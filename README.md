@@ -2,7 +2,7 @@
 
 This repository contains AI-generated translations of key books and essays related to **Effective Altruism** and **Rationality**. My goal is to make high-impact ideas accessible to a global audience by leveraging modern LLMs (Large Language Models) while preserving original formatting and context.
 
-The translations made are far from perfect, but they are a good starting point for a human review and I consider it far better to have them available in this state than not to have them. Perfection is the enemy of the good, and the availability of these translations can help more people benefit from these ideas.
+The translations made are far from perfect, but they are a good starting point and I consider it far better to have them available in this state than not to have them. Perfection is the enemy of the good, and the availability of these translations can help more people benefit from these ideas.
 
 ## 📋 Available Translations
 
