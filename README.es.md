@@ -1,8 +1,6 @@
-# Traducciones de Libros de Altruismo Eficaz 📚
-
 [English](README.md) | [Español]
 
-Este repositorio contiene traducciones generadas por IA de libros y ensayos fundamentales relacionados con el **Altruismo Eficaz (EA)** y la **Racionalidad**. Nuestro objetivo es hacer que las ideas de alto impacto sean accesibles para una audiencia global mediante el uso de LLMs (Modelos de Lenguaje Extensos) modernos, preservando el formato y el contexto original.
+Este repositorio contiene traducciones generadas por IA de libros y ensayos fundamentales relacionados con el **Altruismo Eficaz** y la **Racionalidad**. Mi objetivo es hacer que las ideas de alto impacto sean accesibles para una audiencia global mediante el uso de LLMs (Modelos de Lenguaje Extensos) modernos, preservando el formato y el contexto original.
 
 Las traducciones realizadas están lejísimas de ser perfectas, pero son un buen punto de partida para una revisión humana y considero de lejos mejor que estén disponibles en este estado que no lo estén. La perfección es la enemiga de lo bueno, y la disponibilidad de estas traducciones puede ayudar a que más personas se beneficien de estas ideas.
 

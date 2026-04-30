@@ -1,8 +1,6 @@
-# EA Book Translations 📚
-
 [English] | [Español](README.es.md)
 
-This repository contains AI-generated translations of key books and essays related to **Effective Altruism (EA)** and **Rationality**. Our goal is to make high-impact ideas accessible to a global audience by leveraging modern LLMs (Large Language Models) while preserving original formatting and context.
+This repository contains AI-generated translations of key books and essays related to **Effective Altruism** and **Rationality**. My goal is to make high-impact ideas accessible to a global audience by leveraging modern LLMs (Large Language Models) while preserving original formatting and context.
 
 The translations made are far from perfect, but they are a good starting point for a human review and I consider it far better to have them available in this state than not to have them. Perfection is the enemy of the good, and the availability of these translations can help more people benefit from these ideas.
 
@@ -21,12 +19,10 @@ Calibre + Ebook Translator Plugin.
 
 ## 🩹 Corrections and Collaborations
 
-If you want to help correcting errors or adding new translations, please open an Issue.
+If you want to help correcting errors or adding new translations, please open an Issue or Pull Request.
 
 ## 🔮 Future Possible Plans
 
-- Setup repo settings.
-- Update model list that I used for the translation.
 - Add more translations to more languages of other EA and Rationality books, mainly those in the [EA Archive](https://forum.effectivealtruism.org/posts/DndmvDGStD3gTfhXk/announcing-the-ea-archive).
 - Improve the quality of existing translations, either manually or through better AIs.
 - Fix the lose of external links of the translation system.
