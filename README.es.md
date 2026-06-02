@@ -15,7 +15,7 @@ A continuación se muestra la lista de traducciones completadas. Cada archivo ha
 
 ## 🛠️ Metodología de Traducción
 
-Calibre + Ebook Translator Plugin.
+Usé el lector de ebooks Calibre con un plugin llamado Ebook Translator y pruebo distintos parámetros según el caso, que están en la tabla.
 
 ## 🩹 Correcciones y Colaboraciones
 
