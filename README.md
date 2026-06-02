@@ -15,7 +15,7 @@ Below is a list of completed translations. Each file is processed to maintain fo
 
 ## 🛠️ Translation Methodology
 
-Calibre + Ebook Translator Plugin.
+I used the Calibre ebook reader with a plugin called Ebook Translator and tested different parameters depending on the case, which are in the table.
 
 ## 🩹 Corrections and Collaborations
 
