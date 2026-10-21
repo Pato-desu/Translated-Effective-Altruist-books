@@ -10,8 +10,8 @@ Below is a list of completed translations. Each file is processed to maintain fo
 
 | Book Title | Language | Quality | AI Model | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rationality: From AI to Zombies** | Spanish | First attempt, basic review pending | Gemini 2.5 (Ch 1-21)/2.5 Flash Lite (Ch 22-53)/ 3.1 Flash Lite (54-end) | Batches of 8000 characters | |
-| **Doing Good Better** | Spanish | First attempt, basic review pending | Gemini 2.5 Flash Lite | Batches of 30000 characters. Everything except the end of Notes and Index |
+| **Rationality: From AI to Zombies** | Spanish | First attempt, basic review pending | Gemini 2.5 (Ch 1-21)/2.5 Flash Lite (Ch 22-53)/ 3.1 Flash Lite (54-end) | Batches of 8000 characters. External links restored with Claude (2026-10), 97.8% kept | |
+| **Doing Good Better** | Spanish | First attempt, basic review pending | Gemini 2.5 Flash Lite | Batches of 30000 characters. Complete since 2026-10 (the missing end of Notes and Index was filled in with Claude); external links restored. |
 
 ## 🛠️ Translation Methodology
 
@@ -21,6 +21,41 @@ Below is a list of completed translations. Each file is processed to maintain fo
 
 New books are taken one at a time from the [EA Archive](https://forum.effectivealtruism.org/posts/DndmvDGStD3gTfhXk/announcing-the-ea-archive) (its public [Google Drive folder](https://drive.google.com/drive/folders/1CSKOlo2nE9JtD1u8fUssMyTqOoJEeYMQ)) or from files placed in `inbox/`. Sources and licence notes are listed in `sources.md`.
 
+## ⚙️ Commands
+
+Python 3.11, `pip install -r requirements.txt`; run from this folder. No Calibre.
+
+```
+python -m pytest                                        # tests
+python scripts/epub.py check <epub>... [--lenient]      # structural check of an EPUB
+python scripts/epub.py audit                            # audit every original against its Spanish EPUB -> reports/
+python scripts/epub.py split <book> <lang>              # cut a book into batches (lang: es or zh)
+python scripts/epub.py status <book> <lang>             # progress, retries, stuck batches
+python scripts/epub.py qa <book> <lang>                 # quality gate on translated batches
+python scripts/epub.py merge <book> <lang>              # rebuild the translated file
+python scripts/patch.py split <book> es                 # only the passages still in English
+python scripts/links.py <book> es                       # restore external links lost by a translation
+python scripts/consistency.py <book> es --mine 30       # term-consistency report -> reports/
+python scripts/pdfread.py <file.pdf>                    # text PDF -> Markdown chapters in work/
+python scripts/mdepub.py <book.md> --out <file.epub> --lang zh-Hans   # Markdown chapters -> one EPUB
+```
+
+## 🇨🇳 Chinese books (in progress)
+
+*The Precipice* and *What We Owe the Future* are being translated into Simplified Chinese first, one EPUB each in `Chinese/`. The PDF reader, the Chinese brief, the glossary (`glossary.zh.tsv`), the quality gate and the EPUB builder are ready; the translation starts as soon as the two source PDFs are available in `inbox/`. This table gets their rows when they are done.
+
+## ⚖️ Licences and attribution
+
+- *Rationality: From AI to Zombies* by Eliezer Yudkowsky (MIRI) is released under CC BY-NC-SA 3.0. The Spanish translation is a derivative under the same licence: attribution, non-commercial, share-alike.
+- *Doing Good Better* by William MacAskill is a published book; its translation rights belong to the author and publisher. The translation is shared here as a non-commercial accessibility effort; if a rights holder objects, open an Issue and it will be taken down.
+- Every new book gets its source and what is known about its licence in `sources.md`; books with a clearly restrictive licence are not translated.
+
+## ➕ How to add a book
+
+1. Put the EPUB (or a text PDF, Markdown, HTML or plain text file) in `inbox/` and add a line to `QUEUE.md`, or open an Issue with a link.
+2. Run `python scripts/epub.py split <book> <lang>`, translate the batches, `python scripts/epub.py qa <book> <lang>`, then `merge`. Details are in `TRANSLATE.md` (Spanish), `TRANSLATE.zh.md` (Chinese) and `DISPATCH.md`.
+3. Check the result with `python scripts/epub.py check` and `audit`.
+
 ## 🩹 Corrections and Collaborations
 
 If you want to help correcting errors or adding new translations, please open an Issue or Pull Request.
@@ -29,6 +64,5 @@ If you want to help correcting errors or adding new translations, please open an
 
 - Add more translations to more languages of other EA and Rationality books, mainly those in the [EA Archive](https://forum.effectivealtruism.org/posts/DndmvDGStD3gTfhXk/announcing-the-ea-archive).
 - Improve the quality of existing translations, either manually or through better AIs.
-- Fix the lose of external links of the translation system.
 - If there is interest, convert to Markdown or HTML and add the way to unzip and zip epubs to facilitate corrections.
-- Translation glossary.
+- Quality sample review and re-translation of the worst passages.
