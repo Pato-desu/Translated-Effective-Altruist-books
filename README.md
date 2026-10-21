@@ -15,7 +15,11 @@ Below is a list of completed translations. Each file is processed to maintain fo
 
 ## 🛠️ Translation Methodology
 
-I used the Calibre ebook reader with a plugin called Ebook Translator and tested different parameters depending on the case, which are in the table.
+**Existing translations (before 2026-10):** made with Calibre + the Ebook Translator plugin, using the Gemini models listed in the table.
+
+**Now:** the project is maintained by an automated cloud pipeline that needs no Calibre and no computer of mine. It unpacks the EPUB, splits every chapter into paragraph-sized units (inline links, footnotes and images are kept as numbered placeholders), translates batches with Claude (the smallest model at low effort first; a stronger one only where automatic checks fail), checks every batch (nothing missing, nothing left in English, links intact, glossary terms respected), and writes a valid EPUB again. Progress is saved after every batch, so work can stop and resume at any time. Existing translations are not redone: gaps are filled and the worst passages are re-translated. Audit and quality reports live in `reports/`.
+
+New books are taken one at a time from the [EA Archive](https://forum.effectivealtruism.org/posts/DndmvDGStD3gTfhXk/announcing-the-ea-archive) (its public [Google Drive folder](https://drive.google.com/drive/folders/1CSKOlo2nE9JtD1u8fUssMyTqOoJEeYMQ)) or from files placed in `inbox/`. Sources and licence notes are listed in `sources.md`.
 
 ## 🩹 Corrections and Collaborations
 
