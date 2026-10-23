@@ -23,3 +23,9 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - CFAR_Handbook_2021.pdf · 1dAoO-eT0TG7YUVdTuaKtr_krIE5_8Fxn · 29 MB · pdf
 - Sibling folders of book pdfs: Math, engineering, hard science `1ZevXhaI7pZTn3uvWtLFWIvTUqY6SuTeQ` · Nonfiction written for gen audience `14UIKJpbUCwKoKNOcwBuVtqoTkiUNACCZ` · History `1jZXJMt1Fl0RX_Zodg4o_-trz1531bIWR` · Nonfiction social science `1jky39eR7IOhOAvsAC-ZyeKt5Hkpp98Hj`
 - Fetch note: the Drive connector's download returns file bytes as base64 inside the reply, too large to handle for 7-20 MB PDFs. Until a way is found (M1.1 retry), the two Priority 0 PDFs need dropping into `inbox/` by the owner.
+
+## Main content mini (mapped 2026-10-23, M4.1 partial)
+Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiative `1JnXiI77_p1z9FiNvoAkRaOB4vtXy5uRw`, animal charity evaluators `13AtxJZnwbcT_vMcTmASUGNlWrxLKYXe3`, allfed `1-EQxSARRkBU6FGl73BOo_Cdd9h-o6RRa`. A combined parent query returned only 3 files (the listing looks capped; query one folder at a time next run).
+- synthetic.pdf.txt · 1dGAKyRQa9uJ-zo_YCCUlwx0U9EQFOvQh · 99 KB · txt · allfed
+- mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt · 17NTCeibxtMWvwDOjh2OXq3SMpMePX6yT · 42 KB · txt · chai
+- (a 1 KB Google Scholar citation page in chai, skip)
