@@ -4,6 +4,18 @@ This repository contains AI-generated translations of key books and essays relat
 
 The translations made are far from perfect, but they are a good starting point and I consider it far better to have them available in this state than to not have them at all. Perfection is the enemy of the good, and the availability of these translations can help more people benefit from these ideas.
 
+<!-- downloads:start -->
+### Downloads by language
+
+Each language has its own release, so you can download only the books you need.
+
+- **Spanish**: [release `es-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest), 2 EPUBs
+  - `Hacer el bien mejor_ Como el Altruismo Eficaz puede hacer la diferencia - William MacAskill.epub` (1.0 MB)
+  - `Racionalidad_ de la A a la Z - Eliezer Yudkowsky.epub` (3.9 MB)
+- **Chinese (Simplified)**: [release `zh-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest), 1 EPUB
+  - `危崖 The Precipice.epub` (0.4 MB)
+<!-- downloads:end -->
+
 ## 📋 Available Translations
 
 Below is a list of completed translations. Each file is processed to maintain footnotes, internal links, and technical terminology.
