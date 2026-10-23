@@ -12,8 +12,9 @@ Each language has its own release, so you can download only the books you need.
 - **Spanish**: [release `es-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest), 2 EPUBs
   - `Hacer el bien mejor_ Como el Altruismo Eficaz puede hacer la diferencia - William MacAskill.epub` (1.0 MB)
   - `Racionalidad_ de la A a la Z - Eliezer Yudkowsky.epub` (3.9 MB)
-- **Chinese (Simplified)**: [release `zh-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest), 1 EPUB
+- **Chinese (Simplified)**: [release `zh-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest), 2 EPUBs
   - `危崖 The Precipice.epub` (0.4 MB)
+  - `未来的亏欠 What We Owe the Future.epub` (0.3 MB)
 <!-- downloads:end -->
 
 ## 📋 Available Translations
@@ -52,9 +53,14 @@ python scripts/pdfread.py <file.pdf>                    # text PDF -> Markdown c
 python scripts/mdepub.py <book.md> --out <file.epub> --lang zh-Hans   # Markdown chapters -> one EPUB
 ```
 
-## 🇨🇳 Chinese books (in progress)
+## 🇨🇳 Chinese books
 
-*The Precipice* and *What We Owe the Future* are being translated into Simplified Chinese first, one EPUB each in `Chinese/`. The PDF reader, the Chinese brief, the glossary (`glossary.zh.tsv`), the quality gate and the EPUB builder are ready; the translation starts as soon as the two source PDFs are available in `inbox/`. This table gets their rows when they are done.
+| Book | File | Notes |
+|---|---|---|
+| *The Precipice* (Toby Ord) | `Chinese/危崖 The Precipice.epub` | Translated from the PDF text; 672 notes linked both ways. |
+| *What We Owe the Future* (William MacAskill) | `Chinese/未来的亏欠 What We Owe the Future.epub` | Translated from the PDF text; 798 notes, a few gaps where the PDF text lost a note (see `reports/`). |
+
+Both are machine translations by Claude (Haiku, with Sonnet for retries), checked by the quality gate and a sampled review (`reports/quality-*-zh.md`). One file per book, EPUB only.
 
 ## ⚖️ Licences and attribution
 

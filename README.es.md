@@ -12,8 +12,9 @@ Cada idioma tiene su propia release, para descargar solo los libros que necesita
 - **Spanish**: [release `es-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest), 2 EPUBs
   - `Hacer el bien mejor_ Como el Altruismo Eficaz puede hacer la diferencia - William MacAskill.epub` (1.0 MB)
   - `Racionalidad_ de la A a la Z - Eliezer Yudkowsky.epub` (3.9 MB)
-- **Chinese (Simplified)**: [release `zh-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest), 1 EPUB
+- **Chinese (Simplified)**: [release `zh-latest`](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest), 2 EPUBs
   - `危崖 The Precipice.epub` (0.4 MB)
+  - `未来的亏欠 What We Owe the Future.epub` (0.3 MB)
 <!-- downloads:end -->
 
 ## 📋 Traducciones Disponibles
@@ -52,9 +53,14 @@ python scripts/pdfread.py <archivo.pdf>                 # PDF de texto -> capít
 python scripts/mdepub.py <libro.md> --out <archivo.epub> --lang zh-Hans   # capítulos en Markdown -> un EPUB
 ```
 
-## 🇨🇳 Libros en chino (en curso)
+## 🇨🇳 Libros en chino
 
-*The Precipice* y *What We Owe the Future* se traducen primero al chino simplificado, un EPUB por libro en `Chinese/`. El lector de PDF, el encargo en chino, el glosario (`glossary.zh.tsv`), el control de calidad y el generador de EPUB están listos; la traducción empieza en cuanto los dos PDF de origen estén en `inbox/`. Esta tabla recibirá sus filas cuando terminen.
+| Libro | Archivo | Notas |
+|---|---|---|
+| *The Precipice* (Toby Ord) | `Chinese/危崖 The Precipice.epub` | Traducido desde el texto del PDF; 672 notas enlazadas en ambos sentidos. |
+| *What We Owe the Future* (William MacAskill) | `Chinese/未来的亏欠 What We Owe the Future.epub` | Traducido desde el texto del PDF; 798 notas, con algunos huecos donde el PDF perdió una nota (ver `reports/`). |
+
+Ambos son traducciones automáticas de Claude (Haiku, con Sonnet para los reintentos), revisadas con el control de calidad y una muestra revisada a mano (`reports/quality-*-zh.md`). Un archivo por libro, solo EPUB.
 
 ## ⚖️ Licencias y atribución
 
