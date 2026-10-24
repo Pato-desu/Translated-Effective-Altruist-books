@@ -18,11 +18,14 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - [ ] es · Main content, everything else (the rest of book pdfs first) · 1U0GWA2IUe11K8jzWTPATIhazn-FPzAQC · expand into files later
 
 ## Core EA files (mapped 2026-10-21, M1.1; folder `1UIINZqXaqOWb--3qZ1Pt4kYsR4Dked3k`, 5 files; the folder listing had more pages not yet read)
-- [~] 67/91 suffering-focused-ethics.pdf · 1-Iywc29LrFv6ml1eSsIaeuRqrgxEMV3y · 1.0 MB · pdf · es in progress (2026-10-24, gemini route)
+- [x] suffering-focused-ethics.pdf · 1-Iywc29LrFv6ml1eSsIaeuRqrgxEMV3y · 1.0 MB · pdf · es done 2026-10-24 (91/91 batches, `Español/archive/suffering-focused-ethics.epub`; bibliography titles kept in English via qa-accept.txt)
 - [x] hedonistic imperative.pdf · 1hYBUZGxhmKrrY7RMw6pfE6ri7t8DzVbg · 0.9 MB · pdf · es done 2026-10-24 (45/45 batches, `Español/archive/hedonistic imperative.epub`)
 - CFAR_Handbook_2021.pdf · 1dAoO-eT0TG7YUVdTuaKtr_krIE5_8Fxn · 29 MB · pdf
 - Sibling folders of book pdfs: Math, engineering, hard science `1ZevXhaI7pZTn3uvWtLFWIvTUqY6SuTeQ` · Nonfiction written for gen audience `14UIKJpbUCwKoKNOcwBuVtqoTkiUNACCZ` · History `1jZXJMt1Fl0RX_Zodg4o_-trz1531bIWR` · Nonfiction social science `1jky39eR7IOhOAvsAC-ZyeKt5Hkpp98Hj`
 - Fetch note: the Drive connector's download returns file bytes as base64 inside the reply, too large to handle for 7-20 MB PDFs. Until a way is found (M1.1 retry), the two Priority 0 PDFs need dropping into `inbox/` by the owner.
+
+- [~] 39/89 reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es in progress (2026-10-24; batch 18 to retry; run cap reached)
+- [x] Baumann - Avoiding Worst final.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-24 (25/25 batches, `Español/archive/baumann-avoiding-the-worst.epub`)
 
 ## Main content mini (mapped 2026-10-23, M4.1 partial)
 Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiative `1JnXiI77_p1z9FiNvoAkRaOB4vtXy5uRw`, animal charity evaluators `13AtxJZnwbcT_vMcTmASUGNlWrxLKYXe3`, allfed `1-EQxSARRkBU6FGl73BOo_Cdd9h-o6RRa`. A combined parent query returned only 3 files (the listing looks capped; query one folder at a time next run).
