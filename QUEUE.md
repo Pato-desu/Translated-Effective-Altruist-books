@@ -18,8 +18,8 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - [ ] es · Main content, everything else (the rest of book pdfs first) · 1U0GWA2IUe11K8jzWTPATIhazn-FPzAQC · expand into files later
 
 ## Core EA files (mapped 2026-10-21, M1.1; folder `1UIINZqXaqOWb--3qZ1Pt4kYsR4Dked3k`, 5 files; the folder listing had more pages not yet read)
-- suffering-focused-ethics.pdf · 1-Iywc29LrFv6ml1eSsIaeuRqrgxEMV3y · 1.0 MB · pdf
-- hedonistic imperative.pdf · 1hYBUZGxhmKrrY7RMw6pfE6ri7t8DzVbg · 0.9 MB · pdf
+- [ ] suffering-focused-ethics.pdf · 1-Iywc29LrFv6ml1eSsIaeuRqrgxEMV3y · 1.0 MB · pdf
+- [x] hedonistic imperative.pdf · 1hYBUZGxhmKrrY7RMw6pfE6ri7t8DzVbg · 0.9 MB · pdf · es done 2026-10-24 (45/45 batches, `Español/archive/hedonistic imperative.epub`)
 - CFAR_Handbook_2021.pdf · 1dAoO-eT0TG7YUVdTuaKtr_krIE5_8Fxn · 29 MB · pdf
 - Sibling folders of book pdfs: Math, engineering, hard science `1ZevXhaI7pZTn3uvWtLFWIvTUqY6SuTeQ` · Nonfiction written for gen audience `14UIKJpbUCwKoKNOcwBuVtqoTkiUNACCZ` · History `1jZXJMt1Fl0RX_Zodg4o_-trz1531bIWR` · Nonfiction social science `1jky39eR7IOhOAvsAC-ZyeKt5Hkpp98Hj`
 - Fetch note: the Drive connector's download returns file bytes as base64 inside the reply, too large to handle for 7-20 MB PDFs. Until a way is found (M1.1 retry), the two Priority 0 PDFs need dropping into `inbox/` by the owner.
