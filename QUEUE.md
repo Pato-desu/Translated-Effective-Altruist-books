@@ -24,7 +24,7 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - Sibling folders of book pdfs: Math, engineering, hard science `1ZevXhaI7pZTn3uvWtLFWIvTUqY6SuTeQ` · Nonfiction written for gen audience `14UIKJpbUCwKoKNOcwBuVtqoTkiUNACCZ` · History `1jZXJMt1Fl0RX_Zodg4o_-trz1531bIWR` · Nonfiction social science `1jky39eR7IOhOAvsAC-ZyeKt5Hkpp98Hj`
 - Fetch note: the Drive connector's download returns file bytes as base64 inside the reply, too large to handle for 7-20 MB PDFs. Until a way is found (M1.1 retry), the two Priority 0 PDFs need dropping into `inbox/` by the owner.
 
-- [~] 39/89 reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es in progress (2026-10-24; batch 18 to retry; run cap reached)
+- [~] 77/89 reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es in progress (2026-10-25; batch 78 to retry (glossary: longtermism, utilitarianism); run cap reached)
 - [x] Baumann - Avoiding Worst final.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-24 (25/25 batches, `Español/archive/baumann-avoiding-the-worst.epub`)
 
 ## Main content mini (mapped 2026-10-23, M4.1 partial)
