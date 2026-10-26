@@ -26,6 +26,8 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 
 - [x] reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-25 (89/89 batches, `Español/archive/reasoned-politics.epub`; bibliography titles kept in English via qa-accept.txt)
 - [x] Baumann - Avoiding Worst final.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-24 (25/25 batches, `Español/archive/baumann-avoiding-the-worst.epub`)
+- [x] Singer - Most Good You Can Do.pdf · local inbox · 0.8 MB · pdf · es done 2026-10-26 (43/43 batches, `Español/archive/Singer - Most Good You Can Do.epub`; index and bibliography ids kept in English via qa-accept.txt)
+- [~] Bostrom - Superintelligence (PDFDrive).pdf · local inbox · 3.5 MB · pdf · es 38/118 batches
 
 ## Main content mini (mapped 2026-10-23, M4.1 partial)
 Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiative `1JnXiI77_p1z9FiNvoAkRaOB4vtXy5uRw`, animal charity evaluators `13AtxJZnwbcT_vMcTmASUGNlWrxLKYXe3`, allfed `1-EQxSARRkBU6FGl73BOo_Cdd9h-o6RRa`. A combined parent query returned only 3 files (the listing looks capped; query one folder at a time next run).
