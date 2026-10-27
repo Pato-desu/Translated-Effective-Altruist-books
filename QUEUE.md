@@ -27,7 +27,7 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - [x] reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-25 (89/89 batches, `Español/archive/reasoned-politics.epub`; bibliography titles kept in English via qa-accept.txt)
 - [x] Baumann - Avoiding Worst final.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-24 (25/25 batches, `Español/archive/baumann-avoiding-the-worst.epub`)
 - [x] Singer - Most Good You Can Do.pdf · local inbox · 0.8 MB · pdf · es done 2026-10-26 (43/43 batches, `Español/archive/Singer - Most Good You Can Do.epub`; index and bibliography ids kept in English via qa-accept.txt)
-- [~] Animal Liberation (PDFDrive).pdf · local inbox · pdf · es 38/87 batches (work/animal-liberation-pdfdrive)
+- [~] Animal Liberation (PDFDrive).pdf · local inbox · pdf · es 68/87 batches (work/animal-liberation-pdfdrive)
 - [x] Bostrom - Superintelligence (PDFDrive).pdf · local inbox · 3.5 MB · pdf · es done 2026-10-27 (118/118 batches, `Español/archive/Bostrom - Superintelligence Paths, Dangers, Strategies (PDFDrive).epub`, passes `check`; index and bibliography ids kept in English via qa-accept.txt)
 
 ## Main content mini (mapped 2026-10-23, M4.1 partial)
