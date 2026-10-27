@@ -27,7 +27,10 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - [x] reasoned-politics.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-25 (89/89 batches, `Español/archive/reasoned-politics.epub`; bibliography titles kept in English via qa-accept.txt)
 - [x] Baumann - Avoiding Worst final.pdf · local inbox · 2.2 MB · pdf · es done 2026-10-24 (25/25 batches, `Español/archive/baumann-avoiding-the-worst.epub`)
 - [x] Singer - Most Good You Can Do.pdf · local inbox · 0.8 MB · pdf · es done 2026-10-26 (43/43 batches, `Español/archive/Singer - Most Good You Can Do.epub`; index and bibliography ids kept in English via qa-accept.txt)
-- [~] Animal Liberation (PDFDrive).pdf · local inbox · pdf · es 68/87 batches (work/animal-liberation-pdfdrive)
+- [x] Animal Liberation (PDFDrive).pdf · local inbox · pdf · es done 2026-10-27 (87/87 batches, `Español/archive/Animal Liberation (PDFDrive).epub`; index entries kept in English via qa-accept.txt)
+- [-] Singer - Life You Can Save.pdf · local inbox · scanned PDF, no text layer (prepare refuses); needs OCR or a text copy
+- [~] Most important century.pdf · local inbox · pdf · es 0/430 batches (work/most-important-century, split 2026-10-27; 4 MB of text, about 11 runs)
+- [x] Galef - The Scout Mindset.pdf · local inbox · pdf · es done 2026-10-27 (53/53 batches, `Español/archive/Galef - The Scout Mindset.epub`, passes `check`; extraction artifacts `[^` remain in a few units, repair in M4.5)
 - [x] Bostrom - Superintelligence (PDFDrive).pdf · local inbox · 3.5 MB · pdf · es done 2026-10-27 (118/118 batches, `Español/archive/Bostrom - Superintelligence Paths, Dangers, Strategies (PDFDrive).epub`, passes `check`; index and bibliography ids kept in English via qa-accept.txt)
 
 ## Main content mini (mapped 2026-10-23, M4.1 partial)
