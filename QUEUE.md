@@ -29,7 +29,7 @@ Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain
 - [x] Singer - Most Good You Can Do.pdf · local inbox · 0.8 MB · pdf · es done 2026-10-26 (43/43 batches, `Español/archive/Singer - Most Good You Can Do.epub`; index and bibliography ids kept in English via qa-accept.txt)
 - [x] Animal Liberation (PDFDrive).pdf · local inbox · pdf · es done 2026-10-27 (87/87 batches, `Español/archive/Animal Liberation (PDFDrive).epub`; index entries kept in English via qa-accept.txt)
 - [-] Singer - Life You Can Save.pdf · local inbox · scanned PDF, no text layer (prepare refuses); needs OCR or a text copy
-- [~] Most important century.pdf · local inbox · pdf · es 0/430 batches (work/most-important-century, split 2026-10-27; 4 MB of text, about 11 runs)
+- [~] Most important century.pdf · local inbox · pdf · es 39/49 batches (work/most-important-century; re-split 2026-10-27 after the pdfread glyph fix: the old 430-batch split was 90% `(cid:N)` codes; batch 10 to retry, 41-49 pending, about 1 more run)
 - [x] Galef - The Scout Mindset.pdf · local inbox · pdf · es done 2026-10-27 (53/53 batches, `Español/archive/Galef - The Scout Mindset.epub`, passes `check`; extraction artifacts `[^` remain in a few units, repair in M4.5)
 - [x] Bostrom - Superintelligence (PDFDrive).pdf · local inbox · 3.5 MB · pdf · es done 2026-10-27 (118/118 batches, `Español/archive/Bostrom - Superintelligence Paths, Dangers, Strategies (PDFDrive).epub`, passes `check`; index and bibliography ids kept in English via qa-accept.txt)
 
