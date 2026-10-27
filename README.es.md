@@ -26,6 +26,21 @@ A continuación se muestra la lista de traducciones completadas. Cada archivo ha
 | **Rationality: From AI to Zombies** | Español | Primer intento revisión básica pendiente | Gemini 2.5 (Cap 1-21)/ 2.5 Flash Lite (22-53)/ 3.1 Flash Lite (54-final) | Lotes de 8000 caracteres. Enlaces externos recuperados con Claude (2026-10), 97,8 % conservados | |
 | **Doing Good Better** | Español | Primer intento, revisión básica pendiente | Gemini 2.5 Flash Lite | Lotes de 30000 caracteres. Faltantes completados y enlaces externos recuperados con Claude (2026-10) |
 
+## 📚 Libros del archivo (español)
+
+Traducidos desde el texto de PDFs del [Archivo EA](https://forum.effectivealtruism.org/posts/DndmvDGStD3gTfhXk/announcing-the-ea-archive), con Claude, lote a lote con revisión automática. Los archivos están en `Español/archive/`. Quedan restos del PDF en algunos pasajes (por ejemplo marcas `[^`); la reparación está planificada.
+
+| Libro | Autor | Archivo |
+|---|---|---|
+| *Animal Liberation* | Peter Singer | `Español/archive/Animal Liberation (PDFDrive).epub` |
+| *Superintelligence* | Nick Bostrom | `Español/archive/Bostrom - Superintelligence Paths, Dangers, Strategies (PDFDrive).epub` |
+| *The Scout Mindset* | Julia Galef | `Español/archive/Galef - The Scout Mindset.epub` |
+| *The Most Good You Can Do* | Peter Singer | `Español/archive/Singer - Most Good You Can Do.epub` |
+| *Avoiding the Worst* | Tobias Baumann | `Español/archive/baumann-avoiding-the-worst.epub` |
+| *The Hedonistic Imperative* | David Pearce | `Español/archive/hedonistic imperative.epub` |
+| *Reasoned Politics* | Magnus Vinding | `Español/archive/reasoned-politics.epub` |
+| *Suffering-Focused Ethics* | Magnus Vinding | `Español/archive/suffering-focused-ethics.epub` |
+
 ## 🛠️ Metodología de Traducción
 
 **Traducciones existentes (antes de 2026-10):** hechas con Calibre + el plugin Ebook Translator, usando los modelos Gemini indicados en la tabla.
