@@ -36,8 +36,8 @@ jobs:
           def gh(*a):
               return subprocess.run(["gh", *a, "--repo", REPO], capture_output=True, text=True)
 
-          def norm(name):  # GitHub stores uploaded names with spaces and similar turned into dots
-              return re.sub(r"[^\w.\-+]", ".", name)
+          def norm(name):  # GitHub's asset name: other characters become one dot, e.g. "危崖 The (x).epub" -> "The.x.epub"
+              return re.sub(r"\.{2,}", ".", re.sub(r"[^A-Za-z0-9._+-]+", ".", name)).strip(".")
 
           failed = False
           for tag, folder, suffixes, title, name in LIBS:
