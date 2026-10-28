@@ -9,7 +9,7 @@
 
 每种语言有一个发布版本（release），包含该语言的全部书籍。只想下载一本书，请用下方表格里的链接。
 
-- **西班牙语**: 12 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
+- **西班牙语**: 13 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **中文**: 2 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
 
@@ -28,6 +28,7 @@
 | **CFAR Handbook** (2021) | Center for Applied Rationality | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/CFAR_Handbook_2021.epub) | 由 Claude 根据 PDF 文本翻译。仍有部分 PDF 页眉和表格版式残留。 |
 | **Mapping the Political Economy of Reinforcement Learning Systems**（白皮书） | Thomas Krendl Gilbert | 西班牙语 | [TXT](Espa%C3%B1ol/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt) | 纯文本，与存档一致（保存的网页，含菜单）。 |
 | **Synthetic fat from petroleum as a resilient food for global catastrophes**（论文） | J. B. García Martínez, K. A. Alvarado, D. C. Denkenberger | 西班牙语 | [TXT](Espa%C3%B1ol/archive/synthetic.pdf.txt) | PDF 转出的纯文本；参考文献末尾缺失。 |
+| **A Rationalist's Tale**（LessWrong 文章） | Luke Muehlhauser (lukeprog) | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/A%20Rationalist%27s%20Tale%20-%20LessWrong.epub) | 仅正文；未收录打印页面中的评论。 |
 | **The Most Good You Can Do** | Peter Singer | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) | 由 Claude 根据 PDF 文本翻译。部分章节开头的几个词（PDF 中为小型大写字母）缺失；索引和参考文献条目保留英文。 |
 | **Avoiding the Worst** | Tobias Baumann | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/baumann-avoiding-the-worst.epub) | 由 Claude 根据 PDF 文本翻译。部分章节开头的几个词（PDF 中为小型大写字母）缺失；索引和参考文献条目保留英文。 |
 | **The Hedonistic Imperative** | David Pearce | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/hedonistic%20imperative.epub) | 由 Claude 根据 PDF 文本翻译。部分章节开头的几个词（PDF 中为小型大写字母）缺失；索引和参考文献条目保留英文。 |

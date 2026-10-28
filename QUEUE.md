@@ -14,8 +14,10 @@ Drive root `1CSKOlo2nE9JtD1u8fUssMyTqOoJEeYMQ` (EA Archive 1.3). Format of a lin
 ## Priority 2: the rest of the archive, to Spanish, in the owner's folder order ([D9])
 Folder ids: Main content mini `1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE` (129 MB, plain text) · Non-EA stuff `1gtrAZkQ3Uj_f9M8AeTMMjefD-F5FdCDx` (21 GB) · Main content `1U0GWA2IUe11K8jzWTPATIhazn-FPzAQC` (about 3 GB; subfolders seen: book pdfs `1v9PP1Cx4WlOWdtU6iT7E5wUjxIVr0dLw`, charity entrepreneurship, chai, all OWID data, allfed, and more). The Audio folder is ignored.
 - [~] es · Main content mini · 1bldzosR5QaYwO5pmDQbgCgCleMlT0DpE · expand into files (M1.1 / M4.1) · 2 of the 2 visible files done 2026-10-28; the connector lists only files the owner has opened, so the rest of the folder is not visible yet
-- [ ] es · Non-EA stuff for the post-apocalypse · 1gtrAZkQ3Uj_f9M8AeTMMjefD-F5FdCDx · expand into files later
-- [ ] es · Main content, everything else (the rest of book pdfs first) · 1U0GWA2IUe11K8jzWTPATIhazn-FPzAQC · expand into files later
+- [ ] es · Non-EA stuff for the post-apocalypse · 1gtrAZkQ3Uj_f9M8AeTMMjefD-F5FdCDx · checked 2026-10-28: the visible files are survival PDFs of 12-71 MB (over the connector's 10 MB download limit; its text reader stops after about 70 pages) and privet.pdf (a blank PDF-viewer placeholder, skipped); its three subfolders list nothing yet
+- [ ] es · Main content, everything else (the rest of book pdfs first) · 1U0GWA2IUe11K8jzWTPATIhazn-FPzAQC · subfolders visible 2026-10-28; only these files list so far:
+  - [-] es · book pdfs / Philosophy / Utilitarianism.pdf (Mill, 1879) · 1iG5x65IqoVu_K6Y_hs2f5QiE_nuGBrf8 · 6.5 MB · pdf · download breaks the connector and the text reader stops at p. 65 of ~95; needs a drop into `inbox/`
+  - [x] es · LessWrong top posts / A Rationalist's Tale - LessWrong.pdf · 1JhOhyYVorTDKg2341YB9i648_5qaHq60 · 0.4 MB · pdf · done 2026-10-28 (post only, comments left out)
 
 ## Core EA files (mapped 2026-10-21, M1.1; folder `1UIINZqXaqOWb--3qZ1Pt4kYsR4Dked3k`, 5 files; the folder listing had more pages not yet read)
 - [x] suffering-focused-ethics.pdf · 1-Iywc29LrFv6ml1eSsIaeuRqrgxEMV3y · 1.0 MB · pdf · es done 2026-10-24 (91/91 batches, `Español/archive/suffering-focused-ethics.epub`; bibliography titles kept in English via qa-accept.txt)

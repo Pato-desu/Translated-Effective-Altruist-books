@@ -9,7 +9,7 @@ AI-generated EPUB translations of key books on **Effective Altruism** and **Rati
 
 Each language has one release with all its books as files. To get a single book, use its link in the table below.
 
-- **Spanish**: 12 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
+- **Spanish**: 13 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chinese**: 2 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
 
@@ -28,6 +28,7 @@ Click a title's file link to download that EPUB. All files open in any e-reader.
 | **CFAR Handbook** (2021) | Center for Applied Rationality | Spanish | [EPUB](Espa%C3%B1ol/archive/CFAR_Handbook_2021.epub) | Translated with Claude from the PDF text. Some running headers and table layout from the PDF remain. |
 | **Mapping the Political Economy of Reinforcement Learning Systems** (white paper) | Thomas Krendl Gilbert | Spanish | [TXT](Espa%C3%B1ol/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt) | Plain text, as in the archive (a saved web page, menus included). |
 | **Synthetic fat from petroleum as a resilient food for global catastrophes** (paper) | J. B. García Martínez, K. A. Alvarado, D. C. Denkenberger | Spanish | [TXT](Espa%C3%B1ol/archive/synthetic.pdf.txt) | Plain text from the PDF; the end of the references is missing. |
+| **A Rationalist's Tale** (LessWrong post) | Luke Muehlhauser (lukeprog) | Spanish | [EPUB](Espa%C3%B1ol/archive/A%20Rationalist%27s%20Tale%20-%20LessWrong.epub) | The post only; the comment thread of the printed page is left out. |
 | **The Most Good You Can Do** | Peter Singer | Spanish | [EPUB](Espa%C3%B1ol/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
 | **Avoiding the Worst** | Tobias Baumann | Spanish | [EPUB](Espa%C3%B1ol/archive/baumann-avoiding-the-worst.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
 | **The Hedonistic Imperative** | David Pearce | Spanish | [EPUB](Espa%C3%B1ol/archive/hedonistic%20imperative.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
