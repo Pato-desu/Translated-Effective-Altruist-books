@@ -1,0 +1,329 @@
+La economía política de los sistemas de aprendizaje por refuerzo: el caso de los vehículos autónomos
+Ir al contenido principal
+Buscar
+Navegación de utilidad
+Calendario
+Contacto
+Iniciar sesión
+Hacer una donación
+Navegación principal
+Inicio
+Programas y eventos
+Programas de investigación
+Núcleos de investigación
+Talleres y simposios
+Conferencias públicas
+Actividades internas de los programas
+Personas
+Dirección científica
+Personal
+Visitantes de larga duración actuales
+Becarios de investigación
+Investigadores posdoctorales
+Comité científico asesor
+Consejo de gobierno
+Consejo asesor de la industria
+Profesorado afiliado
+Comunicadores científicos residentes
+Becarios de Derecho y Sociedad
+Participar
+Formas de participar
+Planifique su visita
+Ubicación e indicaciones
+Becas de investigación posdoctoral
+Becas de Derecho y Sociedad
+Programa de comunicadores científicos residentes
+Apoyo
+Fondo anual
+Financiadores
+Alianzas industriales
+Alianzas académicas
+Noticias y videos
+Noticias
+Videos
+Acerca de
+Ruta de navegación
+Inicio
+Archivo de noticias
+La economía política de los sistemas de aprendizaje por refuerzo: el caso de los vehículos autónomos
+domingo, 31 de enero de 2021
+La economía política de los sistemas de aprendizaje por refuerzo: el caso de los vehículos autónomos
+Un libro blanco sobre políticas y prácticas
+por Thomas Krendl Gilbert (becario de Derecho y Sociedad, Simons Institute)
+Las conversaciones sobre la ética de la IA suelen girar en torno a la eliminación del sesgo estadístico. Si un sistema de aprendizaje automático comete muchos errores, un enfoque habitual es proporcionarle más datos o datos mejor estructurados, de modo que la representación resultante sea más precisa y quizá apta para su uso en el mundo real. Un ejemplo claro son los diversos problemas de optimización que implica el desarrollo de vehículos autónomos. Si un automóvil no es bueno girando a la izquierda o incorporándose a la autopista, los diseñadores pueden simplemente simular diversos escenarios en una computadora, derivar un algoritmo y luego programar el comportamiento aprendido en el vehículo.
+Sin embargo, el recurso del “más datos” como parche no ha resuelto muchos de los desafíos de los sistemas reales diseñados para el reconocimiento facial, los sistemas de recomendación y otros.
+1
+Esto se debe en parte a que los diseñadores recurren a soluciones fragmentarias que hacen que un sistema funcione mejor según alguna métrica estrechamente definida, sin una reflexión más profunda sobre lo que significa “mejor” en contexto. El aprendizaje por refuerzo (RL, por sus siglas en inglés), que modela cómo los agentes podrían actuar en algún entorno para aprender y adquirir alguna aproximación de conducta inteligente, puede llevar este paradigma a su punto de quiebre. Sus tres ingredientes clave son los estados (que componen el entorno en juego), las acciones (las opciones que tiene el agente en cada paso de tiempo) y las recompensas (el “retorno” que recibe el agente cuando realiza una acción determinada). A menudo se distingue del aprendizaje supervisado y no supervisado, en el que el sistema solo puede consultar lo que ya se conoce mediante datos etiquetados o explorar la estructura de los datos con restricciones mínimas. En cambio, el núcleo del RL consiste en interpretar la inteligencia misma, ya sea humana o artificial, como un conjunto de conductas aprendidas que equilibran de manera efectiva lo que se sabe con lo que no se sabe: una especie de prudencia computacional.
+Para el diseñador de RL, el problema radica en hacer suposiciones razonables sobre el entorno que puedan traducirse bien en estados, acciones y recompensas. Pero las incertidumbres suelen filtrarse en el sistema en cada uno de ellos, lo que hace cada vez más difícil especificar qué resultados son “mejores” o “peores” a medida que la tarea se vuelve más compleja. Considere el caso simple de preparar café en una habitación de motel: ¿en qué momento no vale la pena rebuscar filtros o café molido, en lugar de usar la bolsa de Earl Grey junto a la cama? ¿Tengo ánimo para bajar a la recepción y usar la poco confiable máquina de capuchinos, o prefiero no salir de mi pijama? ¿Cómo puede una taza de café bien preparada ser “mejor” que una agria o amarga, siempre que esté lo bastante cafeinado como para alcanzar mi vuelo? Como la tarea debe definirse con independencia de cualquier técnica de aprendizaje particular, es irrazonable cargar al agente con todas estas dudas, ¡y más aún si está adormilado! En cambio, el diseñador tiene que configurar de alguna manera un entorno markoviano (uno en el que los valores de los estados y las acciones no dependen de la información pasada) para que el agente lo observe, y luego ayudarlo a aprender a navegarlo. La conducta del agente tiene que poder interpretarse como buena, es decir, bien orientada en lugar de meramente ingeniosa, según nuestra percepción de la tarea misma.
+Sostengo que definir las tareas de esta manera es un problema de
+especificación sociotécnica
+: ¿Para quién es el sistema? ¿Cuál es su propósito? ¿Cómo y ante quién puede rendir cuentas? Dicho de forma más concreta: ¿cuáles son todos los diferentes “entornos” en juego en la movilidad del tráfico urbano? ¿Cuándo tienen los diseñadores justificación para hacer que los vehículos autónomos sean robustos ante ciertos entornos a costa potencial de otros? ¿En qué circunstancias podría ser inaceptable tener un único algoritmo para la detección de objetos, la navegación en el tráfico y la gestión de la congestión?
+Dar respuestas completas a estas preguntas requerirá décadas de investigación a medida que los vehículos autónomos se desarrollen más. Pero antes de que eso ocurra, los diseñadores de sistemas de RL deben entender que la normatividad de estos dominios sociales (el patrón de conductas locales que esperamos de los demás y de nosotros mismos) está estructurada de manera desigual y rica. Mientras que algunas de esas estructuras están suficientemente definidas como para sustentar técnicas de optimización, las definiciones de otras aún no están disponibles. La especificación sociotécnica desafía las prácticas actuales de desarrollo de la IA de tres maneras: 1) alcanzar consenso sobre la estructura normativa del dominio es un
+proceso deliberativo
+que no puede lograrse solo mediante la agregación de datos ni con cálculos; 2) los desacuerdos sobre normas se resuelven mediante
+instituciones sociales
+— en particular, los mercados (¿cómo podemos optimizar?) y la política (¿para qué estamos optimizando?); y 3) los desarrolladores deben construir
+interfaces
+con estas instituciones, de modo que las definiciones de estados, acciones y recompensas estén responsablemente vinculadas a las preocupaciones de las partes interesadas.
+La metapregunta sobre qué problemas están “listos” para el RL y cuáles requerirán una definición adicional comparte mucho con los temas de la economía política. En lugar de la ética abstracta, la economía política plantea la pregunta esencial que está en el corazón de todo sistema de RL —¿cuál es la naturaleza del valor?— en el contexto de dominios normativos particulares. Como estos dominios varían en escala, la misma estructura de recompensas no puede aplicarse automáticamente a todos ellos, y los diseñadores necesitan buen criterio sobre los niveles de abstracción en los que operan las normas, para que el sistema funcione en los niveles que queremos y no en los que no queremos. Hay escalas en las que la optimización necesaria es conocida, escalas en las que la optimización es incierta y otras escalas cuyas características no están claras. De hecho, los campos de la ingeniería, la economía y la gobernanza corresponden aproximadamente a estos casos y sirven como investigaciones distintas sobre cómo pueden operacionalizarse, perseguirse de forma competitiva o deliberarse los supuestos.
+Una exposición sistemática de la economía política queda fuera del alcance de este artículo. En cambio, mi objetivo es describir brevemente las distintas formas de riesgo social que implica la optimización de sistemas avanzados de RL, cómo pueden interpretarse esas formas según las normas jurídicas vigentes y qué tipos de límites a la optimización deberían implementarse para proteger y reformar la infraestructura de manera responsable. Aunque estas afirmaciones pretenden aplicarse a cualquier sistema de RL de suficiente alcance y complejidad, se hace referencia continua al estudio de caso pertinente de los vehículos autónomos (VA), por claridad y sencillez. A lo largo del texto consideramos los contextos institucionales que rodean a los sistemas de VA (sociales, conductuales, gerenciales), en los que se diseñan y despliegan y que a menudo absorben costos ocultos asociados con un desempeño subóptimo.
+Los límites del comportamiento inteligente
+Los temas de la economía política ayudan a revelar cómo la estructuración del entorno de aprendizaje de un agente de RL puede tanto hacer posible el aprendizaje óptimo como generar daño social si los diseñadores no reflexionan adecuadamente sobre cómo se han especificado las recompensas. Esto puede ilustrarse mediante la
+hipótesis de la recompensa
+, la idea de que los “fines” o “propósitos” consisten en maximizar el valor esperado de la suma acumulada de una señal escalar recibida.
+2
+Esta es una forma rebuscada de decir que, para cualquier trabajo en particular, existe alguna respuesta computable a la pregunta de qué significa hacer ese trabajo bien; es decir, que la definición de un buen trabajo está de alguna manera incorporada a la actividad y puede aprenderse exclusivamente haciendo referencia al éxito relativo de las propias acciones. Cortar el césped significa cortar hojas de hierba; lavar los platos significa frotar manchas de suciedad; vencer en Super Mario Bros. significa recolectar monedas, superar niveles o, finalmente, liberar a la princesa Peach.
+De ello se deduce que la habilidad se adquiere mejor interactuando directamente con el entorno, en lugar de imitar cómo lo ha hecho otra persona. Según la hipótesis, optimizar la función de recompensa subyacente, en lugar de aprender a imitar algún patrón de comportamiento observado, es la definición “más sucinta, robusta y transferible de una tarea”.
+3
+Esta función de recompensa a menudo ni siquiera es única, ya que es común que distintas funciones objetivo se optimicen simultáneamente cuando hay interpretaciones superpuestas del comportamiento observado (¿sirvo un vaso de agua porque tengo sed o porque quiero enjuagar el vaso?). Además, el diseñador de IA no tiene que especificar el mecanismo para alcanzar una meta, ya que el agente de RL puede diseñar su propia estrategia para lograrla.
+4
+Filosóficamente, la hipótesis de la recompensa es una afirmación sobre cómo la complejidad del comportamiento inteligente puede, en principio, quedar encapsulada en la simplicidad de la recompensa escalar. En otras palabras, distintas acciones y estrategias pueden compararse de manera definitiva como mejores o peores entre sí con respecto al objetivo final. Si a un agente le resulta difícil aprender una función de recompensa, la hipótesis contempla la idea de que una optimización adicional (ampliar el espacio de acciones, ajustar la señal) resolverá el problema, al menos en la medida en que exista una solución que encontrar. Para aclarar este punto, la hipótesis no afirma que todas las actividades humanas equivalgan a maximizar la utilidad, sino que todas las actividades “bien especificadas” efectivamente lo hacen, al menos en términos de las señales recibidas y del entorno particular de aprendizaje en juego.
+Pero al final del día estamos construyendo sistemas que interactúan con el mundo real, no solo modelos. Aprovechar la hipótesis de la recompensa al diseñar sistemas de IA como los VA implica un problema de especificación: la necesidad de definir alguna recompensa o estado meta para el agente, de manera que conduzca a resultados exitosos. Los desarrolladores de sistemas de RL deben decidir cómo gestionar la brecha entre la especificación del sistema y el comportamiento resultante en el mundo real.
+5
+¿Cómo deberían hacerlo? Los límites de la hipótesis de la recompensa muestran cómo
+sociotécnica
+la especificación es inevitable y la optimización no puede llevarse “hasta el fondo” en lugar de la deliberación normativa.
+Por ejemplo, consideremos un algoritmo de percepción de un VA que tiene dificultades para reconocer escombros en la calle, lo que compromete la capacidad del VA para conducir con seguridad por zonas con poblaciones significativas de personas sin hogar o con un tránsito poco confiable. El VA no sufre accidentes y generalmente llega a su meta a tiempo, pero ocasionalmente pasa por encima de trozos de plástico y vidrio, lo que causa daños al vehículo y, posiblemente, a la vía. ¿Es el comportamiento de este VA subóptimo (podría estar haciendo un mejor trabajo)? ¿O el entorno está mal especificado (está haciendo el trabajo equivocado)? ¿O ninguno de los dos?
+Podemos imaginar fácilmente multitud de formas —algunas técnicas, otras menos— de resolver este problema, según cómo decidamos interpretarlo. Nuestro VA de ejemplo podría desviarse hacia otras calles, normalmente más limpias, aunque esto aumentaría el tiempo de viaje. Podríamos validar de manera más extensa la arquitectura de visión para evitar mejor los escombros de la calle. O podríamos reconstruir el VA para que el chasis sea menos propenso a sufrir daños. Estas estrategias proponen traducciones alternativas entre la utilidad esperada (evitar escombros) y los resultados deseados (conducir por todas las calles, conducir solo por calles seguras, proteger el vehículo, preservar la integridad de la red vial).
+No perdamos la perspectiva. ¡Los seres humanos no conducen coches para evitar escombros, sino para llegar a algún lugar! La cuestión de qué significaría sopesar el golpear escombros frente al objetivo de llegar a nuestro destino a tiempo o de una pieza está lejos de la mente de la mayoría de los conductores humanos. Sin embargo, la hipótesis de la recompensa permite imaginar una única función de utilidad que abarque todos estos rasgos: un único entorno en el que la recompensa escalar es suficiente, en lugar de múltiples mundos con criterios normativos inconmensurables.
+Que la hipótesis de la recompensa deba tener límites no puede cuestionarse seriamente, a menos que creamos que existe una única perspectiva ya hecha desde la cual todos los objetivos puedan simularse computacionalmente y optimizarse. En ese caso, la especificación artificial no sería necesaria: todo lo que hacen los humanos es agregar recompensas que ya están incorporadas en nuestro entorno. Tampoco es posible descartar la hipótesis por completo, ya que muchas tareas pueden simularse de manera significativa y los humanos persiguen objetivos bien definidos todo el tiempo. El hecho es que, de algún modo, los humanos pueden especificar tareas escribiendo lo que significa realizarlas. Esto implica que interpretar el mundo, al dividirlo en fragmentos navegables, requiere un tipo de agencia distinto del que se necesita para navegarlo inteligentemente en primer lugar.
+La hipótesis de la recompensa obliga al diseñador de RL a explicitar y sopesar diversas normas que se siguen colectivamente, pero que nunca antes han sido especificadas de manera robusta, ni siquiera determinadas. Incluso si de hecho existe una única función de utilidad para conducir, nunca se ha escrito (y por ello no está lista para fines de modelado), requeriría evaluar comportamientos de conducción a escalas enormes y puede que encuentre desacuerdos básicos entre esas escalas sobre lo que realmente significa “conducción óptima”. Se necesitan investigación empírica sin precedentes y voluntad política para superar estos obstáculos y codificar los rasgos de manera apropiada, en lugar de los comportamientos que suponemos óptimos.
+Podríamos considerar otro enfoque. En lugar de elaborar con esfuerzo una especificación del VA que incluya de forma significativa los rasgos que queremos, los diseñadores podrían rehacer esos rasgos del entorno para que se ajusten a la especificación del VA que tienen. Andrew Ng lo respaldó en el contexto de incentivar conductas de peatones para acomodarse a las limitaciones de los VA: “En lugar de construir una IA para resolver el problema del pogo stick [es decir, acciones humanas poco frecuentes], deberíamos asociarnos con el gobierno para pedir a la gente que sea respetuosa de la ley y considerada. … La seguridad no depende solo de la calidad de la tecnología de IA.”
+6
+Para extender el ejemplo anterior, en la práctica esto significaría que las empresas de VA podrían asociarse con comunidades locales para combatir la falta de hogar, hacer que se retiren los escombros de la calzada para que sus vehículos no tuvieran que detectarlos, o disuadir a las personas sin hogar de congregarse cerca de calles rentables. Incluso podemos pensar en esto como un problema de diseño de mecanismos: definir el objetivo o los objetivos que queremos y luego diseñar a la inversa los incentivos para los agentes (humanos u otros) que garantizarían que esos objetivos se cumplan.
+Por supuesto, reducir la falta de hogar o limpiar las calles también puede ser algo que todos deseamos. Pero esta indeterminación básica —si es responsabilidad de los diseñadores hacer que los VA estén listos para el mundo tal como es, o ayudar a rehacer el propio mundo para que los VA puedan navegarlo, o algo intermedio— es el núcleo de nuestra discusión y no es algo que la hipótesis de la recompensa pueda responder por nosotros.
+Podemos definir la economía política del RL como
+la ciencia que determina los límites de la hipótesis de la recompensa para un dominio dado
+: plantearlo, compararlo con especificaciones alternativas y evaluarlo. Es a la vez un problema técnico y normativo, porque especificar recompensas bajo incertidumbre depende de la escala del dominio en el que operamos. Un gobierno local que diseña una carretera local frente a un grupo de estados que diseña una autopista interestatal puede situarse en niveles distintos de la jerarquía de complejidad y no pueden tratarse como casos similares. En otras palabras, especificar recompensas exige preguntarse qué significaría gobernar los sistemas de RL, y no solo optimizarlos.
+Gobernanza computacional
+El espacio de problemas de la gobernanza del RL se revela por las resonancias entre la hipótesis de la recompensa y dos supuestos fundamentales de la escuela de economía de Chicago, en particular las ideas de Ronald Coase. Uno es que las empresas son mejores que los mercados para manejar los costos de transacción relacionados con el flujo de información.
+7
+Esto sugiere que la provisión del servicio de AV mediante un único dominio de diseño operativo interno (el conjunto específico de restricciones dentro de las cuales se ha diseñado un sistema automatizado para operar
+8
+) es más eficiente que una mezcla de contratistas independientes compuesta por propietarios de flotas de AV, operadores, fabricantes y reguladores. La hipótesis de la recompensa extiende esta intuición al permitir a los diseñadores imaginar tareas optimizables internamente, como parte de una sola pila computacional, en lugar de especificarse o evaluarse de manera más distribuida; es decir, que es más fácil maximizar la utilidad dentro de la empresa que bajo la guía de terceros. Esto proporcionaría una base computacional (y no económica) para justificar el poder de las empresas para agregar valor social.
+El segundo es que los tribunales y otras entidades políticas deberían intervenir en los contratos sociales solo para garantizar que los derechos de las partes afectadas se asignen de manera óptima.
+9
+El criterio técnico aquí es la eficiencia de Pareto: dados recursos finitos, los bienes deben distribuirse de la mejor manera posible, sin que el beneficio de una parte provenga del perjuicio de otra. Por ejemplo, solo si se comprobara que las flotas de AV generan costos económicos medibles (tiempos de traslado, calidad del aire, daños a las carreteras) para barrios específicos, los tribunales podrían entonces cobrarle a la empresa para compensar esos costos. La hipótesis de la recompensa extiende esto al internalizar explícitamente los costos conocidos como parte de la función de recompensa, antes de que puedan siquiera registrarse como externalidades económicas: las tasas de congestión, contaminación y desgaste de las vías pueden simplemente añadirse como características del entorno y actualizarse en respuesta a las fluctuaciones de la demanda. Si bien añadir características no impide encontrar una política óptima de RL, sí dificulta que los reguladores y los diseñadores la comprendan, lo que limita la interpretabilidad del sistema y la forma en que se asigna la responsabilidad en caso de daño. El problema básico en juego, es decir, deliberar sobre qué es un buen barrio y si, o cómo, puede sostenerse si la flota de AV se despliega, queda relegado, pues se encuentra fuera de los límites de la eficiencia de Pareto.
+Junto con la hipótesis de la recompensa, estos supuestos permitirían a los diseñadores de sistemas de RL “simular” la economía política, ya sea añadiendo características o maximizando la utilidad esperada a escalas de cómputo arbitrarias. Tales diseñadores estarían, en teoría, en mejor posición para definir y medir el valor que el mercado o las instituciones políticas. En lugar de permitir que las preocupaciones normativas se expresen de manera “subóptima” mediante el boicot a un servicio o la aprobación de nuevas leyes de zonificación, sería simplemente más eficiente dejar que los diseñadores de AV “descubran” cuál es la función de recompensa para conducir en San Francisco, Nueva York o Cincinnati, mediante una combinación de ajustes de rutas y precios dinámicos. Si esta forma de gobernanza computacional se llevara a cabo seriamente, eclipsaría una función central de la política: articular criterios normativos insuficientemente especificados que distingan entre pérdidas de utilidad y la definición de buenos resultados sociales. Aquí es donde las preguntas sobre la optimización del RL se encuentran con los temas de la economía política.
+Podemos hacer tangibles estas consideraciones abstractas ilustrando los riesgos que conllevan. La hipótesis de la recompensa implica estrategias alternativas que reflejan distintos enfoques del riesgo, en particular redefinir el servicio que prestan los AV u optimizar el rendimiento del servicio. El primero es posible gracias al
+moldeado de recompensas
+, es decir, reestructurar el entorno del agente para facilitar el aprendizaje de la política óptima. Si bien el moldeado de recompensas no pretende redefinir específicamente el comportamiento óptimo en sí, sí supone que tal definición existe. Esto se convierte en un problema si una empresa de AV ha elegido una definición que no tiene en cuenta de manera responsable las distintas interpretaciones de una conducción “buena” (por ejemplo, no chocar con objetos, maximizar la eficiencia de combustible, minimizar el tiempo de viaje). Usar el moldeado de recompensas para conciliar computacionalmente tales interpretaciones significa que las recompensas del entorno se han evaluado en términos de utilidad esperada y se han ordenado comparativamente según cierto orden de prioridad. Las acciones que los conductores humanos perciben negativamente (circular sobre baches, cerrarle el paso a alguien) reciben un valor escalar y pueden clasificarse de manera distinta según alguna especificación del modelo, incluso sin una norma legal que la guíe. Los enfoques normativos complejos de estas distinciones (los baches son malos pero los gestiona el sector público, el enojo al volante es grosero pero se tolera, el homicidio imprudente es ilegal) pueden quedar oscurecidos o reinventarse, a medida que sus intereses inconmensurables se reducen a un problema de optimización.
+Para evaluar mejor este compromiso, podemos recurrir a las herramientas e ideas de la literatura reciente sobre antimonopolio.
+10
+En entornos viales cuyas normas son indeterminadas, informales o carecen de una forma clara de experiencia en el dominio, el uso del moldeado de recompensas equivale a una reivindicación de propiedad privada sobre la infraestructura pública, lo que también se conoce como
+poder de monopolio
+, por parte de quien controle la especificación del sistema. En otras palabras, una sola empresa actuaría efectivamente como el proveedor exclusivo de servicios de vehículos y tendría la capacidad de definir lo que significan una conducción “buena” y “mala” dentro de su dominio de diseño operativo. Mientras el moldeado de recompensas se limite a entornos cuya dinámica se comprende bien, esto podría ser aceptable. Pero a medida que el dominio de los AV se expande de un solo barrio a una ciudad entera, el proveedor de AV decide, en la práctica, qué tipos y magnitudes de costos no especificados es aceptable que asuma el público mientras el sistema optimiza la definición de conducción elegida por la empresa. Los baches son quizás el mejor ejemplo de ello, pues la flota de vehículos generará estructuralmente baches en lugares específicos a medida que se descubra que ciertas autopistas son más seguras o eficientes para fines de enrutamiento.
+Históricamente, el antimonopolio ha interpretado problemas como este a través de la norma del transportista común. Más allá de cierto umbral de geovallado, una empresa de AV debería interpretarse como un transportista común, responsable de garantizar un acceso justo e igualitario a su plataforma. A ciertas escalas de infraestructura, la plataforma genera externalidades que no pueden rastrearse ni gestionarse de manera confiable mediante metas que la ley solo ha especificado parcialmente, como evitar choques, maximizar el rendimiento de combustible o minimizar el tiempo de ruta. Es probable que esta tendencia empeore a medida que Uber y Lyft aumenten su inversión de capital en viajes compartidos automatizados, Tesla haga crecer el mercado de AV de propiedad personal y Waymo amplíe el tamaño y el área de servicio de su plataforma. En cambio, los parámetros de estas externalidades deben fijarlos un tercero, mediante algún tipo de comisión pública cuya función sea especificar qué significa el bienestar social, en lugar de dejar que se optimice en un vacío normativo. Fuera de estos parámetros, el transportista común (en este caso, el proveedor del servicio de AV) puede ser considerado directamente responsable de los daños que su plataforma cause tanto a la infraestructura pública (carreteras, señalización, etc.) como a los usuarios habituales de la vía, sean o no pasajeros de AV.
+La otra forma de abordar el riesgo se denomina
+moldeado de información
+.
+11
+Este enfoque estructura el entorno de modo que la señal de recompensa, tal como haya sido definida, solo pueda ser observada por el agente bajo condiciones precisas. Esto puede permitir que el agente aprenda de forma más confiable o eficiente, pero también restringe la cantidad de entradas sensoriales. Así, se descartan observaciones posibles, porque dificultan la optimización del desempeño según la especificación elegida. Como ejemplo concreto, los vehículos autónomos en un cruce de cuatro vías podrían considerar como señal únicamente la distancia física con otros vehículos, aunque otra información (la mirada de los peatones, los gestos de mano de otros conductores, las bocinas, la gente gritando, el conocimiento común sobre la señalización del entorno) sea relevante para los conductores humanos. Que los humanos puedan coordinarse mediante distintas fuentes de información es importante, porque la movilidad vial se define por la multimodalidad: la coexistencia de múltiples alfabetizaciones (peatones, automóviles, ciclistas) en un mismo ámbito. En cambio, la configuración de la información puede excluir comportamientos esperados que son comunes en el mundo real, descuidando las características subespecificadas pero integrales en las que confían los actores interesados.
+Una red diversa de reguladores a nivel local, estatal y federal es responsable de diseñar y evaluar formas de señalización que favorezcan el acceso común a las vías. Pero, si se deja a su suerte, la configuración de la información transformará gradualmente el conjunto de sensores que usan los vehículos autónomos en la interfaz de la propia vía. Esto usurparía la autoridad de las agencias independientes y las cargaría con la responsabilidad de rediseñar las carreteras para que sean seguras para los vehículos autónomos, un fenómeno que los economistas denominan captura regulatoria.
+12
+Por ello, la configuración de la información constituye una reivindicación de
+poder monopsónico
+, definido formalmente como el “comprador” exclusivo de algún bien o servicio en un mercado particular. El servicio en este caso es la fuerza laboral distribuida (reguladores, fabricantes y entidades municipales) obligada a respaldar las especificaciones y entradas sensoriales elegidas por las empresas de vehículos autónomos. Mientras la optimización se limite a entornos de un solo modo, como las autopistas, esto quizá no amenace el interés público. Pero a medida que su integración urbana se vuelva más intensa, la interfaz de los vehículos autónomos tenderá a excluir ciertas alfabetizaciones viales y a delimitar el rango de participantes de la movilidad a quienes las vías especificadas por esos vehículos pueden ofrecer servicios comunes. El cruce imprudente de calles (jaywalking) es el paralelo histórico claro: los peatones aprendieron a verse a sí mismos como un problema que los automóviles debían evitar y, para la década de 1930, habían cedido en gran medida el control público de las calles a estos últimos.
+13
+Volviendo al antimonopolio, estos problemas se interpretan mediante el estándar de la regulación estructuralista: debe crearse algún tipo de cortafuegos o interfaz pública entre las organizaciones que producen la especificación de los vehículos autónomos, para garantizar que siga siendo inclusiva con los usuarios de la vía. Esto impediría la fusión de la prestación privada de servicios con el acceso a la vía mediante canales de información restringidos, al tiempo que permitiría a los reguladores externos examinar las entradas sensoriales y confirmar que no excluyen a los participantes de la movilidad. La regulación estructuralista cobrará más importancia a medida que avancemos hacia la infraestructura vial 5G, que hará viables el desplazamiento en pelotón de vehículos autónomos y la optimización del tráfico a escala urbana, ya que las restricciones de señal para la percepción, la localización, la planificación, el enrutamiento y los controles deben seguir coordinadas públicamente y no simplemente ser óptimas. Como mínimo, estas dinámicas de información deben poder ser observadas e interpretadas por terceros, lo que exige la capacidad de evaluar la plataforma mediante documentación externa o auditorías.
+Desafíos de política
+La hipótesis de la recompensa no puede responder qué formas de configuración son normativamente apropiadas para un servicio de IA particular. Esto plantea preguntas sociotécnicas abiertas que preocupan a los diseñadores de RL:
+¿Qué límites hay para lo que puede modelarse?
+¿Qué límites hay para los efectos sistémicos vinculantes?
+14
+¿A quién confiamos el poder de establecer los límites dentro de los cuales puede enmarcarse y evaluarse comparativamente la hipótesis de la recompensa?
+Es difícil responder a estas preguntas, ya que el panorama conceptual y el contexto de la ética de la IA cambian rápidamente. Hoy se proponen normas enteramente nuevas para el antimonopolio que trascienden las protecciones económicas estrechas.
+15
+Los gobiernos de la Unión Europea y de Estados Unidos están descubriendo que tienen la determinación de enfrentarse a las grandes plataformas tecnológicas y regularlas mediante una combinación de multas, protecciones de datos y demandas en curso. Tras las acusaciones de la Comisión Federal de Comercio de que Facebook ha actuado como un monopolio ilegal,
+16
+debemos evaluar continuamente si alinear los sistemas con fines sociales también exige examinar la estructura de las organizaciones que los construyen. Estos avances reflejan preguntas políticas difíciles: ¿debemos arrebatar el poder a los monopolios privados y ponerlo en manos de funcionarios públicos? ¿O bien responsabilizar a ese poder sin importar dónde resida?
+17
+Retrocedamos un paso y consideremos los valores centrales en juego al perseguir la hipótesis de la recompensa en cada vez más ámbitos sociales. Propongo que hay dos:
+integridad
+y
+interoperabilidad
+. La integridad significa que la estructura normativa del ámbito, en la medida en que haya sido especificada por la ley o la costumbre, debe ser protegida por la empresa de IA que actúe como su custodia. En principio, esto implica que existe una traducción limpia entre las normas sociales vigentes y la especificación de estados, acciones y recompensas en el aprendizaje por refuerzo (RL), aunque puede haber incertidumbre sobre cómo lograrlo técnicamente. La interoperabilidad significa que, si la estructura normativa del ámbito requiere una especificación adicional, las distintas interfaces en juego en un sistema determinado al menos sigan siendo coherentes, interpretables y sujetas a evaluación por un tercero. En este caso, la especificación de RL debe estar sujeta a supervisión externa, y los enfoques particulares de optimización deben respaldarse con documentación pública.
+Juntos, estos valores sirven para proteger las normas que ya tenemos de la invasión de los sistemas de IA y para postergar la elección de normas subespecificadas hasta que los actores interesados tengan la oportunidad de articularlas y afirmarlas. Un enfoque equilibrado debe incluir ambos y reflejarse en las relaciones institucionales entre ingenieros, gerentes corporativos y reguladores externos. A continuación, presento brevemente cómo podría verse esto en el contexto del desarrollo de vehículos autónomos.
+A medida que las flotas de vehículos autónomos ocupan más y más calles, heredan las responsabilidades y los compromisos que las ciudades ya han asumido en materia de infraestructura, seguridad y equidad vial. En este caso, las entidades municipales podrían exigir a las empresas que asuman parte del costo de las reparaciones de infraestructura y de cualquier megaproyecto futuro derivado de la prestación de servicios de viaje con vehículos autónomos. Las empresas también podrían estar obligadas a compartir datos para que las comisiones públicas puedan determinar mejor las reparaciones necesarias. Como inspiración para posibles estándares, podemos recurrir a trabajos recientes sobre integridad contextual (CI). La CI interpreta los ámbitos sociales normativos en términos de sus fines (los objetivos de los agentes participantes) y del flujo de información (el medio a través del cual los hechos o datos pueden moverse entre agentes, con cierto grado de asimetría).
+18
+Esto ayuda a precisar los límites para evaluar la configuración de la recompensa y de la información, y sirve como un posible estándar de optimización que los reguladores podrían aplicar a las empresas.
+Los ingenieros internos tendrían entonces que definir estados, acciones y recompensas para cumplir el estándar especificado por CI. Por ejemplo, un AV que no pudiera reconocer escombros en la calzada aún podría desplegarse en esas calles y ser “autorizado para circular” mientras las colisiones siguieran siendo infrecuentes o causaran daños mínimos, según los umbrales especificados por un tercero. Sin embargo, si se comprobara que ese AV genera externalidades imprevistas en forma de congestión del tráfico, podría estar incumpliendo compromisos con la seguridad pública y la movilidad equitativa, y ser considerado responsable del daño. De este modo, CI ayuda a distinguir la tolerancia de comportamientos subóptimos de la evaluación de daños directos: mientras algunos estados y acciones exigen una aplicación estricta y prevención, las normas técnicas para la detección de objetos y la evitación de accidentes aún no se han especificado de forma exhaustiva.
+Mientras tanto, debemos asegurar que las formas alternativas de movilidad no queden excluidas a medida que las vías se pongan en servicio mediante nuevas formas de infraestructura “inteligente”. Un camino a seguir son las interfaces de programación de aplicaciones (API) abiertas, un posible estándar que las empresas de AV podrían adoptar. Consideremos una ciudad en la que una sola flota de AV es dominante, actuando efectivamente como guardián de la movilidad pública misma. En este caso, una API abierta podría respaldar el intercambio de datos público-privado y una competencia estructurada con servicios más pequeños. Esto impediría que la flota aprovechara su dominio de mercado para redefinir el acceso a las vías y limitaría la integración vertical de la prestación del servicio. La definición propia de estados, acciones y recompensas de la empresa sería menos importante que la transparencia sobre esas definiciones entre los equipos de ingeniería, así como la coordinación público-privada entre los gerentes corporativos y los organismos municipales. De este modo, las preocupaciones sobre el transporte multimodal podrían atenderse de forma continua, evitando al mismo tiempo el control unilateral de las asociaciones de movilidad.
+Más allá de la supervisión regulatoria, las API abiertas también hacen posible establecer mercados para una prestación justa de servicios. Esto podría lograrse mediante una combinación de subastas de servicios (por ejemplo, para el acceso a un barrio) y licencias administrativas, asegurando que los peatones, los servicios de movilidad más pequeños y otros actores conserven el acceso a las vías. Siguiendo el camino de las telecomunicaciones,
+19
+las empresas de AV podrían competir por el acceso a protocolos de interoperabilidad en lo que respecta a vías particulares, dentro de parámetros aceptables para los usuarios actuales de la vía. Estos parámetros, a su vez, seguirían sujetos a revisión a medida que se observaran e interpretaran las dinámicas emergentes del tráfico. Crucialmente, estas herramientas incentivarían a las empresas a preocuparse por la función de recompensa que optimizan sus AV y a supervisarla, lo que ayudaría a garantizar que la prestación del servicio respete el bienestar social tanto como resulte técnicamente óptimo.
+Conclusión
+Ambos aspectos de las vías —su condición heredada de bien público y su capacidad continua para acomodar formas estructuralmente diversas de uso— son condiciones necesarias para el desarrollo y el despliegue responsables de los AV. Sin embargo, los problemas de gobernanza computacional analizados arriba son de carácter general y serán relevantes para cualquier sistema de aprendizaje por refuerzo (RL) cuyo desarrollo implique dar forma a las recompensas o a la información en dominios de escala incierta y complejidad normativa. El trabajo técnico y de políticas en curso sobre integridad e interoperabilidad ayudará a iluminar el camino para investigar los límites de la hipótesis de la recompensa en contextos particulares y, por extensión, la economía política emergente de los sistemas de RL. Esto adapta una idea que los estudiosos de la economía política valoran desde hace mucho tiempo
+20
+: en lugar de partir de una visión simplificada de cómo debería funcionar el mundo y luego usar datos para minimizar el sesgo del modelo, primero debemos observar cómo distintas instituciones (individuos, empresas, mercados, gobiernos) han abordado el tipo de problema que enfrentamos, reespecificarlo en consecuencia y mantener interfaces con esas instituciones para que las preocupaciones de los actores interesados puedan atenderse de manera efectiva.
+Agradecimientos
+Deseo agradecer a Peter Bartlett, Tushant Jha, Kristin Kane, Kshitij Kulkarni, Nathan Lambert, Nick Merrill, Vidya Muthukumar, Roshan Shariff y Aaron Snoswell por sus comentarios sobre versiones anteriores de este artículo. También deseo agradecer a mis colegas participantes del programa Theory of Reinforcement Learning por las extensas conversaciones e intercambios.
+Las primeras críticas destacadas al paradigma del big data se centraron en exponer sus afirmaciones espurias de eliminar los sesgos humanos de los datos recopilados históricamente (véase Barocas, Solon, y Andrew D. Selbst. “Big Data’s Disparate Impact.”
+California Law Review
+104, núm. 3 (2016): 671-732.
+http://dx.doi.org/10.2139/ssrn.2477899
+; O’Neil, Cathy.
+Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy
+. New York: Broadway Books, 2016; Pasquale, Frank.
+The Black Box Society
+. Cambridge, MA: Harvard University Press, 2015.). Una segunda ola de estudios críticos sobre algoritmos se ha centrado en fallas técnicas particulares relacionadas con la discriminación racial (Benjamin, Ruha. “Race after Technology: Abolitionist Tools for the New Jim Code.”
+Social Forces
+98, núm. 4 (2020): 1-3.
+https://doi.org/10.1093/sf/soz162
+; Noble, Safiya Umoja.
+Algorithms of Oppression: How Search Engines Reinforce Racism
+. New York: New York University Press, 2018.), de clase (Eubanks, Virginia.
+Automating Inequality: How High-Tech Tools Profile, Police, and Punish the Poor
+. New York: St. Martin’s Press, 2018; Zuboff, Shoshana.
+The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power
+. London: Profile Books, 2019.), y de género (Bolukbasi, Tolga, Kai-Wei Chang, James Zou, Venkatesh Saligrama, y Adam Kalai. “Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings.” arXiv preprint arXiv:1607.06520 (2016)).
+↩︎
+Adaptado de la entrada de blog de Rich Sutton, aquí:
+http://incompleteideas.net/rlai.cs.ualberta.ca/RLAI/rewardhypothesis.html
+.
+↩︎
+Adaptado de Ng, Andrew Y., y Stuart J. Russell. “Algorithms for Inverse Reinforcement Learning.”
+Proceedings of the Seventeenth International Conference on Machine Learning
+. Vol. 1. 2000.
+↩︎
+Adaptado de los comentarios públicos de Michael Littman, expuestos aquí:
+https://www.coursera.org/lecture/fundamentals-of-reinforcement-learning/michael-littman-the-reward-hypothesis-q6x0e
+.
+↩︎
+Véase Sendak, Mark, et al. “‘The Human Body Is a Black Box’: Supporting Clinical Decision-Making With Deep Learning.”
+Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency
+. 2020. El trabajo reciente de Elish emplea de forma más extensa el concepto de “reparación”.
+↩︎
+Citado de Rodney Brooks:
+https://rodneybrooks.com/bothersome-bystanders-and-self-driving-cars/
+.
+↩︎
+Coase, Ronald Harry. “The Nature of the Firm.”
+Essential Readings in Economics
+. London: Palgrave, 1995. 37-54.
+↩︎
+Para una definición más detallada, véase aquí:
+https://itlaw.wikia.org/wiki/Operational_Design_Domain
+.
+↩︎
+Coase, Ronald H. “The Problem of Social Cost.”
+Classic Papers in Natural Resource Economics
+. London: Palgrave Macmillan, 1960. 87-137.
+↩︎
+Véase, por ejemplo, Steinbaum, Marshall, y Maurice E. Stucke. “The Effective Competition Standard: A New Standard for Antitrust.”
+University of Chicago Law Review,
+de próxima publicación (2018).
+↩︎
+Griffith, Shane, et al. “Policy Shaping: Integrating Human Feedback with Reinforcement Learning.”
+Advances in Neural Information Processing Systems
+26 (2013): 2625-2633.
+↩︎
+Dal Bó, Ernesto. “Regulatory Capture: A Review.”
+Oxford Review of Economic Policy
+22, núm. 2 (2006): 203-225.
+↩︎
+Véase Norton, Peter D.
+Fighting Traffic: The Dawn of the Motor Age in the American City
+. Cambridge, MA: MIT Press, 2011.
+↩︎
+Las dos primeras preguntas están adaptadas de aquí:
+https://democraticrobots.substack.com/p/rl-policy
+.
+↩︎
+Rahman, K. Sabeel, y Kathleen Thelen. “The Rise of the Platform Business Model and the Transformation of Twenty-First-Century Capitalism.”
+Politics & Society
+47, núm. 2 (2019): 177-204.
+↩︎
+https://www.nytimes.com/2020/12/09/technology/facebook-antitrust-monopoly.html
+↩︎
+Fukuyama et al. han respaldado recientemente este último enfoque:
+https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/platform_scale_whitepaper_-cpc-pacs.pdf
+.
+↩︎
+Esto se presenta con más detalle en las pp. 182-3 de Nissenbaum, Helen.
+Privacy in Context: Technology, Policy, and the Integrity of Social Life
+. Stanford, CA: Stanford University Press, 2009.
+↩︎
+Illing, Gerhard, y Ulrich Klüh, eds.
+Spectrum Auctions and Competition in Telecommunications
+. Cambridge, MA: MIT Press, 2003.
+↩︎
+Véase Neil Fligstein y Steven Vogel, “Political Economy After Neoliberalism”, disponible aquí:
+http://bostonreview.net/class-inequality/neil-fligstein-steven-vogel-political-economy-after-neoliberalism
+.
+↩︎
+Compartir esta página
+Copiar URL de esta página
+Historias relacionadas
+La directora del Simons Institute, Shafi Goldwasser, recibe el Premio Dijkstra 2023
+La directora del Simons Institute, Shafi Goldwasser, recibe el Premio Dijkstra 2023
+MIT CSAIL
+Leer
+sobre la directora del Simons Institute, Shafi Goldwasser, galardonada con el Premio Dijkstra 2023
+26 de junio de 2023
+Equidad multigrupo | Polylogues
+Equidad multigrupo | Polylogues
+En abril de 2023, el Simons Institute organizó un taller sobre equidad multigrupo y la validez estadística...
+Leer
+sobre Equidad multigrupo | Polylogues
+13 de junio de 2023
+,
+El Simons Institute for the Theory of Computing es el principal centro mundial de investigación colaborativa en ciencias de la computación teórica.
+Pie de página
+Programas y eventos
+Acerca de
+Participar
+Talleres y simposios
+Contáctenos
+Calendario
+Redes sociales del pie de página
+Twitter
+Facebook
+Youtube
+© 2013–2023 Simons Institute for the Theory of Computing. Todos los derechos reservados.
+enlace a la página de inicio
+Cerrar
+Navegación principal
+Inicio
+Programas y eventos
+Programas de investigación
+Grupos de investigación
+Talleres y simposios
+Conferencias públicas
+Actividades internas de los programas
+Personas
+Dirección científica
+Personal
+Visitantes de larga duración actuales
+Investigadores becarios
+Investigadores posdoctorales
+Consejo científico asesor
+Consejo de gobierno
+Consejo asesor de la industria
+Profesorado afiliado
+Comunicadores científicos residentes
+Becarios de derecho y sociedad
+Participar
+Formas de participar
+Planifique su visita
+Ubicación e indicaciones
+Becas de investigación posdoctoral
+Becas de derecho y sociedad
+Programa de comunicadores científicos residentes
+Apoyo
+Fondo anual
+Financiadores
+Alianzas industriales
+Alianzas académicas
+Noticias y videos
+Noticias
+Videos
+Acerca de
+Navegación de utilidades
+Calendario
+Contacto
+Iniciar sesión
+Haga una donación
+enlace a la página de inicio
+Cerrar
+Buscar

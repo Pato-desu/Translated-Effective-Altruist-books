@@ -9,7 +9,7 @@ AI-generated EPUB translations of key books on **Effective Altruism** and **Rati
 
 Each language has one release with all its books as files. To get a single book, use its link in the table below.
 
-- **Spanish**: 10 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
+- **Spanish**: 12 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chinese**: 2 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
 
@@ -21,14 +21,18 @@ Click a title's file link to download that EPUB. All files open in any e-reader.
 | :--- | :--- | :--- | :--- | :--- |
 | **Rationality: From AI to Zombies** | Eliezer Yudkowsky | Spanish | [EPUB](Espa%C3%B1ol/Racionalidad_%20de%20la%20A%20a%20la%20Z%20-%20Eliezer%20Yudkowsky.epub) | Translated with Gemini; external links restored with Claude. Basic review pending. |
 | **Doing Good Better** | William MacAskill | Spanish | [EPUB](Espa%C3%B1ol/Hacer%20el%20bien%20mejor_%20Como%20el%20Altruismo%20Eficaz%20puede%20hacer%20la%20diferencia%20-%20William%20MacAskill.epub) | Translated with Gemini; the missing end of the notes and the index were filled in with Claude. Basic review pending. |
-| **Animal Liberation** | Peter Singer | Spanish | [EPUB](Espa%C3%B1ol/archive/Animal%20Liberation%20%28PDFDrive%29.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **Superintelligence** | Nick Bostrom | Spanish | [EPUB](Espa%C3%B1ol/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **The Scout Mindset** | Julia Galef | Spanish | [EPUB](Espa%C3%B1ol/archive/Galef%20-%20The%20Scout%20Mindset.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **The Most Good You Can Do** | Peter Singer | Spanish | [EPUB](Espa%C3%B1ol/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **Avoiding the Worst** | Tobias Baumann | Spanish | [EPUB](Espa%C3%B1ol/archive/baumann-avoiding-the-worst.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **The Hedonistic Imperative** | David Pearce | Spanish | [EPUB](Espa%C3%B1ol/archive/hedonistic%20imperative.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **Reasoned Politics** | Magnus Vinding | Spanish | [EPUB](Espa%C3%B1ol/archive/reasoned-politics.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
-| **Suffering-Focused Ethics** | Magnus Vinding | Spanish | [EPUB](Espa%C3%B1ol/archive/suffering-focused-ethics.epub) | Translated with Claude from the PDF text. Some PDF debris remains; index and bibliography entries stay in English. |
+| **Animal Liberation** | Peter Singer | Spanish | [EPUB](Espa%C3%B1ol/archive/Animal%20Liberation%20%28PDFDrive%29.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **Superintelligence** | Nick Bostrom | Spanish | [EPUB](Espa%C3%B1ol/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **The Scout Mindset** | Julia Galef | Spanish | [EPUB](Espa%C3%B1ol/archive/Galef%20-%20The%20Scout%20Mindset.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **The Most Important Century** (Cold Takes series) | Holden Karnofsky | Spanish | [EPUB](Espa%C3%B1ol/archive/Most%20important%20century.epub) | Translated with Claude from the PDF text of the blog series. Some line-break debris from the PDF remains. |
+| **CFAR Handbook** (2021) | Center for Applied Rationality | Spanish | [EPUB](Espa%C3%B1ol/archive/CFAR_Handbook_2021.epub) | Translated with Claude from the PDF text. Some running headers and table layout from the PDF remain. |
+| **Mapping the Political Economy of Reinforcement Learning Systems** (white paper) | Thomas Krendl Gilbert | Spanish | [TXT](Espa%C3%B1ol/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt) | Plain text, as in the archive (a saved web page, menus included). |
+| **Synthetic fat from petroleum as a resilient food for global catastrophes** (paper) | J. B. García Martínez, K. A. Alvarado, D. C. Denkenberger | Spanish | [TXT](Espa%C3%B1ol/archive/synthetic.pdf.txt) | Plain text from the PDF; the end of the references is missing. |
+| **The Most Good You Can Do** | Peter Singer | Spanish | [EPUB](Espa%C3%B1ol/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **Avoiding the Worst** | Tobias Baumann | Spanish | [EPUB](Espa%C3%B1ol/archive/baumann-avoiding-the-worst.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **The Hedonistic Imperative** | David Pearce | Spanish | [EPUB](Espa%C3%B1ol/archive/hedonistic%20imperative.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **Reasoned Politics** | Magnus Vinding | Spanish | [EPUB](Espa%C3%B1ol/archive/reasoned-politics.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
+| **Suffering-Focused Ethics** | Magnus Vinding | Spanish | [EPUB](Espa%C3%B1ol/archive/suffering-focused-ethics.epub) | Translated with Claude from the PDF text. The first words of some chapters (small caps in the PDF) are missing; index and bibliography entries stay in English. |
 | **The Precipice** | Toby Ord | Chinese | [EPUB](Chinese/%E5%8D%B1%E5%B4%96%20The%20Precipice.epub) | Translated with Claude from the PDF text. 672 notes, linked both ways. |
 | **What We Owe the Future** | William MacAskill | Chinese | [EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) | Translated with Claude from the PDF text. 798 notes; a few gaps where the PDF lost a note. |
 
