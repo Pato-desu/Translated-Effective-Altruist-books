@@ -9,6 +9,7 @@ Traducciones en EPUB, hechas con IA, de libros clave sobre **Altruismo Eficaz** 
 
 Cada idioma tiene una release con todos sus libros. Para un solo libro, usa su enlace en la tabla de abajo.
 
+- **Inglés (originales)**: 16 libros, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
 - **Español**: 13 libros, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chino**: 2 libros, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
@@ -19,6 +20,22 @@ Haz clic en el enlace del archivo para descargar ese EPUB. Todos se abren en cua
 
 | Libro | Autor | Idioma | Descarga | Notas |
 | :--- | :--- | :--- | :--- | :--- |
+| **Doing Good Better** | William MacAskill | Inglés | [EPUB](English%2C%20Original/Doing%20Good%20Better_%20How%20Effective%20Altruism%20can%20make%20the%20difference%20-%20William%20MacAskill.epub) | Edición original en inglés, conservada como fuente de las traducciones. |
+| **Rationality: From AI to Zombies** | Eliezer Yudkowsky | Inglés | [EPUB](English%2C%20Original/Rationality_%20From%20AI%20to%20Zombies%20-%20Eliezer%20Yudkowsky.epub) | Edición original en inglés, conservada como fuente de las traducciones. |
+| **Animal Liberation** | Peter Singer | Inglés | [PDF](English%2C%20Original/archive/Animal%20Liberation%20%28PDFDrive%29.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **Superintelligence** | Nick Bostrom | Inglés | [PDF](English%2C%20Original/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **The Scout Mindset** | Julia Galef | Inglés | [PDF](English%2C%20Original/archive/Galef%20-%20The%20Scout%20Mindset.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **The Most Important Century** (serie de Cold Takes) | Holden Karnofsky | Inglés | [PDF](English%2C%20Original/archive/Most%20important%20century.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **CFAR Handbook** (2021) | Center for Applied Rationality | Inglés | [PDF](English%2C%20Original/archive/CFAR_Handbook_2021.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **Mapping the Political Economy of Reinforcement Learning Systems** (informe) | Thomas Krendl Gilbert | Inglés | [TXT](English%2C%20Original/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt) | Original en inglés (texto) del Archivo EA, fuente de la traducción española. |
+| **Synthetic fat from petroleum as a resilient food for global catastrophes** (artículo) | J. B. García Martínez, K. A. Alvarado, D. C. Denkenberger | Inglés | [TXT](English%2C%20Original/archive/synthetic.pdf.txt) | Original en inglés (texto) del Archivo EA, fuente de la traducción española. |
+| **The Most Good You Can Do** | Peter Singer | Inglés | [PDF](English%2C%20Original/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **Avoiding the Worst** | Tobias Baumann | Inglés | [PDF](English%2C%20Original/archive/Baumann%20-%20Avoiding%20Worst%20final.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **The Hedonistic Imperative** | David Pearce | Inglés | [PDF](English%2C%20Original/archive/hedonistic%20imperative.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **Reasoned Politics** | Magnus Vinding | Inglés | [PDF](English%2C%20Original/archive/reasoned-politics.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **Suffering-Focused Ethics** | Magnus Vinding | Inglés | [PDF](English%2C%20Original/archive/suffering-focused-ethics.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción española. |
+| **The Precipice** | Toby Ord | Inglés | [PDF](English%2C%20Original/archive/Ord%20-%20Precipice.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción china. |
+| **What We Owe the Future** | William MacAskill | Inglés | [PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) | Original en inglés (PDF) del Archivo EA, fuente de la traducción china. |
 | **Rationality: From AI to Zombies** | Eliezer Yudkowsky | Español | [EPUB](Espa%C3%B1ol/Racionalidad_%20de%20la%20A%20a%20la%20Z%20-%20Eliezer%20Yudkowsky.epub) | Traducido con Gemini; enlaces externos recuperados con Claude. Revisión básica pendiente. |
 | **Doing Good Better** | William MacAskill | Español | [EPUB](Espa%C3%B1ol/Hacer%20el%20bien%20mejor_%20Como%20el%20Altruismo%20Eficaz%20puede%20hacer%20la%20diferencia%20-%20William%20MacAskill.epub) | Traducido con Gemini; el final de las notas y el índice, que faltaban, se completaron con Claude. Revisión básica pendiente. |
 | **Animal Liberation** | Peter Singer | Español | [EPUB](Espa%C3%B1ol/archive/Animal%20Liberation%20%28PDFDrive%29.epub) | Traducido con Claude a partir del texto del PDF. Faltan las primeras palabras de algunos capítulos (versalitas en el PDF); el índice y la bibliografía siguen en inglés. |

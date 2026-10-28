@@ -1,0 +1,329 @@
+Mapping the Political Economy of Reinforcement Learning Systems: The Case of Autonomous Vehicles
+Skip to main content
+Search
+Utility navigation
+Calendar
+Contact
+Login
+Make a Gift
+Main navigation
+Home
+Programs & Events
+Research Programs
+Research Pods
+Workshops & Symposia
+Public Lectures
+Internal Program Activities
+People
+Scientific Leadership
+Staff
+Current Long-Term Visitors
+Research Fellows
+Postdoctoral Researchers
+Scientific Advisory Board
+Governance Board
+Industry Advisory Council
+Affiliated Faculty
+Science Communicators in Residence
+Law and Society Fellows
+Participate
+Ways to Participate
+Plan Your Visit
+Location & Directions
+Postdoctoral Research Fellowships
+Law and Society Fellowships
+Science Communicator in Residence Program
+Support
+Annual Fund
+Funders
+Industrial Partnerships
+Academic Partnerships
+News & Videos
+News
+Videos
+About
+Breadcrumb
+Home
+News Archive
+Mapping the Political Economy of Reinforcement Learning Systems: The Case of Autonomous Vehicles
+Sunday, Jan. 31, 2021
+Mapping the Political Economy of Reinforcement Learning Systems: The Case of Autonomous Vehicles
+A Policy-and-Practice White Paper
+by Thomas Krendl Gilbert (Law and Society Fellow, Simons Institute)
+Conversations about AI ethics often revolve around the elimination of statistical bias. If a given machine learning system makes many mistakes, a common approach is to provide the system with more or better-structured data so that the resulting representation is more accurate and perhaps suitable for real-world use. A clear example is the various optimization problems entailed in the development of autonomous vehicles. If a car is not good at taking left turns or merging onto the highway, designers can just simulate various scenarios on a computer, derive an algorithm, and then program the learned behavior into the vehicle.
+Yet the “more data” band-aid has failed to address many challenges with real systems designed for facial recognition, recommendation systems, and others.
+1
+This is partly because designers rely on piecemeal fixes that make a system perform better according to some narrowly defined metric, without deeper reflection on what “better” means in context. Reinforcement learning (RL), which models how agents might act in some environment in order to learn and acquire some approximation of intelligent behavior, may push this paradigm to its breaking point. Its three key ingredients are states (composing the environment at stake), actions (the options available to the agent at every time step), and rewards (the “return” given to the agent when it takes a particular action). It is often distinguished from supervised and unsupervised learning, in which the system can either reference only what is already known via labeled data or explore the data structure with minimal constraints. By contrast, the heart of RL is to interpret intelligence itself, whether human or artificial, as a set of learned behaviors that effectively balances what is known with what isn’t — a kind of computational prudence.
+For the RL designer, the problem lies in making reasonable assumptions about the environment that can be well translated into states, actions, and rewards. But uncertainties often seep into the system at each of these, making “better” or “worse” outcomes increasingly difficult to specify as the task becomes more complex. Consider the simple case of making coffee in a motel room: At what point is it not worth scrounging for filters or grounds vs. using the bag of Earl Grey next to the bed? Am I up for schlepping down to the lobby to use the unreliable cappuccino dispenser, or do I not want to get out of my jammies? How is a well-brewed cup of coffee “better” than a sour or bitter one, as long as I’m caffeinated enough to catch my flight? As the task must be defined independently from any particular learned technique, it is unreasonable to foist all these quandaries on the agent, let alone a groggy one! Instead, the designer somehow has to set up a Markovian environment (one in which the values of states and actions do not depend on past information) for the agent to observe, and then help the agent learn to navigate it. The agent’s behavior has to be interpretable as good, i.e., as well aimed rather than merely clever, based on our perception of the task itself.
+I argue that defining tasks in this way is a problem of
+sociotechnical specification
+: Who is the system for? What is its purpose? How and to whom can it be held accountable? Put more concretely: What are all the different “environments” at stake in citywide traffic mobility? When do designers have justification for making autonomous vehicles robust to certain environments at the potential cost of others? Under what circumstances might it be unacceptable to have a single algorithm for object detection, traffic navigation, and congestion management?
+Finding complete answers to these questions will require decades of research as autonomous vehicles are further developed. But before that happens, designers of RL systems must understand that these social domains’ normativity (the pattern of local behaviors we expect from others and ourselves) is unevenly and richly structured. While some of those structures are sufficiently defined to support optimization techniques, others’ definitions are not forthcoming. Sociotechnical specification challenges current AI development practices in three ways: 1) reaching consensus on the normative structure of the domain is a
+deliberative process
+that cannot be achieved by data aggregation or computation alone; 2) disagreements on norms are handled by
+social institutions
+— in particular, markets (how can we optimize?) and politics (what are we optimizing for?); and 3) developers need to construct
+interfaces
+with these institutions so that the definitions of states, actions, and rewards are responsibly indexed to the concerns of stakeholders.
+The meta-question of which problems are “ready” for RL and which will require further definition shares much with themes of political economy. Rather than abstract ethics, political economy asks the essential question at the heart of any RL system — what is the nature of value? — in the context of particular normative domains. Because these domains vary in scale, the same reward structure cannot be applied automatically to them, and designers need good sense about the levels of abstraction where norms operate so that the system works on the levels we want and not the ones we don’t. There are scales at which the requisite optimization is known, scales where the optimization is uncertain, and other scales whose features are unclear. In fact, the fields of engineering, economics, and governance roughly correspond to these and serve as distinct inquiries into how assumptions can be operationalized, competitively pursued, or deliberated upon.
+A systematic exposition of political economy is beyond the scope of this article. Instead, my goal is to briefly describe the distinct forms of social risk entailed by the optimization of advanced RL systems, how these forms might be interpreted according to existing legal standards, and what sorts of limits to optimization should be implemented to protect and reform infrastructure responsibly. Although these claims are meant to apply to any RL system of sufficient scope and complexity, continuous reference is made to the pertinent case study of autonomous vehicles (AVs) for the purpose of clarity and simplicity. Throughout, we consider the surrounding institutional contexts (social, behavioral, managerial) in which AV systems are made and deployed and which often absorb hidden costs related to suboptimal performance.
+The limits of intelligent behavior
+The themes of political economy help reveal how the structuring of an RL agent’s learning environment can both make optimal learning possible and generate social harm if designers do not adequately reflect on how rewards have been specified. This can be illustrated through the
+reward hypothesis
+, the idea that “ends” or “purposes” are the maximization of the expected value of the cumulative sum of a received scalar signal.
+2
+This is a fancy way of saying that for any particular job, there is some computable answer to the question of what it means to do that job well — that the definition of a good job is somehow baked into the activity and can be learned exclusively by referencing the relative success of one’s own actions. Mowing the lawn means you are cutting blades of grass; doing the dishes means you are scrubbing away spots of dirt; beating Super Mario Bros. means you are collecting coins, beating levels, or finally freeing Princess Peach.
+It follows that skill is best acquired by interacting with the environment directly rather than by imitating how someone else has done it. According to the hypothesis, optimizing for the underlying reward function rather than learning to mimic some observed behavior pattern is the most “succinct, robust and transferable definition of a task.”
+3
+This reward function is often not even unique, as it is common for different objective functions to be simultaneously optimized when there are overlapping interpretations of the observed behavior (am I pouring a glass of water because I am thirsty or because I want to rinse the glass out?). Moreover, the AI designer does not have to specify the mechanism for achieving a goal, as the RL agent can design its own strategy for achieving it.
+4
+Philosophically, the reward hypothesis is a claim about how the complexity of intelligent behavior can, in principle, be encapsulated by the simplicity of scalar reward. In other words, different actions and strategies can be definitively compared as better or worse than each other with reference to the ultimate goal. If a reward function seems hard for the agent to learn, the hypothesis entertains the idea that further optimization (expanding the action space, adjusting the signal) will solve the problem, at least to the extent that there is a solution to be found. To clarify this point, the hypothesis does not claim that all human activities amount to utility maximization, but that all “well-specified” activities effectively do, at least in terms of the signals received and particular learning environment at stake.
+But at the end of the day we are building systems that interface with the real world, not just models. Leveraging the reward hypothesis when designing AI systems such as AVs entails a problem of specification — the need to define some reward or goal state for the agent in a way that will lead to successful outcomes. RL system developers must decide how to manage the gap between system specification and resulting real-world behavior.
+5
+How should they do this? The limits of the reward hypothesis show how
+sociotechnical
+specification is unavoidable and optimization cannot be pursued “all the way down” in lieu of normative deliberation.
+For example, consider an AV perception algorithm that has trouble recognizing street debris, compromising the AV’s ability to drive safely through areas with significant homeless populations or unreliable street flow. The AV does not get into accidents and generally makes it to its goal on time, but occasionally runs over bits of plastic and glass in a way that does damage to the vehicle and possibly the road. Is this AV’s behavior suboptimal (could it be doing a better job)? Or is the environment misspecified (doing the wrong job)? Or neither?
+We can readily imagine a host of ways — some of which are technical, others less so — to solve this problem, depending on how we choose to interpret it. Our example AV could be rerouted to go through different streets that are typically cleaner, even though this would add to the travel time. We could more extensively validate the vision architecture to better avoid street debris. Or we could rebuild the AV so that the chassis is less prone to damage. These strategies propose alternative translations between expected utility (avoid debris) and desired outcomes (drive on all streets, drive only on streets that are safe, protect the vehicle, preserve the integrity of the road network).
+Let’s not lose perspective. Humans do not drive cars in order to avoid debris, but to get somewhere! The question of what it would mean to weigh hitting debris against the goal of getting to our destination on time or in one piece is far from the minds of most human drivers. Yet the reward hypothesis makes it possible to imagine a single utility function that encompasses all these features — a single environment where scalar reward is sufficient, rather than multiple worlds with incommensurate normative criteria.
+That the reward hypothesis must have limits cannot be seriously questioned, unless we believe that there is a single ready-made perspective from which all goals can be computationally simulated and optimized. In that case, artificial specification would not be necessary — all humans ever do is aggregate rewards that have already been baked into our environment. Nor is it possible to dismiss the hypothesis entirely, as many tasks can be meaningfully simulated and humans do pursue well-defined objectives all the time. The fact is that somehow, humans can specify tasks by writing down what it means to perform them. This implies that to interpret the world by meaningfully carving it up into navigable chunks requires a different kind of agency than intelligently navigating it in the first place.
+The reward hypothesis forces the RL designer to make explicit and weigh various norms that are collectively followed but have never before been robustly specified or even determined. Even if a single utility function for driving does in fact exist, it has never been written down before (and is thus not ready-made for modeling purposes), would require evaluating driving behaviors at enormous scales, and may well encounter basic disagreements among those scales about what “optimal driving” actually means. Unprecedented empirical research and political will are necessary to overcome these hurdles and encode features appropriately rather than the behaviors we assume to be optimal.
+We might consider another approach. Instead of painstakingly crafting an AV specification that meaningfully includes the features we want, designers could remake those environmental features to conform to the AV specification they have. Andrew Ng endorsed this in the context of incentivizing pedestrian behaviors to accommodate the limitations of AVs: “Rather than building AI to solve the pogo stick problem [i.e., rare human actions], we should partner with the government to ask people to be lawful and considerate. … Safety isn’t just about the quality of the AI technology.”
+6
+To extend the example above, in practice this would mean that AV companies could partner with local communities to fight homelessness, have debris removed from the road so that their vehicles did not have to observe it, or discourage people experiencing homelessness from congregating near profitable streets. We can even think of this as a mechanism design problem: define the objective(s) we want and then reverse engineer incentives for the agents (human or otherwise) that would guarantee those objectives are met.
+Of course, reducing homelessness or cleaning up roads may also be something we all want. But this basic indeterminacy — whether it is designers’ responsibility to make AVs ready for the world as it is, or help remake the world itself so that AVs can navigate it, or something in between — is the crux of our discussion and not something the reward hypothesis can answer for us.
+We can define the political economy of RL as
+the science of determining the limits of the reward hypothesis for a given domain
+: framing it, comparing it with alternative specifications, and evaluating it. This is both a technical and a normative problem, because specifying rewards under uncertainty depends on the scale of the domain in which we are operating. A local government designing a road vs. a group of states designing an interstate may fall at different scales of the complexity hierarchy and could not be treated as similar. In other words, specifying rewards requires asking what it would mean to govern RL systems, not just optimize them.
+Computational governance
+The problem space of RL governance is revealed by the resonances between the reward hypothesis and two foundational assumptions of the Chicago school of economics, in particular the ideas of Ronald Coase. One is that firms are better than markets at handling transaction costs pertaining to information flow.
+7
+This suggests that provision of AV service via a single in-house operational design domain (the specific set of constraints within which an automated system has been designed to operate
+8
+) is more efficient than a mix of independent contractors comprising AV fleet owners, operators, manufacturers, and regulators. The reward hypothesis extends this intuition by allowing designers to imagine tasks as optimizable in-house as part of a single computation stack rather than specified or evaluated in a more distributed manner — that it is easier to maximize utility within the firm than under the guidance of third parties. This would provide a computational (rather than economic) basis for justifying the power of firms to aggregate social value.
+The second is that courts and other political entities should intervene on social contracts only to ensure the rights of affected parties are allocated optimally.
+9
+The technical criterion here is Pareto efficiency: given finite resources, goods are to be distributed in the best possible way, with no party’s benefit coming at another’s expense. For example, only if AV fleets were found to generate measurable economic costs (commuter times, air quality, road damage) for specific neighborhoods could courts then charge the firm to make up those costs. The reward hypothesis extends this by explicitly internalizing known costs as part of the reward function before they can even register as economic externalities: rates of congestion, pollution, and road wear can simply be added as environment features and be updated in response to fluctuations in demand. While adding features does not preclude finding an optimal RL policy, it does make it harder for regulators and designers to understand it, which places constraints on system interpretability and how responsibility is allocated in case of harm. The basic problem at stake — deliberating about what a good neighborhood is and whether or how it can be sustained if the AV fleet is deployed — is sidelined, as it lies outside the boundaries of Pareto efficiency.
+Together with the reward hypothesis, these assumptions would permit the designers of RL systems to “simulate” political economy by either adding features or maximizing expected utility at arbitrary computation scales. Such designers would, in theory, be in a better position to define and measure value than either the market or political institutions. Rather than allowing normative concerns to be expressed “suboptimally” by boycotting a service or making new zoning laws, it would simply be more efficient to let AV designers “figure out” what the reward function for driving is in San Francisco or New York or Cincinnati through a mix of routing adjustments and dynamic pricing. If this form of computational governance were seriously pursued, it would eclipse a core function of politics: articulating underspecified normative criteria that distinguish between utility losses and the definition of good social outcomes. This is where questions of RL optimization meet the themes of political economy.
+We can make these abstract considerations tangible by illustrating the risks they entail. The reward hypothesis implies alternative strategies that reflect different approaches to risk, in particular either redefining the service that AVs are providing or optimizing service performance. The former is made possible by
+reward shaping
+— i.e., restructuring the agent’s environment in order to facilitate learning the optimal policy. While reward shaping is specifically not meant to redefine optimal behavior itself, it does assume such a definition exists. This becomes a problem if an AV firm has selected a definition that does not responsibly account for different interpretations of “good” driving (e.g., don’t hit objects, maximize fuel efficiency, minimize travel time). Using reward shaping to computationally reconcile such interpretations means that environment rewards have been evaluated in terms of expected utility and comparatively ranked according to some priority ordering. Actions that human drivers perceive negatively (driving into potholes, cutting someone off) are given scalar value and may be ranked differently according to some model specification, even absent a guiding legal standard. Complex normative approaches to these distinctions (potholes are bad but publicly managed, road rage is rude but tolerated, manslaughter is illegal) may be obfuscated or reinvented as their incommensurable stakes are reduced to an optimization problem.
+To better evaluate this commitment, we can mobilize the tools and insights of the recent literature on antitrust.
+10
+In road environments whose norms are indeterminate, informal, or lack a clear form of domain expertise, the use of reward shaping amounts to a proprietary claim on public infrastructure, also known as
+monopoly power
+, by whoever controls the system specification. In other words, a single firm would effectively act as the exclusive supplier of vehicle services and would have the ability to define what “good” and “bad” driving means within its operational design domain. As long as reward shaping is limited to environments whose dynamics are well understood, this might be acceptable. But as the AVs’ domain expands from a single neighborhood to an entire city, the AV provider is essentially deciding what types and magnitudes of underspecified costs are acceptable for the public to bear as the system optimizes the firm’s chosen definition of driving. Potholes are perhaps the best example of this, as the vehicle fleet will structurally generate them in specific places as certain highways are discovered to be safer or more efficient for routing purposes.
+Historically, antitrust has interpreted problems like this through the common carriage standard. Beyond some geofencing threshold, an AV company should be interpreted as a common carrier that is responsible for ensuring fair and equal access to its platform. At certain infrastructural scales, the platform generates externalities that cannot be reliably tracked or managed through reference to goals that have been only partially specified by law, like avoiding crashes, maximizing fuel economy, or minimizing route time. This trend is likely to worsen as Uber and Lyft increase capital investment in automated rideshare, Tesla grows the market for personally owned AVs, and Waymo scales up the size and service area of its platform. Instead, parameters for these externalities must be set by a third party, requiring some sort of public commission whose job is to specify what social welfare means, rather than let it be optimized in a normative vacuum. Outside these parameters, the common carrier (in this case, the AV service provider) can be held directly liable for damages its platform does both to public infrastructure (roads, signage, etc.) and to regular road users, whether AV passengers or not.
+The other approach to risk is referred to as
+information shaping
+.
+11
+This approach structures the environment so that the reward signal, however it has been defined, can be observed by the agent only under precise conditions. This may allow the agent to learn more reliably or efficiently but also restricts the number of sensory inputs. Possible observations are thereby neglected, because they make optimizing performance harder according to the chosen specification. As a concrete example, AVs at a four-way stop may consider only physical distance from other vehicles as a signal, even if other information (pedestrians’ gaze, other drivers’ hand gestures, horns honking, people yelling, common knowledge about surrounding signage) is salient for human drivers. The fact that humans are able to coordinate via different sources of information is important, as road mobility is defined by multimodality: the coexistence of multiple literacies (pedestrians, cars, cyclists) in a single domain. By contrast, information shaping may exclude expected behaviors that are common in the real world, potentially neglecting the underspecified but integral features relied on by stakeholders.
+A diverse network of regulators at the local, state, and federal levels is responsible for designing and evaluating forms of signage that support common road access. But left to its own devices, information shaping will gradually transform the suite of sensors used by the AV into the interface for the roadway itself. This would co-opt the authority of independent agencies and burden them with the responsibility of redesigning roadways to make them safe for AVs, a phenomenon that economists refer to as regulatory capture.
+12
+Because of this, information shaping constitutes a claim on
+monopsony power
+, formally defined as the exclusive “buyer” of some good or service in a particular market. The service in this case is the distributed labor force (regulators, manufacturers, and municipal bodies) compelled to support the AV firms’ chosen specifications and sensory inputs. As long as the optimization is restricted to single-mode environments like highways, this may not threaten the public interest. But as its urban integration becomes more intensive, the AV interface will tend to exclude certain roadway literacies and delimit the range of mobility participants to whom AV-specified roadways can provide common services. Jaywalking is the clear historical parallel here, as pedestrians learned to see themselves as a problem for cars to avoid and largely ceded public control of streets to them by the 1930s.
+13
+Returning again to antitrust, such problems are interpreted using the standard of structuralist regulation: some kind of firewall or public interface must be created across the organizations that produce the AV specification to ensure that it remains inclusive of road users. This would prevent the fusion of private service provision with roadway access via restricted information channels, while permitting external regulators to investigate sensory inputs and confirm they do not exclude mobility participants. Structuralist regulation will become more important as we transition to 5G roadway infrastructure that will make AV platooning and citywide traffic optimization viable, as signal constraints for perception, localization, planning, routing, and controls must remain publicly coordinated and not merely optimal. At a minimum, these information dynamics must be able to be observed and interpreted by third parties, requiring the ability to evaluate the platform through external documentation or audits.
+Policy challenges
+The reward hypothesis cannot answer which forms of shaping are normatively appropriate for a particular AI service. This leads to open sociotechnical questions of concern to RL designers:
+What limits are there to what can be modeled?
+What limits are there to binding system effects?
+14
+Whom do we entrust with the power to set the bounds within which the reward hypothesis can be framed and comparatively evaluated?
+It is difficult to answer these questions, as the conceptual landscape and context of AI ethics are rapidly shifting. Entirely new standards for antitrust are now being proposed that transcend narrow economic protections.
+15
+Governments in the European Union and United States are discovering they have the stomach for confronting and regulating Big Tech platforms through a mix of fines, data protections, and ongoing lawsuits. In the aftermath of the Federal Trade Commission’s allegations that Facebook has acted as an illegal monopoly,
+16
+we must continuously evaluate whether aligning systems with social ends also requires examining the structure of the organizations that build them. These developments reflect difficult political questions: Must we wrest power away from private monopolies and place it in the hands of public officials? Or hold such power accountable regardless of where it lies?
+17
+Let us take a step back and consider the core values at stake when pursuing the reward hypothesis in more and more social domains. I propose there are two:
+integrity
+and
+interoperability
+. Integrity means the normative structure of the domain, to the extent that it has been specified by law or custom, must be protected by whatever AI company acts as its steward. In principle, this means that there is some clean translation between existing social norms and the RL specification of states, actions, and rewards, although there may be uncertainty about how to achieve this technically. Interoperability means that if the normative structure of the domain requires further specification, the various interfaces at stake in a given system at least remain coherent, interpretable, and subject to evaluation by a third party. In this case, the RL specification must be subject to external oversight, and particular approaches to optimization must be backed up by public documentation.
+Together, these values serve to protect the norms we have from encroachment by AI systems and defer the choice of underspecified norms until stakeholders are given the chance to articulate and affirm them. A balanced approach must include both and be reflected in the institutional relationships among engineers, corporate managers, and external regulators. Below, I briefly present what this might look like in the context of AV development.
+As AV fleets impinge upon more and more streets, they stand to inherit the responsibilities and commitments that cities have already made to infrastructure, safety, and road equity. In this case, municipal bodies could require companies to bear some of the cost for infrastructure repairs and any future megaprojects resulting from the provision of AV ride services. Companies could also be required to share data so that public commissions could better determine needed repairs. For inspiration on possible standards, we can look to recent work on contextual integrity (CI). CI interprets normative social domains in terms of their ends (the goals of participating agents) and information flow (the medium through which facts or data are permitted to move, with some degree of asymmetry, between agents).
+18
+This helps specify limits for evaluating reward and information shaping, serving as a potential optimization standard that regulators could apply to companies.
+In-house engineers would then have to define states, actions, and rewards to meet the standard specified by CI. For example, an AV that couldn’t recognize road debris could still be deployed to those streets and be “street legal” as long as collisions remained infrequent or caused minimal damage according to thresholds specified by a third party. However, if that AV were found to generate unanticipated externalities in the form of traffic congestion, it could be violating commitments to public safety and equitable mobility and be found liable for harm. In this way, CI helps to distinguish the toleration of suboptimal behaviors from the evaluation of direct harms: while some states and actions demand strict enforcement and prevention, technical standards for object detection and accident avoidance have not yet been exhaustively specified.
+Meanwhile, we must ensure that alternative forms of mobility are not excluded as roadways are brought online through new forms of “smart” infrastructure. One path forward is open application programming interfaces (APIs), a possible standard for AV companies to follow. Consider a given city in which a single AV fleet is dominant, effectively serving as a gatekeeper for public mobility itself. In this case, an open API could support public-private data sharing and structured competition with smaller services. This would prevent the fleet from leveraging its market dominance into redefining road access and would set limits on the vertical integration of service provision. The firm’s own definition of states, actions, and rewards would be less important than transparency about those definitions between engineering teams, as well as public-private coordination between corporate managers and municipal bodies. In this way, multimodal transportation concerns could be continuously addressed while preventing unilateral control over mobility partnerships.
+Beyond regulatory oversight, open APIs also make it possible to set up markets for fair service provision. This could be achieved through a mix of service auctions (e.g., for neighborhood access) and administrative licensing, ensuring that pedestrians, smaller mobility services, and other stakeholders maintain road access. Following the path of telecommunications,
+19
+AV companies could compete for access to protocols for interoperability as they pertain to particular roadways, within parameters that are acceptable to current road users. These parameters in turn would remain subject to revision as emergent traffic dynamics were observed and interpreted. Crucially, such tools would incentivize companies to care about and monitor the reward function their AVs are optimizing, helping to ensure that service provision is respectful of social welfare as well as technically optimal.
+Conclusion
+Both aspects of roads — their legacy status as a public good and their continued ability to accommodate structurally diverse means of use — are necessary conditions for the responsible development and deployment of AVs. Yet the computational governance problems discussed above are general and will be relevant for any RL system whose development entails reward or information shaping in domains of uncertain scale and normative complexity. Ongoing technical and policy work pertaining to integrity and interoperability will help light a path for investigating the limits of the reward hypothesis in particular contexts, and by extension the emerging political economy of RL systems. This adapts an insight that scholars of political economy have long appreciated
+20
+: rather than starting from a stylized view of how the world ought to work and then leveraging data to minimize model bias, we ought to first look at how different institutions (individuals, firms, markets, governments) have approached the sort of problem we face, respecify it accordingly, and maintain interfaces with those institutions so that stakeholder concerns can be effectively addressed.
+Acknowledgments
+I wish to thank Peter Bartlett, Tushant Jha, Kristin Kane, Kshitij Kulkarni, Nathan Lambert, Nick Merrill, Vidya Muthukumar, Roshan Shariff, and Aaron Snoswell for their feedback on previous versions of this article. I also wish to thank my fellow participants in the Theory of Reinforcement Learning program for extended conversations and exchange.
+Prominent early critiques of the big data paradigm focused on exposing its spurious claims to eliminate human biases from historically collected data (see Barocas, Solon, and Andrew D. Selbst. “Big Data’s Disparate Impact.”
+California Law Review
+104, no. 3 (2016): 671-732.
+http://dx.doi.org/10.2139/ssrn.2477899
+; O’Neil, Cathy.
+Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy
+. New York: Broadway Books, 2016; Pasquale, Frank.
+The Black Box Society
+. Cambridge, MA: Harvard University Press, 2015.). A second wave of critical algorithm studies has zeroed in on particular technical failures related to discrimination based on race (Benjamin, Ruha. “Race after Technology: Abolitionist Tools for the New Jim Code.”
+Social Forces
+98, no. 4 (2020): 1-3.
+https://doi.org/10.1093/sf/soz162
+; Noble, Safiya Umoja.
+Algorithms of Oppression: How Search Engines Reinforce Racism
+. New York: New York University Press, 2018.), class (Eubanks, Virginia.
+Automating Inequality: How High-Tech Tools Profile, Police, and Punish the Poor
+. New York: St. Martin’s Press, 2018; Zuboff, Shoshana.
+The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power
+. London: Profile Books, 2019.), and gender (Bolukbasi, Tolga, Kai-Wei Chang, James Zou, Venkatesh Saligrama, and Adam Kalai. “Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings.” arXiv preprint arXiv:1607.06520 (2016)).
+↩︎
+Adapted from Rich Sutton’s blog post here:
+http://incompleteideas.net/rlai.cs.ualberta.ca/RLAI/rewardhypothesis.html
+.
+↩︎
+Adapted from Ng, Andrew Y., and Stuart J. Russell. “Algorithms for Inverse Reinforcement Learning.”
+Proceedings of the Seventeenth International Conference on Machine Learning
+. Vol. 1. 2000.
+↩︎
+Adapted from public comments by Michael Littman, stated here:
+https://www.coursera.org/lecture/fundamentals-of-reinforcement-learning/michael-littman-the-reward-hypothesis-q6x0e
+.
+↩︎
+See Sendak, Mark, et al. “‘The Human Body Is a Black Box’: Supporting Clinical Decision-Making With Deep Learning.”
+Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency
+. 2020. Elish’s recent work uses the concept of “repairing” more extensively.
+↩︎
+Quoted from Rodney Brooks:
+https://rodneybrooks.com/bothersome-bystanders-and-self-driving-cars/
+.
+↩︎
+Coase, Ronald Harry. “The Nature of the Firm.”
+Essential Readings in Economics
+. London: Palgrave, 1995. 37-54.
+↩︎
+See here for further definition:
+https://itlaw.wikia.org/wiki/Operational_Design_Domain
+.
+↩︎
+Coase, Ronald H. “The Problem of Social Cost.”
+Classic Papers in Natural Resource Economics
+. London: Palgrave Macmillan, 1960. 87-137.
+↩︎
+See for example Steinbaum, Marshall, and Maurice E. Stucke. “The Effective Competition Standard: A New Standard for Antitrust.”
+University of Chicago Law Review,
+forthcoming (2018).
+↩︎
+Griffith, Shane, et al. “Policy Shaping: Integrating Human Feedback with Reinforcement Learning.”
+Advances in Neural Information Processing Systems
+26 (2013): 2625-2633.
+↩︎
+Dal Bó, Ernesto. “Regulatory Capture: A Review.”
+Oxford Review of Economic Policy
+22, no. 2 (2006): 203-225.
+↩︎
+See Norton, Peter D.
+Fighting Traffic: The Dawn of the Motor Age in the American City
+. Cambridge, MA: MIT Press, 2011.
+↩︎
+The first two questions are adapted from here:
+https://democraticrobots.substack.com/p/rl-policy
+.
+↩︎
+Rahman, K. Sabeel, and Kathleen Thelen. “The Rise of the Platform Business Model and the Transformation of Twenty-First-Century Capitalism.”
+Politics & Society
+47, no. 2 (2019): 177-204.
+↩︎
+https://www.nytimes.com/2020/12/09/technology/facebook-antitrust-monopoly.html
+↩︎
+Fukuyama et al. have recently endorsed the latter approach:
+https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/platform_scale_whitepaper_-cpc-pacs.pdf
+.
+↩︎
+This is presented in more detail on pp. 182-3 of Nissenbaum, Helen.
+Privacy in Context: Technology, Policy, and the Integrity of Social Life
+. Stanford, CA: Stanford University Press, 2009.
+↩︎
+Illing, Gerhard, and Ulrich Klüh, eds.
+Spectrum Auctions and Competition in Telecommunications
+. Cambridge, MA: MIT Press, 2003.
+↩︎
+See Neil Fligstein and Steven Vogel, “Political Economy After Neoliberalism,” available here:
+http://bostonreview.net/class-inequality/neil-fligstein-steven-vogel-political-economy-after-neoliberalism
+.
+↩︎
+Share this page
+Copy URL of this page
+Related stories
+Simons Institute Director Shafi Goldwasser Awarded 2023 Dijkstra Prize
+Simons Institute Director Shafi Goldwasser Awarded 2023 Dijkstra Prize
+MIT CSAIL
+Read
+about Simons Institute Director Shafi Goldwasser Awarded 2023 Dijkstra Prize
+June 26, 2023
+Multigroup Fairness | Polylogues
+Multigroup Fairness | Polylogues
+In April 2023, the Simons Institute hosted a workshop on Multigroup Fairness and the Validity of Statistical...
+Read
+about Multigroup Fairness | Polylogues
+June 13, 2023
+,
+The Simons Institute for the Theory of Computing is the world's leading venue for collaborative research in theoretical computer science.
+Footer
+Programs & Events
+About
+Participate
+Workshops & Symposia
+Contact Us
+Calendar
+Footer social media
+Twitter
+Facebook
+Youtube
+© 2013–2023 Simons Institute for the Theory of Computing. All Rights Reserved.
+link to homepage
+Close
+Main navigation
+Home
+Programs & Events
+Research Programs
+Research Pods
+Workshops & Symposia
+Public Lectures
+Internal Program Activities
+People
+Scientific Leadership
+Staff
+Current Long-Term Visitors
+Research Fellows
+Postdoctoral Researchers
+Scientific Advisory Board
+Governance Board
+Industry Advisory Council
+Affiliated Faculty
+Science Communicators in Residence
+Law and Society Fellows
+Participate
+Ways to Participate
+Plan Your Visit
+Location & Directions
+Postdoctoral Research Fellowships
+Law and Society Fellowships
+Science Communicator in Residence Program
+Support
+Annual Fund
+Funders
+Industrial Partnerships
+Academic Partnerships
+News & Videos
+News
+Videos
+About
+Utility navigation
+Calendar
+Contact
+Login
+Make a Gift
+link to homepage
+Close
+Search

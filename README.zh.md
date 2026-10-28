@@ -9,6 +9,7 @@
 
 每种语言有一个发布版本（release），包含该语言的全部书籍。只想下载一本书，请用下方表格里的链接。
 
+- **英语（原版）**: 16 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
 - **西班牙语**: 13 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **中文**: 2 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
@@ -19,6 +20,22 @@
 
 | 书名 | 作者 | 语言 | 下载 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
+| **Doing Good Better** | William MacAskill | 英语 | [EPUB](English%2C%20Original/Doing%20Good%20Better_%20How%20Effective%20Altruism%20can%20make%20the%20difference%20-%20William%20MacAskill.epub) | 英文原版，作为译本的来源保留。 |
+| **Rationality: From AI to Zombies** | Eliezer Yudkowsky | 英语 | [EPUB](English%2C%20Original/Rationality_%20From%20AI%20to%20Zombies%20-%20Eliezer%20Yudkowsky.epub) | 英文原版，作为译本的来源保留。 |
+| **Animal Liberation** | Peter Singer | 英语 | [PDF](English%2C%20Original/archive/Animal%20Liberation%20%28PDFDrive%29.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **Superintelligence** | Nick Bostrom | 英语 | [PDF](English%2C%20Original/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **The Scout Mindset** | Julia Galef | 英语 | [PDF](English%2C%20Original/archive/Galef%20-%20The%20Scout%20Mindset.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **The Most Important Century**（Cold Takes 系列） | Holden Karnofsky | 英语 | [PDF](English%2C%20Original/archive/Most%20important%20century.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **CFAR Handbook** (2021) | Center for Applied Rationality | 英语 | [PDF](English%2C%20Original/archive/CFAR_Handbook_2021.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **Mapping the Political Economy of Reinforcement Learning Systems**（白皮书） | Thomas Krendl Gilbert | 英语 | [TXT](English%2C%20Original/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt) | EA Archive 中的英文原文（文本），西班牙语译本的来源。 |
+| **Synthetic fat from petroleum as a resilient food for global catastrophes**（论文） | J. B. García Martínez, K. A. Alvarado, D. C. Denkenberger | 英语 | [TXT](English%2C%20Original/archive/synthetic.pdf.txt) | EA Archive 中的英文原文（文本），西班牙语译本的来源。 |
+| **The Most Good You Can Do** | Peter Singer | 英语 | [PDF](English%2C%20Original/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **Avoiding the Worst** | Tobias Baumann | 英语 | [PDF](English%2C%20Original/archive/Baumann%20-%20Avoiding%20Worst%20final.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **The Hedonistic Imperative** | David Pearce | 英语 | [PDF](English%2C%20Original/archive/hedonistic%20imperative.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **Reasoned Politics** | Magnus Vinding | 英语 | [PDF](English%2C%20Original/archive/reasoned-politics.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **Suffering-Focused Ethics** | Magnus Vinding | 英语 | [PDF](English%2C%20Original/archive/suffering-focused-ethics.pdf) | EA Archive 中的英文原文（PDF），西班牙语译本的来源。 |
+| **The Precipice** | Toby Ord | 英语 | [PDF](English%2C%20Original/archive/Ord%20-%20Precipice.pdf) | EA Archive 中的英文原文（PDF），中文译本的来源。 |
+| **What We Owe the Future** | William MacAskill | 英语 | [PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) | EA Archive 中的英文原文（PDF），中文译本的来源。 |
 | **Rationality: From AI to Zombies** | Eliezer Yudkowsky | 西班牙语 | [EPUB](Espa%C3%B1ol/Racionalidad_%20de%20la%20A%20a%20la%20Z%20-%20Eliezer%20Yudkowsky.epub) | 由 Gemini 翻译；外部链接已用 Claude 恢复。基础校对待完成。 |
 | **Doing Good Better** | William MacAskill | 西班牙语 | [EPUB](Espa%C3%B1ol/Hacer%20el%20bien%20mejor_%20Como%20el%20Altruismo%20Eficaz%20puede%20hacer%20la%20diferencia%20-%20William%20MacAskill.epub) | 由 Gemini 翻译；缺失的注释结尾和索引已用 Claude 补全。基础校对待完成。 |
 | **Animal Liberation** | Peter Singer | 西班牙语 | [EPUB](Espa%C3%B1ol/archive/Animal%20Liberation%20%28PDFDrive%29.epub) | 由 Claude 根据 PDF 文本翻译。部分章节开头的几个词（PDF 中为小型大写字母）缺失；索引和参考文献条目保留英文。 |
