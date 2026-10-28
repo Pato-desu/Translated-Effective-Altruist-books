@@ -1,0 +1,77 @@
+# Keeps one rolling release per library (en-latest, es-latest, zh-latest) in step with main.
+# Runs on GitHub with the built-in token: no secrets. Maintained from Pato-desu/AutoAutoDev
+# (projects/ea-books-translation, decision D16/D17); the publish script never overwrites this file.
+name: Releases
+on:
+  push:
+    branches: [main]
+    paths: ["English, Original/**", "Español/**", "Chinese/**", ".github/workflows/releases.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: releases
+  cancel-in-progress: false
+jobs:
+  releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: python
+        run: |
+          import hashlib, json, re, subprocess, sys
+          from pathlib import Path
+
+          LIBS = [  # tag, folder, file types, title, notes name (same as scripts/release.py)
+              ("en-latest", "English, Original", {".epub", ".pdf", ".txt"}, "English (original) books", "English (original)"),
+              ("es-latest", "Español", {".epub"}, "Spanish translations", "Spanish"),
+              ("zh-latest", "Chinese", {".epub"}, "Chinese (Simplified) translations", "Chinese (Simplified)"),
+          ]
+          REPO = __import__("os").environ["REPO"]
+
+          def gh(*a):
+              return subprocess.run(["gh", *a, "--repo", REPO], capture_output=True, text=True)
+
+          def norm(name):  # GitHub stores uploaded names with spaces and similar turned into dots
+              return re.sub(r"[^\w.\-+]", ".", name)
+
+          failed = False
+          for tag, folder, suffixes, title, name in LIBS:
+              d = Path(folder)
+              files = sorted(p for p in d.rglob("*") if p.is_file() and p.suffix.lower() in suffixes
+                             and not p.name.startswith(".")) if d.is_dir() else []
+              if not files:
+                  continue
+              h = hashlib.sha256()
+              for p in files:
+                  h.update(p.name.encode()); h.update(p.read_bytes())
+              digest = h.hexdigest()[:16]
+              view = gh("release", "view", tag, "--json", "body,assets")
+              exists = view.returncode == 0
+              info = json.loads(view.stdout) if exists else {}
+              if exists and f"content-hash: {digest}" in info.get("body", ""):
+                  print(f"{tag}: up to date"); continue
+              notes = (f"All {name} book files of this repository, {len(files)} file(s). Replaced with the newest "
+                       f"versions whenever a book changes.\n\n" + "\n".join(f"- {p.name}" for p in files)
+                       + f"\n\ncontent-hash: {digest}")
+              paths = [str(p) for p in files]
+              if exists:
+                  # drop assets whose file left the folder, then upload (replacing same-name assets)
+                  keep = {norm(p.name) for p in files}
+                  for a in info.get("assets", []):
+                      if norm(a["name"]) not in keep:
+                          gh("release", "delete-asset", tag, a["name"], "--yes")
+                  r = gh("release", "upload", tag, *paths, "--clobber")
+                  if r.returncode == 0:
+                      r = gh("release", "edit", tag, "--notes", notes, "--title", title)
+              else:
+                  r = gh("release", "create", tag, *paths, "--title", title, "--notes", notes, "--target", "main")
+              if r.returncode:
+                  print(f"{tag}: failed: {r.stderr.strip()}"); failed = True
+              else:
+                  print(f"{tag}: {'updated' if exists else 'created'} ({len(files)} files)")
+          sys.exit(1 if failed else 0)
