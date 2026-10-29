@@ -1,0 +1,148 @@
+Las interacciones con el Foro de EA se duplicaron en el último año. Para la actualización del tercer trimestre de CEA, compartimos varias publicaciones sobre distintos aspectos de nuestro trabajo. El Foro de Altruismo Eficaz aspira a ser el lugar central para el debate colaborativo sobre cómo hacer el mayor bien.
+Estado de la métrica
+Las horas de interacción aumentaron un 100.2% interanual al 1 de octubre. Esto cumple nuestra meta del 100%, y significa que duplicamos las horas de interacción este año.
+No empezamos a medir esta métrica hasta 2020, pero, basándonos en otros datos que tenemos, estimamos que la tasa de crecimiento del año anterior fue del 90%, lo que supone un crecimiento de ~380% en dos años.
+Contenido
+Estado de la métrica 1
+Progreso de este trimestre 2
+Reflexiones 3
+
+Ben_West
+74 puntos
+14 comentarios
+Datos (comunidad EA)
+Actualizaciones de la organización
+Foro de Altruismo Eficaz
+Centre for Effective Altruism
+Infraestructura comunitaria
+Construir altruismo eficaz
+Etiquetas:
+Este gráfico muestra las horas diarias de interacción de 2020 (amarillo) y de 2021 (azul). La línea roja muestra nuestra «meta» diaria (las cifras que necesitaríamos alcanzar para lograr un crecimiento interanual del 100% si nuestra interacción creciera de forma lineal).
+Respondiendo a un comentario, también compartimos nuestro gráfico de usuarios activos mensuales (personas que vieron al menos una página con la sesión iniciada):
+Pasamos de 727 usuarios activos mensuales en octubre de 2019 a 1,140 en octubre de 2020, y a 1,954 en octubre de 2021.
+
+Progreso de este trimestre
+Avances principales:
+Otros avances:
+Incorporamos 2 nuevos ingenieros: Sarah Cheng y Jonathan Mustin.
+• Publicamos la página de la comunidad y de eventos, y contratamos a una persona para asegurarnos de que la lista de eventos se actualice cada semana.
+• Republicamos en el Foro cientos de artículos antiguos de fuentes de EA, para que puedan etiquetarse y buscarse dentro del sitio. Entre ellos hay entradas de blog de la organización de filantropía Open Philanthropy, documentos del Global Priorities Institute y transcripciones de podcasts de 80,000 Hours.
+• Ayudamos a Holden Karnofsky a republicar en el Foro una serie de publicaciones exitosas de su blog Cold Takes, empezando por esta.
+• Lanzamos un concurso de escritura creativa.
+• Implementamos varias funciones nuevas visibles para los usuarios:
+• Analíticas de publicaciones
+• Recordatorio de suscripción a Forum Digest
+• Banner en la barra lateral
+• Logramos que funcionaran las pruebas con Cypress, con un puñado de pruebas iniciales. Esto no tendrá un impacto directo en los usuarios, pero nos facilitará probar nuestro código. Fue un proyecto grande: LessWrong empezó a trabajar en él hace más de 2 años.
+•
+Reflexiones
+Calculo que la producción de ingeniería se triplicó en septiembre (por ejemplo, las tres funciones visibles para los usuarios que mencioné se lanzaron en septiembre). Esto va en línea con el triplicado del tamaño del equipo. Como Sarah acaba de empezar este mes, estoy bastante contento con ese aumento de productividad, aunque también creo que podría haber hecho que el proceso de incorporación fuera aún más fluido.
+¿Qué enlaza aquí?
+Forma parte de la secuencia:
+Actualizaciones de CEA (T3 2021)
+El equipo de eventos de CEA: fortalecimiento de capacidades y errores
+El número de personas de CEA casi se duplicó en 2021 (y otras actualizaciones)
+Unas 150 personas han pedido libros a través del enlace de pedido que publicamos en el EA Handbook.
+•
+ 
+ 
+lukeprog
+4 nov 2021 15:21 UTC
+44 puntos
+Por lo que vale, el Foro de EA me parece subjetivamente mucho mejor que hace unos 2 años, tanto en la plataforma como en el contenido, y gran parte de eso parece atribuible, de forma intuitiva, al trabajo concreto del equipo del Foro de EA. ¡Gracias por todo su trabajo!
+Ben_West
+11 nov 2021 1:13 UTC
+2 puntos
+¡Gracias, Luke! Agradecemos las amables palabras.
+ (OP)
+
+Ben_West
+74 puntos
+14 comentarios
+Datos (comunidad EA)
+Actualizaciones de la organización
+Foro de Altruismo Eficaz
+Centre for Effective Altruism
+Infraestructura comunitaria
+Construir altruismo eficaz
+Etiquetas:
+¡Gracias, Luke! Agradecemos las amables palabras.
+NunoSempere
+4 nov 2021 11:15 UTC
+19 puntos
+¡Qué bueno verlo!
+¿Cuál es el número acumulado de horas de 2021 hasta ahora?
+• ¿Tienen las cifras de tiempo dedicado específicamente a la Wiki de EA? (es decir, en páginas cuyas direcciones empiezan por https://forum.effectivealtruism.org/tags o https://forum.effectivealtruism.org/tag)?
+• Me imagino que hay alguna forma de saber cuándo alguien simplemente deja una pestaña abierta durante un rato, pero ¿pueden explicar cómo lo manejan?
+• Relacionado con esto, ¿qué impulsa la interacción? ¿Unos pocos usuarios que la usan mucho, o muchísimos usuarios que la usan poco?
+Ben_West
+11 nov 2021 1:14 UTC
+4 puntos
+¡Gracias, Nuno!
+¿Cuál es el número acumulado de horas de 2021 hasta ahora?
+CEA usa un año de objetivos que empieza el 1 de octubre, es decir, acabamos de empezar nuestro año de objetivos 2022. La publicación anterior trataba de nuestro año de objetivos anterior, del 1 de octubre de 2020 al 1 de octubre de 2021, que equivale aproximadamente al año natural 2021 hasta la fecha.
+Hasta ahora tuvimos 12,000 horas de interacción en el año de objetivos 2022:
+ (OP)
+¿Tienen las cifras de tiempo dedicado específicamente a la Wiki de EA?
+Entre el 1 de octubre de 2020 y el 1 de octubre de 2021, estas páginas recibieron 65,000 visualizaciones y 1,800 horas.
+Me imagino que hay alguna forma de saber cuándo alguien simplemente deja una pestaña abierta durante un rato, pero ¿pueden explicar cómo lo manejan?
+Usamos document.hidden y document.visibilityState para determinar si la pestaña está abierta pero no visible, y los eventos de movimiento del ratón, pulsación de teclas y desplazamiento para determinar si la pestaña está abierta pero inactiva. El código correspondiente está aquí.
+Relacionado con esto, ¿qué impulsa la interacción? ¿Unos pocos usuarios que la usan mucho, o muchísimos usuarios que la usan poco?
+En comparación con la mayoría de las plataformas de contenido en línea, creo que tenemos una audiencia pequeña pero dedicada. (Por ejemplo, muchas plataformas dependen de que sus publicaciones se vuelvan virales al azar en las redes sociales, algo que no suele ser la fuente de gran parte de la interacción en nuestro caso). Así que la respuesta directa a su pregunta es «unos pocos usuarios que la usan mucho», al menos en comparación con algo como BuzzFeed.
+Aquí está el PDF con el tiempo que los usuarios dedicaron a la interacción durante el último mes:
+mes:
+Esto parecería una línea descendente en la mayoría de los sitios, pero, como pueden ver, es relativamente plana en nuestro caso.
+¿Qué enlaza aquí?
+Sophia
+9 nov 2021 10:49 UTC
+14 puntos
+Este tipo de cosas es difícil de juzgar, pero supongo que tener un moderador que parezca entusiasta, accesible y amable marca una gran diferencia.
+Creo que Aaron Gertler pudo hacer que el Foro fuera un lugar mucho menos intimidante para participar en el debate de lo que habría sido sin sus comentarios y publicaciones (y creo también que este tipo de cosas se acumula con el tiempo). Muchas de sus aportaciones parecieron orientar la cultura del Foro hacia una dirección más abierta, más curiosa, más paciente y más acogedora. Leo el Foro con regularidad desde hace años y noté el cambio de tono, que parece deberse en buena medida a la enorme cantidad de publicaciones y comentarios generalmente alentadores, pacientes y amables de Aaron, lo que cambió cuánto me daban ganas de participar de forma impulsiva.
+Ben_West
+11 nov 2021 1:15 UTC
+3 puntos
+¡Gracias, Sophia! Le agradezco mucho que lo comparta; nos ayuda a hacernos una idea de qué aspectos de nuestro trabajo motivan a la gente. Y coincido en que Aaron es genial.
+ (OP)
+Ramiro
+5 nov 2021 19:33 UTC
+12 puntos
+¡Gracias y felicidades!
+Gracias y felicidades.
+Me pregunto si parte de estos efectos (más interacción, más plantilla, más financiación) podrían ser temporales por el covid, etc., en lugar de una tendencia estable. ¿Podemos descartar esta hipótesis?
+Ben_West
+11 nov 2021 1:15 UTC
+3 puntos
+Hola, Ramiro. Me parece probable que parte del crecimiento sea exógeno: EA está creciendo rápidamente como comunidad, y el covid probablemente también hizo que la gente pasara más tiempo en línea.
+Algunas pruebas de que el crecimiento es al menos parcialmente endógeno al Foro son que LessWrong y 80000hours.org no crecieron mucho en el último año, mientras que nosotros duplicamos el nuestro.
+ (OP)
+kyle_fish
+4 nov 2021 11:19 UTC
+6 puntos
+¡Qué buena noticia! ¿Tienen alguna idea de qué fracción de la comunidad EA está usando el Foro? Me interesa saber cuánto de este crecimiento se debe al aumento del tamaño de la comunidad EA, y cuánto a un mayor porcentaje de miembros de la comunidad que usan el Foro.
+Benjamin_Todd
+4 nov 2021 12:15 UTC
+9 puntos
+Sería útil ver el número de usuarios únicos a lo largo del tiempo, en lugar de solo las horas de interacción.
+Aaron Gertler
+4 nov 2021 16:08 UTC
+4 puntos
+He añadido un gráfico a la publicación.
+David_Moss
+4 nov 2021 15:54 UTC
+6 puntos
+Entre quienes respondieron la EA Survey de 2020, el 38% eran miembros del Foro de EA. En 2019 fue el 30%, y en 2018, el 20%.
+Miembros del Foro de EA. En 2019 fue el 30%, y en 2018, el 20%.
+Estas cifras sin duda están infladas, porque los miembros del Foro de EA (un grupo muy desproporcionadamente comprometido: más del 80% se sitúa en los niveles 4 y 5 de 5 en el compromiso autodeclarado) tienen más probabilidades de responder la encuesta. La pregunta es cuántas personas menos comprometidas (que tienen menos probabilidades de estar en el Foro) hay, lo cual es más difícil de estimar, aunque en esta publicación hay un modelo al respecto.
+David_Moss
+7 nov 2021 18:17 UTC
+4 puntos
+Un punto de comparación útil podría ser cuántos EA son miembros de un grupo local. A priori, uno podría pensar que ser miembro de un grupo presencial es un requisito más alto o más exigente que ser miembro del Foro de EA, pero históricamente no ha sido así.
+Otra cosa que podría interesar es que no vemos mucha diferencia en el aumento de la membresía de los grupos EA en el Foro de EA entre la EAS 2019 y la EAS 2020. Pero, al parecer, también ha habido mucho más apoyo a los grupos, así que quizá no sea sorprendente. (Otra posible observación, no mostrada, es que el Foro de EA también parece estar aumentando su peso entre los EA más nuevos, cuando antes era casi exclusivamente terreno de los EA veteranos).
+Ben_West
+11 nov 2021 1:15 UTC
+2 puntos
+Ya algunas personas han publicado fuentes de datos, pero voy a añadir una más: mi intento de calcular el porcentaje de personas que participaron en uno de los programas de CEA y que después usaron el Foro durante el año siguiente. Esto se basó en una coincidencia ingenua de direcciones de correo electrónico, así que probablemente es una subestimación considerable, pero encontró que entre el 25 y el 40% de los asistentes a eventos leyó una publicación del Foro dentro de 2021.
+También registro un conjunto de datos de personas que ocupan puestos de liderazgo en organizaciones EA, y este grupo lee en promedio 0.7 publicaciones al día (es decir, son muy activos en el Foro).
+La penetración es sustancialmente menor entre las personas que son más nuevas en EA.
+En el próximo año, estamos considerando centrar más nuestra atención en ellas.
+ (OP)

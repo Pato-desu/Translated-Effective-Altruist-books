@@ -1,0 +1,184 @@
+DeepMindMachine Learning (ML)Reinforcement LearningGeneral IntelligenceAI Capabilities
+AI
+FrontpageReviewCrossposted from the AI Alignment Forum. Maycontain more technical jargon than usual.!is is a linkpost forhttps://deepmind.com/blog/article/generally-capable-agents-emerge-from-open-ended-playEDIT: Also see paper and resultscompilation video!Today, we published "Open-EndedLearning Leads to Generally CapableAgents," a preprint detailing our !rststeps to train an agent capable ofplaying many di"erent games withoutDeepMind:Generallycapable agentsemerge fromopen-ended playby Daniel Kokotajlo27th Jul 2021
+247Ω 76
+playing many di"erent games withoutneeding human interaction data. ...#e result is an agent with the abilityto succeed at a wide spectrum of tasks— from simple object-!ndingproblems to complex games like hideand seek and capture the $ag, whichwere not encountered during training.We !nd the agent exhibits general,heuristic behaviours such asexperimentation, behaviours that arewidely applicable to many tasks ratherthan specialised to an individual task....#e neural network architecture weuse provides an attention mechanismover the agent’s internal recurrentstate — helping guide the agent’sattention with estimates of subgoalsunique to the game the agent isplaying. We’ve found this goal-attentive agent (GOAT) learns moregenerally capable policies....Playing roughly 700,000 unique gamesin 4,000 unique worlds within XLand,each agent in the !nal generationexperienced 200 billion training stepsas a result of 3.4 million unique tasks.At this time, our agents have been ableto participate in every procedurallygenerated evaluation task except for ahandful that were impossible even for
+handful that were impossible even fora human. And the results we’re seeingclearly exhibit general, zero-shotbehaviour across the task space —with the frontier of normalised scorepercentiles continually improving.Looking qualitatively at our agents, weoften see general, heuristic behavioursemerge — rather than highlyoptimised, speci!c behaviours forindividual tasks. Instead of agentsknowing exactly the “best thing” to doin a new situation, we see evidence ofagents experimenting and changingthe state of the world until they’veachieved a rewarding state. We alsosee agents rely on the use of othertools, including objects to occludevisibility, to create ramps, and toretrieve other objects. Because theenvironment is multiplayer, we canexamine the progression of agentbehaviours while training on held-outsocial dilemmas, such as in a game of“chicken” . As training progresses, ouragents appear to exhibit morecooperative behaviour when playingwith a copy of themselves. Given thenature of the environment, it isdi%cult to pinpoint intentionality —the behaviours we see often appear tobe accidental, but still we see themoccur consistently.My hot take: #is seems like a somewhatbig deal to me. It's what I would havepredicted, but that's scary, given my
+predicted, but that's scary, given mytimelines. I haven't read the paper itself yetbut I look forward to seeing more numbersand scaling trends and attempting toextrapolate... When I do I'll leave acomment with my thoughts.EDIT: My warm take: #e details in thepaper back up the claims it makes in thetitle and abstract. #is is the GPT-1 ofagent/goal-directed AGI; it is the proof ofconcept. Two more papers down the line(and a few OOMs more compute), andwe'll have the agent/goal-directed AGIequivalent of GPT-3. Scary stu".DeepMind5Machine Learning (ML)2Reinforcement Learning2General Intelligence1AI Capabilities1
+AI6
+FrontpageMentioned in321614
+54 comments, sorted by top scoringVanessa KosoyΩ2050
+[-]
+This is certainly interesting! T o put things inproportion though, here are some limitationsthat I see, after skimming the paper and watchingthe video:The virtual laws of physics are always thesame. So, the sense in which this agent is"generally capable" is only via thegeometry and the formal speciﬁcation ofthe goal. Which is still interesting to beHow much compute was used to trainDeepMind's generally capable agents?Did they or didn't they learn tool use?Proposal: Scaling laws for RLgeneralization1y 
+the goal. Which is still interesting to besure! But not as a big deal as it would be ifit did zero-shot learning of physics (whichwould be an enormous deal IMO).The formal speciﬁcation is limited topropositional calculus. This allows for acombinatorial explosion of possible goals,but there's still some sense in which it is"narrow". It would be a bigger deal if itused some more expressive logicallanguage.For some tasks it looks like the agent isjust trying vaguely relevant things atrandom until it achieves the goal. So, it isable to recognize the goal has beenachieved, but less able to come up withefﬁcient plans for achieving it. While"trying stuff until something sticks" isdeﬁnitely a strategy I can relate to, it isnot as impressive as planning in advance.Notice that just recognizing the goal isrelatively easy: modulo the transformationfrom 2D imagery to a 3D model (which iscertainly non-trivial but not a novelcapability), you don't need AI to do it at all(indeed the environment obviouslycomputes the reward via handcraftedcode).
+Daniel KokotajloΩ820
+[-]
+Thanks! This is exactly the sort of thoughtfulcommentary I was hoping to get when I madethis linkpost.--I don't see what the big deal is about laws ofphysics. Humans and all their ancestors evolvedin a world with the same laws of physics; wedidn't have to generalize to different worldswith different laws. Also, I don't think "besuperhuman at ﬁguring out the true laws ofphysics" is on the shortest path to AIs beingdangerous. Also, I don't think AIs need tocontrol robots or whatnot in the real world tobe dangerous, so they don't even need to beable to understand the true laws of physics,even on a basic level.--I agree it would be a bigger deal if they coulduse e.g. ﬁrst-order logic, but not that much of abigger deal? Put it this way: wanna bet about1y 
+bigger deal? Put it this way: wanna bet aboutwhat would happen if they retrained theseagents, but with 10x bigger brains and for 10xlonger, in an expanded environment thatsupported ﬁrst-order logic? I'd bet that we'dget agents that perform decently well at ﬁrst-order logic goals.--Yeah, these agents don't seem smart exactly;they seem to be following pretty simple generalstrategies... but they seem human-like and on apath to smartness, i.e. I can easily imagine themgetting smoothly better and better as we makethem bigger and train them for longer on morevaried environments. I think of these guys asthe GPT -1 of agent AGI.
+Vanessa KosoyΩ714
+[-]
+I don't see what the big deal is aboutlaws of physics. Humans and all theirancestors evolved in a world withthe same laws of physics; we didn'thave to generalize to differentworlds with different laws. Also, Idon't think "be superhuman atﬁguring out the true laws of physics"is on the shortest path to AIs beingdangerous. Also, I don't think AIsneed to control robots or whatnotin the real world to be dangerous, sothey don't even need to be able tounderstand the true laws of physics,even on a basic level.The entire novelty of this work revolvesaround zero-shot / few-shot performance: theability to learn new tasks which don't comewith astronomic amounts of training data. T oevaluate to which extent this goal has beenachieved, we need to look at what wasactually new about the tasks vs. what wasrepeated in the training data a zillion times. So,my point was, the laws of physics do notcontribute to this aspect.Moreover, although the laws of physics areﬁxed, we didn't evolve to know all of physics.Lots of intuition about 3D geometry andmechanics: deﬁnitely. But there are many,many things about the world we had to learn.A bronze age blacksmith possetedsophisticated knowledge about the properties1y 
+sophisticated knowledge about the propertiesof materials and their interaction that did notcome from their genes, not to mention amodern rocket scientist. (Ofc, thecommunication of knowledge means thateach of them beneﬁts from training dataacquired by other people and previousgenerations, and yet.) And, learning isequivalent to performing well on adistribution of different worlds.Finally, an AI doesn't need to control robotsto be dangerous but it does need to createsophisticated models of the world and thelaws which govern it. That doesn't necessarilymean being good at the precise thing we call"physics" (e.g. ﬁguring out quantum gravity),but it is a sort of "physics" broadly construed(so, including any area of science and/orhuman behavior and/or dynamics of humansocieties etc.)I agree it would be a bigger deal ifthey could use e.g. ﬁrst-order logic,but not that much of a bigger deal?Put it this way: wanna bet aboutwhat would happen if they retrainedthese agents, but with 10x biggerbrains and for 10x longer, in anexpanded environment thatsupported ﬁrst-order logic?I might be tempted to take some such bet, butit seems hard to operationalize. Also hard totest unless DeepMind will happen to performthis exact experiment.
+Quintin PopeΩ38
+[-]
+What really impressed me were thegeneralized strategies the agent applied tomultiple situations/goals. E.g., "randomlymove things around until something works"sounds simple, but learning to contextuallyapply that strategy 1. to the appropriate objects, 2. in scenarios where you don't have abetter idea of what to do, and 3. immediately stopping when you ﬁndsomething that works 1y 
+Daniel Kokotajlo20
+is fairly difﬁcult for deep agents to learn. Ithink of this work as giving the RL agents atoolbox of strategies that can be ﬂexiblyapplied to different scenarios. I suspect that ﬁnetuning agents trained inXLand in other physical environments willgive good results because the XLand agentsalready know how to use relatively advancedstrategies. Learning to apply the XLandstrategies to the new physical environmentswill probably be easier than starting fromscratch in the new environment.
+[-]
+Let's deﬁne AGI as "AI that is generallyintelligent, i.e. it isn't limited to a narrow domain,but can do stuff and think stuff about a very widerange of domains."Human-level AGI (Sometimes confusinglyshortened to "AGI") is AGI that is similarlycompetent to humans at a similarly large-and-usefulrange of domains.My stance is that GPT -3 is AGI, but not human-level AGI. (Not even close).I'd also add agency as an important concept -- anAI is agenty if it behaves in a goal-directed way. Idon't think GPT -3 is agenty. But unsurprisingly,lots of game-playing AIs are agenty. AlphaGo wasan agenty narrow AI. I think these new 'agents'trained by DeepMind are agenty AGI, but justextremely crappy agenty AGI. There is a widedomain they can perform in --but it's not thatwide. Not nearly as wide as the human range.And they also aren't that competent even withinthe domain.Thing is though, as we keep making these thingsbigger and train them for longer on morediverse data... it seems that they will becomemore competent, and the range of things they dowill expand. Eventually we'll get to human-levelAGI, though it's another question exactly howlong that'll take.1y 
+gwernΩ617
+Sébastien Larivée13
+[-]
+Looking qualitatively at our agents, weoften see general, heuristic behavioursemerge — rather than highly optimised,speciﬁc behaviours for individual tasks.Instead of agents knowing exactly the“best thing” to do in a new situation,we see evidence of agentsexperimenting and changing the state ofthe world until they’ve achieved arewarding state.The blessings of scale strike again. People havebeen remarkably quick to dismiss the lack of"GPT -4" models as indicating that the scalinghypothesis is dead already. (The only scalinghypothesis refuted by the past year is the 'budgetscaling hypothesis', if you will. All the otherresearch continues to conﬁrm it.)•••Incidentally, it's well worth reading the previouspapers from DM on using populations to learnever more complex and general tasks: AlphaStar,Quake, rats, VR/language robotics, team soccer.We've all read about AlpaFold 2, but I'd alsohighlight VQ-VAE being used increasinglypervasively as a drop-in generative model;"Multimodal Few-Shot Learning with FrozenLanguage Models", Tsimpoukelli et al 2021,further demonstrating the power of large self-supervised models for fast human-like learning;and the always-underappreciated line of work onMuZero for doing sample-efﬁcient & continuous-action model-based RL: "MuZero Unplugged:Online and Ofﬂine Reinforcement Learning byPlanning with a Learned Model", Schrittwieser etal 2021; "Sampled MuZero: Learning and Planningin Complex Action Spaces", Hubert et al 2021(beneﬁting from better use of existing compute,like Podracer).
+[-]
+This seems to support Reward is Enough.  1y 
+1y 
+JsevillamolΩ611More speciﬁcally:DM simulates a lower ﬁdelity version of realworld physics  -> Applies real world AI methods-> Achieves generalised AI performance. This is a pretty concrete demonstration thatcurrent AI methods are sufﬁcient to achievegenerality, just need more real world data tomatch the more complex physics of reality. 
+TheSupremeAI5Zachary Robertson3
+[-]
+And more compute of course. As always.
+[-]
+I'm not quite sure if this is true in a usefulsense. The authors make it clear that theexpected return is not enough to evaluateagent performance according to their criteria.These desiderata cannot beencapsulated by a single numberdescribing an agent’s performance, asthey do not deﬁne a total order(Balduzzi et al., 2019). We move awayfrom characterising agents purely byexpected return and instead considerthe distribution of returns over acountable task space.Given this, is it not reasonable to suggest thatthis gives evidence that we need to move awayfrom expected return as a framework to creategenerally capable agents?
+[-]
+Marius Hobbhahn has estimated the number ofparameters here. His ﬁnal estimate is 3.5e6parameters.Anson Ho has estimated the training compute(his reasoning at the end of this answer). His ﬁnalestimate is 7.8e22 FLOPs.Below I made a visualization of the parametersvs training compute of n=108 important MLsystem, so you can see how DeepMind's syste(labelled GOAT in the graph) compares to other1y 1y 
+9mo 
+(labelled GOAT in the graph) compares to othersystems. 
+[Final calculation](8 TPUs)(4.20e14 FLOP/s)(0.1utilisation rate)(32 agents)(7.3e6s/agent) = 7.8e22 FLOPs==========================NOTES BELOW[Hardware]- "Each agent is trained using 8 TPUv3sand consumes approximately 50,000agent steps (observations) per second."- TPUv3 (half precision): 4.2e14 FLOP/s- Number of TPUs: 8- Utilisation rate: 0.1[Timesteps]- Figure 16 shows steps per generationand agent. In total there are 1.5e10 +4.0e10 + 2.5e10 + 1.1e11 + 2e11 =3.9e11 steps per agent.- 3.9e11 / 5e4 = 8e6 s → ~93 days- 100 million steps is equivalent to 30minutes of wall-clock time in our setup.(pg 29, ﬁg 27)- 1e8 steps → 0.5h- 3.9e11 steps → 1950h → 7.0e6 s →~82 days- Both of these seem like overestimates,because:“Finally, on the largest timescale (days),generational training iterativelyimproves population performance bybootstrapping off previous generations,whilst also iteratively updating the
+Quintin Pope11whilst also iteratively updating thevalidation normalised percentile metricitself.” (pg 16)- Suggests that the above is anoverestimate of the number of daysneeded, else they would have said(months) or (weeks)?- Final choice (guesstimate): 85 days =7.3e6 s[Population size]- 8 agents? (pg 21) → this is describingthe case where they’re not using PBT,so ignore this number- The original PBT paper uses 32 agentsfor one taskhttps://arxiv.org/pdf/1711.09846.pdf (ingeneral it uses between 10 and 80)- (Guesstimate) Average populationsize: 32
+Daniel KokotajloΩ34
+[-]
+Thanks so much! So, for comparison, fruit ﬂieshave more synapses than these XLAND/GOATagents have parameters!https://en.wikipedia.org/wiki/List_of_animals_by_number_of_neurons
+[-]
+Very impressive results! I'm particularly glad tosee the agents incorporating text descriptions oftheir goals in the agents' inputs. It's a stepforward in training agents that ﬂexibly followhuman instructions. However, it currently looks like the agents arejust using the text instructions as a source ofinformation about how to acquire reward fromtheir explicit reward functions, so this approachwon't produce corrigible agents. Hopefully, wecan combine XLand with something like thecooperative inverse reinforcement learningparadigm. E.g., we could add CIRL agent to the XLandenvironments whose objective is to assist thestandard RL agents. Then we'd have:An RL agentwhose inputs are the text9mo 
+1y 
+whose inputs are the textdescription of its goal and its RGBvision + other sensorsthat gets direct reward signalsA CIRL agentwhose inputs are the textdescription of the RL agent's goalsand the CIRL agent's own RGBvision + other sensorsthat has to infer the RL agent's truereward from the RL agent'sbehaviorThen, apply XLand open ended training whereeach RL agent has a variable number of CIRLagents assigned as assistants. Hopefully, we'll get aCIRL agent that can receive instructions via textand watch the behavior of the agent it's assistingto further reﬁne its beliefs about its currentobjective.
+Zachary Robertson4
+[-]
+I'm particularly glad to see the agentsincorporating text descriptions oftheir goals in the agents' inputs. It's astep forward in training agents thatﬂexibly follow human instructions.I don't think they use text. According to ﬁgure38, all goals are provided in one-hot fashion.Atomic predicates are provided in a 5-hot encoded fashion, since all therelations used take two arguments,each of which can be decomposed toa colour and shape. For player objectwe simply have a special colour "me"and "opponent".Do you have a source that says otherwise?
+Quintin Pope5
+[-]
+The summary says they use text and a searchfor “text” in the paper gives this on page 32:“In these past works, the goal usually consistsof the position of the agent or a targetobservation to reach, however some previous1y 
+1y 
+Sammy MartinΩ49
+brp3work uses text goals (Colas et al., 2020) forthe agent similarly to this work.”So I thought they provided goals as text. I’ll bedisappointed if they don’t. Hopefully, futurework will do so (and potentially usepretrained LMs to process the goal texts).
+Zachary Robertson1
+[-]
+It may be both. It's not clear to me if themodule can accept an arbitrary number ofpredicates/atoms for a goal. If so, I supposethat's close enough to 'text'.
+[-]
+What's the practical difference between"text" and one-hots of said "text"? One-hotsare the standard for inputting text intomodels. It is only recently that we expectmodels to learn their preferred encoding forraw text (cf. transformers). By taking a smallshortcut, the authors of this paper get toshow off their agent work without loss ofgenerality: one could still give one-hotinstructions to an agent that is learning to actin the real life.
+[-]
+This is amazing. So it's the exact same agentsperforming well on all of these different tasks,not just the same general algorithm retrained onlots of examples. In which case, have they found agenerally useful way around the catastrophicforgetting problem? I guess the whole trainingprocedure, amount of compute + experience,and architecture, taken together, just solvescatastrophic forgetting - at least for a far widerrange of tasks than I've seen so far.Could you use this technique to e.g. train thesame agent to do well on chess and go?I also notice as per the little animated gifs in theblogpost, that they gave each agent little deathray projectors to manipulate objects, and thatthey look a lot like Daleks.
+adamShimiΩ341y 
+1y 
+1y 
+ 
+adamShimiΩ34
+Charlie Steiner3
+[-]
+Could you use this technique to e.g.train the same agent to do well onchess and go?If I don't misunderstand your question, this issomething they already did with MuZero.
+Kaj_SotalaΩ1524
+[-]
+Didn't they train a separate MuZero agent foreach game? E.g. the page you link only talksabout being able to learn without pre-existingknowledge.
+adamShimiΩ59
+[-]
+Actually, I think you're right. I always thoughtthat MuZero was one and the same systemfor every game, but the Nature paperdescribes it as an architecture that can beapplied to learn different games. I'd like aconﬁrmation from someone who actuallystudied it more, but it looks like MuZeroindeed isn't the same system for each game.
+wangscarpet6
+[-]
+Yep, they're different. It's just anarchitecture. Among other things, Chessand Go have different input/action spaces,so the same architecture can't be used onboth without some way to handle this.This paper uses an egocentric input, whichallows many different types of tasks to usethe same architecture. That would be theequivalent of learning Chess/Go based onpictures of the board.
+[-]
+I think if anything's allowed it to learn morediverse tasks, it's the attentional layers thathave gotten thrown in at the recurrent step(though I haven't actually read beyond the blogpost, so I don't know what I'm talking about). Inwhich case it seems like it's a question of howmuch data and compute you want to throw at1y 
+1y 
+1y 
+1y 
+1y 
+Teja Prabhu7
+much data and compute you want to throw atthe problem. But I'll edit this after I read thepaper and aren't just making crazy talk.
+[-]
+It is interesting to note the limitations of thesystem. From the paper:6.4.5| Failed Hand-authored Tasks Gap tasks Similar to the task in Figure 21, inthis task there is an unreachable object whichthe agent is tasked with being near. The object isunreachable due to the existence of a chasmbetween the agent and object, with no escaperoute (once agent falls in the chasm, it is stuck).This task requires the agent to build a ramp tonavigate over to reach the object. It is worthnoting that during training no such inescapableregions exist. Our agents fall into the chasm, andas a result get trapped. It suggests that agentsassume that they cannot get trapped. Multiple ramp-building tasks Whilstsome tasks do show successful ramp building(Figure 21), some hand-authored tasks requiremultiple ramps to be built to navigate up multipleﬂoors which are inaccessible. In these tasks theagent fails. Following task One hand-authored task isdesigned such that the co-player’s goal is to benear the agent, whilst the agent’s goal is to placethe opponent on a speciﬁc ﬂoor. This is verysimilar to the test tasks that are impossible evenfor a human, however in this task the co-playerpolicy acts in a way which follows the agent’splayer. The agent fails to lead the co-player to thetarget ﬂoor, lacking the theory-of-mind tomanipulate the co-player’s movements. Since anagent does not perceive the goal of the co-player,the only way to succeed in this task would be toexperiment with the co-player’s behaviour, whichour agent does not do.
+Daniel Kokotajlo2
+[-]
+Yep! Thanks! I'm especially keen to seewhether future iterations of this system areable to succeed at these tasks.1y 
+1y 
+iamthouthouarti7
+able to succeed at these tasks.
+[-]
+I have little to no technical knowledge when itcomes to AI, so I have two questions here.1.) Are the agents or the learning process thatwas constructed the focus of the paper?2.) How major of a breakthrough is this towardAGI?
+Self_Optimization2
+[-]
+1. keeping in mind I haven’t gotten a chanceto read the paper itself… the learningprocess is the main breakthrough,because it creates agents that cangeneralise to multiple problems. Thereare admittedly commonalities betweenthe different problems (e.g. the physics),but the same learning process applied tosomething like board game data mightmake a “general board game player”, orperhaps even something like a “generallogistical-pipeline-optimiser” on the righteconomic/business datasets. The abilityto train an agent to succeed on suchdiverse problems is a noticeable steptowards AGI, though there’s little way ofknowing how much it helps until weﬁgure out the Solution itself.2. keeping in mind I’ve only recently startedstudying ML and modern AItechniques… Judging from what I’ve readhere on LW, it’s maybe around 3/4ths assigniﬁcant as GPT -3? I might be wronghere, though.
+Jozdien3
+[-]
+Judging from what I’ve read here onLW, it’s maybe around 3/4ths assigniﬁcant as GPT -3? I might bewrong here, though.Disclaimer to the effect that I'm not veryexperienced here either and might be wrongtoo, but I'm not sure that's the right1y 
+1y 
+1y 
+Daniel Kokotajlo6
+too, but I'm not sure that's the rightcomparison.  It seems to me like GPT -2 (orGPT, but I don't know anything about it) was abreakthrough in having one model that's goodat learning on new tasks with little data, andGPT -3 was a breakthrough in showing how farcapabilities like that can extend with greatercompute.  This feels more like the formerthan the latter, but also sounds moresigniﬁcant than GPT -2 from a puregeneralizing capability standpoint, so maybeslightly more signiﬁcant than GPT -2?
+[-]
+As a counterpoint, when I feel like a circle jerkdownvote is happening I usually upvote tocounteract it. I did in this case with your OP ,even though I think it's wrong. And apparentlyI'm not the only one who does so. So it's not allbad... but yeah, I agree it is disappointing. I don'tthink your post was low-quality, it was justwrong. Therefore not deserving of a negativescore, instead deserving of thoughtful replies.
+parafactual3
+[-]
+Yeah, I wanted to clarify that this is closer towhat I mean, but I wondered if habrykaendorses downvoting comments seen asobviously wrong.Such a strategy seems like it could lead to ageneral culture of circlejerking, but it might alsoprevent the same tired discussions from playingout repeatedly. I don't have a good sense of therelative importance of these concerns, and Isuspected an LW admin's intuition might bebetter calibrated.
+Ruby3
+[-]
+[LW Admin here]. Karma gets interpreted in anumber of ways, but one of my favorites isthat karma is for "how much attention youwant a thing to get." If a comment seemswrong but valuable for people to read, I mightupvote it. If it seems correct but it isimmaterial and unhelpful, I might downvote it.Generally, there's a higher bar for things thatwrong to be worth reading by people.1y 
+1y 
+1y 
+Daniel Kokotajlo5
+Quintin Pope5
+Daniel Kokotajlo4
+wrong to be worth reading by people.I can't fully explain other people's votingbehavior, but in my case I'd often downvotewrong things just so they get less attention.
+[-]
+<3Y our view is still common, but decreasingly so inthe ML community and almost nonexistent onLW I think. My opinion is similar to Abram's,Yair's, and Quintin's. I'd be happy to say more ifyou like!
+[-]
+There are people who've been blind from birth.They're still generally intelligent. I think generalintelligence is mostly applying powerful modelsto huge amounts of rich data. Human senses aresufﬁciently rich even without vision.Also, there are lots of differences betweenhuman brains and current neural nets. E.g., brainsare WAY more powerful than current NNs andtrain for years on huge amounts of incrediblyrich sensory data.
+[-]
+We need to understand informationencoding in the brain before we canachieve full AGI.I disagree; it seems that we are going to brute-force AGI by searching for it, rather than buildingit, so to speak. Stochastic gradient descent onneural networks is basically a search in circuit-space for a circuit that does the job.The machine learning stuff comes withpreexisting artiﬁcial encoding. We labelstuff ourselves.I'm not sure what you mean by this but it seemsfalse to me. "Pretraining" and "unsupervisedlearning" are a really big deal these days. I'm1y 
+1y 
+1y 
+habryka4learning" are a really big deal these days. I'mpretty sure lots of image classiﬁers, for example,generate their own labels for things basically,because they are just trained to predict stuff andthen in order to do so they end up coming upwith their own categories and concepts. GPT -3et al did this too.Without innate information encodingfor language, infants won't be learningmuch about the world throughlanguage, let alone picking up an entirelylanguage from purely listeningexperiences.GPT -3 begins as a totally blank slate. Yet it is ableto learn language, and quite a lot about theworld through language. It can e.g. translatebetween English and Chinese even though all it'sdone is read loads of text. This strongly suggeststhat whatever innate stuff is present in thehuman brain is nice but nonessential, at least forthe basics like learning language and learningabout the world.I'd like to be corrected if I'm wrong onAGI. I've only read a little about it backin my freshman years in college. I'm surethere has been a lot of developmentsince then, and I'd like to learn from thiscommunity. From my experience ofreading about AGI, it's still dealing withmore or less the conﬁnes of thecomputational statistics nature ofintelligence.I don't know when you went to college, but a lothas changed in the last 10 years and in the last 2-5 years especially. If you are looking for morestuff to read on this, I recommend Gwern on theScaling Hypothesis.
+[-]
+There is no automatic voting routine. But allcomments start with a single small-upvote bytheir author, and posts start with a single strong-upvote by their author.
+Gerald Monroe1
+[-]
+1y 
+1y 
+iamthouthouarti4
+Y ou mean using the author's karma for theinitial vote? Interesting if so. (And better thanthe alternative where a zero karma spambotgets as much visibility right away as a wellrespected poster)The circle jerk problem is unfortunate. I havenoticed on Reddit that a huge part of votingbehavior is you eat many downvotes forexpressing a position that disagrees with thesubreddit consensus. Regardless of correctness.
+habryka4
+[-]
+Yep, the author's vote-strength is used for theinitial vote. So comments by users with morekarma can start out with 2 points, as opposedto the default 1, and posts by users with morekarma can start with up to 10 points.
+Gerald Monroe1
+[-]
+Neat. Why stop there? Why not start an EYpost at thousands of points?
+habryka5
+[-]
+Sometimes Eliezer's posts are amazing,sometimes they are only OK. Saturatingthe karma system would get rid of thedistinction between those, and also breakany sorting we might want to do on thefrontpage based on karma.
+[-]
+I apologize if this is something you’ve alreadycovered ad nauseum, but what are yourtimelines?
+Daniel Kokotajlo4
+[-]
+If you click on my name, it'll take you to my LWpage, where you can see my posts and postsequences. I have a sequence on timelines. Ifyou want a number, 50% by 2030.
+Gerald Monroe1
+[-]
+I see the numbers but exponential growth is1y 
+1y 1y 
+1y 1y 
+1y 
+MSRayne2
+I see the numbers but exponential growth ishard for humans. 2012 feels like practicallyyesterday, with consumer tech having barelychanged. Alexa came out in 2014, butprototypes for voice recognition had existedfor years. It reminds me of how it felt inFebruary with the covid news. It didn't feelreal that a virus that had yet to kill a single uscitizen would cause such damage.
+[-]
+This is becoming an ethical concern. At this pointI would say if they don't stop they are riskingsevere mindcrime. If the overview you quoted iscorrect, those entities are sentient enough todeserve moral consideration. But no one is goingto give that consideration, and anyway thisproduces the risk of AGI which is bad foreveryone. I wish companies like DeepMindwould realize how terrifyingly dangerous whatthey're doing is, and focus on perfecting narrowAIs for various different speciﬁc tasks instead.
+Daniel Kokotajlo6
+[-]
+If you want to discuss this more with me, I'd beinterested! I had similar thoughts when readingthe paper... especially when reading about allthe zero-sum games they made these agentsplay.
+MSRayne1
+[-]
+I'm not sure what else to say on the matterbut feel free to shoot me a DM.Note that I'm not an AI expert or anything;the main reason I post here so rarely is thatI'm more of an intuitive thinker, armchairphilosopher, poet, etc than anything and I feelintimidated next to all you smart analyticalpeople; my life's goal though is to ensure thatthe ﬁrst superintelligence is a humancollective mind (via factored cognition, BCIs,etc), rather than an AGI, hence my statementabout narrow AIs (I see AIs as plugins for thehuman brain, not as something that ought toexist as separate entities).1y 
+1y 
+1y 
+bﬁnn1
+[-]
+The game world could include a sign stating therules/objective of the game in English.Presumably then (perhaps helped by GPT -3) theagents might well learn to ﬁnd & read it, as thebest shortcut to working out what to do. Andﬁgure out both the meanings of individual words(nouns, adjectives, verbs) and grammar (wordorder, conjunctions, etc.) so as to understandwhole sentences.*And thus make the leap from GPT -3 as cleverspinner of meaningless symbols like R, E and Dto those symbols having a real-world meaninglike 'RED'. Or even 'Keep the red cube withinline of sight of the yellow pyramid, but don't letthe blue agent see either of them'.Hence leaping from Chinese Room to somethingmore mind-like?(*Though they might need help, e.g. a pre-coded'language instinct', as trial and error may take a vlong time to ﬁgure these out.)
+[comment deleted]-3
+[+]
+Deleted by Raemon, 11/02/2021Reason: (re-deleting in a way that preserved threading. Originallydeleted by Habryka, who I think basically thought it was aconfused question)1y 1y 

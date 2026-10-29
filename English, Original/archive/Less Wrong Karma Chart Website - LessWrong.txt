@@ -1,0 +1,110 @@
+Software T ools
+Site Meta
+Personal BlogAs a learning exercise°, I wrote a webapp which shows some charts on yourkarma score.I recommend just going to the websiteand trying it out, but here is adescription of it as well if you'reinterested. To use it just enter your userid in the text box at the top and thenpress the go button. It will show that itis loading and after a while !ve chartswill be shown."e !rst chart is a time series chartwhich shows you when you haveposted a comment or discussionpost. "is chart allows you tozoom in on any desired area."e second chart is a time serieschart which shows you when youhave posted a main post. "ischart allows you to zoom in on anydesired area."e third chart shows yourcumulative score. "is chart allowsyou to zoom in on any desiredarea.Less WrongKarma ChartWebsiteby ScottL15th Feb 2016
+36
+area."e fourth chart showsproportions, i.e. how manycomments/posts you have madeand how many were positive,neutral or negative. "e !fth and !nal chart showsinformation on your total positiveand negative scores. "is chartallows you to drill down and seewhere your points have originatedfrom, i.e. from comments ordiscussion posts or main posts. Please note that it may take a while toload. I am scraping all the informationfrom your users page. It shouldn't taketoo long though. On my computer ittakes less than a minute to load all theinformation on my karma score, but itdid take around half an hour toload Eliezer_Yudkowsky's karmainformation. YMMV depending onwhat computer you are using. It is notyour score that determines how long itwill take, but the amount of commentsand posts that you have made. Irecommend using chrome as I haven'ttested it in any other browsers."e karma calculated by LessWrongalso might be slightly di#erent to whatmy web app shows. For example, mywebapp shows Eliezers karma totalscore as 290096 and in LessWrong itis 290174. I am pretty sure that my codeis right since I counted one example outand I do know of one bug in the
+and I do know of one bug in theLessWrong code that would e#ect thetotal score. "ere are also other thingsthat LessWrong takes into account that Idon't, e.g. karma awards and the trolltax. "e di#erence shouldn't be toomajor, though, so it shouldn't be a bigproblem."e website is hosted on github and thecode can be found here.TLDR: Try out the Less Wrong KarmaChart Website and let me know whatyou think or if you run into any issues.Software T ools1
+Site Meta1
+Personal Blog
+26 comments, sorted by top scoringphilh5
+[-]
+Neat! And it seems to work on ﬁrefox. Somecomments:I think some users have simply been awardedkarma, which your app wouldn't be able tocatch. It also won't catch karma lost frompaying the troll tax (replying to downvotedcomments).Pressing enter with the box focused didn'tstart the scraping. I had to click 'go'.I'd put main and discussion upvotes on thesame scale. (So the 'main' y-axis is just 10times the 'discussion/comment' y-axis.) Rightnow they don't even have zero in the sameplace, which is really weird. Maybe also makethe scale nonlinear.It's hard to click-and-drag over the wholewidth or height of the chart.I'm not sure how easy this would be, but I'dappreciate a distinction between meetups7y 
+appreciate a distinction between meetupsand non-meetups. (But I think some meetupsare in main and some are in discussion.)I'd like more context on posts/commentswithout having to visit them. For posts, thetitle; for comments, maybe the title of theattached post plus a few words (like in thesidebar). It might be too noisy to put that inthe hover box; if so, perhaps if I click, thehover box expands and stays there until thenext click, and includes an actual link?Y ou don't actually display total karmaanywhere. I had to get it from positive-negative on the pie chart.The pie chart doesn't have a slice for'neutral'.I'd also be interested in seeing cumulativekarma as a time series, and 30-day karma as atime series. (This can't be calculated like Ithink LW calculates it - you'd need to do"karma on last 30 days of comments/posts"rather than "karma given in last 30 days")This has been mostly negative, so I'll say againthat this is really cool. Good job!
+ScottL5
+[-]
+Pressing enter with the boxfocused didn't start the scraping. Ihad to click 'go'.FixedI'd put main and discussionupvotes on the same scale. (So the'main' y-axis is just 10 times the'discussion/comment' y-axis.) Rightnow they don't even have zero inthe same place, which is reallyweird. Maybe also make the scalenonlinear.I moved main into a separate graph. Thisshould ﬁx the issues.It's hard to click-and-drag over thewhole width or height of thechart.7y 
+I could change it so that you can only zoomin on the yaxis like it is here.I'm not sure how easy this wouldbe, but I'd appreciate a distinctionbetween meetups and non-meetups. (But I think somemeetups are in main and some arein discussion.)Maybe I will look at that later.I'd like more context onposts/comments without having tovisit them. For posts, the title; forcomments, maybe the title of theattached post plus a few words(like in the sidebar). It might betoo noisy to put that in the hoverbox; if so, perhaps if I click, thehover box expands and stays thereuntil the next click, and includes anactual link?I have updated this. Try it out and let meknow what you think.Y ou don't actually display totalkarma anywhere. I had to get itfrom positive-negative on the piechart.I ﬁxed the total chart to have title thatshows the total score.The pie chart doesn't have a slicefor 'neutral'.The pie chart is meant to show the totalscore. Since neutral has 0 score I don'tthink it should be in the graph.I'd also be interested in seeingcumulative karma as a time seriesWould that be something like this with thetotal score moving up and down over time.I would do this by ordering thecomment/post scores by their dates.
+comment/post scores by their dates.and 30-day karma as a time series.Would this be similar to the cumulativechart above, but just for 30 days.
+philh3
+[-]
+I have updated this. Try it out andlet me know what you think.Yep, this is an improvement, thanks. I'dprobably change the styling slightly, but I'mnot sure exactly how. Right now the threeOh, and I'd recommend adding the year tothe timestamp, instead of making me readit off the x-axis.Re timeseries: for cumulative, I mean they-axis is "total karma accumulated on allthings posted by date X", so essentially theintegral of the existing graph. I guess itmight look similar to the thing you posted,but (at least for me, and for others whomostly post neutral/positive things) itwould only rarely go down.The 30-day one would be "total karmaaccumulated on all things posted in thethirty days preceding X".
+ScottL2
+[-]
+I'd recommend adding the yearto the timestamp, instead ofmaking me read it off the x-axis.DoneI also did the cumulative chart. I willthink about allowing the user to set thedates that are shown on the cumulativechart. It would start with the ﬁrstcomment/post and end with the last, butit would allow you to change the start orend dates if you want.7y 
+7y 
+plex4
+Vaniver4
+Viliam2
+Mati_Roy1
+[-]
+Aaron Swartz's highest ranked LW posts canbe found with this. I bet a lot of peoplewould love to be able to ﬁnd his highestrated posts, and share some more widely.
+[-]
+Y ou might want to force the 0 line for bothaxes to be the same; when mine ﬁrst loadedmy ﬁrst thought was "why do I have so manynegative red boxes?". That the points on thetime series are clickable links is a very nicetouch.
+ScottL5
+[-]
+I moved the main posts into a separatechart.. It should be less confusing now.
+[-]
+Is this purely client-side? If there is a databaseavailable, it could be useful to cache thescraped data, just in case there are too manypeople wanting to see the results for Eliezer.The cached data could expire after a week.
+ScottL2
+[-]
+Is this purely client-side?Yes. I hosted it in Github Pages because it'sfree. The down side is that it only servesstatic content.. I might be able to usesomething like ﬁrebase, but I don't reallywant to. I will see how easy it is to create alink that allows you to download the datato a csv ﬁle.
+[-]
+It doesn't seem to be working anymore.Maybe add this info at the top of the post.7y 
+7y 
+7y 7y 
+7y 
+3y 
+[anonymous]0[This comment is no longer endorsed by itsauthor]Elo0
+[-]
+This app pleases me.Iamnotnarcissisticatall.
+[-]
+Any chance at getting all comments and postson one of those graphs? For all users overtime? I'd like to see which posts score >=5and <5 karma..
+ScottL0
+[-]
+I don't think so. See Vaniver's comment°which describes what the site is doing. Idon't know the process, but maybe you cansubmit a DB request to the trike apps teamfor this data.
+Elo1
+[-]
+script should be able to be run onhttp://lesswrong.com/comments/ withoutmuch modiﬁcation...
+Vaniver0
+[-]
+Yeah, I recommend against scraping LWthat way instead of making a DB request/ building a page that makes that DBrequest.
+Lumifer0
+[-]
+instead of making a DBrequestCan one? In general, is there anavailable (and working) API to LW?
+Vaniver0
+[-]
+The following is what I had in mindfor that section:7y 
+7y 
+7y 
+7y 7y 
+7y 
+7y 
+ScottL0
+maybe you can submit a DBrequest to the trike appsteam for this data.There is an API but I think it doesn'thave the ability to do everything thatwe'd like it to. See this issue as anexample of a missing feature.But if you have the ability, building thatfeature and submitting it as a pullrequest is better than doing it thelong way (since it also helps everyoneelse who wants to do that sort ofthing in the future).
+Lumifer4
+[-]
+building that featureA feature that allows anyone on the'net to bang on your backenddatabase is not something to betaken lightly :-)I think LW ﬁrst needs a coherentAPI spec, then a framework(including thing like auth tokens, ratelimiters, etc.), and only then speciﬁcabilities to e.g. ask for all commentsof a particular user.
+[-]
+Y ou are probably right. I would assumethat I can also get the post informationfrom this:http://lesswrong.com/r/all/recentposts/ .A graph with this much data probablywouldn't be useful as it would be toobusy. I will look into writing somethingelse to get this data into a usable format.Edit: Y our link only has the maincomments, not the discussion ones. I'mnot sure what to get all the commentinformation from.
+Elo0
+[-]
+7y 
+7y 
+7y 
+Elo0
+Elo0
+[-]
+maybe 3 months worth; for the past 3years? 12 graphs in total; showing thetrend...?I ﬁgured that with the zoom it wouldbe able to be use-able. but separategraphs work too.
+[-]
+not sure how long it's supposed to take; anychance of a % bar? 5-10 minutes total.excellent visualisation, very helpful. Used it tosee which discussion posts of mine weregood. Generally the ones I spent more timeon and felt like they were higher qualityposts. my one concern for myself is thedifference between a top notch post and acrappy one is about 5 karma. Bad discussionposts by me are around 4 karma or less,good ones are 9+ with some in-betweeners.Doesn't seem like they are far apart in scoreeven though they are far apart in quality (tome). Going to think about it and see if I cantake further strides upwards from here...
+Vaniver2
+[-]
+not sure how long it's supposed totake; any chance of a % bar? 5-10minutes total.The way it works is by going to the relevantsection of someone's user page and hittingthe 'next page' link until it runs out ofresults. Y ou only ﬁgure out how manycomments someone's made at the end, andso a % bar isn't that possible. (One coulddisplay the number of comments scraped sofar.)
+philh3
+[-]
+Going that route, I'd suggest 'date ofoldest comment scraped so far' insteadof/as well as the count.
+7y 
+7y 
+7y 
+7y 
+Brillyant-1
+Elo0
+ScottL1
+[-]
+I combined the above suggestions. Whileit is scraping the data, it now also has atable showing the last scraped elementsposted date, the number of itemsscraped and the scraped score. This issplit into two rows one for commentsand one for posts.
+[-]
+I think that would be better than nothing.Also the example of EY; and his karmascore made it seem like it could handle a1000 karma score in a few seconds.
+[-]
+This is so good. Great work.7y 
+7y 
+7y 

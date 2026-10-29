@@ -1,0 +1,539 @@
+Guest post from David Barry about deworming cost-effectiveness - The GiveWell Blog
+Top Charities
+Our Top Charities
+Giving 101
+Why Is It So Expensive to Save Lives?
+Our Giving Funds
+Top Charities Fund
+All Grants Fund
+Unrestricted Fund
+Research
+Research Overview
+Research on Programs
+Our Criteria
+Cost-Effectiveness Analyses
+How We Produce Impact Estimates
+All GiveWell Grants
+Our Mistakes
+About
+About GiveWell
+Our People
+Information About Donating
+General FAQ
+Values
+Official Records
+Jobs
+Contact Us
+Stay Updated
+Blog
+Ways To Give
+Tax Deductibility of Donations
+Overview of Giving Options
+View and Manage Your Giving
+Credit Card
+Check
+Wire Transfer
+ACH (Automatic Clearing House)
+Cryptocurrency
+Securities/Stock
+PayPal
+Wills and Bequests
+Qualified Charitable Distributions
+Donor Advised Fund (DAF)
+Donate to GiveWell UK
+Enter search terms here.
+This search returns results from both GiveWell's main site and from the GiveWell Blog.
+Search form
+Search
+Donate
+Donate
+Home
+The GiveWell Blog
+Guest post from David Barry about deworming cost-effectiveness
+Previous Post
+Next Post
+January 23, 2013
+(updated on:
+September 13, 2013
+)
+|
+by
+Guest
+This is a guest post by
+David Barry
+, a GiveWell supporter. He emailed us at the end of December to point out some mistakes and issues in our cost-effectiveness calculations for deworming, and we asked him to write up his thoughts to share here. We made minor wording and organizational suggestions but have otherwise published as is; we have not vetted his sources or his modifications to our spreadsheet for comparing deworming and cash. Note that since receiving his initial email, we have discussed the possibility of paying him to do more work like this in the future.
+Along with many others, I intuitively disagreed with GiveWell recommending GiveDirectly ahead of the Schistosomiasis Control Initiative. But I wasn’t as knowledgeable as I thought I was – not having paid close attention to every post and report, I thought that deworming helped fix minor short-term illnesses, but it was cost-effective because the deworming treatments are
+really
+cheap. The latter is correct, but I eventually realized that the reason GiveWell was recommending deworming at all was because of its developmental effects. Since these benefits should show up later in life in the form of increased incomes in adulthood, a comparison between deworming and cash transfers makes more sense: what generates more extra money, an investment of a cash transfer or a higher income thanks to deworming? Put like that, deworming’s not the obvious winner.
+Since I still didn’t have a decent grip on what exactly went into GiveWell’s cost-effectiveness estimates, I worked through the various spreadsheets behind them. I didn’t check everything closely, but I worked through it closely enough to turn up a couple of spreadsheet errors (including another one from the DCP2 spreadsheet, though not anywhere near as dramatic as the errors described
+in 2011
+).
+Since there are probably others out there who are as interested in the topic as me, and as ignorant of the details of the calculations as I was, I decided to write up a post on them. It’s part explanation, part criticism, part general commentary. GiveWell have in the past talked about the number of judgement calls that they have to make; they really are unavoidable, and no doubt my own biases have crept into my analysis. I hope I’ve been clear about them though.
+Overall, I find a few points of serious disagreement with the GiveWell staff’s assumptions, but they effectively cancel out, so the net effect for deworming is fairly small.
+My final cost-effectiveness estimate is within the broad range of those from the GiveWell spreadsheet, though more favorable to cash transfers (relative to deworming) than any of the GiveWell staff scenarios. By the end, this exercise made me much more favorable to donating to GiveDirectly
+– the benefits of cash transfers are pretty big and may be comparable with many health interventions. Whereas before I was thinking of an 80/20 split between AMF and SCI, now I think I’ll go 80/10/10 (AMF/SCI/GD). I can now also see better where GiveWell are coming from when they’ve written in the past about not putting as much emphasis on these formal cost-effectiveness estimates – I could well be persuaded in the near future that my own estimates are off by a factor of 5, in either direction.
+There are two main approaches to estimating the cost-effectiveness of deworming: one is based on the DCP2 method, and one is based heavily on Baird et al.’s
+working paper
+. I’ll take each of these in turn.
+DCP2-style calculation
+The DCP2 method for calculating the cost per DALY averted, which was (with some corrections and additions) how GiveWell calculated their cost-effectiveness in 2011, goes like this:
+Use models to estimate the prevalence in each region of the world for each of the various symptoms caused by the various worm infections.
+Already there’s going to be some uncertainty introduced because of the modeling – I haven’t studied this step closely, but in the absence of good data collection, models of disease burdens can be quite substantially wrong. An prominent example here is the annual deaths caused by malaria – the
+WHO has
+a 95% confidence interval of [537000, 907000], whereas a study in the Lancet (
+Murray et al.
+) has [929000, 1685000]. It’d be very optimistic to conclude that it’s probably close to 900,000. More likely, someone’s methodology is wrong.
+Estimate the fraction of the people with symptoms who would be cured with deworming treatment.
+I expect that these values are pretty well established from medical studies.
+Assign a duration and disability weight to each symptom.
+While people can always argue over disability weights, I’ll assume that there is relatively little debate over the short-term morbidity. More challenging is assigning a disability weight to life-long cognitive impairment. The standard value in the literature is 0.024; the reasoning seems to go roughly, “The disability is pretty small, and 0.024 is a pretty small number.” At least one author (
+King 2010
+and elsewhere) argues that instead of the usual value of 0.005 for the total DALY burden due to a schistosomiasis case, we should use a value that may be ten or more times higher. Unfortunately for our confidence in this estimation method, preventing such cognitive or developmental impairment, even using the lower weights, accounts for over half of the estimated DALYs averted by deworming. This is why it’s understandable that for their 2012 analysis, GiveWell relied mostly on the Baird et al. working paper – it’s very problematic to work off just one study, but at least it’s an empirical data point.
+Take the estimated cost per treatment, and multiply through everything to get a cost per DALY averted.
+The spreadsheet GiveWell used to perform these calculations is
+here
+. (Some of the inputs to that sheet are from the corrected (but not fully corrected) DCP2 spreadsheet
+here
+. I’m only linking to this spreadsheet for completeness – it’s very hard to navigate. While there’s still an error in the schistosomiasis sheet, it doesn’t affect GiveWell’s subsequent calculations, and I won’t talk about this spreadsheet again.)
+The calculations in the spreadsheet for soil-transmitted helminths are essentially as I’ve described, with symptoms separated into “general”, “severe”, and “developmental”. But the calculations are different for schistosomiasis. Rather than starting with the prevalences of the various schistosomiasis symptoms, GiveWell instead simply use a given total DALY burden per schistosomiasis case, and spread it out over “general”, “severe”, and “developmental” in the same proportions as the STH’s. (If you just want to calculate the overall cost per DALY averted, there’s no need to spread out the schistosomiasis DALYs like that. But doing so means that you can later fiddle with the disability weight for the developmental impacts. In fact, the spreadsheet back-calculates all the prevalences and other intermediate quantities used in the calculation.)
+Now some comments on the spreadsheet. All calculations are performed for a 3% discount rate (in the ‘DCP2’ sheet: columns E, G, I, …) and for a 0% discount rate (columns F, H, J, …), which makes the sheet look a lot more intimidating that it perhaps should be. Furthermore, rather than calculating DALYs, and converting to “life-saved equivalents” at the end, the conversion is done in the middle of the calculation; I find this unintuitive (perhaps it’s just a personal preference).
+The spreading out of the schistosomiasis DALY burden across the three categories of symptoms is incorrect due to an Excel formula error (cells DCP2!W20:X22). Fixing this error and making no other changes affects some of the intermediate quantities substantially, but only makes a difference of about 10% to the overall cost effectiveness estimates.
+Two different DALY burdens are used per schistosomiasis case: one for a 3% discount rate, and one for a 0% discount rate. Starting with the DALYs and back-calculating the earlier values (prevalences and so on) means that there are various inconsistencies: the spreadsheet has the schistosomiasis prevalences dependent on the discount rate. It is possible to fix this anomaly: pick either the given value of 0.0058 DALY(3,0) or 0.0097 DALY(0,0) and derive the other so that the prevalences are consistent. But while we can remove the absurd apparent dependence of the current prevalence on the future discount rate, it’s not clear that this actually improves the final estimates – who knows which of the 0.0058 and the 0.0097 is the right one to use, if either?
+The conversion from DALYs averted to life-saved equivalents will always cause disagreement amongst different people, and here is my disagreement. GiveWell measure a life at 70 years, and say that the life-long developmental effects last for 70 years. But the life-expectancy in many countries in sub-Saharan Africa is much lower than 70 years, and the children getting dewormed are, on average, aged about 10. So I would have the life-long effects lasting at, say, 45 years rather than 70. Furthermore, since we’re making life-saved comparisons to bednets – where we’re primarily saving lives of under-5 children in countries with similar life expectancies – I think that the “life” would be better defined at 50 years rather than 70. I don’t claim that everyone should follow my definitions for the DALY-to-lives conversion (people may want to weight deaths of young children below those of adults, or age-weight in some other way, and so on), but I think it is worth showing this as one way, in amongst many others, where differences of opinion can alter the cost-effectiveness estimates by 10% or so.
+I’ve put my own version of the spreadsheet, with the various changes described above, on Google Docs
+here
+.
+Calculation based on Baird et al.
+In light of the large uncertainty of the appropriate disability weight to use for life-long cognitive impairment and other possible developmental benefits of deworming treatment in childhood, GiveWell’s latest estimates rely heavily on the
+Baird et al.
+working paper, the latest version of which was released in August 2012. This study looks at (amongst other things) the working hours and earnings of a group of Kenyan adults aged 19 to 26, who as children had been in schools in the Busia district where a deworming program for both STH’s and schistosomiasis had been implemented. The program was rolled out in stages, with schools in “group 1” receiving treatment from 1998 onwards, schools from group 2 from 1999, and schools from group 3 from 2001. Groups 1 and 2 constitute the treatment group, and group 3 is the control group. The program was not quite as simple as that (there were experiments in cost-sharing tried for a little while), but all up, the students in the treatment group received, on average, about 2.4 more years of deworming than the students in the control.
+The results of the study are very positive: wage earners in the treatment group averaged about 29% higher incomes than those in the control. As well as comparing this result to possible returns to investment from cash transfers, we’ll want to ask (and I will give my answer later) how much increased incomes are worth in DALY-equivalent terms – since deworming gives both short-term health benefits and long-term financial benefits, we’ll need some sort of conversion factor if we want an overall cost-effectiveness estimate. The study’s regressions also found that self-employed non-agricultural workers reported 19% higher profits, though the latter result was not statistically significant at the usual levels. I’ll come back to this point later.
+GiveWell present two different calculations based on the Baird et al. results. One is a
+“lives saved framework”
+, and one is a
+“financial framework”
+. I’ll focus my discussion on the financial framework, which includes the assumptions behind the cash transfer benefits calculation. The basic idea for cash transfers is that some fraction of the transfer is invested and generates an income stream (assumed to last 40 years; I suspect that this is generous), while the rest is spent on short-term consumption. Add the latter to the (appropriately discounted) former, and you have the total monetary benefits to cash transfers. For deworming, the basic idea is that some recipients get short-term health benefits, represented as a fraction of average income, and some recipients get an increased income in adulthood. Appropriately discount the latter and add to the former, and you get the total monetary benefits of deworming.
+The ‘Assumptions’ sheet lists the key inputs to the calculations. I’ll look at these out of order. There is a lot of room for disagreement on some quantities, and no real way to satisfactorily resolve those disagreements without much more research. So while at times I might argue that my assumptions are more appropriate than those given by GiveWell staff, at other times I am just offering a different opinion.
+ROI of cash transfers
+I don’t really have much confidence here, though I am inclined to agree with the GiveWell staff that returns can be high. The example often mentioned is that many of GiveDirectly’s cash transfer recipients spend about half their transfer on an iron roof. The thatch roofs often leak during heavy rainfall, which can happen several times a year, and which requires repair costing (say) $15 and also requires moving possessions to under a more solid shelter. An iron roof would therefore start giving a return relative to baseline of over 10% as soon as it next starts raining heavily; GiveDirectly estimate this return to be 17%. In addition, there are studies from other cash transfer programs showing high rates of return. The GiveWell staff’s inputs on this range from 5% to 54%; I am happy to go with something in the middle of that.
+Rate of investment of cash transfers
+This assumption tells us how much of the cash transfer gets invested; all the GiveWell staff assume 75% “based on GiveDirectly self-reported spending and economic theory”, and I have no reason to alter a figure based on self-reported spending.
+Discount rate
+All the GiveWell staff go with 5% here, which I think is much too high a rate. I think that this value should be the
+social
+discount rate, which essentially tells us how much we value the welfare of people today relative to the welfare of people in the future, though it can also be used to describe our uncertainty about the effects of policies today on the future – such an uncertainty will usually get larger the further into the future you estimate. There are good arguments that the social discount rate should be zero (i.e., that we should value future welfare equal to present welfare) or some small number to account for future uncertainty; more commonly used is 3% per annum; in my head I usually assume the rate to be some fuzzy number between about 1.5% and 2%.
+Instead, the GiveWell assumption seems to be describing the discount rate that you’d use if you were making an investment: if you’re able to get a risk-free 5% annual return, then you discount your expected future revenue by 5% per annum compounding. Comparisons of returns might be relevant to the recipients of the transfers, who have to decide where to invest their new cash. But even if they’re able to get a risk-free 5% return, then that is a benefit of the cash transfer that should be discounted only at the social discount rate.
+In his
+blog post
+, Holden also mentions that the discount rate of 5% incorporates the recipients’ preference for current consumption over future consumption. This is a more solid argument, but one that need not bind donors (and arguably
+should
+not bind donors) – I am happy to value the recipients’ future welfare more highly than they do themselves at present. Holden also uses the discount rate to account for the fact that donors are able to invest money today and donate later. There can be (and have been) long debates on the topic of donating now versus donating later; I figure that since I
+am
+donating now, the return I can get on my money is not relevant to an estimate of the benefits of that donation.
+The very high discount rate of 9.85%, offered as a third option, is irrelevant: it is the real interest rate paid by the Kenyan government on its sovereign debt, and it should in no way inform the discount rate used in these cost-effectiveness estimates.
+I’ve spent a bit of time on this assumption because it changes quite substantially the final results. Cash transfers start generating a return very quickly, but the future increased incomes from deworming only start several years after the fact (ten years, if the deworming starts at age 5; five years, if we take the middle age group of students aged 5-14). And in a comparison to bednets, a larger discount rate will unfairly make both deworming and cash transfers look less effective.
+Proportion of child-years that are as helpful (in terms of developmental effects) as the specific years in the study for deworming
+The study has the treatment group getting 2.41 extra years of deworming relative to the control. The calculation assumes that students are dewormed every year for 10 years. If all of those years of deworming are as helpful as the 2.41 years in the Kenyan study, then this assumption should be 100%. I don’t have any clue what this value should be; perhaps some experts on worm infections would have more of an idea about whether infections at age 5 are more or less damaging than those at age 14, but I don’t know.
+Proportion of deworming going to children
+All the GiveWell staff go with 50%, based on discussions with SCI.
+Proportion working for wages; treatment effect on ln(total labor earnings)
+These are two separate assumptions in the spreadsheet, but they are related. Recall that Baird et al. find wage earners in the treatment group seeing increased incomes by 29% relative to the control; about one sixth (16.6%) of their sample was working for wages. Another 10% was in non-agricultural self-employment, and this group did not have a statistically significant increase in profits relative to control, but the point estimate was large, at 19%. GiveWell’s spreadsheet assumes that the self-employed non-agricultural workers receive no long-term benefit from the deworming, and it is certainly acceptable (and often desirable) to ignore results that are not statistically significant. But I personally don’t put quite as large an emphasis on proven outcomes, and put more of an emphasis on expectation values. And here I think the expectation should be that profits increased. As well as the wage earners showing a statistically significant increase in incomes, they show a statistically significant increase in weekly hours worked. The non-agricultural self-employed also show a statistically significant increase in hours worked, and a fairly large point estimate of an increase in profits.
+So while I wouldn’t want to see policymakers picking and choosing non-significant but favorable results, in this case I think the lack of significance is a minor issue, at least for me personally. Including a non-significant results means that I should probably make the “replicability adjustment” (see below) stronger, but in my set of assumptions, I have the proportion of the population seeing increased earnings at 26%, and a treatment effect on ln(earnings) at ln(1 + (0.166*0.287 + 0.1*0.19)/(0.166 + 0.1)) = 0.22.
+Duration of benefits in years
+In GiveWell’s spreadsheet, this assumption applies to both the deworming calculation and the cash transfer calculation. I think that the two should be split: while the average person who reaches the age of 15 may work for 40 years, I’m not convinced that investments will last for so long – the iron roof might need replacing after a couple of decades. (Of course, it’s possible that some investments may last even longer and be passed on to the next generation.) I don’t have much confidence in what the duration of the cash transfer benefits should be, but I would be more comfortable with, say, 25 years rather than 40.
+Replicability adjustment
+John Ioannidis estimates that about half of the results in the medical literature are unable to be replicated, because of publication bias, and some researchers hunting around for techniques that give a statistically significant result, and so on. It’s therefore prudent to assume that experimental social science papers will be subject to similar biases. And since the bulk of the deworming calculation is based on the results of one working paper, it seems appropriate to discount the overall results by some factor: 50% is roughly in the middle of Ioannidis’s estimates on replicability for medical research, and the GiveWell staff all give roughly comparable values (between 30% and 50%). There is, of course, no way of really knowing what this value should be.
+Since I’m including the non-significant result on self-employed profits, and I might be wrong to do so, I think that I should reduce this value from 50% to 42%. That’s a ballpark guess, of course: say the replicability of the wage increases (statistically significant) is 50%, and the replicability of the profit increases (not statistically significant) is only 25%. The wage increases constitute about 70% of the total earnings increases (16.6% of the population with a 29% increase as opposed to 10% of the population with a 19% increase) in the Baird et al. paper, so a natural adjustment to use is 0.7*0.5 + 0.3*0.25 = 0.42. But in my discussion of external validity (below), I argue that when generalized across sub-Saharan Africa, the benefits to the self-employed non-agricultural workers will become more important (comparable to the benefits gained by wage earners), so instead I’ll use an adjustment here of 37%.
+Of course, Baird et al. is not the only paper to have studied deworming benefits, although it provides more useful results for our purposes than the others. Last year, the Cochrane Collaboration released a
+review
+of randomized trials of STH deworming (for a round-up of sometimes strong reactions, see
+this Storify
+). The “Main results” section of the review on page 2 is probably the most persuasive case for cash transfers over deworming that I’ve seen – it is a long list of small or null results with weak evidence bases. It is certainly plausible that some of the defenses of mass deworming are correct: that the subtle health effects caused by a particular species won’t necessarily be picked up by a review of all STH deworming; that we have far stronger evidence of the health benefits of deworming on animals (I have not looked up this literature, but my prior is that it’s likely to be true and relevant to humans); that schistosomiasis, not covered in the Cochrane review, is more important. But I think that we have to give a good deal of weight to the Cochrane review. Of course people will disagree heavily over how much weight to give it; I will say that I’ll reduce my replicability adjustment from 37% down to 18%.
+There’s also a replicability adjustment needed for cash transfers; perhaps we can think of it as an external validity adjustment (see below) as well – this latter correction wouldn’t necessarily be relevant for GiveDirectly at the moment, but perhaps it will be if they scale up their operations to more countries. Since we have
+evidence
+from various programs of high rates of return on investments, I’m satisfied that not much of a correction is needed for the 25% return that I think is reasonable to use for the estimate. On the other hand, I don’t know if a different set of cash transfer recipients would invest, on average, 75% of their transfers. It seems pretty high to me. I’ll put this adjustment at 66.67%.
+External validity
+There are two main reasons to think that the Baird et al. study of the Busia district in Kenya won’t generalize to the rest of sub-Saharan Africa. The first is that Kenya has an unusually large percentage of its adult population in wage employment. The graph on page 9 of
+this report
+from the International Labour Organization shows that about 30% of working-age people in Kenya are in wage employment, with the other low-income countries in the region between about 6 and 19% (the study sample in Baird et al. had about 17%; I’m guessing this is because the wage jobs are disproportionately in Nairobi). Botswana, Namibia, and South Africa – all countries with much higher average incomes – are the only three countries shown with higher percentages of wage employment. Gindling and Newhouse (
+Table 3, p16
+) give the overall percentage of wage earners in a sample of 21 sub-Saharan African countries as 13.4%.
+If you treat increased wage earnings as the only source of life-long benefits to deworming, as the GiveWell spreadsheet does, and if SCI’s work is predominantly in rural areas like the Busia district (I don’t know if this is true), then the external validity adjustment from this factor alone should probably be about 50% (GiveWell’s spreadsheet does not consider this factor).
+If you also include increased profits from the self-employed, then it’s a little trickier. Heintz (
+Table 10.1, p203
+) gives the self-employed non-agricultural share in Kenya as about 16%, as compared with about 20% for the same sample of sub-Saharan African countries used by Gindling and Newhouse. Again assuming that SCI works predominantly in areas like the Busia district, then we can scale up the 10% of self-employed non-agricultural workers to about 12.5%, and scale down the 16.6% of wage earners to around 8%. My overall adjustment is therefore (0.08*0.29 + 0.123*0.19)/(0.166*0.29 + 0.1*0.19) = 70%.
+The second reason for an external validity adjustment is the high prevalences of helminth infections in the region covered by the study. At baseline, the prevalence of hookworm infection was 77%, A. lumbricoides 42%, and T. Trichiura 55% (
+Miguel and Kremer
+, Table II). By comparison, the sub-Saharan Africa prevalences are (roughly!) 23%, 23%, and 19% respectively (
+Bundy et al.
+, where I’ve taken the infections for the 5-14 age groups in Tables 9.5b to 9.7b and normalized them by the SSA/Total infections ratio in Tables 9.5a to 9.7a).
+Furthermore, heavy flooding in 1998 caused very high prevalences of moderate-heavy infection amongst students who hadn’t received deworming treatment when these values were measured in early 1999 (Miguel and Kremer, Table V). These students are from group 2 and group 3 schools – half of them ended up in Baird et al.’s treatment group, and half in the control. If they had all ended up in the control, then we would expect the results to substantially over-estimate the benefits of deworming (remembering that this is relative to an already high baseline prevalence); instead they likely still over-estimate them, but not by as much.
+It is generally assumed that very low worm burdens don’t cause any problems – only people with worm burdens above some threshold are at risk. I haven’t tried to model the proportion of 5-14’s across sub-Saharan Africa above the various thresholds used. The more thought I’ve put into this point, the more uncertain I’ve become on the appropriate external validity adjustment to use here.
+I haven’t looked at schistosomiasis prevalences.
+GiveWell’s staff all use a value of 30.25%, derived from using an odds ratio of moderate-heavy infections between the 1999 treated and 1999 not-treated groups, with the latter figure adjusted upwards so that it is the moderate-heavy prevalence that would have existed in the absence of any treatment (there are spillover benefits to deworming). I find this problematic on three levels. Firstly, using an odds ratio suggests to the casual reader that there is some respectable mathematical model that implies that an odds ratio is the appropriate adjustment; perhaps some model exists, but really this adjustment should be considered a guess. Secondly, I don’t think it’s appropriate to use estimated prevalences in the absence of any treatment: all the results from the studies are based on comparing a treatment to a control, so if an adjustment is to be made based on prevalence levels, then it should be made on the prevalence levels that were actually experienced. Thirdly, GiveWell’s external validity really only attempts to make the results external in time to the same district in Kenya. It would be better to incorporate the knowledge that the helminth infections were particularly high relative to the rest of sub-Saharan Africa, even at baseline. On the other hand, SCI targets to some extent regions where worm infections are high, somewhat mitigating this last factor.
+At the time of writing, I’m unable to come up with anything better than a wild guess for this factor. Moderate-heavy infection prevalences may be substantially higher in the Busia district than in other regions where there will be deworming programs, but they may not be (and I’ve also come across some much higher prevalence estimates than those I linked to above). I don’t know how long the flood-induced very high prevalences in the study persisted for. I don’t even know what effect to expect when the worm burdens change; I tried
+modeling that recently
+, but a) my conclusion then was that I could only guess, and b) further reflections since writing that post have led me to think that some of its assumptions are not valid anyway. So, in light of all that, I wouldn’t argue strongly against any vaguely reasonable adjustment factor; I’ve gone with 30%, but honestly I could be persuaded to much smaller or much larger values.
+Combining the 30% just guessed at with the 70% from earlier (50% if you only consider wage earners) gives an overall external validity factor of 21% (15% if you only consider wage earners).
+For the cash transfer calculation, there are also some inputs needed on the size of the transfers and the average income per person.
+With all of those values decided on, it’s relatively straightforward to churn through the math to get the estimate of the total discounted benefits per dollar. The GiveWell spreadsheet assumes that the benefits are proportional to the log of the increases; that seems debatable but reasonable enough, and my quick check suggests that using proportions directly doesn’t make much of a difference.
+The last component needed to complete the deworming calculation is the short-term health benefits. We can get the DALYs averted per person from the 2011 spreadsheet discussed in the “DCP2-style calculation” section above. With my preferred inputs to that calculation, the result is 0.0019 DALYs averted per person treated. Now the question is, how much should I value that quantity in dollar terms? This is again a question which will result in much reasonable disagreement between different people. The way I figure it, the value of a statistical life in high-income countries is measured in the millions of dollars; call it 90 times the average income. I will therefore value statistical lives in low-income countries at about 90 times the average income. An actual life saved by malaria bednets gives the child, on average, about another 50 years of life; 50 years discounted gives something like 30 years; a DALY is therefore worth something like 90/30 = 3 times an average income. Maybe since the marginal utility of extra consumption is higher for those on low incomes, I should reduce that 3 down to something lower. Keeping it at 3, though, the short-term health benefits equate to 3*0.0019 = 0.57%, similar to the GiveWell staff’s 0.51%.
+Putting it all together, inputting my best guesses (well, often they’re just guesses) into the spreadsheet, it tells me that a dollar spent on deworming leads to a 1.67% proportional increase in consumption, and that a dollar spent on cash transfers leads to a 0.96% proportional increase in consumption. Compared to the GiveWell staff, I’m roughly in the middle of their estimates for the benefits of deworming, and on the high end for cash transfers (only Alexander, who assumes a 54% ROI, has the benefits of cash higher than me), the latter largely due to me using a lower discount rate. My inputs make deworming only 1.7 times as cost-effective as cash – substantially closer to parity than the figures of 2.3 to 4.2 from the GiveWell staff.
+My spreadsheet with my inputs is on Google Docs
+here
+.
+The remaining question is a comparison to bednets. I’ll ignore what’s in the spreadsheet here and do a quick conversion: I said earlier that I value a statistical life at about 90 times income (those who would prefer a different multiplier here can adjust accordingly). Deworming with my inputs gives an increase of a factor of 0.0167 times income; that implies about $5400 for a benefit equivalent to a life saved, about twice what it costs to save a statistical life with bednets, and that ignores any (speculative) subtle developmental effects that bednets may have. For cash transfers with my inputs, it costs a bit under $10,000 to achieve benefits equivalent to a life saved.
+Conclusions
+There really are lots of guesses involved with these sorts of “estimates”. GiveWell have written in the past about not putting as much emphasis on these estimates as some of us might want; having now worked through the deworming example, I can see where GiveWell are coming from.
+While I have plenty of disagreements with the GiveWell staff’s assumptions, and some of those disagreements I would consider more than a mere difference of opinion, altogether I don’t think our biases are systematically different. My preferred inputs to the estimates give comparable results to theirs – the disagreements going in both directions happen to roughly cancel out in this case.
+It’s not
+always
+going to be the case that I (or someone else) will find a series of disagreements that lead to only minor change overall. It’s quite plausible that on another calculation, I would end up estimating the cost-effectiveness to be off by a factor of 2 or more.
+I could well be persuaded in the near future that my own estimates are off by a factor of 5, in either direction.
+Because of all the guesses, I don’t think it’s particularly useful to come up with confidence intervals on the overall cost-effectiveness estimates – it would be a false precision about the uncertainty involved. Having said that, extrapolating deworming benefits from one study is going to give particularly uncertain results, and in other cases it may be of interest to generate formal-ish confidence intervals.
+As a donor, this exercise has made me much more favorable to donating to GiveDirectly. The benefits of cash transfers are pretty big – in fact I think GiveWell have understated these benefits because they use too high a discount rate – and comparable with many health interventions. Whereas before I was thinking of an 80/20 split between AMF and SCI, now I think I’ll go 80/10/10.
+Posted in
+Against Malaria Foundation
+,
+GiveDirectly
+,
+Guest posts from donors
+,
+Schistosomiasis Control Initiative
+,
+Top charities
+|
+Permalink
+|
+7 Comments
+Previous Post
+Next Post
+Comments
+Carl Shulman
+on
+January 23, 2013 at 4:19 pm
+said:
+“John Ioannidis estimates that about half of the results in the medical literature are unable to be replicated, because of publication bias, and some researchers hunting around for techniques that give a statistically significant result, and so on.”
+The replication rates are much better for randomized trials, and especially large ones, than other studies.
+http://www.ncbi.nlm.nih.gov/pubmed/16014596
+Lee
+on
+January 25, 2013 at 4:15 am
+said:
+Social discount rates tend to be higher in developing countries. For example, DFID Rwanda use 10% for project appraisals.
+Colin Rust
+on
+January 28, 2013 at 9:55 pm
+said:
+David writes:
+All the GiveWell staff go with 5% here, which I think is much too high a rate. I think that this value should be the social discount rate, which essentially tells us how much we value the welfare of people today relative to the welfare of people in the future, though it can also be used to describe our uncertainty about the effects of policies today on the future – such an uncertainty will usually get larger the further into the future you estimate. There are good arguments that the social discount rate should be zero (i.e., that we should value future welfare equal to present welfare) or some small number to account for future uncertainty.
+It makes sense to me that the main or even sole reason for the social discount rate is to capture future uncertainty. But still it’s far from clear to me that 5% is too high a number.
+If you have a low discount rate that is low compared to expected investment returns (say long term expected equity returns) and the need for charitable donations is modeled as relatively static, wouldn’t that mean that donating now would be dominated by waiting indefinitely long and donating in the future? It sounds like a sort of Zeno’s paradox of charity at low discount rates in which you never actually donate.
+NIKHITA
+on
+January 30, 2013 at 1:26 am
+said:
+Good educatative article on deworming costeffectiveness.
+Nikhita
+Seruds India NGO
+Serudsindia.org
+Sally Murray
+on
+January 30, 2013 at 8:41 am
+said:
+This is great, thank you for it!
+Do you (and GiveWell) not think there’s a greater problem of fungibility in the case of deworming than cash transfers? It seems unlikely that if GiveDirectly weren’t operating, developing country government would make up for the fact by giving people that income- so with GiveDirectly we’re probably not just freeing up funds for the government to spend on its marginal projects.
+I’m less sure that developing countries wouldn’t do their own deworming in the absence of external assistance from SCI, the WHO, etc. Compared to other things poor governments do spend on, school-based MDA seems to offer higher returns to health, educational, and economic outcomes, and it reduces a governments other health costs… Why wouldn’t they do it? Except for the reason that by NOT doing it, they are able to recruit others to do it? Do you think something else would hold them back? (Something less challenging to SCI’s model)?
+I know that before SCI began their programs, developing country governments were doing little to tackle NTDs; but didn’t SCI’s beginning also coincide with something of an explosion in awareness of NTDs and the cost-effectiveness of their treatment? Might that be the main reason their involvement correlates with effective action to control NTDs?
+Ian Turner
+on
+January 31, 2013 at 8:56 pm
+said:
+Colin: Don’t forget that choosing to invest the money will affect future returns on investments. You can’t actually reinvest your dividends arbitrarily far into the future, because eventually there will be no new investment opportunities to purchase which remain under the rate. So it really depends on the savings-vs-spending decisions of financial market participants as a whole.
+Also, keep in mind that when you are comparing to Kenyan government debt, you have to consider the possibility of a default, which would bring down your expected return below the coupon rate. Moody’s rates Kenya’s sovereign debt as “speculative”, meaning there is a significant chance of default.
+Alexander
+on
+February 6, 2013 at 2:08 pm
+said:
+Carl: We had seen that study as well, but we’re not sure how strong of a parallel it offers. We think that cluster randomized studies done in developing world contexts without placebos are likely to be quite different from placebo-controlled medical efficacy trials in the developed world. Additionally, the population of highly cited medical studies that Ioannidis uses in that paper seems likely to be unrepresentative in other ways.
+David, Lee, Colin, Ian: Thanks for the comments about discount rates. We still believe what Holden wrote in his initial post justifying the 5% discount rate. I’m particularly moved by the concern that without a discount rate, the “invest now and donate indefinitely later” option that Colin points to appears to dominate.
+Sally: Thanks for the comments/questions. I think it’s very difficult to know how fungible contributions are in practice, but I agree that it’s more likely to be the case with SCI than with GiveDirectly. (Note we discuss this worry in
+our review of SCI
+.) I’m less convinced that SCI’s successes may have been due to the overall increase in attention paid to NTDs; although it’s a conceptual possibility, I think the evidence
+described in our review
+offers a fairly compelling–if not ironclad–picture of SCI playing a causal role.
+Comments are closed.
+facebook
+twitter
+print
+email
+Recent Blog Posts
+Want to stay updated on GiveWell's research? Read our blog or follow us by
+email
+,
+Facebook
+,
+Twitter
+, 
+        or
+RSS
+.
+June 2023 open thread
+Why GiveWell funded the rollout of the malaria vaccine
+How much funding does GiveWell expect to raise through 2025?
+March 2023 open thread
+Staff members’ personal donations for giving season 2022
+The winners of the Change Our Mind Contest—and some reflections
+December 2022 open thread
+Our recommendations for giving in 2022
+Answering some questions about water quality programs
+September 2022 open thread
+Follow us:
+Recent Comments
+Connie @ Naturesblendshop commented on
+Why GiveWell funded the rollout of the malaria vaccine
+Miranda Kaplan commented on
+June 2023 open thread
+Miranda Kaplan commented on
+June 2023 open thread
+Miranda Kaplan commented on
+June 2023 open thread
+Henry Howard commented on
+June 2023 open thread
+Henry Howard commented on
+June 2023 open thread
+Brian Valerie commented on
+June 2023 open thread
+luke commented on
+March 2023 open thread
+luke commented on
+March 2023 open thread
+Miranda Kaplan commented on
+March 2023 open thread
+Full archive
+All posts
+Archives
+2023
+June
+May
+April
+March
+2022
+December
+November
+October
+September
+August
+July
+June
+April
+March
+January
+2021
+December
+November
+October
+September
+June
+May
+April
+March
+January
+2020
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2019
+December
+November
+October
+September
+August
+July
+June
+May
+March
+February
+2018
+December
+November
+October
+September
+August
+June
+May
+April
+March
+February
+January
+2017
+December
+November
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2016
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2015
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2014
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2013
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2012
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2011
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2010
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2009
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2008
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2007
+December
+November
+October
+September
+August
+July
+June
+May
+April
+March
+February
+January
+2006
+December
+Recent Blog Posts
+Recent Comments
+Archives
+Home
+Contact
+Stay Updated
+FAQ
+For Charities
+Site Map
+Privacy Policy
+Follow Us:
+Facebook
+Twitter
+RSS
+Subscribe to email updates:
+GiveWell, aka The Clear Fund (a tax-exempt 501(c)(3) public charity). This work is licensed under a Creative Commons
+Attribution-Noncommercial-Share
+alike 3.0 United States License

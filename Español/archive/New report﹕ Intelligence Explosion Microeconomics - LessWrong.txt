@@ -1,0 +1,336 @@
+Despegue de la IAExplosión de inteligenciaArtículos académicos
+IA
+Resumen de portada: Microeconomía de la explosión de inteligencia (pdf) tiene 40,000 palabras y da algunos primeros pasos hacia el problema cuantitativo clave de la explosión de inteligencia, los "rendimientos reinvertibles de las inversiones cognitivas": qué tipo de rendimientos se pueden obtener de una inversión en cognición, si se puede reinvertir para volverse aún más inteligente, y si este proceso se extingue o se dispara. Puede verse como el sucesor compacto y, esperablemente, más coherente del Debate FOOM sobre la IA de hace unos años. (Una idea de muestra que quizá no haya oído antes: el aumento del tamaño del cerebro de los homínidos a lo largo del tiempo evolutivo debe interpretarse como evidencia de un aumento de los rendimientos marginales de la aptitud respecto al tamaño del cerebro, presumiblemente debido a mejores algoritmos de cableado cerebral, y no como evidencia directa de un factor de escala de la inteligencia a partir del tamaño del cerebro.) Espero que los problemas abiertos planteados en el documento inspiren más trabajo de economistas o de modeladores con formación económica, interesados específicamente en la explosión de inteligencia en cuanto inteligencia cognitiva, y no en la "aceleración tecnológica" no cognitiva. MIRI tiene una lista de correo pequeña y técnica para este tipo de discusión. Por si no queda claro por el contexto, yo (Yudkowsky) soy el autor del artículo. Resumen: I. J. Good sostiene, en su tesis de la "explosión de inteligencia", que una máquina de inteligencia suficientemente avanzada podría construir una versión más inteligente de sí misma, que a su vez podría construir una versión aún más inteligente, y que este proceso podría continuar lo suficiente como para superar con creces la inteligencia humana. Como señala correctamente Sandberg (2010), se han hecho varios intentos de formular fórmulas de retorno de la inversión destinadas a representar aceleraciones bruscas del crecimiento económico o tecnológico, pero se ha hecho muy poco para tratar formalmente la tesis de la explosión de inteligencia de I. J. Good como tal. Identifico el problema clave como los rendimientos de la reinversión cognitiva: la capacidad de invertir más potencia de cómputo, computadoras más rápidas o algoritmos cognitivos mejorados para obtener trabajo cognitivo que produzca cerebros más grandes, cerebros más rápidos o mejores diseños mentales. Hay muchos fenómenos del mundo que se han argumentado como evidencia relevante para esta cuestión, desde el curso observado de la evolución de los homínidos hasta la Ley de Moore, pasando por la competencia a lo largo del tiempo de los sistemas de ajedrez por computadora, y muchos más. Entro con cierta profundidad en el tipo de debates que luego
+Nuevo informe: Microeconomía de la explosión de inteligenciaResumen:Esquema del contenido:246 comentarios72
+surgen sobre cómo interpretar tal evidencia. Propongo que el siguiente paso en el análisis de las posturas sobre la explosión de inteligencia sería formalizar curvas de retorno de la inversión, de modo que cada postura pueda indicar formalmente qué microfundamentos considera refutados por las observaciones históricas ya hechas. De forma más general, planteo múltiples preguntas abiertas sobre los "rendimientos de la reinversión cognitiva" o la "microeconomía de la explosión de inteligencia". Aunque estas preguntas han recibido poca atención hasta ahora, parecen muy relevantes para las decisiones de política que afectan a los resultados para la vida inteligente de origen terrestre. La lista de correo dedicada será pequeña y estará restringida a participantes técnicos. Este tema estaba pensado originalmente como una secuencia de Open Problems in Friendly AI, pero el trabajo posterior produjo algo tan condensado que ya no podía dividirse fácilmente en subpublicaciones. Esquema del contenido: 1: Presenta las preguntas básicas y la cuestión cuantitativa clave de los rendimientos reinvertibles sostenidos de las inversiones cognitivas. 2: Analiza el lenguaje básico para hablar de la explosión de inteligencia, y sostiene que deberíamos seguir este proyecto buscando microfundamentos subyacentes, en lugar de perseguir analogías con eventos históricos supuestamente similares. 3: Detalla lo que considero los principales argumentos a favor de una explosión de inteligencia rápida, que constituyen la mayor parte del artículo, con las siguientes subsecciones: 3.1: Qué nos dice realmente el registro fósil sobre los rendimientos del tamaño del cerebro, dado que la mayor parte de la diferencia entre Homo sapiens y Australopithecus probablemente fue un software mejorado. 3.2: Cómo repartir el mérito de la brecha de rendimiento entre humanos y chimpancés, entre "los humanos son individualmente más inteligentes que los chimpancés" y "la transición homínida implicó una ganancia cualitativa única derivada de poder acumular conocimiento". 3.3: Cómo contrastan los rendimientos de la velocidad (profundidad causal serial) con los rendimientos del paralelismo; cómo el pensamiento más rápido parece contrastar con el pensar más. Si las tecnologías de detección y manipulación probablemente presentarán un cuello de botella para los pensadores más rápidos, o qué tan grande sería ese cuello de botella. 3.4: Cómo parecen escalar las poblaciones humanas en poder de resolución de problemas; algunas razones para creer que escalamos de forma tan ineficiente que resulta desconcertante. La partida de ajedrez de Garry Kasparov contra The World, que Kasparov ganó. 3.5: Algunas ineficiencias que podrían acumularse en una estimación de la eficiencia computacional neta de la humanidad en un problema cognitivo. 3.6: Qué nos dice realmente el registro antropológico sobre los rendimientos cognitivos de la presión de selección acumulativa, dado que las presiones de selección probablemente aumentaron a lo largo de la historia homínida. Cómo se esperaría que la historia observada se viera diferente si, de hecho, hubiera rendimientos decrecientes en la cognición.
+3.7: Cómo relacionar las curvas de dificultad evolutiva, de dificultad de ingeniería humana y de dificultad de ingeniería de IA, considerando que casi con certeza son distintas. 3.8: Corrección del sesgo antrópico al intentar estimar la dificultad intrínseca de la inteligencia de nivel homínido solo a partir de observar que la inteligencia evolucionó aquí, en la Tierra. 3.9: La cuestión de si cabe esperar un FOOM "local" (de un solo proyecto) o un FOOM "global" (de toda la economía), y cómo interactúan con ello los rendimientos de la reinversión cognitiva. 3.10: La gran incertidumbre abierta sobre las condiciones mínimas para iniciar un FOOM; por qué el postulado de I. J. Good de partir de una "ultrainteligencia" es probablemente demasiado fuerte (suficiente, pero muy por encima de lo necesario). 3.11: La mayor probabilidad de incógnitas desconocidas en el escenario, ya que una inteligencia superior a la humana buscará y explotará selectivamente fallas o vacíos en nuestro conocimiento actual. 4: Una metodología tentativa para formalizar teorías de la explosión de inteligencia: un proyecto para formalizar posibles microfundamentos y declarar explícitamente su supuesta relación con la experiencia histórica, de modo que algunas posibilidades puedan, supuestamente, ser refutadas. 5: Qué subpreguntas abiertas parecen a la vez de gran valor y posiblemente respondibles. 6: Plantea formalmente el problema abierto y menciona qué se requeriría para que MIRI financiara directamente más trabajo en este campo. Despegue de la IA13Explosión de inteligencia3Artículos académicos2
+IA2
+PortadaMencionado en3838
+246 comentarios, ordenados por puntuación más altaAlgunos comentarios están truncados por el gran volumen. (⌘F para expandir todos)Cambiar configuración de truncamientoRolfAndreassen33
+[-]
+De acuerdo con varias otras personas en que la introducción necesita una reescritura profunda o quizá simplemente un recorte. Considere la frase inicial: Isadore Jacob Gudak, quien anglicanizó su nombre como Irving John Good y usó I. J. Good para publicar. Amigo, no. ¿A quién le importa cómo anglicanizó su nombre? Vaya al grano, si es que tiene alguno. De forma algo parecida, en el cuarto párrafo, usted tiene "Tenga en cuenta que..." Desafío de donación de contrapartida de verano 2013 de MIRI Progreso algorítmico en seis dominios
+hace 10 años 
+gjm29
+mwengler27Tenga en cuenta que la frase "tenga en cuenta que" es innecesaria; alarga la oración y da la impresión de que usted corrige con altanería el comentario de un blog, sin añadir información (ni cortesía) a la frase. Conozco su argumento de que la escritura formal solo añade una sensación de autoridad, pero esto no es informalidad, es edición descuidada. Toda su primera página, en realidad, es una buena muestra de no tener un punto. Me da la impresión de que pensó: "Hmm, necesito algún tipo de introducción" y se fue a hablar de algo, cualquier cosa, que no fuera el verdadero punto del artículo, porque el punto pertenece al cuerpo y no a la introducción. Esto produce una página que no aporta nada. Usted tiene una introducción mucho mejor que empieza con el párrafo... (leer más)
+-10Kawoomba hace 10 años
+[-]
+Observaciones estilísticas superficiales (como verá, solo he mirado cerca de la primera cuarta parte del artículo): El artículo usa repetidamente la palabra "agencia" donde "agente" parecería más apropiado. Estoy de acuerdo con paper-machine en que la minibiografía de I. J. Good tiene poco valor aquí. La observación de la sección 1 sobre que MIRI depende de financiación limitada está fuera de lugar y suena a queja o a súplica de más dinero. Simplemente elimínela. "albeit" en la página 10, poco antes de la nota 8, debería ser solo "but". (O quizá "even though", si ese es su significado.) [EDITADO para añadir: hay otro "albeit" que me suena raro, en la nota 66 de la página 50. No está mal, pero resulta extraño. En términos generales, donde se puede escribir correctamente "albeit" se puede escribir de forma equivalente "even though", y eso es curioso para empezar una nota al pie.] "criteria" en la nota 11, sobre los maximizadores de clips, debería ser "criterion". En la nota 15 (sobre "g") la palabra "entrants" parece elegida de forma muy extraña, y la nota parece definir g como la correlación observada entre distintas medidas de inteligencia, lo cual... (leer más)
+Eliezer Yudkowsky12
+[-]
+Estoy de acuerdo con paper-machine en que la minibiografía de I. J. Good tiene poco valor aquí. Hecho. La observación de la sección 1 sobre que MIRI depende de financiación limitada está fuera de lugar y suena a queja o a súplica de más dinero. Simplemente elimínela. Hecho.
+[-]
+Una idea sobre el ajedrez. En lugar de mirar un caso extremo como Kasparov contra el mundo, me parecería interesante tener equipos de dos, tres y cuatro jugadores con una clasificación individual conocida. Estos equipos podrían jugar muchas partidas contra individuos y entre sí. La clasificación efectiva de los equipos podría determinarse a partir de sus resultados. De este modo, podría determinarse algún sentido de "cuánto más inteligente" es un equipo que sus miembros individuales. Idealmente, el equipo no se clasificaría hasta haber tenido experiencia significativa jugando como equipo. Nos interesa lo que un equipo podría lograr, y no hay una razón fuerte para pensar que optimizar un equipo llevaría menos tiempo que optimizar a un individuo. En la misma línea, podrían desarrollarse equipos que hicieran pruebas de CI y otras pruebas correlacionadas con la IG para ver cuánto más inteligentes son unas pocas personas juntas que un solo humano. ¿Tendrían los resultados implicaciones para el diseño óptimo de la IA?
+9Eliezer Yudkowsky hace 10 años Creo que los equipos de hasta cinco personas pueden escalar "bastante bien según los estándares humanos…
+7ThrustVectoring hace 10 años A medida que aumenta el tamaño del grupo, tienes que dedicar cada vez más esfuerzo a conseguir…
+DanArmak17
+[-]
+hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+shminux26
+Qiaochu_Yuan24
+Usted describe correctamente los problemas de coordinar la selección del mejor resultado producido. Pero hay otro gran problema: coordinar la división del trabajo. Cuando se añade otro jugador a un equipo enorme de 5000 personas, él no empezará a explorar una serie de jugadas completamente nueva que nadie hubiera considerado antes. En cambio, probablemente pasará la mayor parte de su tiempo considerando jugadas que ya han considerado algunos de los jugadores existentes. Esa es otra razón por la que su contribución marginal será tan baja. A diferencia de los humanos, las computadoras son buenas para manejar problemas de divide y vencerás. En el ajedrez, gran parte de la búsqueda de la siguiente jugada es local en el árbol de jugadas. Por eso es un ejemplo particularmente bueno de cómo los grupos humanos no escalan, mientras que las computadoras sí lo harían. 6timtyler hace 10 años Eso es el paralelismo en acción. Es como cuando los chips de cuatro núcleos son populares, mientras que millo… 3joshuabecker hace 4 años Supongo que con "lineal" se refiere a directamente proporcional al tamaño de la población. Los rendimientos decrecientes…
+3joshuabecker hace 4 años Sobre los aparentes beneficios no escalables de la historia: lo que usted llama "la mayoría ch…3mwengler hace 10 años ¿Está usted o alguien más al tanto de algún trabajo en esta línea que muestre la inteligencia …
+9CarlShulman hace 10 años Existe el MIT Center for Collective Intelligence [http://cci.mit.edu/].
+9joshuabecker hace 4 años Actualización: hoy es un campo de investigación bastante grande. El Collective Intelligence …3ThrustVectoring hace 10 años En cuanto a encontrar empíricamente el tamaño óptimo del grupo, sería más barato encontrar el n…0rhollerith_dot_com hace 10 años ¿Alguien juega ajedrez con clasificación en freechess.org? Si es así, ¿quiere llegar a…
+[-]
+Después de revisar el documento de nuevo, creo que un redactor técnico competente, o cualquiera con experiencia en escribir artículos, puede convertir este informe en un artículo apto para enviar en un par de días, quizá una semana, suponiendo que MIRI quiera publicarlo. Habría que recortar mucho, y reorganizar y pulir el resto, pero hay sustancia más que suficiente para uno o dos artículos de calidad. No estoy seguro de cuál es la intención de MIRI con este informe, aparte de "esperar que los problemas abiertos planteados en él inspiren más trabajo de economistas o modeladores con formación económica".
+[-]
+Página 4: la suma log(w) + log(log(w)) + ... no converge. Algún logaritmo será negativo y luego el siguiente no estará definido. Presumiblemente quería detener la suma en cuanto se vuelva negativa, pero entonces me confunde un poco este argumento, porque no estoy seguro de que sea dimensionalmente consistente (no sé en qué unidades se mide el trabajo cognitivo). Al inicio de la página 18 hay una referencia a "este gráfico", pero no hay ningún gráfico...? Comentario general 1: ¿cuál es el público previsto aquí? La mayor parte del artículo se lee como una entrada de blog, lo cual imagino que puede desconcertar a los recién llegados que intentan evaluar si deben prestar atención a MIRI y esperan un artículo de investigación típico en un .pdf de aspecto elegante. Comentario general 2: sigo pensando que esta discusión necesita más complejidad computacional. Lo mencioné antes y no llegué a digerir bien su respuesta. La pregunta sobre lo que se puede y no se puede hacer con una cantidad dada de recursos computacionales parece muy relevante para entender cómo podría ser la explosión de inteligencia; en particular, me sorprendería que preguntas como P frente a NP no tuvieran una fuerte influencia en la distribución de los plazos (espero que cuanto más rápido sea posible resolver problemas NP-completos, lo cual aparentemente incluye el plegamiento de proteínas, más rápido podría la IA hacer FOOM). Pero no soy experto en este campo y podría estar equivocado por varias razones.
+4lukeprog hace 10 años Si mal no recuerdo, Daniel Dewey dijo en el taller de abril que este es, de hecho, su proyecto actual.2gjm hace 10 años La referencia a "este gráfico" es un hipervínculo. Hay muchos hipervínculos de este tipo en el documento. …-1Eliezer Yudkowsky hace 10 años El plegamiento de proteínas no puede ser NP-difícil. No se sabe que el universo físico esté …
+Kindly28
+[-]
+hace 10 años 
+hace 10 años 
+hace 10 años 
+El universo físico no necesita "resolver" el plegamiento de proteínas en el sentido de tener un algoritmo de tiempo polinomial en el peor caso. Solo necesita plegar proteínas. Muchos problemas NP-completos son "en su mayoría fáciles", con unas pocas instancias difíciles que rara vez aparecen. (De hecho, es difícil encontrar un problema NP-completo para el que las instancias aleatorias sean difíciles: si pudiéramos hacerlo, lo usaríamos para criptografía.) Es razonable suponer que el plegamiento de proteínas es así. Por supuesto, si este fuera el caso, quizá la IA tampoco se preocupe por las raras instancias difíciles del plegamiento de proteínas.
+1Gurkenglas hace 4 años Si tenemos un problema NP-completo para el que las instancias aleatorias son difíciles, pero podemos c…7EHeller hace 10 años Las proteínas tienen longitud finita. ¿Por qué le importaría a la naturaleza si no puede hacer algo en tiempo polinomial…
+CellBioGuy12
+Qiaochu_Yuan12
+[-]
+¿Podemos poner un límite superior a la longitud de las proteínas usando escalas de tiempo evolutivas? No realmente: la mayoría de las proteínas grandes constan de "dominios" que se pliegan bastante independientemente unos de otros (aunque las proteínas más pequeñas pueden variar bastante). La titina es una proteína de unos 30,000 aminoácidos en el músculo humano, con unas 500 repeticiones de los mismos 3 módulos básicos dispuestos en fila... a lo largo del tiempo evolutivo se pueden reordenar estas unidades funcionales y formar todo tipo de combinaciones interesantes. De hecho, el laboratorio en el que trabajo tuvo recientemente un problema con esto. Optimizamos un gen para que un ribosoma lo leyera extremadamente rápido, manteniendo exactamente la misma secuencia de proteína (manipulando codones sinónimos). Pero resultó que, cuando la molécula de proteína real sale del ribosoma tan rápido como la habíamos inducido a hacerlo, el plegamiento independiente normal de los dominios sucesivos se alteró: un dominio no se plegaba por completo antes de que empezara a salir el siguiente, interactuaban, y la proteína se plegó totalmente mal y no funcionó, a pesar de tener exactamente la misma secuencia que la proteína silvestre.
+[-]
+Creo que el punto más importante es que la naturaleza no se preocupa por el peor caso (si una proteína tarda una eternidad en plegarse correctamente, no servirá de nada). Pero una IA que intente diseñar proteínas arbitrarias plausiblemente sí.
+6Eliezer Yudkowsky hace 10 años ¿Por qué? La naturaleza diseñó ribosomas sin resolver ningún caso difícil de NP-…
+7[anonymous] hace 10 años ¿En serio? Casi cualquier problema de interés (ajedrez, ingeniería, etc.) es N…
+Eliezer Yudkowsky18
+[-]
+En el peor caso, el plegamiento de proteínas podría ser un hash seguro. Entonces sería más difícil, de hecho imposible, llegar a proteínas ligeramente mejores mediante mutaciones puntuales. Una mutación puntual en una cadena produce un hash seguro completamente distinto de esa cadena. Esto no es un reparo menor; es una razón importante para decir "¡¿Qué?!" ante la idea de que el plegamiento de proteínas y el diseño de proteínas tienen espacios de búsqueda intratables en la práctica. Tienen espacios de búsqueda muy regulares en la práctica, o la evolución no podría recorrer ese espacio en absoluto.
+[anonymous]10
+[-]
+Esto no es un reparo menor; es una razón importante para decir "¡¿Qué?!" ante la idea de que el plegamiento de proteínas y el diseño de proteínas tienen espacios de búsqueda intratables en la práctica. Tienen espacios de búsqueda muy regulares en la práctica, o la evolución no podría recorrer ese espacio en absoluto. Sí, es muy improbable que un proceso natural no diseñado resulte ser casualmente un hash seguro (como sabe por sus discusiones con escépticos de la criónica). Y eso antes de mirar cómo funciona la evolución. Buen punto. El espacio de búsqueda es al menos suave una de cada unos pocos miles de intentos. (Mientras hacía la estimación de Fermi cercana, vi un resultado según el cual el 12% (!!!) de las mutaciones puntuales en algunas bacterias eran beneficiosas.) Dicho esto, el "peor caso posible" suele ser interesante. hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+6DanArmak hace 10 años ¿No se debe eso en gran parte a un efecto de selección? Después de décadas teniendo computadoras, la mayoría…5[anonymous] hace 10 años ¡Vamos! De Wik: Hojeé el artículo [https://www.ncbi.nlm.nih.gov/pmc/a…
+3[anonymous] hace 10 años Tenga en cuenta que, según estas estimaciones, los humanos deberían poder tener nano alrededor…5Qiaochu_Yuan hace 10 años Siento cierta distancia inferencial aquí que no se está salvando con éxito.…
+3Eliezer Yudkowsky hace 10 años Supongo que, para mí, la noción de "resolver un problema NP-difícil" (para N grande a…
+2Kindly hace 10 años De acuerdo, si quiere decir "Nada de lo que ha ocurrido hasta ahora podría haber sido [computacionalmente…6Vaniver hace 10 años Aquí tiene [http://online.liebertpub.com/doi/abs/10.1089/cmb.1998.5.27] un artículo que afirma que…
+zslastman22
+[-]
+El espacio de soluciones es tan grande que incluso las proteínas que muestrean sus puntos a un ritmo de billones por segundo no podrían plegarse realmente si buscaran al azar entre todas las configuraciones posibles; eso sería NP-completo. Por supuesto, no hacen eso. En cambio, se pliegan pieza por pieza a medida que se producen, con interacciones locales que forman dominios que tienden a conservar su estructura aproximada una vez que se unen para formar una proteína completa. Por tanto, no alcanzan el estado de menor energía posible. Las enfermedades priónicas son un ejemplo de lo que puede pasar cuando las proteínas entran en un mínimo de energía local normalmente inaccesible, que en ese caso tiene un efecto de bola de nieve sobre otras proteínas. El resultado es que siguen los surcos del paisaje energético hacia un pozo de energía lo bastante robusto como para soportar todo tipo de variaciones, incluidas las terribles imprecisiones de nuestros intentos de modelado. Nuestras funciones de energía son solo aproximaciones muy burdas de la real, que depende de efectos a nivel cuántico y por eso es intratable. Otro problema es que las proteínas no se pliegan aisladas: interactúan con chaperonas y toda clase de otras cosas. Así que simu... (leer más)
+7Vaniver hace 10 años Exacto, esto se llama la paradoja de Levinthal [http://en.wikipedia.org/wiki/Levinthal%27…
+7zslastman hace 10 años Exacto. En realidad no estoy seguro de qué tan relevante es todo esto para las discusiones sobre una IA que intenta …8Eliezer Yudkowsky hace 10 años Creo haber visto que se ha discutido antes y la respuesta es simplemente que en la vida real li…
+7Vaniver hace 10 años Entonces, puedo pensar en varias cosas distintas que podrían ser todas el "problema del plegamiento de proteínas"…
+1Eliezer Yudkowsky hace 10 años Nada que haya ocurrido físicamente en la Tierra en la vida real, como las proteí…
+Tyrrell_McAllister29
+[-]
+Nada que haya ocurrido físicamente en la Tierra en la vida real, como el plegamiento de proteínas dentro de una célula, o la evolución de nuevas enzimas, o los cerebros homínidos resolviendo problemas, o lo que sea, puede haber sido NP-difícil. Punto. He visto que lo dice un par de veces, y sus interlocutores parecen entenderle, incluso cuando discuten su conclusión. Pero mi cerebro sigue devolviendo un error cuando intento analizar su afirmación. Leída literalmente, "NP-difícil" no es un predicado que pueda aplicarse significativamente a eventos individuales. Así que, en ese sentido, trivialmente, nada de lo que ocurre (física o de otro modo, si "físicamente" hace algún trabajo aquí) puede ser NP-difícil. Pero usted evidentemente no hace una afirmación tan trivial. Entonces, ¿cómo sería que el universo físico "resolviera un problema NP-difícil"? Presumiblemente no significaría solo que algún vendedor real encontró una forma de usar las rutas aéreas existentes para visitar un conjunto de ciudades predeterminadas sin volver a visitar ninguna. Presumiblemente tampoco significaría que alguien construyó una computadora que implementa una búsqueda exhaustiva por fuerza bruta de una solución al problema del viajante de comercio para un grafo arbitrario (una búsqueda que la computadora nunca terminaría antes de la muerte térmica del universo si el ejemplo es grande). Pero no se me ocurre ninguna otra interpretación para su afirmación.
+8CarlShulman hace 10 años EDITADO: esto es un punto secundario. Aquí está Scott Aaronson [http://www.scottaaronson.…
+8EHeller hace 10 años Esto no refuta aquello a lo que usted responde. Decir que el universo no puede resolver un…-5Will_Newsome hace 10 años 5Vaniver hace 10 años Estoy de acuerdo con su error de análisis. Parece que EY se ha alejado [http://lesswrong.…hace 10 años 
+hace 10 años 
+Luke_A_Somers17
+[-]
+Eso parece expresado un poco con demasiada fuerza: los problemas NP-difíciles escalan muy mal, así que ningún proceso real puede llevar N a números grandes. Puedo resolver el problema del viajante en mi cabeza con un esfuerzo modesto si solo hay 4 paradas. Y es trivial si hay 2 o 3 paradas.
+Eliezer Yudkowsky14
+[-]
+Concedido.2CronoDAS hace 9 años Um... ¿no se necesita tiempo exponencial para simular la mecánica cuántica…
+0pengvado hace 9 años Sí (al menos ese es el consenso general entre los teóricos de la complejidad, aunque…0bogdanb hace 9 años ¿Es solo que no conocemos mejores algoritmos, o hay una demostración de que e…
+1CronoDAS hace 9 años Realmente no lo sé; cierta navegación por Wikipedia sugiere que hay una demostración, …-2asr hace 10 años No entiendo por qué cree que se necesita nueva física para resolver instancias difíciles de N…
+2wedrifid hace 10 años Eliezer ya concedió que las instancias triviales de estos problemas pueden resolverse. (…
+4Kawoomba hace 10 años Ese contraargumento es un poco demasiado general, ya que se aplica no solo a los problemas NP…2asr hace 10 años El punto no puede limitarse a las "instancias triviales". Para cualquier problema NP-completo en s…-2shminux hace 10 años Presumiblemente el suicidio cuántico es parte de "lo que sea".2Kawoomba hace 10 años Se me ocurre que realmente no podemos decirlo, ya que solo tenemos acceso al tiempo de t…
+2RichardKennaway hace 10 años Es un punto válido, pero sí presupone una física nueva y exótica para hacer t…2ESRogs hace 10 años Si suponemos que el plegamiento de proteínas se produce según las leyes de la mecánica cuántica…
+3Kawoomba hace 10 años Bueno, sí, hacia eso me inclino. Las propias leyes de la física necesitan…
+5ESRogs hace 10 años Si entiendo bien, usted dice que lo que es computable de forma eficiente dentro de un…
+2Kawoomba hace 10 años Exacto. Gracias por expresar mi punto de forma sucinta, mejor de lo que yo podría. El …1JoshuaZ hace 10 años Esto no se sigue. Puede que encontrar proteínas nuevas y útiles simplemente lleve un tiempo muy largo…
+4Eliezer Yudkowsky hace 10 años Entonces la evolución no ocurriría en la vida real. En realidad, incluso eso subestima…
+0JoshuaZ hace 10 años ¿Eh? ¿Cómo funciona este argumento? Eso no significa que la evolución no pueda ocurr…
+7CarlShulman hace 10 años Por supuesto, ya que la evolución sigue introduciendo proteínas nuevas e interesantes. Pero…
+0SilasBarta hace 10 años Espere, el hecho de que la evolución a menudo esté introduciendo proteínas nuevas e interesantes es…
+CarlShulman10
+[-]
+Invierta el escenario: si la evolución nunca produjera proteínas nuevas e interesantes (ya, después del tiempo T), ¿eso sería evidencia de que no hay más proteínas interesantes que las que produjo la evolución? Sí. Eso sería evidencia de que la oferta de proteínas interesantes se había agotado, igual que el rendimiento de las computadoras en el tres en raya y en las damas dejó de mejorar. No veo de dónde viene usted en este punto.
+0SilasBarta hace 10 años Porque la evolución no puede quedar atrapada en la cuenca de atracción de un óptimo loc…
+2CellBioGuy hace 10 años Las mutaciones puntuales no son la única forma de que surjan cosas nuevas. Usted…0JoshuaZ hace 10 años Carl no comentaba si sería una evidencia muy fuerte, sino…
+0SilasBarta hace 10 años hace 10 años hace 10 años 
+hace 10 años 
+shminux24
+7CarlShulman hace 10 años Sí, podemos tener total confianza en que hay más proteínas interesantes…
+0SilasBarta hace 10 años Eso tiene mucho más sentido. Es solo que, por el contexto, usted ve…-9Eliezer Yudkowsky hace 10 años 2David_Gerard hace 10 años Para varios valores de "resolver". Los problemas NP-difíciles pueden no ser resolubles analíticamente, …0Qiaochu_Yuan hace 10 años ¿Es esta su respuesta completa? Supongo que podría ampliar esto a "espero que todas las pr…
+0Eliezer Yudkowsky hace 10 años No pretende ser una respuesta a todo, solo señala que la estructura de las proteínas…
+-8polypubs hace 10 años
+[-]
+Algunas notas de revisión mientras la leo (a nivel de un diletante brillante°):
+Sección 1: Me pregunto si el modelo de reacción en cadena es bueno para la automejora recursiva, o si es solo el más aterrador. ¿Qué otros modelos se han investigado? Por ejemplo, el modelo de reacción en cadena de la inversión financiera daría como resultado una sola entidad con la tasa de retorno más alta dominando la Tierra; hasta donde sé, esto aún no ha ocurrido.
+Sección 1.3: Hubo hace poco un argumento aquí de David Pearce, creo, según el cual un maximizador de clips suficientemente inteligente tendrá que automodificarse para ser más "humano". Si recuerdo bien, la lógica era que, al buscar en el espacio de opciones de optimización, inevitablemente encontrará un imperativo contra el sufrimiento o algo parecido, lo que resultará inevitablemente en modificar su sistema de metas para hacerlo más compasivo, como parece estar evolucionando la humanidad. Esto restringiría la Tesis de la Ortogonalidad al primer despegue, y daría lugar a una convergencia de metas más adelante. Aunque esto parece un pensamiento ilusorio, podría valer la pena abordarlo con cierto detalle, más allá de la nota 11.
+Capítulo 2: log(n) + log(log(n)) + ... parece describir bi... (leer más)
+Eliezer Yudkowsky12
+Vaniver12
+[-]
+Por ejemplo, el modelo de reacción en cadena de la inversión financiera daría como resultado una sola entidad con la tasa de retorno más alta dominando la Tierra; hasta donde sé, esto no ha ocurrido todavía. ¿Algo así como... los humanos? ¿O como el hecho de que los prestamistas medievales ya no existen, y en cambio parece haberse impuesto en el mundo otro tipo de organización financiera? Véase también la discusión sobre China alcanzando a Australia.
+0shminux hace 10 años Buen punto sobre la dominación humana. Aunque no estoy seguro de cómo encaja en la reacción en cadena…
+[-]
+Si recuerdo bien, la lógica era que, al buscar en el espacio de opciones de optimización, inevitablemente encontrará un imperativo contra el sufrimiento o algo parecido, lo que resultará inevitablemente en modificar su sistema de metas para hacerlo más compasivo, como parece estar evolucionando la humanidad. No veo razón para suponer que el espacio de opciones de optimización contenga imperativos de valor, suponiendo que la IA esté protegida contra el equivalente de los ataques por inyección SQL. La humanidad parece estar evolucionando hacia la compasión porque los factores causales que aumentan la compasión son, en promedio, rentables para los individuos humanos que los tienen. El ejemplo más sencillo es que las fuerzas policiales estables y fuertes ejecutan de forma rutinaria a los asesinos, en lugar de que esos asesinos se beneficien de sus acciones. Si usted no hace 10 años 
+hace 10 años 
+hace 10 años 
+tiene un análogo de la policía, entonces no debería esperar el análogo de la reducción de asesinatos. (Debo señalar que me gusta mucho el enfoque de este informe; creo que intentar discutir modelos causales de forma explícita es mucho mejor que intentar hacer analogías superficiales.) Un espacio vacío para una meditación parece fuera de lugar en un artículo más o menos formal. Como mínimo, usar un salto de página en lugar de una serie de puntos suspensivos parece mejor.
+1shminux hace 10 años Solo estaba parafraseando a David Pearce; no es mi opinión, así que no tiene sentido discutir conmigo…
+5Jayson_Virissimo hace 10 años Sí, pero están perdiendo compasión por otras cosas (bebés no nacidos, dioses, etc…
+0davidpearce hace 10 años un círculo de preocupación empática en expansión no tiene por qué reflejar una ganancia neta de compasi…
+4Nornagest hace 10 años ¿Su fuente distingue entre las motivaciones para el vegetarianismo? Es plausibl…
+2davidpearce hace 10 años Nornagest, buen punto. Véase también "The Brain Functional Networks Associated to…1Jayson_Virissimo hace 10 años Exacto. Lo que debería haber dicho era:
+2davidpearce hace 10 años El crecimiento de la ciencia ha llevado a un declive del animismo. Así que, en cierto sentido, nuestra esp…
+2Eugine_Nier hace 10 años ¿Sería este el mismo Singer que sostiene que no hay nada malo con…
+3davidpearce hace 10 años Por razones utilitaristas (indirectas), podemos argumentar con firmeza que consagrar…
+2Eugine_Nier hace 10 años Si mal no recuerdo, la defensa de Singer es que es mejor matar a los bebés que tener…
+3davidpearce hace 10 años Eugine, ¿le está haciendo justicia a Peter Singer? ¿Qué motiva la postura de Singer…
+3Eugine_Nier hace 10 años Según esta lógica, la mayoría de las personas del pasado a quienes Singer y Pinker c…
+2davidpearce hace 10 años No estoy de acuerdo con Peter Singer en este punto. Así que no soy quien mejor puede defender su…
+0Eugine_Nier hace 10 años No estoy seguro de qué quiere decir con "sensible"; desde luego no impide h…
+2davidpearce hace 10 años La carne in vitro libre de crueldad podría reemplazar potencialmente la carne de todos los se…-1timtyler hace 10 años Según entiendo los argumentos habituales para legalizar el infanticidio, implica…
+-1Eugine_Nier hace 10 años Pruebe a reemplazar "infanticidio" (y "del infante") en esa frase por "matar…
+0timtyler hace 10 años Parece una pregunta tonta. Prácticamente todo el mundo descuenta las preferencias…
+0Eugine_Nier hace 10 años Bueno, lo mismo se aplica aún más fuertemente a los animales, pero la gente…
+-1timtyler hace 10 años Bueno, claro, pero las mujeres adultas también tienen preferencias, y son …
+0Eugine_Nier hace 10 años Lo mismo hacían los dueños de esclavos. En el punto en que la molestia de A justifi…
+1timtyler hace 10 años Claro. Singer tiene obviamente razón respecto al "círculo en expansión": es un verdadero…
+-3Eugine_Nier hace 10 años Um, este es precisamente el punto de desacuerdo, y dado que u…
+2timtyler hace 10 años No lo sabía. Normalmente doy esto por sentado. Algunas convencio…
+-6Eugine_Nier hace 10 años 0Will_Newsome hace 10 años Me parece realmente extraño no recordar haber visto antes esa pieza de retórica…
+1Eliezer Yudkowsky hace 10 años Ojalá pudiera votar positivamente su retractación.
+Adele_L14
+[-]
+Lo más parecido que he visto a este tipo de idea es esto:http://www.gwern.net/The%20Narrowing%20Circle
+7Jayson_Virissimo hace 10 años ¡Vaya, un ensayo excelente! Si mal no recuerdo, empecé a pensar en…
+4gwern hace 10 años ¿Alguna idea de dónde pudo haber escrito Garland eso? Todos los libros listados en su li…hace 10 años 
+gjm20
+ModusPonies18
+satt10
+0Jayson_Virissimo hace 10 años Definitivamente fue una conferencia, no un libro. Quizá la busque cuando…3Vaniver hace 10 años Parece beneficioso asegurarse de que mi comprensión de por qué falla el argumento de Pearce coincida…
+2davidpearce hace 10 años Quizá valga la pena distinguir las tesis de Convergencia frente a Ortogonalidad para: 1…
+1Eugine_Nier hace 10 años Como se menciona en otra parte de este hilo [http://lesswrong.com/lw/hbd/new_rep…1Vaniver hace 10 años Me suena a "a menos que creamos en la conclusión ~X, puede defenderse con firmeza que…
+3davidpearce hace 10 años No hay garantía de que una mayor capacidad de adoptar perspectivas vaya a ir acompañada…
+[-]
+- log(n) + log(log(n)) + ... parece describir bien la tasa actual de progreso científico, al menos en la física de altas energías. Voy a cometer pedantería: anidar suficientes logaritmos termina dando un término indefinido (¡salvo que n sea complejo!). Así que, donde Eliezer dice que "la sucesión log(w) + log(log(w)) + log(log(log(w))) convergerá muy rápidamente" (p. 4), eso parece incorrecto, aunque veo a qué se refiere.
+[anonymous]11
+[-]
+Me molesta de verdad que llame sucesión a lo que es una serie (¿quizá se refiere a la sucesión de sumas parciales?), y que no esté escrito correctamente. La serie no converge porque log(w) no tiene un punto fijo en cero. Tiene sentido si se reemplaza log(w) por log^+(w) = max{ log(w), 0 }, que a veces se escribe como log(w) en artículos de ciencias de la computación, donde el comportamiento en (0, 1] es irrelevante. Supongo que eso equivale a suponer que hay algún umbral de trabajo cognitivo por debajo del cual no se pueden lograr mejoras de rendimiento, lo cual parece razonable.
+0Eliezer Yudkowsky hace 10 años Ya está corregido, espero.
+0[anonymous] hace 10 años Ah, sí. Eso tiene mucho más sentido. Gracias por corregirlo.2Eliezer Yudkowsky hace 10 años Como esto aparentemente molesta a la gente, intentaré corregirlo en algún momento. Una versión más f…
+0Vaniver hace 10 años Bueno, supongamos que el poder cognitivo (en el sentido de la cantidad de trabajo cognitivo aplicado por unidad de tiempo…0GuySrinivasan hace 10 años Esto está en el contexto de reinvertir los dividendos del trabajo cognitivo, suponiendo que lleva…0[anonymous] hace 10 años Me pregunto si quiso decir w + (w+log(w)) + (w+log(w)+log(w+log(w))) + ...0[anonymous] hace 10 años Me pregunto si quiso decir w + (w+log(w)) + (w+log(w)+log(w+log(w))) + ...?
+[-]
+La discusión del debate Yudkowsky-Hanson resulta bastante fuera de lugar. Los puntos planteados son en su mayoría muy relevantes para el artículo; el hecho de que se hicieran durante un debate en línea lo es menos; el lenguaje concreto que usó cada parte en ese debate, todavía menos. Esta discusión también es especialmente informal y parecida a una entrada de blog (ejemplo al azar: la nota 30), lo cual puede o no ser un problema según el público previsto para el artículo. Recomendaría una reescritura importante de esta sección, que siga abordando los mismos temas pero que ya no se preocupe tanto por lo que dijo o pensó cada parte, ni por lo que estuvo dispuesta a conceder en ese debate concreto.
+[-]
+Me alegra ver este informe. Sentía que MIRI producía menos cosas interesantes de lo que yo esperaba, pero esto parece que va a contribuir mucho a remediarlo. Estoy revisando mi opinión sobre la organización al alza. Espero leerlo y me comprometo a haberlo hecho antes de que termine este fin de semana.hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+Vaniver17
+[-]
+Comentarios: Dada la velocidad constante de los investigadores humanos, la velocidad de cómputo se duplica cada 18 meses. Investigadores humanos, con computadoras de última generación como asistentes. Tengo la impresión de que esto importa más para el diseño de chips que para el diseño de herramientas litográficas, pero ciertamente también ayuda en estas.
+Los humanos tienen alrededor de cuatro veces el volumen cerebral de los chimpancés, pero la diferencia entre nosotros se debe probablemente sobre todo a algoritmos de software. ¿Es 'algoritmos de software' la frase correcta? Yo caracterizaría las mejoras más bien como mejoras de firmware o de hardware. [editado] Más adelante usa la frase "algoritmos cognitivos", que me gusta mucho más.
+Un ejemplo más concreto que puede usar en lugar de la palabrería: una de las grandes mejoras de productividad en la programación es un segundo monitor, lo cual parece directamente relacionado con la memoria de trabajo humana limitada. Es fácil imaginar mentes con una memoria de trabajo superior capaces de manejar modelos y tareas mucho más complicados. (De hecho, parecemos ver esta diversidad entre los humanos.)
+En particular, sus argumentos posteriores sobre la profundidad causal serial parecen beneficiarse de considerar explícitamente la memoria de trabajo además de la velocidad.
+Cualquier laboratorio que cierre por la noche para que sus investigadores duerman debe... (leer más)
+TheOtherDave21
+[-]
+Es fácil imaginar mentes con una memoria de trabajo superior capaces de manejar modelos y tareas mucho más complicados. [..] En particular, sus argumentos posteriores sobre la profundidad causal serial parecen beneficiarse de considerar explícitamente la memoria de trabajo. Acuerdo fuerte, aunque anecdótico. La capacidad de memoria de trabajo fue una gran parte de lo que dañó mi derrame cerebral, y en términos coloquiales yo era simplemente tonto, en términos relativos, hasta que eso se curó y se reentrenó. Me iba bien con problemas sencillos, pero bastaba con añadir un solo nivel de indirección para que no pudiera seguirlo. El efecto es, al menos subjetivamente, muy no lineal.
+Vaniver20
+[-]
+Por cierto, creo que este es el argumento más fuerte contra el Teorema de la Inteligencia General de Egan (o, alternativamente, contra el argumento del "Explicador Universal" de Deutsch en The Beginning of Infinity). Sí, los humanos podrían en teoría construir modelos causales arbitrariamente complejos, y eso basta para entender un sistema causal arbitrariamente complejo, pero en la práctica, los humanos sin ayuda están limitados a modelos bastante simples. Sí, somos muy buenos aprovechando ayudas (me acuerdo de lo mucho que escribir ayuda a pensar cada vez que intento un cálculo complicado de cabeza), pero esas limitaciones representan una forma plausible de que sea posible una inteligencia sobrehumana significativa.
+TheOtherDave25
+[-]
+Espero no olvidar nunca la gloriosa experiencia de reinventar el concepto de lista, unas dos semanas después de mi recuperación. De repente me volví indescriptiblemente más inteligente. En la misma línea, he estado esperando pacientemente el desarrollo de búferes cognitivos de memoria de trabajo artificiales. Como usted dice, a efectos prácticos esto es inteligencia sobrehumana.
+4Luke_A_Somers hace 10 años ¡Ay! Odio el daño cerebral. En cualquier caso, felicidades por su descubrimiento.
+2TheOtherDave hace 10 años Sí, a usted y a mí nos pasa lo mismo, hermano.1timtyler hace 10 años Efectivamente. Para mí, ese fue el problema conceptual más evidente [http://lesswrong.com/lw/h…hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+gjm16
+somervta14lukeprog13
+gjm10
+[-]
+No me convence el argumento de que H. sapiens no puede estar en el límite del tamaño del cerebro porque algunas personas tienen cabezas más grandes que el promedio sin que sus madres hayan muerto.
+Presumiblemente, el tamaño de la cabeza está determinado en parte por factores ambientales fuera del control genético, y presumiblemente morir en el parto es una desventaja enorme, mucho peor que ser un poco menos inteligente. Si eso es así, entonces ¿cómo debería verse si, como especie, estamos pegados contra esa pared? (Con esto quiero decir que cualquier aumento general del tamaño de la cabeza sería malo, incluso si ser más listo es una gran ventaja.) Sugiero que veríamos tamaños de cabeza lo bastante alejados de un desastre absoluto como para que, incluso con esa variación ambiental aleatoria, la muerte en el parto siga siendo bastante rara, pero no del todo desconocida. Y, por supuesto, eso es justo lo que vemos: la muerte en el parto es hoy muy rara en países prósperos y avanzados, pero si se retrocede 100 años o se mira en las partes menos afortunadas del mundo, no es para nada tan rara.
+Esto podría cuantificarse, al menos en parte. Podríamos observar cómo varía la frecuencia de la muerte en el parto, en lugares sin atención médica moderna, según el tamaño de la cabeza (aunque controlando... (leer más)
+0CellBioGuy hace 10 años Alternativamente, en realidad la selección podría aplicarse con más fuerza a la indefensión de …0RolfAndreassen hace 10 años Tengo la impresión de que las muertes en el parto no suelen producirse porque…
+[-]
+Aparece un resumen muy conciso en Wikipedia (2013): Citar Wikipedia en cualquier tipo de contexto académico suele ser mala idea, incluso si es solo para un resumen.
+[-]
+En la página 15, usted escribe: la ley tipo Moore para las velocidades de los procesadores seriales se vino abajo en 2004. No se da ninguna cita, pero encontré una: Fuller & Millett (2011). El artículo incluye este práctico gráfico:
+Y también este:
+4lukeprog hace 10 años El libro [http://www.amazon.com/The-Future-Computing-Performance-Level/dp/0309…
+4CellBioGuy hace 10 años Tengo un amigo ingeniero que recientemente propuso la idea de que la tecnología de computación…
+[-]
+La discusión sobre la ley de Moore, los ingenieros más rápidos, el crecimiento hiperbólico, etc., me parece que se acerca a un punto importante sin llegar realmente a abordarlo. Como señala el artículo, una parte sustancial del trabajo del diseño moderno de CPU ya lo hacen computadoras. Entonces, ¿por qué no vemos un crecimiento hiperbólico en lugar de uno meramente mooreano? Una razón sería que, mientras una fracción del trabajo, alejada de cero, la hagan seres humanos, no se obtiene la aceleración superexponencial, por razones evidentes de tipo Amdahl. Los seres humanos terminan siendo el factor que limita la velocidad. Ahora supongamos que sacamos del circuito a los seres humanos por completo. ¿Queda entonces todo en manos de las computadoras, que se aceleran sin parar? Por desgracia, no. Cuando se desarrolla alguna tecnología nueva que permite circuitos más densos, Intel y sus rivales tienen que construir las fábricas antes de cosechar los beneficios de fabricar CPU más rápidas. Y esa labor de construcción no se acelera exponencialmente; de hecho, su costo aumenta rápidamente de una generación a la siguiente. Hay cosas que son puramente una cuestión de diseño ingenioso. Por ejemplo, parte del aumento de velocidad de los programas de computadora a lo largo de los años no ha venido de las CPU sino del compilador... (leer más) hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+jbash9
+shminux8
+Eliezer Yudkowsky8
+shminux6
+shminux6
+[-]
+TL;DR. Los primeros cuatro o cinco párrafos fueron pura palabrería, y ahí me detuve. Entiendo que se cree que se puede salir impune con eso en la "educación popular", pero si se quiere ser tomado en serio en el discurso técnico, hay que frenar la pontificación.
+2[anónimo] hace 10 años No estoy en desacuerdo, pero tampoco creo que esto sea correcto. Hay muchísimos textos verbosos m…
+JoshuaZ11
+[-]
+La mayoría son personas que ya se lo han ganado en parte por tener resultados importantes en su haber.1[anónimo] hace 10 años ¿Podría dar algunos ejemplos de oraciones que considere especialmente…
+5[anónimo] hace 10 años Los primeros tres párrafos. Creo que el cuarto y el quinto párrafos (contra el argumento del abuelo…
+[-]
+Sección 5: El esfuerzo inicial por poner en marcha algunos modelos numéricos podría estar sobreestimado, a menos que tales modelos ya se hayan hecho. Como mínimo, un esfuerzo a pequeña escala puede localizar con precisión los problemas difíciles. Esto me recuerda al modelado de las supernovas de colapso del núcleo: era razonablemente fácil modelar la explosión, excepto el encendido provocado por la onda de choque inicial. Todavía no sabemos exactamente qué hace que se conviertan en FOOM. La mayoría de los modelos predicen un fiasco en lugar de una explosión. Esto es probablemente solo una analogía superficial, pero bien podría ser que unos pocos meses de estudio de verano…
+[-]
+Dos breves notas sobre el texto actual: Kasparov, al parecer, leía el foro de los jugadores rivales durante su victoria de ajedrez en Kasparov vs. The World, lo que no invalida del todo el resultado como evidencia, pero sí debilita la fuerza de la evidencia sobre el (no) escalamiento cognitivo con la población. Además, Garett Jones hizo algunas observaciones pertinentes aquí que debí haber citado en la discusión sobre cómo escala la ciencia con la población científica y el dinero invertido (o más bien, cómo no escala).
+2Will_Newsome hace 10 años ¿Alguien conoce los detalles de Karpov vs. The World [http://www.chessgames.com/…
+[-]
+Aquí está mi resumen del informe. No es un resumen, y algunas de las implicaciones son mías. Las 4 tesis (en realidad, conjeturas): 1. Inevitabilidad de una explosión de inteligencia (definida como poder de optimización entre dominios) debida a la automejora recursiva 2. Ortogonalidad (la inteligencia y la racionalidad son independientes de las preferencias) 3. Convergencia instrumental (la mayoría de los optimizadores compiten por los mismos recursos) 4. Complejidad del valor (los valores no son fácilmente formalizables; no hay tres leyes de la robótica) si son ciertas, implican que la IAG es un riesgo existencial, porque una IAG que surja de manera improvisada wi… (leer más)
+[-]
+También me pregunto por la fecha estimada del FOOM, 2035 (presumiblemente más o menos una década). ¿Hay un cálculo explícito de ella y, con suerte, también los intervalos de confianza? hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+Clippy6
+Eliezer Yudkowsky6
+ZHD5
+0Eliezer Yudkowsky hace 10 años ¿Dónde dice 2035 en el texto? ¿Cómo llegó a la impresión de que t…
+9shminux hace 10 años Quizá malinterpreté este pasaje:
+4Eliezer Yudkowsky hace 10 años Vaya, gracias por señalarlo. Quizá debería quitar las fechas específicas…
+shminux17
+[-]
+Bueno, usted mencionó en alguna ocasión que esta fecha afecta su asignación de recursos entre CFAR y MIRI, así que podría valer la pena hacer el cálculo explícito y someterlo a escrutinio, si no en el informe, entonces en otro lugar.
+7Eliezer Yudkowsky hace 10 años Justo. Todavía nos cuesta expresar las cosas verbalmente, pero sí, eso es.
+[-]
+Gracias por adoptar mi sugerencia de publicar más sobre temas relevantes para la producción de clips de papel.
+3someonewrongonthenet hace 10 años Aunque su existencia me divierte, el meme de la "cuenta de novedad" es muy…
+5Luke_A_Somers hace 10 años Solo hay tantos nombres de novedad apropiados según el contexto. Esto sería…
+0[anónimo] hace 10 años Death [http://lesswrong.com/user/Death/overview/] Algunos otros solo escribieron …3Clippy hace 10 años Aunque me divierte el nombre de la cuenta, el meme de la "cuenta de novedad" es muy virulento a…3[anónimo] hace 10 años Eso es lo que dijimos cuando Clippy empezó a ser ridículo, hace años. Por suerte, esto…
+1CarlShulman hace 10 años ¿Cuál es entonces la historia detrás del nombre de la cuenta?
+1[anónimo] hace 10 años Es uno de mis libros favoritos.
+[-]
+Por falta de problemas grandes descubiertos hasta ahora, lo traslado a Main.
+gwern21
+[-]
+Son 40,000 palabras, según dice usted. ¿Qué tan rápido espera exactamente que se encuentre algún problema grande?
+Eliezer Yudkowsky20
+[-]
+Si es un problema grande, como "no puedo descargar" o "todas estas páginas están en blanco", entonces relativamente rápido.
+[-]
+El tamaño del cerebro homínido no ha aumentado en al menos los últimos 100,000 años. De hecho, el rango es más estrecho y la mediana es más baja en Homo sapiens que en Homo neanderthalensis. Dada esa información, ¿cómo cambia su explicación de sus datos? Los desarrollos cerebrales más importantes del género llegaron durante el periodo en que el tamaño del cerebro no aumentaba. Esto significa que el tamaño no puede ser una variable explicativa. Saludos, ZHD
+5CarlShulman hace 10 años La nota 44 comenta que los neandertales tenían cerebros más grandes, así que no son datos nuevos.
+0ZHD hace 10 años Gracias, Carl. Me está costando trabajo encontrar esa discusión. ¿Podría proporcionarla…
+1CarlShulman hace 10 años Es el enlace [http://intelligence.org/files/IEM.pdf] que aparece al principio del OP. Mire en la pág…
+8ZHD hace 10 años ¡Gracias por la ayuda! Así que esta es la nota al pie: Eso parece un razonamiento circular. Solo…1pcm hace 10 años Hay especulaciones de que el tamaño del cerebro disminuyó por la pérdida del olfato y quizá de otros sentidos…hace 10 años 
+hace 10 años 
+hace 10 años hace 10 años hace 10 años hace 10 años 
+Paul Crowley4Strilanc4
+ThrustVectoring4
+Mitchell_Porter3
+leplen2
+Manfred2
+[-]
+Toda la cosa del contra, contra-contra… es muy difícil de seguir. He visto que tanto usted como Dennett usan conversaciones entre participantes imaginarios para presentar tales argumentos, que me resultan mucho más legibles.
+[-]
+Quiero hacer una pequeña objeción a la Sección 3.8: Si hay varios "pasos difíciles" en la evolución de la inteligencia, entonces los planetas en los que evoluciona la vida inteligente deberían esperar ver los pasos difíciles espaciados de manera más o menos uniforme a lo largo de su historia, sin importar la dificultad relativa de cada paso. […][…] […][…] el intervalo de tiempo entre Australopithecus y Homo sapiens es demasiado corto para ser un paso difícil plausible. No creo que este argumento sea válido. Suponiendo que hay un último paso difícil, se esperaría que la inteligencia apareciera poco después de darlo (porque ya no hay más… (leer más)
+[-]
+Puede que haya encontrado un problema menor en la página 50: Mejores algoritmos podrían reducir la carga serial de un pensamiento y permitir que más pensamientos ocurran en serie en lugar de en paralelo. ¿No debería decir "permitir que más pensamientos ocurran en paralelo en lugar de en serie"? Convertir un pensamiento de múltiples subtareas paralelas en una única tarea serial aumenta la carga serial de ese pensamiento, en lugar de reducirla.
+3Eliezer Yudkowsky hace 10 años La idea aquí es usar el paralelismo para implementar operaciones como el caché…
+0ThrustVectoring hace 10 años Ah, entonces desviar ciclos de procesamiento serial para obtener profundidad serial, en lugar de obtener h…
+[-]
+Supongamos que ya creo que, debido a la informática, la neurociencia, etc., en el futuro habrá agentes o coaliciones de agentes capaces de burlar a los seres humanos para controlar el mundo, y que podemos esperar dar forma al carácter de esos futuros agentes trabajando en temas como la IA amigable. Si ya creo eso, ¿necesito leer esto?
+1Manfred hace 10 años Era bastante interesante, pero para mí fue más una cuestión de presupuesto para entretenerse que para aprender…
+[-]
+Tengo algunas preguntas sobre las matemáticas de las primeras páginas, específicamente la introducción de k. No estoy del todo seguro de seguir exactamente lo que pasa. Así que mi suposición es que intentamos modelar la capacidad de la IA en función de la inversión, y supongo que lo modelamos como la integral de una función exponencial de base k, de modo que
+=\int{k%5Ei}di=\frac{k%5Ei}{\log(k)})con k constante. Creo que la integral es necesaria para asegurar que la derivada de C sea positiva en ambos escenarios k1. Creo que esto coincide con el ejemplo de la reacción nuclear c… (leer más)
+[-]
+El problema de la cerradura de la sección 3.8: Supongamos que hubiera 2 cerraduras, una con una distribución uniforme de resolución de 5 horas, y hace 10 años hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+hace 10 años 
+CronoDAS0
+itaibn00
+gjm0[Este comentario ya no cuenta con el respaldo de su autor][anónimo]0[Este comentario ya no cuenta con el respaldo de su autor]pcm-1
+[anónimo]-1una con una distribución uniforme de resolución de 10 horas. Ahora supongamos que hacemos una nueva distribución de probabilidad en la que primero resolvemos la cerradura uno, luego la dos, en tiempos X e Y. La probabilidad es ahora (hasta los límites de tiempo) X/10*Y/5. ¡Miren, simetría! Ahora supongamos que condicionamos al tiempo total de 1 hora. Entonces X+Y=1. Pero sigue habiendo simetría entre X e Y. Así que, bueno.
+[-]
+Cuando leí este segmento, sentí la necesidad de comentar: Un componente clave del debate entre Robin Hanson y yo fue la cuestión de la localidad. Considérese: si hay rendimientos crecientes del conocimiento con cerebros humanos constantes (esta es la suposición principal en la que se apoyan muchos modelos de hipercrecimiento tecnológico general que no dependen de una explosión de inteligencia, suposición que parece bien respaldada por el crecimiento exponencial de la productividad impulsado por la tecnología), entonces ¿por qué la nación humana líder no está muy por delante de la economía que le sigue? ¿No debería la economía con el mo… (leer más)
+[-]
+Un punto que no aborda: aunque justifica la afirmación de que la inteligencia es algo real y puede compararse, no explica por qué sería medible en una escala numérica. En particular, no entiendo qué significan "aumento lineal de la inteligencia" y "aumento exponencial de la inteligencia" ni cómo pueden compararse. Estilísticamente, estoy de acuerdo con muchos de los demás comentarios y creo que este artículo no es apto para publicación académica. Debería dejar fuera la discusión de temas secundarios, como la especulación sobre los cuellos de botella en la investigación académica, ... (leer más)
+[-]
+Observación estilística superficial: el artículo usa repetidamente la palabra "agencia" donde "agente" parecería más apropiada.
+[-]
+¿Cuáles son las unidades de medida de la "potencia de optimización" y del "orden complejo creado por unidad de tiempo"? ¿Cuáles son los valores típicos para un ser humano?
+[-]
+China está experimentando un crecimiento impulsado por el conocimiento muy rápido, a medida que alcanza el conocimiento ya producido que puede importar a bajo costo. En la medida en que las IA distintas del proyecto más avanzado pueden generar automejoras, generan modificaciones de código idiosincrático que no pueden compartirse a bajo costo con otras IA. Digo que, para China, importar conocimiento es al menos igual de caro. Buena parte son secretos comerciales, que están más celosamente protegidos que el contenido de la IA. China copia del orden de $1 billón en valor. ¿Cuál es el valor del contenido de IA no copiado… (leer más)
+[-]
+Hay algunos lugares del texto que parecen tener hipervínculos originales, pero cuyos hipervínculos no aparecen en el .pdf. Por ejemplo, la nota al pie 21.hace 9 años 
+hace 10 años 
+hace 10 años hace 10 años hace 10 años 
+hace 10 años 
+timtyler-6En general, el artículo necesita un editor técnico.EDIT: La falta de hipervínculos es claramente algo de mi parte. Me disculpo por saltar a conclusiones.
+2RomeoStevens hace 10 años Tangente: ¿por qué no se hace la edición de artículos académicos en GitHub o en otro sistema de control de revisiones…
+7Malo hace 10 años MIRI usa Git para registrar las ediciones de todos los documentos que publica con su plantilla oficial.2[anónimo] hace 10 años ¿Se refiere a la edición que hacen las editoriales? No sé nada de eso, no…
+7RomeoStevens hace 10 años Me llamó la atención que este es un ejemplo perfecto de cómo un flujo eficiente daría g…
+9David_Gerard hace 10 años ¡Y tanto! He explicado con éxito a varios gerentes poco técnicos…3[anónimo] hace 10 años Me imagino que un enfoque de edición similar a GitHub le daría una buena c…
+5ZHD hace 10 años Me gusta cómo está abordando el problema. Sin embargo, creo que la tentación de una fa…
+0[anónimo] hace 10 años Supongo que la "conclusión familiar" de una persona es la "mejor práctica" de otra. N…0lukeprog hace 10 años El hipervínculo de la nota al pie 21 me funciona. Va aquí [http://lesswrong.com/lw/1lx/ref…
+0[anónimo] hace 10 años Nada. Adobe Reader 11.0.2 en Windows 7. Sí, vi que los signos de porcentaje estaban mal…
+0Malo hace 10 años La plantilla LaTeX de MIRI usa el comando /href para crear hipervínculos en el texto y los estilos enla…
+0[anónimo] hace 10 años Mensaje privado enviado. EDIT: Ya no estoy seguro de que enviar todo eso por MP (que yo no…
+6Malo hace 10 años Lo siento, no quise dar a entender eso en absoluto. Acabo de releer mi mensaje y se me ocurrió que…
+5wedrifid hace 10 años ¡Oh! Gracias. No me había fijado en esa función.
+[+]
+hace 10 años 

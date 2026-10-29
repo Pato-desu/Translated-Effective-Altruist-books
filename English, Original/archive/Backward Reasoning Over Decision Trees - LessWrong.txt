@@ -1,0 +1,225 @@
+Game Theory
+FrontpageGame theory is the study of how rationalactors interact to pursue incentives. It startswith the same questionable premises aseconomics: that everyone behaves rationally,that everyone is purely self-interested1, andthat desires can be exactly quanti!ed - anduses them to investigate situations of con"ictand cooperation.Here we will begin with some fairly obviouspoints about decision trees, but by the endwe will have the tools necessary to explain asomewhat surprising !nding: that giving aUS president the additional power of line-item veto may in many cases make thepresident less able to enact her policies.Starting at the beginning:#e basic unit of game theory is the choice.Rational agents make choices in order tomaximize their utility, which is sort of like ameasure of how happy they are. In a one-person game, your choices a$ect yourselfand maybe the natural environment, butnobody else. #ese are pretty simple to dealwith:BackwardReasoning OverDecision Treesby Scott Alexander29th Jun 2012
+152
+with:
+Here we visualize a choice as a branchingtree. At each branch, we choose the optionwith higher utility; in this case, going to thebeach. Since each outcome leads to newchoices, sometimes the decision trees can belonger than this:
+Here's a slightly more di%cult decision,denominated in money instead of utility. Ifyou want to make as much money aspossible, then your !rst choice - going tocollege or starting a minimum wage job rightNow - seems to favor the more lucrativeminimum wage job. But when you take Laterinto account, college opens up morelucrative future choices, as measured in thegray totals on the right-hand side. #isillustrates the important principle ofreasoning backward over decision trees. Ifyou reason forward, taking the best optionon the !rst choice and so on, you end up as alow-level manager. To get the real cash,you've got to start at the end - the total onthe right - and then examine what choice ateach branch will take you there.
+each branch will take you there.#is is all about as obvious as, well, nothitting yourself on the head with a hammer,so let's move on to where it really getsinteresting: two-player games.
+I'm playing White, and it's my move. Forsimplicity I consider only two options: queentakes knight and queen takes rook. #e onechess book I've read values pieces in numberof pawns: a knight is worth three pawns, arook !ve, a queen nine. So at !rst glance, itlooks like my best move is to take Black'srook. As for Black, I have arbitrarily singledout pawn takes pawn as her preferred movein the current position, but if I play queentakes rook, a new option opens up for her:bishop takes queen. Let's look at the decisiontree:
+
+If I foolishly play this two player game thesame way I played the one-player go-to-college game, I note that the middle branchhas the highest utility for White, so I take thechoice that leads there: capture the rook.And then Black plays bishop takes queen,and I am left wailing and gnashing my teeth.What did I do wrong?I should start by assuming Black will,whenever presented with a choice, take theoption with the highest Black utility. UnlessBlack is stupid, I can cross out any branchthat requires Black to play against her owninterests. So now the tree looks like this:
+#e two realistic options are me playingqueen takes rook and ending up without aqueen and -4 utility, or me playing queentakes knight and ending up with a modestgain of 2 utility.(my apologies if I've missed some obviousstrategic possibility on this particularchessboard; I'm not so good at chess buthopefully the point of the example is clear.)#is method of alternating moves in abranching tree matches both our intuitivethought processes during a chess game(“Okay, if I do this, then Black's going to dothis, and then I'd do this, and then... ”) and the
+this, and then I'd do this, and then... ”) and thefoundation of some of the algorithms chesscomputers like Deep Blue use. In fact, it mayseem pretty obvious, or even unnecessary.But it can be used to analyze some morecomplicated games with counterintuitiveresults.Art of Strategy describes a debate from1990s US politics revolving around so-called“line-item veto” power, the ability to vetoonly one part of a bill. For example, ifCongress passed a bill declaring March to beNational Game #eory Month and April tobe National Branching Tree AwarenessMonth, the President could veto only thepart about April and leave March intact (aspolitics currently works, the President couldonly veto or accept the whole bill). Duringthe '90s, President Clinton fought pretty hardfor this power, which seems reasonable as itexpands his options when dealing with thehostile Republican Congress.But Dixit and Nalebu$ explain that gainingline-item veto powers might hurt aPresident. How? Branching trees can explain.Imagine Clinton and the RepublicanCongress are !ghting over a budget. We canthink of this as a game of sequential moves,much like chess. On its turn, Congressproposes a budget. On Clinton's turn, heeither accepts or rejects the budget. A player“wins” if the budget contains their petprojects. In this game, we start with lowdomestic and military budgets. Clinton reallywants to raise domestic spending (utility+10), and has a minor distaste for raised
+military spending (utility -5). Congress reallywants to raise military spending (utility +10),but has a minor distaste for raised domesticspending (utility -5). #e status quo is zeroutility for both parties; if neither party cancome to an agreement, voters get angry atthem and they both lose 2 utility. Here's thetree when Clinton lacks line-item veto:
+For any particular Republican choice,Clinton will never respond in a way that doesnot maximize his utility, so the theRepublicans reason backward and arrive atsomething like this:
+If Republicans are perfectly rational agents,they choose the second option, highdomestic and high military spending, to givethem their highest plausibly obtainableutility of 5.But what if Clinton has the line-item veto?Now his options look like this:
+If the Republicans stick to their previouschoice of “high domestic and high militaryspending” , Clinton line-item vetoes themilitary spending, and we end up with asituation identical to the !rst choice: Clintonsitting on a pile of utility, and theRepublicans wailing and gnashing theirteeth. #e Republicans need to come up witha new strategy, and their thought processes,based on Clinton as a utility-maximizer, looklike this:
+Here Congress's highest utility choice is topropose low domestic spending (it doesn'tmatter if they give more money to themilitary or not as this will get line-itemvetoed). Let's say they propose low domesticand low military spending, and Clintonaccepts. #e utilities are (0, 0), and now thereis much wailing and gnashing of teeth onboth sides (game theorists call this a gnashequilibrium. Maybe you've heard of it.)But now Clinton has a utility of 0, instead ofa utility of 5. Giving him extra options has
+a utility of 5. Giving him extra options hascost him utility! Why should this happen,and shouldn't he be able to avoid it?#is happened because Clinton's newabilities a$ect not only his own choices, butthose of his opponents (compare Schelling:Strategies of Con"ict°). He may be able todeal with this if he can make the Republicanstrust him.In summary, simple sequential games canoften be explored by reasoning backwardsover decision trees representing the choicesof the players involved. #e next post willdiscuss simultaneous games and the conceptof a Nash equilibrium.Footnotes:1: Game theory requires self-interest in thatall players' are driven solely by their desire tomaximize their own payo$ in the gamecurrently being played without regard to thewelfare of other players or any externalstandard of fairness. However, it can also beused to describe the behavior of altruisticagents so long as their altruistic concerns arerepresented in the evaluation of their payo$.Game Theory3
+FrontpageMentioned in1127658 comments, sorted by top scoring#e Library of Scott AlexandriaIntroduction to Game #eory: SequenceGuide
+cousin_it33
+Viliam_Bur24
+[-]
+Very nice that you're doing this!The line item example is a bit too complicated formy taste. Here's a simpler one: let's say Alice hasthe option of cooking a pie, but must share half ofit with Bob. So Alice cooks the pie and everyone ishappy. Now let's give Bob the option of stealing thewhole pie and frustrating Alice. Then Alice won'tcook the pie because she will anticipate that Bob'soptimal decision would leave her without pie andfrustrate her, so everyone is worse off.
+Alex Vermillion4
+[-]
+Thank you very much for this simpler explanation,I couldn't quite grasp the concept 100%. This alsogives me a very easy way to explain this conceptless technically.
+[-]
+Suggestion: Republicans should use a wider paper,and write "high domestic spending" and "highmilitary spending" on the same line. This gives themtheir 5 utility points back. :D
+TimS42
+[-]
+Well, yes. The precise deﬁnition of line-item is anessential issue for implementing a "line-item" veto.It's different in different jurisdictions, and I don'tknow what the federal deﬁnition was.In Wisconsin, the veto was apparently letter byletter - so a patient governor (or staffer) couldtotally change a provision by hunting for theappropriate letters. Funding the arts via a billintended to provide farm aid and suchlike. (Howthat complies with the concept of separation ofpowers boggles my mind, but that's policy, notletter of the law).
+Zack_M_Davis26
+[-]
+a patient governor (or staffer) couldtotally change a provision by huntingfor the appropriate letters11y 
+2y 
+11y 
+11y 
+11y 
+TheOtherDave26It gets worse (better?): in a computerized world,patience is irrelevant. Suppose we have a letter-item veto on Title I of the U. S. Code, and wethink it would be better if, instead of all thoseboring "general provisions" and "rules ofconstruction", this document codiﬁed into law P .C. Hodgell's maxim that "That which can bedestroyed by the truth, should be." Then, castinga spell like this---#!/usr/python3title1 = open("Title_01.txt").read()target = "That which can be destroyed by the truth, should be."target = list(target)target.reverse()keep_chars = []for i, c in enumerate(title1):....try:........if c == target[-1]:............keep_chars.append(i)............target.pop()....except:........breakprint(keep_chars)revised = ""for i in keep_chars:....revised += title1[i]print(revised)---we learn that all we have to do is veto allcharacters except the fourth, 408th, 409th,502nd, 510th, 705th, 894th, 895th, 936th, (morenumbers redacted ...), and 8786th.
+MBlume12
+[-]
+in a computerized world, patience isirrelevant.And here's the generalized lesson =)
+[-]
+In Wisconsin, the veto was apparentlyletter by letter - so a patient governor(or staffer) could totally change aprovision by hunting for theappropriate letters.11y 
+11y 
+Psy-Kosh12appropriate letters.I...But that --Y ou mean....whimpers and hides *
+TimS47
+Eliezer Yudkowsky19
+[-]
+ExampleLaw, as an area of practice, is made of HiddenComplexity of Wishes° issues.
+TheOtherDave26Swimmer96313[anonymous]3
+[-]
+"I try to be cynical, but it's hard to keep up."
+[-]
+I read the example and my ﬁrst instinct wasto check whether it was actually an article onThe Onion. But apparently it is not. (Cries.)
+[-]
+Holy crap... This must be the most shockingthing I've seen in a while.
+Kawoomba15
+[-]
+Holy crap... This must be themost shocking thing I've seen in awhile.opus bestiae.How poetic. Well said.
+[-]
+I was wondering how someone managed toend up as God-Emperor of Wisconsin.
+[-]
+Letter by... BWA?!?!How, how did a line item veto law that allows11y 
+11y 11y 11y 11y 
+11y 11y 
+How, how did a line item veto law that allowsletter by letter editing get passed?That couldn't possibly be "oh, we didn't imaginethat'd be exploitable." If they knew they werepassing the power to actually slice a passed billletter by letter, then they had to know theywere essentially giving the governor arbitrarypower.
+TheOtherDave13
+[-]
+I wish I shared your conﬁdence in thecoherence of legislators. My guess is thatsomeone wanted to turn a plural into asingular or something relatively innocuous likethat, and genuinely didn't think of the "ransomnote" use case.
+Psy-Kosh6
+[-]
+But... even given them not being that clever,you'd think they'd know that the ability toarbitrarily slice and dice a bill would be toomuch. (I know I may be displaying hindsightbias, but... they're politicians! They have tohave had experience with, say, people takingtheir (or colleagues') words out of contextand making it sound like something else, orthey themselves doing it to an opponent,right?ie, the ability to slice and dice somecommunication into something entirelydifferent would be something you'd thinkthey'd already have personal experience with.At least, that's what I'd imagine. Though, still,Hanlon's Razor and all that.
+TheOtherDave22
+[-]
+Many many years ago, I was contacted by acoworker for an estimate of what it wouldtake to modify our tax-calculation code tosupport a new law recently passed by theT exas legislature, which speciﬁed that theﬁrst $25 of Internet charges for T exas-residential subscribers was free of statetaxes.I asked "Well, that depends. What does'ﬁrst' mean? If they mean that on every billwe should reduce the taxable basis by $25,11y 
+10y 
+10y 
+faul_sname2
+we should reduce the taxable basis by $25,we can do that easily. If they mean that onevery bill we should chronologically sort allthe charges and then exclude those chargesfrom taxation, that's far more complicated,and if tax rates vary depending on thecharge the result will be different. If theyactually mean the ﬁrst $25 for eachsubscriber rather than on each bill, that'seasier (but different from the ﬁrst twooptions)."The coworker said "Excellent question. I'llask the client."A week later, she forwarded me email fromthe client rep, saying "Excellent question.I've asked our lawyers."A month later she forwarded me emailfrom the client rep forwarded from thelawyers saying "Excellent question. We'veasked the State Legislature."Several months later, the consensus seemedto be that the State Legislature had nevergiven any thought to what they meant by"ﬁrst".My conﬁdence in politicians' taking careabout what they mean is very low.
+Psy-Kosh2
+[-]
+Ouch.
+[-]
+That depends. They could make the bills really,really short.
+Psy-Kosh3
+[-]
+"I can make this code compile really fast!""Oh? How?""Well, all I have to do is just mark every lineas being a comment....":)10y 11y 10y 
+Raemon5
+[-]
+FYI, according to wikipedia this was changed in1990In 1990, a further amendment speciﬁedthat the line-item veto does not givethe governor power to veto individualletters of appropriations bills, therebyforming new words.[2]
+nshepperd6
+TimS2
+[-]
+But the governor could still veto individualwords in order to create unrelated sentences?
+Benquo12
+Raemon1
+[-]
+Walker has the broadest veto powers of anygovernor nationwide, allowing him to strikeout entire provisions of the budget orrewrite sections by selectively crossing outwords.
+[-]
+Y ou know, I'm not actually sure...
+[-]
+While I was looking for a speciﬁc example°, Ifound references to its recent repeal. But myexample is from ~2005, so there's someinconsistency somewhere.I couldn't ﬁnd the wikipedia article you areciting - are you sure it was about Wisconsin?
+Endovior4
+[-]
+What was repealed seems to have been theability to veto individual letters (creating newwords). This was a laughably incompletesolution, as instead of vetoing individualletters to create whatever wording thegovernor liked (as it was before), he's nowlimited to vetoing lots and lots of words untilhe ﬁnds the exact wording he wanted. Hencewhy the example looks like lots and lots ofwords crossed out, instead of speciﬁc letters11y 
+11y 11y 
+11y 11y 
+11y 
+kilobug21
+Raemon1words crossed out, instead of speciﬁc letterscrossed out. The power involved is quitesimilar, but it's somewhat more tricky to useif you're restricted to whole words.
+[-]
+http://en.wikipedia.org/wiki/Governor_of_Wisconsin
+[-]
+Good introduction, nothing new (but the "line-itemveto" example is a nice one), but still good to havearound.One thing that made me "wail and gnash" a little :that everyone is purely self-interestedThat's not really the case. Game theory usuallyconsider that everyone is an utility maximizer, butnothing says that the utility function has to beselﬁsh. Utility function can factor well-being andhappiness of others in it.Y ou can apply game theory in cases like a parent-child relation, in which the parent and the childdisagree, but the parent still is motivated with theinterest of the child. Even in more classical cases,nothing forces the utility function to be selﬁsh andnot value the other well-being. Game theory onlyapply when the agents have different goals, but itcan just be "I value my own well-being twice asmuch as the well-being of the other", which is not"purely self-interested".It makes me "wail and gnash" because it's a veryfrequent cliché that rationalists and utilitymaximizer are necessarily selﬁsh and don't careabout others, and it's a cliché we should ﬁght. Thatsay, I understand the a whole part of game theoryis about showing how even pure selﬁshness can, insome cases, lead to cooperation being the bestsolution. Y our "line-item veto" is a good example ofit, Clinton and Congress can still cooperate to getthe previous 5-5 equilibrium, if they trust eachothers, and this is an IPD at the end.11y 
+11y 
+Kawoomba19
+AspiringRationalist10
+Scott Alexander1
+[-]
+Game theory only apply when theagents have different goalsThat is not quite true. It can also apply when theyhave identical goals but different information, forexample, the Meet in New Y ork game that isdiscussed in the next post. They should still endup at a Nash Equilibrium, and depending on thespeciﬁcs of a cooperative game, backwardsinduction may be applicable.
+[-]
+See my response to steven0461° and myfootnote. Yes, we will eventually be able to derivecooperation, but we will derive it by starting withselﬁsh assumptions.
+scav0
+[-]
+I don't think the math models motivationanyway. It's abstracted away, leaving each agentmaximising a utility function. Neither is utility inthe model (which is well deﬁned) isomorphic toutility for a person making decisions in the realworld (which is not). But our minds seem tolearn things better when they are couched interms of a story about people.Hmm. Possibly one danger in this is assumingthat your own internal story about what theequations mean is what they actually mean, suchthat you end up overconﬁdent that the resultsof a decision in the real world will be like thestory in your head.
+[-]
+This method of alternating moves in abranching tree matches both our intuitivethought processes during a chess game(“Okay, if I do this, then Black's going todo this, and then I'd do this, and then...”)and the foundation of the algorithmschess computers like Deep Blue use.11y 
+11y 
+11y 
+11y 
+beoShaffer18Could you include a reference to alpha-betapruning, since that is precisely what you'redescribing? Some readers may be more familiarwith that subject domain and appreciate explicitlylinking game theory to an established searchalgorithm.game theorists call this a gnashequilibriumDid you mean "Nash equilibrium"? If it was adeliberate pun, you might want to indicate it forthose who are looking up new concepts, this beingan introductory series.
+Alex Flint6
+[-]
+Could you include a reference to alpha-beta pruning, since that is precisely whatyou're describing? Some readers may bemore familiar with that subject domainand appreciate explicitly linking gametheory to an established searchalgorithm.I think you mean minimax. Alpha-beta pruning isthe optimization to minimax that prunesbranches as soon as any max (min) nodeevaluates lower (higher) than the highest (lowest)opposite-colored node evaluated so far amongthe grandparents' children.
+Kawoomba0
+[-]
+True that. I'm just not aware of many peopleusing the original minimax version, while alpha-beta pruning might ring a bell and uses a similar- albeit, as you say, more complexity-costoptimized - methodology.
+[-]
+Pretty good so far. I personally felt like the line-item example was pretty illuminative, but using realpolitical examples instead of sticking with thenational game theory month approach is a bit iffy.In particular the lineIf Republicans are perfectly rational agents11y 
+11y 
+11y 
+steven046115If Republicans are perfectly rational agents(a sentiment, I admit, open to doubt)Can easily be interpreted as an attack onrepublicans.
+Scott Alexander12Kaj_Sotala10
+drethelin5
+[-]
+Removed.
+[-]
+but using real political examples insteadof sticking with the national game theorymonth approach is a bit iffyI actually thought it was better to have a realpolitical example - made it feel less like anabstract toy example and more like somethingwith actual real-world relevance.
+[-]
+Agreed. Removing the parenthetical would strictlyimprove this in my mind
+[anonymous]6
+[-]
+Or better, adding “given that they are human” atthe end of it. (OTOH, it's not that implausiblethat in that context they would make the samechoice that perfectly rational agents would.)
+[-]
+It starts with the same questionablepremises as economics: that everyonebehaves rationally, that everyone is purelyself-interested, and that desires can beeasily and exactly quantiﬁedI agree that it assumes that everyone behavesrationally and that desires can be exactly quantiﬁed,but I don't see how it assumes that everyone ispurely self-interested or that desires can be easilyquantiﬁed.
+Scott Alexander-1
+[-]
+11y 11y 
+11y 11y 
+11y 
+11y 
+asparisi14
+Dorikka7lukeprog6
+[anonymous]6
+Scott Alexander-1By "easily quantiﬁed", I meant that there is exactlyone possible quantiﬁcation system that is knownby and agreed to by both players, as opposed tothe mess going on in real life as is being discussedon Stuart_Armstrong's thread. But I've deletedthat part as unclear.By "self-interested", I mean for example that theNash equilibrium for Prisoners' Dilemma is (D,D)because we assume both are trying to minimizetheir sentence, and we don't have to worry aboutone of them trying to lessen the other's sentenceat his own expense because the other prisonerhas a wife and kids, or about them wanting tolengthen their own sentence to pay their debt tosociety. I agree that one could use the same mathto analyze someone who is only playing a game todonate the payoff to charity, or something. I'veadded a footnote clarifying this further.
+[-]
+game theorists call this a gnashequilibriumWell played, sir.
+[-]
+I suggest adding a link at the bottom to the nextpost in the sequence.
+[-]
+This is a well-written, light, fun intro. I'll lookforward to linking my friends here°. Y ou should addan attractive image to that post somewhere, so e.g.it shows up with a cool image thumbnail whenpeople link it from Facebook. That's why I addedthe image here°.Hopefully stuffy LWers won't fail to upvote thismerely because it's stuff they (mostly) knowalready.
+[-]
+11y 
+11y 
+11y 11y 
+11y 
+komponisto3Go to the beach? (Utility +5) Hit yourselfon the head with a hammer? (Utility -20)Actually, I wouldn't be willing to hit my head with ahammer with probability 25% in order to go to thebeach with probability 100% - epsilon, so themagnitude of the second utility ought to be muchlarger. YMMV.ETA: Well, if you don't specify how hard I amsupposed to hit myself, maybe I would. :-)
+[-]
+Art of Strategy describes a debate from1990s US politics revolving around so-called “line-item veto” power, the abilityto veto only one part of a bill....During the'90s, President Clinton fought pretty hardfor this power, which seems reasonable asit expands his options when dealing withthe hostile Republican Congress.Just for the beneﬁt of those who don't know thehistory (and won't bother to click on theWikipedia link), it should be noted that theRepublican Congress happily gave Clinton this power(perhaps not so surprising after reading this post!),but it was struck down by the Supreme Court(which functions as° America's House of Lords --kind of a mirror image of how the actual House ofLords used to function as Britain's SupremeCourt).
+drnickbone4
+[-]
+Not sure about the politics, but presumably:A) Republicans thought that they were likely tobeneﬁt in future (with a Republican president)B) They might have thought they'd beneﬁt in thepresent too (e.g. By inserting clauses into billsthat would be popular with supporters, but whichthey knew Clinton would line-item veto; so hegets the ﬂack)C) They calculated it would likely reducegovernment spend overall (by preventing "must-pass" bills being stuffed full of pork)11y 
+11y 
+pass" bills being stuffed full of pork)
+AspiringRationalist4
+[-]
+C) They calculated it would likelyreduce government spend overall (bypreventing "must-pass" bills beingstuffed full of pork)That was the public goal of the line item veto,and I would imagine that both President Clintonand the vast majority of members of Congresswanted to decrease the amount of pork in thebudget (even if those same members wanted toincrease the amount of pork for their state ordistrict).This model of the line-item veto game makes afew faulty assumptions that make it a poorrepresentation of reality:It represents the relationship betweenthe Republican Congress and PresidentClinton as essentially zero-sum (given thepossibility of a deadlock, it's not quitezero-sum, but very close), when in reality,they had some shared goals beyond justaverting a government shut-downIt models Congress as a single agent,when it is really 535 agents. Note to non-Americans: the two parties that dominateAmerican politics generally use primaries toselect their candidates for Congress, and it isvery rare for a member of Congress seekingre-election to change districts, which meansthat keeping voters in one's home districthappy is typically more important tomembers of Congress than keeping partyofﬁcials happy.It models the line-item veto as a muchcoarser instrument than it was. It wouldhave given the President the ability toveto funding for particular projects, notjust "increased domestic spending" or"increased military spending."Because members of Congress answer more totheir own districts than to party leadership,there is a tragedy of the commons problemwhere each member has a strong incentive togo after pork in their own district/state, andalthough they all want less pork, no one hasmuch incentive to do anything about it. The line11y 
+mwengler1
+Kaj_Sotala1
+cousin_it4
+much incentive to do anything about it. The lineitem veto would have given one person theability and incentive to address the issue.
+[-]
+it should be noted that the RepublicanCongress happily gave Clinton this power(perhaps not so surprising after readingthis post!)Sorry, why is that not surprising? In Yvain'sexample, Congress ends up worse off as well.
+komponisto2
+[-]
+True; I should have said "less" surprising ratherthan "not so". (The point being that it's not thelopsided pure transfer of power to Clinton thatit naïvely seems to be at ﬁrst.)
+[-]
+The line item veto is probably a bad choice to useas an example. In the current US political climate,there is a signiﬁcant life to the meme of paralyzingwashington on purpose to get spending down "atany expense." So the problem with your currentexample is the current American may look at it andthink you are presenting lower over all spending assome kind of win, when int his example it isintended to show a loss to both sides.And indeed, it seems a president who wantedlower overall spending would support the line itemveto. She could then get the credit for vetoing thethings her constituents don't want and lay theblame for under funding the things her constituentsdo want on the opposite party. And of course takethe credit for a lower overall budget irrespective ofwhat she would have done running open loop. Isthis an example of some more complex gametheory, or do results like this come about relativelystraightforwardly in simple game theory?
+[-]
+Fascinating, thanks. I already knew a lot of this in avague manner, but it was nice to see it made11y 
+11y 
+11y 
+11y 
+BloodyShrimp0
+tom_cr0
+MaoShan0shminux0vague manner, but it was nice to see it madeconcrete and clear.This seems to have obvious evpsych implicationsregarding emotions such as love and friendship - ifyou love somebody enough that you can't takeserious actions against them, even if it wouldotherwise be rational (for a purely selﬁsh agent),then it's also more proﬁtable for your partner tokeep interacting with you. Of course, handicappingyourself is only a good idea if the other person isn'tout to ruthlessly exploit you anyway, so love oftendemands a lot of reciprocity - unless, perhaps(getting into strong armchair evpsych territory°here), the status difference is so large that you havepotentially more to gain than lose anyway. I expectsomebody here can give a pointer to the standardpapers about this?
+[-]
+This is a bit off-topic/already guarded against byyour disclaimer, but if black takes the pawn afterwhite takes the knight (the single move from thatnode of the given tree), black will lose the bishopand the rook immediately, and the game very soon.
+[-]
+Nice discussion of game theory in politics. Is thereany theoretical basis for expecting the line-itemveto generally to be more harmful than beneﬁcialto the president?(Not an attempt to belittle the above fascinatingexample, but genuine interest in any related, moregeneral results of the theory.)
+[-]
+Is that Chess for Kindle?
+[-]
+I doubt that the line-item veto is a good example,because there are so many complications in anykind of real politics. For example, C&C might agreein advance that a certain line item will be includedonly if some other item is not vetoed. This9y 
+9y 
+10y 11y 
+only if some other item is not vetoed. Thisimproves everyone's utility without going all theway back to the "all-or-nothing" setup, in essenceprioritizing the line items.An example where workarounds are impossible orunlikely would illustrate the standard idea ofworking backwards better.
+drethelin2
+[-]
+How about a hostage negotiation? If thenegotiator has a gun, that gives him more options,but it also means the kidnapper has to take it intoaccount. This may lead to a breakdown incommunications.
+shminux-2
+[-]
+I think that expecting rationality from akidnapper is pushing it a bit.11y 
+11y 

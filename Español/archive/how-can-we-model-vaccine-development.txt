@@ -1,0 +1,92 @@
+¿Cómo podemos modelar el desarrollo de vacunas? · Giving What We Can
+Abrir menú principal
+Investigación
+Comunidad
+Mis donaciones
+Donar
+Iniciar sesión
+Blog
+¿Cómo podemos modelar el desarrollo de vacunas?
+Entrada de blog
+¿Cómo podemos modelar el desarrollo de vacunas?
+Callum Calvert
+5
+min de lectura
+8 nov 2012
+Las enfermedades en el mundo en desarrollo causan un enorme sufrimiento. Controlarlas requiere sumas enormes de dinero. ¿Podría financiar el desarrollo de una vacuna, poniendo fin de una vez por todas a los problemas que causa esa enfermedad específica, ser una forma inmensamente costo-efectiva de donar? El argumento a favor de este tipo de donación caritativa es obvio: dar dinero a quienes hacen esta investigación y desarrollo (I+D) adelantará el día en que la vacuna esté disponible (el momento en que una vacuna eficaz está lista para usarse), el día V. Adelantar este punto incluso un solo día podría evitar una cantidad importante de AVAD. Hemos estado analizando algunas formas de modelar la costo-efectividad de financiar una organización general de desarrollo de vacunas. Esta entrada explorará el primero de estos modelos.
+El Sabin Vaccine Institute es un buen ejemplo de este tipo de organización. Sabin lleva a cabo I+D sin fines de lucro para varias vacunas contra enfermedades desatendidas, pero GWWC está especialmente interesada en su trabajo sobre la esquistosomiasis (también conocida como bilharzia, bilharziosis o fiebre de los caracoles), una vacuna que está programada para entrar en ensayos clínicos de fase 1 el próximo año. El objetivo de esta serie de entradas de blog es obtener una estimación confiable de la costo-efectividad de las donaciones a este programa de desarrollo de la vacuna contra la esquistosomiasis.
+Para empezar, supondremos que una vacuna se producirá con seguridad en algún momento, ya sea por el programa al que donamos o por otro. Entonces, con cualquier modelo hay una forma natural de dividir el cálculo en 2 partes. En primer lugar, queremos saber cuánto adelantará nuestra donación el día V. En segundo lugar, queremos averiguar cómo adelantar ese acontecimiento trascendental en 1 unidad de tiempo se traduce en efectos positivos en el mundo en desarrollo (medidos en AVAD). Luego combinaremos estas cifras para obtener un valor del efecto positivo por donación.
+Entonces, ¿cuánto afectará nuestra donación al día V? Digamos que la organización se encuentra en cierta etapa de su investigación y planea iniciar su siguiente etapa en algún punto futuro particular
+si
+reúnen un fondo de tamaño G. Si no, pospondrán la etapa hasta una fecha T años después de la primera. Solo nos interesa si mi donación (de tamaño D) marca la diferencia entre que la investigación avance o se posponga; por eso, cuán eficaz consideramos la donación dependerá en gran medida de cuánto creemos que la organización recaudará en otros lugares. Si creemos que llenarán su fondo y algo más, o que todos los demás se mantendrán alejados, es poco probable que mi donación marque mucha diferencia en el resultado. El problema, por supuesto, es que no sabemos cuánto va a donar todo el mundo. Para resolverlo, podemos intentar estimar una distribución de cuánto creemos que dará todo el mundo en total. Es razonable suponer que el monto total donado (sin contar nuestra donación) se distribuye normalmente [La razón es que F es la suma de muchísimas donaciones de otras personas. Suponiendo (por simplicidad) que las decisiones de donación de cada individuo son independientes, el teorema del límite central dice que su suma será aproximadamente normal]. En ese caso, la probabilidad de que nuestra donación marque la diferencia es P[G - D < F < G]; es decir, la probabilidad de que el monto total donado (sin contar nuestra donación) quede a D de llenar el fondo, de modo que nuestra donación lo complete (esta probabilidad está representada por el área gris del gráfico de abajo). Así, nuestro impacto esperado en el tiempo del día V será P[G - D < F < G]
+T
+p, donde p es la probabilidad de que el programa produzca con éxito una vacuna (si el programa no logra producir una vacuna, entonces nuestra financiación no ha adelantado el uso de ninguna vacuna y, lamentablemente,
+muchos proyectos de vacunas fracasan).
+.)
+Ahora, ¡la parte 2! Hay 2 efectos positivos importantes que podrían derivarse de tener una vacuna disponible antes.
+En primer lugar, las personas en riesgo de contraer la enfermedad se beneficiarán de que la vacuna esté lista para usarse antes. Por el momento, supondremos que la erradicación se logra exactamente T años antes si la vacuna se desarrolla con éxito sin el retraso en la investigación causado por la falta de financiación. (Podría haber razones por las que esto no sea cierto; por ejemplo, que la vacuna no sea el factor limitante en el esfuerzo de erradicación). Suponiendo que la erradicación se logra eventualmente en todos los casos y ocurre de la misma manera sin importar cuándo comience el esfuerzo, al observar el gráfico de abajo vemos que nuestro impacto depende de la carga mundial de la enfermedad (AVAD causados anualmente por la enfermedad) entre T1, el momento en que la vacuna estará lista si se alcanza la financiación, y T2, el momento en que la vacuna estará lista si la siguiente etapa del desarrollo se retrasa por falta de financiación. Así, si la carga mundial de la enfermedad es de B AVAD/año, el beneficio esperado de nuestra donación es el impacto temporal esperado de nuestra donación multiplicado por B. Esto es B* P[G - D < F < G]
+T
+p AVAD.
+El segundo beneficio se debe a que el costo anual de controlar una enfermedad podría ser enorme. Si suponemos que el dinero destinado al control se desviaría de otro modo a otras intervenciones de salud en el mundo en desarrollo, esto podría evitar un número enorme de AVAD. Sea el costo de controlar la enfermedad $C/año. Si la costo-efectividad promedio de las intervenciones de salud en el mundo en desarrollo es X AVAD/$, entonces por cada dólar desviado el beneficio es C
+X AVAD/año. Por lo tanto, multiplicando como antes, el beneficio esperado de nuestra donación debido a los dólares desviados es C
+X*P[G - D < F < G]
+T
+p AVAD.
+Así, nuestra primera estimación básica de beneficio para una donación de tamaño D a una organización de desarrollo de vacunas es la suma de los 2 beneficios de nuestra donación, (B+C*X)*P[G - D < F < G]
+T
+p AVAD. Suponiendo algunos números bastante conservadores para los insumos y para los parámetros de la distribución de la financiación, parece que las organizaciones de vacunas tienen el potencial de ser bastante costo-efectivas.
+Hay otros factores que aún deben tenerse en cuenta. Por ejemplo, algunas vacunas son solo parcialmente eficaces y algunas enfermedades podrían controlarse por otros medios antes de que se desarrolle una vacuna. Asignar investigadores biomédicos escasos a la investigación de vacunas los apartará de otros programas de I+D. En futuras entradas, al explorar otros modelos, esperamos encontrar formas de abordar estas cuestiones.
+Su selección actual
+Los fondos u organizaciones que seleccione aparecerán aquí
+Asignar donación
+Pie de página
+Una mejor manera de hacer un mundo mejor.
+Giving What We Can es una comunidad de donantes efectivos. Inspiramos a las personas a donar más y a hacerlo de forma más efectiva.
+¡Suscríbase a nuestro boletín!
+Facebook
+Twitter
+Instagram
+YouTube
+LinkedIn
+Tick Tock
+Acerca de
+Sobre nosotros
+Contáctenos
+Nuestro equipo
+Nuestros valores
+Nuestros miembros
+Nuestros eventos
+Transparencia
+Nuestros errores
+Nuestro impacto
+Donar a Giving What We Can
+Empleo
+Más información
+Nuestras mejores organizaciones benéficas
+Comprométase a donar
+Involúcrese
+Deje un legado
+Videos, libros, podcasts
+Preguntas frecuentes
+Mapa del sitio
+Prensa
+Kit de prensa
+Cobertura en medios
+Casos de estudio: personas que se comprometen a donar
+Donar
+Compromiso
+Giving What We Can es un
+Effective Ventures
+proyecto. Effective Ventures Foundation (UK) (EV UK) es una organización benéfica en Inglaterra y Gales (con número de registro de organización benéfica 1149828, número de registro de empresa 07962181, y también es una entidad registrada en los Países Bajos con deducción fiscal ANBI 825776867). Effective Ventures Foundation USA Inc. (EV US) es una organización 501(c)(3) en EE. UU. (EIN 47-1988398). EV UK y EV US son organizaciones benéficas independientes que colaboran estrechamente bajo el nombre “Effective Ventures”. Para otras ubicaciones, consulte
+asesoramiento sobre deducibilidad fiscal por país
+.
+© Giving What We Can – todos los derechos reservados. Por favor
+contáctenos
+si desea redistribuir, traducir o adaptar esta obra.
+Política de privacidad
+|
+Términos y condiciones
+|
+Aviso de cookies
+Contenido estructurado con tecnología de
+Sanity.io

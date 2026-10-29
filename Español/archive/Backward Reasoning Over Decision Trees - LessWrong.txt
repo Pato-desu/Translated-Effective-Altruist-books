@@ -1,0 +1,225 @@
+Teoría de juegos
+Portada. La teoría de juegos es el estudio de cómo interactúan los actores racionales para perseguir incentivos. Parte de las mismas premisas cuestionables que la economía: que todos se comportan racionalmente, que todos son puramente egoístas1, y que los deseos pueden cuantificarse con exactitud; y la usa para investigar situaciones de conflicto y cooperación. Aquí empezaremos con algunas observaciones bastante obvias sobre los árboles de decisión, pero al final tendremos las herramientas necesarias para explicar un hallazgo algo sorprendente: que dar a un presidente de Estados Unidos el poder adicional de veto de partidas puede, en muchos casos, hacer que el presidente sea menos capaz de llevar a cabo sus políticas. Empecemos por el principio: la unidad básica de la teoría de juegos es la elección. Los agentes racionales eligen para maximizar su utilidad, que es algo así como una medida de cuán felices están. En un juego de una persona, sus elecciones lo afectan a usted mismo y quizá al entorno natural, pero a nadie más. Estas son bastante sencillas de tratar Razonar hacia atrás sobre árboles de decisiónpor Scott Alexander29 de junio de 2012
+152
+con:
+Aquí visualizamos una elección como un árbol de ramas. En cada rama elegimos la opción con mayor utilidad; en este caso, ir a la playa. Como cada resultado lleva a nuevas elecciones, a veces los árboles de decisión pueden ser más largos que este:
+Aquí hay una decisión un poco más difícil, expresada en dinero en lugar de utilidad. Si quiere ganar todo el dinero posible, entonces su primera elección —ir a la universidad o empezar ahora mismo un trabajo con salario mínimo— parece favorecer el trabajo con salario mínimo, que es más lucrativo. Pero cuando se toma en cuenta lo que viene después, la universidad abre opciones futuras más lucrativas, según indican los totales en gris del lado derecho. Esto ilustra el principio importante de razonar hacia atrás sobre los árboles de decisión. Si razona hacia adelante, tomando la mejor opción en la primera elección y así sucesivamente, termina como gerente de nivel bajo. Para obtener el dinero de verdad, hay que empezar por el final —el total de la derecha— y luego examinar qué elección en cada rama lo llevará hasta allí.
+en cada rama lo llevará hasta allí. Todo esto es tan obvio como, bueno, no darse un martillazo en la cabeza, así que pasemos a donde realmente se pone interesante: los juegos de dos jugadores.
+Juego con blancas, y es mi turno. Por simplicidad considero solo dos opciones: la dama toma al caballo o la dama toma la torre. El único libro de ajedrez que he leído valora las piezas en número de peones: un caballo vale tres peones, una torre cinco, una dama nueve. Así que, a primera vista, parece que mi mejor jugada es tomar la torre negra. En cuanto a las negras, he elegido arbitrariamente como su jugada preferida en la posición actual que el peón tome peón, pero si yo juego la dama toma la torre, se les abre una nueva opción: el alfil toma a la dama. Veamos el árbol de decisión:
+
+Si juego insensatamente este juego de dos jugadores de la misma manera que jugué el de ir a la universidad de una persona, veo que la rama del medio tiene la mayor utilidad para las blancas, así que elijo la jugada que lleva allí: capturar la torre. Y luego las negras juegan alfil toma a la dama, y yo me quedo lamentándome y crujiendo los dientes. ¿Qué hice mal? Debería empezar suponiendo que las negras, cada vez que tengan una elección, tomarán la opción con mayor utilidad para ellas. A menos que sean tontas, puedo tachar cualquier rama que obligue a las negras a jugar contra sus propios intereses. Así que ahora el árbol se ve así:
+Las dos opciones realistas son: jugar dama toma torre y quedarme sin dama, con -4 de utilidad, o jugar dama toma caballo y terminar con una ganancia modesta de 2 de utilidad. (Mis disculpas si se me ha pasado alguna posibilidad estratégica obvia en este tablero; no soy muy bueno en ajedrez, pero espero que el punto del ejemplo sea claro.) Este método de alternar jugadas en un árbol de ramas coincide tanto con nuestros procesos de pensamiento intuitivos durante una partida de ajedrez (“Bueno, si hago esto, entonces las negras van a hacer esto, y luego yo haría esto, y luego... ”) y el
+y luego yo haría esto, y luego... ”) y el fundamento de algunos de los algoritmos que usan computadoras de ajedrez como Deep Blue. De hecho, puede parecer bastante obvio, o incluso innecesario. Pero puede usarse para analizar juegos más complicados con resultados contraintuitivos. El arte de la estrategia describe un debate de la política estadounidense de los años noventa sobre el llamado poder de veto de partidas (“line-item veto”), es decir, la facultad de vetar solo una parte de un proyecto de ley. Por ejemplo, si el Congreso aprobara una ley que declarara marzo como Mes Nacional de la Teoría de Juegos y abril como Mes Nacional de Conciencia sobre los Árboles de Ramas, el presidente podría vetar solo la parte sobre abril y dejar marzo intacto (tal como funciona hoy la política, el presidente solo puede vetar o aceptar la ley completa). En los años noventa, el presidente Clinton luchó con firmeza por este poder, lo que parece razonable, ya que amplía sus opciones frente a un Congreso republicano hostil. Pero Dixit y Nalebuff explican que obtener el poder de veto de partidas podría perjudicar a un presidente. ¿Cómo? Los árboles de ramas pueden explicarlo. Imaginemos que Clinton y el Congreso republicano están peleando por un presupuesto. Podemos pensarlo como un juego de jugadas secuenciales, como el ajedrez. En su turno, el Congreso propone un presupuesto. En el turno de Clinton, él acepta o rechaza el presupuesto. Un jugador “gana” si el presupuesto contiene sus proyectos favoritos. En este juego, partimos de presupuestos bajos para lo doméstico y lo militar. Clinton realmente quiere subir el gasto doméstico (utilidad +10), y tiene una leve aversión a subir el
+gasto militar (utilidad -5). El Congreso realmente quiere subir el gasto militar (utilidad +10), pero tiene una leve aversión a subir el gasto doméstico (utilidad -5). El statu quo es utilidad cero para ambas partes; si ninguno de los dos llega a un acuerdo, los votantes se enojan con ellos y ambos pierden 2 de utilidad. Este es el árbol cuando Clinton no tiene el poder de veto de partidas:
+Para cualquier elección republicana particular, Clinton nunca responderá de forma que no maximice su utilidad, así que los republicanos razonan hacia atrás y llegan a algo como esto:
+Si los republicanos son agentes perfectamente racionales, eligen la segunda opción, gasto doméstico alto y gasto militar alto, para darles su utilidad más alta razonablemente obtenible, de 5. Pero ¿qué pasa si Clinton tiene el poder de veto de partidas? Ahora sus opciones se ven así:
+Si los republicanos se mantienen en su elección anterior de “gasto doméstico alto y gasto militar alto”, Clinton veta el gasto militar, y terminamos con una situación idéntica a la primera elección: Clinton sentado sobre un montón de utilidad, y los republicanos lamentándose y crujiendo los dientes. Los republicanos necesitan encontrar una nueva estrategia, y su proceso de pensamiento, basado en Clinton como maximizador de utilidad, se ve así:
+Aquí la elección de mayor utilidad para el Congreso es proponer un gasto doméstico bajo (no importa si le dan más dinero al ejército o no, porque esto será vetado por partidas). Digamos que proponen un gasto doméstico bajo y un gasto militar bajo, y Clinton lo acepta. Las utilidades son (0, 0), y ahora hay mucho lamento y crujir de dientes en ambos bandos (los teóricos de juegos llaman a esto un “equilibrio de rechinar de dientes”; quizá lo haya oído). Pero ahora Clinton tiene una utilidad de 0, en lugar de una utilidad de 5. Darle opciones adicionales ha
+una utilidad de 5. Darle opciones adicionales le ha costado utilidad. ¿Por qué debería pasar esto, y no debería poder evitarlo? Esto ocurrió porque las nuevas capacidades de Clinton afectan no solo sus propias elecciones, sino también las de sus oponentes (compare Schelling: La estrategia del conflicto°). Podría lidiar con esto si logra que los republicanos confíen en él. En resumen, los juegos secuenciales simples pueden explorarse a menudo razonando hacia atrás sobre árboles de decisión que representan las elecciones de los jugadores involucrados. La próxima entrada hablará de los juegos simultáneos y del concepto de equilibrio de Nash.Notas al pie:1: La teoría de juegos exige el interés propio en el sentido de que todos los jugadores se mueven únicamente por el deseo de maximizar su propio pago en el juego que se está jugando, sin considerar el bienestar de los demás jugadores ni ningún estándar externo de equidad. Sin embargo, también puede usarse para describir el comportamiento de agentes altruistas, siempre que sus preocupaciones altruistas estén representadas en la evaluación de su pago.Teoría de juegos3
+Portada. Mencionado en 1127658 comentarios, ordenados por puntuación más alta. La biblioteca de Scott Alexandria. Introducción a la teoría de juegos: Secuencia. Guía
+cousin_it33
+Viliam_Bur24
+[-]
+¡Qué bien que esté haciendo esto! El ejemplo del veto de partidas es un poco demasiado complicado para mi gusto. Aquí va uno más sencillo: digamos que Alicia tiene la opción de cocinar un pastel, pero debe compartir la mitad con Bob. Así que Alicia cocina el pastel y todos están contentos. Ahora demos a Bob la opción de robarse todo el pastel y frustrar a Alicia. Entonces Alicia no cocinará el pastel, porque anticipará que la decisión óptima de Bob la dejaría sin pastel y la frustraría, así que todos quedan peor.
+Alex Vermillion4
+[-]
+Muchas gracias por esta explicación más sencilla; no lograba captar del todo el concepto al 100%. Esto también me da una forma muy fácil de explicar el concepto con menos tecnicismos.
+[-]
+Sugerencia: los republicanos deberían usar un papel más ancho y escribir “gasto doméstico alto” y “gasto militar alto” en la misma línea. Así recuperan sus 5 puntos de utilidad. :D
+TimS42
+[-]
+Bueno, sí. La definición precisa de partida es un asunto esencial para aplicar un veto de “partidas”. Varía según la jurisdicción, y no sé cuál era la definición federal. En Wisconsin, el veto se hacía aparentemente letra por letra, así que un gobernador paciente (o un asistente) podía cambiar por completo una disposición buscando las letras apropiadas. Financiar las artes mediante un proyecto de ley destinado a ayudas agrícolas y similares. (Cómo eso cumple con el principio de separación de poderes me deja perplejo, pero eso es política, no la letra de la ley).
+Zack_M_Davis26
+[-]
+un gobernador paciente (o un asistente) podía cambiar por completo una disposición buscando las letras apropiadas11y 
+2y 
+11y 
+11y 
+11y 
+TheOtherDave26Las cosas empeoran (¿mejor?): en un mundo computarizado, la paciencia es irrelevante. Supongamos que tenemos un veto de partidas sobre el Título I del Código de Estados Unidos (U. S. Code), y creemos que sería mejor que, en lugar de todas esas aburridas “disposiciones generales” y “reglas de interpretación”, este documento codificara en ley la máxima de P. C. Hodgell de que “Lo que puede ser destruido por la verdad, debe serlo.” Entonces, lanzando un hechizo como este---#!/usr/python3title1 = open("Title_01.txt").read()target = "That which can be destroyed by the truth, should be."target = list(target)target.reverse()keep_chars = []for i, c in enumerate(title1):....try:........if c == target[-1]:............keep_chars.append(i)............target.pop()....except:........breakprint(keep_chars)revised = ""for i in keep_chars:....revised += title1[i]print(revised)---vemos que todo lo que hay que hacer es vetar todos los caracteres excepto el cuarto, el 408.º, 409.º, 502.º, 510.º, 705.º, 894.º, 895.º, 936.º (más números omitidos ...) y el 8786.º.
+MBlume12
+[-]
+en un mundo computarizado, la paciencia es irrelevante. ¡Y aquí está la lección generalizada =)
+[-]
+En Wisconsin, el veto se hacía aparentemente letra por letra, así que un gobernador paciente (o un asistente) podía cambiar por completo una disposición buscando las letras apropiadas.11y 
+11y 
+Psy-Kosh12letras apropiadas. Yo... Pero eso... ¿Quiere decir...? (gimotea y se esconde) *
+TimS47
+Eliezer Yudkowsky19
+[-]
+Ejemplo: el derecho, como área de práctica, está hecho de problemas de “Complejidad oculta de los deseos”°.
+TheOtherDave26Swimmer96313[anonymous]3
+[-]
+“Intento ser cínico, pero es difícil seguir el ritmo.”
+[-]
+Leí el ejemplo y mi primer instinto fue comprobar si en realidad era un artículo de The Onion. Pero aparentemente no lo es. (Llora.)
+[-]
+¡Dios mío... Esta debe ser la cosa más impactante que he visto en un buen rato.
+Kawoomba15
+[-]
+¡Dios mío... Esta debe ser la cosa más impactante que he visto en un buen rato. opus bestiae. Qué poético. Bien dicho.
+[-]
+Me preguntaba cómo alguien logró terminar como emperador-dios de Wisconsin.
+[-]
+¡Letra por letra... BWA?!?! ¿Cómo, cómo pasó una ley de veto de partidas que permite11y 
+11y 11y 11y 11y 
+11y 11y 
+¿Cómo, cómo pasó una ley de veto de partidas que permite la edición letra por letra? No puede ser que “ah, no imaginamos que se pudiera explotar”. Si sabían que estaban dando el poder de cortar realmente un proyecto aprobado letra por letra, entonces tenían que saber que estaban dándole al gobernador un poder arbitrario.
+TheOtherDave13
+[-]
+Me gustaría compartir su confianza en la coherencia de los legisladores. Mi suposición es que alguien quería convertir un plural en un singular o algo relativamente inocuo como eso, y realmente no pensó en el uso de la “nota de rescate”.
+Psy-Kosh6
+[-]
+Pero... incluso dando por hecho que no sean tan listos, uno pensaría que sabrían que la capacidad de cortar y desmenuzar un proyecto de ley a discreción sería demasiado. (Sé que puedo estar mostrando sesgo retrospectivo, pero... ¡son políticos! Deben haber tenido experiencia con, digamos, personas que sacan de contexto sus palabras (o las de sus colegas) y las hacen sonar como otra cosa, o que lo hacen ellos mismos con un oponente, ¿verdad? Es decir, la capacidad de cortar y desmenuzar alguna comunicación para convertirla en algo completamente distinto sería algo de lo que uno pensaría que ya tienen experiencia personal. Al menos, eso es lo que imaginaría. Aunque, en fin, está la navaja de Hanlon y todo eso.
+TheOtherDave22
+[-]
+Hace muchos años, un compañero de trabajo me contactó para pedir una estimación de lo que costaría modificar nuestro código de cálculo de impuestos para dar soporte a una nueva ley recién aprobada por la legislatura de Texas, que especificaba que los primeros $25 de cargos por Internet de los suscriptores residenciales de Texas estaban exentos de impuestos estatales. Yo pregunté: “Bueno, depende. ¿Qué significa ‘primeros’? Si quieren decir que en cada factura debemos reducir la base imponible en $25, 
+10y 
+10y 
+faul_sname2
+debemos reducir la base imponible en $25, podemos hacerlo fácilmente. Si quieren decir que en cada factura debemos ordenar cronológicamente todos los cargos y luego excluir esos cargos del impuesto, eso es mucho más complicado, y si las tasas varían según el cargo, el resultado será diferente. Si en realidad quieren decir los primeros $25 por cada suscriptor y no por cada factura, eso es más fácil (pero distinto de las dos primeras opciones).” El compañero dijo: “Excelente pregunta. Lo consultaré con el cliente.” Una semana después, me reenvió un correo del representante del cliente que decía: “Excelente pregunta. Lo he consultado con nuestros abogados.” Un mes después, me reenvió un correo del representante del cliente, reenviado por los abogados, que decía: “Excelente pregunta. Hemos consultado a la Legislatura estatal.” Varios meses más tarde, el consenso parecía ser que la Legislatura estatal nunca había pensado en qué querían decir con “primeros”. Mi confianza en que los políticos se preocupen por lo que quieren decir es muy baja.
+Psy-Kosh2
+[-]
+Ay.
+[-]
+Depende. Podrían hacer las leyes realmente, realmente cortas.
+Psy-Kosh3
+[-]
+“¡Puedo hacer que este código compile muy rápido!” “¿Ah, sí? ¿Cómo?” “Bueno, lo único que tengo que hacer es marcar cada línea como comentario....” :)10y 11y 10y 
+Raemon5
+[-]
+Para su información, según Wikipedia esto se cambió en 1990. En 1990, una enmienda adicional especificó que el veto de partidas no da al gobernador el poder de vetar letras individuales de los proyectos de ley de asignaciones, con lo que se forman nuevas palabras.[2]
+nshepperd6
+TimS2
+[-]
+¿Pero el gobernador aún podía vetar palabras individuales para crear oraciones sin relación?
+Benquo12
+Raemon1
+[-]
+Walker tiene los poderes de veto más amplios de cualquier gobernador del país, lo que le permite eliminar disposiciones enteras del presupuesto o reescribir secciones tachando selectivamente palabras.
+[-]
+Sabe, en realidad no estoy seguro...
+[-]
+Mientras buscaba un ejemplo específico°, encontré referencias a su reciente derogación. Pero mi ejemplo es de ~2005, así que hay alguna inconsistencia en algún lugar. No pude encontrar el artículo de Wikipedia que usted cita; ¿está seguro de que trataba de Wisconsin?
+Endovior4
+[-]
+Lo que se derogó parece haber sido la facultad de vetar letras individuales (creando nuevas palabras). Fue una solución ridículamente incompleta, porque en lugar de vetar letras individuales para crear la redacción que quisiera el gobernador (como era antes), ahora está limitado a vetar muchísimas palabras hasta encontrar la redacción exacta que quería. De ahí que el ejemplo se vea como muchísimas palabras tachadas, en lugar de letras específicas11y 
+11y 11y 
+11y 11y 
+11y 
+kilobug21
+Raemon1palabras tachadas, en lugar de letras específicas tachadas. El poder implicado es bastante similar, pero es algo más difícil de usar si se está limitado a palabras completas.
+[-]
+http://en.wikipedia.org/wiki/Governor_of_Wisconsin
+[-]
+Buena introducción, nada nuevo (pero el ejemplo del “veto de partidas” es bueno), aunque vale la pena tenerla a mano. Una cosa que me hizo “crujir de dientes” un poco: “que todos son puramente egoístas”. Eso no es realmente el caso. La teoría de juegos normalmente considera que todos son maximizadores de utilidad, pero nada dice que la función de utilidad tenga que ser egoísta. La función de utilidad puede incluir el bienestar y la felicidad de los demás. Puede aplicar la teoría de juegos en casos como la relación padres-hijos, en los que padre e hijo no están de acuerdo, pero el padre aun así está motivado por el interés del hijo. Incluso en los casos más clásicos, nada obliga a que la función de utilidad sea egoísta y no valore el bienestar de los demás. La teoría de juegos solo se aplica cuando los agentes tienen objetivos distintos, pero eso puede ser simplemente “valoro mi propio bienestar el doble que el bienestar del otro”, lo cual no es “puramente egoísta”. Me hace “crujir de dientes” porque es un cliché muy frecuente que los racionalistas y los maximizadores de utilidad son necesariamente egoístas y no se preocupan por los demás, y es un cliché contra el que deberíamos luchar. Dicho esto, entiendo que una parte entera de la teoría de juegos consiste en mostrar cómo incluso el puro egoísmo puede, en algunos casos, llevar a que la cooperación sea la mejor solución. Su “veto de partidas” es un buen ejemplo: Clinton y el Congreso todavía pueden cooperar para obtener el equilibrio anterior de 5-5, si confían el uno en el otro, y esto acaba siendo un dilema del prisionero iterado.11y 
+11y 
+Kawoomba19
+AspiringRationalist10
+Scott Alexander1
+[-]
+La teoría de juegos solo se aplica cuando los agentes tienen objetivos distintos. Eso no es del todo cierto. También puede aplicarse cuando tienen objetivos idénticos pero información diferente, por ejemplo, el juego “Meet in New York” que se analiza en la próxima entrada. Aun así deberían acabar en un equilibrio de Nash, y, según los detalles de un juego cooperativo, puede ser aplicable la inducción hacia atrás.
+[-]
+Ver mi respuesta a steven0461° y mi nota al pie. Sí, eventualmente podremos derivar la cooperación, pero la derivaremos partiendo de supuestos egoístas.
+scav0
+[-]
+No creo que las matemáticas modelen la motivación de todos modos. Está abstraída; cada agente maximiza una función de utilidad. Tampoco la utilidad del modelo (que está bien definida) es isomorfa a la utilidad de una persona que toma decisiones en el mundo real (que no lo está). Pero nuestras mentes parecen aprender mejor cuando las cosas se expresan en términos de una historia sobre personas. Hmm. Quizá un peligro de esto sea suponer que su propia historia interna sobre lo que significan las ecuaciones es lo que realmente significan, de modo que termine demasiado confiado en que el resultado de una decisión en el mundo real será como la historia en su cabeza.
+[-]
+Este método de alternar jugadas en un árbol de ramas coincide tanto con nuestros procesos de pensamiento intuitivos durante una partida de ajedrez (“Bueno, si hago esto, entonces las negras van a hacer esto, y luego yo haría esto, y luego...”) como con el fundamento de los algoritmos que usan computadoras de ajedrez como Deep Blue.11y 
+11y 
+11y 
+11y 
+beoShaffer18¿Podría incluir una referencia a la poda alfa-beta, ya que eso es precisamente lo que está describiendo? Algunos lectores pueden estar más familiarizados con ese campo y apreciarían que se vincule explícitamente la teoría de juegos con un algoritmo de búsqueda establecido.los teóricos de juegos llaman a esto un “equilibrio de rechinar de dientes”¿Quiso decir “equilibrio de Nash”? Si era un juego de palabras deliberado, quizá convenga indicarlo para quienes buscan conceptos nuevos, ya que esta es una serie introductoria.
+Alex Flint6
+[-]
+¿Podría incluir una referencia a la poda alfa-beta, ya que eso es precisamente lo que está describiendo? Algunos lectores pueden estar más familiarizados con ese campo y apreciarían que se vincule explícitamente la teoría de juegos con un algoritmo de búsqueda establecido. Creo que quiere decir minimax. La poda alfa-beta es la optimización del minimax que poda ramas en cuanto cualquier nodo max (min) evalúa a un valor más bajo (más alto) que el más alto (más bajo) de los nodos de color opuesto evaluados hasta ahora entre los hijos de los abuelos.
+Kawoomba0
+[-]
+Cierto. Solo que no conozco a muchas personas que usen la versión original de minimax, mientras que la poda alfa-beta puede sonar conocida y usa una metodología similar, aunque, como usted dice, optimizada en complejidad y costo.
+[-]
+Bastante bueno hasta ahora. Personalmente sentí que el ejemplo del veto de partidas era bastante ilustrativo, pero usar ejemplos de política real en lugar de mantenerse con el enfoque del mes nacional de la teoría de juegos es algo discutible. En particular la línea “Si los republicanos son agentes perfectamente racionales”11y 
+11y 
+11y 
+steven046115Si los republicanos son agentes perfectamente racionales (una opinión, lo admito, abierta a dudas) puede interpretarse fácilmente como un ataque a los republicanos.
+Scott Alexander12Kaj_Sotala10
+drethelin5
+[-]
+Eliminado.
+[-]
+pero usar ejemplos de política real en lugar de mantenerse con el enfoque del mes nacional de la teoría de juegos es algo discutible. En realidad pensé que era mejor tener un ejemplo de política real; hacía que pareciera menos un juguete abstracto y más algo con relevancia real en el mundo.
+[-]
+De acuerdo. Eliminar el paréntesis mejoraría esto estrictamente, en mi opinión.
+[anonymous]6
+[-]
+O mejor, agregando “dado que son humanos” al final. (Por otro lado, no es tan inverosímil que, en ese contexto, hicieran la misma elección que harían agentes perfectamente racionales.)
+[-]
+Empieza con las mismas premisas cuestionables que la economía: que todos se comportan racionalmente, que todos son puramente egoístas, y que los deseos pueden cuantificarse de forma fácil y exacta. Estoy de acuerdo en que supone que todos se comportan racionalmente y que los deseos pueden cuantificarse exactamente, pero no veo cómo supone que todos sean puramente egoístas ni que los deseos puedan cuantificarse fácilmente.
+Scott Alexander-1
+[-]
+11y 11y 
+11y 11y 
+11y 
+11y 
+asparisi14
+Dorikka7lukeprog6
+[anonymous]6
+Scott Alexander-1Con “cuantificado fácilmente” quise decir que hay exactamente un sistema de cuantificación posible que ambos jugadores conocen y aceptan, a diferencia del lío que hay en la vida real, como se discute en el hilo de Stuart_Armstrong. Pero he eliminado esa parte porque no era clara. Con “autointeresado” me refiero, por ejemplo, a que el equilibrio de Nash del dilema del prisionero es (D,D) porque suponemos que ambos intentan minimizar su condena, y no tenemos que preocuparnos de que uno intente reducir la condena del otro a costa propia porque el otro prisionero tiene esposa e hijos, ni de que quieran alargar su propia condena para pagar su deuda con la sociedad. Estoy de acuerdo en que se podría usar la misma matemática para analizar a alguien que solo juega un juego para donar el pago a una organización benéfica, o algo así. He agregado una nota al pie que lo aclara.
+[-]
+los teóricos de juegos llaman a esto un “equilibrio de rechinar de dientes”Bien jugado, señor.
+[-]
+Sugiero agregar un enlace al final a la próxima entrada de la serie.
+[-]
+Es una introducción bien escrita, ligera y divertida. Esperaré para enlazar a mis amigos aquí°. Debería agregar una imagen atractiva a esa entrada, por ejemplo, para que aparezca con una miniatura llamativa cuando la gente la comparta desde Facebook. Por eso agregué la imagen aquí°. Ojalá que los LWers más formales no dejen de votarla positivamente solo porque es algo que ya conocen (en su mayoría).
+[-]
+11y 
+11y 
+11y 11y 
+11y 
+komponisto3¿Ir a la playa? (Utilidad +5) ¿Darse un martillazo en la cabeza? (Utilidad -20) En realidad, no estaría dispuesto a darme un martillazo en la cabeza con probabilidad 25% para ir a la playa con probabilidad 100% menos épsilon, así que la magnitud de la segunda utilidad debería ser mucho mayor. YMMV (su experiencia puede variar). EDITADO: Bueno, si no especifica con qué fuerza debo golpearme, quizá sí lo haría. :-)
+[-]
+Art of Strategy describe un debate de la política estadounidense de los años noventa sobre el llamado poder de veto por partidas, es decir, la facultad de vetar solo una parte de un proyecto de ley.... Durante los noventa, el presidente Clinton luchó con firmeza por este poder, lo que parece razonable porque amplía sus opciones al tratar con el hostil Congreso republicano. Solo para quienes no conocen la historia (y no se molestarán en hacer clic en el enlace de Wikipedia), conviene señalar que el Congreso republicano concedió con gusto este poder a Clinton (quizá no sea tan sorprendente después de leer esta publicación), pero la Corte Suprema lo anuló (que funciona como° la Cámara de los Lores estadounidense, una imagen especular de cómo la verdadera Cámara de los Lores solía funcionar como el Tribunal Supremo de Gran Bretaña).
+drnickbone4
+[-]
+No sé mucho de la política, pero presumiblemente: A) Los republicanos pensaban que probablemente se beneficiarían en el futuro (con un presidente republicano). B) Quizá creyeran que también se beneficiarían en el presente (por ejemplo, al insertar cláusulas en proyectos de ley que serían populares entre sus partidarios, pero que sabían que Clinton vetaría por partidas; así que él cargaría con el desgaste). C) Calcularon que probablemente reduciría el gasto gubernamental en general (al impedir que los proyectos de ley «de aprobación obligatoria» se llenaran de gasto clientelar)11y 
+11y 
+de aprobación obligatoria» llenos de gasto clientelar)
+AspiringRationalist4
+[-]
+C) Calcularon que probablemente reduciría el gasto gubernamental en general (al impedir que los proyectos de ley «de aprobación obligatoria» se llenaran de gasto clientelar). Ese era el objetivo público del veto por partidas, e imagino que tanto el presidente Clinton como la gran mayoría de los miembros del Congreso querían reducir la cantidad de gasto clientelar en el presupuesto (aunque esos mismos miembros quisieran aumentar el gasto clientelar para su estado o distrito). Este modelo del juego del veto por partidas hace algunas suposiciones erróneas que lo convierten en una representación pobre de la realidad: representa la relación entre el Congreso republicano y el presidente Clinton como esencialmente de suma cero (dada la posibilidad de un bloqueo no es del todo de suma cero, pero está muy cerca), cuando en realidad compartían algunos objetivos más allá de evitar un cierre del gobierno. Modela el Congreso como un solo agente, cuando en realidad son 535 agentes. Nota para quienes no son estadounidenses: los dos partidos que dominan la política estadounidense suelen usar elecciones primarias para seleccionar a sus candidatos al Congreso, y es muy raro que un miembro del Congreso que busca la reelección cambie de distrito, lo que significa que mantener contentos a los votantes de su distrito de origen suele ser más importante para los miembros del Congreso que mantener contentos a los dirigentes del partido. Modela el veto por partidas como un instrumento mucho más burdo de lo que era: le habría dado al presidente la capacidad de vetar la financiación de proyectos concretos, no solo el «aumento del gasto interno» o el «aumento del gasto militar». Porque los miembros del Congreso responden más ante sus propios distritos que ante la dirigencia del partido, existe un problema de tragedia de los comunes en el que cada miembro tiene un fuerte incentivo para buscar gasto clientelar en su propio distrito o estado, y aunque todos quieren menos gasto clientelar, nadie tiene mucho incentivo para hacer nada al respecto. El veto por partidas11y 
+mwengler1
+Kaj_Sotala1
+cousin_it4
+mucho incentivo para hacer nada al respecto. El veto por partidas habría dado a una sola persona la capacidad y el incentivo para abordar el problema.
+[-]
+Conviene señalar que el Congreso republicano concedió con gusto este poder a Clinton (quizá no sea tan sorprendente después de leer esta publicación). Perdón, ¿por qué no es sorprendente? En el ejemplo de Yvain, el Congreso también termina en peor situación.
+komponisto2
+[-]
+Cierto; debí decir «menos» sorprendente en lugar de «no tan». (La idea es que no es la transferencia de poder pura y muy desequilibrada a favor de Clinton que parece ser al principio, ingenuamente.)
+[-]
+El veto por partidas probablemente sea un mal ejemplo para usar. En el clima político estadounidense actual, la idea de paralizar Washington a propósito para reducir el gasto «cueste lo que cueste» tiene mucha fuerza. Así que el problema de tu ejemplo actual es que el lector estadounidense quizá lo vea y piense que estás presentando un gasto total más bajo como algún tipo de victoria, cuando en este ejemplo se pretende mostrar una pérdida para ambos bandos. Y, de hecho, parece que un presidente que quisiera un gasto total más bajo apoyaría el veto por partidas. Ella podría atribuirse el mérito de vetar lo que sus electores no quieren y culpar al partido contrario por la falta de financiación de lo que sí quieren. Y, por supuesto, se llevaría el crédito por un presupuesto total más bajo, independientemente de lo que habría hecho sin retroalimentación. ¿Es este un ejemplo de teoría de juegos algo más compleja, o resultados como este surgen de forma relativamente directa en la teoría de juegos simple?
+[-]
+Fascinante, gracias. Ya sabía mucho de esto de forma vaga, pero fue agradable verlo expuesto11y 
+11y 
+11y 
+11y 
+BloodyShrimp0
+tom_cr0
+MaoShan0shminux0ya sabía mucho de esto de forma vaga, pero fue agradable verlo hecho concreto y claro. Esto parece tener implicaciones evidentes para la psicología evolutiva con respecto a emociones como el amor y la amistad: si amas a alguien lo suficiente como para no poder tomar acciones serias en su contra, incluso si de otro modo sería racional (para un agente puramente egoísta), entonces también es más provechoso para tu pareja seguir interactuando contigo. Por supuesto, autolimitarse solo es buena idea si la otra persona no está dispuesta a explotarte despiadadamente de todos modos, así que el amor a menudo exige mucha reciprocidad, a menos que quizá (entrando en un terreno de psicología evolutiva de sillón°aquí) la diferencia de estatus sea tan grande que puedas tener potencialmente más que ganar que perder de todos modos. Supongo que alguien aquí puede indicar los artículos estándar sobre esto?
+[-]
+Esto se aparta un poco del tema y ya lo cubre tu aclaración, pero si las negras toman el peón después de que las blancas toman el caballo (el único movimiento desde ese nodo del árbol dado), las negras perderán de inmediato el alfil y la torre, y la partida terminará muy pronto.
+[-]
+Buena discusión de la teoría de juegos en la política. ¿Hay alguna base teórica para esperar que el veto por partidas sea, en general, más perjudicial que beneficioso para el presidente? (No es un intento de menospreciar el ejemplo fascinante anterior, sino un interés genuino en resultados más generales relacionados con la teoría.)
+[-]
+¿Eso es Chess para Kindle?
+[-]
+Dudo que el veto por partidas sea un buen ejemplo, porque hay tantas complicaciones en cualquier tipo de política real. Por ejemplo, C&C podrían acordar de antemano que cierta partida se incluya solo si otra partida no es vetada. Esto9y 
+9y 
+10y 11y 
+solo si otra partida no es vetada. Esto mejora la utilidad de todos sin llegar hasta la configuración de «todo o nada», priorizando en esencia las partidas. Un ejemplo en el que las soluciones alternativas sean imposibles o poco probables ilustraría mejor la idea estándar de razonar hacia atrás.
+drethelin2
+[-]
+¿Qué tal una negociación de rehenes? Si el negociador tiene un arma, eso le da más opciones, pero también significa que el secuestrador tiene que tenerla en cuenta. Esto puede llevar a una ruptura de la comunicación.
+shminux-2
+[-]
+Creo que esperar racionalidad de un secuestrador es forzarlo un poco.11y 
+11y 

@@ -1,0 +1,110 @@
+Herramientas de software
+Meta del sitio
+Blog personalComo ejercicio de aprendizaje°, escribí una aplicación web que muestra algunos gráficos sobre su puntuación de karma. Recomiendo ir directamente al sitio web y probarlo, pero aquí tiene también una descripción por si le interesa. Para usarlo, basta con ingresar su userid en el cuadro de texto de arriba y luego presionar el botón go. Se mostrará un mensaje de carga y, después de un rato, aparecerán cinco gráficos. El primer gráfico es un gráfico de series temporales que le muestra cuándo ha publicado un comentario o una publicación de discusión. Este gráfico le permite hacer zoom en cualquier área que desee. El segundo gráfico es una serie temporal que le muestra cuándo ha publicado una publicación principal. Este gráfico le permite hacer zoom en cualquier área que desee. El tercer gráfico muestra su karma acumulado. Este gráfico le permite hacer zoom en cualquier área que desee.Less Wrong Karma Chart Websitepor ScottL15 de febrero de 2016
+36
+área. El cuarto gráfico muestra proporciones, es decir, cuántos comentarios y publicaciones ha escrito y cuántos han sido positivos, neutrales o negativos. El quinto y último gráfico muestra información sobre sus puntuaciones positivas y negativas totales. Este gráfico le permite desglosar los datos y ver de dónde provienen sus puntos, es decir, de comentarios, publicaciones de discusión o publicaciones principales. Tenga en cuenta que puede tardar un rato en cargarse. Estoy extrayendo toda la información de su página de usuario. No debería tardar demasiado, aunque. En mi computadora tarda menos de un minuto en cargar toda la información de mi karma, pero cargar la información de karma de Eliezer_Yudkowsky tardó alrededor de media hora. Puede variar según la computadora que use. No es su puntuación lo que determina cuánto tarda, sino la cantidad de comentarios y publicaciones que ha hecho. Recomiendo usar Chrome, pues no lo he probado en otros navegadores. El karma que calcula LessWrong también podría ser ligeramente diferente de lo que muestra mi aplicación web. Por ejemplo, mi aplicación muestra la puntuación total de karma de Eliezer como 290096, y en LessWrong es 290174. Estoy bastante seguro de que mi código es correcto, porque revisé un ejemplo a mano, y sí conozco un error en el
+y sí conozco un error en el código de LessWrong que afectaría a la puntuación total. También hay otras cosas que LessWrong tiene en cuenta y yo no, por ejemplo los premios de karma y el impuesto del troll. La diferencia no debería ser demasiado grande, así que no debería ser un problema importante. El sitio web está alojado en GitHub y el código puede consultarse aquí. Resumen: pruebe Less Wrong Karma Chart Website y dígame qué le parece o si encuentra algún problema.Herramientas de software1
+Meta del sitio1
+Blog personal
+26 comentarios, ordenados por puntuación más alta philh5
+[-]
+¡Qué bien! Y parece funcionar en Firefox. Algunos comentarios: creo que algunos usuarios simplemente han recibido karma, algo que su aplicación no podría detectar. Tampoco detecta el karma perdido al pagar el impuesto del troll (responder a comentarios con votos negativos). Presionar Enter con el cuadro de texto enfocado no inició el scraping. Tuve que hacer clic en “go”. Pondría los votos positivos de las publicaciones principales y de discusión en la misma escala. (Así, el eje y de “main” sería solo 10 veces el eje y de “discusión/comentario”.) Ahora ni siquiera tienen el cero en el mismo lugar, lo cual es muy raro. Quizá también haría la escala no lineal. Es difícil hacer clic y arrastrar sobre todo el ancho o alto del gráfico. No sé qué tan fácil sería esto, pero agradecería una distinción entre meetups7y 
+agradecería una distinción entre meetups y no meetups. (Pero creo que algunos meetups están en main y otros en discusión.) Me gustaría tener más contexto sobre las publicaciones y los comentarios sin tener que visitarlos. Para las publicaciones, el título; para los comentarios, quizá el título de la publicación adjunta más unas palabras (como en la barra lateral). Puede que sea demasiado ruido para ponerlo en la caja emergente; si es así, tal vez, al hacer clic, la caja emergente se expanda y se quede allí hasta el siguiente clic, e incluya un enlace real. En realidad no muestra el karma total en ningún lugar. Tuve que obtenerlo de la diferencia entre positivo y negativo en el gráfico circular. El gráfico circular no tiene una porción para “neutral”. Me interesaría también ver el karma acumulado como serie temporal, y el karma de los últimos 30 días como serie temporal. (Esto no puede calcularse como creo que lo calcula LW: habría que hacer “karma de los últimos 30 días de comentarios/publicaciones” y no “karma otorgado en los últimos 30 días”.) Casi todo lo anterior ha sido crítica, así que lo diré otra vez: esto es realmente genial. ¡Buen trabajo!
+ScottL5
+[-]
+Presionar Enter con el cuadro de texto enfocado no inició el scraping. Tuve que hacer clic en “go”.Corregido.Pondría los votos positivos de las publicaciones principales y de discusión en la misma escala. (Así, el eje y de “main” sería solo 10 veces el eje y de “discusión/comentario”.) Ahora ni siquiera tienen el cero en el mismo lugar, lo cual es muy raro. Quizá también haría la escala no lineal.Moví las publicaciones principales a un gráfico separado. Esto debería corregir los problemas.Es difícil hacer clic y arrastrar sobre todo el ancho o alto del gráfico.7y 
+Podría cambiarlo para que solo se pueda hacer zoom en el eje y, como está aquí. No estoy seguro de qué tan fácil sería esto, pero agradecería una distinción entre meetups y no meetups. (Pero creo que algunos meetups están en main y otros en discusión.) Quizá lo revise más adelante. Me gustaría tener más contexto sobre las publicaciones y los comentarios sin tener que visitarlos. Para las publicaciones, el título; para los comentarios, quizá el título de la publicación adjunta más unas palabras (como en la barra lateral). Puede que sea demasiado ruido para ponerlo en la caja emergente; si es así, tal vez, al hacer clic, la caja emergente se expanda y se quede allí hasta el siguiente clic, e incluya un enlace real.Ya lo he actualizado. Pruébelo y dígame qué le parece.En realidad no muestra el karma total en ningún lugar. Tuve que obtenerlo de la diferencia entre positivo y negativo en el gráfico circular.Corregí el gráfico total para que tenga un título que muestre la puntuación total.El gráfico circular no tiene una porción para “neutral”.El gráfico circular pretende mostrar la puntuación total. Como neutral tiene una puntuación de 0, no creo que deba estar en el gráfico.Me interesaría también ver el karma acumulado como serie temporal.¿Sería algo parecido a esto, con la puntuación total subiendo y bajando con el tiempo?Lo haría ordenando las puntuaciones de los comentarios/publicaciones según sus fechas.
+las puntuaciones de los comentarios/publicaciones según sus fechas. y el karma de los últimos 30 días como serie temporal.¿Sería esto parecido al gráfico acumulado de arriba, pero solo para 30 días?
+philh3
+[-]
+Ya lo he actualizado. Pruébelo y dígame qué le parece.Sí, es una mejora, gracias. Probablemente cambiaría un poco el estilo, aunque no estoy seguro de cómo. Ahora mismo los tres Ah, y recomendaría añadir el año a la fecha, en lugar de obligarme a leerlo en el eje x.Sobre la serie temporal: en el acumulado, me refiero a que el eje y es “karma total acumulado en todo lo publicado hasta la fecha X”, es decir, esencialmente la integral del gráfico existente. Supongo que podría parecerse a lo que publicó, pero (al menos para mí, y para otros que publican sobre todo contenido neutral o positivo) solo bajaría en raras ocasiones.El de 30 días sería “karma total acumulado en todo lo publicado en los treinta días anteriores a X”.
+ScottL2
+[-]
+Recomendaría añadir el año a la fecha, en lugar de obligarme a leerlo en el eje x.Hecho.También hice el gráfico acumulado. Pensaré en permitir al usuario elegir las fechas que se muestran en el gráfico acumulado. Empezaría con la primera publicación o comentario y terminaría con el último, pero permitiría cambiar las fechas de inicio o de fin si se desea.7y 
+7y 
+plex4
+Vaniver4
+Viliam2
+Mati_Roy1
+[-]
+Las publicaciones de LW mejor valoradas de Aaron Swartz se pueden encontrar con esto. Apuesto a que a mucha gente le encantaría poder encontrar sus publicaciones mejor valoradas y compartirlas más ampliamente.
+[-]
+Quizá convenga forzar la línea del 0 para que ambos ejes sean iguales; cuando el mío cargó por primera vez, mi primera idea fue "¿por qué tengo tantas cajas rojas negativas?". Que los puntos de la serie temporal sean enlaces clicables es un detalle muy bueno.
+ScottL5
+[-]
+Moví las publicaciones principales a un gráfico separado. Ahora debería ser menos confuso.
+[-]
+¿Esto es puramente del lado del cliente? Si hay una base de datos disponible, podría ser útil guardar en caché los datos obtenidos mediante scraping, por si hay demasiadas personas que quieren ver los resultados de Eliezer. Los datos en caché podrían caducar después de una semana.
+ScottL2
+[-]
+¿Esto es puramente del lado del cliente? Sí. Lo alojé en GitHub Pages porque es gratis. La desventaja es que solo sirve contenido estático. Quizá pueda usar algo como Firebase, pero la verdad no quiero. Veré qué tan fácil es crear un enlace que permita descargar los datos en un archivo CSV.
+[-]
+Ya no parece estar funcionando. Quizá deberías añadir esta información al principio de la publicación.7y 
+7y 
+7y 7y 
+7y 
+3y 
+[anónimo]0[Este comentario ya no es respaldado por su autor]Elo0
+[-]
+Esta aplicación me gusta. No soy nada narcisista.
+[-]
+¿Hay alguna posibilidad de tener todos los comentarios y publicaciones en uno de esos gráficos? ¿Para todos los usuarios a lo largo del tiempo? Me gustaría ver qué publicaciones tienen >=5 y <5 de karma..
+ScottL0
+[-]
+No lo creo. Mira el comentario de Vaniver° que describe lo que hace el sitio. No conozco el proceso, pero quizá pueda enviar una solicitud a la base de datos al equipo de trike apps para estos datos.
+Elo1
+[-]
+El script debería poder ejecutarse en http://lesswrong.com/comments/ sin muchas modificaciones...
+Vaniver0
+[-]
+Sí, recomiendo no hacer scraping de LW de esa forma, sino hacer una solicitud a la base de datos o construir una página que haga esa solicitud.
+Lumifer0
+[-]
+en lugar de hacer una solicitud a la base de datos. ¿Se puede? En general, ¿hay una API disponible (y que funcione) para LW?
+Vaniver0
+[-]
+Lo que tenía en mente para esa sección es lo siguiente:7y 
+7y 
+7y 
+7y 7y 
+7y 
+7y 
+ScottL0
+quizá pueda enviar una solicitud a la base de datos al equipo de trike apps para estos datos. Hay una API, pero creo que no tiene la capacidad de hacer todo lo que nos gustaría. Mira esta issue como ejemplo de una función que falta. Pero si se tiene la capacidad, construir esa función y enviarla como pull request es mejor que hacerlo por el camino largo (ya que también ayuda a todos los demás que quieran hacer ese tipo de cosas en el futuro).
+Lumifer4
+[-]
+construir esa función. Una función que permita a cualquiera en internet golpear la base de datos del backend no es algo que deba tomarse a la ligera :-) Creo que LW primero necesita una especificación de API coherente, luego un marco de trabajo (incluyendo cosas como tokens de autenticación, limitadores de tasa, etc.), y solo después funciones específicas, por ejemplo, pedir todos los comentarios de un usuario concreto.
+[-]
+Probablemente sea cierto. Supongo que también puedo obtener la información de las publicaciones desde aquí: http://lesswrong.com/r/all/recentposts/. Un gráfico con tantos datos probablemente no sería útil, porque estaría demasiado saturado. Investigaré cómo escribir algo distinto para convertir estos datos a un formato utilizable. Editar: el enlace que compartiste solo tiene los comentarios principales, no los de discusión. No sé de dónde sacar toda la información de los comentarios.
+Elo0
+[-]
+7y 
+7y 
+7y 
+Elo0
+Elo0
+[-]
+quizá 3 meses; ¿durante los últimos 3 años? 12 gráficos en total, mostrando la tendencia...? Pensé que con el zoom podría ser utilizable, pero los gráficos separados también funcionan.
+[-]
+No sé cuánto tiempo se supone que tarda; ¿hay posibilidad de una barra de porcentaje? 5-10 minutos en total. Excelente visualización, muy útil. La usé para ver qué publicaciones de discusión mías eran buenas. En general, las que dediqué más tiempo y sentí que eran publicaciones de mayor calidad. Mi única preocupación es que la diferencia entre una publicación de primera y una mediocre es de unos 5 de karma. Mis malas publicaciones de discusión están en torno a 4 de karma o menos, las buenas están en 9 o más, con algunas intermedias. No parece que estén tan separadas en puntuación, aunque en calidad (para mí) sí lo están. Voy a pensarlo y ver si puedo dar nuevos pasos hacia arriba desde aquí...
+Vaniver2
+[-]
+No sé cuánto tiempo se supone que tarda; ¿hay alguna posibilidad de una barra de porcentaje? 5-10 minutos en total. Funciona yendo a la sección correspondiente de la página de usuario de alguien y pulsando el enlace "página siguiente" hasta que se acaben los resultados. Solo se sabe cuántos comentarios ha hecho alguien al final, así que una barra de porcentaje no es posible. (Se podría mostrar el número de comentarios extraídos hasta el momento.)
+philh3
+[-]
+Si se va por esa vía, sugeriría "fecha del comentario más antiguo extraído hasta ahora" en lugar de/además del recuento.
+7y 
+7y 
+7y 
+7y 
+Brillyant-1
+Elo0
+ScottL1
+[-]
+Combiné las sugerencias anteriores. Mientras extrae los datos, ahora también tiene una tabla que muestra la fecha de publicación del último elemento extraído, el número de elementos extraídos y la puntuación extraída. Está dividida en dos filas, una para comentarios y otra para publicaciones.
+[-]
+Creo que eso sería mejor que nada. Además, el ejemplo de EY y su puntuación de karma hacían pensar que podría manejar una puntuación de 1000 de karma en unos segundos.
+[-]
+Esto es muy bueno. ¡Excelente trabajo!7y 
+7y 
+7y 

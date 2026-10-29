@@ -1,0 +1,340 @@
+Probabilidad y predicciones
+Visión interna/externa, Distinciones, Probabilidad y estadística, Pronóstico y predicción, Razonamiento explícito
+Racionalidad
+Portada. Relacionado con: Certeza infinita°. Supongamos que la gente de FiveThirtyEight ha creado un modelo para predecir los resultados de una elección importante. Tras procesar datos de encuestas, datos demográficos de la zona y todo lo habitual que se procesa en una situación así, su modelo devuelve una probabilidad mayor que 999,999,999 en mil millones de que el candidato que ocupa el cargo gane la elección. Supongamos además que los resultados de este modelo son su único dato y que no sabe nada más sobre la elección. ¿Cuál es su nivel de confianza en que el candidato que ocupa el cargo gane la elección?
+El mío sería significativamente menor que 999,999,999 en mil millones.
+Cuando un argumento da una probabilidad de 999,999,999 en mil millones para un suceso, entonces probablemente la mayor parte de la probabilidad de que ocurra el suceso ya no está en el "Pero eso todavía deja una posibilidad en mil millones, ¿no?". La mayor parte de la probabilidad está en "ese argumento tiene un fallo". Incluso si no tiene ninguna razón particular para creer que el argumento tiene un fallo, la probabilidad de base de que un argumento tenga un fallo sigue siendo mayor que una en mil millones.
+Más de una vez en mil millones, un politólogo escribe un modelo y se confunde por completo y escribe algo sin relación con la realidad. Más de una vez en mil millones, un programador escribe un programa para procesar estadísticas políticas y habrá un error que invalide por completo los resultados. Más de una vez en mil millones, un empleado de un sitio web publica en línea los resultados de un cálculo político y, por accidente, intercambia qué candidato tiene qué probabilidad de ganar.
+Así que hay que distinguir entre niveles de confianza internos y externos a un modelo o argumento específico. Aquí, el nivel de confianza interno del modelo es 999,999,999/mil millones. Pero mi nivel de confianza externo debería ser más bajo, aunque el modelo sea mi única evidencia, en una cantidad proporcional a mi confianza en el modelo.
+¿Es eso realmente cierto?
+Niveles de confianza dentro y fuera de un argumento, por Scott Alexander, 15 de diciembre de 2010
+225
+Alguien podría sentirse tentado a responder: "Pero hay la misma probabilidad de que el modelo falso sea demasiado alto que de que sea demasiado bajo." Quizás hubo un error en el programa de computadora, pero eso le impidió dar las verdaderas probabilidades del candidato, que serían 999,999,999,999 de cada billón.
+La probabilidad previa de que un candidato gane una elección es del 50%. Necesitamos información que nos aleje de esta probabilidad en alguna dirección. Para alejarnos significativamente de esta probabilidad, necesitamos información sólida. Cualquier debilidad en la información reduce su capacidad para alejarnos de la probabilidad previa. Si hay un fallo en el modelo de FiveThirtyEight, eso nos aleja de su probabilidad de 999,999,999 en mil millones y nos acerca de nuevo a la probabilidad previa del 50%.
+Podemos confirmarlo con una comprobación rápida. Supongamos que no sabemos nada sobre la elección (es decir, seguimos pensando que es 50-50) hasta que una persona informa de una alucinación en la que un ángel ha declarado que el candidato que ocupa el cargo tiene una probabilidad de 999,999,999 en mil millones. No nos sentiríamos tentados a aceptar esta cifra con el argumento de que es igual de probable que sea demasiado alta que demasiado baja.
+Una segunda objeción abarca situaciones como una lotería. Quisiera decir que la probabilidad de que Bob gane una lotería con mil millones de jugadores es de 1/1 de mil millones. ¿Tengo que ajustarla al alza para cubrir la posibilidad de que mi modelo de cómo funcionan las loterías esté de alguna manera viciado? No. Aunque esté entendiendo mal la lotería, no me he apartado de mi probabilidad previa. Aquí, la nueva información realmente tiene la misma probabilidad de ir en contra de Bob que a su favor. Por ejemplo, la lotería podría estar amañada (lo que significaría que mi modelo original de cómo se determinan los ganadores de la lotería tiene un fallo fatal), pero no hay más razón para creer que esté amañada a favor de Bob que a favor de cualquier otra persona.
+Avistado en la naturaleza. El reciente hilo sobre el "asalto de Pascal" dio lugar a una discusión sobre el Gran Colisionador de Hadrones (LHC) destruyendo el universo, que también continuó en un hilo más antiguo sobre el LHC de hace algunos años. Todos los participantes coincidían en que las probabilidades de que el LHC destruyera el mundo eran menores que una entre un millón, pero varios dieron probabilidades extraordinariamente bajas basadas en colisiones de rayos cósmicos. El argumento era que, como los rayos cósmicos han producido colisiones de partículas similares a las del LHC miles de veces al año, la probabilidad de que el LHC destruya el mundo es literalmente cero o bien un número relacionado con la probabilidad de que exista alguna posibilidad de que un rayo cósmico destruya el mundo tan minúscula que no se haya materializado en esas innumerables colisiones. De los comentaristas que mencionaron este argumento, uno dio una probabilidad de 1/3*10^22 y otro sugirió 1/10^25; ambos podrían ser buenas cifras para la confianza interna de este argumento.
+Pero la conexión entre este argumento y el argumento general sobre el LHC pasa por afirmaciones como "las colisiones producidas por rayos cósmicos serán exactamente como las producidas por el LHC", "nuestra comprensión de las propiedades de los rayos cósmicos es en gran medida correcta" y "no estoy drogado en este momento, mirando un paquete de M&Ms y confundiéndolo con un argumento realmente inteligente que tiene que ver con la cuestión del LHC", todas las cuales son probablemente más probables1
+2
+que 1/10^20. Así que, en lugar de decir "la probabilidad de un apocalipsis del LHC es ahora de 1/10^20", diga "tengo un argumento que tiene una probabilidad interna de un apocalipsis del LHC de 1/10^20, lo que reduce un poco mi probabilidad según cuánto confíe en ese argumento". De hecho, el argumento tiene un posible fallo: según Giddings y Mangano, los físicos encargados oficialmente de investigar los riesgos del LHC, los agujeros negros producidos por rayos cósmicos podrían tener suficiente impulso para atravesar la Tierra sin dañarla, y los agujeros negros producidos en el LHC podrían no tenerlo. Esto era previsible: era un argumento simple en un campo complejo que intentaba probar una negación, y habría sido presuntuoso creer con más de un 99% de probabilidad que era impecable. Si solo puede dar un 99% de probabilidad a que el argumento sea sólido, entonces solo puede reducir su probabilidad en la conclusión en un factor de cien, no en un factor de 10^20.
+
+Pero me resulta difícil indignarme como corresponde por esto, ya que el LHC no destruyó el mundo. Un ejemplo mejor podría ser el siguiente, tomado de una discusión en línea sobre el creacionismo que aparentemente se basa en una idea de Fred Hoyle:
+
+Para que una célula viva pueda existir, todas sus partes deben ensamblarse antes de que comience la vida. Esto implica 60,000 proteínas que se ensamblan en unas 100 combinaciones diferentes. La probabilidad de que estas complejas agrupaciones de proteínas se hayan formado solo por azar es extremadamente pequeña. Es aproximadamente 1 entre 10 elevado a la potencia 4,478,296. La probabilidad de que una célula viva se ensamble solo por azar es tan pequeña que bien puede considerarse imposible. Esto significa que la probabilidad de que la célula viva haya sido creada por un creador inteligente que la diseñó es extremadamente grande. La probabilidad de que Dios creara la célula viva es de 10 elevado a la potencia 4,478,296 a 1.
+
+Observe que alguien acaba de dar un nivel de confianza de 10^4478296 a 1 y se equivocó. Esto es el tipo de cosa que nunca, jamás debería ocurrir. Es posiblemente lo más equivocado que alguien haya estado jamás.
+
+Es difícil decir con palabras exactamente cuán equivocado está. Decir "Esta persona estaría dispuesta a apostar el PIB mundial entero durante mil años a que la evolución es verdadera, contra una posibilidad de uno entre un millón de recibir un solo centavo si el creacionismo fuera verdadero" ni siquiera empieza a describirlo: aquí bastaría con un mero 1/10^25. Decir "Esta persona cree que podría hacer una afirmación sobre un tema tan difícil como el origen de la vida celular por cada intervalo de Planck, cada intervalo de Planck desde el Big Bang hasta el presente, y no equivocarse ni una sola vez" solo nos lleva a 1/10^61 aproximadamente. Si la probabilidad de contraer el síndrome de Ganser, la afección psiquiátrica extraordinariamente rara que se manifiesta en una compulsión a decir afirmaciones falsas, es de una en cien millones, y los cien mil biólogos principales del mundo coinciden en que la evolución es verdadera, entonces esta persona debería considerar más probable que los cien mil hayan contraído simultáneamente el síndrome de Ganser que estar haciendo buena biología.
+
+El error de este creacionista no fue matemático; las matemáticas probablemente sí arrojan ese número. El error fue confundir la probabilidad interna (de que la vida compleja se formaría completamente al3
+4
+5
+azar de una manera que puede representarse con este algoritmo particular) con la probabilidad externa (de que la vida pudiera formarse sin Dios). Debería haber añadido un término que representara la posibilidad de que su argumento contundente simplemente no se aplicara.
+
+Por último, considere si se puede asignar una certeza del 100% a un teorema matemático para el que existe una demostración. Eliezer ya examinó este asunto° y se pronunció en contra (citando como ejemplo esta historia de Peter de Blanc). De hecho, este es solo el caso específico de diferenciar la probabilidad interna de la externa cuando la probabilidad interna es igual al 100%. Ahora bien, su probabilidad de que el teorema sea falso depende por completo de la probabilidad de que haya cometido algún error. Muchas demostraciones matemáticas que luego fueron refutadas respaldan en la práctica esta forma de pensar.
+
+Esto no es un argumento totalmente general contra dar niveles de confianza muy altos: situaciones muy complejas y situaciones con muchos resultados posibles mutuamente excluyentes (como el ejemplo de la lotería) aún pueden llegar al nivel de 1/10^20, aunque probablemente no al de 1/10^4478296. Pero en otros tipos de casos, dar un nivel de confianza muy alto requiere una verificación de que no se está confundiendo la probabilidad dentro de un argumento con la probabilidad de la pregunta en su conjunto.
+
+Notas al pie
+1. Aunque técnicamente sabemos que hablamos de un candidato que ocupa el cargo, que normalmente tiene una probabilidad mucho mayor, alrededor del 90% en el Congreso.
+2. Una objeción especialmente retorcida podría ser: "¿Y si el comisionado de la lotería, en un arrebato de corrección política, decide que “todos son ganadores” y reparte el premio mayor en mil millones de partes? Si esto cumpliera sus criterios para “ganar la lotería”, entonces esta mera posibilidad debería, en efecto, aumentar su probabilidad. De hecho, como probablemente hay más de una posibilidad en mil millones de que esto ocurra, la mayor parte de su probabilidad de que Bob gane la lotería debería concentrarse aquí!"
+3. Giddings y Mangano luego vuelven a demostrar el argumento original de “no causará un apocalipsis” usando un método más complicado que involucra enanas blancas.
+4. Mientras buscaba en sitios web creacionistas el argumento que recordaba a medias, encontré lo que puede ser mi nueva cita favorita: “Los matemáticos en general coinciden en que, estadísticamente, cualquier probabilidad superior a 1 entre 10 elevado a la 50 tiene una probabilidad cero de llegar a ocurrir jamás.”
+5. Me preocupa un poco que dentro de cinco años vea esto citado en algún sitio web creacionista como un argumento real.
+Visión interna/externa6, Distinciones6, Probabilidad y estadística2, Pronóstico y predicción2, Razonamiento explícito2
+Racionalidad2
+Portada
+Mencionado en11268383838Cargar más (5/17)Siguiente: The Logician And The God-EmperorSin comentarios35 karmaAnterior: Techniques for probability estimates60 comentarios97 karmaInicie sesión para guardar dónde lo dejó
+192 comentarios, ordenados por puntuación más alta. Algunos comentarios están truncados debido al gran volumen. (⌘F para expandir todos) Cambiar la configuración de truncamiento ata46
+[-]
+Mientras buscaba en sitios web creacionistas el argumento que recordaba a medias, encontré lo que puede ser mi nueva cita favorita: "Los matemáticos en general coinciden en que, estadísticamente, cualquier probabilidad superior a 1 entre 10 elevado a la 50 tiene una probabilidad cero de llegar a ocurrir jamás." Eso me recuerda a una de mis favoritas, de un blog a favor de la abstinencia: Cuando se juega con fuego, hay una probabilidad de 50/50 de que algo salga mal, y nueve de cada diez veces sale mal.
+JGWeissman34
+[-]
+En la serie Mundodisco de Terry Pratchett, existe una ley de causalidad narrativa según la cual las posibilidades de 1 entre un millón se cumplen 9 de cada 10 veces. Algunos personajes hicieron una vez que una cosa difícil que intentaban fuera artificialmente más difícil, para tratar de que la probabilidad fuera exactamente de 1 entre un millón e invocar este recurso.
+1ata hace 12 años Eso es bastante genial. (Ya está en mi lista de autores para leer si alguna vez llego a tener atenc…
+2handoﬂixue hace 12 años Vale la pena señalar que dos de sus libros (Hogfather y El color de la magia) tienen …0Unnamed hace 12 años Pratchett está cerca del principio de mi lista de lecturas pendientes, pero no sé qué libro(s) empezar …
+3TobyBartels hace 12 años Empecé con El color de la magia, pero no me enganchó mucho. Estaba bien escrito…
+Costanza13
+[-]
+¡Esta pregunta surge mucho! Un fan ha creado un gráfico muy sensato y útil, ¡y en muchos idiomas, nada menos! http://www.lspace.org/books/reading-order-guides/
+2Desrtopa hace 12 años Hay más conexiones entre los libros de las que aparecen en ese gráfico t…0Unnamed hace 12 años ¡Gracias! (también para las demás respuestas) Creo que empezaré con Mort y t…0TobyBartels hace 12 años Esto confirma mi vaga sensación de que lo de Rincewind no está particularmente bien…9wedriﬁd hace 12 años Asistí a una charla de Pratchett y él prácticamente admitió lo mismo. Sugirió…4Desrtopa hace 12 años Los he leído todos excepto los de Tiffany Aching, y Night Watch sigue siendo mi favorito…The Library of Scott Alexandria, Hearsay, Double Hearsay, y actualizaciones bayesianas, A Suggested Reading Order for Less Wrong [2011], The Use of Many Independent Lines of Evidence: The Basel Problem, The Control Group Is Out Of Control
+hace 12 años 
+hace 12 años 
+hace 12 años 
+Will_Newsome34
+prase13
+2VAuroch hace 7 años Lea los de Tiffany Aching. No son solo para niños, pero en especial lea…
+0Desrtopa hace 7 años Leí los tres primeros desde que escribí ese comentario (así que todos menos I Shall Wear Midnight)…0NihilCredo hace 12 años Lo mismo. Nunca terminé CoM, pero me enganché después de tomar Equal Rites…0Emile hace 12 años Empecé leyendo algunos del medio, en ningún orden en particular (empezando con …
+2wedriﬁd hace 12 años Moist von Lipvig - Going Postal, Making Money. No se los pierda. Thief of Time (st…0katydee hace 12 años ¿Alguna vez va al cine?
+0ata hace 12 años De vez en cuando.
+1katydee hace 12 años En mi experiencia, leer una novela (buena) requiere poca o ninguna atención adicional en comparación con ver una…
+2ShardPhoenix hace 12 años Una cosa que noto es que los libros requieren cierto esfuerzo para engancharse, mientras que las pelí…
+4katydee hace 12 años Yo encuentro casi lo contrario. Las películas parecen tener significativamente más probabilidades de tener cosas raras…
+4handoﬂixue hace 12 años Interesante. Me resulta mucho más fácil suspender la incredulidad y justificar…0Divide hace 12 años Inténtelo con Rudy Rucker, le reto. Solo aguanté las primeras treinta páginas más o menos…0dlthomas hace 11 años Diría que esto es cierto para las novelas que enganchan. Este no es exactamente el mismo conjunto que g…
+[-]
+Cuando se juega con fuego, hay una probabilidad de 50/50 de que algo salga mal, y nueve de cada diez veces sale mal. Solo están admitiendo su mala calibración.
+8atucker hace 12 años Jaja. Aunque admitir una mala calibración de esa forma es como decir "Creo incorrectamente que X…
+[-]
+Observe que alguien acaba de dar un nivel de confianza de 10^4478296 a 1 y se equivocó. Esto es el tipo de cosa que nunca, jamás debería ocurrir. Es posiblemente lo más equivocado que alguien haya estado jamás.Una vez participé en una discusión en SIAI e hice una estimación que terminó siendo errónea por algo así como trescientos billones de órdenes de magnitud. (Algo sobre tablas de consulta gigantes, pero aun así.) ¿Alguien me supera?
+Larks21Isaac14
+[-]
+Vaya. Lo peor que he hecho fue dar 9 órdenes de magnitud dentro de mi intervalo de confianza del 90% para la velocidad de la Tierra y equivocarme. (¡Resulta que la Tierra no se mueve más rápido que la velocidad de la luz!)
+[-]
+¿Seguramente declarar "x es imposible", antes de presenciar x, sería lo más equivocado que se puede estar?
+katydee35
+benelliott14
+[-]
+Me molestan más las personas que, incrédulas, gritan "¡Es imposible!" después de presenciar x.
+Nebu13
+[-]
+No lo hago. Puede presenciar a un mago, por ejemplo, violando la conservación de la materia, y aun así declarar «¡Eso es imposible!». Básicamente, está afirmando que no cree que las señales que sus sentidos le transmitieron sean exactas.
+[-]
+hace 12 años 
+hace 12 años 
+hace 12 años hace 12 años hace 12 años hace 11 años hace 12 años 
+Chronos18
+Eliezer Yudkowsky12El significado coloquial de "x es imposible" probablemente se acerca más a "x tiene probabilidad <0.1%" que a "x tiene probabilidad 0"
+3CynicalOptimist hace 6 años Esto está bien, pero siento que representaríamos mejor la psicología humana si dijéramos: …1Thomas hace 12 años La probabilidad cero y la imposibilidad no son exactamente lo mismo. Un evento posible puede…
+7benelliott hace 12 años Usted se refiere a la definición matemática de imposibilidad, y soy bien consciente…
+[-]
+Las probabilidades de 1 y 0 se consideran infracciones de las reglas y se descartan.
+9kmccarty hace 12 años Entonces, ¿qué debemos tomar para P(X|X)? Y luego, ¿qué puedo anotarle para la pr…
+ata19
+[-]
+¿Qué debemos tomar entonces para P(X|X)? Él lo ha abordado°: "La que confieso que me da más problemas es P(A|A). Pero preferiría llamar a eso una regla de eliminación sintáctica para el razonamiento probabilístico, o quizás una igualdad de conjuntos entre eventos, en lugar de afirmar que existe alguna proposición específica que tiene "probabilidad 1", y luego: "Vaya, debo ir más despacio porque es tarde en la noche... P(A|A) es el caso más simple de todos. P(x|y) se define como P(x,y)/P(y). P(A|A) se define como P(A,A)/P(A) = P(A)/P(A) = 1. La razón de estas dos probabilidades puede ser 1, pero niego que exista alguna probabilidad real que sea igual a 1. P(|) es una mera conveniencia notacional, nada más. Solo porque por convención escribamos esta razón usando un símbolo "P" no la convierte en una probabilidad."
+6kmccarty hace 12 años Ah, gracias por la referencia. Alguien ha intentado responder la pregunta sobre la confiabilidad…
+0XiXiDu hace 12 años ¿Le interesaría compartir sus opiniones sobre por qué cree que EY es incoherente? Creo que…
+4kmccarty hace 12 años ¿Acusé yo a alguien de ser incoherente? No quise hacer eso, solo quería decir…0Document hace 12 años Aunque no estoy seguro de qué decir al respecto, hay algún tipo de conexión…0Thomas hace 12 años ¿La probabilidad de que esta afirmación sea correcta es menor que 1?
+9benelliott hace 12 años Obviamente.
+-1Thomas hace 12 años ¿Entonces, dice usted, es posible que no sea verdad?
+9ata hace 12 años Diría que según mi modelo (es decir, dentro del argumento (en la terminología de esta publicación…
+0Thomas hace 12 años Puede pensar por un momento que 1024*10224=1048578. Puede hacer una afirmación honesta…0byrnema hace 12 años ¿Qué es lo que es verdad? (Solo para aclarar…)
+-2Thomas hace 12 años Esto: descartar el 0 y el 1 del juego implica que tenemos una probabilidad positiva…9benelliott hace 12 años En efecto, me molesta bastante cuando esto se trata como una refutación del argumento…
+2christopherj hace 9 años Alguien que afirma que las verdades absolutas no existen no tiene derecho a ser absoluto…9MichaelHoward hace 12 años Eso es bastante. ¿Puede decirnos cuál era la estimación?0[anonymous] hace 12 años Bueno, hay miles de millones de personas que creen cosas con p=1... cosas como "Dios e…0[anonymous] hace 12 años Vaya. Eliminar todas las estimaciones de probabilidad "cero" como ilegales según las reglas del juego, es…
+[-]
+hace 12 años hace 12 años 
+hace 12 años 
+Peter_de_Blanc13
+Johnicholas11Me molesta un poco la persistencia del "ruido" de que "el LHC podría destruir el mundo". Sin evidencia, la probabilidad a priori de que se puedan formar agujeros negros microscópicos en absoluto, en todos los sistemas de física posibles, es extremadamente pequeña. La misma teoría (la teoría de cuerdas[1]) que nos ha llevado a sugerir que podrían formarse agujeros negros microscópicos también insiste con firmeza en que todos los agujeros negros se evaporan, e igual de firmemente en que los microscópicos se evaporan más rápido que los grandes en un factor preciso igual al cubo de la razón de masas. Si pensamos que la teoría dice una completa tontería, entonces la probabilidad a posteriori de un desastre en el LHC baja, porque favorecemos el prior ignorante de un universo en el que los agujeros negros microscópicos no existen en absoluto. Así, el "ruido" de que "el LHC podría destruir el mundo" se reduce a la posibilidad de que (A) exista alguna teoría matemáticamente consistente, posterior a la relatividad general, que prediga agujeros negros microscópicos con una evaporación mucho más lenta, (B) esta teoría sin nombre y posiblemente inexistente sea menos compleja en el sentido de Kolmogórov y, por tanto, más probable a posteriori que la que usan actualmente los científicos[2], y (C) los científicos hayan pasado completamente por alto esta teoría sin nombre y posible... (leer más)
+David_Gerard15
+[-]
+Me pregunto cómo podrían verse los argumentos contra el LHC en este sitio si sustituyéramos el LHC por la criptografía. Los matemáticos podrían decir que la idea de que las matemáticas destruyan el mundo es ridícula, pero después de todo tenemos que confiar en que todos los matemáticos que anuncian opiniones sobre el tema estén cuerdos, y sabemos que el número de matemáticos locos en general es mayor que cero. Además, sus argumentos casi con seguridad supondrían que la probabilidad de que las matemáticas destruyan el mundo es 0, así que obviamente deberían descartarse. Así, el peligro de ejecutar OpenSSH debe calcularse como un riesgo existencial que abarque nuestro cono de luz futuro posible. (Aunque, convenientemente, esto sería una soberbia hazaña contra la DRM.) Como bis, necesitamos que alguien calcule el riesgo existencial de levantarse por la mañana para ir a trabajar. Además, ¿encender el LHC envió taquiones hacia atrás en el tiempo para causar el 11-S? Creo que alguien debería informarnos.1DragonGod hace 5 años Rechazo la inducción de Solomonoff como la formulación técnica correcta de la navaja de Ockham, …1Luke_A_Somers hace 6 años Al revisar publicaciones antiguas, encontré esta. La voté a favor antes, y voy a dejarlo así…
+[-]
+Alguien podría sentirse tentado a responder "Pero hay la misma probabilidad de que el modelo falso sea demasiado alto que de que sea demasiado bajo." No estoy seguro de por qué alguien podría sentirse tentado a dar esta respuesta. ¿La idea es que, al hacer cualquier cálculo, es igual de probable obtener un número demasiado grande que uno demasiado pequeño? Pero eso es antes de haber mirado el número.
+Otra posible réplica es que, aunque la respuesta fuera cierta, el modelo falso podría ser muchísimo más alto, pero solo puede ser ligeramente más bajo, ya que 1-10^-9 está bastante cerca de 1.
+1Dweomite hace 1 año Esto depende de la escala que haya elegido para representar la respuesta. Si usted m…
+[-]
+Primero, excelente publicación. Segundo, las advertencias generales contra dar probabilidades muy bajas a las cosas parecen ser interpretadas por muchos lectores casuales como un respaldo al (mal) comportamiento de "privilegiar la hipótesis", por ejemplo, pasar la probabilidad de que Dios exista de muy pequeña a moderadamente pequeña. Eso no está bien, pero no tengo buenos argumentos sobre por qué no está bien. Me encantaría que escribiera un artículo sobre cómo elegir buenos priores. Cosma Shalizi ha hecho un trabajo técnico que me parece (con mi ojo incompetente) relevante: http://projecteuclid.org/DPubS?verb=Display&version=1.0&service=UI&handle=euclid.ejs/1256822130&page=record
+Es decir, Shalizi toma la actualización bayesiana, que requiere modelar el mundo, y responde a la pregunta "¿cuándo sería aceptable usar la actualización bayesiana, aunque sepamos que el modelo está definitivamente equivocado, por ejemplo, porque es demasiado simple?". (Por supuesto, hacer que su modelo "no sea obviamente incorrecto" añadiendo complejidad no es una solución.)
+Scott Alexander19
+[-]
+hace 12 años 
+hace 12 años 
+hace 12 años 
+hace 12 años 
+Sigo confundido sobre lo pequeña que debería ser la probabilidad que uso en la cuestión de Dios. Entiendo el argumento sobre privilegiar la hipótesis y sobre que los seres inteligentes son muy complejos y fantásticamente improbables. Pero también siento que si intentara usar un argumento al menos tan sutil, aplicado a algo sobre lo que estoy al menos tan confundido como sobre lo complejo ontológicamente que debería ser una primera causa, para refutar cosas al menos tan ampliamente creídas como la religión, un millón de veces, me equivocaría al menos una vez.
+9komponisto hace 12 años Vea Advancing Certainty [http://lesswrong.com/lw/1mw/advancing_certainty/]. El f…
+Scott Alexander12
+[-]
+He de admitir que no estoy de acuerdo con gran parte de Advancing Certainty. La clase de referencia adecuada para un físico moderno que conoce bien los errores de lord Kelvin y no los repetirá es "científicos del pasado que conocían bien los errores de sus predecesores y planean no repetirlos", que imagino que tiene una tasa de éxito inferior al cien por ciento, y que podría haber incluido a Kelvin.
+Sería un ejercicio útil ver si los físicos más racionales de 1950 tienen predicciones más exitosas en el año 2000 que los físicos más racionales de 1850 tenían en 1900. No me sorprendería que esto fuera cierto, y entonces los físicos de 2000 podrían, con razón, colocarse en una nueva clase de referencia y suponer que serán aún más exitosos en 2050 que los de 1950 en 2000. Pero si la tasa de éxito después de cincuenta años se mantiene constante, no querría decir "Sí, bueno, probablemente ya resolvimos todos esos problemas, así que lo haremos mejor".
+komponisto12
+[-]
+He de admitir que no estoy de acuerdo con gran parte de Advancing Certainty. ¿Realmente no está de acuerdo con alguna afirmación en particular de Advancing Certainty, o simplemente le suena "raro" por su énfasis? Porque cuando leí su publicación, sentí que "no estaba de acuerdo" (y entré en pánico por la rápida acumulación de votos positivos), pero la reflexión reveló que en realidad tenía algo más parecido a una reacción de ADBOC. Me pareció que la intención de su publicación era decir «¡Abajo las probabilidades confiadas!», mientras que yo tiendo a estar del lado de «¡Viva las probabilidades confiadas!», no porque esté a favor de la excesiva confianza, sino porque creo que muchas preocupaciones sobre la excesiva confianza aquí están mal fundadas (supongo que soy algo así como un "tercer nivel"° en este tema).
+De hecho, cuando se ve a personas quejándose de la excesiva confianza en LW, normalmente no es porque alguien piense que algún candidato político tiene una probabilidad de 0.999999999 de ganar una elección; casi nadie aquí consideraría que esa sea una estimación razonable. En cambio, lo que se encuentra son personas diciendo que 0.0000000001 es una probabilidad demasiado baja de que Dios exista, basándose en nada más que una preocupación general por la excesiva confianza humana.
+Creo que mi... (leer más)
+Scott Alexander12
+[-]
+Definitivamente tuve la sensación de "munición para el enemigo" con su publicación, y el punto sobre el "atuendo de creencia" es bueno, pero creo que el amplio desacuerdo emocional se expresa en algunas afirmaciones específicas:
+1. Incluso si controlara el cansancio, el hambre y cosas así, e incluso si cargara su inteligencia en una computadora y dejara que hiciera el trabajo duro, todavía no creo que pudiera juzgar mil de esos ensayos y equivocarme solo una vez. Admito que esto podría no ser un desacuerdo tan real como creo, porque podría tratarse de una confusión sobre qué clase de referencia deberíamos usar para elegir los ensayos para usted.
+2. Creo que podríamos no estar de acuerdo con la afirmación de lord Kelvin. Creo que yo predeciría que más teorías físicas de hoy están equivocadas de lo que usted predeciría.
+3. Creo que mi probabilidad de que Dios exista sería varios órdenes de magnitud mayor que la suya, aunque creo que usted probablemente conoce más o menos el mismo número de buenos argumentos sobre el tema que yo. Quizás nuestro desacuerdo pueda resolverse empíricamente: si hiciéramos suficientes problemas en los que diéramos niveles de confianza a preguntas como "El área de Canadá es mayor que el área del mar Mediterráneo" y usáramos l... (leer más) hace 12 años 
+hace 12 años 
+hace 12 años 
+Vladimir_Nesov10PhilGoetz9
+DanielLC6[anonymous]5
+shokwave4
+Vladimir_Nesov4
+gwern3
+1Vaniver hace 12 años Cuando lo vi por primera vez, estuve de acuerdo con ello. Pero ahora ya no, en parte por la historia…
+[-]
+Añadido a la página de la wiki de LW «Absolute certainty».
+[-]
+¿Deberían las revistas científicas ajustar el valor p que exigen a un experimento, para que no sea mayor que la probabilidad (hallada empíricamente) de que un artículo revisado por pares contenga un error factual, lógico, metodológico, experimental o tipográfico?
+7Manfred hace 12 años La parte de metaciencia cambiaría con el tiempo, por ejemplo, cuántas personas leen el artículo y…
+[-]
+No creo que la lotería sea una excepción. Existe la posibilidad de que usted haya oído mal y dijeran "millón", no "mil millones".
+[-]
+En realidad hay dos afirmaciones aquí. La primera, que si alguien en Internet tiene un modelo que predice X con un 99.99% de certeza, entonces usted debería asignar menos probabilidad a X, en ausencia de otra evidencia, parece interesante, pero relativamente fácil de aceptar. Estoy bastante seguro de que he razonado de esta manera en el pasado.
+La segunda afirmación es exactamente la misma, pero aplicada a uno mismo. "Si he elaborado un argumento que predice X con un 99.99% de certeza, debería tener menos del 99.99% de certeza sobre X." Esto no es algo que la gente haga por defecto.
+Dudo que... (leer más)
+5Kingreaper hace 12 años Personalmente, encuentro que la mejor manera de tratar con estos números es hablar de nueves. 999,9…
+[-]
+Este no es un argumento totalmente general contra dar niveles de confianza muy altos: Me parece que podemos usar los niveles de confianza muy altos y nuestra comprensión del área en cuestión para justificar ignorar, descontar fuertemente o aceptar los argumentos. Podemos hacerlo con base en que se necesita una cierta cantidad de evidencia° para producir creencias realmente precisas. En el caso del argumento creacionista, un nivel de confianza de 10^4,478,296 a 1 requiere (en realidad) aproximadamente 12,000,000 de bits de evidencia. (10^4,000,000 =~ 2^12,000,000). El creacionista presenta t... (leer más)
+[-]
+Pero mi nivel externo de confianza debería ser menor, incluso si el modelo es mi única evidencia, en una cantidad proporcional a mi confianza en el modelo. Solo en la medida en que usted no confiara en la afirmación más que porque este modelo dice que probablemente es verdadera. Podría ser que ya crea firmemente en la afirmación, y, por tanto, su nivel externo de confianza debería ser más alto de lo que sugiere el modelo, o igual, etc. Más cerca del prior, en otras palabras, y en preguntas extrañas los priores intuitivos pueden ser bastante extremos.
+[-]
+Otro ejemplo de votación: "Common sense and statistics", de Andrew Gelman:hace 12 años hace 12 años 
+hace 12 años hace 12 años 
+hace 12 años 
+hace 12 años 
+hace 8 años 
+timtyler3
+gwern3
+benelliott3Un artículo* se publicó en una revista de ciencias políticas dando la probabilidad de un empate en una elección presidencial como algo así como 10^-90**. ¡Qué falta de alfabetización numérica! El cálculo, por supuesto (digo «por supuesto» porque si uno es estadístico probablemente sabrá lo que viene), se basó en la distribución binomial con P conocida. Por ejemplo, Obama obtuvo algo así como el 52% de los votos, así que si toma n=130 millones y P=0.52 y calcula la probabilidad de un empate exacto... (leer más)
+0Jiro hace 8 años ¿Qué le lleva a concluir que la probabilidad de un margen de votos de 1 está en algún lugar cerca de 1/X de…
+0Wes_W hace 8 años El método fácil, pero no muy riguroso, es usar el principio de indiferencia, ya que hay…
+4Jacob Falkovich hace 8 años Recientemente escribí sobre por qué votar es una idea terrible y caí en el mismo error…
+1DragonGod hace 5 años "La política es el asesino de la mente" es un argumento sobre por qué la gente debería evitar meterse en…1CCC hace 8 años Esa es una suposición importante y no obvia. Así que, en resumen, la cifra de 10^-90 es…
+2Wes_W hace 8 años Sí, estoy de acuerdo. Me simpatiza mucho más la estimación de 10^-90 del artículo que la de Gel…0gwern hace 8 años Por eso la publiqué como comentario en esta entrada en particular, después de todo. Está claro que nuestra s…
+[-]
+Este parece bastante relevante aquí: Probing the Improbable: Methodological Challenges for Risks with Low Probabilities and High Stakes - Toby Ord, Rafaela Hillerbrand, Anders Sandberg http://arxiv.org/abs/0810.5515
+0[anonymous] hace 12 años Gracias, también añadido a la página de la wiki [http://wiki.lesswrong.com/wiki/Absolute_certa…
+[-]
+Esto era previsible: era un argumento simple en un campo complejo que intentaba probar una negación, y habría sido presuntuoso creer con más de un 99% de probabilidad que era impecable. Si solo puede dar un 99% de probabilidad a que el argumento sea sólido, entonces solo puede reducir su probabilidad en la conclusión en un factor de cien, no en un factor de 10^20.Según recuerdo, hubo un artículo en 2008 o 2009 sobre el problema del LHC que concluyó, en efecto, que los pequeños errores de que un análisis se había llevado a cabo incorrectamente se acumulaban y ponían una alta fl... (leer más)
+steven046111
+[-]
+Probing the Improbable
+8gwern hace 12 años Parece que sí, gracias:
+[-]
+Principio muy interesante, y uno que tendré en cuenta, ya que hace muy poco tuve un fracaso espectacular al no aplicarlo. ¿Qué pasa si aplicamos este tipo de pensamiento a la probabilidad bayesiana en general? Parece que tenemos que asignar una pequeña cantidad de probabilidad a la afirmación de que todas nuestras estimaciones están equivocadas, y que nuestros métodos para llegar a esas estimaciones están irremediablemente viciados. Esto me parece problemático, ya que no tengo idea de cómo tratar esa probabilidad; no podemos usar la actualización bayesiana sobre ella, por razones obvias. ¿Alguien tiene alguna idea de cómo lidiar con esto? Preferiblemente una mejor idea que «simplemente no pensar en ello», que es mi estrategia actual.hace 12 años 
+hace 12 años 
+hace 12 años 
+hace 12 años 
+simplicio3
+2Jack hace 12 años El problema básicamente es que se supone que el agente bayesiano idealizado es lógicamente omnisciente a…2wedriﬁd hace 12 años Hay una publicación de Eliezer sobre exactamente este tema. ¿Alguien recuerda el título?
+0benelliott hace 12 años He estado revisando algunas de las publicaciones de Eliezer sobre el tema y lo más cercano que he encontrado…0gjm hace 12 años Usted podría estar pensando en Ends Don't Justify Means [http://lesswrong.com/lw/uv/ends_dont_ju…0Perplexed hace 12 años He estado dándole vueltas a una idea para esto, basada en una analogía con la biología evolutiva. An…
+1Will_Sawin hace 12 años Un verdadero bayesiano es epistémicamente perfecto. Podría tener diferentes subrutinas calculando…
+1Perplexed hace 12 años ¿Está 100% seguro de eso?
+0Will_Sawin hace 12 años No sé cómo calcular creencias, condicionadas a que sea falso.
+1Perplexed hace 12 años Mi punto es que hay algunas proposiciones, por ejemplo, la perfección epistémi…
+0Will_Sawin hace 12 años No creo que el otro sujeto cuente como bayesiano. Ese es definitivamente un buen enfo…0benelliott hace 12 años Esto realmente no resuelve el problema. Si la actualización bayesiana es defectuosa, y todos los subagentes…
+0Perplexed hace 12 años Pero la actualización bayesiana no es defectuosa. Lo que puede estar defectuoso son los supuestos a priori y…
+4benelliott hace 12 años El problema que específicamente pedía resolver es "¿qué pasa si la actualización bayesiana es defectuosa…
+1shokwave hace 12 años Asigne una probabilidad 1-epsilon a su creencia de que la actualización bayesiana funciona. Su cre…
+6jimrandomh hace 12 años Creo que esta es una forma de contar dos veces la misma evidencia. Usted solo puede realizar…
+1shokwave hace 12 años Usted también puede plantear un problema similar sobre los priores. * Determine qué met…
+0jimrandomh hace 12 años Este es distinto, en el sentido de que la evidencia que usted está introduciendo es nueva. Sin emb…3Perplexed hace 12 años Estoy bastante seguro de que hay un error en su razonamiento. Y estoy bastante seguro de que la fuente…
+2shokwave hace 12 años Creo que tomaría la forma de que X sea un resultado, siendo p(X) la probabilidad…
+0Perplexed hace 12 años No entiendo la frase "p(X) es correcta". Además, necesito un esbozo de la a…
+0shokwave hace 12 años p(X) es una medida de mi incertidumbre sobre el resultado X: "p(X) es correcta" es…1benelliott hace 12 años ¡Gracias por expresar mi preocupación en términos mucho mejores de los que logré yo! Si usted…
+4shokwave hace 12 años Es similar al problema filosófico de Hume de la inducción [http://en.wikipedia.o…
+0[anonymous] hace 12 años ¡Adelante! Estoy totalmente a favor de aumentar el número de mentes que trabajan en este pro…0shokwave hace 12 años ¡Adelante! Estoy totalmente a favor de aumentar el número de mentes que trabajan en este pro…0XiXiDu hace 12 años Me encantaría ver a alguien como EY abordar el comentario de arriba. Por cierto, ¿por qué d…
+2shokwave hace 12 años En realidad, planeo abordarlo yo mismo en las próximas dos semanas más o menos. Creo que t…0Perplexed hace 12 años Usted ha despertado mi curiosidad. ¿Un truco para sortear el teorema de Arrow? ¿Tiene…
+2benelliott hace 12 años Me temo que no sé cómo publicar enlaces. Creo que ya hay un artículo de la página principal…
+2Perplexed hace 12 años Ah. Usted se refiere a esta publicación [http://lesswrong.com/lw/1cy/arrows_theorem_is_a…
+2benelliott hace 12 años Todos los sistemas deterministas no dictatoriales pueden manipularse hasta cierto punto (Gibb…1Perplexed hace 12 años La próxima vez que comente, haga clic en el enlace de Ayuda a la derecha inferior del co…
+[-]
+¡Excelente publicación! En cuanto surgió el tema, también recordé algo que escuché una vez decir a un creacionista. Lo más divertido es que esa probabilidad no solo tenía un orden de magnitud absurdamente enorme, sino que su mantisa se citaba con unos 5 decimales. En casos así uno cae en una "confusión de objetivo": ¿debo señalar que ningún ingeniero citaría jamás una probabilidad así a su jefe, bajo pena de perder el empleo? ¿Debo preguntar si mi interlocutor siquiera sabe qué es una "potencia"?hace 12 años 
+mwengler2
+[anonymous]2
+JGWeissman2
+Ben1
+[-]
+Esto está, en el mejor de los casos, débilmente relacionado con la estadística de errores en un canal de comunicaciones. Aquí a menudo se usan simulaciones para ejecutar billones de pruebas y simular (cálculo de Monte Carlo) las condiciones para obtener tasas de error de bits (BER) de 10^-7, 10^-8, y así sucesivamente. Como ingeniero más familiarizado con la capa física (amplificadores de transistores, ruido térmico en los canales, dispersión de RF, etc.), sé que las CONDICIONES para que estos cálculos de Monte Carlo signifiquen algo en los circuitos reales son complejas y no tan comunes como cree el doctorando recién llegado que hace el cálculo... (leer más)
+[-]
+Tenemos la hipótesis H y la evidencia E, y calculamos diligentemente P(H) * P(E | H) / P(E). Parece que su consejo es: ¡no actualice todavía! Sobre todo si este número es muy pequeño. Podríamos haber cometido un error. Pero entonces, ¿cómo deberíamos actualizar? “Redondear hacia arriba” parece problemático.
+9nerzhin12yLo leí en el sentido de “actualizar de nuevo” basándose en la probabilidad de que E sea defectuosa. Esto tenderá …
+1Vladimir_Nesov12yMientras hace eso, la probabilidad de que la estimación sea dinámicamente inestable s…5Scott Alexander12yNo digo que no use el teorema de Bayes, digo que considere con mucho cuidado w…
+4[anonymous]12yCreo que esto equivale a decir: las consideraciones del mundo real imponen una cota superior a …
+0komponisto12ySí [http://lesswrong.com/lw/1mw/advancing_certainty/].2Swimmy12yP(E) puede descomponerse en P(E|A)P(A) + P(E|~A)P(~A). Nuestra tentación, al mirar…
+1[anonymous]12y¿Qué es A? “La desviación hacia las probabilidades a priori” suena otra vez como si estuviéramos postulando una cota …
+[-]
+Uno podría sentirse tentado a responder: “Pero hay la misma probabilidad de que el modelo falso sea demasiado alto que de que sea demasiado bajo.” Tal vez hubo un error en el programa de computadora, pero impidió que diera las probabilidades reales del titular, de 999,999,999,999 entre un billón. Tengo una respuesta distinta a la que usted dio. Considere su incertidumbre meta (“externa”) sobre las log-odds, en la que se pueden añadir evidencias independientes, en lugar de probabilidades. Una distribución que promedia en las log-odds “internas” daría, cuando tra... (leer más)
+0GuySrinivasan12yMe parece incorrecto. Puede escribir sus probabilidades a priori como log-odds, y sus componentes…
+4JGWeissman12yPodría ayudar resolver un ejemplo. Supongamos que nos interesa un evento B con pr…
+3DanielVarga12yTenga en cuenta que su observación no se generaliza a distribuciones de log-odds más complejas…
+2JGWeissman12yEfectivamente. Parece que el efecto que describí se produce cuando la incertidumbre meta es o…
+1GuySrinivasan12yDejé que L(B|E) fuera uniforme de x-s/2 a x+s/2 y obtuve que P(B|E) = donde A es t…0GuySrinivasan12yAh, ya veo, pensé que estaba diciendo algo completamente distinto. :D Sí, lo…
+[-]
+Separarlo en interno y externo es un buen sistema. Creo que la gente hace esto de forma instintiva en la vida real. Ejemplo A: la gente compra boletos de lotería. Mi teoría al respecto es que saben que las probabilidades de ganar son demasiado bajas para justificar la compra de un boleto si se supone que es completamente aleatorio. Sin embargo, la mayoría de la gente está dispuesta a asignar a que el karma, la justicia divina, el plan de Dios o su ritual de la suerte puedan inclinar la lotería a su favor un valor distinto de cero. Si creen en alguna de estas cosas con aunque sea un 1% de certeza, entonces el boleto es un buen negocio para ellos. 12y 
+12y 
+12y 
+10mo 
+Dmytry1
+[anonymous]1
+DuncanS1
+Dan_Moore1
+1TAG10moUn boleto de lotería puede justificarse en términos de utilidad aunque no pueda justificarse en términos de e…
+[-]
+Sobre los agujeros negros del LHC frente a los agujeros negros de los rayos cósmicos: ambos tipos de agujeros negros surgen con carga no nula y se detendrán muy rápidamente. Además, hay rayos cósmicos que golpean estrellas de neutrones, y rayos cósmicos que colisionan en el campo magnético de las estrellas de neutrones, al estilo del LHC. En resumen, el LHC tendría que ser extremadamente excepcional para destruir la Tierra. Simplemente no parece tan excepcional. Lo cierto es que un agujero negro muy diminuto tiene una tasa de acreción increíblemente baja (argumento bastante fiable aquí; se necesita mucho tiempo para hacer pasar la Tierra por el ojo de una aguja, incluso una... (leer más)
+[-]
+Como el mapa es distinto del territorio, hay que salir de su mapa para descontar los cálculos de probabilidad hechos dentro del mapa. Pero ¿cómo hacerlo? Hay que recurrir a un mapa más fuerte. Pero entonces los cálculos allí están sujetos a los errores en el diseño de ese mapa. Esta lógica puede llevarse hasta el nivel más profundo. ¿Cómo adopta una persona racional una metodología bayesiana? ¿No hay alguna probabilidad de que la elección de la metodología sea errónea? Pero ¿cómo concibe esa probabilidad, cuando las consideraciones bayesianas son las únicas disponibles para evaluar la verdad a partir de la evidencia dada? ¿Por qué estas consideraciones no demuestran que la epistemología bayesiana no es la explicación verdadera del conocimiento?
+4gwern11yMe parece que usted ha demostrado que nadie puede cambiar nunca sus creencias ni su metodología, …
+0DragonGod5yContraejemplo: cambié mi epistemología de aristotélica a Aristóteles + Bay…3[anonymous]11yUsted está deshaciendo el camino más allá del cerebro que hace el deshacer. Un agente racional dice “vaya…
+[-]
+Para que una sola célula viva, todas sus partes deben estar ensambladas antes de que empiece la vida. Esto implica 60,000 proteínas que se ensamblan en unas 100 combinaciones diferentes. La probabilidad de que estas complejas agrupaciones de proteínas hubieran surgido solo por azar es extremadamente pequeña. Es alrededor de 1 posibilidad en 10 elevado a la potencia 4,478,296. La probabilidad de que una célula viva se ensamble solo por azar es tan pequeña que bien podría considerarse imposible. Esto significa que la probabilidad de que la célula viva haya sido creada por una inteligen... (leer más)
+3Divide12y¿Lo hizo? Pensé que solo se refería a las “razones de probabilidad” cuando dijo “probabilidad”.
+0[anonymous]12yNo exactamente; “Las razones de probabilidad de que Dios creara la célula viva son de 10 elevado a la 4,478,296 pot…-1[anonymous]8yNo, no. El peor error del tipo no es ese. Si de verdad cree que una célula puede armarse como un rompecabezas…
+[-]
+Supongo que hay al menos dos problemas con el cálculo de las razones de probabilidad del creacionismo. Primero, parece que la persona que hizo el cálculo trabajaba con quizás 60,000 moléculas de proteína en lugar de un sinfín de moléculas de proteína. El segundo problema me cuesta expresarlo con precisión, y tiene que ver con el uso de la distribución uniforme como probabilidad a priori. A veces el uso de la distribución uniforme como probabilidad a priori me parece totalmente justificado. Un ejemplo es cuando existe un modelo bien construido de los resultados posteriores. Otras veces, cuando el modelo f… (leer más)
+6Strange712yConsidere que 1) hay más de una disposición posible de proteínas que califi…
+3DanielLC12yNo debería usar tiempos de Planck a menos que las proteínas puedan reorganizarse de tal manera que…
+0Strange712ySi la temperatura es lo bastante alta como para que haya algún movimiento molecular, se podría o…11y 
+11y 
+12y 
+12y 
+Daniel_Burfoot1
+1GDC312y¿No es más bien que están ignorando la enorme cantidad de bits de evidencia que dicen que…
+Will_Sawin11
+[-]
+Esto es una mala interpretación. El argumento va así: Afirmación verdadera: hay mucha evidencia de células. P(Evidence|Cells)/P(Evidence|~Cells)>>1. Afirmación falsa: sin diseño inteligente, las células solo podrían producirse por azar. P(Cells|~God) es muy muy pequeña. Afirmación discutible: P(Cells|God) es grande. Conclusión: actualizamos masivamente a favor de Dios y en contra de ~God, debido a —no en oposición a— la masiva evidencia a favor de la existencia de células. Esta es una actualización bayesiana válida; solo que la afirmación falsa es falsa.
+3[anonymous]12y¡Tiene toda la razón! Esta es una de las creencias erróneas clave que tienen los creacionistas h…2GDC311yVotado a favor por corregir con éxito mi confusión sobre este ejemplo y ayudarme a entender…
+[-]
+El argumento era que, dado que los rayos cósmicos han estado produciendo colisiones de partículas similares a las del LHC miles de veces al año, la probabilidad de que el LHC destruya el mundo es, o bien, literalmente cero. Este argumento no funciona por razones antrópicas. Podría ser que en la inmensa mayoría de las ramas de Everett la Tierra hubiera sido destruida por colisiones de rayos cósmicos.
+ArisKatsaris28
+[-]
+El razonamiento antrópico solo llega hasta aquí. Aun si acepto la tontería de que innumerables Tierras son destruidas cada año por cada una que sobrevive… los otros planetas del sistema solar también podrían haber sido destruidos. ¿Y las estrellas y galaxias del cielo ya habrían sido devoradas, no? Y ninguna razón antrópica nos impediría presenciarlo desde una distancia segura. Aquí hay un juego divertido: intente refutar la hipótesis de que cada vez que alguien dice “Abracadabra” hay una probabilidad del 99.99% de que el mundo sea destruido.
+Nick_Tarleton25
+Manfred10
+[-]
+Aquí hay un juego divertido: intente refutar la hipótesis de que cada vez que alguien dice “Abracadabra” hay una probabilidad del 99.99% de que el mundo sea destruido. No nos han forzado antrópicamente a un mundo en el que los humanos no puedan decir “Abracadabra”.
+0marchdown11y¡Ah, pero un número no trivial de personas tiene supersticiones leves contra decir “Ab…
+[-]
+Advertencia, alerta de spoiler: Abracadabra.
+ArisKatsaris10
+[-]
+Acaba de asesinar al 99.99% de todas las Tierras. Nuestra rama de Everett sobrevivió por razones antrópicas.
+Jack28
+[-]
+Esto es totalmente comprobable. Voy a descargar algo de ruido cuántico crudo. Si el primer byte no es FF, diré la palabra mágica. Luego informaré qué era el primer byte.12y 
+12y 
+12y 
+12y 
+12y 12y 12y 
+Neo0
+[anonymous]0
+Actualización: el primer byte era 1B...Abracadabra.Sigo aquí.
+8Caspian12yInicialmente esto era evidencia antrópica de normalidad, hasta que la gente hubiera tenido tiempo …
+4Jack12yLo que significa que tenemos que reducir los mundos en los que FF no sucedió. Dígalo con …4XiXiDu12y¿En qué punto habría aceptado que decir “Abracadabra” sí destruye el…
+Jack11
+[-]
+Yo usé esta. Después de dos FF habría decidido que estaba en una simulación que algún autor de Less Wrong había montado después de la singularidad para jugarnos una mala pasada. Ese tipo de escenarios cartesianos de bromista son mucho más probables que “Abracadabra” destruyendo el mundo...
+5wedrifid12y¿Solo dos FF? Eso no parece tan improbable, incluso olvidando todo pensamiento o…
+3Jack12yBueno, dos FF por azar es 1 entre 65536. Y mi probabilidad a priori de “estoy en una simulación” no es…
+5wedrifid12yEse no es el número que hay que considerar aquí. La probabilidad a priori relevante es “estoy en una simulaci…
+4Jack12ySí. Hmm. Realmente no tengo una estimación estable de esa probabilidad. Por supuesto, es…
+2wedrifid12y“Um. ¿WTF? ¿Esto siquiera funciona?” (Sí, dado que la prueba es tan trivial, podría e…0[anonymous]12y¿En serio?
+0[anonymous]12yBueno, la probabilidad es 1 entre 65,536. ¿Hay alguna hipótesis que haya descuidado?
+1NothingnessAbove3yLa persona que ejecuta el servidor de qrng decidió jugarle una mala pasada.2Manfred12y¡Maldición!7Daniel_Burfoot12yAcepto este contraargumento. Esto es poco probable porque es enormemente incompatible …4Eliezer Yudkowsky12yMe gustaría conocer la probabilidad a priori de Yvain sobre esto.
+0Scott Alexander12y¿Sobre el ejemplo de “abracadabra”? La abrumadora mayoría vendría de…1Luke_A_Somers11y¿Solo el mundo? Bueno, todo lo que necesita es una buena nave espacial para no estar en él cuando…
+0dlthomas11yEfectivamente: ninguno de nosotros lo habría oído jamás.0DanielLC12yQuizá, en lugar de solo causar un agujero negro, causa un desgarro en el espacio-tiempo que se expan…
+2shokwave12yMe siento vagamente en desacuerdo con el razonamiento antrópico cuando premia explicaciones elaboradas y co…0[anonymous]12yHay algunas respuestas interesantes aquí [http://lesswrong.com/r/discussion/lw/2s…
+[-]
+“Esta persona cree que podría hacer una afirmación sobre un tema tan difícil como el origen de la vida celular por cada intervalo de Planck, cada intervalo de Planck desde el Big Bang hasta el presente, y no equivocarse ni una sola vez”, solo nos lleva a 1/10^61 aproximadamente. “¿No sería eso 1/ 2^(10^61) o me estoy perdiendo algo?
+[-]
+Me molesta un poco la persistencia del ruido de “el LHC podría destruir el mundo”. Dado que no hay evidencia, la probabilidad a priori de que los agujeros negros microscópicos puedan formarse en absoluto, en todos los posibles sistemas de física, es extremadamente pequeña. La misma teoría (la teoría de cuerdas[1]) que nos ha llevado a sugerir que podrían formarse agujeros negros microscópicos también insiste en que todos los agujeros negros se evaporan, y con la misma firmeza en que los microscópicos se evaporan más rápido que12y 
+9y 
+12y 
+[anonymous]0
+Drahflow0
+jmmcd0los más grandes, por un factor preciso del cubo de la razón de masas. Si pensamos que la teoría habla de compl... (leer más)
+[-]
+Por último, considere la cuestión de si se puede asignar una certeza del 100% a un teorema matemático para el que existe una demostración. Para fundamentar esto en términos más concretos, imagine que está escribiendo un algoritmo para comprimir imágenes formadas por píxeles de 8 bits. El algoritmo recorre varias filas hasta llegar a un píxel, y predice que la distribución de ese píxel es gaussiana con media de 128 y varianza de .1. Entonces, la probabilidad del modelo de que el valor real del píxel sea 255 es un número astronómicamente pequeño, pero el sistema debe reservar algo de probabi... (leer más)
+[-]
+Pero me cuesta indignarme como corresponde por esto, porque la conclusión de que el LHC no destruirá el mundo es correcta. ¿Cuál es su argumento para afirmar que el LHC no destruirá el mundo? Que el mundo todavía exista, aunque los experimentos sigan en curso, se explica fácilmente por el hecho de que necesariamente vivimos en aquellas ramas del universo en las que el LHC no destruyó el mundo. (Por cierto, en relación con esto: ¿ya se ha encontrado el gran filtro?)
+0Scott Alexander12yBuen punto. Lo he cambiado a “dado que el LHC no destruyó el mundo”, wh…
+[-]
+Esta entrada plantea problemas muy similares a los que se discuten en los comentarios aquí°.12y 
+12y 
+12y 

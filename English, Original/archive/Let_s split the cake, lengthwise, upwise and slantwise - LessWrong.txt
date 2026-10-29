@@ -1,0 +1,127 @@
+Game TheoryCoordination / Cooperation
+Frontpage!is post looks at some of the current modelsfor how two agents can split the gain in non-zero sum interactions. For instance, if you anda buddy have to split £10 between the two ofyou, where the money is discarded if you can'treach a deal. Or there is an opportunity totrade your Elvis memorabilia for someone'scollection of North Korean propagandaposters: unless you can agree to a way ofsplitting the gain from trade, the trade won'thappen. Or there is the stereotypical battle ofthe sexes: either a romantic dinner (RD) or anight of Battlestar Galactica (BG) is on o"er,and both members of the couple prefer doingsomething together to doing it separately -but, of course, each one has their preferenceon which activity to do together.Unlike standard games such as Prisoner'sDilemma, this is a coordinated game: the twoagents will negotiate a joint solution, which ispresumed to be binding. !is allows for suchsolutions as 50% (BG,BG) + 50% (RD,RD),which cannot happen with each agentchoosing their moves independently. !e twoagents will be assumed to be expected utilitymaximisers. What would your feelings be on aLet's split the cake,lengthwise, upwiseand slantwiseby Stuart_Armstrong25th Oct 2010
+74
+maximisers. What would your feelings be on agood bargaining outcome in this situation?Enough about your feelings; let's see what theexperts are saying. In general, if A and C areoutcomes with utilities (a,b) and (c,d), thenanother possible outcome is pA + (1-p)C(where you decide #rst, with odds p:1-p,whether to do outcome A or C), with utilityp(a,b) + (1-p)(c,d). Hence if you plot everypossible expected utilities in the plane for agiven game, you get a convex set.For instance, if there is an interaction withpossible pure outcomes (-1,2), (2,10), (4,9),(5,7), (6,3), then the set of actual possibleutilities is the pentagon presented here:
+!e points highlighted in red are the Pareto-optimal points: those where there is nopossibility of making both players better o".Generally only Pareto-optimal points areconsidered valid negotiation solutions: anyother point leaves both player strictly poorerthan they could be.!e #rst and instinctive way to choose anoutcome is to select the egalitarian point. !isis the Pareto-optimal point where bothplayers get the same utility (in this instance,
+players get the same utility (in this instance,both get 27/5 utility):
+However, you can add an arbitrary number toyour utility function without changing any ofyour decisions; your utility function istranslation invariant. Since both players cando so, they can translate the shape seen abovein any direction in the plane without changingtheir fundamental value system. !us theegalitarian solution is not well-de#ned, but anartefact of how the utility functions areexpressed. One can move it to any Pareto-optimal point simply with translations. !usthe naive egalitarian solution should berejected.Another naive possibility is to pick the pointthat re$ects the highest total utility, by addingthe two utilities together. !is gives the vertexpoint (4,9): 
+
+!is method will select the same outcome, nomatter what translation is applied to theutilities. But this method is $awed as well: ifone agent decides to multiply their utilityfunction by any positive real factor, this doesnot change their underlying algorithm at all,but does change the "highest total utility". Ifthe #rst agent decides to multiply their utilityby #ve, for instance, we have the new pictureportrayed here, and the "highest total utilitypoint" has decidedly shifted, to the #rstplayer's great advantage:
+To summarise these transformations to utilityfunctions, we say that a utility function isde#ned only up to a%ne transformations -translations and scalings. !us any validmethod of bargaining must also be invariantto a%ne transformations of both the utilityfunctions.!e two most popular ways of doing this arethe Nash Bargaining solution (NBS), and theKalai-Smorodinsky Bargaining Solution(KSBS). Both are dependent on the existence
+(KSBS). Both are dependent on the existenceof a "disagreement point" d: a pointrepresenting the utilities that each player willget if negotiations break down. Establishingthis disagreement point is another subjectentirely; but once it is agreed upon, onetranslates it so that d=(0,0). !is means thatone has removed the translation freedomfrom the bargaining game, as any translationby either player will move d away from theorigin. In this example, I'll arbitrarily choosethe disagreement at d=(-1,4); hence it nowsu%ces to #nd a scalings-invariant solution.Nash did so by maximising the product of the(translated) utilities. !ere are hyperbolas inthe plane de#ned by the sets of (x,y) such thatxy=a; Nash's requirement is equivalent withpicking the outcome that lies on thehyperbola furthest from the origin. !e NBSand the hyperbolas can be seen here:
+!is gives the NBS as (4,9). But what happenswhen we scale the utilities? !is is equivalentto multiplying x and y by constant positivefactors. !is will change xy=a to xy=b, thuswill map hyperbolas to hyperbolas. !is alsodoes not change the concept of "furthesthyperbola from the origin", so the NBS will
+hyperbola from the origin", so the NBS willnot change. !is is illustrated for the scalingsx->(18/25)x and y->(19/18)y:
+!e NBS has the allegedly desirable propertythat it is "Independent of IrrelevantAlternatives". !is means that if we delete anoption that is not the NBS, then the NBS doesnot change, as can be seen by removing (2,10):
+ Some felt that "Independence of IrrelevantAlternatives" was not a desirable property. Inthe above situation, player 2 gets their best
+the above situation, player 2 gets their bestoption, while player 1 got the worse (Pareto-optimal) option available. Human intuitionrebels against "bargaining" where one sidegets everything, without having to give upanything. !e NBS has other counter-intuitiveproperties, such as the that extra solutions canmake some players worse o". Hence the KSBSreplaces the independence requirement with"if one adds an extra option that is not betterthan either player's best option, this makes noplayer worse o"".!e KSBS is often formulated in terms of"preserving the ratio of maximum gains", butthere is another, more intuitive formulation.De#ne the utopia point u=(u, u), where u isthe maximal possible gain for player 1, and uthe maximal possible gain for player 2. !eutopia point is what a game-theory fairy couldo"er the players so that each would get themaximal possible gain from the game. !enthe KSBS is de#ned as the Pareto-optimalpoint on the line joining the disagreementpoint d with the utopia point u:
+Another way to formulate the KSBS is byrenormalising the utilities so that d=(0,0), u=xyxy
+renormalising the utilities so that d=(0,0), u=(1,1), and then choosing the egalitariansolution:
+In a subsequent post, I'll critique thesebargaining solutions, and propose a moreutility-maximising way of looking at the wholeprocess.Game Theory1Coordination / Cooperation1
+FrontpageMentioned in5546232116Load More (5/9)
+29 comments, sorted by top scoringcousin_it16
+[-]
+Gains from trade: Slug versus Galaxy -how much would I give up to control you?A Problem About Bargaining and LogicalUncertaintyIntertheoretic utility comparisonLying in negotiations: a maximally badproblemIf you don't know the name of the game,just tell me what I mean to you12y 
+cousin_it16
+sketerpot10I just spent ﬁve minutes on a fun little math problemlurking in your post. The Nash solution uses a familyof hyperbolas, so it's natural to ask the question:what other curves could be used instead? In otherwords, which families of curves are invariant underscalings in x and y? T urns out it's easy to prove (tryit!) that all such families have the form x^a*y^b=c,where a and b are constant but c varies. These arethe "generalized Nash solutions" where the playershave unequal "bargaining powers". For furtherreading see this PDF.
+Mati_Roy1Stuart_Armstrong0
+[-]
+the link is broken
+[-]
+Interesting.
+[-]
+In your Romantic Dinner / Battlestar Galacticaexample, it's not really clear what it means for oneperson to translate or scale their utility function. I'mgoing to take a newbie stab at it here, and pleasecorrect me if this is wrong:Scaling: This is where the outcome matters moreto one party than to the other party. For an extremeexample, one person stands to gain between 0 and10 minutes of extra life from the bargain, and theother person could gain between 0 and 500 years ofextra life. And these are totally selﬁsh people, whogenuinely don't care about each other's utility; theyjust want to reach a bargain that optimizes theirown utility. The total-utility-maximizing answerwould favor the person who has the most to gain,and either person could turn this to their advantageby claiming to really, really care about the outcome."I'll literally die if we don't watch BattlestarGalactica!", or some such thing.Translation: This just adds or subtracts aconstant amount of utility to any person's utilityfunction. "I would love to watch BSG, but I'm sohappy just being with you! ♥". If one person will bedisgruntled if they don't (e.g.) have a romantic dinner,and the other person will be at least fairly cheerfuleither way, then this could inﬂuence the bargaining -- 
+5y 12y 12y 
+either way, then this could inﬂuence the bargaining --and if so, it gives a selﬁsh person a way to game thesystem, by acting unhappy when they don't get theirway.The way to take advantage of people using the naiveegalitarian or utility-sum-maximizing decisionmethods is to exaggerate how much you care aboutthings, and sulk when you don't get your way. Alsoknown as "acting like a toddler", which our societyfrowns on, probably for exactly this reason.Is this reasonably accurate?
+gwillen6
+GuySrinivasan5
+Stuart_Armstrong4
+[-]
+I just want to express my disagreement with theother two replies to this comment. Yes, in avacuum, it's true that scaling and translating utilityfunctions doesn't have any effect. But as soon asyou start trying to compare them acrossindividuals -- which is exactly what we were doingin the relevant part of the post -- it seems to methat scaling and translation behave just like thiscomment describes.
+[-]
+It doesn't mean anything to translate or scale autility function. A utility function is just amathematical way to encode certain relativerelationships between outcomes, and it turns out ifyou add 42 to every value of the function, it stillencodes those relationships faithfully. Or if youmultiply everything by 9000.This is why comparing two individuals' utilityfunctions in any naive way makes no sense: theirfunctions are encoding relative preferencerelationships, but it doesn't matter if one of themmultiplies everything by 9000. So any comparisonthat breaks when one of them multiplies everythingby 9000 or adds 42 to everything but the otherdoesn't isn't actually making correct use of theunderlying relative preference relationships.
+[-]
+The scaling and translations don't correpsond toanything real. It's simply that if I have a utilityfunction that has value u1 in world w1 and u2 inworld w2, and u1 > u2, then I prefer w1 to w2.However, if I add a constant c to my utility function,12y 
+12y 
+12y 
+However, if I add a constant c to my utility function,then the utility of world w1 becomes u1 + c andthat of w2 become u2 + c: I still prefer world w1to w2!Similalrly, if you generalise to all worlds, then addingc doesn't change my utility at all: I will always havethe same preferences as I did before. An agent withthe same utility function, plus a constant, willalwaus make the same decisions whatever thevalue of that constant. The same goes formultiplication by a (positive) scalar. Since these"afﬁne transformations" don't change yourpreferences, any reasonable system of bargainingshould be indifferent to them.
+AlanCrowe2
+[-]
+The mathematical object in question is a pair ofutility functions. We have to chose how we liftthe concept of an afﬁne transformation of a utilityfunction to an afﬁne transformation of a pair ofutility functions.One choice is to deﬁne an afﬁne transformationof a pair of utility functions (u,v) as pair of afﬁnetransformations (f,g) which take (u,v) to (fu, gv).With this choice we cannot compare thecomponent utility functions within a pair.Another choice is to deﬁne an afﬁnetransformation of a pair of utility functions (u,v)by applying a single transformation f to bothcomponents getting (fu, fv). This preservescomparisons within the pair.The key point is that our inability to dointerpersonal comparisons of utility is a modelingassumption. It is something we put in to theanalysis, not something that we get out of theanalysis.sketerpot is asking "why can't we just comparethe utilities?" and in the same comment noticingthat there are problems with discovering utilities.What is to stop people exaggerating their utilitiesin order to game the bargaining system?sketerpot's comment pretty much nails thesituation. Since permitting interpersonalcomparisons of utility opens a huge can of wormsan important leg of the broader project is to say:Let us assume that interpersonal comparison ofutility is impossible, and press on with the analysis12y 
+Academian3
+Academian2utility is impossible, and press on with the analysisto ﬁnd what solutions to the bargaining problemare available under this assumption.
+[-]
+Utility scaling/translation can mean something ifyou're scaling them to normalize the average andstandard deviation (or other spreading statistic)of reported marginal utilities in group decisionsover time; see my comment above°.ETA: In case it's not clear, I agree that a choice ofscale for your utility function doesn't meananything by default, and you're right to be pointingthat out, because people mistaken assume thatway too often. But if you scale it with a certainpurpose in mind, like group decision making,utility can take on additional meaning.An example of what I mean: if you and I have tomake a series of binary decisions as a two-personteam, we could each report, on each decision,what is the marginal utility of option 1 overoption 2, using a scale of our own choosing.Reporting marginal utility eliminates the choice oftranslational constant, but we are still scaling ouranswers according to some arbitrary choice ofunit. However, suppose we expect to make, say,100 decisions per year. We can make a rule: theabsolute values of the marginal utilities youreport must add up to less than 1000. In otherwords, you should choose your units so theaverage absolute marginal utility you report isaround 10, or slightly less. This will result in acertain balance in our decision-making procedure:you can't claim to care more than me on everydecision; we will end up having about the sameamount of inﬂuence on the outcomes.But again, this doesn't mean numerical utilities areintrinsically comparable across individuals. Thecomparison depends on a choice of scale,.achoice that can be tailored to differing purposesand hence give different meanings to thenumerical utilities.
+[-]
+Y ou got it: sharing decision utility is sharing power,not welfare.°.12y 
+12y 
+David Scott Krueger (formerly: capybaralet)7MrEff5
+cousin_it1
+A way to prevent people exaggerating how muchthey care about stuff is to mandate that, on average,people should care the same amount abouteverything. This is, very approximately, what I dowith my close friends to make our mutualdecisions quicker: so we don't accidentally makelarge sacriﬁces for small beneﬁts to the other, wesay on a scale from 1-5 how much we care abouteach decision, and the larger carer decides.Example: "Where do you want to go for dinner? Ionly care 2." "I care 3 (because I have a badstomach). Let me decide."Over time, we've gotten faster, and just say thenumbers unless an explanation is necessary. It's anice system :) I'd hate to think my friend wouldmake large sacriﬁces to beneﬁt me only small gains,and conversely, so that's what we do.
+[-]
+It's worth mentioning that (FWICT) these things arecalled bargaining problems in the literature:https://en.wikipedia.org/wiki/Bargaining_problem
+[-]
+A very interesting article, both informative andclearly explained.
+Stuart_Armstrong0
+[-]
+Thanks!
+[-]
+Why does your disagreement point lie outside theset of possible outcomes? If both are derived fromthe same game, one should lie within the other.Otherwise, great post and great diagrams. Thanks.Will your next post give a proof of your conjecturefrom Mar 15?
+Stuart_Armstrong0
+[-]
+4y 
+12y 12y 12y 
+12y 
+Perplexed1
+Stuart_Armstrong0Why does your disagreement point lieoutside the set of possible outcomes? Ifboth are derived from the same game,one should lie within the other.T o emphasis it's essential arbitrariness :-)Otherwise, great post and great diagrams.Thanks. Will your next post give a proofof your conjecture from Mar 15?Thanks! I don't know my conjecture form Mar 15,but the result I have is a new one. Essentially itdeals with how to maximise utility when you'reunsure about what games you'll be playing. I'm stillchecking it, and ageing it.
+[-]
+Very nice. I had been thinking about doing this too,but you beat me to it.In a subsequent post, I'll critique thesebargaining solutions, and propose a moreutility-maximising way of looking at thewhole process.I'm guessing you are referring to Nash's programhere, and the Rubinstein bargaining process. Great.But if you are going to suggest an alternative to NBSand KSBS that is more "utilitarian" in spirit - wellthat would be interesting too.
+Stuart_Armstrong0
+[-]
+But if you are going to suggest analternative to NBS and KSBS that is more"utilitarian" in spirit - well that would beinteresting too.That's what I'm suggesting; essentially it deals withhow to maximise utility when you're unsure aboutwhat games you'll be playing. I'm still checking it,and ageing it.
+Perplexed0
+[-]
+Sounds like you are talking about Harsanyi'sGeneralized Nash Bargaining Solution (pdf link). 
+12y 
+12y 
+12y 
+PhilGoetz0
+Generalized Nash Bargaining Solution (pdf link).
+Stuart_Armstrong0
+[-]
+I don't think so; for instance, I don't thinkHarsanyi's solution is pareto-optimal - though Imight be wrong about this, I'm not yet fullyfollowing it.
+Perplexed0
+[-]
+Well, if you think you can bargain to a Pareto-optimal solution, in a game with imperfectinformation, then I want to see that idea.Because with neither player having enoughinformation to even recognize Pareto-optimality, I don't see how their bargaining canbring them there.Though perhaps you have a deﬁnition ofPareto-optimality in mind in which theoptimality is "in the eye of the beholder".Something like that might make sense. After all,in the course of bargaining, each party gainsinformation about the state of the world,which may result in changes in their expectedutility even without a change in objectivelyexpected outcome.
+Stuart_Armstrong0
+[-]
+Pareto-optimal in expected utility; and yes, "inthe eye of the beholder". The µSMBS Idescribedhttp://lesswrong.com/lw/2xb/if_you_dont_know_the_name_of_the_game_just_tell/° arePareto optimal (in the eyes of both players),even if they have different probabilitydistributions over the games to be played (Iput that in initially, then took it out as itmade the post less readable).
+[-]
+Nice post - thanks for taking the trouble to writethis, and make ﬁgures!The NBS has other counter-intuitiveproperties, such as the that extra solutionscan make some players worse off.12y 
+12y 
+12y 
+12y 
+GuySrinivasan0can make some players worse off.Why would that be counter-intuitive? Saying that iscounter-intuitive implies that you should choose themax-min solution (the solution with the max overplayers P of(min(utility(P)) ).Hence the KSBS replaces the independencerequirement with "if one adds an extraoption that is not better than eitherplayer's best option, this makes no playerworse off".Y ou need to explain what "better" means in thiscontext. Better for both players? With a sum orproduct that is higher? I can't think of any meaningthat makes sense.Another way to formulate the KSBS is byrenormalising the utilities so that d=(0,0),u=(1,1), and then choosing the egalitariansolution:What deﬁnes "the egalitarian solution"?
+[-]
+Thought-dump:The common case: each player has a relativelysmooth payoff over time, with the component fromthe outcome relatively unchanging and thecomponent from the opportunity costs ofnegotiation cumulatively increasing and thosecomponents fairly factorizable.If either estimates their negotiation cost rapidlyswamping their outcome payoff they can agree towhatever the other has offered.If either has a way of estimating that their ratio ofoutcome payoff differential / cumulative negotiationcosts is signiﬁcantly lower than the other's, and canreliably provide the other with a similar estimationcapability, they will provide it and the disadvantagedcan agree to stop negotiating. If they both canalready estimate and have common knowledge oftheir capability and accuracy, the disadvantaged canagree to stop negotiating.If they are in a society of similar agents, society candevelop a stigma for prolonging negotiation for12y 
+develop a stigma for prolonging negotiation forpersonal gain, making negotiation costs much higherthan the usual time+energy required to negotiate,providing impetus for everyone to adopt somecommon procedure that beneﬁts someone "morethan" the other, but kind of at random or at leastunpredictably.An extreme case: We're in a True Prisoner'sDilemma° and the payoff differential is signiﬁcantlymore than anything we could expect to do with ourtime+energy+negentropy+whateverresources. Alsowe're a superintelligence with all the resources ofour lightcone. Also we don't have access to theirsource code and we're certain they don't haveaccess to ours. So we estimate P(they cooperate)however possible... for example simulate all possiblemultiverses (with shortcuts like discarding ones weprove can't reach this state) to see the sum of ourpriors on universes where we get this choice andour counterpart cooperates and hope there'senough mass on ones where there's not a lot ofcoincidence between our algorithm and ourcounterpart's to prove one option's better... or thatwe've solved the problem of logical uncertainty +choice already...A less extreme case: our resources are insteadbounded by how much more gain we get by"negotiating" (computing) further, so we have toabstract more than we did in the abovesimulation+shortcuts, which means our program's alot shorter and there will be far more coincidencebetween our algorithm and our counterpart's if theytoo are getting bounded... maybe we can estimatehow much their computation costs them relative totheir gain? Or how much they think ourcomputation costs us relative to our gain?
+Perplexed0
+[-]
+If you google for "Nash Program", perhaps with theadditional name "Rubinstein", and then read someof the articles listed there, you will learn that someof the ideas appearing in your "thought dump" arealready pretty standard and have been exploredquantitatively.
+GuySrinivasan0
+[-]
+Thanks. I've read the cite on Wikipedia'sRubinstein bargaining model but no further.12y 
+12y 
+dclayh0
+adsenanim-2
+[-]
+Has anyone dealt with bargaining games wheredifferent pure solutions cannot be linearly combined(i.e. a non-convex solution space)?
+Perplexed1
+[-]
+The direct answer is "yes", as you might havediscovered by googling.But different pure solutions can always be linearlycombined - at least if the combination is supposedto be an expected utility rather than a guaranteedutility.In an American football game, a coin is ﬂipped atthe start to produce a fair linear combination of"kicking off" and "receiving".
+JGWeissman5
+[-]
+as you might have discovered bygoogling.But if dclayh had used google instead of asking thequestion in a comment, you never would have hadthe opportunity to respond with your pointabout expected utility.Asking in a comment could also attract theinterest of others who might not have thought toask that question, and gives others theopportunity to give their own answer or link to aresource they think is particularly good, that theymight be able to answer follow up questionsabout.
+[-]
+I know this is a silly question, but do you know theﬁgures you are presenting may be equated to theforces produced by the action of wind on a sail?Y our romantic dinner is a distance away, and I hopeyou are not following Achilles after the T ortoise.12y 12y 
+12y 
+12y 
