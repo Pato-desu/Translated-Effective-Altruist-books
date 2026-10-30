@@ -923,7 +923,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · EA Forum top 1600ish posts / 614.txt · 1KTdFlO9sX5YskIds5e5FS9JFmz7Vdsdx · 20 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 614.txt`)
 - [x] es · EA Forum top 1600ish posts / 495.txt · 1zFyK3zbPC5FGg8Y1pNRrVbuTb7ayaqXJ · 21 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 495.txt`)
 - [x] es · EA Forum top 1600ish posts / 669.txt · 1SWdwLFSPIY_RWAXay8do2ajJAC53tb5Z · 21 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 669.txt`)
-- [ ] es · EA Forum top 1600ish posts / 647.txt · 1YsA1oKQaeoJUYmLCvFHP83DtP96ZnHB6 · 21 KB · txt
+- [x] es · EA Forum top 1600ish posts / 647.txt · 1YsA1oKQaeoJUYmLCvFHP83DtP96ZnHB6 · 21 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 647.txt`)
 - [x] es · EA Forum top 1600ish posts / 655.txt · 1BGVAb5_Y8tSQO3aPykDmDOify9X0KZ4h · 21 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 655.txt`)
 - [x] es · EA Forum top 1600ish posts / 646.txt · 1yuk8A5g85xXJI_5lcg57ouDZi7Wc1xQv · 23 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/EA Forum top 1600ish posts 646.txt`)
 - [x] es · EA Forum top 1600ish posts / 368.txt · 1BzCX-mrUu7Hh-NdG5EpEDSjvhZQfuXCE · 23 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 368.txt`)
@@ -942,7 +942,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · EA Forum top 1600ish posts / 656.txt · 1yirm9zm52hfleGItvX5yPGerLYhU4P95 · 26 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 656.txt`)
 - [x] es · EA Forum top 1600ish posts / 621.txt · 1oYZjwxkp5oPCd99yGHvkPwDNGzI5e5Fd · 26 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 621.txt`)
 - [x] es · EA Forum top 1600ish posts / 467.txt · 13Mei_62bTmIqDCxI8OqPYtJZ6ZtTijGQ · 26 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 467.txt`)
-- [ ] es · EA Forum top 1600ish posts / 480.txt · 1M6eJM8yBxe5JdGs9Z5q-icKP4uKNkmD9 · 27 KB · txt
+- [x] es · EA Forum top 1600ish posts / 480.txt · 1M6eJM8yBxe5JdGs9Z5q-icKP4uKNkmD9 · 27 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 480.txt`)
 - [x] es · EA Forum top 1600ish posts / 644.txt · 1_gMRsnoHsryPiY-bnQyA48HD77QqTHjJ · 27 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 644.txt`)
 - [x] es · EA Forum top 1600ish posts / 440.txt · 1rTHDdOSmaSAIOnPr2Qjq0pei35nV05QA · 27 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 440.txt`)
 - [x] es · EA Forum top 1600ish posts / 553.txt · 1BI22GbOXbhv50-6XlxT2svjoOnGO1rLC · 27 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 553.txt`)
@@ -950,49 +950,49 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · EA Forum top 1600ish posts / 627.txt · 1_bDrqch_sbkjLB8jcXaZ-OurzSmEqnlq · 28 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 627.txt`)
 - [x] es · EA Forum top 1600ish posts / 600.txt · 1p8Ax-Ea105g3lgfz8zwN_Y_F8myoUNmn · 29 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 600.txt`)
 - [x] es · EA Forum top 1600ish posts / 578.txt · 1OzNVDwTVzJQrK3DpPM5gkpxW1gTxGthq · 29 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 578.txt`)
-- [ ] es · EA Forum top 1600ish posts / 503.txt · 1sKIBDwtF-EZptmt1aOlgOj2321Z7lFOY · 30 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 602.txt · 1fU0KMCGvSsbJAsfXV64PlKrM0pl89v4n · 31 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 665.txt · 1B9OKz4VbeP60-hX198tNm4djZgnNM_d- · 32 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 652.txt · 1oRTCqlEEv_jAvS3ADm_HO5Dc_jmlRyno · 33 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 548.txt · 1y5pqSvKFslLXYGCNnTeMqMa8T2i3ZNKv · 33 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 561.txt · 1AjXwKPgwbDdKXe69j4rknHWl1ChVLrve · 35 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 630.txt · 1HP5ZzhlQtjuQngiLo_JQkOTLwFNkBQc9 · 35 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 666.txt · 1kmcubqiszBqTZ6cceGH5NBHMXLyW8YL_ · 36 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 549.txt · 1FD_LBjFPnggcEt331a6KwVOFKEntTx4E · 36 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 558.txt · 13ugmRm6D5uvnaZlaXGJ21eZU_6d8-LG4 · 36 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 642.txt · 12HB1bAxsA10fBGf7cwIbe3cGlxEMzzIu · 37 KB · txt
+- [x] es · EA Forum top 1600ish posts / 503.txt · 1sKIBDwtF-EZptmt1aOlgOj2321Z7lFOY · 30 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 503.txt`)
+- [x] es · EA Forum top 1600ish posts / 602.txt · 1fU0KMCGvSsbJAsfXV64PlKrM0pl89v4n · 31 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/EA Forum top 1600ish posts 602.txt`)
+- [x] es · EA Forum top 1600ish posts / 665.txt · 1B9OKz4VbeP60-hX198tNm4djZgnNM_d- · 32 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 665.txt`)
+- [x] es · EA Forum top 1600ish posts / 652.txt · 1oRTCqlEEv_jAvS3ADm_HO5Dc_jmlRyno · 33 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 652.txt`)
+- [x] es · EA Forum top 1600ish posts / 548.txt · 1y5pqSvKFslLXYGCNnTeMqMa8T2i3ZNKv · 33 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 548.txt`)
+- [x] es · EA Forum top 1600ish posts / 561.txt · 1AjXwKPgwbDdKXe69j4rknHWl1ChVLrve · 35 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 561.txt`)
+- [x] es · EA Forum top 1600ish posts / 630.txt · 1HP5ZzhlQtjuQngiLo_JQkOTLwFNkBQc9 · 35 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 630.txt`)
+- [x] es · EA Forum top 1600ish posts / 666.txt · 1kmcubqiszBqTZ6cceGH5NBHMXLyW8YL_ · 36 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 666.txt`)
+- [x] es · EA Forum top 1600ish posts / 549.txt · 1FD_LBjFPnggcEt331a6KwVOFKEntTx4E · 36 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 549.txt`)
+- [x] es · EA Forum top 1600ish posts / 558.txt · 13ugmRm6D5uvnaZlaXGJ21eZU_6d8-LG4 · 36 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 558.txt`)
+- [x] es · EA Forum top 1600ish posts / 642.txt · 12HB1bAxsA10fBGf7cwIbe3cGlxEMzzIu · 37 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 642.txt`)
 - [x] es · EA Forum top 1600ish posts / 667.txt · 1peUGma4IkzfpkNvxza8q4SOhv3hFwwcu · 38 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 667.txt`)
-- [ ] es · EA Forum top 1600ish posts / 501.txt · 1IwxVAd6OTRsjn2kSKcOuxXYcakiEkQBW · 39 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 618.txt · 1D0eAiMhh4fmss6jvAcyww4gFT9MeSjuY · 39 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 619.txt · 1d6X9kQWqrCGZwkWdvNwpHxFwlLD4T8xs · 39 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 662.txt · 1DPHzEh7TiOlhTeo2SMwoI4pzt8NQeMlm · 39 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 369.txt · 1mZ6mET5qVpQgnwYMnRhKmL2MQlz_xjey · 40 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 461.txt · 1mcOhzAjzAZFvkAGWAZBj3zePFaBFg4Fq · 41 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 633.txt · 1oco2yjO6mmfoSp1seN3DJL-6GMeuUXMZ · 41 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 372.txt · 1DlXv_LIY-5ZBKvwkjcsLoS3-trfFO_Mb · 43 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 636.txt · 1RrIbS95AhfTd5h7wAwmhrmzeELA9yd-e · 43 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 651.txt · 1oEaa8zWAaQhEWReagP2aOhjcNcy1ggHl · 44 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 504.txt · 1Jz1wRjoXsrhnAKTo0pZtryFKq4GhiTJ3 · 44 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 375.txt · 1M9WXR9FMeAO-qQD9cIZAf9J8ktCSupwh · 45 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 459.txt · 1_CyZqrd1ONLe9Z6rSH1RDe7o9oYmKFUm · 45 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 610.txt · 1aOcdrvRq1fgxz-c_xy0k6MuEkR-I-U-p · 45 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 379.txt · 1c_kKB3oXEwmQIFD_BmozkO1qnW_Q-d2Z · 45 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 499.txt · 1G7WILsHG8x5RmGw-poYjr9VICE-iU-tl · 45 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 624.txt · 1IOUxk8OFEzhAJ2aGsvuwZEOym57LOGIH · 46 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 373.txt · 1daOn3pzx6rwK62vxxzunnfKpvrr3-mWA · 48 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 547.txt · 1eyyhMbgYwHqclyHj_22CfP1EW6Zny_MZ · 48 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 482.txt · 1kW1oM_rqqek0L_3Le0z2v8IrI43UWngu · 48 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 643.txt · 1uhkrjQJoT9-oyFbRYpEG4rG3Rtse5x9U · 49 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 615.txt · 1Jhl-D5sZMFp8bykhISX48roI4v00JoAg · 49 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 454.txt · 1DFT-sUSHNTGT0kXGioglaREOKsv8QRa_ · 50 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 557.txt · 1y3jHT8812XS8kgZSy1RWx41FkTBmi0EY · 52 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 449.txt · 1qM7uNyVmOF-9O0LPWKPzwXFeZQs9sPm5 · 52 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 673.txt · 17MyXXET54NRcS9_nVzDkJgWTG2869lL3 · 53 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 496.txt · 1xH1dVnbPtnQgfiGK7CfWsEaXDm2t_sdZ · 54 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 661.txt · 1Od2Va8qOuG9Pz7xKQGA0VSx2J8t_C9R1 · 57 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 520.txt · 1uxJCqVDZL_dkQsFpXM-JRK5M1Ecc5lR7 · 57 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 616.txt · 1CUsWdMgQOqsJNNXSt--WW7QLavn6AzLV · 57 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 505.txt · 1oibHRvTDxHAzi_Zc9G5xnRKB2OmEkIV0 · 57 KB · txt
+- [x] es · EA Forum top 1600ish posts / 501.txt · 1IwxVAd6OTRsjn2kSKcOuxXYcakiEkQBW · 39 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/EA Forum top 1600ish posts 501.txt`)
+- [x] es · EA Forum top 1600ish posts / 618.txt · 1D0eAiMhh4fmss6jvAcyww4gFT9MeSjuY · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 618.txt`)
+- [x] es · EA Forum top 1600ish posts / 619.txt · 1d6X9kQWqrCGZwkWdvNwpHxFwlLD4T8xs · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 619.txt`)
+- [x] es · EA Forum top 1600ish posts / 662.txt · 1DPHzEh7TiOlhTeo2SMwoI4pzt8NQeMlm · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 662.txt`)
+- [x] es · EA Forum top 1600ish posts / 369.txt · 1mZ6mET5qVpQgnwYMnRhKmL2MQlz_xjey · 40 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 369.txt`)
+- [x] es · EA Forum top 1600ish posts / 461.txt · 1mcOhzAjzAZFvkAGWAZBj3zePFaBFg4Fq · 41 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 461.txt`)
+- [x] es · EA Forum top 1600ish posts / 633.txt · 1oco2yjO6mmfoSp1seN3DJL-6GMeuUXMZ · 41 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 633.txt`)
+- [x] es · EA Forum top 1600ish posts / 372.txt · 1DlXv_LIY-5ZBKvwkjcsLoS3-trfFO_Mb · 43 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 372.txt`)
+- [x] es · EA Forum top 1600ish posts / 636.txt · 1RrIbS95AhfTd5h7wAwmhrmzeELA9yd-e · 43 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 636.txt`)
+- [x] es · EA Forum top 1600ish posts / 651.txt · 1oEaa8zWAaQhEWReagP2aOhjcNcy1ggHl · 44 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 651.txt`)
+- [x] es · EA Forum top 1600ish posts / 504.txt · 1Jz1wRjoXsrhnAKTo0pZtryFKq4GhiTJ3 · 44 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 504.txt`)
+- [x] es · EA Forum top 1600ish posts / 375.txt · 1M9WXR9FMeAO-qQD9cIZAf9J8ktCSupwh · 45 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 375.txt`)
+- [x] es · EA Forum top 1600ish posts / 459.txt · 1_CyZqrd1ONLe9Z6rSH1RDe7o9oYmKFUm · 45 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 459.txt`)
+- [x] es · EA Forum top 1600ish posts / 610.txt · 1aOcdrvRq1fgxz-c_xy0k6MuEkR-I-U-p · 45 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 610.txt`)
+- [x] es · EA Forum top 1600ish posts / 379.txt · 1c_kKB3oXEwmQIFD_BmozkO1qnW_Q-d2Z · 45 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 379.txt`)
+- [x] es · EA Forum top 1600ish posts / 499.txt · 1G7WILsHG8x5RmGw-poYjr9VICE-iU-tl · 45 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/EA Forum top 1600ish posts 499.txt`)
+- [x] es · EA Forum top 1600ish posts / 624.txt · 1IOUxk8OFEzhAJ2aGsvuwZEOym57LOGIH · 46 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 624.txt`)
+- [x] es · EA Forum top 1600ish posts / 373.txt · 1daOn3pzx6rwK62vxxzunnfKpvrr3-mWA · 48 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 373.txt`)
+- [x] es · EA Forum top 1600ish posts / 547.txt · 1eyyhMbgYwHqclyHj_22CfP1EW6Zny_MZ · 48 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 547.txt`)
+- [x] es · EA Forum top 1600ish posts / 482.txt · 1kW1oM_rqqek0L_3Le0z2v8IrI43UWngu · 48 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 482.txt`)
+- [x] es · EA Forum top 1600ish posts / 643.txt · 1uhkrjQJoT9-oyFbRYpEG4rG3Rtse5x9U · 49 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 643.txt`)
+- [x] es · EA Forum top 1600ish posts / 615.txt · 1Jhl-D5sZMFp8bykhISX48roI4v00JoAg · 49 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 615.txt`)
+- [x] es · EA Forum top 1600ish posts / 454.txt · 1DFT-sUSHNTGT0kXGioglaREOKsv8QRa_ · 50 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 454.txt`)
+- [x] es · EA Forum top 1600ish posts / 557.txt · 1y3jHT8812XS8kgZSy1RWx41FkTBmi0EY · 52 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 557.txt`)
+- [x] es · EA Forum top 1600ish posts / 449.txt · 1qM7uNyVmOF-9O0LPWKPzwXFeZQs9sPm5 · 52 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 449.txt`)
+- [x] es · EA Forum top 1600ish posts / 673.txt · 17MyXXET54NRcS9_nVzDkJgWTG2869lL3 · 53 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/EA Forum top 1600ish posts 673.txt`)
+- [x] es · EA Forum top 1600ish posts / 496.txt · 1xH1dVnbPtnQgfiGK7CfWsEaXDm2t_sdZ · 54 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/EA Forum top 1600ish posts 496.txt`)
+- [x] es · EA Forum top 1600ish posts / 661.txt · 1Od2Va8qOuG9Pz7xKQGA0VSx2J8t_C9R1 · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/EA Forum top 1600ish posts 661.txt`)
+- [x] es · EA Forum top 1600ish posts / 520.txt · 1uxJCqVDZL_dkQsFpXM-JRK5M1Ecc5lR7 · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/EA Forum top 1600ish posts 520.txt`)
+- [x] es · EA Forum top 1600ish posts / 616.txt · 1CUsWdMgQOqsJNNXSt--WW7QLavn6AzLV · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/EA Forum top 1600ish posts 616.txt`)
+- [x] es · EA Forum top 1600ish posts / 505.txt · 1oibHRvTDxHAzi_Zc9G5xnRKB2OmEkIV0 · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/EA Forum top 1600ish posts 505.txt`)
 - [ ] es · EA Forum top 1600ish posts / 649.txt · 18IsZfPB3VzjC_hBRVbGCdVGp8qh8Tf8n · 61 KB · txt
 - [ ] es · EA Forum top 1600ish posts / 470.txt · 1jPyTY1ZT40yTSrkDvFAwehOlhBfweNWf · 62 KB · txt
 - [ ] es · EA Forum top 1600ish posts / 577.txt · 1wPRh2CSEEmQAMZIjp_MxARU7SBd8eL3T · 63 KB · txt
@@ -1009,85 +1009,85 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · Slate Star Codex and ACX / 2013-12-28-meetup-southeast-michigan-.txt · 1SHpXghYALbSHtEG0npvalOodmXUiTUno · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Slate Star Codex and ACX / 2013-05-15-overheard-in-the-box-part-ii-.txt · 1xvmHmD30tq4FXGxcjQKaeEXWL0Eg0U_6 · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Slate Star Codex and ACX / 2013-05-15-index-posts-on-raikoth-.txt · 11T7obsmUC8XcWmo2EL88pSet8ipkDSu8 · 1 KB · txt · under 2 KB: empty page or stub
-- [ ] es · Slate Star Codex and ACX / 2013-05-12-overheard-in-the-box-.txt · 1q96tIKGuWgNw-pUUfeNMAsN69asXkBpV · 4 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-10-fermats-last-stand-game-rosters-.txt · 1OiX5wDLefKzS9g2QK49mjoRpqNJrGxj- · 4 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-04-24-product-recommendation-fb-purity-.txt · 1Uq2CxeciRkMSU_EVpW0pB2_YtxQoFzp9 · 4 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-08-hitting-below-the-bible-belt-.txt · 1xNdAJlLhuVCXpN-xm0Z-PYijOmIyRHU- · 7 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-05-12-overheard-in-the-box-.txt · 1q96tIKGuWgNw-pUUfeNMAsN69asXkBpV · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-05-12-overheard-in-the-box-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-10-fermats-last-stand-game-rosters-.txt · 1OiX5wDLefKzS9g2QK49mjoRpqNJrGxj- · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-03-10-fermats-last-stand-game-rosters-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-04-24-product-recommendation-fb-purity-.txt · 1Uq2CxeciRkMSU_EVpW0pB2_YtxQoFzp9 · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-04-24-product-recommendation-fb-purity-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-08-hitting-below-the-bible-belt-.txt · 1xNdAJlLhuVCXpN-xm0Z-PYijOmIyRHU- · 7 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-03-08-hitting-below-the-bible-belt-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-12-02-more-fictional-drugs-banned-by-the-fda-.txt · 168AU3Kt0eo1aqHmSgMO6nljCFb7rj7N7 · 7 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-21-november-housekeeping-post-.txt · 1blLVTAoSIwz6k8t6mzh1ZIRFSKWA0wye · 8 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-19-a-new-chapter-in-the-codex-.txt · 1EpbzKwz1B2KILH-JZ0v9ICpmJyRrCvMu · 8 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-16-google-correlate-does-not-imply-google-causation-.txt · 1LGDqb9j8zJv42xZk6QeSLxasspipVtmb · 9 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-04-list-of-reasons-why-gunpowder-treason-should-be-forgot-.txt · 1cL-RMhWfFfS-wLTIXgAweTz_eccGc23x · 10 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-12-biodjinnetics-.txt · 1Mu0S9Twsoh00Ol3Rrzt_P4jAJdabspND · 11 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-06-yet-another-parable-on-the-importance-of-controlling-your-experiments-.txt · 1Y88z7-O3LAKQWZbBoTJ9Uw-erutNnDAH · 12 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-10-science-medicine-links-for-august-.txt · 1LqjjS3FSBEGIn__SiwcooYpfjKIVzbs4 · 12 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-10-25-list-of-fictional-drugs-banned-by-the-fda-.txt · 1-RmaA_XoKUGff1Z66Yq0TvZX7-8SricC · 13 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-26-fermats-last-stand-coordination-thread-.txt · 1f6MYzzwsLYdxyqnYXTc4i9n_fKSQ6vIF · 13 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-28-the-story-of-thanksgiving-is-a-science-fiction-story-.txt · 1hbgwtFAqzLgqIwQ-SlbOsuf5TIjIBS-U · 14 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-12-areteaus-on-bipolar-disorder-.txt · 1iSQ_Sqy-jgN9KDzoc3UNfV42vhMitT-Y · 15 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-24-repost-a-christmas-poem-.txt · 1iSqi8ZPUdQp9L37JNzl2aDbIa1pjtcWu · 15 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-25-people-it-turns-out-capitalism-is-actually-a-thing-.txt · 1mJJn_o5AgjpIJJia4zV3Ft9Ibcf3rjTV · 16 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-24-the-hospital-orientation-.txt · 17qmiP58KZxHBH8PFWWCoZXZ-7ec3qMmB · 16 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-02-two-dark-side-statistics-papers-.txt · 1mjgerCYAoV5Ur1XuiTUAVqVi6A8AgqUk · 16 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-03-the-witching-hour-.txt · 1FWDsgtbSgVrqSBoFvCZ72itTUwn-xYG- · 16 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-01-links-for-november-.txt · 1vTeQwXKMYkGE3WAKBnCCgd4_eDNTvKfp · 17 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-19-genetic-testing-and-self-fulfilling-prophecies-.txt · 1sAWtiJ21POha-88ZOhtzoKnpqseVj0BY · 17 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-04-30-utility-weight-results-.txt · 1zUP7g29QV6I9AJ1XsnLa5S6gXUJtxOfb · 17 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-24-links-for-february-2013-.txt · 1QecKRxdPyrJtMEINuTFKxcJUjGxAl2eV · 19 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-02-links-for-september-.txt · 1zW85k32tXyAvdSSPyY09xmuke76Ik3eN · 19 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-10-good-vibrations-and-subjective-temporal-granularity-.txt · 1Rdg5eRzcnBYgFC-W5OXBtM-lsbtIGnJG · 19 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-13-arguments-from-my-opponent-believes-something-.txt · 1Xe6f29EsTYmEagvHR8Qr6iL2M1GC17Kt · 20 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-15-you-cannot-serve-both-god-and-mammon-but-you-can-serve-mammon-by-predicting-who-will-serve-god-.txt · 14BjVhz9HguXcyBenU7pRet-M7no_efXl · 21 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-28-predictions-for-2014-.txt · 1i_JQl011sZJ6p-bu7nV0vKyMWLKKbT9e · 22 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-05-ambijectivity-.txt · 1-ejV3ShCb43kxDLXFDkv5-l-P_enDXaB · 22 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-04-selection-bias-and-atheist-stereotypes-.txt · 13MqPtxRoxfek8fQSkq_EqRqaWt4FLGYu · 23 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-10-highlights-from-my-notes-from-a-forensic-psychiatry-conference-last-week-.txt · 1lJqkZISL1zYTPp7AbWZ2saqFdhx9udnO · 25 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-17-statistical-literacy-among-doctors-now-lower-than-chance-.txt · 1p8HT7qNSUU7rJ2T7G0L6in4UVVga1boM · 26 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-14-extreme-mnemonics-.txt · 1AfR_cBa2_daBbvaSmFmvbQbv6DahIGDK · 26 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-28-sleep-now-by-prescription-.txt · 17mf5fsIgKY5S-msecc8jnPS1Z5smxPk- · 27 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-07-09-i-atent-dead-.txt · 1X-f_vGvfQG_BD_uQ47SDaSeIBSJNTsWt · 28 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-12-the-life-cycle-of-medical-ideas-.txt · 1M-0qu5Uposkl38w8sgTPvdepJ_PXZtYM · 28 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-04-22-implicit-association-tests-and-suicidality-.txt · 1SF_KTZfgeibDcnvHDBUjjJM_wUj2qZfD · 29 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-11-raikoth-symbolic-beads-.txt · 1KnMzOGdmTij23Ca-7sX9NHp5ewJQiUu_ · 29 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-07-31-holocaust-good-for-you-research-finds-but-frequent-taunting-causes-cancer-in-rats-.txt · 1nCeRG5tlXN4b89vjhmkukiIbREYkYNj_ · 29 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-02-22-dungeons-and-discourse-third-edition-the-dialectic-continues-.txt · 1j2d0p_XYwc97bVzR65R8ZJHdix5Sd9Xq · 30 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-28-thank-you-for-doing-something-ambiguously-between-smoking-and-not-smoking-.txt · 1-fe0yNI7gwT396mobVTDNrjF2GV2ozqp · 30 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-30-links-for-octember-.txt · 1y-qhNzkaYDfnBkLnna09Kto_s70wHkn8 · 30 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-07-29-links-for-july-.txt · 1GVSiYCSxuxCqc5atueKNNUB__H7kCvV_ · 31 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-13-more-links-for-december-.txt · 15GtgYTAL9RbqJy3QTMFR17N0PWslGfkK · 31 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-08-lies-damned-lies-and-facebook-part-4-of-.txt · 1aALx7PBc-QcPuvp9ZJfXkCuT8mOXMQx4 · 32 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-04-links-for-june-.txt · 10JdAoLnDpesyGp98p7Z-iF1cEKNQiHbT · 32 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-31-hansonian-optimism-.txt · 1Zy2l7xkJnSPcAlObOLI7mL6_gPNVGCv_ · 32 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-24-going-from-california-with-an-aching-in-my-heart-.txt · 1GutzYJ7CUlDY2dxtsVx7YZfqBdGwc_9t · 33 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-18-inefficient-hot-dogs-.txt · 1_PVwU3-Nue1VAM8VC44HbWshgyN_vttE · 34 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-11-21-november-housekeeping-post-.txt · 1blLVTAoSIwz6k8t6mzh1ZIRFSKWA0wye · 8 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-11-21-november-housekeeping-post-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-19-a-new-chapter-in-the-codex-.txt · 1EpbzKwz1B2KILH-JZ0v9ICpmJyRrCvMu · 8 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-06-19-a-new-chapter-in-the-codex-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-16-google-correlate-does-not-imply-google-causation-.txt · 1LGDqb9j8zJv42xZk6QeSLxasspipVtmb · 9 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-02-16-google-correlate-does-not-imply-google-causation-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-04-list-of-reasons-why-gunpowder-treason-should-be-forgot-.txt · 1cL-RMhWfFfS-wLTIXgAweTz_eccGc23x · 10 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-11-04-list-of-reasons-why-gunpowder-treason-should-be-forgot-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-12-biodjinnetics-.txt · 1Mu0S9Twsoh00Ol3Rrzt_P4jAJdabspND · 11 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-06-12-biodjinnetics-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-06-yet-another-parable-on-the-importance-of-controlling-your-experiments-.txt · 1Y88z7-O3LAKQWZbBoTJ9Uw-erutNnDAH · 12 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-03-06-yet-another-parable-on-the-importance-of-controlling-your-experiments-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-10-science-medicine-links-for-august-.txt · 1LqjjS3FSBEGIn__SiwcooYpfjKIVzbs4 · 12 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-08-10-science-medicine-links-for-august-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-10-25-list-of-fictional-drugs-banned-by-the-fda-.txt · 1-RmaA_XoKUGff1Z66Yq0TvZX7-8SricC · 13 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-10-25-list-of-fictional-drugs-banned-by-the-fda-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-26-fermats-last-stand-coordination-thread-.txt · 1f6MYzzwsLYdxyqnYXTc4i9n_fKSQ6vIF · 13 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-02-26-fermats-last-stand-coordination-thread-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-28-the-story-of-thanksgiving-is-a-science-fiction-story-.txt · 1hbgwtFAqzLgqIwQ-SlbOsuf5TIjIBS-U · 14 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-11-28-the-story-of-thanksgiving-is-a-science-fiction-story-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-12-areteaus-on-bipolar-disorder-.txt · 1iSQ_Sqy-jgN9KDzoc3UNfV42vhMitT-Y · 15 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2014-01-12-areteaus-on-bipolar-disorder-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-24-repost-a-christmas-poem-.txt · 1iSqi8ZPUdQp9L37JNzl2aDbIa1pjtcWu · 15 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-12-24-repost-a-christmas-poem-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-25-people-it-turns-out-capitalism-is-actually-a-thing-.txt · 1mJJn_o5AgjpIJJia4zV3Ft9Ibcf3rjTV · 16 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-02-25-people-it-turns-out-capitalism-is-actually-a-thing-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-24-the-hospital-orientation-.txt · 17qmiP58KZxHBH8PFWWCoZXZ-7ec3qMmB · 16 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-06-24-the-hospital-orientation-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-02-two-dark-side-statistics-papers-.txt · 1mjgerCYAoV5Ur1XuiTUAVqVi6A8AgqUk · 16 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2014-01-02-two-dark-side-statistics-papers-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-03-the-witching-hour-.txt · 1FWDsgtbSgVrqSBoFvCZ72itTUwn-xYG- · 16 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-11-03-the-witching-hour-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-01-links-for-november-.txt · 1vTeQwXKMYkGE3WAKBnCCgd4_eDNTvKfp · 17 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-11-01-links-for-november-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-19-genetic-testing-and-self-fulfilling-prophecies-.txt · 1sAWtiJ21POha-88ZOhtzoKnpqseVj0BY · 17 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2014-01-19-genetic-testing-and-self-fulfilling-prophecies-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-04-30-utility-weight-results-.txt · 1zUP7g29QV6I9AJ1XsnLa5S6gXUJtxOfb · 17 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-04-30-utility-weight-results-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-24-links-for-february-2013-.txt · 1QecKRxdPyrJtMEINuTFKxcJUjGxAl2eV · 19 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-02-24-links-for-february-2013-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-02-links-for-september-.txt · 1zW85k32tXyAvdSSPyY09xmuke76Ik3eN · 19 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-09-02-links-for-september-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-10-good-vibrations-and-subjective-temporal-granularity-.txt · 1Rdg5eRzcnBYgFC-W5OXBtM-lsbtIGnJG · 19 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-03-10-good-vibrations-and-subjective-temporal-granularity-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-13-arguments-from-my-opponent-believes-something-.txt · 1Xe6f29EsTYmEagvHR8Qr6iL2M1GC17Kt · 20 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-06-13-arguments-from-my-opponent-believes-something-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-15-you-cannot-serve-both-god-and-mammon-but-you-can-serve-mammon-by-predicting-who-will-serve-god-.txt · 14BjVhz9HguXcyBenU7pRet-M7no_efXl · 21 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-02-15-you-cannot-serve-both-god-and-mammon-but-you-can-serve-mammon-by-predicting-who-will-serve-god-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-28-predictions-for-2014-.txt · 1i_JQl011sZJ6p-bu7nV0vKyMWLKKbT9e · 22 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2014-01-28-predictions-for-2014-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-05-ambijectivity-.txt · 1-ejV3ShCb43kxDLXFDkv5-l-P_enDXaB · 22 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-05-05-ambijectivity-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-04-selection-bias-and-atheist-stereotypes-.txt · 13MqPtxRoxfek8fQSkq_EqRqaWt4FLGYu · 23 KB · txt · es done 2026-10-29 (3/3 batches, `Español/archive/2013-05-04-selection-bias-and-atheist-stereotypes-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-10-highlights-from-my-notes-from-a-forensic-psychiatry-conference-last-week-.txt · 1lJqkZISL1zYTPp7AbWZ2saqFdhx9udnO · 25 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-11-10-highlights-from-my-notes-from-a-forensic-psychiatry-conference-last-week-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-17-statistical-literacy-among-doctors-now-lower-than-chance-.txt · 1p8HT7qNSUU7rJ2T7G0L6in4UVVga1boM · 26 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-12-17-statistical-literacy-among-doctors-now-lower-than-chance-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-14-extreme-mnemonics-.txt · 1AfR_cBa2_daBbvaSmFmvbQbv6DahIGDK · 26 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-08-14-extreme-mnemonics-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-28-sleep-now-by-prescription-.txt · 17mf5fsIgKY5S-msecc8jnPS1Z5smxPk- · 27 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-09-28-sleep-now-by-prescription-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-07-09-i-atent-dead-.txt · 1X-f_vGvfQG_BD_uQ47SDaSeIBSJNTsWt · 28 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-07-09-i-atent-dead-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-12-the-life-cycle-of-medical-ideas-.txt · 1M-0qu5Uposkl38w8sgTPvdepJ_PXZtYM · 28 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-09-12-the-life-cycle-of-medical-ideas-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-04-22-implicit-association-tests-and-suicidality-.txt · 1SF_KTZfgeibDcnvHDBUjjJM_wUj2qZfD · 29 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-04-22-implicit-association-tests-and-suicidality-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-11-raikoth-symbolic-beads-.txt · 1KnMzOGdmTij23Ca-7sX9NHp5ewJQiUu_ · 29 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-05-11-raikoth-symbolic-beads-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-07-31-holocaust-good-for-you-research-finds-but-frequent-taunting-causes-cancer-in-rats-.txt · 1nCeRG5tlXN4b89vjhmkukiIbREYkYNj_ · 29 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-07-31-holocaust-good-for-you-research-finds-but-frequent-taunting-causes-cancer-in-rats-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-02-22-dungeons-and-discourse-third-edition-the-dialectic-continues-.txt · 1j2d0p_XYwc97bVzR65R8ZJHdix5Sd9Xq · 30 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-02-22-dungeons-and-discourse-third-edition-the-dialectic-continues-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-28-thank-you-for-doing-something-ambiguously-between-smoking-and-not-smoking-.txt · 1-fe0yNI7gwT396mobVTDNrjF2GV2ozqp · 30 KB · txt · es done 2026-10-29 (4/4 batches, `Español/archive/2013-03-28-thank-you-for-doing-something-ambiguously-between-smoking-and-not-smoking-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-30-links-for-octember-.txt · 1y-qhNzkaYDfnBkLnna09Kto_s70wHkn8 · 30 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-09-30-links-for-octember-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-07-29-links-for-july-.txt · 1GVSiYCSxuxCqc5atueKNNUB__H7kCvV_ · 31 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-07-29-links-for-july-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-13-more-links-for-december-.txt · 15GtgYTAL9RbqJy3QTMFR17N0PWslGfkK · 31 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-12-13-more-links-for-december-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-08-lies-damned-lies-and-facebook-part-4-of-.txt · 1aALx7PBc-QcPuvp9ZJfXkCuT8mOXMQx4 · 32 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-11-08-lies-damned-lies-and-facebook-part-4-of-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-04-links-for-june-.txt · 10JdAoLnDpesyGp98p7Z-iF1cEKNQiHbT · 32 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-06-04-links-for-june-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-31-hansonian-optimism-.txt · 1Zy2l7xkJnSPcAlObOLI7mL6_gPNVGCv_ · 32 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-05-31-hansonian-optimism-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-24-going-from-california-with-an-aching-in-my-heart-.txt · 1GutzYJ7CUlDY2dxtsVx7YZfqBdGwc_9t · 33 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-05-24-going-from-california-with-an-aching-in-my-heart-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-18-inefficient-hot-dogs-.txt · 1_PVwU3-Nue1VAM8VC44HbWshgyN_vttE · 34 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-09-18-inefficient-hot-dogs-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-06-14-the-virtue-of-silence-.txt · 1qvn_dPckotdk5DGQCPYTjkLKFZhVy6Sq · 34 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-23-we-are-all-msscribe-.txt · 1CHyA3ZGRjB9-lPUBc8ZnK42dHroFLfAG · 36 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-23-things-i-dont-understand-about-genetics-a-non-exhaustive-list-.txt · 1ZLpzE64WIsM5qGPeviSim99A46WpN0dX · 37 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-12-23-we-are-all-msscribe-.txt · 1CHyA3ZGRjB9-lPUBc8ZnK42dHroFLfAG · 36 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-12-23-we-are-all-msscribe-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-23-things-i-dont-understand-about-genetics-a-non-exhaustive-list-.txt · 1ZLpzE64WIsM5qGPeviSim99A46WpN0dX · 37 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-08-23-things-i-dont-understand-about-genetics-a-non-exhaustive-list-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-04-15-things-i-learned-by-spending-five-thousand-years-in-an-alternate-universe-.txt · 1COO1qSzi6jeXU7TslRadJMHoktqq2XQz · 37 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-21-the-thin-blue-line-that-stays-bizarrely-horizontal-.txt · 1wfPUE_fKUyItCpvMXAsVIFZ1W-Ko0cL5 · 38 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-30-military-strikes-are-an-extremely-cheap-way-to-help-foreigners-.txt · 1p2_lchNXddw-vEBTgEj5LRA-SME5vklr · 38 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-04-29-yellow-journalism-in-the-war-on-science-.txt · 1TlwzckqpCvSAgHrullnHHTCL9e1ExknX · 38 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-22-public-awareness-campaigns-.txt · 1eVP1yqjyPePZXkbJQYPHKApV8xfjobPD · 39 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-09-21-the-thin-blue-line-that-stays-bizarrely-horizontal-.txt · 1wfPUE_fKUyItCpvMXAsVIFZ1W-Ko0cL5 · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-09-21-the-thin-blue-line-that-stays-bizarrely-horizontal-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-30-military-strikes-are-an-extremely-cheap-way-to-help-foreigners-.txt · 1p2_lchNXddw-vEBTgEj5LRA-SME5vklr · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-08-30-military-strikes-are-an-extremely-cheap-way-to-help-foreigners-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-04-29-yellow-journalism-in-the-war-on-science-.txt · 1TlwzckqpCvSAgHrullnHHTCL9e1ExknX · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-04-29-yellow-journalism-in-the-war-on-science-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-22-public-awareness-campaigns-.txt · 1eVP1yqjyPePZXkbJQYPHKApV8xfjobPD · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-12-22-public-awareness-campaigns-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-12-28-a-comment-i-posted-on-what-would-jt-do-.txt · 1VgATogEEU2BtJT4F2dc_PXgFLBT5ORCf · 39 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-11-lies-damned-lies-and-facebook-part-3-of-.txt · 1A3I_GQLmnL4KVefK5gRESfrjvw4nxOwV · 39 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-11-17-more-links-for-november-.txt · 14f85dxUZioA4m6n3LKB21j1fBVgWK2pY · 39 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-19-scientific-freud-.txt · 1tQm-vqb927kr5xToKjtRZxuVk1SfwioQ · 40 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-01-literally-inconceivable-contraceptives-and-abortion-rates-.txt · 1ntmXbBWrsJtjgv7YiNTelUOw7i5n5I54 · 42 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-02-if-its-worth-doing-its-worth-doing-with-made-up-statistics-.txt · 1WS1MfLzFVqwXdvEv6yAiS0VAqg_cHAJx · 43 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-04-the-logician-and-the-god-emperor-.txt · 1MK80dc6BmaKlJHJS7Zjo_gsCNgtkab6W · 43 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-12-a-response-to-apophemi-on-triggers-.txt · 1hzyB1NWuw8cqygqvkcDIRMhIxf8pa94d · 43 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-01-links-for-december-.txt · 17zxJe70dKNiIoMLyS4rXB0tIK6GBzdpR · 46 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-11-medical-and-psychological-studies-for-june-.txt · 153nALYcsVAhFmLey0iUEYxRUfRTaal-T · 47 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-29-fake-euthanasia-statistics-.txt · 1cngbmMnPns-fBptTMJ_4WKguqiMPjASk · 47 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-25-the-trend-evaluation-of-all-values-.txt · 1T0dBn6BH-vxYx2GNPobLzyL4JFGrlc_- · 47 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-06-11-lies-damned-lies-and-facebook-part-3-of-.txt · 1A3I_GQLmnL4KVefK5gRESfrjvw4nxOwV · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-06-11-lies-damned-lies-and-facebook-part-3-of-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-11-17-more-links-for-november-.txt · 14f85dxUZioA4m6n3LKB21j1fBVgWK2pY · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-11-17-more-links-for-november-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-19-scientific-freud-.txt · 1tQm-vqb927kr5xToKjtRZxuVk1SfwioQ · 40 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-09-19-scientific-freud-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-01-literally-inconceivable-contraceptives-and-abortion-rates-.txt · 1ntmXbBWrsJtjgv7YiNTelUOw7i5n5I54 · 42 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-06-01-literally-inconceivable-contraceptives-and-abortion-rates-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-02-if-its-worth-doing-its-worth-doing-with-made-up-statistics-.txt · 1WS1MfLzFVqwXdvEv6yAiS0VAqg_cHAJx · 43 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-05-02-if-its-worth-doing-its-worth-doing-with-made-up-statistics-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-04-the-logician-and-the-god-emperor-.txt · 1MK80dc6BmaKlJHJS7Zjo_gsCNgtkab6W · 43 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-12-04-the-logician-and-the-god-emperor-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-12-a-response-to-apophemi-on-triggers-.txt · 1hzyB1NWuw8cqygqvkcDIRMhIxf8pa94d · 43 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2014-01-12-a-response-to-apophemi-on-triggers-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-01-links-for-december-.txt · 17zxJe70dKNiIoMLyS4rXB0tIK6GBzdpR · 46 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-12-01-links-for-december-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-11-medical-and-psychological-studies-for-june-.txt · 153nALYcsVAhFmLey0iUEYxRUfRTaal-T · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-06-11-medical-and-psychological-studies-for-june-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-29-fake-euthanasia-statistics-.txt · 1cngbmMnPns-fBptTMJ_4WKguqiMPjASk · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-08-29-fake-euthanasia-statistics-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-25-the-trend-evaluation-of-all-values-.txt · 1T0dBn6BH-vxYx2GNPobLzyL4JFGrlc_- · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-09-25-the-trend-evaluation-of-all-values-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-06-25-nature-is-not-a-slate-its-a-series-of-levers-.txt · 1XpvhqcKeozaDlgOzCtsZrThV5kEp4l_f · 50 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-07-25-i-myself-am-a-scientismist-.txt · 1-bLS-oPZfEPqWP0AtrLKBMZuwuTcOAbM · 50 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-25-beware-mass-produced-medical-recommendations-.txt · 1XBkuGaHGtDnkLNdMI7M86zaHImQnAmZV · 51 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-14-giving-and-accepting-apologies-.txt · 14Fqp6smVk8mmAQsJEepbHXKXknfrqzcN · 52 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-07-25-i-myself-am-a-scientismist-.txt · 1-bLS-oPZfEPqWP0AtrLKBMZuwuTcOAbM · 50 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-07-25-i-myself-am-a-scientismist-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-25-beware-mass-produced-medical-recommendations-.txt · 1XBkuGaHGtDnkLNdMI7M86zaHImQnAmZV · 51 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2014-01-25-beware-mass-produced-medical-recommendations-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-14-giving-and-accepting-apologies-.txt · 14Fqp6smVk8mmAQsJEepbHXKXknfrqzcN · 52 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-09-14-giving-and-accepting-apologies-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-06-22-social-psychology-is-a-flamethrower-.txt · 1SFSI3NIDuoZELEIO-I_5yDxb6hgcay0f · 52 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-12-papal-pr-.txt · 1BwVRIQi3wY5wSc_RRVYPga7eR2eHIUJ0 · 54 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-12-29-the-spirit-of-the-first-amendment-.txt · 16oR-KhYjeB55msF75BpXdFoIeJZcoV5f · 60 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt · 1mPgUeFGG_OuSIWoBYm_tp6sVdbJMZwno · 60 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-12-12-papal-pr-.txt · 1BwVRIQi3wY5wSc_RRVYPga7eR2eHIUJ0 · 54 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-12-12-papal-pr-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-12-29-the-spirit-of-the-first-amendment-.txt · 16oR-KhYjeB55msF75BpXdFoIeJZcoV5f · 60 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/2013-12-29-the-spirit-of-the-first-amendment-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt · 1mPgUeFGG_OuSIWoBYm_tp6sVdbJMZwno · 60 KB · txt · es done 2026-10-29 (9/9 batches, `Español/archive/2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-11-26-a-letter-i-will-probably-send-to-the-fda-.txt · 1R3d5Qa49fseDqTWKPytZD7pWSHrXzria · 62 KB · txt
 - [ ] es · Slate Star Codex and ACX / 2014-01-26-more-links-for-january-.txt · 1YTapV4x2lbTlC8kz1Cx1X8MkpMGUyG8g · 65 KB · txt
 - [ ] es · Slate Star Codex and ACX / 2013-08-25-fake-consensualism-.txt · 1SHORBOxwdWI1kihk6FAF4LrZLYq2-GhW · 69 KB · txt
@@ -1281,7 +1281,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · happier lives / 1688148035_.txt · 1UgMZvPSGZkLxFZr8EW85Dlcr4cJEyvFr · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · happier lives / 1688148083_.txt · 1HN6e1yZCPkF1xG3_6f1MxJX6FopT_jAe · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · happier lives / 1688148065_.txt · 1DhaJzmNT-pKSg_VVodxark5zLR_8eGQR · 2 KB · txt · under 2 KB: empty page or stub
-- [ ] es · happier lives / 1688148070_.txt · 1bIyX2pQAPEetHZaXx49osyu_G7gEKJXz · 2 KB · txt
+- [x] es · happier lives / 1688148070_.txt · 1bIyX2pQAPEetHZaXx49osyu_G7gEKJXz · 2 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/happier lives 1688148070_.txt`)
 - [ ] es · happier lives / 1688148062_.txt · 1V3UaaO_D6Rjj2C9yp2NFVVhN9PrmTrRo · 2 KB · txt
 - [ ] es · happier lives / 1688148097_.txt · 1k0pEzvm-6iHytoDTuu7I1dvjgq3Dksjp · 3 KB · txt
 - [ ] es · happier lives / 1688148049_.txt · 1qmiC3RdQOKqKQIU2g9Y9em7YZyTSv_7x · 4 KB · txt
