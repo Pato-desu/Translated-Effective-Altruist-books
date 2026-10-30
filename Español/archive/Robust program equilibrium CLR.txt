@@ -1,0 +1,708 @@
+Theory and Decision (2019) 86:143–159
+https://doi.org/10.1007/s11238-018-9679-3
+Equilibrio de programa robusto
+Caspar Oesterheld1,2
+Publicado en línea: 23 de noviembre de 2018
+© Los autores 2018
+Resumen
+Un enfoque para lograr la cooperación en el dilema del prisionero de una sola ronda es el equilibrio de programa de Ten-
+nenholtz (Games Econ Behav 49(2):363–373, 2004), en el que
+los jugadores de un juego presentan programas en lugar de estrategias. Estos programas luego
+pueden leer el código fuente de los demás para decidir qué acción tomar. Como muestra
+Tennenholtz, la cooperación se juega en un equilibrio de este juego alternativo. En
+particular, propone que los dos jugadores presenten la misma versión del siguiente
+programa: cooperar si el oponente es una copia exacta de este programa y desertar de otro
+modo. Ninguno de los dos jugadores puede beneficiarse de presentar un programa diferente.
+Desafortunadamente, este equilibrio es frágil y poco probable que se realice en la práctica. Por eso
+proponemos un programa nuevo y simple para lograr equilibrios de programa cooperativos más robustos:
+equilibrios: cooperar con una pequeña probabilidad /epsilon1 y, en caso contrario, actuar como actúa el oponente frente a este programa.
+Sostengo que este programa es similar a la estrategia tit for tat para
+el dilema del prisionero iterado. Ambos “empiezan” cooperando y copian el comportamiento de su oponente
+en “la última ronda”. Luego generalizamos este enfoque de convertir estrategias
+para la versión repetida de un juego en programas para la versión de una sola ronda de un juego
+a otros juegos de dos jugadores. Demostramos que los programas resultantes heredan propiedades de
+la estrategia subyacente. Esto les permite provocar de forma robusta y eficaz las mismas
+respuestas que la estrategia subyacente para el juego repetido.
+Palabras clave: teoría algorítmica de juegos · Equilibrio de programa · Equilibrio de Nash ·
+Juegos repetidos
+Índice
+1 Introducción .............................................1 4 4
+2 Preliminares .............................................1 4 5
+2.1 Juegos en forma estratégica ......................................1 4 5
+Correspondencia: Caspar Oesterheld
+caspar.oesterheld@foundational-research.org; caspar.oesterheld@duke.edu
+1Foundational Research Institute, Berlin, Alemania
+2Dirección actual: Duke University, Durham, Carolina del Norte, EE. UU.
+123
+144 C. Oesterheld
+2.2 Equilibrio de programa ......................................1 4 6
+2.3 Juegos repetidos .........................................1 4 7
+3 Equilibrio de programa robusto en el dilema del prisionero .......................1 5 1
+4 De las estrategias de juegos iterados a los equilibrios de programa robustos .....................1 5 4
+4.1 Comportamiento de detención .........................................1 5 5
+4.2 Relación con la estrategia subyacente del juego iterado .....................1 5 6
+4.3 Explotabilidad ..........................................1 5 8
+5 Conclusión ..............................................1 5 8
+Referencias ................................................1 5 9
+1 Introducción
+Se ha escrito mucho sobre cómo racionalizar el juego que no es de equilibrio de Nash en juegos en
+forma estratégica. Sobre todo, los teóricos de juegos han discutido cómo
+puede lograrse la cooperación en el dilema del prisionero, donde la cooperación mutua no es un equilibrio de Nash pero es superior en el sentido de Pareto a la deserción mutua. Uno de los enfoques más exitosos
+es la repetición de un juego, y en particular el dilema del prisionero iterado (Axelrod
+2006 ).
+Otro enfoque consiste en introducir mecanismos de compromiso de algún tipo. En este
+artículo analizaremos un mecanismo de compromiso particular: el formalismo de equilibrio de programa de Tennenholtz (2004)
+(sec. 2.2). Aquí, la idea es que, en lugar de estrategias,
+los jugadores presentan programas que calculan estrategias y se les da acceso al
+código fuente de los demás. Los programas pueden entonces codificar compromisos creíbles, como alguna versión de “si el otro coopera, yo coopero”.
+Como se deseaba, Tennenholtz (2004, sec. 3, Teorema 1) muestra que la cooperación mutua
+se juega en un equilibrio de programa del dilema del prisionero. Sin embargo, el equilibrio de Tennenholtz es muy frágil. Esencialmente, consiste en dos copias de un programa que
+coopera si se enfrenta a una copia exacta de sí mismo (cf. McAfee 1984; Howard 1988). Incluso
+pequeñas desviaciones de ese programa rompen el equilibrio. Así, lograr la cooperación de esta manera solo es realista si los jugadores pueden comunicarse de antemano y ponerse de acuerdo en
+un resultado particular.
+Otra crítica convincente a este equilibrio trivial es que el modelo de dos
+jugadores que presentan programas es, de todos modos, solo una metáfora. En la vida real, los programas
+podrían ser en cambio el resultado de un proceso evolutivo (Binmore 1988, pp. 14s.) y
+el equilibrio de Tennenholtz es difícil de obtener mediante tal proceso. Alternativamente, si vemos nuestra teoría como normativa en lugar de descriptiva, podemos ver los programas
+mismos como el público destinatario de nuestras recomendaciones. Esto también significa que estos
+agentes ya tendrán alguna forma de código fuente, p. ej., uno que deriva y considera
+los equilibrios de programa del juego, y está fuera de su alcance cambiar
+ese código fuente para ajustarlo a algún estándar común. Sin embargo, aún pueden decidir algún procedimiento para pensar en este problema particular de tal manera que permita
+la cooperación con otros agentes preprogramados de forma racional.
+Al notar la fragilidad del equilibrio propuesto por Tennenholtz, se ha propuesto
+lograr un equilibrio de programa más robusto haciendo que los programas razonen sobre los
+demás (van der Hoek et al. 2013; Barasz et al. 2014; Critch 2016). Por ejemplo, Barasz
+et al. (2014, sec. 3) proponen un programa FairBot, cuyas variantes veremos en
+123
+Equilibrio de programa robusto 145
+este artículo, que coopera si la aritmética de Peano puede demostrar que el oponente coo-
+pera contra FairBot. FairBot coopera (mediante el teorema de Löb) de forma más robusta contra
+versiones diferentes de sí mismo. Estas propuestas son muy elegantes y sin duda merecen más atención. Sin embargo, sus beneficios tienen el costo de ser computacionalmente
+costosas.
+En este artículo, por tanto, derivo una clase de equilibrios de programa que sostendré que son más
+prácticos. En el caso del dilema del prisionero, propongo un programa que coopera
+con una pequeña probabilidad y, en caso contrario, actúa como el oponente actúa contra sí mismo (véase
+Algoritmo 1). Hacer lo que hace el oponente, al estilo de FairBot, incentiva la cooperación.
+Cooperar con una pequeña probabilidad nos permite evitar bucles infinitos que surgirían
+si solo predijéramos y copiáramos la acción de nuestro oponente (véase Algoritmo 2). Este
+enfoque de un equilibrio de programa de cooperación robusto en el dilema del prisionero se describe en la sec. 3.
+Luego generalizamos la construcción ejemplificada en el dilema del prisionero
+(véase la sec. 4). En particular, mostramos cómo las estrategias para la versión repetida de un juego
+pueden usarse para construir buenos programas para la versión de una sola ronda de ese juego. Mostramos
+que muchas de las propiedades de la estrategia subyacente del juego repetido se trasladan
+al programa para el juego en etapa. Así, podemos construir programas “buenos” y
+equilibrios de programa a partir de estrategias “buenas” y equilibrios de Nash.
+2 Preliminares
+2.1 Juegos en forma estratégica
+Como referencia, comenzamos introduciendo terminología y formalismo básicos para
+juegos en forma estratégica. Para una introducción, véase, p. ej., Osborne (2004). Por razones que
+se harán evidentes más adelante, limitamos nuestro tratamiento a juegos de dos jugadores.
+Un juego estratégico de dos jugadores G=(A1,A2,u1,u2) consta de dos conjuntos numerables de
+jugadas Ai y, para ambos jugadores i∈{1,2}, una función de utilidad acotada ui:A1×A2→ R.
+Una estrategia (mixta) para el jugador i es una distribución de probabilidad πi sobre Ai.
+Dado un perfil de estrategias (π1,π2), la probabilidad de un resultado (a1,a2)∈A1×A2
+es
+P(a1,a2|π1,π2):=π1(a1)·π2(a2). (1)
+El valor esperado para el jugador i dado ese perfil de estrategias es
+E[ui|π1,π2]:=/summationdisplay
+(a1,a2)∈A1×A2P(a1,a2|π1,π2)·ui(a1,a2).
+Nótese que, como la función de utilidad está acotada, la suma converge absolutamente, de modo
+que el orden de los pares de acciones no afecta el valor de la suma.
+123
+146 C. Oesterheld
+2.2 Equilibrio de programa
+Ahora introducimos el concepto de equilibrio de programa, propuesto por primera vez por Tennenholtz
+(2004). La idea principal es sustituir las estrategias por programas de computadora a los que se les da
+acceso al código fuente del otro.1 Los programas dan lugar entonces a estrategias.
+Para cualquier juego G, primero debemos definir el conjunto de perfiles de programas PROG(G)
+formado por pares de programas. La entrada i-ésima de un elemento de PROG(G) debe ser un
+código fuente de programa pi que, al ser interpretado por una función apply, asigna de forma probabilística
+perfiles de programas2 a Ai.
+Exigimos que, para cualquier perfil de programas (p1,p2)∈PROG(G), ambos programas se detengan.
+De lo contrario, el perfil no daría lugar a una estrategia bien definida. Si pi se detiene
+depende del programa p−i contra el que juega, donde (de acuerdo con la convención
+de la teoría de juegos) −:{1,2}→{1,2}: 1↦2, 2↦1, y escribimos −i en lugar
+de −(i). Por ejemplo, si pi ejecuta apply(p−i,(pi,p−i)), es decir, simula al oponente,
+entonces eso está bien siempre que p−i no ejecute también apply(pi,(pi,p−i)), lo que
+produciría un bucle infinito. Para evitar esta dependencia mutua, generalmente exigiremos que
+PROG(G)=PROG1(G)×PROG2(G), donde PROG i(G) consiste en programas para el
+jugador i. Hay métodos para hacerlo conservando el poder expresivo, como las jerarquías
+de jugadores (p. ej., a los jugadores de índice mayor se les permite simular a los de índice menor,
+pero no al revés), las jerarquías de programas (los programas solo pueden invocar a sus oponentes con programas más simples como entrada), lo que exige que los programas tengan un «plan B» si la terminación
+no puede garantizarse de otro modo, o permitir que cada jugador solo inicie, en esperanza, estrictamente menos de una simulación.
+Estos métodos también pueden combinarse. En este artículo no asumimos ninguna definición particular de PROG(G). Sin embargo, suponemos que
+pueden realizar cálculos arbitrarios siempre que estos cálculos estén garantizados
+para detenerse independientemente de la salida de las partes del código que dependen del programa oponente. También exigimos que PROG(G) sea compatible con nuestras construcciones. Nos
+proponemos mostrar que nuestras construcciones son tan benignas en cuanto a bucles infinitos que este supuesto no es
+demasiado fuerte.
+Dado un perfil de programas (p
+1,p2), obtenemos un perfil de estrategias (apply(p1,(p1,p2)),
+apply(p2,(p1,p2))). Para cualquier resultado (a1,a2) de G, definimos
+P(a1,a2|p1,p2):=P(a1,a2|apply(p1,(p1,p2)),apply(p2,(p1,p2)))
+(2)
+y para cada jugador i∈{1,2}, definimos
+E[ui|p1,p2]:=/summationdisplay
+(a1,a2)∈A1×A2P(a1,a2|p1,p2)·ui(a1,a2). (3)
+1El equilibrio en su forma rudimentaria ya había sido propuesto por McAfee (1984) y Howard
+(1988). Al menos la idea de ver a los jugadores como programas con acceso al código fuente del otro también ha sido
+discutida por, p. ej., Binmore (1987, secc. 5; 1988) y Anderlini (1990).
+2 Para mantener simple nuestra notación, supondremos que nuestros programas reciben su propio código fuente como entrada
+además del de su oponente. Si PROG i(G) es suficientemente potente, entonces, por el teorema de recursión de Kleene,
+los programas también podrían referirse a su propio código fuente sin recibirlo como entrada (Cutland 1980,
+cap. 11).
+123
+Equilibrio de programas robusto 147
+Para el jugador i, definimos la función de mejor respuesta (de valor conjunto) como
+Bi(p−i)=arg maxpi∈PROG i(G)E/bracketleftbig
+ui|pi,p−i/bracketrightbig
+.
+Un perfil de programas (p1,p2) es un equilibrio de programas (débil) de G si, para i∈{1,2},
+es pi∈Bi(p−i).
+2.3 Juegos repetidos
+Nuestra construcción involucrará estrategias para la versión repetida de un juego de dos jugadores.
+Así, para cualquier juego G, definimos G/epsilon1 como la repetición de G con una probabilidad de
+/epsilon1∈(0,1] de terminar después de cada ronda. Ambos jugadores de G/epsilon1 solo serán informados del
+último movimiento de su oponente. Esto difiere del supuesto más típico de que los jugadores
+tienen acceso a todo el historial de movimientos pasados. Más adelante veremos por qué esta desviación es
+necesaria. Una estrategia πi para el jugador i asigna de forma no determinista movimientos del oponente o
+la información de la ausencia de ellos a un movimiento
+πi:{0}∪A−i/squigglerightAi.
+Así, para a∈Ai, b∈A−i, πi(b,a):=πi(b)(a) denota la probabilidad de elegir a
+dado que el oponente jugó b en la ronda anterior, y πi(0,a):=πi(0)(a)
+denota la probabilidad de elegir a en la primera ronda. Llamamos a una estrategia πi estacionaria
+si para todo a∈Ai, πi(b,a) es constante con respecto a b∈{0}∪A−i. Si πi es estacionaria,
+escribimos πi(a):=πi(b,a). La probabilidad de que el juego siga un historial completo
+de movimientos h=a0b0a1b1···anbn y luego termine es
+P(h|(π1,π2)):=π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)nn/productdisplay
+i=1π1(bi−1,ai)π2(ai−1,bi).(4)
+Nótese que los movimientos del historial siempre vienen en pares aibi, que se eligen
+«simultáneamente» en respuesta a bi−1 y ai−1, respectivamente. El valor esperado para
+el jugador i dado el perfil de estrategias (π1,π2) es
+E[ui|π1,π2]:=/summationdisplay
+h∈(A1·A2)+P(h|π1,π2)·ui(h), (5)
+donde (A1·A2)+ es el conjunto de todos los historiales y
+ui(a0b0a1b1···anbn):=n/summationdisplay
+i=0ui(ai,bi). (6)
+La suma desordenada laxa en la ecuación 5 es, de nuevo, no problemática gracias a la convergencia absoluta
+de la serie, que es una consecuencia directa de la demostración del Lema 1.
+Nótese cómo la organización del historial en pares de movimientos nos permite aplicar la
+función de utilidad del juego por etapas de la ecuación 6.
+123
+148 C. Oesterheld
+Para el jugador i, definimos la función de mejor respuesta de valor conjunto como
+Bi(π−i)=arg maxπi:{0}∪A−i/squigglerightAiE/bracketleftbig
+ui|πi,π−i/bracketrightbig
+.
+De forma análoga, Bc
+i(π−i) es el conjunto de respuestas a π−i que son las mejores entre las
+computables, Bs
+i(π−i) el conjunto de respuestas a π−i que son las mejores entre las estacionarias, y
+Bs,c
+i(π−i) es el conjunto de respuestas a π−i que son las mejores entre las
+estrategias computables estacionarias. Un perfil de estrategias (π1,π2) es un equilibrio de Nash (débil) de G/epsilon1 si para i∈
+{1,2} se cumple que πi∈Bi(π−i).
+Ahora demostramos algunos lemas que necesitaremos más adelante. Primero, tenemos los valores que hemos llamado sugestiva-
+mente probabilidades P(h), pero no hemos demostrado que cumplan, digamos,
+los axiomas de Kolmogórov. La aditividad no es un problema, porque solo hemos definido la probabilidad para eventos atómicos, y la no negatividad es obvia a partir de la definición.
+Sin embargo, también necesitaremos el hecho de que los números que hemos llamado probabilidades
+efectivamente suman 1, lo cual requiere unas pocas líneas para demostrarse.
+Lema 1 Sea G
+/epsilon1 sea un juego repetido y π1, π2 estrategias para ese juego. Entonces
+/summationdisplay
+h∈(A1·A2)+P(h|π1,π2)=1.
+Demostración
+/summationdisplay
+hP(h|π1,π2)=
+Ec.4/summationdisplay
+a0b0···anbn∈(A1·A2)+π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)n
+·n/productdisplay
+i=1π1(bi−1,ai)π2(ai−1,bi)
+=
+absoluta
+convergencia/epsilon1∞/summationdisplay
+n=0(1−/epsilon1)n/summationdisplay
+a0b0···anbn∈(A1A2)n+1π1(0,a0)π2(0,b0)n/productdisplay
+i=1π1(bi−1,ai)π2(ai−1,bi)
+=/epsilon1∞/summationdisplay
+n=0(1−/epsilon1)n/summationdisplay
+a0b0∈A1A2π1(0,a0)π2(0,b0)/summationdisplay
+a1b1∈A1A2π1(b0,a1)π2(a0,b1)...
+·/summationdisplay
+anbn∈A1A2π1(bn−1,an)π2(an−1,bn)
+=/epsilon1∞/summationdisplay
+n=0(1−/epsilon1)n
+=
+suma de la serie geo-
+métrica1
+Para ver por qué la penúltima ecuación es verdadera, nótese que la suma más interna es 1.
+Por tanto, la siguiente suma también es 1, y así sucesivamente. Dado que el orden en el lado derecho de
+la primera línea es laxo, y como solo se sabe que la segunda línea converge absolutamente,
+123
+Equilibrio de programas robusto 149
+el reordenamiento se entiende mejor de derecha a izquierda. El último paso usa la conocida
+formula/summationtext∞
+k=0xk=1/(1−x) para la serie geométrica. /intersectionsq/unionsq
+Para cualquier juego G/epsilon1, k∈N+, a∈A1, b∈A2 y estrategias π1 y π2 para G/epsilon1, nosotros
+definimos
+Pk,G/epsilon1(a,b|π1,π2):=(1−/epsilon1)k/summationdisplay
+a0b0···ak−1bk−1∈(A1A2)kπ1(bk−1,a)π2(ak−1,b)π1(0,a0)π2(0,b0)
+·k−1/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj). (7)
+Para k=0, definimos
+P0,G/epsilon1(a,b|π1,π2):=π1(0,a)·π2(0,b).
+Intuitivamente, Pk,G/epsilon1(a,b|π1,π2) es la probabilidad de alcanzar al menos la ronda
+k y de que (a,b) se juegue en esa ronda. Con esto
+/summationdisplay
+ab∈A1A2Pk,G/epsilon1(a,b|π1,π2)ui(a,b)
+debería ser la utilidad esperada de la ronda k-ésima (donde no llegar a la ronda k
+cuenta como 0). Esto sugiere una nueva manera de calcular las utilidades esperadas de forma más detallada, ronda por ronda.
+Lema 2 Sea G
+/epsilon1 un juego, y sean π1, π2 estrategias para ese juego. Entonces
+E[ui|π1,π2]=∞/summationdisplay
+k=0/summationdisplay
+ab∈A1A2Pk,G/epsilon1(a,b|π1,π2)ui(a,b).
+Demostración
+EG/epsilon1[ui|π1,π2]=/summationdisplay
+h∈(A1A2)+P(h|π1,π2)ui(h)
+=
+Ecs.4,6/summationdisplay
+a0b0···anbn∈(A1A2)+π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)n⎛
+⎝n/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠
+·n/summationdisplay
+k=0ui(ak,bk)=∞/summationdisplay
+k=0/summationdisplay
+a0b0···anbn∈(A1A2)≥k+1π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)n
+·⎛
+⎝n/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠ui(ak,bk)
+=∞/summationdisplay
+k=0/summationdisplay
+a0b0···akbk∈(A1A2)k+1/summationdisplay
+ak+1bk+1···anbn∈(A1A2)∗π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)nui(ak,bk)
+123
+150 C. Oesterheld
+·⎛
+⎝k/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠⎛
+⎝n/productdisplay
+j=k+1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠
+=∞/summationdisplay
+k=0/summationdisplay
+a0b0···akbk∈(A1A2)k+1π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)kui(ak,bk)
+·⎛
+⎝k/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠
+·/summationdisplay
+ak+1bk+1···anbn∈(A1A2)∗/epsilon1(1−/epsilon1)n−k⎛
+⎝n/productdisplay
+j=k+1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠
+=
+lema 1∞/summationdisplay
+k=0/summationdisplay
+a0b0···akbk∈(A1A2)k+1π1(0,a0)π2(0,b0)/epsilon1(1−/epsilon1)kui(ak,bk)
+·⎛
+⎝k/productdisplay
+j=1π1(bj−1,aj)π2(aj−1,bj)⎞
+⎠
+=
+Ec.7∞/summationdisplay
+k=0/summationdisplay
+akbk∈A1A2Pk(ak,bk|π1,π2)ui(ak,bk)
+/intersectionsq/unionsq
+Para encontrar la probabilidad de que el jugador i elija a en la ronda k, normalmente tenemos que calcular
+las probabilidades de todas las acciones en todas las rondas anteriores. Después de todo, el jugador i reacciona al
+movimiento anterior del jugador −i, quien a su vez reacciona al movimiento del jugador i en la ronda k−2, y así sucesivamente.
+Esto es lo que hace tan larga la ecuación 7. Sin embargo, imaginemos que el jugador −i usa una
+estrategia estacionaria. Esto, por supuesto, significa que la distribución de probabilidad del jugador −i sobre los movimientos
+en la ronda k (suponiendo que el juego efectivamente llega a la ronda k) puede calcularse directamente como
+π−i(b). La distribución del jugador i sobre los movimientos en la ronda k es casi igual de sencilla de calcular,
+porque solo depende de la distribución del jugador −i sobre los movimientos en la ronda k−1, que
+también puede calcularse directamente. Obtenemos así el siguiente lema.
+Lema 3 Sea G /epsilon1 un juego, sea πi cualquier estrategia para G /epsilon1 y sea π−i una
+estrategia estacionaria para G /epsilon1. Entonces, para todo k ∈N+, es
+Pk,G/epsilon1(a,b|πi,π−i)=(1−/epsilon1)k/summationdisplay
+b/prime∈A−iπ−i(b/prime)π−i(b)πi(b/prime,a).
+Demostración. Realizamos la demostración por inducción sobre k. Para k=1, se tiene
+P1(a,b|πi,π−i)=
+Ec.7(1−/epsilon1)/summationdisplay
+a0b0πi(b0,a)π−i(a0,b)πi(0,a0)π−i(0,b0)
+123
+Equilibrio de programas robusto 151
+Tabla 1 Matriz de pagos del
+dilema del prisionero Jugador 1 Jugador 2
+Cooperar Desertar
+Cooperar 3 ,31 ,4
+Desertar 4 ,12 ,2
+=(1−/epsilon1)/summationdisplay
+b0πi(b0,a)π−i(b)π−i(b0)/summationdisplay
+a0πi(0,a0)
+=(1−/epsilon1)/summationdisplay
+b0πi(b0,a)π−i(b)π−i(b0).
+Si el lema es verdadero para k, también lo es para k+1:
+Pk+1(a,b|πi,π−i)=(1−/epsilon1)k+1/summationdisplay
+a0b0···akbk∈(AiA−i)k+1πi(bk,a)π−i(ak,b)πi(0,a0)π−i(0,b0)
+·k/productdisplay
+j=1πi(bj−1,aj)π−i(aj−1,bj)
+=
+Ec.7(1−/epsilon1)/summationdisplay
+akbkPk(akbk|πi,π−i)πi(bk,a)π−i(b)
+=
+H.I.(1−/epsilon1)k+1/summationdisplay
+akbk/summationdisplay
+b/primeπ−i(b/prime)π−i(bk)π−i(b)πi(b/prime,ak)πi(bk,a)
+=(1−/epsilon1)k+1/summationdisplay
+bkπ−i(bk)π−i(b)πi(bk,a)/summationdisplay
+b/primeπ−i(b/prime)/summationdisplay
+akπi(b/prime,ak)
+=(1−/epsilon1)k+1/summationdisplay
+bkπ−i(bk)π−i(b)πi(bk,a).
+/intersectionsq/unionsq
+3 Equilibrio de programas robusto en el dilema del prisionero
+Las discusiones sobre el equilibrio de programas han utilizado tradicionalmente el conocido dilema del pris-
+ionero (o variaciones triviales de él) como ejemplo para mostrar cómo el
+equilibrio de programas racionaliza la cooperación allí donde falla el equilibrio de Nash (p. ej., Tennen-
+holtz 2004, secc. 3; McAfee 1984; Howard 1988; Barasz et al. 2014). El presente
+artículo no es una excepción. En esta sección presentaremos nuestra idea principal usando el ejem-
+plo del dilema del prisionero; la siguiente sección ofrece la construcción más general
+y las demostraciones de las propiedades de dicha construcción. Como referencia, la matriz de pagos del dilema del prisionero se muestra en la Tabla 1.
+Propongo usar la siguiente regla de decisión: con una probabilidad de /epsilon1∈(0,1],
+cooperar. En caso contrario, actuar como juega su oponente contra usted. Llamaré a esta estrat-
+123
+152 C. Oesterheld
+Datos: perfil de programas (p1,p2)
+Resultado: acción ai∈{C,D}
+1 si sample (0,1)</epsilon1 entonces
+2 devolver C
+3 fin
+4 devolver sample (apply(p−i,(p1,p2)))
+Algoritmo 1: El /epsilon1GroundedFairBot para el jugador i. El programa usa una
+función sample que muestrea uniformemente del intervalo dado o de la distribución de
+probabilidad dada. Se supone que /epsilon1 es computable.
+/epsilon1GroundedFairBot. Una descripción del algoritmo en pseudocódigo se da en
+Algoritmo 1.3
+El programa propuesto combina dos ideas principales. Primero, es una versión de FairBot
+(Barasz et al. 2014). Es decir, elige la acción que jugaría su oponente contra
+sí mismo. Como el jugador −i querría que el jugador i coopere, /epsilon1GroundedFairBot así incen-
+tiva la cooperación, siempre que /epsilon1< 1/2. En esto se parece a la estrategia ojo por ojo en
+el dilema del prisionero iterado (IPD) (discutida de forma célebre por Axelrod 2006), la cual
+adopta un enfoque empírico para comportarse como el oponente se comporta contra sí mismo. Aquí,
+la probabilidad de que el juego termine debe ser suficientemente pequeña (de nuevo, menor que 1/2 para los pagos
+dados) en cada ronda, para que la amenaza de castigo y el atractivo de la recompensa
+sean razones persuasivas para cooperar.
+La segunda idea principal detrás de /epsilon1GroundedFairBot es que coopera con una
+pequeña probabilidad /epsilon1. Ante todo, esto evita caer en el bucle infinito en el que
+una implementación ingenua de FairBot (véase el Algoritmo 2) cae cuando juega contra
+oponentes que, a su vez, intentan simular a FairBot. Nótese, de nuevo, la semejanza con
+la estrategia ojo por ojo del dilema del prisionero iterado, que coopera cuando no
+se dispone de información sobre la estrategia del oponente.
+Datos: perfil de programas (p1,p2)
+Resultado: acción ai∈{C,D}
+1 devolver sample (apply(p−i,(p1,p2)))
+Algoritmo 2: NaiveFairBot para el jugador i
+Para entender mejor cómo funciona /epsilon1GroundedFairBot, consideremos su conducta frente a
+algunos oponentes distintos. Cuando /epsilon1GroundedFairBot se enfrenta a NaiveFairBot, ambos
+cooperan. A modo de ilustración, en la Fig. 1 se muestra un grafo dinámico de llamadas de su interacción.
+Se deja como ejercicio para el lector analizar la conducta de /epsilon1GroundedFairBot frente a
+otros programas, como otra instancia de /epsilon1GroundedFairBot o una variante de
+/epsilon1GroundedFairBot que deserta en lugar de cooperar con probabilidad /epsilon1.
+Cuando juega contra estrategias que también se basan en simular a su oponente, podemos pensar en
+/epsilon1GroundedFairBot como si jugara un «IPD mental». Si el programa oponente
+decide si coopera, debe considerar que quizá en ese momento solo esté siendo simu-
+3Este programa fue propuesto por Abram Demski en una conversación sobre ideas parecidas (pero peores) a las
+mías. También lo propuso Jessica Taylor en https://agentfoundations.org/item?id=524, aunque en un
+contexto ligeramente distinto.
+123
+Equilibrio de programas robusto 153
+Fig. 1 Diagrama dinámico de llamadas que
+describe cómo
+p1=/epsilon1GroundedFairBot
+elige al jugar contra
+p2=NaiveFairBot.
+lado. Así, elegirá una acción con la mirada puesta en obtener una reacción favorable
+de /epsilon1GroundedFairBot un nivel de recursión más arriba. La cooperación en la primera «ronda» es un
+intento de dirigir el IPD mental hacia una dirección favorable, a costa de cooperar si
+sample (0,1)</epsilon1 ya ocurre en la primera ronda.
+Además de demostrar resultados teóricos (como se hace a continuación), sería útil
+probar /epsilon1GroundedFairBot «en la práctica», es decir, contra otros programas propuestos para
+el dilema del prisionero con acceso al código fuente de los demás. Solo encontré un torneo informal
+torneo para esta versión del dilema del prisionero. Lo organizó en 2013
+Alex Mennen en el foro en línea y blog comunitario LessWrong.4 En el conjunto original de envíos
+de envíos, /epsilon1GroundedFairBot habría obtenido el sexto puesto de 21. La razón por la que
+no es un contendiente serio para el primer puesto es que no aprovecha la gran cantidad de
+envíos explotables (como bots que deciden sin mirar el código fuente de su oponente). Una vez que se eliminan los 9 programas peores, /epsilon1GroundedFairBot obtiene
+el segundo puesto. Si se continúa este proceso de eliminar programas sin éxito
+durante otras dos rondas, /epsilon1GroundedFairBot queda entre los cuatro supervivientes que
+cooperan entre sí.
+5
+4El torneo se anunció en https://www.lesserwrong.com/posts/BY8kvyuLzMZJkwTHL/
+prisoner-s-dilemma-with-visible-source-code-tournament y los resultados en https://www.lesserwrong.
+com/posts/QP7Ne4KXKytj4Krkx/prisoner-s-dilemma-tournament-results-0 .
+5Para un análisis más detallado y un informe sobre mi metodología, véase https://casparoesterheld.ﬁles.wordpress.
+com/2018/02/transparentpdwriteup.pdf .
+123
+154 C. Oesterheld
+4 De los juegos iterados de estrategias a los equilibrios de programa robustos
+Generalizamos ahora la construcción de la sección anterior. Dado cualquier
+estrategia computable πi para un juego secuencial G/epsilon1, propongo el siguiente programa: con una pequeña
+probabilidad /epsilon1 muestrea de πi(0). En caso contrario, actúa como respondería πi
+(en el juego secuencial G/epsilon1) a la acción que toma el oponente contra este programa. Llamaré
+a este programa /epsilon1Grounded πiBot. Una descripción del programa en pseudocódigo aparece
+en el Algoritmo 3. Como caso particular, /epsilon1GroundedFairBot surge de /epsilon1Grounded πiBot al
+tomar a πi como toma y daca.
+Datos: perfil de programas (p1,p2)
+Resultado: acción ai∈Ai
+1si sample (0,1)</epsilon1 entonces
+2 devolver sample (πi(0))
+3fin
+4devolver sample (πi(sample (apply(p−i,(p1,p2)))))
+Algoritmo 3: El /epsilon1Grounded πiBot para el jugador i. El programa usa una función
+sample, que muestrea uniformemente de un intervalo dado o de una distribución de probabilidad dada.
+Se supone que πi y /epsilon1 son computables.
+De nuevo, nuestro programa combina dos ideas principales. Primero, /epsilon1Grounded πiBot
+responde a cómo juega el oponente contra /epsilon1Grounded πiBot. En esto se parece al
+comportamiento de πi en G/epsilon1. Como veremos, esto lleva a que /epsilon1Grounded πiBot herede muchas de
+las propiedades de πi. En particular, si (como toma y daca) πi usa algún mecanismo para incentivar
+a su oponente a converger hacia una acción deseada, entonces /epsilon1Grounded πiBot incentiva esa
+acción de manera similar.
+Segundo, termina de inmediato, de nuevo, con una pequeña probabilidad /epsilon1 para evitar
+los bucles infinitos en que cae Naive πiBot (véase el Algoritmo 4). Jugar πi(0)
+en particular está motivado en parte por el “G/epsilon1 mental” que /epsilon1Grounded πiBot juega contra
+algunos oponentes (como /epsilon1Grounded π−iBots o Naive π−iBots). La otra motivación
+es hacer más clara la relación entre /epsilon1Grounded πiBot y πi. En cuanto a las
+estrategias óptimas contra /epsilon1Grounded πiBot, la elección de esa acción constante
+no puede importar mucho si /epsilon1 es pequeño. Consideremos, de nuevo, la analogía con toma y daca. Incluso si toma y daca
+empezara con defección, uno debería igualmente intentar cooperar con él. En la práctica, sin embargo, ha resultado que la versión “amable” de toma y daca (y las estrategias amables en
+general) son más exitosas (Axelrod 2006, cap. 2). La transparencia en el programa
+equilibrio puede hacer menos importantes tales “señales de cooperatividad”, por ejemplo frente a programas como el FairBot de Barasz et al. (2014, secc. 3). No obstante, parece plausible
+que, aunque solo sea por el “G mental”
+consideraciones relacionadas con /epsilon1, en juegos transparentes las
+“acciones iniciales” también importan.
+Datos: perfil de programas (p1,p2)
+Resultado: acción ai∈Ai
+1devolver sample (πi(sample (apply(p−i,(p1,p2)))))
+Algoritmo 4: El Naive πiBot para el jugador i. Se supone que πi es computable.
+123
+Equilibrio de programa robusto 155
+Fundamentamos ahora formalmente estas dos intuiciones. Primero, analizamos el comportamiento de parada de /epsilon1Grounded πiBot.
+Luego mostramos que, en cierto sentido, /epsilon1Grounded πiBot se comporta en G
+como πi en G/epsilon1.
+4.1 Comportamiento de parada
+Para que un programa sea una opción viable en la versión “transparente” de G, debe detenerse
+frente a una amplia variedad de oponentes. De lo contrario, podría quedar excluido de PROG (G)
+en nuestro formalismo. Además, debe ser lo bastante eficiente para ser útil en la práctica. Al igual que
+con /epsilon1GroundedFairBot, la razón principal por la que /epsilon1Grounded πiBot es inocuo en cuanto a
+el riesgo de bucles infinitos es que genera estrictamente menos de una nueva llamada a función en
+esperanza y nunca inicia más de una. Aunque no tenemos un aparato formal para analizar el “riesgo de bucle” de un programa, es fácil demostrar el siguiente teorema.
+Teorema 4 Sea π
+i una estrategia computable para un juego G/epsilon1. Además, sea p −i cualquier
+programa (no necesariamente en PROG i(G)) que llama a apply (pi,(pi,p−i)) como máximo una vez
+y termina con probabilidad 1 si apply termina con probabilidad 1. Entonces /epsilon1Grounded πiBot
+y p −i se detienen uno frente al otro con probabilidad 1, y el número esperado de pasos
+requeridos para ejecutar /epsilon1Grounded πiBot es, como máximo,
+Tπi+(Tπi+Tp−i)1−/epsilon1
+/epsilon1, (8)
+donde T πi es el número máximo de pasos para muestrear de πi, y T p−i es el número máximo
+de pasos necesarios para muestrear de apply (p−i,(/epsilon1Grounded πiBot,p−i)), excluyendo
+los pasos necesarios para ejecutar apply (/epsilon1Grounded πiBot,(/epsilon1Grounded πiBot,p−i)).
+Demostración. Basta con discutir los casos en que p−i llama a πi una vez con certeza, porque
+si alguna de nuestras afirmaciones fuera refutada por algún programa p−i, también lo sería
+por una versión de ese programa que llama a πi una vez con certeza. Si p−i llama a πi una vez con
+certeza, entonces los grafos de llamadas dinámicas de /epsilon1Grounded πiBot y de p−i se parecen
+al dibujado en 1. En particular, solo contiene un camino infinito, y ese camino tiene
+una probabilidad de a lo sumo lim i→∞(1−/epsilon1)i=0.
+En cuanto a la complejidad temporal, podemos considerar también el grafo de llamadas dinámicas. La política
+πi debe ejecutarse al menos una vez (con probabilidad /epsilon1 con la entrada 0, y con
+probabilidad 1 −/epsilon1 contra una acción muestreada de apply (p−i,(/epsilon1Grounded πiBot,p−i))).
+Con probabilidad (1−/epsilon1), también debemos ejecutar la parte no simulada de p−i
+y, por segunda vez, πi. Y así sucesivamente. El número esperado de pasos para ejecutar
+/epsilon1Grounded πiBot es, por tanto,
+Tπi+∞/summationdisplay
+j=1(1−/epsilon1)j(Tπi+Tp−i),
+que puede demostrarse igual al término de (8) usando la conocida fórmula/summationtext∞
+k=0xk=1/(1−x) para la serie geométrica. /intersectionsq/unionsq
+123
+156 C. Oesterheld
+Obsérvese que este argumento no funcionaría si hubiera más de dos jugadores o si
+la estrategia para el juego iterado dependiera de algo más que del último movimiento del oponente,
+porque en esos casos la extensión natural de /epsilon1Grounded πiBot tendría
+que hacer múltiples llamadas a otros programas. De hecho, esta es una de las razones por las que
+el presente artículo solo analiza juegos de dos jugadores e iterados con memoria de corto
+plazo. Queda como trabajo futuro determinar si puede obtenerse un resultado similar para más de dos jugadores y estrategias que dependen de toda la historia pasada.
+Como casos particulares, para cualquier estrategia π
+−i, /epsilon1Grounded πiBot termina frente a
+/epsilon1Grounded π−iBot y Naive π−iBot (y estos programas, a su vez, terminan frente a
+/epsilon1Grounded πiBot). Lo último es especialmente notable. Nuestro /epsilon1Grounded πiBot termi-
+na y lleva al oponente a terminar incluso si el oponente es tan descuidado que
+ni siquiera terminaría frente a una versión de sí mismo
+o, en nuestro formalismo, si PROG −i(G) da al oponente más margen para trabajar con simulaciones.
+4.2 Relación con la estrategia subyacente del juego iterado
+Teorema 5 Sea G un juego, πi una estrategia para el jugador i en G/epsilon1, p i=
+/epsilon1Grounded πiBot y p −i∈PROG −i(G) cualquier programa oponente. Definimos
+π−i=apply(p−i,(pi,p−i)), lo que hace de π−i una estrategia para el jugador −i en G/epsilon1. Entonces
+EG/bracketleftbig
+ui|pi,p−i/bracketrightbig
+=/epsilon1EG/epsilon1/bracketleftbig
+ui|πi,π−i/bracketrightbig
+.
+Demostración. Transformamos por separado los dos valores esperados de la ecuación que debe demostrarse, y luego notamos que solo difieren en un factor /epsilon1:
+demostrado y luego nótese que solo difieren en un factor /epsilon1:
+EG/epsilon1/bracketleftbig
+ui|πi,π−i/bracketrightbig
+=
+lema 2∞/summationdisplay
+k=0/summationdisplay
+ab∈AiA−iPk,G/epsilon1(a,b|πi,π−i)ui(a,b)
+=
+lema 3/summationdisplay
+ab∈AiA−iπi(0,a)π−i(b)ui(a,b)
++∞/summationdisplay
+k=1/summationdisplay
+ab∈AiA−i(1−/epsilon1)k/summationdisplay
+b/prime∈A−iπ−i(b/prime)πi(b/prime,a)π−i(b)ui(a,b)
+=
+absoluta
+convergencia/summationdisplay
+ab∈AiA−iπi(0,a)π−i(b)ui(a,b)
++/summationdisplay
+ab∈AiA−i/summationdisplay
+b/prime∈A−iπ−i(b/prime)πi(b/prime,a)π−i(b)ui(a,b)∞/summationdisplay
+k=1(1−/epsilon1)k
+=
+suma de la serie geo-
+métrica/summationdisplay
+ab∈AiA−iπi(0,a)π−i(b)ui(a,b)
++1−/epsilon1
+/epsilon1/summationdisplay
+ab∈AiA−i/summationdisplay
+b/prime∈A−iπ−i(b/prime)πi(b/prime,a)π−i(b)ui(a,b).
+123
+Equilibrio de programa robusto 157
+El penúltimo paso usa la convergencia absoluta para reordenar los signos de suma. El último
+paso usa la conocida fórmula/summationtext∞
+k=0xk=1/(1−x) para la serie geométrica.
+Pasemos al otro valor esperado:
+EG/bracketleftbig
+ui|pi,p−i/bracketrightbig
+=
+Ecs.3,2,1/summationdisplay
+ab∈AiA−iapply(pi,(pi,p−i),a)apply(p−i,(pi,p−i),b)ui(a,b)
+=
+def.s pi,π−i/summationdisplay
+ab∈AiA−i⎛
+⎝/epsilon1πi(0,a)+(1−/epsilon1)/summationdisplay
+b/prime∈A−iπ−i(b/prime)πi(b/prime,a)⎞
+⎠π−i(b)ui(a,b)
+=/epsilon1/summationdisplay
+ab∈AiA−iπi(0,a)π−i(b)ui(a,b)
++(1−/epsilon1)/summationdisplay
+ab∈AiA−i/summationdisplay
+b/prime∈A−iπ−i(b/prime)πi(b/prime,a)π−i(b)ui(a,b).
+Aquí, apply(pi,(pi,p−i),a):=apply(pi,(pi,p−i))(a). La hipótesis se sigue
+inmediatamente. /intersectionsq/unionsq
+Nótese que la parte del programa de la demostración no involucra ningún “G/epsilon1 mental”.
+Usando el Teorema 5, podemos demostrar fácilmente varias transferencias de propiedades de πi a
+/epsilon1Grounded πiBot.
+Corolario 6. Sea G un juego. Sea πi una estrategia computable para el jugador i en G /epsilon1 y
+sea p i=/epsilon1Grounded πiBot.
+1. Si p −i∈B−i(pi), entonces apply (p−i,(pi,p−i))∈Bs,c
+−i(πi).
+2. Si π−i∈Bs,c
+i(πi) y apply (p−i,(pi,p−i))=π−i, entonces p −i∈B−i(pi).
+Demostración. Tanto 1 como 2 se siguen directamente del Teorema 5. /intersectionsq/unionsq
+Intuitivamente, el Corolario 6 muestra que πi y /epsilon1Grounded πiBot provocan las
+mismas mejores respuestas. Nótese que las mejores respuestas en el juego de programas solo corresponden
+a las mejores respuestas estacionarias computables en el juego repetido. El requisito de computabilidad se debe a que los programas no pueden imitar las mejores
+respuestas no computables. Las estrategias correspondientes del juego repetido además deben ser esta-
+cionarias porque /epsilon1Grounded π
+iBot solo incentiva el comportamiento del oponente para una única
+situación, a saber, la de jugar contra /epsilon1Grounded πiBot. Como caso especial
+del Corolario 6, si /epsilon1< 1/2, la mejor respuesta a /epsilon1GroundedFairBot es un programa que
+coopera contra /epsilon1GroundedFairBot porque en un IPD con una probabilidad de terminar
+menor que 1/2, un programa que coopera es la mejor respuesta (estacionaria computable)
+a tit for tat.
+Corolario 7. Sea G un juego. Si (π1,π2) es un equilibrio de Nash de G /epsilon1 y π1 y π2
+son computables, entonces (/epsilon1Grounded π1Bot,/epsilon1Grounded π2Bot) es un equilibrio de programa
+de G.
+Demostración. Se sigue directamente del Teorema 5. /intersectionsq/unionsq
+123
+158 C. Oesterheld
+4.3 Explotabilidad
+Además de formar un equilibrio contra muchos oponentes (incluido sí mismo) e incen-
+tivar la cooperación, otra razón importante del éxito de tit for tat es que es
+“poco explotable” (Axelrod 2006). Es decir, cuando juega contra tit for tat, es
+imposible recibir una recompensa mucho mayor que la de tit for tat en sí. Ahora mostramos que la (in)explotabilidad se transfiere de las estrategias π
+i a los /epsilon1Grounded πiBots.
+Llamamos a un juego G=(A1,A2,u1,u2) simétrico si A1=A2 y u1(a,b)=
+u2(b,a) para todos a∈A1 y b∈A2. Si G es simétrico, llamamos a una estrategia πi para G/epsilon1
+N-explotable en G/epsilon1 para un N∈R≥0 si existe un π−i tal que
+E/bracketleftbig
+u−i|π−i,πi/bracketrightbig
+>E/bracketleftbig
+ui|π−i,πi/bracketrightbig
++N.
+Llamamos πi N-inexplotable si no es N-explotable.
+De manera análoga, en un juego simétrico G llamamos a un programa piN-explotable para un
+N∈R≥0 si existe un p−i tal que
+E/bracketleftbig
+u−i|p−i,pi/bracketrightbig
+>E/bracketleftbig
+ui|p−i,pi/bracketrightbig
++N.
+Llamamos piN-inexplotable si no es N-explotable.
+Corolario 8. Sea G un juego y πi una estrategia N-inexplotable para G /epsilon1. Entonces
+/epsilon1Grounded πiBot es /epsilon1N-inexplotable.
+Demostración. Se sigue directamente del Teorema 5. /intersectionsq/unionsq
+Nótese que si, como tit for tat en el IPD, πi es N-inexplotable en G/epsilon1 para todo /epsilon1, entonces
+podemos hacer que /epsilon1Grounded πiBot sea arbitrariamente cercano a 0-inexplotable disminuyendo /epsilon1.
+5 Conclusión
+En este artículo, dimos la siguiente receta para construir un equilibrio de programa para
+un juego de dos jugadores dado:
+1. Construir el juego repetido correspondiente al juego. En particular, consideramos
+juegos repetidos en los que cada jugador solo puede reaccionar a la jugada del oponente en la
+ronda anterior (en lugar de todo el historial de jugadas previas de ambos jugadores)
+y el juego termina con una pequeña probabilidad /epsilon1 después de cada ronda.
+2. Construir un equilibrio de Nash para ese juego iterado.
+3. Convertir cada una de las estrategias en un programa de computadora que funciona de la siguiente manera (véase
+Algoritmo 3): con probabilidad /epsilon1 hace lo que la estrategia hace en la primera ronda. Con
+probabilidad 1 −/epsilon1, aplica el programa del oponente a este programa; luego hace lo que la
+estrategia subyacente respondería a la salida del programa del oponente.
+El resultado es un equilibrio de programa que, según hemos argumentado, es más robusto que los
+equilibrios descritos por Tennenholtz (2004). De forma más general, hemos mostrado que trans-
+ladar la estrategia de un individuo para el juego repetido a un programa para el juego de una etapa
+123
+Equilibrio de programa robusto 159
+de la manera descrita en el paso 3 conserva muchas de las propiedades de la estrategia para el
+juego repetido. Así, parece que los programas “buenos” para presentar pueden derivarse de
+estrategias “buenas” para el juego repetido.
+Agradecimientos. Estoy en deuda con Max Daniel y con un revisor anónimo por numerosos comentarios útiles.
+Acceso abierto. Este artículo se distribuye bajo los términos de la licencia Creative Commons Atribución 4.0 Interna-
+cional (http://creativecommons.org/licenses/by/4.0/), que permite el uso sin restricciones, la distribución
+y la reproducción en cualquier medio, siempre que se dé el crédito adecuado al autor o autores originales y a la
+fuente, se proporcione un enlace a la licencia Creative Commons y se indique si se han hecho cambios.
+Referencias
+Anderlini, L. (1990). Some notes on Church’s thesis and the theory of games. Theory and Decision, 29(1),
+19–52.
+Axelrod, R. (2006). The Evolution of Cooperation. New York: Basic Books.
+Barasz, M., et al. (2014). Robust cooperation in the prisoner’s dilemma: Program equilibrium via provability
+logic. arxiv: 1401.5577.
+Binmore, K. (1987). Modeling rational players: Part I. Economics and Philosophy, 3(2), 179–214.
+Binmore, K. (1988). Modeling rational players: Part II. Economics and Philosophy, 4(1), 9–55.
+Critch, A. (2016). Parametric bounded Löb’s theorem and robust cooperation of bounded agents.
+arxiv:1602.04184.
+Cutland, N. (1980). Computability: An introduction to recursive function theory. Cambridge: Cambridge
+University Press.
+van der Hoek, W., Witteveen, C., & Wooldridge, M. (2013). Program equilibrium—A program reasoning
+approach. International Journal of Game Theory, 42(3), 639–671.
+Howard, J. V. (1988). Cooperation in the prisoner’s dilemma. Theory and Decision, 24(3), 203–213.
+McAfee, R. P. (1984). Effective computability in economic decisions. http://www.mcafee.cc/Papers/PDF/
+EffectiveComputability.pdf. Consultado el 10 nov 2018.
+Osborne, M. J. (2004). An introduction to game theory. Oxford: Oxford University Press.
+Tennenholtz, M. (2004). Program equilibrium. Games and Economic Behavior, 49(2), 363–373.
+123

@@ -9,7 +9,7 @@ Traducciones en EPUB, hechas con IA, de libros clave sobre **Altruismo Eficaz** 
 
 Cada idioma tiene una release con todos sus libros. Para un solo libro, usa su enlace en la tabla de abajo.
 
-- **Inglés (originales)**: 14 libros y 826 textos breves, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
+- **Inglés (originales)**: 14 libros y 1289 textos breves, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
 - **Español**: 13 libros, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chino**: 2 libros, [descargar todos](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
@@ -36,7 +36,7 @@ Haz clic en el enlace del archivo para descargar ese EPUB. Todos se abren en cua
 | **What We Owe the Future** | William MacAskill | Chino, Inglés | [Chino EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) · [Inglés PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) |
 | **A Rationalist's Tale** (entrada de LessWrong) | Luke Muehlhauser (lukeprog) | Español | [Español EPUB](Espa%C3%B1ol/archive/A%20Rationalist%27s%20Tale%20-%20LessWrong.epub) |
 
-Además de los libros, hay 826 textos breves traducidos (artículos, publicaciones de foros y blogs, papers): ver [ARCHIVE.es.md](ARCHIVE.es.md). <!-- archive-link -->
+Además de los libros, hay 1289 textos breves traducidos (artículos, publicaciones de foros y blogs, papers): ver [ARCHIVE.es.md](ARCHIVE.es.md). <!-- archive-link -->
 
 ## Cómo se hicieron y qué calidad tienen
 

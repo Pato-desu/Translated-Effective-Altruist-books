@@ -9,7 +9,7 @@
 
 每种语言有一个发布版本（release），包含该语言的全部书籍。只想下载一本书，请用下方表格里的链接。
 
-- **英语（原版）**: 14 本书和 826 篇短篇文本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
+- **英语（原版）**: 14 本书和 1289 篇短篇文本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
 - **西班牙语**: 13 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **中文**: 2 本, [全部下载](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
@@ -36,7 +36,7 @@
 | **What We Owe the Future** | William MacAskill | 中文, 英语 | [中文 EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) · [英语 PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) |
 | **A Rationalist's Tale**（LessWrong 文章） | Luke Muehlhauser (lukeprog) | 西班牙语 | [西班牙语 EPUB](Espa%C3%B1ol/archive/A%20Rationalist%27s%20Tale%20-%20LessWrong.epub) |
 
-除书籍外，另有 826 篇短篇文本（文章、论坛与博客帖子、论文）已翻译：见 [ARCHIVE.zh.md](ARCHIVE.zh.md)。 <!-- archive-link -->
+除书籍外，另有 1289 篇短篇文本（文章、论坛与博客帖子、论文）已翻译：见 [ARCHIVE.zh.md](ARCHIVE.zh.md)。 <!-- archive-link -->
 
 ## 制作方式与质量
 

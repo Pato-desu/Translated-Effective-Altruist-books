@@ -9,7 +9,7 @@ AI-generated EPUB translations of key books on **Effective Altruism** and **Rati
 
 Each language has one release with all its books as files. To get a single book, use its link in the table below.
 
-- **English (originals)**: 14 books and 826 shorter texts, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
+- **English (originals)**: 14 books and 1289 shorter texts, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
 - **Spanish**: 13 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chinese**: 2 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
@@ -35,7 +35,7 @@ Click a title's file link to download that EPUB. All files open in any e-reader.
 | **The Precipice** | Toby Ord | Chinese, English | [Chinese EPUB](Chinese/%E5%8D%B1%E5%B4%96%20The%20Precipice.epub) · [English PDF](English%2C%20Original/archive/Ord%20-%20Precipice.pdf) |
 | **What We Owe the Future** | William MacAskill | Chinese, English | [Chinese EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) · [English PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) |
 
-Besides the books, 827 shorter texts (articles, forum and blog posts, papers) are translated: see [ARCHIVE.md](ARCHIVE.md). <!-- archive-link -->
+Besides the books, 1290 shorter texts (articles, forum and blog posts, papers) are translated: see [ARCHIVE.md](ARCHIVE.md). <!-- archive-link -->
 
 ## How they were made and how good they are
 

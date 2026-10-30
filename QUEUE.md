@@ -1013,7 +1013,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Slate Star Codex and ACX / 2013-03-10-fermats-last-stand-game-rosters-.txt · 1OiX5wDLefKzS9g2QK49mjoRpqNJrGxj- · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-03-10-fermats-last-stand-game-rosters-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-04-24-product-recommendation-fb-purity-.txt · 1Uq2CxeciRkMSU_EVpW0pB2_YtxQoFzp9 · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-04-24-product-recommendation-fb-purity-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-03-08-hitting-below-the-bible-belt-.txt · 1xNdAJlLhuVCXpN-xm0Z-PYijOmIyRHU- · 7 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-03-08-hitting-below-the-bible-belt-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-12-02-more-fictional-drugs-banned-by-the-fda-.txt · 168AU3Kt0eo1aqHmSgMO6nljCFb7rj7N7 · 7 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-12-02-more-fictional-drugs-banned-by-the-fda-.txt · 168AU3Kt0eo1aqHmSgMO6nljCFb7rj7N7 · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/2013-12-02-more-fictional-drugs-banned-by-the-fda-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-11-21-november-housekeeping-post-.txt · 1blLVTAoSIwz6k8t6mzh1ZIRFSKWA0wye · 8 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-11-21-november-housekeeping-post-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-06-19-a-new-chapter-in-the-codex-.txt · 1EpbzKwz1B2KILH-JZ0v9ICpmJyRrCvMu · 8 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/2013-06-19-a-new-chapter-in-the-codex-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-02-16-google-correlate-does-not-imply-google-causation-.txt · 1LGDqb9j8zJv42xZk6QeSLxasspipVtmb · 9 KB · txt · es done 2026-10-29 (2/2 batches, `Español/archive/2013-02-16-google-correlate-does-not-imply-google-causation-.txt`)
@@ -1060,15 +1060,15 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Slate Star Codex and ACX / 2013-05-31-hansonian-optimism-.txt · 1Zy2l7xkJnSPcAlObOLI7mL6_gPNVGCv_ · 32 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-05-31-hansonian-optimism-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-05-24-going-from-california-with-an-aching-in-my-heart-.txt · 1GutzYJ7CUlDY2dxtsVx7YZfqBdGwc_9t · 33 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-05-24-going-from-california-with-an-aching-in-my-heart-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-09-18-inefficient-hot-dogs-.txt · 1_PVwU3-Nue1VAM8VC44HbWshgyN_vttE · 34 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-09-18-inefficient-hot-dogs-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-06-14-the-virtue-of-silence-.txt · 1qvn_dPckotdk5DGQCPYTjkLKFZhVy6Sq · 34 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-06-14-the-virtue-of-silence-.txt · 1qvn_dPckotdk5DGQCPYTjkLKFZhVy6Sq · 34 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/2013-06-14-the-virtue-of-silence-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-12-23-we-are-all-msscribe-.txt · 1CHyA3ZGRjB9-lPUBc8ZnK42dHroFLfAG · 36 KB · txt · es done 2026-10-29 (5/5 batches, `Español/archive/2013-12-23-we-are-all-msscribe-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-08-23-things-i-dont-understand-about-genetics-a-non-exhaustive-list-.txt · 1ZLpzE64WIsM5qGPeviSim99A46WpN0dX · 37 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-08-23-things-i-dont-understand-about-genetics-a-non-exhaustive-list-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-04-15-things-i-learned-by-spending-five-thousand-years-in-an-alternate-universe-.txt · 1COO1qSzi6jeXU7TslRadJMHoktqq2XQz · 37 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-04-15-things-i-learned-by-spending-five-thousand-years-in-an-alternate-universe-.txt · 1COO1qSzi6jeXU7TslRadJMHoktqq2XQz · 37 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/2013-04-15-things-i-learned-by-spending-five-thousand-years-in-an-alternate-universe-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-09-21-the-thin-blue-line-that-stays-bizarrely-horizontal-.txt · 1wfPUE_fKUyItCpvMXAsVIFZ1W-Ko0cL5 · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-09-21-the-thin-blue-line-that-stays-bizarrely-horizontal-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-08-30-military-strikes-are-an-extremely-cheap-way-to-help-foreigners-.txt · 1p2_lchNXddw-vEBTgEj5LRA-SME5vklr · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-08-30-military-strikes-are-an-extremely-cheap-way-to-help-foreigners-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-04-29-yellow-journalism-in-the-war-on-science-.txt · 1TlwzckqpCvSAgHrullnHHTCL9e1ExknX · 38 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-04-29-yellow-journalism-in-the-war-on-science-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-12-22-public-awareness-campaigns-.txt · 1eVP1yqjyPePZXkbJQYPHKApV8xfjobPD · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-12-22-public-awareness-campaigns-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-12-28-a-comment-i-posted-on-what-would-jt-do-.txt · 1VgATogEEU2BtJT4F2dc_PXgFLBT5ORCf · 39 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-12-28-a-comment-i-posted-on-what-would-jt-do-.txt · 1VgATogEEU2BtJT4F2dc_PXgFLBT5ORCf · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/2013-12-28-a-comment-i-posted-on-what-would-jt-do-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-06-11-lies-damned-lies-and-facebook-part-3-of-.txt · 1A3I_GQLmnL4KVefK5gRESfrjvw4nxOwV · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-06-11-lies-damned-lies-and-facebook-part-3-of-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-11-17-more-links-for-november-.txt · 14f85dxUZioA4m6n3LKB21j1fBVgWK2pY · 39 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-11-17-more-links-for-november-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-09-19-scientific-freud-.txt · 1tQm-vqb927kr5xToKjtRZxuVk1SfwioQ · 40 KB · txt · es done 2026-10-29 (6/6 batches, `Español/archive/2013-09-19-scientific-freud-.txt`)
@@ -1080,11 +1080,11 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Slate Star Codex and ACX / 2013-06-11-medical-and-psychological-studies-for-june-.txt · 153nALYcsVAhFmLey0iUEYxRUfRTaal-T · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-06-11-medical-and-psychological-studies-for-june-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-08-29-fake-euthanasia-statistics-.txt · 1cngbmMnPns-fBptTMJ_4WKguqiMPjASk · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-08-29-fake-euthanasia-statistics-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-09-25-the-trend-evaluation-of-all-values-.txt · 1T0dBn6BH-vxYx2GNPobLzyL4JFGrlc_- · 47 KB · txt · es done 2026-10-29 (7/7 batches, `Español/archive/2013-09-25-the-trend-evaluation-of-all-values-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-06-25-nature-is-not-a-slate-its-a-series-of-levers-.txt · 1XpvhqcKeozaDlgOzCtsZrThV5kEp4l_f · 50 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-06-25-nature-is-not-a-slate-its-a-series-of-levers-.txt · 1XpvhqcKeozaDlgOzCtsZrThV5kEp4l_f · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/2013-06-25-nature-is-not-a-slate-its-a-series-of-levers-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-07-25-i-myself-am-a-scientismist-.txt · 1-bLS-oPZfEPqWP0AtrLKBMZuwuTcOAbM · 50 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-07-25-i-myself-am-a-scientismist-.txt`)
 - [x] es · Slate Star Codex and ACX / 2014-01-25-beware-mass-produced-medical-recommendations-.txt · 1XBkuGaHGtDnkLNdMI7M86zaHImQnAmZV · 51 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2014-01-25-beware-mass-produced-medical-recommendations-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-09-14-giving-and-accepting-apologies-.txt · 14Fqp6smVk8mmAQsJEepbHXKXknfrqzcN · 52 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-09-14-giving-and-accepting-apologies-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-06-22-social-psychology-is-a-flamethrower-.txt · 1SFSI3NIDuoZELEIO-I_5yDxb6hgcay0f · 52 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-06-22-social-psychology-is-a-flamethrower-.txt · 1SFSI3NIDuoZELEIO-I_5yDxb6hgcay0f · 52 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/2013-06-22-social-psychology-is-a-flamethrower-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-12-12-papal-pr-.txt · 1BwVRIQi3wY5wSc_RRVYPga7eR2eHIUJ0 · 54 KB · txt · es done 2026-10-29 (8/8 batches, `Español/archive/2013-12-12-papal-pr-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-12-29-the-spirit-of-the-first-amendment-.txt · 16oR-KhYjeB55msF75BpXdFoIeJZcoV5f · 60 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/2013-12-29-the-spirit-of-the-first-amendment-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt · 1mPgUeFGG_OuSIWoBYm_tp6sVdbJMZwno · 60 KB · txt · es done 2026-10-29 (9/9 batches, `Español/archive/2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt`)
@@ -1282,32 +1282,32 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · happier lives / 1688148083_.txt · 1HN6e1yZCPkF1xG3_6f1MxJX6FopT_jAe · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · happier lives / 1688148065_.txt · 1DhaJzmNT-pKSg_VVodxark5zLR_8eGQR · 2 KB · txt · under 2 KB: empty page or stub
 - [x] es · happier lives / 1688148070_.txt · 1bIyX2pQAPEetHZaXx49osyu_G7gEKJXz · 2 KB · txt · es done 2026-10-29 (1/1 batches, `Español/archive/happier lives 1688148070_.txt`)
-- [ ] es · happier lives / 1688148062_.txt · 1V3UaaO_D6Rjj2C9yp2NFVVhN9PrmTrRo · 2 KB · txt
-- [ ] es · happier lives / 1688148097_.txt · 1k0pEzvm-6iHytoDTuu7I1dvjgq3Dksjp · 3 KB · txt
-- [ ] es · happier lives / 1688148049_.txt · 1qmiC3RdQOKqKQIU2g9Y9em7YZyTSv_7x · 4 KB · txt
-- [ ] es · happier lives / 1688148087_.txt · 1IioRjy26DJCO_drpt5t35TElSd7c7QyF · 4 KB · txt
-- [ ] es · happier lives / 1688148081_.txt · 1RrstZCYnJwrdKDrYVSire593EQJfydfi · 5 KB · txt
-- [ ] es · happier lives / 1688148069_.txt · 1o93XQYPWTGuT1dMmgWWHPubK8TtCcSYO · 6 KB · txt
-- [ ] es · happier lives / 1688148059_.txt · 15OgtRf0cso9T0r42NBwrow5Bfl7GHtCp · 6 KB · txt
-- [ ] es · happier lives / 1688148099_.txt · 1lp4tvN2ulgoZ99baw_5dSjxhSBfBUGuO · 8 KB · txt
-- [ ] es · happier lives / 1688148039_.txt · 1MWvzZ-1h2yH19QExPcLFHfFxm5Jmod9w · 8 KB · txt
-- [ ] es · happier lives / 1688148037_.txt · 1tHFzI3eRn2-pAmNKHYXyjxtwXt85XWaQ · 10 KB · txt
-- [ ] es · happier lives / 1688148092_.txt · 1bfsvXOBjzmSHDr5DDNRS2MpBHtfY3anO · 13 KB · txt
-- [ ] es · happier lives / 1688148042_.txt · 1hTqVWoLRYDIYIQQsYoB73sfGR2NhLhXq · 19 KB · txt
-- [ ] es · happier lives / 1688148101_.txt · 1qQxvH2VjHAZD4yhlSybeZ0umL2cRF02F · 20 KB · txt
-- [ ] es · happier lives / 1688148052_.txt · 1Ne-jtsUL1q5VlEiMSP0PVmAw--oycTqy · 25 KB · txt
-- [ ] es · happier lives / 1688148025_.txt · 1uUlULvySHmpqKik6p7606VJaNcvJ51bL · 26 KB · txt
-- [ ] es · happier lives / 1688148051_.txt · 1oT9wkZI3ixWcmgPS9FYsa-us72yOCGbX · 30 KB · txt
-- [ ] es · happier lives / 1688148079_.txt · 1WH0RdvvwQg6kcesco7Qzlj-m7tlxMebQ · 34 KB · txt
-- [ ] es · happier lives / 1688148072_.txt · 1IYkWO3mDB-Ay59DT6qz6KwOPUHReJszx · 35 KB · txt
-- [ ] es · happier lives / 1688148060_.txt · 1EiIh82PyddZxoJV1VVAELVwOrz1h7V9k · 40 KB · txt
-- [ ] es · happier lives / 1688148104_.txt · 10uSceRuEKnNgz59zP-_c0zgVdgEJXcG- · 44 KB · txt
-- [ ] es · happier lives / 1688148056_.txt · 1esNIOClY_IioJMhasNSYBQLOalsD2idF · 46 KB · txt
-- [ ] es · happier lives / 1688148102_.txt · 12lV9g8eOMjXmqTkx4fSRPu4jclb53wBq · 48 KB · txt
-- [ ] es · happier lives / 1688148046_.txt · 1PEb-gFEARcNAZqyseoYdyxuUBC6LqnXk · 54 KB · txt
-- [ ] es · happier lives / 1688148067_.txt · 1BeKKcR77L8rNrCOQpUNyR3nIfcHxqnUU · 57 KB · txt
-- [ ] es · happier lives / 1688148028_.txt · 1NNkOx6-P5e7Gy9hY5oKNsr1R2dTdDA1s · 58 KB · txt
-- [ ] es · happier lives / 1688148054_.txt · 1ZAMASLT12EyZjQA8lxSP-vgaoHu0yAgs · 59 KB · txt
+- [x] es · happier lives / 1688148062_.txt · 1V3UaaO_D6Rjj2C9yp2NFVVhN9PrmTrRo · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148062_.txt`)
+- [x] es · happier lives / 1688148097_.txt · 1k0pEzvm-6iHytoDTuu7I1dvjgq3Dksjp · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148097_.txt`)
+- [x] es · happier lives / 1688148049_.txt · 1qmiC3RdQOKqKQIU2g9Y9em7YZyTSv_7x · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148049_.txt`)
+- [x] es · happier lives / 1688148087_.txt · 1IioRjy26DJCO_drpt5t35TElSd7c7QyF · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148087_.txt`)
+- [x] es · happier lives / 1688148081_.txt · 1RrstZCYnJwrdKDrYVSire593EQJfydfi · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148081_.txt`)
+- [x] es · happier lives / 1688148069_.txt · 1o93XQYPWTGuT1dMmgWWHPubK8TtCcSYO · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148069_.txt`)
+- [x] es · happier lives / 1688148059_.txt · 15OgtRf0cso9T0r42NBwrow5Bfl7GHtCp · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148059_.txt`)
+- [x] es · happier lives / 1688148099_.txt · 1lp4tvN2ulgoZ99baw_5dSjxhSBfBUGuO · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148099_.txt`)
+- [x] es · happier lives / 1688148039_.txt · 1MWvzZ-1h2yH19QExPcLFHfFxm5Jmod9w · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/happier lives 1688148039_.txt`)
+- [x] es · happier lives / 1688148037_.txt · 1tHFzI3eRn2-pAmNKHYXyjxtwXt85XWaQ · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/happier lives 1688148037_.txt`)
+- [x] es · happier lives / 1688148092_.txt · 1bfsvXOBjzmSHDr5DDNRS2MpBHtfY3anO · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/happier lives 1688148092_.txt`)
+- [x] es · happier lives / 1688148042_.txt · 1hTqVWoLRYDIYIQQsYoB73sfGR2NhLhXq · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/happier lives 1688148042_.txt`)
+- [x] es · happier lives / 1688148101_.txt · 1qQxvH2VjHAZD4yhlSybeZ0umL2cRF02F · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/happier lives 1688148101_.txt`)
+- [x] es · happier lives / 1688148052_.txt · 1Ne-jtsUL1q5VlEiMSP0PVmAw--oycTqy · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/happier lives 1688148052_.txt`)
+- [x] es · happier lives / 1688148025_.txt · 1uUlULvySHmpqKik6p7606VJaNcvJ51bL · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/happier lives 1688148025_.txt`)
+- [x] es · happier lives / 1688148051_.txt · 1oT9wkZI3ixWcmgPS9FYsa-us72yOCGbX · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/happier lives 1688148051_.txt`)
+- [x] es · happier lives / 1688148079_.txt · 1WH0RdvvwQg6kcesco7Qzlj-m7tlxMebQ · 34 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/happier lives 1688148079_.txt`)
+- [x] es · happier lives / 1688148072_.txt · 1IYkWO3mDB-Ay59DT6qz6KwOPUHReJszx · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/happier lives 1688148072_.txt`)
+- [x] es · happier lives / 1688148060_.txt · 1EiIh82PyddZxoJV1VVAELVwOrz1h7V9k · 40 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/happier lives 1688148060_.txt`)
+- [x] es · happier lives / 1688148104_.txt · 10uSceRuEKnNgz59zP-_c0zgVdgEJXcG- · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/happier lives 1688148104_.txt`)
+- [x] es · happier lives / 1688148056_.txt · 1esNIOClY_IioJMhasNSYBQLOalsD2idF · 46 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/happier lives 1688148056_.txt`)
+- [x] es · happier lives / 1688148102_.txt · 12lV9g8eOMjXmqTkx4fSRPu4jclb53wBq · 48 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/happier lives 1688148102_.txt`)
+- [x] es · happier lives / 1688148046_.txt · 1PEb-gFEARcNAZqyseoYdyxuUBC6LqnXk · 54 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/happier lives 1688148046_.txt`)
+- [x] es · happier lives / 1688148067_.txt · 1BeKKcR77L8rNrCOQpUNyR3nIfcHxqnUU · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/happier lives 1688148067_.txt`)
+- [x] es · happier lives / 1688148028_.txt · 1NNkOx6-P5e7Gy9hY5oKNsr1R2dTdDA1s · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/happier lives 1688148028_.txt`)
+- [x] es · happier lives / 1688148054_.txt · 1ZAMASLT12EyZjQA8lxSP-vgaoHu0yAgs · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/happier lives 1688148054_.txt`)
 - [ ] es · happier lives / 1688148040_.txt · 1zZ2XcvTdrK5-hid0U4t0dsbkg2-wHPbN · 64 KB · txt
 - [ ] es · happier lives / 1688148095_.txt · 1NcWmpJR-_--I9kZSRvuUJsf0iWeBV5XH · 72 KB · txt
 - [ ] es · happier lives / 1688148044_.txt · 1zDLV7UXlyt-mF1pgi4akm6v2gsxEBpH4 · 74 KB · txt
@@ -1331,140 +1331,140 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · Reducing-Suffering / Wild-animal suffering on The Reality Check podcast.txt · 1jN5DI-4SUdzjVmMsXk23RtjY6U14FqRk · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Reducing-Suffering / Jeffrey Lockwood on Insect Suffering.txt · 1ncXAztJEox5YCKI-8etWVGEB9kolxavY · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Reducing-Suffering / Additional Essays.txt · 10J8_RUyhwhY6N2hp11pIdIkgrU_4noBe · 1 KB · txt · under 2 KB: empty page or stub
-- [ ] es · Reducing-Suffering / Donate $400K per Year by Working at Soros Fund Management.txt · 1PNiiCMgsGOzX9BOsplj6WaSI_O88aAWu · 2 KB · txt
-- [ ] es · Reducing-Suffering / Zooplankton Densities in Lakes and Reservoirs.txt · 1bOF32OFN_KUF1ADdhIObyRzww9hN1uKn · 2 KB · txt
-- [ ] es · Reducing-Suffering / About this site.txt · 1bKpsVgT6SYwBbvvLgPKUjvKwewi9Kel9 · 3 KB · txt
-- [ ] es · Reducing-Suffering / On Triage.txt · 1ydKx2cF99q40GxBwFBATMUZ9-njpxXEf · 4 KB · txt
-- [ ] es · Reducing-Suffering / Mr. Rogers on Unconditional Love.txt · 1F-7KGUmkuh0jjyNp0psC8Xa9iP6daBnX · 4 KB · txt
-- [ ] es · Reducing-Suffering / How Forest Fires Affect Wild-Animal Suffering.txt · 16C9cEBShrXumSHWwuKCdDRMd7uYsyiIT · 5 KB · txt
-- [ ] es · Reducing-Suffering / Intuition and Reason.txt · 1pPKRYunnHfQvumcpL3jveVx5dp3Z1-Qz · 5 KB · txt
-- [ ] es · Reducing-Suffering / The Cruelty of Eating Snails.txt · 1-2ukmHfVKYOqw4FhvVuh0wOZpVOPk8Qw · 5 KB · txt
-- [ ] es · Reducing-Suffering / One Trillion Fish.txt · 1MN-lLMe5BXvo8upfqv1bOvp_hhKWoU82 · 6 KB · txt
-- [ ] es · Reducing-Suffering / On the Seriousness of Suffering.txt · 16Gq78ZAgDUQIjFsidF_vw1JydToDegKT · 6 KB · txt
-- [ ] es · Reducing-Suffering / Beauty-Driven Morality.txt · 1WSEd9vsCA6efAbTS0A_x_Du6tcr6LI0U · 6 KB · txt
-- [ ] es · Reducing-Suffering / Paul Almond on AI, Atheism, Consciousness, and the Multiverse.txt · 1WFeX4X9xq7WrYHr5bSvV5-QEWomq6YdG · 6 KB · txt
-- [ ] es · Reducing-Suffering / Why Lower Crop Yields Reduce Invertebrate Suffering (Given Certain Assumptions).txt · 1lTbp4cmfEaO5OcpPr3lGq5-9B2H4OcPO · 6 KB · txt
-- [ ] es · Reducing-Suffering / Sunk-Cost Fallacy as a Punishment Mechanism.txt · 1PRo3Il3V5nLtCbJL1iiInQXmhaL3HS8a · 6 KB · txt
-- [ ] es · Reducing-Suffering / Precautionary Principle vs. Expected Values.txt · 1ugkEA9Shjp-96GI3WS1pLlucDPE_Axbd · 7 KB · txt
-- [ ] es · Reducing-Suffering / Zooplankton Created by a Facultative Aerated Wastewater Treatment Lagoon﹕ An Analysis of Kring et al. (2013).txt · 1iLtoBG10m46pyC_JZKh-S_j7_wI0K4Kr · 7 KB · txt
-- [ ] es · Reducing-Suffering / A Short Introduction to Reducing Suffering.txt · 1Cj_4nxFYm2-u-1ocn7N8BExtTRAl8gWk · 7 KB · txt
-- [ ] es · Reducing-Suffering / Haller’s Rule and Sentience Per Unit Biomass.txt · 196aV-h-B6uMj4-eAlBU2489ErNwzKQxt · 8 KB · txt
-- [ ] es · Reducing-Suffering / Caring about Animal Suffering.txt · 1WwCcWlTC2xXQh2UK2QDFrTX6Hz79xrQO · 8 KB · txt
-- [ ] es · Reducing-Suffering / Net Impact of Vegetarianism on Factory-Farm Suffering vs. Invertebrates on Pasture Fields.txt · 1Ti8VNKP426kQazWXscSerXdv8vgi03Sg · 9 KB · txt
-- [ ] es · Reducing-Suffering / Abundances of Soil Organisms.txt · 1Qns8GEVrJyQPtTmaxSIK-xdteJQrsiQS · 9 KB · txt
-- [ ] es · Reducing-Suffering / Turn Discussions into Blog Posts.txt · 1kGdbQ9-bTsDCacI3RwWNTCPIsg3mkrqO · 9 KB · txt
-- [ ] es · Reducing-Suffering / Why Most People Don_t Care About Wild-Animal Suffering.txt · 1I27MmDCu5DJtAmfoP188OcRCC0zTOzZQ · 9 KB · txt
-- [ ] es · Reducing-Suffering / A Few Useful Topics to Read About.txt · 1VHojW-jRBuHo-OPKdC21eRuWmIoiubww · 9 KB · txt
-- [ ] es · Reducing-Suffering / Why I Prefer Public Conversations.txt · 1m1WIKp7bnVK5Gfc6B0UXg7H-pGotLQ77 · 9 KB · txt
-- [ ] es · Reducing-Suffering / Cost-Effectiveness Comparison for Different Ways to Reduce Insect Suffering.txt · 1qoZ8S6UBv662VjR0l8vrLMT2lTOXBj2n · 9 KB · txt
-- [ ] es · Reducing-Suffering / How I Started Writing about Wild-Animal Suffering.txt · 1_IaxJ8c3A7u_N8DGFesS3lDMmC8acfl_ · 10 KB · txt
-- [ ] es · Reducing-Suffering / Frequently asked questions.txt · 1Bcu5sNQYoYgApKVhWfXwNA2Y1oh1qiN2 · 10 KB · txt
-- [ ] es · Reducing-Suffering / Employers with Huge Matching-Donations Limits.txt · 1vD4I2Y6BU3YYcBx8zMAFms0b2G5cua7V · 10 KB · txt
-- [ ] es · Reducing-Suffering / History of This Website.txt · 1peCUX8GuxtGQi0P8TftyKcxTMT6ofjkD · 10 KB · txt
-- [ ] es · Reducing-Suffering / Covariance of Wealth and Cost-Effectiveness.txt · 1V_HvBoPBwOTT2DobfTWa3tmC5UKMNpBi · 10 KB · txt
-- [ ] es · Reducing-Suffering / Why Vegans Should Care about Suffering in Nature.txt · 1O5-07DNv5FXMOrkC0SC1nrVyJhus_q7e · 10 KB · txt
-- [ ] es · Reducing-Suffering / Staying Altruistic for the Long Term.txt · 1MsrZKbmqPqUNSsK_2AKex1ay5EDgUQNM · 11 KB · txt
-- [ ] es · Reducing-Suffering / Trophic Cascades Caused by Fishing.txt · 1XGHAYztd2RTmP4EkzFp6BrK-QxyAzxXX · 11 KB · txt
-- [ ] es · Reducing-Suffering / How Fungicides and Eutrophication Affect Suffering in the Wild.txt · 1mIxY8dMsa_C2lNGIy1DNkYLrLYy_SGT2 · 11 KB · txt
-- [ ] es · Reducing-Suffering / Interview about Ethics and Effective Altruism.txt · 18_h4w9PQ8NYnKQf4mfyf20BJrhFN8Vgh · 11 KB · txt
-- [ ] es · Reducing-Suffering / How Eutrophication Affects Freshwater Invertebrate Populations.txt · 1QUxIemuvbLzT1prhYwYzgjkakiVIHpZc · 11 KB · txt
-- [ ] es · Reducing-Suffering / Random Ideas and Suggestions.txt · 19ARA7VJJ0sRUxBui7cr-el9rDTP5Po7u · 11 KB · txt
-- [ ] es · Reducing-Suffering / Suffering in Animals vs. Humans.txt · 1eW-GMsuZAOJ2lBIlNgC9nIVGMU9Lqc0h · 12 KB · txt
-- [ ] es · Reducing-Suffering / Why the Modesty Argument for Moral Realism Fails.txt · 14NPuwnSKDiRF5T9nk5C11-jkG0k0bY9H · 12 KB · txt
-- [ ] es · Reducing-Suffering / Epistemological Black Swans.txt · 1DeFlziYcVzxqk2-06EJ2ssulOeKKueuu · 12 KB · txt
-- [ ] es · Reducing-Suffering / A Simple Program to Illustrate the Hard Problem of Consciousness.txt · 1-oCtNM0Uu11shZtmnOm7AjD20wtwDlx7 · 12 KB · txt
-- [ ] es · Reducing-Suffering / Machine Sentience and Robot Rights.txt · 1-hR5ip8md6MdwFKuGEZsLP98yetyAOuY · 12 KB · txt
-- [ ] es · Reducing-Suffering / Objections to the Zombie Argument.txt · 1Bd_e9Cd8CdfKjRkk_3zY1t6sOHJ8N4KZ · 12 KB · txt
-- [ ] es · Reducing-Suffering / Three Types of Negative Utilitarianism.txt · 16lxPSzDT6FTeg4GN6hLDE28BSf5U7HOC · 12 KB · txt
-- [ ] es · Reducing-Suffering / Habitat Loss, Not Preservation, Generally Reduces Wild-Animal Suffering.txt · 10S5fLgYzqS-UjlvDMtOmNxK04lziCN0l · 13 KB · txt
-- [ ] es · Reducing-Suffering / Why I Don_t Focus on the Hedonistic Imperative.txt · 16Vqe-y9Rp0NzeUi6tHqG0BTmlwQEGGaZ · 13 KB · txt
-- [ ] es · Reducing-Suffering / Environmental Impacts of Cattle Beyond the Pasture.txt · 1z_LEv8oZUEXbanxtAPsB50yZFHmu5Rxx · 13 KB · txt
-- [ ] es · Reducing-Suffering / Reasons to Promote Suffering-Focused Ethics.txt · 1ouUeB2Qqwy4OQI_RGX21u9pbDQ-l5rMv · 14 KB · txt
-- [ ] es · Reducing-Suffering / Empathy vs. Principle﹕ A Reply to David Brooks.txt · 1tg2VSvLPFF0JZ7BHdm5UsDnWJkgWVNEm · 14 KB · txt
-- [ ] es · Reducing-Suffering / Effects of CO2 and Climate Change on Terrestrial Net Primary Productivity.txt · 1y8jcL3DwHoeR86y0IOmTAHh1QwtDJHXz · 14 KB · txt
-- [ ] es · Reducing-Suffering / Summary of My Beliefs and Values on Big Questions.txt · 1onzXky9qxcu7L11ysCWkxw9f7-HiOHs9 · 14 KB · txt
-- [ ] es · Reducing-Suffering / A Small Mechanical Turk Survey on Ethics and Animal Welfare.txt · 1nlI5UApQV-CzfCC1pvxDweZCBzcPPcbA · 14 KB · txt
-- [ ] es · Reducing-Suffering / My Donation Recommendations.txt · 1HhY6aQxfQ8eYcS7mgGav_mm_3ghhleLT · 14 KB · txt
-- [ ] es · Reducing-Suffering / Posthuman Multiculturalism.txt · 1VmuflNYWoZYz7VxFJc5D7mu-klbzVmfp · 14 KB · txt
-- [ ] es · Reducing-Suffering / The Cost of Kids.txt · 1WP2z6U95aWlmW6GXpoOK3V4QvzwmeKsn · 15 KB · txt
-- [ ] es · Reducing-Suffering / Strategic Considerations for Moral Antinatalists.txt · 1NVcVhMFVY7U742mSe_WtCP0P3xbnN1f3 · 16 KB · txt
-- [ ] es · Reducing-Suffering / Instrumental Judgment and Expectational Consequentialism.txt · 1tR9HKnj-Z9GtAzwhGx-8dPqI0w1eeEx4 · 16 KB · txt
-- [ ] es · Reducing-Suffering / Thoughts Regarding the Simulation Hypothesis.txt · 1pxDGV4YuZLTgx2n2wuE_dCN5I9xDZDMB · 16 KB · txt
-- [ ] es · Reducing-Suffering / Fuzzy, Nested Minds Problematize Utilitarian Aggregation.txt · 1vAYFxWTNd8GwDLgrzAaoZ5ezEy90YgXm · 16 KB · txt
-- [ ] es · Reducing-Suffering / Comments on Compassion, by the Pound.txt · 1pGiL1k2-_6CZPbPcNqzpNGeyrnbX3sin · 16 KB · txt
-- [ ] es · Reducing-Suffering / Ideas for Volunteering to Reduce Wild-Animal Suffering.txt · 1NJX8El9eb7fI9Pjg-E2yxWVut2IdF7Kt · 17 KB · txt
-- [ ] es · Reducing-Suffering / Zooplankton Densities in Rivers.txt · 1xMGvEzOv64ZsobsREly3U8XjPucgPwLU · 17 KB · txt
-- [ ] es · Reducing-Suffering / Omelas and Space Colonization.txt · 1DAQbjI1ltTRms2a74d1vPj6gx0w4HeLU · 17 KB · txt
-- [ ] es · Reducing-Suffering / Invertebrate-Free Composting.txt · 1e79hx7inxQ0dbgS8Efxb_C98yyexDmJr · 17 KB · txt
-- [ ] es · Reducing-Suffering / Predictions of AGI Takeoff Speed vs. Years Worked in Commercial Software.txt · 1rIugXC_Toq0UTN5wid7hX80Xqt9EcKl- · 17 KB · txt
-- [ ] es · Reducing-Suffering / Why I Am Not a Type-F Monist.txt · 1qMJK5Zv2AZ4ZqPMI3Y8xk0BvEO7eUk7a · 17 KB · txt
-- [ ] es · Reducing-Suffering / Invertebrate Impacts of Worm-Bin Composting vs. Methane-Producing Decomposition.txt · 1Fn04yjGttsgZprn2aNmacsAgV1YCJt5t · 18 KB · txt
-- [ ] es · Reducing-Suffering / Net Primary Productivity by Land Type.txt · 1YzzkQG1_Avc_FOsaIeb514IrU4yvE4u3 · 18 KB · txt
-- [ ] es · Reducing-Suffering / Invertebrate Suffering Caused by Worm Composting.txt · 1WWCp7FF4hVprfhx5lr1oYi5Ewx2SiokJ · 18 KB · txt
-- [ ] es · Reducing-Suffering / Yew-Kwang Ng on Wild-Animal Suffering.txt · 1tifvxKYemBAPe-l1FZ-eBsESErgkvngn · 18 KB · txt
-- [ ] es · Reducing-Suffering / Prudential Arguments Regarding the Problem of Consciousness.txt · 17sFpID7cZm9B7cP2AsBKtTeoSRxObBC8 · 18 KB · txt
-- [ ] es · Reducing-Suffering / Intention-Based Moral Reactions Distort Intuitions about Wild Animals.txt · 1xh1tc_w3ff78IcuS9M8eSKVoImwvFOtv · 18 KB · txt
-- [ ] es · Reducing-Suffering / The Haste Consideration, Revisited.txt · 1Khv7TNnqzidrj6nWHg30SEeYlZftDlEr · 19 KB · txt
-- [ ] es · Reducing-Suffering / Interview with John Lamberton.txt · 1maeOHu2FKzN9GEhHwynSKABOwZxN5PYa · 19 KB · txt
-- [ ] es · Reducing-Suffering / Invertebrates Created by Throwing Out Food Scraps.txt · 1IghiVmBzFjryMQsqM1lrQBMAuHM3Rh4J · 20 KB · txt
-- [ ] es · Reducing-Suffering / Altruistic Motivation Based on Pain vs. Enjoyment.txt · 11A-LcqKMG9_59LnJq6m0qHA2tkS5xgLd · 20 KB · txt
-- [ ] es · Reducing-Suffering / Artificial general intelligence as a continuation of existing software and societal trends.txt · 1aFWRv5KRhuTC7E-j4rrY_4M57pGeulh9 · 20 KB · txt
-- [ ] es · Reducing-Suffering / Astronomical suffering from slightly misaligned artificial intelligence.txt · 1DBLAGqqrHCofkz2BjOUvJBODhKaHzl4v · 20 KB · txt
-- [ ] es · Reducing-Suffering / The Future of Darwinism.txt · 1HACh6_OcAzEa_WCUM2U6VWENFk1hnr12 · 20 KB · txt
-- [ ] es · Reducing-Suffering / Medicine vs. Deep Ecology.txt · 1lrUAypVofJde9tDRtnHGnuMkPMxsuhr2 · 21 KB · txt
-- [ ] es · Reducing-Suffering / Why I Don_t Support Eating Insects.txt · 1wDLXPnsvIN4XMZkbuGI4a7ZVW67TjyMT · 21 KB · txt
-- [ ] es · Reducing-Suffering / Personal and Social Tolerance.txt · 1eCfDiwh8upBuh5ohU1Vr4BUhQ_oaZU-4 · 21 KB · txt
-- [ ] es · Reducing-Suffering / Macro- vs. Micro-Optimization.txt · 1UmxzJ-hhgynGL5ZCOxDBxEa3t-u4jKj4 · 21 KB · txt
-- [ ] es · Reducing-Suffering / Expected Value of Shared Information for Competing Agents.txt · 1So4Y2z4E7ydIyaOq0x9Y1tur3GJHewsU · 22 KB · txt
-- [ ] es · Reducing-Suffering / The Importance of Insect Suffering.txt · 11EKDKOtxV6sJeGDzD96JqIzM-TgkfzcY · 22 KB · txt
-- [ ] es · Reducing-Suffering / Quantify with Care.txt · 1_t2P9t1lixa5iP9x5fnWXp_sJpSOIxOG · 22 KB · txt
-- [ ] es · Reducing-Suffering / Humanity_s Impact on the Aggregate Metabolism of Land Wild Animals﹕ An Analysis of Krausmann et al. (2013).txt · 186FgkIQu5qTgmBcGmHad_ECu2EB_VtCB · 23 KB · txt
-- [ ] es · Reducing-Suffering / Microorganisms Created by Septic Systems.txt · 1GrYNN_qba0Zb6xNLnsLexzFiLzAur0KR · 24 KB · txt
-- [ ] es · Reducing-Suffering / I_m Not a Speciesist / index﹔ I_m Just a Utilitarian.txt · 1ueqA3xigItBvGdqeC2S_p_7ItHaT0Qnr · 26 KB · txt
-- [ ] es · Reducing-Suffering / Brain Sizes and Cognitive Abilities of Micrometazoans.txt · 1mYaUkitROuJBgU6Q8mIRXWC1EAU2M-77 · 26 KB · txt
-- [ ] es · Reducing-Suffering / My Personal Reactions to Confrontational Animal Activism.txt · 1t1_jhGVoyndfEgWI35oiki53ht7VqV3l · 26 KB · txt
-- [ ] es · Reducing-Suffering / The Horror of Suffering.txt · 1EfFdrIAQl0BZO_Z8VKbpeL-5gqpWSJQ0 · 26 KB · txt
-- [ ] es · Reducing-Suffering / Interview on Effective Altruism.txt · 1bGVFEj68SHO2WUlDGYtZ-gbCM0fEnvLK · 27 KB · txt
-- [ ] es · Reducing-Suffering / Machine Ethics and Preference Utilitarianism.txt · 1ofWcCUI_4SwpYIIjYwa7P1WduNnH-iQB · 27 KB · txt
-- [ ] es · Reducing-Suffering / Lab Universes﹕ Creating Infinite Suffering.txt · 1jDu5LsPWIXgpxMDtKdkoEk-h40rxA-4r · 28 KB · txt
-- [ ] es · Reducing-Suffering / How Irrigation Affects Global Net Primary Productivity.txt · 1NHk0ksphfKx1rAcNTK5-XnBg_uio9JJc · 28 KB · txt
-- [ ] es · Reducing-Suffering / Calculator for Expected Utility of Founding a Startup.txt · 197iT-HqSQ3B_F0bGiFDu5nIraVsWTez5 · 28 KB · txt
-- [ ] es · Reducing-Suffering / What Knowledge of Consciousness Says about Theories of Consciousness.txt · 1XXjXO3u-uDHarV7mMcX5NfN7ow0I4z2h · 29 KB · txt
-- [ ] es · Reducing-Suffering / Humanity_s Net Impact on Wild-Animal Suffering.txt · 1FgIoT0ZgPVB2g-05uATOop_-qq5oXg8V · 30 KB · txt
-- [ ] es · Reducing-Suffering / Cognitive Abilities of Unicellular Organisms.txt · 1izaGE0j4ZTbLLPFU9ma_mUFiPtlh1xdE · 30 KB · txt
-- [ ] es · Reducing-Suffering / Thoughts on Postmodernism and Its Intellectual Kin.txt · 1lxnmWzXg5vzChNxY_F1v18URO7e3muon · 31 KB · txt
-- [ ] es · Reducing-Suffering / How to Kill Bugs Humanely.txt · 146E4ge6BpcYIK8fP3sj4mZvbdsVT5HY6 · 33 KB · txt
-- [ ] es · Reducing-Suffering / Fitness Considerations Regarding the Suffering of Short-Lived Animals.txt · 1RQ0LU-CDHLTrc0iv3Q3YmilVAqTP6bif · 33 KB · txt
-- [ ] es · Reducing-Suffering / The Fine Print on Beef_s Water Use.txt · 1Krn2neV-ITTGxSKhkvPpowXUVExScylq · 34 KB · txt
-- [ ] es · Reducing-Suffering / The Value of Wikipedia Contributions in Social Sciences.txt · 1N9gtljKe4MtFzl7_Urmmf0qJE7pH-SXf · 35 KB · txt
-- [ ] es · Reducing-Suffering / Spreading Google Grants with Caution about Counterfactuals.txt · 1YkaJvke9tSEPXjeGGxrSUHizW-N6xxQH · 35 KB · txt
-- [ ] es · Reducing-Suffering / Why Honesty is a Good Policy.txt · 1ymo4NfEqNg7f9TSUV06cnjd3sRHYW7Z1 · 35 KB · txt
-- [ ] es · Reducing-Suffering / Two-Envelopes Problem for Uncertainty about Brain-Size Valuation and Other Moral Questions.txt · 1iB1T8hnULJkg98C0lzDPatBlMGTPXe2S · 35 KB · txt
-- [ ] es · Reducing-Suffering / Estimating Aggregate Wild-Animal Suffering from Reproductive Age and Births per Female.txt · 1IUR9gY4w-wm4rnXQWydpn4e80Sw-uQD3 · 35 KB · txt
-- [ ] es · Reducing-Suffering / Convert Grass Lawns to Gravel to Reduce Insect Suffering.txt · 1P6mw9VZ87e0aSNn1aHUGbltujrhGa4Rb · 35 KB · txt
-- [ ] es · Reducing-Suffering / How Wild-Caught Fishing Affects Wild-Animal Suffering.txt · 1acRzL4-mu6997ZTwYwxY2tBmv2TLAS6d · 37 KB · txt
-- [ ] es · Reducing-Suffering / My Confusions about the Hard Problem of Consciousness.txt · 1H6JmHl0TAs5jByRFcQP6DYjddVzIFvyv · 37 KB · txt
-- [ ] es · Reducing-Suffering / Invertebrates Created by Composting.txt · 1CeqoSIqUZ6df0JYuje5vNtrsdw2K94b3 · 38 KB · txt
-- [ ] es · Reducing-Suffering / Eating Insects Is Usually Less Efficient Than Eating Plants.txt · 1DJkOMCQuDr4_J-BGYFRtsXif0FKCqF9j · 38 KB · txt
-- [ ] es · Reducing-Suffering / Bacteria, Plants, and Graded Sentience.txt · 17XPYlwbuEE4m7cZzDPrT30fDx11ZYhOA · 38 KB · txt
-- [ ] es · Reducing-Suffering / Scenarios for Very Long-Term Impacts of Climate Change on Wild-Animal Suffering.txt · 1H-1PZ4RVEI-vh8oeoxQ2HBvIwXQUH93U · 39 KB · txt
-- [ ] es · Reducing-Suffering / Eternalism and Its Ethical Implications.txt · 14bgNpKAEGlQL4vqJ51FnMPW1T-91TTOh · 41 KB · txt
-- [ ] es · Reducing-Suffering / Why Your Laptop May Be Marginally Sentient.txt · 1I4OpFpzsMEE7Xistu-VssU8Y38k68RNc · 43 KB · txt
-- [ ] es · Reducing-Suffering / Why I Support the Humane Slaughter Association.txt · 1bB2XhrHw0mPZUqxi9mS9EcHOJfqpcJPe · 44 KB · txt
-- [ ] es · Reducing-Suffering / The Many Fallacies of Dualism.txt · 14lG81Tp7QS8I5DEL7GkQxJNweOF1yItz · 45 KB · txt
-- [ ] es · Reducing-Suffering / Humane Insecticides.txt · 1veCCXzchyB3twwaBuPk9A0VDjVE6ylHp · 45 KB · txt
-- [ ] es · Reducing-Suffering / Efforts to Help Wild Animals Should Be Effective, Not Idealistic.txt · 1UXsQKcn142-qeWR5Z8q-BrqOBlrvJND4 · 46 KB · txt
-- [ ] es · Reducing-Suffering / Insect Suffering from Silk, Shellac, Carmine, and Other Insect Products.txt · 1YWQH-sNtHya8IOe2ec3BuH7Fudh8Hb7K · 46 KB · txt
-- [ ] es · Reducing-Suffering / Why Activists Should Consider Making Lots of Money.txt · 1Nm2bfMBHRhY92mUsR3hpwmJrEVxKfKQl · 47 KB · txt
-- [ ] es · Reducing-Suffering / Advice for Students on Earning to Give.txt · 1nPtXoQUA23Br6utnVToF5ZnnMEpPfCGA · 47 KB · txt
-- [ ] es · Reducing-Suffering / Microorganisms Created by Wastewater-Treatment Systems.txt · 1tldfvPa_X3eJlbzRHKm0T4-Wf3KcEnxn · 49 KB · txt
-- [ ] es · Reducing-Suffering / Climate Change and Wild Animals.txt · 1OEdvh2WD0efU3jMgL86HTRvBmsAnDjXn · 49 KB · txt
-- [ ] es · Reducing-Suffering / How Cattle Grazing Affects Insect Populations on Pasture Fields.txt · 1VUrVNOBijq_Zpdej2cHcXpm-eGXxzDCu · 50 KB · txt
-- [ ] es · Reducing-Suffering / How Cattle Grazing Affects Pasture Productivity.txt · 1k1ux3hGSYtX28VfzTjVuf8D2ZqUaZQN_ · 50 KB · txt
-- [ ] es · Reducing-Suffering / A Corporation Analogy for Consciousness﹕ Comments on Ward (2011).txt · 1dVz0V-fT7yGZYcFsi3X1JPZILDKOdZAn · 55 KB · txt
-- [ ] es · Reducing-Suffering / Why Charities Usually Don_t Differ Astronomically in Expected Cost-Effectiveness.txt · 1_SRLx4fLFrrkwKCnsKZFx6ia0xna34jE · 55 KB · txt
-- [ ] es · Reducing-Suffering / Consciousness Is a Process, Not a Moment.txt · 1g_7jLi5Rd5_ahCHf4f2JRgnRnCSdrJOx · 58 KB · txt
-- [ ] es · Reducing-Suffering / Vegans Should Not Eat Insects﹕ A Reply to Fischer (2016).txt · 1kbJxBdRQOG6RCUZ0EKhzn-bIrSOQdEcB · 59 KB · txt
+- [x] es · Reducing-Suffering / Donate $400K per Year by Working at Soros Fund Management.txt · 1PNiiCMgsGOzX9BOsplj6WaSI_O88aAWu · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Donate $400K per Year by Working at Soros Fund Management.txt`)
+- [x] es · Reducing-Suffering / Zooplankton Densities in Lakes and Reservoirs.txt · 1bOF32OFN_KUF1ADdhIObyRzww9hN1uKn · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Zooplankton Densities in Lakes and Reservoirs.txt`)
+- [x] es · Reducing-Suffering / About this site.txt · 1bKpsVgT6SYwBbvvLgPKUjvKwewi9Kel9 · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/About this site.txt`)
+- [x] es · Reducing-Suffering / On Triage.txt · 1ydKx2cF99q40GxBwFBATMUZ9-njpxXEf · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/On Triage.txt`)
+- [x] es · Reducing-Suffering / Mr. Rogers on Unconditional Love.txt · 1F-7KGUmkuh0jjyNp0psC8Xa9iP6daBnX · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Mr. Rogers on Unconditional Love.txt`)
+- [x] es · Reducing-Suffering / How Forest Fires Affect Wild-Animal Suffering.txt · 16C9cEBShrXumSHWwuKCdDRMd7uYsyiIT · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/How Forest Fires Affect Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Intuition and Reason.txt · 1pPKRYunnHfQvumcpL3jveVx5dp3Z1-Qz · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Intuition and Reason.txt`)
+- [x] es · Reducing-Suffering / The Cruelty of Eating Snails.txt · 1-2ukmHfVKYOqw4FhvVuh0wOZpVOPk8Qw · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/The Cruelty of Eating Snails.txt`)
+- [x] es · Reducing-Suffering / One Trillion Fish.txt · 1MN-lLMe5BXvo8upfqv1bOvp_hhKWoU82 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/One Trillion Fish.txt`)
+- [x] es · Reducing-Suffering / On the Seriousness of Suffering.txt · 16Gq78ZAgDUQIjFsidF_vw1JydToDegKT · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/On the Seriousness of Suffering.txt`)
+- [x] es · Reducing-Suffering / Beauty-Driven Morality.txt · 1WSEd9vsCA6efAbTS0A_x_Du6tcr6LI0U · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Beauty-Driven Morality.txt`)
+- [x] es · Reducing-Suffering / Paul Almond on AI, Atheism, Consciousness, and the Multiverse.txt · 1WFeX4X9xq7WrYHr5bSvV5-QEWomq6YdG · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Paul Almond on AI, Atheism, Consciousness, and the Multiverse.txt`)
+- [x] es · Reducing-Suffering / Why Lower Crop Yields Reduce Invertebrate Suffering (Given Certain Assumptions).txt · 1lTbp4cmfEaO5OcpPr3lGq5-9B2H4OcPO · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Why Lower Crop Yields Reduce Invertebrate Suffering (Given Certain Assumptions).txt`)
+- [x] es · Reducing-Suffering / Sunk-Cost Fallacy as a Punishment Mechanism.txt · 1PRo3Il3V5nLtCbJL1iiInQXmhaL3HS8a · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Sunk-Cost Fallacy as a Punishment Mechanism.txt`)
+- [x] es · Reducing-Suffering / Precautionary Principle vs. Expected Values.txt · 1ugkEA9Shjp-96GI3WS1pLlucDPE_Axbd · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Precautionary Principle vs. Expected Values.txt`)
+- [x] es · Reducing-Suffering / Zooplankton Created by a Facultative Aerated Wastewater Treatment Lagoon﹕ An Analysis of Kring et al. (2013).txt · 1iLtoBG10m46pyC_JZKh-S_j7_wI0K4Kr · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Zooplankton Created by a Facultative Aerated Wastewater Treatment Lagoon﹕ An Analysis of Kring et al. (2013).txt`)
+- [x] es · Reducing-Suffering / A Short Introduction to Reducing Suffering.txt · 1Cj_4nxFYm2-u-1ocn7N8BExtTRAl8gWk · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/A Short Introduction to Reducing Suffering.txt`)
+- [x] es · Reducing-Suffering / Haller’s Rule and Sentience Per Unit Biomass.txt · 196aV-h-B6uMj4-eAlBU2489ErNwzKQxt · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Haller’s Rule and Sentience Per Unit Biomass.txt`)
+- [x] es · Reducing-Suffering / Caring about Animal Suffering.txt · 1WwCcWlTC2xXQh2UK2QDFrTX6Hz79xrQO · 8 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Caring about Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Net Impact of Vegetarianism on Factory-Farm Suffering vs. Invertebrates on Pasture Fields.txt · 1Ti8VNKP426kQazWXscSerXdv8vgi03Sg · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Net Impact of Vegetarianism on Factory-Farm Suffering vs. Invertebrates on Pasture Fields.txt`)
+- [x] es · Reducing-Suffering / Abundances of Soil Organisms.txt · 1Qns8GEVrJyQPtTmaxSIK-xdteJQrsiQS · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Abundances of Soil Organisms.txt`)
+- [x] es · Reducing-Suffering / Turn Discussions into Blog Posts.txt · 1kGdbQ9-bTsDCacI3RwWNTCPIsg3mkrqO · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Turn Discussions into Blog Posts.txt`)
+- [x] es · Reducing-Suffering / Why Most People Don_t Care About Wild-Animal Suffering.txt · 1I27MmDCu5DJtAmfoP188OcRCC0zTOzZQ · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Why Most People Don_t Care About Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / A Few Useful Topics to Read About.txt · 1VHojW-jRBuHo-OPKdC21eRuWmIoiubww · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/A Few Useful Topics to Read About.txt`)
+- [x] es · Reducing-Suffering / Why I Prefer Public Conversations.txt · 1m1WIKp7bnVK5Gfc6B0UXg7H-pGotLQ77 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Why I Prefer Public Conversations.txt`)
+- [x] es · Reducing-Suffering / Cost-Effectiveness Comparison for Different Ways to Reduce Insect Suffering.txt · 1qoZ8S6UBv662VjR0l8vrLMT2lTOXBj2n · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Cost-Effectiveness Comparison for Different Ways to Reduce Insect Suffering.txt`)
+- [x] es · Reducing-Suffering / How I Started Writing about Wild-Animal Suffering.txt · 1_IaxJ8c3A7u_N8DGFesS3lDMmC8acfl_ · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/How I Started Writing about Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Frequently asked questions.txt · 1Bcu5sNQYoYgApKVhWfXwNA2Y1oh1qiN2 · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Frequently asked questions.txt`)
+- [x] es · Reducing-Suffering / Employers with Huge Matching-Donations Limits.txt · 1vD4I2Y6BU3YYcBx8zMAFms0b2G5cua7V · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Employers with Huge Matching-Donations Limits.txt`)
+- [x] es · Reducing-Suffering / History of This Website.txt · 1peCUX8GuxtGQi0P8TftyKcxTMT6ofjkD · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/History of This Website.txt`)
+- [x] es · Reducing-Suffering / Covariance of Wealth and Cost-Effectiveness.txt · 1V_HvBoPBwOTT2DobfTWa3tmC5UKMNpBi · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Covariance of Wealth and Cost-Effectiveness.txt`)
+- [x] es · Reducing-Suffering / Why Vegans Should Care about Suffering in Nature.txt · 1O5-07DNv5FXMOrkC0SC1nrVyJhus_q7e · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Why Vegans Should Care about Suffering in Nature.txt`)
+- [x] es · Reducing-Suffering / Staying Altruistic for the Long Term.txt · 1MsrZKbmqPqUNSsK_2AKex1ay5EDgUQNM · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Staying Altruistic for the Long Term.txt`)
+- [x] es · Reducing-Suffering / Trophic Cascades Caused by Fishing.txt · 1XGHAYztd2RTmP4EkzFp6BrK-QxyAzxXX · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Trophic Cascades Caused by Fishing.txt`)
+- [x] es · Reducing-Suffering / How Fungicides and Eutrophication Affect Suffering in the Wild.txt · 1mIxY8dMsa_C2lNGIy1DNkYLrLYy_SGT2 · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/How Fungicides and Eutrophication Affect Suffering in the Wild.txt`)
+- [x] es · Reducing-Suffering / Interview about Ethics and Effective Altruism.txt · 18_h4w9PQ8NYnKQf4mfyf20BJrhFN8Vgh · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Interview about Ethics and Effective Altruism.txt`)
+- [x] es · Reducing-Suffering / How Eutrophication Affects Freshwater Invertebrate Populations.txt · 1QUxIemuvbLzT1prhYwYzgjkakiVIHpZc · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/How Eutrophication Affects Freshwater Invertebrate Populations.txt`)
+- [x] es · Reducing-Suffering / Random Ideas and Suggestions.txt · 19ARA7VJJ0sRUxBui7cr-el9rDTP5Po7u · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Random Ideas and Suggestions.txt`)
+- [x] es · Reducing-Suffering / Suffering in Animals vs. Humans.txt · 1eW-GMsuZAOJ2lBIlNgC9nIVGMU9Lqc0h · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Suffering in Animals vs. Humans.txt`)
+- [x] es · Reducing-Suffering / Why the Modesty Argument for Moral Realism Fails.txt · 14NPuwnSKDiRF5T9nk5C11-jkG0k0bY9H · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Why the Modesty Argument for Moral Realism Fails.txt`)
+- [x] es · Reducing-Suffering / Epistemological Black Swans.txt · 1DeFlziYcVzxqk2-06EJ2ssulOeKKueuu · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Epistemological Black Swans.txt`)
+- [x] es · Reducing-Suffering / A Simple Program to Illustrate the Hard Problem of Consciousness.txt · 1-oCtNM0Uu11shZtmnOm7AjD20wtwDlx7 · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/A Simple Program to Illustrate the Hard Problem of Consciousness.txt`)
+- [x] es · Reducing-Suffering / Machine Sentience and Robot Rights.txt · 1-hR5ip8md6MdwFKuGEZsLP98yetyAOuY · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Machine Sentience and Robot Rights.txt`)
+- [x] es · Reducing-Suffering / Objections to the Zombie Argument.txt · 1Bd_e9Cd8CdfKjRkk_3zY1t6sOHJ8N4KZ · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Objections to the Zombie Argument.txt`)
+- [x] es · Reducing-Suffering / Three Types of Negative Utilitarianism.txt · 16lxPSzDT6FTeg4GN6hLDE28BSf5U7HOC · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Three Types of Negative Utilitarianism.txt`)
+- [x] es · Reducing-Suffering / Habitat Loss, Not Preservation, Generally Reduces Wild-Animal Suffering.txt · 10S5fLgYzqS-UjlvDMtOmNxK04lziCN0l · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Habitat Loss, Not Preservation, Generally Reduces Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Why I Don_t Focus on the Hedonistic Imperative.txt · 16Vqe-y9Rp0NzeUi6tHqG0BTmlwQEGGaZ · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Why I Don_t Focus on the Hedonistic Imperative.txt`)
+- [x] es · Reducing-Suffering / Environmental Impacts of Cattle Beyond the Pasture.txt · 1z_LEv8oZUEXbanxtAPsB50yZFHmu5Rxx · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Environmental Impacts of Cattle Beyond the Pasture.txt`)
+- [x] es · Reducing-Suffering / Reasons to Promote Suffering-Focused Ethics.txt · 1ouUeB2Qqwy4OQI_RGX21u9pbDQ-l5rMv · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Reasons to Promote Suffering-Focused Ethics.txt`)
+- [x] es · Reducing-Suffering / Empathy vs. Principle﹕ A Reply to David Brooks.txt · 1tg2VSvLPFF0JZ7BHdm5UsDnWJkgWVNEm · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Empathy vs. Principle﹕ A Reply to David Brooks.txt`)
+- [x] es · Reducing-Suffering / Effects of CO2 and Climate Change on Terrestrial Net Primary Productivity.txt · 1y8jcL3DwHoeR86y0IOmTAHh1QwtDJHXz · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Effects of CO2 and Climate Change on Terrestrial Net Primary Productivity.txt`)
+- [x] es · Reducing-Suffering / Summary of My Beliefs and Values on Big Questions.txt · 1onzXky9qxcu7L11ysCWkxw9f7-HiOHs9 · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Summary of My Beliefs and Values on Big Questions.txt`)
+- [x] es · Reducing-Suffering / A Small Mechanical Turk Survey on Ethics and Animal Welfare.txt · 1nlI5UApQV-CzfCC1pvxDweZCBzcPPcbA · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/A Small Mechanical Turk Survey on Ethics and Animal Welfare.txt`)
+- [x] es · Reducing-Suffering / My Donation Recommendations.txt · 1HhY6aQxfQ8eYcS7mgGav_mm_3ghhleLT · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/My Donation Recommendations.txt`)
+- [x] es · Reducing-Suffering / Posthuman Multiculturalism.txt · 1VmuflNYWoZYz7VxFJc5D7mu-klbzVmfp · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Posthuman Multiculturalism.txt`)
+- [x] es · Reducing-Suffering / The Cost of Kids.txt · 1WP2z6U95aWlmW6GXpoOK3V4QvzwmeKsn · 15 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/The Cost of Kids.txt`)
+- [x] es · Reducing-Suffering / Strategic Considerations for Moral Antinatalists.txt · 1NVcVhMFVY7U742mSe_WtCP0P3xbnN1f3 · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Strategic Considerations for Moral Antinatalists.txt`)
+- [x] es · Reducing-Suffering / Instrumental Judgment and Expectational Consequentialism.txt · 1tR9HKnj-Z9GtAzwhGx-8dPqI0w1eeEx4 · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Instrumental Judgment and Expectational Consequentialism.txt`)
+- [x] es · Reducing-Suffering / Thoughts Regarding the Simulation Hypothesis.txt · 1pxDGV4YuZLTgx2n2wuE_dCN5I9xDZDMB · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Thoughts Regarding the Simulation Hypothesis.txt`)
+- [x] es · Reducing-Suffering / Fuzzy, Nested Minds Problematize Utilitarian Aggregation.txt · 1vAYFxWTNd8GwDLgrzAaoZ5ezEy90YgXm · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Fuzzy, Nested Minds Problematize Utilitarian Aggregation.txt`)
+- [x] es · Reducing-Suffering / Comments on Compassion, by the Pound.txt · 1pGiL1k2-_6CZPbPcNqzpNGeyrnbX3sin · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Comments on Compassion, by the Pound.txt`)
+- [x] es · Reducing-Suffering / Ideas for Volunteering to Reduce Wild-Animal Suffering.txt · 1NJX8El9eb7fI9Pjg-E2yxWVut2IdF7Kt · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Ideas for Volunteering to Reduce Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Zooplankton Densities in Rivers.txt · 1xMGvEzOv64ZsobsREly3U8XjPucgPwLU · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Zooplankton Densities in Rivers.txt`)
+- [x] es · Reducing-Suffering / Omelas and Space Colonization.txt · 1DAQbjI1ltTRms2a74d1vPj6gx0w4HeLU · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Omelas and Space Colonization.txt`)
+- [x] es · Reducing-Suffering / Invertebrate-Free Composting.txt · 1e79hx7inxQ0dbgS8Efxb_C98yyexDmJr · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Invertebrate-Free Composting.txt`)
+- [x] es · Reducing-Suffering / Predictions of AGI Takeoff Speed vs. Years Worked in Commercial Software.txt · 1rIugXC_Toq0UTN5wid7hX80Xqt9EcKl- · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Predictions of AGI Takeoff Speed vs. Years Worked in Commercial Software.txt`)
+- [x] es · Reducing-Suffering / Why I Am Not a Type-F Monist.txt · 1qMJK5Zv2AZ4ZqPMI3Y8xk0BvEO7eUk7a · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Why I Am Not a Type-F Monist.txt`)
+- [x] es · Reducing-Suffering / Invertebrate Impacts of Worm-Bin Composting vs. Methane-Producing Decomposition.txt · 1Fn04yjGttsgZprn2aNmacsAgV1YCJt5t · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Invertebrate Impacts of Worm-Bin Composting vs. Methane-Producing Decomposition.txt`)
+- [x] es · Reducing-Suffering / Net Primary Productivity by Land Type.txt · 1YzzkQG1_Avc_FOsaIeb514IrU4yvE4u3 · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Net Primary Productivity by Land Type.txt`)
+- [x] es · Reducing-Suffering / Invertebrate Suffering Caused by Worm Composting.txt · 1WWCp7FF4hVprfhx5lr1oYi5Ewx2SiokJ · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Invertebrate Suffering Caused by Worm Composting.txt`)
+- [x] es · Reducing-Suffering / Yew-Kwang Ng on Wild-Animal Suffering.txt · 1tifvxKYemBAPe-l1FZ-eBsESErgkvngn · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Yew-Kwang Ng on Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Prudential Arguments Regarding the Problem of Consciousness.txt · 17sFpID7cZm9B7cP2AsBKtTeoSRxObBC8 · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Prudential Arguments Regarding the Problem of Consciousness.txt`)
+- [x] es · Reducing-Suffering / Intention-Based Moral Reactions Distort Intuitions about Wild Animals.txt · 1xh1tc_w3ff78IcuS9M8eSKVoImwvFOtv · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Intention-Based Moral Reactions Distort Intuitions about Wild Animals.txt`)
+- [x] es · Reducing-Suffering / The Haste Consideration, Revisited.txt · 1Khv7TNnqzidrj6nWHg30SEeYlZftDlEr · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/The Haste Consideration, Revisited.txt`)
+- [x] es · Reducing-Suffering / Interview with John Lamberton.txt · 1maeOHu2FKzN9GEhHwynSKABOwZxN5PYa · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Interview with John Lamberton.txt`)
+- [x] es · Reducing-Suffering / Invertebrates Created by Throwing Out Food Scraps.txt · 1IghiVmBzFjryMQsqM1lrQBMAuHM3Rh4J · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Invertebrates Created by Throwing Out Food Scraps.txt`)
+- [x] es · Reducing-Suffering / Altruistic Motivation Based on Pain vs. Enjoyment.txt · 11A-LcqKMG9_59LnJq6m0qHA2tkS5xgLd · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Altruistic Motivation Based on Pain vs. Enjoyment.txt`)
+- [x] es · Reducing-Suffering / Artificial general intelligence as a continuation of existing software and societal trends.txt · 1aFWRv5KRhuTC7E-j4rrY_4M57pGeulh9 · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Artificial general intelligence as a continuation of existing software and societal trends.txt`)
+- [x] es · Reducing-Suffering / Astronomical suffering from slightly misaligned artificial intelligence.txt · 1DBLAGqqrHCofkz2BjOUvJBODhKaHzl4v · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Astronomical suffering from slightly misaligned artificial intelligence.txt`)
+- [x] es · Reducing-Suffering / The Future of Darwinism.txt · 1HACh6_OcAzEa_WCUM2U6VWENFk1hnr12 · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/The Future of Darwinism.txt`)
+- [x] es · Reducing-Suffering / Medicine vs. Deep Ecology.txt · 1lrUAypVofJde9tDRtnHGnuMkPMxsuhr2 · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Medicine vs. Deep Ecology.txt`)
+- [x] es · Reducing-Suffering / Why I Don_t Support Eating Insects.txt · 1wDLXPnsvIN4XMZkbuGI4a7ZVW67TjyMT · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Why I Don_t Support Eating Insects.txt`)
+- [x] es · Reducing-Suffering / Personal and Social Tolerance.txt · 1eCfDiwh8upBuh5ohU1Vr4BUhQ_oaZU-4 · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Personal and Social Tolerance.txt`)
+- [x] es · Reducing-Suffering / Macro- vs. Micro-Optimization.txt · 1UmxzJ-hhgynGL5ZCOxDBxEa3t-u4jKj4 · 21 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Macro- vs. Micro-Optimization.txt`)
+- [x] es · Reducing-Suffering / Expected Value of Shared Information for Competing Agents.txt · 1So4Y2z4E7ydIyaOq0x9Y1tur3GJHewsU · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Expected Value of Shared Information for Competing Agents.txt`)
+- [x] es · Reducing-Suffering / The Importance of Insect Suffering.txt · 11EKDKOtxV6sJeGDzD96JqIzM-TgkfzcY · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/The Importance of Insect Suffering.txt`)
+- [x] es · Reducing-Suffering / Quantify with Care.txt · 1_t2P9t1lixa5iP9x5fnWXp_sJpSOIxOG · 22 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Quantify with Care.txt`)
+- [x] es · Reducing-Suffering / Humanity_s Impact on the Aggregate Metabolism of Land Wild Animals﹕ An Analysis of Krausmann et al. (2013).txt · 186FgkIQu5qTgmBcGmHad_ECu2EB_VtCB · 23 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Humanity_s Impact on the Aggregate Metabolism of Land Wild Animals﹕ An Analysis of Krausmann et al. (2013).txt`)
+- [x] es · Reducing-Suffering / Microorganisms Created by Septic Systems.txt · 1GrYNN_qba0Zb6xNLnsLexzFiLzAur0KR · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Microorganisms Created by Septic Systems.txt`)
+- [x] es · Reducing-Suffering / I_m Not a Speciesist / index﹔ I_m Just a Utilitarian.txt · 1ueqA3xigItBvGdqeC2S_p_7ItHaT0Qnr · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/index﹔ I_m Just a Utilitarian.txt`)
+- [x] es · Reducing-Suffering / Brain Sizes and Cognitive Abilities of Micrometazoans.txt · 1mYaUkitROuJBgU6Q8mIRXWC1EAU2M-77 · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Brain Sizes and Cognitive Abilities of Micrometazoans.txt`)
+- [x] es · Reducing-Suffering / My Personal Reactions to Confrontational Animal Activism.txt · 1t1_jhGVoyndfEgWI35oiki53ht7VqV3l · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/My Personal Reactions to Confrontational Animal Activism.txt`)
+- [x] es · Reducing-Suffering / The Horror of Suffering.txt · 1EfFdrIAQl0BZO_Z8VKbpeL-5gqpWSJQ0 · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/The Horror of Suffering.txt`)
+- [x] es · Reducing-Suffering / Interview on Effective Altruism.txt · 1bGVFEj68SHO2WUlDGYtZ-gbCM0fEnvLK · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Interview on Effective Altruism.txt`)
+- [x] es · Reducing-Suffering / Machine Ethics and Preference Utilitarianism.txt · 1ofWcCUI_4SwpYIIjYwa7P1WduNnH-iQB · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Machine Ethics and Preference Utilitarianism.txt`)
+- [x] es · Reducing-Suffering / Lab Universes﹕ Creating Infinite Suffering.txt · 1jDu5LsPWIXgpxMDtKdkoEk-h40rxA-4r · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Lab Universes﹕ Creating Infinite Suffering.txt`)
+- [x] es · Reducing-Suffering / How Irrigation Affects Global Net Primary Productivity.txt · 1NHk0ksphfKx1rAcNTK5-XnBg_uio9JJc · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/How Irrigation Affects Global Net Primary Productivity.txt`)
+- [x] es · Reducing-Suffering / Calculator for Expected Utility of Founding a Startup.txt · 197iT-HqSQ3B_F0bGiFDu5nIraVsWTez5 · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Calculator for Expected Utility of Founding a Startup.txt`)
+- [x] es · Reducing-Suffering / What Knowledge of Consciousness Says about Theories of Consciousness.txt · 1XXjXO3u-uDHarV7mMcX5NfN7ow0I4z2h · 29 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/What Knowledge of Consciousness Says about Theories of Consciousness.txt`)
+- [x] es · Reducing-Suffering / Humanity_s Net Impact on Wild-Animal Suffering.txt · 1FgIoT0ZgPVB2g-05uATOop_-qq5oXg8V · 30 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Humanity_s Net Impact on Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Cognitive Abilities of Unicellular Organisms.txt · 1izaGE0j4ZTbLLPFU9ma_mUFiPtlh1xdE · 30 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Cognitive Abilities of Unicellular Organisms.txt`)
+- [x] es · Reducing-Suffering / Thoughts on Postmodernism and Its Intellectual Kin.txt · 1lxnmWzXg5vzChNxY_F1v18URO7e3muon · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Thoughts on Postmodernism and Its Intellectual Kin.txt`)
+- [x] es · Reducing-Suffering / How to Kill Bugs Humanely.txt · 146E4ge6BpcYIK8fP3sj4mZvbdsVT5HY6 · 33 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/How to Kill Bugs Humanely.txt`)
+- [x] es · Reducing-Suffering / Fitness Considerations Regarding the Suffering of Short-Lived Animals.txt · 1RQ0LU-CDHLTrc0iv3Q3YmilVAqTP6bif · 33 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Fitness Considerations Regarding the Suffering of Short-Lived Animals.txt`)
+- [x] es · Reducing-Suffering / The Fine Print on Beef_s Water Use.txt · 1Krn2neV-ITTGxSKhkvPpowXUVExScylq · 34 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/The Fine Print on Beef_s Water Use.txt`)
+- [x] es · Reducing-Suffering / The Value of Wikipedia Contributions in Social Sciences.txt · 1N9gtljKe4MtFzl7_Urmmf0qJE7pH-SXf · 35 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/The Value of Wikipedia Contributions in Social Sciences.txt`)
+- [x] es · Reducing-Suffering / Spreading Google Grants with Caution about Counterfactuals.txt · 1YkaJvke9tSEPXjeGGxrSUHizW-N6xxQH · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Spreading Google Grants with Caution about Counterfactuals.txt`)
+- [x] es · Reducing-Suffering / Why Honesty is a Good Policy.txt · 1ymo4NfEqNg7f9TSUV06cnjd3sRHYW7Z1 · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Why Honesty is a Good Policy.txt`)
+- [x] es · Reducing-Suffering / Two-Envelopes Problem for Uncertainty about Brain-Size Valuation and Other Moral Questions.txt · 1iB1T8hnULJkg98C0lzDPatBlMGTPXe2S · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Two-Envelopes Problem for Uncertainty about Brain-Size Valuation and Other Moral Questions.txt`)
+- [x] es · Reducing-Suffering / Estimating Aggregate Wild-Animal Suffering from Reproductive Age and Births per Female.txt · 1IUR9gY4w-wm4rnXQWydpn4e80Sw-uQD3 · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Estimating Aggregate Wild-Animal Suffering from Reproductive Age and Births per Female.txt`)
+- [x] es · Reducing-Suffering / Convert Grass Lawns to Gravel to Reduce Insect Suffering.txt · 1P6mw9VZ87e0aSNn1aHUGbltujrhGa4Rb · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Convert Grass Lawns to Gravel to Reduce Insect Suffering.txt`)
+- [x] es · Reducing-Suffering / How Wild-Caught Fishing Affects Wild-Animal Suffering.txt · 1acRzL4-mu6997ZTwYwxY2tBmv2TLAS6d · 37 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/How Wild-Caught Fishing Affects Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / My Confusions about the Hard Problem of Consciousness.txt · 1H6JmHl0TAs5jByRFcQP6DYjddVzIFvyv · 37 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/My Confusions about the Hard Problem of Consciousness.txt`)
+- [x] es · Reducing-Suffering / Invertebrates Created by Composting.txt · 1CeqoSIqUZ6df0JYuje5vNtrsdw2K94b3 · 38 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Invertebrates Created by Composting.txt`)
+- [x] es · Reducing-Suffering / Eating Insects Is Usually Less Efficient Than Eating Plants.txt · 1DJkOMCQuDr4_J-BGYFRtsXif0FKCqF9j · 38 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Eating Insects Is Usually Less Efficient Than Eating Plants.txt`)
+- [x] es · Reducing-Suffering / Bacteria, Plants, and Graded Sentience.txt · 17XPYlwbuEE4m7cZzDPrT30fDx11ZYhOA · 38 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Bacteria, Plants, and Graded Sentience.txt`)
+- [x] es · Reducing-Suffering / Scenarios for Very Long-Term Impacts of Climate Change on Wild-Animal Suffering.txt · 1H-1PZ4RVEI-vh8oeoxQ2HBvIwXQUH93U · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Scenarios for Very Long-Term Impacts of Climate Change on Wild-Animal Suffering.txt`)
+- [x] es · Reducing-Suffering / Eternalism and Its Ethical Implications.txt · 14bgNpKAEGlQL4vqJ51FnMPW1T-91TTOh · 41 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Eternalism and Its Ethical Implications.txt`)
+- [x] es · Reducing-Suffering / Why Your Laptop May Be Marginally Sentient.txt · 1I4OpFpzsMEE7Xistu-VssU8Y38k68RNc · 43 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Why Your Laptop May Be Marginally Sentient.txt`)
+- [x] es · Reducing-Suffering / Why I Support the Humane Slaughter Association.txt · 1bB2XhrHw0mPZUqxi9mS9EcHOJfqpcJPe · 44 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Why I Support the Humane Slaughter Association.txt`)
+- [x] es · Reducing-Suffering / The Many Fallacies of Dualism.txt · 14lG81Tp7QS8I5DEL7GkQxJNweOF1yItz · 45 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/The Many Fallacies of Dualism.txt`)
+- [x] es · Reducing-Suffering / Humane Insecticides.txt · 1veCCXzchyB3twwaBuPk9A0VDjVE6ylHp · 45 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Humane Insecticides.txt`)
+- [x] es · Reducing-Suffering / Efforts to Help Wild Animals Should Be Effective, Not Idealistic.txt · 1UXsQKcn142-qeWR5Z8q-BrqOBlrvJND4 · 46 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Efforts to Help Wild Animals Should Be Effective, Not Idealistic.txt`)
+- [x] es · Reducing-Suffering / Insect Suffering from Silk, Shellac, Carmine, and Other Insect Products.txt · 1YWQH-sNtHya8IOe2ec3BuH7Fudh8Hb7K · 46 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Insect Suffering from Silk, Shellac, Carmine, and Other Insect Products.txt`)
+- [x] es · Reducing-Suffering / Why Activists Should Consider Making Lots of Money.txt · 1Nm2bfMBHRhY92mUsR3hpwmJrEVxKfKQl · 47 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Why Activists Should Consider Making Lots of Money.txt`)
+- [x] es · Reducing-Suffering / Advice for Students on Earning to Give.txt · 1nPtXoQUA23Br6utnVToF5ZnnMEpPfCGA · 47 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Advice for Students on Earning to Give.txt`)
+- [x] es · Reducing-Suffering / Microorganisms Created by Wastewater-Treatment Systems.txt · 1tldfvPa_X3eJlbzRHKm0T4-Wf3KcEnxn · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Microorganisms Created by Wastewater-Treatment Systems.txt`)
+- [x] es · Reducing-Suffering / Climate Change and Wild Animals.txt · 1OEdvh2WD0efU3jMgL86HTRvBmsAnDjXn · 49 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Climate Change and Wild Animals.txt`)
+- [x] es · Reducing-Suffering / How Cattle Grazing Affects Insect Populations on Pasture Fields.txt · 1VUrVNOBijq_Zpdej2cHcXpm-eGXxzDCu · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/How Cattle Grazing Affects Insect Populations on Pasture Fields.txt`)
+- [x] es · Reducing-Suffering / How Cattle Grazing Affects Pasture Productivity.txt · 1k1ux3hGSYtX28VfzTjVuf8D2ZqUaZQN_ · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/How Cattle Grazing Affects Pasture Productivity.txt`)
+- [x] es · Reducing-Suffering / A Corporation Analogy for Consciousness﹕ Comments on Ward (2011).txt · 1dVz0V-fT7yGZYcFsi3X1JPZILDKOdZAn · 55 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/A Corporation Analogy for Consciousness﹕ Comments on Ward (2011).txt`)
+- [x] es · Reducing-Suffering / Why Charities Usually Don_t Differ Astronomically in Expected Cost-Effectiveness.txt · 1_SRLx4fLFrrkwKCnsKZFx6ia0xna34jE · 55 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Why Charities Usually Don_t Differ Astronomically in Expected Cost-Effectiveness.txt`)
+- [x] es · Reducing-Suffering / Consciousness Is a Process, Not a Moment.txt · 1g_7jLi5Rd5_ahCHf4f2JRgnRnCSdrJOx · 58 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/Consciousness Is a Process, Not a Moment.txt`)
+- [x] es · Reducing-Suffering / Vegans Should Not Eat Insects﹕ A Reply to Fischer (2016).txt · 1kbJxBdRQOG6RCUZ0EKhzn-bIrSOQdEcB · 59 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/Vegans Should Not Eat Insects﹕ A Reply to Fischer (2016).txt`)
 - [ ] es · Reducing-Suffering / How to Interpret a Physical System as a Mind.txt · 1UvA6e3OVUAZzPOv1xzamoN-8gjx469_f · 61 KB · txt
 - [ ] es · Reducing-Suffering / Ranking Explanations of the Fermi Paradox.txt · 1jToJQqCj-8BEmg1rDd9gby6pmFNPlBAs · 63 KB · txt
 - [ ] es · Reducing-Suffering / Speculations on Invertebrate Population Dynamics Relevant to Reducing Suffering.txt · 1QRZsFrB2N1FBilUGt7EoMbtkSzMBdUN8 · 69 KB · txt
@@ -1480,22 +1480,22 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · Reducing-Suffering / How Rainforest Beef Production Affects Wild-Animal Suffering.txt · 19gmTRqVNYpDehXcSTvkDwB1VR6dYo5pX · 142 KB · txt
 - [-] es · Centre on Long-Term Risk / The evidentialist’s wager - William MacAskill, Aron Vallinder (Global Priorities Institute, Oxford University) Caspar Österheld (Duke University), Carl Shulman (Future of Humanity Institute, Oxford University), Johannes Treutlein (T_78aabe7492884404.txt · 1bBOAeQqcRNBr_Yryfu2-g2XY83CWpLPh · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Centre on Long-Term Risk / Multiple Resolution.txt · 1jGni1V7y6B9vIHbxE5OTIuwta49k2Dn4 · 1 KB · txt · under 2 KB: empty page or stub
-- [ ] es · Centre on Long-Term Risk / Suffering-Focused AI Safety﹕ In Favor of “Fail-Safe” Measures – Center on Long-Term Risk.txt · 16mhYCD2_mh56MCtAu-uOmcGYloucAJBu · 3 KB · txt
-- [ ] es · Centre on Long-Term Risk / Superintelligence as a Cause or Cure for Risks of Astronomical Suffering – Center on Long-Term Risk.txt · 1EPsRtOVqr33rnS5O0oC9LhZ82QCDMfUL · 3 KB · txt
-- [ ] es · Centre on Long-Term Risk / Reducing long-term risks from malevolent actors – Center on Long-Term Risk.txt · 1wrBv4fxkHEw2B-1RXxng-YTtndrc25DK · 3 KB · txt
-- [ ] es · Centre on Long-Term Risk / Multiverse-wide Cooperation via Correlated Decision Making – Center on Long-Term Risk.txt · 17vE34RKO2M71VVAVUCIUWoLlBhglX094 · 3 KB · txt
-- [ ] es · Centre on Long-Term Risk / Decision Theory and the Irrelevance of Impossible Outcomes – The Universe from an Intentional Stance.txt · 1giys58qgo7a1qkmm0FsuwNiNqVc6KV97 · 9 KB · txt
-- [ ] es · Centre on Long-Term Risk / Anthropic uncertainty in the Evidential Blackmail – The Universe from an Intentional Stance.txt · 17eBQwwxd0ADCuY6VdXjlWnUu6YbGLur_ · 13 KB · txt
-- [ ] es · Centre on Long-Term Risk / Weak identifiability and its consequences in strategic settings – Center on Long-Term Risk.txt · 1_UkQiG80nVCV32TuayVj343SU7URb6h- · 14 KB · txt
-- [ ] es · Centre on Long-Term Risk / Complications in evaluating neglectedness – The Universe from an Intentional Stance.txt · 1pGQBgWTpGFZYvl9leI-HgPgVdsoIZ0VP · 22 KB · txt
-- [ ] es · Centre on Long-Term Risk / Collaborative game specification﹕ arriving at common models in bargaining – Center on Long-Term Risk.txt · 1tALu5J-jrGuv1aiJ1FLivtaUbjgYQHjc · 23 KB · txt
-- [ ] es · Centre on Long-Term Risk / Bibliography of Suffering-Focused Views – Center on Long-Term Risk.txt · 1Ma7fKmBe63BqGpZUs8dUlfrHYhj9MYGA · 28 KB · txt
-- [ ] es · Centre on Long-Term Risk / Dealing with Moral Multiplicity – Center on Long-Term Risk.txt · 1Dn0B378xbkjGpkNtoiWCUaO97JiSylX8 · 37 KB · txt
-- [ ] es · Centre on Long-Term Risk / Equilibrium and prior selection problems in multipolar deployment - AI Alignment Forum.txt · 1umcu0yf0Zvu4qDtk5ktR-wF3qkM02oY1 · 37 KB · txt
-- [ ] es · Centre on Long-Term Risk / Robust program equilibrium CLR.txt · 1KXMpdMYIAw9TcnILrKzawkx6bxTzZYaH · 42 KB · txt
-- [ ] es · Centre on Long-Term Risk / The Commitment Races problem - AI Alignment Forum.txt · 1uMyT1md8JEw9U-s09uwXU8S7ZEWc-T_J · 48 KB · txt
-- [ ] es · Centre on Long-Term Risk / Soft takeoff can still lead to decisive strategic advantage - AI Alignment Forum.txt · 1mP3xkybE6z2yP6dTQfGXcbwYp-nOFwvZ · 49 KB · txt
-- [ ] es · Centre on Long-Term Risk / Normative Disagreement as a Challenge for Cooperative AI – Center on Long-Term Risk.txt · 1jvEwaPRDBU25RgUAWhT1gF0qZyvG6Su6 · 58 KB · txt
+- [x] es · Centre on Long-Term Risk / Suffering-Focused AI Safety﹕ In Favor of “Fail-Safe” Measures – Center on Long-Term Risk.txt · 16mhYCD2_mh56MCtAu-uOmcGYloucAJBu · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Suffering-Focused AI Safety﹕ In Favor of “Fail-Safe” Measures – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Superintelligence as a Cause or Cure for Risks of Astronomical Suffering – Center on Long-Term Risk.txt · 1EPsRtOVqr33rnS5O0oC9LhZ82QCDMfUL · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Superintelligence as a Cause or Cure for Risks of Astronomical Suffering – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Reducing long-term risks from malevolent actors – Center on Long-Term Risk.txt · 1wrBv4fxkHEw2B-1RXxng-YTtndrc25DK · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Reducing long-term risks from malevolent actors – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Multiverse-wide Cooperation via Correlated Decision Making – Center on Long-Term Risk.txt · 17vE34RKO2M71VVAVUCIUWoLlBhglX094 · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Multiverse-wide Cooperation via Correlated Decision Making – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Decision Theory and the Irrelevance of Impossible Outcomes – The Universe from an Intentional Stance.txt · 1giys58qgo7a1qkmm0FsuwNiNqVc6KV97 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Decision Theory and the Irrelevance of Impossible Outcomes – The Universe from an Intentional Stance.txt`)
+- [x] es · Centre on Long-Term Risk / Anthropic uncertainty in the Evidential Blackmail – The Universe from an Intentional Stance.txt · 17eBQwwxd0ADCuY6VdXjlWnUu6YbGLur_ · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Anthropic uncertainty in the Evidential Blackmail – The Universe from an Intentional Stance.txt`)
+- [x] es · Centre on Long-Term Risk / Weak identifiability and its consequences in strategic settings – Center on Long-Term Risk.txt · 1_UkQiG80nVCV32TuayVj343SU7URb6h- · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/Weak identifiability and its consequences in strategic settings – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Complications in evaluating neglectedness – The Universe from an Intentional Stance.txt · 1pGQBgWTpGFZYvl9leI-HgPgVdsoIZ0VP · 22 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Complications in evaluating neglectedness – The Universe from an Intentional Stance.txt`)
+- [x] es · Centre on Long-Term Risk / Collaborative game specification﹕ arriving at common models in bargaining – Center on Long-Term Risk.txt · 1tALu5J-jrGuv1aiJ1FLivtaUbjgYQHjc · 23 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Collaborative game specification﹕ arriving at common models in bargaining – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Bibliography of Suffering-Focused Views – Center on Long-Term Risk.txt · 1Ma7fKmBe63BqGpZUs8dUlfrHYhj9MYGA · 28 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Bibliography of Suffering-Focused Views – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Dealing with Moral Multiplicity – Center on Long-Term Risk.txt · 1Dn0B378xbkjGpkNtoiWCUaO97JiSylX8 · 37 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Dealing with Moral Multiplicity – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Equilibrium and prior selection problems in multipolar deployment - AI Alignment Forum.txt · 1umcu0yf0Zvu4qDtk5ktR-wF3qkM02oY1 · 37 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Equilibrium and prior selection problems in multipolar deployment - AI Alignment Forum.txt`)
+- [x] es · Centre on Long-Term Risk / Robust program equilibrium CLR.txt · 1KXMpdMYIAw9TcnILrKzawkx6bxTzZYaH · 42 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Robust program equilibrium CLR.txt`)
+- [x] es · Centre on Long-Term Risk / The Commitment Races problem - AI Alignment Forum.txt · 1uMyT1md8JEw9U-s09uwXU8S7ZEWc-T_J · 48 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/The Commitment Races problem - AI Alignment Forum.txt`)
+- [x] es · Centre on Long-Term Risk / Soft takeoff can still lead to decisive strategic advantage - AI Alignment Forum.txt · 1mP3xkybE6z2yP6dTQfGXcbwYp-nOFwvZ · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Soft takeoff can still lead to decisive strategic advantage - AI Alignment Forum.txt`)
+- [x] es · Centre on Long-Term Risk / Normative Disagreement as a Challenge for Cooperative AI – Center on Long-Term Risk.txt · 1jvEwaPRDBU25RgUAWhT1gF0qZyvG6Su6 · 58 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/Normative Disagreement as a Challenge for Cooperative AI – Center on Long-Term Risk.txt`)
 - [ ] es · Centre on Long-Term Risk / Evolutionary Stability of Other-Regarding Preferences Under Complexity Costs – Center on Long-Term Risk.txt · 1LA57AxStBns5BeqrQEo_sBzkHENfApGr · 62 KB · txt
 - [ ] es · Centre on Long-Term Risk / Commitment games with conditional information revelation – Center on Long-Term Risk.txt · 1pMyvHnxODqkcYDjWp3750YqAURTgEJuv · 63 KB · txt
 - [ ] es · Centre on Long-Term Risk / Tranquilism – Center on Long-Term Risk.txt · 1rZ7gGa19l16gXz7mCYHZXXyQz_VkSMpu · 65 KB · txt
@@ -1507,16 +1507,16 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · Rethink Priorities / Transparency — Rethink Priorities.txt · 1ECEwZbRmnxJ1NBa3vYbUveo7IqngetFe · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Rethink Priorities / About Rethink Priorities — Rethink Priorities.txt · 15CYTH_GQytifyOYqpyY4eiAkBTS_tFYg · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Rethink Priorities / 12.txt · 1hHeG67jGcpvIoy5e8QQWJt4ZM2WCCihH · 2 KB · txt · under 2 KB: empty page or stub
-- [ ] es · Rethink Priorities / 7.txt · 1rkK6eCd2jD1BRFz2gUFTG4D9CeDX_RUY · 2 KB · txt
-- [ ] es · Rethink Priorities / 72.txt · 1CT_7I7_LUPeYj-vnKOVZo532SWPYQOLa · 2 KB · txt
-- [ ] es · Rethink Priorities / Rethink Priorities poll﹕ US attitudes towards insects — Rethink Priorities.txt · 1ISlVgowz5luMg6YusZX0tJUy00mU3uOU · 2 KB · txt
-- [ ] es · Rethink Priorities / Our Team — Rethink Priorities.txt · 1oeex2X_7K_xXWMSaxpnVrc6_KsgMJH6A · 3 KB · txt
-- [ ] es · Rethink Priorities / 13.txt · 1UxrtID3Ugbw0XKnY46j6P1yp1D0G3Cib · 4 KB · txt
-- [ ] es · Rethink Priorities / 9.txt · 1gZq1yJAHpX8n6Qdsbp39iiGcpjhDK6bP · 5 KB · txt
-- [ ] es · Rethink Priorities / 73.txt · 1RWVp7R0cYIH49jJV64DX4sgS_fYNR5yC · 5 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2019﹕ EA cities and the cost of living — Rethink Priorities.txt · 1OKFWYkLhEC1yuBeEo41qTKgK8okBlnL8 · 5 KB · txt
-- [ ] es · Rethink Priorities / 95.txt · 1hUDWo4OWXIawgKDg7tNggG73yaK9RxLy · 5 KB · txt
-- [ ] es · Rethink Priorities / 166.txt · 1VotV4EtXghntCoFf2gl4Q5dfa8cz7VkL · 6 KB · txt
+- [x] es · Rethink Priorities / 7.txt · 1rkK6eCd2jD1BRFz2gUFTG4D9CeDX_RUY · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 7.txt`)
+- [x] es · Rethink Priorities / 72.txt · 1CT_7I7_LUPeYj-vnKOVZo532SWPYQOLa · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 72.txt`)
+- [x] es · Rethink Priorities / Rethink Priorities poll﹕ US attitudes towards insects — Rethink Priorities.txt · 1ISlVgowz5luMg6YusZX0tJUy00mU3uOU · 2 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities poll﹕ US attitudes towards insects — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / Our Team — Rethink Priorities.txt · 1oeex2X_7K_xXWMSaxpnVrc6_KsgMJH6A · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Our Team — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 13.txt · 1UxrtID3Ugbw0XKnY46j6P1yp1D0G3Cib · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 13.txt`)
+- [x] es · Rethink Priorities / 9.txt · 1gZq1yJAHpX8n6Qdsbp39iiGcpjhDK6bP · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 9.txt`)
+- [x] es · Rethink Priorities / 73.txt · 1RWVp7R0cYIH49jJV64DX4sgS_fYNR5yC · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 73.txt`)
+- [x] es · Rethink Priorities / EA Survey 2019﹕ EA cities and the cost of living — Rethink Priorities.txt · 1OKFWYkLhEC1yuBeEo41qTKgK8okBlnL8 · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/EA Survey 2019﹕ EA cities and the cost of living — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 95.txt · 1hUDWo4OWXIawgKDg7tNggG73yaK9RxLy · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 95.txt`)
+- [x] es · Rethink Priorities / 166.txt · 1VotV4EtXghntCoFf2gl4Q5dfa8cz7VkL · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Rethink Priorities 166.txt`)
 - [ ] es · Rethink Priorities / Overview of Rethink Priorities’ work on risks from nuclear weapons — Rethink Priorities.txt · 1rliGbbxeozSHRqORPFMNtGg_8zkWFaub · 6 KB · txt
 - [ ] es · Rethink Priorities / 136.txt · 1pRvkGslhlKU2XzeD-oKvroRQnWTNcUQS · 7 KB · txt
 - [ ] es · Rethink Priorities / Invertebrate sentience table — Rethink Priorities.txt · 1tR9kDSgco-ztfj19dvSsdeo1daosZsek · 7 KB · txt
@@ -1600,88 +1600,88 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · Rethink Priorities / Animal Welfare — Rethink Priorities.txt · 1SJMFDy6_qVGwTmdJyJH9Pa9OgaQ6K4dO · 24 KB · txt
 - [ ] es · Rethink Priorities / 142.txt · 1A4Kgmy7lMz9RqVIILmTyApNp5RjF7Arb · 24 KB · txt
 - [ ] es · Rethink Priorities / Life history classification — Rethink Priorities.txt · 1vIltDiHgWV6M3L1AV3e592_VFHCttORW · 24 KB · txt
-- [ ] es · Rethink Priorities / The scale of direct human impact on invertebrates — Rethink Priorities.txt · 1AR7iOeHdf7RUIyZQr-BbmC7Q0IZ-nBSJ · 24 KB · txt
-- [ ] es · Rethink Priorities / 59.txt · 1J-YVjIXc5Oz_eILoUDIA2yEU37TYXEDd · 24 KB · txt
-- [ ] es · Rethink Priorities / Key characteristics for evaluating future global governance institutions — Rethink Priorities.txt · 1OpLOQNtjpYtzIeYyzxH8V9lhb5z7Fikb · 24 KB · txt
-- [ ] es · Rethink Priorities / 89.txt · 14Kd9X35MvE-1rkGZKznqdK0ufVjHhwK2 · 24 KB · txt
-- [ ] es · Rethink Priorities / 70.txt · 1SVMbYgGSUCAqDlM_zijVKhRSMTWqq7PO · 25 KB · txt
-- [ ] es · Rethink Priorities / Types of specification problems in forecasting — Rethink Priorities.txt · 12vvmOC5TbEw4urwN-pQnq4bJLFcKFkLH · 25 KB · txt
-- [ ] es · Rethink Priorities / 145.txt · 1-ZydaOaff5DqaTNM853oiyxiMG_1Yhk0 · 25 KB · txt
-- [ ] es · Rethink Priorities / Cost-Effectiveness of RC Forward — Rethink Priorities.txt · 1--PZgE2L2nx5-cAiTjRGoajDzNSpfqtd · 25 KB · txt
-- [ ] es · Rethink Priorities / Accuracy issues in FAO animal numbers — Rethink Priorities.txt · 1IGw-Tz4z4L-7ggDFFidl1ufJOdntz_rt · 26 KB · txt
-- [ ] es · Rethink Priorities / 115.txt · 1c534e2YkK_UXNVqSehm61Ro9fmUwGzsa · 26 KB · txt
-- [ ] es · Rethink Priorities / 39.txt · 1HTh51QYkZqzMmD1F4DkFBJGnbT76vpF5 · 26 KB · txt
-- [ ] es · Rethink Priorities / 46.txt · 1n1n3v8CTD9U9T3y0I2wMmjOLSZHeeLW1 · 27 KB · txt
-- [ ] es · Rethink Priorities / black soldier flies.txt · 11dphMCsNKjwojD4scT4rg5gVQ9A3Klo0 · 27 KB · txt
-- [ ] es · Rethink Priorities / 65.txt · 1ClSUQdjTRBIGCl4QTTYTo7cPgCApz3rF · 28 KB · txt
-- [ ] es · Rethink Priorities / 129.txt · 1R12P_vuiv02CAmygaBL850PjBoCq2IsK · 28 KB · txt
-- [ ] es · Rethink Priorities / 91.txt · 1MhqoNk1_rzNFxrNMcE_gOGzz4rNJxIuk · 29 KB · txt
-- [ ] es · Rethink Priorities / Ways EU law might matter for farmed animals — Rethink Priorities.txt · 1HqWNp7RUy9fI-Aq_Xe_sYrUKRAVWj-xD · 29 KB · txt
-- [ ] es · Rethink Priorities / 77.txt · 1aplNEEMO6K5T6btv-q2RvyFzAKzVA1po · 29 KB · txt
-- [ ] es · Rethink Priorities / 75.txt · 1bslpd8AI7wQnlYrpoWcxFruI8EzxVpoJ · 29 KB · txt
-- [ ] es · Rethink Priorities / Humanities research ideas for longtermists — Rethink Priorities.txt · 1I7E0Bg1q6JIfOaoMBU5P_xGoW75ex__Q · 29 KB · txt
-- [ ] es · Rethink Priorities / 116.txt · 1DPp7pNaNtUNRcg-MxyLDzYixog_lwtIy · 29 KB · txt
-- [ ] es · Rethink Priorities / Local EA group organizers survey 2019 — Rethink Priorities.txt · 141SUUZ-tjm_sZEMDLMUKrf3pSE7WHtT- · 29 KB · txt
-- [ ] es · Rethink Priorities / 5.txt · 1ObEsuIeNV8GZ1MjGkvmprhlOrgv4r5rk · 29 KB · txt
-- [ ] es · Rethink Priorities / 21.txt · 1So8Tt501skcjJrT217MJtne-fvw5uStt · 29 KB · txt
-- [ ] es · Rethink Priorities / 23.txt · 127e9VUaL1Z-XKrFf_82B_r2Jsm2oTfI5 · 30 KB · txt
-- [ ] es · Rethink Priorities / 19.txt · 1URkVG9RaPMg7Y8TKfjb3JWVp0ryKqMvt · 30 KB · txt
-- [ ] es · Rethink Priorities / 81.txt · 1M0-JEURcXpJPwrZArVhlM-j7G_6MWC62 · 30 KB · txt
-- [ ] es · Rethink Priorities / Silk production﹕ global scale and animal welfare issues — Rethink Priorities.txt · 1z-pYv3syfFS585tOyuGT-Ih2Qs-9Pjb3 · 30 KB · txt
-- [ ] es · Rethink Priorities / 111.txt · 1O4njt-W_DxKH9Z8EG44XknaJdlopkdj3 · 31 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2019﹕ Careers and Skills — Rethink Priorities.txt · 1y8CfI6JidpP2RaG9xIXcIcYq91EO8QvX · 31 KB · txt
-- [ ] es · Rethink Priorities / 18.txt · 13yS73aFHRYzkFlMWSIUPhW0msuB4vgo3 · 31 KB · txt
-- [ ] es · Rethink Priorities / 112.txt · 1ss8gA2UIF_tuocR1fLkogcTiNxwKUA4V · 31 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2019﹕ Cause Prioritization — Rethink Priorities.txt · 1B2K5CXivUsPFelIoZ75vQLqX1uctIq9E · 31 KB · txt
-- [ ] es · Rethink Priorities / 26.txt · 1GTX_q7XVmpWH833SRRT5xlpa3UkHXIjF · 34 KB · txt
-- [ ] es · Rethink Priorities / 148.txt · 1hmSkbjkN01Pr6mv1ixDxCrV_mfcI1AdK · 35 KB · txt
-- [ ] es · Rethink Priorities / Rodents farmed for pet snake food — Rethink Priorities.txt · 1lqtwVD67RzEBhZnIGN2889xZrwEfH0kc · 35 KB · txt
-- [ ] es · Rethink Priorities / 66.txt · 1IurCxWD5joB3gIb0MlUEOrePHdqNn_VV · 35 KB · txt
-- [ ] es · Rethink Priorities / 103.txt · 1IQpoFVbSMnjNxoctg-pwiwNbGaQJs5FV · 37 KB · txt
-- [ ] es · Rethink Priorities / 16.txt · 1e7oXOz4OLG3G6AUUzoT7RfqjN-CF6a_E · 38 KB · txt
-- [ ] es · Rethink Priorities / 163.txt · 1jn_e9Xoi4eXtGUqkHrCcdC2fCWs7VREJ · 39 KB · txt
-- [ ] es · Rethink Priorities / 133.txt · 1Ebe1P1t7r52H5kMVcu-lFV2uaFNaK91T · 39 KB · txt
-- [ ] es · Rethink Priorities / 141.txt · 1kSiL8t8esK77oL83334YEJ1HyhsCoOLo · 39 KB · txt
-- [ ] es · Rethink Priorities / Insect herbivores, life history and wild animal welfare — Rethink Priorities.txt · 1BcXXUxehsaeR2V4Cur965bS7ddRBV2-2 · 39 KB · txt
-- [ ] es · Rethink Priorities / 61.txt · 1Mb7lGjul4Ldu0EbR55BNn4RYZhqtTnSK · 40 KB · txt
-- [ ] es · Rethink Priorities / 31.txt · 1xHFrp6LU2pwOh9N4gYgB8zbZyX27ysgq · 42 KB · txt
-- [ ] es · Rethink Priorities / 64.txt · 1BQFTZDSSbUlA4XR2785EO8-XC45Gm7jf · 42 KB · txt
-- [ ] es · Rethink Priorities / 101.txt · 1_xBhX2QQWwMuZvOAS8wy2KKOMgHvrikj · 44 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2019﹕ Community Information — Rethink Priorities.txt · 18CerVCW-COGY36CJxUK3TPMfb-LdrAHw · 44 KB · txt
-- [ ] es · Rethink Priorities / 35.txt · 1Ks-K1WKGu9ZpHrL82pCl7Z7MKGbD4UwM · 45 KB · txt
-- [ ] es · Rethink Priorities / 160.txt · 1-852X3deGNps75ccU-PFg1RLGFUiplaP · 46 KB · txt
-- [ ] es · Rethink Priorities / 120.txt · 1HOgMUuH3GBbP7QixZPTil39nxgUyomTQ · 46 KB · txt
-- [ ] es · Rethink Priorities / 29.txt · 1HXJqYNsKmC6_MT2CanMwAkM7XNO66vmr · 46 KB · txt
-- [ ] es · Rethink Priorities / 48.txt · 1FxH5czMgGrggU8vsSNMyWUPFSJgyDIZM · 47 KB · txt
-- [ ] es · Rethink Priorities / Monitoring wild animal welfare via vocalizations — Rethink Priorities.txt · 1jk-AspGSuKosPuEytI4upEMMWzTzREmC · 48 KB · txt
-- [ ] es · Rethink Priorities / 55.txt · 16t3th1XTVML9hTtltiBNBDmNimgwhuux · 48 KB · txt
-- [ ] es · Rethink Priorities / 34.txt · 13VyhEVgxZe9gwtfwQ6CzC_4g3YUWRqi5 · 49 KB · txt
-- [ ] es · Rethink Priorities / 121.txt · 1xZtk65xQCv2TqsDCWQkJm9o7k45fpjgY · 49 KB · txt
-- [ ] es · Rethink Priorities / 45.txt · 18jm95H_uHrdwIccHHzwwSP8LRdIy77np · 49 KB · txt
-- [ ] es · Rethink Priorities / 30.txt · 1aGPXJBfMum_1x9j8851jjvDh7bSWPTab · 49 KB · txt
-- [ ] es · Rethink Priorities / 138.txt · 1c8W6uktNkQVVpHC4Eu1p4dfwEzT-atqF · 50 KB · txt
-- [ ] es · Rethink Priorities / Features relevant to invertebrate sentience, part 2 — Rethink Priorities.txt · 1iheCKOneAaB5DG4KDGV-Px0P1XImVOpB · 50 KB · txt
-- [ ] es · Rethink Priorities / 57.txt · 1xdWxYWsQ77dT_JXy-LdclRY3zBpwvzHg · 50 KB · txt
-- [ ] es · Rethink Priorities / Issues with futarchy — Rethink Priorities.txt · 1gudnOvbBJF-Q_0REIj_Gn4j07qjiaAq9 · 50 KB · txt
-- [ ] es · Rethink Priorities / 17.txt · 1mEHGRW8qrauD-imNKp7e3-nEYLdrbpy2 · 50 KB · txt
-- [ ] es · Rethink Priorities / 131.txt · 1_u48rQ6d3PXbfHNFQzt-5tzq8SERMxan · 50 KB · txt
-- [ ] es · Rethink Priorities / 51.txt · 1sE9zYEokbzSo-ld6coG8g_T7ebDzkzXu · 51 KB · txt
-- [ ] es · Rethink Priorities / Forecasts estimate limited cultured meat production through 2050 — Rethink Priorities.txt · 1SXYczBGafF8yVzZHuJUE_lX2OP8RLvZI · 51 KB · txt
-- [ ] es · Rethink Priorities / 117.txt · 1gKwH6yMPOn9SMhdiPa646-kUD9d3_gdP · 52 KB · txt
-- [ ] es · Rethink Priorities / 139.txt · 1bcL5JmBiMmZrgjlpe8T8bqf7i6oQ4G3s · 52 KB · txt
-- [ ] es · Rethink Priorities / Next steps in invertebrate welfare, part 3﹕ understanding attitudes and possibilities — Rethink Priorities.txt · 1ktgc7KfBluZdK848B36QZExT-eOytLpo · 52 KB · txt
-- [ ] es · Rethink Priorities / 2.txt · 1FR85ZI_1pbNe8WJHD94YfjxplWvKJpKq · 52 KB · txt
-- [ ] es · Rethink Priorities / 47.txt · 1BlH2VryMGDv193I169a3MBkP5HIXz16q · 54 KB · txt
-- [ ] es · Rethink Priorities / Reducing aquatic noise as a wild animal welfare intervention — Rethink Priorities.txt · 1OOTJcWSAFemmepcCSjJHHTt_MGmfoiJj · 54 KB · txt
-- [ ] es · Rethink Priorities / 107.txt · 1hpLRL8Q3pCfOO3xQq2V3loe15mAX7ofu · 54 KB · txt
-- [ ] es · Rethink Priorities / 11.txt · 1FbUkIKlg3pu0WK5kZZCKGRAQWdLWpaz5 · 54 KB · txt
-- [ ] es · Rethink Priorities / 154.txt · 1oK3BAW4aejXXKFFI6wSIR0AlrTnGLsng · 55 KB · txt
-- [ ] es · Rethink Priorities / Detecting morally significant pain in nonhumans﹕ some philosophical difficulties — Rethink Priorities.txt · 1oU3vPHYqPenHBmuwPKDek89FDipE58Nw · 55 KB · txt
-- [ ] es · Rethink Priorities / 137.txt · 1aT-y1PrxUVb27DLx1nHvDgAld33DCoIS · 56 KB · txt
-- [ ] es · Rethink Priorities / Features relevant to invertebrate sentience, part 3 — Rethink Priorities.txt · 1j-awjuAeEJD_ubSXj9woZukjrsfdh763 · 56 KB · txt
-- [ ] es · Rethink Priorities / 4.txt · 18I4x_aZU38-vVdjTciH4GEPneYLul_O5 · 57 KB · txt
-- [ ] es · Rethink Priorities / 10.txt · 1B6txgViyfW8FuYnuKb-DU1VOKIzEoJGD · 57 KB · txt
-- [ ] es · Rethink Priorities / 97.txt · 19axL8mbvf0nV5eFXp7b_zSPik-bo1Xs6 · 59 KB · txt
+- [x] es · Rethink Priorities / The scale of direct human impact on invertebrates — Rethink Priorities.txt · 1AR7iOeHdf7RUIyZQr-BbmC7Q0IZ-nBSJ · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/The scale of direct human impact on invertebrates — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 59.txt · 1J-YVjIXc5Oz_eILoUDIA2yEU37TYXEDd · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 59.txt`)
+- [x] es · Rethink Priorities / Key characteristics for evaluating future global governance institutions — Rethink Priorities.txt · 1OpLOQNtjpYtzIeYyzxH8V9lhb5z7Fikb · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Key characteristics for evaluating future global governance institutions — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 89.txt · 14Kd9X35MvE-1rkGZKznqdK0ufVjHhwK2 · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 89.txt`)
+- [x] es · Rethink Priorities / 70.txt · 1SVMbYgGSUCAqDlM_zijVKhRSMTWqq7PO · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 70.txt`)
+- [x] es · Rethink Priorities / Types of specification problems in forecasting — Rethink Priorities.txt · 12vvmOC5TbEw4urwN-pQnq4bJLFcKFkLH · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Types of specification problems in forecasting — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 145.txt · 1-ZydaOaff5DqaTNM853oiyxiMG_1Yhk0 · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 145.txt`)
+- [x] es · Rethink Priorities / Cost-Effectiveness of RC Forward — Rethink Priorities.txt · 1--PZgE2L2nx5-cAiTjRGoajDzNSpfqtd · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Cost-Effectiveness of RC Forward — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / Accuracy issues in FAO animal numbers — Rethink Priorities.txt · 1IGw-Tz4z4L-7ggDFFidl1ufJOdntz_rt · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Accuracy issues in FAO animal numbers — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 115.txt · 1c534e2YkK_UXNVqSehm61Ro9fmUwGzsa · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 115.txt`)
+- [x] es · Rethink Priorities / 39.txt · 1HTh51QYkZqzMmD1F4DkFBJGnbT76vpF5 · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 39.txt`)
+- [x] es · Rethink Priorities / 46.txt · 1n1n3v8CTD9U9T3y0I2wMmjOLSZHeeLW1 · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 46.txt`)
+- [x] es · Rethink Priorities / black soldier flies.txt · 11dphMCsNKjwojD4scT4rg5gVQ9A3Klo0 · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/black soldier flies.txt`)
+- [x] es · Rethink Priorities / 65.txt · 1ClSUQdjTRBIGCl4QTTYTo7cPgCApz3rF · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 65.txt`)
+- [x] es · Rethink Priorities / 129.txt · 1R12P_vuiv02CAmygaBL850PjBoCq2IsK · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 129.txt`)
+- [x] es · Rethink Priorities / 91.txt · 1MhqoNk1_rzNFxrNMcE_gOGzz4rNJxIuk · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 91.txt`)
+- [x] es · Rethink Priorities / Ways EU law might matter for farmed animals — Rethink Priorities.txt · 1HqWNp7RUy9fI-Aq_Xe_sYrUKRAVWj-xD · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Ways EU law might matter for farmed animals — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 77.txt · 1aplNEEMO6K5T6btv-q2RvyFzAKzVA1po · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 77.txt`)
+- [x] es · Rethink Priorities / 75.txt · 1bslpd8AI7wQnlYrpoWcxFruI8EzxVpoJ · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 75.txt`)
+- [x] es · Rethink Priorities / Humanities research ideas for longtermists — Rethink Priorities.txt · 1I7E0Bg1q6JIfOaoMBU5P_xGoW75ex__Q · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Humanities research ideas for longtermists — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 116.txt · 1DPp7pNaNtUNRcg-MxyLDzYixog_lwtIy · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 116.txt`)
+- [x] es · Rethink Priorities / Local EA group organizers survey 2019 — Rethink Priorities.txt · 141SUUZ-tjm_sZEMDLMUKrf3pSE7WHtT- · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Local EA group organizers survey 2019 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 5.txt · 1ObEsuIeNV8GZ1MjGkvmprhlOrgv4r5rk · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 5.txt`)
+- [x] es · Rethink Priorities / 21.txt · 1So8Tt501skcjJrT217MJtne-fvw5uStt · 29 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 21.txt`)
+- [x] es · Rethink Priorities / 23.txt · 127e9VUaL1Z-XKrFf_82B_r2Jsm2oTfI5 · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 23.txt`)
+- [x] es · Rethink Priorities / 19.txt · 1URkVG9RaPMg7Y8TKfjb3JWVp0ryKqMvt · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 19.txt`)
+- [x] es · Rethink Priorities / 81.txt · 1M0-JEURcXpJPwrZArVhlM-j7G_6MWC62 · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Rethink Priorities 81.txt`)
+- [x] es · Rethink Priorities / Silk production﹕ global scale and animal welfare issues — Rethink Priorities.txt · 1z-pYv3syfFS585tOyuGT-Ih2Qs-9Pjb3 · 30 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Silk production﹕ global scale and animal welfare issues — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 111.txt · 1O4njt-W_DxKH9Z8EG44XknaJdlopkdj3 · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 111.txt`)
+- [x] es · Rethink Priorities / EA Survey 2019﹕ Careers and Skills — Rethink Priorities.txt · 1y8CfI6JidpP2RaG9xIXcIcYq91EO8QvX · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/EA Survey 2019﹕ Careers and Skills — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 18.txt · 13yS73aFHRYzkFlMWSIUPhW0msuB4vgo3 · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 18.txt`)
+- [x] es · Rethink Priorities / 112.txt · 1ss8gA2UIF_tuocR1fLkogcTiNxwKUA4V · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 112.txt`)
+- [x] es · Rethink Priorities / EA Survey 2019﹕ Cause Prioritization — Rethink Priorities.txt · 1B2K5CXivUsPFelIoZ75vQLqX1uctIq9E · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/EA Survey 2019﹕ Cause Prioritization — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 26.txt · 1GTX_q7XVmpWH833SRRT5xlpa3UkHXIjF · 34 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 26.txt`)
+- [x] es · Rethink Priorities / 148.txt · 1hmSkbjkN01Pr6mv1ixDxCrV_mfcI1AdK · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 148.txt`)
+- [x] es · Rethink Priorities / Rodents farmed for pet snake food — Rethink Priorities.txt · 1lqtwVD67RzEBhZnIGN2889xZrwEfH0kc · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rodents farmed for pet snake food — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 66.txt · 1IurCxWD5joB3gIb0MlUEOrePHdqNn_VV · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 66.txt`)
+- [x] es · Rethink Priorities / 103.txt · 1IQpoFVbSMnjNxoctg-pwiwNbGaQJs5FV · 37 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 103.txt`)
+- [x] es · Rethink Priorities / 16.txt · 1e7oXOz4OLG3G6AUUzoT7RfqjN-CF6a_E · 38 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Rethink Priorities 16.txt`)
+- [x] es · Rethink Priorities / 163.txt · 1jn_e9Xoi4eXtGUqkHrCcdC2fCWs7VREJ · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 163.txt`)
+- [x] es · Rethink Priorities / 133.txt · 1Ebe1P1t7r52H5kMVcu-lFV2uaFNaK91T · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 133.txt`)
+- [x] es · Rethink Priorities / 141.txt · 1kSiL8t8esK77oL83334YEJ1HyhsCoOLo · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 141.txt`)
+- [x] es · Rethink Priorities / Insect herbivores, life history and wild animal welfare — Rethink Priorities.txt · 1BcXXUxehsaeR2V4Cur965bS7ddRBV2-2 · 39 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Insect herbivores, life history and wild animal welfare — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 61.txt · 1Mb7lGjul4Ldu0EbR55BNn4RYZhqtTnSK · 40 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 61.txt`)
+- [x] es · Rethink Priorities / 31.txt · 1xHFrp6LU2pwOh9N4gYgB8zbZyX27ysgq · 42 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 31.txt`)
+- [x] es · Rethink Priorities / 64.txt · 1BQFTZDSSbUlA4XR2785EO8-XC45Gm7jf · 42 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 64.txt`)
+- [x] es · Rethink Priorities / 101.txt · 1_xBhX2QQWwMuZvOAS8wy2KKOMgHvrikj · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Rethink Priorities 101.txt`)
+- [x] es · Rethink Priorities / EA Survey 2019﹕ Community Information — Rethink Priorities.txt · 18CerVCW-COGY36CJxUK3TPMfb-LdrAHw · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/EA Survey 2019﹕ Community Information — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 35.txt · 1Ks-K1WKGu9ZpHrL82pCl7Z7MKGbD4UwM · 45 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 35.txt`)
+- [x] es · Rethink Priorities / 160.txt · 1-852X3deGNps75ccU-PFg1RLGFUiplaP · 46 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 160.txt`)
+- [x] es · Rethink Priorities / 120.txt · 1HOgMUuH3GBbP7QixZPTil39nxgUyomTQ · 46 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 120.txt`)
+- [x] es · Rethink Priorities / 29.txt · 1HXJqYNsKmC6_MT2CanMwAkM7XNO66vmr · 46 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 29.txt`)
+- [x] es · Rethink Priorities / 48.txt · 1FxH5czMgGrggU8vsSNMyWUPFSJgyDIZM · 47 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 48.txt`)
+- [x] es · Rethink Priorities / Monitoring wild animal welfare via vocalizations — Rethink Priorities.txt · 1jk-AspGSuKosPuEytI4upEMMWzTzREmC · 48 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Monitoring wild animal welfare via vocalizations — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 55.txt · 16t3th1XTVML9hTtltiBNBDmNimgwhuux · 48 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 55.txt`)
+- [x] es · Rethink Priorities / 34.txt · 13VyhEVgxZe9gwtfwQ6CzC_4g3YUWRqi5 · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 34.txt`)
+- [x] es · Rethink Priorities / 121.txt · 1xZtk65xQCv2TqsDCWQkJm9o7k45fpjgY · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 121.txt`)
+- [x] es · Rethink Priorities / 45.txt · 18jm95H_uHrdwIccHHzwwSP8LRdIy77np · 49 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 45.txt`)
+- [x] es · Rethink Priorities / 30.txt · 1aGPXJBfMum_1x9j8851jjvDh7bSWPTab · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 30.txt`)
+- [x] es · Rethink Priorities / 138.txt · 1c8W6uktNkQVVpHC4Eu1p4dfwEzT-atqF · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 138.txt`)
+- [x] es · Rethink Priorities / Features relevant to invertebrate sentience, part 2 — Rethink Priorities.txt · 1iheCKOneAaB5DG4KDGV-Px0P1XImVOpB · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Features relevant to invertebrate sentience, part 2 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 57.txt · 1xdWxYWsQ77dT_JXy-LdclRY3zBpwvzHg · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 57.txt`)
+- [x] es · Rethink Priorities / Issues with futarchy — Rethink Priorities.txt · 1gudnOvbBJF-Q_0REIj_Gn4j07qjiaAq9 · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Issues with futarchy — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 17.txt · 1mEHGRW8qrauD-imNKp7e3-nEYLdrbpy2 · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Rethink Priorities 17.txt`)
+- [x] es · Rethink Priorities / 131.txt · 1_u48rQ6d3PXbfHNFQzt-5tzq8SERMxan · 50 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 131.txt`)
+- [x] es · Rethink Priorities / 51.txt · 1sE9zYEokbzSo-ld6coG8g_T7ebDzkzXu · 51 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 51.txt`)
+- [x] es · Rethink Priorities / Forecasts estimate limited cultured meat production through 2050 — Rethink Priorities.txt · 1SXYczBGafF8yVzZHuJUE_lX2OP8RLvZI · 51 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Forecasts estimate limited cultured meat production through 2050 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 117.txt · 1gKwH6yMPOn9SMhdiPa646-kUD9d3_gdP · 52 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 117.txt`)
+- [x] es · Rethink Priorities / 139.txt · 1bcL5JmBiMmZrgjlpe8T8bqf7i6oQ4G3s · 52 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 139.txt`)
+- [x] es · Rethink Priorities / Next steps in invertebrate welfare, part 3﹕ understanding attitudes and possibilities — Rethink Priorities.txt · 1ktgc7KfBluZdK848B36QZExT-eOytLpo · 52 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Next steps in invertebrate welfare, part 3﹕ understanding attitudes and possibilities — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 2.txt · 1FR85ZI_1pbNe8WJHD94YfjxplWvKJpKq · 52 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 2.txt`)
+- [x] es · Rethink Priorities / 47.txt · 1BlH2VryMGDv193I169a3MBkP5HIXz16q · 54 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 47.txt`)
+- [x] es · Rethink Priorities / Reducing aquatic noise as a wild animal welfare intervention — Rethink Priorities.txt · 1OOTJcWSAFemmepcCSjJHHTt_MGmfoiJj · 54 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Reducing aquatic noise as a wild animal welfare intervention — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 107.txt · 1hpLRL8Q3pCfOO3xQq2V3loe15mAX7ofu · 54 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 107.txt`)
+- [x] es · Rethink Priorities / 11.txt · 1FbUkIKlg3pu0WK5kZZCKGRAQWdLWpaz5 · 54 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 11.txt`)
+- [x] es · Rethink Priorities / 154.txt · 1oK3BAW4aejXXKFFI6wSIR0AlrTnGLsng · 55 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 154.txt`)
+- [x] es · Rethink Priorities / Detecting morally significant pain in nonhumans﹕ some philosophical difficulties — Rethink Priorities.txt · 1oU3vPHYqPenHBmuwPKDek89FDipE58Nw · 55 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Detecting morally significant pain in nonhumans﹕ some philosophical difficulties — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 137.txt · 1aT-y1PrxUVb27DLx1nHvDgAld33DCoIS · 56 KB · txt · es done 2026-10-30 (9/9 batches, `Español/archive/Rethink Priorities 137.txt`)
+- [x] es · Rethink Priorities / Features relevant to invertebrate sentience, part 3 — Rethink Priorities.txt · 1j-awjuAeEJD_ubSXj9woZukjrsfdh763 · 56 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Features relevant to invertebrate sentience, part 3 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 4.txt · 18I4x_aZU38-vVdjTciH4GEPneYLul_O5 · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 4.txt`)
+- [x] es · Rethink Priorities / 10.txt · 1B6txgViyfW8FuYnuKb-DU1VOKIzEoJGD · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 10.txt`)
+- [x] es · Rethink Priorities / 97.txt · 19axL8mbvf0nV5eFXp7b_zSPik-bo1Xs6 · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Rethink Priorities 97.txt`)
 - [ ] es · Rethink Priorities / 113.txt · 1HGt96bYIBtV2VuF67wcW-TA12V4BEz0M · 63 KB · txt
 - [ ] es · Rethink Priorities / 43.txt · 1JGM7dNPt6GGO5JnysdekyzNcG-ziQfD6 · 63 KB · txt
 - [ ] es · Rethink Priorities / Using artificial intelligence (machine vision) to increase the effectiveness of human-wildlife conflict mitigations could benefit WAW — Rethink Priorities.txt · 1crEVz4WXrvXDpxNZKwG1nnTGn1G_Su0M · 63 KB · txt
@@ -1745,47 +1745,47 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · Rethink Priorities / 41.txt · 1qQzgP9-boF6YXzjVHxHpPILqdKfbpXx6 · 181 KB · txt
 - [ ] es · Rethink Priorities / 32.txt · 1DEM7mBxmznBP81hwtM193UPeQpQyVVwL · 339 KB · txt
 - [ ] es · gpi / Owen-Cotton-Barratt-HIlary-Greaves-A-bargaining-theoretic-approach-to-moral-uncertainty-1.txt · 1GIqvcvMPY0niwFRe2stRMy7ZHiRgXPLh · 3 KB · txt
-- [ ] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-1.txt · 1Y50Zx2Pn95f3Kb7F543dJTbEswewkkt_ · 4 KB · txt
-- [ ] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-ECCP.txt · 1y_PA2D-gtZE8eac_tjWVA3aJl4QjIw-l · 6 KB · txt
-- [ ] es · gpi / GPI-website-privacy-policy.txt · 1RZ0Acd_Q8sI8jiqAk7mc1JYIZ0XdTphZ · 9 KB · txt
-- [ ] es · gpi / Andreas-Mogensen_Do-not-go-gentle.txt · 1UXKRCmvMFUf2dfkCCPHcSsxBX39uNMjd · 17 KB · txt
-- [ ] es · gpi / Greaves_Book_review_Scheffler.txt · 1MX1EySmoSySINzGPe7rZPLoQKN3Tyj9E · 19 KB · txt
-- [ ] es · gpi / GPI-Senior-Research-Fellow-Philosophy.txt · 1bkAtt0OVfuMRszLU7PO1mSFMnvtAFABT · 21 KB · txt
-- [ ] es · gpi / Foundational-Issues-in-Effective-Altruism-October-2022-Version.txt · 1XIMKzZWwk2ANt-NoKMVQxeyaYa6h1P4z · 21 KB · txt
-- [ ] es · gpi / Postdoctoral-Reserach-Fellow-in-Philosophy-2021.txt · 10vMPluAiCjuQ2_Nac07N2xOJQ4dZlrtw · 21 KB · txt
-- [ ] es · gpi / Senior-Reserach-Fellow-in-Philosophy-2021.txt · 1miFMlLGWxh6FSiozj3RS_viQs6ckbnPx · 21 KB · txt
-- [ ] es · gpi / Predoctoral-Research-Fellows-in-Economics-2021.txt · 1MHT12UW58RWh6ycfxeuYIwdhwp-6lzYj · 23 KB · txt
-- [ ] es · gpi / Postdoctoral-Research-Fellow-Philosophy.txt · 199QxW8869c28v_VKUCOlRrBBkhIkNjFj · 24 KB · txt
-- [ ] es · gpi / Philosophy-SRF.txt · 1GDNkmWtxsE0DHHncEBYvQMLRRZv0fjLy · 24 KB · txt
-- [ ] es · gpi / Senior-Research-Fellow-in-Economics-2021.txt · 18ByuD1vIulrSbOhzbsPnsYa9tGsYcG70 · 24 KB · txt
-- [ ] es · gpi / Postdoctoral-Research-Fellowship-in-Economics-2021.txt · 1ru1NVqK2oo9V100xJ_31dSvtSz6Dyi_o · 24 KB · txt
-- [ ] es · gpi / Postdoctoral-Research-Fellow-in-Economics-2-year-2022-job-description.txt · 1Aa4rHwUgVucTiRAWj2YQ0NPGyfYaD_U1 · 25 KB · txt
-- [ ] es · gpi / GPI-Predoctoral-Research-Fellow-Economics.txt · 1crPvSWKClHWH6_UVy058tflfcjy94kCs · 27 KB · txt
-- [ ] es · gpi / GPI-Senior-Research-Fellow-Economics.txt · 1_PfURANTyqSYs4J0vBG5lD7SOK7hCZa7 · 27 KB · txt
-- [ ] es · gpi / GPI-Postdoctoral-Research-Fellow-Economics.txt · 1fBWDf6FzdnZHa1WYab8-J0OC0nK1lq49 · 27 KB · txt
-- [ ] es · gpi / Global-Priorities-Research-Ethics-and-the-Very-Far-Future.txt · 1Fi_4iPOKjJUnwUzHTxoe0Co0A9l4mKxE · 28 KB · txt
-- [ ] es · gpi / Mogensen-The-Hinge-of-History-Hypothesis-reply-to-MacAskill.txt · 1nagmcZu8IJjU8J7bq5cwCTYiCa5ZQ2hh · 29 KB · txt
-- [ ] es · gpi / Econ-SRF-2-year.txt · 1kC9W-vSWhTC7QDzxExGh3etVTafpKZxC · 30 KB · txt
-- [ ] es · gpi / Econ-SRF-4-year.txt · 1gXNAJD_8nLmDVtEF8laQADPQhpIUQr8_ · 30 KB · txt
-- [ ] es · gpi / Mogensen-the-hinge-of-history-hypothesis.txt · 1JF07jCJcdpZBRbH-Sn0qeW9vdlwQ3_2L · 30 KB · txt
-- [ ] es · gpi / Predoctoral-Research-Fellow-Economics-2020.txt · 1EwOS5SLCNXgE7hLgyl_9lHV3ZQiSanhh · 30 KB · txt
-- [ ] es · gpi / Senior-Research-Fellow-Economics.txt · 1R9ddxeNaojx-al_BTB8d-4s3bYEF34lC · 30 KB · txt
-- [ ] es · gpi / Postdoctoral-Research-Fellow-Economics.txt · 1Tcy6ueviq4WAXWt3w1roDMatoGKnH71q · 30 KB · txt
-- [ ] es · gpi / Teruji-Thomas-Simulation-expectation.txt · 1umAjNhGP-BixBW-KDRIZCqTSKxKi2wDm · 40 KB · txt
-- [ ] es · gpi / Teruji-Thomas-Simulation-Expectation-2.txt · 1zPM_sp5aOFJZN4a2YxX1ia9bv8KU6w3s · 41 KB · txt
-- [ ] es · gpi / Tyler-M-John-and-William-MacAskill_Longtermist-institutional-reform.txt · 17g256ynmAl_LaaZX_wwpt8IfFqHxRbHB · 44 KB · txt
-- [ ] es · gpi / Andreas-Mogensen_Doomsday-rings-twice.txt · 1y0fMivx4Nb5WttVricvKq4b9MvIEXMCI · 47 KB · txt
-- [ ] es · gpi / William_MacAskill_when_donate.txt · 1rE9lkjfqd54YKcboUZQvyPtsSqNga1WV · 48 KB · txt
-- [ ] es · gpi / William_MacAskill_when-should-an-effective-altruist-donate.txt · 1exF0_Q0z9r3Vvqgxs6wHO3Pdz9FXLYIR · 48 KB · txt
-- [ ] es · gpi / MacAskill_When_should_an_effective_altruist_donate.txt · 1m4h0ZHkuj4Yzu0cF6qpIi9PsTdFOSzOr · 49 KB · txt
-- [ ] es · gpi / David-Thorstad-the-scope-of-longtermism.txt · 1tquBg-fZR-_D2I42wGHEqqNSwQ9nrXmz · 51 KB · txt
-- [ ] es · gpi / Andreas-Mogensen-The-weight-of-suffering1.txt · 13H6-wmGxp9iGWfCZn3URvhUQ-L3KFyqo · 53 KB · txt
-- [ ] es · gpi / Stefan-Riedener_Existential-risks-from-a-Thomist-Christian-perspective.txt · 1T1D5AujPiYpISzcsJcXQ1SbYuGga1Um2 · 54 KB · txt
-- [ ] es · gpi / David-Thorstad-Existential-risk-pessimism-.txt · 1Kt4w7DZdHvRLOH5gWSQD3NCE4fZuHSRq · 58 KB · txt
-- [ ] es · gpi / David-Thorstad-Existential-risk-pessimism1.txt · 1hv0K56wW9sJMc-wmpXhruJ-eOsMrQkUT · 58 KB · txt
-- [ ] es · gpi / Andreas-Mogensen-Respect-for-others-risk-attitudes-and-the-long-run-future.txt · 1GyDdoN9Rp2aCLRHCy9erpHvCJQJ-aU1C · 59 KB · txt
+- [x] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-1.txt · 1Y50Zx2Pn95f3Kb7F543dJTbEswewkkt_ · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Research-Prioritisation-at-the-Global-Priorities-Institute-1.txt`)
+- [x] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-ECCP.txt · 1y_PA2D-gtZE8eac_tjWVA3aJl4QjIw-l · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Research-Prioritisation-at-the-Global-Priorities-Institute-ECCP.txt`)
+- [x] es · gpi / GPI-website-privacy-policy.txt · 1RZ0Acd_Q8sI8jiqAk7mc1JYIZ0XdTphZ · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/GPI-website-privacy-policy.txt`)
+- [x] es · gpi / Andreas-Mogensen_Do-not-go-gentle.txt · 1UXKRCmvMFUf2dfkCCPHcSsxBX39uNMjd · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Andreas-Mogensen_Do-not-go-gentle.txt`)
+- [x] es · gpi / Greaves_Book_review_Scheffler.txt · 1MX1EySmoSySINzGPe7rZPLoQKN3Tyj9E · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Greaves_Book_review_Scheffler.txt`)
+- [x] es · gpi / GPI-Senior-Research-Fellow-Philosophy.txt · 1bkAtt0OVfuMRszLU7PO1mSFMnvtAFABT · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/GPI-Senior-Research-Fellow-Philosophy.txt`)
+- [x] es · gpi / Foundational-Issues-in-Effective-Altruism-October-2022-Version.txt · 1XIMKzZWwk2ANt-NoKMVQxeyaYa6h1P4z · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Foundational-Issues-in-Effective-Altruism-October-2022-Version.txt`)
+- [x] es · gpi / Postdoctoral-Reserach-Fellow-in-Philosophy-2021.txt · 10vMPluAiCjuQ2_Nac07N2xOJQ4dZlrtw · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Postdoctoral-Reserach-Fellow-in-Philosophy-2021.txt`)
+- [x] es · gpi / Senior-Reserach-Fellow-in-Philosophy-2021.txt · 1miFMlLGWxh6FSiozj3RS_viQs6ckbnPx · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Senior-Reserach-Fellow-in-Philosophy-2021.txt`)
+- [x] es · gpi / Predoctoral-Research-Fellows-in-Economics-2021.txt · 1MHT12UW58RWh6ycfxeuYIwdhwp-6lzYj · 23 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Predoctoral-Research-Fellows-in-Economics-2021.txt`)
+- [x] es · gpi / Postdoctoral-Research-Fellow-Philosophy.txt · 199QxW8869c28v_VKUCOlRrBBkhIkNjFj · 24 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Postdoctoral-Research-Fellow-Philosophy.txt`)
+- [x] es · gpi / Philosophy-SRF.txt · 1GDNkmWtxsE0DHHncEBYvQMLRRZv0fjLy · 24 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Philosophy-SRF.txt`)
+- [x] es · gpi / Senior-Research-Fellow-in-Economics-2021.txt · 18ByuD1vIulrSbOhzbsPnsYa9tGsYcG70 · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Senior-Research-Fellow-in-Economics-2021.txt`)
+- [x] es · gpi / Postdoctoral-Research-Fellowship-in-Economics-2021.txt · 1ru1NVqK2oo9V100xJ_31dSvtSz6Dyi_o · 24 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/Postdoctoral-Research-Fellowship-in-Economics-2021.txt`)
+- [x] es · gpi / Postdoctoral-Research-Fellow-in-Economics-2-year-2022-job-description.txt · 1Aa4rHwUgVucTiRAWj2YQ0NPGyfYaD_U1 · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Postdoctoral-Research-Fellow-in-Economics-2-year-2022-job-description.txt`)
+- [x] es · gpi / GPI-Predoctoral-Research-Fellow-Economics.txt · 1crPvSWKClHWH6_UVy058tflfcjy94kCs · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/GPI-Predoctoral-Research-Fellow-Economics.txt`)
+- [x] es · gpi / GPI-Senior-Research-Fellow-Economics.txt · 1_PfURANTyqSYs4J0vBG5lD7SOK7hCZa7 · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/GPI-Senior-Research-Fellow-Economics.txt`)
+- [x] es · gpi / GPI-Postdoctoral-Research-Fellow-Economics.txt · 1fBWDf6FzdnZHa1WYab8-J0OC0nK1lq49 · 27 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/GPI-Postdoctoral-Research-Fellow-Economics.txt`)
+- [x] es · gpi / Global-Priorities-Research-Ethics-and-the-Very-Far-Future.txt · 1Fi_4iPOKjJUnwUzHTxoe0Co0A9l4mKxE · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Global-Priorities-Research-Ethics-and-the-Very-Far-Future.txt`)
+- [x] es · gpi / Mogensen-The-Hinge-of-History-Hypothesis-reply-to-MacAskill.txt · 1nagmcZu8IJjU8J7bq5cwCTYiCa5ZQ2hh · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Mogensen-The-Hinge-of-History-Hypothesis-reply-to-MacAskill.txt`)
+- [x] es · gpi / Econ-SRF-2-year.txt · 1kC9W-vSWhTC7QDzxExGh3etVTafpKZxC · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Econ-SRF-2-year.txt`)
+- [x] es · gpi / Econ-SRF-4-year.txt · 1gXNAJD_8nLmDVtEF8laQADPQhpIUQr8_ · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Econ-SRF-4-year.txt`)
+- [x] es · gpi / Mogensen-the-hinge-of-history-hypothesis.txt · 1JF07jCJcdpZBRbH-Sn0qeW9vdlwQ3_2L · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Mogensen-the-hinge-of-history-hypothesis.txt`)
+- [x] es · gpi / Predoctoral-Research-Fellow-Economics-2020.txt · 1EwOS5SLCNXgE7hLgyl_9lHV3ZQiSanhh · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Predoctoral-Research-Fellow-Economics-2020.txt`)
+- [x] es · gpi / Senior-Research-Fellow-Economics.txt · 1R9ddxeNaojx-al_BTB8d-4s3bYEF34lC · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Senior-Research-Fellow-Economics.txt`)
+- [x] es · gpi / Postdoctoral-Research-Fellow-Economics.txt · 1Tcy6ueviq4WAXWt3w1roDMatoGKnH71q · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/Postdoctoral-Research-Fellow-Economics.txt`)
+- [x] es · gpi / Teruji-Thomas-Simulation-expectation.txt · 1umAjNhGP-BixBW-KDRIZCqTSKxKi2wDm · 40 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Teruji-Thomas-Simulation-expectation.txt`)
+- [x] es · gpi / Teruji-Thomas-Simulation-Expectation-2.txt · 1zPM_sp5aOFJZN4a2YxX1ia9bv8KU6w3s · 41 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/Teruji-Thomas-Simulation-Expectation-2.txt`)
+- [x] es · gpi / Tyler-M-John-and-William-MacAskill_Longtermist-institutional-reform.txt · 17g256ynmAl_LaaZX_wwpt8IfFqHxRbHB · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Tyler-M-John-and-William-MacAskill_Longtermist-institutional-reform.txt`)
+- [x] es · gpi / Andreas-Mogensen_Doomsday-rings-twice.txt · 1y0fMivx4Nb5WttVricvKq4b9MvIEXMCI · 47 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/Andreas-Mogensen_Doomsday-rings-twice.txt`)
+- [x] es · gpi / William_MacAskill_when_donate.txt · 1rE9lkjfqd54YKcboUZQvyPtsSqNga1WV · 48 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/William_MacAskill_when_donate.txt`)
+- [x] es · gpi / William_MacAskill_when-should-an-effective-altruist-donate.txt · 1exF0_Q0z9r3Vvqgxs6wHO3Pdz9FXLYIR · 48 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/William_MacAskill_when-should-an-effective-altruist-donate.txt`)
+- [x] es · gpi / MacAskill_When_should_an_effective_altruist_donate.txt · 1m4h0ZHkuj4Yzu0cF6qpIi9PsTdFOSzOr · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/MacAskill_When_should_an_effective_altruist_donate.txt`)
+- [x] es · gpi / David-Thorstad-the-scope-of-longtermism.txt · 1tquBg-fZR-_D2I42wGHEqqNSwQ9nrXmz · 51 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/David-Thorstad-the-scope-of-longtermism.txt`)
+- [x] es · gpi / Andreas-Mogensen-The-weight-of-suffering1.txt · 13H6-wmGxp9iGWfCZn3URvhUQ-L3KFyqo · 53 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Andreas-Mogensen-The-weight-of-suffering1.txt`)
+- [x] es · gpi / Stefan-Riedener_Existential-risks-from-a-Thomist-Christian-perspective.txt · 1T1D5AujPiYpISzcsJcXQ1SbYuGga1Um2 · 54 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Stefan-Riedener_Existential-risks-from-a-Thomist-Christian-perspective.txt`)
+- [x] es · gpi / David-Thorstad-Existential-risk-pessimism-.txt · 1Kt4w7DZdHvRLOH5gWSQD3NCE4fZuHSRq · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/David-Thorstad-Existential-risk-pessimism-.txt`)
+- [x] es · gpi / David-Thorstad-Existential-risk-pessimism1.txt · 1hv0K56wW9sJMc-wmpXhruJ-eOsMrQkUT · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/David-Thorstad-Existential-risk-pessimism1.txt`)
+- [x] es · gpi / Andreas-Mogensen-Respect-for-others-risk-attitudes-and-the-long-run-future.txt · 1GyDdoN9Rp2aCLRHCy9erpHvCJQJ-aU1C · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Andreas-Mogensen-Respect-for-others-risk-attitudes-and-the-long-run-future.txt`)
 - [ ] es · gpi / David-Thorstad-Andreas-Mogensen-Heuristics-for-clueless-agents.txt · 1aQ_H4bdkbX1D2rZH8PC7CdsFUKZ38PRv · 59 KB · txt
-- [ ] es · gpi / Karri-Heikkiken-GPI-working-paper-1.txt · 1Rr4-zcs9mKouy3SZuBjFklFOIJrp7yt5 · 60 KB · txt
+- [x] es · gpi / Karri-Heikkiken-GPI-working-paper-1.txt · 1Rr4-zcs9mKouy3SZuBjFklFOIJrp7yt5 · 60 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Karri-Heikkiken-GPI-working-paper-1.txt`)
 - [ ] es · gpi / Maya-Eden_The-cross-sectional-implications-of-the-social-discount-rate.txt · 1tRwzJa3OFTPnyCrW2aDQte7XBWZ-60Gk · 61 KB · txt
 - [ ] es · gpi / Mogensen_doomsday_rings_twice.txt · 18DlxmggYlKGCw66G5dlFU0sMAXPScKIO · 61 KB · txt
 - [ ] es · gpi / Thomas-Doomsday-and-Objective-Chance-Version-2.txt · 1ctjzxxVvZ5ylHDEEXEt8mkLsBJLgpigs · 61 KB · txt
@@ -1854,163 +1854,163 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · gpi / gpi-research-agenda-201902.txt · 13E6NYPnxuh-2IwaPaEmA8n_n2zoYsNVl · 151 KB · txt
 - [ ] es · gpi / Trammell-Dynamic-Public-Good-Provision-under-Time-Preference-Heterogeneity.txt · 1-F7YH8YeBbkgFcXZVcLlMz41csvGWihw · 159 KB · txt
 - [ ] es · gpi / GPI-research-agenda-version-2.1.txt · 1sJELjPhWvO_wSWS1rGsjhrj3RZ-rwYyr · 236 KB · txt
-- [ ] es · animal charity evaluators / 2014-year-in-review.txt · 1ygN8PLecGvIG4TG2bo1NUEf3A_mtpDjZ · 6 KB · txt
-- [ ] es · animal charity evaluators / new-video-efficacy-comparison-study.txt · 1Qxt6n2ISsrh8T4xqW8SdkmuiQRLmgnB1 · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-categories.txt · 1OYaONPrnfbSd5cFDBmMHP3YfRkQ3Lz8v · 6 KB · txt
-- [ ] es · animal charity evaluators / internships-available.txt · 1YQ5p_uG5J_TQ7DPvLIdvDmsXU9ez9bgV · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-media-center.txt · 1-Bca19Tob5uRrokbRKKp66PZbPcCTygx · 6 KB · txt
-- [ ] es · animal charity evaluators / taking-action-for-animals-conference.txt · 1s7hOoFEVkiN_IOjGUUNPecI8ezcb9lmG · 6 KB · txt
-- [ ] es · animal charity evaluators / mad-city-vegan-fest.txt · 1_0iYP-vu82vrtz-KtDuF7MkuYnODG1Os · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-twitter.txt · 1skrD8o0fletBu8y0h4bsMgLhgDZtgiPz · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-donation-policy.txt · 1_ruuifpCc5pN7dNSE4Ex9RkNovbbOwby · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-webinar.txt · 1Dkh6CLk50OcDMe_Hk_jbIboGAtvcc0J3 · 6 KB · txt
-- [ ] es · animal charity evaluators / humane-league-labs-2.txt · 1ojYU2KdAh3r9XfFTKGSanslvBvex1_NA · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-media.txt · 1PXPMoYbaoxJnYgGwufl37QjY8vrhv-js · 6 KB · txt
-- [ ] es · animal charity evaluators / 2014-animal-rights-national-conference.txt · 1mS6tt7sta8U26cvEjMBmG0FWvkbJcTDI · 6 KB · txt
-- [ ] es · animal charity evaluators / printed-materials.txt · 1FDm2TGvTnNI6HEzs8F8XqJHjWyI69-Hn · 6 KB · txt
-- [ ] es · animal charity evaluators / Researcher-referral.txt · 1EvxMczqp0GH2u7UPgcisdoqXGjhx1lDM · 6 KB · txt
-- [ ] es · animal charity evaluators / more-details-about-our-recommendation-process.txt · 1uiiCBUIDgCqog0R_hIJ7NsrLhvJ7fP9v · 6 KB · txt
-- [ ] es · animal charity evaluators / interested-board-member.txt · 1hsCC87BHX0tJAnYT-YMUwPrYUY4qEK03 · 6 KB · txt
-- [ ] es · animal charity evaluators / matching-drive-progress.txt · 1Y1uMScApL16MOV-ubDm4YdLsz9us3W40 · 6 KB · txt
-- [ ] es · animal charity evaluators / introducing-new-footnote-system-top-charities.txt · 1XCAIWCIy8CcB6VYpwDIYnGTo4pARB0sG · 6 KB · txt
-- [ ] es · animal charity evaluators / ace-welcomes-new-board-members.txt · 1-fyBVb3PXL9aVfCLZLigE4jMsF0Dhkbx · 6 KB · txt
-- [ ] es · animal charity evaluators / jobs-and-internships-available.txt · 1y9lR4FRpLmWrzQBAfbgDTTMQ36IzEf1g · 6 KB · txt
-- [ ] es · animal charity evaluators / new-Director-of-research.txt · 1Pu7j5KXuF6O6GMO1wgptzwuTk6WIShCr · 7 KB · txt
-- [ ] es · animal charity evaluators / singer-on-the-why-and-how-of-effective-altruism.txt · 1YbttZ9dTfjJmAEC9MJme4MgAx4aos54d · 7 KB · txt
-- [ ] es · animal charity evaluators / matching-drive-double-your-impact.txt · 1BB--0z4cstTR_A9T6kuSAWVfsSM3mcME · 7 KB · txt
-- [ ] es · animal charity evaluators / even-matching.txt · 1A3cyCbR1gTKq2p7MsiXX3TxkQGQMhLOi · 7 KB · txt
-- [ ] es · animal charity evaluators / ace-2015-year-in-review.txt · 1jk8MXo2TrkpmtzDZPLZtx20-D90neiIZ · 7 KB · txt
-- [ ] es · animal charity evaluators / raising-for-effective-giving.txt · 1mx95FenXXMI-xpHElOEB7PxoMsUZge44 · 7 KB · txt
-- [ ] es · animal charity evaluators / ace-highlights-detailed-updates-newsletter.txt · 1lh6uv7YP29E6QmLfErwDhbHWpYQp5_1e · 7 KB · txt
-- [ ] es · animal charity evaluators / now-hiring-jobs-with-eaa-and-cea.txt · 16vBRWdda26ugGAVOaxlpHzYqQfnFD51i · 7 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-conversations-interviews.txt · 1KV2LHRHzfrjBy6Wumb0NrjUhmzGnewYz · 7 KB · txt
-- [ ] es · animal charity evaluators / 2015-guide-to-giving-and-trifold-brochure.txt · 1l-PvptkBMzzMOyDgl52oEMgd5QXwNTQr · 7 KB · txt
-- [ ] es · animal charity evaluators / strategic-plans-and-prospective-goals.txt · 1olqWwcx6JbeXB1s2m8Eis9vm3TP5PROS · 7 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-volunteering-advice.txt · 1W_uehaNp-HIzmnXIwGwKf9mmIJA25iPQ · 7 KB · txt
-- [ ] es · animal charity evaluators / ace-highlights-recent-conversations-and-interviews.txt · 19q5rEPgja0INIgozrn3KWJcP5xQ-2GNn · 7 KB · txt
-- [ ] es · animal charity evaluators / the-shift-at-the-2013-animal-rights-national-conference.txt · 1eJPaH-NqPmA9YA0ykm2wf4gCKxi6gvwt · 7 KB · txt
-- [ ] es · animal charity evaluators / easy-ways-to-volunteer-effectively.txt · 1lM7-YSY58Y8kkHYPnRfg6A7HqCNfZyOd · 7 KB · txt
-- [ ] es · animal charity evaluators / job-openings-eaa-is-hiring.txt · 1Ck6zihsa0y4lnXvpFSy8FDeGM_JcPuhb · 7 KB · txt
-- [ ] es · animal charity evaluators / letter-from-eaas-new-executive-Director-jon-bockman.txt · 118QUZbowkDO5WY3kM_Hf-6-x-98YJjks · 7 KB · txt
-- [ ] es · animal charity evaluators / matching-gift-programs.txt · 1H7wGdDpRUnBDEy_dcNRiAk4bJ6WEUawv · 7 KB · txt
-- [ ] es · animal charity evaluators / giving-what-we-can-pledge-to-support-effective-charities.txt · 1uowP7ydEhRYkkYxYobzgQiU9cTVI13FX · 7 KB · txt
-- [ ] es · animal charity evaluators / change-at-eaa.txt · 1qyxbhZXlF7AJqE9toGtDQ1oU3u4CMv4b · 8 KB · txt
-- [ ] es · animal charity evaluators / ace-is-hiring-Researcher-position-available.txt · 1rqyvkom5M-IuNm3kzpbjFMpOvxHZavSW · 8 KB · txt
-- [ ] es · animal charity evaluators / registration-now-open-for-the-2016-eaa-research-symposium.txt · 1MjSYjYCvFM8DDo7KiVcyZlxwtU5mvoJ0 · 8 KB · txt
-- [ ] es · animal charity evaluators / why-giving-now-is-highly-effective.txt · 1zwxSzY7JBfBkqYpWlE9G7pLkZYfGsHcM · 8 KB · txt
-- [ ] es · animal charity evaluators / eaa-mission-method-and-merger.txt · 1f9eFZnpy204q4aoypjiymYGUJHkB8BnD · 8 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-research-proposals.txt · 1JSBfoLtPWcQNh2ntFelm0JWpYziRtz5A · 8 KB · txt
-- [ ] es · animal charity evaluators / neglected-causes.txt · 1FFUgAnYDdlhsyIEpljdPW9t926OclCpB · 8 KB · txt
-- [ ] es · animal charity evaluators / on-receiving-a-grant-from-the-open-philanthropy-project.txt · 1ns65ARoPmyPcRHc6iYXPAeW2D18AMz_b · 8 KB · txt
-- [ ] es · animal charity evaluators / a-new-name-a-new-site-and-a-new-beginning.txt · 1EFcl5UuK7UuPFjtvXzwlsePMF7hNVuld · 8 KB · txt
-- [ ] es · animal charity evaluators / introducing-donation-registry.txt · 1LKdmk4mv5K6ZNEnQSlZkB6_F_2S1CKWA · 8 KB · txt
-- [ ] es · animal charity evaluators / upcoming-recommendation-changes.txt · 1viqbdYjSr1zsefIHT8BeQ2V1iq_LuHdD · 8 KB · txt
-- [ ] es · animal charity evaluators / 2015-internal-evaluation-released.txt · 1RXk3IcpRfUuEMwdU3iyhi2GKRIgrXguA · 8 KB · txt
-- [ ] es · animal charity evaluators / announcing-the-2016-eaa-research-symposium.txt · 1S06Vefa-UjESaRnsk_HKKPYKD9iTrKCy · 8 KB · txt
-- [ ] es · animal charity evaluators / whats-the-rush-giving-now-instead-of-later.txt · 1QBXrus_v1OVP9MOmoUyaceD22xAG9ySF · 8 KB · txt
-- [ ] es · animal charity evaluators / help-us-help-animals-with-your-donation-this-giving-season.txt · 1-aoF-mN3dd9pw3S0jbR2T6sKsQBIbl16 · 8 KB · txt
-- [ ] es · animal charity evaluators / it-is-effectiveness-not-overhead-that-matters.txt · 1AFhTtm3U18VTVBr9j-ZfOiPji_IVvjJV · 8 KB · txt
-- [ ] es · animal charity evaluators / undercover-investigations-evaluation.txt · 1uvHwhVt8Yw2ZVpBfn9M20IDBJfwYUATA · 8 KB · txt
-- [ ] es · animal charity evaluators / announcing-the-launch-of-a-new-meta-organization-star.txt · 1dM4VEp9G_ehJLkxmFMYnhyCSxVgmYOQM · 8 KB · txt
-- [ ] es · animal charity evaluators / happy-birthday-peter-singer.txt · 1StiqRz3pMSikgmY4q0Cd0OmG5ctwD3yI · 8 KB · txt
+- [x] es · animal charity evaluators / 2014-year-in-review.txt · 1ygN8PLecGvIG4TG2bo1NUEf3A_mtpDjZ · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/2014-year-in-review.txt`)
+- [x] es · animal charity evaluators / new-video-efficacy-comparison-study.txt · 1Qxt6n2ISsrh8T4xqW8SdkmuiQRLmgnB1 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/new-video-efficacy-comparison-study.txt`)
+- [x] es · animal charity evaluators / ace-highlight-categories.txt · 1OYaONPrnfbSd5cFDBmMHP3YfRkQ3Lz8v · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-categories.txt`)
+- [x] es · animal charity evaluators / internships-available.txt · 1YQ5p_uG5J_TQ7DPvLIdvDmsXU9ez9bgV · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/internships-available.txt`)
+- [x] es · animal charity evaluators / ace-highlight-media-center.txt · 1-Bca19Tob5uRrokbRKKp66PZbPcCTygx · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-media-center.txt`)
+- [x] es · animal charity evaluators / taking-action-for-animals-conference.txt · 1s7hOoFEVkiN_IOjGUUNPecI8ezcb9lmG · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/taking-action-for-animals-conference.txt`)
+- [x] es · animal charity evaluators / mad-city-vegan-fest.txt · 1_0iYP-vu82vrtz-KtDuF7MkuYnODG1Os · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/mad-city-vegan-fest.txt`)
+- [x] es · animal charity evaluators / ace-highlight-twitter.txt · 1skrD8o0fletBu8y0h4bsMgLhgDZtgiPz · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-twitter.txt`)
+- [x] es · animal charity evaluators / ace-highlight-donation-policy.txt · 1_ruuifpCc5pN7dNSE4Ex9RkNovbbOwby · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-donation-policy.txt`)
+- [x] es · animal charity evaluators / ace-webinar.txt · 1Dkh6CLk50OcDMe_Hk_jbIboGAtvcc0J3 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-webinar.txt`)
+- [x] es · animal charity evaluators / humane-league-labs-2.txt · 1ojYU2KdAh3r9XfFTKGSanslvBvex1_NA · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/humane-league-labs-2.txt`)
+- [x] es · animal charity evaluators / ace-highlight-media.txt · 1PXPMoYbaoxJnYgGwufl37QjY8vrhv-js · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-media.txt`)
+- [x] es · animal charity evaluators / 2014-animal-rights-national-conference.txt · 1mS6tt7sta8U26cvEjMBmG0FWvkbJcTDI · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/2014-animal-rights-national-conference.txt`)
+- [x] es · animal charity evaluators / printed-materials.txt · 1FDm2TGvTnNI6HEzs8F8XqJHjWyI69-Hn · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/printed-materials.txt`)
+- [x] es · animal charity evaluators / Researcher-referral.txt · 1EvxMczqp0GH2u7UPgcisdoqXGjhx1lDM · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Researcher-referral.txt`)
+- [x] es · animal charity evaluators / more-details-about-our-recommendation-process.txt · 1uiiCBUIDgCqog0R_hIJ7NsrLhvJ7fP9v · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/more-details-about-our-recommendation-process.txt`)
+- [x] es · animal charity evaluators / interested-board-member.txt · 1hsCC87BHX0tJAnYT-YMUwPrYUY4qEK03 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/interested-board-member.txt`)
+- [x] es · animal charity evaluators / matching-drive-progress.txt · 1Y1uMScApL16MOV-ubDm4YdLsz9us3W40 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/matching-drive-progress.txt`)
+- [x] es · animal charity evaluators / introducing-new-footnote-system-top-charities.txt · 1XCAIWCIy8CcB6VYpwDIYnGTo4pARB0sG · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/introducing-new-footnote-system-top-charities.txt`)
+- [x] es · animal charity evaluators / ace-welcomes-new-board-members.txt · 1-fyBVb3PXL9aVfCLZLigE4jMsF0Dhkbx · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-welcomes-new-board-members.txt`)
+- [x] es · animal charity evaluators / jobs-and-internships-available.txt · 1y9lR4FRpLmWrzQBAfbgDTTMQ36IzEf1g · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/jobs-and-internships-available.txt`)
+- [x] es · animal charity evaluators / new-Director-of-research.txt · 1Pu7j5KXuF6O6GMO1wgptzwuTk6WIShCr · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/new-Director-of-research.txt`)
+- [x] es · animal charity evaluators / singer-on-the-why-and-how-of-effective-altruism.txt · 1YbttZ9dTfjJmAEC9MJme4MgAx4aos54d · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/singer-on-the-why-and-how-of-effective-altruism.txt`)
+- [x] es · animal charity evaluators / matching-drive-double-your-impact.txt · 1BB--0z4cstTR_A9T6kuSAWVfsSM3mcME · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/matching-drive-double-your-impact.txt`)
+- [x] es · animal charity evaluators / even-matching.txt · 1A3cyCbR1gTKq2p7MsiXX3TxkQGQMhLOi · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/even-matching.txt`)
+- [x] es · animal charity evaluators / ace-2015-year-in-review.txt · 1jk8MXo2TrkpmtzDZPLZtx20-D90neiIZ · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-2015-year-in-review.txt`)
+- [x] es · animal charity evaluators / raising-for-effective-giving.txt · 1mx95FenXXMI-xpHElOEB7PxoMsUZge44 · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/raising-for-effective-giving.txt`)
+- [x] es · animal charity evaluators / ace-highlights-detailed-updates-newsletter.txt · 1lh6uv7YP29E6QmLfErwDhbHWpYQp5_1e · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlights-detailed-updates-newsletter.txt`)
+- [x] es · animal charity evaluators / now-hiring-jobs-with-eaa-and-cea.txt · 16vBRWdda26ugGAVOaxlpHzYqQfnFD51i · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/now-hiring-jobs-with-eaa-and-cea.txt`)
+- [x] es · animal charity evaluators / ace-highlight-conversations-interviews.txt · 1KV2LHRHzfrjBy6Wumb0NrjUhmzGnewYz · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-conversations-interviews.txt`)
+- [x] es · animal charity evaluators / 2015-guide-to-giving-and-trifold-brochure.txt · 1l-PvptkBMzzMOyDgl52oEMgd5QXwNTQr · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/2015-guide-to-giving-and-trifold-brochure.txt`)
+- [x] es · animal charity evaluators / strategic-plans-and-prospective-goals.txt · 1olqWwcx6JbeXB1s2m8Eis9vm3TP5PROS · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/strategic-plans-and-prospective-goals.txt`)
+- [x] es · animal charity evaluators / ace-highlight-volunteering-advice.txt · 1W_uehaNp-HIzmnXIwGwKf9mmIJA25iPQ · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-volunteering-advice.txt`)
+- [x] es · animal charity evaluators / ace-highlights-recent-conversations-and-interviews.txt · 19q5rEPgja0INIgozrn3KWJcP5xQ-2GNn · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlights-recent-conversations-and-interviews.txt`)
+- [x] es · animal charity evaluators / the-shift-at-the-2013-animal-rights-national-conference.txt · 1eJPaH-NqPmA9YA0ykm2wf4gCKxi6gvwt · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/the-shift-at-the-2013-animal-rights-national-conference.txt`)
+- [x] es · animal charity evaluators / easy-ways-to-volunteer-effectively.txt · 1lM7-YSY58Y8kkHYPnRfg6A7HqCNfZyOd · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/easy-ways-to-volunteer-effectively.txt`)
+- [x] es · animal charity evaluators / job-openings-eaa-is-hiring.txt · 1Ck6zihsa0y4lnXvpFSy8FDeGM_JcPuhb · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/job-openings-eaa-is-hiring.txt`)
+- [x] es · animal charity evaluators / letter-from-eaas-new-executive-Director-jon-bockman.txt · 118QUZbowkDO5WY3kM_Hf-6-x-98YJjks · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/letter-from-eaas-new-executive-Director-jon-bockman.txt`)
+- [x] es · animal charity evaluators / matching-gift-programs.txt · 1H7wGdDpRUnBDEy_dcNRiAk4bJ6WEUawv · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/matching-gift-programs.txt`)
+- [x] es · animal charity evaluators / giving-what-we-can-pledge-to-support-effective-charities.txt · 1uowP7ydEhRYkkYxYobzgQiU9cTVI13FX · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/giving-what-we-can-pledge-to-support-effective-charities.txt`)
+- [x] es · animal charity evaluators / change-at-eaa.txt · 1qyxbhZXlF7AJqE9toGtDQ1oU3u4CMv4b · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/change-at-eaa.txt`)
+- [x] es · animal charity evaluators / ace-is-hiring-Researcher-position-available.txt · 1rqyvkom5M-IuNm3kzpbjFMpOvxHZavSW · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-is-hiring-Researcher-position-available.txt`)
+- [x] es · animal charity evaluators / registration-now-open-for-the-2016-eaa-research-symposium.txt · 1MjSYjYCvFM8DDo7KiVcyZlxwtU5mvoJ0 · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/registration-now-open-for-the-2016-eaa-research-symposium.txt`)
+- [x] es · animal charity evaluators / why-giving-now-is-highly-effective.txt · 1zwxSzY7JBfBkqYpWlE9G7pLkZYfGsHcM · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/why-giving-now-is-highly-effective.txt`)
+- [x] es · animal charity evaluators / eaa-mission-method-and-merger.txt · 1f9eFZnpy204q4aoypjiymYGUJHkB8BnD · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/eaa-mission-method-and-merger.txt`)
+- [x] es · animal charity evaluators / ace-highlight-research-proposals.txt · 1JSBfoLtPWcQNh2ntFelm0JWpYziRtz5A · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/ace-highlight-research-proposals.txt`)
+- [x] es · animal charity evaluators / neglected-causes.txt · 1FFUgAnYDdlhsyIEpljdPW9t926OclCpB · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/neglected-causes.txt`)
+- [x] es · animal charity evaluators / on-receiving-a-grant-from-the-open-philanthropy-project.txt · 1ns65ARoPmyPcRHc6iYXPAeW2D18AMz_b · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/on-receiving-a-grant-from-the-open-philanthropy-project.txt`)
+- [x] es · animal charity evaluators / a-new-name-a-new-site-and-a-new-beginning.txt · 1EFcl5UuK7UuPFjtvXzwlsePMF7hNVuld · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/a-new-name-a-new-site-and-a-new-beginning.txt`)
+- [x] es · animal charity evaluators / introducing-donation-registry.txt · 1LKdmk4mv5K6ZNEnQSlZkB6_F_2S1CKWA · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/introducing-donation-registry.txt`)
+- [x] es · animal charity evaluators / upcoming-recommendation-changes.txt · 1viqbdYjSr1zsefIHT8BeQ2V1iq_LuHdD · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/upcoming-recommendation-changes.txt`)
+- [x] es · animal charity evaluators / 2015-internal-evaluation-released.txt · 1RXk3IcpRfUuEMwdU3iyhi2GKRIgrXguA · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/2015-internal-evaluation-released.txt`)
+- [x] es · animal charity evaluators / announcing-the-2016-eaa-research-symposium.txt · 1S06Vefa-UjESaRnsk_HKKPYKD9iTrKCy · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/announcing-the-2016-eaa-research-symposium.txt`)
+- [x] es · animal charity evaluators / whats-the-rush-giving-now-instead-of-later.txt · 1QBXrus_v1OVP9MOmoUyaceD22xAG9ySF · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/whats-the-rush-giving-now-instead-of-later.txt`)
+- [x] es · animal charity evaluators / help-us-help-animals-with-your-donation-this-giving-season.txt · 1-aoF-mN3dd9pw3S0jbR2T6sKsQBIbl16 · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/help-us-help-animals-with-your-donation-this-giving-season.txt`)
+- [x] es · animal charity evaluators / it-is-effectiveness-not-overhead-that-matters.txt · 1AFhTtm3U18VTVBr9j-ZfOiPji_IVvjJV · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/it-is-effectiveness-not-overhead-that-matters.txt`)
+- [x] es · animal charity evaluators / undercover-investigations-evaluation.txt · 1uvHwhVt8Yw2ZVpBfn9M20IDBJfwYUATA · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/undercover-investigations-evaluation.txt`)
+- [x] es · animal charity evaluators / announcing-the-launch-of-a-new-meta-organization-star.txt · 1dM4VEp9G_ehJLkxmFMYnhyCSxVgmYOQM · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/announcing-the-launch-of-a-new-meta-organization-star.txt`)
+- [x] es · animal charity evaluators / happy-birthday-peter-singer.txt · 1StiqRz3pMSikgmY4q0Cd0OmG5ctwD3yI · 8 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/happy-birthday-peter-singer.txt`)
 - [ ] es · animal charity evaluators / on-triage.txt · 19NNQQv6SPmjKx_N89qwhtfC9yo0y4V_O · 8 KB · txt
-- [ ] es · animal charity evaluators / corporate-outreach-review.txt · 1a-kf0zdBtuz2DKY_TUDzvDm8oAKHpEUm · 8 KB · txt
-- [ ] es · animal charity evaluators / welcome-to-effective-animal-activism.txt · 1R8GQwnZeQTdMr4UesEG1EAch_MhPkU7k · 8 KB · txt
-- [ ] es · animal charity evaluators / writing-a-competitive-research-grant-proposal.txt · 1c6RYe8zB0ygL9WixGnXM9pLeDiWTH6I- · 9 KB · txt
-- [ ] es · animal charity evaluators / volunteer-effectively.txt · 1DZBeYUQ9uCqI905xXOrpoeT3eQKVRiha · 9 KB · txt
-- [ ] es · animal charity evaluators / new-veg-ad-video-by-farm-sanctuary.txt · 1KPBpV7zvFgSOlhuxgULtEc3NwSheid3B · 9 KB · txt
-- [ ] es · animal charity evaluators / our-thinking-on-only-publishing-approved-reviews.txt · 1ur_GSKELhpUyE7l7E3AJPIr9SBra5mR3 · 9 KB · txt
-- [ ] es · animal charity evaluators / new-resources-white-paper-project.txt · 1Rt932Oc2ZfIqOB1SPuqMx56taSAJKdJU · 9 KB · txt
-- [ ] es · animal charity evaluators / updates-from-the-last-round-of-research-funding.txt · 1XrrnY6WwVg2byStRGiPOdSr7C4wf6M8C · 9 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-cause-prioritization.txt · 1h0Oin39wvCnrDl0GM8PvE4Xc30lyE0E1 · 9 KB · txt
-- [ ] es · animal charity evaluators / increase-your-impact-with-googles-ad-grants.txt · 1JgjKD_KSYEnc-WqtNWgI4qnPtjLmFTlg · 9 KB · txt
-- [ ] es · animal charity evaluators / introducing-advocacy-research-program-officer.txt · 1nyKXbhGqNpCK6zIvRbpmBBilVG99l6Ym · 9 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-organization-evaluation-criteria.txt · 15anwvElvNrhSWrp3CNXmQxJOpBPzkYDC · 9 KB · txt
-- [ ] es · animal charity evaluators / centre-effective-altruism-hiring.txt · 1ZOF61vlWPenSeKgXr0WujsCx3exJPs8u · 9 KB · txt
-- [ ] es · animal charity evaluators / updates-to-donation-allocation-chart.txt · 1HnO2ROu4Y-tq1GmcK2Ilxk6xFF9tN7zY · 9 KB · txt
-- [ ] es · animal charity evaluators / 2014-survey-effective-altruists.txt · 1Ws1Vt4u7nbxyrHXeaszjtc7-rWW8z1sa · 9 KB · txt
-- [ ] es · animal charity evaluators / internship-experience-erika-alonso.txt · 19sd41eokBWJi1GPKqD1H1w8C4gU_NJxX · 9 KB · txt
-- [ ] es · animal charity evaluators / the-haste-consideration.txt · 1Pltqyq3yubfXNzqr-Ueh-dyvjHs-NHcC · 9 KB · txt
-- [ ] es · animal charity evaluators / speciesism-and-human-rights.txt · 1BfFP8t6iinmAoiaoTugwbli4sdsiDLdV · 9 KB · txt
-- [ ] es · animal charity evaluators / introducing-our-redistribution-donation-option.txt · 12CHuAbqjMFpyEMCkQ_TvqofCuJAsiZ0g · 9 KB · txt
-- [ ] es · animal charity evaluators / givewell-on-industrial-agriculture.txt · 1rcHvKGK0mXXANCnVwsqB1Z34R4qzt0N4 · 9 KB · txt
-- [ ] es · animal charity evaluators / animal-advocacy-data-repository.txt · 1QqfO9_SePO3ssMeJQapQ9eKsH-v5E2Bx · 9 KB · txt
-- [ ] es · animal charity evaluators / ace-fundraising-restrictions.txt · 1QK65U96pdad58U9y_E0-t7aHATrXSFz8 · 9 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-list-organizations.txt · 187_oPrc1tjkGvp3XIkbkrXbpWvUs89Yy · 9 KB · txt
-- [ ] es · animal charity evaluators / wild-animal-suffering.txt · 1RrPPJWEkGwWTYe41jNDc7yhW98_VS3Co · 9 KB · txt
-- [ ] es · animal charity evaluators / thinking-charity-rating-systems.txt · 1nMIekSGKeahOMGsQNAUEuN7ViPsoq3eR · 10 KB · txt
-- [ ] es · animal charity evaluators / social-movements-case-study-childrens-rights.txt · 11UuL8jCqxyIr6T_Q5hWVCftftZfrrJUq · 10 KB · txt
-- [ ] es · animal charity evaluators / thinking-upcoming-recommendations.txt · 1GsiVqJG4QOZbEzBIWAQ5w6zko2Swudpx · 10 KB · txt
-- [ ] es · animal charity evaluators / online-tools-and-resources-for-nonprofits-2016.txt · 16Win4nRzc41ZnT72xrCfQVJsXjrxG_TC · 10 KB · txt
-- [ ] es · animal charity evaluators / how-good-are-the-best-2.txt · 1GK6WuLzRj3Naq7_Vtr23E2euIQ7gL_gn · 10 KB · txt
-- [ ] es · animal charity evaluators / social-movements-case-study-fat-activism.txt · 11PZ5fCowzE_x6hStMbNnoZZcWHIzVjT3 · 10 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-survey-guidelines.txt · 1mgCLEXRstTGdN-QQzGrjkhW_1-Xw9Pm1 · 10 KB · txt
-- [ ] es · animal charity evaluators / do-you-love-animals-effectively.txt · 1jAjEx7rzuAWPTRcLmTsflZMW4STj0cH2 · 10 KB · txt
-- [ ] es · animal charity evaluators / recommendations-may-2014.txt · 1dN0vDOWb8dfT_vm0n6UcF-7X6I5glgwt · 10 KB · txt
-- [ ] es · animal charity evaluators / green-retracts-persuasion-study.txt · 1ViMpMeYiMNhtFH4sj9eftP7pRe8R_yZk · 10 KB · txt
-- [ ] es · animal charity evaluators / vegfests-the-importance-of-professionalism.txt · 1cgJv34OqYPvL_0gqEi3UpQsOGocwfTFR · 10 KB · txt
-- [ ] es · animal charity evaluators / introducing-our-new-advocacy-research-program-officer.txt · 1TIZtq2IXXTqe4O9SR3amyb6JUri55-OF · 10 KB · txt
-- [ ] es · animal charity evaluators / thoughts-on-our-website-redesign.txt · 1v6B2VIFHtwRUEp3br6MJ8UpzXFj7_QZs · 10 KB · txt
-- [ ] es · animal charity evaluators / our-thinking-on-reviewing-international-charities.txt · 1J0vhucVx3wSCRZbF3IKDB75teMVI-kxe · 11 KB · txt
-- [ ] es · animal charity evaluators / eaa-research-update-and-call-for-questions.txt · 1Da_5yZBp0vB81Ucn-jTuzyAXQO5Z6Cpq · 11 KB · txt
-- [ ] es · animal charity evaluators / 3-simple-ways-to-understand-user-behavior.txt · 1xod3viLlTYs_zlzfHvHTU32yjxl48gDX · 11 KB · txt
-- [ ] es · animal charity evaluators / welcome-aces-new-staff-member-dee-perez.txt · 1lhWphPF3gozbgZMZ8PsVdCtq5hSIf6Op · 11 KB · txt
-- [ ] es · animal charity evaluators / diversity-and-inclusion-in-the-animal-rights-movement.txt · 1-8dSi8RX0U8dgiC04X-YbQmm2Hnw1WAf · 11 KB · txt
-- [ ] es · animal charity evaluators / thinking-studies.txt · 1gVcCXowIhV0ttscoARByAhAYyvIDVATQ · 11 KB · txt
-- [ ] es · animal charity evaluators / does-money-make-you-happy.txt · 1jFuztNAufys29Z66EH75sJKK_Exv3M3d · 11 KB · txt
-- [ ] es · animal charity evaluators / breaking-down-the-leafleting-study.txt · 12md-AJXqKcoh_kV3jiPzrcgarDir79wR · 11 KB · txt
-- [ ] es · animal charity evaluators / do-protests-hurt-animal-activism.txt · 1YcxtAyVWoGp3ELo1Y9m3U68paZVCqmRy · 11 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-our-use-of-cost-effectiveness-estimates.txt · 1N8UGwKNOaapMUGkde-N8b7OKvJNLn55B · 11 KB · txt
-- [ ] es · animal charity evaluators / introducing-recommendations-december-2014.txt · 1gbqXrsmCoRmD2ShPqICJtA5SWt5cS5LA · 11 KB · txt
-- [ ] es · animal charity evaluators / social-movements-research-project.txt · 1mn4UFXw_UjFK9jHilV0YvfIcVyGGfXwO · 11 KB · txt
-- [ ] es · animal charity evaluators / ab-testing.txt · 1NM97vTRtM6Otm42J9DKpWIfPEOWo-vfS · 11 KB · txt
-- [ ] es · animal charity evaluators / make-helping-animals-your-legacy-2.txt · 1Ya9pJZkfLzr0XMh8j19CTHsyw5e4e7BX · 12 KB · txt
-- [ ] es · animal charity evaluators / research-is-hard-what-weve-learned-from-the-leafleting-study.txt · 1MMfwxNhxrv8el0jsyyJFbH8IOz_1L9jt · 12 KB · txt
-- [ ] es · animal charity evaluators / animal-advocacy-at-ea-global.txt · 1oCMs4vjODfxzQ6vjnRYtige48uwuoM1X · 12 KB · txt
-- [ ] es · animal charity evaluators / research-review-process-call-for-external-reviewers.txt · 11GpNC112nRstDGHPCD9ptv9bitp7s3mJ · 12 KB · txt
-- [ ] es · animal charity evaluators / using-technology-to-increase-animal-advocacy-effectiveness.txt · 12BwfEi9oP7oRm4uQW5SRQ1HT_-EHoYz6 · 12 KB · txt
-- [ ] es · animal charity evaluators / the-value-of-sanctuaries-and-how-to-maximize-their-impact.txt · 1yhPstjqzxwM21JwCkfLKRctIPnuK6FpU · 12 KB · txt
+- [x] es · animal charity evaluators / corporate-outreach-review.txt · 1a-kf0zdBtuz2DKY_TUDzvDm8oAKHpEUm · 8 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/corporate-outreach-review.txt`)
+- [x] es · animal charity evaluators / welcome-to-effective-animal-activism.txt · 1R8GQwnZeQTdMr4UesEG1EAch_MhPkU7k · 8 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/welcome-to-effective-animal-activism.txt`)
+- [x] es · animal charity evaluators / writing-a-competitive-research-grant-proposal.txt · 1c6RYe8zB0ygL9WixGnXM9pLeDiWTH6I- · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/writing-a-competitive-research-grant-proposal.txt`)
+- [x] es · animal charity evaluators / volunteer-effectively.txt · 1DZBeYUQ9uCqI905xXOrpoeT3eQKVRiha · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/volunteer-effectively.txt`)
+- [x] es · animal charity evaluators / new-veg-ad-video-by-farm-sanctuary.txt · 1KPBpV7zvFgSOlhuxgULtEc3NwSheid3B · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/new-veg-ad-video-by-farm-sanctuary.txt`)
+- [x] es · animal charity evaluators / our-thinking-on-only-publishing-approved-reviews.txt · 1ur_GSKELhpUyE7l7E3AJPIr9SBra5mR3 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/our-thinking-on-only-publishing-approved-reviews.txt`)
+- [x] es · animal charity evaluators / new-resources-white-paper-project.txt · 1Rt932Oc2ZfIqOB1SPuqMx56taSAJKdJU · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/new-resources-white-paper-project.txt`)
+- [x] es · animal charity evaluators / updates-from-the-last-round-of-research-funding.txt · 1XrrnY6WwVg2byStRGiPOdSr7C4wf6M8C · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updates-from-the-last-round-of-research-funding.txt`)
+- [x] es · animal charity evaluators / ace-highlight-cause-prioritization.txt · 1h0Oin39wvCnrDl0GM8PvE4Xc30lyE0E1 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-cause-prioritization.txt`)
+- [x] es · animal charity evaluators / increase-your-impact-with-googles-ad-grants.txt · 1JgjKD_KSYEnc-WqtNWgI4qnPtjLmFTlg · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/increase-your-impact-with-googles-ad-grants.txt`)
+- [x] es · animal charity evaluators / introducing-advocacy-research-program-officer.txt · 1nyKXbhGqNpCK6zIvRbpmBBilVG99l6Ym · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/introducing-advocacy-research-program-officer.txt`)
+- [x] es · animal charity evaluators / ace-highlight-organization-evaluation-criteria.txt · 15anwvElvNrhSWrp3CNXmQxJOpBPzkYDC · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-organization-evaluation-criteria.txt`)
+- [x] es · animal charity evaluators / centre-effective-altruism-hiring.txt · 1ZOF61vlWPenSeKgXr0WujsCx3exJPs8u · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/centre-effective-altruism-hiring.txt`)
+- [x] es · animal charity evaluators / updates-to-donation-allocation-chart.txt · 1HnO2ROu4Y-tq1GmcK2Ilxk6xFF9tN7zY · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updates-to-donation-allocation-chart.txt`)
+- [x] es · animal charity evaluators / 2014-survey-effective-altruists.txt · 1Ws1Vt4u7nbxyrHXeaszjtc7-rWW8z1sa · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/2014-survey-effective-altruists.txt`)
+- [x] es · animal charity evaluators / internship-experience-erika-alonso.txt · 19sd41eokBWJi1GPKqD1H1w8C4gU_NJxX · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/internship-experience-erika-alonso.txt`)
+- [x] es · animal charity evaluators / the-haste-consideration.txt · 1Pltqyq3yubfXNzqr-Ueh-dyvjHs-NHcC · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/the-haste-consideration.txt`)
+- [x] es · animal charity evaluators / speciesism-and-human-rights.txt · 1BfFP8t6iinmAoiaoTugwbli4sdsiDLdV · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/speciesism-and-human-rights.txt`)
+- [x] es · animal charity evaluators / introducing-our-redistribution-donation-option.txt · 12CHuAbqjMFpyEMCkQ_TvqofCuJAsiZ0g · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/introducing-our-redistribution-donation-option.txt`)
+- [x] es · animal charity evaluators / givewell-on-industrial-agriculture.txt · 1rcHvKGK0mXXANCnVwsqB1Z34R4qzt0N4 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/givewell-on-industrial-agriculture.txt`)
+- [x] es · animal charity evaluators / animal-advocacy-data-repository.txt · 1QqfO9_SePO3ssMeJQapQ9eKsH-v5E2Bx · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/animal-advocacy-data-repository.txt`)
+- [x] es · animal charity evaluators / ace-fundraising-restrictions.txt · 1QK65U96pdad58U9y_E0-t7aHATrXSFz8 · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-fundraising-restrictions.txt`)
+- [x] es · animal charity evaluators / ace-highlight-list-organizations.txt · 187_oPrc1tjkGvp3XIkbkrXbpWvUs89Yy · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-list-organizations.txt`)
+- [x] es · animal charity evaluators / wild-animal-suffering.txt · 1RrPPJWEkGwWTYe41jNDc7yhW98_VS3Co · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/wild-animal-suffering.txt`)
+- [x] es · animal charity evaluators / thinking-charity-rating-systems.txt · 1nMIekSGKeahOMGsQNAUEuN7ViPsoq3eR · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/thinking-charity-rating-systems.txt`)
+- [x] es · animal charity evaluators / social-movements-case-study-childrens-rights.txt · 11UuL8jCqxyIr6T_Q5hWVCftftZfrrJUq · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/social-movements-case-study-childrens-rights.txt`)
+- [x] es · animal charity evaluators / thinking-upcoming-recommendations.txt · 1GsiVqJG4QOZbEzBIWAQ5w6zko2Swudpx · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/thinking-upcoming-recommendations.txt`)
+- [x] es · animal charity evaluators / online-tools-and-resources-for-nonprofits-2016.txt · 16Win4nRzc41ZnT72xrCfQVJsXjrxG_TC · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/online-tools-and-resources-for-nonprofits-2016.txt`)
+- [x] es · animal charity evaluators / how-good-are-the-best-2.txt · 1GK6WuLzRj3Naq7_Vtr23E2euIQ7gL_gn · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/how-good-are-the-best-2.txt`)
+- [x] es · animal charity evaluators / social-movements-case-study-fat-activism.txt · 11PZ5fCowzE_x6hStMbNnoZZcWHIzVjT3 · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/social-movements-case-study-fat-activism.txt`)
+- [x] es · animal charity evaluators / ace-highlight-survey-guidelines.txt · 1mgCLEXRstTGdN-QQzGrjkhW_1-Xw9Pm1 · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-survey-guidelines.txt`)
+- [x] es · animal charity evaluators / do-you-love-animals-effectively.txt · 1jAjEx7rzuAWPTRcLmTsflZMW4STj0cH2 · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/do-you-love-animals-effectively.txt`)
+- [x] es · animal charity evaluators / recommendations-may-2014.txt · 1dN0vDOWb8dfT_vm0n6UcF-7X6I5glgwt · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/recommendations-may-2014.txt`)
+- [x] es · animal charity evaluators / green-retracts-persuasion-study.txt · 1ViMpMeYiMNhtFH4sj9eftP7pRe8R_yZk · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/green-retracts-persuasion-study.txt`)
+- [x] es · animal charity evaluators / vegfests-the-importance-of-professionalism.txt · 1cgJv34OqYPvL_0gqEi3UpQsOGocwfTFR · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/vegfests-the-importance-of-professionalism.txt`)
+- [x] es · animal charity evaluators / introducing-our-new-advocacy-research-program-officer.txt · 1TIZtq2IXXTqe4O9SR3amyb6JUri55-OF · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/introducing-our-new-advocacy-research-program-officer.txt`)
+- [x] es · animal charity evaluators / thoughts-on-our-website-redesign.txt · 1v6B2VIFHtwRUEp3br6MJ8UpzXFj7_QZs · 10 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/thoughts-on-our-website-redesign.txt`)
+- [x] es · animal charity evaluators / our-thinking-on-reviewing-international-charities.txt · 1J0vhucVx3wSCRZbF3IKDB75teMVI-kxe · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/our-thinking-on-reviewing-international-charities.txt`)
+- [x] es · animal charity evaluators / eaa-research-update-and-call-for-questions.txt · 1Da_5yZBp0vB81Ucn-jTuzyAXQO5Z6Cpq · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/eaa-research-update-and-call-for-questions.txt`)
+- [x] es · animal charity evaluators / 3-simple-ways-to-understand-user-behavior.txt · 1xod3viLlTYs_zlzfHvHTU32yjxl48gDX · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/3-simple-ways-to-understand-user-behavior.txt`)
+- [x] es · animal charity evaluators / welcome-aces-new-staff-member-dee-perez.txt · 1lhWphPF3gozbgZMZ8PsVdCtq5hSIf6Op · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/welcome-aces-new-staff-member-dee-perez.txt`)
+- [x] es · animal charity evaluators / diversity-and-inclusion-in-the-animal-rights-movement.txt · 1-8dSi8RX0U8dgiC04X-YbQmm2Hnw1WAf · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/diversity-and-inclusion-in-the-animal-rights-movement.txt`)
+- [x] es · animal charity evaluators / thinking-studies.txt · 1gVcCXowIhV0ttscoARByAhAYyvIDVATQ · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/thinking-studies.txt`)
+- [x] es · animal charity evaluators / does-money-make-you-happy.txt · 1jFuztNAufys29Z66EH75sJKK_Exv3M3d · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/does-money-make-you-happy.txt`)
+- [x] es · animal charity evaluators / breaking-down-the-leafleting-study.txt · 12md-AJXqKcoh_kV3jiPzrcgarDir79wR · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/breaking-down-the-leafleting-study.txt`)
+- [x] es · animal charity evaluators / do-protests-hurt-animal-activism.txt · 1YcxtAyVWoGp3ELo1Y9m3U68paZVCqmRy · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/do-protests-hurt-animal-activism.txt`)
+- [x] es · animal charity evaluators / ace-highlight-our-use-of-cost-effectiveness-estimates.txt · 1N8UGwKNOaapMUGkde-N8b7OKvJNLn55B · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-our-use-of-cost-effectiveness-estimates.txt`)
+- [x] es · animal charity evaluators / introducing-recommendations-december-2014.txt · 1gbqXrsmCoRmD2ShPqICJtA5SWt5cS5LA · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/introducing-recommendations-december-2014.txt`)
+- [x] es · animal charity evaluators / social-movements-research-project.txt · 1mn4UFXw_UjFK9jHilV0YvfIcVyGGfXwO · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/social-movements-research-project.txt`)
+- [x] es · animal charity evaluators / ab-testing.txt · 1NM97vTRtM6Otm42J9DKpWIfPEOWo-vfS · 11 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ab-testing.txt`)
+- [x] es · animal charity evaluators / make-helping-animals-your-legacy-2.txt · 1Ya9pJZkfLzr0XMh8j19CTHsyw5e4e7BX · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/make-helping-animals-your-legacy-2.txt`)
+- [x] es · animal charity evaluators / research-is-hard-what-weve-learned-from-the-leafleting-study.txt · 1MMfwxNhxrv8el0jsyyJFbH8IOz_1L9jt · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/research-is-hard-what-weve-learned-from-the-leafleting-study.txt`)
+- [x] es · animal charity evaluators / animal-advocacy-at-ea-global.txt · 1oCMs4vjODfxzQ6vjnRYtige48uwuoM1X · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/animal-advocacy-at-ea-global.txt`)
+- [x] es · animal charity evaluators / research-review-process-call-for-external-reviewers.txt · 11GpNC112nRstDGHPCD9ptv9bitp7s3mJ · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/research-review-process-call-for-external-reviewers.txt`)
+- [x] es · animal charity evaluators / using-technology-to-increase-animal-advocacy-effectiveness.txt · 12BwfEi9oP7oRm4uQW5SRQ1HT_-EHoYz6 · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/using-technology-to-increase-animal-advocacy-effectiveness.txt`)
+- [x] es · animal charity evaluators / the-value-of-sanctuaries-and-how-to-maximize-their-impact.txt · 1yhPstjqzxwM21JwCkfLKRctIPnuK6FpU · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/the-value-of-sanctuaries-and-how-to-maximize-their-impact.txt`)
 - [ ] es · animal charity evaluators / ace-interviews-peter-singer.txt · 1hmbQSWhZ2YrqzHqQeQ00uydklro-621s · 12 KB · txt
-- [ ] es · animal charity evaluators / updated-recommendations-december-2016.txt · 1UveLxTFd7RPMcueci92R07YMBxYPjDqP · 13 KB · txt
-- [ ] es · animal charity evaluators / 2015-ace-donor-survey-results.txt · 1f_hQvOcXGzFyP3KkrlQFbjEVPQiouFWK · 13 KB · txt
-- [ ] es · animal charity evaluators / audience-ace.txt · 1rfKvLIGMhHxAXa8Naibkihnu-Se905FB · 13 KB · txt
-- [ ] es · animal charity evaluators / comparing-top-and-standout-charities.txt · 1oOWqfZE8lGeKRAn1YJ78CcHxe1XD8VB- · 13 KB · txt
-- [ ] es · animal charity evaluators / prospective-goals-looking-back-at-2014.txt · 1q9qAJ1bsuNG76lduAnjdaeQZn5dFVRNz · 13 KB · txt
-- [ ] es · animal charity evaluators / important-questions-resources.txt · 1P7nAXY8qYvH2Q5dshKGMVojqem1Db_jt · 13 KB · txt
-- [ ] es · animal charity evaluators / op-ed-saving-one-cow-to-slaughter-another.txt · 111GG2ByUWHW2ksTyDO3b2qJLWKcbRCFm · 13 KB · txt
-- [ ] es · animal charity evaluators / prospective-goals-looking-back-at-2015.txt · 19UmdIOX86suslNavjWTgusNLrSdZwD80 · 13 KB · txt
-- [ ] es · animal charity evaluators / additional-analysis-of-a-study-of-vegetarians.txt · 1meSVehY3UCdAJXKQzl2-ZBx2sRKf7VuX · 13 KB · txt
-- [ ] es · animal charity evaluators / updated-recommendations-december-2015.txt · 18vI_gWw3OTl7CAQBCbDcDpbrsoahrIOw · 13 KB · txt
-- [ ] es · animal charity evaluators / decision-to-rescind-our-recommendation-of-hsus-fapc.txt · 10W6pmaENYHl1AqtN8QLxgTTIAAkj3nHc · 14 KB · txt
+- [x] es · animal charity evaluators / updated-recommendations-december-2016.txt · 1UveLxTFd7RPMcueci92R07YMBxYPjDqP · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updated-recommendations-december-2016.txt`)
+- [x] es · animal charity evaluators / 2015-ace-donor-survey-results.txt · 1f_hQvOcXGzFyP3KkrlQFbjEVPQiouFWK · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/2015-ace-donor-survey-results.txt`)
+- [x] es · animal charity evaluators / audience-ace.txt · 1rfKvLIGMhHxAXa8Naibkihnu-Se905FB · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/audience-ace.txt`)
+- [x] es · animal charity evaluators / comparing-top-and-standout-charities.txt · 1oOWqfZE8lGeKRAn1YJ78CcHxe1XD8VB- · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/comparing-top-and-standout-charities.txt`)
+- [x] es · animal charity evaluators / prospective-goals-looking-back-at-2014.txt · 1q9qAJ1bsuNG76lduAnjdaeQZn5dFVRNz · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/prospective-goals-looking-back-at-2014.txt`)
+- [x] es · animal charity evaluators / important-questions-resources.txt · 1P7nAXY8qYvH2Q5dshKGMVojqem1Db_jt · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/important-questions-resources.txt`)
+- [x] es · animal charity evaluators / op-ed-saving-one-cow-to-slaughter-another.txt · 111GG2ByUWHW2ksTyDO3b2qJLWKcbRCFm · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/op-ed-saving-one-cow-to-slaughter-another.txt`)
+- [x] es · animal charity evaluators / prospective-goals-looking-back-at-2015.txt · 19UmdIOX86suslNavjWTgusNLrSdZwD80 · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/prospective-goals-looking-back-at-2015.txt`)
+- [x] es · animal charity evaluators / additional-analysis-of-a-study-of-vegetarians.txt · 1meSVehY3UCdAJXKQzl2-ZBx2sRKf7VuX · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/additional-analysis-of-a-study-of-vegetarians.txt`)
+- [x] es · animal charity evaluators / updated-recommendations-december-2015.txt · 18vI_gWw3OTl7CAQBCbDcDpbrsoahrIOw · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updated-recommendations-december-2015.txt`)
+- [x] es · animal charity evaluators / decision-to-rescind-our-recommendation-of-hsus-fapc.txt · 10W6pmaENYHl1AqtN8QLxgTTIAAkj3nHc · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/decision-to-rescind-our-recommendation-of-hsus-fapc.txt`)
 - [ ] es · animal charity evaluators / top-animal-charities-and-climate-change.txt · 1QuI6EeotI9Kq0Nty2-BBxxr5Jm3ZhO8R · 14 KB · txt
-- [ ] es · animal charity evaluators / ace-highlight-when-will-there-be-cost-competitive-cultured-animal-products.txt · 1QVkTIN2GayH8VVb2Y6kcUOwcsPjtIxUx · 14 KB · txt
-- [ ] es · animal charity evaluators / bienestaristas-o-abolicionistas-por-que-la-division-perjudica-a-los-animales.txt · 1GU-ogRai8zPmphKUcdNni7ezpbqUlFxu · 14 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-anthony-nocella.txt · 1_Ser6OuW3zFJo34NDkJlDzz0PT-AKJ4j · 14 KB · txt
-- [ ] es · animal charity evaluators / update-on-thls-room-for-funding.txt · 1I6DHeTPHlOE38q2hCICjjJ5nxFF9cclE · 14 KB · txt
-- [ ] es · animal charity evaluators / leafleting-study-analysis.txt · 1cPRVB1RCWyuV379Cp54x199gqDB1i_C3 · 14 KB · txt
-- [ ] es · animal charity evaluators / divestment-an-opportunity-for-effective-animal-advocacy.txt · 1EdxUXDkjmFqiRjvTQMXCNOOuTG_pMXat · 14 KB · txt
-- [ ] es · animal charity evaluators / can-one-conversation-lead-to-long-lasting-change.txt · 1YltZlI8syrCNDcbSjPnRTLEdmkSPdWOf · 14 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-will-potter.txt · 1jsx7ipQScqx2OZm4VcslmeeNOMDehAwE · 15 KB · txt
-- [ ] es · animal charity evaluators / pilot-pay-per-view-video-study.txt · 19hprTjdebA5B1JrVhA9FILlmlu1xRes8 · 15 KB · txt
-- [ ] es · animal charity evaluators / update-on-the-review-process.txt · 1oSrhNAiqfyyWVQxk3EBKlGw1shhEZJ9z · 15 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-brad-goldberg.txt · 1qIdzYUz7OxF73EYTIKISJESSr3bQ0thN · 15 KB · txt
-- [ ] es · animal charity evaluators / summary-of-the-2016-eaa-symposium.txt · 1Rf65a0VDQY55gQKEAwnFcrqjbRk_iAFg · 15 KB · txt
-- [ ] es · animal charity evaluators / shallow-evaluations-process-update.txt · 1MtFG8wj67-Yo2Elq17Gj9rcui2YQxodV · 16 KB · txt
-- [ ] es · animal charity evaluators / things-that-surprised-us-about-the-december-2016-evaluation-process.txt · 1ob-U0ib4yWKznLnAHXbGr3iYc1xIGXzC · 16 KB · txt
-- [ ] es · animal charity evaluators / top-charity-donor-survey-2015.txt · 1xbqn-y-j5PB-sPOBHO8rXgRvKAtteGq9 · 16 KB · txt
-- [ ] es · animal charity evaluators / things-that-surprised-us-about-the-december-2014-review-process.txt · 1zmODeCW3eObvUktWF_Q5cSneQgN-BfUn · 16 KB · txt
-- [ ] es · animal charity evaluators / the-process-leading-to-our-2016-recommendations.txt · 1LZCR5xJ20QOXacWTp0_SW-yEtKsqYIBK · 16 KB · txt
-- [ ] es · animal charity evaluators / some-updates-to-our-charity-evaluation-process-2017.txt · 1kihbg6RVHbnfwrwEfxD0KfqhKBWK-U-w · 16 KB · txt
+- [x] es · animal charity evaluators / ace-highlight-when-will-there-be-cost-competitive-cultured-animal-products.txt · 1QVkTIN2GayH8VVb2Y6kcUOwcsPjtIxUx · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-when-will-there-be-cost-competitive-cultured-animal-products.txt`)
+- [x] es · animal charity evaluators / bienestaristas-o-abolicionistas-por-que-la-division-perjudica-a-los-animales.txt · 1GU-ogRai8zPmphKUcdNni7ezpbqUlFxu · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/bienestaristas-o-abolicionistas-por-que-la-division-perjudica-a-los-animales.txt`)
+- [x] es · animal charity evaluators / ace-interviews-anthony-nocella.txt · 1_Ser6OuW3zFJo34NDkJlDzz0PT-AKJ4j · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-interviews-anthony-nocella.txt`)
+- [x] es · animal charity evaluators / update-on-thls-room-for-funding.txt · 1I6DHeTPHlOE38q2hCICjjJ5nxFF9cclE · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/update-on-thls-room-for-funding.txt`)
+- [x] es · animal charity evaluators / leafleting-study-analysis.txt · 1cPRVB1RCWyuV379Cp54x199gqDB1i_C3 · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/leafleting-study-analysis.txt`)
+- [x] es · animal charity evaluators / divestment-an-opportunity-for-effective-animal-advocacy.txt · 1EdxUXDkjmFqiRjvTQMXCNOOuTG_pMXat · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/divestment-an-opportunity-for-effective-animal-advocacy.txt`)
+- [x] es · animal charity evaluators / can-one-conversation-lead-to-long-lasting-change.txt · 1YltZlI8syrCNDcbSjPnRTLEdmkSPdWOf · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/can-one-conversation-lead-to-long-lasting-change.txt`)
+- [x] es · animal charity evaluators / ace-interviews-will-potter.txt · 1jsx7ipQScqx2OZm4VcslmeeNOMDehAwE · 15 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-interviews-will-potter.txt`)
+- [x] es · animal charity evaluators / pilot-pay-per-view-video-study.txt · 19hprTjdebA5B1JrVhA9FILlmlu1xRes8 · 15 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/pilot-pay-per-view-video-study.txt`)
+- [x] es · animal charity evaluators / update-on-the-review-process.txt · 1oSrhNAiqfyyWVQxk3EBKlGw1shhEZJ9z · 15 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/update-on-the-review-process.txt`)
+- [x] es · animal charity evaluators / ace-interviews-brad-goldberg.txt · 1qIdzYUz7OxF73EYTIKISJESSr3bQ0thN · 15 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-interviews-brad-goldberg.txt`)
+- [x] es · animal charity evaluators / summary-of-the-2016-eaa-symposium.txt · 1Rf65a0VDQY55gQKEAwnFcrqjbRk_iAFg · 15 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/summary-of-the-2016-eaa-symposium.txt`)
+- [x] es · animal charity evaluators / shallow-evaluations-process-update.txt · 1MtFG8wj67-Yo2Elq17Gj9rcui2YQxodV · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/shallow-evaluations-process-update.txt`)
+- [x] es · animal charity evaluators / things-that-surprised-us-about-the-december-2016-evaluation-process.txt · 1ob-U0ib4yWKznLnAHXbGr3iYc1xIGXzC · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/things-that-surprised-us-about-the-december-2016-evaluation-process.txt`)
+- [x] es · animal charity evaluators / top-charity-donor-survey-2015.txt · 1xbqn-y-j5PB-sPOBHO8rXgRvKAtteGq9 · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/top-charity-donor-survey-2015.txt`)
+- [x] es · animal charity evaluators / things-that-surprised-us-about-the-december-2014-review-process.txt · 1zmODeCW3eObvUktWF_Q5cSneQgN-BfUn · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/things-that-surprised-us-about-the-december-2014-review-process.txt`)
+- [x] es · animal charity evaluators / the-process-leading-to-our-2016-recommendations.txt · 1LZCR5xJ20QOXacWTp0_SW-yEtKsqYIBK · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/the-process-leading-to-our-2016-recommendations.txt`)
+- [x] es · animal charity evaluators / some-updates-to-our-charity-evaluation-process-2017.txt · 1kihbg6RVHbnfwrwEfxD0KfqhKBWK-U-w · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/some-updates-to-our-charity-evaluation-process-2017.txt`)
 - [ ] es · animal charity evaluators / should-veg-activists-use-health-arguments.txt · 1ZGH3qKrFdS3eHvUiQkB5rBlNhhpfbU_2 · 16 KB · txt
-- [ ] es · animal charity evaluators / what-does-torontos-creed-expansion-ruling-mean-for-vegan-advocacy.txt · 13U4TW303QBzhNOkiZ4Km89bkdc3oCdN9 · 16 KB · txt
+- [x] es · animal charity evaluators / what-does-torontos-creed-expansion-ruling-mean-for-vegan-advocacy.txt · 13U4TW303QBzhNOkiZ4Km89bkdc3oCdN9 · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/what-does-torontos-creed-expansion-ruling-mean-for-vegan-advocacy.txt`)
 - [ ] es · animal charity evaluators / career-advice-for-high-impact-activism.txt · 1nivWv0I7K2uNNs-8uextv0mFMsfMNPeB · 16 KB · txt
 - [ ] es · animal charity evaluators / elements-leaflet-matter.txt · 1CCJKSkEeJIkDGC-LUw-crip49FW5gjV- · 16 KB · txt
 - [ ] es · animal charity evaluators / ace-interviews-collectively-free.txt · 1n8XIzECc5cV6FNGk_OmI8ts3-4-Tduep · 16 KB · txt
-- [ ] es · animal charity evaluators / reasons-why-charities-declined-to-be-reviewed-published.txt · 1-Y4U8Aq4Hl02vE_uaazqjirpVW765rwy · 17 KB · txt
-- [ ] es · animal charity evaluators / the-process-leading-to-our-2015-recommendations.txt · 19Pwa07x1ytetdT-duWE_T9K99w-QuOF8 · 17 KB · txt
+- [x] es · animal charity evaluators / reasons-why-charities-declined-to-be-reviewed-published.txt · 1-Y4U8Aq4Hl02vE_uaazqjirpVW765rwy · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/reasons-why-charities-declined-to-be-reviewed-published.txt`)
+- [x] es · animal charity evaluators / the-process-leading-to-our-2015-recommendations.txt · 19Pwa07x1ytetdT-duWE_T9K99w-QuOF8 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/the-process-leading-to-our-2015-recommendations.txt`)
 - [ ] es · animal charity evaluators / where-ace-staff-are-giving-and-why.txt · 1GFnYJPJRNktyple-jAJ89etJ7SOmKudw · 17 KB · txt
-- [ ] es · animal charity evaluators / updated-charity-recommendations-december-2017.txt · 1zulo5tFqd5heteu8WZtUMt02_loYO765 · 17 KB · txt
-- [ ] es · animal charity evaluators / six-steps-to-self-evaluation.txt · 1L1s9ybvd7TfiaPJUrNw3hKVkyStOMz83 · 17 KB · txt
+- [x] es · animal charity evaluators / updated-charity-recommendations-december-2017.txt · 1zulo5tFqd5heteu8WZtUMt02_loYO765 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/updated-charity-recommendations-december-2017.txt`)
+- [x] es · animal charity evaluators / six-steps-to-self-evaluation.txt · 1L1s9ybvd7TfiaPJUrNw3hKVkyStOMz83 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/six-steps-to-self-evaluation.txt`)
 - [ ] es · animal charity evaluators / 2018-prospective-goals.txt · 1SeisRy9eidR1TUb10K2Rxm-S8wZQy4je · 17 KB · txt
 - [ ] es · animal charity evaluators / thinking-process-leading-december-2014-recommendations.txt · 1yBWlkfq3a21mTU5CmwyA4x3AAxRGZDsy · 18 KB · txt
 - [ ] es · animal charity evaluators / which-key-ideas-should-we-be-spreading-with-marginal-resources.txt · 1yoecQRbpJsr6DaCEc0cYEzxxd8wtkDei · 19 KB · txt
