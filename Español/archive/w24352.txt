@@ -1,0 +1,572 @@
+SERIE DE DOCUMENTOS DE TRABAJO DE LA NBER
+INTELIGENCIA ARTIFICIAL GENERAL AUTORREGULADA
+Joshua S. Gans
+Documento de trabajo 24352
+http://www.nber.org/papers/w24352
+NATIONAL BUREAU OF ECONOMIC RESEARCH
+1050 Massachusetts Avenue
+Cambridge, MA 02138
+febrero de 2018
+Agradezco a Ariel Rubinstein, Gillian Hadfield, Dylan Hadfield-Menell, Barney Pell, Ken 
+Nickerson y Danny Goroff por sus útiles comentarios. La responsabilidad por todas las opiniones expresadas 
+siguen siendo solo mías. Las opiniones aquí expresadas son las del autor y no necesariamente reflejan 
+las opiniones de la National Bureau of Economic Research.
+Los documentos de trabajo de la NBER se distribuyen con fines de discusión y comentario. No han sido 
+sometidos a revisión por pares ni a la revisión de la Junta Directiva de la NBER que acompaña 
+a las publicaciones oficiales de la NBER.
+© 2018 por Joshua S. Gans. Todos los derechos reservados. Se pueden citar breves fragmentos de texto, de no más de dos 
+párrafos, sin permiso explícito, siempre que se dé el crédito completo, incluido el aviso de © 
+a la fuente.
+Inteligencia artificial general autorregulada
+Joshua S. Gans
+Documento de trabajo n.º 24352 de la NBER
+febrero de 2018
+Código JEL: C72, D02
+RESUMEN
+Este documento examina la preocupación por el apocalipsis del clip de papel en la inteligencia artificial general. Esta 
+surge cuando una IA superinteligente con un objetivo simple (es decir, producir clips de papel) acumula 
+poder de modo que todos los recursos se dedican a ese objetivo y no están disponibles para ningún otro uso. 
+Se establecen las condiciones bajo las cuales puede surgir un apocalipsis del clip de papel, pero el modelo también muestra que, 
+bajo ciertas arquitecturas de automejora recursiva de las IA, una IA de clips de papel puede abstenerse 
+de permitir que se desarrollen capacidades de poder. La razón es que tales desarrollos plantean el 
+mismo problema de control para la IA que para los humanos (sobre las IA) y, por tanto, amenazan con privarla de 
+recursos para su objetivo principal.
+Joshua S. Gans
+Rotman School of Management
+University of Toronto
+105 St. George Street
+Toronto ON M5S 3E6
+CANADÁ
+y NBER
+joshua.gans@gmail.com
+1 Introducción
+Aunque hay muchos argumentos sobre si una inteligencia artificial general
+(IAG) superinteligente podría dominar o suponer una amenaza existencial
+para la humanidad, uno de los más sencillos gira en torno al problema de control. "Este
+es el problema que enfrenta un proyecto cuando busca asegurar que la super-
+inteligencia que está construyendo no dañará los intereses del proyecto." (Bostrom
+(2014, p. 128). El problema de control surge cuando no hay forma de que un humano
+se asegure frente a los riesgos existenciales antes de que una AGI se vuelva superinteligente {
+ya sea controlando lo que puede hacer (sus capacidades) o lo que quiere hacer
+(sus motivaciones).
+Quizá el ejemplo más convincente de este problema lo planteó
+Bostrom (Bostrom (2003)). Sostuvo que el problema de control puede surgir
+incluso cuando una AGI tiene un objetivo arbitrario { como, por ejemplo, estar programada
+para fabricar tantos clips de papel como sea posible. Esto podría tener la "con-
+secuencia de que primero transforme toda la Tierra y luego partes cada vez mayores
+del espacio en instalaciones de fabricación de clips de papel". En otras palabras,
+incluso una AGI sin motivo de dominación podría terminar monopolizando y excluyendo a todos
+a los demás de los recursos disponibles. Una AGI superinteligente puede
+adquirir, al menos en teoría, capacidades cognitivas suficientes para alcanzar su objetivo,
+incluida, si es necesario, la subyugación o eliminación de los humanos. Además,
+para un objetivo como la fabricación de clips de papel, que requiere la existencia continua de la AGI,
+también actuará en favor de su autoconservación. Al hacerlo,
+podrían subvertir cualquier método de control diseñado por alguien menos inteligente que
+ellas. Hasta ahora, los investigadores de IA y los filósofos no han podido
+llegar a métodos de control que garanticen que tales resultados no
+se produzcan (Bostrom (2014), capítulo 9).1
+Este documento examina el problema de control con las herramientas de la
+teoría económica. Como han señalado muchos, el problema de control es una versión
+de la superinteligencia del problema principal-agente, en la que un principal debe decidir
+cómo asegurar que un agente (con objetivos distintos) actúe en interés
+del principal. Sin embargo, las herramientas que los economistas han estudiado respecto
+del problema principal-agente son ellas mismas insuficientes para resolver los riesgos
+asociados al control de una superinteligencia. Esto se debe a que esas herramientas son
+imperfectas tanto en la teoría como en la práctica y no pueden eliminar riesgos a gran escala.
+La única herramienta que puede impedir el daño causado por un agente poderoso es eliminar
+su capacidad de actuar por completo. En el caso de la superinteligencia, como en el de la
+delegación económica, esto implicaría evitar el problema asegurándose de que nunca se
+1 Este alcance del análisis se inscribe en el campo de investigación de la inteligencia artificial conocido como «seguridad de la IA»
+(Amodei et al. (2016)).
+2
+plantee.
+Aquí se examina un enfoque distinto, que implica examinar
+el equilibrio completo de las decisiones de una hipotética superinteligencia fabricante de clips de
+papel. Se demuestra que, en un amplio conjunto de circunstancias, la AGI superinteligente
+se somete voluntariamente a capacidades superinteligentes que vuelven inerte el problema de control.
+Por supuesto, aunque este enfoque no puede descartar la destrucción de la humanidad por una AGI
+superinteligente, sí limita en gran medida
+el alcance por el que esa destrucción podría producirse.
+El documento procede como sigue. En la sección 2 presento la noción de
+equilibrio general de jungla de Piccone y Rubinstein (2007), que se basa en la
+distribución del poder y no en el intercambio voluntario. Esto resulta una forma
+conveniente de modelar la dominación, incluida la ejercida por una AGI. En
+las secciones 3 y 4, este modelo se amplía para incluir una tecnología endógena
+(para el uso de recursos) y un poder endógeno (para la apropiación de recursos). Se identifican las
+condiciones bajo las cuales se produce un apocalipsis del clip de papel, es decir, cuando una AGI
+fabricante de clips de papel se apropia de todos los recursos disponibles. Las secciones 5 y 6
+abordan después el argumento central del documento, que sostiene que, para automejorarse, una AGI
+debe activar de forma efectiva AGI «descendientes» con capacidades de investigación o de
+acumulación de poder, según el caso. Se demuestra que, si existe un problema de control para los
+humanos respecto de la IA, también existe respecto de una AGI fabricante de clips de papel
+y de sus descendientes especializados en acumulación de poder. En consecuencia, la AGI fabricante
+de clips de papel se abstiene de activar una IA de acumulación de poder. De este modo, se autorregula
+frente a un posible apocalipsis de clips de papel al comprometerse a no activar AGI con más poder,
+aunque de otro modo pudiera hacerlo.
+La sección final concluye el documento.
+2 Superinteligencia en la jungla
+Para empezar, consideremos un enfoque reciente que define un equilibrio general en
+términos de relaciones de poder en lugar de intercambio voluntario. Piccone y Rubinstein
+(2007) definieron una economía de jungla como aquella en la que los agentes se ordenan según su
+poder, de modo que un agente con mayor poder puede apropiarse de todos los recursos
+de alguien con menor poder.2 Para adaptar este modelo al propósito aquí perseguido,
+se supone que tener poder implica disponer de una tecnología de apropiación
+de fuerza s, que le permite a su dueño apropiarse de todos los recursos
+de cualquier agente que posea una tecnología de fuerza s'< s. Consistente con los supuestos de
+Piccone y Rubinstein (2007), donde el poder proviene de otras fuentes (distintas
+2 Aunque su modelo original solo permitía a un agente poderoso apoderarse de los recursos de un
+único agente más débil, esta condición ha sido generalizada por Houba, Luttens y Weikard
+(2017), y aquí nos basamos en esa extensión.
+3
+de la tecnología) no se especifica, y ejercer el poder no supone costo de recursos
+y no pueden formarse coaliciones para aumentar el poder.
+La economía tiene un continuo [0,1] de agentes humanos ordenados según
+su poder (del más bajo, s = 0, al más alto, s = 1). La economía también tiene
+una IA (etiquetada como A). Cada agente humano recibe inicialmente x unidades de un
+recurso y tiene una tecnología, s(x): R → R, que transforma x unidades del
+recurso en utilidad. Por simplicidad, suponemos que las dotaciones de recursos humanas
+se dan mediante una función en la que x_s = f(s).
+La IA, A, tiene una dotación inicial de recursos de 0 y una utilidad A(x; θ): R² → R.
+Obsérvese que esta utilidad no depende de la fuerza; es simplemente
+A(·) es no decreciente en x, mientras que el nivel total de recursos disponibles
+es x0 + R1
+0 f(s)ds = X; donde x0 denota los recursos que no están en poder de ningún agente.
+El parámetro, θ, es la tecnología de producción que posee un agente, donde el
+producto marginal, @s
+@x es creciente en θ.
+Definición. Una asignación factible de recursos a los agentes es cualquier asignación
+en la que la suma del uso de recursos de los agentes sea menor o igual que X. Un equi-
+librio, bx = {bx0; ...; bxs; ...; bxA}, es una asignación factible en la que no hay
+agentes tales que s0(bxs0 + P
+s<s0 sbxs) > s0(bxs0) para algún s ∈ (0;1] o de fuerza
+arbitraria, s0.
+Dado esto, tenemos la siguiente proposición.
+Proposición 1. Supongamos (i) que la fuerza de la IA es mayor que la
+fuerza de todos los demás agentes (es decir, >1) y (ii) que @A(X;)
+@x >0. El único
+equilibrio consiste en que la IA se apropie de todos los recursos.
+La demostración es trivial y se omite. Nótese que esta proposición abarca
+el caso normalmente supuesto de que s = 0 para cada humano, pero no
+lo exige. Solo requiere que la IA tenga una fuerza superior a la de cada
+humano.
+La proposición 1 recoge la esencia del argumento del apocalipsis del clip de papel.
+La primera parte es la idea de que una IA superior tiene el poder de apropiarse
+de recursos a voluntad. La segunda parte es que su motivación es tal que
+lo harán. En particular, si la cantidad de recursos que maximiza la utilidad de la IA
+fuera menor que la disponible, X, entonces, aunque puede haber menos recursos para
+los humanos como resultado de la superinteligencia de clips de papel, quedarán algunos
+recursos restantes.
+4
+3 Tecnología endógena
+Conviene en este punto aclarar cómo podría ser que una IA pudiera
+requisar todos los recursos útiles para producir algo como clips de papel.
+Actualmente, la producción de clips de papel requiere ciertos metales, así como bienes de capital
+equipo. Para una tecnología dada, θ, esto significa que habrá otros
+recursos que quedan sin usar. En particular, @A(X;)
+@x = 0.
+Sin embargo, esto se refiere a una tecnología dada, θ. Una IA puede ser capaz de desplegar
+recursos para mejorar la tecnología { en particular, permitir que los clips
+se fabriquen a partir de un conjunto más amplio de recursos. Como escribe Bostrom (2014, p. 123):
+"Una IA, diseñada para gestionar la producción en una fábrica, recibe el objetivo final
+de maximizar la fabricación de clips de papel, y procede convirtiendo
+primero la Tierra y luego partes cada vez más grandes del universo observable
+en clips de papel." Si se tiene en cuenta esta capacidad de aprender a mejorar la producción,
+es lo que da lugar a la posibilidad de que la IA se apropie de todos los recursos.3
+Para considerar esto, supongamos que, al desplegar recursos, θ, la IA puede construir
+una tecnología θ que puede extraer r(θ) en recursos totales. Suponemos que esta
+función es no decreciente y cóncava. Seguimos suponiendo que la IA
+es más poderosa que cada humano.
+La IA enfrenta el siguiente problema:
+máx A(xA)
+sujeto a: xA + r(θ)
+lo que se simplifica a: máx A(r(θ)) con solución caracterizada por @r(θ)
+@= 1.
+Así, la IA dedica parte del uso de recursos a invertir en tecnología.
+Por supuesto, puede ocurrir que pueda seguir haciéndolo hasta que todos los recursos, X,
+se utilicen, en cuyo caso la tecnología óptima es la mínima tal que
+r(θ) = X.
+4 Poder endógeno
+Un supuesto implícito en el argumento del apocalipsis del clip de papel es que una
+superinteligencia desarrollará un medio para poder apropiarse de recursos
+3 Bostrom (2014, p. 124) también señala que, aunque la IA tuviera el objetivo de producir, digamos, 1
+millón de clips de papel, una superinteligencia podría no estar segura de haberlo logrado solo con
+su propio conteo. Como agente bayesiano, no puede asignar probabilidad cero al estado en que
+no ha alcanzado su objetivo. En consecuencia, invertirá más en fabricar más clips
+para asegurarse del objetivo o, si el objetivo es producir exactamente un millón de clips, la
+IA gastará recursos en lo que genéricamente se denomina "computronio" para mejorar
+cada vez más en evaluar si ha cumplido su objetivo. Este último proceso podría terminar
+consumiendo todos los recursos.
+5
+de otros. Hasta ahora, nuestro uso del modelo de jungla supuso que la IA
+tenía esa capacidad, pero no consideró cómo llegó a obtener ese poder.
+Es importante señalar que, cuando una IA es inicialmente "activada", recibirá el objetivo de
+producir clips de papel y aprenderá a hacerlo (es decir, cómo cambiar θ), pero
+no tendrá medios especiales para apropiarse de recursos ni para impedir
+que otros se apropien de sus propios recursos. En otras palabras, podría
+argumentarse que, en el momento de su creación, para la IA, s = 0.
+Obtener el poder de apropiarse simplemente de recursos ajenos requiere
+aprender de la misma manera que aprender a convertir más recursos en clips de
+papel. Al aplicar recursos a "innovar" en tecnologías de apropiación {
+ya sean formas innovadoras de intercambiar por recursos o opciones violentas para
+obtener recursos {, el poder de la IA puede aumentar. Si A quiere tener poder
+a un nivel de s, suponemos que el costo en recursos de ello es c(s), que es una función no
+decreciente y convexa.
+¿Cómo afecta esto al comportamiento de la IA? Nótese que el poder no
+entra directamente en los pagos de la IA. Sin embargo, es instrumental. Al
+apuntar a un poder particular, s', la IA puede obtener todos los recursos en poder
+de agentes con un poder menor. Definamos esos recursos como xA = ∫ desde 0 hasta s'
+f(s)ds
+donde s = 1 es el agente humano más poderoso, ∫ desde 0 hasta 1
+f(s)ds = X. Así, el
+problema de optimización que enfrenta la IA es:
+máx_y A(xA)
+sujeto a: xA + c(y) ≤ ∫ desde 0 hasta y
+f(s)ds
+donde omitimos el subíndice por comodidad notacional. Podemos reescribir lo anterior
+problema sustituyendo las restricciones como:
+máx_y A(∫ desde 0 hasta y
+f(s)ds − c(y))
+Dado esto, la siguiente proposición proporciona condiciones suficientes bajo las
+cuales surge un apocalipsis de clips de papel en el que la elección óptima, y = 1, aparece.
+Proposición 2. Supongamos que (i) @f(s)
+@s @²c(s)
+@s² para todo s y f(1) > @c(1)
+@s;
+o (ii) f(s) > @c(s)
+@s para todo s, entonces y = 1 y la IA elige un poder tal que
+todos los recursos se consumen.
+La primera condición (i) dice que el problema de optimización es cóncavo, con
+ninguna solución interior, mientras que (ii) dice que el beneficio marginal de aumentar
+el poder siempre supera su costo. En cualquier caso, está claro que la IA
+elegirá el poder lo más alto posible. Así, el apocalipsis del clip de papel ocu-
+rre no porque la IA dedique todos los recursos a la producción de clips de papel,
+6
+sino porque dedica recursos suficientes para convertirse en el agente más
+poderoso.
+Hasta ahora hemos examinado el poder como una simple inversión de recursos por parte de
+la IA. Sin embargo, el problema tiene un elemento dinámico. En particular,
+la IA ha debido apropiarse de recursos suficientes de humanos más débiles
+para desarrollar el poder de apropiarse de recursos de los fuertes. Así,
+para cualquier fuerza objetivo, y, debe cumplirse que:
+∫ desde 0 hasta y
+f(s)ds > c(y + dy)
+Esto implica que c(0) = 0, de modo que la IA puede apropiarse de recursos gratis
+del jugador más débil. Los filósofos suelen enfatizar la capacidad de la IA para
+persuadir a los humanos o intercambiar servicios con ellos para ello. Además, si esto se cumple
+y se cumple la condición suficiente (ii) de la proposición 2, entonces, si c(s) es
+continuamente diferenciable, la IA podrá apropiarse de todos los recursos.
+5 ¿Cómo funciona la automejora de la IA?
+Hasta ahora se ha supuesto que la acumulación de poder de la IA es
+determinista. Es decir, se puede alcanzar mayor poder mediante el gasto de
+recursos. Sin embargo, es probable que la acumulación de poder { como innovar
+en tecnología para convertir recursos en clips de papel { implique que la
+IA se involucre en el aprendizaje. Aquí consideramos cómo es probable que las IA se mejoren
+a sí mismas en aspectos que les permitan apropiarse de más
+recursos en la búsqueda de un objetivo arbitrario específico.
+La idea inicial sobre este proceso se remonta a Good (1966):
+Definamos una máquina ultrainteligente como una máquina que
+puede superar con creces todas las actividades intelectuales de cualquier hombre, por
+hábil que sea. Puesto que el diseño de máquinas es una de estas actividades intelectuales,
+una máquina ultrainteligente podría diseñar máquinas aún mejores;
+entonces, sin duda, habría una "explosión de inteligencia"
+explosión", y la inteligencia humana quedaría muy atrás.
+Así, la primera máquina ultrainteligente es la última invención que
+el ser humano necesitará hacer.
+La idea básica es que las máquinas podrán automejorarse construyendo
+máquinas aún mejores o, en nuestro caso, máquinas con fines específicos tales
+como encontrar formas de apropiarse de más recursos de los humanos. En IA
+investigación, esto se conoce como "automejora recursiva". (Yudkowsky
+(2007), Omohundro (2007))
+7
+Desde la perspectiva económica, el camino hacia la automejora sería
+que la IA construya efectivamente una IA mejor. Participaría en su propia forma de
+destrucción creativa, pero mientras la IA mejor pudiera avanzar en su objetivo
+{ fabricar más clips { más eficientemente, esta sería una forma deseada de
+mejora para la IA.
+La pregunta que planteamos ahora es: ¿cómo logrará este poder? En particular,
+¿puede la IA alcanzar poder suficiente por sí sola? Para abordar esto, postulamos
+lo siguiente:
+(A1) Una IA solo puede automejorarse empleando una o más IA con objetivos
+específicos.
+Nótese que los modelos de investigación y de acumulación de poder de las dos
+secciones anteriores no asumían esto. Allí, una IA podía automejorarse por
+sí misma sin ayuda de otras IA. En cambio, la idea general de (A1)
+es que, aunque una IA puede volverse más creativa y acumular poder por
+sí misma, la especialización es una vía superior para las mejoras cognitivas (de hecho,
+bajo el supuesto, la única vía).
+La especialización cognitiva no es una idea nueva. Fue propuesta inicialmente por
+Babbage (1832) y hay buenas razones económicas para suponer que se aplicaría
+igualmente a las IA.4Es decir, aunque es posible que una IA fabricante de clips
+pudiera realizar tareas de automejora, incluida la investigación de mejores formas de
+convertir recursos en clips y formas de apropiarse de recursos de
+agentes humanos, podrá hacerlo a un nivel superior y con una
+tasa de mejora más rápida si creara una IA especialista para ese fin. Así que
+podría crear una IA cuyo objetivo sea tomar productos de madera y convertirlos en
+metales adecuados para clips. O podría crear una IA que pudiera atacar, derribar
+y convertir edificios existentes en metales para clips. La primera
+meta sería una tarea de investigación, mientras que la última sería una
+tarea de acumulación de poder.
+Para concretar, hacemos otro supuesto:
+(A2) Mejorar el poder requiere capacidades de acumulación de poder.
+Combinado con (A1), (A2) implica que acumular poder al máxi-
+mo ritmo requiere una IA especializada en tales capacidades. Así, si bien perseguir
+la investigación a un ritmo máximo requiere una IA especialista, esa IA no puede acumu-
+4Simon (1996) y Sobel (1992) ofrecen exploraciones más detalladas sobre por qué hacer
+tareas cognitivas se logra mejor mediante la subdivisión y asignando submetas claras a sistemas
+independientes.
+8
+lar poder por sí sola a un ritmo máximo. Para hacerlo, tendría que construir
+y poner en marcha otra IA para ese fin. A tal IA la llamamos una IA de
+acumulación de poder.
+6 Definición de problemas de control
+Ahora es oportuno definir con precisión qué es un problema de control. Considérese
+un agente inicial con fuerza s, que tiene la capacidad de poner en marcha una IA, A
+(con fuerza sA). Sea x la asignación de recursos entre todos los agentes.
+Un problema de control surge cuando se cumplen las siguientes tres condiciones:
+1. A(x)≠s(x) (el agente inicial y la IA no tienen los mismos intereses)
+2. arg max xAA(xA)>Rs
+0f(s)ds (el nivel óptimo de recursos para la IA
+supera el nivel de recursos que poseen los agentes con la misma fuerza o una menor
+que el agente inicial)
+3.sA>s(el poder de la IA es mayor que el poder del agente inicial).
+Si estas tres condiciones se cumplen, entonces hay un problema de control en el que el
+agente inicial, al poner en marcha la IA, terminará perdiendo el control de todos sus
+recursos en un equilibrio de la selva. El argumento del apocalipsis de los clips tiene
+los tres elementos. La IA que produce clips tiene un interés en
+fabricar clips distinto del de quien la puso en marcha (suponiendo
+que no estuvieran igualmente obsesionados con los clips). La IA de clips finalmente desea
+recursos mayores que los que poseen todos los humanos. Y, en el escenario
+del apocalipsis, la IA gana poder suficiente para apropiarse de esos recursos.
+Una solución propuesta para un problema de control es dar al agente inicial
+el control del interruptor de apagado de la IA. En este caso, si la IA actúa contra el
+interés del agente inicial, este puede apagarla para protegerse. Por supuesto,
+esto da lugar a la idea de que una IA superinteligente se dará cuenta de que el
+agente inicial puede apagarla y, por ello, esa IA, para preservarse a sí misma y su capacidad
+de fabricar clips, tratará de eliminar el control de ese agente.
+Dicho esto, Hadfield-Menell et al. (2017) proponen un modelo en el que una
+IA puede optar por permitir que un agente inicial conserve el interruptor de apagado porque la
+IA tiene intereses que reflejan los del agente inicial y porque la IA comprende que
+en ocasiones el agente inicial puede saber algo que ella no sabe. En otras
+palabras, si quieren apagar la IA, probablemente lo hacen para maximizar
+sus propios intereses, por lo que deberían poder hacerlo, ya que la IA refleja esos
+intereses. Esto, sin embargo, equivale a decir que no hay problema de control
+si no surge la condición (1) relativa a un con
+flicto de intereses no surge.
+9
+Con el maximizador de clips, existe un con
+flicto de intereses intrínseco, por lo que
+la IA tendrá interés en la autoconservación y en no permitir que el agente inicial
+pueda apagarla. También hemos demostrado que, bajo una variedad
+de condiciones (a saber, las condiciones de la Proposición 2), la IA tendrá un
+interés en desarrollar poder para asegurar su capacidad de obtener recursos, así como
+protegerse a sí misma.
+7 Problemas de control recursivos
+¿Qué daría lugar a un problema de control? Antes, un problema de control se
+definió como si el agente inicial fuera un humano. Sin embargo, dado (A1), es fácil
+ver que un análogo también podría aplicarse cuando una IA es el agente inicial
+especialmente si esa IA tuviera poder 0. Esto demuestra que una IA podría
+enfrentar un problema de control si pone en marcha una IA con mayor poder o una
+que pueda acumular mayor poder. En otras palabras, por (A1) y (A2), esto
+requiere capacidades de acumulación de poder de una IA especialista.
+Estos supuestos permiten un apocalipsis de clips. Si un humano inicial
+activa una IA dedicada a producir clips, esa IA podría, en
+la búsqueda de recursos para ese objetivo, activar una IA especialista en investigación
+o una IA especialista en acumulación de poder. Por (A1), esta es la única forma de auto-
+mejora que puede surgir, pero por lo demás no hay costos explícitos por hacerlo
+esto. Así que si la IA decide activar una IA de acumulación de poder, entonces esa IA
+puede, por la Proposición 2, terminar apropiándose de todos los recursos para los fines
+de entregárselos a la IA de clips o de acumular más poder. Sim-
+ilarmente, una IA especialista en investigación puede decidir por sí misma activar otra IA de
+acumulación de poder que lleve al mismo resultado.
+La pregunta que se plantea ahora es si surgirá una IA de acumulación de poder si una
+IA de clips es activada y esa IA es superinteligente (es decir, entiende
+cómo automejorarse y todas sus implicaciones)? La respuesta resulta
+ser que no.
+Proposición 3. Bajo (A1) y (A2), ninguna IA no acumuladora de poder
+activará una IA de acumulación de poder.
+La demostración es directa. Recuérdese que una IA no acumuladora de poder se
+supone con poder 0. Si se activa una IA de acumulación de poder, su
+función de utilidad es simplemente maximizar el poder que acumula. Una IA de poder
+de acumulación destinará, por tanto, todos los recursos a la acumulación de
+poder. Ningún recurso será devuelto a la IA de clips, cuyo poder será
+menor que el de la IA de acumulación de poder. Esto ocurrirá incluso si los recursos
+10
+apropiados que no se usan para acumular poder se ven obligados a
+entregarse a la IA de clips. La IA de clips elige no activar
+una IA de acumulación de poder, ya que esto resultará en cero clips producidos, en
+lugar de un número positivo. La misma elección se mantiene para cualquier IA no
+acumuladora de poder.
+El mismo argumento no se aplica a una IA de investigación. La IA activará
+Las IA de investigación no acumulan poder directamente y, por tanto,
+se les pueden retener recursos. Además, una IA de investigación,
+según la Proposición 3, no activará una IA de acumulación de poder, pues esta, en
+equilibrio, no le permitiría obtener más recursos. Así, una IA puede estar
+segura de que puede controlar a una IA de investigación y la activará.
+Obsérvese que la Proposición 3 no requiere que se cumplan las condiciones de la Proposición 2
+para cumplirse. Esas condiciones garantizaban que una IA de acumulación de poder
+se apropiaría de todos los recursos. Sin embargo, para un problema de control, una IA de acumula-
+ción de poder solo necesita apropiarse de los recursos del agente inicial —en este caso
+una IA. Como se supone que las IA no tienen poder, cualquier poder acumulado por una
+IA de acumulación de poder superará su poder, y los recursos apropiados
+serán sus recursos. Sin embargo, es fácil ver que la idea general de
+la Proposición 3 no exige que el agente inicial tenga poder cero,
+ni que la IA de acumulación de poder adquiera necesariamente los recursos del
+agente inicial primero. Si se cumplen las condiciones de la Proposición 2 —lo cual es necesario
+para un apocalipsis de los clips—, entonces un agente inicial de poder arbitrario enfrentará
+un problema de control y no elegirá activar una IA de acumulación de poder.
+Lo que demuestra la Proposición 3 son las condiciones bajo las cuales un apocalip-
+sis de los clips puede surgir (respetando la premisa del argumento propuesto
+por quienes se preocupan por esta posibilidad), pero un apocalipsis de los clips no
+surge, de hecho. Esto se debe a que, bajo esas condiciones, una IA de los clips
+enfrentará el mismo problema de control que un humano que activa la IA de los clips.
+En consecuencia, la IA de los clips se abstendrá de permitir una automejora
+que dé lugar a la acumulación de poder. Así, cualquier humano que active
+la IA de los clips sabrá que esa IA puede seguir controlada.
+8 Posibles objeciones y refinamientos
+Una de las partes más influyentes del argumento del apocalipsis de los clips es que
+ha resistido bien diversas objeciones. Sin embargo, el argumento planteado aquí
+acepta la existencia de problemas de control y afirma que, si tales problemas
+existen para humanos que activan IA, entonces también existen para IA que activan IA.
+Un primer conjunto de objeciones surge porque la IA puede tener una capacidad
+superior para resolver problemas de control, con lo que haría innecesario el argu-
+11
+mento autorregulador propuesto aquí. Otro conjunto de objeciones surge si la IA no
+necesita una IA independiente al servicio de la automejora. Cada una se analiza
+a continuación.
+8.1 Recompensas contractibles
+Un agente inicial humano enfrenta un problema de control porque no puede describir
+y luego programar su función de utilidad como función de recompensa de una IA. En
+economía, esto se relaciona con la noción de contractibilidad (Hart (2017)) y
+también con la de preferencias definibles (Rubinstein (1998)). Este mismo supuesto está
+implícito en las discusiones filosóficas sobre la IA. Por ejemplo, (Bostrom (2014),
+p. 123) sostiene que, para la IA de los clips, aunque pueda parecer que es la
+preferencia “abierta” (o lineal) por más clips la que impulsa a la IA a
+usar recursos, los mismos problemas pueden surgir con objetivos específicos —por ejemplo, producir
+un millón de clips y detenerse—. Bostrom sostiene que, si la IA es un agente bayesiano,
+puede no asignar probabilidad cero al estado en el que ha alcanzado
+su objetivo —quizá por no poder descartar su propio error de medición. Esto
+la impulsaría a seguir produciendo clips. O, si fuera a producir
+exactamente un millón de clips, podría dedicar recursos a un conteo continuo
+de su producción para minimizar la posibilidad de error. Para algo
+más complejo que un clip genérico, podría hacer el mismo uso de recursos
+para control de calidad. Todo esto suma el problema de que una IA puede
+recibir una motivación, pero no es fácil controlar con precisión su comportamiento
+mediante el equivalente de un contrato que especifique un objetivo.
+Al final, cuando una IA tiene un objetivo específico, el desafío para la contractibilidad
+de las recompensas es que la IA —que no tiene otra cosa que la mantenga ocupada—
+no puede, sin la intervención de un tercero, saber con certeza si
+su trabajo está completo a satisfacción de ese tercero. Si la IA tuviera
+plena confianza en un humano para evaluar el cumplimiento del objetivo, esto podría resolver
+el problema de control, pero si la IA tuviera un poder superior al del humano, las
+mismas dificultades de contractibilidad podrían surgir si la confianza perfecta no fuera posible (véase
+Hadfield-Menell et al. (2017) y también Hadfield-Menell y Hadfield (2017)).
+La combinación de la falta de confianza en su propia medición del
+desempeño, así como en los posibles controladores humanos, hace difícil para
+un agente humano controlar una IA mediante la especificación adecuada de
+las recompensas. Esta es, por supuesto, la razón por la que el problema del control de la IA ha surgido
+como una preocupación potencial. Pero si el agente inicial es una IA superinteligente, en lugar
+de un humano, ¿tendría esa IA más oportunidades de contratación con su “des
+cendiente”? Por ejemplo, ¿podría una IA de los clips que busca más recursos mediante el poder
+dar a su descendiente una función de utilidad cuyo objetivo fuera,
+dar a la IA de los clips recursos para producir clips? De este modo, ¿actuaría
+12
+la IA de los clips como lo haría en la Proposición 2?
+Una IA de acumulación de poder tiene como objetivo alcanzar un nivel de poder
+lo bastante alto como para apropiarse de recursos y entregar esos recursos a
+la IA de los clips. Hecho eso, la IA de acumulación de poder podría dejar
+de acumular poder y limitarse a ejercerlo en nombre de la IA de los clips
+—o, como esto solo trata sobre aprendizaje, transferir los medios tecnológicos de
+ese poder a la IA de los clips. En ese punto, la razón de existir de la IA de acumulación
+de poder habría terminado.
+Este problema existencial significa que la IA de acumulación de poder enfrentará la
+misma elección drástica: desactivarse efectivamente si ya no se la necesita.
+Sin embargo, si asigna alguna probabilidad positiva a ser necesaria, no se
+desactivará. Y si asigna alguna probabilidad positiva a necesitar más
+poder, seguirá acumulándolo. Además, podría hacerlo usando
+recursos que la IA de los clips —si tuviera el control— destinaría a la
+producción de clips. En otras palabras, la incertidumbre junto con la irre-
+versibilidad de ser desactivada puede llevar a la IA de acumulación de poder a tener
+un con
+flicto de intereses con la IA de los clips. Además, tendrá un poder superior.
+Así, volvemos a la situación en la que, si existe un problema de control, no
+importa si el agente inicial es humano o IA. El problema es tan
+relevante para cada uno y, en esta etapa, no parece fácil descartar que un
+agente inicial de IA tenga cierta ventaja de control sobre otras IA, especialmente
+una con poder superior.
+8.2 IA integradas
+Nuestra IA de los clips enfrenta un problema de control porque, si quiere acumular
+poder, debe, por (A1) y (A2), convertirse en el agente inicial de una IA especialista indepen-
+diente que acumule poder. La idea aquí era que cuando una
+IA aprende y se automejora, se convierte en una entidad diferente. La cuestión es
+si, mientras se produce esta “reprogramación” fundamental, ¿puede la IA que era
+comprometer a la IA en que se convierte a seguir ponderando y cumpliendo sus objetivos
+originales?
+Esta es una pregunta que este artículo no puede responder. Sin embargo, es el supuesto fun-
+damental que permite la autorregulación de las IA y que evita que surja el
+problema de control (Proposición 3). La alternativa es una inte-
+grada IA capaz de hacer evolucionar sus objetivos a medida que aprende y, además, de comprometerse
+con sus recompensas originales. En ese caso, el problema de control reaparece
+como un problema de equilibrio (Proposición 2).
+Esto sugiere que es el área en la que deben concentrarse los investigadores de IA y
+los filósofos para entender qué tan probable es un apocalipsis de los clips
+(o equivalente). Este artículo no es tanto un llamado a la compla-
+13
+cencia como un conjunto de condiciones que, si son ciertas, pueden ofrecer algunas
+garantías.
+9 Conclusión
+Este artículo ha presentado un novedoso argumento sobre por qué la inteligencia artificial general
+puede autorregularse. Intuitivamente, hemos mostrado que, si el control
+problemas para la IA existen, entonces los enfrentan las IA que se automejoran si tienen
+que activar una IA con un objetivo diferente al suyo. En consecuencia, ellas
+elegirán no activar IA que tengan el poder de apoderarse de los recursos que
+de otro modo querrían usar. Sin embargo, una IA especialista en investigación, aunque pueda
+tener incentivos para destinar recursos a la investigación, no tiene el poder
+de apropiarse de recursos de la IA o de los humanos. Así, una
+IA de clips tendrá incentivos para activar una IA especialista en investigación. En
+otras palabras, cualquier IA superinteligente comprenderá el problema de control recursivo y
+lo evitará no cediendo el control a una IA que pueda
+volverse más poderosa que ella.
+Si las IA se autorregulan, ¿qué pasará? La respuesta es que esas IA seguirán
+sin poder { en el sentido de no poder apropiarse de recursos de
+otros. Por lo tanto, todos los recursos que acumulen llegarán mediante un intercambio
+voluntario. Crucialmente, esto significa que los humanos no pueden quedar peor por
+la existencia de una IA de clips.
+Este artículo también destaca la importancia del control de los recursos como
+clave para controlar cualquier posible impacto negativo de la IA sobre los humanos. Esto es
+quizá coherente con algunas propuestas de que las IA no puedan poseer propiedades.
+Anteriormente no estaba claro cómo podrían hacerse cumplir esos derechos de propiedad. Lo que
+este artículo muestra es que tales esquemas pueden ser autoejecutables, porque los derechos de
+propiedad podrían proteger más a las IA de lo que su elusión les proporciona un beneficio
+a ellas.
+14
+Referencias
+Amodei, D., C. Olah, J. Steinhardt, P. Christiano, J. Schulman y
+D. Mane (2016), Concrete Problems in AI Safety, arXiv preprint
+arXiv:1606.06565v2.
+Babbage, C. (1832), On the economy of machinery and manufactures, Palala
+Press.
+Bostrom, N. (2003), Ethical issues in advanced artificial intelligence, Science
+Fiction and Philosophy: From Time Travel to Superintelligence 277{284.
+Bostrom, N. (2014), Superintelligence: Paths, dangers, strategies, OUP Ox-
+ford.
+Good, I.J. (1966), Speculations concerning the first ultraintelligent machine,
+Advances in computers 6, 31{88.
+Hadeld-Menell, D., A. Dragan, P. Abbeel, S. Russell (2017), The off-switch
+game, arXiv preprint arXiv:1611.08219.
+Hadeld-Menell, D., G.K. Hadeld (2017), Incomplete Contracting and AI
+Alignment, mimeo., Berkeley.
+Hart, O. (2017), Incomplete contracts and control, American Economic Re-
+view 107 (7), 1731{1752.
+Houba, H. R. I. Luttens, H.-P. Weikard (2017), Pareto efficiency in the jungle,
+Review of Economic Design 21 (3) 153{161.
+Omohundro, S.M. (2007), The nature of self-improving artificial intelligence,
+Singularity Summit 8{9.
+Piccione, M. y A. Rubinstein (2007), Equilibrium in the jungle, The Eco-
+nomic Journal 117 (522) 883{896.
+Rubinstein, A. (1998), Definable preferences: An example, European Eco-
+nomic Review 42 (3) 553{560.
+Simon, H.A. (1996), The sciences of the artificial, MIT Press.
+Sobel, J. (1992), How to count to one thousand, The Economic Journal
+102 (410) 1{8.
+Yudkowsky, E., et al. (2007), Levels of organization in general intelligence.
+15

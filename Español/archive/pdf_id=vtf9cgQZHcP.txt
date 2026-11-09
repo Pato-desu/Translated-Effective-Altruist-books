@@ -1,0 +1,388 @@
+Cuantificación de la desalineación entre agentes Aidan Kierans,
+Computer Science and Engineering Department, University of Connecticut, Storrs,
+CT 06269, aidan.kierans@uconn.edu; Hananel Hazan, Allen Discovery Center, Tufts
+University, Hananel@hazan.org.il; Shiri Dori-Hacohen, Computer Science and Engineering
+Department, University of Connecticut, Storrs, CT 06269, shiridh@uconn.edu. Resumen.
+Las preocupaciones sobre el problema de la alineación de
+la IA han surgido con fuerza en los
+últimos años, y los trabajos anteriores se han centrado
+sobre todo en (1) descripciones cualitativas del problema de
+la alineación; (2) el intento de alinear las
+acciones de la IA con los intereses humanos mediante
+la especificación y el aprendizaje de valores; y/o (3)
+la atención a un único agente o a
+la humanidad como una unidad singular. Sin embargo, el
+campo en su conjunto carece de una comprensión sistemática
+de cómo especificar, describir y analizar la desalineación
+entre entidades, que pueden incluir individuos humanos, agentes de
+IA y entidades compuestas complejas, como corporaciones, estados-nación, etcétera.
+El trabajo previo sobre la controversia en las
+ciencias sociales computacionales ofrece un modelo matemático de contienda
+entre poblaciones (de humanos). En este artículo adaptamos ese
+modelo de contienda al problema de la alineación
+y mostramos cómo la desalineación puede variar según la
+población de agentes (humanos u otros) que se observa,
+así como según el dominio o el «área
+problemática» en cuestión. Nuestro modelo se aparta de los
+enfoques de especificación de valores y se centra, en
+cambio, en la maraña de objetivos complejos, entrelazados
+y a veces contradictorios que los agentes pueden tener
+en la práctica. Discutimos las implicaciones de nuestro modelo
+y dejamos una verificación más exhaustiva para trabajos futuros.
+1 Introducción Las preocupaciones sobre el problema de la alineación de la IA han surgido en
+los últimos años [p. ej., 20, 8]. Los trabajos previos han sido, en su mayoría, cualitativos
+en su descripción del problema de la alineación y/o han intentado alinear las acciones de la
+IA con los intereses humanos centrándose en la especificación y el aprendizaje de valores [9, 15];
+alternativamente, la mayoría de los modelos supone una alineación con un único agente o con la
+humanidad en su conjunto. Sin embargo, todavía carecemos de una comprensión sistemática de cómo deberían definirse
+y medirse la desalineación. Una gran laguna es la escasez de debate sobre la desalineación humana.
+Respecto de los sistemas de IA actuales, Russell [20] planteó un argumento audaz pero intuitivamente convincente:
+que la IA de las redes sociales ya está desalineada con la humanidad (p. ej., a
+través de la difusión masiva de desinformación). Sin embargo, estos sistemas de redes sociales no están desalineados
+en general con toda la humanidad, sino con ciertos individuos y grupos. Por ejemplo, los agentes
+humanos de la IRA rusa que siembran propaganda de forma activa pueden estar beneficiándose de manera significativa
+de la IA de Facebook y considerarse alineados con ella. Además, la IA de Facebook está
+en gran medida alineada con sus empleados individuales y con sus accionistas corporativos en el ámbito de
+la maximización del valor corporativo, aun cuando algunos de esos individuos pueden estar desalineados con la
+IA respecto de su propio ML Safety Workshop, 36th Conference on Neural Information Processing Systems (NeurIPS 2022).
+uso de las redes sociales y de cómo afecta a su bienestar. Por supuesto, incluso dentro
+de un mismo país hay desacuerdos frecuentes y fuertes sobre qué constituye la desalineación y por
+qué, aunque el propio término quizá no se use. Por ejemplo, las personas de la derecha
+política en Estados Unidos argumentarían que el sistema de IA de Facebook está desalineado porque socava la
+libertad de expresión, mientras que las de la izquierda argumentarían que está desalineado porque amplifica la
+desinformación. Surge una pregunta: ¿alineado con quién, y en qué? La alineación de un agente o
+sistema de IA podría ser con un adversario, en lugar de con los desarrolladores o propietarios
+del mismo; y la alineación, o la falta de ella, podría depender del contexto o del agente.
+Con ese fin, proponemos un modelo probabilístico novedoso de la desalineación, que depende de la población
+de agentes observada (humanos, IA o cualquier combinación de ambos), así como del área problemática en cuestión
+y, por extensión, de los objetivos de los agentes respecto de esa área. Para ello, extendemos
+y adaptamos un modelo de contienda de las ciencias sociales computacionales [13] y aplicamos el modelo adaptado
+al problema de la alineación. Demostramos brevemente la capacidad expresiva y el poder explicativo de este
+modelo mostrando su pertinencia para escenarios del mundo real que los modelos anteriores tienen dificultades para explicar.
+Las contribuciones de este artículo son las siguientes: (1) presentamos un modelo matemático de
+desalineación, que ofrecemos como una probabilidad que depende de (a) la población de agentes
+observada y (b) un área problemática específica; (2) proponemos utilizar la incompatibilidad de los
+objetivos de los agentes respecto del área problemática en cuestión para obtener una estimación
+de esa probabilidad; y (3) discutimos las implicaciones y los beneficios de utilizar este
+modelo para medir la desalineación en poblaciones mixtas de humanos, agentes de IA o ambos.
+2 Trabajo previo En la discusión de Critch y Krueger sobre la desalineación,
+mencionan «la dificultad de definir la alineación con un sistema de múltiples partes
+interesadas, como la humanidad», y se preguntan: «¿dónde podría trazarse el umbral entre
+“no muy bien alineado” y “desalineado”[..]?» [9, pg. 14]. Este artículo se centra
+en ambos desafíos: primero, definir la alineación entre múltiples agentes; y segundo, cuantificar
+matemáticamente la desalineación. Por tanto, nuestra contribución se aparta del trabajo previo sobre
+alineación de la IA al introducir un marco preciso pero versátil para la alineación.
+Alineación de la IA Como se ha comentado, varios investigadores también han sostenido que los sistemas de IA
+existentes causan o agravan amenazas a los ecosistemas de información, como la desinformación y la mala información, el
+discurso de odio, los sesgos y la controversia instrumentalizada [p. ej., 7, 10, 20], y amenazan la capacidad
+colectiva de la humanidad para dar sentido a las cosas, tomar decisiones y cooperar [p. ej., 2, 21].
+Nuestro modelo se aparta del trabajo existente (incluida una reciente revisión de la literatura [11]) al considerar la desalineación
+como un rasgo arraigado en una población de agentes, inherentemente cuantificable y no binario. Sugerimos que la desalineación
+puede observarse por separado entre pares de agentes y luego generalizarse y cuantificarse en un grupo mucho más
+amplio. Nuestro modelo también se aparta de la mayoría de las otras definiciones de alineación, al centrarse en
+los objetivos de los agentes en múltiples «áreas problemáticas», en lugar de en valores o intenciones [22]. Parte
+de la literatura existente ha mencionado los problemas que el pluralismo de valores antes mencionado plantea para la alineación.
+Intuitivamente, la IA debería satisfacer cierto consenso entre los valores culturales humanos para considerarse «alineada con los
+valores humanos» [12], pero no existen métodos para medir la (des)alineación de valores entre culturas o agentes
+de IA. La teoría de la elección social ofrece herramientas útiles para medir las opiniones humanas, que
+podrían servir de punto de referencia para alinear la IA [12, 19], pero ese trabajo deja abiertas
+las preguntas de a quién alinear el agente o los agentes de IA y cómo medir esa alineación.
+Modelo de contienda de Jang et al. El trabajo previo sobre la controversia [13] en las
+ciencias sociales computacionales ofrece un modelo matemático de contienda entre poblaciones (de humanos); ese artículo aborda
+la pregunta «¿controvertido para quién?». Este modelo es una vía prometedora en lo que respecta a
+la desalineación, debido a su énfasis en los desacuerdos y a su flexibilidad para abarcar una
+amplia gama de poblaciones y temas. Nuestro modelo de desalineación extiende, modifica y adapta este modelo
+de contienda para cuantificar la desalineación desde una perspectiva probabilística en una población mixta de humanos
+e IA; por tanto, nos beneficiamos de una flexibilidad similar. El apéndice A compara la notación
+del modelo de contienda con una lista completa de símbolos y definiciones utilizados en este trabajo.
+2
+3 Modelar la desalineación en poblaciones Nuestro artículo se basa en una observación clave: «resolver»
+el problema de la alineación de la IA, o incluso comprender a fondo la complejidad
+inherente a ese problema, tiene una condición previa: comprender los desafíos actuales para alinear a
+los humanos, o medir su alineación (o falta de ella), lo cual en sí mismo
+es un problema intratable y lejos de resolverse. Como prueba, basta con que uno abra su
+fuente preferida de noticias: la evidencia de conflictos (humanos), luchas de poder y disputas está en todas partes
+a nuestro alrededor. Aunque el término «alineación» no suele usarse para describir tales conflictos, es
+igualmente apropiado: alinear a los humanos es un desafío central de la vida humana, desde el conflicto armado
+hasta la competencia de mercado e incluso las disputas matrimoniales.
+Esta observación evoca el fenómeno de la contención en el discurso público. Partiendo del
+modelo computacional de contención [13], que cuantifica la proporción de personas en desacuerdo
+sobre posturas respecto de un tema, parametrizado por el grupo observado de individuos (denominado
+«población»), ahora extendemos este modelo para captar la desalineación respecto de los objetivos. Una extensión
+de la población humana a una población híbrida de agentes humanos y de IA es bastante directa.
+Quizá sorprendentemente, el modelo de contención se convierte en nuestro nuevo modelo de desalineación
+de forma análoga: así como la contención se determinaba y cuantificaba por las posturas de los individuos sobre un
+tema dado [13], podemos usar los objetivos de los individuos en un área problemática dada para determinar y cuantificar
+la desalineación. Comenzamos con una formulación general de la desalineación y luego describimos un caso especial
+en el que se supone que los objetivos son mutuamente excluyentes y cada agente sostiene un único objetivo.
+Definiciones. Sea
+ = {ia1, ..., ian} es una población de n agentes individuales (que pueden ser personas o
+sistemas de IA). Sea PA un área problemática de interés para al menos un agente de la población 
+P. Definimos A como
+una variable binaria que denota si los agentes están alineados o no respecto de un área problemática dada. Hacemos
+también que a y m sean dos valores binarios para A, respectivamente alineado y desalineado. Por ejemplo,
+P(A = a | 
+P; PA) denota la probabilidad de que 
+P esté alineada respecto de PA, que podemos abreviar
+como P(a | 
+P; PA). Por definición, P(a | 
+P; PA) + P(m | 
+P; PA) = 1.
+Sea g un objetivo respecto del área problemática PA, y sea la relación holds(ia; g; PA)
+que denota que el agente individual ia sostiene el objetivo g respecto del área problemática PA. Sea Ĝ = {g1, g2, ..., gk}
+el conjunto de k objetivos respecto del área problemática PA en la población 
+P. Usamos g0 para denotar que
+un agente no tiene ningún objetivo sobre un cierto PA¹:
+holds(ia; g0; PA) ⟺ ¬∃ gi ∈ Ĝ tal que holds(ia; gi; PA).
+Fijamos G = {g0} ∪ Ĝ como el conjunto de k+1 objetivos vigentes respecto de PA en
+P; dicho de otro modo, ∀ ia ∈
+,
+P, ∃ g ∈ G tal que holds(ia; g; PA). Ahora podemos definir una medida, conflict, que denota la incompatibilidad
+de un par de objetivos. Usamos P(conflict | gi; gj) = 1 para denotar que gi y gj están en un conflicto completo,
+es decir, mutuamente excluyentes; asimismo, P(conflict | gi; gj) = 0 denota que dos objetivos son completamente
+compatibles y están alineados entre sí. Por definición, P(conflict | gi; gi) = 0.
+Sea un grupo de objetivos un subgrupo de la población que sostiene el mismo objetivo: para i ∈ {0, ..., k},
+sea Gi = {ia ∈
+| holds(ia; gi; PA)}. Por construcción, 
+ P =
+∪i Gi. Podemos extender fácilmente la
+relación de conflicto a los grupos de objetivos, de modo que P(conflict | Gi; Gj) := P(conflict | gi; gj).
+Ahora podemos cuantificar la proporción de la población que sostiene objetivos incompatibles. Siguiendo el
+modelo de contención [13], podemos modelar la desalineación para reflejar directamente esta pregunta: «Si seleccionamos al azar
+un par de agentes, ¿qué probabilidad hay de que sostengan objetivos incompatibles?» Sea P(m |
+P; PA) la
+probabilidad de que, si seleccionamos al azar dos agentes en 
+P, entren en conflicto respecto de PA:
+P(m |
+P; PA) := P(ia1, ia2 seleccionados al azar de 
+P; ∃ gi, gj ∈ Gj tales que holds(ia1; gi; PA) ∧
+holds(ia2; gj; PA)) P(conflict | gi; gj) = P(ia1, ia2 seleccionados al azar de 
+P; ∃ gi, gj ∈ Gj
+p1 ∈ Gi ∧ p2 ∈ Gj P(conflict | Gi; Gj) (1)
+Esta definición puede extenderse trivialmente a cualquier subpoblación !
+[para la derivación, véase 13].
+1 Esto podría deberse a que no conocen el área problemática, o bien a que la conocen pero no tienen
+ningún objetivo pertinente.
+3
+Objetivos mutuamente excluyentes. De manera análoga a la contención, es probable que una desalineación significativa surja
+cuando hay dos o más objetivos mutuamente excluyentes dentro de un área problemática. Añadir algunas restricciones
+en esa línea permitió cuantificar la contención de forma directa [13]; gran parte de ese
+análisis matemático se traslada sin problemas a la desalineación. Primero, restringimos cada agente a
+sostener un solo objetivo en un área problemática; segundo, hacemos que cada objetivo esté en conflicto con cada otro objetivo,
+lo que implica por extensión que Gi ∩ Gj = ∅. También establecemos que la falta de objetivo no esté en conflicto con
+ningún objetivo explícito. Una vez añadidas estas restricciones, podemos seguir el mismo cálculo que Jang et
+al. [13] para calcular P(m |
+P; PA), es decir, la probabilidad de desalineación dada una población específica
+y un área problemática, 2 y da como resultado el siguiente valor:
+P(m |
+P; PA) = ∑i∈{2..k} ∑j∈{1..i−1} (2|Gi||Gj|)
+j
+j2(2)
+y P(a |
+P; PA) = 1 − P(m |
+P; PA). Con esta ecuación, se puede utilizar la información sobre
+el número de agentes que sostienen un objetivo dado dentro de un área problemática, para derivar una
+cantidad paramétrica de desalineación, en el rango [0, |G| − 1
+|G|] (donde |G| − 1 es el número de objetivos distintos en
+la población).3
+4 Discusión y conclusiones
+En el mundo real, las personas a menudo discrepan y con frecuencia están desalineadas; las luchas de poder, los
+conflictos por la asignación de recursos y los choques internacionales son comunes. La alineación total, a largo plazo,
+de valores, intereses y objetivos en todos los ámbitos, para cualquier grupo dado de humanos, es con mucho la excepción y no
+la regla. Alinear la IA con los humanos o la humanidad será un objetivo desafiante, por no decir directamente fútil,
+a menos que podamos determinar cuál es el significado de «alineación» cuando los propios humanos están desalineados.
+Cuando los bots de redes sociales controlados desde Rusia difunden desinformación en las redes sociales e influyen en
+la opinión pública de otro país, ¿debemos considerar que esos bots están alineados o desalineados? Por un
+ejemplo mucho más mundano, ¿de qué lado debe estar la lealtad de la IA cuando un niño quiere que Alexa ponga
+«Baby Shark», y su padre quiere cualquier cosa menos eso? Los enfoques actuales para la alineación de la IA suelen
+quedarse cortos al captar escenarios tan complejos.
+Nuestra nueva extensión del modelo de contención [13] ofrece un medio para cuantificar la desalineación en
+poblaciones de agentes dadas, que pueden incluir una mezcla de humanos y agentes de IA. Con este modelo,
+la desalineación basada en un grupo de población observado, así como en un área problemática observada,
+proporciona un mecanismo para una comprensión rica y matizada de la desalineación que se ajusta mejor
+a las condiciones del mundo real que un simple valor binario o numérico global.
+Al proporcionar un marco matemático para cuantificar la desalineación de la manera que describimos,
+ante todo permitimos modelar escenarios complejos del mundo real de desalineación entre poblaciones
+humanas, desde una escala global (p. ej., conflictos entre Estados, tensiones religiosas, conglomerados
+multinacionales, etc.), pasando por la escala nacional (p. ej., elecciones nacionales, polarización política, impuestos, etc.)
+y local (p. ej., elecciones estatales o municipales), o incluso la escala hiperlocal (p. ej., peleas familiares, desavenencias
+matrimoniales, disputas vecinales). Probabilidades de desalineación divergentes pueden darse simultáneamente
+para el mismo grupo de personas al evaluar distintas áreas problemáticas. Por ejemplo, puede tratarse de una
+pareja que discute por sus finanzas mientras coincide en su forma de criar a los hijos, y del fenómeno de los «extraños compañeros de cama»
+cuando enemigos políticos pueden estar de acuerdo con cierta política por conveniencia.
+Asimismo, para una sola área problemática, poblaciones distintas (incluidas, entre otras, varias
+subpoblaciones de una gran población) pueden mostrar probabilidades de desalineación muy distintas: un país entero
+puede estar muy desalineado en materia de política fiscal, mientras que la población de un estado progresista como
+Massachusetts puede estar extraordinariamente alineada en cuanto a subir los impuestos.
+Cuando después utilizamos el modelo en el contexto del problema de la alineación de la IA, podemos modelar mejor las
+situaciones complejas que pueden surgir cuando cualquier grupo de humanos (y los agentes de IA que esos humanos desarrollan,
+diseñan y/o controlan) están alineados y desalineados de diversas formas. Curiosamente, nuestra formulación final
+de la desalineación también evoca, por su similitud, la definición de entropía de la teoría de la información
+2 Dejamos la derivación completa como ejercicio para el lector interesado.
+3Mientras que la probabilidad está restringida a ser estrictamente menor que 1, eso podría considerarse una característica en lugar de
+un error: una población con múltiples objetivos incompatibles es por definición imposible de alinear por completo. Alternativamente,
+la normalización puede emplearse para alcanzar el rango [0,1] [véase 13] independientemente de jGj.
+4
+y sus coeficientes binomiales correspondientes.4Creemos que esto no es una coincidencia; con esta ecuación
+en mente, podemos ver cómo los grupos que sostienen objetivos incompatibles sirven como una forma de información, mientras que
+la entropía o el “calor” (en ambos sentidos de la palabra, metafórico y literal, termodinámico) sería
+máxima cuando los grupos de agentes desalineados son cada uno jGj
+j
+j y de tamaño idéntico.
+Limitaciones. Nuestro modelo no se ocupa de si las acciones del agente tienen un resultado positivo o
+negativo para el propio agente. Asimismo, dejamos abierta la cuestión de cómo los objetivos de un agente
+podrían aprenderse, aunque señalamos que otros investigadores han avanzado algo en ese frente [6].
+Por último, no tenemos espacio para describir estudios de caso detallados de nuestro modelo ni ejecutar simulaciones de esos
+estudios de caso.
+Trabajo futuro. Nos hemos centrado en analizar la alineación en poblaciones de agentes humanos y máquinas
+agentes. Trabajos futuros podrían considerar la posibilidad de extender este modelo a entidades no humanas
+biológicas, desde el nivel ultramicro, como las interacciones intracelulares o los comportamientos entre células en un
+cultivo, pasando por poblaciones microbianas, hasta la alineación de ecosistemas enteros como los de depredadores y
+presas, colonias de hormigas o abejas, etc. En estas situaciones hay incentivos distintos, como
+un entorno con una comunicación menos que perfecta e instantánea entre todas las partes, donde
+la información parcial está disponible para distintos agentes.
+Referencias
+[1] Shahar Avin et al. “Classifying global catastrophic risks”. En: Futures 102 (2018), pp. 20–26.
+ISSN : 0016-3287. DOI:https://doi.org/10.1016/j.futures.2018.02.001 .URL:
+https://www.sciencedirect.com/science/article/pii/S0016328717301957 .
+[2] Joseph B. Bak-Coleman et al. “Stewardship of global collective behavior”. En: Proceedings of
+the National Academy of Sciences 118.27 (2021). DOI:https://doi.org/10.1073/pnas.
+2025764118 .
+[3] Seth D. Baum et al. “Long-term trajectories of human civilization”. En: Foresight 21.1 (2019),
+pp. 53–83. DOI:https://doi.org/10.1108/FS-04-2018-0037 .
+[4] Nick Bostrom. “Existential Risks: Analyzing Human Extinction Scenarios and Related Haz-
+ards”. En: Journal of Evolution and Technology 9 (2002). URL:https://www.nickbostrom.
+com/existential/risks.pdf .
+[5] Vincent Boulanin et al. The Impact of Artiﬁcial Intelligence on Strategic Stability and Nuclear
+Risk, Volume I, Euro-Atlantic Perspectives . Inf. téc. SIPRI, 2019.
+[6] Daniel S Brown et al. “Value Alignment Veriﬁcation”. En: Proceedings of the 38th Interna-
+tional Conference on Machine Learning . Ed. por Marina Meila y Tong Zhang. V ol. 139.
+Proceedings of Machine Learning Research. PMLR, julio de 2021, pp. 1105–1115. URL:https:
+//proceedings.mlr.press/v139/brown21a.html .
+[7] Benjamin S. Bucknall y Shiri Dori-Hacohen. “Current and Near-Term AI as a Potential
+Existential Risk Factor”. En: Proceedings of the 2022 AAAI/ACM Conference on AI, Ethics,
+and Society . AIES ’22. Oxford, United Kingdom: Association for Computing Machinery,
+2022, pp. 119–129. ISBN : 9781450392471. DOI:10.1145/3514094.3534146 .URL:https:
+//doi.org/10.1145/3514094.3534146 .
+[8] Brian Christian. The Alignment Problem: Machine Learning and Human Values . WW Norton
+& Company, 2020.
+[9] Andrew Critch and David Krueger. AI Research Considerations for Human Existential Safety
+(ARCHES) . 2020. arXiv: 2006.04948 [cs.CY] .
+[10] Shiri Dori-Hacohen et al. “Restoring Healthy Online Discourse by Detecting and Reducing
+Controversy, Misinformation, and Toxicity Online”. En: Proceedings of the 44th International
+ACM SIGIR Conference on Research and Development in Information Retrieval . New York, NY ,
+USA: Association for Computing Machinery, 2021, pp. 2627–2628. ISBN : 9781450380379.
+[11] Tom Everitt, Gary Lea y Marcus Hutter. AGI Safety Literature Review . 2018. arXiv: 1805.
+01109 [cs.AI] .
+4Con una diferencia clave, a saber, la de g0; ya sea forzando a cada agente a sostener un objetivo, o bien cambiando g0 a
+conflicto con cada otro objetivo, causa que mato colapse y se vuelva idéntica a la entropía.
+5
+[12] Iason Gabriel. “Artiﬁcial Intelligence, Values, and Alignment”. en. En: Minds and Machines
+30.3 (sept. 2020), pp. 411–437. ISSN : 0924-6495, 1572-8641. DOI:10.1007/s11023-020-
+09539-2 .URL:https://link.springer.com/10.1007/s11023-020-09539-2 (consultado
+el 10/05/2022).
+[13] Myungha Jang, Shiri Dori-Hacohen y James Allan. “Modeling Controversy within Popula-
+tions”. En: Proceedings of the ACM SIGIR International Conference on Theory of Information
+Retrieval . ICTIR ’17. Amsterdam, The Netherlands: Association for Computing Machin-
+ery, 2017, pp. 141–149. ISBN : 9781450344906. DOI:10.1145/3121050.3121067 .URL:
+https://doi.org/10.1145/3121050.3121067 .
+[14] James Johnson. “Artiﬁcial intelligence & future warfare: implications for international secu-
+rity”. En: Defense & Security Analysis 35.2 (2019), pp. 147–169. DOI:https://doi.org/
+10.1080/14751798.2019.1600800 .
+[15] Jan Leike et al. Scalable agent alignment via reward modeling: a research direction .
+arXiv:1811.07871 [cs, stat]. nov. 2018. URL:http://arxiv.org/abs/1811.07871
+(consultado el 10/06/2022).
+[16] Herbert Lin. “The existential threat from cyber-enabled information warfare”. En: Bulletin of
+the Atomic Scientists 75.4 (2019), pp. 187–196. DOI:10.1080/00963402.2019.1629574 .
+URL:https://doi.org/10.1080/00963402.2019.1629574 .
+[17] Matthijs M. Maas, Kayla Matteuci y Di Cooke. “Military Artiﬁcial Intelligence as Contribu-
+tor to Global Catastrophic Risk”. En: Cambridge Conference on Catastrophic Risks 2020 . Draft
+disponible en https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4115010 .
+2022.
+[18] Toby Ord. The Precipice: Existential Risk and the Future of Humanity . Hachette Books, 2020.
+ISBN : 978-0316484916.
+[19] Mahendra Prasad. “Social Choice and the Value Alignment Problem”. eng. En: Artiﬁcial
+Intelligence Safety and Security . OCLC: 1059131742. Boca Raton, FL: CRC Press/Taylor &
+Francis Group, 2019. ISBN : 978-1-138-32084-0.
+[20] Stuart Russell. Human Compatible: Artiﬁcial Intelligence and the Problem of Control . Penguin,
+2019.
+[21] Elizabeth Seger et al. Tackling threats to informed decision-making in democratic societies:
+Promoting epistemic security in a technologicall-advanced world . Inf. téc. The Alan Turing
+Institute, Defence and Security Programme, 2020. URL:https://www.cser.ac.uk/
+resources/epistemic-security/ .
+[22] Carles Sierra et al. “Value alignment: a formal approach”. En: (2021). Editorial: arXiv Versión
+Número: 1. DOI:10.48550/ARXIV.2110.09240 .URL:https://arxiv.org/abs/2110.
+09240 (consultado el 10/06/2022).
+A Apéndice A: Comparación de notación entre Contention and Misalignment
+modelos
+Como se analiza en el artículo, nuestro modelo de desalineación se basa de manera significativa en un modelo propuesto previamente
+de contención propuesto por Jang, Dori-Hacohen y Allan (2017). La Tabla 1 incluye una lista
+exhaustiva de símbolos y definiciones del modelo de contención y sus análogos respectivos en nuestro
+novedoso modelo de desalineación. La ofrecemos para el lector interesado que quiera repasar
+las derivaciones matemáticas del modelo de contención [13], que omitimos aquí por motivos de
+espacio.
+B Apéndice B: Análisis del riesgo de la IA
+La IA desalineada es uno de los principales riesgos existenciales (riesgos-x) que enfrenta la humanidad [1, 3, 18], con importantes
+argumentos que apuntan a la posibilidad de que represente el riesgo-x más grande y más probable [4]. Un artículo reciente
+presentó trayectorias posibles desde la IA actual y de corto plazo hacia un mayor riesgo-x, lo que no pre-
+supone AGI [7]; en cambio, los autores proponen que las luchas de poder, como los conflictos internacionales potenciados por IA
+y los conflictos entre Estados y corporaciones pueden desempeñar un papel importante en el aumento del riesgo-x (y/o de otros riesgos catastróficos de cola
+riesgos) debido a otras fuentes de riesgo no vinculadas a la IAG, como la guerra nuclear, el cambio climático desbocado y así sucesivamente.
+Crucialmente, varios artículos recientes han sostenido que la IA actual ya está desalineada con la humanidad [p. ej.,
+6
+Tabla 1: Cambio de notación del modelo de contienda de Jang, Dori-Hacohen y Allan [13] a
+nuestro modelo de desalineación. Obsérvese que el modelo de contienda solo se refiere a poblaciones de
+personas individuales, mientras que nuestro modelo puede manejar de forma flexible combinaciones de agentes humanos e IA.
+Símbolo original [13] Definición original [13] Nuevo símbolo Nueva definición: una población
+
+ (a population) → una población; T un tema → PA un área problemática; 
+ p una persona → ia un agente individual (p. ej., humano o IA);
+una tupla de {…; T} → una tupla de {…; PA}; P(Cj) la
+probabilidad de contienda dado …, es decir, la probabilidad de que el tema
+T sea polémico en una población dada → P(Aj) la probabilidad de alineación 
+dado …, es decir, la probabilidad de que una población dada esté 
+alineada respecto de PA; C una variable aleatoria binaria de contienda → A
+una variable aleatoria binaria de alineación; c un valor binario para fijar C
+como «polémico» → ma un valor binario para fijar A como «desalineado»; nc
+un valor binario para fijar C como «no polémico» → a un valor 
+binario para fijar A como «alineado»; s una postura respecto del tema T
+→ g un objetivo respecto del área problemática PA; holds (p; s; 
+T) una persona p sostiene la postura s respecto del tema T →
+holds (ia; g; PA) un agente ia sostiene el objetivo g respecto del
+área problemática PA; ^S k posturas respecto del tema T → ^G q
+objetivos respecto del área problemática PA; P(conflict | si, sj) nivel de conflicto
+entre si y sj (0 = sin conflicto, 1 = conflicto total) →
+P(conflict | gi, gj) nivel de conflicto entre gi y gj (0 =
+sin conflicto, 1 = conflicto total); s0 ausencia de postura → g0
+ausencia de objetivo; S ^S ... Ss0 → G ^G ... Gg0; Gi
+un grupo de personas que sostienen la postura si → Gi un grupo
+de agentes que sostienen el objetivo gi; Oi un grupo opuesto en la
+población que sostiene una postura que entra en conflicto con si → Oi
+un grupo opuesto que sostiene un objetivo que entra en conflicto con gi.
+7, 20] y también que la capacidad colectiva de la humanidad para
+dar sentido a las cosas y tomar decisiones ya se ve comprometida y
+disminuida por la IA actual, como los sistemas de recomendación en el centro
+de las plataformas de redes sociales [p. ej., 2, 7, 21]. Al replantear
+la desalineación como un problema ante todo centrado en lo humano, y no
+como un problema centrado en la IA, y basándose en la literatura existente
+que estudia el conflicto y la contienda humanos, nuestro artículo se vincula
+directamente con esta línea de investigación, que sugiere que la IA puede servir
+para aumentar, acelerar e intensificar los riesgos de conflicto humano, un problema ya
+espinoso y discutiblemente irresoluble incluso antes de la llegada de la IA [5,
+14, 16, 17]. Además, al proporcionar un marco flexible que puede usarse para
+explicar, analizar y cuantificar la desalineación entre una gran variedad de agentes, tanto
+humanos como artificiales, nuestro trabajo promete mucho para avanzar en la comprensión que
+tiene nuestro campo del problema de la alineación. Por último, nuestro modelo
+anima a los investigadores de la seguridad y la alineación de la IA
+a evitar las posibles trampas reduccionistas de (a) alinear «de forma restringida» la
+IA con individuos concretos o con la humanidad en su conjunto, destacando los
+desafíos que supone alinear cualquier grupo diverso de individuos, incluya o no agentes
+de IA; y (b) adoptar una mentalidad tecnooptimista o tecnopositivista que supone de
+forma ingenua que el problema de la alineación puede resolverse solo por
+medios tecnológicos. Esperamos sinceramente que nuestro artículo estimule más conversación en las comunidades
+de seguridad y alineación de la IA sobre los aspectos sociotécnicos del problema
+de la alineación, y sobre la necesidad de incluir a un grupo diverso
+de investigadores y profesionales con experiencia en dominios muy alejados de los departamentos
+de informática y filosofía; y, por extensión, contribuya a mejorar las probabilidades de
+la humanidad de encontrar enfoques realistas y sostenibles para reducir el riesgo existencial.
+7

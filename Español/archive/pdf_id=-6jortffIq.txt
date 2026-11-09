@@ -1,0 +1,260 @@
+Alineamiento como proceso dinámico
+Paul de Font-Reaulx
+Departamento de Filosofía
+University of Michigan, Ann Arbor
+pauldfr@umich.edu
+Resumen
+La mayoría de las IA de aprendizaje actuales tienen fines dados exógenamente y fijos a los que gra-
+dualmente aprenden a optimizar. En la investigación sobre alineamiento se ha asumido que
+las inteligencias artificiales generales del tipo que podría representar un riesgo existencial también lo harían. Bajo
+este supuesto, el alineamiento de valores se convierte en la tarea de encontrar el conjunto correcto de fines
+antes de permitir que el agente actúe. Sin embargo, un agente también puede tener fines que cambian fun-
+damentalmente durante su vida. La tarea de alinear a tales agentes no es
+una de especificar un conjunto de fines, sino de diseñar una metafunción que guíe los
+fines en desarrollo del agente hacia un equilibrio que produzca un comportamiento alineado con
+nuestros valores humanos. Si las inteligencias artificiales generales poseyeran fines tan dinámicos,
+entonces esto tendría implicaciones importantes para el tipo de investigación sobre alineamiento que
+deberíamos realizar hoy. En este artículo sostengo que hay una probabilidad considerable
+de que las inteligencias artificiales generales tengan fines tan dinámicos, y en respuesta
+articulo una agenda para la investigación sobre alineamiento dinámico.
+1 Cuestionar una visión estática del alineamiento
+El problema del alineamiento suele plantearse como un problema de fijar con precisión los fines correctos para
+un agente artificial extremadamente capaz —lo que, siguiendo la convención, llamaré inteligencia artificial general
+(IAG)— antes de permitir que actúe. El desafío es especificar esos fines de modo que cuando
+el agente intenta alcanzarlos, el resultado será uno que esté en línea con nuestros valores humanos.
+Este planteamiento involucra dos fases. Primero, especificamos los fines fundamentales que se le darán al agente. En
+una arquitectura de aprendizaje por refuerzo (RL), estos se representan mediante la función de recompensa del agente.
+Segundo, dejamos que el agente actúe e intente alcanzar esos fines. Los fines en sí mismos, sin embargo,
+permanecen fijos durante la segunda fase. Llamemos a esto una visión estática del alineamiento.
+Imaginemos, en cambio, que los fines del agente cambian a lo largo de su vida. En un marco de
+RL, esto sería un agente con una función de recompensa que cambia con el tiempo en función
+de sus acciones. Para un agente así, no tendría sentido adoptar la visión estática del alineamiento,
+porque los fines que especificamos meticulosamente en la primera etapa simplemente cambiarían mientras el agente
+tuviera permitido actuar en la segunda etapa. Para agentes así, debemos concebir el alineamiento como un
+proceso dinámico. Según esta visión dinámica del alineamiento, el problema del alineamiento no es el desafío
+de especificar un conjunto perfecto de fines. Más bien, es el desafío de diseñar un agente que
+por sí mismo desarrolle fines que, en equilibrio, produzcan un comportamiento acorde con nuestros valores. Nótese que un
+agente con fines tan dinámicos es distinto de un agente que desarrolla fines estáticos al aproximar
+los valores humanos mediante preferencia revelada,[15] o de uno entrenado para aprender dinámicas cooperativas.[14]
+En cierto modo, alinear un agente con fines dinámicos sería mucho más difícil que alinear uno con
+fines estáticos, en virtud de la complejidad que probablemente implica el proceso dinámico. Por otro
+lado, también abriría nuevas vías para abordar el alineamiento que podrían resolver los actuales
+estancamientos.[4] Esto hace poco claro si deberíamos esperar que las IAG tengan fines dinámicos o estáticos,
+o intentar diseñarlos de una u otra manera. Como sostengo más adelante, de hecho tenemos razones para
+creer que tendrían fines dinámicos en lugar de estáticos, y deberíamos diversificar nuestras estrategias
+ML Safety Workshop, 36th Conference on Neural Information Processing Systems (NeurIPS 2022).
+e invertir recursos en comprender mejor el alineamiento dinámico. Eso supondría un cambio significativo
+respecto de cómo se persigue hoy la investigación sobre alineamiento, donde la visión estática se asume ampliamente como la única
+alternativa.
+En el resto de este artículo, primero sostengo que los humanos tienen plausiblemente fines dinámicos que cambian a lo largo de
+su vida. Luego presento un argumento sobre por qué esto nos da razones para pensar que las IAG
+tendrían también fines dinámicos. Finalmente, analizo qué significa esto para la investigación sobre alineamiento y presento una
+agenda de preguntas por responder.
+2 Fines humanos y artificiales
+Consideremos los fines de algunos agentes artificiales populares, tanto reales como hipotéticos. Por ejemplo, con-
+sidere un agente artificial como el aprendiz de refuerzo que juega a Atari de Deepmind.[13] Este agente tiene una
+función de recompensa especificada exógenamente en forma de puntuación del juego, que representa sus fundamen-
+tales fines. Estos fines no cambian durante la vida del agente y pueden considerarse "cableados"
+en su sistema. Lo mismo puede decirse del infame maximizador de clips de Nick Bostrom, que tiene
+como fin fundamental maximizar el número de clips en el universo.[2] Este agente
+podría adoptar muchos subobjetivos para ser instrumentalmente eficaz al alcanzar sus fines —incluida la erradi-
+cación de la humanidad—, pero el fin fundamental de maximizar clips en sí mismo no cambia.
+En cambio, no está claro que los humanos funcionen así. Más bien, al menos en una comprensión ingenua, esto
+parece que los fines humanos a veces cambian a lo largo de nuestra vida. En algunos casos, esto parece ocurrir como
+producto de la socialización, por ejemplo cuando interiorizamos las normas y los valores de nuestra com-
+unidad. En otros casos, parece que deliberadamente provocamos cambios en nuestros fines mediante la deliberación, por ejemplo
+cuando nos hacemos vegetarianos.1Si estos casos implican un cambio en nuestros fines más fundamentales —nuestra
+función de recompensa—, entonces los humanos serían tipos de agentes muy distintos del jugador de
+Atari de Deepmind, del maximizador de clips de Bostrom y de la mayoría de las otras IA representadas en las discusiones.
+Se podría objetar y decir que los fines fundamentales humanos, de hecho, no cambian. Según esta propuesta,
+los humanos nacen con fines fundamentales innatos que se mantienen fijos durante toda su vida, y solo
+cambian en términos de encontrar mejores formas de obtenerlos. Una persona que defienda esta visión podría por ejem-
+plo sostener que cuando decidimos hacernos vegetarianos, no hemos tenido ningún cambio en los fines fundamentales.
+Más bien, hemos llegado a creer que ser vegetariano es una forma instrumentalmente más eficaz
+de alcanzar nuestros fines innatos (por ejemplo, el de estar sanos y ser algo altruistas).
+Esta visión de los fines humanos bien podría ser correcta, y debería considerarse una opción vigente. Sin embargo,
+ciertamente no es obviamente correcta, y nos deja luchando por explicar buena parte del comportamiento humano.
+Concretamente, no está claro si existe algún conjunto dado de fines básicos al que pueda reducirse la diáspora de
+las aspiraciones humanas. Supongamos, por ejemplo, que nacemos con el fin innato de
+maximizar el bienestar de nosotros mismos y de nuestros parientes cercanos. Entonces resulta difícil ver cómo podríamos terminar con
+humanos dispuestos a dar recursos a extraños lejanos, o que sufren por la belleza o la ciencia,
+y que ellos mismos consideran exitosas estas acciones. Podría argumentarse que una explicación más natural sería
+que sus fines fundamentales han cambiado a lo largo de su vida de un modo que hace que estos proyectos
+sean racionales según esos nuevos fines. Véase el Apéndice A para una breve respuesta a la objeción de que
+la recompensa corresponde al placer y al dolor.
+Si esto es correcto, significa que los humanos tienen fines dinámicos. Si es así, entonces no podríamos
+modelar con precisión a un humano con una función de recompensa estática, como hacemos con los agentes artificiales de arriba.
+Más bien, si quisiéramos modelar con precisión a un humano en un marco de RL, necesitaríamos modelar la
+función de recompensa como determinada a su vez por alguna metafunción de orden superior. Esta metafunción
+regiría cómo se desarrollaría la función de recompensa con el tiempo. Hay algunos antecedentes de tal
+metafunción,[3] pero en general no se ha explorado a fondo en la literatura.2
+Dado todo lo que hemos dicho aquí, esta metafunción podría adoptar muchas formas distintas. Un ejem-
+plo sencillo, sin embargo, podría ser una que produzca recompensas adaptativas, análogas a la noción de
+preferencias adaptativas.[8] Tal función aumentaría la recompensa para los resultados que el agente encuentra
+más a menudo, lo que hace que valore más su entorno. Incluso esta sugerencia tan simple
+podría permitirnos dar sentido a fenómenos como la interiorización de valores tan extendida en nuestro entorno cercano
+1En la literatura filosófica pertinente, esto se conoce como autoconstitución.[12]
+2Una excepción es el trabajo de Kleiman-Weiner y sus colegas sobre el uso de modelos bayesianos jerárquicos para cap-
+turar metas que se desarrollan en respuesta a un entorno social.[11]
+2
+contexto social. Si necesitamos metafunciones más complejas para modelar a los seres humanos, por ejemplo, es una
+pregunta para futuras investigaciones.
+3 ¿Tendrían las IAG fines dinámicos?
+Si podemos modelar a los seres humanos de la forma jerárquica y dinámica que se sugiere arriba, entonces presumiblemente
+también podemos diseñar agentes artificiales eficaces con fines dinámicos. Para los propósitos de la alineación
+de la IA, sin embargo, nos interesan principalmente las IAG en particular, y si tendrían
+fines dinámicos. Podría ser que esto dependa de los diseñadores, de modo que las IAG podrían
+diseñarse igual de bien con fines estáticos o dinámicos. En otras palabras, podría ser que si un
+agente artificial tiene fines estáticos o dinámicos no influya en la probabilidad de que sea generalmente
+inteligente. Llamemos a esta afirmación Ortogonalidad.3
+Si la Ortogonalidad es verdadera, entonces tendríamos razones para aspirar a diseñar IAG con el tipo
+de fines —estáticos o dinámicos— que parezca más viable alinear. Para determinar esa cuestión, necesitamos
+entender mejor la alternativa de la alineación dinámica. En otras palabras, si la Ortogonalidad es verdadera,
+entonces, en principio, deberíamos invertir recursos en investigación sobre la alineación dinámica.
+Sin embargo, creo que hay razones para pensar que la Ortogonalidad es falsa. En concreto, creo que
+según nuestras pruebas actuales es más probable que las IAG tengan fines dinámicos que fines estáticos.
+Pero si es así, entonces la investigación sobre la alineación dinámica sería aún más importante que si
+Ortogonalidad era falsa, porque sería el tipo principal de alineación que deberíamos esperar tener que
+realizar. Aquí hay un argumento esquemático a favor de la afirmación de que la inteligencia general se correlaciona con
+fines dinámicos en los agentes artificiales:
+(1) Los seres humanos tienen fines cambiantes.
+(2) Los procesos cognitivos de los seres humanos ofrecen buenas pruebas sobre cómo tendrían que ser los procesos cog-
+nitivos de un agente artificial para ser generalmente inteli-
+gente.
+(3) Si los procesos que subyacen a la capacidad de cambiar de fines también subyacen a la inteligencia
+general de un agente, entonces ese agente no podría ser generalmente inteligente sin
+tener fines cambiantes.
+(4) Los procesos que subyacen a la capacidad de los seres humanos para cambiar de fines también subyacen a
+la inteligencia general de los seres humanos.
+(C) Las IA no podrían ser generalmente inteligentes sin tener fines cambiantes.
+Expondré brevemente un poco más los componentes del argumento. (1) se defiende en la sección anterior.
+sección. Sobre (2), la cognición humana es nuestra principal prueba de existencia de la posibilidad de una inteligencia general avanzada.
+Todo lo demás igual, sería, por tanto, muy sorprendente que lográramos diseñar un agente que demostrara una capacidad de inteligencia general,
+dadas las restricciones computacionales realistas,
+que no guardara ninguna semejanza con la arquitectura computacional de la cognición humana. ¿Hasta qué punto la cognición artifi-
+cial tendría que parecerse plausiblemente a la cognición humana es una cuestión abierta. Lo que se deduce,
+sin embargo, es que si descubrimos que algún proceso o componente es esencial para la inteligencia general humana,
+eso nos da una evidencia rebatible de que algo análogo sería necesario para la
+inteligencia general artificial. Sin embargo, véase el Apéndice B para algunas críticas.
+Sobre (3), si un agente tiene la capacidad de que se le cambien sus fines, entonces hay algunos procesos
+computacionales que subyacen a ese cambio y lo provocan. Sin embargo, si esos procesos también intervienen
+en otras capacidades, como la capacidad del agente de alcanzar instrumentalmente sus fines, entonces
+no deberíamos esperar ver una capacidad sin la otra. Por ejemplo, en los seres humanos, procesos de
+función ejecutiva como el control inhibitorio intervienen tanto en la planificación prudencial (por ejemplo, no gastarse
+los ahorros en una salida nocturna) como en el comportamiento social (por ejemplo, ser cortés con alguien a quien preferiría
+reprender).[7] Esto significa que si vemos a alguien miope en sus decisiones, también deberíamos
+esperar que sea más antisocial, todo lo demás igual.
+3Esto es diferente de lo que Nick Bostrom llama «la tesis de la ortogonalidad».[1] La suya es una afirmación sobre la
+relación entre capacidades y fines, a saber, que cualquier nivel de racionalidad instrumental puede combinarse con
+cualquier fin. La ortogonalidad tal como se considera aquí es una afirmación sobre la relación entre dos capacidades: la capacidad
+de cambiar de fines y de ser instrumentalmente racional.
+3
+(4) es una premisa muy especulativa. Como se señaló en la sección anterior, es una cuestión abierta si
+los fines humanos son fundamentalmente dinámicos, y básicamente no hay investigación sobre los procesos que
+subyacerían al cambio de nuestros fines, si fueran dinámicos. Lo que sí podemos decir es que sería
+al menos sorprendente que los procesos que subyacen a nuestros supuestos cambios de fin y nuestra
+racionalidad instrumental estuvieran completamente desconectados. Por ejemplo, esto implicaría que los procesos mediante
+los cuales interiorizamos una norma no intervendrían en la deliberación sobre si debemos seguir esa
+norma por razones instrumentales. Por ejemplo, el proceso mediante el cual podríamos interiorizar la afirmación
+de que robar está mal estaría desconectado del proceso mediante el cual vemos que robar podría
+meternos en problemas. Sin embargo, parece plausible que las consideraciones instrumentales formen parte del
+proceso de interiorización, es decir, que las normas prudencialmente beneficiosas son más fáciles de «tragar» que las muy
+normas autosacrificiales.[16] En este contexto, al menos no deberíamos asumir que podemos
+tener fácilmente inteligencia general humana sin fines dinámicos humanos.
+Si aceptamos estas afirmaciones, entonces debemos concluir que la Ortogonalidad es falsa y que las IAG son
+más propensas a tener fines dinámicos que fines estáticos. Quiero subrayar, sin embargo, que no considero que esto
+sea un argumento decisivo. Es bastante probable —si tuviera que apostar dinero, le asignaría alrededor de
+un 65 % de probabilidad4— que al menos una de las premisas anteriores sea falsa. Sin embargo, dado que estas afirmaciones
+se basan en una escasez de investigación, espero que haya un valor significativo en seguir investigando si
+son verdaderas.
+4 Un plan para la investigación sobre la alineación dinámica
+He argumentado que las IAG podrían diseñarse con fines dinámicos, y que alinear una IAG así
+requeriría un tipo de enfoque significativamente distinto al que he llamado la visión estática de la alineación,
+que es la concepción dominante de la alineación hoy. También he argumentado que tenemos razones para
+pensar que las IAG no solo podrían tener fines dinámicos, sino que también es relativamente probable que los tengan.
+Esto plantea la cuestión de qué deberíamos hacer ahora. Independientemente de si las IAG necesitarían
+tener fines dinámicos, parece que tenemos razones para invertir recursos en comprender la alineación dinámica.
+Suponiendo un marco de aprendizaje por refuerzo (RL), esto significará investigar cómo podemos diseñar metafunciones que
+produzcan funciones de recompensa para la IAG que favorezcan nuestros valores, que constituyen equilibrios en
+el entorno que compartirá con nosotros. Por ejemplo, esto podría significar encontrar una metafunción
+que haga que una IAG desarrolle funciones de recompensa cooperativas y altruistas de forma robusta en distintos
+entornos.
+Sin embargo, para entender cómo podrían funcionar estas metafunciones, y para calibrar
+qué tan en serio debemos considerar las IAG con fines dinámicos, necesitamos entender mejor las preguntas
+subyacentes al argumento que he expuesto aquí. Como la posibilidad de fines dinámicos se sostiene en gran medida
+por la hipótesis de que los seres humanos los tienen, espero que haya un valor significativo en
+entender mejor los fines humanos y los procesos cognitivos que subyacen a su formación. Esto
+nos deja con un conjunto de preguntas que, creo, constituyen un posible programa de investigación. Estas son
+algunas de ellas:
+• ¿Tienen los seres humanos fines fundamentalmente dinámicos?
+• ¿Cuáles son los procesos cognitivos mediante los cuales cambian las metas humanas, si es que cambian, y cómo se relacionan
+con los distintos dominios de la racionalidad instrumental?
+• ¿Cómo modelamos mejor estos procesos dinámicos en un marco computacional?
+• ¿Cómo alineamos las acciones de un agente con nuestros valores en este modelo dinámico?
+Si el argumento aquí expuesto es sólido, entonces la investigación sobre estas preguntas tiene un importante
+valor esperado. Idealmente, esta debe realizarse en estrecha colaboración con investigadores de otras disciplinas,
+especialmente neurocientíficos y científicos cognitivos que pueden contribuir al desarrollo de modelos precisos
+de la cognición humana, para que estos puedan usarse para orientar el desarrollo de agentes artificiales
+seguros. Es probable que esto contribuya no solo a la alineación dinámica, sino también a resolver la toma de
+decisiones morales y la clarificación de valores.[10]
+4Mis credencias sobre la verdad de las premisas son actualmente aproximadamente: P(1) = .7, P(2) = .9, P(3) = .9, y
+P(4) = .6. Esto da una probabilidad de 34.02% de que todas las premisas sean verdaderas.
+4
+Referencias
+[1] Nick Bostrom. The Superintelligent Will: Motivation and Instrumental Rationality in Ad-
+vanced Artificial Agents. Minds and Machines, 22(2):71–85, 2012. Editorial: Springer Ver-
+lag.
+[2] Nick Bostrom. Superintelligence: Paths, Dangers, Strategies. Oxford University Press, 2014.
+[3] Jeshua Bratman, Satinder Singh, Jonathan Sorg, y Richard Lewis. Strong mitigation: nesting
+search for good policies within search for good reward. pages 407–414, junio de 2012.
+[4] Joseph Carlsmith. Is Power-Seeking AI an Existential Risk?, junio de 2022. arXiv:2206.13353
+[cs].
+[5] Peter Carruthers. Valence and Value. Philosophy and Phenomenological Research, 97(3):658–
+680, 2018.
+[6] Richard Dawkins. Flights of Fancy: Defying Gravity by Design and Evolution. Apollo, mayo
+2022.
+[7] Adele Diamond. Executive Functions. Annual review of psychology, 64:135–168, 2013.
+[8] Jon Elster. Utilitarianism and the Genesis of Wants. En Amartya Kumar Sen y Bernard
+Arthur Owen Williams, editores, Utilitarianism and Beyond, pages 219–238. Cambridge Uni-
+versity Press, 1982.
+[9] Peter Godfrey-Smith. Other Minds: The Octopus, the Sea, and the Deep Origins of Conscious-
+ness. Farrar, Straus and Giroux, New York, first edition edition, diciembre de 2016.
+[10] Dan Hendrycks y Mantas Mazeika. X-Risk Analysis for AI Research, septiembre de 2022.
+arXiv:2206.05862 [cs].
+[11] Max Kleiman-Weiner, Rebecca Saxe, y Joshua B. Tenenbaum. Learning a commonsense
+moral theory. Cognition, 167:107–123, octubre de 2017.
+[12] Christine M. Korsgaard. Self-Constitution: Agency, Identity, and Integrity. Oxford University
+Press, Oxford; New York, 1st edition edition, junio de 2009.
+[13] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan
+Wierstra, y Martin Riedmiller. Playing Atari with Deep Reinforcement Learning, diciembre
+2013. arXiv:1312.5602 [cs].
+[14] Peter Railton. Ethical Learning, Natural and Artificial. En S. Matthew Liao, editor, Ethics of
+Artificial Intelligence, pages 45–78. Oxford University Press, septiembre de 2020.
+[15] Stuart Russell. Human Compatible: Artificial Intelligence and the Problem of Control. Penguin
+Books, octubre de 2019.
+[16] Tadeusz Wieslaw Zawidzki. Mindshaping: A New Framework for Understanding Human
+Social Cognition. Bradford, 2013.
+Apéndice A: La recompensa como placer y dolor
+Una sugerencia popular es que la función de recompensa corresponde, en los agentes naturales, a la presencia
+de placer y a la ausencia de dolor. Esta sugerencia es poco plausible. Una razón es el problema de
+reducción planteado en la sección 2, es decir, que pocos objetivos pueden reducirse a un balance esperado de bien
+dolor y placer. Por ejemplo, el padre o la madre que sacrifica su vida por su hijo no espera
+mucho placer para sí mismo en el futuro. Otra razón adicional, sin embargo, es que esto entiende
+mal la función de las señales hedónicas. Los acontecimientos no son buenos para nosotros porque sean placenteros. Más bien,
+es más preciso decir que son placenteros porque son buenos para nosotros, aunque esto también
+distorsiona algo el panorama.[5]
+5
+Apéndice B: ¿Se parecerá la cognición de la AGI a la cognición humana?
+Hay muchas objeciones que pueden plantearse contra la sugerencia de que la AGI se parecería a la
+cognición humana. En primer lugar, no está claro que los humanos sean la única prueba de existencia de la inteligencia general. Los pul-
+pos en particular ofrecen un ejemplo de una inteligencia aparentemente impresionante que está evolutivamente
+muy alejada de nosotros.[9] Sin embargo, aunque necesitamos estudiar estos animales con más detalle para estar seguros,
+no parecen ofrecer verdaderos ejemplos alternativos al nivel de capacidad que nos interesa
+aquí. En segundo lugar, tecnologías como el vuelo más pesado que el aire no se inventaron intentando imitar
+a las aves, lo que podría generar dudas sobre la necesidad de imitar la cognición humana para crear IA. Deberíamos
+tener en cuenta dos cosas al respecto. Primero, la inteligencia general es una capacidad mucho menos ubicua que el vue-
+lo —que vemos realizado de muchas formas distintas en aves, insectos y murciélagos—, así que “acertar” con esa
+capacidad por pura suerte parece mucho menos probable, lo que sugiere que tendríamos que apuntar a ella con más precisión.
+En segundo lugar, en el caso del vuelo, los humanos sin duda aprendieron algo de los principios del vuelo
+de los animales, pero encontraron mejores formas de realizarlos dadas las limitaciones de los materiales pesados.[6]
+6
