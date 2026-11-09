@@ -1,0 +1,616 @@
+Rationally Speaking #171: Scott Aaronson on “The ethics and strategy of vote trading”
+Julia Galef: Welcome to Rationally Speaking, the podcast where we explore the 
+borderlands between reason and nonsense. I'm your host, Julia Galef, and with 
+me is this episode's guest, Professor Scott Aaronson. 
+Scott is a returning guest on Rationally Speaking. When last we spoke with 
+Scott, he was a Professor of Computer Science at MIT in Cambridge, 
+Massachusetts. He has since moved to Austin, Texas where he is now a 
+Professor of Computer Science at the University of Texas, Austin.
+Scott's research focuses on quantum computing and computational complexity 
+theory, but he writes and blogs about a bunch of wide ranging and interesting 
+topics, including one that we're going to talk about today, which is vote trading. 
+Scott, welcome back to the show.
+Scott Aaronson: Thanks. It's great to be here.
+Julia Galef: Scott, I will have you know that I picked up my ballot for this election and I've 
+filled out almost all of it, including the gazillion propositions on the California 
+ballot. And I've made my choices for state senate and mayor and all those 
+things, but I have not actually officially voted yet. I haven't submitted my ballot. 
+And that is because I was waiting to talk with you about vote trading.
+ So this is a personally pivotal conversation for me, and potentially for many of 
+my listeners, as well. 
+Before we go any further, why don't you tell us what vote trading is and how it 
+works.
+Scott Aaronson: Yeah, so vote trading is an idea that first came to prominence in the 2000 U.S. 
+election, you know, Bush versus Gore. 
+I was just teaching a class and talking about Bush versus Gore, and the students 
+reminded me that they were 5 or 6 years old when it happened.
+Julia Galef: Wow.
+Scott Aaronson: For those who don't remember, that was an incredibly close election, and many 
+of us at the time realized that it would be incredibly close, that the electoral 
+college could actually matter a lot, and many of us feared what would happen if 
+Bush won. I think that history shows that we were largely correct to fear that. 
+We wanted to do something to help Gore win the election, and what we realized 
+was that 3% of the electorate or so was voting for Ralph Nader, and that those 
+voters could actually make the crucial difference.
+Now, these were typically voters who would strongly prefer Gore over Bush, 
+but who just felt like Gore was not liberal enough and so wanted to register a 
+Page 2 of 18protest vote. Now, the idea, it was not my idea, but… a bunch of people may 
+have independently come up with this idea. The idea was that people who live 
+in swing states, even if they're Nader supporters, they will vote for Gore -- but 
+they will arrange for someone who lives in a safe state, such as California or 
+Texas or something, to vote for Nader on their behalf.
+In this way, both parties get what they want. The Nader supporter who lives in 
+the swing state gets a vote for Nader cast on their behalf, so Nader would get 
+the same vote share that he would have gotten anyway. 
+Some people were concerned for him to get 5% of the vote, which would make 
+him qualify for federal matching funds in 2004. In fact, he only got 3% of the 
+vote, but people thought at the time that he might get 5%. 
+You wouldn't decrease his chances of getting that, but in the meantime, that 
+Nader supporter would not be helping Bush win in a swing state.
+In the meantime, a Gore supporter who lives in a safe state will vote for Nader 
+instead of Gore where it doesn't really matter to the outcome, but they 
+effectively get to teleport their Gore vote to a swing state where it does matter 
+much more.
+Julia Galef: Right. The third party voter, the Nader voter in this case, doesn't really care 
+which state his vote is counted in because he only cares about it as a protest 
+vote and also as its contribution to the total proportion of votes for the federal 
+matching funds. Whereas the Gore voter does care very much which state his 
+vote counts in because in some states, it's just so uncompetitive that ... 
+Actually, we should probably just give listeners a sense of just how unlikely it is 
+that your vote will make a difference in a state like California. I mean, it's on the 
+order of at least one in a billion, right?
+Scott Aaronson: Yes.
+Julia Galef: As opposed to in a swing state.
+Scott Aaronson: Yeah, it would depend on what modeling assumptions you made, but generally, 
+in states where there's a 10% margin or more, I mean, the polls would have to 
+be wrong in a very major way for there to be any chance that your vote is going 
+to matter.
+Julia Galef: Right.
+Scott Aaronson: Whereas in swing states, I mean, the amount by which your vote does matter 
+can be gauged, maybe, by looking at what happened in Florida in 2000 where 
+the entire presidential election was decided by about 500 votes.
+Julia Galef: Right. Returning to the story at the time, did you set up a site for vote trading or 
+did other people do it? And what happened?
+Page 3 of 18Scott Aaronson: At the time I got involved, there were already vote trading sites that were up 
+there. 
+But I saw that people were making arguments against vote trading that I 
+thought were just invalid. For example, people were saying, "Well, couldn't 
+Bush voters game the system?" That didn't really make any sense if you thought 
+about it. There's nothing that a Bush voter has to gain by impersonating either 
+side of this transaction.
+Julia Galef: Wait. Unpack that just a little bit more.
+Scott Aaronson: Yeah, yeah. Well, a Bush voter could pretend to be a Gore supporter, let's say, 
+and so then they're going to get people to ... That is going to cause more people 
+to vote for Gore in a swing state, which of course, is the opposite of what the 
+Bush voter would want.
+Julia Galef: Right.
+Scott Aaronson: They could also get more people to vote for Nader in a safe state, but there 
+would have to be a really, really massive amount of that for a safe state to 
+actually become competitive.
+Julia Galef: Right.
+Scott Aaronson: Probably you would get an inkling if it were actually going on on such a scale.
+Julia Galef: Right. All you could do if you are truly, deep down, a Bush supporter in that 
+election, would be to increase the percentage of votes going to a third party 
+candidate, but you can't increase Bush's chance.
+Scott Aaronson: That's right, yeah. A more common argument that people made was that the 
+Gore and the Nader supporter won't be able to trust each other. Each one will 
+have a huge incentive to just renege and vote for their preferred candidate and 
+there would be no way of checking it. 
+It is true that our voting system is designed to make it difficult to prove the way 
+that you voted to someone else. The reason for that is that it's supposed to be 
+difficult to sell your vote to someone or for someone to coerce someone else to 
+vote a certain way.
+Julia Galef: Right.
+Scott Aaronson: In, I think, about half of the states, it is actually legal to send a photo of your 
+ballot to another person. In half the states, it's illegal. Check the law in your 
+state. But even in states where it's legal, you could, say, in principle, you could 
+mark a ballot, send a photo of it, and then change the ballot.
+Julia Galef: Right.
+Page 4 of 18Scott Aaronson: At the end of the day, yes, you do have to have a baseline level of trust for the 
+person who you're swapping with, and this is why all the vote swapping sites 
+recommend that you actually talk to this person, talk to them on the phone or 
+whatever, get to know them as you would get to know a friend, make sure that 
+you have some baseline level of shared values.
+Then the other point that's important here is: even if you thought that there 
+was, let's say, a 50% chance that the other person was going to cheat, the 
+overall trade is so much to your benefit that most likely it would still be to your 
+benefit to do it. 
+For example, if you live in a safe state, then even a 50% chance that someone in 
+a swing state is going to vote for Gore on your behalf, is better than a 0% 
+chance of a swing state vote, which is sort of, to a first approximation, the only 
+kind of vote that matters.
+Julia Galef: Right. Let's say I'm a Gore supporter in California and I'm vote swapping with 
+someone in Florida, I basically don't lose anything, right, because my vote 
+wasn't going to count in California anyways.
+Scott Aaronson: That's right.
+Julia Galef: I'm getting this thing for free. Maybe this thing that I'm getting for free is only a 
+50% chance of someone voting for Gore in Florida, but 50% for nothing is great.
+Scott Aaronson: Right. Now, for the Nader supporter or the Gary Johnson supporter or whatever 
+in Florida, the calculus is a little bit different.
+Julia Galef: Right.
+Scott Aaronson: If they value Hillary winning the election over Trump sort of comparably to 
+how much they value Gary Johnson getting a certain vote share, then again, 
+they'll have to tolerate a certain chance of cheating.
+Julia Galef: Right.
+Scott Aaronson: Anyway, what I did in 2000 is I set up a website called “In Defense of 
+NaderTrading” that just sort of set out these sorts of arguments. 
+And then within a few days, I was just getting hundreds of emails and was going 
+on interviews. Because this was a trending topic, and somehow, I was just a 
+random person who had set up a webpage, but I was out there to talk to. Then 
+people would give me objections and I would respond to them on the webpage.
+Julia Galef: Some more sensible than others.
+Scott Aaronson: Yeah, yeah. That's right. This was before the concept of blogs existed, but this 
+page effectively became like a blog. This page sort of pointed people to these 
+vote swapping sites. 
+Page 5 of 18Now, unfortunately, while I was doing this, actually the main vote swapping 
+site, voteswap2000, I think, was shut down by the California State Attorney 
+General. He sent them a cease and desist letter.
+Julia Galef: What were the grounds?
+Scott Aaronson: Well, he was saying this is facilitating vote selling, which is against the law. 
+Then a lot of people said that this was an outrage and that this shutdown would 
+not stand in court. 
+This was a republican attorney general who was doing this. There were only a 
+couple weeks until the election and so there was no time to litigate it. There 
+were a couple other vote swapping sites that shut themselves down voluntarily 
+because of what had happened in California. Even though in other states, it was 
+still legal or no action had actually been taken against these sites.
+Julia Galef: Wow. Given how close it was in Florida, it's really striking to think ...
+Scott Aaronson: Yep. That could have made the difference.
+Julia Galef: Yeah. If they had just continued for a few more weeks.
+Scott Aaronson: This could absolutely have made the difference, yes.
+Julia Galef: Wow.
+Scott Aaronson: Yep. This is what we realized at the time, that it could come down to just a few 
+thousand. I didn't know and imagine it would come down to 500 votes, but it 
+could come down to a very small number. 
+There were 100,000 people who voted for Nader in Florida. Think about that. If 
+we had gotten 1% of those people, that would have changed the outcome.
+Julia Galef: Wow.
+Scott Aaronson: Okay. So, we were trying. We did reach some thousands of people around the 
+country, including some hundreds in Florida, and it was not enough.
+Julia Galef: Yeah.
+Scott Aaronson: I did all these interviews about it where I wanted to talk about the game theory, 
+and the question that everyone wanted to ask me was just about legality, "Will I 
+be thrown in jail if I do this?"
+Julia Galef: So… speaking of legality, how has that situation changed at all since the 2000 
+election?
+Scott Aaronson: Great question. It has changed dramatically. 
+Page 6 of 18At that time, the best I could say is, "Look, I'm not a lawyer. I'm a computer 
+science grad student. If it's not legal then it clearly should be legal." I could give 
+many, many moral arguments for that.
+Julia Galef: Yeah. I definitely want to talk about the ethics of vote swapping, but let's hold 
+on to that for a minute, after we cover the law.
+Scott Aaronson: Of course, I couldn't guarantee someone that they wouldn't go to court either 
+for swapping votes or for setting up a vote swapping site. 
+Now, the people who ran this vote swapping site in 2000 actually filed a lawsuit 
+about it, and eventually, in 2007, it got resolved by the Ninth Circuit Court of 
+Appeals in an amazing decision, which was called Porter v. Bowen. It's worth 
+reading in full, but what this decision says, basically, is that swapping votes the 
+way that these sites were doing, is an activity that's protected by the First 
+Amendment. 
+These people were just legitimately using their voting power and deciding to 
+vote strategically.
+It is not at all the same thing as buying or selling a vote or trading a vote for a 
+material good or service. It is, instead, trading a vote for another vote in an 
+unenforceable way. In that way, it is not all that dissimilar from what the 
+members of congress do all the time.
+Julia Galef: Right.
+Scott Aaronson: This decision did not prosecute the California Attorney General for what he had 
+done. It granted him immunity, because it said, "Well, at the time that he did 
+this, the legality of vote swapping had not been clearly established," but it also 
+said, "Going forward, vote swapping is protected." It gave people the assurance 
+that they will not be punished, either for doing vote swapping, for setting up 
+website that facilitate vote swapping, or any of that.
+As long as this ruling stands, and at this point, it's only the Supreme Court that 
+could overturn it, but as long as it stands, vote swapping is legal.
+Julia Galef: There are sites today, right, that are facilitating vote swapping for Clinton 
+supporters who want to trade with a Johnson or a Stein voter in a swing state?
+Scott Aaronson: Uh-huh, yep. Let me think. There's a “Trump traders” site. Oh, I'm sorry, there's 
+also one called “makeminecount.org.”
+Julia Galef: I checked out Make Mine ... Oh you were just about to say their motto. Go ahead.
+Scott Aaronson: Oh, yeah. It was "Everybody wins except Trump."
+Julia Galef: Yeah, that's the one I was looking at.
+Page 7 of 18Scott Aaronson: You checked it out?
+Julia Galef: Yeah, a little bit. Do you have any recommendations? Is one better than the 
+others?
+Scott Aaronson: I don't really know. I mean, the truth is that I signed up for Make Mine Count. I 
+don't think they ever gave me a match. It looks like the Johnson supporters in 
+swing states are probably the limited commodity in this market.
+Julia Galef: Right.
+Scott Aaronson: It's sort of like sometimes a bar skews toward one gender or another. It looks 
+like it's probably a skewed market to the Hillary supporters in the safe states, 
+which might mean that people could contemplate arrangements where one 
+Hillary vote in a swing state would be traded for several Johnson votes in safe 
+states.
+Julia Galef: Oh, interesting.
+Scott Aaronson: I think that's entirely plausible to consider.
+Julia Galef: I wonder if the sites are arranging things like that. I would totally do that.
+Scott Aaronson: I don’t know if they’re actually arranging that. Anyway, I can tell you what I did.
+ I just wrote a blog post about it, and because of this blog post, I got an offer to 
+trade from a libertarian in Ohio, a statistics professor there, so he said that he 
+will vote for Hillary if I vote for Gary Johnson in Texas on his behalf. We agreed 
+to that -- except that now Trump is doing so badly, fortunately, I think, that it 
+looks like even Texas might be becoming competitive.
+Julia Galef: Yeah, this election is all so unprecedented.
+Scott Aaronson: Yeah, it is. It really is. He and I discussed it on the phone just a week ago and 
+our arrangement is that if we decide the night before the election that Texas is 
+really a swing state, then he will release me so that we will both vote for Hillary.
+Julia Galef: Do you need a backup?
+Scott Aaronson: Excuse me?
+Julia Galef: Do you need a backup person to trade with in the event ...
+Scott Aaronson: Oh, well, yes, I guess I could find if another person wanted to be my backup. 
+Well, okay, but see, if Texas is really a swing state, then I should just vote for 
+Hillary and just be done with it.
+Julia Galef: Oh, right. That's right.
+Page 8 of 18Scott Aaronson: He is going to vote for Hillary in any case, but if we decide that Texas is really 
+competitive, then he'll release me to vote for Hillary, otherwise I'll vote for 
+Johnson.
+Julia Galef: Right, so HE needs a backup.
+Scott Aaronson: Yeah, right. That's right.
+Julia Galef: We could arrange a backup for him via you.
+Scott Aaronson: Uh-huh.
+Julia Galef: A listener could email you, offer to be the backup, and then you could pass him 
+on to your partner.
+Scott Aaronson: Yeah, that's true. I should say, I blogged about this. Of course, Trump has been 
+doing very badly. All the prediction markets give Hillary about a 90% chance of 
+winning.
+Julia Galef: Yeah, although ...
+Scott Aaronson: I'm happy about that, but at the same time, a 10% chance of Trump winning, I 
+think, is still a greater risk than we want to bear.
+Julia Galef: Yeah. I also feel like… I would not bet at 50-50 odds on Trump winning, but I 
+still feel like things are volatile enough this time around that I'm not going to 
+get too complacent, despite the current odds.
+Scott Aaronson: That's right. I think it's good not to get complacent, and I think even though it 
+looks likely that Hillary will win, I think that vote trading is still a very good 
+idea because we would like to make it as clear as possible that he's going to 
+lose, given what I regard as the threat that he poses to the country.
+Julia Galef: Let's talk about some of the strategic questions involved in vote trading and 
+then we can move on to the ethics from there.
+Scott Aaronson: Yeah, sure.
+Julia Galef: You already talked about the concern that, what if the other person doesn't 
+uphold their end of the bargain? 
+A less common concern that I've heard people raise is the act of helping the 
+third party candidate get funding and legitimacy, et cetera, it might actually 
+seem like a good thing to the Clinton voter, even if they would still prefer that 
+Clinton win
+  However, if you look at the long game -- if I, this election, am helping Gary 
+Johnson get legitimacy and funding, and I'm happy to do that, especially 
+because it helps Clinton win, then next election or the one after that, isn't the 
+Page 9 of 18power of the third party candidate to be a spoiler just increased? And so we're 
+facing an even bigger problem next time than we did this time?
+Scott Aaronson: I mean, I view third party candidates as just very, very hard to predict in 
+American Politics. There doesn't seem to be a whole lot of continuity in them 
+from one election to the next. Sometimes one will have their moment in the sun 
+where they get some percentage of the vote, and then often if the same person 
+runs again in four years, people have sort of lost interest by then and they get a 
+much smaller vote share.
+Julia Galef: Do the matching funds go to Johnson or to the libertarian party?
+Scott Aaronson: I think it's for the party that gets 5%.
+Julia Galef: Okay. So they could still ...
+Scott Aaronson: To get federal matching funds would be an ironic sort of victory for the 
+libertarian party.
+Julia Galef: That's true!
+Scott Aaronson: They could make the argument, "Well, this is the system as it stands and we 
+have to work within it," and so forth. 
+I mean, the truth is that I think it would be great if there were more voices in 
+our political dialog. I think that, unfortunately, our system has an incredibly 
+strong equilibrium toward two parties. You can see that, like for example, Ralph 
+Nader got 3% of the vote, right? Which was enough to swing the election from 
+Gore to Bush, but is otherwise tiny. Then Bernie Sanders, 16 years later, 
+running on a pretty similar platform to Nader's, actually almost defeated 
+Hillary, could have won the election.
+Julia Galef: Right.
+Scott Aaronson: He did it within the democratic party. 
+Pat Buchanan, who was running on sort of a nativist, anti-immigrant, and so 
+forth, platform, got 1% of the vote in 2000, and I think that's what many of us 
+saw at the time, that that will always be a 1% share of the electorate.
+Julia Galef: Right.
+Scott Aaronson: Now we have Trump, who's run on the same kind of platform as Buchanan, but 
+he did it within the republican party, and he came, still uncomfortably close, to 
+being president. I don't actually think that third party candidates will ... It's 
+hard to say that they're ever going to get more on the order of 10%. The last 
+one we had that did was Ross Perot in 1992.
+Julia Galef: Right.
+Page 10 of 18Scott Aaronson: Even he got less than 20%. I mean, is there a causal relationship between what 
+we do now and strengthening the third parties for eight years from now? I 
+mean, I don't know, there might be. In any case, both with this election and with 
+the 2000 election, I feel like there is such an overriding interest in preventing a 
+bad outcome that we can worry about what happens four years later when we 
+get to that.
+Julia Galef: Yeah, point well taken.
+ To ask about one more long-term thing… even if you have the position that 
+long-term considerations are trumped by the short ones in this case…
+Scott Aaronson: Trumped in some sense, yes.
+Julia Galef: Oh, man, that word's going to be ruined.
+Scott Aaronson: Sorry, sorry.
+Julia Galef: What about the perverse incentives that are created by this, in some cases it's 
+called, moral trade? Where if someone's making a choice that you think is the 
+wrong one morally, like voting for the candidate that you think is going to cause 
+a worse outcome than a different candidate. By offering to trade with them, 
+aren’t you creating the incentive for people to be, in this case, third party voters 
+in the longer run, because that gives them a lot of bargaining power?
+Scott Aaronson: Well, I think that there’s a word for this kind of thing, and the word is “politics”.
+ I think I would argue that, of course, I'm not someone who anyone would 
+mistake for a politician, I'm a theoretical computer scientist, who is very happy 
+if I just have the social skills to just get through my own life without trying to 
+lead anyone else. 
+My understanding would be that the entire essence of politics is trying to make 
+some mutually beneficial arrangements and deals, actually, with people whose 
+values might be very different from your own. If everyone had the same values, 
+then there wouldn't be a need for political process.
+Julia Galef: Well, I agree with that. In fact, I think that an objection that really annoys me is 
+that people say vote trading is wrong because “everyone should be voting for 
+which candidate they actually prefer.” 
+Which, I could see that view, but it totally contradicts the thing that many 
+people say when they argue, "Well, I might prefer Johnson, but I'm voting 
+strategically, so I'm voting for the candidate who I think is best overall, given 
+both my preferences and their chance to win." 
+In practice, many, many people do, in fact, vote strategically and endorse voting 
+strategically, so that doesn't seem like a good objection to vote trading to me.
+Page 11 of 18Scott Aaronson: Right. I mean, the presidents and the members of congress who we’re electing 
+are engaging in strategic behavior all the time, constantly. They're saying, 
+"Okay, if you want this bill for farm spending, then it has to have this rider 
+about this completed unrelated issue." This is every single day in congress. 
+Which is not necessarily a good thing, but these are the people who we're 
+voting for. I think that some degree of coalition building is inevitable in a 
+democracy. If everyone had the same values as you did, then there would be no 
+need to form a coalition.
+Julia Galef: Right.
+Scott Aaronson: You would just already agree.
+Julia Galef: But the thing that I was trying to point at with my previous question was not 
+about the ethics of trading with people who have different preferences than 
+you. It was about affecting people's preferences in the future, because they 
+know that trading's an option.
+ People who otherwise might have voted strategically and voted for Clinton, or 
+whoever you think is the right candidate, would instead decide to be third party 
+voters because they know that vote trading exists. Consciously or 
+unconsciously.
+Scott Aaronson: Look, it's possible, but when it comes to questions about human behavior, I 
+apply this very, very strong attenuation factor the further out you go into the 
+future.
+Julia Galef: Yeah, I respect that.
+Scott Aaronson: There are so many predictions about what ... Just to give you another example, 
+in 2000, there were actually Nader supporters, quite a few of them, who were 
+arguing, "Well, we actually want Bush to win the election. Not only do we not 
+care about throwing the election to Bush, we actually want him to win." Why? 
+Because Bush will be so bad that he will obviously just galvanize everyone into 
+a populous uprising that will then cause the green party to win, or something 
+like that.
+Julia Galef: Wow. That sounds very familiar. I've heard that same argument from Bernie 
+fans.
+Scott Aaronson: Yeah. That argument, such as it is, actually has a long history. The communists 
+also believed that, right? They called it “heightening the contradictions,” that 
+actually you have to oppose liberal reformers and make things as bad as 
+possible for ordinary working people. So that they will see that they have no 
+option but to support a true uprising of the proletariat.
+Julia Galef: Right.
+Page 12 of 18Scott Aaronson: This kind of thinking has a long history, I wouldn't say a distinguished history, 
+but a long history. 
+There are all kinds of predictions about what people might or might not do 
+years into the future that often have a really poor track record. In this case, not 
+only was Bush elected, he was then reelected in 2004. In between 2000 and 
+2004, several things have happened. The 9/11 attacks, the invasion of Iraq, that 
+I think no one on any side was really predicting.
+Julia Galef: Yeah.
+Scott Aaronson: Yeah. Likewise, how many people were predicting Trump or were predicting 
+the situation that we would be in right now back in 2012? These things are 
+pretty volatile. 
+That's why I'm more concentrated on the immediate goal of preventing Trump 
+from taking over the country.
+Julia Galef: Yeah. 
+The defense that vote trading is practiced by politicians all the time, could, in 
+another light, be seen as an indictment of vote trading. “One Man’s Modus 
+Ponens is Another Man’s Modus Tollens…”
+Scott Aaronson: I suppose so.
+Julia Galef: Saying, "Well, congress does it, therefore it's fine." Other people might say, 
+"Well, congress does it, therefore it's not fine."
+Scott Aaronson: Therefore it's bad.
+Julia Galef: Yeah, or not therefore it's bad, but we should condemn it both in the case of 
+congress and in the case of private citizen voting in elections. 
+Is your claim just that, "Well, it's no worse than what politicians do already", or 
+are you saying that the thing that politicians do is fine? Or are you saying that 
+it’s better than what the politicians do?
+Scott Aaronson: I think it’s definitely no worse than what politicians do.
+ I think that what politicians do is not great, especially nowadays when our 
+political process has become more and more polarized with, I would say, one 
+side often just holding the entire process hostage in order to achieve the things 
+that they want. 
+On the other hand, I would also say that even in the best case, some degree of 
+bordering and coalition building is probably inevitable in a democracy. There's 
+probably never been any democracy where this sort of thing didn't happen. It's 
+not something that I worry about like anywhere near as much as I worry about 
+Page 13 of 18the moral consequences of Trump winning.
+Julia Galef: Right.
+Scott Aaronson: There's another moral argument that I could try on you for size.
+Julia Galef: Sure.
+Scott Aaronson: Which is, look, let's say that you and I were friends and we just made a private 
+agreement that we're going to swap our votes, that I'm going to vote for your 
+preferred candidate and you're going to vote for mine. Then it's hard to think of 
+anyone who would consider that to be immoral. It's just two friends exercising 
+their right to vote how they want and discussing it with each other. 
+Then the argument is how is it really different if a website is involved in order 
+to introduce these people to each other?
+Julia Galef: Yeah, that's an interesting form of argument that I've seen before. I certainly 
+find it compelling. 
+But I could imagine that those are two different policies -- where one policy is, 
+if people want to do this privately, then fine, we're not going to interfere, 
+there's nothing wrong with that. That’s on the one hand. 
+Then the other policy is we're going to endorse or allow this on a wide, 
+impersonal scale. 
+It seems to me that the consequences are different in the second case. You 
+might believe that the former is fine because it can't actually affect the 
+democratic process, because it's not going to happen at a wide scale. But if you 
+try to make that extrapolation from the personal to the impersonal, then our 
+democratic process could be under threat.
+I'm not necessarily endorsing that argument. I'm just saying that I don't think 
+that you can just scale up the act and assume that all the moral calculus is 
+completely unchanged as you scale it up. In part, that's because the 
+consequences can be very different when you scale it up.
+Scott Aaronson: Right. But I think that any time you want to say this sort of activity is fine if 
+people just do it here and there, but if they really use the internet to talk to each 
+other and realize that they can do it and do it on a large scale, then we have to 
+crack down on it. I think there are very, very serious issues with how a 
+democratic society can maintain that kind of balance.
+Julia Galef: Yeah.
+Scott Aaronson: Because what people can do it all, they can talk about on the internet.
+ Of course, no one is forcing anyone to go to these websites. All that's being 
+Page 14 of 18asked is that those people who are interested can use them and that other 
+people tolerate it.
+Julia Galef: Yeah. This reminds me of another objection that I've occasionally heard made 
+to vote trading, is that it undermines the role of the electoral college in our 
+democracy. 
+Now, I'm not the hugest fan of the electoral college, but…
+Scott Aaronson: Yeah. That I probably find the least compelling of all the arguments because I 
+confess that I think the electoral college should be undermined. I mean, within 
+a legal means. 
+But I think that it is an anachronism. I think that it A, makes no sense, and B, 
+has no real relation to what the founders of the country actually intended. I 
+mean, when they set up this system, the electoral college was actual electors 
+who would travel on horseback or whatever to go and meet and then sit and 
+discuss it. At the time that they were chose as electors, they wouldn't know 
+themselves which candidate they preferred.
+Now we have a system where the electoral college basically just functions to 
+enforce sort of a tiered majority vote. For almost all of the states, almost all of 
+the electors in that state are either legally obligated for vote for their party's 
+candidate or, in practice, they're going to vote for their party's candidate. You 
+effectively just have a tiered majority. 
+A tiered majority is just a very bad system compared to having a direct popular 
+vote for a couple reasons.
+One is the well-known reason, that it focuses this inordinate amount of 
+attention on the issues of Ohio and Florida and North Carolina and a few other 
+states. Those states just get deluged with ads and politicians and so forth. 
+Meanwhile, there are all these other states whose problems basically just get 
+ignored because they don't matter in the electoral college. They're not swing 
+states.
+There's also a second problem with a tiered majority system, and that is that it 
+is much, much more vulnerable to small errors or small amounts of noise than a 
+direct majority would be. To take an example, the 2000 election was ultimately 
+decided by about 500 votes in Florida, where actually we don't even know 
+exactly how many votes because there was a recount going on, which was 
+substantially changing the situation before the Supreme Court intervened to 
+stop it. Let's say it was a statistical tie in Florida, it all depends on which ballots 
+you count and which you don't.
+Meanwhile, the national popular vote was actually much less close. That was 
+actually by a 500,000 votes in favor of Al Gore. You can actually do the math, 
+and what you find is that a direct popular vote is way less likely to be at the 
+margin of statistical dead heat than a tiered majority vote will be.
+Page 15 of 18Julia Galef: Why is that a good thing? Why is it a desirable feature of a voting system?
+Scott Aaronson: Well, because you would like to not have the outcome of an election be thrown 
+into doubt because of a Florida-in-2000 type of a situation. You could say that 
+we were lucky that time. We were unlucky in that Bush became the president, 
+but we were lucky in that Gore stood down.
+b He conceded the election, even though, by rights, maybe, he shouldn't have, and 
+thereby prevented the kind of thing that, historically, could lead to a civil war.
+Julia Galef: Right. I was wondering, as you were describing the flaws in the electoral 
+college, I was wondering whether I actually want to endorse the general policy 
+that we should be undermining a national institution because we think it's bad. 
+I have qualms about that policy, in general, but I think in this case, the means ... 
+I think I'm okay with undermining national institutions as long as the means by 
+which we're doing it are legitimate and transparent and ethical, which I think 
+this is.
+Scott Aaronson: Right. I think of myself as a patriotic American. I want what's good for the 
+country. I'm not even suggesting that anyone even contemplate breaking the 
+law here. I'm talking about doing something that's completely consistent with 
+the law. 
+Then they might say, "Oh, but he's going against what the Founding Fathers 
+wanted," or whatever, but I'm not going against that either. I'm just going 
+against this irrational system that this evolved into and that we're stuck with 
+right now, which is not actually the way things were set up originally.
+Julia Galef: We're just about out of time, but before we close, I wanted to ask you about a 
+quote that I saw. I forget if it was on your blog or an interview that you gave, 
+but you were talking about what you liked about vote trading and you said that 
+it reminds you of combining quantum mechanics with general relativity. Can 
+you elaborate on that?
+Scott Aaronson: Well, it was just a tongue-in-cheek comment that I made in 2000, that there 
+were two different kinds of craziness here. One is the craziness of the electoral 
+college, which you could say is a remedial kind of craziness but one that we're 
+subjected to, and the other one is the craziness that always arises when you 
+have an election with three or more candidates. This is the subject of Arrow's 
+theorem, for example, saying that you're not going to ever have a completely 
+rational way to hold an election between three or more candidates. 
+In effect, these two kinds of craziness are being canceled against each other, in 
+some sense.
+Julia Galef: To produce the deeply sensible world that we see.
+Scott Aaronson: Right. That is not to be taken too seriously.
+Page 16 of 18Julia Galef: Cool. Well, as my closing comment, I'll just say that I had been considering 
+signing up for “Make Mine Count”, and I was definitely leaning in favor of doing 
+that before this episode. Now I am still in favor of vote trading, but I think 
+because, as you've pointed out, the whole process is kind of limited by the third 
+party supporters in swing states, I think it's probably best for me not to add my 
+California Clinton vote to the giant ever-growing pile of California Clinton 
+voters that are accumulating on sites like Make Mine Count, and I'll instead just 
+offer to trade my vote with any listener of mine who was going to vote for 
+Johnson or Stein in a swing state. You can just email me at julia@rationality.org 
+and we can chat.
+Scott Aaronson: That's great. That's the convenient thing about having an audience.
+Julia Galef: Yeah, absolutely.
+Scott Aaronson: You can make offers like that.
+Julia Galef: Okay. To my listeners, I would encourage you, if this whole thing sounds 
+interesting and valuable to you as well, to check out Make Mine Count or 
+trumptraders.org to look into vote swapping, especially if you're a third party 
+supporter in a swing state. 
+Even if you're not, there's still a decent chance that your vote will be able to be 
+paired with a third party supporter in a swing state. And yeah, email me if you 
+would be interested in trading with me.
+Scott, this is great. I'll wrap up this part of the podcast and we'll move on now 
+to the Rationally Speaking pick.
+Scott Aaronson: Okay.
+[interlude]
+Julia Galef: Welcome back. Every episode I invite my guest on Rationally Speaking to give 
+the Rationally Speaking Pick of the Episode. That's a book or article or website 
+or something that has influenced their thinking in some interesting way. Scott, 
+what's your pick for today's episode?
+Scott Aaronson: Okay. I think my pick for this episode will be the essays of Paul Graham.
+Julia Galef: Oh, good one.
+Scott Aaronson: He was the founder of  Y Combinator, a start-up incubator. In particular, his 
+essay called "Why Nerds are Unpopular". I mean, I think I first read it about a 
+decade ago. It really changed the way that I thought about that question.
+Julia Galef: Can you say a little bit more about how?
+Scott Aaronson: Yeah. Basically, he puts forward an argument that a lot of the common theories 
+Page 17 of 18about why nerds are picked on, for example, the other kids envy them, are just 
+not true. They just don't withstand scrutiny. 
+The main point is that to understand the phenomenon of the nerd, which is sort 
+of actually a pretty recent cultural phenomenon, you have to understand 
+something about the modern junior high-schooler or high schooler, and 
+particularly in the U.S. and the way that these were designed as effectively 
+holding pens. They might also teach people something.
+Julia Galef: Just by accident.
+Scott Aaronson: Yeah, that's not the main purpose. They're these holding pens. And then he says 
+that any time that you create a situation like that, whether it's in a prison or it's 
+Manhattan socialites or people who don't have real work to do, they will create 
+a status hierarchy somehow. 
+Normally status hierarchies are based on things like who is contributing to the 
+good of the group or who is building something or inventing something. If 
+there's none of that, then people will create a sort of pure self-referential status 
+hierarchy. You see that again and again, and so he put it into this much broader 
+context.
+Then, in his account, a nerd is just someone who is in that environment but who 
+cares about something beyond the immediate self-referential status game, like 
+they care about either math or literature or something in the external world. 
+Then he says there are not neurosurgery residents or Navy Seals who work as 
+hard at anything as high school students work at being popular. If you are not 
+devoting 100% of your effort to this, then you are going to fall behind.
+Julia Galef: Interesting.
+Scott Aaronson: To me it was a very, very novel take on a question that's concerned me a lot, but 
+I would also just say that his ...
+Julia Galef: I too have had a personal interest in that question for much of my life!
+Scott Aaronson: Yeah. Graham just came up on my blog recently. That's why I was thinking 
+about him. His essays are some of my favorite essays.
+Julia Galef: Me as well.
+I think my favorite is Keep Your Identity Small, which maybe we can also link to 
+on the podcast website.
+Scott Aaronson: Yeah, absolutely.
+Julia Galef: Just so many of them are gold. That's a great pick.
+Scott Aaronson: Yeah, yeah.
+Page 18 of 18Julia Galef: Well, Scott, thank you so much for joining us on the show again. I think this is a 
+very important topic and I'm glad that you've been writing about it and I'm 
+happy to increase the size of the conversation a little bit.
+Scott Aaronson: Great. Well, thank you for having me, Julia. Let us hope this election has a good 
+outcome.
+Julia Galef: Indeed. At the least so that I can exhale after so many months of exhaling.
+Scott Aaronson: That's right, and so that I can stop having to check PredictWise like ten times an 
+hour.
+Julia Galef: I know. It's become like a tick. I think I'll just keep checking after the election is 
+over just because I can't stop.
+Scott Aaronson: Exactly. It will do wonders for my productivity.
+Julia Galef: Well, this concludes another episode of Rationally Speaking. Join us next time 
+for more explorations on the borderlands between reason and nonsense.

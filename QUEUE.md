@@ -1744,7 +1744,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · Rethink Priorities / 90.txt · 1necv8Kx3k6QQ1qIh4zsSEqUTlKTvAKSh · 169 KB · txt
 - [ ] es · Rethink Priorities / 41.txt · 1qQzgP9-boF6YXzjVHxHpPILqdKfbpXx6 · 181 KB · txt
 - [ ] es · Rethink Priorities / 32.txt · 1DEM7mBxmznBP81hwtM193UPeQpQyVVwL · 339 KB · txt
-- [ ] es · gpi / Owen-Cotton-Barratt-HIlary-Greaves-A-bargaining-theoretic-approach-to-moral-uncertainty-1.txt · 1GIqvcvMPY0niwFRe2stRMy7ZHiRgXPLh · 3 KB · txt
+- [x] es · gpi / Owen-Cotton-Barratt-HIlary-Greaves-A-bargaining-theoretic-approach-to-moral-uncertainty-1.txt · 1GIqvcvMPY0niwFRe2stRMy7ZHiRgXPLh · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Owen-Cotton-Barratt-HIlary-Greaves-A-bargaining-theoretic-approach-to-moral-uncertainty-1.txt`)
 - [x] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-1.txt · 1Y50Zx2Pn95f3Kb7F543dJTbEswewkkt_ · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Research-Prioritisation-at-the-Global-Priorities-Institute-1.txt`)
 - [x] es · gpi / Research-Prioritisation-at-the-Global-Priorities-Institute-ECCP.txt · 1y_PA2D-gtZE8eac_tjWVA3aJl4QjIw-l · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/Research-Prioritisation-at-the-Global-Priorities-Institute-ECCP.txt`)
 - [x] es · gpi / GPI-website-privacy-policy.txt · 1RZ0Acd_Q8sI8jiqAk7mc1JYIZ0XdTphZ · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/GPI-website-privacy-policy.txt`)
@@ -1784,7 +1784,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · gpi / David-Thorstad-Existential-risk-pessimism-.txt · 1Kt4w7DZdHvRLOH5gWSQD3NCE4fZuHSRq · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/David-Thorstad-Existential-risk-pessimism-.txt`)
 - [x] es · gpi / David-Thorstad-Existential-risk-pessimism1.txt · 1hv0K56wW9sJMc-wmpXhruJ-eOsMrQkUT · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/David-Thorstad-Existential-risk-pessimism1.txt`)
 - [x] es · gpi / Andreas-Mogensen-Respect-for-others-risk-attitudes-and-the-long-run-future.txt · 1GyDdoN9Rp2aCLRHCy9erpHvCJQJ-aU1C · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Andreas-Mogensen-Respect-for-others-risk-attitudes-and-the-long-run-future.txt`)
-- [ ] es · gpi / David-Thorstad-Andreas-Mogensen-Heuristics-for-clueless-agents.txt · 1aQ_H4bdkbX1D2rZH8PC7CdsFUKZ38PRv · 59 KB · txt
+- [x] es · gpi / David-Thorstad-Andreas-Mogensen-Heuristics-for-clueless-agents.txt · 1aQ_H4bdkbX1D2rZH8PC7CdsFUKZ38PRv · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/David-Thorstad-Andreas-Mogensen-Heuristics-for-clueless-agents.txt`)
 - [x] es · gpi / Karri-Heikkiken-GPI-working-paper-1.txt · 1Rr4-zcs9mKouy3SZuBjFklFOIJrp7yt5 · 60 KB · txt · es done 2026-10-30 (8/8 batches, `Español/archive/Karri-Heikkiken-GPI-working-paper-1.txt`)
 - [ ] es · gpi / Maya-Eden_The-cross-sectional-implications-of-the-social-discount-rate.txt · 1tRwzJa3OFTPnyCrW2aDQte7XBWZ-60Gk · 61 KB · txt
 - [ ] es · gpi / Mogensen_doomsday_rings_twice.txt · 18DlxmggYlKGCw66G5dlFU0sMAXPScKIO · 61 KB · txt
@@ -1970,7 +1970,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · animal charity evaluators / research-review-process-call-for-external-reviewers.txt · 11GpNC112nRstDGHPCD9ptv9bitp7s3mJ · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/research-review-process-call-for-external-reviewers.txt`)
 - [x] es · animal charity evaluators / using-technology-to-increase-animal-advocacy-effectiveness.txt · 12BwfEi9oP7oRm4uQW5SRQ1HT_-EHoYz6 · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/using-technology-to-increase-animal-advocacy-effectiveness.txt`)
 - [x] es · animal charity evaluators / the-value-of-sanctuaries-and-how-to-maximize-their-impact.txt · 1yhPstjqzxwM21JwCkfLKRctIPnuK6FpU · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/the-value-of-sanctuaries-and-how-to-maximize-their-impact.txt`)
-- [ ] es · animal charity evaluators / ace-interviews-peter-singer.txt · 1hmbQSWhZ2YrqzHqQeQ00uydklro-621s · 12 KB · txt
+- [x] es · animal charity evaluators / ace-interviews-peter-singer.txt · 1hmbQSWhZ2YrqzHqQeQ00uydklro-621s · 12 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-interviews-peter-singer.txt`)
 - [x] es · animal charity evaluators / updated-recommendations-december-2016.txt · 1UveLxTFd7RPMcueci92R07YMBxYPjDqP · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updated-recommendations-december-2016.txt`)
 - [x] es · animal charity evaluators / 2015-ace-donor-survey-results.txt · 1f_hQvOcXGzFyP3KkrlQFbjEVPQiouFWK · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/2015-ace-donor-survey-results.txt`)
 - [x] es · animal charity evaluators / audience-ace.txt · 1rfKvLIGMhHxAXa8Naibkihnu-Se905FB · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/audience-ace.txt`)
@@ -1982,7 +1982,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · animal charity evaluators / additional-analysis-of-a-study-of-vegetarians.txt · 1meSVehY3UCdAJXKQzl2-ZBx2sRKf7VuX · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/additional-analysis-of-a-study-of-vegetarians.txt`)
 - [x] es · animal charity evaluators / updated-recommendations-december-2015.txt · 18vI_gWw3OTl7CAQBCbDcDpbrsoahrIOw · 13 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/updated-recommendations-december-2015.txt`)
 - [x] es · animal charity evaluators / decision-to-rescind-our-recommendation-of-hsus-fapc.txt · 10W6pmaENYHl1AqtN8QLxgTTIAAkj3nHc · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/decision-to-rescind-our-recommendation-of-hsus-fapc.txt`)
-- [ ] es · animal charity evaluators / top-animal-charities-and-climate-change.txt · 1QuI6EeotI9Kq0Nty2-BBxxr5Jm3ZhO8R · 14 KB · txt
+- [x] es · animal charity evaluators / top-animal-charities-and-climate-change.txt · 1QuI6EeotI9Kq0Nty2-BBxxr5Jm3ZhO8R · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/top-animal-charities-and-climate-change.txt`)
 - [x] es · animal charity evaluators / ace-highlight-when-will-there-be-cost-competitive-cultured-animal-products.txt · 1QVkTIN2GayH8VVb2Y6kcUOwcsPjtIxUx · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-highlight-when-will-there-be-cost-competitive-cultured-animal-products.txt`)
 - [x] es · animal charity evaluators / bienestaristas-o-abolicionistas-por-que-la-division-perjudica-a-los-animales.txt · 1GU-ogRai8zPmphKUcdNni7ezpbqUlFxu · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/bienestaristas-o-abolicionistas-por-que-la-division-perjudica-a-los-animales.txt`)
 - [x] es · animal charity evaluators / ace-interviews-anthony-nocella.txt · 1_Ser6OuW3zFJo34NDkJlDzz0PT-AKJ4j · 14 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/ace-interviews-anthony-nocella.txt`)
@@ -2001,43 +2001,43 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · animal charity evaluators / things-that-surprised-us-about-the-december-2014-review-process.txt · 1zmODeCW3eObvUktWF_Q5cSneQgN-BfUn · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/things-that-surprised-us-about-the-december-2014-review-process.txt`)
 - [x] es · animal charity evaluators / the-process-leading-to-our-2016-recommendations.txt · 1LZCR5xJ20QOXacWTp0_SW-yEtKsqYIBK · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/the-process-leading-to-our-2016-recommendations.txt`)
 - [x] es · animal charity evaluators / some-updates-to-our-charity-evaluation-process-2017.txt · 1kihbg6RVHbnfwrwEfxD0KfqhKBWK-U-w · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/some-updates-to-our-charity-evaluation-process-2017.txt`)
-- [ ] es · animal charity evaluators / should-veg-activists-use-health-arguments.txt · 1ZGH3qKrFdS3eHvUiQkB5rBlNhhpfbU_2 · 16 KB · txt
+- [x] es · animal charity evaluators / should-veg-activists-use-health-arguments.txt · 1ZGH3qKrFdS3eHvUiQkB5rBlNhhpfbU_2 · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/should-veg-activists-use-health-arguments.txt`)
 - [x] es · animal charity evaluators / what-does-torontos-creed-expansion-ruling-mean-for-vegan-advocacy.txt · 13U4TW303QBzhNOkiZ4Km89bkdc3oCdN9 · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/what-does-torontos-creed-expansion-ruling-mean-for-vegan-advocacy.txt`)
-- [ ] es · animal charity evaluators / career-advice-for-high-impact-activism.txt · 1nivWv0I7K2uNNs-8uextv0mFMsfMNPeB · 16 KB · txt
-- [ ] es · animal charity evaluators / elements-leaflet-matter.txt · 1CCJKSkEeJIkDGC-LUw-crip49FW5gjV- · 16 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-collectively-free.txt · 1n8XIzECc5cV6FNGk_OmI8ts3-4-Tduep · 16 KB · txt
+- [x] es · animal charity evaluators / career-advice-for-high-impact-activism.txt · 1nivWv0I7K2uNNs-8uextv0mFMsfMNPeB · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/career-advice-for-high-impact-activism.txt`)
+- [x] es · animal charity evaluators / elements-leaflet-matter.txt · 1CCJKSkEeJIkDGC-LUw-crip49FW5gjV- · 16 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/elements-leaflet-matter.txt`)
+- [x] es · animal charity evaluators / ace-interviews-collectively-free.txt · 1n8XIzECc5cV6FNGk_OmI8ts3-4-Tduep · 16 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/ace-interviews-collectively-free.txt`)
 - [x] es · animal charity evaluators / reasons-why-charities-declined-to-be-reviewed-published.txt · 1-Y4U8Aq4Hl02vE_uaazqjirpVW765rwy · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/reasons-why-charities-declined-to-be-reviewed-published.txt`)
 - [x] es · animal charity evaluators / the-process-leading-to-our-2015-recommendations.txt · 19Pwa07x1ytetdT-duWE_T9K99w-QuOF8 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/the-process-leading-to-our-2015-recommendations.txt`)
-- [ ] es · animal charity evaluators / where-ace-staff-are-giving-and-why.txt · 1GFnYJPJRNktyple-jAJ89etJ7SOmKudw · 17 KB · txt
+- [x] es · animal charity evaluators / where-ace-staff-are-giving-and-why.txt · 1GFnYJPJRNktyple-jAJ89etJ7SOmKudw · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/where-ace-staff-are-giving-and-why.txt`)
 - [x] es · animal charity evaluators / updated-charity-recommendations-december-2017.txt · 1zulo5tFqd5heteu8WZtUMt02_loYO765 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/updated-charity-recommendations-december-2017.txt`)
 - [x] es · animal charity evaluators / six-steps-to-self-evaluation.txt · 1L1s9ybvd7TfiaPJUrNw3hKVkyStOMz83 · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/six-steps-to-self-evaluation.txt`)
-- [ ] es · animal charity evaluators / 2018-prospective-goals.txt · 1SeisRy9eidR1TUb10K2Rxm-S8wZQy4je · 17 KB · txt
-- [ ] es · animal charity evaluators / thinking-process-leading-december-2014-recommendations.txt · 1yBWlkfq3a21mTU5CmwyA4x3AAxRGZDsy · 18 KB · txt
-- [ ] es · animal charity evaluators / which-key-ideas-should-we-be-spreading-with-marginal-resources.txt · 1yoecQRbpJsr6DaCEc0cYEzxxd8wtkDei · 19 KB · txt
-- [ ] es · animal charity evaluators / should-animal-organizations-conduct-their-own-research.txt · 1sPbeXW9WvftS95DbTQQ2r7mw_YKBet7E · 19 KB · txt
-- [ ] es · animal charity evaluators / sexual-harassment-within-the-animal-advocacy-movement.txt · 11tiM2mFdRiTvjrSXyxskPaIfeYESh83a · 19 KB · txt
-- [ ] es · animal charity evaluators / how-many-animals-does-a-vegetarian-save-in-the-uk.txt · 1aGlM_PvFYA31Q-Mf89p-KyRYtuJdwsGl · 19 KB · txt
-- [ ] es · animal charity evaluators / looking-back-at-2016-prospective-goals.txt · 1zE2jJmDsLACqCwJd74rUvsh99jqr6l4T · 19 KB · txt
-- [ ] es · animal charity evaluators / interview-with-brian-tomasik.txt · 1s8Z8USVvxErb6hdmHSRVU27EaD_6hTZS · 21 KB · txt
-- [ ] es · animal charity evaluators / beyond-meat-vs-new-harvest.txt · 1PkabZpLMF70zoRCMfBvTSPCnVdqygzSk · 21 KB · txt
-- [ ] es · animal charity evaluators / how-should-we-account-for-the-potential-long-term-impact-of-organizations.txt · 1vJceyrAnzxEd6CnikqZhjn4iHc9Af8o_ · 21 KB · txt
-- [ ] es · animal charity evaluators / how-we-evaluate-social-media-impact.txt · 1MJkz-s_jMqlWtKbL3FU8lgwRhU3FWyz_ · 22 KB · txt
-- [ ] es · animal charity evaluators / our-strategic-plan.txt · 1vh4TpsnKYDwODy4aaAbomyrh6c2r3-SG · 22 KB · txt
-- [ ] es · animal charity evaluators / some-thoughts-on-our-cost-effectiveness-estimates.txt · 154bPlVyWv-srBmYgqflNdPVxEMolLXz9 · 22 KB · txt
-- [ ] es · animal charity evaluators / why-digital-sentience-is-relevant-to-animal-activists.txt · 1gibwrBQnHQwg0-N66dM0f02FBAmqxwwP · 22 KB · txt
-- [ ] es · animal charity evaluators / why-the-situation-of-animals-in-the-wild-should-concern-us.txt · 1cx2WFHgSZwjEeCiqUWAErnW2b_yBaHts · 23 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-ethan-brown-ceo-beyond-meat.txt · 1PO2ht_HT0tWrRw_w_6rVAa1KYjnvx4xT · 24 KB · txt
-- [ ] es · animal charity evaluators / ace-highlights-interview-with-carrie-freeman.txt · 1JnTbl3s7Rx1VwJlMPffUbGmtkRAE0ZDi · 25 KB · txt
-- [ ] es · animal charity evaluators / our-initial-thoughts-on-the-mfa-facebook-ads-study.txt · 1k2PQ-9_eosW8risfoi3s8jr3Je02dad- · 26 KB · txt
-- [ ] es · animal charity evaluators / clean-meat-or-cultured-meat-a-randomized-trial-evaluating-the-impact-on-self-reported-purchasing-preferences.txt · 1w_I8xUsG4tr9po1811S2-ZoDMvBiwW5q · 26 KB · txt
-- [ ] es · animal charity evaluators / why-farmed-animals.txt · 1f6mngAoqn_sEQiwRSOyLB2p8qh15Fp2O · 28 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-matt-ball.txt · 1e_rzD5Ciy5zNbupG7d2WPl3rwepxipVR · 28 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-nikki-bollaert.txt · 17xM2WY8RdVKc9uZWaZ2Uekrbz8yzaZsb · 29 KB · txt
-- [ ] es · animal charity evaluators / welfarists-or-abolitionists-division-hurts-animal-advocacy.txt · 1fSpDP5bmaMcYXwxzJdQ_oYXmVsYrpmHE · 30 KB · txt
-- [ ] es · animal charity evaluators / room-for-more-funding.txt · 1or8bGrdOU6k_VlC7WNVsyAK1PY3PPqx- · 30 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-david-wolfson.txt · 1eipAjv9oF-EUmT6MFIjr8RvRETVvrKtp · 31 KB · txt
-- [ ] es · animal charity evaluators / how-can-we-integrate-diversity-equity-and-inclusion-into-the-animal-advocacy-movement.txt · 1eX5MUUZLNbwiZGsVb4tXW44Jst4DFVav · 35 KB · txt
-- [ ] es · animal charity evaluators / ace-interviews-hal-herzog.txt · 18MIjATC6qeGwrGxtDp0jQC3ngqCZ63Sj · 37 KB · txt
+- [x] es · animal charity evaluators / 2018-prospective-goals.txt · 1SeisRy9eidR1TUb10K2Rxm-S8wZQy4je · 17 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/2018-prospective-goals.txt`)
+- [x] es · animal charity evaluators / thinking-process-leading-december-2014-recommendations.txt · 1yBWlkfq3a21mTU5CmwyA4x3AAxRGZDsy · 18 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/thinking-process-leading-december-2014-recommendations.txt`)
+- [x] es · animal charity evaluators / which-key-ideas-should-we-be-spreading-with-marginal-resources.txt · 1yoecQRbpJsr6DaCEc0cYEzxxd8wtkDei · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/which-key-ideas-should-we-be-spreading-with-marginal-resources.txt`)
+- [x] es · animal charity evaluators / should-animal-organizations-conduct-their-own-research.txt · 1sPbeXW9WvftS95DbTQQ2r7mw_YKBet7E · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/should-animal-organizations-conduct-their-own-research.txt`)
+- [x] es · animal charity evaluators / sexual-harassment-within-the-animal-advocacy-movement.txt · 11tiM2mFdRiTvjrSXyxskPaIfeYESh83a · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/sexual-harassment-within-the-animal-advocacy-movement.txt`)
+- [x] es · animal charity evaluators / how-many-animals-does-a-vegetarian-save-in-the-uk.txt · 1aGlM_PvFYA31Q-Mf89p-KyRYtuJdwsGl · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/how-many-animals-does-a-vegetarian-save-in-the-uk.txt`)
+- [x] es · animal charity evaluators / looking-back-at-2016-prospective-goals.txt · 1zE2jJmDsLACqCwJd74rUvsh99jqr6l4T · 19 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/looking-back-at-2016-prospective-goals.txt`)
+- [x] es · animal charity evaluators / interview-with-brian-tomasik.txt · 1s8Z8USVvxErb6hdmHSRVU27EaD_6hTZS · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/interview-with-brian-tomasik.txt`)
+- [x] es · animal charity evaluators / beyond-meat-vs-new-harvest.txt · 1PkabZpLMF70zoRCMfBvTSPCnVdqygzSk · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/beyond-meat-vs-new-harvest.txt`)
+- [x] es · animal charity evaluators / how-should-we-account-for-the-potential-long-term-impact-of-organizations.txt · 1vJceyrAnzxEd6CnikqZhjn4iHc9Af8o_ · 21 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/how-should-we-account-for-the-potential-long-term-impact-of-organizations.txt`)
+- [x] es · animal charity evaluators / how-we-evaluate-social-media-impact.txt · 1MJkz-s_jMqlWtKbL3FU8lgwRhU3FWyz_ · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/how-we-evaluate-social-media-impact.txt`)
+- [x] es · animal charity evaluators / our-strategic-plan.txt · 1vh4TpsnKYDwODy4aaAbomyrh6c2r3-SG · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/our-strategic-plan.txt`)
+- [x] es · animal charity evaluators / some-thoughts-on-our-cost-effectiveness-estimates.txt · 154bPlVyWv-srBmYgqflNdPVxEMolLXz9 · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/some-thoughts-on-our-cost-effectiveness-estimates.txt`)
+- [x] es · animal charity evaluators / why-digital-sentience-is-relevant-to-animal-activists.txt · 1gibwrBQnHQwg0-N66dM0f02FBAmqxwwP · 22 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/why-digital-sentience-is-relevant-to-animal-activists.txt`)
+- [x] es · animal charity evaluators / why-the-situation-of-animals-in-the-wild-should-concern-us.txt · 1cx2WFHgSZwjEeCiqUWAErnW2b_yBaHts · 23 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/why-the-situation-of-animals-in-the-wild-should-concern-us.txt`)
+- [x] es · animal charity evaluators / ace-interviews-ethan-brown-ceo-beyond-meat.txt · 1PO2ht_HT0tWrRw_w_6rVAa1KYjnvx4xT · 24 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/ace-interviews-ethan-brown-ceo-beyond-meat.txt`)
+- [x] es · animal charity evaluators / ace-highlights-interview-with-carrie-freeman.txt · 1JnTbl3s7Rx1VwJlMPffUbGmtkRAE0ZDi · 25 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/ace-highlights-interview-with-carrie-freeman.txt`)
+- [x] es · animal charity evaluators / our-initial-thoughts-on-the-mfa-facebook-ads-study.txt · 1k2PQ-9_eosW8risfoi3s8jr3Je02dad- · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/our-initial-thoughts-on-the-mfa-facebook-ads-study.txt`)
+- [x] es · animal charity evaluators / clean-meat-or-cultured-meat-a-randomized-trial-evaluating-the-impact-on-self-reported-purchasing-preferences.txt · 1w_I8xUsG4tr9po1811S2-ZoDMvBiwW5q · 26 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/clean-meat-or-cultured-meat-a-randomized-trial-evaluating-the-impact-on-self-reported-purchasing-preferences.txt`)
+- [x] es · animal charity evaluators / why-farmed-animals.txt · 1f6mngAoqn_sEQiwRSOyLB2p8qh15Fp2O · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/why-farmed-animals.txt`)
+- [x] es · animal charity evaluators / ace-interviews-matt-ball.txt · 1e_rzD5Ciy5zNbupG7d2WPl3rwepxipVR · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/ace-interviews-matt-ball.txt`)
+- [x] es · animal charity evaluators / ace-interviews-nikki-bollaert.txt · 17xM2WY8RdVKc9uZWaZ2Uekrbz8yzaZsb · 29 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/ace-interviews-nikki-bollaert.txt`)
+- [x] es · animal charity evaluators / welfarists-or-abolitionists-division-hurts-animal-advocacy.txt · 1fSpDP5bmaMcYXwxzJdQ_oYXmVsYrpmHE · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/welfarists-or-abolitionists-division-hurts-animal-advocacy.txt`)
+- [x] es · animal charity evaluators / room-for-more-funding.txt · 1or8bGrdOU6k_VlC7WNVsyAK1PY3PPqx- · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/room-for-more-funding.txt`)
+- [x] es · animal charity evaluators / ace-interviews-david-wolfson.txt · 1eipAjv9oF-EUmT6MFIjr8RvRETVvrKtp · 31 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/ace-interviews-david-wolfson.txt`)
+- [x] es · animal charity evaluators / how-can-we-integrate-diversity-equity-and-inclusion-into-the-animal-advocacy-movement.txt · 1eX5MUUZLNbwiZGsVb4tXW44Jst4DFVav · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/how-can-we-integrate-diversity-equity-and-inclusion-into-the-animal-advocacy-movement.txt`)
+- [x] es · animal charity evaluators / ace-interviews-hal-herzog.txt · 18MIjATC6qeGwrGxtDp0jQC3ngqCZ63Sj · 37 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/ace-interviews-hal-herzog.txt`)
 - [-] es · wild animal initiative / ace-top-charity-2021.txt · 1qhGDz36pyMVhumntjGrOEOKv44Cy7yGC · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · wild animal initiative / additional-grantees-2022.txt · 1-YcJ-07hb7Lq6tVq6urMqV7BxF3DJdaa · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · wild animal initiative / advisory-panel.txt · 1CD2y6NL5QIcPlTtOtQN1DfLVYWw_w_yL · 1 KB · txt · under 2 KB: empty page or stub
@@ -2071,8 +2071,8 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · wild animal initiative / videobiologicalage.txt · 1lIgseqc9UilJhubN_oh4plxGrrwlgBqJ · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · wild animal initiative / wai-executive-director.txt · 1MPg52zD9uhO6LuliLsSrrGubNYIiEri6 · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · wild animal initiative / welfare-expectancy.txt · 1GYX2Qtmr2cfqAEpZCzoqDceSq3FP835P · 1 KB · txt · under 2 KB: empty page or stub
-- [ ] es · wild animal initiative / RE_Opinion_Published+article.txt · 1_7Nq_5-WJaw9zuCdwOhUEH6vz8uSWtV0 · 20 KB · txt
-- [ ] es · wild animal initiative / Accounting for demography in the assessment of wild animal welfare _ bioRxiv.txt · 13XS5SaXufL9-BOJVDyfKQ6njuOAShRP6 · 53 KB · txt
+- [x] es · wild animal initiative / RE_Opinion_Published+article.txt · 1_7Nq_5-WJaw9zuCdwOhUEH6vz8uSWtV0 · 20 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/RE_Opinion_Published+article.txt`)
+- [x] es · wild animal initiative / Accounting for demography in the assessment of wild animal welfare _ bioRxiv.txt · 13XS5SaXufL9-BOJVDyfKQ6njuOAShRP6 · 53 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/Accounting for demography in the assessment of wild animal welfare _ bioRxiv.txt`)
 - [ ] es · wild animal initiative / 819565v1.full.txt · 1oMHtIMCPb0CCDBJjn8pRVO3MuK13fRdA · 61 KB · txt
 - [ ] es · wild animal initiative / Improving+Pest+Management+for+Wild+Insect+Welfare.txt · 1chyXsQVLzTexQmnngnXiOWqyUsyxh_5a · 82 KB · txt
 - [ ] es · wild animal initiative / WAI_PersistenceAndReversibility_Dec2019.txt · 1D8B_VkSdD0SCetRm_ZDm6aXDKeu5bdre · 83 KB · txt
@@ -2130,42 +2130,42 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · wild animal initiative / grantee-caterpillars.txt · 1MLOd8PNRoZ88n7gFmSIXEQupLEpAUFvb · 343 KB · txt
 - [ ] es · wild animal initiative / small-grants-2023.txt · 13_dE87sihK5OYryc8HxTYlEaqDk0AUDf · 455 KB · txt
 - [-] es · good food institute research library / www.ncbi.nlm.nih.gov.txt · 1aZcWbyp9ZoodRmSbUFJXzUcNSXKpwYFP · 1 KB · txt · under 2 KB: empty page or stub
-- [ ] es · good food institute research library / pnf_2013_v18n1_80.txt · 1HyixUe678Lmbzj2bHIk4DF_qq5sQROmD · 23 KB · txt
-- [ ] es · good food institute research library / 13197_2019_Article_4148.txt · 1LR4IWY2mVap812huxvUlvhP_nEkO2gq0 · 28 KB · txt
-- [ ] es · good food institute research library / 10068_2018_Article_437.txt · 1Addi7Hxim8MkP9my2z290I7T-iHqjP40 · 30 KB · txt
-- [ ] es · good food institute research library / 13197_2018_Article_3311.txt · 13ohKEBhtJLxFvjz5PzOSHhKgibfOCwAa · 31 KB · txt
-- [ ] es · good food institute research library / 13197_2017_Article_2524.txt · 1cpK8n_5KNhWcl8wFjL025At_C6P_BZRN · 32 KB · txt
-- [ ] es · good food institute research library / 11130_2020_Article_806.txt · 1ic03CUV0WXO31fXbvSCw45OiAlhQug1q · 32 KB · txt
-- [ ] es · good food institute research library / ajas-29-12-1774.txt · 1OFMjGBeY0xb8apAWmOzQUDleh2-IvqaO · 35 KB · txt
-- [ ] es · good food institute research library / 11130_2018_Article_660.txt · 1lCSCtbXOFYZBJQWfGPwMJZiCL8PMBx9N · 35 KB · txt
-- [ ] es · good food institute research library / 13197_2018_Article_3551.txt · 1L3l2AGfcxN8E85l0J8wG4ZQnY3UqngB7 · 36 KB · txt
-- [ ] es · good food institute research library / 13197_2017_Article_2721.txt · 1PEHQ_isZ5sLbe1UaoQuPUSk-Gj4UbvYE · 39 KB · txt
-- [ ] es · good food institute research library / molecules-23-03265.txt · 1zuPm-DY8Zquf8RsaREWHKV2zRxvQO6_h · 39 KB · txt
-- [ ] es · good food institute research library / 13197_2020_Article_4249.txt · 1wLuw-RO1UjbRae58NzrA8Jkv9ScACCjM · 40 KB · txt
-- [ ] es · good food institute research library / 40694_2018_Article_50.txt · 1bxIYOSMarKxWLGnaCbXhU-UG96daWie8 · 41 KB · txt
-- [ ] es · good food institute research library / 13197_2016_Article_2206.txt · 1sNHfp6IXpnAGKMXQU4waS3Sgt7Mrl5vF · 43 KB · txt
-- [ ] es · good food institute research library / 13197_2018_Article_3312.txt · 1URI7FWER31zqt9vbsVjXZw25blu_jOVV · 43 KB · txt
-- [ ] es · good food institute research library / 10811_2016_Article_957.txt · 1N9WqPFIs6UEIde6cVDRFCflNDqJRCX10 · 43 KB · txt
-- [ ] es · good food institute research library / gb-2011-12-10-232.txt · 1J6jbnGjVHmlE89UQ-BK3fRUV11aw_VJl · 44 KB · txt
-- [ ] es · good food institute research library / 13197_2017_Article_2855.txt · 1Vk8fn2VAkyQ_KN_z4-ip3tc9_e-gj_72 · 44 KB · txt
-- [ ] es · good food institute research library / 10068_2020_Article_737.txt · 1Wb_eNxMdrKF-aYscBtACfpwrPpNOYMnb · 44 KB · txt
-- [ ] es · good food institute research library / 12870_2018_Article_1579.txt · 1_G59BxH0PTbHZTpG32rLKX3P63hP-cBg · 44 KB · txt
-- [ ] es · good food institute research library / pnas.201006265.txt · 1n1gJE8Kp4_pipmgPiGURdz8lTrm2al2z · 45 KB · txt
-- [ ] es · good food institute research library / 13197_2017_Article_2614.txt · 1iYPvkvfeQPsi7qQKzZ1_khSR3XHpZODj · 47 KB · txt
-- [ ] es · good food institute research library / 13197_2019_Article_4109.txt · 173fze7FPHo_-i-b2NvZ_rqAYe917Pm0A · 48 KB · txt
-- [ ] es · good food institute research library / fpls-07-00688 (1).txt · 1vhgcXBb85KxnnbU81f-nXOpz2VGccOjP · 48 KB · txt
-- [ ] es · good food institute research library / fpls-07-00688.txt · 1KnDcJuciMKD40nsGF5sotEaDgpjkBcfC · 48 KB · txt
-- [ ] es · good food institute research library / IJAC2018-9182508.txt · 1558TbdpmlzzdmT4P02dLERZQmFw-YIMX · 49 KB · txt
-- [ ] es · good food institute research library / foods-09-01077.txt · 19G03PSUJ61vsp8DGpdoxBrRlnc2hOja2 · 49 KB · txt
-- [ ] es · good food institute research library / 13197_2019_Article_4211.txt · 1aVw4FHyc06now1O2rDUXeVVqFDYPvUP6 · 50 KB · txt
-- [ ] es · good food institute research library / jkab227.txt · 1mA88V0Nlgv7UtnOV6cAOB3GeEjBxg0S3 · 50 KB · txt
-- [ ] es · good food institute research library / erx117.txt · 1OrB_0h7FPmV-aq-2D28xBEefdvA1_qOL · 51 KB · txt
-- [ ] es · good food institute research library / PBI-15-648.txt · 1OXq7io-4EKJVFgf3JrN9kZsCIe2bn3Ik · 53 KB · txt
-- [ ] es · good food institute research library / 726_2018_Article_2640.txt · 1pdgyDAEWmHBUm7NTJJ4Fi9mk1YHmild0 · 53 KB · txt
-- [ ] es · good food institute research library / foods-09-00772.txt · 10M7Qj_Ri59m5N39XcU-P8ia22aVXspxb · 54 KB · txt
-- [ ] es · good food institute research library / PBI-15-729.txt · 1mX3UDEhigqcQW837M-HIDxiyYbdQFK70 · 54 KB · txt
-- [ ] es · good food institute research library / srep32452.txt · 1GhII21MnBDJz2lLJvyxTdzKV7S4aISpd · 55 KB · txt
-- [ ] es · good food institute research library / foods-08-00651.txt · 1usJM2mrH5TbTDCS2WIuyARU4o181Bdu- · 56 KB · txt
+- [x] es · good food institute research library / pnf_2013_v18n1_80.txt · 1HyixUe678Lmbzj2bHIk4DF_qq5sQROmD · 23 KB · txt · es done 2026-10-30 (3/3 batches, `Español/archive/pnf_2013_v18n1_80.txt`)
+- [x] es · good food institute research library / 13197_2019_Article_4148.txt · 1LR4IWY2mVap812huxvUlvhP_nEkO2gq0 · 28 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/13197_2019_Article_4148.txt`)
+- [x] es · good food institute research library / 10068_2018_Article_437.txt · 1Addi7Hxim8MkP9my2z290I7T-iHqjP40 · 30 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/10068_2018_Article_437.txt`)
+- [x] es · good food institute research library / 13197_2018_Article_3311.txt · 13ohKEBhtJLxFvjz5PzOSHhKgibfOCwAa · 31 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/13197_2018_Article_3311.txt`)
+- [x] es · good food institute research library / 13197_2017_Article_2524.txt · 1cpK8n_5KNhWcl8wFjL025At_C6P_BZRN · 32 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/13197_2017_Article_2524.txt`)
+- [x] es · good food institute research library / 11130_2020_Article_806.txt · 1ic03CUV0WXO31fXbvSCw45OiAlhQug1q · 32 KB · txt · es done 2026-10-30 (4/4 batches, `Español/archive/11130_2020_Article_806.txt`)
+- [x] es · good food institute research library / ajas-29-12-1774.txt · 1OFMjGBeY0xb8apAWmOzQUDleh2-IvqaO · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/ajas-29-12-1774.txt`)
+- [x] es · good food institute research library / 11130_2018_Article_660.txt · 1lCSCtbXOFYZBJQWfGPwMJZiCL8PMBx9N · 35 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/11130_2018_Article_660.txt`)
+- [x] es · good food institute research library / 13197_2018_Article_3551.txt · 1L3l2AGfcxN8E85l0J8wG4ZQnY3UqngB7 · 36 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/13197_2018_Article_3551.txt`)
+- [x] es · good food institute research library / 13197_2017_Article_2721.txt · 1PEHQ_isZ5sLbe1UaoQuPUSk-Gj4UbvYE · 39 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/13197_2017_Article_2721.txt`)
+- [x] es · good food institute research library / molecules-23-03265.txt · 1zuPm-DY8Zquf8RsaREWHKV2zRxvQO6_h · 39 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/molecules-23-03265.txt`)
+- [x] es · good food institute research library / 13197_2020_Article_4249.txt · 1wLuw-RO1UjbRae58NzrA8Jkv9ScACCjM · 40 KB · txt · es done 2026-10-30 (5/5 batches, `Español/archive/13197_2020_Article_4249.txt`)
+- [x] es · good food institute research library / 40694_2018_Article_50.txt · 1bxIYOSMarKxWLGnaCbXhU-UG96daWie8 · 41 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/40694_2018_Article_50.txt`)
+- [x] es · good food institute research library / 13197_2016_Article_2206.txt · 1sNHfp6IXpnAGKMXQU4waS3Sgt7Mrl5vF · 43 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/13197_2016_Article_2206.txt`)
+- [x] es · good food institute research library / 13197_2018_Article_3312.txt · 1URI7FWER31zqt9vbsVjXZw25blu_jOVV · 43 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/13197_2018_Article_3312.txt`)
+- [x] es · good food institute research library / 10811_2016_Article_957.txt · 1N9WqPFIs6UEIde6cVDRFCflNDqJRCX10 · 43 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/10811_2016_Article_957.txt`)
+- [x] es · good food institute research library / gb-2011-12-10-232.txt · 1J6jbnGjVHmlE89UQ-BK3fRUV11aw_VJl · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/gb-2011-12-10-232.txt`)
+- [x] es · good food institute research library / 13197_2017_Article_2855.txt · 1Vk8fn2VAkyQ_KN_z4-ip3tc9_e-gj_72 · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/13197_2017_Article_2855.txt`)
+- [x] es · good food institute research library / 10068_2020_Article_737.txt · 1Wb_eNxMdrKF-aYscBtACfpwrPpNOYMnb · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/10068_2020_Article_737.txt`)
+- [x] es · good food institute research library / 12870_2018_Article_1579.txt · 1_G59BxH0PTbHZTpG32rLKX3P63hP-cBg · 44 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/12870_2018_Article_1579.txt`)
+- [x] es · good food institute research library / pnas.201006265.txt · 1n1gJE8Kp4_pipmgPiGURdz8lTrm2al2z · 45 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/pnas.201006265.txt`)
+- [x] es · good food institute research library / 13197_2017_Article_2614.txt · 1iYPvkvfeQPsi7qQKzZ1_khSR3XHpZODj · 47 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/13197_2017_Article_2614.txt`)
+- [x] es · good food institute research library / 13197_2019_Article_4109.txt · 173fze7FPHo_-i-b2NvZ_rqAYe917Pm0A · 48 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/13197_2019_Article_4109.txt`)
+- [x] es · good food institute research library / fpls-07-00688 (1).txt · 1vhgcXBb85KxnnbU81f-nXOpz2VGccOjP · 48 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/fpls-07-00688 (1).txt`)
+- [x] es · good food institute research library / fpls-07-00688.txt · 1KnDcJuciMKD40nsGF5sotEaDgpjkBcfC · 48 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/fpls-07-00688.txt`)
+- [x] es · good food institute research library / IJAC2018-9182508.txt · 1558TbdpmlzzdmT4P02dLERZQmFw-YIMX · 49 KB · txt · es done 2026-10-30 (6/6 batches, `Español/archive/IJAC2018-9182508.txt`)
+- [x] es · good food institute research library / foods-09-01077.txt · 19G03PSUJ61vsp8DGpdoxBrRlnc2hOja2 · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/foods-09-01077.txt`)
+- [x] es · good food institute research library / 13197_2019_Article_4211.txt · 1aVw4FHyc06now1O2rDUXeVVqFDYPvUP6 · 50 KB · txt · es done 2026-10-30 (7/7 batches, `Español/archive/13197_2019_Article_4211.txt`)
+- [x] es · good food institute research library / jkab227.txt · 1mA88V0Nlgv7UtnOV6cAOB3GeEjBxg0S3 · 50 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/jkab227.txt`)
+- [x] es · good food institute research library / erx117.txt · 1OrB_0h7FPmV-aq-2D28xBEefdvA1_qOL · 51 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/erx117.txt`)
+- [x] es · good food institute research library / PBI-15-648.txt · 1OXq7io-4EKJVFgf3JrN9kZsCIe2bn3Ik · 53 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/PBI-15-648.txt`)
+- [x] es · good food institute research library / 726_2018_Article_2640.txt · 1pdgyDAEWmHBUm7NTJJ4Fi9mk1YHmild0 · 53 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/726_2018_Article_2640.txt`)
+- [x] es · good food institute research library / foods-09-00772.txt · 10M7Qj_Ri59m5N39XcU-P8ia22aVXspxb · 54 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/foods-09-00772.txt`)
+- [x] es · good food institute research library / PBI-15-729.txt · 1mX3UDEhigqcQW837M-HIDxiyYbdQFK70 · 54 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/PBI-15-729.txt`)
+- [x] es · good food institute research library / srep32452.txt · 1GhII21MnBDJz2lLJvyxTdzKV7S4aISpd · 55 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/srep32452.txt`)
+- [x] es · good food institute research library / foods-08-00651.txt · 1usJM2mrH5TbTDCS2WIuyARU4o181Bdu- · 56 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/foods-08-00651.txt`)
 - [ ] es · good food institute research library / 13197_2016_Article_2197.txt · 1Bd2DPq89WQl7QeTBQuZFpkF9gB6p8RhV · 61 KB · txt
 - [ ] es · good food institute research library / molecules-23-02127.txt · 1NDTvZgmKAu9mu3VTzdW_jSDaljWO_hjj · 63 KB · txt
 - [ ] es · good food institute research library / marinedrugs-13-03422.txt · 1jZ8DPQPjkqXqEYc2iEwSQ_RqGXmLpgfL · 64 KB · txt
@@ -2194,113 +2194,113 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · good food institute research library / nihms-1570273.txt · 16XbppIIJMs0Fp2kAY4zhKGYDfyl5VcIr · 119 KB · txt
 - [ ] es · good food institute research library / foods-10-00260.txt · 1-Nq_nueBhHNMjEcwzPQsM4B3Nezybf1r · 138 KB · txt
 - [ ] es · good food institute research library / foods-10-00600.txt · 156cZ789RBPOxMxxF2sl1oL6zn7Lds6ph · 144 KB · txt
-- [ ] es · malaria consortium / 1688272541_sumrespeformanceinfographics.txt · 17B0ySrqKuN6WZVsjfjW_eA7xMQ5lmxqL · 4 KB · txt
-- [ ] es · malaria consortium / 1688272538_mapdpresentationeffectivemalariaprevention.txt · 1bsXsKZSU-eeTt_VG-NrmknQoy-DAL5mi · 4 KB · txt
-- [ ] es · malaria consortium / 1688272496_221028astmh_tedilahabtefinal.txt · 1p_om80WS5VQBUiNhC6QU3F_Sb5gNGCEp · 4 KB · txt
-- [ ] es · malaria consortium / 1688272512_astmh2021postersgeoffrey.txt · 1yK-Oi_g704E0MJNWW5G2YIsT66E3t_w_ · 5 KB · txt
-- [ ] es · malaria consortium / 1688272536_buildingcapacityformalariaeliminationinsoutherncambodia.txt · 1lnmIPxzxYji-BT782qVnjVel0dMqjdZC · 5 KB · txt
-- [ ] es · malaria consortium / 1688272504_201029astmhposterjohnbaptistfinal.txt · 1p0u8BAvHcpYQ4HDbGwEKY_nVjcl4nSjH · 5 KB · txt
-- [ ] es · malaria consortium / 1688272529_201027astmhposterleobraackfinal.txt · 12AW5CF70mn0ukwF0e5SF9DeyKgE8KTLC · 5 KB · txt
-- [ ] es · malaria consortium / 1688272479_icimssuccessstory_hdavolunteersfinal.txt · 1KT1GprHTRD0J6GHxtq1QwfJaHlieoNOm · 5 KB · txt
-- [ ] es · malaria consortium / 1688272506_1164.txt · 12TGLV2oZQ6x_XEMmen86nvuka4PnfD_- · 5 KB · txt
-- [ ] es · malaria consortium / 1688272539_workingwithcommunitiesinethiopiatopreventthespreadofmalaria.txt · 19IwSkdohOe_iA8TREMm6EZvyuLoizVoY · 5 KB · txt
-- [ ] es · malaria consortium / 1688272537_reachingallchildrennomatterwhat.txt · 11SfjVkq9_dz7Nfj6bzYm2LzVxlHHwnWy · 5 KB · txt
-- [ ] es · malaria consortium / 1688272508_successstorymapd_keyinfluencer_cp1.txt · 1j_AvTcjx-2Y30uP9dbGA3bItYm1l7dC0 · 5 KB · txt
-- [ ] es · malaria consortium / 1688272519_supportingcommunityhealthworkersinmozambiquetorespondtocovid19_final.txt · 1xuQsUYH_xefCYApEJDioyOOC_AqwwVqr · 6 KB · txt
-- [ ] es · malaria consortium / 1688272482_assessinginfectionpreventionforsmcduringcovid19.txt · 1zt9apYfLhObrHjOEa2tbgJtAjZTSFYLx · 6 KB · txt
-- [ ] es · malaria consortium / 1688272477_astmh2022postermusa1.txt · 1ZaCUWCZnGtjJXJD4D65PIh6Bh8wJDgQE · 6 KB · txt
-- [ ] es · malaria consortium / 1688272509_astmhkap2.txt · 16HGqjVWp5n1c0G1uxkl4_iLlnCOoGJL2 · 6 KB · txt
-- [ ] es · malaria consortium / 1688272539_astmhposterjb.txt · 1cEztXp_cVNIjXOgraq_PR-BJJT6Hp0BO · 6 KB · txt
-- [ ] es · malaria consortium / 1688272510_usaid_mapd_end_of_project_crosscutting_21.txt · 1-XGOqCkw43hWWExaHVP15daqqq1_Hu8_ · 6 KB · txt
-- [ ] es · malaria consortium / 1688272478_hajarasstory_nigeria_final.txt · 1J3ejVnciq4WzdmTM3okh_P8uboiucjpW · 6 KB · txt
-- [ ] es · malaria consortium / 1688272480_strengtheningmalariasurveillanceinmozambiqueportuguese.txt · 1V97qx30sOQd2aubm8FKdI6gNRqtEVVGB · 6 KB · txt
-- [ ] es · malaria consortium / 1688272524_evaluatingtheimpactofcovid19onmalariaandotherinfectiousdiseasesinuganda_final.txt · 1OdzKn-lYSXx5uZ2iCBvusg9vB6rz6-kB · 6 KB · txt
-- [ ] es · malaria consortium / 1688272525_implementinganationalcovid19vaccinationcampaigninsouthsudan1.txt · 1PIUswvEg4Ju7xR8ov_zb6IPujde0pQ2x · 6 KB · txt
-- [ ] es · malaria consortium / 1688272503_deliveringalonglastinginsecticidalnetcampaigninsouthsudan.txt · 17iaidei5c0u4YEEfFVanOpa9cowc9CMw · 6 KB · txt
-- [ ] es · malaria consortium / 1688272491_astmh2022postersmonicameasuringsmcbf.txt · 1kn5LMxPetHVE3_YfUlIUqIVivkAyexRT · 6 KB · txt
-- [ ] es · malaria consortium / 1688272519_strengtheningthepneumoniaresponseinchad_final.txt · 1FOK-1Cg-vWgHRUwwNHxZtb_x_Bs5uq-L · 6 KB · txt
-- [ ] es · malaria consortium / 1688272514_projectbriefpreventiondiagnosisandmanagementofpodoconiosis.txt · 1JT519XAIgbBXCV8FZBYE9bkqMNzZFD70 · 6 KB · txt
-- [ ] es · malaria consortium / 1688272502_casestudy_jpf_hew_2021_final.txt · 1_89vdw21bq0fZNgTOcm29xTdbDXnMluq · 6 KB · txt
-- [ ] es · malaria consortium / 1688272469_projectbriefethiopiantdsfinal.txt · 1Bj5UlvJ1EUP0QQ9OxJlAdNT7QNPTXYyJ · 7 KB · txt
-- [ ] es · malaria consortium / 1688272481_astmh2021postersanthony02.txt · 1OVwahkWiG0CiI-_xGlGyuCOjVgmtXxyI · 7 KB · txt
-- [ ] es · malaria consortium / 1688272487_usaidsmalariaactionprogramfordistrictssuccessstoryiptp.txt · 1QOLqjDBSC9-MXM-M_Obtb38utSPZE_ZT · 7 KB · txt
-- [ ] es · malaria consortium / 1688272529_happyfeet3.txt · 1cY16QFKmMpBm-OWQkh-SZ2x7bwBob1at · 7 KB · txt
-- [ ] es · malaria consortium / 1688272494_successstorygrandround.txt · 1sCq3UJAE4pS4P9Q1rHRUOqkO7xUY1PXO · 7 KB · txt
-- [ ] es · malaria consortium / 1688272523_astmhposterpatrick.txt · 1BilXG92F2lxj42pHhAGPJWdaVcGaBjUL · 7 KB · txt
-- [ ] es · malaria consortium / 1688272483_hbbrochurefinal.txt · 1X1kHOZ-M-qk0rpQkLAWTo_VBGh4Y2Efe · 7 KB · txt
-- [ ] es · malaria consortium / 1688272492_smc2021ptupdated.txt · 1b8roNEDpsvJn8N6YHZu_6TCTK4JYt6HZ · 8 KB · txt
-- [ ] es · malaria consortium / 1688272526_monitoringtheintroductionofsmcincameroon_astmh2017.txt · 15QYpQKz_4YnmPLfy5DNsDbyJY5M9COBu · 8 KB · txt
-- [ ] es · malaria consortium / 1688272474_mozambique_upscale_eng_20221024.txt · 1wnhfMpWNgdLo1qrgqqiKDFAMW2Ufd-kd · 8 KB · txt
-- [ ] es · malaria consortium / 1688272528_partneringwithgovernmentstoimprovematernalandchildhealthfrench.txt · 1MGZDp8AX5NLCMC5LDi9gICjLjTSm29gI · 9 KB · txt
-- [ ] es · malaria consortium / 1688272515_successstorykabaroleregion.txt · 1bZuMCB8Bvk097VUZR5U8uPT713-zx_c5 · 9 KB · txt
-- [ ] es · malaria consortium / 1688272540_advocacybriefantenatalcareinethiopia.txt · 1ItL9Gg33_4ZJcCHgV9a7mr18W1Eo01b_ · 9 KB · txt
-- [ ] es · malaria consortium / 1688272486_thecostandimpactofaccesssmc_davidcollins.txt · 1nHdgsWYsM9bwvBGM_S73UStt5YedkePj · 9 KB · txt
-- [ ] es · malaria consortium / 1688272527_positionstatementdengue.txt · 15tSEvxMOPTlPjXw9-V07yN9XBLlqulMu · 10 KB · txt
-- [ ] es · malaria consortium / 1688272501_presentation_positivedeviance_rbm.txt · 1Nfu0RCoI0zW670BIxXXzobt9hrYLtEBX · 10 KB · txt
-- [ ] es · malaria consortium / 1688272469_sdgfoldout2.txt · 1lzsYRvVO0JNtm_QNEC7gVieqeiUV0Qmg · 10 KB · txt
-- [ ] es · malaria consortium / 1688272494_presentationivmprevioustrials.txt · 1BVhASAAI1XF3yeIyekju6UW194ztlr3t · 10 KB · txt
-- [ ] es · malaria consortium / 1688272507_strengtheningsurveillancefordatainformedmalariacontrolactivities.txt · 1UB31IAJTwDJduEQ_NE_nMKe8dXb5v5p6 · 11 KB · txt
-- [ ] es · malaria consortium / 1688272505_220303communitybasedmalariapreventionsurveillanceinterventionsinethiopiafinal.txt · 1nEn7ZtkE6RqYb4sz3qIvm51jTYYPrhYy · 11 KB · txt
-- [ ] es · malaria consortium / 1688272506_brochurematernalhealthandadolescentcare3.txt · 1lhHMll4xXf6VXsMJ80EHAKbwY81E-JlR · 11 KB · txt
-- [ ] es · malaria consortium / 1688272511_mapdlearningbriefedutainmentasavehicleformalariarelatedbehaviorchange.txt · 1s6ng6ajP5385bjn0s4ouk-rwHQkYC1Ph · 11 KB · txt
-- [ ] es · malaria consortium / 1688272475_uflearningbrieftrainingmalariavolunteerstodelivericcm.txt · 1IZMEfvdBC_4Rmd0jGHadKl2y5TaRhlRH · 12 KB · txt
-- [ ] es · malaria consortium / 1688272476_advocacybriefppps.txt · 1afAzpBWBItY_YuMX9h16EsDYRxIxl1dZ · 12 KB · txt
-- [ ] es · malaria consortium / 1688272520_sustainingthedatatoactiontransitioninmozambique.txt · 1dvIqqbCet0HpPOHpuAv8KU8Ewl8glzVy · 12 KB · txt
-- [ ] es · malaria consortium / 1688272497_usingtherolemodelapproachtoimprovemalariapreventionandcontrol.txt · 1dFjq6j6gaianbZmksRq3hnf0dCjkuhjJ · 12 KB · txt
-- [ ] es · malaria consortium / 1688272481_positionstatementdenguefr.txt · 1ePR4beT7r19cBJe-CBNWJRcx7b8bbZve · 12 KB · txt
-- [ ] es · malaria consortium / 1688272516_strengtheningsurveillancefordatainformedmalariacontrolactivitiespt.txt · 1bRpeImmPTnHvg4ZhL7hJzkwftQZm_zuF · 13 KB · txt
-- [ ] es · malaria consortium / 1688272535_ufimplementingsmcburkinafasofr.txt · 1ycpoM6qWNjopfcxSiDhStqYjW9I4HPcD · 13 KB · txt
-- [ ] es · malaria consortium / 1688272495_deployinganintegratedmalariainformationstoragesysteminmozambiquept.txt · 1LPqiJPVhoaaJEeFmwvTzL0PGGCYsg9HA · 14 KB · txt
-- [ ] es · malaria consortium / 1688272534_positionstatementclimatechange.txt · 1tFvbMjMYZ_JDmnShKq07FR05jEFz7FEx · 14 KB · txt
-- [ ] es · malaria consortium / 1688272490_chadsmcresearchbrieffr.txt · 17VK_lsdNTlXgTfsnmQkCC8NtxZCwSq4Q · 15 KB · txt
-- [ ] es · malaria consortium / 1688272517_ufthebomahealthinitiative.txt · 1CxMbjSQOdLTHFGR8QKK7S_mUek2loxEl · 16 KB · txt
-- [ ] es · malaria consortium / 1688272521_exploringtheimplementationofsmcinmozambiqueresults202020214.txt · 1jAi-IHyFFwIj2Ojo1CpsAKFYzErWn4hO · 16 KB · txt
-- [ ] es · malaria consortium / 1688272499_positionstatementclimatechangept.txt · 1dSIjbBSGtr5-ThU2f5k9E2F3SETpn57A · 16 KB · txt
-- [ ] es · malaria consortium / 1688272493_integratingsmcandvitaminasupplementationlessonslearntfromnigeria.txt · 1Gji4nEwinffbWORtLYYiol_tcacqFnGp · 16 KB · txt
-- [ ] es · malaria consortium / 1688272471_workingwithschoolsv3.txt · 1DePirjlf-hgS-DPN6_qZAonfNZtdlxPb · 17 KB · txt
-- [ ] es · malaria consortium / 1688272513_28exploringtheimplementationofsmcinmozambiqueresults20202021pt.txt · 1yEp2Shpayhd72SfuX6YlGYvMPPaBesu4 · 18 KB · txt
-- [ ] es · malaria consortium / 1688272473_acceleratingmalariaeliminationinnortherncambodiathroughearlydiagnosisandtreatment.txt · 1V8zTBGDnRVwgRwjMO7Vg0kV8RU7Y0hZZ · 18 KB · txt
-- [ ] es · malaria consortium / 1688272523_advocacybrief_hss.txt · 1P-HvR5L7RXTxAFuiryiFBd6gr2OS55uH · 19 KB · txt
-- [ ] es · malaria consortium / 1688272498_escolas_pt.txt · 1uVZxKRGcv2dVJw4E8ThRSzpnzbJ6ldMJ · 19 KB · txt
-- [ ] es · malaria consortium / 1688272489_20212025orgstrategyfr.txt · 1kHqKLjmXyGibL4dqyxto4gu2Y-WfK63y · 19 KB · txt
-- [ ] es · malaria consortium / 1688272541_2022positionstatementvaccinesfr1.txt · 1zi-8xphSZZ79_pPM1K4QPc17yCYiWQLB · 19 KB · txt
-- [ ] es · malaria consortium / 1688272522_adaptingpoliticaleconomyanalysisformalariaprogramming.txt · 1Ta1EcbC6eH-_VqdPXjNAGB-HQOilvIeM · 19 KB · txt
-- [ ] es · malaria consortium / 1688272510_monitoringandevaluatingsmcusingalogicalframeworkapproachptupdated.txt · 1zQGD1p40TQY8eTDEbplS2eP2IH6_Acbl · 21 KB · txt
-- [ ] es · malaria consortium / 1688272518_eventnotessmcsymposium9thjune2016.txt · 1gEZC8m3Q9adaTwaNCz5Ov6-6aj_1FRIe · 21 KB · txt
-- [ ] es · malaria consortium / 1688272500_learningbriefismo.txt · 1BrjBwVZcvjNT1cqNKs90BhpLTDKxJj7_ · 21 KB · txt
-- [ ] es · malaria consortium / 1688272472_capacitystatementsurveillancefr.txt · 1YBr2NpgJ9B97da-PjiL7XwR1WauuC9P0 · 25 KB · txt
-- [ ] es · malaria consortium / 1688272534_journoarticlesurveillanceasacoreinterventiontostrengthenmalariacontrolprogramsinmoderatetohightransmissionsettings.txt · 1euYZK_OjbrGZCjEHQEbDRUkHVn3CCDwx · 37 KB · txt
-- [ ] es · malaria consortium / 1688272478_commercialsectorcasestudyonerevisedfinal200514.txt · 1Uar7tcp8_ziC8qRNP0m5SqTz5-j6Zqa- · 38 KB · txt
-- [ ] es · malaria consortium / 1688272467_guidetodevelopingandmonitoringaresearchuptakeplan_interactive.txt · 1D7E-6VNo18Z_wUusgWicldZDZEn3qmg4 · 41 KB · txt
-- [ ] es · malaria consortium / 1688272499_consequencesofrdtfeverdx.txt · 1n05u19hGXd8FEnmpV5NhF9CIJw3zxXHT · 43 KB · txt
-- [ ] es · malaria consortium / 1688272470_guidetodevelopingandmonitoringaresearchuptakeplan_pt.txt · 17tFRYr7ELRDxAKzXKwL2jT3ycmwzHsRV · 50 KB · txt
-- [ ] es · malaria consortium / 1688272484_kapsurveyplosone.txt · 1yk7jjThLOrKtGqLEbbegkHMbQsABi1U- · 51 KB · txt
-- [ ] es · malaria consortium / 1688272466_drugabusenigeria.txt · 1G7xug3sqs1yCxwct_IzYAQ3Tj3yUVQsB · 51 KB · txt
-- [ ] es · malaria consortium / 1688272488_pulseoximeterarticle.txt · 1TSowf9NXQfWB4-i12DhrVf0k482KEGkX · 51 KB · txt
-- [ ] es · malaria consortium / 1688272533_guidetodevelopingandmonitoringaresearchuptakeplan_fr.txt · 1PG6SzRIcr7RaZPwJk6t5rKtEF_w3Puxp · 52 KB · txt
+- [x] es · malaria consortium / 1688272541_sumrespeformanceinfographics.txt · 17B0ySrqKuN6WZVsjfjW_eA7xMQ5lmxqL · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272541_sumrespeformanceinfographics.txt`)
+- [x] es · malaria consortium / 1688272538_mapdpresentationeffectivemalariaprevention.txt · 1bsXsKZSU-eeTt_VG-NrmknQoy-DAL5mi · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272538_mapdpresentationeffectivemalariaprevention.txt`)
+- [x] es · malaria consortium / 1688272496_221028astmh_tedilahabtefinal.txt · 1p_om80WS5VQBUiNhC6QU3F_Sb5gNGCEp · 4 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272496_221028astmh_tedilahabtefinal.txt`)
+- [x] es · malaria consortium / 1688272512_astmh2021postersgeoffrey.txt · 1yK-Oi_g704E0MJNWW5G2YIsT66E3t_w_ · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272512_astmh2021postersgeoffrey.txt`)
+- [x] es · malaria consortium / 1688272536_buildingcapacityformalariaeliminationinsoutherncambodia.txt · 1lnmIPxzxYji-BT782qVnjVel0dMqjdZC · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272536_buildingcapacityformalariaeliminationinsoutherncambodia.txt`)
+- [x] es · malaria consortium / 1688272504_201029astmhposterjohnbaptistfinal.txt · 1p0u8BAvHcpYQ4HDbGwEKY_nVjcl4nSjH · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272504_201029astmhposterjohnbaptistfinal.txt`)
+- [x] es · malaria consortium / 1688272529_201027astmhposterleobraackfinal.txt · 12AW5CF70mn0ukwF0e5SF9DeyKgE8KTLC · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272529_201027astmhposterleobraackfinal.txt`)
+- [x] es · malaria consortium / 1688272479_icimssuccessstory_hdavolunteersfinal.txt · 1KT1GprHTRD0J6GHxtq1QwfJaHlieoNOm · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272479_icimssuccessstory_hdavolunteersfinal.txt`)
+- [x] es · malaria consortium / 1688272506_1164.txt · 12TGLV2oZQ6x_XEMmen86nvuka4PnfD_- · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/malaria consortium 1688272506_1164.txt`)
+- [x] es · malaria consortium / 1688272539_workingwithcommunitiesinethiopiatopreventthespreadofmalaria.txt · 19IwSkdohOe_iA8TREMm6EZvyuLoizVoY · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272539_workingwithcommunitiesinethiopiatopreventthespreadofmalaria.txt`)
+- [x] es · malaria consortium / 1688272537_reachingallchildrennomatterwhat.txt · 11SfjVkq9_dz7Nfj6bzYm2LzVxlHHwnWy · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272537_reachingallchildrennomatterwhat.txt`)
+- [x] es · malaria consortium / 1688272508_successstorymapd_keyinfluencer_cp1.txt · 1j_AvTcjx-2Y30uP9dbGA3bItYm1l7dC0 · 5 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272508_successstorymapd_keyinfluencer_cp1.txt`)
+- [x] es · malaria consortium / 1688272519_supportingcommunityhealthworkersinmozambiquetorespondtocovid19_final.txt · 1xuQsUYH_xefCYApEJDioyOOC_AqwwVqr · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272519_supportingcommunityhealthworkersinmozambiquetorespondtocovid19_final.txt`)
+- [x] es · malaria consortium / 1688272482_assessinginfectionpreventionforsmcduringcovid19.txt · 1zt9apYfLhObrHjOEa2tbgJtAjZTSFYLx · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272482_assessinginfectionpreventionforsmcduringcovid19.txt`)
+- [x] es · malaria consortium / 1688272477_astmh2022postermusa1.txt · 1ZaCUWCZnGtjJXJD4D65PIh6Bh8wJDgQE · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272477_astmh2022postermusa1.txt`)
+- [x] es · malaria consortium / 1688272509_astmhkap2.txt · 16HGqjVWp5n1c0G1uxkl4_iLlnCOoGJL2 · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272509_astmhkap2.txt`)
+- [x] es · malaria consortium / 1688272539_astmhposterjb.txt · 1cEztXp_cVNIjXOgraq_PR-BJJT6Hp0BO · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272539_astmhposterjb.txt`)
+- [x] es · malaria consortium / 1688272510_usaid_mapd_end_of_project_crosscutting_21.txt · 1-XGOqCkw43hWWExaHVP15daqqq1_Hu8_ · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272510_usaid_mapd_end_of_project_crosscutting_21.txt`)
+- [x] es · malaria consortium / 1688272478_hajarasstory_nigeria_final.txt · 1J3ejVnciq4WzdmTM3okh_P8uboiucjpW · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272478_hajarasstory_nigeria_final.txt`)
+- [x] es · malaria consortium / 1688272480_strengtheningmalariasurveillanceinmozambiqueportuguese.txt · 1V97qx30sOQd2aubm8FKdI6gNRqtEVVGB · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272480_strengtheningmalariasurveillanceinmozambiqueportuguese.txt`)
+- [x] es · malaria consortium / 1688272524_evaluatingtheimpactofcovid19onmalariaandotherinfectiousdiseasesinuganda_final.txt · 1OdzKn-lYSXx5uZ2iCBvusg9vB6rz6-kB · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272524_evaluatingtheimpactofcovid19onmalariaandotherinfectiousdiseasesinuganda_final.txt`)
+- [x] es · malaria consortium / 1688272525_implementinganationalcovid19vaccinationcampaigninsouthsudan1.txt · 1PIUswvEg4Ju7xR8ov_zb6IPujde0pQ2x · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272525_implementinganationalcovid19vaccinationcampaigninsouthsudan1.txt`)
+- [x] es · malaria consortium / 1688272503_deliveringalonglastinginsecticidalnetcampaigninsouthsudan.txt · 17iaidei5c0u4YEEfFVanOpa9cowc9CMw · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272503_deliveringalonglastinginsecticidalnetcampaigninsouthsudan.txt`)
+- [x] es · malaria consortium / 1688272491_astmh2022postersmonicameasuringsmcbf.txt · 1kn5LMxPetHVE3_YfUlIUqIVivkAyexRT · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272491_astmh2022postersmonicameasuringsmcbf.txt`)
+- [x] es · malaria consortium / 1688272519_strengtheningthepneumoniaresponseinchad_final.txt · 1FOK-1Cg-vWgHRUwwNHxZtb_x_Bs5uq-L · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272519_strengtheningthepneumoniaresponseinchad_final.txt`)
+- [x] es · malaria consortium / 1688272514_projectbriefpreventiondiagnosisandmanagementofpodoconiosis.txt · 1JT519XAIgbBXCV8FZBYE9bkqMNzZFD70 · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272514_projectbriefpreventiondiagnosisandmanagementofpodoconiosis.txt`)
+- [x] es · malaria consortium / 1688272502_casestudy_jpf_hew_2021_final.txt · 1_89vdw21bq0fZNgTOcm29xTdbDXnMluq · 6 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272502_casestudy_jpf_hew_2021_final.txt`)
+- [x] es · malaria consortium / 1688272469_projectbriefethiopiantdsfinal.txt · 1Bj5UlvJ1EUP0QQ9OxJlAdNT7QNPTXYyJ · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272469_projectbriefethiopiantdsfinal.txt`)
+- [x] es · malaria consortium / 1688272481_astmh2021postersanthony02.txt · 1OVwahkWiG0CiI-_xGlGyuCOjVgmtXxyI · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272481_astmh2021postersanthony02.txt`)
+- [x] es · malaria consortium / 1688272487_usaidsmalariaactionprogramfordistrictssuccessstoryiptp.txt · 1QOLqjDBSC9-MXM-M_Obtb38utSPZE_ZT · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272487_usaidsmalariaactionprogramfordistrictssuccessstoryiptp.txt`)
+- [x] es · malaria consortium / 1688272529_happyfeet3.txt · 1cY16QFKmMpBm-OWQkh-SZ2x7bwBob1at · 7 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272529_happyfeet3.txt`)
+- [x] es · malaria consortium / 1688272494_successstorygrandround.txt · 1sCq3UJAE4pS4P9Q1rHRUOqkO7xUY1PXO · 7 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272494_successstorygrandround.txt`)
+- [x] es · malaria consortium / 1688272523_astmhposterpatrick.txt · 1BilXG92F2lxj42pHhAGPJWdaVcGaBjUL · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272523_astmhposterpatrick.txt`)
+- [x] es · malaria consortium / 1688272483_hbbrochurefinal.txt · 1X1kHOZ-M-qk0rpQkLAWTo_VBGh4Y2Efe · 7 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272483_hbbrochurefinal.txt`)
+- [x] es · malaria consortium / 1688272492_smc2021ptupdated.txt · 1b8roNEDpsvJn8N6YHZu_6TCTK4JYt6HZ · 8 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272492_smc2021ptupdated.txt`)
+- [x] es · malaria consortium / 1688272526_monitoringtheintroductionofsmcincameroon_astmh2017.txt · 15QYpQKz_4YnmPLfy5DNsDbyJY5M9COBu · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272526_monitoringtheintroductionofsmcincameroon_astmh2017.txt`)
+- [x] es · malaria consortium / 1688272474_mozambique_upscale_eng_20221024.txt · 1wnhfMpWNgdLo1qrgqqiKDFAMW2Ufd-kd · 8 KB · txt · es done 2026-10-30 (1/1 batches, `Español/archive/1688272474_mozambique_upscale_eng_20221024.txt`)
+- [x] es · malaria consortium / 1688272528_partneringwithgovernmentstoimprovematernalandchildhealthfrench.txt · 1MGZDp8AX5NLCMC5LDi9gICjLjTSm29gI · 9 KB · txt · es done 2026-10-30 (2/2 batches, `Español/archive/1688272528_partneringwithgovernmentstoimprovematernalandchildhealthfrench.txt`)
+- [x] es · malaria consortium / 1688272515_successstorykabaroleregion.txt · 1bZuMCB8Bvk097VUZR5U8uPT713-zx_c5 · 9 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1688272515_successstorykabaroleregion.txt`)
+- [x] es · malaria consortium / 1688272540_advocacybriefantenatalcareinethiopia.txt · 1ItL9Gg33_4ZJcCHgV9a7mr18W1Eo01b_ · 9 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272540_advocacybriefantenatalcareinethiopia.txt`)
+- [x] es · malaria consortium / 1688272486_thecostandimpactofaccesssmc_davidcollins.txt · 1nHdgsWYsM9bwvBGM_S73UStt5YedkePj · 9 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272486_thecostandimpactofaccesssmc_davidcollins.txt`)
+- [x] es · malaria consortium / 1688272527_positionstatementdengue.txt · 15tSEvxMOPTlPjXw9-V07yN9XBLlqulMu · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272527_positionstatementdengue.txt`)
+- [x] es · malaria consortium / 1688272501_presentation_positivedeviance_rbm.txt · 1Nfu0RCoI0zW670BIxXXzobt9hrYLtEBX · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272501_presentation_positivedeviance_rbm.txt`)
+- [x] es · malaria consortium / 1688272469_sdgfoldout2.txt · 1lzsYRvVO0JNtm_QNEC7gVieqeiUV0Qmg · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272469_sdgfoldout2.txt`)
+- [x] es · malaria consortium / 1688272494_presentationivmprevioustrials.txt · 1BVhASAAI1XF3yeIyekju6UW194ztlr3t · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272494_presentationivmprevioustrials.txt`)
+- [x] es · malaria consortium / 1688272507_strengtheningsurveillancefordatainformedmalariacontrolactivities.txt · 1UB31IAJTwDJduEQ_NE_nMKe8dXb5v5p6 · 11 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272507_strengtheningsurveillancefordatainformedmalariacontrolactivities.txt`)
+- [x] es · malaria consortium / 1688272505_220303communitybasedmalariapreventionsurveillanceinterventionsinethiopiafinal.txt · 1nEn7ZtkE6RqYb4sz3qIvm51jTYYPrhYy · 11 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272505_220303communitybasedmalariapreventionsurveillanceinterventionsinethiopiafinal.txt`)
+- [x] es · malaria consortium / 1688272506_brochurematernalhealthandadolescentcare3.txt · 1lhHMll4xXf6VXsMJ80EHAKbwY81E-JlR · 11 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272506_brochurematernalhealthandadolescentcare3.txt`)
+- [x] es · malaria consortium / 1688272511_mapdlearningbriefedutainmentasavehicleformalariarelatedbehaviorchange.txt · 1s6ng6ajP5385bjn0s4ouk-rwHQkYC1Ph · 11 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272511_mapdlearningbriefedutainmentasavehicleformalariarelatedbehaviorchange.txt`)
+- [x] es · malaria consortium / 1688272475_uflearningbrieftrainingmalariavolunteerstodelivericcm.txt · 1IZMEfvdBC_4Rmd0jGHadKl2y5TaRhlRH · 12 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272475_uflearningbrieftrainingmalariavolunteerstodelivericcm.txt`)
+- [x] es · malaria consortium / 1688272476_advocacybriefppps.txt · 1afAzpBWBItY_YuMX9h16EsDYRxIxl1dZ · 12 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272476_advocacybriefppps.txt`)
+- [x] es · malaria consortium / 1688272520_sustainingthedatatoactiontransitioninmozambique.txt · 1dvIqqbCet0HpPOHpuAv8KU8Ewl8glzVy · 12 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272520_sustainingthedatatoactiontransitioninmozambique.txt`)
+- [x] es · malaria consortium / 1688272497_usingtherolemodelapproachtoimprovemalariapreventionandcontrol.txt · 1dFjq6j6gaianbZmksRq3hnf0dCjkuhjJ · 12 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272497_usingtherolemodelapproachtoimprovemalariapreventionandcontrol.txt`)
+- [x] es · malaria consortium / 1688272481_positionstatementdenguefr.txt · 1ePR4beT7r19cBJe-CBNWJRcx7b8bbZve · 12 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272481_positionstatementdenguefr.txt`)
+- [x] es · malaria consortium / 1688272516_strengtheningsurveillancefordatainformedmalariacontrolactivitiespt.txt · 1bRpeImmPTnHvg4ZhL7hJzkwftQZm_zuF · 13 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272516_strengtheningsurveillancefordatainformedmalariacontrolactivitiespt.txt`)
+- [x] es · malaria consortium / 1688272535_ufimplementingsmcburkinafasofr.txt · 1ycpoM6qWNjopfcxSiDhStqYjW9I4HPcD · 13 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272535_ufimplementingsmcburkinafasofr.txt`)
+- [x] es · malaria consortium / 1688272495_deployinganintegratedmalariainformationstoragesysteminmozambiquept.txt · 1LPqiJPVhoaaJEeFmwvTzL0PGGCYsg9HA · 14 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272495_deployinganintegratedmalariainformationstoragesysteminmozambiquept.txt`)
+- [x] es · malaria consortium / 1688272534_positionstatementclimatechange.txt · 1tFvbMjMYZ_JDmnShKq07FR05jEFz7FEx · 14 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272534_positionstatementclimatechange.txt`)
+- [x] es · malaria consortium / 1688272490_chadsmcresearchbrieffr.txt · 17VK_lsdNTlXgTfsnmQkCC8NtxZCwSq4Q · 15 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272490_chadsmcresearchbrieffr.txt`)
+- [x] es · malaria consortium / 1688272517_ufthebomahealthinitiative.txt · 1CxMbjSQOdLTHFGR8QKK7S_mUek2loxEl · 16 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272517_ufthebomahealthinitiative.txt`)
+- [x] es · malaria consortium / 1688272521_exploringtheimplementationofsmcinmozambiqueresults202020214.txt · 1jAi-IHyFFwIj2Ojo1CpsAKFYzErWn4hO · 16 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272521_exploringtheimplementationofsmcinmozambiqueresults202020214.txt`)
+- [x] es · malaria consortium / 1688272499_positionstatementclimatechangept.txt · 1dSIjbBSGtr5-ThU2f5k9E2F3SETpn57A · 16 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272499_positionstatementclimatechangept.txt`)
+- [x] es · malaria consortium / 1688272493_integratingsmcandvitaminasupplementationlessonslearntfromnigeria.txt · 1Gji4nEwinffbWORtLYYiol_tcacqFnGp · 16 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/1688272493_integratingsmcandvitaminasupplementationlessonslearntfromnigeria.txt`)
+- [x] es · malaria consortium / 1688272471_workingwithschoolsv3.txt · 1DePirjlf-hgS-DPN6_qZAonfNZtdlxPb · 17 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272471_workingwithschoolsv3.txt`)
+- [x] es · malaria consortium / 1688272513_28exploringtheimplementationofsmcinmozambiqueresults20202021pt.txt · 1yEp2Shpayhd72SfuX6YlGYvMPPaBesu4 · 18 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272513_28exploringtheimplementationofsmcinmozambiqueresults20202021pt.txt`)
+- [x] es · malaria consortium / 1688272473_acceleratingmalariaeliminationinnortherncambodiathroughearlydiagnosisandtreatment.txt · 1V8zTBGDnRVwgRwjMO7Vg0kV8RU7Y0hZZ · 18 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272473_acceleratingmalariaeliminationinnortherncambodiathroughearlydiagnosisandtreatment.txt`)
+- [x] es · malaria consortium / 1688272523_advocacybrief_hss.txt · 1P-HvR5L7RXTxAFuiryiFBd6gr2OS55uH · 19 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272523_advocacybrief_hss.txt`)
+- [x] es · malaria consortium / 1688272498_escolas_pt.txt · 1uVZxKRGcv2dVJw4E8ThRSzpnzbJ6ldMJ · 19 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272498_escolas_pt.txt`)
+- [x] es · malaria consortium / 1688272489_20212025orgstrategyfr.txt · 1kHqKLjmXyGibL4dqyxto4gu2Y-WfK63y · 19 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272489_20212025orgstrategyfr.txt`)
+- [x] es · malaria consortium / 1688272541_2022positionstatementvaccinesfr1.txt · 1zi-8xphSZZ79_pPM1K4QPc17yCYiWQLB · 19 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272541_2022positionstatementvaccinesfr1.txt`)
+- [x] es · malaria consortium / 1688272522_adaptingpoliticaleconomyanalysisformalariaprogramming.txt · 1Ta1EcbC6eH-_VqdPXjNAGB-HQOilvIeM · 19 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272522_adaptingpoliticaleconomyanalysisformalariaprogramming.txt`)
+- [x] es · malaria consortium / 1688272510_monitoringandevaluatingsmcusingalogicalframeworkapproachptupdated.txt · 1zQGD1p40TQY8eTDEbplS2eP2IH6_Acbl · 21 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272510_monitoringandevaluatingsmcusingalogicalframeworkapproachptupdated.txt`)
+- [x] es · malaria consortium / 1688272518_eventnotessmcsymposium9thjune2016.txt · 1gEZC8m3Q9adaTwaNCz5Ov6-6aj_1FRIe · 21 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272518_eventnotessmcsymposium9thjune2016.txt`)
+- [x] es · malaria consortium / 1688272500_learningbriefismo.txt · 1BrjBwVZcvjNT1cqNKs90BhpLTDKxJj7_ · 21 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272500_learningbriefismo.txt`)
+- [x] es · malaria consortium / 1688272472_capacitystatementsurveillancefr.txt · 1YBr2NpgJ9B97da-PjiL7XwR1WauuC9P0 · 25 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/1688272472_capacitystatementsurveillancefr.txt`)
+- [x] es · malaria consortium / 1688272534_journoarticlesurveillanceasacoreinterventiontostrengthenmalariacontrolprogramsinmoderatetohightransmissionsettings.txt · 1euYZK_OjbrGZCjEHQEbDRUkHVn3CCDwx · 37 KB · txt · es done 2026-10-31 (5/5 batches, `Español/archive/1688272534_journoarticlesurveillanceasacoreinterventiontostrengthenmalariacontrolprogramsinmoderatetohightransmissionsettings.txt`)
+- [x] es · malaria consortium / 1688272478_commercialsectorcasestudyonerevisedfinal200514.txt · 1Uar7tcp8_ziC8qRNP0m5SqTz5-j6Zqa- · 38 KB · txt · es done 2026-10-31 (5/5 batches, `Español/archive/1688272478_commercialsectorcasestudyonerevisedfinal200514.txt`)
+- [x] es · malaria consortium / 1688272467_guidetodevelopingandmonitoringaresearchuptakeplan_interactive.txt · 1D7E-6VNo18Z_wUusgWicldZDZEn3qmg4 · 41 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/1688272467_guidetodevelopingandmonitoringaresearchuptakeplan_interactive.txt`)
+- [x] es · malaria consortium / 1688272499_consequencesofrdtfeverdx.txt · 1n05u19hGXd8FEnmpV5NhF9CIJw3zxXHT · 43 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/1688272499_consequencesofrdtfeverdx.txt`)
+- [x] es · malaria consortium / 1688272470_guidetodevelopingandmonitoringaresearchuptakeplan_pt.txt · 17tFRYr7ELRDxAKzXKwL2jT3ycmwzHsRV · 50 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/1688272470_guidetodevelopingandmonitoringaresearchuptakeplan_pt.txt`)
+- [-] es · malaria consortium / 1688272484_kapsurveyplosone.txt · 1yk7jjThLOrKtGqLEbbegkHMbQsABi1U- · 51 KB · txt · skipped 2026-10-31: the text export is glyph-garbled (font without a Unicode map), no readable English to translate
+- [x] es · malaria consortium / 1688272466_drugabusenigeria.txt · 1G7xug3sqs1yCxwct_IzYAQ3Tj3yUVQsB · 51 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/1688272466_drugabusenigeria.txt`)
+- [x] es · malaria consortium / 1688272488_pulseoximeterarticle.txt · 1TSowf9NXQfWB4-i12DhrVf0k482KEGkX · 51 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/1688272488_pulseoximeterarticle.txt`)
+- [x] es · malaria consortium / 1688272533_guidetodevelopingandmonitoringaresearchuptakeplan_fr.txt · 1PG6SzRIcr7RaZPwJk6t5rKtEF_w3Puxp · 52 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/1688272533_guidetodevelopingandmonitoringaresearchuptakeplan_fr.txt`)
 - [ ] es · malaria consortium / 1688272484_inscalelearningdigitalportuguese.txt · 1Bs0qCRLYl4x_d52_H0pfFT3yNhGpRf5D · 82 KB · txt
 - [ ] es · malaria consortium / 1688272516_smcphilanthropyreport2020.txt · 1WpecO5nn5_QRO3_SJSib3O_7FeYZoeTx · 135 KB · txt
 - [ ] es · malaria consortium / 1688272485_malariaconsortiumscmpsiendofprojectreportupdate.txt · 1NtVIwtBUZLuuEjL14OlNAJ5Zs_iIWGVX · 135 KB · txt
 - [ ] es · malaria consortium / 1688272468_asianets.txt · 1K8MDivRWY0NFv_cLpay92gPCqFHWh0xL · 175 KB · txt
-- [ ] es · allfed / publications-and-reports#peer-reviewed.txt · 19WxtJKS4EqhS1wjG0HpjH6IP7GutKvuz · 8 KB · txt
-- [ ] es · allfed / Feeding_Everyone_No_Matter_What.txt · 1gtq9HyKhXaMXdK4rNeDc-n-St_7dZS6f · 10 KB · txt
-- [ ] es · allfed / BaumEtal_AltFoodSolutions_2016-07-08.pdf.txt · 1uxf-Mv-lI6qXyDRFf3qD9Ua7VCW0fCvo · 16 KB · txt
-- [ ] es · allfed / Vitamins-in-Agricultural-Catastrophes-final.pdf.txt · 1tiPOTBdeYlz6NvwwwM2LxLFsA_9lncjA · 17 KB · txt
-- [ ] es · allfed / Global_Catastrophic_and_Existential_Risks_Communication_Scale.txt · 1HirDeldCOPM1lYY_lHpzmd7HrCvWy0Rz · 25 KB · txt
-- [ ] es · allfed / ALLFED_20COVID-19_20Cascading_20Food_20System_20Risk_20Report.pdf.txt · 1Y5diZU7GRVwTAjQfuEHusANLV11Hfkht · 27 KB · txt
-- [ ] es · allfed / Davos-10-percent-submit.pdf.txt · 1rRfROb6VrHy21PgEGs5bjHL4JYD98uqR · 28 KB · txt
-- [ ] es · allfed / needs_20other_20than_20food_20if_20industry_20is_20disabled_20final.pdf.txt · 10QszleQWS_jUd8X2JF4choV9PUpFI7h8 · 29 KB · txt
-- [ ] es · allfed / Feeding_Everyone_if_Industry_is_Disabled.pdf.txt · 1ZUkspTqoioTH2o7bcrvcxbFTxe9xtDaZ · 33 KB · txt
-- [ ] es · allfed / bluefutures2023.pdf.txt · 1VzS_U4-5a6yMAyHqn_5WQc5BRMzI1kIN · 42 KB · txt
-- [ ] es · allfed / Global_20distribution_20forests_20leaf_20protein.pdf.txt · 1-nKpCApGW8BknYMdWveSq6NQ-rH_ckaX · 43 KB · txt
-- [ ] es · allfed / H2_20SCP_20space.pdf.txt · 17S75me4DDvm4oZF66iO0lri-nAdFNjd_ · 44 KB · txt
-- [ ] es · allfed / LPC_20yield_20NA.pdf.txt · 1VB1FXFwz__0L3NdPhQlOCCGT96tWjUmX · 45 KB · txt
-- [ ] es · allfed / Food_20without_20sun_20price_20and_20life_20saving_20potential.pdf.txt · 1apRPFwRNLNrEzAfBDWF7kx-azDrLKyTn · 48 KB · txt
-- [ ] es · allfed / MES_20EAB_20space_20preprint.pdf.txt · 1mxiQ0x0pkm8A3_jZvWv_1_Vft0_9A_QH · 50 KB · txt
-- [ ] es · allfed / agriculture-353686-vitamins-update.pdf.txt · 1vW0dsuTbd50jPbWKQAHxTlraDOgoN4P7 · 51 KB · txt
-- [ ] es · allfed / Cost-Effectiveness_20global.pdf.txt · 1MkS0xXZW3Gcjm1JvOmLHyqU3_HTx18D7 · 51 KB · txt
-- [ ] es · allfed / Feeding-everyone-if-the-sun-is-obscured-and-industry-is-disabled.pdf.txt · 1Jj-SFGwTdfXKRweB1ziCRAHpLAa5nTVd · 54 KB · txt
-- [ ] es · allfed / plants-08-00110.pdf.txt · 1AzzJrOeP7uISPSlkgNu9UjBV379m9uFp · 60 KB · txt
+- [x] es · allfed / publications-and-reports#peer-reviewed.txt · 19WxtJKS4EqhS1wjG0HpjH6IP7GutKvuz · 8 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/publications-and-reports#peer-reviewed.txt`)
+- [x] es · allfed / Feeding_Everyone_No_Matter_What.txt · 1gtq9HyKhXaMXdK4rNeDc-n-St_7dZS6f · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/Feeding_Everyone_No_Matter_What.txt`)
+- [x] es · allfed / BaumEtal_AltFoodSolutions_2016-07-08.pdf.txt · 1uxf-Mv-lI6qXyDRFf3qD9Ua7VCW0fCvo · 16 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/BaumEtal_AltFoodSolutions_2016-07-08.pdf.txt`)
+- [x] es · allfed / Vitamins-in-Agricultural-Catastrophes-final.pdf.txt · 1tiPOTBdeYlz6NvwwwM2LxLFsA_9lncjA · 17 KB · txt · es done 2026-10-31 (3/3 batches, `Español/archive/Vitamins-in-Agricultural-Catastrophes-final.pdf.txt`)
+- [x] es · allfed / Global_Catastrophic_and_Existential_Risks_Communication_Scale.txt · 1HirDeldCOPM1lYY_lHpzmd7HrCvWy0Rz · 25 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Global_Catastrophic_and_Existential_Risks_Communication_Scale.txt`)
+- [x] es · allfed / ALLFED_20COVID-19_20Cascading_20Food_20System_20Risk_20Report.pdf.txt · 1Y5diZU7GRVwTAjQfuEHusANLV11Hfkht · 27 KB · txt · es done 2026-10-31 (4/4 batches, `Español/archive/ALLFED_20COVID-19_20Cascading_20Food_20System_20Risk_20Report.pdf.txt`)
+- [x] es · allfed / Davos-10-percent-submit.pdf.txt · 1rRfROb6VrHy21PgEGs5bjHL4JYD98uqR · 28 KB · txt · es done 2026-10-31 (4/4 batches, `Español/archive/Davos-10-percent-submit.pdf.txt`)
+- [x] es · allfed / needs_20other_20than_20food_20if_20industry_20is_20disabled_20final.pdf.txt · 10QszleQWS_jUd8X2JF4choV9PUpFI7h8 · 29 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/needs_20other_20than_20food_20if_20industry_20is_20disabled_20final.pdf.txt`)
+- [x] es · allfed / Feeding_Everyone_if_Industry_is_Disabled.pdf.txt · 1ZUkspTqoioTH2o7bcrvcxbFTxe9xtDaZ · 33 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Feeding_Everyone_if_Industry_is_Disabled.pdf.txt`)
+- [x] es · allfed / bluefutures2023.pdf.txt · 1VzS_U4-5a6yMAyHqn_5WQc5BRMzI1kIN · 42 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/bluefutures2023.pdf.txt`)
+- [x] es · allfed / Global_20distribution_20forests_20leaf_20protein.pdf.txt · 1-nKpCApGW8BknYMdWveSq6NQ-rH_ckaX · 43 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/Global_20distribution_20forests_20leaf_20protein.pdf.txt`)
+- [x] es · allfed / H2_20SCP_20space.pdf.txt · 17S75me4DDvm4oZF66iO0lri-nAdFNjd_ · 44 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/H2_20SCP_20space.pdf.txt`)
+- [x] es · allfed / LPC_20yield_20NA.pdf.txt · 1VB1FXFwz__0L3NdPhQlOCCGT96tWjUmX · 45 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/LPC_20yield_20NA.pdf.txt`)
+- [x] es · allfed / Food_20without_20sun_20price_20and_20life_20saving_20potential.pdf.txt · 1apRPFwRNLNrEzAfBDWF7kx-azDrLKyTn · 48 KB · txt · es done 2026-10-31 (6/6 batches, `Español/archive/Food_20without_20sun_20price_20and_20life_20saving_20potential.pdf.txt`)
+- [x] es · allfed / MES_20EAB_20space_20preprint.pdf.txt · 1mxiQ0x0pkm8A3_jZvWv_1_Vft0_9A_QH · 50 KB · txt · es done 2026-10-31 (8/8 batches, `Español/archive/MES_20EAB_20space_20preprint.pdf.txt`)
+- [x] es · allfed / agriculture-353686-vitamins-update.pdf.txt · 1vW0dsuTbd50jPbWKQAHxTlraDOgoN4P7 · 51 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/agriculture-353686-vitamins-update.pdf.txt`)
+- [x] es · allfed / Cost-Effectiveness_20global.pdf.txt · 1MkS0xXZW3Gcjm1JvOmLHyqU3_HTx18D7 · 51 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/Cost-Effectiveness_20global.pdf.txt`)
+- [x] es · allfed / Feeding-everyone-if-the-sun-is-obscured-and-industry-is-disabled.pdf.txt · 1Jj-SFGwTdfXKRweB1ziCRAHpLAa5nTVd · 54 KB · txt · es done 2026-10-31 (7/7 batches, `Español/archive/Feeding-everyone-if-the-sun-is-obscured-and-industry-is-disabled.pdf.txt`)
+- [x] es · allfed / plants-08-00110.pdf.txt · 1AzzJrOeP7uISPSlkgNu9UjBV379m9uFp · 60 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/plants-08-00110.pdf.txt`)
 - [ ] es · allfed / Nuclear_20Winter_20Seaweed.pdf.txt · 1S0f3C_o1WHBa225Gzm5CUVfG9Szv95xs · 61 KB · txt
 - [ ] es · allfed / Isolated_20refuges_20for_20surviving_20global_20catastrophes.pdf.txt · 1wD7z5yPzVENUXUbApR2opQLdRQgktPRZ · 62 KB · txt
 - [ ] es · allfed / chemical_synthesis.pdf.txt · 1ji3k7NWEFHUA2ERc2EmBVArCJVYYl7af · 62 KB · txt
@@ -2380,116 +2380,116 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · chai / citations_view_op=view_citation&hl=de&user=8DgF8HcAAAAJ&sortby=pubdate&citation_for_view=8DgF8HcAAAAJ_d1gkVwhDpl0C.txt · 1b--vC2t1h0_82q1BLbyoWzoexFucttQC · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · chai / 705.txt · 1-mYDii8Ib9Venc6WoNaHFVNPoWVBzVvC · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · chai / 1454ca2270599546dfcd2a3700e4d2f1-Abstract.txt · 1v-RD-nTcR0NjpTfldXV039OFMW-AutjA · 2 KB · txt · under 2 KB: empty page or stub
-- [ ] es · chai / index.txt · 1EJUpTd4eLSj4TRmvg_Ttl9C0GiP_PiY6 · 2 KB · txt
-- [ ] es · chai / Bridging_Safety_and_RL.pdf.txt · 1LlMmfw9eambOn6QJkEhBMaZXIByGvX2I · 2 KB · txt
-- [ ] es · chai / forum_id=Hygv3xrtDr.txt · 1j6_9NJmw2PzF6NrZrFwtH8EfV4_NmtVd · 2 KB · txt
-- [ ] es · chai / data-driven-photorealistic-social-face-trait-encoding-prediction-.txt · 19o7YC0ZZmJ6NVvxMdGGyKipyVowiWBI0 · 3 KB · txt
-- [ ] es · chai / 11633.txt · 1rFLoo34O9W2sEpBfU0ephH84R0NimtV2 · 3 KB · txt
-- [ ] es · chai / 1806.05635.txt · 1-eL-DtqEgwtvAMxy_CLiyx7HBWEbkva0 · 4 KB · txt
-- [ ] es · chai / 1801.03583.txt · 1SwroyCVWFn3AllAkznCeZom_ysFKS5f1 · 4 KB · txt
-- [ ] es · chai / 1907.11826.txt · 174Nf728fsDMQKP4Wjwgxwlv4t87NxTNi · 4 KB · txt
-- [ ] es · chai / 2111.00585.txt · 1HDb5ZB4DCI7z-kwV_ew5Ne9hzkPv3rSJ · 4 KB · txt
-- [ ] es · chai / 1807.05185.txt · 1TBxLJboLUljbKyNvTfGWAlZRqbuIpGsa · 4 KB · txt
-- [ ] es · chai / 1906.02069.txt · 1AvXhrFlJzf_BuTU508rgFnSA_6ygBK63 · 4 KB · txt
-- [ ] es · chai / 2005.14363.txt · 1aHe92vMq8-y0qqF4yzgeBBvv_If59Ajk · 4 KB · txt
-- [ ] es · chai / 2209.07096.txt · 1P9BGUE1OOnjd4LUAMVTniMKSwk4TLwTv · 5 KB · txt
-- [ ] es · chai / 2210.07424.txt · 1sR4Q1YWKmuqx6SNixc_JcU8Kwi7dy8QN · 5 KB · txt
-- [ ] es · chai / 1808.08460.txt · 1KfacETU1lF8Ym12ntJyvItZ8TfcibGTb · 5 KB · txt
-- [ ] es · chai / 2108.13956.txt · 1unTjeGpJwS89PfYZ5qG_3JyDVUM26wzk · 5 KB · txt
-- [ ] es · chai / 2205.13013.txt · 1qUlH5iJPn_TdJuJ6ZUgYPXnNi3uZF0VM · 5 KB · txt
-- [ ] es · chai / 1704.06960.txt · 1EGKv1ByfuLIriF5xAbLkhEU7KoTdSw8p · 5 KB · txt
-- [ ] es · chai / 2203.13236.txt · 1Mb3Njljt45UWn5FamU-SdgB_1T3FfpXH · 5 KB · txt
-- [ ] es · chai / 2206.08593.txt · 1NoIlFiLY4-1-8VdAb9BPYkE_eZRazQdM · 5 KB · txt
-- [ ] es · chai / 1912.07045.txt · 1aPfuhuZkJuModlJMemmU3MmKKJpVu8Wt · 5 KB · txt
-- [ ] es · chai / 2103.05247.txt · 1xIgLk4HDCpuRMuzEKSedTjfB7uoDCfwA · 5 KB · txt
-- [ ] es · chai / 1806.09605.txt · 1pjQOmHAs1k_2znFUYbiFrPpgWQjy_Lm2 · 5 KB · txt
-- [ ] es · chai / 2110.15191.txt · 1vzrJJ8ga83TTzqHT0WhpcRlKqv8NGivY · 5 KB · txt
-- [ ] es · chai / 2106.07643.txt · 1lyFEudK5HDRG2nwMvDRSGIn6jhT-Wwul · 5 KB · txt
-- [ ] es · chai / 2209.09608.txt · 1rSVIoD9Tqbk3K85UmIEBkmOaJB-mCHyy · 5 KB · txt
-- [ ] es · chai / 1806.02027.txt · 1dvjt-pplvnIgQwdLGiF9QxOb3pfcF7nk · 5 KB · txt
-- [ ] es · chai / 2112.10751.txt · 14Oqc-sy1r0QsFHulMBTVaUMfd7Ew_TlK · 5 KB · txt
-- [ ] es · chai / 2107.13668.txt · 163utVJxtu_pZwPxQisB7se99Em3wdPN2 · 5 KB · txt
-- [ ] es · chai / 2208.02246.txt · 1K9DFUdavVaW-D3tHMGYT6eDtUHiaPBvL · 5 KB · txt
-- [ ] es · chai / 2102.04999.txt · 1B6bGUZveM3yA9uK9kSBFjAuUEkVHmmgh · 5 KB · txt
-- [ ] es · chai / 2106.01345.txt · 1S0YSvNjX7th-L6z08dK5rTFhViVmXjg8 · 5 KB · txt
-- [ ] es · chai / 2102.06741.txt · 1-orHjCG24904R-7iGfLUcBGVjvR6ElqR · 5 KB · txt
-- [ ] es · chai / 2102.04897.txt · 1kS1vJH6d-ktlQ3Q3X_ZtE4rz1d05tzmu · 5 KB · txt
-- [ ] es · chai / 2107.00591.txt · 171MrN2xng_D137vRn3IHA1yrZ7ZAEX4Z · 5 KB · txt
-- [ ] es · chai / 1910.10362.txt · 11M8oF8jNjE6RvTv2Dtt24ge27Fi-9nYm · 5 KB · txt
-- [ ] es · chai / 2205.11558.txt · 1lRvlrVrcfj3QBUJi43dTTnEibn0K51-C · 5 KB · txt
-- [ ] es · chai / 1807.00553.txt · 1nKZW9SMkqtGPgmH_mSdYWyDsfv0rJhGp · 5 KB · txt
-- [ ] es · chai / 1911.09005.txt · 1MCyfkJfiRSP5jNTPg8y7O-BG-bsvWWyp · 5 KB · txt
-- [ ] es · chai / 2111.00210.txt · 1LL0wdxOTGWm_7JR-Tf47lX6s4rCyQgfY · 5 KB · txt
-- [ ] es · chai / 2106.06499.txt · 1B5jQgfaMYB5N2SGB1joFZwwNg5u6VKIq · 5 KB · txt
-- [ ] es · chai / 2103.02886.txt · 1xlNYlxXTK_3KwjqhOBzbVDLjOhWnPM7r · 5 KB · txt
-- [ ] es · chai / 2003.04881.txt · 1h1mzynnSZ4zIA8iDHuHs3M2MqPahQ-sC · 5 KB · txt
-- [ ] es · chai / 1912.01172.txt · 1k9FSb2J0V51ezcwRtwy_Rhjv_JUfBdOq · 5 KB · txt
-- [ ] es · chai / 2102.09430.txt · 1HfYresw1jxHFwhbQJKSFVxSsNRh1r7Ff · 5 KB · txt
-- [ ] es · chai / 2102.13195.txt · 1oiZ9p__ybzAG2XCMBwB5sslAGGmaIs68 · 5 KB · txt
-- [ ] es · chai / 2104.00677.txt · 1XX_xXAy8WhuCo5mfnzRk0KAX09aCiJtI · 5 KB · txt
-- [ ] es · chai / 2101.01857.txt · 1CdVQ1KWrGD7rUVHeQT8WVJyEsLFxpToL · 5 KB · txt
-- [ ] es · chai / 2021.02.12.430858v1.txt · 1Zq5NJP5Y_HVR7Ozh2TAJ55PnlRH2YGGQ · 5 KB · txt
-- [ ] es · chai / 2112.05135.txt · 1ROscbiCmOCOFkyo3h3GIVQoGWyMkavQu · 5 KB · txt
-- [ ] es · chai / 2007.04973.txt · 16nux_55PARDZ9-cuICqnXYMabILBU30H · 5 KB · txt
-- [ ] es · chai / 2106.10268.txt · 13Juu-sQagdkE0OABO5f62lCBMTqpTTJM · 5 KB · txt
-- [ ] es · chai / 2009.08319.txt · 1uhIs8u8QLlhlbatT8gtamL24QRsosYoi · 5 KB · txt
-- [ ] es · chai / 1910.07581.txt · 1AFh9KDt_vMPmZNqZyiZXt0bdB4pAflzh · 5 KB · txt
-- [ ] es · chai / 1807.09341.txt · 1cmNaTQzvO46r2C42wIFUImnN3n0CsB2Y · 5 KB · txt
-- [ ] es · chai / 1902.11277.txt · 1SGIo2VP0zW8yAohpVowXS8HhK5--rF7g · 5 KB · txt
-- [ ] es · chai / 1911.11132.txt · 1reEYXsN0b1Qdj4aBKQKQiupFZ44nvh9A · 5 KB · txt
-- [ ] es · chai / 2105.09938.txt · 1GaebPqbRt31iORQiJ8QLYrGJSWbXOLTo · 6 KB · txt
-- [ ] es · chai / 2112.00659.txt · 1sDxC1_UeX8A6Nn99O-7ovlxaHrgmubfg · 6 KB · txt
-- [ ] es · chai / 2106.10365.txt · 1u5DYmAXx2oCVgq4fz9N_nF4Rx8M_dcI2 · 6 KB · txt
-- [ ] es · chai / 2204.07705.txt · 1_RCoDy35HmQosGyQrVRBCZ31WUoY0hng · 6 KB · txt
-- [ ] es · chai / 2004.07213.txt · 1WUxxu76SRpOPs5aTT_m-fbwc1fYHhFl5 · 6 KB · txt
-- [ ] es · chai / 2103.12021.txt · 12iGr5ChzW8FoPhI1MjrnAS40KLkp5jzR · 6 KB · txt
-- [ ] es · chai / 2110.14051.txt · 1kYgs04MC4ww106A-_c0Mbjb3SKvQAHAc · 6 KB · txt
-- [ ] es · chai / tu19a.txt · 1D10wKFZlpWcsLKJ3WiiHQhflcMRjmH2b · 6 KB · txt
-- [ ] es · chai / 2022.06.08.495348v1.txt · 1Cfebbxtd-h19gPyfA5ix1NU_u8Sy_9Ge · 8 KB · txt
-- [ ] es · chai / recommendation-systems-transparency.txt · 1QTAIbM3RbzE7PC-Y3czVL7SowSFP11PA · 11 KB · txt
-- [ ] es · chai / 3306618.3314275.txt · 1eEP8JBa45s9DzkNRXNXqoEGWoi-9DzSj · 12 KB · txt
-- [ ] es · chai / 10.1007_2F978-3-030-33432-1.txt · 1hV4R78X44llpNY4BY2nqGnNsL7llLwx- · 13 KB · txt
-- [ ] es · chai / 3306618.3314294.txt · 11nZpTQqafZXL3QFHC8oP6xL7nkZqoqjk · 13 KB · txt
-- [ ] es · chai / citation.cfm_id=3331715.txt · 1rgBPJLS2icpiAYUoqQ7B0CpKvddW51wp · 16 KB · txt
-- [ ] es · chai / thompson2022complex.txt · 1sZG_HF6A1eTr0AlFUhtiY9J6TLi3YHll · 18 KB · txt
-- [ ] es · chai / mohan-why19.txt · 1Noe_OFffknJkDMHyfdq8YyvUPGICdwkK · 19 KB · txt
-- [ ] es · chai / ftc_final.txt · 1bdk-qFeJFkXuE5wob8pi3yr5_3n8Jivg · 20 KB · txt
-- [ ] es · chai / marjieh2022predicting.txt · 1wEpjLU7K28K1KH3g1zRHjcQqYF46R_jI · 29 KB · txt
-- [ ] es · chai / devraj_dynamics.txt · 1luKVSVpbflmxGyk0M8q3n59NYaasn9-x · 29 KB · txt
-- [ ] es · chai / Accelerating_Metacognitive_RL-CameraReady.txt · 1SV3CCJ-4yLqiy2YpVyHRqibwyWgFi9yE · 33 KB · txt
-- [ ] es · chai / kumarusing.txt · 1BwB71xcygbgoEAkH_q4VmO3CGx0WgLWm · 33 KB · txt
-- [ ] es · chai / 2108.00366.txt · 1QEL8JZP8DGlkG1a3UCf-pdELx7I0nvN- · 33 KB · txt
-- [ ] es · chai / cogsciReichman.txt · 1GHC4MfkUwlWwf-JhcTW3C8tCafzRl0AS · 33 KB · txt
-- [ ] es · chai / SSS19_Paper_Upload_198.txt · 1ZEcS_lwC4t171mp90oBh8S9SXcQ-yW1Z · 35 KB · txt
-- [ ] es · chai / liu18e.txt · 1vqNBWPTj_d1EUh7VP6J9x_Oq64jMYS6a · 38 KB · txt
-- [ ] es · chai / 2004.06100.txt · 173xaapYv0vAIO-wR0L2TWJhbOf2NxId8 · 38 KB · txt
-- [ ] es · chai / gates2022memory.txt · 1unVQGPaG7HNrI42WPFPCFvj4Q3iR-bwc · 39 KB · txt
+- [x] es · chai / index.txt · 1EJUpTd4eLSj4TRmvg_Ttl9C0GiP_PiY6 · 2 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/index.txt`)
+- [x] es · chai / Bridging_Safety_and_RL.pdf.txt · 1LlMmfw9eambOn6QJkEhBMaZXIByGvX2I · 2 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/Bridging_Safety_and_RL.pdf.txt`)
+- [x] es · chai / forum_id=Hygv3xrtDr.txt · 1j6_9NJmw2PzF6NrZrFwtH8EfV4_NmtVd · 2 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/forum_id=Hygv3xrtDr.txt`)
+- [x] es · chai / data-driven-photorealistic-social-face-trait-encoding-prediction-.txt · 19o7YC0ZZmJ6NVvxMdGGyKipyVowiWBI0 · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/data-driven-photorealistic-social-face-trait-encoding-prediction-.txt`)
+- [x] es · chai / 11633.txt · 1rFLoo34O9W2sEpBfU0ephH84R0NimtV2 · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/chai 11633.txt`)
+- [x] es · chai / 1806.05635.txt · 1-eL-DtqEgwtvAMxy_CLiyx7HBWEbkva0 · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1806.05635.txt`)
+- [x] es · chai / 1801.03583.txt · 1SwroyCVWFn3AllAkznCeZom_ysFKS5f1 · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1801.03583.txt`)
+- [x] es · chai / 1907.11826.txt · 174Nf728fsDMQKP4Wjwgxwlv4t87NxTNi · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1907.11826.txt`)
+- [x] es · chai / 2111.00585.txt · 1HDb5ZB4DCI7z-kwV_ew5Ne9hzkPv3rSJ · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2111.00585.txt`)
+- [x] es · chai / 1807.05185.txt · 1TBxLJboLUljbKyNvTfGWAlZRqbuIpGsa · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/1807.05185.txt`)
+- [x] es · chai / 1906.02069.txt · 1AvXhrFlJzf_BuTU508rgFnSA_6ygBK63 · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1906.02069.txt`)
+- [x] es · chai / 2005.14363.txt · 1aHe92vMq8-y0qqF4yzgeBBvv_If59Ajk · 4 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2005.14363.txt`)
+- [x] es · chai / 2209.07096.txt · 1P9BGUE1OOnjd4LUAMVTniMKSwk4TLwTv · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2209.07096.txt`)
+- [x] es · chai / 2210.07424.txt · 1sR4Q1YWKmuqx6SNixc_JcU8Kwi7dy8QN · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2210.07424.txt`)
+- [x] es · chai / 1808.08460.txt · 1KfacETU1lF8Ym12ntJyvItZ8TfcibGTb · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1808.08460.txt`)
+- [x] es · chai / 2108.13956.txt · 1unTjeGpJwS89PfYZ5qG_3JyDVUM26wzk · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2108.13956.txt`)
+- [x] es · chai / 2205.13013.txt · 1qUlH5iJPn_TdJuJ6ZUgYPXnNi3uZF0VM · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2205.13013.txt`)
+- [x] es · chai / 1704.06960.txt · 1EGKv1ByfuLIriF5xAbLkhEU7KoTdSw8p · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1704.06960.txt`)
+- [x] es · chai / 2203.13236.txt · 1Mb3Njljt45UWn5FamU-SdgB_1T3FfpXH · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2203.13236.txt`)
+- [x] es · chai / 2206.08593.txt · 1NoIlFiLY4-1-8VdAb9BPYkE_eZRazQdM · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2206.08593.txt`)
+- [x] es · chai / 1912.07045.txt · 1aPfuhuZkJuModlJMemmU3MmKKJpVu8Wt · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1912.07045.txt`)
+- [x] es · chai / 2103.05247.txt · 1xIgLk4HDCpuRMuzEKSedTjfB7uoDCfwA · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2103.05247.txt`)
+- [x] es · chai / 1806.09605.txt · 1pjQOmHAs1k_2znFUYbiFrPpgWQjy_Lm2 · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1806.09605.txt`)
+- [x] es · chai / 2110.15191.txt · 1vzrJJ8ga83TTzqHT0WhpcRlKqv8NGivY · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2110.15191.txt`)
+- [x] es · chai / 2106.07643.txt · 1lyFEudK5HDRG2nwMvDRSGIn6jhT-Wwul · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2106.07643.txt`)
+- [x] es · chai / 2209.09608.txt · 1rSVIoD9Tqbk3K85UmIEBkmOaJB-mCHyy · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2209.09608.txt`)
+- [x] es · chai / 1806.02027.txt · 1dvjt-pplvnIgQwdLGiF9QxOb3pfcF7nk · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1806.02027.txt`)
+- [x] es · chai / 2112.10751.txt · 14Oqc-sy1r0QsFHulMBTVaUMfd7Ew_TlK · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2112.10751.txt`)
+- [x] es · chai / 2107.13668.txt · 163utVJxtu_pZwPxQisB7se99Em3wdPN2 · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2107.13668.txt`)
+- [x] es · chai / 2208.02246.txt · 1K9DFUdavVaW-D3tHMGYT6eDtUHiaPBvL · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2208.02246.txt`)
+- [x] es · chai / 2102.04999.txt · 1B6bGUZveM3yA9uK9kSBFjAuUEkVHmmgh · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2102.04999.txt`)
+- [x] es · chai / 2106.01345.txt · 1S0YSvNjX7th-L6z08dK5rTFhViVmXjg8 · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2106.01345.txt`)
+- [x] es · chai / 2102.06741.txt · 1-orHjCG24904R-7iGfLUcBGVjvR6ElqR · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2102.06741.txt`)
+- [x] es · chai / 2102.04897.txt · 1kS1vJH6d-ktlQ3Q3X_ZtE4rz1d05tzmu · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2102.04897.txt`)
+- [x] es · chai / 2107.00591.txt · 171MrN2xng_D137vRn3IHA1yrZ7ZAEX4Z · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2107.00591.txt`)
+- [x] es · chai / 1910.10362.txt · 11M8oF8jNjE6RvTv2Dtt24ge27Fi-9nYm · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/1910.10362.txt`)
+- [x] es · chai / 2205.11558.txt · 1lRvlrVrcfj3QBUJi43dTTnEibn0K51-C · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2205.11558.txt`)
+- [x] es · chai / 1807.00553.txt · 1nKZW9SMkqtGPgmH_mSdYWyDsfv0rJhGp · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1807.00553.txt`)
+- [x] es · chai / 1911.09005.txt · 1MCyfkJfiRSP5jNTPg8y7O-BG-bsvWWyp · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1911.09005.txt`)
+- [x] es · chai / 2111.00210.txt · 1LL0wdxOTGWm_7JR-Tf47lX6s4rCyQgfY · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2111.00210.txt`)
+- [x] es · chai / 2106.06499.txt · 1B5jQgfaMYB5N2SGB1joFZwwNg5u6VKIq · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2106.06499.txt`)
+- [x] es · chai / 2103.02886.txt · 1xlNYlxXTK_3KwjqhOBzbVDLjOhWnPM7r · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2103.02886.txt`)
+- [x] es · chai / 2003.04881.txt · 1h1mzynnSZ4zIA8iDHuHs3M2MqPahQ-sC · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2003.04881.txt`)
+- [x] es · chai / 1912.01172.txt · 1k9FSb2J0V51ezcwRtwy_Rhjv_JUfBdOq · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1912.01172.txt`)
+- [x] es · chai / 2102.09430.txt · 1HfYresw1jxHFwhbQJKSFVxSsNRh1r7Ff · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2102.09430.txt`)
+- [x] es · chai / 2102.13195.txt · 1oiZ9p__ybzAG2XCMBwB5sslAGGmaIs68 · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2102.13195.txt`)
+- [x] es · chai / 2104.00677.txt · 1XX_xXAy8WhuCo5mfnzRk0KAX09aCiJtI · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2104.00677.txt`)
+- [x] es · chai / 2101.01857.txt · 1CdVQ1KWrGD7rUVHeQT8WVJyEsLFxpToL · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2101.01857.txt`)
+- [x] es · chai / 2021.02.12.430858v1.txt · 1Zq5NJP5Y_HVR7Ozh2TAJ55PnlRH2YGGQ · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2021.02.12.430858v1.txt`)
+- [x] es · chai / 2112.05135.txt · 1ROscbiCmOCOFkyo3h3GIVQoGWyMkavQu · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2112.05135.txt`)
+- [x] es · chai / 2007.04973.txt · 16nux_55PARDZ9-cuICqnXYMabILBU30H · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2007.04973.txt`)
+- [x] es · chai / 2106.10268.txt · 13Juu-sQagdkE0OABO5f62lCBMTqpTTJM · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2106.10268.txt`)
+- [x] es · chai / 2009.08319.txt · 1uhIs8u8QLlhlbatT8gtamL24QRsosYoi · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2009.08319.txt`)
+- [x] es · chai / 1910.07581.txt · 1AFh9KDt_vMPmZNqZyiZXt0bdB4pAflzh · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1910.07581.txt`)
+- [x] es · chai / 1807.09341.txt · 1cmNaTQzvO46r2C42wIFUImnN3n0CsB2Y · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1807.09341.txt`)
+- [x] es · chai / 1902.11277.txt · 1SGIo2VP0zW8yAohpVowXS8HhK5--rF7g · 5 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/1902.11277.txt`)
+- [x] es · chai / 1911.11132.txt · 1reEYXsN0b1Qdj4aBKQKQiupFZ44nvh9A · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/1911.11132.txt`)
+- [x] es · chai / 2105.09938.txt · 1GaebPqbRt31iORQiJ8QLYrGJSWbXOLTo · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2105.09938.txt`)
+- [x] es · chai / 2112.00659.txt · 1sDxC1_UeX8A6Nn99O-7ovlxaHrgmubfg · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2112.00659.txt`)
+- [x] es · chai / 2106.10365.txt · 1u5DYmAXx2oCVgq4fz9N_nF4Rx8M_dcI2 · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2106.10365.txt`)
+- [x] es · chai / 2204.07705.txt · 1_RCoDy35HmQosGyQrVRBCZ31WUoY0hng · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2204.07705.txt`)
+- [x] es · chai / 2004.07213.txt · 1WUxxu76SRpOPs5aTT_m-fbwc1fYHhFl5 · 6 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/2004.07213.txt`)
+- [x] es · chai / 2103.12021.txt · 12iGr5ChzW8FoPhI1MjrnAS40KLkp5jzR · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2103.12021.txt`)
+- [x] es · chai / 2110.14051.txt · 1kYgs04MC4ww106A-_c0Mbjb3SKvQAHAc · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2110.14051.txt`)
+- [x] es · chai / tu19a.txt · 1D10wKFZlpWcsLKJ3WiiHQhflcMRjmH2b · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/tu19a.txt`)
+- [x] es · chai / 2022.06.08.495348v1.txt · 1Cfebbxtd-h19gPyfA5ix1NU_u8Sy_9Ge · 8 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/2022.06.08.495348v1.txt`)
+- [x] es · chai / recommendation-systems-transparency.txt · 1QTAIbM3RbzE7PC-Y3czVL7SowSFP11PA · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/recommendation-systems-transparency.txt`)
+- [x] es · chai / 3306618.3314275.txt · 1eEP8JBa45s9DzkNRXNXqoEGWoi-9DzSj · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/3306618.3314275.txt`)
+- [x] es · chai / 10.1007_2F978-3-030-33432-1.txt · 1hV4R78X44llpNY4BY2nqGnNsL7llLwx- · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/10.1007_2F978-3-030-33432-1.txt`)
+- [x] es · chai / 3306618.3314294.txt · 11nZpTQqafZXL3QFHC8oP6xL7nkZqoqjk · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/3306618.3314294.txt`)
+- [x] es · chai / citation.cfm_id=3331715.txt · 1rgBPJLS2icpiAYUoqQ7B0CpKvddW51wp · 16 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/citation.cfm_id=3331715.txt`)
+- [x] es · chai / thompson2022complex.txt · 1sZG_HF6A1eTr0AlFUhtiY9J6TLi3YHll · 18 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/thompson2022complex.txt`)
+- [x] es · chai / mohan-why19.txt · 1Noe_OFffknJkDMHyfdq8YyvUPGICdwkK · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/mohan-why19.txt`)
+- [x] es · chai / ftc_final.txt · 1bdk-qFeJFkXuE5wob8pi3yr5_3n8Jivg · 20 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/ftc_final.txt`)
+- [x] es · chai / marjieh2022predicting.txt · 1wEpjLU7K28K1KH3g1zRHjcQqYF46R_jI · 29 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/marjieh2022predicting.txt`)
+- [x] es · chai / devraj_dynamics.txt · 1luKVSVpbflmxGyk0M8q3n59NYaasn9-x · 29 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/devraj_dynamics.txt`)
+- [x] es · chai / Accelerating_Metacognitive_RL-CameraReady.txt · 1SV3CCJ-4yLqiy2YpVyHRqibwyWgFi9yE · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/Accelerating_Metacognitive_RL-CameraReady.txt`)
+- [x] es · chai / kumarusing.txt · 1BwB71xcygbgoEAkH_q4VmO3CGx0WgLWm · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/kumarusing.txt`)
+- [x] es · chai / 2108.00366.txt · 1QEL8JZP8DGlkG1a3UCf-pdELx7I0nvN- · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/2108.00366.txt`)
+- [x] es · chai / cogsciReichman.txt · 1GHC4MfkUwlWwf-JhcTW3C8tCafzRl0AS · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/cogsciReichman.txt`)
+- [x] es · chai / SSS19_Paper_Upload_198.txt · 1ZEcS_lwC4t171mp90oBh8S9SXcQ-yW1Z · 35 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/SSS19_Paper_Upload_198.txt`)
+- [x] es · chai / liu18e.txt · 1vqNBWPTj_d1EUh7VP6J9x_Oq64jMYS6a · 38 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/liu18e.txt`)
+- [x] es · chai / 2004.06100.txt · 173xaapYv0vAIO-wR0L2TWJhbOf2NxId8 · 38 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/2004.06100.txt`)
+- [x] es · chai / gates2022memory.txt · 1unVQGPaG7HNrI42WPFPCFvj4Q3iR-bwc · 39 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/gates2022memory.txt`)
 - [x] mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt · 17NTCeibxtMWvwDOjh2OXq3SMpMePX6yT · 42 KB · txt · chai · es done 2026-10-28 (6/6 batches, `Español/archive/mapping-political-economy-reinforcement-learning-systems-case-autonomous-vehicles.txt`; scraped web page, menus included)
-- [ ] es · chai / 2210.03109.txt · 1MbvEkekmD3S6rZvX1fIN30jGj3R_e6rI · 42 KB · txt
-- [ ] es · chai / 2006.02689.txt · 1VhgitDvElj430EQwv9hD-pf6yoatsOBV · 43 KB · txt
-- [ ] es · chai / 1912.02781.txt · 19zQ7zV3Q86SVN4Z_RYcocLPqe5Z-fyQj · 44 KB · txt
-- [ ] es · chai / lewry_intuitions.txt · 1Dr2k6dmWPGw-pVTxW-49c_cZfAI1ZBaL · 45 KB · txt
-- [ ] es · chai / 1802.05300.txt · 1ypRqy_K2d-4ZQQvOzlkon3PT847qnPSU · 45 KB · txt
-- [ ] es · chai / dubeyimportantcurious.txt · 1jlBum8mZ39GuZXmmZ0rYpkKcjACTsmlT · 45 KB · txt
-- [ ] es · chai / hendrycks19a.txt · 1HttAhMnV0VQhO-3i47y6mXuW2NApBtCk · 45 KB · txt
-- [ ] es · chai / 1906.12340.txt · 1YmNAPl5knxExgH3UiOtrKYQuFtM4KG-f · 48 KB · txt
-- [ ] es · chai / stooke20a.txt · 1ngztxHK3g-DaJQINKCOjBC9PkN7Xnd1w · 48 KB · txt
-- [ ] es · chai / 2006.02000.txt · 1GU4jJ9CHeXYU-DAu5TaUVUyGKXtbw6UF · 48 KB · txt
-- [ ] es · chai / pdf_id=c7hpFp_eRCo.txt · 1g7bdj786ohYPh2GnZBISXa463rv5Zml0 · 49 KB · txt
-- [ ] es · chai / zheng20b.txt · 1GXIaHipqKSvlyV8gRyYmp0xJLSx9bC3S · 49 KB · txt
-- [ ] es · chai / nvs_aaai22.txt · 1a7kS9fc-P9E6RbBAQ47NsXT7hQE2Pvmg · 49 KB · txt
-- [ ] es · chai / vms_aaai21.txt · 1i7Ffbu3Ad98wMPcw469HUGcZoLJlg89D · 50 KB · txt
-- [ ] es · chai / 0e915db6326b6fb6a3c56546980a8c93-Paper.txt · 12oyKYUGpWcJBqbcSnZTLIaw4V_zKPJ1T · 52 KB · txt
-- [ ] es · chai / s13428-019-01201-9.txt · 1l08mcqIP9nt0K1IW6pEhcSc-I3qerWor · 52 KB · txt
-- [ ] es · chai / yamakoshiprobing.txt · 1Q8iPIBTDaD9-BdGkQk1Jnj3Qub_w9TYm · 53 KB · txt
-- [ ] es · chai / iccv19-brm.txt · 1si5eiC3hy7ZLwfr_xeAIBbZsXw2DMlYo · 53 KB · txt
-- [ ] es · chai / pdf_id=gT6j4_tskUt.txt · 18fZqFw1kW9mhHorJM96ZQLOviobVVAbd · 54 KB · txt
-- [ ] es · chai / petersondeepmodels22.txt · 1U_NMwXhUCSGTIgrjlO3r72lX2kxIEm0C · 56 KB · txt
-- [ ] es · chai / 2205.07395.txt · 1ky66OYqvw88f0wEznmQdXnS6ZEmUgB4m · 57 KB · txt
-- [ ] es · chai / 1903.12261.txt · 13f02ix3-Qx2AKyu9Rq2jc7Lkh_oqKdr_ · 58 KB · txt
-- [ ] es · chai / 2012.10800.txt · 1AtrOHZJFfVzcS-RGYd8ys4Ondize2Rfm · 58 KB · txt
-- [ ] es · chai / 94130ea17023c4837f0dcdda95034b65-Paper.txt · 1bpyYaJL3AsePA_8URn5WYXEkkAfD8vHP · 60 KB · txt
-- [ ] es · chai / 2003.06417.txt · 1j9s3itDN22nF-jiubrwRA9BcBWWKrPhO · 60 KB · txt
+- [x] es · chai / 2210.03109.txt · 1MbvEkekmD3S6rZvX1fIN30jGj3R_e6rI · 42 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/2210.03109.txt`)
+- [x] es · chai / 2006.02689.txt · 1VhgitDvElj430EQwv9hD-pf6yoatsOBV · 43 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/2006.02689.txt`)
+- [x] es · chai / 1912.02781.txt · 19zQ7zV3Q86SVN4Z_RYcocLPqe5Z-fyQj · 44 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/1912.02781.txt`)
+- [x] es · chai / lewry_intuitions.txt · 1Dr2k6dmWPGw-pVTxW-49c_cZfAI1ZBaL · 45 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/lewry_intuitions.txt`)
+- [x] es · chai / 1802.05300.txt · 1ypRqy_K2d-4ZQQvOzlkon3PT847qnPSU · 45 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/1802.05300.txt`)
+- [x] es · chai / dubeyimportantcurious.txt · 1jlBum8mZ39GuZXmmZ0rYpkKcjACTsmlT · 45 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/dubeyimportantcurious.txt`)
+- [x] es · chai / hendrycks19a.txt · 1HttAhMnV0VQhO-3i47y6mXuW2NApBtCk · 45 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/hendrycks19a.txt`)
+- [x] es · chai / 1906.12340.txt · 1YmNAPl5knxExgH3UiOtrKYQuFtM4KG-f · 48 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/1906.12340.txt`)
+- [x] es · chai / stooke20a.txt · 1ngztxHK3g-DaJQINKCOjBC9PkN7Xnd1w · 48 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/stooke20a.txt`)
+- [x] es · chai / 2006.02000.txt · 1GU4jJ9CHeXYU-DAu5TaUVUyGKXtbw6UF · 48 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/2006.02000.txt`)
+- [x] es · chai / pdf_id=c7hpFp_eRCo.txt · 1g7bdj786ohYPh2GnZBISXa463rv5Zml0 · 49 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/pdf_id=c7hpFp_eRCo.txt`)
+- [x] es · chai / zheng20b.txt · 1GXIaHipqKSvlyV8gRyYmp0xJLSx9bC3S · 49 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/zheng20b.txt`)
+- [x] es · chai / nvs_aaai22.txt · 1a7kS9fc-P9E6RbBAQ47NsXT7hQE2Pvmg · 49 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/nvs_aaai22.txt`)
+- [x] es · chai / vms_aaai21.txt · 1i7Ffbu3Ad98wMPcw469HUGcZoLJlg89D · 50 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/vms_aaai21.txt`)
+- [x] es · chai / 0e915db6326b6fb6a3c56546980a8c93-Paper.txt · 12oyKYUGpWcJBqbcSnZTLIaw4V_zKPJ1T · 52 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/0e915db6326b6fb6a3c56546980a8c93-Paper.txt`)
+- [x] es · chai / s13428-019-01201-9.txt · 1l08mcqIP9nt0K1IW6pEhcSc-I3qerWor · 52 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/s13428-019-01201-9.txt`)
+- [x] es · chai / yamakoshiprobing.txt · 1Q8iPIBTDaD9-BdGkQk1Jnj3Qub_w9TYm · 53 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/yamakoshiprobing.txt`)
+- [x] es · chai / iccv19-brm.txt · 1si5eiC3hy7ZLwfr_xeAIBbZsXw2DMlYo · 53 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/iccv19-brm.txt`)
+- [x] es · chai / pdf_id=gT6j4_tskUt.txt · 18fZqFw1kW9mhHorJM96ZQLOviobVVAbd · 54 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/pdf_id=gT6j4_tskUt.txt`)
+- [x] es · chai / petersondeepmodels22.txt · 1U_NMwXhUCSGTIgrjlO3r72lX2kxIEm0C · 56 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/petersondeepmodels22.txt`)
+- [x] es · chai / 2205.07395.txt · 1ky66OYqvw88f0wEznmQdXnS6ZEmUgB4m · 57 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/2205.07395.txt`)
+- [x] es · chai / 1903.12261.txt · 13f02ix3-Qx2AKyu9Rq2jc7Lkh_oqKdr_ · 58 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/1903.12261.txt`)
+- [x] es · chai / 2012.10800.txt · 1AtrOHZJFfVzcS-RGYd8ys4Ondize2Rfm · 58 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/2012.10800.txt`)
+- [x] es · chai / 94130ea17023c4837f0dcdda95034b65-Paper.txt · 1bpyYaJL3AsePA_8URn5WYXEkkAfD8vHP · 60 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/94130ea17023c4837f0dcdda95034b65-Paper.txt`)
+- [x] es · chai / 2003.06417.txt · 1j9s3itDN22nF-jiubrwRA9BcBWWKrPhO · 60 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/2003.06417.txt`)
 - [ ] es · chai / 1812.04606.txt · 1rNVfjiQbVluSaLtmygfeYUTtNFZ7An4r · 64 KB · txt
 - [ ] es · chai / 2006.16241.txt · 1HnLj0IxQuJDO_QNUcs0Ex1BU4982Le7A · 64 KB · txt
 - [ ] es · chai / 2103.03386.txt · 1o1DhgJiMIFcj3WUscoYJx9jtesMLg3WA · 65 KB · txt
@@ -2545,142 +2545,142 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · Alignment Forum / You Are A Brain - AI Alignment Forum.txt · 16avfJNPnQ7dj8x9YK5qKersMWTCEgAIC · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Alignment Forum / UDT as a Nash Equilibrium - AI Alignment Forum.txt · 1zRn8_vbel2l_AIPEgf6HlDKhvzpl8eHw · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Alignment Forum / A Walkthrough of In-Context Learning and Induction Heads (w- Charles Frye) Part 1 of 2 - AI Alignment Forum.txt · 123nKT-dLd1C8rSE20zpkV2jpgPTBJnu1 · 2 KB · txt · under 2 KB: empty page or stub
-- [ ] es · Alignment Forum / Forecasting AI Progress﹕ A Research Agenda - AI Alignment Forum.txt · 1uNiOb41r0NW2FU7ywRGIVmpBZ1sjrcTw · 2 KB · txt
-- [ ] es · Alignment Forum / Making a New Table Leaf - AI Alignment Forum.txt · 1qqrqbd9LUCbddanym7UqHySHl4grsF8I · 2 KB · txt
-- [ ] es · Alignment Forum / Rigging is a form of wireheading - AI Alignment Forum.txt · 1w6y_YhzyOpCIKvPeX3pMtFFTg-qjGQc8 · 2 KB · txt
-- [ ] es · Alignment Forum / A review of the Bio-Anchors report - AI Alignment Forum.txt · 1rtfYdBYj9uXha6QeaF9wnKoOXCL_NuwB · 2 KB · txt
-- [ ] es · Alignment Forum / A framework for thinking about wireheading - AI Alignment Forum.txt · 1F7JMhDQuwYlpuNRnm2jwjzD_8Y3kTI3A · 3 KB · txt
-- [ ] es · Alignment Forum / How to destroy the universe with a hypercomputer - AI Alignment Forum.txt · 1ZLd365_jJN3ellwYXfuOLwX9kQSyZ5rG · 3 KB · txt
-- [ ] es · Alignment Forum / Founding a rationalist group at the University of Michigan - AI Alignment Forum.txt · 1r3UPOdAbcu1c8CHjW3uB2il2RD1hxAyv · 3 KB · txt
-- [ ] es · Alignment Forum / Logical Updatelessness as a Robust Delegation Problem - AI Alignment Forum.txt · 14w7VSwT6InRD4WTveXMySvZ8Nkze13yQ · 3 KB · txt
-- [ ] es · Alignment Forum / Optimizing arbitrary expressions with a linear number of queries to a Logical Induction Oracle (Cartoon Guide) - AI Alignment Forum.txt · 1Ix-xU_2m9eSkxV7LEnJICdKld0uywobo · 3 KB · txt
-- [ ] es · Alignment Forum / A Walkthrough of A Mathematical Framework for Transformer Circuits - AI Alignment Forum.txt · 145zBcaubX9y-agm_8pt4Y-TsK6CRnFZh · 3 KB · txt
-- [ ] es · Alignment Forum / HIRING﹕ Inform and shape a new project on AI safety at Partnership on AI - AI Alignment Forum.txt · 137qVt4TECVY6-qQACQusQ2tJHbbZERBf · 3 KB · txt
-- [ ] es · Alignment Forum / Introducing Pastcasting﹕ A tool for forecasting practice - AI Alignment Forum.txt · 1QFFLr-UMAM5Ag1S1L0DKOpML4sb_gWcb · 3 KB · txt
-- [ ] es · Alignment Forum / Allowing a formal proof system to self improve while avoiding Lobian obstacles. - AI Alignment Forum.txt · 1AN-MAhNd-H4DNYrnKOKV2KVy6OmRk6Yc · 4 KB · txt
-- [ ] es · Alignment Forum / RandomWalkNFT﹕ A Game Theory Exercise - AI Alignment Forum.txt · 1KGasqS2C8jnZDIKLLyyHX4D8xTWIlBMh · 4 KB · txt
-- [ ] es · Alignment Forum / HCH as a measure of manipulation - AI Alignment Forum.txt · 17zsJcR7FQGqT0L-0kUgQo1n5X9u0mrhc · 4 KB · txt
-- [ ] es · Alignment Forum / Second Failure of Inductive Learning with a Delay in Feedback - AI Alignment Forum.txt · 1lTfUXefy2t_FIUj42uXR9ma4sZ-rrho8 · 4 KB · txt
-- [ ] es · Alignment Forum / How to Build a Lumenator - AI Alignment Forum.txt · 16wny8XMTAhpbetEmndjIq_thNssztcZY · 4 KB · txt
-- [ ] es · Alignment Forum / A general model of safety-oriented AI development - AI Alignment Forum.txt · 1MXW8s6HewGmbPfvVYUtC1sTqhYFDF5fj · 4 KB · txt
-- [ ] es · Alignment Forum / A non-logarithmic argument for Kelly - AI Alignment Forum.txt · 162dvaBSCQ7wzl5vbTNpgtsKuicr7GPmP · 4 KB · txt
-- [ ] es · Alignment Forum / A Rational Argument - AI Alignment Forum.txt · 1A36-7I8nkwa5M9xVhgsVt0F_RBlCdrHE · 4 KB · txt
-- [ ] es · Alignment Forum / Quantilizer ≡ Optimizer with a Bounded Amount of Output - AI Alignment Forum.txt · 1I_8Y3wAaUDV3211RymAbqHjjavgUmTKm · 4 KB · txt
-- [ ] es · Alignment Forum / Interspecies diplomacy as a potentially productive lens on AGI alignment - AI Alignment Forum.txt · 1iGCcbOyLckaSjTnMwyPeYU_8Tr-w3TzK · 4 KB · txt
-- [ ] es · Alignment Forum / Towards a Formalisation of Logical Counterfactuals - AI Alignment Forum.txt · 19AmOb-JC_9etrnPiD_WgURj8OZ1MB7yf · 5 KB · txt
-- [ ] es · Alignment Forum / Using GPT-N to Solve Interpretability of Neural Networks﹕ A Research Agenda - AI Alignment Forum.txt · 1g_Viuu_DJmRsxPjyaEBA9EwBu8VptQfk · 5 KB · txt
-- [ ] es · Alignment Forum / If I were a well-intentioned AI... II﹕ Acting in a world - AI Alignment Forum.txt · 1UhwpW7RrGBvekqqP2ZcdgnWeAX45yATi · 5 KB · txt
-- [ ] es · Alignment Forum / A Counterexample to an Informal Conjecture on Proof Length and Logical Counterfactuals - AI Alignment Forum.txt · 1v-iTfSXX4GkYL-VRels2DK-DMlCSuyI- · 5 KB · txt
-- [ ] es · Alignment Forum / A Problem with the Modified Demski Prior - AI Alignment Forum.txt · 1a_fiNhO2flhKFX_bRDbqe2rJ9qIjWaEF · 5 KB · txt
-- [ ] es · Alignment Forum / (A -_ B) -_ A - AI Alignment Forum.txt · 1FxVwnmfH7-DT-jR544tubXmhI6rA89am · 5 KB · txt
-- [ ] es · Alignment Forum / A test for symbol grounding methods﹕ true zero-sum games - AI Alignment Forum.txt · 15b9jDQrSYRq5uhXWqn356qnHQ-To3PrV · 6 KB · txt
-- [ ] es · Alignment Forum / Encultured AI Pre-planning, Part 2﹕ Providing a Service - AI Alignment Forum.txt · 1_NvpDv4TnMeTWPfRzyzyZ_yHxSPQeJOt · 6 KB · txt
-- [ ] es · Alignment Forum / A Good Future (rough draft) - AI Alignment Forum.txt · 1eiGR4ChWzLprovYeO4eTshGTCwBtMjiv · 6 KB · txt
-- [ ] es · Alignment Forum / No Constant Distribution Can be a Logical Inductor - AI Alignment Forum.txt · 16iKRRczoA-6Sul-njrdnqPSL6EVuj6Yb · 6 KB · txt
-- [ ] es · Alignment Forum / Fisherian Runaway as a decision-theoretic problem - AI Alignment Forum.txt · 1VteaXZjufgktn4Non2Cro7gX6tQ53Vr7 · 6 KB · txt
-- [ ] es · Alignment Forum / Gratification﹕ a useful concept, maybe new - AI Alignment Forum.txt · 1smIkir9CBxkIlDbhPGKmi8GYfYTsQJAq · 6 KB · txt
-- [ ] es · Alignment Forum / Can_t Unbirth a Child - AI Alignment Forum.txt · 1V6OWYOxM0wdg0PYfXx0FZczpu1nbeTmN · 6 KB · txt
-- [ ] es · Alignment Forum / Active Inference as a formalisation of instrumental convergence - AI Alignment Forum.txt · 1QkBXwqXDj0AybRaOUVL1vo_v91llcsGw · 6 KB · txt
-- [ ] es · Alignment Forum / A different angle on UDT - AI Alignment Forum.txt · 1qMm34jhgItE_vlyA7oPFTzNG7BkQP9TO · 6 KB · txt
-- [ ] es · Alignment Forum / Abstraction = Information at a Distance - AI Alignment Forum.txt · 14mmOWo-YidRPxPu-yhedz1VAOTiWcl-7 · 6 KB · txt
-- [ ] es · Alignment Forum / Bits of Optimization Can Only Be Lost Over A Distance - AI Alignment Forum.txt · 1mdULyFIbnRwZBcF6HgthDKcHilTiMBVL · 6 KB · txt
-- [ ] es · Alignment Forum / Yes, a blog. - AI Alignment Forum.txt · 1MzBafQLsrniII4TUTHAGVnT1MX39FLNs · 7 KB · txt
-- [ ] es · Alignment Forum / A Small Negative Result on Debate - AI Alignment Forum.txt · 1jaMs3-Dj4EEQQLvj4KTtOtVJuB3AJW0i · 7 KB · txt
-- [ ] es · Alignment Forum / A correlated analogue of reflective oracles - AI Alignment Forum.txt · 1biffKndDDnDDkMMTJr6ZDPJm-OTrxvOW · 7 KB · txt
-- [ ] es · Alignment Forum / A possible preference algorithm - AI Alignment Forum.txt · 10yQKGhfqqgMKr7-jJp-kk_OL4v7adHpI · 7 KB · txt
+- [x] es · Alignment Forum / Forecasting AI Progress﹕ A Research Agenda - AI Alignment Forum.txt · 1uNiOb41r0NW2FU7ywRGIVmpBZ1sjrcTw · 2 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/Forecasting AI Progress﹕ A Research Agenda - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Making a New Table Leaf - AI Alignment Forum.txt · 1qqrqbd9LUCbddanym7UqHySHl4grsF8I · 2 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/Making a New Table Leaf - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Rigging is a form of wireheading - AI Alignment Forum.txt · 1w6y_YhzyOpCIKvPeX3pMtFFTg-qjGQc8 · 2 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Rigging is a form of wireheading - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A review of the Bio-Anchors report - AI Alignment Forum.txt · 1rtfYdBYj9uXha6QeaF9wnKoOXCL_NuwB · 2 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A review of the Bio-Anchors report - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A framework for thinking about wireheading - AI Alignment Forum.txt · 1F7JMhDQuwYlpuNRnm2jwjzD_8Y3kTI3A · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A framework for thinking about wireheading - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / How to destroy the universe with a hypercomputer - AI Alignment Forum.txt · 1ZLd365_jJN3ellwYXfuOLwX9kQSyZ5rG · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/How to destroy the universe with a hypercomputer - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Founding a rationalist group at the University of Michigan - AI Alignment Forum.txt · 1r3UPOdAbcu1c8CHjW3uB2il2RD1hxAyv · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Founding a rationalist group at the University of Michigan - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Logical Updatelessness as a Robust Delegation Problem - AI Alignment Forum.txt · 14w7VSwT6InRD4WTveXMySvZ8Nkze13yQ · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Logical Updatelessness as a Robust Delegation Problem - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Optimizing arbitrary expressions with a linear number of queries to a Logical Induction Oracle (Cartoon Guide) - AI Alignment Forum.txt · 1Ix-xU_2m9eSkxV7LEnJICdKld0uywobo · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Optimizing arbitrary expressions with a linear number of queries to a Logical Induction Oracle (Cartoon Guide) - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Walkthrough of A Mathematical Framework for Transformer Circuits - AI Alignment Forum.txt · 145zBcaubX9y-agm_8pt4Y-TsK6CRnFZh · 3 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/A Walkthrough of A Mathematical Framework for Transformer Circuits - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / HIRING﹕ Inform and shape a new project on AI safety at Partnership on AI - AI Alignment Forum.txt · 137qVt4TECVY6-qQACQusQ2tJHbbZERBf · 3 KB · txt · es done 2026-10-31 (1/1 batches, `Español/archive/HIRING﹕ Inform and shape a new project on AI safety at Partnership on AI - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Introducing Pastcasting﹕ A tool for forecasting practice - AI Alignment Forum.txt · 1QFFLr-UMAM5Ag1S1L0DKOpML4sb_gWcb · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Introducing Pastcasting﹕ A tool for forecasting practice - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Allowing a formal proof system to self improve while avoiding Lobian obstacles. - AI Alignment Forum.txt · 1AN-MAhNd-H4DNYrnKOKV2KVy6OmRk6Yc · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Allowing a formal proof system to self improve while avoiding Lobian obstacles. - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / RandomWalkNFT﹕ A Game Theory Exercise - AI Alignment Forum.txt · 1KGasqS2C8jnZDIKLLyyHX4D8xTWIlBMh · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/RandomWalkNFT﹕ A Game Theory Exercise - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / HCH as a measure of manipulation - AI Alignment Forum.txt · 17zsJcR7FQGqT0L-0kUgQo1n5X9u0mrhc · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/HCH as a measure of manipulation - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Second Failure of Inductive Learning with a Delay in Feedback - AI Alignment Forum.txt · 1lTfUXefy2t_FIUj42uXR9ma4sZ-rrho8 · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Second Failure of Inductive Learning with a Delay in Feedback - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / How to Build a Lumenator - AI Alignment Forum.txt · 16wny8XMTAhpbetEmndjIq_thNssztcZY · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/How to Build a Lumenator - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A general model of safety-oriented AI development - AI Alignment Forum.txt · 1MXW8s6HewGmbPfvVYUtC1sTqhYFDF5fj · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A general model of safety-oriented AI development - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A non-logarithmic argument for Kelly - AI Alignment Forum.txt · 162dvaBSCQ7wzl5vbTNpgtsKuicr7GPmP · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A non-logarithmic argument for Kelly - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Rational Argument - AI Alignment Forum.txt · 1A36-7I8nkwa5M9xVhgsVt0F_RBlCdrHE · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Rational Argument - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Quantilizer ≡ Optimizer with a Bounded Amount of Output - AI Alignment Forum.txt · 1I_8Y3wAaUDV3211RymAbqHjjavgUmTKm · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Quantilizer ≡ Optimizer with a Bounded Amount of Output - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Interspecies diplomacy as a potentially productive lens on AGI alignment - AI Alignment Forum.txt · 1iGCcbOyLckaSjTnMwyPeYU_8Tr-w3TzK · 4 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Interspecies diplomacy as a potentially productive lens on AGI alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Towards a Formalisation of Logical Counterfactuals - AI Alignment Forum.txt · 19AmOb-JC_9etrnPiD_WgURj8OZ1MB7yf · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Towards a Formalisation of Logical Counterfactuals - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Using GPT-N to Solve Interpretability of Neural Networks﹕ A Research Agenda - AI Alignment Forum.txt · 1g_Viuu_DJmRsxPjyaEBA9EwBu8VptQfk · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Using GPT-N to Solve Interpretability of Neural Networks﹕ A Research Agenda - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / If I were a well-intentioned AI... II﹕ Acting in a world - AI Alignment Forum.txt · 1UhwpW7RrGBvekqqP2ZcdgnWeAX45yATi · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/If I were a well-intentioned AI... II﹕ Acting in a world - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Counterexample to an Informal Conjecture on Proof Length and Logical Counterfactuals - AI Alignment Forum.txt · 1v-iTfSXX4GkYL-VRels2DK-DMlCSuyI- · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Counterexample to an Informal Conjecture on Proof Length and Logical Counterfactuals - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Problem with the Modified Demski Prior - AI Alignment Forum.txt · 1a_fiNhO2flhKFX_bRDbqe2rJ9qIjWaEF · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Problem with the Modified Demski Prior - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / (A -_ B) -_ A - AI Alignment Forum.txt · 1FxVwnmfH7-DT-jR544tubXmhI6rA89am · 5 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/(A -_ B) -_ A - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A test for symbol grounding methods﹕ true zero-sum games - AI Alignment Forum.txt · 15b9jDQrSYRq5uhXWqn356qnHQ-To3PrV · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A test for symbol grounding methods﹕ true zero-sum games - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Encultured AI Pre-planning, Part 2﹕ Providing a Service - AI Alignment Forum.txt · 1_NvpDv4TnMeTWPfRzyzyZ_yHxSPQeJOt · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Encultured AI Pre-planning, Part 2﹕ Providing a Service - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Good Future (rough draft) - AI Alignment Forum.txt · 1eiGR4ChWzLprovYeO4eTshGTCwBtMjiv · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Good Future (rough draft) - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / No Constant Distribution Can be a Logical Inductor - AI Alignment Forum.txt · 16iKRRczoA-6Sul-njrdnqPSL6EVuj6Yb · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/No Constant Distribution Can be a Logical Inductor - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Fisherian Runaway as a decision-theoretic problem - AI Alignment Forum.txt · 1VteaXZjufgktn4Non2Cro7gX6tQ53Vr7 · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Fisherian Runaway as a decision-theoretic problem - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Gratification﹕ a useful concept, maybe new - AI Alignment Forum.txt · 1smIkir9CBxkIlDbhPGKmi8GYfYTsQJAq · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Gratification﹕ a useful concept, maybe new - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Can_t Unbirth a Child - AI Alignment Forum.txt · 1V6OWYOxM0wdg0PYfXx0FZczpu1nbeTmN · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Can_t Unbirth a Child - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Active Inference as a formalisation of instrumental convergence - AI Alignment Forum.txt · 1QkBXwqXDj0AybRaOUVL1vo_v91llcsGw · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Active Inference as a formalisation of instrumental convergence - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A different angle on UDT - AI Alignment Forum.txt · 1qMm34jhgItE_vlyA7oPFTzNG7BkQP9TO · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A different angle on UDT - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Abstraction = Information at a Distance - AI Alignment Forum.txt · 14mmOWo-YidRPxPu-yhedz1VAOTiWcl-7 · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Abstraction = Information at a Distance - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Bits of Optimization Can Only Be Lost Over A Distance - AI Alignment Forum.txt · 1mdULyFIbnRwZBcF6HgthDKcHilTiMBVL · 6 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Bits of Optimization Can Only Be Lost Over A Distance - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Yes, a blog. - AI Alignment Forum.txt · 1MzBafQLsrniII4TUTHAGVnT1MX39FLNs · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/Yes, a blog. - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Small Negative Result on Debate - AI Alignment Forum.txt · 1jaMs3-Dj4EEQQLvj4KTtOtVJuB3AJW0i · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Small Negative Result on Debate - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A correlated analogue of reflective oracles - AI Alignment Forum.txt · 1biffKndDDnDDkMMTJr6ZDPJm-OTrxvOW · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A correlated analogue of reflective oracles - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A possible preference algorithm - AI Alignment Forum.txt · 10yQKGhfqqgMKr7-jJp-kk_OL4v7adHpI · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A possible preference algorithm - AI Alignment Forum.txt`)
 - [ ] es · Alignment Forum / (A -_ B) -_ A in Causal DAGs - AI Alignment Forum.txt · 1UerBLFWkPHpn8wMFwy0VvZ9kvM3hEx6R · 8 KB · txt
-- [ ] es · Alignment Forum / Announcing Encultured AI﹕ Building a Video Game - AI Alignment Forum.txt · 1ts_3TvxzduZoiEz9_gzsvmUw1ID--nBB · 8 KB · txt
-- [ ] es · Alignment Forum / (Another) Using a Memory Palace to Memorize a Textbook - AI Alignment Forum.txt · 1ba7kod7dm8Q_CtckWsYMKaWV74A8mApR · 8 KB · txt
-- [ ] es · Alignment Forum / A taxonomy of Oracle AIs - AI Alignment Forum.txt · 1P2lFfhf_Lsq62XwgN_gCI051h9uMMM8Z · 8 KB · txt
-- [ ] es · Alignment Forum / The underlying model of a morphism - AI Alignment Forum.txt · 1dYMLwaDxEUEW3aevUUglNTWUSOH0-arN · 9 KB · txt
-- [ ] es · Alignment Forum / Some reasons why a predictor wants to be a consequentialist - AI Alignment Forum.txt · 12Nittat3B5qttqJxvU3kmaJhvJ1Kh684 · 9 KB · txt
-- [ ] es · Alignment Forum / If I were a well-intentioned AI... III﹕ Extremal Goodhart - AI Alignment Forum.txt · 12bMvF8cDJnHyaU-3l_rIFFfpNW4KyEcM · 9 KB · txt
-- [ ] es · Alignment Forum / A world in which the alignment problem seems lower-stakes - AI Alignment Forum.txt · 1OS_BFWzBcGMdxg2OCpEdq2hVHIE8i4Jo · 9 KB · txt
-- [ ] es · Alignment Forum / Minimization of prediction error as a foundation for human values in AI alignment - AI Alignment Forum.txt · 1CKg9DvTv_Ul4zZjXiA5iC31aV_d-pwHD · 9 KB · txt
-- [ ] es · Alignment Forum / Generalised models as a category - AI Alignment Forum.txt · 1kTQCRQY4-YMXftJVH-GqP3gSHcVgVx5L · 10 KB · txt
-- [ ] es · Alignment Forum / A Layman’s Guide to Recreational Mathematics Videos - AI Alignment Forum.txt · 1xztgYKtZ6neNZpgLFCMcxMTX_hFfuYwt · 10 KB · txt
-- [ ] es · Alignment Forum / A shift in arguments for AI risk - AI Alignment Forum.txt · 1FAf3rim1iCp1ImSYg3GTcnTgGlUmmcVl · 10 KB · txt
-- [ ] es · Alignment Forum / A simple example of conditional orthogonality in finite factored sets - AI Alignment Forum.txt · 14LFA2HIAuYYvao8qtsA_jmzsEH6xV8W1 · 10 KB · txt
-- [ ] es · Alignment Forum / Corrigible but misaligned﹕ a superintelligent messiah - AI Alignment Forum.txt · 1T87903O00M_efbQiTZ3PEp8pzSyWFF8x · 11 KB · txt
-- [ ] es · Alignment Forum / A measure-theoretic generalization of logical induction - AI Alignment Forum.txt · 18spo985EjhhPRgyd-lx6DzJKE7MqBgx1 · 11 KB · txt
-- [ ] es · Alignment Forum / Towards a New Decision Theory - AI Alignment Forum.txt · 1va1yEHMo6rTPjmU8xEEd1ot-JhyRP7OV · 11 KB · txt
-- [ ] es · Alignment Forum / A primer on provability logic - AI Alignment Forum.txt · 1rRISr_viJvOGUT2o2PEpTsXC1P5fHBzT · 11 KB · txt
-- [ ] es · Alignment Forum / Easy guide for running a local Rationality meetup - AI Alignment Forum.txt · 16JJZYnWcAbHzMrYzY6QuE3C0NgT1-BnW · 11 KB · txt
-- [ ] es · Alignment Forum / A Possible Resolution To Spurious Counterfactuals - AI Alignment Forum.txt · 11tFWZxW_-NRgvuFVzL7VRbLHMtuFlD8M · 11 KB · txt
-- [ ] es · Alignment Forum / Counterfactuals are an Answer, Not a Question - AI Alignment Forum.txt · 1T8Gyqdvp1jSRgOCxotulXaStg2LrA9fd · 12 KB · txt
-- [ ] es · Alignment Forum / A first look at the hard problem of corrigibility - AI Alignment Forum.txt · 1MGKlfqDNCAGyiJffvvnbrz47iAXiq0vQ · 12 KB · txt
-- [ ] es · Alignment Forum / AI Safety and Neighboring Communities﹕ A Quick-Start Guide, as of Summer 2022 - AI Alignment Forum.txt · 1U4Or9A-Gdlt9fL0PPAwk7AIBduo8OHVu · 12 KB · txt
-- [ ] es · Alignment Forum / Appendix﹕ How to run a successful Hamming circle - AI Alignment Forum.txt · 19jtpHRWkEEOTQOr74fiAfAKwWs_fXS3- · 12 KB · txt
-- [ ] es · Alignment Forum / Anatomy of a Gear - AI Alignment Forum.txt · 1jzxA64FdjauzY4QbNHzhzqwbLVNJCRQn · 12 KB · txt
-- [ ] es · Alignment Forum / A naive alignment strategy and optimism about generalization - AI Alignment Forum.txt · 1b7K-nYmX2nf9uAQFlhsWFgD13xS39Nnv · 12 KB · txt
-- [ ] es · Alignment Forum / If I were a well-intentioned AI... I﹕ Image classifier - AI Alignment Forum.txt · 104LqZGFGPVSSh5D9mXiFFy4eH3XSWciU · 12 KB · txt
-- [ ] es · Alignment Forum / Updated Deference is not a strong argument against the utility uncertainty approach to alignment - AI Alignment Forum.txt · 1dQNfGtmhauOIurszokuYotpU_OKhwqvp · 12 KB · txt
-- [ ] es · Alignment Forum / Learning a concept using only positive examples - AI Alignment Forum.txt · 1zdD5sZPQ_1EM5Q1ayizKkCefjsTZR-_I · 13 KB · txt
-- [ ] es · Alignment Forum / Why we need a _theory_ of human values - AI Alignment Forum.txt · 1KFjpHtjucEYAxyJ9X9V3x92K6D7C14eZ · 13 KB · txt
-- [ ] es · Alignment Forum / Procedurally evaluating factual accuracy﹕ a request for research - AI Alignment Forum.txt · 11a_dLCqooRjeJ-R-k4DS1UPBO90Vj-T- · 13 KB · txt
-- [ ] es · Alignment Forum / Wireless is a trap - AI Alignment Forum.txt · 1pODwVliF-JOwg5PftZnakncKVaqGj7vd · 13 KB · txt
-- [ ] es · Alignment Forum / Failure modes in a shard theory alignment plan - AI Alignment Forum.txt · 1AulNkWVx9yuosjUdl5ruESCcd7us2y3J · 13 KB · txt
-- [ ] es · Alignment Forum / BASALT﹕ A Benchmark for Learning from Human Feedback - AI Alignment Forum.txt · 1AjNmUiuoB47WCgkU348687-n5rExSUvK · 13 KB · txt
-- [ ] es · Alignment Forum / Player vs. Character﹕ A Two-Level Model of Ethics - AI Alignment Forum.txt · 16t9wYUYe1cNaEsKUklOPMrX-jKNOfvNn · 14 KB · txt
-- [ ] es · Alignment Forum / A Summary Of Anthropic_s First Paper - AI Alignment Forum.txt · 196dn7BLG6FyFYBie7DVuHfD9bXLk2e7H · 14 KB · txt
-- [ ] es · Alignment Forum / Swimming Upstream﹕ A Case Study in Instrumental Rationality - AI Alignment Forum.txt · 18Yz9MS3ddVQuVvwP5iodpSv7VS7UaCR3 · 14 KB · txt
-- [ ] es · Alignment Forum / Thoughts from a Two Boxer - AI Alignment Forum.txt · 1USMvB4GFZPmkpJRJoW4pXlo1aLje7gGR · 14 KB · txt
-- [ ] es · Alignment Forum / Appendix﹕ how a subagent could get powerful - AI Alignment Forum.txt · 1ZnB341sNZadQ6XuTz8UImduXu886dNp1 · 14 KB · txt
-- [ ] es · Alignment Forum / A Data limited future - AI Alignment Forum.txt · 1X4zOFIS0sxG2zm31-JMknWVp8yJ757I_ · 14 KB · txt
-- [ ] es · Alignment Forum / A Mystery About High Dimensional Concept Encoding - AI Alignment Forum.txt · 1wOIqzN_-0Z5kj5d9pZFNmgqH0q09WHhH · 14 KB · txt
-- [ ] es · Alignment Forum / Science in a High-Dimensional World - AI Alignment Forum.txt · 1MiHuruxxKBysOJv_VuE0daHE_3uCGMt- · 14 KB · txt
-- [ ] es · Alignment Forum / A short introduction to machine learning - AI Alignment Forum.txt · 159iLNFlUXHMMql1RibMbxe_ycfqS9SZ- · 14 KB · txt
-- [ ] es · Alignment Forum / SUDT﹕ A toy decision theory for updateless anthropics - AI Alignment Forum.txt · 1FQ83Tq_r_12G5IqJs3UnzA2GkWkeaK9b · 15 KB · txt
-- [ ] es · Alignment Forum / GPT-3﹕ a disappointing paper - AI Alignment Forum.txt · 10e1qqX3mbc8dT2Huo7WTBIK5HobnXZop · 15 KB · txt
-- [ ] es · Alignment Forum / Automated Fact Checking﹕ A Look at the Field - AI Alignment Forum.txt · 1-9sKM6ior6XAOVVzS3dxTcEyyrQ2vxQS · 15 KB · txt
-- [ ] es · Alignment Forum / A Walkthrough of Interpretability in the Wild (w- authors Kevin Wang, Arthur Conmy & Alexandre Variengien) - AI Alignment Forum.txt · 1DNZLofthEXjG8erRpckrazzjObP4DDjl · 15 KB · txt
-- [ ] es · Alignment Forum / Reflective oracles as a solution to the converse Lawvere problem - AI Alignment Forum.txt · 1Vva7thkr3SQ71BJm0nEbj31tcs2sM5Jg · 15 KB · txt
-- [ ] es · Alignment Forum / Tessellating Hills﹕ a toy model for demons in imperfect search - AI Alignment Forum.txt · 1AlCnpU755mA5C6zSRqmvM75UXmqRdRr2 · 16 KB · txt
-- [ ] es · Alignment Forum / Evolution is a bad analogy for AGI﹕ inner alignment - AI Alignment Forum.txt · 1Ij_VnLLl1MTcYHYO_aybRG5nCeiyYy0w · 16 KB · txt
-- [ ] es · Alignment Forum / Further Progress on a Bayesian Version of Logical Uncertainty - AI Alignment Forum.txt · 1okC096bZkeI1J3POovXR_-djrm93LEfo · 16 KB · txt
-- [ ] es · Alignment Forum / Value loading in the human brain﹕ a worked example - AI Alignment Forum.txt · 17g9SxMQdD1UQQb01XrTht-mjJnNw-HBK · 16 KB · txt
-- [ ] es · Alignment Forum / Intuitions on Universal Behavior of Information at a Distance - AI Alignment Forum.txt · 1RteJOUWqhzKll7DsFSIjJUymJSu7-oHq · 16 KB · txt
-- [ ] es · Alignment Forum / A note about differential technological development - AI Alignment Forum.txt · 1P2nIgbZfh19JQNcQ22ntxdX0CTVCEwol · 17 KB · txt
-- [ ] es · Alignment Forum / In memoryless Cartesian environments, every UDT policy is a CDT+SIA policy - AI Alignment Forum.txt · 1hWVr6AvLjWTBWhtdtMfb3KbZH98hdRi_ · 17 KB · txt
-- [ ] es · Alignment Forum / Better priors as a safety problem - AI Alignment Forum.txt · 1q5PHNcI5By9Qbf9U_KXzQj82au4dGdkt · 17 KB · txt
-- [ ] es · Alignment Forum / ACDT﹕ a hack-y acausal decision theory - AI Alignment Forum.txt · 1mpV32Zpkc2fbe0DV3pv1ZQ7Voo0p3vq1 · 17 KB · txt
-- [ ] es · Alignment Forum / Wireheading as a potential problem with the new impact measure - AI Alignment Forum.txt · 1ny6nKgor4kUxT0gIR7cCwNPJpRY-5Tx7 · 17 KB · txt
-- [ ] es · Alignment Forum / Stable self-improvement as a research problem - AI Alignment Forum.txt · 1GzNGiFZIDBR75zz3U8uL9WxORH3JlKfm · 18 KB · txt
-- [ ] es · Alignment Forum / Optimization at a Distance - AI Alignment Forum.txt · 1nBIpFamhL0D4hC2LT2qA-KsZ5dQ34ovG · 18 KB · txt
-- [ ] es · Alignment Forum / Characterizing Real-World Agents as a Research Meta-Strategy - AI Alignment Forum.txt · 191FnYCXk9XBgMz5gQD6OfyJdcEkQcY1U · 18 KB · txt
-- [ ] es · Alignment Forum / Sticky goals﹕ a concrete experiment for understanding deceptive alignment - AI Alignment Forum.txt · 1cLPZ4ueLDgGVYLQf26ncaU07iEGphVAc · 18 KB · txt
-- [ ] es · Alignment Forum / Intuitions about goal-directed behavior - AI Alignment Forum.txt · 1nAwl2yLGfNhLvTXNKFwc03F6Tf02zo7P · 19 KB · txt
-- [ ] es · Alignment Forum / A blog post is a very long and complex search query to find fascinating people and make them route interesting stuff to your inbox - AI Alignment Forum.txt · 17jJyBHfUYRKxEiSmcuoDS4fc9GWWZSDq · 19 KB · txt
-- [ ] es · Alignment Forum / A newcomer’s guide to the technical AI safety field - AI Alignment Forum.txt · 1LHuPaoIklmwVUF7uMTtGH_KYDj_cs05k · 19 KB · txt
-- [ ] es · Alignment Forum / A Framework to Explain Bayesian Models - AI Alignment Forum.txt · 1CgSvukFGPhXhQmidD5WBA68aERjbDjMS · 19 KB · txt
-- [ ] es · Alignment Forum / A distillation of Evan Hubinger_s training stories (for SERI MATS) - AI Alignment Forum.txt · 13uyafEff6W06xOLm6fcpeax-KI3F7kIp · 19 KB · txt
-- [ ] es · Alignment Forum / Reward functions and updating assumptions can hide a multitude of sins - AI Alignment Forum.txt · 1-WGauZZ1kpn5FIvTwUsDgdq0d0bKyM5n · 20 KB · txt
-- [ ] es · Alignment Forum / Oversight Leagues﹕ The Training Game as a Feature - AI Alignment Forum.txt · 1nAcEV4CsvzYQIb9FFequEZd_n0d6TxJD · 21 KB · txt
-- [ ] es · Alignment Forum / AI Services as a Research Paradigm - AI Alignment Forum.txt · 1Ia60mSdMo5tXtvnuVn4UtkzGLegEa9Oh · 21 KB · txt
-- [ ] es · Alignment Forum / Aligning a toy model of optimization - AI Alignment Forum.txt · 1nqpVLeyYEwd_H196VsO3lVdYd8mDZ6bc · 23 KB · txt
-- [ ] es · Alignment Forum / The Blackwell order as a formalization of knowledge - AI Alignment Forum.txt · 1gFFHytruASZ19wrCvqt5rWFU3MHm4ZtL · 24 KB · txt
-- [ ] es · Alignment Forum / Convergence Towards World-Models﹕ A Gears-Level Model - AI Alignment Forum.txt · 1L3sPR2cm95ZovwaTCydqj0j-U1NlX4t7 · 26 KB · txt
-- [ ] es · Alignment Forum / A Test for Language Model Consciousness - AI Alignment Forum.txt · 176ENH1g4mUIQFe-21bTnHhqOCFxXdt-V · 27 KB · txt
-- [ ] es · Alignment Forum / Problems facing a correspondence theory of knowledge - AI Alignment Forum.txt · 1X1iQGYC1w8fpHplwSr6AHR3sPmnEEAgU · 27 KB · txt
-- [ ] es · Alignment Forum / Tips for the most immersive video calls - AI Alignment Forum.txt · 1V_khlzJmmD3RM2pg_7bl9WnMFYpE_phC · 27 KB · txt
-- [ ] es · Alignment Forum / Environments as a bottleneck in AGI development - AI Alignment Forum.txt · 1jzuxXQlvOFWVw9_SLvpRJKrhpqYvjcZd · 27 KB · txt
-- [ ] es · Alignment Forum / Pointing to a Flower - AI Alignment Forum.txt · 1mrzwnn51uF49dRJXM4wb3zIIZ8SaPJYW · 28 KB · txt
-- [ ] es · Alignment Forum / Seeking Power is Convergently Instrumental in a Broad Class of Environments - AI Alignment Forum.txt · 1YEPRHRvhpsZ5i6OzaWEc5YTpCP1G5kG0 · 29 KB · txt
-- [ ] es · Alignment Forum / Towards a mechanistic understanding of corrigibility - AI Alignment Forum.txt · 144flI7KLr673jWw84nyxPfmmPMOrFnXm · 30 KB · txt
-- [ ] es · Alignment Forum / Delegative Reinforcement Learning with a Merely Sane Advisor - AI Alignment Forum.txt · 17dRVMY26UuqPbKP80dwfpzbYaNb3VLt1 · 31 KB · txt
-- [ ] es · Alignment Forum / Review of A Map that Reflects the Territory - AI Alignment Forum.txt · 1Y6dQydsvEssVgpLCDapCfOGhHOdzGbww · 31 KB · txt
-- [ ] es · Alignment Forum / A Critique of Non-Obstruction - AI Alignment Forum.txt · 1I-ii_OFAnizxZv1B_PYlA10qoes_WH-L · 32 KB · txt
-- [ ] es · Alignment Forum / A dilemma for prosaic AI alignment - AI Alignment Forum.txt · 17eUQXHrofVcWj1LVLBkn9PJn27XmzQb8 · 33 KB · txt
-- [ ] es · Alignment Forum / Selection Theorems﹕ A Program For Understanding Agents - AI Alignment Forum.txt · 1NQjc01iViEtRFrUlgkp_Yvi_n_wlxwnC · 33 KB · txt
-- [ ] es · Alignment Forum / (C)IRL is not solely a learning process - AI Alignment Forum.txt · 1EABx3ZJgFJ8-RIwTnLu0GPTONts2R4_l · 33 KB · txt
-- [ ] es · Alignment Forum / Truthful LMs as a warm-up for aligned AGI - AI Alignment Forum.txt · 1BMSWnxE02Fn41CT2Ugz2FqVNi5_SpI_M · 34 KB · txt
-- [ ] es · Alignment Forum / Toward a New Technical Explanation of Technical Explanation - AI Alignment Forum.txt · 1tKJeICD_VPgBDSoQEBsgi-cNja_HhSe2 · 34 KB · txt
-- [ ] es · Alignment Forum / The Brain as a Universal Learning Machine - AI Alignment Forum.txt · 1gX4j7RegPCq9WUoq3Bi4VEah4PgHqsoW · 37 KB · txt
-- [ ] es · Alignment Forum / Book Review﹕ A PhD is Not Enough - AI Alignment Forum.txt · 1gYPIEmyNvW17GHxPH3UIe1V-PtMEfaVp · 38 KB · txt
-- [ ] es · Alignment Forum / AI takeoff story﹕ a continuation of progress by other means - AI Alignment Forum.txt · 183Jd3TI9cPhhPckwP_JKTmY4Dz3p7FEk · 44 KB · txt
-- [ ] es · Alignment Forum / Misalignment-by-default in multi-agent systems - AI Alignment Forum.txt · 1ODzZ_pnk_4AB57Ba45-mYFFu5kXqsEV5 · 51 KB · txt
-- [ ] es · Alignment Forum / A positive case for how we might succeed at prosaic AI alignment - AI Alignment Forum.txt · 1CSgTBFqmTKiAGfXFro0jb5SAFyC_H_qd · 53 KB · txt
-- [ ] es · Alignment Forum / A central AI alignment problem﹕ capabilities generalization, and the sharp left turn - AI Alignment Forum.txt · 16KvYlhATFvUo39iZWLFgayOMCjLV_o6C · 54 KB · txt
+- [x] es · Alignment Forum / Announcing Encultured AI﹕ Building a Video Game - AI Alignment Forum.txt · 1ts_3TvxzduZoiEz9_gzsvmUw1ID--nBB · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Announcing Encultured AI﹕ Building a Video Game - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / (Another) Using a Memory Palace to Memorize a Textbook - AI Alignment Forum.txt · 1ba7kod7dm8Q_CtckWsYMKaWV74A8mApR · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/(Another) Using a Memory Palace to Memorize a Textbook - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A taxonomy of Oracle AIs - AI Alignment Forum.txt · 1P2lFfhf_Lsq62XwgN_gCI051h9uMMM8Z · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A taxonomy of Oracle AIs - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / The underlying model of a morphism - AI Alignment Forum.txt · 1dYMLwaDxEUEW3aevUUglNTWUSOH0-arN · 9 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/The underlying model of a morphism - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Some reasons why a predictor wants to be a consequentialist - AI Alignment Forum.txt · 12Nittat3B5qttqJxvU3kmaJhvJ1Kh684 · 9 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Some reasons why a predictor wants to be a consequentialist - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / If I were a well-intentioned AI... III﹕ Extremal Goodhart - AI Alignment Forum.txt · 12bMvF8cDJnHyaU-3l_rIFFfpNW4KyEcM · 9 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/If I were a well-intentioned AI... III﹕ Extremal Goodhart - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A world in which the alignment problem seems lower-stakes - AI Alignment Forum.txt · 1OS_BFWzBcGMdxg2OCpEdq2hVHIE8i4Jo · 9 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A world in which the alignment problem seems lower-stakes - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Minimization of prediction error as a foundation for human values in AI alignment - AI Alignment Forum.txt · 1CKg9DvTv_Ul4zZjXiA5iC31aV_d-pwHD · 9 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Minimization of prediction error as a foundation for human values in AI alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Generalised models as a category - AI Alignment Forum.txt · 1kTQCRQY4-YMXftJVH-GqP3gSHcVgVx5L · 10 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Generalised models as a category - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Layman’s Guide to Recreational Mathematics Videos - AI Alignment Forum.txt · 1xztgYKtZ6neNZpgLFCMcxMTX_hFfuYwt · 10 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Layman’s Guide to Recreational Mathematics Videos - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A shift in arguments for AI risk - AI Alignment Forum.txt · 1FAf3rim1iCp1ImSYg3GTcnTgGlUmmcVl · 10 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A shift in arguments for AI risk - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A simple example of conditional orthogonality in finite factored sets - AI Alignment Forum.txt · 14LFA2HIAuYYvao8qtsA_jmzsEH6xV8W1 · 10 KB · txt · es done 2026-10-31 (2/2 batches, `Español/archive/A simple example of conditional orthogonality in finite factored sets - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Corrigible but misaligned﹕ a superintelligent messiah - AI Alignment Forum.txt · 1T87903O00M_efbQiTZ3PEp8pzSyWFF8x · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Corrigible but misaligned﹕ a superintelligent messiah - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A measure-theoretic generalization of logical induction - AI Alignment Forum.txt · 18spo985EjhhPRgyd-lx6DzJKE7MqBgx1 · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A measure-theoretic generalization of logical induction - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Towards a New Decision Theory - AI Alignment Forum.txt · 1va1yEHMo6rTPjmU8xEEd1ot-JhyRP7OV · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Towards a New Decision Theory - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A primer on provability logic - AI Alignment Forum.txt · 1rRISr_viJvOGUT2o2PEpTsXC1P5fHBzT · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A primer on provability logic - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Easy guide for running a local Rationality meetup - AI Alignment Forum.txt · 16JJZYnWcAbHzMrYzY6QuE3C0NgT1-BnW · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Easy guide for running a local Rationality meetup - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Possible Resolution To Spurious Counterfactuals - AI Alignment Forum.txt · 11tFWZxW_-NRgvuFVzL7VRbLHMtuFlD8M · 11 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Possible Resolution To Spurious Counterfactuals - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Counterfactuals are an Answer, Not a Question - AI Alignment Forum.txt · 1T8Gyqdvp1jSRgOCxotulXaStg2LrA9fd · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Counterfactuals are an Answer, Not a Question - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A first look at the hard problem of corrigibility - AI Alignment Forum.txt · 1MGKlfqDNCAGyiJffvvnbrz47iAXiq0vQ · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A first look at the hard problem of corrigibility - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / AI Safety and Neighboring Communities﹕ A Quick-Start Guide, as of Summer 2022 - AI Alignment Forum.txt · 1U4Or9A-Gdlt9fL0PPAwk7AIBduo8OHVu · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/AI Safety and Neighboring Communities﹕ A Quick-Start Guide, as of Summer 2022 - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Appendix﹕ How to run a successful Hamming circle - AI Alignment Forum.txt · 19jtpHRWkEEOTQOr74fiAfAKwWs_fXS3- · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Appendix﹕ How to run a successful Hamming circle - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Anatomy of a Gear - AI Alignment Forum.txt · 1jzxA64FdjauzY4QbNHzhzqwbLVNJCRQn · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Anatomy of a Gear - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A naive alignment strategy and optimism about generalization - AI Alignment Forum.txt · 1b7K-nYmX2nf9uAQFlhsWFgD13xS39Nnv · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A naive alignment strategy and optimism about generalization - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / If I were a well-intentioned AI... I﹕ Image classifier - AI Alignment Forum.txt · 104LqZGFGPVSSh5D9mXiFFy4eH3XSWciU · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/If I were a well-intentioned AI... I﹕ Image classifier - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Updated Deference is not a strong argument against the utility uncertainty approach to alignment - AI Alignment Forum.txt · 1dQNfGtmhauOIurszokuYotpU_OKhwqvp · 12 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Updated Deference is not a strong argument against the utility uncertainty approach to alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Learning a concept using only positive examples - AI Alignment Forum.txt · 1zdD5sZPQ_1EM5Q1ayizKkCefjsTZR-_I · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Learning a concept using only positive examples - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Why we need a _theory_ of human values - AI Alignment Forum.txt · 1KFjpHtjucEYAxyJ9X9V3x92K6D7C14eZ · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Why we need a _theory_ of human values - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Procedurally evaluating factual accuracy﹕ a request for research - AI Alignment Forum.txt · 11a_dLCqooRjeJ-R-k4DS1UPBO90Vj-T- · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Procedurally evaluating factual accuracy﹕ a request for research - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Wireless is a trap - AI Alignment Forum.txt · 1pODwVliF-JOwg5PftZnakncKVaqGj7vd · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Wireless is a trap - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Failure modes in a shard theory alignment plan - AI Alignment Forum.txt · 1AulNkWVx9yuosjUdl5ruESCcd7us2y3J · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Failure modes in a shard theory alignment plan - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / BASALT﹕ A Benchmark for Learning from Human Feedback - AI Alignment Forum.txt · 1AjNmUiuoB47WCgkU348687-n5rExSUvK · 13 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/BASALT﹕ A Benchmark for Learning from Human Feedback - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Player vs. Character﹕ A Two-Level Model of Ethics - AI Alignment Forum.txt · 16t9wYUYe1cNaEsKUklOPMrX-jKNOfvNn · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Player vs. Character﹕ A Two-Level Model of Ethics - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Summary Of Anthropic_s First Paper - AI Alignment Forum.txt · 196dn7BLG6FyFYBie7DVuHfD9bXLk2e7H · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Summary Of Anthropic_s First Paper - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Swimming Upstream﹕ A Case Study in Instrumental Rationality - AI Alignment Forum.txt · 18Yz9MS3ddVQuVvwP5iodpSv7VS7UaCR3 · 14 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Swimming Upstream﹕ A Case Study in Instrumental Rationality - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Thoughts from a Two Boxer - AI Alignment Forum.txt · 1USMvB4GFZPmkpJRJoW4pXlo1aLje7gGR · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Thoughts from a Two Boxer - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Appendix﹕ how a subagent could get powerful - AI Alignment Forum.txt · 1ZnB341sNZadQ6XuTz8UImduXu886dNp1 · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Appendix﹕ how a subagent could get powerful - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Data limited future - AI Alignment Forum.txt · 1X4zOFIS0sxG2zm31-JMknWVp8yJ757I_ · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Data limited future - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Mystery About High Dimensional Concept Encoding - AI Alignment Forum.txt · 1wOIqzN_-0Z5kj5d9pZFNmgqH0q09WHhH · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Mystery About High Dimensional Concept Encoding - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Science in a High-Dimensional World - AI Alignment Forum.txt · 1MiHuruxxKBysOJv_VuE0daHE_3uCGMt- · 14 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Science in a High-Dimensional World - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A short introduction to machine learning - AI Alignment Forum.txt · 159iLNFlUXHMMql1RibMbxe_ycfqS9SZ- · 14 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A short introduction to machine learning - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / SUDT﹕ A toy decision theory for updateless anthropics - AI Alignment Forum.txt · 1FQ83Tq_r_12G5IqJs3UnzA2GkWkeaK9b · 15 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/SUDT﹕ A toy decision theory for updateless anthropics - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / GPT-3﹕ a disappointing paper - AI Alignment Forum.txt · 10e1qqX3mbc8dT2Huo7WTBIK5HobnXZop · 15 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/GPT-3﹕ a disappointing paper - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Automated Fact Checking﹕ A Look at the Field - AI Alignment Forum.txt · 1-9sKM6ior6XAOVVzS3dxTcEyyrQ2vxQS · 15 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Automated Fact Checking﹕ A Look at the Field - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Walkthrough of Interpretability in the Wild (w- authors Kevin Wang, Arthur Conmy & Alexandre Variengien) - AI Alignment Forum.txt · 1DNZLofthEXjG8erRpckrazzjObP4DDjl · 15 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A Walkthrough of Interpretability in the Wild (w- authors Kevin Wang, Arthur Conmy & Alexandre Variengien) - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Reflective oracles as a solution to the converse Lawvere problem - AI Alignment Forum.txt · 1Vva7thkr3SQ71BJm0nEbj31tcs2sM5Jg · 15 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Reflective oracles as a solution to the converse Lawvere problem - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Tessellating Hills﹕ a toy model for demons in imperfect search - AI Alignment Forum.txt · 1AlCnpU755mA5C6zSRqmvM75UXmqRdRr2 · 16 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Tessellating Hills﹕ a toy model for demons in imperfect search - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Evolution is a bad analogy for AGI﹕ inner alignment - AI Alignment Forum.txt · 1Ij_VnLLl1MTcYHYO_aybRG5nCeiyYy0w · 16 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Evolution is a bad analogy for AGI﹕ inner alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Further Progress on a Bayesian Version of Logical Uncertainty - AI Alignment Forum.txt · 1okC096bZkeI1J3POovXR_-djrm93LEfo · 16 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Further Progress on a Bayesian Version of Logical Uncertainty - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Value loading in the human brain﹕ a worked example - AI Alignment Forum.txt · 17g9SxMQdD1UQQb01XrTht-mjJnNw-HBK · 16 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Value loading in the human brain﹕ a worked example - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Intuitions on Universal Behavior of Information at a Distance - AI Alignment Forum.txt · 1RteJOUWqhzKll7DsFSIjJUymJSu7-oHq · 16 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Intuitions on Universal Behavior of Information at a Distance - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A note about differential technological development - AI Alignment Forum.txt · 1P2nIgbZfh19JQNcQ22ntxdX0CTVCEwol · 17 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/A note about differential technological development - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / In memoryless Cartesian environments, every UDT policy is a CDT+SIA policy - AI Alignment Forum.txt · 1hWVr6AvLjWTBWhtdtMfb3KbZH98hdRi_ · 17 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/In memoryless Cartesian environments, every UDT policy is a CDT+SIA policy - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Better priors as a safety problem - AI Alignment Forum.txt · 1q5PHNcI5By9Qbf9U_KXzQj82au4dGdkt · 17 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Better priors as a safety problem - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / ACDT﹕ a hack-y acausal decision theory - AI Alignment Forum.txt · 1mpV32Zpkc2fbe0DV3pv1ZQ7Voo0p3vq1 · 17 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/ACDT﹕ a hack-y acausal decision theory - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Wireheading as a potential problem with the new impact measure - AI Alignment Forum.txt · 1ny6nKgor4kUxT0gIR7cCwNPJpRY-5Tx7 · 17 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Wireheading as a potential problem with the new impact measure - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Stable self-improvement as a research problem - AI Alignment Forum.txt · 1GzNGiFZIDBR75zz3U8uL9WxORH3JlKfm · 18 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Stable self-improvement as a research problem - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Optimization at a Distance - AI Alignment Forum.txt · 1nBIpFamhL0D4hC2LT2qA-KsZ5dQ34ovG · 18 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Optimization at a Distance - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Characterizing Real-World Agents as a Research Meta-Strategy - AI Alignment Forum.txt · 191FnYCXk9XBgMz5gQD6OfyJdcEkQcY1U · 18 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Characterizing Real-World Agents as a Research Meta-Strategy - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Sticky goals﹕ a concrete experiment for understanding deceptive alignment - AI Alignment Forum.txt · 1cLPZ4ueLDgGVYLQf26ncaU07iEGphVAc · 18 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Sticky goals﹕ a concrete experiment for understanding deceptive alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Intuitions about goal-directed behavior - AI Alignment Forum.txt · 1nAwl2yLGfNhLvTXNKFwc03F6Tf02zo7P · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Intuitions about goal-directed behavior - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A blog post is a very long and complex search query to find fascinating people and make them route interesting stuff to your inbox - AI Alignment Forum.txt · 17jJyBHfUYRKxEiSmcuoDS4fc9GWWZSDq · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/A blog post is a very long and complex search query to find fascinating people and make them route interesting stuff to your inbox - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A newcomer’s guide to the technical AI safety field - AI Alignment Forum.txt · 1LHuPaoIklmwVUF7uMTtGH_KYDj_cs05k · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/A newcomer’s guide to the technical AI safety field - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Framework to Explain Bayesian Models - AI Alignment Forum.txt · 1CgSvukFGPhXhQmidD5WBA68aERjbDjMS · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/A Framework to Explain Bayesian Models - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A distillation of Evan Hubinger_s training stories (for SERI MATS) - AI Alignment Forum.txt · 13uyafEff6W06xOLm6fcpeax-KI3F7kIp · 19 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/A distillation of Evan Hubinger_s training stories (for SERI MATS) - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Reward functions and updating assumptions can hide a multitude of sins - AI Alignment Forum.txt · 1-WGauZZ1kpn5FIvTwUsDgdq0d0bKyM5n · 20 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Reward functions and updating assumptions can hide a multitude of sins - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Oversight Leagues﹕ The Training Game as a Feature - AI Alignment Forum.txt · 1nAcEV4CsvzYQIb9FFequEZd_n0d6TxJD · 21 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Oversight Leagues﹕ The Training Game as a Feature - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / AI Services as a Research Paradigm - AI Alignment Forum.txt · 1Ia60mSdMo5tXtvnuVn4UtkzGLegEa9Oh · 21 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/AI Services as a Research Paradigm - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Aligning a toy model of optimization - AI Alignment Forum.txt · 1nqpVLeyYEwd_H196VsO3lVdYd8mDZ6bc · 23 KB · txt · es done 2026-11-07 (3/3 batches, `Español/archive/Aligning a toy model of optimization - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / The Blackwell order as a formalization of knowledge - AI Alignment Forum.txt · 1gFFHytruASZ19wrCvqt5rWFU3MHm4ZtL · 24 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/The Blackwell order as a formalization of knowledge - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Convergence Towards World-Models﹕ A Gears-Level Model - AI Alignment Forum.txt · 1L3sPR2cm95ZovwaTCydqj0j-U1NlX4t7 · 26 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Convergence Towards World-Models﹕ A Gears-Level Model - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Test for Language Model Consciousness - AI Alignment Forum.txt · 176ENH1g4mUIQFe-21bTnHhqOCFxXdt-V · 27 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/A Test for Language Model Consciousness - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Problems facing a correspondence theory of knowledge - AI Alignment Forum.txt · 1X1iQGYC1w8fpHplwSr6AHR3sPmnEEAgU · 27 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Problems facing a correspondence theory of knowledge - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Tips for the most immersive video calls - AI Alignment Forum.txt · 1V_khlzJmmD3RM2pg_7bl9WnMFYpE_phC · 27 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Tips for the most immersive video calls - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Environments as a bottleneck in AGI development - AI Alignment Forum.txt · 1jzuxXQlvOFWVw9_SLvpRJKrhpqYvjcZd · 27 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/Environments as a bottleneck in AGI development - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Pointing to a Flower - AI Alignment Forum.txt · 1mrzwnn51uF49dRJXM4wb3zIIZ8SaPJYW · 28 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Pointing to a Flower - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Seeking Power is Convergently Instrumental in a Broad Class of Environments - AI Alignment Forum.txt · 1YEPRHRvhpsZ5i6OzaWEc5YTpCP1G5kG0 · 29 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Seeking Power is Convergently Instrumental in a Broad Class of Environments - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Towards a mechanistic understanding of corrigibility - AI Alignment Forum.txt · 144flI7KLr673jWw84nyxPfmmPMOrFnXm · 30 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Towards a mechanistic understanding of corrigibility - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Delegative Reinforcement Learning with a Merely Sane Advisor - AI Alignment Forum.txt · 17dRVMY26UuqPbKP80dwfpzbYaNb3VLt1 · 31 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Delegative Reinforcement Learning with a Merely Sane Advisor - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Review of A Map that Reflects the Territory - AI Alignment Forum.txt · 1Y6dQydsvEssVgpLCDapCfOGhHOdzGbww · 31 KB · txt · es done 2026-11-07 (4/4 batches, `Español/archive/Review of A Map that Reflects the Territory - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A Critique of Non-Obstruction - AI Alignment Forum.txt · 1I-ii_OFAnizxZv1B_PYlA10qoes_WH-L · 32 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/A Critique of Non-Obstruction - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A dilemma for prosaic AI alignment - AI Alignment Forum.txt · 17eUQXHrofVcWj1LVLBkn9PJn27XmzQb8 · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/A dilemma for prosaic AI alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Selection Theorems﹕ A Program For Understanding Agents - AI Alignment Forum.txt · 1NQjc01iViEtRFrUlgkp_Yvi_n_wlxwnC · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/Selection Theorems﹕ A Program For Understanding Agents - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / (C)IRL is not solely a learning process - AI Alignment Forum.txt · 1EABx3ZJgFJ8-RIwTnLu0GPTONts2R4_l · 33 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/(C)IRL is not solely a learning process - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Truthful LMs as a warm-up for aligned AGI - AI Alignment Forum.txt · 1BMSWnxE02Fn41CT2Ugz2FqVNi5_SpI_M · 34 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/Truthful LMs as a warm-up for aligned AGI - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Toward a New Technical Explanation of Technical Explanation - AI Alignment Forum.txt · 1tKJeICD_VPgBDSoQEBsgi-cNja_HhSe2 · 34 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/Toward a New Technical Explanation of Technical Explanation - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / The Brain as a Universal Learning Machine - AI Alignment Forum.txt · 1gX4j7RegPCq9WUoq3Bi4VEah4PgHqsoW · 37 KB · txt · es done 2026-11-07 (6/6 batches, `Español/archive/The Brain as a Universal Learning Machine - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Book Review﹕ A PhD is Not Enough - AI Alignment Forum.txt · 1gYPIEmyNvW17GHxPH3UIe1V-PtMEfaVp · 38 KB · txt · es done 2026-11-07 (5/5 batches, `Español/archive/Book Review﹕ A PhD is Not Enough - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / AI takeoff story﹕ a continuation of progress by other means - AI Alignment Forum.txt · 183Jd3TI9cPhhPckwP_JKTmY4Dz3p7FEk · 44 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/AI takeoff story﹕ a continuation of progress by other means - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / Misalignment-by-default in multi-agent systems - AI Alignment Forum.txt · 1ODzZ_pnk_4AB57Ba45-mYFFu5kXqsEV5 · 51 KB · txt · es done 2026-11-07 (7/7 batches, `Español/archive/Misalignment-by-default in multi-agent systems - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A positive case for how we might succeed at prosaic AI alignment - AI Alignment Forum.txt · 1CSgTBFqmTKiAGfXFro0jb5SAFyC_H_qd · 53 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/A positive case for how we might succeed at prosaic AI alignment - AI Alignment Forum.txt`)
+- [x] es · Alignment Forum / A central AI alignment problem﹕ capabilities generalization, and the sharp left turn - AI Alignment Forum.txt · 16KvYlhATFvUo39iZWLFgayOMCjLV_o6C · 54 KB · txt · es done 2026-11-07 (8/8 batches, `Español/archive/A central AI alignment problem﹕ capabilities generalization, and the sharp left turn - AI Alignment Forum.txt`)
 - [ ] es · Alignment Forum / Simulators, constraints, and goal agnosticism﹕ porbynotes vol. 1 - AI Alignment Forum.txt · 1UUC2IlhQqMHHa_qSrvY2wudD4qTDo_xB · 67 KB · txt
 - [ ] es · Alignment Forum / How to pursue a career in technical AI alignment - AI Alignment Forum.txt · 1J8ZaMRWZ0_0YPgOFkKz23FbvoYOwKS6C · 71 KB · txt
 - [ ] es · Alignment Forum / Another (outer) alignment failure story - AI Alignment Forum.txt · 1BSQl4qKDVOLAx5pH5Wz25GLeits78hzB · 83 KB · txt
@@ -2750,104 +2750,104 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · book pdfs / Core EA / Yudkowsky - Harry Potter and Methods of Rationality (PDFDrive).txt · 1hOPfnjohSc4LlWek_gyXqXdyT_BRzCcm · 3.8 MB · txt
 - [ ] es · book pdfs / Math, engineering, hard science / Fundamentals of Physics Textbook (PDFDrive).txt · 18czNskKgacQI04u-Qtrh-R2hNG4W6wPa · 5.6 MB · txt
 - [-] es · transcripts / .DS_Store.txt · 1nUHtdU8EDoP5_yTNAua_pNfYANWwMSsK · 1 KB · txt · macOS metadata, not a text
-- [ ] es · transcripts / hear this idea transcripts / 1688259795_introduction.txt · 1Y5_VQ3t6FdekkOO_YsgdViNdRWgx_JiX · 2 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148062_.txt · 1iIgTWQhxnC011Bl1WqwJFTmiKHpdFv8q · 2 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259767_erwan.txt · 1P9X89aDPxWkiPfQxXc8ScSIDjUjOWdUR · 3 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259766_robichaud.txt · 16YOjOajHEX49iteHIsoDwo650mqPayTU · 3 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259793_tads.txt · 1yFg9t6s6OVV1oFKnLGulpWL81u1dWyuW · 8 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148099_.txt · 14HZh27s0NKxPFKjkWmb29-Feazhn748O · 8 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259780_matt.txt · 1awtDnAoRLLD4K7xQ6CiBh4_jsw9rSFod · 8 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259794_tobias.txt · 1CurJ_huhfPbff-VuLmFm6M3RF-xuWahX · 8 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259780_armond.txt · 1Pb0pi1A1XqRpu7Kc_oxIaz1YE9SsEJ5t · 9 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259777_christoph.txt · 18bDll3wWbY5hpTY23s628TtEVhjZcGZz · 10 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259777_gillian.txt · 13vUPPlaRPGfeOGht8fU4DJ16E2yyiWeG · 10 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259776_mike.txt · 1ZnYtslOdtEo1mOBdqyveuNBsgZM1mrkj · 11 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259778_bryan.txt · 1jy1UPhjyIWaY4Qe9asnB_QysG4x3kG3E · 12 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259778_ben.txt · 1Y7J-Waltq3jKFZXjcPmkkwLu5MACA2lT · 12 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259790_toke.txt · 1rO9fFA71kjLM_m-4nnUzISuiu08ZpyGb · 13 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259794_victoria.txt · 1f0-WbzSHQgySDKWCUTc5kwfODeyAV8O9 · 14 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259779_sachs.txt · 1No4ZZF8NVGY7_6Lyqgj0Y7vsufm9eDG8 · 15 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259792_diane.txt · 1FhADe_jK8PhvfQ5OkMlwFqB7QC1yhvHs · 16 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148042_.txt · 1n9I7MnAc9q20rIfnZVPJkxr9s0C6kHcv · 19 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259789_sanjay.txt · 1LAhNtkJ0eK0HnTVKYvVUD9CEeR2X8s82 · 21 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259793_kent.txt · 1vO8ZPQoyJ3xMa9PBf1iUytSkHbAfB6D_ · 21 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259793_vasilis.txt · 1ZTFKBXFNGSDNLY_0NJkd6np-TZGU5vB8 · 21 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259786_ace.txt · 1zj7L-1hgp9-p0SIH9JJWrznp0t_VE9gR · 21 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259789_carolina.txt · 1xideqZXPsOuo4YR3U-lYNX8OVss4gfnw · 23 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259792_dan.txt · 1BHqKt9oDYYZECcsA7-vs-J-GNhnRK4y9 · 25 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148025_.txt · 1zhr6mngzWji-pRmggBAwe3eOVBMLcoSz · 26 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259779_anders.txt · 1XmHBU4NmoqaQhe6F3S1AsO1fEA3bD22h · 26 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259785_sebastian.txt · 1vDjg-th7Cdi6RbaiLjRMVv9BK7E6iOEA · 26 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs203transcript.txt · 1odOVWvR78MXmqkFd2KGPMmcZSdwH_owW · 31 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259787_sriya.txt · 1UooWAEONu9VKxbw9lBaN3MXbODYJ66S4 · 32 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs173transcript.txt · 1R5HPOZ7rtoG0lByglwQNt1PC_POxMJYA · 32 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259784_julia.txt · 19ZxI4-U0OMC8Hsd-BoFjmZimuTWqKMGx · 33 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148079_.txt · 1BukCg2oTxDT7iimJ-aZ5VEh7yYPxbGaY · 34 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259785_marcus.txt · 1N5nzh9t9KMtn7OZndigGH4VvRhflfVsH · 34 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259790_eve.txt · 1ZCsEK-T4kSFo9xtPxoLFUnHjgY5ccAbk · 35 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259791_neel.txt · 1Izgtnzswr-vBi_IQ4we3GJl2d2uMEE8Y · 35 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs170transcript.txt · 1J-4ebpJjuCzrOKmwYr95rVWMRwjPOsZo · 36 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs211transcript.txt · 1txR_SioI5pKxqbUw2qaATe4743gihglH · 36 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259788_jessie.txt · 1hFWZVuaREroMe6tniyIrrVcx8iHh8X6Y · 36 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259765_miller.txt · 1Y12bqjmcYHVgcCw_NfBVR0sbtmyXgYYC · 37 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs177transcript.txt · 1g4cYvZBDm4fK47hOG3FGfDcBpldiDvBi · 37 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs179transcript.txt · 1dSkLrE8lCHR0FF3N8Z6Y5qq8AWf6bi7G · 38 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259782_anna.txt · 1OSvh9ThBSee9eyjzULsRL_xwOchvDhDP · 38 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs169transcript.txt · 12ecC21QxeorBbVICtZn8fgVQ-kS2DPCM · 38 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs174transcript.txt · 1-2MLucj8SNCaZvJmHVPu3p8NG4EiITXt · 40 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688148060_.txt · 1VwipD2a2avk1B7bei2APnzBVwIuhS3bL · 40 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259783_eva.txt · 1jxRI7n2cIDV4p3SWUQzahr5Rl2sci4Ze · 40 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs215transcript.txt · 1KnJe_EtwpvVla9hpHlDEvKumdyU8GJJw · 41 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259786_bruce.txt · 1O5_NcD0KEu79nWEOmiuC4C3AIoHyodxI · 41 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs149transcript.txt · 1XspnUDxCWe37JzjvFn9W3D4htt8D5__E · 41 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs171transcript.txt · 1GUFCnTWyz5m8JtfFXGJ5E8ENmJT9oL6r · 42 KB · txt
-- [ ] es · transcripts / hear this idea transcripts / 1688259791_george.txt · 1zeeHmLx2ZM8RI-tErKdjN1ckX35SGZ6Z · 42 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs199transcript.txt · 1ovFG-_PQTcboEbfPrx3qmw3ZWcA36sEk · 42 KB · txt
+- [x] es · transcripts / hear this idea transcripts / 1688259795_introduction.txt · 1Y5_VQ3t6FdekkOO_YsgdViNdRWgx_JiX · 2 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/1688259795_introduction.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148062_.txt · 1iIgTWQhxnC011Bl1WqwJFTmiKHpdFv8q · 2 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/transcripts 1688148062_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259767_erwan.txt · 1P9X89aDPxWkiPfQxXc8ScSIDjUjOWdUR · 3 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/1688259767_erwan.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259766_robichaud.txt · 16YOjOajHEX49iteHIsoDwo650mqPayTU · 3 KB · txt · es done 2026-11-08 (1/1 batches, `Español/archive/1688259766_robichaud.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259793_tads.txt · 1yFg9t6s6OVV1oFKnLGulpWL81u1dWyuW · 8 KB · txt · es done 2026-11-08 (1/1 batches, `Español/archive/1688259793_tads.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148099_.txt · 14HZh27s0NKxPFKjkWmb29-Feazhn748O · 8 KB · txt · es done 2026-11-08 (1/1 batches, `Español/archive/transcripts 1688148099_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259780_matt.txt · 1awtDnAoRLLD4K7xQ6CiBh4_jsw9rSFod · 8 KB · txt · es done 2026-11-08 (1/1 batches, `Español/archive/1688259780_matt.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259794_tobias.txt · 1CurJ_huhfPbff-VuLmFm6M3RF-xuWahX · 8 KB · txt · es done 2026-11-08 (1/1 batches, `Español/archive/1688259794_tobias.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259780_armond.txt · 1Pb0pi1A1XqRpu7Kc_oxIaz1YE9SsEJ5t · 9 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259780_armond.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259777_christoph.txt · 18bDll3wWbY5hpTY23s628TtEVhjZcGZz · 10 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259777_christoph.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259777_gillian.txt · 13vUPPlaRPGfeOGht8fU4DJ16E2yyiWeG · 10 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259777_gillian.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259776_mike.txt · 1ZnYtslOdtEo1mOBdqyveuNBsgZM1mrkj · 11 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259776_mike.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259778_bryan.txt · 1jy1UPhjyIWaY4Qe9asnB_QysG4x3kG3E · 12 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259778_bryan.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259778_ben.txt · 1Y7J-Waltq3jKFZXjcPmkkwLu5MACA2lT · 12 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259778_ben.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259790_toke.txt · 1rO9fFA71kjLM_m-4nnUzISuiu08ZpyGb · 13 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259790_toke.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259794_victoria.txt · 1f0-WbzSHQgySDKWCUTc5kwfODeyAV8O9 · 14 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259794_victoria.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259779_sachs.txt · 1No4ZZF8NVGY7_6Lyqgj0Y7vsufm9eDG8 · 15 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259779_sachs.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259792_diane.txt · 1FhADe_jK8PhvfQ5OkMlwFqB7QC1yhvHs · 16 KB · txt · es done 2026-11-08 (2/2 batches, `Español/archive/1688259792_diane.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148042_.txt · 1n9I7MnAc9q20rIfnZVPJkxr9s0C6kHcv · 19 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/transcripts 1688148042_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259789_sanjay.txt · 1LAhNtkJ0eK0HnTVKYvVUD9CEeR2X8s82 · 21 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/1688259789_sanjay.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259793_kent.txt · 1vO8ZPQoyJ3xMa9PBf1iUytSkHbAfB6D_ · 21 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/1688259793_kent.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259793_vasilis.txt · 1ZTFKBXFNGSDNLY_0NJkd6np-TZGU5vB8 · 21 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/1688259793_vasilis.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259786_ace.txt · 1zj7L-1hgp9-p0SIH9JJWrznp0t_VE9gR · 21 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/1688259786_ace.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259789_carolina.txt · 1xideqZXPsOuo4YR3U-lYNX8OVss4gfnw · 23 KB · txt · es done 2026-11-08 (3/3 batches, `Español/archive/1688259789_carolina.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259792_dan.txt · 1BHqKt9oDYYZECcsA7-vs-J-GNhnRK4y9 · 25 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/1688259792_dan.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148025_.txt · 1zhr6mngzWji-pRmggBAwe3eOVBMLcoSz · 26 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/transcripts 1688148025_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259779_anders.txt · 1XmHBU4NmoqaQhe6F3S1AsO1fEA3bD22h · 26 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/1688259779_anders.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259785_sebastian.txt · 1vDjg-th7Cdi6RbaiLjRMVv9BK7E6iOEA · 26 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/1688259785_sebastian.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs203transcript.txt · 1odOVWvR78MXmqkFd2KGPMmcZSdwH_owW · 31 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/rs203transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259787_sriya.txt · 1UooWAEONu9VKxbw9lBaN3MXbODYJ66S4 · 32 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/1688259787_sriya.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs173transcript.txt · 1R5HPOZ7rtoG0lByglwQNt1PC_POxMJYA · 32 KB · txt · es done 2026-11-08 (4/4 batches, `Español/archive/rs173transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259784_julia.txt · 19ZxI4-U0OMC8Hsd-BoFjmZimuTWqKMGx · 33 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259784_julia.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148079_.txt · 1BukCg2oTxDT7iimJ-aZ5VEh7yYPxbGaY · 34 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/transcripts 1688148079_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259785_marcus.txt · 1N5nzh9t9KMtn7OZndigGH4VvRhflfVsH · 34 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259785_marcus.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259790_eve.txt · 1ZCsEK-T4kSFo9xtPxoLFUnHjgY5ccAbk · 35 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259790_eve.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259791_neel.txt · 1Izgtnzswr-vBi_IQ4we3GJl2d2uMEE8Y · 35 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259791_neel.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs170transcript.txt · 1J-4ebpJjuCzrOKmwYr95rVWMRwjPOsZo · 36 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs170transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs211transcript.txt · 1txR_SioI5pKxqbUw2qaATe4743gihglH · 36 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs211transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259788_jessie.txt · 1hFWZVuaREroMe6tniyIrrVcx8iHh8X6Y · 36 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259788_jessie.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259765_miller.txt · 1Y12bqjmcYHVgcCw_NfBVR0sbtmyXgYYC · 37 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259765_miller.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs177transcript.txt · 1g4cYvZBDm4fK47hOG3FGfDcBpldiDvBi · 37 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs177transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs179transcript.txt · 1dSkLrE8lCHR0FF3N8Z6Y5qq8AWf6bi7G · 38 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs179transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259782_anna.txt · 1OSvh9ThBSee9eyjzULsRL_xwOchvDhDP · 38 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259782_anna.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs169transcript.txt · 12ecC21QxeorBbVICtZn8fgVQ-kS2DPCM · 38 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs169transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs174transcript.txt · 1-2MLucj8SNCaZvJmHVPu3p8NG4EiITXt · 40 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs174transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688148060_.txt · 1VwipD2a2avk1B7bei2APnzBVwIuhS3bL · 40 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/transcripts 1688148060_.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259783_eva.txt · 1jxRI7n2cIDV4p3SWUQzahr5Rl2sci4Ze · 40 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/1688259783_eva.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs215transcript.txt · 1KnJe_EtwpvVla9hpHlDEvKumdyU8GJJw · 41 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs215transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259786_bruce.txt · 1O5_NcD0KEu79nWEOmiuC4C3AIoHyodxI · 41 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/1688259786_bruce.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs149transcript.txt · 1XspnUDxCWe37JzjvFn9W3D4htt8D5__E · 41 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs149transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs171transcript.txt · 1GUFCnTWyz5m8JtfFXGJ5E8ENmJT9oL6r · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs171transcript.txt`)
+- [x] es · transcripts / hear this idea transcripts / 1688259791_george.txt · 1zeeHmLx2ZM8RI-tErKdjN1ckX35SGZ6Z · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/1688259791_george.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs199transcript.txt · 1ovFG-_PQTcboEbfPrx3qmw3ZWcA36sEk · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs199transcript.txt`)
 - [ ] es · transcripts / Lunar Society selected transcripts / 32_ Sam Bankman-Fried - Crypto, Altruism, and Leadership.txt · 1fvc3AwqRu78a_OuoSJMw_P95wm-eXy6N · 42 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs134transcript.txt · 1ecio8lruD_Cr62HI7fSysl69f7Vcpsw6 · 42 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs201transcript.txt · 1YU8s2f-t8RLa8k6HmOR4zV3OJh_l4nIV · 42 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs198transcript.txt · 1S5O-Vc_PoCqejv9xq0xXMgIh4Uk7pINx · 42 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs172transcript.txt · 1zE17zr2VAlZ1v9GXC_A3ZRCl0ZGKL0EQ · 43 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs133transcript.txt · 1_jEW2yARTS3wfuyfS_12K_bv870x6bt4 · 44 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs206transcript.txt · 1CwC_5WzUrG_s4zpDrScnZdGzSInhJuhi · 45 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs166transcript.txt · 1muEefi-kV6BIQKRhR3fvvkoEPDcNdPeu · 45 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs150transcript.txt · 1bRDF3S1NCVJOFVSHSbmgnKKNDZm6ANxZ · 45 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs200transcript.txt · 1wSw7JLOvLBjBCUUJx968xp2JDE6k6ib7 · 45 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs164transcript.txt · 1abY3Yl263jlgmuSRpZER3OZhk-Dslewy · 45 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs135transcript.txt · 11hVf0iouOzWc0Hr8GPSSuc8xhHrxyjgg · 45 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs134transcript.txt · 1ecio8lruD_Cr62HI7fSysl69f7Vcpsw6 · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs134transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs201transcript.txt · 1YU8s2f-t8RLa8k6HmOR4zV3OJh_l4nIV · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs201transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs198transcript.txt · 1S5O-Vc_PoCqejv9xq0xXMgIh4Uk7pINx · 42 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs198transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs172transcript.txt · 1zE17zr2VAlZ1v9GXC_A3ZRCl0ZGKL0EQ · 43 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs172transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs133transcript.txt · 1_jEW2yARTS3wfuyfS_12K_bv870x6bt4 · 44 KB · txt · es done 2026-11-08 (7/7 batches, `Español/archive/rs133transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs206transcript.txt · 1CwC_5WzUrG_s4zpDrScnZdGzSInhJuhi · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs206transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs166transcript.txt · 1muEefi-kV6BIQKRhR3fvvkoEPDcNdPeu · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs166transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs150transcript.txt · 1bRDF3S1NCVJOFVSHSbmgnKKNDZm6ANxZ · 45 KB · txt · es done 2026-11-08 (5/5 batches, `Español/archive/rs150transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs200transcript.txt · 1wSw7JLOvLBjBCUUJx968xp2JDE6k6ib7 · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs200transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs164transcript.txt · 1abY3Yl263jlgmuSRpZER3OZhk-Dslewy · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs164transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs135transcript.txt · 11hVf0iouOzWc0Hr8GPSSuc8xhHrxyjgg · 45 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs135transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs194transcript.txt · 1I4OanAyvQhQ12NlcaZFzxKiBq8FX2K9d · 46 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs168transcript.txt · 1lz_2dXibUE4iH70N78Jb7Lr0wL4Gn_uD · 46 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs168transcript.txt · 1lz_2dXibUE4iH70N78Jb7Lr0wL4Gn_uD · 46 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/rs168transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs190transcript.txt · 1tdREgJj3KesQsOyt4iQSTRkuLkNbkXrx · 46 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs148transcript.txt · 1dISucBLzcoT5CE0sVK_B4nfdOHv0m992 · 47 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs214transcript.txt · 12zgNAwNdIpqznSYhKtxYf4bOjw6E3jIp · 48 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs148transcript.txt · 1dISucBLzcoT5CE0sVK_B4nfdOHv0m992 · 47 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs148transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs214transcript.txt · 12zgNAwNdIpqznSYhKtxYf4bOjw6E3jIp · 48 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs214transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs178transcript.txt · 1viAJZ6QOyLCW5yjvzBxZfeX1avSkq5p7 · 48 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs205transcript.txt · 1LQeeYFw30XYLptScfDrxOlkVbxi4eTX2 · 48 KB · txt
 - [ ] es · transcripts / hear this idea transcripts / 1688259787_luke.txt · 1UWVr85-cYQHhLP1OshO5aWnUZZa5FSFg · 49 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs208transcript.txt · 1HwR1AmVktNcR7_4HIsm3TqDBmg41T2i9 · 49 KB · txt
-- [ ] es · transcripts / Lunar Society selected transcripts / Ilya Sutskever (OpenAI Chief Scientist) - Building AGI, Alignment, & Future Models.txt · 1aXxAvMAiHYwRuc-U22RzzMjR4CpYg4pz · 49 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs192transcript.txt · 1Am56TKvDJD3jNTo16Kmf_EoAfINKSgUc · 49 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs208transcript.txt · 1HwR1AmVktNcR7_4HIsm3TqDBmg41T2i9 · 49 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs208transcript.txt`)
+- [x] es · transcripts / Lunar Society selected transcripts / Ilya Sutskever (OpenAI Chief Scientist) - Building AGI, Alignment, & Future Models.txt · 1aXxAvMAiHYwRuc-U22RzzMjR4CpYg4pz · 49 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/Ilya Sutskever (OpenAI Chief Scientist) - Building AGI, Alignment, & Future Models.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs192transcript.txt · 1Am56TKvDJD3jNTo16Kmf_EoAfINKSgUc · 49 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs192transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs157transcript.txt · 1BkRR4mlMcR3O8cNuFD3IP8hBkUJ0qt1s · 49 KB · txt
 - [ ] es · transcripts / hear this idea transcripts / 1688259783_thomas.txt · 12_VSe1Oo1EFAmOsS11QDZUkIGndBXgTS · 49 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs158transcript.txt · 1yXqbHr1aCLFvbQqeSNL8hxEghPrH_kw3 · 50 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs180transcript.txt · 1AtX1jR7-3_N4Cllr7_y0T-cyvpNbl4R0 · 50 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs180transcript.txt · 1AtX1jR7-3_N4Cllr7_y0T-cyvpNbl4R0 · 50 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs180transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs188transcript.txt · 1JqelZQN17Apwfp1uMBi79k8oDlDGtK1a · 50 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs197transcript.txt · 1IMQsONx6_MNXs9qxyibNQvQWsF3aenPD · 51 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs151transcript.txt · 1xyh1QOhvAIFA-N8IFZGU2RwnRXALtTaF · 51 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs151transcript.txt · 1xyh1QOhvAIFA-N8IFZGU2RwnRXALtTaF · 51 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs151transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs146transcript.txt · 1QpTyPEGgKXhuMDNiblHxeK0nocJruLtI · 51 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs209transcript.txt · 1AuBIe24mh53alCr6OLTGUf19nAYOJfrN · 51 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs209transcript.txt · 1AuBIe24mh53alCr6OLTGUf19nAYOJfrN · 51 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs209transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs195transcript.txt · 1iUBjhp67YPtIRAoaearkLahNyuMiw4PM · 52 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs212transcript.txt · 1poHn7ErNK19E_kRGn-FsRBZB1HS7uOm3 · 52 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs212transcript.txt · 1poHn7ErNK19E_kRGn-FsRBZB1HS7uOm3 · 52 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs212transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs167transcript.txt · 1LiOFRtYdVgDNY0qScHphciNPzg9AITNX · 53 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs175transcript.txt · 1BXG8xpTRqPOMrF73kiiXlKwPpgUT8PUq · 53 KB · txt
 - [ ] es · transcripts / hear this idea transcripts / 1688259784_nikhil.txt · 1u_2KLq7hrkWCE2X4SK_54Fa4Sivew2_g · 53 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs202transcript.txt · 1HxIs0QXfBZAf5Y8C4OTesTiJDid0vKFB · 53 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs152transcript.txt · 1iQziohbCeg_LLnps81BPaQHgmjKNM64i · 53 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs202transcript.txt · 1HxIs0QXfBZAf5Y8C4OTesTiJDid0vKFB · 53 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs202transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs152transcript.txt · 1iQziohbCeg_LLnps81BPaQHgmjKNM64i · 53 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs152transcript.txt`)
 - [ ] es · transcripts / hear this idea transcripts / 1688148046_.txt · 1O_dpx5hZdzML2andVtgdH8QSsvv6kkPc · 54 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs153transcript.txt · 1mIjFFh8gsi5D7DA3pmhL7juw1MXQQItP · 54 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs153transcript.txt · 1mIjFFh8gsi5D7DA3pmhL7juw1MXQQItP · 54 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs153transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs181transcript.txt · 15N9VUzB-KYGIuQKwbjUI5yeOeUmI4MMK · 54 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs210transcript.txt · 1pTX15asUH7ggMGowXc_kPLHSJSlSQKrt · 54 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs161transcript.txt · 1AlMKzFxXSSZUMNbWIeMPvnWvEcNIFHwe · 54 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs213transcript.txt · 1B61zHDIfUF52PgxswOUXOwUpMou1Oo9r · 54 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs161transcript.txt · 1AlMKzFxXSSZUMNbWIeMPvnWvEcNIFHwe · 54 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs161transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs213transcript.txt · 1B61zHDIfUF52PgxswOUXOwUpMou1Oo9r · 54 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs213transcript.txt`)
 - [ ] es · transcripts / rationally speaking transcripts / rs176transcript.txt · 17NwoBRCeJI1H0qT7xK7W_dVTpdIIyiG5 · 55 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs159transcript.txt · 19tIbrVpvnZSkCsIu-9j9_9wQ7TCAuUJi · 55 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs183transcript.txt · 1_IfetpkqetUn4hrZkB9WkHPVGAY2P-p6 · 55 KB · txt

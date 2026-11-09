@@ -1,0 +1,760 @@
+Uso de datos de confianza para entrenar redes profundas con
+Labels Corrupted by Severe Noise
+Dan Hendrycks
+Universidad de California, Berkeley
+hendrycks@berkeley.eduMantas Mazeika
+University of Chicago
+mantas@ttic.eduDuncan Wilson
+Foundational Research Institute
+duncanw@nevada.unr.edu
+Kevin Gimpel
+Toyota Technological Institute at Chicago
+kgimpel@ttic.edu
+Resumen
+La importancia creciente de los conjuntos de datos masivos que se usan en el aprendizaje profundo hace que la robus-
+tez frente al ruido en las etiquetas sea una propiedad crítica de los clasificadores. Las fuentes de ruido en las etiquetas
+incluyen el etiquetado automático, el etiquetado por no expertos y la corrupción de etiquetas por envenena-
+miento de datos por parte de adversarios. Numerosos trabajos previos asumen que ninguna fuente de etiquetas puede
+ser confiable. Relajamos este supuesto y asumimos que un pequeño subconjunto de los datos de
+entrenamiento es confiable. Esto permite mejoras sustanciales en la robustez frente a la corrupción de etiquetas.
+Además, el ruido de etiquetas particularmente severo puede combatirse usando un conjunto de
+datos confiables con etiquetas limpias. Utilizamos los datos confiables mediante una propuesta de corrección de pérdida
+que emplea ejemplos confiables de manera eficiente en cuanto a datos para mitigar los
+efectos del ruido de etiquetas en los clasificadores de redes neuronales profundas. En tareas de visión y de procesamiento del lenguaje natural
+experimentamos con diversos ruidos de etiquetas con varias
+intensidades, y mostramos que nuestro método supera significativamente a los métodos existentes.
+1 Introducción
+La robustez frente al ruido en las etiquetas está llamada a convertirse en una propiedad cada vez más importante de los modelos de aprendizaje supervisado
+con la llegada del aprendizaje profundo, la necesidad de más datos etiquetados hace inevitable que
+no todos los ejemplos tengan etiquetas de alta calidad. Esto es especialmente cierto en las fuentes de datos que admiten
+la extracción automática de etiquetas, como el rastreo web de imágenes, y tareas para las que las etiquetas de alta calidad
+son costosas de producir, como la segmentación semántica o el análisis sintáctico. Además, la corrupción de etiquetas
+puede surgir en el envenenamiento de datos [9, 23]. Tanto las corrupciones naturales como las maliciosas de etiquetas tienden a degradar bruscamente
+el rendimiento de los sistemas de clasificación [29].
+La mayoría de los trabajos previos sobre robustez frente a la corrupción de etiquetas asumen que todos los datos de entrenamiento están potencialmente corrompidos.
+Sin embargo, por lo general hay disponible cierto número de ejemplos confiables. Los datos confiables se reúnen
+para crear conjuntos de validación y de prueba. Cuando es posible seleccionar datos confiables, un pequeño conjunto de
+datos confiables podría crearse para el entrenamiento. Nos apartamos del supuesto de que todos los datos de entrenamiento están
+potencialmente corrompidos, asumiendo que un subconjunto del entrenamiento es confiable. A su vez demostramos
+que tener cierta cantidad de datos de entrenamiento confiables permite mejoras significativas en la robustez.
+Para aprovechar la información adicional de las etiquetas confiables, proponemos una nueva corrección de pérdida y
+la verificamos empíricamente en varios conjuntos de datos de visión y de lenguaje natural con corrupción de etiquetas.
+En concreto, demostramos la recuperación ante niveles extremadamente altos de ruido en las etiquetas, incluido el caso terrible en que
+los datos no confiables tienen la mayoría de sus etiquetas corrompidas. Una corrupción tan severa puede ocurrir
+en situaciones adversarias, como el envenenamiento de datos, o cuando el número de clases es grande. En comparación con
+Igual contribución.
+32nd Conference on Neural Information Processing Systems (NIPS 2018), Montréal, Canadá. arXiv:1802.05300v4  [cs.LG]  28 ene 2019
+las correcciones de pérdida que no emplean datos confiables [17], nuestro método es significativamente más preciso en
+escenarios con ruido de etiquetas de moderado a severo. Respecto a un método reciente que también usa
+datos confiables [10], nuestro método es mucho más eficiente en cuanto a datos y, en general, más preciso. Estos resultados
+demuestran que los sistemas pueden resistir la corrupción de etiquetas con acceso solo a un pequeño número de etiquetas
+de referencia (gold standard). El código de los experimentos está disponible en https://github.com/mmazeika/glc.
+2 Trabajos relacionados
+El rendimiento de los sistemas de aprendizaje automático que dependen de datos etiquetados se ha mostrado
+notablemente degradado en presencia de ruido en las etiquetas [16, 18]. En el caso del ruido adversario en las etiquetas, esta
+degradación puede ser aún peor [19]. Por ello, el modelado, la corrección y el aprendizaje con etiquetas ruidosas
+han sido bien estudiados [15, 1, 3].
+Los métodos de [14, 8, 17, 24] permiten la robustez frente al ruido en las etiquetas modificando la arquitectura del modelo
+o implementando una corrección de pérdida. A diferencia de Mnih y Hinton [14], que se centran en la clasificación binaria
+de imágenes aéreas, y de Larsen et al. [8], que asumen ruido simétrico en las etiquetas, [17, 24] consideran el ruido en las etiquetas
+en el escenario de problemas multiclase con ruido asimétrico.
+Sukhbaatar et al. [24] introducen una matriz estocástica que mide la corrupción de etiquetas, señalan su imposibilidad
+de calcularse sin acceso a las etiquetas verdaderas, y proponen un método de corrección de pérdida hacia adelante.
+La corrección de pérdida hacia adelante añade una capa lineal al final del modelo, y la pérdida se ajusta en consecuencia
+para incorporar el aprendizaje sobre el ruido en las etiquetas. Patrini et al. [17] también usan el mecanismo de corrección
+de pérdida hacia adelante, y proponen una estimación de la matriz de corrupción de etiquetas que depende
+de supuestos fuertes y no usa etiquetas limpias.
+En contraste con [24, 17], asumimos que durante el entrenamiento el modelo tiene acceso a un pequeño conjunto
+de etiquetas limpias. Véase Charikar, Steinhardt y Valiant [2] para un análisis general de este supuesto.
+Este supuesto ha sido aprovechado por otros con fines de robustez frente al ruido en las etiquetas, en especial
+[25, 10, 26, 20]. Veit et al. [25] usan etiquetas verificadas por humanos para entrenar una red de limpieza de etiquetas
+estimando los residuos entre las etiquetas ruidosas y las limpias en un escenario de clasificación multietiqueta. En
+el escenario multiclase en el que nos centramos en este trabajo, Li et al. [10] proponen destilar las predicciones de
+un modelo entrenado con etiquetas limpias en una segunda red entrenada con esas predicciones y con las etiquetas ruidosas.
+Nuestro trabajo difiere de estos dos en que no entrenamos redes neuronales solo con las etiquetas limpias.
+3 Gold Loss Correction
+Real
+ GLC (nuestro)
+Forward
+ Matriz de confusión
+0.00.20.40.60.81.0
+Figura 1: Una matriz de corrupción de etiquetas (arriba a la
+izquierda) y tres estimaciones de la matriz para un
+conjunto de datos CIFAR-10 corrompido. La entrada Cij
+es la probabilidad de que una etiqueta de la clase i
+se corrompa a la clase j, o simbólicamente
+Cij=p(ey=jjy=i). Se nos da un conjunto de datos no confiable eD de u ejemplos (x;ey),
+y asumimos que estos ejemplos son potencialmente cor-
+rompidos a partir de la verdadera distribución de datos p(x;y)
+con K clases. La corrupción se especifica mediante una distribución
+de ruido en las etiquetas p(eyjy;x). También se nos da un conjunto de datos confiable
+D de t ejemplos extraídos de p(x;y), donde t=(t+u)1.
+Nos referimos a t=(t+u) como la fracción confiable. Concretamente, un
+raspador web que etiqueta imágenes a partir de metadatos puede producir
+un conjunto no confiable, mientras que los ejemplos anotados por expertos
+formarían un conjunto de datos confiable y serían un estándar de oro (gold standard).
+Exploramos dos vías para utilizar D para mejorar este
+enfoque. La primera usa directamente los datos confiables mientras
+se entrena el clasificador final. Como esto podría aplicarse a los mé-
+todos existentes, hacemos ablaciones para demostrar su efecto.
+La segunda vía usa la información adicional que aportan las eti-
+quetas limpias para modelar mejor el ruido en las etiquetas
+para usarlo en un clasificador corregido.
+Nuestro método usa D para estimar la matriz KK
+de probabilidades de corrupción Cij=p(ey=jjy=i). Una vez
+obtenida esta estimación, la usamos para entrenar un clasificador modificado del que recuperamos una estimación de la
+distribución condicional deseada p(yjx). Llamamos a este método
+la corrección de pérdida dorada (Gold Loss Correction, GLC)
+así llamada porque usa etiquetas confiables o de estándar de oro (gold standard).
+2
+Estimación de la matriz de corrupción. Primero, entrenamos un clasificador bp(eyjx) sobre eD. Sean ey e y elementos del
+conjunto de etiquetas posibles. Para estimar la probabilidad p(eyjy), usamos la identidad p(eyjy;x)p(xj
+y) =p(eyjy)p(xjey;y). Integrando sobre todos los x se obtiene usZ
+p(eyjy;x)p(xjy) dx=p(eyjy)Z
+p(xjey;y) dx=p(eyjy):
+Podemos aproximar la integral de la izquierda con la esperanza de p(eyjy;x) sobre la distribución empírica
+de x dado y. Suponiendo independencia condicional de ey e y dado x, tenemos p(eyj
+y;x) =p(eyjx), que se aproxima directamente mediante bp(eyjx), el clasificador entrenado sobre eD. Con más detalle,
+sea Ai el subconjunto de x en D con etiqueta i. Denotemos nuestra estimación de C mediante bC. Tenemos
+bCij=1
+jAijX
+x2Aibp(ey=jjx) =1
+jAijX
+x2Aibp(ey=jjy=i;x)p(ey=jjy=i):
+Así estimamos nuestra matriz de corrupción para el GLC. La aproximación se basa en que p̂(y|x)
+sea una buena estimación de p(y|x), en el número de ejemplos confiables de cada clase, y en el
+grado en que se cumple el supuesto de independencia condicional. Este supuesto
+es razonable, ya que suele ocurrir que los procesos de etiquetado ruidosos no tienen acceso a
+la etiqueta verdadera. Además, cuando los datos son separables (es decir, y es determinista dado x), el supuesto
+se cumple. Una demostración se incluye en el Material Suplementario. Investigamos estos factores en
+los experimentos.
+Algoritmo GOLD LOSSCORRECTION (GLC)
+1: Entrada: datos confiables D, datos no confiables D̃, pérdida ℓ
+2: Entrenar la red f(x) = p̂(y|x;θ) ∈ R^K sobre D
+3: Llenar Ĉ ∈ R^(K×K) con ceros
+4: para k = 1, ..., K hacer
+5: num_ejemplos = 0
+6: para (xi, yi) ∈ D tal que yi = k hacer
+7: num_ejemplos += 1
+8: Ĉk += f(xi) {sumar f(xi) a la fila k}
+9: fin para
+10: Ĉk /= num_ejemplos
+11: fin para
+12: Inicializar nuevo modelo g(x) = p̂(y|x;θ)
+13: Entrenar con ℓ(g(x); y) sobre D y ℓ(Ĉᵀg(x); ỹ) sobre D̃
+14: Salida: modelo p̂(y|x;θ). Entrenamiento de un clasificador corregido.
+Ahora, con Ĉ, seguimos el método de [24,
+17] para entrenar un clasificador corregido, que
+describimos brevemente a continuación. Dada la salida softmax s ∈ R^(K×1)
+de un clasificador sin entrenar,
+definimos la nueva salida como ẽs := ĈTs. Luego
+entrenamos p̂(ẽs|x) con las etiquetas ruidosas usando
+la pérdida de entropía cruzada. Podemos mejorar aún más
+este método usando datos confiables para entrenar
+el clasificador corregido. Así, no aplicamos
+corrección a los ejemplos del conjunto
+confiable encontrados durante el entrenamiento. Esto tiene
+el efecto de permitir que el GLC maneje un
+grado de dependencia de la instancia en el ruido
+de etiquetas [13], aunque nuestros experimentos sugieren
+que la mayor parte de las ganancias de rendimiento del GLC
+provienen de nuestra estimación de Ĉ. Un algoritmo concreto
+de nuestro método se proporciona aquí.
+4 Experimentos
+Generación de etiquetas corruptas. Supongamos que nuestro conjunto de datos tiene t+u ejemplos. Muestreamos un conjunto de t
+puntos de datos confiables D, y los u ejemplos no confiables restantes forman D̃, que corrompemos de forma probabilística
+según una matriz de corrupción verdadera C. Note que no conocemos cuáles de nuestros
+u ejemplos no confiables están corruptos. Solo sabemos que potencialmente lo están.
+Para generar las etiquetas no confiables a partir de las etiquetas verdaderas en D̃, primero obtenemos una matriz de corrupción C. Luego,
+para un ejemplo con etiqueta verdadera i, muestreamos la etiqueta corrupta de la distribución categórica
+parametrizada por la fila i-ésima de C. Note que esto no satisface el supuesto
+de independencia condicional requerido para nuestra estimación de C. Sin embargo, encontramos que el GLC aún funciona bien en la práctica,
+quizá porque este supuesto también se cumple cuando los datos son separables, en el sentido de que cada x
+tiene una única y verdadera, lo cual es aproximadamente cierto en muchos de nuestros experimentos.
+Comparación de métodos de corrección de pérdida. El GLC difiere de correcciones de pérdida previas para el ruido
+en las etiquetas en que asume razonablemente acceso a una fuente de anotación de alta calidad. Por ello, para comparar
+con otros métodos de corrección de pérdida, preguntamos cómo se desempeña cada método partiendo del mismo
+conjunto de datos con el mismo ruido de etiquetas. En otras palabras, la única información adicional que usa nuestro método es
+conocer qué ejemplos son confiables y cuáles potencialmente están corruptos.
+3
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-10, Flip, 10% confiable
+GLC (nuestro)
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-100, Flip, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-10, Uniforme, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Flip, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-100, Jerárq., 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-100, Uniforme, 10% confiableFigura 2: Curvas de error de numerosos métodos de corrección de etiquetas con un rango completo de intensidades de corrupción
+de etiquetas en varios conjuntos de datos de visión y procesamiento de lenguaje natural.
+4.1 Conjuntos de datos y arquitecturas
+MNIST. El conjunto de datos MNIST contiene imágenes en escala de grises de 28×28 de los dígitos 0-9. El conjunto de entrenamiento
+tiene 60,000 imágenes y el de prueba 10,000 imágenes. Para el preprocesamiento, reescalamos los píxeles al
+intervalo [0;1]. Entrenamos una red totalmente conectada de 2 capas con 256 dimensiones ocultas. Entrenamos con
+Adam durante 10 épocas usando lotes de tamaño 32 y una tasa de aprendizaje de 0.001. Para la regularización, usamos
+decaimiento de peso ℓ2 en todas las capas con λ = 1×10⁻⁶.
+CIFAR. Los dos conjuntos de datos CIFAR contienen imágenes a color de 32×32. CIFAR-10 tiene diez clases, y
+CIFAR-100 tiene 100 clases. CIFAR-100 tiene 20 “superclases” que dividen sus 100 clases en 20
+conjuntos semánticamente similares. Usamos estas superclases para el ruido jerárquico. Ambos conjuntos tienen 50,000
+imágenes de entrenamiento y 10,000 de prueba. Para ambos, entrenamos una Wide Residual Network [28]
+de profundidad 40 y factor de ensanchamiento 2. Entrenamos durante 75 épocas usando SGD con momento de Nesterov
+y un programa de tasa de aprendizaje coseno [11].
+IMDB. El conjunto de datos IMDB Large Movie Reviews [12] contiene 50,000 reseñas de películas
+altamente polarizadas de Internet Movie Database, divididas por igual en conjuntos de entrenamiento y prueba. Rellenamos y recortamos las reseñas
+a una longitud de 200 tokens, y aprendemos vectores de palabras de 50 dimensiones desde cero para un tamaño de vocabulario de
+5,000. Entrenamos una LSTM con 64 dimensiones ocultas sobre estos datos. Entrenamos usando el optimizador Adam
+[7] durante 3 épocas con tamaño de lote 64 y la tasa de aprendizaje sugerida de 0.001. Para la regularización,
+usamos dropout [22] en la capa de salida lineal con una probabilidad de descarte de 0.2.
+Twitter. El conjunto Twitter Part of Speech [4] contiene 1,827 tuits anotados con 25 etiquetas POS.
+Se divide en un conjunto de entrenamiento de 1,000 tuits, un conjunto de desarrollo de 327 tuits y un conjunto de prueba de 500
+tuits. Usamos el conjunto de desarrollo para ampliar el conjunto de entrenamiento. Usamos vectores de palabras preentrenados de 50 dimensiones,
+y para cada token concatenamos los vectores de palabras en una ventana fija centrada en el
+token. Estos forman nuestro conjunto de entrenamiento y prueba. Usamos un tamaño de ventana de 3 y entrenamos una red totalmente
+conectada de 2 capas con tamaño oculto 256, y usamos la no linealidad GELU [6]. Entrenamos con Adam durante
+15 épocas con tamaño de lote 64 y tasa de aprendizaje de 0.001. Para la regularización, usamos decaimiento de peso ℓ2
+con λ = 5×10⁻⁵ en todas menos en la capa de salida lineal.
+SST. El conjunto Stanford Sentiment Treebank consiste en reseñas de películas de una sola oración [21]. Usamos
+la versión de 2 clases (es decir, SST2), que tiene 6,911 reseñas en el conjunto de entrenamiento, 872 en el de desarrollo
+y 1,821 en el de prueba. Usamos el conjunto de desarrollo para ampliar el de entrenamiento. Rellenamos y recortamos
+las reseñas a una longitud de 30 tokens y aprendemos vectores de palabras de 100 dimensiones desde cero para un tamaño de vocabulario
+de 10,000. Nuestro clasificador es un modelo de promedio de palabras con una capa de salida afín. Usamos el
+optimizador Adam durante 5 épocas con tamaño de lote 50 y tasa de aprendizaje 0.001. Para la regularización, usamos
+decaimiento de peso ℓ2 con λ = 1×10⁻⁴ en la capa de salida.
+4
+Corrupción
+Tipo Porcentaje Confiable
+Confiable Solo
+Sin corr. Forward Forward
+Gold Destil. Matriz de confusión
+GLC
+(nuestro) MNIST Uniforme 5 37.6 12.9 14.5 13.5 42.1 21.8 10.3
+Uniforme 10 12.9 12.3 13.9 12.3 9.2 15.1 6.3
+Uniforme 25 6.6 9.3 11.8 9.2 5.8 11.0 4.7
+Flip 5 37.6 50.1 51.7 41.4 46.5 11.7 3.4
+Flip 10 12.9 51.1 48.8 36.4 32.4 5.6 2.9
+Flip 25 6.6 47.7 50.2 37.1 28.2 3.8 2.6
+Media 19.0 30.6 31.8 25.0 27.4 11.5 5.0 CIFAR-10 Uniforme 5 39.6 31.9 9.1 27.8 29.7 22.4 9.0
+Uniforme 10 31.3 31.9 8.6 20.6 18.3 22.7 6.9
+Uniforme 25 17.4 32.7 7.7 27.1 11.6 16.7 6.4
+Flip 5 39.6 53.3 38.6 47.8 29.7 8.1 6.6
+Flip 10 31.3 53.2 36.5 51.0 18.1 8.2 6.2
+Flip 25 17.4 52.7 37.6 49.5 11.8 7.1 6.1
+Media 29.4 42.6 23.0 37.3 19.9 14.2 6.9 CIFAR-100 Uniforme 5 82.4 48.8 47.7 49.6 87.5 53.6 42.4
+Uniforme 10 67.3 48.4 47.2 48.9 61.2 49.7 33.9
+Uniforme 25 52.2 45.4 43.6 46.0 39.8 39.6 27.3
+Flip 5 82.4 62.1 61.6 62.6 87.1 28.6 27.1
+Flip 10 67.3 61.9 61.0 62.2 61.8 26.9 25.8
+Flip 25 52.2 59.6 57.5 61.4 40.0 25.1 24.7
+Jerárquico 5 82.4 50.9 51.0 52.4 87.1 45.8 34.8
+Jerárquico 10 67.3 51.9 50.5 52.1 61.7 38.8 30.2
+Jerárquico 25 52.2 54.3 47.0 51.1 39.7 29.7 25.4
+Media 67.3 53.7 51.9 54.0 62.9 37.5 30.2
+Tabla 1: Resultados del conjunto de datos de visión. Porcentaje confiable es la fracción confiable multiplicada por 100. Salvo que se indique otra cosa
+todos los valores son porcentajes que representan el área bajo la curva de error calculada
+en 11 puntos de prueba. El mejor resultado medio aparece en negrita.
+4.2 Corrección de las etiquetas con ruido
+Corrección de pérdida hacia adelante. El método de corrección hacia adelante de Patrini et al. [17] también obtiene bC
+entrenando un clasificador con las etiquetas ruidosas y usando las probabilidades softmax resultantes. Sin embargo,
+este método no hace uso de una fracción confiable de los datos de entrenamiento. En cambio, usa el argmax
+en el percentil 97 de las probabilidades softmax de una clase dada como heurística para detectar un ejemplo
+que realmente pertenece a dicha clase. Como en el artículo original, lo sustituimos por el argmax sobre
+todas las probabilidades softmax de una clase dada en los experimentos con CIFAR-100. La estimación de C se usa luego
+para entrenar un clasificador corregido de la misma manera que el GLC.
+Forward Gold. Para examinar el efecto de entrenar con etiquetas confiables, como hace el GLC, aumentamos
+el método Forward reemplazando su estimación de C por la identidad en los ejemplos confiables. Llamamos a este
+método Forward Gold. También puede verse como el GLC con la estimación de C del método Forward.
+Destilación. El método de destilación de Li et al. [10] consiste en entrenar una red neuronal con un gran
+conjunto de datos confiable y usar esta red para proporcionar objetivos blandos para los datos no confiables. De este modo, las etiquetas
+se “destilan” a partir de una red neuronal. Si las decisiones del clasificador para entradas no confiables son menos fiables
+que las etiquetas ruidosas originales, la utilidad de la red es limitada. Por tanto, para obtener una red neuronal fiable,
+se necesita un conjunto de datos confiable grande. Se entrena un nuevo clasificador usando etiquetas que son una combinación convexa
+de los objetivos blandos y de las etiquetas originales no confiables.
+Matrices de confusión. Una alternativa intuitiva al GLC es estimar C mediante una matriz de confusión.
+Para ello, entrenamos un clasificador con los ejemplos no confiables, obtenemos su matriz de confusión sobre los
+ejemplos confiables, normalizamos las filas de la matriz y luego entrenamos un clasificador corregido como en el GLC.
+4.3 Corrupción uniforme, por inversión y jerárquica
+Matrices generadoras de corrupción. Consideramos tres tipos de matrices de corrupción: corromper
+uniformemente a todas las clases, es decir, Cij= 1=K; invertir una etiqueta a una clase diferente, y corromper uniformemente
+a clases que son semánticamente similares. Para crear una corrupción uniforme con distintas intensidades, tomamos
+5
+Corrupción
+Tipo Porcentaje
+Confiable Confiable
+Solo Sin corr. Forward Forward
+Gold Destil. Confusión
+Matriz GLC
+(Nuestro) SST Uniforme 5 45.4 27.5 26.5 26.6 43.4 26.1 24.2
+Uniforme 10 35.2 27.2 26.2 25.9 33.3 25.0 23.5
+Uniforme 25 26.1 26.5 25.3 24.6 25.0 22.4 21.7
+Inversión 5 45.4 50.2 50.3 50.3 48.8 26.0 24.9
+Inversión 10 35.2 49.9 50.1 49.9 42.1 24.6 23.5
+Inversión 25 26.1 48.7 49.0 47.3 31.8 22.4 21.7
+Media 35.6 38.3 37.9 37.4 37.4 24.4 23.3IMDBUniforme 5 36.9 26.7 27.9 27.6 35.5 25.4 25.0
+Uniforme 10 26.2 25.8 27.2 26.1 24.9 23.3 22.3
+Uniforme 25 22.2 21.4 23.0 20.1 21.0 18.9 18.7
+Inversión 5 36.9 49.2 49.2 49.2 41.8 25.8 25.2
+Inversión 10 26.2 47.8 48.3 47.5 28.0 22.1 22.0
+Inversión 25 22.2 39.4 39.6 36.6 23.5 19.2 18.5
+Media 28.5 35.0 35.9 34.5 29.1 22.5 22.0TwitterUniforme 5 35.9 37.1 51.7 44.1 32.0 41.5 31.0
+Uniforme 10 23.6 33.5 49.5 40.2 22.2 33.6 22.3
+Uniforme 25 16.3 25.5 40.6 26.4 16.6 20.0 15.5
+Inversión 5 35.9 56.2 61.6 54.8 36.4 23.4 15.8
+Inversión 10 23.6 53.8 59.0 48.9 26.1 15.9 12.9
+Inversión 25 16.3 43.0 52.5 36.7 20.5 13.3 12.8
+Media 25.3 41.5 52.5 41.9 25.7 24.6 18.4
+Tabla 2: Resultados del conjunto de datos de PLN. Porcentaje confiable es la fracción confiable multiplicada por 100. Salvo que se indique otra cosa
+todos los valores son porcentajes que representan el área bajo la curva de error calculada
+en 11 puntos de prueba. El mejor resultado medio aparece en negrita.
+tomamos una combinación convexa de una matriz identidad y la matriz 11T=K. Nos referimos al coeficiente
+de 11T=K como la intensidad de la corrupción para una corrupción “uniforme”. Una corrupción “inversión” de intensidad m
+consiste en que, para cada fila, se asigna una masa de probabilidad m a la columna fuera de la diagonal, y las entradas de la diagonal
+reciben una masa de probabilidad 1 − m. Por último, una corrupción más realista es la corrupción jerárquica. Para
+esta corrupción, aplicamos corrupción uniforme solo a clases semánticamente similares; por ejemplo, “cama”
+puede corromperse a “sofá” pero no a “castor” en CIFAR-100. Para CIFAR-100, los ejemplos se consideran
+semánticamente similares si comparten la misma etiqueta de “superclase” especificada por los creadores del conjunto de datos.
+Experimentos y análisis de resultados. Entrenamos los modelos descritos en la Sección 4.1 bajo corrupciones de etiquetas uniformes,
+por inversión de etiquetas y jerárquicas, con distintas fracciones de datos confiables. Para evaluar el
+rendimiento del GLC, lo comparamos con otros métodos de corrección de pérdida y con dos líneas base: una en la que
+entrenamos una red solo con datos confiables sin correcciones de etiquetas, y otra en la que la red entrena
+con todos los datos sin correcciones de etiquetas. Registramos los errores en los conjuntos de prueba con las intensidades de corrupción
+f0;0:1;:::; 1:0g. Como calculamos la precisión del modelo para numerosas intensidades de corrupción, los experimentos con CIFAR
+implican entrenar más de 500 Wide Residual Networks. En las Tablas 1 y 2 reportamos el área
+bajo las curvas de error para las intensidades de corrupción f0;0:1;:::; 1:0g para todas las líneas base y correcciones.
+En la Figura 2 se muestra una muestra de curvas de error. Estas curvas son la interpolación lineal de los
+errores en las once intensidades de corrupción.
+En todos los experimentos, el GLC obtiene mejor área bajo la curva de error que las líneas base y que los
+métodos Forward y Destilación. El orden de los demás métodos y líneas base es variado. En
+MNIST, entrenar solo con los datos confiables supera a todos los métodos salvo al GLC y a la
+Matriz de confusión, pero se desempeña significativamente peor en CIFAR-100, incluso con fracciones confiables grandes.
+La corrección de matriz de confusión queda en segundo lugar tras el GLC, lo que indica que las matrices de confusión normalizadas
+no son tan precisas como nuestro método de estimación de C. Lo verificamos inspeccionando
+las estimaciones directamente y encontramos que las matrices de confusión normalizadas dan una estimación muy sesgada
+debido a tomar un argmax sobre las puntuaciones de clase en lugar de usar muestreo aleatorio. La Figura 1 muestra un
+ejemplo de este sesgo en el caso de corrupción por inversión de etiquetas con una intensidad de 7/10.
+Curiosamente, Forward Gold se desempeña peor que Forward en varios conjuntos de datos. No observamos el
+mismo comportamiento al desactivar el componente correspondiente del GLC, y creemos que puede deberse
+a la varianza introducida durante el entrenamiento por la diferencia de señal que proporcionan la estimación de C del método Forward y las etiquetas limpias.
+6
+El GLC proporciona una estimación de C superior y, por tanto, puede estar mejor
+capacitado para aprovechar el entrenamiento con las etiquetas limpias. Resultados adicionales sobre SVHN están en el
+Material suplementario.
+También comparamos el GLC con el trabajo reciente de Ren et al. [20], que propone una corrección de pérdida que
+usa un conjunto confiable y meta-aprendizaje. Encontramos que el GLC supera consistentemente a este método. Para
+ahorrar espacio, los resultados están en el Material suplementario.
+Porcentaje
+Confiable Confiable
+Solo No
+Corr. Forward Forward
+Gold Destil. Confusión
+Matriz GLC
+(Nuestro)
+CIFAR-101 62.9 28.3 28.1 30.9 60.4 31.9 26.9
+5 39.6 27.1 26.6 25.5 28.1 27 21.9
+10 31.3 25.9 25.1 22.9 17.8 24.2 19.2
+Media 44.6 27.1 26.6 26.4 35.44 27.7 22.7
+CIFAR-1005 82.4 71.1 73.9 73.6 88.3 74.1 68.7
+10 67.3 66 68.2 66.1 62.5 63.8 56.6
+25 52.2 56.9 56.9 51.4 39.7 50.8 40.8
+Media 67.3 64.7 66.3 63.7 63.5 62.9 55.4
+Tabla 3: Resultados al obtener etiquetas ruidosas muestreando de la distribución softmax de un clasificador débil.
+Porcentaje confiable es la fracción confiable multiplicada por 100. Salvo que se indique otra cosa, todos los
+valores son el porcentaje de error. El mejor resultado promedio para cada conjunto de datos se muestra en negrita.
+4.4 Clasificadores débiles como etiquetas
+Nuestro siguiente punto de referencia para el GLC es usar etiquetas ruidosas obtenidas de un clasificador débil. Esto modela
+el escenario de ruido en las etiquetas que surge de un sistema de clasificación más débil que el propio, pero con acceso
+a información sobre las etiquetas verdaderas que uno desea transferir a su propio sistema. Por ejemplo,
+extraer etiquetas de imágenes a partir del texto que las rodea en páginas web proporciona una señal valiosa, pero estas
+etiquetas entrenarían un clasificador deficiente sin corregir el ruido en las etiquetas. Este escenario satisface exactamente
+el supuesto de independencia condicional sobre el ruido de las etiquetas usado para nuestra estimación de bC, porque el
+clasificador débil no toma la etiqueta verdadera como entrada al producir etiquetas ruidosas.
+Generación de etiquetas del clasificador débil. Para obtener las etiquetas, entrenamos redes Wide Residual Net-
+works de 40 capas en CIFAR-10 y CIFAR-100 con etiquetas limpias durante diez épocas cada una. Luego, muestreamos de
+sus distribuciones softmax con una temperatura de 5, y fijamos las etiquetas resultantes. Esto da lugar a
+etiquetas ruidosas que usamos en lugar de las obtenidas mediante los métodos de corrupción uniforme, flip y jerárquica.
+métodos de corrupción. Las etiquetas producidas por los clasificadores débiles tienen precisiones de 40% en
+CIFAR-10 y de 7% en CIFAR-100. Pese a la presencia de etiquetas muy corruptas, logramos
+recuperar de forma significativa el rendimiento con el uso de un conjunto de confianza. Obsérvese que, a diferencia de los
+métodos de corrupción anteriores, las etiquetas de clasificadores débiles tienen una sola intensidad de corrupción. Por ello, el rendimiento se mide
+en porcentaje de error y no en el área bajo la curva de error. Los resultados se muestran en la Tabla 3.
+Análisis de resultados. En promedio, GLC supera a todos los demás métodos en el experimento de etiquetas de clasificador débil
+experimentos. El método Distillation funciona mejor que GLC por un pequeño margen con la fracción de confianza más alta
+fracción de confianza, pero funciona peor con fracciones de confianza más bajas, lo que indica que GLC goza de una eficiencia de datos superior
+eficiencia de datos. Esto se destaca porque GLC alcanza una tasa de error de 26:94% en CIFAR-10 con una
+fracción de confianza de solo 1%, frente al error original de 60%. Cabe señalar, sin embargo, que
+entrenar sin corrección alcanza un error de 28:32% en este experimento, lo que sugiere que las etiquetas del clasificador débil
+tienen un sesgo bajo. La mejora que aporta GLC es mayor con fracciones de confianza más grandes.
+5 Discusión
+Eficiencia de datos. Hemos visto que GLC funciona con fracciones de confianza pequeñas. Lo corrobo-
+ramos su eficiencia de datos recurriendo al conjunto Clothing1M [26]. Clothing1M es un conjunto de datos masivo
+con anotaciones humanas y ruidosas, que usamos para comparar la eficiencia de datos de GLC
+con la de Distillation cuando hay muy pocas etiquetas de confianza. Consiste en 1 millón de imágenes de ropa etiquetadas de forma ruidosa
+imágenes de ropa obtenidas rastreando mercados en línea. 50,000 imágenes tienen anotaciones humanas
+ejemplos, de los cuales tomamos submuestras como nuestro conjunto de confianza.
+Para GLC y Distillation, primero ajustamos finamente una ResNet-34 con ejemplos de entrenamiento no confiables durante
+cuatro épocas, y usamos esto para estimar nuestra matriz de corrupción. Después, ajustamos finamente la red durante
+7
+cuatro épocas más con los conjuntos combinados de confianza y no confiables, usando el método respectivo. Durante el ajuste
+fino, congelamos las primeras siete capas, y entrenamos mediante descenso de gradiente con momento de Nesterov
+y una programación de tasa de aprendizaje coseno. Para el preprocesamiento, recortamos aleatoriamente y usamos reflejo especular. También
+sobremuestreamos el conjunto de confianza, lo que resulta en mejor rendimiento para ambos métodos.
+100 500 1000
+Número de ejemplos de confianza 3040506070 Precisión porcentual Distillation
+GLC (nuestro)
+Figura 3: Eficiencia de datos de nuestro
+método frente a Distillation en Clothing1M.
+Como se muestra en la Figura 3, GLC supera a Distillation por un
+margen amplio, especialmente con menos ejemplos de confianza. Esto ocurre por-
+que Distillation requiere ajustar finamente un clasificador con los datos de confianza
+solamente, lo cual generaliza mal con muy pocos ejemplos.
+En cambio, estimar la matriz C puede hacerse con muy
+pocos ejemplos. En consecuencia, encontramos que nuestra ventaja
+disminuye a medida que aumenta el número de ejemplos de confianza.
+Con más etiquetas de confianza, el rendimiento en Clothing1M se estabiliza,
+como se aprecia en la Figura 3. Consideramos el caso extremo y entrenamos con el
+conjunto de confianza completo de Clothing1M. Ajustamos finamente una ResNeXt preentrenada de 50-
+capas [27] con ejemplos de entrenamiento no confiables para estimar
+nuestra matriz de corrupción. Luego, ajustamos finamente la ResNeXt con todos los
+ejemplos de entrenamiento. Durante el ajuste fino usamos descenso de gradiente
+con momento de Nesterov. Durante las primeras dos épocas, ajustamos
+solo la capa de salida con una tasa de aprendizaje de 10−2. Después, ajustamos toda la red con una tasa de aprendizaje
+de 10−3 durante dos épocas, y durante otras dos épocas a 10−4. Luego aplicamos nuestra corrección de pérdida.
+Ahora, ajustamos finamente toda la red con una tasa de aprendizaje de 10−3 durante dos épocas, y continuamos el entrenamiento
+a 10−4, y detenemos anticipadamente según el conjunto de validación. En un trabajo previo, Xiao et al. [26] obtienen
+78:24% en este escenario. Sin embargo, nuestro método obtiene una precisión de vanguardia de 80:67%, mientras que
+con este procedimiento el método Forward solo obtiene una precisión de 79:03%.
+Mejora de la estimación de bC. Para algunos conjuntos de datos, el clasificador bp(eyjx) puede ser una mala estimación de
+p(eyjx), lo que supone un cuello de botella en la estimación de bC para GLC. Para ver en qué medida
+esto podría afectar el rendimiento, y si métodos simples para mejorar bp(eyjx) podrían ayudar, ejecutamos
+varias variantes del experimento GLC en CIFAR-100 bajo la corrupción por inversión de etiquetas con una
+fracción de confianza de 5/100, que describimos ahora. En todas las variantes, promediamos el área bajo la
+curva de error sobre cinco inicializaciones aleatorias.
+1. En la primera variante, reemplazamos la estimación de GLC de bC por C, la matriz de corrupción verdadera.
+2. Como demostraron hendrycks17baseline, Guo et al. [5], los clasificadores modernos de redes neuronales profundas
+tienden a tener distribuciones softmax excesivamente confiadas. Encontramos que así ocurre con nuestra bp(eyjx)
+estimación, a pesar de la mayor entropía de las etiquetas ruidosas, por lo que usamos el método de calibración de confianza por escalado de temperatura
+propuesto en el artículo para calibrar bp(eyjx).
+3. Supongamos que conocemos las tasas base de las etiquetas corruptas eb, donde ebi=p(ey=i), y la tasa base
+de las etiquetas verdaderas b del conjunto de confianza. Si postulamos que bC0 corrompió las etiquetas, entonces debemos tener
+bTbC0=ebT. Así, podemos obtener una mejor estimación de la matriz de corrupción calculando una nueva
+estimación bC = argmin bC ‖bTbC0−ebT‖2
+2+λ‖bC−bC0‖2
+sujeto a bC1=1.
+Encontramos que usar la matriz de corrupción verdadera como nuestra bC aporta un beneficio de 0:96 puntos porcentuales
+en el área bajo la curva de error, pero ni la calibración de confianza ni la incorporación de tasas base
+logró cambiar el rendimiento respecto al GLC original. Esto indica que GLC es robusto
+al uso de redes no calibradas para estimar C, y que mejorar su rendimiento puede ser
+difícil sin mejorar directamente el rendimiento de la red neuronal usada para estimar bp(yjx).
+6 Conclusión
+En este trabajo hemos mostrado el impacto de contar con un pequeño conjunto de ejemplos de confianza en la
+robustez frente al ruido en las etiquetas de los clasificadores de redes neuronales. Propusimos Gold Loss Correction (GLC), un método
+para lidiar con el ruido en las etiquetas. Este método aprovecha el supuesto de que el modelo tiene acceso a un
+pequeño conjunto de etiquetas correctas para obtener estimaciones precisas de la distribución del ruido. A lo largo de
+nuestros experimentos, GLC supera a los métodos previos de robustez frente al ruido de etiquetas en diversos dominios naturales
+de procesamiento del lenguaje y de visión, lo que mostramos al considerar varias corrupciones y
+numerosas intensidades, incluidas intensidades severas. Estos resultados demuestran que GLC es un método potente,
+eficiente en datos para mejorar la robustez frente al ruido en las etiquetas.
+8
+Agradecimientos
+Agradecemos a NVIDIA por donar las GPU usadas en esta investigación.
+Referencias
+[1] B Biggio, B Nelson, y P Laskov. “Support Vector Machines Under Adversarial Label Noise”.
+En: ACML (2011).
+[2] Moses Charikar, Jacob Steinhardt, y Gregory Valiant. “Learning from Untrusted Data”. En:
+STOC (2017).
+[3] Benoît Frénay y Michel Verleysen. “Classification in the presence of label noise: a survey”.
+En: IEEE Trans Neural Netw Learn Syst (2014).
+[4] Kevin Gimpel et al. “Part-of-speech Tagging for Twitter: Annotation, Features, and Experi-
+ments”. En: ACL (2011).
+[5] Chuan Guo et al. “On Calibration of Modern Neural Networks”. En: ICML (2017).
+[6] Dan Hendrycks y Kevin Gimpel. “Bridging Nonlinearities and Stochastic Regularizers with
+Gaussian Error Linear Units”. En: CoRR (2016).
+[7] Diederik P. Kingma y Jimmy Ba. “Adam: A Method for Stochastic Optimization”. En: ICLR
+(2014).
+[8] J Larsen et al. “Design of robust neural network classifiers”. En: Acoustics, Speech and Signal
+Processing, 1998. Actas de la 1998 IEEE International Conference on . 1998.
+[9] Bo Li et al. “Data Poisoning Attacks on Factorization-Based Collaborative Filtering”. En: NIPS
+(2016).
+[10] Yuncheng Li et al. “Learning from Noisy Labels with Distillation”. En: ICCV (2017).
+[11] Ilya Loshchilov and Frank Hutter. “SGDR: Stochastic Gradient Descent with Warm Restarts”.
+En:ICLR (2016).
+[12] Andrew L. Maas et al. “Learning Word Vectors for Sentiment Analysis”. En: Actas de
+la 49.ª Annual Meeting of the Association for Computational Linguistics: Human Language
+Technologies . 2011.
+[13] Aditya Krishna Menon, Brendan van Rooyen, and Nagarajan Natarajan. “Learning from Binary
+Labels with Instance-Dependent Corruption”. En: CoRR (2016).
+[14] V olodymyr Mnih and Geoffrey E Hinton. “Learning to label aerial images from noisy data”.
+En:ICML (2012).
+[15] Nagarajan Natarajan et al. “Learning with Noisy Labels”. En: Advances in Neural Information
+Processing Systems 26 . 2013.
+[16] David F Nettleton, Albert Orriols-Puig, and Albert Fornells. “A study of the effect of different
+types of noise on the precision of supervised learning techniques”. En: Artif Intell Rev (2010).
+[17] Giorgio Patrini et al. “Making Deep Neural Networks Robust to Label Noise: a Loss Correction
+Approach”. En: CVPR (2016).
+[18] M Pechenizkiy et al. “Class Noise and Supervised Learning in Medical Domains: The Effect
+of Feature Extraction”. En: 19th IEEE Symposium on Computer-Based Medical Systems
+(CBMS’06) . 2006.
+[19] Scott Reed et al. “Training Deep Neural Networks on Noisy Labels with Bootstrapping”. En:
+ICLR Workshop (2014).
+[20] Thu Mengye Ren et al. “Learning to Reweight Examples for Robust Deep Learning”. En: ICML
+(2018).
+[21] Richard Socher et al. “Recursive Deep Models for Semantic Compositionality Over a Sentiment
+Treebank”. En: Conference on Empirical Methods in Natural Language Processing . 2013.
+[22] Nitish Srivastava et al. “Dropout: A simple way to prevent neural networks from overﬁtting”.
+En:The Journal of Machine Learning Research (2014).
+[23] Jacob Steinhardt, Pang Wei Koh, and Percy Liang. “Certiﬁed Defenses for Data Poisoning
+Attacks”. En: NIPS . 2017.
+[24] Sainbayar Sukhbaatar et al. “Training Convolutional Networks with Noisy Labels”. En: ICLR
+Workshop (2014).
+9
+[25] Andreas Veit et al. “Learning From Noisy Large-Scale Datasets With Minimal Supervision”.
+En:CVPR (2017).
+[26] Tong Xiao et al. “Learning from massive noisy labeled data for image classiﬁcation”. En: CVPR
+(2015).
+[27] Saining Xie et al. “Aggregated Residual Transformations for Deep Neural Networks”. En:
+CVPR (2016).
+[28] Sergey Zagoruyko and Nikos Komodakis. “Wide Residual Networks”. En: BMVC (2016).
+[29] Xingquan Zhu and Xindong Wu. “Class Noise vs. Attribute Noise: A Quantitative Study”. En:
+Artiﬁcial Intelligence Review (2004).
+10
+A. Demostración: la separabilidad implica Y?eYjX
+Mostramos aquí que el supuesto de independencia condicional requerido por nuestro estimador bC se cumple
+cuando los datos son separables, es decir, cuando la etiqueta es determinista dada la entrada.
+Sean X;Y;eY variables aleatorias que siguen una distribución de datos PX;Y;eY, donde Y y eY son categóricas.
+Semánticamente, Y representa la etiqueta verdadera y eY la etiqueta con ruido. Supongamos que los datos
+son separables, es decir, PYjX(yjx) = 0 se cumple para todo y≠y, en cuyo caso tenemos
+PYjX(yjx) = 1 . Por brevedad en el resto de la demostración, usaremos notación probabilística abreviada, es decir,
+p(yjx) = 1 . Usando el supuesto de separabilidad, tenemos
+p(eyjx) =X
+yp(y;eyjx) =X
+yp(eyjy;x)p(yjx) =p(eyjy;x): (1)
+Usaremos esto para mostrar que p(y;eyjx) =p(yjx)p(eyjx) para todo y;ey;x. Sean ey y x dados. Para
+y6=y, tenemos
+p(y;eyjx) =p(y;ey;x)
+p(x)=0
+p(x)= 0;
+porque la separabilidad implica p(y;x) = 0 para y6=y. Esto también es igual a p(yjx)p(eyjx), por lo que el
+caso y6=y queda cubierto. Supongamos y=y. Tenemos
+p(y;eyjx) =p(y;ey;x)
+p(x)=p(eyjy;x)p(y;x)
+p(x)=p(eyjx)p(yjx);
+donde en el último paso usamos la ecuación (1). Esto completa la demostración.
+11
+B Resultados adicionales y gráficos de error
+Tipo de corrupción Porcentaje
+Confiable Solo confiable Sin corr. Ren et al. GLC (nuestro) MNIST Uniforme 5 37.6 12.9 10.6 10.3
+Uniforme 10 12.9 12.3 7.7 6.3
+Uniforme 25 6.6 9.3 8.5 4.7
+Inversión 5 37.6 50.1 20.2 3.4
+Inversión 10 12.9 51.1 22.7 2.9
+Inversión 25 6.6 47.7 22.7 2.6
+Media 19.0 30.6 15.4 5.0 CIFAR-10 Uniforme 5 39.6 31.9 30.5 9.0
+Uniforme 10 31.3 31.9 30.8 6.9
+Uniforme 25 17.4 32.7 33.3 6.4
+Inversión 5 39.6 53.3 21.9 6.6
+Inversión 10 31.3 53.2 23.0 6.2
+Inversión 25 17.4 52.7 24.4 6.1
+Media 29.4 42.6 27.3 6.9CIFAR-100 Uniforme 5 82.4 48.8 68.5 42.4
+Uniforme 10 67.3 48.4 71.5 33.9
+Uniforme 25 52.2 45.4 72.8 27.3
+Inversión 5 82.4 62.1 67.2 27.1
+Inversión 10 67.3 61.9 68.4 25.8
+Inversión 25 52.2 59.6 71.5 24.7
+Media 67.3 54.4 70.0 30.2
+Tabla 4: Resultados del método de Ren et al. [19]. Los resultados de todos los demás métodos distintos de Ren et al. se
+copian de la Tabla 5. El porcentaje confiable es la fracción confiable multiplicada por 100. Salvo que se
+indique lo contrario, todos los valores son porcentajes que representan el área bajo la curva de error calculada en 11 puntos de prueba.
+El mejor resultado medio se muestra en negrita.
+12
+Corrupción
+Tipo Porcentaje
+Confiable
+Solo sin corr. Forward Forward
+Gold Destil. Confusión
+Matriz GLC
+(nuestro) MNIST Uniforme 5 37.6 12.9 14.5 13.5 42.1 21.8 10.3
+Uniforme 10 12.9 12.3 13.9 12.3 9.2 15.1 6.3
+Uniforme 25 6.6 9.3 11.8 9.2 5.8 11.0 4.7
+Inversión 5 37.6 50.1 51.7 41.4 46.6 11.7 3.4
+Inversión 10 12.9 51.1 48.8 36.4 32.4 5.6 2.9
+Inversión 25 6.6 47.7 50.2 37.1 28.2 3.8 2.6
+Media 19.0 30.6 31.8 25.0 27.4 11.5 5.0SVHN Uniforme 0.1 80.4 25.5 26.2 26.8 80.9 25.7 24.4
+Uniforme 1 79.7 25.5 24.2 24.9 80.4 28.2 28.1
+Uniforme 5 24.3 25.5 15.0 15.7 24.1 2.7 2.8
+Inversión 0.1 80.4 51.0 51.0 50.9 89.1 19.8 19.4
+Inversión 1 79.7 51.0 43.9 49.5 86.3 17.8 21.7
+Inversión 5 24.3 51.0 43.2 49.0 17.6 2.2 2.2
+Media 61.5 38.2 33.9 36.1 63.1 16.1 16.4CIFAR-10 Uniforme 5 39.6 31.9 9.1 27.9 29.7 22.4 9.0
+Uniforme 10 31.3 31.9 8.6 20.6 18.3 22.7 6.9
+Uniforme 25 17.4 32.7 7.7 27.1 11.6 16.7 6.4
+Inversión 5 39.6 53.3 38.6 47.8 29.7 8.1 6.6
+Inversión 10 31.3 53.2 36.5 51.0 18.1 8.2 6.2
+Inversión 25 17.4 52.7 37.6 49.5 11.8 7.1 6.1
+Media 29.4 42.6 23.0 37.3 19.9 14.2 6.9CIFAR-100 Uniforme 5 82.4 48.8 47.7 49.6 87.5 53.6 42.4
+Uniforme 10 67.3 48.4 47.2 48.9 61.2 49.7 33.9
+Uniforme 25 52.2 45.4 43.6 46.0 39.8 39.6 27.3
+Inversión 5 82.4 62.1 61.6 62.6 87.1 28.6 27.1
+Inversión 10 67.3 61.9 61.0 62.2 61.9 26.9 25.8
+Inversión 25 52.2 59.6 57.5 61.4 40.0 25.1 24.7
+Jerárquica 5 82.4 50.9 51.0 52.4 87.1 45.8 34.8
+Jerárquica 10 67.3 51.9 50.5 52.1 61.7 38.8 30.2
+Jerárquica 25 52.2 54.3 47.0 51.1 39.7 29.7 25.4
+Media 67.3 53.7 51.9 54.0 62.9 37.5 30.2
+Tabla 5: Resultados sobre conjuntos de datos de visión. Estos difieren de los resultados del artículo por la adición de SVHN.
+El porcentaje confiable es la fracción confiable multiplicada por 100. Salvo que se indique lo contrario, todos los valores son
+porcentajes que representan el área bajo la curva de error calculada en 11 puntos de prueba. El mejor resultado medio
+se muestra en negrita.
+13
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Uniforme, 5% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Uniforme, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Uniforme, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Inversión, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Inversión, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Inversión, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Jerárquica, 5% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Jerárquica, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-100, Jerárquica, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-10, Uniforme, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-10, Uniforme, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-10, Uniforme, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-10, Inversión, 5% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de pruebaCIFAR-10, Inversión, 10% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba CIFAR-10, Flip, 25% confiable14
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Uniform, 0.1% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Uniform, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Uniform, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Flip, 0.1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba MNIST, Flip, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Uniform, 0.1% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Uniform, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Uniform, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Flip, 0.1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SVHN, Flip, 5% confiableFigura 5: Curvas de error de numerosos métodos de corrección de etiquetas en conjuntos de datos de visión usando varios
+tipos de corrupción de etiquetas y un rango completo de intensidades de corrupción.
+15
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Uniform, 0.1% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Uniform, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Uniform, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Flip, 0.1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba SST, Flip, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Uniform, 1% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Uniform, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Uniform, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Flip, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba IMDB, Flip, 25% confiable16
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Uniform, 1% confiable
+Nuestro
+Confusión
+Destilación
+Forward Gold
+Forward
+Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Uniform, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Uniform, 25% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Flip, 1% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Flip, 5% confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción0.00.20.40.60.81.0Error de prueba Twitter, Flip, 25% confiableFigura 7: Curvas de error de numerosos métodos de corrección de etiquetas en conjuntos de datos de PLN usando varios
+tipos de corrupción de etiquetas y un rango completo de intensidades de corrupción.
+17

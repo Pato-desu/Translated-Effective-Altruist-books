@@ -1,0 +1,467 @@
+ARTÍCULO DE INVESTIGACIÓN
+Distribución global de las clases de bosque y de la
+biomasa foliar para su uso como alimentos alternativos para
+minimizar la desnutrición
+Tim Fist1| Adewale A. Adesanya2| David Denkenberger1,3|
+Joshua M. Pearce4
+1Alianza para Alimentar a la Tierra en Desastres
+(ALLFED), Fairbanks, Alaska, EE. UU.
+2Programa de Medio Ambiente y Energía,
+Departamento de Ciencias Sociales, Michigan Technological University, Houghton, Michigan, EE. UU.
+3Departamento de Ingeniería Mecánica,
+University of Alaska Fairbanks, Fairbanks, Alaska, EE. UU.
+4Departamento de Ingeniería Eléctrica y
+Computacional, Western University, London, Ontario, Canadá
+Correspondencia
+Joshua M. Pearce, Departamento de Ingeniería Eléctrica y Computacional, Western University, 1151 Richmond St N, London, Ontario N6A 3K7, Canadá. Correo electrónico: joshua.pearce@uwo.ca
+Información sobre financiamiento
+Centre for Effective Altruism; John and Melinda Thompson Endowment Fund in Vision NeurosciencesResumen
+Debido a la fácil disponibilidad de hojas de árbol en muchas
+geografías, el alimento alternativo de concentrado de hojas
+tiene actualmente el potencial de aliviar el hambre de más de
+800 millones de personas. Por ello, podría tener un gran
+impacto determinar la comestibilidad de los concentrados de hojas, que se encuentran en las mismas regiones que las
+poblaciones más desnutridas del mundo. Lamentablemente, la
+toxicidad del concentrado de hojas de la mayoría de los tipos comunes de hojas de árbol
+no ha sido evaluada, y el costo de hacerlo
+exige establecer prioridades. Este estudio preliminar explora esta posible solución al hambre en el mundo
+identificando las clases de bosque con mayor probabilidad de ofrecer acceso cercano
+a las personas hambrientas del mundo, con lo que se sientan las bases
+de una lista priorizada de tipos de hojas para evaluar su toxicidad.
+En concreto, este estudio describe una metodología novedosa para mapear la biomasa de hojas verdes disponible y
+las clases de bosque correspondientes (p. ej., bosque tropical húmedo caduci-
+folio), así como su relación espacial con la
+distribución global de las personas con bajo peso. Estos
+resultados serán útiles para elaborar una lista específica de
+especies de árboles en las que realizar análisis de toxicidad foliar, con el
+fin de desarrollar las hojas como fuente alternativa de alimento, tanto para los problemas actuales de desnutrición como para
+escenarios de catástrofe global.Recibido: 12 de octubre de 2020 Revisado: 18 de enero de 2021 Aceptado: 9 de agosto de 2021
+DOI: 10.1002/wfp2.12030
+World Food Policy. 2021;1 –19. wileyonlinelibrary.com/journal/wfp2 © 2021 Policy Studies Organization 1
+PALABRAS CLAVE
+agricultura, hojas comestibles, bosques, SIG, riesgo catastrófico global,
+hambre
+1|INTRODUCCIÓN
+Más de 820 millones de personas están actualmente subalimentadas y enfrentan una privación crónica de alimentos
+en todo el mundo (Organización de las Naciones Unidas para la Alimentación y la Agricultura [FAO], 2018).
+Los niños menores de 5 años son los más afectados (Bhutta et al., 2017; McDonald et al., 2013; Fondo de las Naciones Unidas para la Infancia [UNICEF], 2005). Según el Global Nutrition Report
+(GNR), 150,8 millones presentan retraso del crecimiento (deterioro del crecimiento y el desarrollo que experimentan los niños
+por una mala nutrición crónica) y 50,5 millones de niños menores de 5 años presentan emaciación (desnutrición aguda) (GNR, 2018). En total, cada año nacen 20 millones de bebés con bajo peso y un tercio de las
+mujeres en edad reproductiva padece anemia (GNR, 2018). Esto es innecesario, ya que investigaciones previas han
+demostrado que los suministros de alimentos alternativos podrían sostener a toda la población humana incluso en el desastre más extremo que elimine toda la agricultura convencional (Denkenberger y Pearce, 2014, 2015). En un desastre así, la ingesta de alimentos de la humanidad podría incluso mejorar respecto de
+la actual distribución desigual, y todas las vidas podrían mantenerse en términos de ingesta
+calórica mediante la conversión de fuentes de carbono como los árboles muertos (madera) y las hojas en alimento comestible para los humanos (Denkenberger y Pearce, 2016, 2018a). Más sorprendente aún, los cálculos preliminares muestran
+que una diversidad modesta de alimentos alternativos podría aportar una dieta equilibrada de macronutrientes y
+micronutrientes (Denkenberger y Pearce, 2018b) para mantener una salud humana razonable (Shenkin, 2006). Algunos alimentos alternativos, incluida la extracción de calorías de las hojas, serían
+útiles en otra clase de catástrofes, las que interrumpen la electricidad, como una tormenta solar extrema
+(Cole et al., 2016), o incluso una combinación de catástrofes (Denkenberger et al., 2017). Incluso sin ningún evento extremo, es importante que un sistema alimentario global resiliente sea continuo
+(es decir, que sea capaz de mantener la ingesta calórica de manera constante para que las personas no pasen hambre ni sufran
+de forma intermitente los efectos perjudiciales del hambre) (Seekell et al., 2017). En las circunstancias más extremas de una catástrofe global que bloquee el sol, el mayor desafío para alimentar a la población mundial se sitúa entre el momento en que se consumen los alimentos almacenados (cerca de 6 meses) y la
+transición a los alimentos alternativos posterior a la catástrofe (cerca de 1 año) (Denkenberger y
+Pearce, 2014, 2015). De las soluciones de alimentos alternativos que podrían ampliarse en este período, la mejor solución teórica es usar las hojas muertas por la catástrofe (a diferencia de las
+hojas agotadas de nutrientes y desprendidas de forma natural, llamadas hojarasca), por su amplia
+disponibilidad y su precio razonable en comparación con otros alimentos alternativos (Denkenberger et al., 2018). Es posible moler y prensar las hojas, hervir el líquido y luego coagular el líquido resul-
+tante como concentrado de hojas para convertirlo en alimento, que contiene cerca de 8% de la materia seca de las hojas
+originales (Leaf for Life, 2019). El líquido restante no utilizado contiene gran parte de las toxinas y se ha considerado no apto para el consumo humano (Kennedy, 1993). Aunque los rendimientos del concentrado de hojas
+elaborado a escala doméstica son menores con técnicas no industriales (Kennedy, 1993),
+realizar este proceso en los hogares sería más accesible y podría contribuir a aliviar el hambre ahora. Sin embargo, producir alimento apto para el consumo humano a nivel global a partir de hojas de árbol de esta manera o en tés es difícil porque (a) solo se puede extraer una pequeña fracción de las
+calorías de las hojas (p. ej., en el té negro, cerca de 20% de las calorías totales de las proteínas, carbohi-
+dratos y lípidos pasa al líquido [Belitz et al., 2009]); (b) consumir tés a base de hojas de árbol es2 FIST ET AL .
+
+poco común, aunque en algunas partes del mundo ya se consume té de agujas de pino (Kim y
+Chung, 2000); (c) se necesita más información sobre el porcentaje de las hojas de árbol existentes que
+podría cosecharse de forma sostenible de los muchos tipos de árboles; y (d) no se han realizado
+suficientes estudios para evaluar la toxicidad humana del extracto de hojas de los tipos comunes de hojas de árbol.
+Para superar este último desafío (d), un estudio reciente (Pearce et al., 2019) aportó una nueva
+metodología para obtener un cribado rápido de toxinas de concentrados de hojas comunes mediante un enfoque no
+dirigido, con un espectrómetro de masas híbrido de trampa de iones y orbitrap de ultraalta resolución con ionización por electrospray (ESI) acoplado a un sistema de cromatografía líquida bidimensional de ultraalta presión. Los químicos identificados mediante el enfoque no dirigido se cotejan luego
+con la base de datos OpenFoodTox (Bassan et al., 2018) para identificar sustancias químicas tóxicas. Las
+toxinas identificadas se examinan luego para validar su fórmula y se evalúa su riesgo como alimento; además, se necesitan más análisis con estándares para descartar la toxicidad. Aunque este cribado inicial es más rápido
+y menos costoso que los métodos anteriores, sigue presentando costos prohibitivos para aplicarlo a todas
+las especies de árboles del mundo. Por lo tanto, el objetivo de este estudio es proporcionar un medio de priorización
+para identificar los tipos de hojas que deberían evaluarse primero. Dado que el concentrado de hojas como
+alimento alternativo tiene el potencial de aliviar el hambre de más de 800 millones de personas hoy
+(FAO, 2018), parece apropiado centrarse en los tipos de hojas de los lugares donde viven las personas más desnutridas. Con recursos limitados para los estudios de toxicidad foliar, ¿qué tipos de bosques (clases de bosque) y los árboles que contienen deberían ser el primer objetivo del análisis toxicológico de sus hojas? Este es principalmente
+un problema de geografía aplicada, y este estudio preliminar busca resolverlo
+al determinar estas prioridades. Este estudio describe una metodología para cartografiar la biomasa foliar verde disponible y las clases forestales, y su relación espacial con la distribución mundial de la desnutri-
+ción. Se basa en métodos descritos por el Center for International Earth Science Information
+Network —CIESIN —Columbia University (2005), Doxsey-Whitfield et al. (2015) y Ruesch
+y Gibbs (2008). Los resultados de esta nueva metodología serán útiles para elaborar estudios más
+detallados sobre especies de árboles, que servirán de base para los cribados de toxicidad de hojas, con el fin
+de desarrollar las hojas como fuente alimentaria alternativa, tanto para los problemas actuales de desnutrición como para los escenarios catastróficos.
+2|MÉTODOS
+2.1 |Datos
+Los datos se seleccionaron por ser de acceso abierto y los más recientes y de alta calidad disponibles
+disponibles y se detallan a continuación. Se eligieron conjuntos de datos de los años 2000 –2002, un intervalo de fechas
+con los datos mundiales correspondientes más completos disponibles tanto para la biomasa foliar como para la desnutrición. Los datos elaborados como parte de este proyecto están disponibles en acceso abierto en formato tabular
+(Fist, 2019), y los usuarios pueden consultar en detalle las regiones en un mapa interactivo alojado en
+http://bit.ly/allfed-leaf-map.
+2.1.1 | Desnutrición mundial
+Para estimar los datos espaciales mundiales sobre desnutrición a nivel subnacional, se utilizó la
+prevalencia subnacional mundial de desnutrición infantil en 2002, elaborada por la Administración Nacional de Aeronáutica
+y del Espacio (NASA) Centro de Aplicaciones de Datos Socioeconómicos (SEDAC) que se FIST ET AL . 3
+
+usa aquí (Center for International Earth Science Information Network —CIESIN —Columbia
+University, 2005). La población mundial total de 2000 desglosada por región también proviene de
+SEDAC (2019).
+2.1.2 | Biomasa foliar
+El Panel Intergubernamental sobre el Cambio Climático (IPCC) proporciona un mapa de alta resolución de la biomasa viva
+de carbono para el año 2000 (Ruesch & Gibbs, 2008).
+2.2 |Cálculo del número total de personas que sufren desnutrición
+por región
+Se supone que los datos de SEDAC sobre bajo peso dentro de una región (que describen los niveles de
+bajo peso en niños menores de 5 años) son un buen indicador de las tasas de desnutrición en general en
+esa región. Esto se debe a que los niños dependen de los adultos para su cuidado y no se alimentan si no hay suficiente comida en la región (LaFollette & May, 1996). También se supone que la mayoría de las regiones sin datos de SEDAC o con un desglose subnacional deficiente no tienen actualmente problemas de desnutrición
+significativos. Por ejemplo, dos de esas regiones son Estados Unidos y
+Canadá, que sufren una epidemia de obesidad (Pozza & Isidori, 2018; Upadhyay et al., 2018), y a nivel mundial, el 38.9 % de los adultos tiene sobrepeso u obesidad (GNR, 2018).
+Para convertir los datos generales en el número total de personas que sufren desnutrición en
+cada región, la población total de cada región se multiplica por la fracción dada por la proporción de niños menores de 5 años con bajo peso. Esto supone que, si los niveles de desnutrición infantil son
+aproximadamente similares a los niveles de desnutrición en adultos en cada zona, este producto proporcionará una aproxi-
+mación de primer orden razonable del número total de personas que sufren desnutrición en una región determinada. A continuación, los datos de población de SEDAC (una cuadrícula ráster de 30 segundos de arco) se asignan a
+las regiones de desnutrición de SEDAC (un conjunto de datos vectoriales de polígonos) para sumar la población en esas
+regiones y establecer los niveles absolutos de desnutrición.
+El conjunto de datos resultante puede analizarse a nivel mundial y regional. Aquí se usan como ejemplo las regiones de
+Uttar Pradesh, en la India, y el noreste de Nigeria, dos regiones con
+altos niveles de desnutrición. También representan zonas donde este enfoque sería más viable
+ya que las personas pobres viven dentro o cerca de los bosques.
+2.3 |Estimación de la distribución espacial de las especies de árboles y de la
+biomasa foliar
+La biomasa total de carbono del Lawrence Berkeley National Laboratory (Ruesch &
+Gibbs, 2008) debe traducirse en una estimación razonablemente precisa de la biomasa foliar, desglosada
+por tipo de bosque. Primero, se determina la cantidad de este carbono que está sobre el suelo, en los árboles.
+Segundo, se halla la proporción de la biomasa de un árbol que es carbono. Finalmente, se aplica la proporción
+de la biomasa de un árbol formada por hojas, para determinar la biomasa foliar total
+disponible en cada región.
+La mayor parte de la biomasa determinada por Ruesch y Gibbs (2008) está contenida en árboles,
+y no en pastos, cultivos, etc. Para determinar la cantidad específica de biomasa arbórea en el FIST ET AL . 4
+
+conjunto de datos, se requiere la distribución espacial mundial de los árboles, para lo cual se utilizó la
+Agencia Espacial Europea (ESA, 2019) de cobertura terrestre global. Las clases de suelo relevantes para la cobertura arbórea
+se cartografían, teniendo en cuenta que se excluyeron las siguientes clases: sistemas montañosos, regiones polares,
+regiones desérticas, estepas, matorrales y cuerpos de agua. Estas clases se excluyeron por su aislamiento geográfico, su carácter hostil y la dificultad de cosechar hojas (por ejemplo, sería impracticable
+suponer una cosecha de hojas generalizada). Se supone que la proporción de la biomasa seca de un árbol que es carbono es
+del 47 % (Lamlom & Savidge, 2006), mientras que el porcentaje de la biomasa de un árbol
+formada por hojas se supone del 1 % (Poorter et al., 2012). Cabe señalar que, para los fines de este estudio, las rápidas tasas de aumento del concentrado de hojas hacen que la biomasa foliar del 1 %
+sea la de mayor interés, pero que la madera restante podría usarse para alimentos alternativos, por ejemplo,
+al alimentar con ella a escarabajos y hongos, y el material restante a ratas.
+Estos valores se combinan para generar un mapa de biomasa foliar a través de las distintas
+clasificaciones forestales.
+2.4 |Combinación de la densidad de desnutrición y la biomasa foliar para determinar las
+zonas forestales a evaluar
+Primero, se determinan los tipos de bosque más comunes en regiones con altos niveles de desnutrición, comparando
+los datos regionales de bajo peso generados anteriormente con los datos de zonas forestales
+(ESA, 2019). Estos datos pueden examinarse de cerca para entender qué clasificaciones forestales predominan en las zonas que más sufren desnutrición. De nuevo,
+se usan como ejemplo las regiones de la India y Nigeria. A continuación, se cartografía la clase forestal más común por pobla-
+ción y superficie regional, con base en (a) el área forestal total y (b) la biomasa foliar total. Este análisis puede proporcionar una lista de prioridades, tanto mundial como regional, de tipos de bosque en los que concentrar la investigación sobre alternativas
+alimentarias, según las vidas potencialmente salvadas. Sin embargo, para determinar si hay
+realmente suficientes hojas para ser útiles, se realiza un análisis final para obtener la biomasa foliar total disponible en cada región, en todas las clases forestales, por persona que sufre desnutrición.
+Estos datos están disponibles en formato tabular (Fist, 2019), y los usuarios pueden consultar en detalle las
+regiones en un mapa interactivo alojado en http://bit.ly/allfed-leaf-map.
+3|RESULTADOS
+Siguiendo los métodos descritos anteriormente, la proporción de niños menores de 5 años
+con bajo peso se cartografía en la Figura 1a, y la proporción de la población total que
+tiene menos de 5 años se muestra en la Figura 1b. El indicador de la desnutrición general en una región se describe mediante los límites con borde negro de la Figura 1. Los resultados, derivados de los límites regionales de SEDAC,
+tienen mayor resolución en zonas con un problema de desnutrición más grave, como
+el África subsahariana. Como muestra la Figura 1, estos límites no dan una idea particularmente buena de cómo se distribuyen los niveles de desnutrición dentro de ciertas regiones, como Rusia. Además, estos
+resultados no proporcionan información para los países en los que no hay datos de desnutrición,
+lo que abarca América del Norte, Europa Occidental, Australia/Nueva Zelanda y varios otros.
+La población mundial de 2000 se muestra en la Figura 2. Los datos de población se asignan a
+las regiones de desnutrición mostradas en las Figuras 1a, b y 3a, b. Los mapas de la Figura 3 destacan
+el gran número de niños que sufren desnutrición en el sur y el sudeste de Asia, en particular
+la India e Indonesia. FIST ET AL . 5
+
+Con este conjunto de datos pueden analizarse regiones individuales. Esto se muestra en la Figura 4 para el estado
+de Uttar Pradesh, en la India, y en la Figura 5 para el noreste de Nigeria.
+Solo en Uttar Pradesh (Figura 4a) hay más de 10 millones de niños menores de 5 años con bajo peso, lo que representa un alarmante 51 % del total de niños menores de 5 años. Con la metodología descrita anteriormente, la población inferida con bajo peso en esta región es de 89 millones, en una población total de 173 millones.
+La Figura 4b muestra el mismo conjunto de datos para el noreste de Nigeria, donde la población total es de 22 millones, el porcentaje de niños menores de 5 años con bajo peso es del 38 %, y la población inferida con bajo peso menor de 5 años y en general es de 1.4 millones y 8.3 millones, respectivamente.
+FIGURA 1 (a) Proporción de niños menores de 5 años que también tienen bajo peso, y (b) proporción de la población total menor de 5 años6 FIST ET AL .
+
+FIGURA 2 La población mundial en 2000. Obsérvese que los valores de la leyenda de cada color están en escala logarítmica FIST ET AL . 7
+
+FIGURA 3 (a) Población total menor de 5 años con bajo peso. (b) Población total con bajo peso
+suponiendo que el porcentaje de niños con bajo peso puede extrapolarse a la población total.
+Las regiones sin datos disponibles se muestran en negro8 FIST ET AL .
+
+FIGURA 4 (a) Detalle de los resultados de los cálculos para Uttar Pradesh. (b) Detalle de los resultados de los cálculos para
+el noreste de Nigeria FIST ET AL . 9
+
+FIGURA 5 (a) Toneladas de biomasa viva de carbono por hectárea en 2000. (b) Regiones del planeta cubiertas por bosques y desglosadas por tipo de zona forestal. (c) Biomasa foliar en las distintas clasificaciones forestales
+mostradas en (b)10 FIST ET AL .
+
+El siguiente paso es complementar el análisis de la distribución mundial del hambre con infor-
+mación disponible sobre la biomasa foliar en cada una de estas regiones.
+De estos datos se desprende que la mayor parte de la biomasa viva mundial se encuentra en la región
+ecuatorial, con un factor típico de /C242/C2 veces más biomasa por hectárea que incluso las regiones de
+densidad de biomasa del norte o del sur.
+Con los datos de cobertura terrestre globales de la ESA (2019), las regiones boscosas del mundo, desglosadas
+por clase amplia, se muestran en la Figura 5b. Estos datos se validaron de forma cruzada con los conjuntos de datos de Global Forest Watch (2000) Tree Cover y NASA MODIS Land Cover (2019). De las clases forestales excluidas según la metodología descrita anteriormente, los sistemas montañosos son
+las clases con mayor cubierta forestal según la biomasa. Sin embargo, para este análisis, las
+regiones montañosas se siguieron excluyendo por la relativa dificultad de cosechar hojas en ese tipo de ambientes.
+Al combinar los datos mostrados en las Figuras 5a,b, usando la proporción de carbono en la bio-
+masa de un árbol, junto con la proporción de la biomasa de un árbol formada por hojas, obtenemos los
+datos de la Figura 5c: un mapa de biomasa foliar en toneladas/ha en las distintas zonas forestales
+clasificaciones forestales.
+Los datos de población con bajo peso se superponen con las regiones de bosque disponible y se muestran en
+la Figura 6a.
+La Figura 6b amplía los datos de clase forestal y desnutrición en la India. Hay tres clasificaciones forestales pri-
+marias para la India: bosques tropicales secos, bosques tropicales húmedos caducifolios y
+bosques tropicales lluviosos. La Figura 6b indica que concentrarse en las hojas de árboles comunes a los bosques tropicales secos ofrecería el mayor potencial de reducción de la desnutrición en esta región, ya que esta
+clase forestal tiene la mayor cobertura local y la mayor biomasa foliar total. Estos datos también pueden consultarse en formato tabular
+(Fist, 2019). Además, como se aprecia en la Figura 6b, el extracto de hojas no podría usarse para reducir la desnutrición en todas las regiones de la India (sobre todo en el oeste), a menos que la biomasa foliar se
+transporte, ya que hay regiones que sufren problemas de desnutrición (en rojo) con
+ningún bosque disponible.
+Nigeria comparte los mismos tipos de bosques que la India. De igual manera, no todas las partes de Nigeria
+que sufren desnutrición tienen acceso a bosques (véase la Figura 6c). El transporte sería nece-
+sario para usar el extracto de hojas para controlar la desnutrición en Nigeria. Esto se complica por la distribución subregional de los grupos lingüísticos (Hansford et al., 1976). La Figura 6c indica que los árboles de bosques tropicales húmedos caducifolios deberían evaluarse primero para usar el extracto de hojas como alimento alterna-
+tivo en Nigeria. Otros países pueden usar los conjuntos de datos proporcionados con este estudio para evaluar
+listas de prioridades para sus propias regiones.
+La clase forestal más común por región se muestra en las Figuras 7a,b, por superficie y por bio-
+masa total, respectivamente. Obsérvense las prioridades de algunas regiones, como Argentina.
+Por último, la biomasa foliar total disponible en cada región, en todas las clases forestales, por persona
+que sufre desnutrición se muestra en la Figura 8.
+En toda la Tierra, las clasificaciones forestales que podrían proporcionar alimento alternativo con extracto de hojas a las personas que sufren desnutrición se muestran en la Tabla 1. Como se ve en la Tabla 1,
+los tipos de bosque que deberían evaluarse con más detalle para acabar con el hambre aguda mediante extracto de hojas,
+son todos tropicales: los bosques húmedos caducifolios, los bosques secos y las selvas tropicales representan la gran mayoría
+de la población mundial con bajo peso.
+La Tabla 2 muestra la cantidad total disponible de biomasa foliar seca en cada una de las clases forestales
+consideradas en este estudio. Estos datos son especialmente relevantes para catástrofes globales que obscurecen el sol
+escenarios en los que se requeriría una gran cantidad de alimento alternativo para alimentar a la
+población mundial. FIST ET AL . 11
+
+FIGURA 6 (a) Datos de población con bajo peso (blanco !rojo; negro donde no hay datos) superpuestos a las regiones de bosque disponible (verde). (b) Datos de población con bajo peso (blanco !rojo; negro donde no hay datos) frente a clasificaciones forestales (puntos), India. (c) Datos de población con bajo peso (blanco !rojo; negro donde no hay datos) frente a clasificaciones forestales en Nigeria12 FIST ET AL .
+
+4|DISCUSIÓN
+El análisis presentado en este estudio tiene varias limitaciones. En primer lugar, está limitado por la actualidad de los conjuntos de datos, todos con años de referencia entre 2000 y 2002, lo que afecta a los resultados
+ya que todas las entradas han cambiado. Razonablemente, cabe esperar que la población mundial, el número de personas desnutridas y la cubierta arbórea hayan cambiado en el periodo intermedio. Sin embargo, estos eran los mejores datos completos disponibles y proporcionan buenos indicadores semicuantitativos tanto para la investigación como para la acción política. Se recomienda un trabajo futuro que utilice teledetección (Djomo & Chimi, 2017; Drake et al., 2003; Halme et al., 2019; Heiskanen, 2006; Zheng
+et al., 2007) y el índice de vegetación normalizado de firma de puntos calientes (NHVI), el índice de área foliar (LAI),
+FIGURA 7 La clasificación forestal más prevalente por región de población, según (a) el área forestal total
+y (b) la biomasa foliar total disponible FIST ET AL . 13
+
+FIGURA 8 Biomasa foliar seca por individuo con bajo peso en toneladas/persona, mostrada en las regiones de población. Obsérvese que las categorías de la leyenda están en escala logarítmica
+TABLA 1 Clasificaciones forestales que podrían proporcionar alimento alternativo con extracto de hojas a la mayor cantidad de personas que sufren desnutrición
+Clasificación forestal Población mundial con bajo peso en la región
+donde la clasificación forestal es la más prevalente
+Bosque tropical húmedo caducifolio 348,514,567
+Bosque seco tropical 309,536,295
+Selva tropical lluviosa 226,873,692Bosque húmedo subtropical 37,503,126
+Bosque continental templado 17,900,192
+Bosque seco subtropical 12,574,476
+Bosque de coníferas boreal 4,988,328
+Bosque oceánico templado 117,119
+Total 958,007,79514 FIST ET AL .
+
+índice de vegetación de diferencia normalizada (NDVI), y de la función de distribución bidireccional de la reflectancia, fun-
+ción (BRDF) con técnicas para estimar la biomasa foliar (Cunliffe et al., 2020; Hasegawa et al., 2010;
+Sader et al., 1989; Zhu & Liu, 2015).
+Además, no todas las zonas tenían datos disponibles (regiones negras en las figuras). Con el cambio climático global acelerándose
+(Bevis et al., 2019; Edenhofer, 2015; Houghton, 1996; Schuur et al., 2015;
+Turetsky et al., 2019), la cobertura del conjunto de datos de superficie forestal (clases forestales) también cabría esperar que cambie
+al cambio hacia el futuro (Gatti et al., 2019). La metodología para calcular la biomasa foliar a partir de los datos del stock global de carbono tiene varias fuentes de supuestos que podrían refinarse
+cuando se hayan realizado análisis detallados de la proporción de masa de las hojas de árboles en regiones específicas.
+Además, en este estudio se excluyeron las regiones montañosas; pero si se encuentra una forma técnicamente viable de cosechar hojas en esas regiones, deberían incluirse en análisis futuros. Ade-
+más, podrían evaluarse otros tipos de hojas (por ejemplo, de arbustos), lo que podría alterar la
+lista de prioridades.
+Los resultados de este estudio son útiles, ya que dan una fuerte indicación de los tipos de bosques en los que
+debería concentrarse la investigación futura sobre el uso de hojas como alimento alternativo para
+ayudar a reducir la desnutrición a corto plazo. También hay áreas claras en las que se desea un trabajo espacial futuro
+para aprovechar más este estudio. El siguiente paso sugerido en este análisis es desglosar las clases forestales de este estudio en especies de árboles individuales en distintas regiones y/o
+elaborar un conjunto de datos globales que muestre la distribución de especies de árboles. La viabilidad técnica general de este
+enfoque para resolver los problemas actuales de hambre requiere bastante más estudio, ya que el hambre actual es principalmente una construcción social (Maurer & Sobal, 1995) debida a una mala gobernanza (Birner, 2007) o
+a la guerra (Toole & Waldman, 1993); incluso distancias cortas de transporte pueden resultar técnica o económica-
+mente prohibitivas para los pobres del mundo. Este análisis podría, por tanto, mejorarse considerando el
+impacto tanto de la propiedad (por ejemplo, quién es dueño de los bosques) como del envío dentro de un
+mismo país entre regiones, así como el envío internacional y el impacto del procesamiento regional frente
+al distribuido. Además, los métodos de cosecha y procesamiento de hojas para obtener concentrado de proteína de hoja (LPC) requieren bastante más investigación técnica para encontrar los métodos más eficientes y sostenibles, y determinar la viabilidad, en particular para el hambre aguda. Por ejemplo, ¿qué
+porcentaje de hojas puede cosecharse fácilmente de especies de árboles concretas en regiones específicas sin
+provocar la muerte de los árboles y la deforestación para el hambre actual? Cabe señalar que, tras un importante TABLA 2 Biomasa foliar seca total en toneladas, en función de la clasificación forestal
+Clasificación forestal Biomasa foliar seca total (toneladas)
+Selva tropical lluviosa 4,383,160,948
+Bosque tropical húmedo caducifolio 1,545,050,205
+Bosque seco tropical 621,972,869
+Bosque húmedo subtropical 521,891,853
+Bosque de coníferas boreal 432,035,896
+Bosque continental templado 186,085,629
+Bosque de tundra boreal 112,470,103
+Bosque oceánico templado 120,400,200Bosque seco subtropical 95,440,491
+Total 8,018,508,194FIST ET AL . 15
+
+un evento GCR, los árboles morirían de todos modos. También es necesario trabajo futuro para evaluar el
+impacto de consecuencias no deseadas (por ejemplo, la deforestación y las emisiones de carbono como resultado de
+una extracción generalizada de LPC mediante métodos de tala). Trabajo futuro también podría actualizar los datos
+de entrada usados en este análisis. Por ejemplo, ya están disponibles datos de desnutrición del FoodSecurity Portal (2019).
+Además, estos mismos métodos usados en este estudio podrían emplearse para la determinación de prioridades
+de tipos de bosque que estudiar para evaluar la viabilidad del concentrado de hojas como alimento alternativo en escenarios de riesgo catastrófico global (GCR) que obscurecen el sol. En estos casos, sería importante una visión más global de la disponibilidad de biomasa foliar, en lugar de una enfocada específicamente en las
+regiones más desnutridas.
+Por último, se necesita trabajo adicional para poder determinar cuántas personas podrían alimentarse
+con la biomasa foliar existente en una región, cosechada de forma sostenible para atender la desnutrición aguda
+(por ejemplo, cosechando un porcentaje de hojas arrancándolas del árbol), así como usando
+métodos más extremos para escenarios GCR que obscurecen el sol (por ejemplo, talar los árboles y cosechar todas las hojas, ya que los árboles morirán de todos modos en tal evento). Para el primero, se necesita el porcentaje de
+hojas que puede cosecharse de forma sostenible de las distintas especies de árboles pertinentes.
+Para ambos escenarios, también habría que determinar experimentalmente el porcentaje del peso seco de las hojas que puede extraerse como alimento comestible para distintas especies de árboles. Estas técnicas tendrían que sopesarse frente a otras soluciones analizadas previamente en un
+desastre que obscurece el sol, así como frente a nuevas soluciones como la ampliación de la producción de cultivos en invernadero
+(Alvarado et al., 2020), la producción de proteína microbiana a partir de la conversión de hidrógeno (Martínez et al., 2021), o la reconversión de biorrefinerías para producir azúcar (Throup et al., 2020).
+Por último, puede que sea posible un consumo calórico menor que las recomendaciones de la Organización Mundial de la Salud
+(OMS, 2012), por lo que se necesita más claridad sobre el aporte calórico necesario para sostener la vida humana, a fin de calcular la masa de biomasa foliar que debe estar disponible
+en todos los escenarios.
+5|CONCLUSIONES
+Este estudio aplicó con éxito un nuevo enfoque para cartografiar la biomasa foliar verde disponible y las
+clases forestales correspondientes, y su relación espacial con la distribución mundial de personas con insu-
+ficiencia ponderal. Logró identificar las clases forestales con mayor probabilidad de ofrecer un acceso cercano a los
+hambrientos del mundo para usar como alimento alternativo el concentrado de hojas. Estas clases forestales son los bosques tropicales húmedos
+caducifolios, los bosques tropicales secos y las selvas tropicales lluviosas. Estos resultados serán úti-
+les para elaborar una lista específica de especies de árboles sobre las que realizar análisis de toxicidad de hojas en estudios futuros,
+con el fin de desarrollar las hojas como fuente alimentaria alternativa, tanto para la desnutrición actual como para los escenarios catastróficos graves.
+INFORMACIÓN DE FINANCIACIÓN
+Este trabajo fue financiado por el Thompson Endowment y el Centre for Effective Altruism.
+CONFLICTO DE INTERESES
+Los autores declaran que no existe conflicto de intereses.
+ORCID
+Joshua M. Pearce
+https://orcid.org/0000-0001-9802-3056 16 FIST ET AL .
+
+REFERENCIAS
+Alvarado, K. A., Mill, A., Pearce, J. M., Vocaet, A., & Denkenberger, D. (2020). Scaling of greenhouse crop
+production in low sunlight scenarios. Science of the Total Environment ,707, 136012. https://doi.org/10.
+1016/j.scitotenv.2019.136012
+Bassan, A., Ceriani, L., Richardson, J., Livaniou, A., Ciacci, A., Baldin, R., Kovarich, S., Fioravanzo, E.,
+Pavan, M., Gibin, D., Di Piazza, G., Pasinato, L., Cappé, S., Verhagen, H., Robinson, T., & Dorne, J. L. (2018). OpenFoodTox: EFSA ’s chemical hazards database. https://doi.org/10.5281/zenodo.1252752
+Belitz, H. D., Grosch, W., & Schieberle, P. (2009). 2009 food chemistry . Berlín, Alemania: Springer.
+Bevis, M., Harig, C., Khan, S. A., Brown, A., Simons, F. J., Willis, M., Fettweis, X., Van Den Broeke, M. R.,
+Madsen, F. B., Kendrick, E., & Caccamise, D. J. (2019). Accelerating changes in ice mass within Greenland,
+and the ice sheet ’s sensitivity to atmospheric forcing. Proceedings of the National Academy of Sciences ,
+116(6), 1934 –1939. https://doi.org/10.1073/pnas.1806562116
+Bhutta, Z. A., Berkley, J. A., Bandsma, R. H. J., Kerac, M., Trehan, I., & Briend, A. (2017). Severe childhood
+malnutrition. Nature Reviews Disease Primers ,3, 17067. https://doi.org/10.1038/nrdp.2017.67
+Birner, R. (2007). Improving governance to eradicate hunger and poverty. Twenty twenty (2020) focus brief on
+the world ’s poor and hungry people/International Food Policy Research Institute (IFPRI).
+Center for International Earth Science Information Network —CIESIN —Columbia University. (2005).
+Poverty mapping project: Global subnational prevalence of child malnutrition. https://doi.org/10.7927/h4k64g12
+Cole, D., Denkenberger, D., Griswold, M., Abdelkhaliq, M., & Pearce, J. (2016). Feeding everyone if industry is
+disabled. Proceedings of the 6th International Disaster and Risk Conference, Davos, Suiza.
+Cunliffe, A. M., Assmann, J. J., Daskalova, G. N., Kerby, J. T., & Myers-Smith, I. H. (2020). Aboveground biomass
+corresponds strongly with drone-derived canopy height but weakly with greenness (NDVI) in a shrubtundra landscape. Environmental Research Letters ,15(12), 125004.
+Denkenberger, D., & Pearce, J. (2018b). Micronutrient availability in alternative foods during agricultural
+catastrophes. Agriculture ,8, 169. https://doi.org/10.3390/agriculture8110169
+Denkenberger, D., Pearce, J., Taylor, A. R., & Black, R. (2018). Food without sun: Price and life-saving potential.
+Foresight ,21, 118–129. https://doi.org/10.1108/FS-04-2018-0041
+Denkenberger, D., & Pearce, J. M. (2014). Feeding everyone no matter what: Managing food security after global
+catastrophe . Academic Press.
+Denkenberger, D. C., Cole, D. D., Abdelkhaliq, M., Griswold, M., Hundley, A. B., & Pearce, J. M. (2017). Feeding
+everyone if the sun is obscured and industry is disabled. International Journal of Disaster Risk Reduction ,21,
+284–290. https://doi.org/10.1016/j.ijdrr.2016.12.018
+Denkenberger, D. C., & Pearce, J. M. (2015). Feeding everyone: Solving the food crisis in event of global
+catastrophes that kill crops or obscure the sun. Futures, Confronting Future Catastrophic Threats to
+Humanity ,72,5 7–68. https://doi.org/10.1016/j.futures.2014.11.008
+Denkenberger, D. C., & Pearce, J. M. (2016). Cost-effectiveness of interventions for alternate food to address
+agricultural catastrophes globally. International Journal of Disaster Risk Science ,7(3), 205 –215. https://doi.
+org/10.1007/s13753-016-0097-2
+Denkenberger, D. C., & Pearce, J. M. (2018a). Cost-effectiveness of interventions for alternate food in the
+United States to address agricultural catastrophes. International Journal of Disaster Risk Reduction ,27,
+278–
+289. https://doi.org/10.1016/j.ijdrr.2017.10.014
+Djomo, A. N., & Chimi, C. D. (2017). Tree allometric equations for estimation of above, below and total biomass
+in a tropical moist forest: Case study with application to remote sensing. Forest Ecology and Management ,
+391, 184–193. https://doi.org/10.1016/j.foreco.2017.02.022
+Doxsey-Whitfield, E., MacManus, K., Adamo, S. B., Pistolesi, L., Squires, J., Borkovska, O., & Baptista, S. R.
+(2015). Taking advantage of the improved availability of census data: A first look at the Gridded Population
+of the World, Version 4 (GPWv4). Papers in Applied Geography ,1(3), 226 –234. https://doi.org/10.1080/
+23754931.2015.1014272
+Drake, J. B., Knox, R. G., Dubayah, R. O., Clark, D. B., Condit, R., Blair, J. B., & Hofton, M. (2003).
+Above-ground biomass estimation in closed canopy neotropical forests using lidar remote sensing: Factors affecting the generality of relationships. Global Ecology and Biogeography ,12(2), 147 –159. FIST ET AL . 17
+
+Edenhofer, O. (ed.) (2015). Climate change 2014: Mitigation of climate change (vol. 3). Cambridge University
+Press.
+European Space Agency. (2019). ESA data user element [documento WWW]. Consultado en http://dup.esrin.esa.
+int/page_globcover.php (consultado el 7.8.19).
+Fist, T. (2019). Mapping leaf biomass and forest classes against global malnutrition [documento WWW]. Google
+Docs. Consultado en bit.ly/allfed-leaf-table (consultado el 7.8.19).
+Food and Agriculture Organization of the United Nations. (2018). Fao.org SOFI 2018 —The State of Food Secu-
+rity and Nutrition in the World. Consultado en http://www.fao.org/state-of-food-security-nutrition/en/
+(consultado el 7.8.19).
+Food Security Portal. (2019). Prevalence of undernourishment (%). Consultado en http://www.
+foodsecurityportal.org/api/countries/fao-population-under (consultado el 7.8.19).
+Gatti, R. C., Callaghan, T., Velichevskaya, A., Dudko, A., Fabbio, L., Battipaglia, G., & Liang, J. (2019). Accelerat-
+ing upward treeline shift in the Altai Mountains under last-century climate change. Scientific Reports ,9(1),
+7678.
+Global Forest Watch. (2000). Tree cover (2000) Consultado en https://beta-gfw.opendata.arcgis.com/datasets/
+7876b225f8034a0ebba79fad4afb80ad (consultado el 7.8.19).
+Global Nutrition Report. (2018). 2018 Global Nutrition Report [documento WWW], 09:58:49.202407 +00:00.
+Global Nutrition Report. Consultado en https://globalnutritionreport.org/reports/global-nutrition-report-2018/ (consultado el 7.8.19).
+Halme, E., Pellikka, P., & Mõttus, M. (2019). Utility of hyperspectral compared to multispectral remote sensing
+data in estimating forest biomass and structure variables in Finnish boreal forest. International Journal of
+Applied Earth Observation and Geoinformation ,83, 101942. https://doi.org/10.1016/j.jag.2019.101942
+Hansford, K., Bendor-Samuel, J., & Stanford, R. (1976). A provisional language map of Nigeria. Savanna: A
+Journal of the Environmental and Social Sciences ,5(2), 115 –124.
+Hasegawa, K., Matsuyama, H., Tsuzuki, H., & Sweda, T. (2010). Improving the estimation of leaf area index by
+using remotely sensed NDVI with BRDF signatures. Remote Sensing of Environment ,114(3), 514 –519.
+https://doi.org/10.1016/j.rse.2009.10.005
+Heiskanen, J. (2006). Estimating aboveground tree biomass and leaf area index in a mountain birch forest using
+ASTER satellite data. International Journal of Remote Sensing ,27(6), 1135 –1158. https://doi.org/10.1080/
+01431160500353858
+Houghton, E. (1996). Climate change 1995: The science of climate change: Contribution of working group I to the
+second assessment report of the Intergovernmental Panel on Climate Change (vol. 2). Cambridge University
+Press.
+Kennedy, D. (1993). Leaf concentrate: A field guide for small scale programs . FL, USA: Leaf for Life: Interlachen.
+Kim, K.-Y., & Chung, H.-J. (2000). Flavor compounds of pine sprout tea and pine needle tea. Journal of
+Agricultural and Food Chemistry ,48, 1269 –1272. https://doi.org/10.1021/jf9900229
+LaFollette, H., & May, L. (1996). Suffer the little children. En World hunger and morality (págs. 70 –84). Upper
+Saddle River, NJ: Prentice Hall.
+Lamlom, S. H., & Savidge, R. A. (2006). Carbon content variation in boles of mature sugar maple and giant
+sequoia. Tree Physiology ,26(4), 459 –468. https://doi.org/10.1093/treephys/26.4.459
+Leaf for Life. (2019) Industrial leaf concentrate process. Disponible en línea: https://www.leafforlife.org/PAGES/
+INDUSTRI.HTM (consultado el 7.8.19).
+Martínez, J. B. G., Egbejimba, J., Throup, J., Matassa, S., Pearce, J. M., & Denkenberger, D. C. (2021). Potential
+of microbial protein from hydrogen for preventing mass starvation in catastrophic scenarios. Sustainable
+Production and Consumption ,25, 234–
+247. https://doi.org/10.1016/j.spc.2020.08.011
+Maurer, D., & Sobal, J. (eds.) (1995). Eating agendas: Food and nutrition as social problems . Transaction
+Publishers.
+McDonald, C. M., Olofin, I., Flaxman, S., Fawzi, W. W., Spiegelman, D., Caulfield, L. E., Black, R. E.,
+Ezzati, M., & Danaei, G. (2013). The effect of multiple anthropometric deficits on child mortality: Meta-analysis of individual data in 10 prospective studies from developing countries. The American Journal
+of Clinical Nutrition ,97, 896–901. https://doi.org/10.3945/ajcn.112.047639
+NASA MODIS Land Cover. (2019). Land cover & phenology. Consultado en https://ladsweb.modaps.eosdis.
+nasa.gov/missions-and-measurements/science-domain/land-cover-and-phenology (consultado el 7.8.19).18 FIST ET AL .
+
+Pearce, J. M., Khaksari, M., & Denkenberger, D. (2019). Preliminary automated determination of edibility of
+alternative foods: Non-targeted screening for toxins in red maple leaf concentrate. Plants ,8, 110. https://
+doi.org/10.3390/plants8050110
+Poorter, H., Niklas, K. J., Reich, P. B., Oleksyn, J., Poot, P., & Mommer, L. (2012). Biomass allocation to leaves,
+stems and roots: Meta-analyses of interspecific variation and environmental control. New Phytologist ,193,
+30–50. https://doi.org/10.1111/j.1469-8137.2011.03952.x
+Pozza, C., & Isidori, A. M. (2018). What ’s behind the obesity epidemic. En Imaging in bariatric surgery (págs. 1 –8).
+Springer, Cham.
+Ruesch, A., & Gibbs, H. K. (2008). New IPCC tier-1 global biomass carbon map for the year 2000. Disponible
+en línea desde el Carbon Dioxide Information Analysis Center [http://cdiac.ess-dive.lbl.gov], Oak Ridge National Laboratory, Oak Ridge, Tennessee.
+Sader, S. A., Waide, R. B., Lawrence, W. T., & Joyce, A. T. (1989). Tropical forest biomass and successional age
+class relationships to a vegetation index derived from Landsat TM data. Remote Sensing of Environment ,28,
+143–198. https://doi.org/10.1016/0034-4257(89)90112-0
+Schuur, E. A., McGuire, A. D., Schädel, C., Grosse, G., Harden, J. W., Hayes, D. J., Hugelius, G., Koven, C. D.,
+Kuhry, P., Lawrence, D. M., & Natali, S. M. (2015). Climate change and the permafrost carbon feedback. Nature ,520(7546), 171.
+Seekell, D., Carr, J., Dell ’Angelo, J., D ’Odorico, P., Fader, M., Gephart, J., Kummu, M., Magliocca, N.,
+Porkka, M., Puma, M., Ratajczak, Z., Rulli, M. C., Suweis, S., & Tavoni, A. (2017). Resilience in the global food system. Environmental Research Letters ,12, 025010. https://doi.org/10.1088/1748-9326/aa5730
+Shenkin, A. (2006). Micronutrients in health and disease. Postgraduate Medical Journal ,82, 559–567. https://doi.
+org/10.1136/pgmj.2006.047670
+Socioeconomic Data and Applications Center. (2019). Gridded population of the world (GPW), v4 jSEDAC
+[documento WWW]. URL https://sedac.ciesin.columbia.edu/data/collection/gpw-v4 (consultado el 7.8.19).
+Throup, J., Bals, B., Cates, J., García Martínez, J. B., Pearce, J. M., & Denkenberger, D. (2020). Rapid repurposing
+of biorefinery, pulp & paper and breweries for lignocellulosic sugar production in global food shortages.
+https://doi.org/10.31219/osf.io/jns2e
+Toole, M. J., & Waldman, R. J. (1993). Refugees and displaced persons: War, hunger, and public health. JAMA ,
+270(5), 600 –605. https://doi.org/10.1001/jama.1993.03510050066029
+Turetsky, M. R., Abbott, B. W., Jones, M. C., Anthony, K. W., Olefeldt, D., Schuur, E. A., Koven, C.,
+McGuire, A. D., Grosse, G., Kuhry, P., & Hugelius, G. (2019). Permafrost collapse is accelerating carbon release. Nature ,569,3 2–34. https://doi.org/10.1038/d41586-019-01313-4
+United Nations Children ’s Fund. (2005). The state of the world ’s children 2006: Excluded and invisible . Hong
+Kong, China: UNICEF. ISBN 978-92-806-3916-2
+Upadhyay, J., Farr, O., Perakakis, N., Ghaly, W., & Mantzoros, C. (2018). Obesity as a disease. Medical Clinics ,
+102(1), 13 –33. https://doi.org/10.1016/j.mcna.2017.08.004
+World Health Organization. (2012). En línea en http://www.wfp.org/hunger/what-is (consultado el 04/2012).Zheng, G., Chen, J. M., Tian, Q. J., Ju, W. M., & Xia, X. Q. (2007). Combining remote sensing imagery and forest
+age inventory for biomass mapping. Journal of Environmental Management ,85(3), 616
+–623. https://doi.org/
+10.1016/j.jenvman.2006.07.015
+Zhu, X., & Liu, D. (2015). Improving forest aboveground biomass estimation using seasonal Landsat NDVI
+time-series. ISPRS Journal of Photogrammetry and Remote Sensing ,102, 222–231. https://doi.org/10.1016/
+j.isprsjprs.2014.08.014
+Cómo citar este artículo: Fist, T., Adesanya, A. A., Denkenberger, D., & Pearce, J. M.
+(2021). Global distribution of forest classes and leaf biomass for use as alternative foods to
+minimize malnutrition. World Food Policy ,1–19. https://doi.org/10.1002/wfp2.12030 FIST ET AL . 19
+

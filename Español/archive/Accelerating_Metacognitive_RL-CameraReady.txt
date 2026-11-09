@@ -1,0 +1,603 @@
+Mejorar el aprendizaje por refuerzo metacognitivo
+mediante estructuras de recompensa y retroalimentación
+Paul M. Krueger1(pmk@berkeley.edu)
+Falk Lieder1(falk.lieder@berkeley.edu)
+Thomas L. Griffiths (tom griffiths@berkeley.edu)
+Departamento de Psicología, Universidad de California en Berkeley, Berkeley, CA 94720, EE. UU.
+1Estos autores contribuyeron por igual.
+Resumen
+¿Cómo aprendemos a pensar mejor y qué podemos hacer para pro-
+mover ese aprendizaje metacognitivo? Aquí proponemos que el crecimiento cog-
+nitivo avanza mediante el aprendizaje por refuerzo metacognitivo
+. Aplicamos esta teoría para modelar cómo las personas aprenden cuánto
+planificar con antelación y ponemos a prueba sus predicciones sobre la velocidad de
+el aprendizaje metacognitivo en dos experimentos. En el primer experi-
+mento encontramos que nuestro modelo puede distinguir una estructura de recompensas que
+favorece el aprendizaje por refuerzo metacognitivo de otra que
+lo dificulta. En el segundo experimento, mostramos que nuestro modelo
+puede usarse para diseñar un mecanismo de retroalimentación que mejora
+el aprendizaje por refuerzo metacognitivo en un entorno que
+dificulta el aprendizaje. Nuestros resultados sugieren que modelar el aprendizaje metacog-
+nitivo es un paso prometedor hacia la promoción del desarrollo
+cognitivo.
+Palabras clave: toma de decisiones; planificación; aprendizaje por refuer-
+zo metacognitivo; entrenamiento cognitivo
+Introducción
+Uno de los aspectos más notables de la mente humana es su
+capacidad para mejorarse a sí misma a partir de la experiencia. Este aprendizaje
+ocurre en una variedad de ámbitos, desde las asociaciones simples de estímulo-
+respuesta y las habilidades motoras y perceptivas, hasta la resolución de
+problemas, el control cognitivo y el propio aprendizaje (C. S. Green &
+Bavelier, 2008; Bavelier, Green, Pouget y Schrater, 2012).
+Las demostraciones de plasticidad cognitiva y cerebral han ins-
+pirado programas de entrenamiento cognitivo. El éxito del entrenamiento
+cognitivo ha sido desigual y los mecanismos de aprendizaje subyacentes
+no se comprenden bien (Owen et al., 2010; Anguera
+et al., 2013; Morrison y Chein, 2011). La retroalimentación es un com-
+ponente importante de muchos programas eficaces de entrenamiento cognitivo
+, pero sigue sin estar claro qué hace que algunas estructuras de retroalimentación
+sean más eficaces que otras, y no existe ningún método de diseño fundamentado en principios
+cipio para diseñar estructuras de retroalimentación óptimas.
+Para abordar estos problemas, modelamos la plasticidad cognitiva
+como aprendizaje por refuerzo metacognitivo. Esta perspectiva per-
+mite trasladar métodos para acelerar el aprendizaje por refuerzo
+en robots (Ng, Harada y Russell, 1999) a estructuras de retroali-
+mentación para el entrenamiento cognitivo en humanos.
+Aquí evaluamos este enfoque en el ámbito de la planificación.
+Como primer paso, desarrollamos un modelo de aprendizaje por refuerzo metacognitivo
+de cómo las personas aprenden cuántos pasos planificar
+con antelación en problemas de decisión secuenciales, y ponemos a prueba sus predic-
+ciones empíricamente. Los resultados de nuestro primer experimento sugieren
+que nuestro modelo puede discernir qué estructuras de recompensa favorecen más
+el aprendizaje metacognitivo. En nuestro segundo experi-
+mento encontramos que las estructuras de retroalimentación diseñadas a partir de nuestro
+modelo pueden acelerar el aprendizaje para planificar. Empezamos presentando la teoría del aprendizaje por refuer-
+zo en la que se basa nuestro enfoque. Las dos secciones siguientes
+aplican esta teoría para modelar el problema de decidir cómo
+decidir y el proceso mediante el cual las personas aprenden a hacerlo.
+Luego usamos esta teoría para motivar un método computacional novedoso
+para diseñar estructuras de retroalimentación que promuevan la plasticidad cog-
+nitiva y ponemos a prueba experimentalmente las predicciones de nuestra
+teoría. Cerramos con una discusión de las implicaciones de nuestros
+resultados para el entrenamiento cognitivo.
+Planificación y aprendizaje por refuerzo
+Un problema de decisión secuencial puede modelarse como un proceso de
+decisión de Markov (MDP)
+M= (S;A;T;g;r;P0); (1)
+donde S es el conjunto de estados, A es el conjunto de acciones, T(s;a;s0)
+es la probabilidad de que el agente pase del estado s al
+estado s0 si ejecuta la acción a, 0≤γ≤1 es el factor de descuento
+de las recompensas futuras, r(s;a;s0) es la recompensa generada por esta
+transición, y P0 es la distribución de probabilidad del estado inicial
+S0 (Sutton y Barto, 1998). Una política π: S→A especifica
+qué acción tomar en cada uno de los estados. La suma esperada
+de recompensas descontadas que una política π generará en el
+MDP M a partir de un estado s se conoce como su función de valor
+Vp
+M(s) =E"
+¥
+å
+t=0gtr(St;p(St);St+1)#
+: (2)
+La política óptima π*
+M maximiza la suma esperada de recompensas descon-
+tadas, es decir,
+p?
+M=argmax
+pE"
+¥
+å
+t=0gtr(St;p(St);St+1)#
+: (3)
+Resolver problemas de planificación grandes suele ser intratable, ya que
+el número de secuencias de acciones posibles crece expo-
+nencialmente con el número de pasos que se planifican con antelación. Cuando
+el espacio de estados S es discreto y relativamente pequeño, la programación
+dinámica puede usarse para hallar planes óptimos en tiempo polino-
+mial (Littman, Dean y Kaelbling, 1995). Pero los espacios de estados de alta
+dimensión y continuos con los que las personas tienen que planificar
+en la vida real son demasiado grandes para estos métodos. En cambio, las personas
+parecen apoyarse en estrategias de planificación aproximadas (Huys
+et al., 2015) y a menudo deciden principalmente a partir de resultados inmediatos
+y cercanos, descuidando las consecuencias a largo plazo de sus
+acciones (Myerson y Green, 1995). A pesar de
+su falibilidad, mirar solo unos pocos pasos hacia adelante puede simplificar
+drásticamente el problema de planificación, y esto suele ser una nece-
+sidad para agentes con racionalidad limitada y conocimiento imperfecto del
+entorno (Jiang, Kulesza, Singh y Lewis, 2015). Como
+tomar atajos en el proceso de decisión es a la vez necesario y
+problemático, una buena toma de decisiones requiere saber cuándo
+eso es admisible y cuándo no lo es. Saber cuánto
+planificar es, por tanto, una importante habilidad metacognitiva que aprender.
+Trabajos previos sugieren que esta habilidad metacognitiva puede
+aprenderse por ensayo y error (Lieder y Griffiths, 2015).
+El aprendizaje por ensayo y error puede entenderse en términos de
+aprendizaje por refuerzo (Sutton y Barto, 1998). Aunque ciertos
+algoritmos de aprendizaje por refuerzo pueden, en principio, aprender a
+resolver problemas arbitrariamente complejos, el aprendizaje por refuerzo
+también puede ser muy lento, especialmente cuando las recompensas son escasas
+y la política óptima está lejos de la estrategia inicial del aprendiz.
+Un enfoque habitual para remediar este problema es dar al
+algoritmo pseudo-recompensas por acciones que no logran el
+objetivo pero avanzan en la dirección correcta (Ng et al., 1999). Aunque
+trabajos previos han desarrollado esta idea para acelerar el aprendizaje
+de una correspondencia directa de estados a acciones, nosotros la aprovecharemos para
+acelerar el aprendizaje de la planificación.
+Decidir cómo decidir
+Las personas pueden usar muchas estrategias de decisión diferentes. Esto plantea
+el problema de decidir cómo decidir (Boureau, Sokol-
+Hessner y Daw, 2015). Las investigaciones previas sobre metadecisión
+se han centrado en el arbitraje entre hábitos y
+planificación (Keramati, Dezfouli y Piray, 2011; Dolan
+y Dayan, 2013). Aunque este es un importante problema de metacontrol
+, es solo una parte del rompecabezas, porque las personas
+disponen de más de un mecanismo de decisión orientado a metas
+. Por eso, cuando el sistema basado en modelos está a cargo,
+hay que determinar cuántos pasos debe planificar
+con antelación. Idealmente, el horizonte de planificación elegido debería lograr
+el equilibrio óptimo entre la calidad esperada de la decisión frente
+al tiempo de decisión (Vul, Goodman, Griffiths y Tenenbaum,
+2014) y al esfuerzo mental (Shenhav et al., 2017).
+Aquí hacemos el supuesto simplificador de que las personas siempre
+eligen la acción que maximiza su suma de recompensas esperadas
+en los próximos h pasos, para algún valor de h que varía
+entre decisiones. Un horizonte de planificación de h=1 implica mirar
+solo el resultado inmediato de cada acción (planificación miope de un
+paso), mientras que un horizonte mayor que uno
+implica resolver un problema de decisión secuencial para formar un plan de múl-
+tiples pasos. Bajo este supuesto, el problema de metadecisión
+consiste en seleccionar un horizonte de planificación h de un conjunto H={1,2,...},
+ejecutar el plan, seleccionar un nuevo horizonte de planificación, y así sucesivamente.
+De forma más formal, este problema puede formalizarse como un
+MDP de metanivel (Hay, Russell, Tolpin y Shimony, 2012). En nuestra
+tarea, el MDP de metanivel es
+Mmeta= (Smeta;H;Tmeta;rmeta); (4)
+donde el estado de metanivel m∈Smeta={0;1;2;3;4} codifica el número de movimientos restantes, y la acción de metanivel
+h∈H={1;2;3;4} es el horizonte de planificación usado para tomar una
+decisión. La función de recompensa de metanivel rmeta integra
+costo de planificar con el retorno de la acción resultante:
+rmeta(mk;hk) =−cost(hk)+h
+å
+t=1r(st;plan(k;hk)
+t); (5)
+donde plan(k;h)
+t es la t-ésima acción del plan formado al mirar
+h pasos hacia adelante en el estado de metanivel mk. El tomador de metadecisiones
+recibe esta recompensa después de que el plan se ha ejecutado en
+su totalidad. Si el tomador de metadecisiones elige horizontes de planificación cortos,
+puede haber múltiples ciclos de planificar-actuar-recompensa-aprender
+dentro de un único ensayo. El costo de planificar cost(hk) está determi-
+nado por el factor de ramificación b del árbol de decisión, según
+como
+cost(hk) =l·bhk·hk; (6)
+donde bhk es el número de planes, hk es el número de pasos
+por plan, y l es el costo por paso de planificación. *
+Aprendizaje por refuerzo metacognitivo
+Resolver el problema de decidir cómo decidir de forma óptima es
+computacionalmente intratable, pero la solución óptima puede
+aproximarse mediante el aprendizaje (Russell & Wefald, 1991).
+Proponemos que las personas usan el aprendizaje por refuerzo (Sutton
+& Barto, 1998) para aproximar la solución óptima al
+problema de metadecisión formulado en la Ecuación 4.
+Modelo
+Nuestro modelo de aprendizaje por refuerzo metacognitivo se basa en
+el algoritmo SARSA de semigradiente (Sutton & Barto, 1998)
+que se desarrolló para resolver aproximadamente MDP con espacios de estados
+grandes o continuos. Específicamente, suponemos que las personas
+aprenden una aproximación lineal a la función Q de metanivel
+Qmeta(mk;hk)≈7
+å
+j=1wj·fj(mk;hk); (7)
+cuyas características f comprenden una variable indicadora para cada posible
+horizonte de planificación h (f1=1(h=1);···;f4=1(h=4)),
+una variable indicadora de si el agente planificó
+todos los l pasos hasta el final de la tarea (f5=1(h=l)), el número de
+pasos que quedaron sin planificar (f6=maxf0;l−hg),
+y el número de pasos que el agente planificó de más (f7=
+maxf0;h−lg). El algoritmo SARSA de semigradiente aprende
+los pesos de estas características mediante descenso de gradiente. Para acercarlo
+al desempeño humano, nuestro modelo reemplaza sus actualizaciones de descenso de gra-
+diente por aprendizaje bayesiano. Concretamente, los
+pesos w se aprenden mediante regresión lineal bayesiana de la
+estimación bootstrap ˆQ(mk;hk) de la función de valor de metanivel
+sobre las características f. El estimador bootstrap
+ˆQ(mk;hk) =rmeta(mk;hk)+hµt;f(m0;h0)i (8)
+*Esta ecuación asume un factor de ramificación constante y una cota superior
+de la complejidad de la planificación. El tiempo de planificación de las personas probablemente
+aumenta menos que exponencialmente con el horizonte de planificación, pero
+nuestra aproximación puede ser suficiente para problemas pequeños.
+es la suma de la recompensa inmediata de metanivel y el pre-
+dicho valor del siguiente estado de metanivel m0. El valor
+previsto de m0 es el producto escalar de la media posterior µt
+de los pesos w dadas las observaciones de las primeras ac-
+ciones (donde t=åk
+n=1hn) y las características f(m0;c0) de m0 y
+el horizonte de planificación h0 que se seleccionará en ese estado.
+Suponemos que la distribución a priori de los pesos de las características refleja que
+es beneficioso planificar hasta el final (P(f5) =N(µ=1;s=
+0.1)), aunque planificar es costoso (P(f1) =P(f2) =P(f3) =
+P(f4) =N(µ=−1;s=0.1)), y que planificar demasiado es
+más costoso que planificar muy poco (P(f7) =N(µ=−1;s=
+0.1) y P(f6) =N(µ=0;s=0.1)).
+Dada la distribución posterior de los pesos w de las características, el
+horizonte de planificación h se selecciona mediante muestreo de Thompson. Específicamente,
+para tomar la k-ésima metadecisión, se muestrea un vector de pesos ∼w
+de la distribución posterior de los pesos dada la serie
+de estados de metanivel, horizontes de planificación seleccionados y
+estimaciones de valor experimentadas hasta ahora. Es decir,
+∼wk∼P(w|Ek); (9)
+donde el conjunto Ek={e1;···;ek} contiene la experiencia del tomador de metadecisiones
+a partir de las primeras k metadecisiones; para ser
+precisos, cada experiencia de metanivel ej∈Ek es una tupla
+⟨mj;hj;ˆQ(mj;cj;µj)⟩
+que contiene un estado de metanivel, el cálculo
+seleccionado en él y las estimaciones bootstrap de su valor Q
+. El vector de pesos muestreado ∼w se usa entonces para predecir
+los valores Q de cada posible horizonte de planificación h∈H de
+acuerdo con la Ecuación 7. Finalmente, el horizonte de planificación con el
+valor Q previsto más alto se usa para tomar la decisión.
+Al proponer el aprendizaje por refuerzo metacognitivo como un
+mecanismo de plasticidad cognitiva, nuestro modelo sugiere que la recom-
+pensa y la retroalimentación son críticas para el crecimiento cognitivo. Concep-
+tualizar el aprendizaje por refuerzo metacognitivo como un pro-
+blema de regresión sugiere que aprender a pensar mejor sobre
+un problema requiere menos práctica cuanto mayor sea la corre-
+lación entre las características f(m;c) (es decir, los predictores) y
+la recompensa resultante neta del costo de pensar (es decir, el crite-
+rio; Green, 1991). Aquí aplicamos nuestro modelo para predecir
+con qué rapidez pueden las personas aprender que más planificación conduce a
+mejores resultados a partir de la estructura de recompensas de los problemas de práctica
+. Según el modelo, el aprendizaje debería ser más rápido
+cuando la recompensa aumenta de forma determinista con el
+horizonte de planificación, tanto dentro como entre problemas. En cambio,
+el aprendizaje debería ser más lento cuando esta relación se degrada
+por una variabilidad adicional en las recompensas que no está relacionada con
+la planificación. Los siguientes experimentos ponen a prueba esta predicción y
+muestran la utilidad del modelo para diseñar estructuras de retroalimentación
+que promuevan el aprendizaje metacognitivo.
+Experimento 1: Las estructuras de recompensa pueden ayudar o
+dificultar el aprendizaje de la planificación
+Métodos
+Reclutamos a 304 participantes adultos de Amazon Mechan-
+ical Turk. La tarea duró unos 25 minutos, y los participantes
+recibieron $2.50 más una bonificación de hasta
+Figura 1: Captura de pantalla de un problema del Experimento 1.
+$2.00. Los participantes jugaron una serie de juegos de planificación de vuelos.
+El entorno consistía en seis ciudades distintas, cada una con
+conexión a otras dos ciudades (Figura 1). Los participantes comenzaban cada
+ensayo en una ciudad determinada y debían planificar un número
+especificado de vuelos. Cada vuelo estaba asociado con una
+ganancia o pérdida de dinero conocida, mostrada en pantalla. Así, la tarea de los partici-
+pantes consistía en planificar una ruta que maximizara sus
+ganancias o minimizara sus pérdidas, según el número de
+pasos de planificación requeridos para ese juego.
+El experimento comprendía trece ensayos en total: una secuencia
+de tres problemas de práctica que requerían planificar 2, 3 y
+3 pasos hacia adelante, respectivamente, seguidos de diez problemas de 4 pasos
+, con una pausa tras el ensayo ocho. El orden de los dos
+problemas de 3 pasos se aleatorizó, y el orden de los diez
+problemas de 4 pasos se aleatorizó en los últimos diez ensayos del
+experimento. Los participantes se asignaron al azar a una de
+dos condiciones: entornos con estructuras de recompensa diseñadas
+para promover el aprendizaje (“recompensas diagnósticas”), o entornos
+con estructuras de recompensa diseñadas para dificultar el aprendizaje
+(“recompensas no diagnósticas”).
+Los problemas de la condición de recompensas diagnósticas se generaron au-
+tomáticamente para exhibir cuatro características:
+1. Para cada problema de l pasos, planificar h<l pasos hacia adelante genera
+l−h movimientos subóptimos. En otras palabras, cada planificador miope
+comete el número máximo posible de errores.
+2. Cuando el número de movimientos es l, planificar l pasos hacia adelante
+produce un retorno positivo, pero planificar h<l pasos hacia adelante
+produce un retorno negativo.
+3. El retorno aumenta de forma monótona con el horizonte de planificación
+desde 1 hasta el número total de movimientos.
+4. Cada posición inicial aparece al menos una vez.
+Las estructuras de recompensa usadas para la condición de recompensas no diagnósticas
+se crearon desplazando las estructuras de recompensa diagnósticas
+para degradar la correlación entre horizonte de planificación
+y recompensa. Concretamente, en la mitad de los problemas todas
+las recompensas se desplazaron hacia abajo, de modo que ninguna cantidad de planificación
+podía lograr un retorno mejor que −$10. Como los problemas originales
+eran tales que el planificador de 1 paso siempre tenía
+el peor rendimiento, el desplazamiento era −r1+X
+l, donde r1 es el retorno del planificador de 1
+paso, l es el número de pasos del problema de planificación,
+y X es un número aleatorio entre 10 y 20 que variaba
+entre problemas (X∼Uniforme([10;20])). Para la otra mitad
+de los problemas, todas las recompensas se desplazaron hacia arriba por −r1+X
+l, de modo
+que todos los planificadores obtengan un retorno de al menos +$10. Estas estruc-
+turas de recompensa hacen extremadamente difícil que el aprendizaje por refuerzo
+metacognitivo descubra que la planificación es valiosa,
+porque los desplazamientos aleatorios reducen mucho la correlación en-
+tre horizonte de planificación y recompensa.
+Resultados
+Tanto las simulaciones del modelo como el comportamiento humano demostraron
+un aprendizaje mejorado en entornos con recompensas diagnósticas.
+La Figura 2 muestra el rendimiento medio del metacognitivo
+modelo de aprendizaje por refuerzo, y el rendimiento medio de
+los participantes humanos. Aquí, el rendimiento se mide como recompensa rela-
+tiva
+Rrel= (R−Rmin)/(Rmax−Rmin); (10)
+donde R es la recompensa total recibida durante el ensayo, y Rmin
+y Rmax son la recompensa total más alta y más baja posible en
+ese ensayo, respectivamente.
+Para medir los efectos de la condición y del número de ensayo
+sobre el rendimiento de los participantes humanos, realizamos un
+ANOVA de medidas repetidas. Esto reveló un efecto significativo de ambos
+número de ensayo (F(9;2989) =3.44; p<0.001) y de la condición
+(F(9;3029) =15.26; p<0.0001), de modo que los participantes mejoraron
+con el tiempo, y los participantes con retroalimentación diagnóstica
+obtuvieron mejores resultados que quienes no la tuvieron. Para medir el aprendizaje
+en cada grupo, realizamos una regresión lineal simple de la recompensa rela-
+tiva sobre el número de ensayo. Esto reveló una ecuación de regresión significativa
+para los participantes que recibieron recompensas diagnósticas
+(F(2;302) =11.28; p<0.01), con un R2 de 0.59,
+pero no para los participantes que recibieron recompensas no diagnósticas
+(F(2;302) =3.51; p>0.05), con un R2 de 0.31, lo que sugiere
+que la mejora del rendimiento se produjo con recompensas diagnósticas,
+pero no sin ellas.
+Para analizar la frecuencia con la que los participantes eligieron
+la ruta óptima, realizamos una regresión logística multinomial
+de si cada participante eligió o no la ruta óptima
+según el número de ensayo y el grupo. Esto reveló efectos significativos
+del número de ensayo (p<10−6) y del grupo (p<0.0001).
+Además, observamos que los participantes que interactuaban con una estructura de recompensa di-
+agnóstica aprendieron a planificar significativamente más
+hacia adelante que los participantes que interactuaban con la
+estructura de recompensa no diagnóstica. Cuando quedaban cuatro pasos, el pro-
+medio de horizonte de planificación era 2.96 con recompensas diagnósticas, en com-
+paración con 2.65 con recompensas no diagnósticas (t(596) =2.94,
+Figura 2: Predicciones del modelo y rendimiento humano en el Ex-
+perimento 1. Las barras de error indican el error estándar de la media.
+Las predicciones del modelo se promediaron sobre 500 simulaciones.
+p<0.01). Cuando las recompensas eran diagnósticas de una buena planificación,
+las elecciones de los participantes en el primer paso de los problemas de 4 pasos
+coincidieron un 10.3% más a menudo con la planificación de 4 pasos
+(t(302) =3.57; p<0.001). Para 3 pasos restantes hubo
+un aumento significativo de las elecciones coincidentes con la planificación óptima
+de 1 paso (p<0.01), de 2 pasos (p<0.01) y de 4 pasos
+(p<0.01). Para 2 pasos restantes hubo un aumento signif-
+icativo de las elecciones coincidentes con la planificación óptima de 1 paso
+(p<0.0001) sin una disminución de la coincidencia con otros
+horizontes de planificación. Por último, en el último movimiento, las
+elecciones de los participantes en el entorno con recompensas diagnósticas corre-
+spondieron un 5.8% más a menudo con la planificación óptima de 1 paso
+(t(302) =3.71; p<0.001), y significativamente con menos frecuencia
+con la planificación de 2 y de 3 pasos (p<0.01 y p<0.001). En
+resumen, las recompensas diagnósticas produjeron una mejor coincidencia entre
+el horizonte de planificación y el número de pasos restantes.
+Experimento 2: Uso de la retroalimentación para promover
+el aprendizaje de la planificación
+Cuando se tiene control sobre la estructura de recompensas de un entorno,
+crear recompensas diseñadas para un aprendizaje más rápido puede ser via-
+ble. Sin embargo, con frecuencia las recompensas del entorno son fijas. En el Ex-
+perimento 2 probamos si proporcionar retroalimentación puede ser una
+alternativa eficaz para acelerar el aprendizaje. Cuando
+los participantes no planifican lo suficiente para encontrar la ruta óptima, esto
+podría deberse a que el costo en tiempo de planificar una ruta óptima
+supera sus beneficios. Para cambiar eso, proporcionamos retroalimentación
+en forma de penalizaciones por tiempo de espera para las decisiones miopes.
+Métodos
+Reclutamos a 324 participantes adultos en Amazon Mechani-
+cal Turk. La tarea duró unos 30 minutos, y los participantes
+recibieron $3.00 más una bonificación dependiente del rendimiento de hasta
+$2.00. Los participantes jugaron veinte ensayos del juego de planificación de vuelos
+descrito antes. Estos ensayos se dividieron en un
+bloque de entrenamiento y un bloque de prueba. El bloque de entrenamiento con-
+sistía en seis ensayos que requerían planificar 2 pasos, seguidos de diez
+ensayos que requerían planificar 3 pasos. El bloque de prueba consistía
+en cuatro ensayos adicionales de 3 pasos. El orden de los ensayos de 2 pasos
+y el orden de los ensayos de 3 pasos se aleatorizaron entre
+los sujetos. Los participantes se asignaron al azar a la
+condición de retroalimentación o a la condición de control.
+En el bloque de entrenamiento, los participantes de la condición de retroalimentación
+recibían información sobre su horizonte de planificación aparente al final de cada
+ensayo y eran penalizados con un tiempo de espera que reflejaba la cantidad
+de planificación que habían evitado. Concretamente, fijamos la dura-
+ción de los tiempos de espera de modo que el costo de las decisiones miopes
+fuera proporcional a la cantidad de planificación necesaria
+que el participante había evitado. Específicamente, el costo de oportunidad de
+planificar se estimó mediante cost =2l−ĥ, donde l es el número
+de movimientos de ese ensayo, ĥ es el horizonte de planificación aparente del
+participante, y 2 es el factor de ramificación, ya que cada paso
+implicaba una decisión binaria. El horizonte de planificación del participante
+se estimó por el número de movimientos consecutivos conformes con la
+política óptima, comenzando por el último movimiento,
+seguido del penúltimo, etc. Al final de cada ensayo del
+primer bloque, los participantes del grupo de retroalimentación eran penali-
+zados con un retraso de tiempo de espera por rutas subóptimas. El retraso
+se calculaba como 7·(cost−1) segundos. Durante este período,
+los participantes no podían pasar al siguiente ensayo. Si los partici-
+pantes realizaban la ruta óptima, podían pasar
+inmediatamente al siguiente ensayo.
+El grupo de control no recibía retroalimentación y debía esperar
+un tiempo fijo al final de cada ensayo del bloque 1,
+independientemente de su rendimiento. Este período fijo se fijó en
+8 segundos, para igualar el tiempo medio de espera de los participantes
+del grupo de retroalimentación (7.9 segundos). Ninguno de los grupos recibió
+retroalimentación ni retrasos en el bloque de prueba.
+Los problemas de planificación presentados en este experimento se
+crearon en dos pasos. En el primer paso creamos problemas de 2 y 3
+pasos con estructuras de recompensa máximamente diagnósticas
+(según los criterios usados en el Experimento 1), sujetas a
+la restricción de que el primer movimiento con la recompensa inmediata más alta
+fuera óptimo exactamente en la mitad de esos problemas. En el
+segundo paso modificamos estos problemas para deteriorar
+la correlación entre horizonte de planificación y recompensa usando
+el mismo método que empleamos para crear las estructuras de recompensa
+no diagnósticas usadas en el Experimento 1.
+Predicciones del modelo
+Aplicamos el modelo de aprendizaje por refuerzo metacognitivo
+descrito antes al problema de aprender cuántos pasos
+conviene planificar hacia adelante. Simulamos una ejecución del experi-
+mento descrito antes con 1000 participantes en cada condi-
+ción. Las simulaciones predijeron un aumento gradual del retorno rela-
+tivo desde el primer problema de 3 pasos hasta el último (véase
+la Figura 3). Con retroalimentación, el retorno relativo aumentó más rápido
+y alcanzó un nivel más alto que sin ella.
+Resultados
+Para cuantificar los efectos de la condición y del número de ensayo sobre el
+rendimiento (medido como recompensa relativa), realizamos un ANOVA mixto de
+Figura 3: Resultados del Experimento 2. El modelo RL metacognitivo
+predice que la retroalimentación acelera el aprendizaje de la planificación. El com-
+portamiento humano muestra un patrón de resultados similar.
+de medidas repetidas sobre el rendimiento de los participantes
+durante los ensayos de 3 pasos. Esto reveló un efecto significativo
+de la retroalimentación (F(9;4521) =8.54; p<0.01) y del número de ensayo
+(F(9;4521) =1.85; p<0.05) sobre la recompensa relativa. Para
+medir el aprendizaje en cada grupo, realizamos una regresión lineal simple
+de la recompensa relativa sobre el número de ensayo en los ensayos de 3
+pasos del bloque de entrenamiento (es decir, cuando los participantes del
+grupo de retroalimentación la recibían). Esto reveló una ecuación de regresión signif-
+icativa para el grupo de retroalimentación (F(2;322) =
+5.28; p=0.05), con un R2 de 0.40, pero no para el grupo de control
+(F(2;322) =1.57; p>0.05), con un R2 de 0.16. Esto
+sugiere que los participantes que recibieron retroalimentación mejoraron
+durante el bloque de entrenamiento, pero el grupo de control no lo hizo.
+La retroalimentación aumentó el rendimiento promedio del modelo en
+tanto el bloque de entrenamiento como el bloque de transferencia. A continuación
+probamos si el aprendizaje mejorado del grupo con retroalimentación
+durante el entrenamiento se tradujo en un mejor desempeño en el bloque de
+transferencia (ensayos 17-20), donde ya no recibían ninguna
+retroalimentación. Una prueba t de dos muestras reveló que la
+ventaja del grupo con retroalimentación en el bloque de prueba fue casi significativa
+(t(1294) =1:53;p=0:063). La Figura 3 compara el desempeño de los
+participantes con las predicciones del modelo.
+Como predijo nuestro modelo, una regresión logística multinomial de
+si cada participante eligió o no la ruta óptima, en función del
+número de ensayo y de la retroalimentación, reveló efectos significativos
+del número de ensayo (p<0:0001) y de la retroalimentación (p<0:01).
+La retroalimentación pareció ampliar los horizontes de planificación de las personas:
+cuando quedaban dos movimientos, las elecciones del grupo
+con retroalimentación eligieron la opción miope un 4% menos a menudo
+(t(1398) =−2:17;p<0:05), y la planificación óptima de 2 pasos un 7% más a
+menudo (t(1398) =3:44;p<0:001), y la de 3 pasos un 4% más a
+menudo (t(1398) =2:43;p<0:05).
+Discusión
+En este artículo presentamos un modelo computacional
+de cómo las personas aprenden a decidir mejor. Su idea central es que
+aprender a pensar puede entenderse como aprendizaje por refuerzo metacognitivo.
+Nuestro modelo amplía investigaciones previas
+sobre el aprendizaje de la selección de estrategias (Lieder et al., 2014; Lieder y
+Griffiths, 2015) al capturar que elegir operaciones cognitivas
+es un problema de decisión secuencial con recompensas potencialmente demoradas
+y no una decisión única. El nuevo modelo
+predijo correctamente los efectos de la estructura de recompensas y de la
+retroalimentación sobre el aprendizaje de la planificación: el Experimento 1 sugiere que nuestro
+modelo capta el efecto de las estructuras de recompensa sobre la velocidad del
+aprendizaje metacognitivo. Luego aplicamos nuestra teoría para diseñar
+retroalimentación sobre el desempeño de las personas en entornos cuya
+estructura de recompensas no es diagnóstica de una buena planificación.
+El Experimento 2 confirmó la predicción del modelo de que esta intervención
+sería eficaz.
+Nuestros resultados sugieren dos enfoques pragmáticos para promover
+el crecimiento cognitivo: primero, diseñar estructuras de recompensa que
+sean diagnósticas de la calidad del razonamiento, la planificación y
+la toma de decisiones; segundo, dar retroalimentación sobre el proceso
+mediante el cual se tomó una decisión. En el Experimento 2 seguimos
+este último enfoque al diseñar retroalimentación basada en el costo
+de planificar; pero otros tipos de retroalimentación también podrían ser útiles.
+Si la plasticidad cognitiva se basa en el aprendizaje por refuerzo sin modelo,
+como supone nuestra teoría, entonces su velocidad debería depender de manera crítica
+de qué tan bien refleja la retroalimentación que reciben las personas
+al realizar operaciones cognitivas el valor de estas. Por tanto,
+las estructuras de retroalimentación que alinean la retroalimentación inmediata con
+el valor a largo plazo deberían ser máximamente eficaces para promover
+la plasticidad cognitiva y el aprendizaje para tomar mejores decisiones.
+Los futuros experimentos deberían probar esta hipótesis diseñando
+estructuras de retroalimentación con el método óptimo de gamificación introducido
+por Lieder y Griffiths (2016). La retroalimentación diseñada
+mediante gamificación óptima podría ser especialmente beneficiosa
+porque el método subyacente de modelado de recompensas está diseñado
+para acelerar el aprendizaje por refuerzo sin modelo (Ng et al.,
+1999). De manera crítica, para promover el aprendizaje de cómo decidir, las personas
+deberían decidir sin ninguna ayuda y recibir solo retroalimentación
+después de su elección.
+Esperamos que nuestra teoría del aprendizaje por refuerzo metacognitivo
+sea un paso hacia el establecimiento de una base científica
+para diseñar retroalimentación para el entrenamiento cognitivo y otras
+intervenciones que promuevan el crecimiento cognitivo. Los trabajos futuros
+evaluarán formas alternativas de retroalimentación y abordarán el
+problema de la transferencia y la retención, y diseñarán
+paradigmas de entrenamiento más eficaces que usen tareas máximamente diagnósticas de
+cómo las personas piensan y deciden.
+Agradecimientos. Este trabajo fue financiado por la subvención número
+ONR MURI N00014-13-1-0341. Los autores agradecen a Thomas Hills,
+Peter Dayan, Rika Antonova, Silvia Bunge, Stuart Russell, Amitai
+Shenhav y Sebastian Musslick por sus comentarios y discusiones.
+Referencias
+Anguera, J. A., Boccanfuso, J., Rintoul, J. L., Al-Hashimi, O.,
+Faraji, F., Janowich, J., . . . otros (2013). Video game training
+enhances cognitive control in older adults. Nature ,501(7465), 97–
+101.Bavelier, D., Green, C. S., Pouget, A., & Schrater, P. (2012). Brain
+plasticity through the life span: learning to learn and action video
+games. Annual review of neuroscience ,35, 391–416.
+Boureau, Y.-L., Sokol-Hessner, P., & Daw, N. D. (2015). Deciding
+how to decide: self-control and meta-decision making. Trends in
+cognitive sciences ,19(11), 700–710.
+Dolan, R. J., & Dayan, P. (2013). Goals and habits in the brain.
+Neuron ,80(2), 312–325.
+Green, C. S., & Bavelier, D. (2008). Exercising your brain: a review
+of human brain plasticity and training-induced learning. Psychol-
+ogy and aging ,23(4), 692.
+Green, S. B. (1991). How many subjects does it take to do a regres-
+sion analysis. Multivariate behavioral research ,26(3), 499–510.
+Hay, N., Russell, S., Tolpin, D., & Shimony, S. (2012). Select-
+ing computations: Theory and applications. En N. de Freitas y
+K. Murphy (eds.), Uncertainty in artificial intelligence: Proceed-
+ings of the twenty-eighth conference. P.O. Box 866 Corvallis, Ore-
+gon 97339 USA: AUAI Press.
+Huys, Q. J. M., Lally, N., Faulkner, P., Eshel, N., Seifritz, E., Ger-
+shman, S. J., . . . Roiser, J. P. (2015). Interplay of approximate
+planning strategies. Proceedings of the National Academy of Sci-
+ences ,112(10), 3098–3103.
+Jiang, N., Kulesza, A., Singh, S., & Lewis, R. (2015). The depen-
+dence of effective planning horizon on model accuracy. En Actas de la
+conferencia internacional de 2015 sobre agentes autónomos
+y sistemas multiagente (pp. 1181–1189).
+Keramati, M., Dezfouli, A., & Piray, P. (2011). Speed/accuracy
+trade-off between the habitual and the goal-directed processes.
+PLoS Comput Biol ,7(5), e1002055.
+Lieder, F., y Griffiths, T. L. (2015). When to use which heuristic: A
+rational solution to the strategy selection problem. En Actas
+de la 37.ª conferencia anual de la Sociedad de Ciencia Cognitiva (Cognitive Science Society).
+Lieder, F., y Griffiths, T. L. (2016). Helping people make better
+decisions using optimal gamification. En Proc. 38th annu. conf.
+cogn. sci. soc., philadelphia (pp. 2075–80).
+Lieder, F., Plunkett, D., Hamrick, J. B., Russell, S. J., Hay, N., y
+Griffiths, T. (2014). Algorithm selection by rational metareason-
+ing as a model of human strategy selection. En Z. Ghahramani,
+M. Welling, C. Cortes, N. Lawrence, y K. Weinberger (eds.), Ad-
+vances in neural information processing systems 27 (pp. 2870–
+2878). Curran Associates, Inc.
+Littman, M. L., Dean, T. L., y Kaelbling, L. P. (1995). On the
+complexity of solving markov decision problems. En Actas
+de la undécima conferencia sobre incertidumbre en inteligencia artificial
+(pp. 394–402).
+Morrison, A. B., y Chein, J. M. (2011). Does working memory
+training work? the promise and challenges of enhancing cogni-
+tion by training working memory. Psychonomic bulletin & review ,
+18(1), 46–60.
+Myerson, J., y Green, L. (1995). Discounting of delayed rewards:
+Models of individual choice. Journal of the experimental analysis
+of behavior ,64(3), 263–276.
+Ng, A. Y., Harada, D., y Russell, S. (1999). Policy invariance under
+reward transformations: Theory and application to reward shaping.
+En I. Bratko y S. Dzeroski (eds.), Actas de la 16.ª Conferencia Anual
+Internacional sobre Aprendizaje Automático (pp. 278–287). San
+Francisco: Morgan Kaufmann.
+Owen, A. M., Hampshire, A., Grahn, J. A., Stenton, R., Dajani, S.,
+Burns, A. S., . . . Ballard, C. G. (2010). Putting brain training to
+the test. Nature ,465(7299), 775–778.
+Russell, S., y Wefald, E. (1991). Principles of metareasoning. Ar-
+tificial Intelligence ,49(1-3), 361–395.
+Shenhav, A., Musslick, S., Lieder, F., Kool, W., Griffiths, T., Cohen,
+J., y Botvinick, M. (2017). Toward a rational and mechanistic
+account of mental effort. Annual Review of Neuroscience ,40.
+Sutton, R. S., y Barto, A. G. (1998). Reinforcement learning: An
+introduction . Cambridge, MA, USA: MIT press.
+Vul, E., Goodman, N., Griffiths, T. L., y Tenenbaum, J. B. (2014).
+One and done? optimal decisions from very few samples. Cognitive
+science ,38(4), 599–637.

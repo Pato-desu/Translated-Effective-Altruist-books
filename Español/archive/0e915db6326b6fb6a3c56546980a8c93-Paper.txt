@@ -1,0 +1,701 @@
+Diseño adversario de entornos guiado por repetición
+Minqi Jiang
+UCL, FAIRMichael Dennis
+UC BerkeleyJack Parker-Holder
+Universidad de Oxford
+Jakob Foerster
+FAIREdward Grefenstette
+UCL, FAIRTim Rocktäschel
+UCL, FAIR
+Resumen
+Los agentes de aprendizaje por refuerzo profundo (RL) pueden generalizar con éxito a entornos
+nuevos si se entrenan con un conjunto de configuraciones de entorno y tarea suficientemente diverso
+configuraciones. El diseño no supervisado de entornos (UED) es un paradigma prometedor de RL auto-
+supervisado, en el que los parámetros libres de un entorno insuficientemente especificado
+se adaptan automáticamente durante el entrenamiento a las capacidades del agente,
+lo que da lugar a la aparición de entornos de entrenamiento diversos. Aquí planteamos el Prioritized
+Level Replay (PLR), un método empíricamente exitoso pero sin motivación teórica
+que selecciona de forma selectiva niveles de entrenamiento generados aleatoriamente, como UED. Sostenemos
+que, al seleccionar niveles completamente aleatorios, PLR también puede generar niveles novedosos y
+complejos para un entrenamiento eficaz. Esta idea revela una clase natural de métodos UED que
+llamamos Dual Curriculum Design (DCD). Crucialmente, DCD incluye tanto
+PLR como un algoritmo UED popular, PAIRED, como casos particulares, y hereda garantías teóricas
+similares. Esta conexión nos permite desarrollar nueva teoría para PLR,
+ofreciendo una versión con una garantía de robustez en los equilibrios de Nash. Además,
+nuestra teoría sugiere una mejora muy contraintuitiva para PLR: al impedir que
+el agente actualice su política con niveles no seleccionados (entrenando con menos datos), podemos
+mejorar la convergencia hacia los equilibrios de Nash. De hecho, nuestros experimentos confirman
+que nuestro nuevo método, PLR?, obtiene mejores resultados en un conjunto de tareas de transferencia
+zero-shot fuera de distribución, además de demostrar que PLR? mejora el
+rendimiento de PAIRED, del que hereda su marco teórico.
+1 Introducción
+Si bien los enfoques de aprendizaje por refuerzo profundo (RL) han dado lugar a numerosas aplicaciones exitosas en
+dominios complejos como Atari [ 21], Go [ 35], ajedrez [ 36], Dota [ 4] y StarCraft [ 40] en los últimos años,
+los agentes de RL profundo siguen siendo frágiles y a menudo no logran transferirse a entornos apenas distintos
+de los encontrados durante el entrenamiento [ 44,9]. Para garantizar el aprendizaje de políticas robustas y bien generalizables
+los agentes deben entrenarse con variaciones de entornos suficientemente diversas e informativas (por ejemplo, véase
+la sección 3.1 de [ 8]). Sin embargo, no siempre es factible especificar una distribución de entrenamiento apropiada o
+un generador de la misma. Por ello, los agentes pueden beneficiarse enormemente de métodos que adapten automáticamente la
+distribución de variaciones del entorno a lo largo del entrenamiento [ 10,17]. A lo largo de este artículo llamaremos
+a una instancia o configuración particular del entorno (por ejemplo, una disposición de bloques, circuitos de carrera o
+en general, cualquiera de las entidades que componen el entorno) un nivel.
+Dos trabajos recientes [ 10,17] han buscado demostrar empíricamente la necesidad de un mecanismo más específico, adaptado al agente, para
+seleccionar los niveles sobre los que entrenar a los agentes de RL, a fin de garantizar un aprendizaje eficiente
+y la generalización a niveles no vistos, así como proporcionar métodos que implementen tales mecanismos.
+El primer método, Protagonist Antagonist Induced Regret Environment Design (PAIRED) [ 10],
+Contribución igual. Correspondencia a msj@fb.com y michael_dennis@berkeley.edu .
+35.ª Conferencia sobre Sistemas de Procesamiento de Información Neuronal (NeurIPS 2021).
+(a) DR
+ (b) PAIRED
+ (c) REPAIRED
+ (d) PLR?
+(e) Humano
+Figura 1: Muestras extraídas al azar de circuitos de CarRacing producidos por distintos métodos. (a) La aleatorización de dominio
+(DR) produce circuitos de complejidad media, con pocas curvas cerradas. (b) PAIRED a menudo
+explota en exceso la diferencia entre los estudiantes, lo que da lugar a circuitos simples que, de forma incidental, favorecen al antagonista.
+(c) REPAIRED mitiga esta degeneración, recuperando la complejidad de los circuitos. (d) PLR? selecciona los más desafiantes
+de los circuitos generados aleatoriamente, lo que da lugar a circuitos que se parecen más a los diseñados por humanos, como
+(e) el Gran Premio de Nürburgring.
+introduce un paradigma de RL autosupervisado llamado Unsupervised Environment Design (UED). Aquí, un
+generador de entornos (un maestro) coevoluciona con una política de estudiante que se entrena en niveles propuestos activamente
+por el maestro, lo que da lugar a una forma de aprendizaje con currículo adaptativo. El objetivo de esta coevolución
+es que el maestro aprenda gradualmente a generar entornos que ejemplifiquen propiedades de aquellos que
+podrían encontrarse en el momento del despliegue, y que el estudiante aprenda al mismo tiempo una buena política
+que permita la transferencia zero-shot a dichos entornos. El enfoque adversario específico de PAIRED para el
+diseño de entornos garantiza una caracterización útil de la robustez de la política final del estudiante, en forma
+de una garantía de arrepentimiento minimax [ 31], suponiendo que su sistema multiagente maestro-estudiante
+alcanza un equilibrio de Nash [NE, 24]. En cambio, el segundo método, Prioritized Level Replay
+(PLR) [ 17], encarna una forma alternativa de aprendizaje con currículo dinámico que no supone
+el control de la generación de niveles, sino la capacidad de repetir selectivamente niveles existentes. PLR registra
+los niveles propuestos previamente por un generador de entornos de caja negra y, para cada uno, estima el
+potencial de aprendizaje del agente en ese nivel, es decir, qué tan útil sería volver a obtener nueva experiencia de ese
+nivel en el futuro. El algoritmo PLR aprovecha estas puntuaciones para adaptar un calendario de revisión o
+repetición de niveles para maximizar el potencial de aprendizaje. Se ha demostrado que PLR produce resultados escalables y robustos,
+mejorando tanto la complejidad muestral del entrenamiento del agente como la generalización de la política aprendida
+en entornos diversos. Sin embargo, a diferencia de PAIRED, PLR se motiva con argumentos heurísticos
+y carece de una caracterización teórica útil de su comportamiento de aprendizaje.
+En este artículo argumentamos que PLR es, por sí mismo, una forma efectiva de UED: al seleccionar incluso
+niveles generados aleatoriamente, PLR puede generar niveles novedosos y complejos para aprender políticas robustas.
+Esta idea conduce a una clase natural de métodos UED, que llamamos Dual Curriculum Design (DCD).
+En DCD, una política de estudiante se enfrenta a un equipo de dos maestros que coevolucionan. Uno de ellos
+genera niveles nuevos y desafiantes, mientras que el otro selecciona pasivamente los niveles existentes para repetirlos, al
+priorizar aquellos que se estima que son más adecuadamente desafiantes para el estudiante. Mostramos que PAIRED
+y PLR son miembros distintos de la clase de algoritmos DCD, y demostramos en la sección 3 que todos los algoritmos DCD
+gozan de garantías de arrepentimiento minimax similares a las de PAIRED.
+Aprovechamos este resultado para ofrecer la primera caracterización teórica de PLR, lo que de inmediato
+sugiere un ajuste simple pero muy contraintuitivo a PLR: al entrenar únicamente con trayectorias de
+los niveles de repetición, PLR se vuelve demostrablemente robusto en NE. Llamamos a esta variante resultante PLR? (sección 4).
+Desde esta perspectiva, PLR realiza el diseño de niveles de una manera diametralmente opuesta
+a PAIRED: mediante la selección priorizada en lugar de la generación activa. Un segundo corolario de
+la robustez demostrable de los algoritmos DCD muestra que PLR? puede extenderse para aprovechar el
+maestro de PAIRED como generador de niveles, preservando la garantía de robustez de PAIRED, lo que da como resultado
+un método que llamamos Replay-Enhanced PAIRED (REPAIRED) (sección 5). Hipotetizamos que en esta
+configuración, PLR? desempeña un papel complementario al de PAIRED en el fortalecimiento de las políticas de los estudiantes.
+Nuestros experimentos de la sección 6 investigan la dinámica de aprendizaje de PLR?, REPAIRED y sus
+contrapartes sin repetición en un dominio de laberintos desafiante y en un nuevo escenario UED de control continuo
+basado en el popular entorno CarRacing [ 5]. En ambos escenarios, muy distintos entre sí, nuestros
+métodos ofrecen mejoras significativas frente a PLR y PAIRED, produciendo agentes capaces de realizar
+generalización fuera de distribución (OOD) a una variedad de laberintos diseñados por humanos y circuitos de Fórmula 1.
+En resumen, presentamos las siguientes contribuciones: (i) establecemos un marco común, Dual
+Curriculum Design, que abarca PLR y PAIRED. Esto nos permite desarrollar nueva teoría,
+que proporciona las primeras garantías de robustez para PLR en NE, así como para REPAIRED, lo cual
+2
+amplía PAIRED con un mecanismo de repetición basado en PLR. (ii) Crucialmente, nuestra teoría sugiere una mejora muy
+contraintuitiva a PLR: la convergencia hacia NE debería favorecerse entrenando con menos
+datos al usar PLR; en concreto, aplicando actualizaciones de gradiente solo con datos que provienen del
+búfer de PLR, usando las muestras de la distribución del entorno únicamente para calcular la priorización
+de los niveles en el búfer. (iii) Nuestros experimentos en un dominio de laberintos y en un nuevo dominio de carreras de coches muestran
+que nuestros métodos superan significativamente a sus contrapartes sin repetición en la generalización zero-shot.
+Publicamos el código abierto de nuestros métodos en https://github.com/facebookresearch/dcd .
+2 Antecedentes 
+2.1 Diseño no supervisado de entornos 
+El diseño no supervisado de entornos (UED), tal como lo introdujeron [ 10], es el problema de diseñar automáticamente
+una distribución de entornos que se adapta al agente que aprende. UED se define en términos de
+un POMDP subespecificado (UPOMDP), dado por M=hA;O; ;SM;TM;IM;RM;
+i, donde 
+A es un conjunto de acciones, O es un conjunto de observaciones, S es un conjunto de estados, T:SA!(S) es una
+función de transición, I:S!O es una función de observación (o inspección), R:S!R es una función de recompensa
+y  
+es un factor de descuento. Esta definición es idéntica a la de un POMDP con la adición de 
+para representar los parámetros libres del entorno. Estos parámetros pueden ser distintos en cada paso de
+tiempo e incorporarse a la función de transición TM:SA!(S). Por ejemplo, podría
+representar las posibles posiciones de los obstáculos en un laberinto. Nos referiremos al entorno resultante
+de un fijo 2 como M, o con un ligero abuso de notación, simplemente cuando se desprenda del contexto. Definimos
+el valor de  en M como V() =E[PT
+i=0rt
+t] donde rt son las recompensas obtenidas por  en
+M. Siguiendo la terminología de [17], llamamos nivel a un entorno completamente especificado.
+2.2 Protagonist Antagonist Induced Regret Environment Design 
+Protagonist Antagonist Induced Regret Environment Design [PAIRED, 10] presenta un enfoque UED
+que consiste en entrenar simultáneamente agentes en un juego de tres jugadores: el protagonista A y
+el antagonista B se entrenan en entornos generados por el maestro ~. El objetivo de
+este juego se define por U(A;B;~) =E~[REGRET(A;B)], donde el arrepentimiento se define por
+REGRET(A;B) =V(B) V(A). El protagonista y el antagonista se entrenan ambos para
+maximizar sus retornos descontados del entorno, mientras que el maestro se entrena para maximizar U. Obsérvese que
+al maximizar el arrepentimiento, el maestro no tiene incentivo para generar niveles irresolubles, que tendrán
+un arrepentimiento máximo de 0. Por abreviar, a veces nos referiremos al protagonista y al antagonista
+en conjunto como los agentes estudiantes . El bucle en sentido antihorario que parte de los agentes estudiantes en la Figura 2
+resume este enfoque, siendo los estudiantes tanto el protagonista como el antagonista.
+A medida que ambos agentes estudiantes se vuelven más hábiles para resolver distintos niveles, el maestro sigue adaptando
+sus diseños de niveles para explotar las debilidades del protagonista en relación con el antagonista. A medida que este
+proceso se desarrolla, PAIRED produce un currículo emergente de niveles progresivamente más complejos
+a lo largo del límite de las capacidades del protagonista. PAIRED es un método creativo en el sentido de que
+el maestro puede generar potencialmente una secuencia interminable de niveles novedosos. Sin embargo, como el maestro
+solo se adapta mediante actualizaciones de gradiente, es intrínsecamente lento para adaptarse a los cambios en las políticas de los estudiantes.
+2.3 Prioritized Level Replay 
+Prioritized Level Replay [PLR, 17] es una estrategia de aprendizaje activo que se ha demostrado que mejora la eficiencia muestral de una política
+y su generalización a niveles no vistos cuando se entrena y evalúa en niveles de un mismo
+UPOMDP, normalmente implementado como un simulador con semilla. PLR mantiene un búfer de niveles con los
+K niveles visitados con mayor potencial de aprendizaje, estimado mediante la pérdida L1 de valor promediada en el tiempo del
+agente que aprende en el último episodio de cada nivel. Al inicio de cada episodio de entrenamiento, con
+una probabilidad de repetición predefinida p, PLR usa un bandido para muestrear el nivel de  con el fin de maximizar el
+potencial de aprendizaje estimado; en caso contrario, con probabilidad 1 p, PLR muestrea un nuevo nivel del
+simulador. A diferencia de PAIRED, generativo pero de adaptación lenta, PLR no crea nuevos niveles,
+sino que actúa como un mecanismo de selección de adaptación rápida para elegir el siguiente nivel de entrenamiento entre
+los niveles encontrados previamente. Además, a diferencia de PAIRED, PLR no ofrece una garantía de robustez.
+Al extender la base teórica de PAIRED a PLR, mostraremos cómo PLR puede modificarse
+3
+para ofrecer una garantía de robustez en NE, así como cómo PAIRED puede aprovechar la selección complementaria de PLR
+para cambiar rápidamente entre los niveles generados y maximizar el arrepentimiento del estudiante.
+3 La robustez de Dual Curriculum Design 
+Curador: actualizar con el nivel; seleccionar un nivel de repetición; actualizar con el arrepentimiento; Estudiante; generar nuevo nivel 
+Generador: entrenar con el nivel generado 
+Figura 2: Visión general de Dual Curriculum Design (DCD). El estudiante aprende en presencia de dos maestros que se adaptan mutuamente
+y que buscan maximizar el arrepentimiento del estudiante: el maestro generador diseña nuevos niveles para desafiar al
+agente, y el maestro curador prioriza un conjunto de niveles ya creados, muestreándolos selectivamente para su repetición.
+Los enfoques anteriores de PAIRED y PLR revelan una dualidad natural: enfoques que aprenden gradualmente
+a generar niveles, como PAIRED, y métodos que no pueden generar niveles, sino que seleccionan rápidamente
+los existentes, como PLR. Esta dualidad sugiere combinar generadores lentos de niveles con
+selectores rápidos. Llamamos a esta nueva clase de algoritmos UED Dual Curriculum Design (DCD). Por ejemplo,
+PLR puede verse como un selector con un mecanismo de muestreo priorizado junto a un generador aleatorio, mientras que
+PAIRED puede verse como un generador que maximiza el arrepentimiento sin selector. DCD puede considerar además la aleatorización de dominio
+(DR) como un caso degenerado de generador aleatorio de niveles sin selector. 
+Para analizar teóricamente este espacio de métodos, modelamos DCD como un juego de tres jugadores entre un
+agente estudiante y dos maestros, llamado juego de currículo dual . Sin embargo, para formalizar este juego,
+primero debemos formalizar el escenario con un solo maestro: supongamos que el UPOMDP se desprende del contexto. Entonces,
+dada una función de utilidad para un único maestro, Ut(;), podemos definir de forma natural el juego base entre
+los estudiantes y el maestro tasG=hS=SsSt;U=UsUti, donde Ss=  es el conjunto de estrategias
+del estudiante, St=  es el conjunto de estrategias del maestro, y Us(;) =V() es la función de utilidad
+del estudiante. En las secciones 4 y 5 estudiaremos escenarios correspondientes a distintas elecciones de funciones de utilidad
+para los agentes maestros, a saber, el objetivo de arrepentimiento máximo UR
+t(;) y el
+objetivo uniforme UU
+t(;). Estos dos objetivos se definen como sigue (para cualquier constante C):
+UR 
+t(;) = argmax
+2fV() V()g (1)
+UU 
+t(;) =C (2)
+En el juego de currículo dual G, el primer maestro juega con probabilidad p, y el segundo,
+con probabilidad (1 p), o más formalmente, G=hS=SsStSt;U=UsU1
+tU2
+ti, donde 
+las funciones de utilidad del estudiante y de los dos maestros, respectivamente, Us;U1
+t;U2
+t, se definen como sigue: 
+U1
+t(;1;2) =pU1
+t(;1) (3)
+U2
+t(;1;2) = (1 p)U2
+t(;2) (4)
+Us(;1;2) =pUs(;1) + (1 p)Us(;2) (5)
+Nuestro teorema principal establece que los NE del juego de currículo dual son NE aproximados tanto del juego base
+para cualquiera de los maestros originales como del juego base con un maestro que maximiza la recompensa conjunta de
+pU1
+t+ (1 p)U2
+t, donde la calidad de las aproximaciones depende de la probabilidad de mezcla p. 
+Teorema 1. Sea B la máxima diferencia entre U1
+t y U2
+t, y sea (;1;2) un NE para
+G. Entonces (;p1+ (1 p)2) es un NE aproximado para el juego base con cualquiera de los maestros o para un
+maestro que optimiza su objetivo conjunto. Más precisamente, es un NE 2Bp(1 p)-aproximado cuando
+Ut=pU1
+t+ (1 p)U2
+t, un NE 2B(1 p)-aproximado cuando Ut=U1
+t, y un NE 2Bp-aproximado 
+cuando Ut=U2
+t. 
+La intuición detrás de este teorema es que, como los dos maestros no afectan el comportamiento del otro, 
+su mejor respuesta a un s fijo es elegir una estrategia que maximice U1
+t y U2
+t, respectivamente. 
+4
+Además, las estrategias de los dos maestros pueden verse como una única estrategia combinada para el juego base 
+juego con el objetivo conjunto, o con el objetivo propio de cada maestro. De hecho, los maestros proporcionan
+una mejor respuesta aproximada a cada caso del juego base simplemente jugando sus mejores
+respuestas individuales. Así, cuando alcanzamos un NE del juego de currículo dual, los maestros llegan a respuestas aproximadamente
+óptimas tanto para el juego base con el objetivo conjunto como con sus objetivos propios, lo que significa
+que también se encuentran en un NE aproximado del juego base con cualquiera de los maestros. Los detalles completos de esta demostración
+se describen en el Apéndice A.
+4 Hacer PLR robusto
+En esta sección ofrecemos una justificación teórica de la eficacia observada empíricamente de PLR,
+y, en el proceso, motivamos un ajuste contraintuitivo del algoritmo.
+Algoritmo 1: PLR robusto (PLR?)
+Inicializar aleatoriamente la política () y un búfer de niveles vacío, de tamaño K.
+mientras no converja hacer
+Muestrear la decisión de repetición Bernoulli, dPD(d)
+si d= 0 entonces
+Muestrear el nivel  del generador de niveles
+Recolectar la trayectoria de  en  sobre , con un stop-gradient ? , es decir, suprimir la actualización de la política
+si no
+Usar PLR para muestrear un nivel de repetición del almacén de niveles, 
+Recolectar la trayectoria de la política en  sobre  y actualizar  con las recompensas R()
+fin
+Calcular la puntuación PLR, S=score (;)
+Actualizar  con  usando la puntuación S
+fin
+4.1 Lograr garantías de robustez con PLR
+PLR ofrece fuertes mejoras empíricas en generalización, pero carece de garantías teóricas de
+robustez. Un paso hacia una garantía así consiste en reemplazar su priorización basada en la pérdida L1 de valor
+por una priorización basada en el arrepentimiento, usando los métodos que analizamos en la sección 4.2: aunque la pérdida L1 de valor puede
+ser buena para entrenar rápidamente la función de valor, puede sesgar el comportamiento del entrenamiento a largo plazo hacia
+políticas de alta varianza. Sin embargo, incluso con este cambio, PLR mantiene garantías teóricas más débiles
+porque el maestro generador aleatorio puede alejar al estudiante de las políticas de arrepentimiento minimax y
+en su lugar, hacia políticas que sacrifican robustez para sobresalir en niveles no estructurados. Formalizamos
+este argumento intuitivo en el siguiente corolario del Teorema 1.
+Corolario 1. Sea G el juego de currículo dual en el que el primer maestro maximiza el arrepentimiento,
+por lo que U1
+t=UR
+t, y el segundo maestro juega al azar, por lo que U2
+t=UU
+t. Sea V() acotada
+en [B ;B+] para todos ;. Además, supongamos que (;1;2) es un equilibrio de Nash
+de G. Sea R= minA2fmax;B2;fREGRET(A;B)gg el arrepentimiento óptimo del peor caso
+arrepentimiento. Entonces  está a 2(B+ B )(1 p) de tener el arrepentimiento óptimo del peor caso, o formalmente,
+max;B2;fREGRET(A;)gR 2(B+ B )(1 p). Además, existen entornos
+para todos los valores de p dentro de un factor constante de alcanzar esta cota.
+La demostración del Corolario 1 se deriva de una aplicación directa del Teorema 1 para mostrar que un NE de G es un
+NE aproximado para el juego base del primer maestro, y construyendo un ejemplo simple
+en el que la mejor respuesta del estudiante en G no logra alcanzar el arrepentimiento minimax en G. Estos argumentos se
+describen en su totalidad en el Apéndice A. Este corolario justifica en parte por qué PLR mejora
+la robustez de la política de equilibrio, ya que sesga la política resultante hacia una política de arrepentimiento minimax.
+Sin embargo, también señala un camino para mejorar aún más PLR: si la probabilidad p de usar directamente un nivel del maestro-
+generado se fijara en 0, entonces en el equilibrio la política resultante converge a una política minimax
+de arrepentimiento. En consecuencia, llegamos a la idea contraintuitiva de evitar las actualizaciones de gradiente con
+trayectorias recogidas de niveles muestreados al azar, para asegurar que en NE encontremos una política de arrepentimiento minimax
+. Desde el punto de vista de la robustez, por tanto, es óptimo entrenar con menos datos. El PLR modificado
+PLR? con este ajuste contraintuitivo se resume en el Algoritmo 1, en el que este
+pequeño cambio respecto al algoritmo original aparece resaltado en azul.
+5
+4.2 Estimación del arrepentimiento
+En general, los niveles pueden diferir en los retornos máximos alcanzables, lo que hace imposible conocer el verdadero
+arrepentimiento de un nivel sin acceso a un oráculo. Como la pérdida L1 de valor que emplea normalmente PLR no
+corresponde en general al arrepentimiento, recurrimos a funciones de puntuación alternativas que aproximan mejor
+el arrepentimiento. Se analizan a continuación dos enfoques, ambos eficaces en la práctica.
+Pérdida de valor positiva. Promediar sobre todas las transiciones con pérdida de valor positiva equivale a estimar
+el arrepentimiento como la diferencia entre el retorno máximo alcanzado y el retorno predicho, por episodio.
+Sin embargo, esta estimación está muy sesgada, ya que los objetivos de valor están ligados a la política actual del agente, potencialmente
+subóptima. Como solo considera pérdidas de valor positivas, esta función de puntuación lleva a un muestreo optimista
+de niveles con respecto a la política actual. Al usar GAE [ 33] para estimar los objetivos de valor
+de arranque, esta pérdida toma la siguiente forma, donde  y
+son los factores de descuento de GAE y del MDP
+respectivamente, y t, el error TD en el paso de tiempo t:
+1
+TTX
+t=0max TX
+k=t(
+)k tk;0!
+:
+Monte Carlo máximo (MaxMC). Podemos mitigar parte del sesgo de la pérdida de valor positiva
+sustituyendo el objetivo de valor por el mayor retorno alcanzado hasta el momento en el nivel dado durante el entrenamiento. Al
+usar este retorno máximo, las estimaciones del arrepentimiento ya no dependen de la política actual del agente. Este
+estimador adopta la forma simple de (1=T)PT
+t=0Rmax V(st). En nuestros experimentos con recompensas densas,
+calculamos esta puntuación como la diferencia entre el retorno máximo alcanzado y V(s0).
+5 Replay-Enhanced PAIRED (REPAIRED)
+Podemos reemplazar el maestro generador aleatorio que usa PLR? por el maestro de PAIRED. Esta extensión
+incluye un segundo agente estudiante, el antagonista, también dotado de su propio búfer de niveles PLR. En
+cada episodio, con probabilidad p, los estudiantes evalúan su rendimiento (sin entrenar) en un
+nivel recién generado y, con probabilidad 1 p, entrenan con un nivel muestreado del propio búfer PLR de
+cada estudiante, que prioriza el arrepentimiento. Entrenar solo con los niveles de mayor arrepentimiento debería mitigar las ineficiencias
+del procedimiento de optimización del maestro de PAIRED. Nos referimos a esta extensión como Replay-Enhanced
+PAIRED (REPAIRED). En la Figura 2 se ofrece una visión general de REPAIRED mediante flechas negras, con los
+estudiantes siendo el protagonista y el antagonista, mientras que el pseudocódigo completo se describe en el Apéndice B.
+Dado que PLR? y PAIRED promueven ambos el arrepentimiento en el equilibrio, sería razonable creer que
+la combinación de ambos hace lo mismo. Un corolario directo del Teorema 1, que
+describimos en el Apéndice 1, muestra que, en un escenario teóricamente ideal, combinar estos dos algoritmos
+como se hace en REPAIRED, efectivamente encuentra estrategias de arrepentimiento minimax en equilibrio.
+Corolario 2. Sea G el juego de currículo dual en el que ambos maestros maximizan el arrepentimiento, por lo que
+U1
+t=U2
+t=UR
+t. Además, supongamos que (;1;2) es un equilibrio de Nash de G. Entonces,2
+argminA2fmax;B2;fREGRET(A;B)gg.
+Este resultado nos da cierta garantía de que, si nuestro método llega a NE, el protagonista
+ha convergido a una estrategia de arrepentimiento minimax, que tiene los beneficios descritos en [ 10]: como una política de arrepentimiento minimax
+resuelve todos los entornos resolubles, siempre que esto sea posible y esté suficientemente bien definido,
+cabe esperar que las políticas resultantes del comportamiento de equilibrio de REPAIRED sean robustas y
+versátiles en todos los entornos del dominio.
+6 Experimentos
+Nuestros experimentos tienen como primer objetivo (1) evaluar el rendimiento empírico del método motivado teóricamente
+PLR?, y, en segundo lugar, comprender mejor el efecto de la repetición en el diseño no supervisado de entornos
+en concreto (2) su impacto en el rendimiento de generalización zero-shot de las políticas de estudiante inducidas
+y (3) la complejidad de los niveles diseñados por el maestro. Para ello, comparamos PLR
+y REPAIRED con sus contrapartes sin repetición, DR y PAIRED, en los dos escenarios muy distintos
+de control discreto con recompensas dispersas y de control continuo con recompensas densas. Presentamos
+las descripciones de los entornos junto con las elecciones de modelo e hiperparámetros en el Apéndice D.
+6
+6.1 Navegación parcialmente observable
+Cada nivel de navegación es un laberinto parcialmente observable que requiere que los agentes estudiantes realicen acciones discretas
+para alcanzar una meta y recibir una recompensa dispersa. Nuestros agentes usan PPO [ 34] con una arquitectura recurrente basada en LSTM
+política para manejar la observabilidad parcial. Antes de cada episodio, el maestro diseña el nivel en este orden:
+empezando con un laberinto vacío, coloca un bloque obstructor por paso de tiempo hasta un presupuesto de bloques
+predefinido, y finalmente coloca al agente seguido de la meta.
+SixteenRoomsLabyrinthLabyrinth2MazeMaze2PerfectMaze*LargeCorridor*
+Tasa de resolución0.00.51.0
+DRMinimaxPAIREDREPAIREDPLRPLR⊥
+Figura 3: Rendimiento de transferencia zero-shot en entornos de prueba desafiantes tras 250M de pasos de entrenamiento. Los gráficos
+muestran la mediana y el rango intercuartílico de las tasas de resolución en 10 ejecuciones. Un asterisco (*) junto al nombre del laberinto indica
+que el laberinto se genera procedimentalmente, por lo que cada intento corresponde a una configuración aleatoria del laberinto.
+Generalización zero-shot. Entrenamos políticas con cada método durante 250M de pasos y evaluamos la generalización zero-
+shot en varios entornos OOD desafiantes, además de niveles de la distribución completa de
+dos entornos generados procedimentalmente, PerfectMaze y LargeCorridor. También
+comparamos con las líneas base DR y minimax. Nuestros resultados en las Figuras 3 y 4 muestran que PLR? y
+REPAIRED logran ambos una mayor eficiencia muestral y generalización zero-shot que sus contrapartes sin repetición
+. La mejora en el rendimiento de prueba que logra PLR? sobre DR y PLR cuando se entrena
+con un número equivalente de actualizaciones de gradiente, agregado en todos los laberintos de prueba, es estadísticamente significativa
+(p < 0:05), al igual que la mejora del rendimiento de prueba de REPAIRED sobre PAIRED. Mucho antes de 250
+millones de pasos, tanto PLR como PLR? superan significativamente a PAIRED tras 3 mil millones de pasos de entrenamiento, según
+se informa en [ 10]. Además, ambas variantes de PLR dan lugar a políticas con mayor transferencia zero-shot que
+las variantes de PAIRED. En particular, el agente PLR? aprende a resolver laberintos mediante una aproximación de la regla de la mano derecha
+. La Tabla 2 del Apéndice C.1 recoge el rendimiento en todos los laberintos de prueba. El éxito de diseñar
+niveles que maximizan el arrepentimiento mediante búsqueda aleatoria (selección) en lugar de aprender un generador con RL sugiere
+que, para algunos UPOMDP, el paisaje de arrepentimiento, en función de los parámetros libres , tiene una baja
+dimensionalidad efectiva [ 3]. Renunciar al aprendizaje basado en gradientes en favor de la búsqueda aleatoria puede entonces
+conducir a una adaptación más rápida al paisaje de arrepentimiento cambiante, a medida que la política evoluciona durante el entrenamiento.
+DR
+PLR
+PLR⊥
+REPAIRED
+PAIRED
+Figura 5: Ejemplos de estructuras emergentes
+generadas por cada método. Complejidad emergente. A medida que los agentes estudiantes mejoran,
+los maestros deben generar niveles más desafiantes para
+mantener el arrepentimiento. Medimos la complejidad emergente resultante
+mediante el seguimiento del número de bloques en cada
+nivel y la longitud del camino más corto hasta la meta (donde
+a los niveles irresolubles se les asigna una longitud de 0). Estos resultados,
+resumidos en la Figura 4, muestran que PAIRED se adapta lentamente
+la complejidad durante el entrenamiento, mientras que REPAIRED al principio
+aumenta rápidamente la complejidad, antes de ser superado por
+PAIRED. Este inicio más rápido de la complejidad puede deberse
+al mecanismo de repetición rápida de REPAIRED, y la desaceleración a largo plazo respecto a PAIRED puede
+explicarse por sus actualizaciones de gradiente menos frecuentes. Nuestros resultados en un período de entrenamiento extendido
+del Apéndice C confirman que tanto PAIRED como REPAIRED aumentan lentamente la complejidad con el tiempo,
+hasta igualar la alcanzada en tan solo una fracción del número de pasos de gradiente de PLR y PLR?.
+Este resultado muestra que la búsqueda aleatoria es sorprendentemente eficiente para descubrir de forma continua niveles de
+complejidad creciente, dado un mecanismo de selección adecuado como PLR. La Figura 5 muestra que,
+de forma similar a los métodos con un maestro que maximiza el arrepentimiento, PLR encuentra niveles con estructuras complejas.
+7
+SixteenRoomsTasa de resolución
+05K102005K68101205K0.00.1Labyrinth
+Longitud del camino más corto Número de bloques Número de bloques Tasa de resolución DRMinimaxPAIREDREPAIREDPLRPLR⊥
+0250M01
+0250M01
+0250M01
+LabyrinthMazeSixteenRoomsPAIRED, 3B pasosMediana
+PasosActualizaciones PPO05K0.00.20.50.8Figura 4: Rendimiento de transferencia zero-shot durante el entrenamiento para las variantes de PAIRED y REPAIRED. Los gráficos
+muestran la media y el error estándar en 10 ejecuciones. Las líneas punteadas marcan el rendimiento medio de PAIRED tras 3B
+pasos de entrenamiento, según se informa en [10], mientras que las líneas discontinuas indican los retornos medianos.
+6.2 Carreras de coches basadas en píxeles con control continuo
+Para probar la versatilidad y la escalabilidad de nuestros métodos, recurrimos a una versión extendida del entorno CarRacing
+de OpenAI Gym [ 5]. Este entorno implica control continuo con recompensas densas,
+un espacio de acciones tridimensional y observaciones parciales en píxeles, con el objetivo de dar una vuelta completa
+a un circuito. Para habilitar UED en cualquier circuito cerrado, reparametrizamos CarRacing para generar
+circuitos como curvas de Bézier [ 22] con puntos de control arbitrarios. El maestro genera niveles eligiendo una
+secuencia de hasta 12 puntos de control, que define de forma única un circuito de Bézier dentro de restricciones de curvatura
+concretas y predefinidas. Tras 5M pasos de entrenamiento, probamos el rendimiento de transferencia zero-shot de las
+políticas entrenadas por cada método en 20 niveles que replican circuitos oficiales de Fórmula Uno (F1) diseñados por humanos
+(véase la Figura 19 del Apéndice para una visualización de los circuitos). Obsérvese que estos circuitos son
+significativamente OOD, ya que no pueden definirse con solo 12 puntos de control. En la Figura 6 mostramos
+la evolución del rendimiento de transferencia zero-shot para el entorno CarRacing original, así como
+tres circuitos de F1 de dificultad variable, incluyendo también el rendimiento final en el conjunto completo de F1
+(benchmark). Para el rendimiento final, también evaluamos el agente CarRacing del estado del arte de
+[38] en nuestro nuevo benchmark de F1.
+PasosF1 completoTang et al, 2020DRPAIREDREPAIREDPLRPLR⊥Retorno en prueba
+05M0450900
+CarRacing-v0
+05M0450900
+F1-Italy
+05M0450900
+F1-Singapore
+05M0450900
+F1-Germany
+0200400
+Retorno en prueba
+Figura 6: Rendimiento de transferencia zero-shot. Los gráficos muestran la media y el error estándar en 10 ejecuciones.
+A diferencia del escenario de navegación discreto y con recompensas dispersas, encontramos que DR produce políticas moderadamente exitosas
+para la transferencia zero-shot en CarRacing. Las recompensas densas simplifican el problema de aprendizaje y los circuitos de Bézier aleatorios
+ocasionalmente contienen los desafíos presentes en los circuitos de F1, como curvas cerradas en horquilla y observaciones
+con circuitos paralelos debido a la alta curvatura local. Aun así, vemos que las políticas entrenadas muestreando selectivamente
+circuitos para maximizar el arrepentimiento superan significativamente a las entrenadas muestreando de forma uniforme
+8
+a partir de circuitos generados aleatoriamente, en términos de transferencia zero-shot a los circuitos OOD de F1. Sorprendentemente,
+con una tasa de repetición de 0.5, PLR? obtiene ganancias estadísticamente significativas (p<0:001) sobre PLR en el rendimiento zero-shot
+en el benchmark completo de F1, a pesar de entrenar directamente solo con la mitad de los datos de rollout, usando
+la mitad de actualizaciones de gradiente. Una vez más, vemos que la búsqueda aleatoria con selección mediante PLR produce
+una rica selección de niveles y un currículo eficaz.
+También observamos que PAIRED tiene dificultades para entrenar un protagonista robusto en CarRacing. En concreto,
+PAIRED explota en exceso las fortalezas relativas del antagonista sobre el protagonista, encontrando currículos que
+orientan al protagonista hacia políticas que, en última instancia, rinden mal incluso en circuitos sencillos, lo que lleva a una
+reducción gradual de la complejidad de los niveles. Presentamos curvas de entrenamiento que revelan esta dinámica en el Apéndice
+C. Como muestra la Figura 6, REPAIRED mitiga sustancialmente esta degeneración, aunque no por completo,
+dando lugar a una política que supera significativamente a PAIRED (p<0:001) en rendimiento medio en el conjunto completo de
+F1, pero rinde menos que DR. En particular, PLR? supera el rendimiento del estado del arte
+AttentionAgent [38], a pesar de no usar una política de autoatención y de entrenar con menos del 0.25% del
+número de pasos del entorno en comparación. Estas ganancias provienen únicamente del currículo inducido.
+La Figura 17 del Apéndice C revela además que PLR? produce políticas de CarRacing que tienden a alcanzar
+retornos mínimos más altos en promedio en comparación con los métodos de referencia, lo que aporta más evidencia de
+los beneficios de la propiedad de arrepentimiento minimax combinada con un mecanismo rápido basado en repetición para encontrar eficientemente
+niveles de alto arrepentimiento.
+7 Trabajos relacionados
+Al inducir currículos paralelos, DCD sigue una rica tradición de métodos de aprendizaje con currículo [ 2,32,28,
+23]. Muchos algoritmos previos de aprendizaje curricular se asemejan al curador de DCD, con mecanismos subyacentes de muestreo selectivo similares
+a los de PLR?. Lo más parecido es TSCL [ 19], que prioriza
+los niveles según el retorno en lugar de la pérdida de valor, y se ha demostrado que sobreajusta a los niveles de entrenamiento en algunos
+entornos [ 17]. En nuestro caso, los niveles repetidos pueden verse como estrategias pasadas de un generador de niveles
+docente. Esto vincula nuestros métodos basados en repetición con el juego ficticio [FSP, 13] y, más de cerca,
+FSP priorizado [40], que muestrea selectivamente a los oponentes según sus tasas históricas de victorias.
+Los enfoques recientes que emplean un adversario generador incluyen Asymmetric Self-Play [ 37,26],
+en el que un agente propone tareas para otro en forma de trayectorias del entorno, y AMIGo [ 6],
+en el que el docente recibe recompensa por proponer metas alcanzables. Aunque nuestros métodos no presuponen
+un escenario basado en metas, otros han avanzado aquí usando modelado generativo [ 12,29], aprendizaje
+de habilidades latentes [ 14] y explotando el desacuerdo entre modelos [ 45]. Estos métodos son menos aplicables en general
+que PLR?, y a diferencia de nuestros métodos DCD, no ofrecen garantías de robustez bien fundamentadas.
+Otros algoritmos recientes pueden entenderse como formas de UED y, como DCD, se enmarcan en la teoría
+de la decisión. POET [ 41,42], un enfoque coevolutivo [ 27], usa una población de adversarios minimax
+(en lugar de minimax regret) para construir terreno para un agente BipedalWalker. En cambio,
+a diferencia de nuestros métodos, POET requiere entrenar una gran población de agentes y entornos, y
+en consecuencia, supone un costo de cómputo considerable. APT-Gen [ 11] también genera tareas de forma procedimental, pero
+requiere acceso a las tareas objetivo, mientras que nuestros métodos buscan mejorar la transferencia zero-shot.
+El marco DCD también abarca métodos de aleatorización adaptativa de dominio [DR, 20,15], que
+han tenido éxito en ayudar a la transferencia sim2real en robótica [ 39,16,1,25]. DR en sí queda subsumido por
+la generación procedimental de contenido [ 30], para la cual UED y DCD pueden verse como un marco formal
+de teoría de la decisión, que permite desarrollar algoritmos demostrablemente óptimos.
+8 Discusión
+Establecimos una conexión novedosa entre PLR y los enfoques UED de minimax regret como PAIRED,
+desarrollando la teoría del Diseño Dual de Currículo (DCD). En este marco, una política de estudiante es
+desafiada por un equipo de dos docentes que se co-adaptan y maximizan el arrepentimiento: uno, un generador que crea
+niveles nuevos, y el otro, un curador que muestrea selectivamente niveles generados previamente para repetirlos.
+Esta visión unifica PLR y PAIRED, que son ambos instancias de DCD. Nuestros resultados teóricos sobre DCD
+nos permitieron demostrar que PLR alcanza una política de minimax regret en NE, con lo que ofrecemos la primera
+caracterización teórica de la robustez de PLR. En particular, nuestra teoría lleva al resultado contraintuitivo
+de que PLR puede volverse demostrablemente robusto entrenando con menos datos, concretamente usando solo
+9
+las trayectorias de los niveles muestreados para repetición. Además, desarrollamos Replay-Enhanced PAIRED
+(REPAIRED), que extiende las actualizaciones selectivas basadas en repetición de PLR a PAIRED, y demostramos
+que comparte la misma garantía de robustez en NE. Empíricamente, en dos entornos muy distintos,
+encontramos que PLR? mejora significativamente la generalización zero-shot frente a PLR, y REPAIRED
+frente a PAIRED. Como nuestros métodos solo modifican el orden de los niveles visitados durante el entrenamiento, pueden, en
+principio, combinarse con muchos otros métodos de RL para producir mejoras potencialmente ortogonales en
+eficiencia de muestras y generalización.
+Si bien estas mejoras basadas en DCD para PLR y PAIRED conducen empíricamente a políticas más robustas,
+es importante enfatizar que nuestros resultados teóricos solo demuestran una garantía de minimax regret en NE
+para estos métodos; sin embargo, no ofrecen ninguna garantía explícita de convergencia a dichos NE.
+Además, vale la pena destacar que los métodos basados en repetición como PLR? dependen por completo
+de la calidad de los niveles propuestos por el generador. Nuestros resultados muestran que basta con curar
+niveles de alto arrepentimiento descubiertos mediante búsqueda aleatoria para superar al docente PAIRED basado en RL en los
+dominios estudiados. Esperamos que avanzar en métodos para definir o adaptar la distribución de propuestas del generador
+tiene un gran potencial para mejorar la eficacia de nuestros métodos, especialmente en dominios más complejos
+y de mayor dimensión, donde la búsqueda aleatoria puede resultar ineficaz para encontrar niveles de entrenamiento útiles.
+Es importante señalar que nuestros métodos suponen una elección adecuada de lo que constituye los parámetros libres del UPOMDP.
+Nuestros métodos no pueden esperarse que produzcan políticas robustas para transferencia zero-shot si
+el conjunto de entornos definido por los parámetros libres no se alinea suficientemente con el dominio de
+transferencia de interés. Diseñar la parametrización del entorno para una transferencia zero-shot exitosa a un
+dominio objetivo específico puede ser muy poco trivial, lo que plantea un problema importante para la investigación futura.
+Más allá del diseño de entornos, observamos que los procesos UED de larga duración en UPDOMPs amplios
+se parecen mucho al aprendizaje continuo en dominios abiertos. La congruencia de estos
+entornos sugiere que nuestras contribuciones en torno a DCD podrían extenderse a problemas más generales de aprendizaje continuo
+en los que los agentes deben aprender a dominar una secuencia diversa de tareas con límites de episodio predefinidos (o
+inferidos), si se supone que las tareas son diseñadas por un docente que maximiza el arrepentimiento.
+Así, los métodos basados en DCD como PLR? podrían producir políticas más generales para el aprendizaje continuo. Anticipamos
+muchos cruces emocionantes entre estas áreas de investigación en los años venideros.
+Dado el rápido progreso en la aplicación de RL a dominios cada vez más complejos, podemos esperar con confianza un
+aumento continuo de los despliegues reales de sistemas de RL en los próximos años. A diferencia de la simulación, en
+el mundo real, el entorno tiende a presentar mucha más variabilidad, que puede no estar explícitamente
+codificada en el simulador asociado usado para el entrenamiento. Los agentes de RL desplegados son, por tanto, propensos a cometer
+muchos errores debido a variaciones inesperadas del entorno. Nuestros métodos para mejorar UED conducen
+a agentes de RL más robustos ante un rango potencialmente amplio de cambios en el entorno. Así, nuestro
+trabajo puede resultar una herramienta útil para lograr agentes de RL más seguros y confiables, ayudando a habilitar la
+aplicación de RL a más problemas del mundo real.
+Al aumentar la aplicabilidad de RL a entornos reales, nuestro trabajo puede agravar los riesgos más
+generales de desplegar el aprendizaje automático: mayor desempleo; dependencia excesiva de modelos sesgados
+que potencialmente refuerzan conceptos erróneos comunes y desigualdades sociales; y el avance
+de las armas automatizadas. En particular, como se discute en la Sección 8, alinear la elección de
+parámetros libres del UPOMDP con el dominio objetivo de interés es importante para una transferencia exitosa.
+Si bien esta elección de parámetros libres actúa entonces como un posible punto de fallo, la abstracción UPOMDP
+subyacente a UED revela que este problema afecta en general a todos los métodos de RL que buscan entrenar políticas robustas;
+un UPOMDP simplemente hace explícito el espacio de configuraciones del entorno que, de otro modo, estaría implícito, definido
+por un POMDP estándar. Al obligarnos a considerar en qué punto nuestro entorno de entrenamiento se aparta de
+la realidad, los métodos UED alientan a diseñar sistemas de RL de forma más consciente de los
+supuestos subyacentes sobre el entorno, lo que lleva a sistemas más fundamentados y robustos.
+Agradecimientos y declaración de financiación
+Nos gustaría agradecer a Natasha Jaques, Patrick Labatut y Heinrich Küttler por discusiones fructíferas
+que ayudaron a dar forma a este trabajo. Además, agradecemos a nuestros revisores anónimos por sus valiosos
+comentarios. MJ cuenta con el apoyo del programa de doctorado FAIR. Este trabajo fue financiado por Facebook.
+10
+Referencias
+[1]O. M. Andrychowicz, B. Baker, M. Chociej, R. Józefowicz, B. McGrew, J. Pachocki, A. Petron,
+M. Plappert, G. Powell, A. Ray, J. Schneider, S. Sidor, J. Tobin, P. Welinder, L. Weng, y
+W. Zaremba. Learning dexterous in-hand manipulation. The International Journal of Robotics
+Research, 39(1):3–20, 2020.
+[2]Y . Bengio, J. Louradour, R. Collobert, y J. Weston. Curriculum learning. En Actas de
+the 26th Annual International Conference on Machine Learning , ICML ’09, pág. 41–48, New
+York, NY , USA, 2009. Association for Computing Machinery.
+[3]J. Bergstra y Y . Bengio. Random search for hyper-parameter optimization. Journal of
+Machine Learning Research , 13:281–305, 2012.
+[4]C. Berner, G. Brockman, B. Chan, V . Cheung, P. D˛ ebiak, C. Dennison, D. Farhi, Q. Fischer,
+S. Hashme, C. Hesse, et al. Dota 2 with large scale deep reinforcement learning. arXiv preprint
+arXiv:1912.06680 , 2019.
+[5]G. Brockman, V . Cheung, L. Pettersson, J. Schneider, J. Schulman, J. Tang, y W. Zaremba.
+Openai gym. CoRR , abs/1606.01540, 2016.
+[6]A. Campero, R. Raileanu, H. Kuttler, J. B. Tenenbaum, T. Rocktäschel, y E. Grefenstette.
+Learning with AMIGo: Adversarially motivated intrinsic goals. En International Conference on
+Learning Representations , 2021.
+[7]M. Chevalier-Boisvert, L. Willems, y S. Pal. Minimalistic gridworld environment for openai
+gym. https://github.com/maximecb/gym-minigrid , 2018.
+[8]K. Cobbe, C. Hesse, J. Hilton, y J. Schulman. Leveraging procedural generation to benchmark
+reinforcement learning. En Actas de la 37th International Conference on Machine
+Learning , págs. 2048–2056, 2020.
+[9]K. Cobbe, O. Klimov, C. Hesse, T. Kim, y J. Schulman. Quantifying generalization in
+reinforcement learning. En K. Chaudhuri y R. Salakhutdinov, eds., Actas de la
+36th International Conference on Machine Learning, ICML 2019, 9-15 June 2019, Long Beach,
+California, USA , Proceedings of Machine Learning Research. PMLR, 2019.
+[10] M. Dennis, N. Jaques, E. Vinitsky, A. Bayen, S. Russell, A. Critch, y S. Levine. Emergent
+complexity and zero-shot transfer via unsupervised environment design. En Advances in Neural
+Information Processing Systems , vol. 33, 2020.
+[11] K. Fang, Y . Zhu, S. Savarese, y F.-F. Li. Adaptive procedural task generation for hard-
+exploration problems. En International Conference on Learning Representations , 2021.
+[12] C. Florensa, D. Held, X. Geng, y P. Abbeel. Automatic goal generation for reinforcement
+learning agents. En J. Dy y A. Krause, eds., Actas de la 35th International
+Conference on Machine Learning , vol. 80 of Proceedings of Machine Learning Research ,
+págs. 1515–1528. PMLR, 10 2018.
+[13] J. Heinrich, M. Lanctot, y D. Silver. Fictitious self-play in extensive-form games. En
+Actas de la 32nd International Conference on Machine Learning , págs. 805–813, 2015.
+[14] A. Jabri, K. Hsu, A. Gupta, B. Eysenbach, S. Levine, y C. Finn. Unsupervised curricula for
+visual meta-reinforcement learning. En Advances in Neural Information Processing Systems ,
+vol. 32, 2019.
+[15] N. Jakobi. Evolutionary robotics and the radical envelope-of-noise hypothesis. Adaptive
+Behavior , 6(2):325–368, 1997.
+[16] S. James, A. J. Davison, y E. Johns. Transferring end-to-end visuomotor control from
+simulation to real world for a multi-stage task. En 1st Conference on Robot Learning , 2017.
+[17] M. Jiang, E. Grefenstette, y T. Rocktäschel. Prioritized level replay. En Actas de la
+38th International Conference on Machine Learning, ICML 2021, 18-24 July 2021, Virtual
+Event , vol. 139 of Proceedings of Machine Learning Research , págs. 4940–4950. PMLR,
+2021.
+[18] X. Ma. Car racing with pytorch. https://github.com/xtma/pytorch_car_caring , 2019.
+[19] T. Matiisen, A. Oliver, T. Cohen, y J. Schulman. Teacher-student curriculum learning. IEEE
+Transactions on Neural Networks and Learning Systems , PP, 07 2017.
+11
+[20] B. Mehta, M. Diaz, F. Golemo, C. J. Pal, y L. Paull. Active domain randomization. En L. P.
+Kaelbling, D. Kragic, y K. Sugiura, eds., 3rd Annual Conference on Robot Learning, CoRL
+2019, Osaka, Japan, October 30 - November 1, 2019, Proceedings , vol. 100 of Proceedings
+of Machine Learning Research , págs. 1162–1176. PMLR, 2019.
+[21] V . Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. G. Bellemare, A. Graves,
+M. Riedmiller, A. K. Fidjeland, G. Ostrovski, et al. Human-level control through deep
+reinforcement learning. Nature , 518(7540):529–533, 2015.
+[22] M. E. Mortenson. Mathematics for Computer Graphics Applications . Industrial Press Inc.,
+1999.
+[23] S. Narvekar, B. Peng, M. Leonetti, J. Sinapov, M. E. Taylor, y P. Stone. Curriculum learning
+for reinforcement learning domains: A framework and survey. Journal of Machine Learning
+Research , 21:181:1–181:50, 2020.
+[24] J. F. Nash et al. Equilibrium points in n-person games. Proceedings of the National Academy of
+Sciences , 36(1):48–49, 1950.
+[25] OpenAI, I. Akkaya, M. Andrychowicz, M. Chociej, M. Litwin, B. McGrew, A. Petron, A. Paino,
+M. Plappert, G. Powell, R. Ribas, J. Schneider, N. Tezak, J. Tworek, P. Welinder, L. Weng,
+Q. Yuan, W. Zaremba, y L. Zhang. Solving rubik’s cube with a robot hand. CoRR ,
+abs/1910.07113, 2019.
+[26] O. OpenAI, M. Plappert, R. Sampedro, T. Xu, I. Akkaya, V . Kosaraju, P. Welinder, R. D’Sa,
+A. Petron, H. P. de Oliveira Pinto, A. Paino, H. Noh, L. Weng, Q. Yuan, C. Chu, y W. Zaremba.
+Asymmetric self-play for automatic goal discovery in robotic manipulation, 2021.
+[27] E. Popovici, A. Bucci, R. P. Wiegand, y E. D. De Jong. Coevolutionary Principles , págs.
+987–1033. Springer Berlin Heidelberg, 2012.
+[28] R. Portelas, C. Colas, L. Weng, K. Hofmann, y P.-Y . Oudeyer. Automatic curriculum learning
+for deep rl: A short survey. En C. Bessiere, ed., Proceedings of the Twenty-Ninth International
+Joint Conference on Artiﬁcial Intelligence, IJCAI-20 , págs. 4819–4825. International Joint
+Conferences on Artificial Intelligence Organization, 7 2020. Survey track.
+[29] S. Racaniere, A. Lampinen, A. Santoro, D. Reichert, V . Firoiu, y T. Lillicrap. Automated
+curriculum generation through setter-solver interactions. En International Conference on
+Learning Representations , 2020.
+[30] S. Risi y J. Togelius. Increasing generality in machine learning through procedural content
+generation. Nature Machine Intelligence , 2(8):428–436, 8 2020.
+[31] L. J. Savage. The theory of statistical decision. Journal of the American Statistical association ,
+46(253):55–67, 1951.
+[32] J. Schmidhuber. Powerplay: Training an increasingly general problem solver by continually
+searching for the simplest still unsolvable problem. Frontiers in Psychology , 4:313, 06 2013.
+[33] J. Schulman, P. Moritz, S. Levine, M. I. Jordan, y P. Abbeel. High-dimensional continuous
+control using generalized advantage estimation. En Y . Bengio y Y . LeCun, eds., 4th
+International Conference on Learning Representations, ICLR 2016, San Juan, Puerto Rico,
+May 2-4, 2016, Conference Track Proceedings , 2016.
+[34] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, y O. Klimov. Proximal policy optimization
+algorithms. CoRR , abs/1707.06347, 2017.
+[35] D. Silver, A. Huang, C. J. Maddison, A. Guez, L. Sifre, G. Van Den Driessche, J. Schrittwieser,
+I. Antonoglou, V . Panneershelvam, M. Lanctot, et al. Mastering the game of go with deep neural
+networks and tree search. Nature , 529(7587):484–489, 2016.
+[36] D. Silver, T. Hubert, J. Schrittwieser, I. Antonoglou, M. Lai, A. Guez, M. Lanctot, L. Sifre,
+D. Kumaran, T. Graepel, et al. A general reinforcement learning algorithm that masters chess,
+shogi, y go through self-play. Science , 362(6419):1140–1144, 2018.
+[37] S. Sukhbaatar, Z. Lin, I. Kostrikov, G. Synnaeve, A. Szlam, y R. Fergus. Intrinsic motivation
+and automatic curricula via asymmetric self-play. En 6th International Conference on Learning
+Representations, ICLR 2018, Vancouver, BC, Canada, April 30 - May 3, 2018, Conference Track
+Proceedings . OpenReview.net, 2018.
+12
+[38] Y . Tang, D. Nguyen, y D. Ha. Neuroevolution of self-interpretable agents. En Proceedings of
+the Genetic and Evolutionary Computation Conference , 2020.
+[39] J. Tobin, R. Fong, A. Ray, J. Schneider, W. Zaremba, y P. Abbeel. Domain randomization
+for transferring deep neural networks from simulation to the real world. En 2017 IEEE/RSJ
+International Conference on Intelligent Robots and Systems (IROS) , pages 23–30, 2017.
+[40] O. Vinyals, I. Babuschkin, W. M. Czarnecki, M. Mathieu, A. Dudzik, J. Chung, D. H. Choi,
+R. Powell, T. Ewalds, P. Georgiev, et al. Grandmaster level in StarCraft II using multi-agent
+reinforcement learning. Nature , 575(7782):350–354, 2019.
+[41] R. Wang, J. Lehman, J. Clune, y K. O. Stanley. Paired open-ended trailblazer (POET):
+endlessly generating increasingly complex and diverse learning environments and their solutions.
+CoRR , abs/1901.01753, 2019.
+[42] R. Wang, J. Lehman, A. Rawal, J. Zhi, Y . Li, J. Clune, y K. Stanley. Enhanced POET:
+Open-ended reinforcement learning through unbounded invention of learning challenges and
+their solutions. En Proceedings of the 37th International Conference on Machine Learning ,
+pages 9940–9951, 2020.
+[43] B. L. Welch. The generalization of ‘student’s’ problem when several different population
+variances are involved. Biometrika , 34(1-2):28–35, 1947.
+[44] A. Zhang, N. Ballas, y J. Pineau. A dissection of overfitting and generalization in continuous
+reinforcement learning. arXiv preprint arXiv:1806.07937 , 2018.
+[45] Y . Zhang, P. Abbeel, y L. Pinto. Automatic curriculum learning through value disagreement.
+En Advances in Neural Information Processing Systems , volume 33, pages 7648–7659, 2020.
+13
+Lista de verificación
+1. Para todos los autores...
+(a) ¿Reflejan con precisión las afirmaciones principales del resumen y de la introducción
+las contribuciones y el alcance del artículo? [Sí]
+(b) ¿Describió las limitaciones de su trabajo? [Sí] Véase la sección 8.
+(c) ¿Discutió posibles impactos negativos de su trabajo en la sociedad? [Sí]
+(d) ¿Leyó las pautas de revisión ética y se aseguró de que su artículo
+las cumple? [Sí]
+2. Si incluye resultados teóricos...
+(a) ¿Enunció el conjunto completo de supuestos de todos los resultados teóricos? [Sí]
+(b) ¿Incluyó demostraciones completas de todos los resultados teóricos? [Sí]
+3. Si realizó experimentos...
+(a) ¿Incluyó el código, los datos y las instrucciones necesarias para reproducir los principales
+resultados experimentales (en el material suplementario o como URL)? [Sí]
+(b) ¿Especificó todos los detalles del entrenamiento (por ejemplo, particiones de datos, hiperparámetros
+y cómo se eligieron)? [Sí] Véanse el apéndice D.1 y D.2.
+(c) ¿Informó de las barras de error (por ejemplo, con respecto a la semilla aleatoria tras ejecutar los
+experimentos varias veces)? [Sí]
+(d) ¿Incluyó la cantidad total de cómputo y el tipo de recursos utilizados (por ejemplo, tipo
+de GPU, clúster interno o proveedor de nube)? [Sí] Véanse el apéndice D.1 y D.2.
+4. Si utiliza recursos existentes (por ejemplo, código, datos, modelos) o si publica nuevos recursos...
+(a) Si su trabajo utiliza recursos existentes, ¿citó a sus creadores? [Sí]
+(b) ¿Mencionó la licencia de los recursos? [Sí] La licencia MIT.
+(c) ¿Incluyó nuevos recursos en el material suplementario o como URL? [Sí]
+(d) ¿Discutió si se obtuvo el consentimiento de las personas cuyos datos está utilizando o curando,
+y cómo se obtuvo? [N/A]
+(e) ¿Discutió si los datos que utiliza o cura contienen información personal identificable
+o contenido ofensivo? [N/A]
+5. Si utilizó crowdsourcing o realizó investigación con sujetos humanos...
+(a) ¿Incluyó el texto completo de las instrucciones dadas a los participantes y capturas de pantalla,
+si corresponde? [N/A]
+(b) ¿Describió los posibles riesgos para los participantes, con enlaces a las aprobaciones de la
+Junta de Revisión Institucional (IRB), si corresponde? [N/A]
+(c) ¿Incluyó el salario por hora estimado pagado a los participantes y la cantidad total
+gastada en su compensación? [N/A]
+14

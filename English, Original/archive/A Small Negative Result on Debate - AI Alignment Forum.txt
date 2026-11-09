@@ -1,0 +1,43 @@
+Debate (AI safety technique)
+AI
+FrontpageSome context for this new arXiv paper from my group at NYU:We're working toward sandwiching° experiments using our QuALITY long-document QAdataset, with reading time playing the role of the the expertise variable. Roughly: Is theresome way to get humans to reliably answer hard reading-comprehensions questionsabout a ~5k-word text, without ever having the participants or any other annotators takethe ~20 minutes that it would require to actually read the text.This is an early writeup of some negative results. It's earlier in the project that I wouldusually write something like this up, but some authors had constraints that made itworthwhile, so I'm sharing what we have.Here, we tried to ﬁnd out if single-turn debate leads to reliable question answering: If wegive people high-quality arguments for and against each (multiple-choice) answerchoices, supported by pointers to key quotes in the source text, can they reliably answerthe questions under a time limit?We did this initial experiment in an oracle setting; We had (well-incentivized, skilled)humans write the arguments, rather than an LM. Given the limits of current LMs on longtexts, we expect this to give us more information about whether this research direction isgoing anywhere.It didn't really work: Our human annotators answered at the same low accuracy with andwithout the arguments. The selected pointers to key quotes did help a bit, though.We're planning to keep pursuing the general strategy, with multi-turn debate—wheredebaters can rebut one another's arguments and evidence—as the immediate next step.Overall, I take this as a very slight update in the direction that debate is di.cult to use inpractice as an alignment strategy. Slight enough that this probably shouldn't change yourview of debate unless you were, for some reason, interested in this exactconstrained/trivial application of it.A Small Negative Result on Debateby Sam Bowman12th Apr 2022
+28
+Debate (AI safety technique)2
+AI2
+FrontpageMentioned in28
+10 comments, sorted by top scoringSam Bowman5
+Beth Barnes5
+[-]
+Update: We did a quick follow-up study adding counterarguments, turning this from single-turn to two-turn debate, as aquick way of probing whether more extensive full-transcript debate experiments on this task would work. The follow-upresults were negative. Tweet thread here: https://twitter.com/sleepinyourhat/status/1585759654478422016Direct paper link: https://arxiv.org/abs/2210.10860 (To appear at the NeurIPS ML Safety workshop.)We're still broadly optimistic about debate, but not on this task, and not in this time-limited, discussion-limited setting, andwe're doing a broader more fail-fast style search of other settings. Stay tuned for more methods and datasets.
+[-]
+crossposting my comments from Slack thread:Here are some debate trees from experiments I did on long-text QA  on this example short story:TreeDebater view 1Debater view 2Our conclusion was that we don’t expect debate to work robustly in these cases. In our case this was mostly because in caseswhere the debate is things like ’is there implied subtext A?’,  human debaters don’t really know why they believe some textdoes or doesn’t have a particular implication. They have some mix of priors about what the text might be saying (which can’treally be justiﬁed with debate), and various updates to that based on style, word choice, etc, where humans don’t necessarilyhave introspective access to what exactly in the text made them come to the conclusion.My guess is that’s not the limitationyou’re running into here - I’d expect that to just be the depth.There are other issues with text debates, like if the evidence is distributed across many quotes that each only provide a smallamount of evidence - in this case the honest debater needs to have decent estimates for how much evidence each quoteprovides, so they can split their argument into something like ‘there are 10 quotes that weakly support position A’; ‘theevidence that these quotes provide is additive rather than redundant’.[edited to ﬁx links]
+Sam Bowman2
+[-]
+Yep. (Thanks for re-posting.) We're pretty resigned to the conclusion that debate fails to reach a correct conclusion in atJobs: Help scale up LM alignment research at NYU2mo 
+9mo 
+9mo 
+Paul Christiano4
+Alex Gray1
+TLW1
+least some non-trivial cases—we're mainly interested in ﬁguring out (i) whether there are signiﬁcant domains or families ofquestions for which it will often reach a conclusion, and (ii) whether it tends to fail gracefully (i.e., every outcome is eithercorrect or a draw).
+[-]
+I think that one of the key di.culties for debate research is having good tasks that call for more sophisticated protocols. Ithink this dataset seems great for that purpose, and having established a negative result for 1-turn debate seems like a goodfoundation for follow-up work exploring more sophisticated protocols. (It seems like a shame that people don't normallypublish early-stage and negative results.)In comparison with other datasets (e.g. in the negative results described by Beth), it seems like QuALITY is identifying prettycrisp failures and is within striking distance for modern ML. I haven't looked at the dataset beyond the samples in the paperbut tentatively I'm pretty excited about more people working on it (and excited to see future work from your group!)I do strongly suspect that multi-turn debates could handle these questions, and if not it would be a pretty signiﬁcant updateabout debate / the nature of human reasoning / etc. I think it's possible those debates would have to get pretty complicated,and it's also quite plausible that it will be easier to get something else to work. In any case, i feel like the problem is a closeenough match for what we care about that doing "whatever it takes" will probably generally be pretty interesting.
+[-]
+Do you have suggestions for domains where you do expect one-turn debate to work well, now that you've got these results?
+Sam Bowman1
+[-]
+I have no reason to be especially optimistic given these results, but I suppose there may be some fairly simple questions forwhich it's possible to enumerate a complete argument in a way that ﬂaws will be clearly apparent.In general, it seems like single-turn debate would have to rely on an extremely careful judge, which we don't quite have,given the time constraint. Multi-turn seems likely to be more forgiving, especially if the judge has any inﬂuence over thecourse of the debate.
+[-]
+If there are high-quality arguments for multiple answers, doesn't that "just" mean that the multiple-choice question is itselflow-quality?
+Sam Bowman1
+[-]
+One of the arguments is quite misleading in most cases, so probably not high-quality by typical deﬁnitions. Unfortunately,under the time limit, our readers can't reliably tell which one is misleading.Without arguments and without the time limit, annotators get the questions right with ~90% accuracy:https://arxiv.org/abs/2112.08608
+TLW0
+[-]
+Did your description to the participants state that the arguments were high-quality?9mo 
+9mo 9mo 
+9mo 9mo 
+9mo 
+Sam Bowman1
+[-]
+I can look up the exact wording if it's helpful, but I assume it's clear from the basic setup that at least one of thearguments has to be misleading.9mo 

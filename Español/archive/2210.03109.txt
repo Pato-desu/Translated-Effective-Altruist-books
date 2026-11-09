@@ -1,0 +1,534 @@
+Aprendizaje de robots en el mundo real con
+Preentrenamiento visual enmascarado
+Ilija RadosavovicTete XiaoStephen James Pieter Abbeel Jitendra MalikyTrevor Darrelly
+Universidad de California, Berkeley
+Resumen: en este trabajo exploramos el preentrenamiento visual autosupervisado con imágenes
+procedentes de videos diversos y no controlados, para tareas robóticas del mundo real. Como en trabajos previos, nuestras
+representaciones visuales se preentrenan mediante un autocodificador enmascarado (MAE), se congelan
+y luego se pasan a un módulo de control entrenable. A diferencia de trabajos previos, mostramos que
+las representaciones preentrenadas son eficaces en una variedad de tareas robóticas
+y configuraciones corporales del mundo real. Encontramos que nuestro codificador supera de forma consistente a CLIP
+(hasta 75%), al preentrenamiento supervisado con ImageNet (hasta 81%) y al entrenamiento desde
+cero (hasta 81%). Por último, entrenamos un transformador de visión de 307M de parámetros con
+una enorme colección de 4.5M de imágenes de Internet y de videos egocéntricos, y
+demuestra con claridad los beneficios de escalar el preentrenamiento visual para el aprendizaje de robots.
+Palabras clave: aprendizaje autosupervisado, representaciones visuales, aprendizaje de robots
+1 Introducción
+Aprender representaciones con redes neuronales grandes es el motor del aprendizaje profundo moderno.
+Esto ha permitido resultados impresionantes en visión por computadora [1, 2], procesamiento del lenguaje natural [3, 4, 5],
+y generación de audio [6, 7]. ¿Cómo podemos transferir las historias de éxito del aprendizaje de representaciones a
+la robótica? Podemos abordarlo desde dos extremos: representaciones compartidas en el lado de la percepción o
+representaciones compartidas en el lado de la acción. Nuestro enfoque en este artículo son las representaciones visuales compartidas.
+Por supuesto, el diablo está en los detalles. Los avances recientes en el campo del aprendizaje visual han hecho
+esto más factible: (1) el uso de datos diversos del mundo real, de Internet y de videos egocéntricos,
+(2) objetivos autosupervisados que no dependen en exceso de aumentos de datos u otras formas de
+fuertes priores diseñados por humanos, (3) modelos transformadores escalables y de alta capacidad [8, 9], y (4) el entrenamiento de
+políticas de control sobre representaciones visuales congeladas. En nuestro trabajo reciente [10] mostramos que
+esta receta de preentrenamiento visual autosupervisado es eficaz para el control motor en simulación.
+En este artículo mostramos que este marco también es eficaz para tareas robóticas del mundo real (Figura 1).
+Partimos de nuestro trabajo previo, pero logramos avances significativos en escala y diversidad de datos (7 
+más grande), tamaño del modelo (15  mayor) y experimentos con robots reales (extensas evaluaciones con robots reales).
+En particular, entrenamos representaciones visuales autosupervisadas con imágenes y videos del mundo real de
+Internet [11, 12, 13] y conjuntos de datos de videos egocéntricos [14, 15]. Aprovechamos los autocodificadores enmascarados
+[16], que aprenden representaciones visuales mediante predicción enmascarada. La esperanza es que, al aprender a
+predecir el contenido faltante en imágenes del mundo real, el modelo aprenda propiedades útiles del mundo
+visual que le permitan aprender a realizar tareas robóticas del mundo real. Dado el codificador de visión
+preentrenado, congelamos el codificador y aprendemos políticas de control encima. Las mismas representaciones visuales se
+usan en todas las tareas robóticas posteriores y configuraciones corporales. Nos centramos en un aprendizaje eficiente en el mundo real
+mediante clonación de comportamiento con un puñado de demostraciones proporcionadas por humanos por tarea (20 - 80).
+*,yContribución igual. Código, modelos preentrenados y videos disponibles en nuestra página del proyecto.arXiv:2210.03109v1  [cs.RO]  6 Oct 2022
+Tareas robóticas del mundo realDos robots (xArm, mano Allegro)Ocho tareas (escenas, objetos)Datos en entornos reales
+Más de 4.5 millones de imágenesCinco fuentes de datos diversas
+Autocodificador enmascarado
+CodificadorDecodificador(b) Autocodificador(a) Enmascaramiento
+Figura 1: Aprendizaje de robots en el mundo real con preentrenamiento visual enmascarado. Aprendemos representa-
+ciones visuales a partir de una enorme colección de datos de Internet y egocéntricos. Preentrenamos representaciones con
+modelado de imágenes enmascaradas, congelamos el codificador y aprendemos políticas de control para tareas robóticas encima.
+Evaluamos nuestro enfoque en un extenso estudio en el mundo real e informamos resultados de 981 experimentos
+en el mundo real. Consideramos tareas básicas de control motor (alcanzar, empujar, tomar), así como tareas con varia-
+ciones en escenas y objetos (Figura 1, derecha). Encontramos que nuestro enfoque logra un rendimiento considerablemente mayor
+que CLIP (hasta 75%), el preentrenamiento supervisado (hasta 81%) y el entrenamiento desde cero
+(hasta 81%). Además, observamos que nuestras representaciones producen grandes mejoras en la eficiencia
+muestral, alcanzando el rendimiento de la línea base más fuerte con la mitad de demostraciones.
+Además, demostramos los beneficios de escalar el preentrenamiento visual para la robótica entrenando un
+codificador de visión de 307M de parámetros [9] con una enorme colección de 4.5M de imágenes de ImageNet [11],
+Epic Kitchens [17], Something Something [12], 100 Days of Hands [13] y los conjuntos de datos Ego4D [15].
+Es importante señalar que observamos que no basta con escalar solo el modelo, y que los modelos más grandes
+requieren conjuntos de datos más grandes. Hasta donde sabemos, este es el modelo de visión más grande desplegado para
+la robótica, y demuestra con claridad los beneficios de la escala del preentrenamiento visual para el aprendizaje de robots.
+2 Trabajos relacionados
+El control de extremo a extremo se ocupa de aprender a predecir acciones del robot (p. ej., velocidades articulares, poses del
+efector final, etc.) directamente a partir de observaciones [18, 19, 20], sin necesidad de realizar una estimación explícita de pose 3D
+[21], planificación de agarre [22] y planificación de movimiento [23]. Sin embargo, estos enfoques de extremo a extremo
+tienden a ser demasiado ineficientes en muestras para el entrenamiento en el mundo real. Algunos trabajos han intentado encontrar
+un equilibrio entre estos enfoques encadenados explícitamente y los de extremo a extremo [24, 25, 26].
+El preentrenamiento supervisado para robótica aprende una o más tareas auxiliares mediante supervisión fuerte
+y luego transfiere las representaciones a tareas robóticas posteriores. Lin et al. [27] muestran que las repre-
+sentaciones aprendidas a partir de tareas semánticas como la detección y la segmentación se correlacionan con mapas de posibilidades de
+acción para la manipulación de objetos. Shridhar et al. [28] usan el modelo CLIP [29] supervisado por lenguaje
+para aprender una política de imitación condicionada por lenguaje. En trabajos simultáneos, Nair et al. [30] exploran
+el preentrenamiento de representaciones visuales mediante aprendizaje contrastivo temporal y descripciones en lenguaje de
+anotadores humanos. Estos métodos requieren todos etiquetas de expertos o supervisión entre dominios.
+El aprendizaje autosupervisado en robótica se ha explorado como medio para mejorar la eficiencia muestral.
+Algunos ejemplos son: aprender un modelo dinámico a partir de la interacción con entornos [31]; aprender
+representaciones visuales a partir de la interacción con entornos [32]; aprender políticas basadas en visión sobre
+trayectorias recolectadas por cuenta propia [33, 34]; aprender autocodificadores visuales sobre trayectorias [35]; aprender representaciones espa-
+ciotemporales a partir de videos [36, 37]; aprender correspondencia visual [38]; utilizar
+recuperación no paramétrica por vecino más cercano [39]; y realizar aprendizaje visual autosupervisado sobre
+demostraciones recolectadas previamente [40]. Estos métodos requieren recolectar datos del mismo dominio y, por lo tanto, pueden
+ser difíciles de extender más allá del entorno y la tarea de entrenamiento. En cambio, nuestro enfoque usa una
+colección diversa y a gran escala de imágenes y videos del mundo real, lo que la hace más generalizable.
+2
+𝜋!"#$𝜋%&"!𝜋%'"()*
+𝜋%'+",
+𝜋'*-#.Codificador de visión preentrenado
+𝜋/"0$
+Figura 2: Un codificador para todos los robots y tareas. Entrenamos políticas de control por tarea, encima del
+codificador congelado. El mismo codificador de visión se usa en todas las tareas robóticas posteriores y configuraciones corporales.
+3 Aprendizaje de robots en el mundo real con preentrenamiento visual enmascarado
+3.1 Preentrenamiento visual enmascarado
+Recolección de datos. Primero compilamos un conjunto de datos a gran escala para aprender representaciones visuales. Usamos
+principalmente Ego4D [15], un conjunto de datos egocéntrico a gran escala, de nueve países, grabado mediante
+dispositivos portátiles, que cubre más de 3,670 horas de actividades de la vida diaria. Combinamos los datos de Ego4D con
+ImageNet [11], así como los datos de interacción mano-objeto (HoI) usados en [10], que comprenden
+el conjunto de datos egocéntrico Epic Kitchens [17], el conjunto de datos 100 Days of Hands de YouTube [13] y el
+conjunto de datos Something-Something de colaboración colectiva [12]. Nuestros datos de entrenamiento suman 4.5 millones de imágenes, 6.5 veces
+de los datos de HoI. Encontramos que un conjunto de preentrenamiento suficientemente grande y diverso para realizar el enmascaramiento
+de imágenes como tarea autosupervisada es fundamental para escalar el backbone visual en tareas con robots reales.
+Objetivo autosupervisado. En el núcleo de nuestro enfoque de aprendizaje de representaciones autosupervisado está
+el modelado de imágenes enmascaradas mediante los autocodificadores enmascarados (MAE) [16]. MAE enmascara parches aleatorios
+de una imagen y reconstruye el contenido faltante con un transformador de visión (ViT) [9]. Una tasa de enmascaramiento alta
+de, p. ej., 75%, y un diseño asimétrico de codificador pesado y decodificador ligero, son importantes para aprender
+buenas representaciones visuales de forma eficiente. Sencillo y libre de aumentaciones específicas del conjunto de datos o de la tarea
+[41], MAE es el marco autosupervisado del estado del arte en visión por computadora [42, 43, 44, 45],
+y ha demostrado funcionar bien en tareas de control motor también en simulación [10].
+Arquitectura. Usamos los modelos ViT como codificadores visuales. Aunque los modelos ViT entrenados con MAE
+logran un rendimiento que mejora en tareas visuales a medida que crece el tamaño de los modelos [9, 16, 46], pero trabajos previos [10]
+no muestran mejora al pasar de un modelo ViT-Small al ViT-Base equivalente, con 4x
+más parámetros. En este trabajo escalamos el modelo a ViT-Large y lo desplegamos en el
+robot real. El modelo contiene 307M parámetros y funciona a ≈64 gigaflops con un tamaño de entrada de 224 × 224,
+aproximadamente 15 veces más que el ResNet-50 [47], el modelo de visión más grande
+utilizado en robótica. Como mostraremos en los experimentos, escalar el tamaño de los modelos al entrenar con datos suficientemente grandes
+lleva a una mejora consistente del rendimiento en tareas robóticas posteriores.
+3.2 Aprendizaje robótico en el mundo real
+Aprendemos a realizar tareas con robots reales mediante clonación de comportamiento (BC). Recolectamos demostraciones
+que contienen trayectorias de imágenes RGB desde una cámara montada en la muñeca y el estado articular del robot en
+cada paso de tiempo. En la mayoría de las tareas usamos el sistema de realidad virtual HTC Vive con seguimiento de movimiento para controlar el
+efector final. En algunas tareas difíciles de demostrar con el controlador de movimiento, p. ej., cerrar
+la puerta del refrigerador, usamos enseñanza cinestésica. Con las demostraciones grabadas, entrenamos una política de control
+que recibe las características de la imagen de entrada y los estados propioceptivos (posiciones articulares) en el paso de tiempo t
+y predice la acción en el paso de tiempo t+1. Realizamos control por posición articular; no usamos ninguna
+información del efector final (p. ej., la pose de 6 GDL). Nos basamos en nuestro pipeline MVP [10] y congelamos
+el codificador de imagen durante todo el aprendizaje de la política, lo que evita que los codificadores preentrenados grandes
+se sobreajusten a un entorno o tarea específicos, y reduce mucho la huella de memoria de la GPU y el tiempo de entrenamiento.
+3
+Figura 3: Tareas robóticas en el mundo real. Realizamos evaluaciones extensas con robots reales usando un brazo robótico de 7 GDL
+con una pinza de mordazas paralelas. Nuestras tareas incluyen habilidades básicas de control motor (alcanzar un bloque rojo,
+empujar un cubo de madera y tomar un cubo amarillo), variaciones de escenas (cerrar un refrigerador),
+objetos (tomar frutas) y escenas y objetos (tomar un frasco de detergente de un fregadero desordenado).
+4 Configuración experimental
+En esta sección describimos los detalles de implementación de nuestro enfoque y la configuración de evaluación.
+Datos. Extraemos fotogramas de Ego4D, Epic Kitchens y Something-Something a 0.2 fps, 1 fps
+y 0.3 fps, respectivamente. Combinamos Ego4D con ImageNet y el conjunto YouTube 100 Days
+of Hands. Este proceso produce 2.6M fotogramas de Ego4D, 1.2M imágenes de ImageNet y
+700k imágenes HoI del resto, un total de 4.5M imágenes. Denominamos el conjunto combinado “Ego” por
+abreviación. Cabe señalar que [10] solo usa las 700k imágenes HoI, excluyendo Ego4D e ImageNet.
+Codificadores. Usamos la arquitectura estándar de Vision Transformer (ViT) como codificador de imagen. Usamos
+tres modelos de distintos tamaños: ViT-Small [48], ViT-Base y ViT-Large, con 22M, 86M y
+307M parámetros, respectivamente. El modelo ViT-Small tiene aproximadamente el mismo tamaño que el ResNet-
+50, mientras que el modelo ViT-Large tiene 15 veces más parámetros que el modelo ResNet-50.
+Preentrenamiento. Preentrenamos los modelos mediante el marco MAE [16]. La receta de entrenamiento sigue
+de cerca a [16], con ajustes específicos del conjunto de datos de [10]. Usamos un token de clasificación ficticio auxiliar
+para transferir a tareas posteriores de robótica. Entrenamos los modelos MAE durante 400 épocas para
+el conjunto combinado Ego; 1600 épocas para el conjunto HOI; y 1600 épocas para el conjunto ImageNet.
+Usamos la receta de preentrenamiento de [49] para el estudio que involucra modelos supervisados de ImageNet.
+Controladores. El controlador recibe tanto las características de la imagen como el estado propioceptivo del robot. Usamos
+posiciones articulares como estado propioceptivo, sin añadir explícitamente la pose del efector final al
+estado. No usamos velocidad en el estado porque nuestro brazo de bajo costo no admite una detección real de velocidad.
+El controlador produce ángulos articulares delta. El diseño del controlador sigue de cerca a [50], es decir,
+un MLP de cuatro capas con activación SeLU [51] después de cada capa oculta. El tamaño oculto es [256,
+128, 64] para la mayoría de las tareas y [512, 256, 128] para la tarea PickSink. Proyectamos linealmente las características
+de la imagen y los estados propioceptivos a un espacio de incrustación conjunto como entrada del controlador.
+Robot y tareas robóticas. Usamos el robot UFACTORY xArm7 de bajo costo (un brazo de 7 GDL) y una
+pinza de mordazas paralelas de 1 GDL. Usamos la frecuencia máxima de control del brazo, 5 Hz, tanto para recolectar
+demostraciones como para el control. Usamos una cámara RealSense montada en la muñeca, en primera persona, para todas las tareas.
+No usamos la información de profundidad de la cámara. Consideramos tareas básicas de control motor, es decir,
+ReachBlock, PushCube y PickCube, y tareas en contexto más desafiantes, es decir, CloseFridge,
+PickFruit y PickSink. Las tareas se muestran en la Figura 3 (más detalles en la siguiente sección).
+Demostraciones. Recolectamos 80 demostraciones por tarea. Usamos el sistema de realidad virtual HTC Vive con
+seguimiento de movimiento para la mayoría de las tareas, excepto CloseFridge, para la que usamos enseñanza cinestésica. Usamos
+repetición de trayectorias en el robot para podar trayectorias. No usamos la información de fotogramas clave para el aprendizaje.
+Evaluación. Evaluamos sistemáticamente 16 variaciones del entorno, p. ej., desplazando el
+objeto objetivo. Para la consistencia y fiabilidad del estudio, usamos las mismas 16 variaciones para todos
+los modelos de cada tarea, y evaluamos los modelos de forma secuencial en cada variación, para que las condiciones
+de iluminación, del robot, las posiciones iniciales precisas de los objetos, etc. sean similares (véase también el Apéndice B).
+4
+Nuestro CLIP Sup. Desde cero020406080100Éxito (%)ReachBlock
+Nuestro CLIP Sup. Desde ceroPushCube
+Nuestro CLIP Sup. Desde ceroPickCubeFigura 4: Comparación con codificadores visuales. Comparamos nuestro enfoque con codificadores visuales entrenados
+con CLIP, con aprendizaje supervisado en ImageNet y desde cero en la tarea en cuestión. En todos los casos,
+observamos que nuestro enfoque supera consistentemente a las líneas base por un margen considerable.
+20 40 60 80
+Núm. demostraciones020406080100Éxito (%)
+ReachBlock
+Nuestro
+CLIP
+20 40 60 80
+Núm. demostraciones
+PushCube
+Nuestro
+CLIP
+20 40 60 80
+Núm. demostraciones
+PickCube
+Nuestro
+CLIP
+Figura 5: Complejidad de muestra. Mostramos el rendimiento de nuestro enfoque a medida que el número de demos-
+traciones varía de 20 a 80. CLIP con 80 demostraciones se muestra con una línea discontinua
+de referencia. Nuestro enfoque es comparable a CLIP usando solo la mitad de las demostraciones.
+5 Resultados experimentales
+Realizamos evaluaciones extensas en una variedad de backbones visuales, tareas robóticas del mundo real, objetos y
+entornos (Figura 3). En total, reportamos resultados de 981 experimentos en el mundo real.
+5.1 Control motor básico
+Evaluamos tres tareas básicas de control motor en contextos visualmente simples: alcanzar un bloque rojo, empu-
+jar un cubo de madera y tomar un cubo amarillo (véase la Figura 3 para la visualización de las tareas). Estas tareas
+sirven como peldaños para tareas más complejas, y las representaciones visuales que potencialmente
+pueden ser fundamentales para la robótica deberían aprender estas tareas de forma eficiente. En todos los casos, aleatorizamos la posición inicial
+del objeto y del robot (véase el Apéndice B para detalles sobre el aprendizaje y la configuración de la tarea).
+Comparación con diversos codificadores visuales. En la Figura 4 comparamos nuestro enfoque con un conjunto de enfoques de vanguardia
+de última generación para backbones de visión: CLIP [3] entrenado con 400M de pares texto-imagen, modelo supervisado entrenado
+con ImageNet, y un modelo entrenado desde cero con datos de demostración del dominio. Para
+comparaciones justas, usamos el codificador de visión ViT-Base [9] para todos los métodos. Observamos empíricamente que
+el codificador CLIP obtiene el mejor desempeño entre las líneas base, y el orden de los resultados es consistente en
+las tareas del benchmark. Nuestro enfoque supera consistentemente a las líneas base por un margen considerable.
+Complejidad de muestra. En la Figura 5 estudiamos el desempeño de nuestro enfoque a medida que el número de demostra-
+ciones varía de 20 a 80. Como referencia, mostramos el desempeño de la línea base más competitiva
+CLIP, entrenada con 80 demostraciones (línea horizontal punteada). En conjunto, observamos
+que nuestro enfoque alcanza el desempeño de CLIP usando 50% menos demostraciones. Este resultado es
+una señal prometedora para usar nuestros modelos en el aprendizaje de tareas robóticas más complejas, como se analiza a continuación.
+5
+Nuestro CLIP Sup. Desde cero020406080100Éxito (%)CloseFridge
+Nuestro CLIP Sup. Desde cero PickFruit
+Nuestro CLIP Sup. Desde cero PickSink
+Figura 6: Variaciones en escenas y objetos. Comparamos nuestro enfoque con CLIP en tareas con varia-
+ciones en escenas (cerrar el refrigerador), objetos (recoger frutas) y escenas y objetos (recoger un objeto
+de un fregadero desordenado). Los modelos son ViT-Base. Nuestro enfoque supera considerablemente a CLIP y
+la brecha es mayor que en escenarios más simples (ver Figura 4). Esto puede sugerir que nuestras representaciones
+capturan una estructura espacial más precisa, útil para tareas robóticas en contextos más realistas.
+5.2 Escenas y objetos visualmente diversos
+Previamente mostramos que nuestro enfoque puede aprender tareas básicas de control motor, como alcanzar,
+empujar y recoger, con una tasa de éxito y una mejor complejidad de muestra que los backbones de visión de referencia.
+Para centrarnos en el aspecto de control motor, usamos un entorno visualmente simple y objetos
+básicos. Sin embargo, uno de los principales beneficios potenciales de nuestro enfoque es que aprender representa-
+ciones visuales a partir de imágenes diversas del mundo real puede permitir resolver tareas robóticas que involucran la interacción
+con objetos cotidianos en entornos visualmente más complejos. En esta subsección, evaluamos nuestras
+representaciones visuales en tareas robóticas con variaciones de escenas y objetos en configuraciones más realistas.
+Contexto de escena. Primero evaluamos nuestro enfoque en una escena más realista considerando la tarea de
+cerrar la puerta de un refrigerador de juguete que queda abierto (denominada CloseFridge). Aleatorizamos la ubicación
+del refrigerador, qué lado de la puerta cerrar y el ángulo inicial de la puerta. Como se muestra en la Figura 6,
+abajo a la izquierda, la configuración inicial del refrigerador y del robot varía considerablemente, lo cual es bastante
+común en entornos cotidianos. La Figura 6, arriba a la izquierda, muestra que nuestro enfoque supera a todas las líneas base.
+Objetos diferentes. Luego, evaluamos una tarea con una variedad de objetos. El objetivo es recoger
+ocho frutas diferentes que varían en color, forma y tamaño (denominada PickFruit). En cada prueba, se selecciona
+una fruta al azar, y tanto la posición de la fruta como la del robot se aleatorizan. El número de
+demostraciones de entrenamiento no cambia, es decir, proporcionamos 10 demostraciones para cada fruta. En
+la Figura 6, en el centro, mostramos los resultados de la evaluación (arriba) y muestras de configuración inicial (abajo).
+Vemos que las líneas base tienen dificultades en este escenario, mientras que nuestro enfoque alcanza una puntuación casi perfecta.
+Objetos en contexto. Finalmente, evaluamos nuestro enfoque en una tarea que implica interactuar con objetos
+en contextos cotidianos. Encargamos al robot recoger una botella de detergente de un fregadero desordenado (denominada
+PickSink). La tarea es difícil porque la configuración visual de la escena, como los platos de juguete,
+las tazas y los cubiertos, puede variar de innumerables maneras, como se muestra en la Figura 6 derecha. Observamos que
+nuestro enfoque supera considerablemente a los métodos de referencia que usan el mismo codificador ViT-B.
+6
+ViT-SViT-SViT-BViT-BViT-LViT-LModeloModelo + DatosFigura 7: Escalado del modelo y de los datos. Estudiamos las propiedades de escalado de nuestro enfoque. Observamos
+que escalar solo el tamaño del modelo de ViT-S a ViT-B, manteniendo fijo el conjunto de datos (colección de imágenes HoI;
+ver el texto para más detalles), no mejora el desempeño e incluso lo empeora (izquierda). Sin embargo,
+cuando escalamos tanto el modelo como los datos (nuestra masiva colección de imágenes Ego; ver el texto para más detalles) vemos
+beneficios claros de un modelo más grande. La tendencia continúa al pasar del ViT-B de 86M
+al modelo ViT-L de 307M (centro y derecha). Además, las ganancias son mayores en las tareas más difíciles (derecha).
+5.3 Escalado del modelo y del tamaño de los datos
+Es importante señalar que nuestro enfoque de preentrenamiento visual usa un objetivo autosupervisado [16] que hace pocas
+suposiciones sobre la distribución de los datos y no depende de tareas auxiliares diseñadas por humanos, como
+las aumentaciones de datos. Por ello, el marco es muy adecuado para el preentrenamiento a partir de una masiva
+colección de datos visuales no etiquetados y del mundo real. Aquí estudiamos el escalado del modelo y del tamaño de los datos.
+Primero consideramos aumentar la capacidad del modelo. En la Figura 7, izquierda, vemos que aumentar el tamaño
+del modelo (≈4.5x) de ViT-S a ViT-B, manteniendo fijo el tamaño de los datos (colección de imágenes HOI [10]),
+no aumenta el desempeño e incluso lo empeora. Esto es consistente con los resultados en simulación
+reportados en [10]. Sin embargo, si también escalamos el tamaño de los datos de HOI a nuestra masiva colección de datos Ego,
+ViT-B produce mejores resultados. Estos resultados sugieren que debemos escalar tanto el modelo como los datos.
+En la Figura 7, centro y derecha, mostramos el desempeño en función del tamaño del modelo. Además,
+aumentar el tamaño del modelo de ViT-B de 86M parámetros a ViT-L de 307M parámetros lleva a
+mejoras adicionales. La ganancia es mayor para la tarea visualmente más desafiante (PickSink). Hasta
+donde sabemos, nuestro trabajo es el mayor modelo de visión desplegado en tareas con robots reales, lo cual
+demuestra claramente los beneficios de escalar el preentrenamiento visual para el aprendizaje robótico en el mundo real.
+5.4 Comparación con trabajos concurrentes
+supervisiónparám. éxito
+(M) (%)
+R3M video-texto 23 31.3
+CLIP imagen-texto 86 18.8
+Nuestro solo-imagen 22 68.8
+86 93.8
+307 100.0
+Tabla 1: Comparación con trabajos concurrentes.
+Todos nuestros modelos de visión, entrenados con imagen-
+solo autosupervisión, considerablemente supe-
+ran el modelo R3M [30] más sólido disponible
+entrenado con etiquetas de pares video-lenguaje de
+Ego4D [15]. Las ganancias son mayores para modelos
+más grandes. Evaluado en la tarea PickFruit. Comparamos nuestro enfoque con un trabajo concurrente [30],
+presentado a la misma conferencia (CoRL 2022).
+De forma similar, preentrena representaciones visuales con video
+no controlado del mundo real de Ego4D [15]. Sin embargo, este
+depende de anotaciones pareadas de lenguaje y video que
+están disponibles como parte de Ego4D. En cambio, nuestro enfoque
+es totalmente autosupervisado y hace suposiciones mínimas
+sobre la distribución de los datos, lo que nos permite aprovechar
+colecciones masivas de datos sin curar (p. ej., de
+Internet). En la Tabla 1, comparamos nuestros modelos con
+el modelo R3M ResNet-50 más sólido disponible. Observamos
+que nuestro modelo ViT-B de tamaño mediano supera
+por un margen amplio al R3M ResNet-50 (93.8% frente a
+31.3%). También vemos que nuestro modelo ViT-S más pequeño
+de [10] también lo supera (68.8% frente a 31.3%).
+7
+Muñeca [def.] Mesa cám.020406080100Éxito (%)Cámara
+Ambos [def.] sin propiocep. sin visión Modalidad
+Ninguna [def.] + aum. color + aum. desplazamiento Aumentos
+ViT-B [def.] ResNet-18 ResNet-50020406080100Éxito (%)Desde cero Arq.
+ViT-B nuestro R-50 CLIP ViT-B CLIPPreentr. Arq.
+ViT-S HoI R-50 CLIPAjuste fino
+Congelado
+AjustadoFigura 8: Estudios de ablación. Realizamos estudios de ablación sobre las configuraciones de cámara; modalidad de entrada;
+aumentaciones de imagen de uso común; arquitectura de entrenamiento desde cero; arquitectura de preentrenamiento CLIP; arqui-
+tectura, y ajuste fino de extremo a extremo en tareas posteriores. Véase la Sección 5.5 para más detalles.
+5.5 Estudios de ablación
+Realizamos estudios de ablación sobre configuraciones de cámara, modalidad de entrada, ajustes de entrenamiento, arquitecturas de modelo
+para nuestro enfoque y las líneas base, así como para el ajuste fino en tareas posteriores. Los resultados en la Figura 8 se discuten a continuación.
+Cámaras. Comparamos usar la cámara de muñeca en primera persona con la cámara de mesa en tercera persona (Fig-
+ure 8, arriba a la izquierda). La cámara montada en la muñeca produce resultados significativamente mejores que la cámara de
+tercera persona. Durante las pruebas de evaluación observamos que el modelo con cámara de tercera persona tiene dificultades con
+la localización de grano fino, y cuanto más lejos está el objeto de la cámara, peor es la trayectoria predicha.
+Esto sugiere que el modelo puede confundirse por la ambigüedad de escala (tamaño) del escenario,
+porque no usamos profundidad, y la observación de tercera persona no cambia cuando el robot actúa.
+Modalidad. Experimentamos eliminando los estados propioceptivos o las imágenes de la entrada del modelo
+(Figura 8, arriba al centro); ambos casos dan una tasa de éxito de cero, ya que ninguno es una entrada completamente observada para la tarea.
+Aumentos. Experimentamos agregando aumentos de datos comunes para entrenar la política de la tarea
+(Figura 8, arriba a la derecha). No observamos ningún beneficio de estos aumentos, probablemente porque
+nuestro codificador visual está congelado y se sobreajusta mucho menos al entrenar con una cantidad limitada de datos.
+Arquitecturas para entrenamiento desde cero. Comparamos varias arquitecturas de modelos de menor tamaño
+para entrenamiento desde cero (Figura 8, abajo a la derecha). Los modelos ResNet-18 y ResNet-50, que equivalen al
+11% y al 22% del modelo ViT-B de referencia (en FLOP), respectivamente, no producen mejores resultados.
+Arquitecturas de preentrenamiento CLIP. Comparamos los modelos CLIP ResNet-50 y ViT-B publicados.
+El modelo CLIP ViT-B produce mejor rendimiento en las tareas de robótica. Este resultado coincide
+con el orden de los modelos CLIP en tareas de visión por computadora, según se reporta en [29].
+Ajuste fino. Hacemos ajuste fino del modelo ViT-S HoI y del modelo CLIP ResNet-50, ya que son modelos relativamente
+más pequeños que logran un rendimiento modesto en tareas posteriores. El ajuste fino de estos
+modelos mejora marginalmente el rendimiento, lo que sugiere que el ajuste fino solo con un número limitado
+de demostraciones no cierra la brecha con representaciones visuales superiores del preentrenamiento.
+8
+Alcance visto Alcance no visto Volteo de cubo
+Figura 9: Mano multidedo. Mostramos que nuestro marco se generaliza fácilmente a un robot de morfología distinta.
+Experimentamos con el alcance de los dedos, usando objetos vistos y no vistos, y con el volteo de cubos.
+5.6 Caso de estudio: mano multidedo
+Nuestro enfoque no hace suposiciones sobre las tareas robóticas posteriores ni sobre las encarnaciones. En particular,
+nuestras políticas toman imágenes de píxeles como entrada y predicen ángulos de posición articular como acciones (en lugar de, p. ej.,
+la pose del efector final). En esta subsección probamos la generalidad de nuestro enfoque aplicándolo a tareas posteriores
+con una mano multidedo Allegro (véase el Apéndice A para más detalles sobre la configuración).
+Alcance visual. Diseñamos una tarea de alcance en la que la mano aprende a llegar a la parte superior de un objeto
+con la punta del dedo índice. La posición del objeto se aleatoriza sobre la palma. Proporcionamos 10
+demostraciones para cada uno de los 8 objetos distintos. En la prueba, evaluamos la política entrenada sobre los
+8 objetos vistos y 45 objetos no vistos (véase la Figura 9). La tasa de éxito es del 50% en ambos casos.
+Volteo visual. A continuación, consideramos una tarea de volteo de cubo en la que el objetivo es voltear un cubo de goma que
+está colocado en la palma. La posición del cubo se aleatoriza sobre la palma. Por lo tanto, la política debe
+basarse en señales visuales para completar la tarea. En conjunto, observamos una tasa de éxito de 50% en 30
+pruebas. Véase la Figura 9 para ejemplos de fotogramas clave y también los videos en la página del proyecto.
+Entender la visión a través de la acción. Entrenar políticas sobre representaciones visuales congeladas
+nos permite realizar estudios para entender qué utilizan las representaciones visuales preentrenadas para las
+tareas posteriores. Aquí primero entrenamos una política para alcanzar un cubo amarillo, pero la probamos con objetos de
+forma y color distintos. Primero, encontramos que cuando se da la misma forma de otro color (cubo de madera) o el mismo color
+y otra forma (pelota amarilla), la política alcanza el objeto. Luego, cuando se le da tanto el cubo amarillo como un distractor,
+alcanza el cubo amarillo. Por último, cuando se le da un objeto de otra forma y color (cubo azul), la mano permanece
+quieta. Véase la página del proyecto para ver los videos.
+6 Discusión
+Limitaciones. Aunque las escenas y objetos de nuestro estudio son más realistas que en los benchmarks robóticos más simples,
+seguimos usando sobre todo objetos de juguete en entornos de laboratorio relativamente limpios, en lugar de
+objetos reales en escenas del mundo real. Nuestras tareas involucran un solo objeto y no requieren que el
+robot aprenda control por retroalimentación ni planificación de varios pasos. Factores como el tiempo de funcionamiento del robot también
+pueden influir en los resultados. Superar estas limitaciones es esencial a medida que avanzamos hacia el desarrollo,
+la evaluación y el despliegue masivo de modelos preentrenados para aplicaciones robóticas en el mundo real.
+Conclusión. Exploramos el aprendizaje de representaciones visuales a partir de una colección masiva de datos del mundo real
+y su uso en tareas robóticas posteriores. Preentrenamos representaciones con modelado enmascarado,
+congelamos el codificador y aprendemos políticas de control encima. Realizamos evaluaciones extensas en el mundo
+real y mostramos que, en diversas tareas robóticas, nuestro enfoque logra una mayor tasa de éxito y
+mejor complejidad de muestra que CLIP, el preentrenamiento supervisado en ImageNet y el entrenamiento desde cero.
+Además, demostramos los beneficios de escalar el tamaño del modelo y de los datos para el aprendizaje robótico en el mundo real.
+9
+Figura 10: Recolección de datos. Mostramos nuestra configuración para recolectar demostraciones en el mundo real con
+operación humana. Izquierda: recolectamos demostraciones del xArm usando un control de realidad virtual HTC Vive. Derecha:
+recolectamos demostraciones de la mano Allegro usando un dispositivo Meta Quest 2. Véase el texto para más detalles.
+Apéndice A: Recolección de datos
+Describimos nuestra configuración para recolectar demostraciones para el xArm y la mano Allegro (Figura 10).
+Demostraciones del xArm. Para recolectar demostraciones del xArm, usamos un control de realidad virtual HTC Vive
+(Figura 10, izquierda). La configuración incluye dos sensores externos que rastrean la posición del control de RV
+y estiman su pose de 6 GDL. Dada la pose de 6 GDL del control, lo usamos para controlar la pose del
+efector final (EE) del robot. Específicamente, asignamos la pose del EE a los ángulos articulares mediante cinemática inversa
+(IK) siguiendo [52]. Controlamos el estado de apertura y cierre de la pinza mediante un botón del control.
+Con esta canalización, el usuario controla el sistema en tiempo real, con vista directa del
+robot. Mientras el usuario realiza la tarea, guardamos la transmisión de la cámara y la información del estado del robot
+como demostraciones. En promedio, se tarda alrededor de 1 hora en recolectar 40 demostraciones con esta configuración.
+Demostraciones de la mano Allegro. Nos gustaría tener una configuración similar para recolectar demostraciones
+para la mano Allegro. Sin embargo, es difícil controlar una mano multidedo con un joystick o un control de RV.
+Por ello, requerimos una interfaz de usuario distinta. Para esto, desarrollamos un nuevo enfoque basado
+en el dispositivo Meta Quest 2 (Figura 10, derecha). En particular, usamos el seguimiento de manos que ofrece el
+Quest 2 para obtener los puntos clave 3D de la mano humana. Luego asignamos los puntos clave humanos a los
+ángulos articulares de la mano Allegro usando IK siguiendo [53]. Como antes, nuestro sistema funciona en tiempo real y
+registra los datos de demostración mientras el humano controla el robot para completar la tarea deseada.
+Cabe señalar que nuestro enfoque de grabación de demostraciones depende exclusivamente de software y hardware de RV
+de consumo. A saber, el seguimiento del control de RV en el caso del HTC Vive, y el seguimiento de manos en el caso del
+Meta Quest 2. Esto tiene tres propiedades deseables para la investigación. Primero, es probablemente más preciso y
+fiable que los prototipos de investigación. Segundo, es probable que mejore con futuras actualizaciones de software.
+Por último, es fácil de adquirir y configurar para otros investigadores de todo el mundo.
+Apéndice B: Evaluación
+Nuestro objetivo es realizar una evaluación justa de los distintos métodos de preentrenamiento y controlar cualquier factor de
+confusión que pueda afectar el rendimiento. En las primeras etapas de este proyecto observamos
+que el rendimiento del mismo modelo varía de forma no trivial según el tiempo de funcionamiento del robot, es decir, tras
+varias horas de funcionamiento, nuestro brazo robótico de bajo costo empieza a ejecutar las acciones con menos precisión. De manera similar,
+la diferencia en las condiciones de iluminación puede afectar al rendimiento de los distintos métodos. Por ello,
+empleamos un protocolo de evaluación sistemático. En el momento de recopilar datos y de entrenar, aleatorizamos la
+posición inicial del objeto y del robot. En el momento de la prueba, fijamos la posición del robot en el centro del espacio de aleatori-
+zación, y desplazamos el objeto a lo largo de K ubicaciones predefinidas y medidas cuidadosamente (usamos
+k = 16 en la mayoría de los experimentos). Para cada ubicación del objeto objetivo, evaluamos un conjunto de modelos
+de forma secuencial, de modo que cada modelo manipula el objeto exactamente en la misma ubicación y aproximadamente al
+mismo tiempo. Luego movemos el objeto a la siguiente ubicación y repetimos el paso de evaluación. En conjunto, este
+procedimiento garantiza que los modelos se evalúen con condiciones similares de robot e iluminación.
+10
+Agradecimientos
+Agradecemos a los siguientes colegas sus valiosas discusiones y su apoyo a nuestro
+proyecto: Shankar Sastry por el acceso a la mano Allegro, Ken Goldberg por sus comentarios y sugerencias, Adam
+Curtis por su ayuda con el cableado, Kevin Hu por su ayuda con la redirección de la mano Allegro, Erik Rogers por sus sugerencias sobre ROS
+sugerencias, Lerrel Pinto por las discusiones sobre la mano Allegro, Raven Huang y Justin Kerr por su ayuda con
+la impresión 3D, y William Peebles por las discusiones. Este trabajo contó en parte con el apoyo de los programas DARPA Machine
+Common Sense, LwLL y RACER; el programa ONR MURI (N00014-21-1-2801);
+Hong Kong Centre for Logistics Robotics, BMW, así como los programas de alianza industrial de BAIR.
+Referencias
+[1] A. Krizhevsky, I. Sutskever y G. E. Hinton. Imagenet classification with deep convolutional
+neural networks. NeurIPS, 2012.
+[2] R. Girshick, J. Donahue, T. Darrell y J. Malik. Rich feature hierarchies for accurate object
+detection and semantic segmentation. En CVPR, 2014.
+[3] A. Radford, K. Narasimhan, T. Salimans y I. Sutskever. Improving language understanding
+by generative pre-training. 2018.
+[4] J. Devlin, M.-W. Chang, K. Lee y K. Toutanova. Bert: Pre-training of deep bidirectional
+transformers for language understanding. En NAACL-HCT, 2019.
+[5] T. B. Brown, B. Mann, N. Ryder, M. Subbiah, J. Kaplan, P. Dhariwal, A. Neelakantan,
+P. Shyam, G. Sastry, A. Askell, et al. Language models are few-shot learners. NeurIPS,
+2020.
+[6] A. Van Den Oord, S. Dieleman, H. Zen, K. Simonyan, O. Vinyals, A. Graves, N. Kalchbrenner,
+A. W. Senior y K. Kavukcuoglu. Wavenet: A generative model for raw audio. SSW, 2016.
+[7] P. Dhariwal, H. Jun, C. Payne, J. W. Kim, A. Radford y I. Sutskever. Jukebox: A generative
+model for music. arXiv:2005.00341, 2020.
+[8] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser y I. Polosukhin.
+Attention is all you need. En NeurIPS, 2017.
+[9] A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn, X. Zhai, T. Unterthiner, M. Dehghani,
+M. Minderer, G. Heigold, S. Gelly, et al. An image is worth 16x16 words: Transformers
+for image recognition at scale. En ICLR, 2020.
+[10] T. Xiao, I. Radosavovic, T. Darrell y J. Malik. Masked visual pre-training for motor control.
+arXiv:2203.06173, 2022.
+[11] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li y L. Fei-Fei. Imagenet: A large-scale hierarchical
+image database. En CVPR, 2009.
+[12] R. Goyal, S. Ebrahimi Kahou, V. Michalski, J. Materzynska, S. Westphal, H. Kim, V. Haenel,
+I. Fruend, P. Yianilos, M. Mueller-Freitag, et al. The” something something” video database
+for learning and evaluating visual common sense. En ICCV, 2017.
+[13] D. Shan, J. Geng, M. Shu y D. F. Fouhey. Understanding human hands in contact at internet
+scale. En CVPR, 2020.
+[14] D. Damen, H. Doughty, G. M. Farinella, S. Fidler, A. Furnari, E. Kazakos, D. Moltisanti,
+J. Munro, T. Perrett, W. Price, et al. Scaling egocentric vision: The epic-kitchens dataset. In
+ECCV, 2018.
+11
+[15] K. Grauman, A. Westbury, E. Byrne, Z. Chavis, A. Furnari, R. Girdhar, J. Hamburger,
+H. Jiang, M. Liu, X. Liu, et al. Ego4d: Around the world in 3,000 hours of egocentric video.
+arXiv:2110.07058, 2021.
+[16] K. He, X. Chen, S. Xie, Y. Li, P. Doll ´ar y R. Girshick. Masked autoencoders are scalable
+vision learners. arXiv:2111.06377, 2021.
+[17] D. Damen, H. Doughty, G. M. Farinella,, A. Furnari, J. Ma, E. Kazakos, D. Moltisanti,
+J. Munro, T. Perrett, W. Price y M. Wray. Rescaling egocentric vision: Collection, pipeline
+and challenges for epic-kitchens-100. IJCV, 2021.
+[18] S. Levine, C. Finn, T. Darrell y P. Abbeel. End-to-end training of deep visuomotor policies.
+JMLR, 2016.
+[19] S. James, A. J. Davison y E. Johns. Transferring end-to-end visuomotor control from simulation
+to real world for a multi-stage task. CoRL, 2017.
+[20] D. Kalashnikov, A. Irpan, P. Pastor, J. Ibarz, A. Herzog, E. Jang, D. Quillen, E. Holly,
+M. Kalakrishnan, V. Vanhoucke, et al. Scalable deep reinforcement learning for vision-based
+robotic manipulation. En CoRL, 2018.
+[21] OpenAI, M. Andrychowicz, B. Baker, M. Chociej, R. J ´ozefowicz, B. McGrew, J. Pachocki,
+A. Petron, M. Plappert, G. Powell, A. Ray, J. Schneider, S. Sidor, J. Tobin, P. Welinder,
+L. Weng y W. Zaremba. Learning dexterous in-hand manipulation. IJRR, 2020.
+[22] A. T. Miller, S. Knoop, H. I. Christensen y P. K. Allen. Automatic grasp planning using
+shape primitives. En ICRA, 2003.
+[23] J. J. Kuffner y S. M. LaValle. Rrt-connect: An efficient approach to single-query path
+planning. En ICRA, 2000.
+[24] A. Zeng, S. Song, S. Welker, J. Lee, A. Rodriguez y T. Funkhouser. Learning synergies
+between pushing and grasping with self-supervised deep reinforcement learning. En IROS,
+2018.
+[25] A. Zeng, P. Florence, J. Tompson, S. Welker, J. Chien, M. Attarian, T. Armstrong, I. Krasin,
+D. Duong, V. Sindhwani, et al. Transporter networks: Rearranging the visual world for robotic
+manipulation. CoRL, 2020.
+[26] S. James y A. J. Davison. Q-attention: Enabling Efficient Learning for Vision-based Robotic
+Manipulation. RA-L, 2022.
+[27] L. Yen-Chen, A. Zeng, S. Song, P. Isola, and T.-Y. Lin. Learning to see before learning to act:
+Visual pre-training for manipulation. En ICRA, 2020.
+[28] M. Shridhar, L. Manuelli y D. Fox. Cliport: What and where pathways for robotic manipulation.
+En CoRL, 2021.
+[29] A. Radford, J. W. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell,
+P. Mishkin, J. Clark, et al. Learning transferable visual models from natural language supervision.
+En ICML, 2021.
+[30] S. Nair, A. Rajeswaran, V. Kumar, C. Finn y A. Gupta. R3m: A universal visual representation
+for robot manipulation. arXiv:2203.12601, 2022.
+[31] P. Agrawal, A. V. Nair, P. Abbeel, J. Malik y S. Levine. Learning to poke by poking:
+Experiential learning of intuitive physics. NeurIPS, 2016.
+[32] L. Pinto, D. Gandhi, Y. Han, Y.-L. Park y A. Gupta. The curious robot: Learning visual
+representations via physical interactions. En ECCV, 2016.
+12
+[33] L. Pinto y A. Gupta. Supersizing self-supervision: Learning to grasp from 50k tries and 700
+robot hours. En ICRA, 2016.
+[34] S. Levine, P. Pastor, A. Krizhevsky, J. Ibarz y D. Quillen. Learning hand-eye coordination
+for robotic grasping with deep learning and large-scale data collection. IJRR, 2018.
+[35] C. Finn, X. Y. Tan, Y. Duan, T. Darrell, S. Levine y P. Abbeel. Deep spatial autoencoders
+for visuomotor learning. En ICRA, 2016.
+[36] P. Sermanet, K. Xu y S. Levine. Unsupervised perceptual rewards for imitation learning. In
+RSS, 2017.
+[37] P. Sermanet, C. Lynch, Y. Chebotar, J. Hsu, E. Jang, S. Schaal, S. Levine y G. Brain. Timecontrastive
+networks: Self-supervised learning from video. En ICRA, 2018.
+[38] P. Florence, L. Manuelli y R. Tedrake. Self-supervised correspondence in visuomotor policy
+learning. RA-L, 2019.
+[39] J. Pari, N. Muhammad, S. P. Arunachalam, L. Pinto, et al. The surprising effectiveness of
+representation learning for visual imitation. arXiv:2112.01511, 2021.
+[40] A. Zhan, P. Zhao, L. Pinto, P. Abbeel y M. Laskin. A framework for efficient robotic
+manipulation. arXiv:2012.07975, 2020.
+[41] T. Xiao, X. Wang, A. A. Efros y T. Darrell. What should not be contrastive in contrastive
+learning. En ICLR, 2021.
+[42] Y. Li, S. Xie, X. Chen, P. Dollar, K. He y R. Girshick. Benchmarking detection transfer
+learning with vision transformers. arXiv:2111.11429, 2021.
+[43] Z. Tong, Y. Song, J. Wang y L. Wang. Videomae: Masked autoencoders are data-efficient
+learners for self-supervised video pre-training. arXiv:2203.12602, 2022.
+[44] C. Feichtenhofer, H. Fan, Y. Li y K. He. Masked autoencoders as spatiotemporal learners.
+arXiv:2205.09113, 2022.
+[45] R. Bachmann, D. Mizrahi, A. Atanov y A. Zamir. Multimae: Multi-modal multi-task
+masked autoencoders. arXiv:2204.01678, 2022.
+[46] X. Zhai, A. Kolesnikov, N. Houlsby y L. Beyer. Scaling vision transformers. En CVPR,
+2022.
+[47] K. He, X. Zhang, S. Ren y J. Sun. Deep residual learning for image recognition. En CVPR,
+2016.
+[48] H. Touvron, M. Cord, M. Douze, F. Massa, A. Sablayrolles y H. Jégou. Training data-
+efficient image transformers & distillation through attention. En ICML, 2021.
+[49] T. Xiao, P. Dollar, M. Singh, E. Mintun, T. Darrell y R. Girshick. Early convolutions help
+transformers see better. En NeurIPS, 2021.
+[50] V. Makoviychuk, L. Wawrzyniak, Y. Guo, M. Lu, K. Storey, M. Macklin, D. Hoeller, N. Rudin,
+A. Allshire, A. Handa, et al. Isaac gym: High performance gpu-based physics simulation for
+robot learning. En NeurIPS, 2021.
+[51] G. Klambauer, T. Unterthiner, A. Mayr y S. Hochreiter. Self-normalizing neural networks.
+En NeurIPS, 2017.
+[52] S. James, K. Wada, T. Laidlow y A. J. Davison. Coarse-to-Fine Q-attention: Efficient
+Learning for Visual Robotic Manipulation via Discretisation. CVPR, 2022.
+[53] S. P. Arunachalam, S. Silwal, B. Evans y L. Pinto. Dexterous imitation made easy: A
+learning-based framework for efficient dexterous manipulation. arXiv:2203.13251, 2022.
+13

@@ -1,0 +1,798 @@
+Solving Hard AI Planning Instances Using Curriculum-Driven Deep
+Reinforcement Learning
+Dieqiao Feng ,Carla P. Gomes and Bart Selman
+Department of Computer Science
+Cornell University
+fdqfeng, gomes, selman g@cs.cornell.edu
+Abstract
+Despite signiﬁcant progress in general AI plan-
+ning, certain domains remain out of reach of cur-
+rent AI planning systems. Sokoban is a PSPACE-
+complete planning task and represents one of the
+hardest domains for current AI planners. Even
+domain-speciﬁc specialized search methods fail
+quickly due to the exponential search complexity
+on hard instances. Our approach based on deep re-
+inforcement learning augmented with a curriculum-
+driven method is the ﬁrst one to solve hard in-
+stances within one day of training while other mod-
+ern solvers cannot solve these instances within
+any reasonable time limit. In contrast to prior
+efforts, which use carefully handcrafted pruning
+techniques, our approach automatically uncovers
+domain structure. Our results reveal that deep RL
+provides a promising framework for solving previ-
+ously unsolved AI planning problems, provided a
+proper training curriculum can be devised.
+1 Introduction
+Deterministic, fully observable planning is a key domain for
+artiﬁcial intelligence. In its full generality, AI planning en-
+compasses general theorem proving, where proofs can be
+viewed as plans leading from a set of basic axioms to the
+theorems to be proved. Planning is well known to be a
+very challenging computational problem: ﬁnding proofs in
+a strong ﬁrst-order mathematical theory which encodes basic
+arithmetic is undecidable [G¨odel, 1931 ]and plan-existence
+is PSPACE-complete for propositional STRIPS planning
+[Bylander, 1994 ]. Domain-independent planners, such as
+BLACKBOX [Kautz and Selman, 1998 ], IPP [Koehler et al. ,
+1997 ], and FF [Hoffmann, 2001 ]among many others, were
+built for solving general planning tasks given by an initial
+state, goal state, and a set of plan operators [Vallati et al. ,
+2015 ]. Though these planners have greatly enlarged the set
+of feasible planning tasks, one major shortcoming of these
+planning systems is that they may do well on one problem
+domain but poorly on another, which has prevented a wider
+use of AI planning systems. This situation is in contrast to
+the development of SAT/SMT solvers, which also tackle a
+combinatorial search task, but have found wide applicabilityin, for example, hardware and software veriﬁcation [J¨arvisalo
+et al. , 2012 ]. An alternative approach to general AI plan-
+ning is to develop domain-specialized solvers, e.g., Soko-
+lution for solving Sokoban planning problems, as discussed
+below. The specialized solvers utilize handcrafted domain-
+speciﬁc knowledge to prune the search space. Clearly, an
+effective domain-independent approach is preferable. Our
+learning framework presented here provides a path towards
+such domain independence. In particular, we will use a ma-
+chine learning framework to automatically uncover domain-
+speciﬁc problem structure during the solution process.
+Recent advances in the deep learning community inspired
+methods of augmenting search with deep neural networks us-
+ing deep reinforcement learning (RL). In the game domain,
+AlphaGo [Silver et al. , 2016 ]as the ﬁrst Go program to beat
+professional players in 2016 and its more general and newest
+version AlphaZero [Silver et al. , 2017 ]achieved a higher
+Elo rating and dominated the state-of-the-art Chess program
+Stockﬁsh. One key question about the success of deep RL
+in these combinatorial (logical) domains is whether the game
+setting is a required component for success. RL requires a re-
+ward signal. In a game setting, this signal comes from the ul-
+timate win/loss result from playout. For a game, we can train
+the deep nets in a self-play approach. In such an approach,
+the initial deep net starts off playing at a very low level (es-
+sentially random play). But in self-play against an equally
+weak player (using a copy of the trained network), the system
+will see a mixture of wins and losses and thus gets a useful
+reward signal about the utility of states. The system can then
+slowly improve its level of play through repeated rounds of
+self-play.
+The core challenge in a single-agent setting, such as AI
+planning, where we want to solve unsolved problem instances
+is:how do we get any positive reward signal during training?
+This is because a positive feedback signal would require a
+valid plan to the goal but that is exactly what we are look-
+ing for. In fact, the problem instances we will solve here re-
+quire very subtle chains of several dozens to even hundreds
+of steps. A random exploration will never “accidentally” en-
+counter a successful chain. Our solution is to devise a series
+of training instances (a “curriculum”) that slowly builds up to
+the full, previously unsolved problem instance. We will see
+below how such an approach is general and surprisingly ef-
+fective. Curriculum based training has earlier been proposedarXiv:2006.02689v1  [cs.AI]  4 Jun 2020
+in[Bengio et al. , 2009 ]as a strategy for partitioning training
+data for incremental training of hard concepts. A novel aspect
+of our setting is that at each level of our curriculum training,
+we use what was learned at the previous level to obtain new
+training data to reach the next level.
+Given the PSPACE-completeness of many interesting plan-
+ning tasks, it is widely assumed (unless P = PSPACE) that de-
+veloping a solver capable of solving effectively any arbitrary
+instance is infeasible. Moreover, due to the signiﬁcant over-
+head of training deep neural networks, we do not aim to com-
+pete on running time with ﬁnely tuned specialized solvers on
+small problem instances. In this work, we therefore focus on
+planning instances that are right beyond the reach of current
+state-of-the-art specialized solvers. We will show for the ﬁrst
+time how such instances can be tackled successfully within a
+deep RL framework. Speciﬁcally, we will show AI planning
+instances on which our deep learning strategy outperforms
+the best previous combinatorial search methods. We will also
+provide insights about what problem structure deep nets cap-
+ture during the learning process.
+We selected Sokoban planning as our AI planning task be-
+cause of its extreme difﬁculty for AI planners [Fern et al. ,
+2011 ] [Lipovetzky, 2013 ]. Moreover, Sokoban instances have
+a regular 2-D input shape that is well-suited for convolutional
+neural networks. Such 2-D structure can also be found in
+many other AI planning that involve scheduling and trans-
+portation style problems. However, Sokoban is much more
+challenging in computational terms. Sokoban is a single-
+player game, created in 1981, in which, given a set of boxes
+and equal number of goal locations, a player needs to push all
+boxes to goal squares without crossing walls and boxes. Fig-
+ure 1 shows a typical instance. The player can only move
+horizontally or vertically onto empty squares. Despite its
+apparent conceptual simplicity, it quickly became clear that
+one could create very hard instances with highly intricate and
+long solutions (if solvable at all). Analyzing the computa-
+tional complexity of Sokoban is non-trivial but the question
+was ﬁnally resolved by Culberson in 1997, who proved the
+problem to be PSPACE-complete [Culberson, 1997 ] [Hearn
+and Demaine, 2005 ]. We will show below that the harder
+Sokoban instances lie far beyond general AI planners but also
+quickly are beyond the reach of specialized Sokoban solvers.
+All modern state-of-the-art solvers are based on a combinato-
+rial search framework augmented with intricate handcrafted
+pruning rules and dead-end detection techniques.
+Our framework learns and solves a single hard Sokoban
+instance at a time. This is an important choice in our set-
+ting. We want the deep net to uncover the underlying struc-
+ture of the combinatorial space that is directly relevant to
+the hard — previously unsolved — instance under consid-
+eration. This approach mimics conﬂict-driven clause learn-
+ing (CDCL) [Marques-Silva and Sakallah, 1999 ]for solv-
+ing Boolean satisﬁability problem (SAT). In SAT solving, the
+clauses are learned during the processing of a single instance.
+In this setting, the learned clauses are optimally relevant to
+the problem instance at hand. Another potential advantage of
+our framework is that all the parameters of the deep neural
+network are focused on the layout of the given input instance
+and its corresponding search space. Though some generalknowledge about Sokoban, e.g., that pushing a box to a cor-
+ner leads to a dead-end state, can be learned from one instance
+and generalized to others, we show that our training setup can
+also discover this kind of knowledge efﬁciently and general-
+ize well across its search space. In addition, the deep learning
+framework can now uncover very specialized problem struc-
+ture that helps tailor the search for the solution to the speciﬁc
+problem instance at hand. Examples of such structure can
+be a certain placement of a subset of boxes from which the
+goal state cannot be reached. The search mechanism can now
+eliminate any exploration action sequences that lead to such
+a placement. This is analogous to the pruning provided by
+learned clauses in SAT solvers. The learned clauses are spe-
+ciﬁc to the SAT instance under consideration.
+As we discussed above, we need to devise a way to obtain
+a proper training signal for solving AI planning problems.
+Since the input instance might be extremely hard and there-
+fore cannot directly provide any positive reward signal, we in-
+corporate the idea of curriculum learning and construct sim-
+pler subcases derived from the original challenge problem. In
+our Sokoban domain, a natural choice is to randomly select
+smaller subsets of initial boxes and goal squares while leav-
+ing all walls unchanged. In particular, our learning procedure
+starts from exploring 2-box subcases and gradually increases
+the number of boxes after the success rate of ﬁnding a solu-
+tion increases to a certain threshold. We show that knowl-
+edge learned from subcases with smaller numbers of boxes
+can generalize successfully to subcases with larger numbers
+of boxes.
+Solving the Sokoban planning task is a combinatorial
+search problem and we will utilize AlphaZero-style Monte
+Carlo tree search in reinforcement learning for exploring the
+search space more efﬁciently. The only domain knowledge
+we use during learning is computing valid pushes from a state
+and building the state transition table, and the input of the
+neural network is the current raw 2-D board state. Intricate
+handcrafted techniques in modern solvers like dead-end de-
+tection are not used.
+Our experiments reveal that our curriculum-driven deep re-
+inforcement learning framework can surpass traditional spe-
+cialized solvers for a large set of instances from benchmark
+datasets such as XSokoban and Sasquatch. The deep network
+helps the Monte Carlo tree search explore the search space
+more effectively and offers signiﬁcant generalization to un-
+seen states. In addition, the growth of running time when
+the complexity of the instances in the curriculum increases is
+near polynomial instead of exponential.
+We will also provide a number of other insights into the
+learning process. Of particular interest is the observation that
+when training the deep net on harder tasks in the curriculum,
+its performance on easier instances degrades. This form of
+”catastrophic forgetting” makes the stronger networks less ro-
+bust, even when better at solving harder instances. It would be
+an interesting research direction to devise a curriculum-driven
+approach that does not show degradation on easier tasks while
+still reaching maximal effectiveness on the original problem.
+2 Related Work
+Search in combinatorial domains has been studied exten-
+sively in AI, in areas such as planning, decision making, and
+reasoning. For NP-complete tasks, successful SAT solvers
+WalkSAT [Selman et al. , 1992 ]and the CDCL framework
+[Marques-Silva and Sakallah, 1999 ]have been built to efﬁ-
+ciently uncover structure of the input problem and demon-
+strate near polynomial scaling on many industrial SAT do-
+mains. The key insight of their success is the ability of the
+algorithm to learn problem invariants and reshape the search
+space by avoiding entering subtrees which do not contain a
+solution. Most planning tasks are harder than SAT and usu-
+ally are at least PSPACE-complete. Graphplan [Blum and
+Furst, 1997 ]and FF are general planners accepting formal
+languages such as PDDL [Fox and Long, 2003 ]. However, as
+reported in [Welle, 2003 ], a major shortcoming of these gen-
+eral planners is that they may do well on one problem domain
+but poorly on another.
+The enhancement of planning with learning [Fern et al. ,
+2011 ]has been investigated extensively in the past. Directed
+by the current goal, [Abel et al. , 2015 ]prune away irrelevant
+actions. In each state, [Rosman and Ramamoorthy, 2012 ]ex-
+ploit the usefulness of each action by learning action priors.
+For Sokoban-specialized solving, modern solvers utilize in-
+tricate domain-dependent techniques such as subtle dead-end
+detection, duplicate positions pruning, lower bound calcula-
+tion, and no inﬂuence move detection [Junghanns and Scha-
+effer, 2001 ]. While all of these techniques offer efﬁciency im-
+provements over general planning for Sokoban, good repre-
+sentations of states, tight heuristic functions as well as dead-
+end detection methods are handcrafted, which requires a care-
+ful inspection of domain structure and heavy utilization of
+domain knowledge.
+In recent years, deep neural networks have achieved
+promising results in many domains. The most exciting re-
+sult in the combinatorial domain is AlphaZero which utilizes
+deep reinforcement learning to automatically discover do-
+main structure of two-player games like Chess and Go. Key
+to its success is the self-play learning strategy, which starts
+with two weak players and gradually collects useful learn-
+ing signals by self-play and gradually improves the ability
+of the players. Previously, it was not clear how to develop
+such “curriculum-driven” strategy in the planning domain.
+Because unlike in the game domain, where learning signals
+(wins/losses) are available for any pair of players of roughly
+equal strengths, including very weak and random players, in
+the planning domain, the agent will initially fail to reach the
+goal state at every attempt and therefore cannot bootstrap its
+learning process.
+Deep neural networks have also been used to help tackle
+Sokoban problems. [Weber et al. , 2017 ]augment deep re-
+inforcement learning with an imagination component, and
+[Groshev et al. , 2018 ]use imitation learning to learn from
+successful Sokoban plays and generalize reactive policies to
+unseen instances. However, their performance is nowhere
+close to state-of-the-art specialized Sokoban solvers.
+Our approach offers two major advantages over prior ap-
+proaches: (1) our approach solves hard benchmark instances
+Figure 1: The instance XSokoban 29 (left panel) and one of its 3-
+box subcase (right panel). The blue circle is the location of the
+player (or “pusher”), red circles are boxes, and cells with dark back-
+ground are goal squares. Light colored squares form walls. The
+player has to push the boxes onto goal squares.
+that are out of reach of specialized Sokoban solvers; (2) no
+domain-speciﬁc knowledge is needed during learning and no
+extra data, e.g., manually provided solutions, are required.
+Our idea of training on similar, but easier subcases out from
+the original instance can be adapted to other planning do-
+mains.
+3 Formal Framework
+3.1 Model
+Given a Sokoban instance I, the preprocessing phase com-
+putes the set of all possible pushes A. A deep neural network
+(p;v) =f(s)with parameters takes the board state sas
+input and outputs a vector of action probability pwith compo-
+nentspa= Pr(ajs)for each push action a2A, and a scalar
+valuevindicating the estimated number of remaining steps to
+the goal from state s. The left ﬁgure of Figure 1 shows the
+original instance XSokoban 29 from the benchmark dataset
+XSokoban. The input to the network is a 6HWim-
+age stack consisting of 6 features planes while HandWare
+the height and width of the corresponding Sokoban instance.
+Feature planes represent walls, empty goal squares, boxes on
+empty squares, boxes on goal squares, player-reachable cells,
+and player-reachable cells on goal squares respectively.
+The effort of solving a Sokoban instance can be divided
+into two parts:
+1. The player moves to the correct position adjacent to a
+box for pushing.
+2. The player pushes the box.
+In our experiment, we use the set of valid pushes instead of
+valid moves as the action set since the number of pushes in a
+solution is signiﬁcantly smaller than the number of moves.
+(One move is moving one square over for the player (the
+pusher).) In other words, the plan length is generally far
+shorter in terms of number of pushes vs. number of moves.
+To model the set of valid pushes at each state requires keep-
+ing track of the reachable cells that are next to blocks for the
+player. Illegal pushes are masked out by setting their prob-
+abilities to zero, and re-normalising the probabilities for re-
+maining moves.
+For each instanceI, we set a maximum allowable pushes
+or “steps”Imax during the learning phase. Imax indicates
+the maximum number of steps of a single plan that the algo-
+rithm is allowed to explore during learning. The model will
+be forced to stop after Imaxpushes. Setting such a thresh-
+old can help avoid inﬁnite meaningless loops when explor-
+ing. The remaining-step estimator vis also normalized to the
+interval [0;1]to ﬁt better into the neural network framework.
+Notice that ifImaxis set smaller than the length of the short-
+est solution plan then the model will never ﬁnd any solution.
+In our experiments, we start with Imax= 500 and double it
+whenever learning fails after a long run.
+The learning framework consists of multiple iterations, and
+each iteration contains three parts:
+1. Initial board generation phase: we randomly generate
+500 initial boards according to our curriculum-driven
+strategy described in subsection 3.2.
+2. Exploration phase: the model searches for solutions
+(plans) for these boards with Monte Carlo tree search
+(MCTS) driven by the policy/value network trained so
+far. For more details see subsection 3.3.
+3. Training phase: we train the neural work with learning
+signals collected from the exploration phase. This part
+will be further illustrated in subsection 3.4.
+3.2 Curriculum-driven Strategy
+For hard Sokoban instances the deep RL setup may fail to
+ﬁnd any solution and thus gets no useful training signal. Our
+curriculum strategy is based on two insights: (1) construct
+simpler subcases that are more likely to be solved by the cur-
+rent trained model; (2) the constructed subcases should share
+similar structure information with the original instance to en-
+hance knowledge generalization from a series of subcases to
+the original problem instance.
+Learning starts by choosing a small subset of initial boxes
+and goal squares to form a subcase for exploration and train-
+ing while leaving wall locations unchanged. Figure 1 (right)
+shows one such example. Three boxes and goal squares are
+randomly selected from the initial ones. The resulting sub-
+case requires a much simpler plan. Speciﬁcally, assume the
+input Sokoban instance has nboxes and goal squares, in each
+iteration we randomly select mnboxes and goal squares
+and gradually increase mafter a certain level of performance
+has been reached at each level. Compared with the origi-
+nal problem, solutions of the subcases will be shorter and,
+most importantly, easier to ﬁnd with MCTS and the deep net
+trained so far. By solving a collection of mbox subcases
+for each value of m, we effectively train a distance function
+and action model that can handle mbox subproblems for a
+range of initial and goal placements. This level of generality
+is important because we do not know in advance on which
+goal square, any particular box from the initial state will end
+up. Moreover, because we start with a 2 box subcase, MCTS
+with a randomly initialized deep net can still ﬁnd a solution
+path, and thus a positive reward signal. By slowly increas-
+ing the subcase size (and difﬁculty), deep RL can continue
+to obtain a positive reward signal and incrementally improve
+the trained net to handle increasingly complex scenarios, ulti-
+mately leading to a solution to to the original instance, when
+m=n.
+In the experiment section we will show that it is necessary
+for the model to learn to a certain accuracy rate on m-box
+Figure 2: One example showing that subcases are not necessarily
+solvable even though the original instance has a solution.
+subcases before jumping to (m+ 1) -box subcases. Speciﬁ-
+cally, if the model jumps to (m+ 1) -box scenarios before it
+reaches a high success rate on m-box scenarios, one poten-
+tial danger is that the performance of learning will abruptly
+degrade and the model might be no longer able to ﬁnd any
+solution for (m+ 1) -box subcases.
+To decide on when to increase m, one possible measure to
+use would be the solution rate reached at that level. However,
+somewhat counterintuitively, even if the original problem in-
+stance is solvable, certain subcases may not have solutions.
+This is due to a hidden complexity of the Sokoban domain:
+we know that the boxes need to reach the goal squares but
+we don’t know exactly which box should go to which goal
+square. So, even though our subproblems use a strict subset
+of the boxes and goal squares, we may accidentally generate
+an unsolvable subproblem. Figure 2 gives an example. In this
+case, the probability of generating a solvable 2-box subcase is
+only1
+2, since we need to guarantee that the number of boxes
+and goal squares be the same in each room. In general, it is
+difﬁculty to compute the probability that a random subcase is
+solvable. Therefore, using the success rate at a certain level
+is not a robust criterion. We use an alternative way to decide
+when to increment m. Speciﬁcally, we increment mwhen
+the success rate of ﬁnding a solution has not improved over a
+certain number of iterations. We use 5 iterations in our exper-
+iments. Our experiments show that this strategy works well
+in practice.
+3.3 Monte Carlo Tree Search
+We search for solutions (plans) of the Sokoban m-box subin-
+stances (mn) using an AlphaZero-style Monte Carlo tree
+search (MTCS) guided by the deep net trained so far. As we
+will see, MTCS works well but other search techniques may
+also be worth exploring in future work. In MTCS, at each
+states, we compute (p;v) =f(s)and create a root node R
+which contains the state s. Multiple Monte Carlo rounds will
+be performed from Rto calculate the best move in s. Each
+round consists of three components:
+Selection: start from the root node R, which contains the
+states, and select successive child nodes which maxi-
+mize a utility function until a leaf node L, the goal, or
+a dead-end is reached. A leaf node is any node that has
+never been evaluated by the neural network before. If
+the goal or a dead-end is reached then we jump to the
+backpropagation phase otherwise the expansion phase.
+Expansion: compute the set of all valid pushes Afrom
+the statesLof the node L. Unlike traditional MCTS
+followed by a roll-out which simulates multiple random
+plays, we evaluate (p;v) =f(sL)with the neural net-
+work and use vas the estimated evaluation for the back-
+propagation phase.
+Backpropagation: use vofsLto update information of
+the nodes on the path from RtoL. Setvto0ifsLis
+the goal state or 1ifsLis a dead-end. Assume the state-
+observation-action trajectory from RtoLiss=s0a1 !
+s1a2 ! al !sl=sLwherelis the length of the
+trajectory, we update Qnew(si;ai+1)to
+Q(si;ai+1)N(si;ai+1) + min(v+l i
+Imax;1)
+N(si;ai+1) + 1;
+whereQ(s;a)is the mean action value averaged from
+previous rounds and N(s;a)is the visit count.
+To select child nodes, we choose at= argmaxaQ(st 1;a)+
+U(st 1;a)using a variant of the PUCT algorithm where
+U(s;a) = cputp
+1 +P
+bN(s;b)
+1 +N(s;a)pa;
+andcput is a constant balancing exploration and exploitation.
+After 1600 rounds have been performed, we choose a move
+either greedily or proportionally with respect to the visit count
+at the root state s. This procedure proceeds until a dead-
+end or the goal is reached, or the maximum allowable pushes
+Imaxhave been performed. Notice we don’t utilize any ad-
+vanced dead-end detection algorithm used in previous mod-
+ern solvers. Instead, we only detect dead-ends when no valid
+pushes from the state are available, e.g., all boxes are pushed
+into corners and are no longer movable.
+To construct learning signals for the training phase, we
+collect all states on paths explored by the Monte Carlo tree
+search, and use the probability proportional to the visit count
+as the improved probability distribution for training. For
+value prediction, if the leaf node is the goal state then we use
+the distance to the leaf node as the new label u. Otherwise,
+either a loop or a dead-end is reached and we set uto 1 for all
+nodes on the path.
+3.4 Training
+We use 5 GPUs to train the network and each iteration con-
+tains 1000 epochs with mini-batch 160 in total. Unlike [Mnih
+et al. , 2013 ]and[Silver et al. , 2017 ]who maintain an ex-
+tra memory pool to save training episodes, we directly train
+on data collected from the current iteration. Speciﬁcally, the
+network parameters are adjusted by gradient descent on the
+loss function that sums over a mean-squared loss and a cross-
+entropy loss
+l= (u v)2 log(p) +ckk2;
+wherecis the constant to control the impact of weight decay.
+After the training phase, new parameters of the network are
+used to guide the Monte Carlo tree search in the next iteration.
+For this paper, we did not perform a detailed hyper param-
+eter study to select the best network structure for our prob-
+lem setting. We used vanilla ResNet [Heet al. , 2016 ]with
+8 residual blocks as the network setting for all experiments.Sokoban instance Our method Sokolution FF
+XSokoban 29 9.1h Failed Failed
+Sasquatch 29 Failed Failed Failed
+Sasquatch 30 Failed Failed Failed
+Sasquatch3 18 14.9h Failed Failed
+Sasquatch7 48 23.4h 1.0h Failed
+Grigr2001 2 22.1h Failed Failed
+Table 1: Performance comparison. Sokoban instances are selected
+from standard datasets and are marked as ”Solved by none”. Time
+limit for all solvers are extended to 24 hours if the option is available.
+All solvers are running on the same CPU cores while our method uti-
+lizes additional 5 GPUs. The conversion from Sokoban into STRIPS
+format is shown in [Welle, 2003 ].
+It is an indication of the promise of our general framework
+that we already obtained good results with standard ResNet.
+The overall performance can likely be further improved with
+careful hyper parameter tuning.
+4 Experiments
+Here we report our experiments on XSokoban, the de facto
+standard test suite in the academic literature on Sokoban
+solver programming, as well as other large test suites1. We
+pick instances that are marked as ”Solved by none of the four
+modern solvers”. The time limit for the statistics of previous
+benchmark is usually 10 minutes. We extend the time limit
+to 24 hours if the option is available and retest all solvers on
+these hard instances. We do the test on our method, state-of-
+the-art Sokoban-specialized solver Sokolution, and domain-
+independent general planner FF. Table 1 shows the perfor-
+mance of each solver on the selected instances.
+4.1 Scaling Comparison
+Since our framework utilizes extra GPU resources, to gain
+more insights about the difference between the ways that
+our framework and traditional search-based algorithms han-
+dle hard instances, we evaluate the scaling performance of
+each solver on subcases with gradually increasing difﬁculty.
+We use XSokoban 29, which contains 16 boxes, for illustra-
+tion purposes, as shown in Figure 3. The running time for
+FF and Sokolution clearly show exponential growth and FF
+can no longer solve any m-box subcase for m8. Sokolu-
+tion signiﬁcantly outperforms our method for small-box sub-
+cases. We believe this is mainly due to the heavy overhead of
+the training of neural networks. As the size of subcases in-
+creases, our method shines both in running time and scaling
+performance. Note that our method spends almost no extra
+time jumping from 15-box subcases to the original 16-box in-
+stance. That’s because the prediction of the network learned
+from 15-box subcases is highly accurate on the 16-box in-
+stance and the model is already capable of solving the original
+problem.
+1Sokoban datasets available at http://sokobano.de/wiki/index.
+php?title=Solver Statistics
+23456781m3m10m30m1h3h10h24hRunning time(log)FF
+246810121416Sokolution
+246810121416Our method
+2345678
+Number of boxes3h6h9h12h15h18h21h24hRunning time
+246810121416
+Number of boxes246810121416
+Number of boxesFigure 3: Scaling performance comparison between FF, Sokolution
+and our method on instance XSokoban 29. For m-box subcases,
+we randomly generated 19 subcases for FF and Sokolution, and plot
+their boxplot according to running time. The running time in the
+top three ﬁgures is in logarithmic scale while the bottom three are in
+linear scale. For our method, we plot the total time needed for the
+algorithm to achieve 95% success rate for each m.
+4.2 Exploration Efﬁciency
+We now show that the network can efﬁciently extract knowl-
+edge when exploring and generalize to unseen states. For the
+same XSokoban 29 instance, we plot the state efﬁciency by
+comparing the number of seen states during the exploration
+phase and the total number of possible states in Figure 4. In
+the left ﬁgure, for each m, the total number of initial states
+is 16
+m2. The number of explored states almost remains at
+the same magnitude as mincreases. This implies the capabil-
+ity of the neural network to efﬁciently extract structure infor-
+mation of the combinatorial search space and generalize its
+knowledge to unseen search spaces. The right ﬁgure shows
+the comparison between total possible board states and those
+explored by the Monte Carlo tree search.
+Also notice that for subcases with m3, the model needs
+to see almost all possible board states before jumping to next
+stages. This implies generalization does not start for small-
+box subcases and the model needs to explore every possi-
+ble combination of board states to understand the underlying
+structure. As mincreases and the combinatorial space grows,
+generalization starts to shine and help the Monte Carlo tree
+search stay around the most promising search space.
+4.3 Forgetting during Curriculum Learning
+One surprising phenomenon in curriculum-driven learning is
+that the networks may start to forget previously learned struc-
+ture as the learning proceeds. As seen in Figure 5, as the
+number of boxes increases, the success rate of small-box sub-
+cases gradually decreases. Speciﬁcally, we see that the curves
+trained on higher numbers of boxes drop off to the left, i.e.,
+the performance on cases with fewer boxes becomes worse.
+On the other hand, the ability to solve increasingly hard cases
+2 4 6 810 12 14 16
+Number of boxes101103105107Number of initial states(log)
+Total
+Explored
+2 4 6 810 12 14 16
+Number of boxes1071010101310161019Number of states(log)
+Total
+Visited
+Uniquely visitedFigure 4: The state statistics during learning. The left ﬁgure shows
+the total number of initial states and the number of explored initial
+states by the Monte Carlo tree search. The right ﬁgure shows the
+total number of all possible states, all states, and unique states ex-
+plored by the Monte Carlo tree search. The y-axis of both ﬁgures is
+plotted in logarithmic scale.
+2 3 4 5 6 7 8 910 11 12 13 14 15 16
+Number of boxes0%20%40%60%80%100%Success rate
+Figure 5: Success rate of different models on different subcases. For
+eachn2[2;16], we extracted the model Nnwhen the algorithm
+reached 95% success rate for the ﬁrst time on n-box subcases. Each
+curve represents a model N, and for each curve there is a corre-
+sponding circle on it whose x-coordinate nindicates the model Nn.
+The x-axis represents each m-box subcase, and for each model Nn
+we randomly generated 500m-box subcases and tested its success
+rate on these subcases.
+(more boxes) through the curriculum-driven training shows
+that knowledge learned from m-box subcases can be useful
+in ﬁnding solutions to m0-box subcases where m0>m . The
+curve shows that the model learned from 13-box subcases
+is already capable of solving the original instance with 16
+boxes. This implies that an ensemble of knowledge from
+small-box subcases can work together to provide enough
+guidance for ﬁnding a solution of the original, unsolved prob-
+lem instance.
+Note that catastrophic forgetting has been previously ob-
+served in the context of training deep neural networks.
+Speciﬁcally, deep nets can gradually or abruptly forget pre-
+viously learned knowledge upon learning new information.
+This is an important issue to consider because humans typi-
+cally do not show such catastrophic forgetting when increas-
+ing their proﬁciency on a task. For example, a chess player
+reaching grand master level will not suddenly start lose to a
+beginner player. An interesting research challenge is to de-
+velop training curricula that prevent catastrophic forgetting
+for deep RL.
+4.4 Knowledge Extraction from the Network
+We now show how accurate both value prediction and prob-
+ability prediction are compared with ground truth provided
+−20 0 20 40
+Difference between prediction and ground truth0.0000.0250.0500.0750.1000.1250.150Proportion8 on starting
+8 on random
+16 on starting
+16 on random
+0 20 40 60 80 100
+Probability of predicting ground truth0.000.010.020.030.040.050.06 8 on starting
+8 on random
+16 on starting
+16 on randomFigure 6: The accuracy of network prediction compared with ground
+truth. The left ﬁgure shows the difference between value predic-
+tion which indicates the remaining steps to the goal and the ground
+truth. The right ﬁgures shows the conﬁdence of the network about
+the ground truth action. We test both on N8andN16that are trained
+after 8-box subcases and the original problem.
+by optimal Sokoban solvers. We also want to test whether
+the network can generalize to absolutely unseen board states
+or just learns well on states that are frequently visited by the
+Monte Carlo tree search. For this experiment, we test on m-
+box subcases of XSokoban 29 wherem= 8. We randomly
+select 500 initial 8-box subcases and do some random pushes
+on them to generate the set of starting states which are sup-
+posed to be frequently seen by the Monte Carlo tree search.
+And we also generate 500 board states whose boxes are ran-
+domly selected from all possible locations of the board. These
+states are supposed to be hardly explored. All test states are
+guaranteed to be solvable and dead-end free.
+As shown in ﬁgure 6, we see that the utility function cap-
+tures the distance to the goal for 8-box subcases surprisingly
+well for states where the 8 boxes are close to the initial 16-box
+setup. When we consider subcases with the 8 boxes initially
+placed randomly, we see the utility function degrade. So the
+learning does focus on states close to the states that may oc-
+cur as legal intermediate states which are heavily explored
+and exploited by reinforcement learning.
+When we consider the 16-box learned network, we see an
+analogous phenomenon but overall less accurate in terms of
+both utility and policy compared with 8-box scenarios. In
+fact, the policy for 8-box subcases for randomly placed boxes
+becomes worst, though still way better than random policy.
+This means that the Monte Carlo tree search is no longer fo-
+cused enough to ﬁnd the goal state in 8-box scenarios. This
+explains the forgetting curve as discussed earlier.
+5 Conclusion
+We presented a framework based on deep RL for solving hard
+combinatorial planning problems in the domain of Sokoban.
+A key challenge in the application of deep RL in a sin-
+gle agent setting is the lack of a positive reinforcement sig-
+nal since our goal is to solve previously unsolved instances
+that are beyond existing combinatorial search methods. We
+showed how a curriculum-driven deep RL approach can suc-
+cessfully address this challenge. By devising a sequence of
+increasingly complex sub problems, each derived from the
+original instance, we can incrementally learn an approximate
+distance to goal function that can guide MCTS to solving the
+original problem instance.We showed the effectiveness of our learning based plan-
+ning strategy by solving hard Sokoban instances that are out
+of reach of previous search-based solution techniques, in-
+cluding methods specialized for Sokoban. We could uncover
+plans with over two hundred actions, where almost any devia-
+tion from the plan would lead to an unrecoverable state. Since
+Sokoban is one of the hardest challenge domains for current
+AI planners, this work shows the potential of curriculum-
+based deep RL for solving hard AI planning tasks. In future
+work, we hope to extend these techniques to boost theorem
+proving methods to ﬁnd intricate mathematical proofs con-
+sisting of long sequences of inference steps to assist in math-
+ematical discovery.
+Acknowledgments
+We thank the anonymous reviewers for their valuable feed-
+back. This work was supported by the Center for Human-
+Compatible AI, an NSF Expeditions in Computing award
+(CCF-1522054), an AFSOR award (FA9550-17-1-0292), and
+an ARO DURIP award (W911NF-17-1-0187) for the com-
+pute cluster used in our experimental work.
+References
+[Abel et al. , 2015 ]David Abel, David Ellis Hershkowitz,
+Gabriel Barth-Maron, Stephen Brawner, Kevin O’Farrell,
+James MacGlashan, and Stefanie Tellex. Goal-based ac-
+tion priors. In Twenty-Fifth International Conference on
+Automated Planning and Scheduling , 2015.
+[Bengio et al. , 2009 ]Yoshua Bengio, J ´erˆome Louradour,
+Ronan Collobert, and Jason Weston. Curriculum learn-
+ing. In Proceedings of the 26th annual international con-
+ference on machine learning , pages 41–48, 2009.
+[Blum and Furst, 1997 ]Avrim L Blum and Merrick L Furst.
+Fast planning through planning graph analysis. Artiﬁcial
+intelligence , 90(1-2):281–300, 1997.
+[Bylander, 1994 ]Tom Bylander. The computational com-
+plexity of propositional strips planning. Artiﬁcial Intel-
+ligence , 69(1-2):165–204, 1994.
+[Culberson, 1997 ]Joseph Culberson. Sokoban is pspace-
+complete. University of Alberta, Technical Report, TRID-
+ID TR97-02 , 1997.
+[Fern et al. , 2011 ]Alan Fern, Roni Khardon, and Prasad
+Tadepalli. The ﬁrst learning track of the international plan-
+ning competition. Machine Learning , 84(1-2):81–107,
+2011.
+[Fox and Long, 2003 ]Maria Fox and Derek Long. Pddl2. 1:
+An extension to pddl for expressing temporal planning do-
+mains. Journal of artiﬁcial intelligence research , 20:61–
+124, 2003.
+[G¨odel, 1931 ]Kurt G ¨odel. ¨Uber formal unentscheidbare
+s¨atze der principia mathematica und verwandter systeme
+i.Monatshefte f ¨ur mathematik und physik , 38(1):173–198,
+1931.
+[Groshev et al. , 2018 ]Edward Groshev, Aviv Tamar,
+Maxwell Goldstein, Siddharth Srivastava, and Pieter
+Abbeel. Learning generalized reactive policies using deep
+neural networks. In 2018 AAAI Spring Symposium Series ,
+2018.
+[Heet al. , 2016 ]Kaiming He, Xiangyu Zhang, Shaoqing
+Ren, and Jian Sun. Deep residual learning for image recog-
+nition. In Proceedings of the IEEE conference on computer
+vision and pattern recognition , pages 770–778, 2016.
+[Hearn and Demaine, 2005 ]Robert A Hearn and Erik D De-
+maine. Pspace-completeness of sliding-block puzzles and
+other problems through the nondeterministic constraint
+logic model of computation. Theoretical Computer Sci-
+ence, 343(1-2):72–96, 2005.
+[Hoffmann, 2001 ]J¨org Hoffmann. Ff: The fast-forward
+planning system. AI magazine , 22(3):57–57, 2001.
+[J¨arvisalo et al. , 2012 ]Matti J ¨arvisalo, Daniel Le Berre,
+Olivier Roussel, and Laurent Simon. The international sat
+solver competitions. Ai Magazine , 33(1):89–92, 2012.
+[Junghanns and Schaeffer, 2001 ]Andreas Junghanns and
+Jonathan Schaeffer. Sokoban: Improving the search with
+relevance cuts. Theoretical Computer Science , 252(1-
+2):151–175, 2001.
+[Kautz and Selman, 1998 ]Henry Kautz and Bart Selman.
+Blackbox: A new approach to the application of theorem
+proving to problem solving. In AIPS98 Workshop on Plan-
+ning as Combinatorial Search , volume 58260, pages 58–
+60, 1998.
+[Koehler et al. , 1997 ]Jana Koehler, Bernhard Nebel, J ¨org
+Hoffmann, and Yannis Dimopoulos. Extending planning
+graphs to an adl subset. In European Conference on Plan-
+ning, pages 273–285. Springer, 1997.
+[Lipovetzky, 2013 ]Nir Lipovetzky. Structure and inference
+in classical planning . PhD thesis, Universitat Pompeu
+Fabra, 2013.
+[Marques-Silva and Sakallah, 1999 ]Joao P Marques-Silva
+and Karem A Sakallah. Grasp: A search algorithm for
+propositional satisﬁability. IEEE Transactions on Com-
+puters , 48(5):506–521, 1999.
+[Mnih et al. , 2013 ]V olodymyr Mnih, Koray Kavukcuoglu,
+David Silver, Alex Graves, Ioannis Antonoglou, Daan
+Wierstra, and Martin Riedmiller. Playing atari with deep
+reinforcement learning. arXiv preprint arXiv:1312.5602 ,
+2013.
+[Rosman and Ramamoorthy, 2012 ]Benjamin Rosman and
+Subramanian Ramamoorthy. What good are actions?
+accelerating learning using learned action priors. In
+2012 IEEE International Conference on Development and
+Learning and Epigenetic Robotics (ICDL) , pages 1–6.
+IEEE, 2012.
+[Selman et al. , 1992 ]Bart Selman, Hector J Levesque,
+David G Mitchell, et al. A new method for solving hard
+satisﬁability problems. In Aaai , volume 92, pages 440–
+446. Citeseer, 1992.
+[Silver et al. , 2016 ]David Silver, Aja Huang, Chris J Maddi-
+son, Arthur Guez, Laurent Sifre, George Van Den Driess-che, Julian Schrittwieser, Ioannis Antonoglou, Veda Pan-
+neershelvam, Marc Lanctot, et al. Mastering the game
+of go with deep neural networks and tree search. nature ,
+529(7587):484, 2016.
+[Silver et al. , 2017 ]David Silver, Thomas Hubert, Julian
+Schrittwieser, Ioannis Antonoglou, Matthew Lai, Arthur
+Guez, Marc Lanctot, Laurent Sifre, Dharshan Kumaran,
+Thore Graepel, et al. Mastering chess and shogi by
+self-play with a general reinforcement learning algorithm.
+arXiv preprint arXiv:1712.01815 , 2017.
+[Vallati et al. , 2015 ]Mauro Vallati, Lukas Chrpa, Marek
+Grze ´s, Thomas Leo McCluskey, Mark Roberts, Scott San-
+ner, et al. The 2014 international planning competition:
+Progress and trends. Ai Magazine , 36(3):90–98, 2015.
+[Weber et al. , 2017 ]Th´eophane Weber, S ´ebastien
+Racani `ere, David P Reichert, Lars Buesing, Arthur
+Guez, Danilo Jimenez Rezende, Adria Puigdomenech
+Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, et al.
+Imagination-augmented agents for deep reinforcement
+learning. arXiv preprint arXiv:1707.06203 , 2017.
+[Welle, 2003 ]James Welle. A comparison of parallelism in
+current ai planning systems. 2003.

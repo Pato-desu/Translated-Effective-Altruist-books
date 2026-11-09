@@ -1,0 +1,16 @@
+Logical InductionLogical UncertaintyOracle AI
+Rationality
+AI
+FrontpageThis is Logical Induction, or LI for short.
+We can ask LI any maths question that has a number as an answer. If we ask it a question that istoo tricky, it will have a good guess. On average, LI is neither too high or too low. Here we seethat it has no idea what the 10100th digit of π is, except that it is a digit, so it averages all thedigits from 0 to 9 together.A green box indicates a question has a blank space in it. A green box around a binary stringmeans the question you get when you put that binary string into the blank space.For example, here are some green boxes you could use.Optimizing arbitrary expressions with alinear number of queries to a LogicalInduction Oracle (Cartoon Guide)by Donald Hobson23rd Jul 2020
+2
+It can be an easy question or a hard question. We can pick any question we like that has a blankspace in it.LI will take in a string in a green box, and try its best to output a number.
+Now suppose that some strings of 0's and 1's are better than others for some task we aretrying to do. The green box represents a question asking how good the string is.Maybe the string encodes the design of an engine, and the green box represents the questionof how e(cient that design is.We could ﬁnd the best string we can by asking LI about every possible string.
+Unfortunately, there are a lot of possible strings, so this approach would be quite slow, even ifLI itself was fast.Is there a quicker way?We can ask LI questions about itself.
+This cloud represents a question about the best value that LI can ﬁgure out how to get from astring of bits that starts with x, and then contains another n bits.We deﬁne it like this
+Note that the + in x+"0" is string concatenation, but the + in n+1 is addition.If we aren't going to add any more bits, we can just use the green box, if we are going to addsome more bits, we can try adding each of "0" and "1", then asking LI for their best guessabout cloud.
+Diamond is almost the same as cloud, it just tells you which of the two numbers is bigger, notwhat that bigger number is. This is what we use to construct our really good bit string, the onethat makes LI of greenbox as large as possible.Here is how we put those bits together.
+Suppose that the string we want to create is n bits long.We start with scroll 0 being the empty string. Once we get to scroll n, we have our answer.Note that we could just ask LI"what's the ﬁrst bit of the best possible answer?","what's the second bit of the best possible answer?", ...The reason this doesn't work very well is suppose we mark bitstrings like this"1"+[answer to very tricky puzzle] gets 100 points"0"+ [anything you like] gets 99 points"1"+[wrong answer to the puzzle] gets 0 pointsThe ﬁrst bit to the best possible answer is "1". However, if LI can't answer the puzzle, then youwill ﬁnd better strings on average by starting with "0".The method shown here will output "0" if LI has an accurate idea of its own capabilities. LIshould know what it can and can't do if it has had enough time to think.Logical Induction3Logical Uncertainty2Oracle AI2
+Rationality2
+AI2
+Frontpage

@@ -1,0 +1,224 @@
+Muéstrame el algoritmo: transparencia en los sistemas de recomendación — Schwartz Reisman Institute
+Volver arriba
+0
+Saltar al contenido
+Novedades
+Noticias
+Eventos
+Videos
+Quiénes somos
+Sobre nosotros
+Donantes fundadores
+Liderazgo del instituto
+Consejo asesor
+Personas
+Qué hacemos
+Investigación
+Soluciones
+Participe
+Contacto
+Buscar
+Abrir menú
+Cerrar menú
+Novedades
+Noticias
+Eventos
+Videos
+Quiénes somos
+Sobre nosotros
+Donantes fundadores
+Liderazgo del instituto
+Consejo asesor
+Personas
+Qué hacemos
+Investigación
+Soluciones
+Participe
+Contacto
+Buscar
+Abrir menú
+Cerrar menú
+Carpeta:
+Novedades
+Atrás
+Noticias
+Eventos
+Videos
+Carpeta:
+Quiénes somos
+Atrás
+Sobre nosotros
+Donantes fundadores
+Liderazgo del instituto
+Consejo asesor
+Personas
+Carpeta:
+Qué hacemos
+Atrás
+Investigación
+Soluciones
+Participe
+Contacto
+Buscar
+Muéstrame el algoritmo: transparencia en los sistemas de recomendación
+Comentario
+25 de agosto
+Escrito por
+Jonathan Stray
+La transparencia se ha convertido en una preocupación central en torno a los usos y al impacto de los algoritmos de recomendación, pero ¿cómo se vería este principio si se implementara? En la décima entrega de la
+serie de publicaciones de SRI
+sobre las características, implicaciones y controversias en torno a la privacidad en un contexto cada vez más digital y rico en datos, el colaborador invitado
+Jonathan Stray
+explora nociones de transparencia algorítmica y explica algunas de las limitaciones de las concepciones actuales de la “IA explicable”.
+Todos, desde los usuarios hasta los académicos y los reguladores, han exigido más transparencia en torno a los algoritmos de recomendación; por ejemplo, los que recomiendan determinada música o determinadas películas en las plataformas de streaming, o los que determinan lo que se ve en los feeds de las redes sociales.
+¿Serviría de algo publicar el código fuente del recomendador? ¿Necesitamos en cambio datos agregados de interacción de los usuarios? ¿O quizá métricas para distintos tipos de contenido o de resultados? No estoy seguro de que sepamos todavía qué es la “transparencia”, así que pedí a los participantes de un taller con miembros de la industria, la academia y la sociedad civil que me dijeran qué les gustaría saber en sus sueños más salvajes, libres de problemas de privacidad y secreto.
+Hay una presión creciente por algún tipo de transparencia algorítmica. Como dijo Alan Rusbridger, miembro de la Junta de Supervisión de Facebook,
+recientemente en The Guardian
+“En algún momento vamos a pedir ver el algoritmo, estoy seguro”. Pero su frase siguiente va al centro del asunto: “Si lo entenderemos cuando lo veamos es otra cuestión”.
+En cierto sentido, no hay nada misterioso en los algoritmos que usan los sistemas de recomendación de las plataformas. YouTube ha publicado artículos técnicos detallados (por ejemplo,
+“Recommending What Video to Watch Next: A Multitask Ranking System”
+y
+“Latent Cross: Making Use of Context in Recurrent Recommender Systems”
+), Facebook ha publicado entradas técnicas en su blog (por ejemplo,
+“How Does News Feed Predict What You Want to See?”
+y
+“Recommending items to more than a billion people”
+), y hay muchas descripciones de otros sistemas, como
+Google News
+o el sistema de personalización de
+The New York Times
+.
+Aunque hay mucho ingenio en estas divulgaciones, hay poco de exótico en comparación con la investigación pública. Los sistemas de recomendación son en gran medida una tecnología abierta, aunque de cambio rápido.
+Aún se podría exigir ver el código de la plataforma. No está del todo claro dónde trazar la línea de lo que cuenta como “el algoritmo”, y la mera cantidad de código (quizá decenas de millones de líneas) dificultará la interpretación. En todo caso, el código en sí podría no resultar muy revelador sin los datos con los que funciona y las interacciones que de ellos resultan. La escala también es un problema en este punto. Incluso si pudiéramos resolver por arte de magia todos los problemas de privacidad, muy intensos, en torno al acceso a datos masivos de usuarios, un participante del grupo señaló que “YouTube y probablemente Facebook son demasiado grandes para que una sola persona entienda qué hace el algoritmo”.
+El código en sí podría no resultar muy revelador sin los datos con los que funciona y las interacciones que de ellos resultan.
+De hecho, un auditor algorítmico activo informó que “nadie que yo conozca reclama seriamente la transparencia del algoritmo real”. En cambio, “necesitamos transparencia sobre los resultados importantes, o sobre los antecedentes de esos resultados”.
+Las plataformas ya publican informes de transparencia (véanse, por ejemplo,
+los de Twitter
+y
+los de Google
+de transparencia), y la cantidad de métricas informadas ha aumentado de forma constante a lo largo de los años: no solo la moderación de contenidos y el ranking, sino también desde las solicitudes de las autoridades hasta las retiradas por derechos de autor. No es en absoluto sencillo interpretar estas cifras. Por ejemplo, ¿cuál es un valor “bueno” para el número de elementos retirados por una infracción concreta de la política? ¿O para el porcentaje de usuarios que vio cierto tipo de contenido? Investigaciones recientes
+sobre Twitter
+comparan los feeds cronológico y algorítmico, pero la presentación cronológica no es
+una referencia razonable
+para plataformas como Facebook, donde los usuarios no curan sus conexiones en la misma medida, ni para plataformas como YouTube, que podrían recomendar cualquier elemento en cualquier momento.
+Tampoco está claro si se están informando las cifras correctas. Desarrollar métricas es complicado, consume tiempo y es políticamente delicado para las plataformas. Tampoco les conviene necesariamente buscar problemas. Sería mucho mejor que alguien externo definiera qué se mide. Una forma de hacerlo sería proporcionar definiciones, pero los auditores externos podrían tomar mejores decisiones sobre qué medir si tuvieran acceso a datos internos. De hecho, el próximo Reglamento de Servicios Digitales de la UE incluye un
+requisito de auditoría independiente
+.
+¿Cuál es un valor “bueno” para el número de elementos retirados por una infracción concreta de la política? ¿O para el porcentaje de usuarios que vio cierto tipo de contenido?
+Como no todos pueden ser auditores, las plataformas también podrían ofrecer API de transparencia: formas estandarizadas y automatizables de consultar qué se comparte y en qué se hace clic. Estas permitirían consultas agregadas de tipos específicos, quizá protegidas mediante
+privacidad diferencial
+, pero lo que los investigadores externos realmente quisieran es poder hacer experimentos. La privacidad y el costo hacen que esta oportunidad siga limitada a un pequeño número de personas, pero hay una opción interesante: añadir cierta cantidad de ruido a los rankings de elementos. Con las herramientas de consulta adecuadas, esto permite probar en la práctica todas las políticas de recomendación contrafactuales a la vez, al menos si se registran suficientes datos sobre lo que hicieron los usuarios cuando se les presentaron estas opciones ligeramente modificadas. Es la generalización última de las pruebas A/B, y se ha desarrollado con mayor profundidad en
+algoritmos de bandidos para la evaluación offline
+. Es una idea muy prometedora, pero conviene tener en cuenta que no permitirá una evaluación contrafactual de efectos como la viralidad o los cambios en el comportamiento de los usuarios.
+Sin embargo, incluso este nivel de acceso podría no significar mucho para los usuarios. Hay una diferencia entre la “escrutabilidad” (la posibilidad de investigar y comprender) y la “
+transparencia
+”, o las divulgaciones con un propósito específico, como el control, la reparación o la rendición de cuentas. Los usuarios quieren saber por qué ven lo que ven, y los creadores de contenido quieren saber por qué reciben la distribución que reciben (o no reciben). La información sobre las políticas que guían las recomendaciones podría serles mucho más útil.
+Los usuarios quieren saber por qué ven lo que ven, y los creadores de contenido quieren saber por qué reciben la distribución que reciben (o no reciben).
+En esta línea, una de las sugerencias más interesantes vino de un participante de una plataforma en el taller. “Creo que lo más útil sería básicamente las actuaciones judiciales de lo que hacemos”, dijo. “Documentar qué estábamos mirando, documentar qué hacíamos cuando tomábamos decisiones”. Esta idea se inspira en los registros internos de cambios existentes y se modela según la forma en que los tribunales no pueden simplemente decidir un resultado, sino que deben justificar cuidadosamente su decisión. Por supuesto, nada es perfecto: este tipo de transparencia incentivará tomar ciertas decisiones en otros lugares.
+¿Quiere saber más?
+Lea el análisis de la directora de SRI, Gillian Hadfield, sobre
+por qué necesitamos una IA “justificable”, y no explicable
+.
+Explore otras entradas de
+la serie de blog de SRI sobre privacidad
+.
+Conozca los
+“cuatro conversaciones”
+que guían la investigación de SRI.
+Únase a un
+grupo de discusión de SRI
+.
+Jonathan Stray
+es investigador visitante en el
+Berkeley Center for Human-Compatible AI (CHAI)
+, donde trabaja en sistemas de recomendación (los algoritmos que seleccionan y ordenan contenidos en redes sociales, aplicaciones de noticias y tiendas en línea) y en cómo su funcionamiento afecta el bienestar y la polarización. También enseña ciencias de la computación y periodismo en la Escuela de Periodismo de Columbia. Stray lideró el desarrollo de
+Workbench
+, un sistema de programación visual para el periodismo de datos, y creó
+Overview
+, un sistema de código abierto para analizar conjuntos de documentos, destinado a periodistas de investigación. También ha trabajado como editor en The Associated Press, como redactor de The New York Times, Foreign Policy, ProPublica,
+MIT Tech Review
+, Wired, y como desarrollador de gráficos por computadora en Adobe Systems.
+Explorar artículos por etiqueta:
+IA
+Datos
+Economía
+Educación
+Ingeniería
+Ética
+Gobernanza
+Salud
+Derechos humanos
+En los medios
+Empleo
+Derecho
+Normatividad
+Privacidad
+Serie sobre privacidad
+Psicología
+Política pública
+Sistemas de recomendación
+Informes
+Talleres
+Artículos relacionados
+Destacado
+23 jun 2023
+Comentario
+Por qué Geoffrey Hinton está preocupado por el futuro de la IA
+23 jun 2023
+Comentario
+23 jun 2023
+Comentario
+24 may 2023
+Comentario
+La regulación de la IA en Canadá avanza. Esto es lo que debe venir después.
+24 may 2023
+Comentario
+24 may 2023
+Comentario
+16 may 2023
+Comentario
+Riesgo e incertidumbre: ¿qué debemos hacer con la IA?
+16 may 2023
+Comentario
+16 may 2023
+Comentario
+10 abr 2023
+Comentario
+Ojo con subirse al carro de la IA generativa
+10 abr 2023
+Comentario
+10 abr 2023
+Comentario
+23 mar 2023
+Comentario
+La alfabetización digital será clave en un mundo transformado por la IA
+23 mar 2023
+Comentario
+23 mar 2023
+Comentario
+21 mar 2023
+Comentario
+Los trabajos académicos escritos por IA sacan un notable: ¿es trampa?
+21 mar 2023
+Comentario
+21 mar 2023
+Comentario
+Gobernanza
+Serie sobre privacidad
+Privacidad
+Datos
+IA
+Sistemas de recomendación
+Jonathan Stray
+Jonathan Stray es investigador visitante en el Berkeley Center for Human-Compatible AI (CHAI), donde trabaja en sistemas de recomendación (los algoritmos que seleccionan y ordenan contenidos en redes sociales, aplicaciones de noticias y tiendas en línea) y en cómo su funcionamiento afecta el bienestar y la polarización. También enseña ciencias de la computación y periodismo en la Escuela de Periodismo de Columbia. Stray lideró el desarrollo de Workbench, un sistema de programación visual para el periodismo de datos, y creó Overview, un sistema de código abierto para analizar conjuntos de documentos, destinado a periodistas de investigación. También ha trabajado como editor en The Associated Press, como redactor de The New York Times, Foreign Policy, ProPublica, MIT Tech Review y Wired, y como desarrollador de gráficos por computadora en Adobe Systems.
+http://jonathanstray.com/me
+Anterior
+Anterior
+La líder de investigación de SRI Wendy H. Wong es nombrada miembro del College of New Scholars de la Royal Society of Canada
+Siguiente
+Siguiente
+El Schwartz Reisman Institute publica su plan estratégico 2021–24
+Contacto
+U of T
+U of T Privacy
+© 2023 Schwartz Reisman Institute for Technology and Society. Todos los derechos reservados.

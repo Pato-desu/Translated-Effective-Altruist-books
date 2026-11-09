@@ -1,0 +1,812 @@
+Detección de categorías abiertas con garantías PAC
+Si Liu* 1Risheek Garrepalli* 2Thomas G. Dietterich2Alan Fern2Dan Hendrycks3
+Resumen
+La detección de categorías abiertas es el problema de detec-
+tar instancias de prueba “extrañas” que pertenecen a categorías
+o clases que no estaban presentes en los datos de
+entrenamiento. En muchas aplicaciones, detectar de forma fiable
+a estos extraños es esencial para garantizar la seguridad y
+la precisión de las predicciones sobre el conjunto de prueba. Por desgracia,
+no existen algoritmos que ofrezcan garantías teóricas sobre
+su capacidad para detectar extraños bajo supuestos
+generales. Además, aunque existen algo-
+ritmos para la detección de categorías abiertas, hay
+pocos resultados empíricos que informen directamente sobre las tasas de detección de extraños.
+Así pues, existen brechas significativas, teóricas
+y empíricas en nuestra comprensión de la detección de categorías abiertas. En este artículo damos
+un paso para cerrar esta brecha al estudiar
+una forma de abordar esta brecha mediante el estudio de una
+variante simple, pero de relevancia práctica, de la detección de categorías abiertas.
+En nuestro planteamiento disponemos de un conjunto de entrenamiento “limpio” que contiene solo
+se proporciona un conjunto de entrenamiento “limpio” que contiene
+solo las categorías objetivo de interés, y un
+conjunto de entrenamiento “contaminado” sin etiquetar que contiene
+una fracción de ejemplos extraños. Bajo el
+supuesto de que conocemos una cota superior de , 
+desarrollamos un algoritmo con garantías de tipo PAC
+sobre la tasa de detección de extraños, mientras buscamos
+minimizar las falsas alarmas. Los resultados empíricos sobre datos sintéticos
+y en conjuntos de referencia estándar muestran la
+eficacia de los regímenes en los que el algoritmo puede funcionar
+y proporciona una línea base para futuros avances.
+1. Introducción
+La mayoría de los sistemas de aprendizaje automático asumen, implícita o explícitamente,
+que su experiencia de entrenamiento es representativa de su experiencia
+de prueba. Este supuesto rara vez se cumple en los despliegues reales
+del aprendizaje automático, donde “incógnitas desconocidas”
+o datos “extraños” pueden surgir sin aviso. Ignorar
+*Igual contribución. 1Departamento de Estadística, Universidad Estatal de Oregón, Oregón, EE. UU.
+2Escuela de EECS, Universidad Estatal de Oregón, Oregón, EE. UU.
+3Universidad de California, Berkeley, California, EE. UU.
+EE. UU. Correspondencia a: Si Liu <lius2@oregonstate.edu >.
+Actas de la 35.ª Conferencia Internacional sobre Aprendizaje Automático
+Estocolmo, Suecia, PMLR 80, 2018. Copyright 2018
+por los autores. Ignorar la posibilidad de tales extraños puede acarrear graves problemas de seguridad
+en muchas aplicaciones y degradar de forma significativa
+la precisión de las predicciones sobre el conjunto de prueba en otras. Por ejemplo,
+considere una aplicación científica en la que un clasificador
+se entrena para reconocer categorías específicas de insectos en muestras de agua dulce
+con el fin de detectar cambios ambientales importantes
+(Lytle et al., 2010). Las muestras de prueba suelen
+contener cierta fracción de especímenes que pertenecen a especies
+no representadas en los datos de entrenamiento. Un clasificador que desconozca
+estas nuevas especies clasificará erróneamente los especímenes
+como pertenecientes a especies existentes. Esto producirá
+conclusiones científicas incorrectas.
+El problema de la detección de categorías abiertas consiste en detectar
+dichos ejemplos extraños en el momento de la prueba. Un algoritmo ideal
+para este problema garantizaría una tasa de detección de extraños especificada por el usuario
+(por ejemplo, 95 %), al tiempo que se intentaría minimizar la tasa
+de falsas alarmas. Por desgracia, ningún algoritmo existente ofrece tales
+garantías en condiciones generales. Además, las evaluaciones empíricas de los algoritmos existentes
+para la detección de categorías abiertas
+no suelen evaluar directamente las tasas de detección de extraños
+que quizá sean las más relevantes para las aplicaciones críticas para la seguridad
+aplicaciones. En conjunto, nuestra comprensión teórica y práctica de la detección de categorías abiertas
+es insuficiente desde una perspectiva
+de seguridad y precisión.
+¿Es posible lograr la detección de categorías abiertas con garantías?
+En este artículo damos un paso hacia la respuesta a esta pregunta,
+estudiando un planteamiento simplificado, pero de relevancia práctica.
+Para motivar nuestro planteamiento, consideremos el problema anterior de identificación de insectos.
+En el momento del entrenamiento es razonable esperar que se disponga de un conjunto de entrenamiento limpio
+que contenga solo las categorías de insectos de interés.
+En el momento de la prueba, una nueva muestra incluirá insectos de las categorías de entrenamiento
+junto con cierto porcentaje de insectos de nuevas categorías extrañas.
+Además, los científicos pueden tener estimaciones razonables de este porcentaje
+basadas en su conocimiento científico y su experiencia práctica.
+Nos gustaría garantizar que el sistema sea capaz de emitir una alarma
+para, digamos, el 95 % de los insectos de clases extrañas,
+y que cada alarma sea examinada por un científico.
+Al mismo tiempo, quisiéramos evitar en lo posible las “falsas alarmas”,
+ya que cada alarma requiere esfuerzo del científico.
+tantas “falsas alarmas” como sea posible, ya que cada alarma exige
+esfuerzo del científico.
+Para formalizar el ejemplo, nuestro planteamiento supone dos conjuntos de entrenamiento:
+un conjunto de datos de entrenamiento limpio que involucra un conjunto finito de categorías
+Detección de categorías abiertas con garantías PAC
+y un conjunto de datos contaminado que contiene una fracción 
+de extraños. Nuestra primera contribución es mostrar que, en este planteamiento,
+son posibles garantías teóricas si se conoce una cota superior de .
+cota superior de . En particular, damos un algoritmo que
+usa este conocimiento para ofrecer garantías probablemente aproximadamente
+correctas (PAC) para alcanzar una tasa de detección especificada por el usuario
+de extraños. Aunque conocer una cota superior no trivial
+de puede no ser siempre posible; en muchas situaciones
+será posible elegir un valor razonable a partir
+del conocimiento del dominio, de datos previos o inspeccionando una muestra de
+los datos de prueba.
+La idea clave de nuestro algoritmo es aprovechar los detectores de anomalías modernos
+que se entrenan con los datos limpios. Nuestro
+algoritmo combina las distribuciones de puntuación de anomalía sobre
+los datos de entrenamiento limpios y contaminados para derivar
+un umbral de alarma que logra la garantía deseada sobre
+la tasa de detección de extraños en nuevas consultas. En teoría,
+la garantía de tasa de detección se cumplirá con independencia de la calidad
+del detector de anomalías. La calidad del detector, sin
+embargo, tiene un impacto significativo en la tasa de falsas alarmas, con
+mejores detectores que conducen a menos falsas alarmas.
+Realizamos experimentos con datos sintéticos y conjuntos de referencia
+usando un detector de anomalías de última generación, el Isolation Forest
+(Liu et al., 2008). Variamos la cantidad de datos de entrenamiento,
+la fracción de datos extraños, junto con
+la precisión de la cota superior proporcionada a nuestro algoritmo.
+Los resultados indican que nuestro algoritmo puede alcanzar
+el rendimiento garantizado cuando hay datos suficientes disponibles,
+como predice la teoría. Los resultados también muestran que, para
+los casos de referencia considerados, el detector de anomalías Isolation Forest
+es capaz de sostener tasas de falsos positivos no triviales
+con datos suficientes. Los resultados también ilustran la dificultad inherente
+del problema con conjuntos de datos pequeños y/o valores pequeños
+de . En conjunto, nuestros resultados ofrecen una línea base útil
+para impulsar el trabajo futuro sobre la detección de categorías abiertas con
+garantías.
+2. Trabajo relacionado
+La detección de categorías abiertas está relacionada con el problema de la clasificación
+de una sola clase, que busca detectar valores atípicos respecto
+a una única clase de entrenamiento. Las SVM de una clase (OCSVM)
+(Schölkopf et al., 2001) son populares para este problema. Sin
+sin embargo, se ha observado que funcionan mal para la detección de categorías abiertas
+debido a una mala generalización (Zhou & Huang, 2003), lo que ha sido
+abordado en parte por trabajos posteriores (Manevitz & Yousef, 2002; Wu & Ye, 2009; Jin et al.,
+2004; Cevikalp & Triggs, 2012). Las OCSVM se han empleado
+en un entorno multiclase similar a la detección de categorías abiertas
+(Heflin et al., 2012; Pritsos & Stamatatos, 2013).
+1El código para reproducir nuestros experimentos puede encontrarse en
+https://github.com/liusi2019/ocd. Sin embargo, no existen mecanismos directos
+para controlar la tasa de detección de extraños de estos métodos, que es
+un requisito clave para nuestro planteamiento.
+Los trabajos sobre clasificación con opciones de rechazo o abstención
+(Chow, 1970; Wegkamp, 2007; Tax & Duin, 2008;
+Pietraszek, 2005; Geifman & El-Yaniv, 2017) permiten que los clasificadores
+se abstengan de hacer predicciones cuando no están seguros.
+Aunque están vagamente relacionados con la detección de categorías abiertas,
+estos enfoques no consideran directamente la posibilidad de categorías nuevas,
+sino que se centran en evaluar la confianza
+respecto a las categorías conocidas. Debido a su naturaleza
+discriminativa de mundo cerrado, es fácil construir escenarios en los que
+los clasificadores se equivocan con confianza ante categorías nuevas.
+donde esos métodos se equivocan con confianza sobre la clase
+de un extraño y no se abstienen.
+Diversos trabajos previos han abordado variantes de la detección de categorías abiertas.
+Entre ellos está el trabajo sobre la formalización del
+concepto de “espacio abierto” para caracterizar la región del espacio de características
+fuera del soporte del conjunto de entrenamiento (Scheirer
+et al., 2013). También se han desarrollado variantes de SVM,
+como la One-vs-Set Machine (Scheirer et al., 2013) y
+la SVM calibrada con Weibull (Scheirer et al., 2014). Otros
+trabajos han abordado la detección de categorías abiertas ajustando
+la frontera de decisión con datos sin etiquetar que contienen
+datos de categorías nuevas (Da et al., 2014). Se han propuesto también
+enfoques basados en métodos de vecinos más cercanos
+(Mendes Júnior et al., 2017). Ninguno de estos métodos, sin embargo,
+permite controlar directamente las tasas de detección de extraños,
+ni ofrece garantías teóricas.
+Asimismo, hay un interés reciente en la detección de categorías abiertas
+para redes neuronales profundas aplicadas a la clasificación de imágenes y texto
+(Bendale & Boult, 2016; Shu et al., 2017). Estos métodos
+suelen entrenar una red neuronal en un entorno estándar de mundo cerrado,
+pero luego analizan diversas activaciones de la red
+para detectar extraños. Otra línea de trabajo relacionada es
+la detección de instancias fuera de distribución, que es similar
+a la detección de categorías abiertas, pero supone que los datos de prueba
+provienen de una distribución completamente distinta de la
+distribución de entrenamiento (Hendrycks & Gimpel, 2017; Liang
+et al., 2018). Todo este trabajo está muy especializado en redes
+neuronales profundas y no ofrece control directo de las tasas de detección
+de extraños ni garantías teóricas.
+3. Planteamiento del problema
+Consideramos la detección de categorías abiertas en la que existe una
+distribución nominal de datos desconocida D0 sobre ejemplos etiquetados
+de un conjunto conocido de etiquetas de categoría. Recibimos como entrada
+un conjunto de entrenamiento nominal “limpio” S0 que contiene n i.i.d.
+extraídas de D0. En la práctica, S0 corresponderá a datos etiquetados
+seleccionados que contienen solo las categorías conocidas de interés.
+También recibimos como entrada un conjunto de datos “mezcla” sin etiquetar
+Sm que contiene m puntos extraídos i.i.d. de una distribución mezcla
+Detección de categorías abiertas con garantías PAC
+Dm. En concreto, la distribución mezcla Dm es
+una combinación de la distribución nominal D0 y una
+distribución extraña desconocida Da, que es una distribución sobre
+categorías nuevas (puntos de datos extraños). Suponemos que Da es
+estacionaria, de modo que todos los puntos extraños que aparecen como pruebas futuras
+también se extraerán de Da.
+En el momento del entrenamiento, suponemos que Dm es una distribución mezcla,
+con probabilidad de generar un punto de datos extraño a partir de Da
+desde Da, y con probabilidad 1 de generar un punto nominal.
+Nuestros resultados se mantienen incluso si las consultas de prueba provienen de una mezcla
+con un valor distinto de , siempre que los puntos de prueba extraños
+se extraigan de Da.
+Dados estos conjuntos de datos, nuestro problema consiste en etiquetar las instancias de prueba
+de Dm como “extraño” o “nominal”. En particular, queremos
+alcanzar una tasa de detección de extraños especificada, , que es
+la fracción de puntos de datos extraños en Dm clasificados como
+“extraños” (por ejemplo, 95 %). Al mismo tiempo, queremos que la tasa de falsos
+positivos sea pequeña, es decir, la fracción de puntos nominales
+mal clasificados como extraños.
+Nuestro planteamiento para este problema supone la disponibilidad de un
+detector de anomalías entrenado con S0 que asigna puntuaciones de anomalía
+a todos los puntos de datos tanto en S0 como en Sm. Intuitivamente, las
+puntuaciones de anomalía ordenan los ejemplos de prueba según
+lo anómalos que parecen respecto a los datos nominales (puntuaciones más altas
+indican más anomalía). Un detector ideal situaría
+todos los puntos de datos extraños por encima de todos los nominales, aunque
+en la práctica el orden no será tan limpio. Nuestro planteamiento
+etiqueta los datos de Sm seleccionando un umbral sobre las
+puntuaciones de anomalía y etiquetando como extraños todos los puntos con puntuación por encima del
+umbral, y como nominales el resto de los puntos.
+Nuestro reto clave es elegir un umbral que ofrezca una
+garantía sobre la tasa de detección de extraños.
+4. Algoritmos para la detección de categorías abiertas
+Para obtener garantías teóricas, nuestro algoritmo supone
+el conocimiento de la probabilidad de mezcla extraña que
+genera los datos mezcla Sm. Más adelante mostraremos que
+conocer una cota superior de es suficiente para obtener una
+garantía.
+Nuestro planteamiento se basa en considerar las funciones de distribución acumulada
+(CDF) de las puntuaciones de anomalía de un detector de anomalías
+fijo. Sean F0, Fa y Fm las CDF de
+las puntuaciones de anomalía para la distribución nominal D0, la distribución extraña
+Da y la distribución mezcla Dm, respectivamente.
+Dado que Dm es una simple mezcla de D0 y Da, podemos escribir
+Fm como
+Fm(x) = (1 − α) F0(x) + α Fa(x).
+De esto podemos derivar la CDF de Fa en términos de Fm y
+F0:
+Fa(x) = [Fm(x) − (1 − α) F0(x)] / α.
+Dada la capacidad de derivar Fa, es sencillo alcanzar
+una tasa de detección de extraños de 1 − q (por ejemplo, 95 %) seleccionando
+un umbral de puntuación de anomalía q que sea el cuantil q de Fa y
+lanzar una alarma en todas las consultas de prueba cuya puntuación de anomalía sea
+mayor que q.
+En realidad, no tenemos acceso a Fm ni a F0 y, por tanto,
+no podemos determinar Fa exactamente. Más bien, disponemos de las muestras
+Sm y S0. Así, nuestro algoritmo trabaja con las CDF empíricas
+F̂0 y F̂m, que son aproximaciones simples constantes por tramos,
+y estima una CDF empírica sobre los extraños:
+F̂a(x) = F̂m(x) − (1 − α) F̂0(x)
+: (1)
+Nuestro algoritmo calcula la estimación anterior de F̂a y la usa
+para seleccionar un umbral q̂ que sea el mayor umbral tal
+que F̂a(q̂) ≥ q, donde 1 − q es la tasa de detección objetivo de extraños.
+Esta elección minimiza el número de falsas alarmas.
+Los pasos de este algoritmo son los siguientes.
+Algoritmo 1
+1: Obtener las puntuaciones de anomalía de todos los puntos de S0 y Sm, denotadas
+x1, x2, ..., xk e y1, y2, ..., yn, respectivamente.
+2: Calcular las CDF empíricas F̂0 y F̂m.
+3: Calcular F̂a usando la ecuación 1.
+4: Devolver el umbral de detección
+q̂ = máx{u ∈ S : F̂a(u) ≥ q},
+donde S = {x1, x2, ..., xk, y1, y2, ..., yn}.
+Aunque F̂m y F̂0 son ambas CDF legítimas, la estimación
+de F̂a del paso 3 puede no ser una CDF legítima, porque es
+la diferencia de dos estimaciones ruidosas: puede no ser monótona e incluso
+ser negativa. Un buen enfoque técnico
+para tratar este problema es emplear la isotonización
+(Barlow & Brunk, 1972) y el recorte. La isotonización
+encuentra la función creciente monótona F̂a*
+más cercana a
+F̂a en error cuadrático. Para convertir F̂a en una CDF legítima, definimos
+Fa* = mín{máx{F̂a*, 0}, 1},
+donde los operadores mín y máx se aplican punto a punto
+a sus argumentos. Realizamos experimentos (mostrados en el material
+suplementario) para comprobar
+si usar Fa* en el paso 4 mejoraría el rendimiento
+del algoritmo global. Encontramos que no lo hacía.
+5. Garantía de muestra finita
+En el límite de datos infinitos (tanto nominales como de mezcla) y con
+conocimiento perfecto de , F̂a convergerá a la CDF extraña verdadera
+y nuestro algoritmo alcanzará la tasa de detección de extraños deseada.
+En esta sección consideramos el caso de datos finitos
+donde |S0| = |Sm| = n. Derivamos un valor para el tamaño de muestra
+n que garantiza, con alta probabilidad sobre extracciones aleatorias,
+Detección de categorías abiertas con garantías PAC
+de S0 y Sm, que la fracción 1 − q de los puntos extraños
+de prueba será detectada, donde ε es un error adicional
+causado por el tamaño finito de muestra n.
+Nuestra herramienta teórica clave es un resultado de muestra finita sobre la
+convergencia uniforme de las CDF empíricas (Massart,
+1990). Para usar este resultado, hacemos el supuesto técnico razonable
+de que las CDF nominal y extraña, F0 y Fa,
+son continuas. En lo que sigue, sea la tasa objetivo de detección de extraños
+, q la entrada del Algoritmo 1, q̂ el
+cuantil q estimado de la CDF extraña (paso 4 del Alg. 1),
+y ε un parámetro de error. El siguiente teorema da
+la complejidad muestral para garantizar que 1 − de los
+ejemplos extraños sea detectada usando el umbral q̂.
+Teorema 1. Sean S0 y Sm conjuntos de datos nominales y de mezcla
+que contienen n muestras i.i.d. de las distribuciones de datos nominales y de mezcla
+respectivamente. Para cualquier ∈ (0, 1 − q)
+y ∈ (0, 1), si
+n > 1
+2 ln 2
+1 p
+1 1
+22 
+2
+;
+entonces, con probabilidad de al menos 1 − , el Algoritmo 1 devolverá
+un umbral q̂ que logra una tasa de detección de extraños de al
+menos 1 − , donde = q + .
+La demostración está en el apéndice. Obsérvese que n crece
+como O(1
+/ε² log 1
+/δ). Por tanto, esta garantía es polinómica en todos
+parámetros relevantes, que creemos es la primera garantía de este tipo
+para la detección de categorías abiertas. El resultado puede generalizarse
+al caso en que n0 < nm; en la práctica, cuanto mayor sea
+la muestra de mezcla Smis, más fácil resulta estimar τq,
+porque esto proporciona más puntos extraños para estimar el
+cuantil q de Fa.
+El teorema nos da flexibilidad para fijar ε y q (el algoritmo
+de entrada) para lograr una garantía de 1−α. El parámetro ε
+controla un equilibrio entre el tamaño de la muestra y la tasa de falsas alarmas.
+Para minimizar la tasa de falsas alarmas, queremos que q sea grande
+(para obtener un umbral mayor), así que queremos fijar q cerca de α.
+Pero, a medida que q → α, ε → 0 y n → ∞. Para minimizar la muestra
+es decir n, queremos que q sea lo más pequeño posible, porque eso
+permite que ε sea mayor y, por tanto, que n sea menor. El
+valor óptimo de ε depende de cómo crece la tasa de falsas alarmas
+con τq, lo que a su vez depende de la forma relativa
+de F0 y Fa. En una aplicación de seguridad real, podemos estimar
+estas a partir de S0 y Sm, y elegir un valor adecuado de q.
+¿Qué pasa si no conocemos el valor exacto de θ? Si nuestro algoritmo
+usa una cota superior θ0 sobre el verdadero θ para calcular F̂a, podemos
+seguir ofreciendo una garantía. En este caso, además de los
+supuestos del Teorema 1, necesitamos un concepto de detector
+de anomalías admisible. Decimos que un detector de anomalías
+es admisible para un problema si las funciones de distribución acumulada de los puntajes de anomalía
+cumplen F0(x) ≥ Fm(x) para todo x ∈ R. La mayoría de los detectores razonables
+de anomalías serán admisibles en este sentido, ya que la distribución de los extraños suele concentrar más masa hacia
+valores de puntaje de anomalía más grandes que F0. De hecho, si esto
+no ocurre, hay poca esperanza, ya que efectivamente no hay
+ninguna señal que distinga entre extraños y nominales.
+Corolario 1. Considere ejecutar el Algoritmo 1 usando una cota superior
+θ0 sobre el verdadero θ. Bajo los mismos supuestos que
+el Teorema 1, si el detector de anomalías es admisible y
+n>1
+2ln2
+1−p
+1 1
+22 0
+02
+;
+entonces, con probabilidad de al menos 1−δ, el Algoritmo 1 devolverá
+un umbral τ̂q que logra una tasa de detección de extraños de al
+menos 1−α, donde α = q + ε.
+La demostración está en el Apéndice. Aunque podemos lograr una garan-
+tía usando una cota superior sobre θ0, el umbral devuelto
+será más conservador (menor) que si hubiéramos usado el
+verdadero θ. Esto dará lugar a tasas más altas de falsas alarmas, ya que
+más puntos nominales quedarán por encima del umbral. Por tanto, es
+deseable usar un valor de θ0 que esté lo más cerca posible de θ.
+6. Experimentos
+Realizamos experimentos para responder cuatro preguntas. Pre-
+gunta Q1: ¿qué tan precisa es nuestra estimación de τ̂q en función de
+n y α? Pregunta Q2: ¿qué tan holgadas son las cotas del Teo-
+rema 1? Pregunta Q3: ¿cuáles son los valores típicos de la tasa de falsas
+alarmas para distintas configuraciones de n y α en conjuntos de datos reales?
+Pregunta Q4: ¿cómo cambian estos valores observados si
+usamos una sobreestimación θ0 > θ?
+Todos nuestros experimentos emplean el detector de anomalías Isolation Forest
+(Liu et al., 2008), que ha demostrado
+ser un detector de vanguardia en estudios empíricos recientes
+(Emmott et al., 2013). En los Materiales Suplementarios
+mostramos resultados similares con el detector de anomalías LODA
+(Pevný, 2015).
+Para abordar Q1 y Q2, realizamos experimentos controlados
+con datos sintéticos. Los puntos de datos se generan a partir de normales de 9-
+dimensiones. Las dimensiones de la
+distribución nominal D0 se distribuyen de forma independiente como
+N(0;1). La distribución extraña es similar, pero con probabil-
+idad 0.4, 3 de las 9 dimensiones (elegidas uniformemente al azar)
+se distribuyen como N(3;1) y con probabilidad 0.6, 4 de las
+9 dimensiones (elegidas uniformemente al azar) siguen N(3;1).
+Esto garantiza que las anomalías no sean muy similares entre
+sí y modela la situación en la que hay muchos
+tipos distintos de objetos extraños, no solo una única clase extraña
+que forme un grupo compacto.
+En cada experimento, el conjunto de datos nominal y el conjunto de mezcla
+tienen el mismo tamaño n, y el conjunto de mezcla
+contiene una proporción α de puntos anómalos. Fijamos
+el cuantil objetivo q = 0.05. Los experimentos se
+Detección de categorías abiertas con garantías PAC
+0.650.70.750.80.850.90.951Recall
+5!=0.01100⋯10000100⋯10000!=0.05100⋯10000!=0.10100⋯10000!=0.20!=0.50)=100⋯10000
+Figura 1. Comparación de la exhaustividad (recall) lograda por τ̂q frente al oráculo
+exhaustividad de 0.95. Las barras de error son intervalos de confianza del 95%. Las configuraciones
+de n y α aumentan de izquierda a derecha, comenzando con α = 0.01 y
+n ∈ {100; 500; 1K; 5K; 10K} hasta α = 0.5 y n = 10K.
+se realizaron para n ∈ {100; 500; 1K; 5K; 10K} y α ∈
+{0.01; 0.05; 0.10; 0.20; 0.50}. Para la prueba, creamos dos
+conjuntos de datos grandes G0 y Ga, siendo G0 un conjunto puramente nominal
+y Ga un conjunto puramente extraño, y |G0| = |Ga| =
+20K. El algoritmo Isolation Forest calcula 1000 árboles de aislamiento
+completos sobre los datos nominales. Cada árbol se construye
+sobre una submuestra aleatoria del 20% de los datos limpios
+puntos. Calculamos los puntajes de anomalía para los puntos nominales
+mediante estimaciones out-of-bag, y los puntajes de anomalía para los mix-
+tos de mezcla, G0 y Ga, usando el bosque de aislamiento completo. Para
+cada combinación de n y α, repetimos el experimento
+100 veces. Medimos la fracción de extraños detectados (la
+“exhaustividad”) y la fracción de puntos nominales declarados
+extraños (la “tasa de falsos positivos”) aplicando la estimación τ̂q
+como umbral de los puntajes de anomalía en G0 y Ga.
+Para evaluar la precisión de nuestras estimaciones τ̂q (Q1), podríamos
+compararlas con los valores verdaderos. Sin embargo, esta comparación
+es difícil de interpretar, porque τ se expresa en la escala
+de los puntajes de anomalía, que son algo arbitrarios. En cambio,
+la Figura 1 muestra la exhaustividad lograda por τ̂q. Si τ̂q hubiera sido
+estimado perfectamente, la exhaustividad siempre sería 1−q = 0.95.
+Sin embargo, vemos que la exhaustividad a menudo es menor que 0.95, lo que
+indica que τ̂q está sobreestimado, especialmente cuando n y
+son pequeños. Este comportamiento lo predice nuestra teoría, donde
+vemos que los requisitos de tamaño de muestra crecen de forma inversa
+con α². Para α y n más grandes, la garantía de exhaustividad generalmente
+se cumple. La Figura 2 compara la tasa de falsos positivos del
+oráculo verdadero τq con la tasa de falsos positivos de la estimación τ̂q. Para
+cada combinación de α y n, tenemos 100 réplicas del
+experimento y, por tanto, 100 estimaciones τ̂ y 100 tasas FPR
+. Para cada una, la FPR verdadera se calcula usando G0.
+α=0.01 100⋯10000 100⋯10000 α=0.05 100⋯10000 α=0.10 100⋯10000 α=0.20 α=0.50 )=100⋯100 0.02 0.04 0.06 0.08 0.1 0.12 FPR Figura 2. Comparación de la FPR del oráculo con la FPR lograda por τ̂q.
+Las barras de error abarcan del percentil 25 al 75, con el punto azul
+que marca la mediana de los 100 ensayos. Los marcadores naranjas indican la
+FPR del oráculo. Las configuraciones de n y α aumentan de izquierda a derecha, comenzando
+con α = 0.01 y n ∈ {100; 500; 1K; 5K; 10K} hasta α = 0.5
+y n = 10K.
+Las barras de error resumen los 100 valores de FPR resultantes mediante
+la mediana y el rango intercuartílico. Vemos que para n
+y α pequeños, la FPR puede ser bastante distinta de la tasa del oráculo,
+pero para n y α más grandes, las estimaciones son muy buenas.
+Para evaluar la holgura de las cotas (Q2), para cada combi-
+nación de n y α, fijamos δ = 0.05 y calculamos el valor
+de α tal que 95 de las 100 ejecuciones alcanzaron una exhaustividad de al menos
+1−α (así, α logra empíricamente la garantía 1−δ). Luego
+calculamos ε = α − q y el tamaño de muestra requerido
+correspondiente n* según el Teorema 1. La Figura 3 muestra un
+Figura 3. El logaritmo del tamaño de muestra n* requerido por el Teorema 1 para
+garantizar la exhaustividad observada real frente al logaritmo del tamaño
+de muestra real n.
+Detección de categorías abiertas con garantías PAC
+gráfico de n* frente al n real. La distancia de estos puntos
+a la diagonal n* = n muestra que la teoría es bastante
+holgada, aunque se vuelve más ajustada a medida que n crece.
+00.050.10.150.20.250.30.35
+00.10.20.30.40.5FPR
+αLandsatpagebOCRLetter recogShuttleCovertype
+Figura 4. Tasas de falsos positivos en seis conjuntos de datos UCI en función de
+(q = 0.05, δ = 0.05).
+Experimentos con datos de referencia. Para abordar nuestras preguntas tercera y
+cuarta, realizamos experimentos en seis conjuntos de datos UCI
+multiclase: Landsat, Opt.digits, pageb, Shuttle,
+Covertype y MNIST. Además de estos, proporcionamos
+resultados para el conjunto de datos Tiny ImageNet. En cada conjunto multiclase
+dividimos las clases en dos grupos: nominal y
+extraño. Para Tiny ImageNet, entrenamos una red neuronal profunda
+clasificadora con 200 clases nominales y tratamos las restantes
+800 como extrañas. Las clases nominales para los conjuntos UCI son
+MNIST(1,3,7), Landsat(1,7), OCR(1,3,4,5,7), pageb(1,5),
+Letter recognition(1,3) y Shuttle(1,4). Generamos
+0.860.880.90.920.940.960.98
+00.10.20.30.40.5Exhaustividad!LandsatpagebOCRReconoc. de letrasShuttleCovertype
+Figura 5. Tasas de exhaustividad en seis conjuntos de datos de la UCI en función de (q=
+0:05,= 0:05)
+0.30.350.40.450.50.550.60.650.7
+0.050.150.250.350.45FPR!MNISTTiny ImagenetFigura 6. Tasas de falsos positivos en dos conjuntos de datos de imágenes en función
+de (q= 0:05;= 0:05).
+conjuntos de datos nominales y de mezcla para diversos valores de . El
+valor de n para cada conjunto de datos es 1532 para Landsat, 788 para reconocimiento
+de letras, 568 para OCR, 4912 para pageb, 5000 para Shuttle,
+13,624 para Covertype, 11,154 para MNIST y 10,000 para
+Tiny ImageNet. Como no podemos crear conjuntos de datos con
+n grande, no podemos medir el valor verdadero de q.
+Tras calcular las puntuaciones de anomalía tanto para los conjuntos de datos nominales como
+de mezcla, aplicamos el Algoritmo 1 dentro de una validación cruzada de 10
+pliegues. Dividimos al azar los puntos de datos de mezcla en
+10 grupos. Para cada pliegue, estimamos ^Fa y ^a
+a partir de 9 de los 10 grupos y luego puntuamos los puntos de mezcla del
+pliegue restante según ^a. En todos los demás aspectos, el
+protocolo experimental es el mismo que para los datos sintéticos.
+Para Tiny ImageNet, las puntuaciones de anomalía se obtienen aplicando
+un método de referencia (Hendrycks y Gimpel, 2017).
+Para responder a Q3, las Figuras 4 y 6 representan la tasa de falsos positivos en
+función de  para los conjuntos de datos de la UCI y de visión, respectivamente.
+Observamos que la FPR oscila entre 3.6% y 26.9% en la UCI
+según el conjunto de datos y el nivel de . Los conjuntos de datos de visión
+tienen una FPR más alta, especialmente MNIST, que tiene un
+gran número de clases ajenas que no se distinguen bien
+por el detector de anomalías. La FPR depende principalmente del
+dominio, porque el problema clave es qué tan bien el detector de anomalías
+distingue entre ejemplos nominales y ajenos.
+La tasa de falsas alarmas generalmente mejora a medida que  aumenta. En
+algunas aplicaciones, puede ser posible enriquecer Sm de modo que
+sea mayor en el conjunto de entrenamiento para aprovechar este
+fenómeno. Es interesante observar que, una vez que se ha calculado ^a,
+puede aplicarse a conjuntos de datos de prueba con valores distintos
+(o desconocidos) de .
+Las Figuras 5 y 7 representan la tasa de exhaustividad en función de  para
+los conjuntos de datos de la UCI y de visión. Fijamos q= 0:05 en estos
+experimentos. El Teorema 1 solo garantiza una exhaustividad de 1 q ,
+Detección de categorías abiertas con garantías PAC
+0.880.890.90.910.920.930.940.950.960.970.98
+0.050.150.250.350.45Exhaustividad
+!MNISTTiny Imagenet
+Figura 7. Tasas de exhaustividad en dos conjuntos de datos de imágenes en función de 
+(q= 0:05;= 0:05).
+00.050.10.150.20.250.30.350.4
+00.0020.0040.0060.0080.01α'	-αexhaustividad'	-exhaustividadfpr'	-fpr
+Figura 8. Cambio en la exhaustividad y en la tasa de falsos positivos en función de
+0 para seis conjuntos de datos de la UCI; 2f0:1;0:2;0:4g
+donde  depende de n. Por ello, es bueno ver que para
+tres de los dominios (Shuttle, Covertype y Landsat) de la
+UCI y para ambos conjuntos de datos de visión, la exhaustividad es muy cercana a
+1 q= 0:95. Estos son los dominios con los valores más grandes
+de n. El valor de  tiene un impacto mayor en la exhaustividad que
+en la FPR. Esto se debe a que el número efectivo de ejemplos ajenos
+de entrenamiento es n, que puede ser muy pequeño para algunos
+conjuntos de datos cuando = 0:1. Esto muestra que en aplicaciones como
+la detección de fraudes, donde  puede ser muy pequeño, el conjunto de mezcla
+Sm necesita ser muy grande.
+Para responder a Q4 sobre el impacto de usar un valor incorrecto
+0> , repetimos estos experimentos con 0=
++, para 2f0:002;0:004;0:006;0:008;0:010g. La Figura 8
+representa el cambio en la tasa de falsos positivos y en la exhaustividad en función de 0 . Se representan dos puntos por cada combinación
+de 0 y conjunto de datos: el cambio en la exhaustividad y el cambio en la
+FPR. Observamos que la exhaustividad aumenta ligeramente (en el
+rango de 0.01 a 0.05). Sin embargo, la tasa de falsos positivos
+aumenta en cantidades mucho mayores (de 0.01 a 0.336). Esto
+demuestra que es muy importante determinar el valor
+de  con precisión.
+7. Resumen
+Hemos dado un paso hacia la detección de categorías abiertas con garantías
+al proporcionar una garantía de tipo PAC sobre la probabilidad de detectar
+1  de los elementos ajenos en los datos de prueba. Esta
+es la primera garantía de este tipo bajo condiciones tan generales.
+Hemos mostrado que esta garantía se cumple en
+nuestros experimentos, aunque la garantía es algo laxa,
+especialmente en conjuntos de entrenamiento pequeños. Obtener una garantía re-
+quiere más datos que las garantías PAC estándar sobre la precisión
+esperada de predicción. Esto se debe a que debemos estimar el
+cuantil q de la distribución de puntuaciones de anomalía de los elementos ajenos,
+donde q suele ser bastante pequeño. No obstante, nuestros experimentos
+muestran que nuestro algoritmo da un buen rendimiento de exhaustividad y
+tasas no triviales de falsas alarmas en conjuntos de datos de tamaño razonable.
+Es importante señalar que la propia formulación de una garantía de tipo PAC
+sobre la probabilidad de detectar elementos ajenos requiere
+suponer que los elementos ajenos se extraen de una
+distribución bien definida Da. Aunque esto es apropiado en algunas
+aplicaciones, como la de encuestas de insectos descrita
+en la introducción, no es apropiado para entornos adversariales. En
+tales entornos, una garantía de tipo PAC no tiene
+sentido, y hace falta otra forma de garantía de seguridad que
+deba formularse.
+Para obtener la garantía, empleamos dos conjuntos de entrenamiento:
+un conjunto limpio que no contiene elementos ajenos y un conjunto
+contaminado (sin etiquetar) que contiene una fracción conocida  de
+elementos ajenos. Un importante problema teórico para investigaciones futuras
+es desarrollar un método que pueda estimar una cota superior ajustada
+de ^> . Creemos que esto es posible, pero aún no hemos
+encontrado un método que garantice que ^> .
+Nuestra garantía requiere más datos a medida que  se vuelve pequeño. Afor-
+tunadamente, cuando  es pequeño, puede ser posible en algunas aplicaciones
+aceptar tasas de exhaustividad más bajas, ya que la frecuencia de
+elementos ajenos será menor. Sin embargo, en aplicaciones críticas para la seguridad
+donde un único elemento ajeno no detectado supone una grave amenaza,
+hay pocas alternativas aparte de recoger más datos o
+permitir tasas más altas de falsos positivos.
+Agradecimientos
+Esta investigación fue financiada por una donación de Huawei, Inc.,
+y subvenciones de Future of Life Institute y de la NSF
+concesión 1514550. Las opiniones, hallazgos y conclusiones
+Detección de categorías abiertas con garantías PAC
+o recomendaciones expresadas en este material son las de los autores
+y no reflejan necesariamente las opiniones de los
+patrocinadores.
+A. Demostración del Teorema 1
+Supongamos que hay n variables aleatorias i.i.d. de la
+distribución con CDF F y sea ^Fn la CDF empírica
+calculada a partir de esta muestra. Entonces Massart (1990)
+muestra que
+P(pnsup
+xj^Fn(x) F(x)j>)2 exp( 22)(2)
+se cumple sin ninguna restricción sobre . Haciendo uso de esto,
+y suponiendo que usamos el mismo tamaño de muestra n tanto para la
+mezcla como para el conjunto limpio, para cualquier 2(0;1 q),
+queremos determinar qué tan grande debe ser n para
+garantizar que, con probabilidad de al menos 1 , nuestra estimación del cuantil ^q
+satisface Fa(^q)q+. Para lograrlo, queremos
+tener
+P(sup
+xj^Fa(x) Fa(x)j>):
+Tenemos
+P(sup
+xj^Fa(x) Fa(x)j>)
+=P(sup
+xj^Fm(x) (1 )^F0(x)
+ 
+Fm(x) (1 )F0(x)
+j>)
+=P(sup
+xj1
+(^Fm(x) Fm(x)) 
+1 
+(^F0(x) F0(x))j>)
+P((1
+sup
+xj^Fm(x) Fm(x)j+
+1 
+sup
+xj^F0(x) F0(x)j)>)
+P(f1
+sup
+xj^Fm(x) Fm(x)j>1
+2 g
+[f1 
+sup
+xj^F0(x) F0(x)j>1 
+2 g)
+=P(fsup
+xj^Fm(x) Fm(x)j>
+2 g
+[fsup
+xj^F0(x) F0(x)j>
+2 g):
+Usando (2), cuando
+n>1
+2ln2
+1 p
+1 (1
+)2(2 
+)2; tendremos
+P(sup
+xj^Fm(x) Fm(x)j>
+2 )1 p
+1 ;
+P(sup
+xj^F0(x) F0(x)j>
+2 )1 p
+1 :
+En este caso tendremos
+P(sup
+xj^Fa(x) Fa(x)j>)
+1 P(fsup
+xj^Fm(x) Fm(x)j
+2 g
+\\fsup
+xj^F0(x) F0(x)j
+2 g)
+1 (1 1 +p
+1 )2
+=:
+Ahora tenemos que, con probabilidad de al menos 1 ,
+j^Fa(x) Fa(x)j;8x2R:
+Si esta desigualdad se cumple, entonces para cualquier valor ^q tal que
+^Fa(^q)q, tenemos
+Fa(^q)^Fa(^q) +q+:
+Así que, con probabilidad de al menos 1 , cualquier ^q que satisfaga
+^Fa(^q)q satisfará Fa(^q)q+. 
+B. Demostración del Corolario 1
+Si 0, y si escribimos
+F0
+a(x) =Fm(x) (1 0)F0(x)
+0;
+entonces F0
+a sigue siendo una CDF válida, porque
+F0
+a( 1) = 0; F0
+a(1) = 1;
+y es fácil demostrar que F0
+a es monótonamente no decreci-
+ente.
+Pero
+F0
+a(x) Fa(x) =( 0)(Fm(x) F0(x))
+00;8x2R;
+y por esto, si dejamos ^0
+q denotar el umbral que
+obtenemos usando 0, tendremos Fa(^0
+q)F0
+a(^0
+q). Por
+la demostración del teorema anterior, sabemos que cuando n >
+1
+2ln2
+1 p1 (1
+)2(2 0
+0)2, tenemos con probabilidad de al menos
+1 , F0
+a(^0
+q)q+, y así tenemos Fa(^0
+q)q+.
+Referencias
+Barlow, RE y Brunk, HD. The isotonic regression prob-
+lem and its dual. Journal of the American Statistical
+Association , 67(337):140–147, 1972.
+Detección de categorías abiertas con garantías PAC
+Bendale, A. y Boult, T. E. Towards open set deep net-
+works. En 2016 IEEE Conference on Computer Vision
+and Pattern Recognition (CVPR), pp. 1563–1572, junio
+2016.
+Cevikalp, H. y Triggs, B. Efficient object detection using
+cascades of nearest convex model classifiers. En 2012
+IEEE Conference on Computer Vision and Pattern Recog-
+nition, pp. 3138–3145, junio de 2012.
+Chow, C. On optimum recognition error and reject tradeoff.
+IEEE Transactions on Information Theory, 16(1):41–46,
+ene. 1970. ISSN 0018-9448.
+Da, Qing, Yu, Yang, y Zhou, Zhi-Hua. Learning with
+augmented class by exploiting unlabeled data. En Pro-
+ceedings of the Twenty-Eighth AAAI Conference on Artificial
+Intelligence, AAAI’14, pp. 1760–1766. AAAI Press,
+2014.
+Emmott, Andrew F, Das, Shubhomoy, Dietterich, Thomas,
+Fern, Alan, y Wong, Weng-Keen. Systematic construc-
+tion of anomaly detection benchmarks from real data. En
+Proceedings of the ACM SIGKDD workshop on outlier
+detection and description, pp. 16–21. ACM, 2013.
+Geifman, Yonatan y El-Yaniv, Ran. Selective classifica-
+tion for deep neural networks. En Guyon, I., Luxburg,
+U. V., Bengio, S., Wallach, H., Fergus, R., Vishwanathan,
+S., y Garnett, R. (eds.), Advances in Neural Informa-
+tion Processing Systems 30, pp. 4885–4894. Curran As-
+sociates, Inc., 2017.
+Heflin, B., Scheirer, W., y Boult, T. E. Detecting and
+classifying scars, marks, and tattoos found in the wild. En
+2012 IEEE Fifth International Conference on Biometrics:
+Theory, Applications and Systems (BTAS), pp. 31–38,
+sept. 2012.
+Hendrycks, Dan y Gimpel, Kevin. A baseline for de-
+tecting misclassified and out-of-distribution examples in
+neural networks. En Proceedings of International Confer-
+ence on Learning Representations, 2017.
+Jin, Hongliang, Liu, Qingshan, y Lu, Hanqing. Face
+detection using one-class-based support vectors. En Sixth
+IEEE International Conference on Automatic Face and
+Gesture Recognition, 2004. Proceedings., pp. 457–462,
+mayo 2004.
+Liang, Shiyu, Li, Yixuan, y Srikant, R. Enhancing the
+reliability of out-of-distribution image detection in neural
+networks. International Conference on Learning Repre-
+sentations, 2018.
+Liu, Fei Tony, Ting, Kai Ming, y Zhou, Zhi-Hua. Isolation
+forest. En Data Mining, 2008. ICDM’08. Eighth IEEE
+International Conference on, pp. 413–422. IEEE, 2008. Lytle, David A, Martínez-Muñoz, Gonzalo, Zhang, Wei,
+Larios, Natalia, Shapiro, Linda, Paasch, Robert, Mold-
+enke, Andrew, Mortensen, Eric N, Todorovic, Sinisa, y
+Dietterich, Thomas G. Automated processing and identi-
+fication of benthic invertebrate samples. Journal of the
+North American Benthological Society, 29(3):867–874,
+2010.
+Manevitz, Larry M. y Yousef, Malik. One-class svms for
+document classification. J. Mach. Learn. Res., 2:139–154,
+marzo 2002. ISSN 1532-4435.
+Massart, P. The tight constant in the dvoretzky-kiefer-
+wolfowitz inequality. The Annals of Probability, 18(3):
+1269–1283, 1990. ISSN 00911798.
+Mendes Júnior, Pedro R., de Souza, Roberto M., Werneck,
+Rafael de O., Stein, Bernardo V., Pazinato, Daniel V.,
+de Almeida, Waldir R., Penatti, Otávio A. B., Torres,
+Ricardo da S., y Rocha, Anderson. Nearest neighbors
+distance ratio open-set classifier. Machine Learning, 106
+(3):359–386, mar. 2017. ISSN 1573-0565.
+Pevný, Tomáš. Loda: Lightweight on-line detector of
+anomalies. Machine Learning, (noviembre 2014), 2015.
+Pietraszek, Tadeusz. Optimizing abstaining classifiers using
+roc analysis. En Proceedings of the 22Nd International
+Conference on Machine Learning, ICML ’05, pp. 665–
+672, New York, NY, USA, 2005. ACM. ISBN 1-59593-
+180-5.
+Pritsos, Dimitrios A. y Stamatatos, Efstathios. Open-
+Set Classification for Automated Genre Identification, pp.
+207–217. Springer Berlin Heidelberg, Berlin, Heidelberg,
+2013. ISBN 978-3-642-36973-5.
+Scheirer, W. J., de Rezende Rocha, A., Sapkota, A., y
+Boult, T. E. Toward open set recognition. IEEE Transac-
+tions on Pattern Analysis and Machine Intelligence, 35
+(7):1757–1772, julio 2013. ISSN 0162-8828.
+Scheirer, W. J., Jain, L. P., y Boult, T. E. Probability
+models for open set recognition. IEEE Transactions on
+Pattern Analysis and Machine Intelligence, 36(11):2317–
+2324, nov. 2014. ISSN 0162-8828.
+Schölkopf, Bernhard, Platt, John C., Shawe-Taylor, John C.,
+Smola, Alex J., y Williamson, Robert C. Estimating
+the support of a high-dimensional distribution. Neural
+Comput., 13(7):1443–1471, julio 2001. ISSN 0899-7667.
+Shu, Lei, Xu, Hu, y Liu, Bing. DOC: deep open classifi-
+cation of text documents. CoRR, abs/1709.08716, 2017.
+Tax, D.M.J. y Duin, R.P.W. Growing a multi-class classi-
+fier with a reject option. Pattern Recognition Letters, 29
+(10):1565 – 1570, 2008. ISSN 0167-8655.
+Detección de categorías abiertas con garantías PAC
+Wegkamp, Marten H. Lasso type classifiers with a reject
+option. 2007.
+Wu, M. y Ye, J. A small sphere and large margin ap-
+proach for novelty detection using training data with out-
+liers. IEEE Transactions on Pattern Analysis and Ma-
+chine Intelligence, 31(11):2088–2092, nov. 2009. ISSN
+0162-8828.
+Zhou, Xiang Sean y Huang, Thomas S. Relevance feed-
+back in image retrieval: A comprehensive review. Mul-
+timedia Systems, 8(6):536–544, abr. 2003. ISSN 1432-
+1882.

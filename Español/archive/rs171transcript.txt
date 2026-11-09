@@ -1,0 +1,616 @@
+Rationally Speaking #171: Scott Aaronson sobre “La ética y la estrategia del intercambio de votos”
+Julia Galef: Bienvenidos a Rationally Speaking, el podcast donde exploramos las 
+fronteras entre la razón y el sinsentido. Soy su anfitriona, Julia Galef, y junto con 
+me acompaña el invitado de este episodio, el profesor Scott Aaronson. 
+Scott es un invitado recurrente de Rationally Speaking. La última vez que hablamos con 
+Scott, era profesor de Ciencias de la Computación en el MIT, en Cambridge, 
+Massachusetts. Desde entonces se mudó a Austin, Texas, donde ahora es 
+profesor de Ciencias de la Computación en la Universidad de Texas en Austin.
+Las investigaciones de Scott se centran en la computación cuántica y la complejidad computacional 
+teoría, pero escribe y bloguea sobre un montón de temas muy variados e interesantes, 
+temas, incluido uno del que vamos a hablar hoy, que es el intercambio de votos. 
+Scott, bienvenido de nuevo al programa.
+Scott Aaronson: Gracias. Es un gusto estar aquí.
+Julia Galef: Scott, quiero que sepa que recogí mi boleta para esta elección y ya he 
+llenado casi toda, incluidas las incontables propuestas electorales que aparecen en la 
+boleta de California. Y ya elegí a mis candidatos para el senado estatal, la alcaldía y todas esas 
+cosas, pero todavía no he votado oficialmente. Todavía no he entregado mi boleta. 
+Y es porque estaba esperando hablar con usted sobre el intercambio de votos.
+ Así que esta es una conversación personalmente decisiva para mí, y potencialmente para muchos de 
+mis oyentes, también. 
+Antes de seguir, ¿por qué no nos explica qué es el intercambio de votos y cómo 
+funciona.
+Scott Aaronson: Sí, el intercambio de votos es una idea que surgió por primera vez en las elecciones de 2000 en EE. UU. 
+elección, ya sabe, Bush contra Gore. 
+Acabo de dar una clase y hablar sobre Bush contra Gore, y los estudiantes 
+me recordaron que tenían 5 o 6 años cuando eso sucedió.
+Julia Galef: Vaya.
+Scott Aaronson: Para quienes no lo recuerdan, fue una elección increíblemente reñida, y muchos de 
+nosotros nos dimos cuenta en ese momento de que sería increíblemente reñida, de que el 
+colegio electoral podría importar mucho, y muchos temíamos lo que pasaría si 
+Bush ganara. Creo que la historia muestra que en gran medida teníamos razón al temerlo. 
+Queríamos hacer algo para ayudar a que Gore ganara la elección, y lo que nos dimos cuenta 
+fue que alrededor del 3% del electorado votaba por Ralph Nader, y que esos 
+votantes podían marcar la diferencia crucial.
+Ahora bien, eran votantes que normalmente preferían mucho más a Gore que a Bush, 
+pero sentían que Gore no era lo bastante liberal y querían registrar un 
+Página 2 de 18 voto de protesta. Ahora bien, la idea no fue mía, pero… varias personas podrían 
+haber llegado por su cuenta a esta idea. La idea era que las personas que viven 
+en estados indecisos, aun si son partidarios de Nader, votarán por Gore, pero 
+se encargarían de que alguien que vive en un estado seguro, como California o 
+Texas o algún otro, votara por Nader en su nombre.
+De este modo, ambas partes obtienen lo que quieren. El partidario de Nader que vive en 
+el estado indeciso recibe un voto por Nader emitido en su nombre, así que Nader obtendría 
+el mismo porcentaje de votos que habría obtenido de todos modos. 
+A algunas personas les preocupaba que obtuviera el 5% de los votos, lo que le daría 
+derecho a fondos federales de igualación en 2004. De hecho, solo obtuvo el 3% de los 
+votos, pero en ese momento la gente pensaba que podría obtener el 5%. 
+No se reducirían sus probabilidades de lograrlo, pero mientras tanto, ese 
+partidario de Nader no estaría ayudando a Bush a ganar en un estado indeciso.
+Mientras tanto, un partidario de Gore que vive en un estado seguro votará por Nader 
+en lugar de Gore, donde en realidad no importa para el resultado, pero 
+en efecto logra trasladar su voto por Gore a un estado indeciso donde sí importa 
+mucho más.
+Julia Galef: Claro. El votante de tercer partido, en este caso el votante de Nader, realmente no se preocupa 
+en qué estado se cuenta su voto, porque solo le importa como voto de protesta 
+y también como su aporte a la proporción total de votos para los fondos federales 
+de igualación. En cambio, al votante de Gore sí le importa mucho en qué estado 
+cuenta su voto, porque en algunos estados la competencia es tan nula que... 
+En realidad, probablemente deberíamos darles a los oyentes una idea de lo improbable que es 
+que su voto haga una diferencia en un estado como California. Quiero decir, está en el 
+orden de al menos uno en mil millones, ¿verdad?
+Scott Aaronson: Sí.
+Julia Galef: A diferencia de lo que pasa en un estado indeciso.
+Scott Aaronson: Sí, dependería de qué supuestos de modelado se usen, pero en general, 
+en los estados donde hay una diferencia de 10% o más, quiero decir, las encuestas tendrían que 
+estar equivocadas de forma muy grave para que hubiera alguna probabilidad de que su voto llegue a 
+importar.
+Julia Galef: Claro.
+Scott Aaronson: Mientras que en los estados indecisos, quiero decir, la medida en que su voto sí importa 
+puede estimarse, quizás, mirando lo que pasó en Florida en 2000, donde 
+toda la elección presidencial se decidió por unos 500 votos.
+Julia Galef: Claro. Volviendo a la historia de entonces, ¿usted creó un sitio para el intercambio de votos o 
+lo hicieron otras personas? ¿Y qué pasó?
+Página 3 de 18 Scott Aaronson: Cuando yo me involucré, ya existían sitios de intercambio de votos 
+ahí. 
+Pero vi que la gente presentaba argumentos en contra del intercambio de votos que 
+me parecían simplemente inválidos. Por ejemplo, la gente decía: "Bueno, ¿acaso no 
+los votantes de Bush podrían manipular el sistema?" Eso no tenía ningún sentido si uno lo pensaba 
+con cuidado. No hay nada que un votante de Bush gane haciéndose pasar por cualquiera de los 
+lados de esta transacción.
+Julia Galef: Espere. Desarrolle un poco más eso.
+Scott Aaronson: Sí, claro. Bueno, un votante de Bush podría hacerse pasar por partidario de Gore, digamos, 
+y entonces va a conseguir que la gente... Eso hará que más personas 
+voten por Gore en un estado indeciso, lo cual, por supuesto, es lo contrario de lo que el 
+votante de Bush querría.
+Julia Galef: Claro.
+Scott Aaronson: También podrían lograr que más personas votaran por Nader en un estado seguro, pero hace falta 
+tendría que haber una cantidad realmente, realmente masiva para que un estado seguro 
+se volviera realmente competitivo.
+Julia Galef: Claro.
+Scott Aaronson: Probablemente se notaría si estuviera pasando realmente a esa escala.
+Julia Galef: Claro. Lo único que podría hacer alguien que en el fondo fuera un partidario de Bush en 
+esa elección sería aumentar el porcentaje de votos para un candidato de 
+tercer partido, pero no puede aumentar las probabilidades de Bush.
+Scott Aaronson: Así es, sí. Un argumento más común que hacía la gente era que el 
+partidario de Gore y el de Nader no podrían confiar el uno en el otro. Cada uno tendría 
+un enorme incentivo para simplemente incumplir y votar por su candidato preferido, y 
+no habría ninguna manera de comprobarlo. 
+Es cierto que nuestro sistema de votación está diseñado para que sea difícil demostrar la manera 
+que usted votó ante otra persona. La razón de ello es que se supone que debe ser 
+difícil vender su voto a alguien o que alguien coaccione a otra persona para que 
+vote de cierta manera.
+Julia Galef: Claro.
+Scott Aaronson: En, creo, alrededor de la mitad de los estados, sí es legal enviar una foto de su 
+boleta a otra persona. En la otra mitad, es ilegal. Consulte la ley en su 
+estado. Pero incluso en los estados donde es legal, en principio, digamos, usted podría 
+marcar una boleta, enviar una foto y luego cambiar la boleta.
+Julia Galef: Claro.
+Página 4 de 18 Scott Aaronson: Al final del día, sí, hay que tener un nivel básico de confianza hacia la 
+persona con la que se intercambia, y por eso todos los sitios de intercambio de votos 
+recomiendan que de verdad hable con esta persona, por teléfono o 
+como sea, que la conozca como lo haría con un amigo, y asegúrese de que 
+tengan algún nivel básico de valores compartidos.
+Luego está el otro punto importante: incluso si uno creyera que había 
+digamos, un 50% de probabilidad de que la otra persona fuera a hacer trampa, el 
+intercambio en conjunto le conviene tanto que, con toda probabilidad, seguiría siendo a su 
+favor de hacerlo. 
+Por ejemplo, si usted vive en un estado seguro, entonces incluso una probabilidad del 50% de que alguien en 
+un estado indeciso vaya a votar por Gore en su nombre, es mejor que una probabilidad del 0% 
+probabilidad de un voto en un estado indeciso, que es, en primera aproximación, lo único 
+que importa de verdad.
+Julia Galef: Claro. Digamos que soy partidaria de Gore en California y hago un intercambio de votos con 
+alguien de Florida: básicamente no pierdo nada, ¿verdad?, porque mi voto 
+de todos modos no iba a contar en California.
+Scott Aaronson: Así es.
+Julia Galef: Estoy obteniendo esto gratis. Quizá lo que obtengo gratis sea solo una 
+probabilidad del 50% de que alguien vote por Gore en Florida, pero un 50% por nada es estupendo.
+Scott Aaronson: Claro. Ahora bien, para el partidario de Nader, el de Gary Johnson o quien sea 
+en Florida, el cálculo es un poco distinto.
+Julia Galef: Claro.
+Scott Aaronson: Si valoran que Hillary gane la elección sobre Trump en una medida comparable a 
+cuánto valoran que Gary Johnson obtenga cierta proporción de votos, entonces, de nuevo, 
+tendrán que tolerar cierta probabilidad de trampa.
+Julia Galef: Claro.
+Scott Aaronson: En fin, lo que hice en 2000 fue crear un sitio web llamado “In Defense of 
+NaderTrading”, donde simplemente exponía este tipo de argumentos. 
+Y en pocos días empecé a recibir cientos de correos electrónicos y a salir a dar entrevistas. 
+Era un tema de actualidad y, de algún modo, yo era una persona cualquiera que había creado una página, 
+pero a la que se podía acudir para hablar. Entonces 
+la gente me planteaba objeciones y yo les respondía en la página web.
+Julia Galef: Algunas más sensatas que otras.
+Scott Aaronson: Sí, sí. Así es. Esto fue antes de que existiera el concepto de blog, pero esta 
+página terminó funcionando como un blog. Dirigía a la gente hacia estos 
+sitios de intercambio de votos. 
+Página 5 de 18Por desgracia, mientras hacía esto, el principal sitio de intercambio de votos 
+, voteswap2000, creo, fue clausurado por el fiscal general del estado de California 
+. Les envió una carta de cese y desistimiento.
+Julia Galef: ¿Con qué fundamento?
+Scott Aaronson: Bueno, decía que esto facilitaba la venta de votos, lo cual es ilegal. 
+Entonces mucha gente dijo que aquello era un escándalo y que la clausura no se sostendría 
+en los tribunales. 
+Lo hacía un fiscal general republicano. Solo faltaban un par de 
+semanas para la elección, así que no había tiempo para litigarlo. Otros 
+sitios de intercambio de votos se cerraron por voluntad propia 
+a raíz de lo que había pasado en California, aunque en otros estados seguía siendo 
+legal o no se había tomado ninguna medida contra esos sitios.
+Julia Galef: Vaya. Dado lo reñida que fue la elección en Florida, es realmente impactante pensar...
+Scott Aaronson: Sí. Eso podría haber marcado la diferencia.
+Julia Galef: Sí. Si hubieran seguido funcionando unas semanas más.
+Scott Aaronson: Sin duda podría haber marcado la diferencia, sí.
+Julia Galef: Vaya.
+Scott Aaronson: Sí. Eso es lo que entendimos en ese momento: que podía decidirse por solo unos pocos 
+miles de votos. No imaginaba que terminaría en 500 votos, pero 
+podía quedar en una cifra muy pequeña. 
+Hubo 100.000 personas que votaron por Nader en Florida. Piénselo. Si 
+hubiéramos llegado al 1% de ellas, habría cambiado el resultado.
+Julia Galef: Vaya.
+Scott Aaronson: Bueno, lo intentamos. Llegamos a algunos miles de personas en todo el 
+país, incluidas unas cuantas centenas en Florida, y no fue suficiente.
+Julia Galef: Sí.
+Scott Aaronson: Di todas esas entrevistas en las que quería hablar de teoría de juegos, 
+pero la pregunta que todos querían hacerme era solo sobre legalidad: “¿Me 
+van a meter en la cárcel si hago esto?”
+Julia Galef: Entonces… hablando de legalidad, ¿cómo ha cambiado esa situación 
+desde la elección de 2000?
+Scott Aaronson: Excelente pregunta. Ha cambiado radicalmente. 
+Página 6 de 18En aquel momento, lo mejor que podía decir era: “Mire, no soy abogado. Soy un estudiante de posgrado en ciencias de la 
+computación. Si no es legal, claramente debería serlo.” Podía dar 
+muchísimos argumentos morales para eso.
+Julia Galef: Sí. Definitivamente quiero hablar de la ética del intercambio de votos, pero dejemos 
+eso para un momento, después de que veamos la ley.
+Scott Aaronson: Por supuesto, tampoco podía garantizarle a nadie que no terminaría en un tribunal 
+por intercambiar votos ni por crear un sitio de intercambio de votos. 
+Ahora bien, quienes manejaban ese sitio de intercambio de votos en 2000 presentaron una demanda 
+al respecto y, finalmente, en 2007, el Tribunal de Apelaciones del Noveno Circuito la resolvió 
+con una decisión notable, llamada Porter v. Bowen. Vale la pena 
+leerla completa, pero lo que dice esa decisión, básicamente, es que intercambiar votos de la 
+forma en que lo hacían estos sitios es una actividad protegida por la Primera 
+Enmienda. 
+Estas personas simplemente estaban usando legítimamente su poder de voto y decidieron 
+votar de forma estratégica.
+No es en absoluto lo mismo que comprar o vender un voto, o cambiar un voto por un 
+bien o servicio material. Es, más bien, cambiar un voto por otro voto de una 
+manera no exigible. En ese sentido, no es muy distinto de lo que 
+hacen los miembros del Congreso todo el tiempo.
+Julia Galef: Claro.
+Scott Aaronson: Esa decisión no procesó al fiscal general de California por lo que había 
+hecho. Le concedió inmunidad, porque dijo: “En el momento en que lo hizo, 
+la legalidad del intercambio de votos no estaba claramente establecida”, pero también 
+dijo: “De ahora en adelante, el intercambio de votos está protegido”. Dio a la gente la seguridad 
+de que no será castigada, ni por intercambiar votos, ni por crear 
+un sitio web que facilite el intercambio de votos, ni por nada de eso.
+Mientras esta resolución se mantenga, y en este punto solo la Corte Suprema podría 
+revocarla, el intercambio de votos es legal.
+Julia Galef: Hoy hay sitios que facilitan el intercambio de votos para partidarios de Clinton 
+que quieren cambiar con un votante de Johnson o de Stein en un estado indeciso?
+Scott Aaronson: Ajá, sí. Déjeme pensar. Hay uno que se llama “Trump traders”. Ah, perdón, hay 
+también uno llamado “makeminecount.org”.
+Julia Galef: Estuve viendo Make Mine… Ah, iba a decir su lema. Adelante.
+Scott Aaronson: Ah, sí. Era: “Todos ganan excepto Trump”.
+Julia Galef: Sí, ese es el que estaba mirando.
+Página 7 de 18Scott Aaronson: ¿Lo revisó?
+Julia Galef: Sí, un poco. ¿Tiene alguna recomendación? ¿Hay alguno mejor que los 
+demás?
+Scott Aaronson: No lo sé realmente. La verdad es que me inscribí en Make Mine Count. 
+No creo que me hayan dado nunca una pareja. Parece que los votantes de Johnson en 
+estados indecisos son probablemente el recurso escaso de este mercado.
+Julia Galef: Claro.
+Scott Aaronson: Es un poco como cuando un bar tiene más clientes de un género que de otro. Parece 
+que el mercado probablemente está sesgado hacia los partidarios de Hillary en los estados seguros, 
+lo que podría significar que se contemplen acuerdos en los que un 
+voto por Hillary en un estado indeciso se cambie por varios votos por Johnson en estados 
+seguros.
+Julia Galef: Ah, interesante.
+Scott Aaronson: Creo que es perfectamente plausible considerarlo.
+Julia Galef: Me pregunto si los sitios están organizando cosas así. Yo lo haría sin dudarlo.
+Scott Aaronson: No sé si realmente lo están organizando. En fin, le puedo contar lo que hice yo.
+ Solo escribí una entrada de blog al respecto y, gracias a ella, recibí una oferta de 
+cambio de un libertario de Ohio, profesor de estadística allí, así que me dijo que 
+votará por Hillary si yo voto por Gary Johnson en Texas en su nombre. Lo acordamos 
+, excepto que ahora Trump lo está haciendo tan mal, afortunadamente, creo, que 
+parece que incluso Texas podría estar volviéndose competitivo.
+Julia Galef: Sí, esta elección es tan inédita.
+Scott Aaronson: Sí, lo es. Realmente lo es. Él y yo lo hablamos por teléfono hace apenas una semana y 
+nuestro acuerdo es que, si la noche antes de la elección decidimos que Texas es 
+realmente un estado indeciso, entonces él me liberará para que los dos votemos por Hillary.
+Julia Galef: ¿Necesita un respaldo?
+Scott Aaronson: ¿Perdón?
+Julia Galef: ¿Necesita una persona de respaldo con quien intercambiar en caso de...?
+Scott Aaronson: Oh, bueno, sí, supongo que podría averiguar si otra persona quisiera ser mi respaldo. 
+Bueno, pero mire, si Texas es realmente un estado indeciso, entonces debería votar 
+por Hillary y listo.
+Julia Galef: Ah, claro. Así es.
+Página 8 de 18Scott Aaronson: Él va a votar por Hillary de todos modos, pero si decidimos que Texas es realmente 
+competitivo, entonces me liberará para votar por Hillary; de lo contrario, votaré por 
+Johnson.
+Julia Galef: Claro, así que ÉL necesita un respaldo.
+Scott Aaronson: Sí, claro. Así es.
+Julia Galef: Podríamos organizarle un respaldo a él por medio de usted.
+Scott Aaronson: Ajá.
+Julia Galef: Un oyente podría escribirle, ofrecerse como respaldo, y luego usted podría pasarlo 
+a su pareja.
+Scott Aaronson: Sí, es cierto. Debo decir que escribí un blog sobre esto. Por supuesto, Trump lo está haciendo 
+muy mal. Todos los mercados de predicción le dan a Hillary alrededor de un 90% de 
+probabilidades de ganar.
+Julia Galef: Sí, aunque...
+Scott Aaronson: Me alegra, pero al mismo tiempo, una probabilidad del 10% de que gane Trump, creo, 
+sigue siendo un riesgo mayor del que queremos asumir.
+Julia Galef: Sí. Yo también siento que… no apostaría a un 50-50 a que gane Trump, pero 
+aun así siento que las cosas son lo bastante volátiles esta vez como para que no me 
+confíe demasiado, a pesar de las probabilidades actuales.
+Scott Aaronson: Así es. Creo que es bueno no confiarse, y creo que, aunque parezca probable 
+que Hillary gane, el intercambio de votos sigue siendo una muy buena 
+idea, porque queremos dejar lo más claro posible que él va a 
+perder, dada la amenaza que, a mi juicio, representa para el país.
+Julia Galef: Hablemos de algunas de las cuestiones estratégicas del intercambio de votos y 
+después pasemos a la ética.
+Scott Aaronson: Sí, claro.
+Julia Galef: Usted ya habló de la preocupación de que, ¿qué pasa si la otra persona no 
+cumple su parte del trato? 
+Una preocupación menos común que he escuchado es que ayudar 
+al candidato de un tercer partido a conseguir financiamiento y legitimidad, etc., podría parecer 
+algo bueno para el votante de Clinton, aunque aun así prefiera que 
+gane Clinton.
+  Sin embargo, si se mira el juego a largo plazo: si yo, en esta elección, ayudo a Gary 
+Johnson a obtener legitimidad y financiamiento, y estoy feliz de hacerlo, sobre todo 
+porque ayuda a que gane Clinton, entonces en la próxima elección o en la siguiente, ¿no aumenta 
+Página 9 de 18el poder del candidato de un tercer partido para actuar como espoleta? ¿Y así no nos enfrentamos 
+a un problema aún mayor la próxima vez que en esta?
+Scott Aaronson: Quiero decir, considero que los candidatos de terceros partidos son muy, muy difíciles de predecir en la 
+política estadounidense. No parece haber mucha continuidad en ellos 
+de una elección a otra. A veces alguien tiene su momento de gloria 
+y obtiene cierto porcentaje de votos, y luego, si la misma persona 
+se postula de nuevo dentro de cuatro años, la gente ya perdió el interés y obtiene una 
+proporción de votos mucho menor.
+Julia Galef: ¿Los fondos de contrapartida van a Johnson o al Partido Libertario?
+Scott Aaronson: Creo que van para el partido que obtenga el 5%.
+Julia Galef: Bueno. Entonces todavía podrían...
+Scott Aaronson: Obtener fondos federales de contrapartida sería una victoria irónica para el 
+Partido Libertario.
+Julia Galef: ¡Es cierto!
+Scott Aaronson: Podrían argumentar: “Bueno, este es el sistema tal como está y tenemos 
+que trabajar dentro de él”, y cosas así. 
+Quiero decir, la verdad es que creo que sería estupendo que hubiera más voces en 
+nuestro diálogo político. Creo que, lamentablemente, nuestro sistema tiene un equilibrio 
+increíblemente fuerte hacia dos partidos. Se ve, por ejemplo, en que Ralph 
+Nader obtuvo el 3% de los votos, ¿verdad? Lo cual bastó para inclinar la elección de 
+Gore a Bush, pero por lo demás es minúsculo. Luego Bernie Sanders, 16 años después, 
+con una plataforma bastante parecida a la de Nader, estuvo a punto de derrotar a 
+Hillary; podría haber ganado la elección.
+Julia Galef: Claro.
+Scott Aaronson: Lo hizo dentro del Partido Demócrata. 
+Pat Buchanan, que se postuló con una plataforma de corte nativista, antiinmigrante y 
+demás, obtuvo el 1% de los votos en 2000, y creo que eso es lo que muchos vimos 
+en ese momento: que siempre será un 1% del electorado.
+Julia Galef: Claro.
+Scott Aaronson: Ahora tenemos a Trump, que se postuló con el mismo tipo de plataforma que Buchanan, pero 
+lo hizo dentro del Partido Republicano, y llegó, todavía de forma incómoda cerca, a 
+ser presidente. No creo que los candidatos de terceros partidos vayan a... Es 
+difícil decir que alguna vez vayan a obtener más en torno al 10%. El último 
+que lo hizo fue Ross Perot en 1992.
+Julia Galef: Claro.
+Página 10 de 18Scott Aaronson: Ni siquiera él obtuvo menos del 20%. Quiero decir, ¿existe una relación causal entre lo 
+que hacemos ahora y el fortalecimiento de los terceros partidos dentro de ocho años? Quiero 
+decir, no lo sé, quizá la haya. En todo caso, tanto con esta elección como con 
+la de 2000, siento que hay un interés tan prioritario en evitar un 
+mal resultado que podemos preocuparnos por lo que pase dentro de cuatro años cuando 
+lleguemos a eso.
+Julia Galef: Sí, buen punto.
+ Para preguntar por una cosa más a largo plazo… incluso si uno sostiene que 
+las consideraciones a largo plazo quedan subordinadas a las de corto plazo en este caso…
+Scott Aaronson: Subordinadas en cierto sentido, sí.
+Julia Galef: Ay, por favor, esa palabra va a quedar arruinada.
+Scott Aaronson: Perdón, perdón.
+Julia Galef: ¿Qué hay de los incentivos perversos que esto crea? En algunos casos se le llama 
+comercio moral. Cuando alguien toma una decisión que usted considera 
+moralmente incorrecta, como votar por el candidato que, según usted, causará 
+un peor resultado que otro candidato. Al ofrecerle intercambiar votos, 
+¿no está creando el incentivo para que la gente sea, en este caso, votante de un tercer partido 
+a largo plazo, porque eso le da mucho poder de negociación?
+Scott Aaronson: Bueno, creo que hay una palabra para este tipo de cosas, y la palabra es “política”.
+ Creo que yo diría que, por supuesto, no soy alguien a quien nadie confundiría 
+con un político: soy un científico computacional teórico, y me conformo muy contento 
+con tener las habilidades sociales para salir adelante en mi propia vida sin tratar de 
+guiar a nadie más. 
+Mi entendimiento es que la esencia misma de la política es tratar de hacer 
+acuerdos y pactos mutuamente beneficiosos, en realidad, con personas cuyos 
+valores pueden ser muy distintos de los propios. Si todos tuvieran los mismos valores, 
+entonces no habría necesidad de un proceso político.
+Julia Galef: Bueno, estoy de acuerdo. De hecho, creo que hay una objeción que me molesta mucho: la de que 
+la gente dice que el intercambio de votos está mal porque “todos deberían votar por 
+el candidato que realmente prefieren”. 
+Podría entender esa postura, pero contradice totalmente lo que mucha 
+gente dice cuando argumenta: “Bueno, podría preferir a Johnson, pero estoy votando 
+de forma estratégica, así que voto por el candidato que, en general, creo que es mejor, 
+dadas tanto mis preferencias como sus posibilidades de ganar”. 
+En la práctica, muchísimas personas sí votan de forma estratégica y defienden hacerlo, 
+así que no me parece una buena objeción al intercambio de votos.
+Página 11 de 18Scott Aaronson: Claro. Quiero decir, los presidentes y los miembros del Congreso que elegimos 
+se comportan estratégicamente todo el tiempo, constantemente. Dicen: 
+“Bueno, si quieren este proyecto de ley de gasto agrícola, entonces tiene que incluir esta cláusula 
+sobre este asunto completamente no relacionado.” Esto pasa todos los días en el Congreso. 
+Lo cual no es necesariamente bueno, pero son estas las personas por las que 
+votamos. Creo que cierto grado de formación de coaliciones es inevitable en una 
+democracia. Si todos tuvieran los mismos valores que usted, no habría 
+necesidad de formar una coalición.
+Julia Galef: Claro.
+Scott Aaronson: Usted simplemente ya estaría de acuerdo.
+Julia Galef: Pero lo que yo intentaba señalar con mi pregunta anterior no era 
+sobre la ética de intercambiar con personas que tienen preferencias distintas a 
+las suyas. Era sobre afectar las preferencias de la gente en el futuro, porque 
+sepan que el intercambio de votos es una opción.
+ Personas que, de otro modo, quizá habrían votado estratégicamente por Clinton, o 
+por quien cada cual crea que es el candidato correcto, decidirían en cambio ser votantes de un tercer partido 
+porque saben que existe el intercambio de votos. Consciente o 
+inconscientemente.
+Scott Aaronson: Bueno, es posible, pero cuando se trata de preguntas sobre el comportamiento humano, yo 
+aplico un factor de atenuación muy, muy fuerte cuanto más lejos se llega en el 
+futuro.
+Julia Galef: Sí, lo respeto.
+Scott Aaronson: Hay tantas predicciones sobre lo que... Solo para poner otro ejemplo, 
+en 2000 hubo, de hecho, partidarios de Nader, bastantes, que estaban 
+argumentando: “Pues en realidad queremos que Bush gane la elección. No solo no nos 
+importa entregarle la elección a Bush, sino que queremos que gane.” ¿Por qué? 
+Porque Bush será tan malo que, obviamente, movilizará a todos para 
+un levantamiento popular que hará que el partido verde gane, o algo 
+por el estilo.
+Julia Galef: Vaya. Eso me suena muy conocido. Ese mismo argumento lo he oído de los 
+seguidores de Bernie.
+Scott Aaronson: Sí. Ese argumento, por llamarlo así, tiene de hecho una larga historia. Los comunistas 
+también lo creían, ¿verdad? Lo llamaban “agudizar las contradicciones”, que 
+en realidad había que oponerse a los reformistas liberales y hacer que las cosas fueran tan malas como fuera posible 
+para la gente trabajadora común, para que vieran que no tenían 
+otra opción que apoyar un verdadero levantamiento del proletariado.
+Julia Galef: Claro.
+Página 12 de 18Scott Aaronson: Este tipo de pensamiento tiene una larga historia, no diría que una historia distinguida, 
+pero sí una larga historia. 
+Hay toda clase de predicciones sobre lo que la gente podría o no hacer 
+dentro de años, que a menudo tienen un historial muy pobre. En este caso, no solo 
+fue elegido Bush, sino que fue reelegido en 2004. Entre 2000 y 
+2004 ocurrieron varias cosas. Los atentados del 11-S, la invasión de Irak, que 
+creo que nadie, de ningún bando, realmente predijo.
+Julia Galef: Sí.
+Scott Aaronson: Sí. Igualmente, ¿cuánta gente predijo a Trump o predijo 
+la situación en la que nos encontramos ahora, allá por 2012? Estas cosas son 
+bastante volátiles. 
+Por eso me concentro más en el objetivo inmediato de impedir que Trump 
+se haga con el control del país.
+Julia Galef: Sí. 
+La defensa de que el intercambio de votos lo practican los políticos todo el tiempo podría, de 
+otro modo, verse como una acusación contra el intercambio de votos. “Lo que para un hombre es modus 
+ponens, para otro es modus tollens…”
+Scott Aaronson: Supongo que sí.
+Julia Galef: Decir: “Pues el Congreso lo hace, así que está bien”. Otras personas podrían decir, 
+“Pues el Congreso lo hace, así que no está bien”.
+Scott Aaronson: Así que está mal.
+Julia Galef: Sí, o más bien no que esté mal, sino que deberíamos condenarlo tanto en el caso del 
+Congreso como en el de los ciudadanos particulares que votan en las elecciones. 
+¿Se trata solo de que “no es peor que lo que ya hacen los políticos”, o 
+se sostiene que lo que hacen los políticos está bien? ¿O se dice que 
+es mejor que lo que hacen los políticos?
+Scott Aaronson: Creo que definitivamente no es peor que lo que hacen los políticos.
+ Creo que lo que hacen los políticos no es nada bueno, sobre todo hoy en día, cuando nuestro 
+proceso político se ha vuelto cada vez más polarizado, y diría que un 
+bando a menudo mantiene a todo el proceso como rehén para conseguir las cosas 
+que quiere. 
+Por otro lado, diría también que incluso en el mejor de los casos, algún grado de 
+tratos y formación de coaliciones es probablemente inevitable en una democracia. Hay 
+probablemente nunca ha habido una democracia en la que este tipo de cosas no pasara. No es 
+algo que me preocupe ni de cerca tanto como me preocupan 
+Página 13 de 18las consecuencias morales de que gane Trump.
+Julia Galef: Claro.
+Scott Aaronson: Hay otro argumento moral que podría poner a prueba, a ver qué tal queda.
+Julia Galef: Claro.
+Scott Aaronson: Es este: bueno, digamos que somos amigos y acabamos de hacer un acuerdo privado 
+de intercambiar nuestros votos: yo votaré por el candidato preferido del otro, 
+y el otro votará por el mío. Entonces es difícil pensar en 
+alguien que considere eso inmoral. Son simplemente dos amigos que ejercen 
+su derecho a votar como quieran y lo hablan entre ellos. 
+Entonces el argumento es: ¿en qué se diferencia realmente si interviene una página web para 
+presentar a estas personas entre sí?
+Julia Galef: Sí, es una forma de argumento interesante que ya había visto. Desde luego 
+me parece convincente. 
+Pero puedo imaginar que son dos políticas distintas: una sería 
+si la gente quiere hacerlo en privado, entonces bien, no vamos a intervenir, 
+no hay nada malo en ello. Esa es por un lado. 
+La otra política sería respaldar o permitir esto a gran 
+escala e impersonal. 
+Me parece que las consecuencias son distintas en el segundo caso. Uno 
+podría creer que lo primero está bien porque en realidad no puede afectar al 
+proceso democrático, porque no va a ocurrir a gran escala. Pero si uno 
+intenta extrapolar de lo personal a lo impersonal, entonces nuestro 
+proceso democrático podría estar amenazado.
+No necesariamente respaldo ese argumento. Solo digo que no creo 
+que se pueda simplemente escalar el acto y suponer que todo el cálculo moral es 
+completamente el mismo al escalarlo. En parte, eso se debe a que las 
+consecuencias pueden ser muy distintas al escalarlo.
+Scott Aaronson: Claro. Pero creo que cada vez que se diga que este tipo de actividad está bien si 
+la gente lo hace aquí y allá, pero si de verdad usan internet para hablar entre 
+sí y se dan cuenta de que pueden hacerlo a gran escala, entonces hay que 
+frenarlo. Creo que hay problemas muy, muy serios sobre cómo una 
+sociedad democrática puede mantener ese tipo de equilibrio.
+Julia Galef: Sí.
+Scott Aaronson: Porque todo lo que la gente puede hacer, puede comentarlo en internet.
+ Por supuesto, nadie obliga a nadie a entrar en esas páginas. Lo único que se 
+Página 14 de 18pide es que quienes estén interesados puedan usarlas y que otras 
+personas lo toleren.
+Julia Galef: Sí. Esto me recuerda otra objeción que a veces he oído hacer 
+al intercambio de votos: que socava el papel del Colegio Electoral en nuestra 
+democracia. 
+Ahora bien, no soy una gran admiradora del Colegio Electoral, pero…
+Scott Aaronson: Sí. Es probablemente el que menos me convence de todos los argumentos, porque 
+confieso que creo que el Colegio Electoral debería socavarse. Quiero decir, dentro de 
+medios legales. 
+Pero creo que es un anacronismo. Creo que A, no tiene ningún sentido, y B, 
+no tiene ninguna relación real con lo que los fundadores del país realmente pretendían. Quiero 
+decir, cuando establecieron este sistema, el Colegio Electoral eran electores de verdad 
+que viajaban a caballo o como fuera para reunirse y luego sentarse a 
+deliberar. En el momento en que los elegían como electores, no sabían 
+ellos mismos a qué candidato preferían.
+Ahora tenemos un sistema en el que el Colegio Electoral básicamente sirve para 
+imponer una especie de mayoría escalonada. En casi todos los estados, casi todos los 
+electores de ese estado están legalmente obligados a votar por el candidato de su partido 
+o, en la práctica, van a votar por el candidato de su partido. Uno 
+efectivamente tiene solo una mayoría escalonada. 
+Una mayoría escalonada es un sistema muy malo comparado con tener un voto popular 
+directo, por un par de razones.
+Una es la razón bien conocida: concentra una cantidad desmesurada de 
+atención en los asuntos de Ohio, Florida, Carolina del Norte y algunos otros 
+estados. Esos estados se ven inundados de anuncios, políticos y demás. 
+Mientras tanto, hay muchos otros estados cuyos problemas básicamente quedan 
+ignorados porque no importan en el Colegio Electoral. No son estados 
+decisivos.
+También hay un segundo problema con el sistema de mayoría escalonada, y es que 
+es mucho, mucho más vulnerable a pequeños errores o pequeñas cantidades de ruido que una 
+mayoría directa. Para poner un ejemplo, la elección de 2000 se decidió finalmente 
+decidida por unos 500 votos en Florida, donde en realidad ni siquiera sabemos 
+cuántos votos fueron exactamente, porque había un recuento en curso, que estaba 
+cambiando sustancialmente la situación antes de que la Corte Suprema interviniera para 
+detenerlo. Digamos que fue un empate estadístico en Florida; todo depende de las papeletas que 
+se cuenten y cuáles no.
+Mientras tanto, el voto popular nacional fue en realidad mucho menos reñido. Fue 
+de hecho por 500.000 votos a favor de Al Gore. Se puede hacer la cuenta, 
+y lo que se encuentra es que un voto popular directo es mucho menos probable que esté en el 
+margen de un empate estadístico que lo que lo estará una mayoría escalonada.
+Página 15 de 18Julia Galef: ¿Por qué es eso algo bueno? ¿Por qué es una característica deseable de un sistema de votación?
+Scott Aaronson: Bueno, porque uno querría que el resultado de una elección no quedara 
+en duda por una situación del tipo de la Florida de 2000. Se podría decir que 
+tuvimos suerte en esa ocasión. Tuvimos mala suerte en que Bush llegara a la presidencia, 
+pero tuvimos suerte en que Gore se hiciera a un lado.
+b Reconoció la derrota, aunque, en justicia, quizá no debía haberlo hecho, y 
+así evitó el tipo de cosas que, históricamente, podrían llevar a una guerra civil.
+Julia Galef: Claro. Me preguntaba, mientras se describían los defectos del Colegio 
+Electoral, si de verdad quiero respaldar la política general 
+de que deberíamos socavar una institución nacional porque pensamos que es mala. 
+Tengo reservas sobre esa política en general, pero creo que en este caso, los medios… 
+Creo que estoy de acuerdo con socavar instituciones nacionales siempre que los medios con 
+los que lo hacemos sean legítimos, transparentes y éticos, y creo que 
+este caso lo es.
+Scott Aaronson: Claro. Me considero un estadounidense patriota. Quiero lo que es bueno para el 
+país. Ni siquiera sugiero que nadie contemple romper la 
+ley aquí. Hablo de hacer algo completamente compatible con 
+la ley. 
+Entonces podrían decir: “Oh, pero está yendo en contra de lo que querían los Padres Fundadores” 
+o lo que sea, pero tampoco voy en contra de eso. Solo voy 
+en contra de este sistema irracional en el que terminó convirtiéndose y con el que estamos atascados 
+ahora mismo, que en realidad no es como se estableció originalmente.
+Julia Galef: Casi nos queda sin tiempo, pero antes de cerrar quería preguntar sobre una 
+cita que vi. No recuerdo si estaba en el blog o en una entrevista que se concedió, 
+pero se hablaba de lo que gustaba del intercambio de votos, y se decía que 
+recordaba a combinar la mecánica cuántica con la relatividad general. ¿Puede 
+elaborar eso?
+Scott Aaronson: Bueno, fue solo un comentario medio en broma que hice en 2000, de que había 
+dos tipos distintos de locura aquí. Una es la locura del Colegio 
+Electoral, que podría decirse que es una locura remediable pero a la que estamos 
+sometidos, y la otra es la locura que siempre surge cuando se 
+tiene una elección con tres o más candidatos. Este es el tema del teorema de Arrow, 
+por ejemplo, que nunca se va a tener una forma completamente 
+racional de celebrar una elección entre tres o más candidatos. 
+En efecto, estas dos clases de locura se cancelan mutuamente, en 
+cierto sentido.
+Julia Galef: Para producir el mundo profundamente sensato que vemos.
+Scott Aaronson: Claro. Eso no hay que tomarlo demasiado en serio.
+Página 16 de 18Julia Galef: Genial. Bueno, como comentario final, solo diré que había estado considerando 
+inscribirme en “Make Mine Count”, y definitivamente me inclinaba a favor de hacerlo 
+antes de este episodio. Ahora sigo a favor del intercambio de votos, pero creo 
+que, como se ha señalado, todo el proceso está algo limitado por los partidarios de 
+terceros partidos en los estados decisivos, creo que probablemente lo mejor es que yo no sume mi 
+voto de California por Clinton a la enorme y creciente pila de votantes de California por Clinton 
+que se acumulan en sitios como Make Mine Count, y en cambio solo 
+ofreceré intercambiar mi voto con cualquier oyente mío que fuera a votar por 
+Johnson o Stein en un estado decisivo. Basta con escribirme a julia@rationality.org 
+y hablamos.
+Scott Aaronson: Genial. Esa es la ventaja de tener audiencia.
+Julia Galef: Sí, claro.
+Scott Aaronson: Se pueden hacer ofertas así.
+Julia Galef: Bien. A mis oyentes les animaría, si todo esto les parece 
+interesante y valioso, a revisar Make Mine Count o 
+trumptraders.org para informarse sobre el intercambio de votos, sobre todo si se apoya a un tercer partido 
+en un estado decisivo. 
+Aunque no sea así, todavía hay bastantes posibilidades de que el voto pueda 
+emparejarse con un partidario de un tercer partido en un estado decisivo. Y sí, si alguien quiere 
+intercambiar conmigo, que escriba.
+Scott, esto está muy bien. Cerraré esta parte del podcast y ahora pasaremos 
+a la selección de Rationally Speaking.
+Scott Aaronson: Bien.
+[interludio]
+Julia Galef: Bienvenidos de nuevo. En cada episodio invito a mi invitado de Rationally Speaking a dar 
+la selección Rationally Speaking del episodio. Es un libro, un artículo o un sitio web 
+u otra cosa que haya influido de alguna manera interesante en su pensamiento. Scott, 
+¿cuál es la selección de hoy?
+Scott Aaronson: Bien. Creo que mi selección para este episodio serán los ensayos de Paul Graham.
+Julia Galef: Oh, buena elección.
+Scott Aaronson: Fue fundador de Y Combinator, una incubadora de empresas emergentes. En particular, su 
+ensayo titulado “Why Nerds are Unpopular”. Quiero decir, creo que lo leí por primera vez hace 
+una década. Realmente cambió la forma en que pensaba sobre esa pregunta.
+Julia Galef: ¿Puede decir un poco más sobre cómo?
+Scott Aaronson: Sí. Básicamente, propone un argumento según el cual muchas de las teorías comunes 
+Página 17 de 18sobre por qué se mete con los frikis, por ejemplo, que los otros chicos los envidian, son simplemente 
+falsas. Simplemente no resisten el escrutinio. 
+El punto principal es que para entender el fenómeno del friki, que es 
+en realidad un fenómeno cultural bastante reciente, hay que entender 
+algo sobre el estudiante moderno de secundaria o preparatoria, y 
+en particular en Estados Unidos, y la forma en que estos fueron diseñados como, en efecto, 
+espacios de encierro. También podrían enseñar algo a la gente.
+Julia Galef: Solo por accidente.
+Scott Aaronson: Sí, ese no es el propósito principal. Son estos espacios de encierro. Y luego dice 
+que cada vez que se crea una situación así, ya sea en una prisión o en 
+los círculos de alta sociedad de Manhattan o entre personas sin trabajo real, siempre surge 
+una jerarquía de estatus de alguna manera. 
+Normalmente las jerarquías de estatus se basan en cosas como quién contribuye al 
+bien del grupo o quién está construyendo o inventando algo. Si 
+no hay nada de eso, entonces la gente crea una especie de jerarquía de estatus puramente autorreferencial 
+que se ve una y otra vez, y por eso lo llevó a un contexto mucho más amplio, 
+general.
+Entonces, según su relato, un friki es simplemente alguien que está en ese entorno pero que 
+se preocupa por algo más allá del juego de estatus autorreferencial inmediato, como 
+las matemáticas, la literatura o algo del mundo exterior. 
+Luego dice que no hay residentes de neurocirugía ni Navy Seals que trabajen tan 
+duro en nada como lo hacen los estudiantes de secundaria por ser populares. Si no se 
+dedica el 100% del esfuerzo a esto, entonces se va a quedar atrás.
+Julia Galef: Interesante.
+Scott Aaronson: Para mí fue una mirada muy, muy novedosa sobre una pregunta que me ha preocupado mucho, pero 
+diría también que su…
+Julia Galef: ¡Yo también he tenido un interés personal en esa pregunta durante gran parte de mi vida!
+Scott Aaronson: Sí. Graham salió hace poco en mi blog. Por eso estaba pensando 
+en él. Sus ensayos están entre mis favoritos.
+Julia Galef: A mí también.
+Creo que mi favorito es Keep Your Identity Small, que quizá también podamos enlazar 
+en la web del podcast.
+Scott Aaronson: Sí, absolutamente.
+Julia Galef: Muchos de ellos son oro puro. Es una gran selección.
+Scott Aaronson: Sí, sí.
+Página 18 de 18Julia Galef: Bueno, Scott, muchas gracias por acompañarnos de nuevo en el programa. Creo que este es un 
+tema muy importante, y me alegra que se haya escrito sobre él, y estoy 
+feliz de ampliar un poco la conversación.
+Scott Aaronson: Genial. Bueno, gracias por invitarme, Julia. Esperemos que esta elección tenga un buen 
+resultado.
+Julia Galef: Desde luego. Al menos para poder soltar el aire después de tantos meses de estar conteniéndolo.
+Scott Aaronson: Así es, y para dejar de tener que revisar PredictWise como diez veces por 
+hora.
+Julia Galef: Lo sé. Se ha vuelto como un tic. Creo que seguiré revisando después de que termine la elección 
+solo porque no puedo parar.
+Scott Aaronson: Exacto. Hará maravillas por mi productividad.
+Julia Galef: Bueno, con esto termina otro episodio de Rationally Speaking. Acompáñennos la próxima vez 
+para más exploraciones en las fronteras entre la razón y el absurdo.

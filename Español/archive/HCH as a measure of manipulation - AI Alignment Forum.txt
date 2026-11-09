@@ -1,0 +1,24 @@
+Humans Consulting HCH
+Blog personal Una idea a medio cocer que surgió de una conversación con Jessica, Ryan y Tsvi: Nos gustaría tener una forma directa de definir «manipulación», para poder instruir a una IA para que no manipule a sus desarrolladores, o construir una medida de bajo impacto que trate la manipulación como un impacto especialmente importante. Podríamos definir inicialmente la manipulación en términos de las acciones esperadas de un humano o, de forma más robusta, en términos de los efectos sobre la distribución de políticas de un humano a lo largo de una amplia variedad de entornos plausibles. Sin embargo, nos gustaría que nuestra IA todavía pudiera contarnos información (de forma no manipuladora) en lugar de esconderse de nosotros en un esfuerzo por evitar toda influencia. El título, por supuesto, adelanta la siguiente idea: si la IA puede razonar sobre algún modelo adecuado de HCH, entonces podemos definir la noción de «la acción a tiene una influencia muy baja sobre un humano, en comparación con la acción nula, aparte de transmitir la información x»: es decir, sobre una distribución de preguntas q, donde HCH se define en relación con ese humano; condicionamos la distribución según si la IA realiza la acción a o la acción nula; y x,q es la entrada compuesta por el enunciado x seguido de la pregunta q. Esto, por supuesto, no excluye el uso de enunciados manipuladores x, pero al menos podría permitirnos reducir las formas de manipulación a aquellas que ocurrirían con la entrada de texto a HCH. Preferiría que la IA razonara sobre HCH en lugar de solo (p. ej.) sobre las acciones del humano en una simulación de una hora, porque HCH puede en principio capturar las preferencias a largo plazo y extrapoladas de un humano, y son estas las que más queremos asegurar que no sean manipuladas. ¿Hay un fallo obvio en este enfoque, una mejora obvia, o algo más simple a lo que se reduzca? HCH como medida de manipulación por orthonormal 10 mar 2017
+HCH(q)|a≈HCH(x,q)|null1
+Mencionado en 2
+6 comentarios, ordenados por puntuación más alta Ryan Carey 1
+orthonormal0
+[-]
+Se me ocurren dos problemas: 1. Supongamos generosamente que q es una distribución fija de preguntas que queremos que el sistema de IA haga a los humanos. Alguna acción manipuladora podría cambiar las respuestas a q solo un poco, pero aun así cambiar mucho las consecuencias de actuar según esas respuestas. 2. Consideremos un sistema de IA que optimiza una función de utilidad que incluye este tipo de término para regularizar contra la manipulación. Las acciones que mejor cumplen esa función de utilidad podrían ser aquellas que manipulan mucho a los humanos (y reorientan sus recursos hacia alguna otra función) y los obligan a responder preguntas de una «forma natural». Es decir, quizá el impacto se parezca más a la distancia recorrida (una integral de trayectoria) que al desplazamiento.
+orthonormal0orthonormal0
+[-]
+Sobre el #2: creo que esta es una objeción importante a la idea de bajo impacto mediante una penalización por regularización en general.
+[-]
+Sobre el #1: un conjunto obvio de preguntas que incluir en q son preguntas de aprobación sobre distintos aspectos de la política de la IA. (En particular, si queremos que la IA calcule más tarde el HCH de un humano y le pida orientación, entonces queremos estar seguros de que la respuesta de HCH a esa pregunta no está manipulada.)
+[-]
+Está además la objeción de «si haces esto, ¿por qué no hacer simplemente que la IA le pregunte a HCH qué hacer?». En conjunto, espero que sea más fácil para una IA concluir de forma robusta que cierto plan solo cambia el HCH de un humano mediante cierto contenido informativo, que para la IA calcular de forma fiable el HCH del humano. Pero no tengo argumentos sólidos para esta intuición.
+Jessica Taylor1
+[-]
+«Tener una estimación bien calibrada de HCH» es la condición que se quiere, no «poder calcular HCH de forma fiable».
+orthonormal1
+[-]
+Debería haber dicho «estimar HCH de forma fiable»; además de la calibración, también querría bastante precisión antes de confiar en ella. Comparing AI Alignment Approaches to Minimize False Positive Risk 6y 
+6y 6y 
+6y 
+6y 6y 

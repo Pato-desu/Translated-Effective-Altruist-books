@@ -1,0 +1,822 @@
+MultiXNet: Multiclass Multistage Multimodal Motion Prediction
+Nemanja Djuric, Henggang Cui, Zhaoen Su, Shangxuan Wu, Huahua Wang,
+Fang-Chieh Chou, Luisa San Martin, Song Feng, Rui Hu, Yang Xu, Alyssa Dayan,
+Sidney Zhang, Brian C. Becker, Gregory P. Meyer, Carlos Vallespi-Gonzalez, Carl K. Wellington
+Uber Advanced Technologies Group
+fndjuric, hcui2, suzhaoen, shangxuan.wu, anteaglewang, fchou, luisasm g@uber.com
+fsongf, rui.hu, yang.xu, ada, sidney, bbecker, gmeyer, cvallespi, cwellington g@uber.com
+Resumen — Una de las piezas críticas del rompecabezas de la conducción autónoma
+es comprender el entorno de un vehículo autónomo
+(SDV) y predecir cómo cambiará ese entorno en
+el futuro cercano. Para abordar esta tarea proponemos MultiXNet,
+un enfoque de extremo a extremo para la detección y la predicción de movimiento
+basado directamente en datos de sensores lidar. Este enfoque se basa
+en trabajos previos al manejar múltiples clases de agentes de tráfico,
+añadiendo un refinamiento de trayectoria de segunda etapa entrenado conjuntamente
+y produciendo una distribución de probabilidad multimodal sobre
+el movimiento futuro de los agentes que incluye tanto múltiples comportamientos de tráfico discretos
+y incertidumbres de posición continuas calibradas. El
+método se evaluó con datos a gran escala y del mundo real recogidos
+por una flota de SDV en varias ciudades, y los resultados indican
+que supera a los enfoques existentes del estado del arte.
+I. INTRODUCCIÓN
+Predecir los estados futuros de otros agentes de tráfico, como
+vehículos, peatones y ciclistas, representa una capacidad clave
+para la tecnología de conducción autónoma. Es una tarea desafiante
+que parece desempeñar un papel importante en la evitación de accidentes
+tanto para conductores humanos [1], [2] como para sus
+contrapartes autónomas [3]. En el contexto de un vehículo autónomo
+(SDV) es importante captar el abanico de posibilidades
+para otros agentes, y no solo una única trayectoria más probable.
+Considérese un vehículo que se aproxima a una intersección en sentido contrario,
+que puede seguir recto o girar delante del
+SDV (ejemplificado en la Fig. 1). Para garantizar la seguridad, el SDV necesita
+razonar con precisión sobre ambos modos posibles y
+modular su comportamiento en consecuencia. Además de los modos discretos,
+un planificador de movimiento posterior puede reaccionar de forma distinta
+a una predicción según la incertidumbre de posición dentro de
+una trayectoria predicha. Por ejemplo, si un vehículo en sentido contrario
+parece que podría tomar un giro amplio e invadir el carril del SDV,
+el SDV puede reducir la velocidad preventivamente para disminuir el
+riesgo. Por otro lado, si la predicción muestra confianza
+en que el vehículo seguirá en su carril, el SDV podría
+optar por mantener su velocidad actual.
+Reuniendo los requisitos anteriores, la Fig. 1 muestra un
+ejemplo de la tarea que aborda este trabajo. La entrada es un
+mapa y una secuencia de datos lidar que se proyectan en un
+marco de coordenadas global común usando la pose del SDV. La
+salida es una distribución multimodal sobre los posibles estados futuros
+de los demás agentes de la escena. Un desafío importante
+es que distintos tipos de agentes, como peatones y vehículos,
+presentan comportamientos muy diferentes, mientras que un enfoque desplegado
+debe manejar a todos los agentes presentes en una escena dada.
+Fig. 1: Ejemplo de salida del modelo MultiXNet propuesto,
+que muestra detecciones y predicciones de movimiento multimodales y conscientes de la incertidumbre para
+múltiples tipos de agentes superpuestas sobre datos lidar y de mapa,
+incluidos peatones en las aceras
+y un vehículo y un ciclista que se aproximan al SDV; nótese que
+la predicción del vehículo que gira es una trayectoria de baja probabilidad
+que es poco probable, aunque aún posible de observar en el mundo real
+Trabajos previos en esta área han demostrado un fuerte rendimiento
+usando métodos de extremo a extremo que aprenden conjuntamente la detección
+y la predicción de movimiento directamente a partir de datos de sensores [4], [5],
+incluida la adición de una etapa de refinamiento aprendida conjuntamente de
+la red que mejora la predicción de trayectorias [6].
+Sin embargo, estos enfoques se han centrado generalmente solo en
+vehículos y producen una única trayectoria en lugar de distribuciones
+completas de movimiento. Trabajos más recientes han mostrado la capacidad de
+aprender una distribución continua directamente a partir de datos de sensores para
+múltiples clases [7], pero las distribuciones no son multimodales.
+Los métodos de predicción que operan sobre detecciones en lugar de
+los datos crudos de sensores han mostrado un mejor rendimiento al
+introducir predicciones multiclase [8], estimaciones de incertidumbre
+[9], [10], o incorporar múltiples modos [11]. Si bien
+cada uno de estos conceptos se ha considerado de forma individual; este
+trabajo busca unificarlos en un único enfoque que
+demostramos empíricamente que supera a las líneas base competidoras.
+Nuestro trabajo se basa en IntentNet [5] para producir un modelo de predicción de movimiento de extremo a extremo
+con las siguientes contribuciones:
+detección y predicción de movimiento conjuntas de múltiples agentes
+clases: vehículos, peatones y ciclistas;
+predicción de trayectorias multimodal para capturar distintas
+posibles trayectorias futuras de los agentes de tráfico, junto con
+sus correspondientes incertidumbres continuas de posición.
+Usando un conjunto de datos a gran escala y del mundo real, el enfoque propuesto
+demostró superar al estado del arte actual.arXiv:2006.02000v4  [cs.CV]  24 May 2021
+II. TRABAJOS RELACIONADOS
+La detección de objetos es una tarea crítica para un sistema SDV, con
+varios artículos propuestos recientemente en la literatura. Un
+enfoque popular es usar una representación de vista de pájaro (BEV),
+en la que los puntos lidar se codifican en vóxeles 3D [5], lo cual
+tiene la gran ventaja de ser una representación invariante al rango
+de los objetos. PointPillars [12] propuso aprender la codificación BEV
+mediante un esquema de cálculo que ofrece mejor
+velocidad manteniendo una alta precisión. La vista de rango (RV) es
+otra representación popular de puntos lidar que ofrece una
+entrada compacta sin perder toda la información del sensor. Los
+autores de [13] mostraron que RV es bueno para detectar tanto
+objetos de corto y largo alcance, lo que puede mejorarse aún más
+combinando una imagen de cámara con lidar RV [14]. Trabajos
+recientes aplican tanto representaciones BEV como RV [15], [16],
+extrayendo características mediante ramas separadas de la red
+que se fusionan en una etapa posterior. Este método de fusión conserva
+la información de objetos de corto y largo alcance, a costa
+de una estructura de red más compleja y pesada. En este trabajo
+nos centramos en el enfoque BEV y analizamos varias ideas sobre
+cómo mejorar el estado del arte actual.
+La predicción de movimiento es otro tema importante en la comunidad SDV.
+Típicamente, los modelos de predicción toman como entrada las detecciones actuales y
+pasadas, y luego producen trayectorias para los
+próximos segundos. Un enfoque común es entrenar modelos recurrentes
+para procesar las entradas y extraer características aprendidas
+[17], [18], [19], [20], [21], [22]. Varios métodos
+se han propuesto que toman el entorno de los agentes y otra
+información contextual mediante imágenes BEV como entrada,
+y extraen características útiles de la escena usando redes neuronales convolucionales
+(CNN) [4], [8], [9], [10], [11], [18]. Curiosamente,
+la mayoría de las investigaciones previas sobre predicción de trayectorias se ha
+centrado en predecir el movimiento de un tipo particular de agente vial
+(p. ej., vehículo o peatón). Sin embargo, múltiples tipos de
+agentes de tráfico coexisten en las vías públicas, y los SDV necesitan
+predecir con precisión los movimientos de todos los agentes relevantes para
+conducir con seguridad. Además, los distintos tipos de agentes tienen patrones
+de movimiento distintos (p. ej., ciclistas y peatones se comportan bastante
+de forma distinta [8]), y es importante modelarlos por separado.
+Unos pocos artículos recientes abordaron este desafío usando métodos
+recurrentes [18], [23], [24]. Sin embargo, a diferencia de nuestro trabajo, se
+asumió la existencia de un sistema de detección y no se
+entrenaron de extremo a extremo con datos crudos de sensores.
+Otro aspecto de la tarea de predicción importante para
+garantizar operaciones seguras del SDV es modelar la estocasticidad
+del comportamiento del tráfico, ya sea considerando la multimodalidad del
+movimiento de los agentes (p. ej., si van a girar a la izquierda
+o a la derecha en una intersección) o la incertidumbre de posición dentro de un
+único modo. En cuanto a la multimodalidad de las trayectorias futuras
+hay dos clases comunes de enfoques.
+El primero es el uso de modelos generativos, ya sea de forma explícita
+con autoencoders variacionales condicionales [17], [18], [25] o
+de forma implícita con redes generativas antagónicas [19], [20],
+[21], [22], [26]. Una vez entrenadas, las trayectorias se predicen
+muestreando de la distribución aprendida en el momento de la inferencia. Los
+modelos generativos suelen requerir que el sistema extraiga muchas muestras para garantizar una buena cobertura del espacio de trayectorias (p. ej.,
+hasta 20 en [19], [21]), lo cual puede ser poco práctico para
+aplicaciones críticas en tiempo. La segunda categoría de enfoques
+predice directamente un número fijo de trayectorias junto con
+sus probabilidades en un único paso [9], [11], [27],
+[28]. Las trayectorias y las probabilidades se entrenan conjuntamente
+con una combinación de pérdidas de regresión y de clasificación,
+y son mucho más eficientes que las alternativas. Como resultado,
+la mayor parte del trabajo aplicado sigue el enfoque de un único paso [9], [27].
+Además de la multimodalidad, es importante captar la
+incertidumbre del movimiento del agente dentro de un modo de trayectoria. Esto
+puede lograrse modelando explícitamente cada trayectoria como una
+distribución de probabilidad, por ejemplo modelando los puntos de trayectoria
+mediante gaussianas [9], [10], [18], [29]. Siguiendo
+un paradigma distinto, algunos investigadores han propuesto enfoques no
+paramétricos [30] para predecir directamente un mapa de ocupación
+. Mientras que los enfoques paramétricos pueden convertirse fácilmente en
+un espacio de ocupación por celdas, lo inverso no es necesariamente cierto,
+lo que limita la aplicabilidad de tales representaciones de salida en
+los módulos posteriores del sistema SDV.
+En lugar de usar modelos independientes de detección y predicción de
+movimiento, algunos trabajos recientes han propuesto entrenarlos
+conjuntamente de forma de extremo a extremo, tomando datos crudos de sensores
+como entrada. Este enfoque fue pionero en el modelo FaF
+[4], mientras que IntentNet [5] incluyó además datos de mapa
+como entrada y propuso predecir tanto las trayectorias de los agentes
+como sus intenciones de alto nivel. Los autores de [31] extendieron
+esta idea a un modelo de extremo a extremo que también incluye
+planificación de movimiento. SpAGNN [6] introdujo un modelo de dos etapas
+con recorte de región de interés rotada (RROI), un módulo de red neuronal de grafos
+para codificar las relaciones entre agentes, así como
+modelar la incertidumbre de las trayectorias futuras. MotionNet
+[32] usó una red piramidal espacio-temporal para realizar conjuntamente
+detección y predicción de movimiento para cada celda de la rejilla BEV.
+LaserFlow [7] propuso un modelo de extremo a extremo que usa entradas
+lidar RV de múltiples cuadros, a diferencia de los demás métodos que usan
+representaciones BEV, y que además puede realizar predicciones sobre
+múltiples tipos de agentes. Comparado con nuestro método, la mayoría de los
+métodos de extremo a extremo anteriores no consideran la predicción de movimiento
+sobre tipos diversos de agentes viales, y ninguno aborda
+la naturaleza multimodal de las posibles trayectorias futuras. Los
+trabajos anteriores han mostrado claramente la promesa de los enfoques
+de extremo a extremo, y los investigadores estudian distintos aspectos para
+mejorar el rendimiento de la predicción. En este artículo proponemos
+el primer modelo que reúne estas ideas clave, y mostramos
+en la sección experimental los beneficios frente a las líneas base.
+III. ENFOQUE PROPUESTO
+En esta sección describimos nuestro método de extremo a extremo para la
+detección y predicción conjuntas, denominado MultiXNet. Primero describimos
+la arquitectura IntentNet [5] del estado del arte, seguida de
+una discusión de nuestras mejoras propuestas.
+A. Detección y predicción de extremo a extremo de referencia
+1) Representación de entrada: en la Fig. 2 mostramos las entradas lidar
+y de mapa a la red. Suponemos un sensor lidar instalado
+en el SDV que proporciona mediciones a intervalos regulares
+Primera etapa Segunda etapa Segunda etapa Red troncal Lidar voxelizado
+Mapa Características Predicción Detección
+Características lidar Primera etapa Red troncal RROI rotado por detección
+Primera etapa Mapa de características
+Segunda etapa Red troncal Segunda etapa Red troncal Predicciones probabilísticas multimodales refinadas
+Primera etapa Salida MultiXNet Salida
+Mapa rasterizado
+Fig. 2: Visión general de la arquitectura MultiXNet, donde la red de primera etapa, correspondiente a IntentNet [5], produce los agentes
+detectados y su predicción de movimiento unimodal, mientras que la segunda etapa refina las predicciones para que sean multimodales y conscientes de la
+incertidumbre; nótese que la predicción de primera etapa del vehículo que gira a la derecha es incorrecta, y la segunda etapa mejora su predicción
+intervalos de tiempo. En el instante t, un barrido lidar St comprende un conjunto
+de retornos lidar 3D representados por sus ubicaciones (x;y;z).
+Siguiendo [5], codificamos los datos lidar St en una imagen BEV
+centrada en el SDV, con tamaños de vóxel de ∆L y ∆W a lo largo
+de los ejes x hacia adelante e y hacia la izquierda, respectivamente, y ∆V a lo largo
+del eje vertical (que representa los canales de la imagen). Cada
+vóxel codifica información binaria sobre si existe o no
+al menos un retorno lidar dentro de ese vóxel. Además,
+para captar información temporal codificamos los T−1 barridos pasados
+lidar {St−T+1,...,St−1} en el mismo marco BEV
+usando sus poses SDV conocidas, y los apilamos juntos a lo largo
+de la dimensión de canal (o vertical). Suponiendo que consideramos
+un área de longitud L, anchura W y altura V, esto produce una
+imagen de entrada de tamaño l
+L
+Lm
+l
+W
+Wm
+Tl
+V
+Vm
+.
+Además, supongamos que tenemos acceso a un mapa de alta
+definición del área de operación alrededor del SDV, denotado
+por M. Como se muestra en la Fig. 2, codificamos los elementos estáticos del mapa
+de M en el mismo marco BEV que se introdujo antes. Estos
+incluyen trayectorias de conducción, pasos de peatones, límites de carril y de carretera,
+intersecciones, accesos y estacionamientos, donde cada elemento se
+codifica como una máscara binaria en su propio canal separado.
+Esto da lugar a un total de siete canales adicionales de mapa,
+que se procesan mediante unas pocas capas convolucionales antes de
+apilarse con los canales lidar procesados, para usarse
+como entrada BEV para el resto de la red, como se describe en [5].
+2) Arquitectura de la red y salida: la imagen BEV de entrada
+puede considerarse una representación en rejilla vista desde arriba del
+entorno del SDV, con cada celda de la rejilla que comprende
+características codificadas a lo largo de las dimensiones de canal. Como en [5],
+esta imagen se procesa luego mediante una secuencia de capas
+convolucionales 2D para producir una capa final que contiene
+características aprendidas para cada ubicación de celda. Tras una capa convolucional adicional 1×1
+convolucional, para cada celda predecimos dos conjuntos de
+salidas, que representan la detección de objetos y su movimiento
+predicción (en el texto siguiente denotamos un valor
+predicho mediante la notación con sombrero ^). En particular, la detección
+de una celda centrada en (x;y) comprende una probabilidad de existencia
+^p, un cuadro delimitador orientado representado por su centro
+^c0= (^cx0;^cy0) relativo al centro de la celda de la rejilla, tamaño
+representado por longitud ^l y anchura ^w, y orientación ^θ0 relativa
+al eje x, parametrizada como una tupla (sin^θ0;cos^θ0). Además, la salida de predicción se compone de centros de cuadros delimitadores
+(o puntos de paso) ^ch= (^cxh;^cyh) y orientaciones ^θh para los
+H horizontes temporales futuros, con h ∈ {1,...,H}. Un conjunto completo de
+H puntos de paso se denota como trayectoria ^τ={^ch,^θh}H
+h=1,
+donde el tamaño del cuadro delimitador se considera constante a lo largo de
+todo el horizonte de predicción.
+3) Pérdida: como se comenta en [5], la pérdida en un instante
+dado consiste en pérdidas de detección y de predicción calculadas
+sobre todas las celdas BEV. En cuanto a la pérdida de detección por píxel,
+se usa una pérdida focal binaria `focal(^p) = (1−^p)
+log ^p se usa
+para la probabilidad de un objeto de referencia (ground truth) [33], donde
+encontramos empíricamente un buen rendimiento con el hiperparámetro 
+fijado en 2. Además, cuando existe un objeto de referencia
+en una celda particular, una pérdida de regresión suave `1 `1(^v−v) se
+usa para todos los parámetros del cuadro delimitador (es decir, centro, tamaño y
+orientación), donde la pérdida se calcula entre el valor predicho
+^v y el valor de referencia correspondiente v. La regresión suave
+`1 también se usa para capturar los errores de predicción
+de los centros y orientaciones futuros de los cuadros delimitadores. Llamamos
+a una celda que contiene un objeto celda de primer plano (fg), y
+a una celda de fondo (bg) en caso contrario. Luego, la pérdida total en
+el horizonte h para una celda de primer plano Lfg(h) se calcula como
+Lfg(h)= 1h=0
+`focal(^p) +`1(^l−l) +`1( ^w−w)
++
+`1(^cxh−cxh) +`1(^cyh−cyh)+
+`1(sin^θh−sinθh) +`1(cos^θh−cosθh);(1)
+donde 1c vale 1 si se cumple la condición c y 0 en caso contrario.
+La pérdida para una celda de fondo es Lbg=`focal(1−^p).
+Por último, para imponer una tolerancia de error menor para los
+horizontes anteriores multiplicamos las pérdidas por horizonte por pesos fijos
+que disminuyen gradualmente para los pasos temporales futuros, y las
+pérdidas por horizonte se agregan para obtener la pérdida final,
+L= 1 bg cellLbg+ 1 fg cellHX
+h=0hLfg(h); (2)
+donde2(0;1) es un factor de decaimiento constante (fijado en 0:97 en
+nuestros experimentos). La pérdida contiene tanto componentes de detección como de predicción
+y todos los parámetros del modelo se aprenden conjuntamente de
+forma de extremo a extremo.
+B. Mejora de la predicción de movimiento de extremo a extremo
+En esta sección presentamos un método de extremo a extremo que
+construimos sobre el enfoque presentado en la sección anterior, ampliándolo
+para mejorar significativamente su rendimiento de predicción.
+1) Pérdida consciente de la incertidumbre: además de predecir trayectorias,
+una tarea importante en la conducción autónoma es la estimación
+de su incertidumbre espacial. Esto es útil para la fusión
+de resultados de múltiples predictores, y también es utilizado por
+un planificador de movimiento para mejorar la seguridad del SDV. En trabajos anteriores [10]
+se propuso como un paso de ajuste fino tras el entrenamiento de
+un modelo que solo consideraba los puntos de paso de la trayectoria sin
+incertidumbres. Luego, congelando los pesos principales de predicción
+o fijando una tasa de aprendizaje baja, el módulo de incertidumbre se
+entrenaba sin perjudicar el rendimiento global de predicción.
+En este artículo describimos un método que aprende trayectorias
+e incertidumbres conjuntamente, donde descomponemos la incertidumbre de
+posición en las direcciones a lo largo de la trayectoria (AT) y transversal (CT)
+[34]. En particular, un punto de paso predicho ^ch se
+proyecta a lo largo de las direcciones AT y CT considerando el
+rumbo de referencia θh, y los errores a lo largo de estas direcciones
+se supone que siguen una distribución de Laplace Laplace(μ;b),
+donde μ es la media y b la diversidad, los parámetros de Laplace.
+Suponemos que los errores AT y CT son independientes, cada uno con
+un conjunto separado de parámetros de Laplace. Tomando
+AT como ejemplo y suponiendo un valor de error ^eAT, esto
+define una distribución de Laplace Laplace(^eAT;^bAT). Luego,
+minimizamos la pérdida minimizando la divergencia de Kullback–Leibler (KL)
+entre la Laplace de referencia (0;bAT) y
+la Laplace predicha (^eAT;^bAT), calculada como sigue [35],
+KLAT= log^bAT
+bAT+bATexp
+ j^eATj
+bAT
++j^eATj
+^bAT 1:(3)
+De forma similar, KLCT puede calcularse para los errores CT, y
+usamos entonces KLAT y KLCT en lugar de la pérdida `1 suave
+para los centros de los cuadros delimitadores introducida en la
+sección anterior. En la sección experimental comparamos la elección de
+distribución de Laplace frente a la gaussiana, así como la elección de
+la pérdida de divergencia KL frente a la pérdida de log-verosimilitud negativa. Los
+resultados muestran el beneficio de optimizar la divergencia KL de Laplace
+para modelar los errores de predicción.
+Una pregunta importante es la elección de las diversidades de referencia
+bAT y bCT. En trabajos anteriores de detección [36] se usaba una
+proporción del área de la etiqueta cubierta por puntos lidar,
+sin embargo, esto puede no ser la mejor elección para la tarea de
+predicción, ya que se espera que la dificultad e incertidumbre de la predicción
+aumenten con horizontes más largos. Para tenerlo en cuenta, aumentamos linealmente
+la diversidad de referencia con el tiempo como
+b*(t) = α* + β* t; (4)
+donde los parámetros α* y β* se determinan empíricamente,
+con parámetros separados para las componentes AT y CT.
+Esto se logra entrenando modelos con α* y β* variables, y
+eligiendo el conjunto de parámetros para el cual los
+diagramas de fiabilidad [10] indican que las salidas del modelo están
+mejor calibradas, como se discute en la Sec. IV-B.2) Refinamiento de trayectoria de segunda etapa: como se muestra en
+Fig. 2, tras la inferencia de detección y predicción
+descrita en la Sec. III-A, realizamos un refinamiento adicional de
+las predicciones de movimiento de los objetos detectados, donde
+tomamos los objetos detectados e inferimos sus trayectorias futuras
+mejoradas mediante procesamiento adicional. La red de refinamiento
+que llamamos segunda etapa del modelo,
+descarta las predicciones de trayectoria de primera etapa y toma
+el centro inferido del objeto ^c0 y la orientación ^θ0, así como la
+capa final de características de la red principal. Luego, recorta
+y rota las características aprendidas para cada agente, de modo que el
+agente quede orientado hacia arriba en la imagen rotada [8], [10],
+[37], como se ilustra en la Fig. 2. El mapa de características RROI se
+pasa luego por una red CNN ligera antes de la
+predicción final de la trayectoria futura y la incertidumbre.
+Las redes de primera y segunda etapa se entrenan conjuntamente,
+usando la pérdida completa L en la primera etapa y solo la pérdida de predicción futura
+en la segunda etapa, donde las predicciones de la segunda etapa
+se usan como trayectorias de salida finales. La
+segunda etapa es totalmente diferenciable y, por tanto, los gradientes
+fluyen desde la segunda etapa hacia la primera.
+El método propuesto tiene varias ventajas. Primero, la
+representación de salida puede estandarizarse en el marco del agente.
+En el modelo de primera etapa, las trayectorias pueden irradiarse en cualquier
+dirección desde la posición del agente, mientras que en el marco del agente
+la mayoría de las trayectorias futuras crecen desde el origen
+hacia adelante. Además, la segunda etapa puede concentrarse en
+extraer características de un único agente de interés y descartar
+información irrelevante. Por último, nótese que las predicciones de
+la primera y la segunda etapa pueden usarse ambas en el sistema final,
+según los requisitos de latencia. Por ejemplo, como
+las predicciones de la segunda etapa implican un costo adicional de latencia, el
+sistema puede usar las predicciones de primera etapa para algunos agentes, y
+ejecutar la segunda etapa solo para los agentes en los que este refinamiento sea
+considerado importante.
+3) Predicción de trayectorias multimodal: el comportamiento del tráfico es
+inherentemente multimodal, ya que los agentes de tráfico en cualquier punto pueden
+tomar una de varias decisiones de movimiento. Modelar este
+comportamiento es una tarea importante en el campo de la conducción autónoma, con
+varias ideas interesantes propuestas en la literatura [9],
+[11], [27], [28]. En este artículo abordamos este problema, y
+describimos un enfoque para producir un número fijo de trayectorias
+para cada agente detectado junto con sus probabilidades. En
+particular, en lugar de producir una única trayectoria predicha
+en la segunda etapa para cada agente detectado, el modelo
+produce un número fijo de M trayectorias. Denotemos
+los modos de trayectoria producidos por el modelo como {^τm}M
+m=1 y sus
+probabilidades como {^pm}M
+m=1. Primero, identificamos uno de los M
+modos como el modo de referencia mgt, para lo cual
+diseñamos una política novedosa basada en la dirección para decidir el
+modo de referencia. Más concretamente, calculamos un ángulo
+∆θ=θH−θ0 entre el último y el actual
+rumbo de referencia, donde ∆θ ∈ (−π;π]. Luego, dividimos el rango
+(−π;π] en M intervalos y decidimos mgt según dónde cae ∆θ
+. De este modo, durante el entrenamiento cada modo se especializa
+para ser responsable de un comportamiento distinto (p. ej., para M= 3 tenemos
+modos de giro a la izquierda, giro a la derecha y de seguir recto).
+Nótese que existe la opción de aprender los modos mediante un
+esquema de maximización de la esperanza (EM), o aprendiendo directamente una
+red de densidad de mezclas, como se comenta en [11]. Sin embargo,
+encontramos que el enfoque propuesto funciona mejor en la práctica.
+Dadas las predicciones y la trayectoria de referencia, y
+usando un enfoque similar al comentado en [11], la pérdida de trayectoria multimodal
+consiste en una pérdida de trayectoria del modo mgt-ésimo
+modo de trayectoria, según se describe en la Sec. III-B.1, y una pérdida de
+entropía cruzada para las probabilidades de los modos de trayectoria. Por último, seguimos
+usando la pérdida de predicción unimodal en la primera etapa para
+mejorar el entrenamiento del modelo, y la pérdida de trayectoria multimodal
+se aplica solo para entrenar la red de segunda etapa. Nótese
+que la precisión de las detecciones de primera etapa afecta directamente
+la calidad de las predicciones de segunda etapa, ya que la segunda etapa
+usa las salidas de primera etapa como entradas. Sin embargo,
+no observamos problemas debidos a esta dependencia, y los
+resultados experimentales muestran que el refinamiento de segunda etapa
+conduce a un mejor rendimiento de predicción.
+4) Manejo de múltiples tipos de agentes: a diferencia de trabajos anteriores [5]
+que se centraban en su mayoría en un único tipo de agente de tráfico, modelamos
+el comportamiento de múltiples tipos de agentes simultáneamente, centrándonos
+en vehículos, peatones y ciclistas. Esto se hace
+separando tres conjuntos de salidas, uno por cada tipo, después de
+que la red troncal calcula las características BEV aprendidas compartidas
+mostradas en la Fig. 2. Nótese que encontramos que el modelo logra
+el mejor rendimiento cuando cada clase tiene capas adicionales y separadas
+procesamiento posterior de las características aprendidas. Se manejan todos los actores
+usar un solo modelo y una sola pasada simplifica el
+sistema SDV de forma significativa y ayuda a garantizar operaciones seguras y eficaces
+operaciones. Es importante subrayar que, en el caso de
+peatones y ciclistas, encontramos que una salida unimodal
+ofrece el mejor rendimiento, y no usamos la
+pérdida multimodal ni la etapa de refinamiento para estos actores de tráfico.
+Así, en nuestros experimentos fijamos M= 3 para vehículos
+y M= 1 para los demás tipos de actores. Luego, la pérdida final del
+modelo es la suma de las pérdidas por tipo, y cada pérdida por tipo
+incluye la pérdida de detección descrita en la Sec. III-A.3, así como
+la pérdida de trayectoria con conciencia de incertidumbre descrita en la Sec.
+III-B.1, Sec. III-B.2 y Sec. III-B.3.
+IV. EXPERIMENTOS
+A. Configuración experimental
+Siguiendo trabajos previos [6], evaluamos el enfoque propuesto
+usando los datos de código abierto nuScenes [38] y
+los datos propietarios ATG4D. Los datos ATG4D se recopilaron
+mediante una flota de SDV en varias ciudades de Norteamérica
+con un sensor lidar de 64 haces montado en el techo. Contiene más de
+1 millón de fotogramas recopilados de 5;500 escenarios distintos,
+cada escenario es una secuencia de 250 fotogramas capturados a
+10 Hz. Las etiquetas son trayectorias precisas de cajas delimitadoras 3D
+con un alcance máximo de 100 metros desde el vehículo que recopila
+los datos. Los vehículos son el tipo de actor más común en el conjunto
+de datos, con 3:2x menos peatones y 15x menos ciclistas.
+Fijamos los parámetros de la imagen BEV en L= 150m,
+W= 100m,V= 3:2m,L= 0:16m,W= 0:16m,
+V= 0:2m, y usamos T= 10 barridos para predecir H= 30
+estados futuros a 10 Hz (lo que resulta en predicciones de 3 s de longitud). Para la segunda etapa, recortamos una región de 40m40m
+alrededor de cada actor. Los modelos se implementaron en PyTorch
+[39] y se entrenaron de extremo a extremo con 16 GPU, con un lote por GPU
+de tamaño 2, el optimizador Adam [40] y una tasa de aprendizaje inicial
+de 2e-4, entrenando durante 2 épocas que se completan en un día. Cabe señalar que
+al inicio del entrenamiento, la salida de detección de la primera etapa es demasiado ruidosa
+para proporcionar entradas estables al refinamiento de la segunda etapa. Para
+mitigar este problema, usamos las detecciones de verdad de referencia para las
+primeras 2:5k iteraciones al entrenar la red de la segunda etapa.
+Comparamos el enfoque descrito con nuestra implementa-
+ción de IntentNet [5], que ampliamos para admitir múltiples
+clases y ajustamos para obtener mejores resultados que los reportados en
+el artículo original. Además, usando los resultados publicados,
+comparamos con el método SpAGNN de extremo a extremo propuesto recientemente
+que tiene en cuenta las interacciones entre los actores de trá-
+fico [6]. Evaluamos los métodos usando tanto métricas de detección
+como de predicción. Siguiendo la literatura previa para las métricas de detec-
+ción, fijamos el umbral de coincidencia de detección IoU
+en 0:7, 0:1 y 0:3 para vehículos, peatones y ciclistas,
+respectivamente. Para las métricas de predicción fijamos el umbral de probabilidad
+para obtener una exhaustividad de 0:8 como punto operativo,
+como se propone en [6]. En particular, reportamos la precisión media
+(AP) como métrica de detección, así como el error de desplazamiento (DE)
+[41] y el error de trayectoria transversal (CT) a 3 segundos.
+Para los enfoques multimodales reportamos tanto el mín-
+over-M [11], [17], que toman el error mínimo sobre todos los
+modos (midiendo la exhaustividad) y el rendimiento del modo de mayor
+probabilidad (midiendo la precisión).
+B. Resultados
+Los resultados de la evaluación con datos de nuScenes para vehículos,
+peatones y ciclistas se resumen en la Tabla I, con
+los mejores resultados de predicción en negrita, donde comparamos
+el MultiXNet propuesto con los métodos del estado del arte
+SpAGNN [6] e IntentNet [5]. Cabe señalar que, además de
+la línea base IntentNet, que usa el error de desplazamiento (DE) en
+su pérdida, también incluimos una versión con pérdidas AT y CT igualmente ponderadas
+en su lugar. Esta es una extensión de la línea base
+que usa la idea presentada en la Sec. III-B.1, que demostró
+un buen rendimiento en nuestros experimentos.
+Podemos ver que todos los métodos lograron un rendimiento de detección
+similar en general. Al comparar los métodos del estado del
+arte SpAGNN e IntentNet, este último obtuvo
+una mejor precisión de predicción en actores vehiculares. Los autores de
+SpAGNN no proporcionaron resultados para otros actores de tráfico, por lo que
+estos resultados no se incluyen en la tabla. Además, vemos
+que IntentNet con pérdidas AT/CT, correspondiente al modelo
+descrito en la Sec. III-A que no modela la incertidumbre,
+logra errores DE y CT comparables a los del IntentNet
+original con pérdida DE, con resultados ligeramente mejorados para
+vehículos y ciclistas. Aunque las mejoras no son
+grandes, este modelo permite diferentes ponderaciones de los errores AT y CT
+componentes. Este compromiso es una característica importante para
+los modelos desplegados en la conducción autónoma, donde la precisión de predicción
+en estas dos direcciones puede tener diferente
+importancia (por ejemplo, en escenarios de incorporación, el AT puede ser más
+importante, mientras que en los adelantamientos nos puede importar más el CT
+TABLA I: Comparación con datos de nuScenes usando el modo de mayor probabilidad, con el rendimiento de detección evaluado mediante
+precisión media en % (AP) y la predicción mediante el error de desplazamiento (DE) y el error transversal (CT) a 3 s, en centímetros;
+los resultados calculados en el modo de mejor coincidencia (es decir, min-over-M) para los métodos multimodales se muestran entre paréntesis cuando están disponibles
+Vehículos Peatones Ciclistas
+Método AP DE CT AP DE CT AP DE CT
+SpAGNN - 145.0 - - - - - - -
+IntentNet (DE) 61.0 117.4 37.7 64.4 83.5 47.3 30.9 184.6 73.7
+IntentNet (AT/CT) 60.3 118.3 37.8 63.4 83.6 46.8 31.8 173.0 70.2
+MultiXNet 60.6 105.0 (104.2 )29.7 (29.1) 66.1 80.1 43.8 32.6 203.1 54.8
+TABLA II: Estudio de ablación del MultiXNet propuesto sobre los datos ATG4D; “Unc.” denota la pérdida de incertidumbre de la Sec. III-B.1,
+“2nd” denota la etapa de refinamiento de la Sec. III-B.2, y “Mm.” denota la pérdida multimodal de la Sec. III-B.3
+Vehículos Peatones Ciclistas
+Unc. 2nd Mm. AP DE CT AP DE CT AP DE CT
+83.9 90.4 26.0 88.4 61.8 32.9 83.2 51.7 23.5
+KL-L 84.1 91.9 22.8 88.2 57.1 30.4 84.6 49.9 21.1
+3 84.6 82.2 22.2 88.7 63.2 33.2 84.3 51.6 23.8
+KL-L 3 84.4 83.3 20.4 88.4 57.6 30.6 83.9 52.0 21.7
+3 3 84.0 82.4 ( 81.4)22.4 (21.8) 88.5 62.6 33.0 84.2 51.2 23.7
+KL-L 3 3 84.2 83.1 (82.1) 20.2 (19.8) 88.4 57.2 30.5 84.6 48.5 20.7
+KL-G 3 3 85.0 84.5 (83.4) 20.6 ( 19.7)88.7 58.1 31.3 84.7 50.4 20.6
+NL-L 3 3 84.6 85.3 (84.0) 20.2 (19.8) 88.4 58.4 31.0 83.9 50.4 20.9
+NL-G 3 3 84.5 88.5 (87.7) 21.1 (20.7) 88.6 59.3 32.0 83.5 51.8 21.0
+KL-L no rot. 3 84.4 86.9 (86.0) 21.9 (21.2) 88.6 57.3 30.7 84.0 50.4 21.5
+escenarios). Por último, el MultiXNet propuesto superó
+a los métodos competidores por un margen significativo en los tres
+tipos de actores. Considerando solo los vehículos, vemos que
+modelar trayectorias multimodales llevó a mejoras cuando
+se considera el modo min-over-M (resultado dado entre parén-
+tesis), así como el modo de mayor probabilidad, lo que indica tanto
+una mejor exhaustividad como una mejor precisión del MultiXNet, respectivamente.
+En la Tabla II presentamos los resultados de un estudio de ablación del
+MultiXNet, realizado sobre el conjunto ATG4D, más grande
+de datos, que involucra los componentes analizados en la Sec. III-B.
+Cabe señalar que la primera fila corresponde al IntentNet (AT/CT)
+método, mientras que la última fila de la primera parte de la tabla
+corresponde al MultiXNet propuesto (KL-L denota la
+pérdida de divergencia KL usando la distribución de Laplace). Podemos ver
+que todos los métodos tuvieron prácticamente la misma AP, lo que no es
+un resultado sorprendente, ya que todos los enfoques tienen
+arquitecturas de detección idénticas. Centrándonos por un momento en los actores vehiculares,
+modelar la incertidumbre llevó a mejoras en el error CT,
+que disminuyó un 13%. Introducir el refinamiento de los actores
+mediante la red de la segunda etapa resultó en la mayor mejo-
+ra en el DE, con una reducción del 11%. Cabe señalar que
+mejoras tan grandes en DE y CT pueden traducirse en
+mejoras significativas en el rendimiento de los SDV.
+Las últimas tres filas de la parte superior de la Tabla II muestran
+el rendimiento de distintas variantes del modelo de la segunda
+etapa. De forma similar al resultado anterior, modelar
+la incertidumbre llevó a una mejora sustancial de casi
+un 10% en el error CT. Esto se explica
+porque los valores atípicos reciben menor peso debido a su
+mayor varianza, como se muestra en la ecuación (3), y por tanto tienen menor
+impacto durante el entrenamiento en comparación con el caso en que la
+varianza no se tiene en cuenta. Además, en las dos filas siguientes
+evaluamos los modelos que generan salidas multimodales
+Fig. 3: Diagramas de fiabilidad para las dimensiones a lo largo de la trayectoria (AT) (izquierda) y
+transversal (CT) (derecha) en el horizonte de predicción de 3 s
+trayectorias. Podemos ver que usar el modo de mayor probabilidad
+para medir el rendimiento dio resultados comparables a los de
+una alternativa unimodal. Esto se debe a una limitación conocida de
+este tipo de esquema de evaluación, que no puede captar adecuadamente
+el rendimiento de los enfoques multimodales [11], [17]. Por
+esta razón, entre paréntesis, también informamos min-over-M,
+una técnica de evaluación multimodal de uso habitual en la
+literatura, que indicó mejoras tanto en DE como en CT
+en comparación con los demás modelos de referencia.
+Por último, en las cuatro filas inferiores realizamos más estudios de ablación
+modificando la pérdida con conciencia de incertidumbre y el
+procesamiento de la segunda etapa. En particular, analizamos un modelo
+que usa la divergencia KL propuesta y asume un modelo de ruido gaussiano
+(KL-G) en lugar de laplaciano (KL-L), así como
+modelos que optimizan directamente la log-verosimilitud negativa con
+distribuciones gaussianas (NL-G) y laplacianas (NL-L) para modelar
+los errores de predicción. Podemos ver que usar la pérdida KL con
+distribución laplaciana, tal como se introduce en la Sec. III-B.1, dio como resultado
+los errores de predicción más bajos en los tres tipos de actores.
+Además, en la última fila mostramos los resultados de MultiXNet
+en los que no rotamos las características recortadas, como se
+Fig. 4: Resultados cualitativos de los modelos en competencia; fila superior: IntentNet, inferior: MultiXNet; verdad de referencia en rojo,
+predicciones en azul, mientras que las elipses de color indican una desviación estándar de la incertidumbre inferida para las predicciones futuras
+descritas en la Sec. III-B.2. Podemos ver que omitir
+la rotación produjo una caída significativa del rendimiento, lo que
+refuerza el uso de RROI en el procesamiento de la segunda etapa.
+Analicemos los resultados para peatones y ciclistas
+que se muestran en el resto de la Tabla II. Como se explicó en la Sec.
+III-B.4, no usamos el refinamiento de la segunda etapa ni
+la pérdida multimodal con estos actores, y los cambios indicados
+en las columnas 2nd y Mm. solo afectaron a la rama de vehículos
+de la red (los resultados de la misma configuración cambiaron
+ligeramente por la inicialización aleatoria de los pesos). De forma similar a los
+experimentos con vehículos, vemos que modelar la incertidumbre
+mejoró los resultados, con mejoras de CT entre el 9%
+y el 13%, como se ve en la segunda, cuarta y sexta filas.
+Además de mejorar el rendimiento, modelar la incertidumbre
+también permite razonar sobre el ruido inherente al movimiento futuro
+del tráfico. Como se mencionó en la Sec. I, esta es una característica importante
+que ayuda a la planificación de movimiento a generar movimientos seguros y
+eficientes para el SDV. En la Fig. 3 presentamos diagramas de fiabilidad
+[10] a lo largo de las dimensiones AT y CT para
+los tres tipos de actores, medidos con un horizonte de predicción de 3
+segundos. Podemos ver que las incertidumbres aprendidas estaban bien
+calibradas, con una ligera subconfianza para todos los actores de tráfico.
+Las incertidumbres de los ciclistas fueron las menos calibradas, seguidas
+por las de los peatones. Como era de esperar, los tipos de actores con más
+datos de entrenamiento mostraron las incertidumbres mejor calibradas.
+C. Resultados cualitativos
+En esta sección presentamos varios casos representativos
+que ejemplifican los beneficios de MultiXNet propuesto
+frente al IntentNet, el estado del arte. Tres comparaciones de los
+dos métodos se muestran en la Fig. 4, donde no visualizamos
+las trayectorias de MultiXNet de baja probabilidad por debajo del umbral de 0.3.
+En el primer caso, vemos a un actor que se acerca a una intersección
+y gira a la derecha, donde IntentNet unimodal
+predijo incorrectamente que seguiría recto
+a través de la intersección. En cambio, MultiXNet predijo
+una trayectoria de giro muy precisa con alta certeza, al tiempo que permitía la posibilidad de seguir recto.
+Además de las predicciones, vemos que ambos
+modelos detectaron a los dos actores en los alrededores del SDV
+con alta precisión. En el segundo caso, el SDV avanza
+por una intersección con semáforo en verde, rodeado
+de vehículos. Vemos que ambos modelos detectaron correctamente
+y predijeron los movimientos de la mayoría de los actores de tráfico.
+Consideremos la predicción de movimiento de un camión grande
+en un carril de giro a la derecha, al lado derecho del SDV. Una vez más,
+IntentNet predijo una trayectoria recta, mientras que en realidad el
+actor giró. Como antes, MultiXNet generó múltiples
+modos y ofreció estimaciones razonables de incertidumbre para
+tanto la trayectoria de giro como la de seguir recto.
+Por último, el tercer caso muestra el SDV en una intersección poco común
+de tres vías. Como antes, ambos modelos ofrecieron
+detecciones precisas de los actores circundantes, incluido uno
+peatón en la parte superior de la escena. Dirijamos nuestra atención
+al vehículo que se acerca a la intersección desde la
+parte superior de la figura. Este actor hizo un giro a la izquierda sin prioridad
+hacia el SDV, que IntentNet predijo mal como
+seguir recto. En cambio, vemos que MultiXNet produjo
+ambos modos posibles, incluida una trayectoria de giro con gran
+incertidumbre debido a la forma inusual de la intersección.
+V. CONCLUSIÓN
+Presentamos MultiXNet, un modelo multietapa que primero
+infiere detecciones y predicciones de objetos, y luego refina
+estas predicciones con una segunda etapa para producir múltiples
+trayectorias futuras posibles. El método propuesto se evaluó
+con dos conjuntos de datos a gran escala recogidos en las calles
+de varias ciudades, donde superó al estado del arte
+existente. Aunque obtiene un buen rendimiento, hay varias
+direcciones en las que el método podría mejorarse. Por
+ejemplo, la red no modela explícitamente las interacciones entre actores,
+y se centra en lidar y en mapas, mientras que la introducción de
+sensores como radares y cámaras podría ser muy beneficiosa.
+Estas líneas representan áreas de nuestro trabajo futuro.
+REFERENCIAS
+[1] P. Stahl, B. Donmez y G. A. Jamieson, “Anticipation in driving:
+The role of experience in the efficacy of pre-event conflict cues,” IEEE
+Transactions on Human-Machine Systems, vol. 44, no. 5, pp. 603–613,
+2014.
+[2] ——, “Supporting anticipation in driving through attentional and
+interpretational in-vehicle displays,” Accident Analysis & Prevention,
+vol. 91, pp. 103–113, 2016.
+[3] A. Cosgun, L. Ma, et al., “Towards full automated drive in urban
+environments: A demonstration in gomentum station, california,” en
+IEEE Intelligent Vehicles Symposium, 2017, pp. 1811–1818. [En línea].
+Disponible en: https://doi.org/10.1109/IVS.2017.7995969
+[4] W. Luo, B. Yang y R. Urtasun, “Fast and furious: Real time end-
+to-end 3d detection, tracking and motion forecasting with a single
+convolutional net,” en Proc. of the IEEE CVPR, 2018, pp. 3569–3577.
+[5] S. Casas, W. Luo y R. Urtasun, “Intentnet: Learning to predict
+intention from raw sensor data,” en Conference on Robot Learning,
+2018, pp. 947–956.
+[6] S. Casas, C. Gulino, R. Liao y R. Urtasun, “Spatially-aware graph
+neural networks for relational behavior forecasting from sensor data,”
+arXiv preprint arXiv:1910.08233, 2019.
+[7] G. P. Meyer, J. Charland, S. Pandey, A. Laddha, C. Vallespi-Gonzalez,
+y C. K. Wellington, “Laserflow: Efficient and probabilistic object
+detection and motion forecasting,” arXiv preprint arXiv:2003.05982,
+2020.
+[8] F.-C. Chou, T.-H. Lin, H. Cui, V. Radosavljevic, T. Nguyen, T.-K.
+Huang, M. Niedoba, J. Schneider y N. Djuric, “Predicting motion
+of vulnerable road users using high-definition maps and efficient
+convnets,” en IEEE Intelligent Vehicles Symposium (IV), 2020.
+[9] Y. Chai, B. Sapp, M. Bansal y D. Anguelov, “Multipath: Multiple
+probabilistic anchor trajectory hypotheses for behavior prediction,”
+arXiv preprint arXiv:1910.05449, 2019.
+[10] N. Djuric, V. Radosavljevic, H. Cui, T. Nguyen, F.-C. Chou, T.-H. Lin,
+y J. Schneider, “Uncertainty-aware short-term motion prediction of
+traffic actors for autonomous driving,” en IEEE Winter Conference on
+Applications of Computer Vision (WACV), 2020.
+[11] H. Cui, V. Radosavljevic, F.-C. Chou, T.-H. Lin, T. Nguyen, T.-K.
+Huang, J. Schneider y N. Djuric, “Multimodal trajectory predictions
+for autonomous driving using deep convolutional networks,” en 2019
+International Conference on Robotics and Automation (ICRA). IEEE,
+2019, pp. 2090–2096.
+[12] A. H. Lang, S. V ora, H. Caesar, L. Zhou, J. Yang, y O. Beijbom,
+“Pointpillars: Fast encoders for object detection from point clouds,” en
+Actas de la IEEE Conference on Computer Vision and Pattern
+Recognition , 2019, pp. 12 697–12 705.
+[13] G. P. Meyer, A. Laddha, E. Kee, C. Vallespi-Gonzalez, y C. K.
+Wellington, “Lasernet: An efficient probabilistic 3d object detector
+for autonomous driving,” en Actas de la IEEE Conference on
+Computer Vision and Pattern Recognition , 2019, pp. 12 677–12 686.
+[14] G. P. Meyer, J. Charland, D. Hegde, A. Laddha, y C. Vallespi-
+Gonzalez, “Sensor fusion for joint 3d object detection and semantic
+segmentation,” en The IEEE Conference on Computer Vision and
+Pattern Recognition (CVPR) Workshops , junio de 2019.
+[15] X. Chen, H. Ma, J. Wan, B. Li, y T. Xia, “Multi-view 3d object
+detection network for autonomous driving,” en Actas de la
+IEEE Conference on Computer Vision and Pattern Recognition , 2017,
+pp. 1907–1915.
+[16] Y . Zhou, P. Sun, Y . Zhang, D. Anguelov, J. Gao, T. Ouyang, J. Guo,
+et al. , “End-to-end multi-view fusion for 3d object detection in lidar
+point clouds,” preimpresión arXiv:1910.06528 , 2019.
+[17] N. Lee, W. Choi, P. Vernaza, C. B. Choy, P. H. Torr, y M. Chan-
+draker, “Desire: Distant future prediction in dynamic scenes with in-
+teracting agents,” en Actas de la IEEE Conference on Computer
+Vision and Pattern Recognition , 2017, pp. 336–345.
+[18] T. Salzmann, B. Ivanovic, P. Chakravarty, y M. Pavone, “Trajec-
+tron++: Multi-agent generative trajectory forecasting with heteroge-
+neous data for control,” preimpresión arXiv:2001.03093 , 2020.
+[19] A. Gupta, J. Johnson, L. Fei-Fei, S. Savarese, y A. Alahi, “Social
+gan: Socially acceptable trajectories with generative adversarial net-
+works,” en Actas de la IEEE Conference on Computer Vision
+and Pattern Recognition , 2018, pp. 2255–2264.
+[20] T. Zhao, Y . Xu, M. Monfort, W. Choi, C. Baker, Y . Zhao, Y . Wang,
+y Y . N. Wu, “Multi-agent tensor fusion for contextual trajectory
+prediction,” en Actas de la IEEE Conference on Computer
+Vision and Pattern Recognition , 2019, pp. 12 126–12 134.[21] A. Sadeghian, V . Kosaraju, A. Sadeghian, N. Hirose, H. Rezatofighi,
+y S. Savarese, “Sophie: An attentive gan for predicting paths
+compliant to social and physical constraints,” en Actas de la
+IEEE Conference on Computer Vision and Pattern Recognition , 2019,
+pp. 1349–1358.
+[22] V . Kosaraju, A. Sadeghian, R. Mart ´ın-Mart ´ın, I. Reid, H. Rezatofighi,
+y S. Savarese, “Social-bigat: Multimodal trajectory forecasting using
+bicycle-gan and graph attention networks,” en Advances in Neural
+Information Processing Systems , 2019, pp. 137–146.
+[23] Y . Ma, X. Zhu, S. Zhang, R. Yang, W. Wang, y D. Manocha,
+“Trafficpredict: Trajectory prediction for heterogeneous traffic-agents,”
+en AAAI Conference on Artificial Intelligence , 2019.
+[24] R. Chandra, U. Bhattacharya, A. Bera, y D. Manocha, “Traphic: Tra-
+jectory prediction in dense and heterogeneous traffic using weighted
+interactions,” en Actas de la IEEE Conference on Computer
+Vision and Pattern Recognition , 2019, pp. 8483–8492.
+[25] Y . Yuan y K. Kitani, “Diverse trajectory forecasting with determi-
+nantal point processes,” preimpresión arXiv:1907.04967 , 2019.
+[26] E. Wang, H. Cui, S. Yalamanchi, M. Moorthy, F.-C. Chou, y
+N. Djuric, “Improving movement predictions of traffic actors in bird’s-
+eye view models using GANs and differentiable trajectory rasteriza-
+tion,” en ACM SIGKDD Conference on Knowledge Discovery and Data
+Mining (KDD) , 2020.
+[27] T. Phan-Minh, E. C. Grigore, F. A. Boulton, O. Beijbom, y E. M.
+Wolff, “Covernet: Multimodal behavior prediction using trajectory
+sets,” en Actas de la IEEE/CVF Conference on Computer Vision
+and Pattern Recognition , 2020, pp. 14 074–14 083.
+[28] H. Cui, T. Nguyen, F.-C. Chou, T.-H. Lin, J. Schneider, D. Bradley, y
+N. Djuric, “Deep kinematic models for physically realistic prediction
+of vehicle trajectories,” 2020 International Conference on Robotics
+and Automation (ICRA) , 2020.
+[29] J. Hong, B. Sapp, y J. Philbin, “Rules of the road: Predicting driving
+behavior with a convolutional model of semantic interactions,” en
+Actas de la IEEE Conference on Computer Vision and Pattern
+Recognition , 2019, pp. 8454–8462.
+[30] A. Jain, S. Casas, R. Liao, Y . Xiong, S. Feng, S. Segal, y R. Urtasun,
+“Discrete residual flow for probabilistic pedestrian behavior predic-
+tion,” preimpresión arXiv:1910.08041 , 2019.
+[31] W. Zeng, W. Luo, S. Suo, A. Sadat, B. Yang, S. Casas, y R. Urtasun,
+“End-to-end interpretable neural motion planner,” en Actas de
+la IEEE Conference on Computer Vision and Pattern Recognition ,
+2019, pp. 8660–8669.
+[32] P. Wu, S. Chen, y D. Metaxas, “Motionnet: Joint perception and
+motion prediction for autonomous driving based on bird’s eye view
+maps,” preimpresión arXiv:2003.06754 , 2020.
+[33] T.-Y . Lin, P. Goyal, R. Girshick, K. He, y P. Dollar, “Focal loss for
+dense object detection,” en ICCV , 2017.
+[34] C. Gong y D. McNally, “A methodology for automated trajectory
+prediction analysis,” en AIAA Guidance, Navigation, and Control
+Conference and Exhibit , 2004, p. 4788.
+[35] G. P. Meyer, “An alternative probabilistic interpretation of the huber
+loss,” preimpresión arXiv:1911.02088 , 2019.
+[36] G. P. Meyer y N. Thakurdesai, “Learning an uncertainty-
+aware object detector for autonomous driving,” preimpresión
+arXiv:1910.11375 , 2019.
+[37] M. Liang, B. Yang, Y . Chen, R. Hu, y R. Urtasun, “Multi-task
+multi-sensor fusion for 3d object detection,” en Actas de la
+IEEE Conference on Computer Vision and Pattern Recognition , 2019,
+pp. 7345–7353.
+[38] H. Caesar, V . Bankiti, A. H. Lang, S. V ora, V . E. Liong, Q. Xu,
+A. Krishnan, Y . Pan, G. Baldan, y O. Beijbom, “nuscenes: A
+multimodal dataset for autonomous driving,” en Actas de la
+IEEE/CVF Conference on Computer Vision and Pattern Recognition ,
+2020, pp. 11 621–11 631.
+[39] A. Paszke, S. Gross, et al. , “Pytorch: An imperative style, high-
+performance deep learning library,” en Advances in Neural Information
+Processing Systems 32 , H. Wallach, H. Larochelle, A. Beygelzimer,
+F. d’ Alché-Buc, E. Fox, y R. Garnett, eds. Curran Associates,
+Inc., 2019, pp. 8024–8035.
+[40] D. P. Kingma y J. Ba, “Adam: A method for stochastic optimiza-
+tion,” preimpresión arXiv:1412.6980 , 2014.
+[41] A. Alahi, K. Goel, V . Ramanathan, A. Robicquet, L. Fei-Fei, y
+S. Savarese, “Social lstm: Human trajectory prediction in crowded
+spaces,” en Actas de la IEEE conference on computer vision
+and pattern recognition , 2016, pp. 961–971.

@@ -1,0 +1,23 @@
+AI RiskIterated Ampliﬁcation
+FrontpageThis may be trivial or obvious for a lot of people, but it doesn't seem like anyone has botheredto write it down (or I haven't looked hard enough). It started out as a generalization of PaulChristiano's IDA, but also covers things like safe recursive self-improvement.Start with a team of one or more humans (researchers, programmers, trainers, and/or overseers), with access to zero or more AIs (initially as assistants). The human/AI team in each round develops a new AI and adds it to the team, and repeats this until maturity in AI technology is achieved. Safety/alignment is ensured by having some set of safety/alignment properties on the team that is inductively maintained by the development process.The reason I started thinking in this direction is that Paul's approach seemed very hard to knockdown, because any time a ﬂaw or di'culty is pointed out or someone expresses skepticism onsome technique that it uses or the overall safety invariant, there's always a list of othertechniques or invariants that could be substituted in for that part (sometimes° in my own brainas I tried to criticize some part of it). Eventually I realized this shouldn't be surprising becauseIDA is an instance of this more general model of safety-oriented AI development, so there arebound to be many points near it in the space of possible safety-oriented AI developmentpractices. (Again, this may already be obvious to others including Paul, and in their minds IDA isperhaps already a cluster of possible development practices consisting of the most promisingsafety techniques and invariants, rather than a single point.)If this model turns out not to have been written down before, perhaps it should be assigned aname, like Iterated Safety-Invariant AI-Assisted AI Development, or something pithier?AI Risk1Iterated Ampliﬁcation1
+FrontpageA general model of safety-oriented AIdevelopmentby Wei Dai11th Jun 2018
+20
+Mentioned in401
+5 comments, sorted by top scoringVladimir Slepnev5
+William Saunders4
+[-]
+My two biggest objections to that kind of plan:1) It feels like passing the buck, which is a known antipattern in thinking about AI.2) With a "soft" self-improving entity, like a team of people and AIs, most invariants you can deﬁne will also be "soft" andprone to drift over many iterations.That's why I'd prefer a more object-level solution to alignment, if we can have it. But maybe we can't have it.
+Wei Dai5
+[-]
+1) It feels like passing the buck, which is a known antipattern in thinking about AI.Not sure what you mean by this or by "more object-level solution to alignment". Please explain more?2) With a “soft” self-improving entity, like a team of people and AIs, most invariants you can deﬁne will also be“soft” and prone to drift over many iterations.Yeah I agree with this part. I think deﬁning an invariant that is both "good enough" and achievable/provable will be veryhard or maybe just impossible.
+Vladimir Slepnev3
+[-]
+Not sure what you mean by this or by "more object-level solution to alignment". Please explain more?The proposed setup can be seen as a self-improving AI, but a pretty opaque one. To explain why it makes a particulardecision, we must appeal to anthropomorphism, like "our team of researchers wouldn't do such a stupid thing". Thatseems prone to wishful thinking. I would prefer to launch an AI for which at least some decisions have non-anthropomorphic explanations.
+[-]
+Shorter name candidates:Inductively Aligned AI DevelopmentInductively Aligned AI Assistants2018 AI Alignment Literature Review and Charity ComparisonThe Alignment Newsletter #11: 06/18/185y 
+5y 
+5y 
+5y 
+William Saunders3
+[-]
+It's a nice property of this model that it prompts consideration of the interaction between humans and AIs at every step (tohighlight things like risks of the humans having access to some set of AI systems for manipulation or moral hazard reasons).5y 

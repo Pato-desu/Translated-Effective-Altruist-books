@@ -1,0 +1,694 @@
+Learning Causal Trees with Latent Variables via Controlled Experimentation
+Prasad Tadepalli
+Oregon State University
+Corvallis, Oregon, 97331Cameron Barrie
+Oregon State University
+Corvallis, Oregon, 97331Stuart J. Russell
+University of California
+Berkeley, California, 94720
+Abstract
+Learning causal knowledge often requires interventional ex-
+periments due to the non-determinacy of causality. In this
+paper we motivate the need for experiments from the per-
+spective of computational tractability when there are latent
+variables. We present a polynomial-time controlled experi-
+mentation algorithm to learn the parameters of a known tree
+structured causal network when all nodes but the root and the
+leaves are latent and only the leaves are controllable. Our em-
+pirical results on several synthetic datasets show the superior-
+ity of algorithmic experimentation compared to other passive
+approaches such as neural network learning.
+Introduction
+Structural causal Models (SCMs) are attractive models of
+causality with intuitive semantics and mathematical rigor.
+It is well known that learning the structure of causal net-
+works often requires interventional experiments, as the ob-
+servational data alone cannot identify the true causal struc-
+ture from its Markov equivalence class (Pearl 2009; Spirtes,
+Glymour, and Scheines 2000; Reichenbach 1991). There
+have been several approaches to learn the structure of the
+causal networks by combining observational and interven-
+tional data (Cooper and Yoo 1999; Peters, B ¨uhlmann, and
+Meinshausen 2016; Silander and Myllymaki 2012; Eaton
+and Murphy 2007). There are also some sophisticated ap-
+proaches that actively design optimal experiments to learn
+the structure of the network (He and Geng 2008). In re-
+cent work, optimal active learning strategies for identi-
+fying causal network structures with minimal number of
+single-node and multi-node interventions have been studied
+(Hauser and B ¨uhlmann 2014).
+There has been considerable work on learning the struc-
+ture of SCMs in the presence of latent variables includ-
+ing IC* (Pearl 2009), FCI (Spirtes, Glymour, and Scheines
+2000), and RFCI (Colombo et al. 2012). Recent methods
+have explored the use of path queries (Bello and Hono-
+rio 2017), experimental design (Kocaoglu, Shanmugam, and
+Bareinboim 2017), and constraint satisfaction to learn the
+structure (Hyttinen et al. 2013). In this work, we address
+the complementary problem of efﬁciently learning the pa-
+Copyright c2019, Association for the Advancement of Artiﬁcial
+Intelligence (www.aaai.org). All rights reserved.rameters of a network with a known structure in the pres-
+ence of a large number of latent variables. Previous work on
+learning the parameters of Bayesian networks are based on
+expectation maximization and gradient descent (Binder et
+al. 1997), a variety of imputation methods and others such
+as robust Bayesian estimator (Ramoni and Sebastiani 2001).
+However, none of these approaches make any formal guar-
+antees of performance. Indeed, it appears that learning in
+the presence of latent variables is intractable without exper-
+iments, which is not considered by these methods.
+We consider the problem of learning the parameters of a
+structural causal model (SCM) from observations and ex-
+periments in the framework of PAC-learning of probabilistic
+concepts or P-concepts (Kearns and Schapire 1994). This
+framework assumes that the inputs are generated from a nat-
+ural distribution, and the goal is to learn, with a high prob-
+ability, an approximate conditional distribution of the tar-
+get variable given the inputs. In PAC-prediction, the learner
+is allowed to express the target function in any polynomi-
+ally evaluatable representation equivalent to the target con-
+cept. Thus PAC-learning of a concept is in general a harder
+problem than PAC-prediction as the learner has greater free-
+dom to represent its target. When all variables are Boolean,
+and the CPTs are deterministic, an SCM is equivalent to a
+Boolean circuit. Unfortunately PAC-prediction of Boolean
+circuits from random examples is cryptographically hard,
+i.e., as hard as solving cryptographic problems such as inte-
+ger factoring (Pitt and Valiant 1988). Surprisingly, the prob-
+lem remains hard even when the circuit is tree-structured and
+the structure of the tree is given (Pitt and Warmuth 1990).
+Since probabilistic Boolean SCMs, where only the inputs
+and the ﬁnal output of the SCM are observed, generalize
+Boolean circuits, it follows that learning them is as hard as
+factoring. Just as in the Boolean circuits, the hardness re-
+mains even when the SCM has a known tree structure.
+It was previously shown that the functions that correspond
+to the latent internal nodes of a tree structured deterministic
+Boolean circuit can be learned from random examples and
+membership queries (Tadepalli and Russell 1998). A mem-
+bership query asks the output of the circuit for any given
+input. Interestingly both membership queries and the ran-
+dom examples are needed for learning to be successful. On
+the other hand, deviations from the tree structure make the
+problem cryptographically hard even when both random ex-
+amples and membership queries are allowed. In this paper,
+we extend this previous work to probabilistic setting and
+show that rooted probabilistic causal trees can be efﬁciently
+learned from observational and experimental data.
+While there have been many approaches to learning
+causal networks that employ a combination of observational
+and experimental data, in many cases, the experiments are
+ofﬂine and predetermined, which limits them to be small in
+number and non-adaptive. Previous work in active learning
+of Bayesian networks also explored the idea of experimenta-
+tion where the relevant variables to be intervened are picked
+using greedy heuristics such as structure entropy and ex-
+pected posterior loss over a query distribution (Li and Leong
+2009; Tong and Koller 2001; He and Geng 2008). In con-
+trast, we study the problem of algorithmic experimentation
+with provable guarantees , where the experiments are se-
+lected by the algorithm automatically for the speciﬁc infor-
+mational need of learning. Also unlike the model of learning
+from membership queries where each query returns a label,
+each experiment in our setting returns the conditional prob-
+ability distribution of output given the input.
+The root of the tree represents the target variable whose
+value we are interested in predicting and the leaves of the
+tree represent the input variables whose values can be di-
+rectly set or controlled by the algorithm. The causality ﬂows
+from the leaf nodes to the root node, i.e., from the input vari-
+ables to the target. Following the terminology of causal net-
+works, we call the causal antecedents of a node, its parents,
+rather than its children as is normally referred to in the tree
+literature. We assume that the tree-structure of the network is
+given and the conditional probabilities at each node are rep-
+resented explicitly in the form of tables. Learning the con-
+ditional probability tables (CPTs) is straightforward if we
+observe all nodes in the tree. What makes the problem difﬁ-
+cult and interesting is that only the root and the leaves of the
+tree are observable and the rest of the nodes are latent.
+Our top level algorithm is similar to that of (Tadepalli and
+Russell 1998) and is inspired by the idea of “controlled ex-
+perimentation” in science. The algorithm, called Control-
+Exp, creates an appropriate context – or experimental set-
+ting – that controls a latent variable and observes its effect
+on another variable. The result of the “experiment” is a con-
+ditional probability of the target variable given the input.
+While in the real world, the experiment will have to be re-
+peated many times to estimate the probability, it is directly
+computed from synthetic causal models in our experiments.
+The results show that our algorithm robustly and ac-
+curately learns the target models from a combination of
+random examples and automatically designed experiments.
+Deep neural networks trained on the same data or on the
+same amount of randomly generated data fail to learn as
+well. We believe that it strongly suggests the need for learn-
+ing algorithms that exploit the known domain structure and
+adaptively design and conduct their own experiments.
+Problem Setup
+A Structural Causal Model (SCM) is a 4-tuple (V;D;G;P ),
+whereVis a set of random variables over the domain D,G
+is a directed acyclic graph over V, andPis the conditionaldistribution of variables Vi2Vgiven the values of their
+parents (causal antecedents) Pa(Vi)inG. A Tree-structured
+causal network or causal tree is an SCM in the form of a
+rooted tree, where the root represents the only target variable
+and the direction of causality is from the leaf nodes that rep-
+resent the input variables to the root. Recall that we reverse
+the usual convention of parent-child relationship in trees to
+be consistent with the terminology of causal networks. In
+particular we assume that each node has a single child and
+has multiple parents which are its causal antecedents.
+We assume that only the input variables and the target
+are observable. The rest of the variables, called the internal
+nodes, are latent. We often use the word ‘node’ to mean the
+variable represented at that node. In this work, we assume
+that the tree structure of an SCM, i.e., VandGare given and
+seek to learn the probability model P(:jPa(:)). We restrict
+ourselves to the Boolean domain for all our variables, which
+allowsPto be represented by a conditional probability ta-
+ble (CPT) given by P(Vi= 1jPa(Vi))for each variable Vi.
+The CPT has one entry for every possible value tuple of the
+parents ofVi. The generative process of the SCM induces a
+conditional distribution P(target = 1jinput =x), abbrevi-
+ated asP(targetjx), which we seek to learn from examples.
+We assume that the inputs xare generated from a natural
+distributionD(x). Following the PAC framework of (Kearns
+and Schapire 1994), we seek an  -approximate probabil-
+ity model of P, which is a model ~Pthat guarantees that
+Prx2D[jP(targetjx) ~P(targetjx)j> ]. Learn-
+ing algorithms ﬁnd such models by considering a hypoth-
+esis spaceHof possible models and returning a hypothesis
+h2Hwith the least empirical loss on a sufﬁciently large set
+of labeled samples. The PAC-learning theory of (Kearns and
+Schapire 1994; Haussler 1992) and others (Pollard 1984)
+deﬁne a combinatorial measure called pseudo-dimension d
+for the hypothesis space where a sample size polynomial in
+d;1=;1=, and 1=is sufﬁcient to guarantee that any hy-
+pothesis that minimizes the empirical loss on the sample is
+going to be an  -approximation of the true model with
+probability 1 . The pseudo-dimension of the hypothesis
+space of Bayesian networks of a given structure is given by
+the sum of the sizes of all its CPTs, i.e., n2k, wherenis
+the number of nodes and the degree kis an upper bound on
+the number of parents of any node (Dasgupta 1997). Hence
+causal trees of small degree have low sample complexity.
+Turning now to the time complexity of learning, in pre-
+vious work it is shown that the parameters of determin-
+istic causal trees with known structure can be learned in
+polynomial-time when both random examples and mem-
+bership queries are available (Tadepalli and Russell 1998).
+Both random examples and membership queries are neces-
+sary for successful learning. Without membership queries
+the problem is equivalent to learning arbitrary Boolean func-
+tions from random examples, which is cryptographically
+hard (Pitt and Valiant 1988). Without random examples, the
+trees can encode arbitrary passwords so that it takes expo-
+nentially many guesses to get any useful information in the
+worst case.
+The goal of this paper is to generalize the above result to
+that of learning  approximate models of causal trees from
+random observational examples (x;P(targetjx))wherex
+is chosen according to the natural distribution D, and ex-
+perimental queries EXP( x) which are responded with the
+conditional probability P(targetjx)for anyx. The learning
+algorithm works by drawing a sufﬁciently large sample of
+random examples, and then using the experimental queries
+around these examples to ﬁnd the least loss causal tree con-
+sistent with the data. The crux of the problem is to do this
+in a way that only takes time polynomial in the size of the
+target tree and the size of the random sample.
+Control Normal Form of Causal Trees
+In this section, we show that the conditional probability ta-
+bles of causal trees with latent internal nodes can be trans-
+formed into a special normal form which will be exploited
+by our learning algorithm.
+Deﬁnition 1 A causal tree is in control normal form (CNF)
+if for every internal variable Vi2V, there are some values d
+for its parents such that P(Vi=1jPa(Vi)=d)=1 and some
+other values zfor its parents such that P(Vi= 1jPa(Vi) =
+z)=0:
+In a causal tree in a control normal form, there are inputs
+that can deterministically set any internal variable to 0or1.
+We can ﬁnd these inputs by choosing appropriate values for
+each parent of the internal node to set it to 0or1and recurs-
+ing over the parents to do the same. For any internal node n
+of a target tree in CNF, let d(n)be the input assignment for
+its leaf nodes that deterministically sets the node to a value
+of 1. Similarly let z(n)set its value to 0. We call the dual
+inputsz(n)andd(n)thecontrol inputs ofi. We will now
+consider the problem of transforming any given causal tree
+to CNF.
+Deﬁnition 2 Theweighted average of S and T with respect
+to w, denoted by A(w;S;T ), is(1 w)S+wT.
+The following lemma is useful to justify the normalization
+algorithm.
+Lemma 1 Let0lowhi1. Then,
+A(w lo
+hi lo;A(lo;S;T );A(hi;S;T )) =A(w;S;T ).
+Proof:A(w lo
+hi lo;A(lo;S;T );A(hi;S;T ))
+= (1 w lo
+hi lo)A(lo;S;T ) +w lo
+hi loA(hi;S;T )
+=hi w
+hi lo((1 lo)S+loT) +w lo
+hi lo((1 hi)S+hiT)
+=(hi lo) w(hi lo)
+hi loS+hi lo
+hi lowT
+= (1 w)S+wT=A(w;S;T )Table 1 describes
+the algorithm “ Normalize ” that converts any rooted tree-
+structured causal network to its normal form. The algorithm
+starts from the leaf CPTs and proceeds toward the root. In
+the algorithm, we let PandP0denote the old and new en-
+tries in the CPTs respectively. In Table 1 and elsewhere, we
+assumePa(n)represents the parents (direct causes) of n,ni
+isithparent ofn, andniis the set of all co-parents of ni.
+i.e., parents of nother thanni. Letzbe a vector of 0s and
+1s of appropriate dimensions. Step 2 of the algorithm lin-
+early rescales the probability tables of niso that the lowest
+probabilitylomaps to 0and the highest probability himaps1. Pick an internal node ni, which is a parent of n, where all
+its parents are leaves or have already been normalized.
+2. Let the smallest probability in the CPT of nibelo, and
+the highest probability be hi. Replace the entries in the
+CPT ofnias follows.
+P0(ni=1jPa(ni) =z) P(ni= 1jpa(ni) =z) lo
+hi lo.
+3. Change the CPT of nas follows. Here yis an assignment
+of0s and 1s to co-parents of ni, i.e., nodes in ni.
+P0(n=1jni=0;ni=y) 
+A(lo;P(n=1jni=0;ni=y); P(n=1jni=1;ni=y))
+P0(n= 1jni=1;ni=y) 
+A(hi;P (n=1jni=0;ni=y); P(n=1jni=1;ni=y))
+Table 1: The Normalize procedure repeatedly executes
+steps 1-3 by picking nodes in bottom-up manner.
+to1. Every other probability wmaps tow lo
+hi lo. Step 3 com-
+pensates for this change at node nby adjusting its CPT with
+respect to node ni. Lemma 2 shows that the compensation
+preserves the distribution of nfor any values of its children.
+Lemma 2 Consider a rooted tree-structured causal net-
+work for which Normalize has been applied at node ni.
+Then for any vectors xandyof appropriate dimensions,
+P(n= 1jPa(ni) =x;ni=y) =P0(n= 1jPa(ni) =x;ni=
+y)
+Proof:
+P(n=1jPa(ni)=x;ni=y)
+=P(ni=1jPa(ni)=x;ni=y)
+P(n=1jni=1;Pa(ni)=x;ni=y)
++P(ni=0jPa(ni)=x;ni=y)
+P(n= 1jni=0;Pa(ni)=x;ni=y)
+=P(ni=1jPa(ni)=x)P(n=1jni=1;ni=y)
++ (1 P(ni=1jPa(ni)=x))P(n=1jni=0;ni=y)
+=A(P(ni=1jPa(ni)=x);P(n=1jni=0;ni=y);
+P(n=1jni=1;ni=y))
+=A(P(ni= 1jPa(ni) =x) lo
+hi lo;
+A(lo;P(n=1jni=0;ni=y);
+P(n=1jni=1;ni=y));
+A(hi;P (n=1jni=0;ni=y);
+P(n=1jni=1;ni=y)))
+=A(P0(ni=1jPa(ni)=x);P0(n= 1jni=0;ni=y);
+P0(n=1jni=1;ni=y))
+=P0(ni=1jPa(ni)=x)P0(n=1jni=1;ni=y)
++(1 P0(ni=1jPa(ni)=x))P0(n=1jni=0;ni=y)
+=P0(n= 1jPa(ni)=x;ni=y)
+Since each transformation at nipreserves the conditional
+probabilityP(njPa(ni);ni), a sequence of such transfor-
+mations at each nipreserves it as well. Repeating this argu-
+ment for each internal node nin bottom-up manner shows
+that the probability of the target given any input is preserved.
+The following theorem formalizes the argument.
+Theorem 1 LetPbe the probabilities that result by do-
+ing the above transformation on all hidden nodes in bot-
+tom up manner on a rooted tree-structured Bayesian net.
+Letzbe any binary vector the leaf nodes are set to. Then,
+P(targetjz) =P(targetjz).
+Proof: We show that each transformation preserves the
+above conditional probability. By induction it follows that it
+is preserved by a sequence of transformations.
+P(targetjz) =P
+wP(targetjn=w;z)P
+x;yP(n=wjPa(ni)=x;ni=y)
+P(Pa(ni)=xjz)P(ni=yjz)
+Note that none of the three values – P(targetjn=w;z),
+P(Pa(ni) =xjz), andP(ni=yjz)– change as a result
+of changing the CPTs of nodes nandni. By Lemma 2, the
+changes at nodes nandniare such that P(n=wjPa(ni)=
+x;ni=y)is preserved for w=1or0. Hence the value of the
+whole expression is preserved. 
+For example, consider the 4-input tree-structured causal
+network in Figure 1. We assume all variables are Boolean
+valued. Only the input variables D;E;F;G at the leaf nodes
+and the target Aat the root are observable. BandCare la-
+tent. The ﬁgure shows how the CPTs of A,B, andCare
+transformed to normalize the causal network and preserve
+the distribution P(AjD;E;F;G ). For example, the notation
+0:3=0on nodeBindicates that the P(B= 1jD= 0;E=
+0;F= 1;G= 0) = 0:3before normalization and 0.0 after
+normalization. The conditional probability of node Csimi-
+larly changes from 0:1to0. The conditional probability of
+Aon the other hand remains the same as before at 0:36.
+B C
+G F E DA=1 C=0 C=1
+B=0 .4 .3
+B=t .3 .2
+B=1 E=0 E=1
+D=0 .3 .7
+D=1 .6 .9
+B=1 E=0 E=1
+D=0 0 .67
+D=1 .5 1C=1 G=0 G=1
+F=0 .2 .9
+F=1 .1 .7A=1 C=0 C=1
+B=0 .36 .28
+B=t .3 .22
+C=1 G=0 G=1
+F=0 .125 1
+F=1 0 .751 00 00.3/0 0.1/00.36
+A
+Figure 1: CPT normalization. The CPTs show the probabil-
+ity that a variable = 1, given its parents. After normalization
+bothBandChave a 0 and a 1 in their CPTs. The ﬁgure
+shows the probabilities of different variables given an input
+before and after normalization.
+The Learning Algorithm
+Given that any target causal tree can be put in CNF, we seek
+to learn a tree in CNF and call it the target tree. Recall that
+for trees in CNF, every internal node nhas control inputs
+d(n)andz(n)to its leaves that set it to 1and0respectively.
+In addition, if there is also an input context, i.e., an assign-
+ment to the input variables other than the leaves of n, thatmakes this internal node have an impact on the distribution
+of the target variable, we call the node distinguishable. Dis-
+tinguishability allows us to infer the distribution of the la-
+tent internal node from the distribution of the target variable
+when the node’s context is set appropriately. If a node is not
+distinguishable, it has little impact on the target distribution
+for any input, and hence can be permanently set to a constant
+value, signiﬁcantly simplifying learning.
+Formally, a node nis-distinguishable if there is an as-
+signmentc(n)to the inputs other than the leaves of n, called
+the “context input” of nsuch thatjP(targetjd(n);c(n)) 
+P(targetjz(n);c(n))j>  . In this case we assume
+P(targetjc(n);n= 1)> P (targetjc(n);n= 0) so
+thatP(targetjc(n);d(n))> P(targetjc(n);z(n)). This is
+w.l.o.g. since the internal nodes are latent, which allows re-
+deﬁning 0and1values for them.
+We describe our algorithm in three stages. First observing
+a distinguishable node, second ﬁlling in the CPT of a distin-
+guishable node whose parents are also distinguishable, and
+third ﬁnding the distinguishable assignments. We then put it
+all together as a top-down recursive algorithm.
+Inferring the distribution of a distinguishable node
+Supposenis a distinguishable node with control inputs d(n)
+andz(n)and context input c(n). Lety(n)represent some
+assignment to the leaf (input) nodes under the subtree rooted
+at noden. The following suggests how we might infer the
+conditional distribution of ngiveny(n)from the conditional
+distribution of the target given y(n)andc(n).
+P(targetjy(n);c(n))=
+P(targetjy(n);c(n);n=1)P(n=1jl(n)=y)
++P(targetjy(n);c(n);n=0)(1 P(n=1jy(n)))
+=P(targetjd(n);c(n);n=1)P(n=1jy(n))
++P(targetjz(n);c(n))(1 P(n=1jy(n)))
+From the last equation, it follows that
+P(n=1jy(n)) =P(targetjy(n);c(n)) P(targetjz(n);c(n))
+P(targetjd(n);c(n)) P(targetjz(n);c(n)).
+We can implement this by using the EXP oracle that
+returns the probability of the target for various inputs. In
+particular, we have:
+P(n=1jy(n)) =EXP (y(n);c(n)) EXP (z(n);c(n))
+EXP (d(n);c(n)) EXP (z(n);c(n)).
+The above shows that ﬁnding the context and control in-
+puts would make a latent node effectively observable and
+controllable. If a node is not distinguishable, it means that
+it has no impact on the target, and hence can be effectively
+ignored by setting it to a constant function, say 0.
+Filling in the CPT of a distinguishable node
+Assuming that nand its parents are distinguishable with
+known context and control inputs, it is straightforward to
+ﬁll in the CPT of nusing appropriate experimental queries.
+We consider each possible assignment vector xto the par-
+ents of node n, wherexiis the bit we would like to assign
+to theithparentni. To ﬁll inP(n=1jPa(n)=x), for each
+parentniofn, set its leaf inputs y(ni)according to d(ni)if
+Algorithm 1 ControlExp
+1:Procedure LearnTree( S;n;c (n))
+2:foreach parentniofndo
+3: ﬁndc(ni);d(ni);z(ni)usingS
+4:hi EXP(d(ni);c(ni))
+5:lo EXP(z(ni);c(ni))
+6:end for
+7:foreach tuple of values xfor the parents of ndo
+8: foreach distinguishable parent niofndo
+9: ifxi=1set inputsy(ni) d(ni)
+10: else set inputs y(ni) z(ni)
+11: end for
+12:w= EXP (y(n1);:::;y (nk);c(n))
+13:P(n= 1jPa(n) =x) w lo
+hi lo
+14:end for
+15:foreach distinguishable parent niofndo
+16: call LearnTree( S;ni;c(ni))
+17:end for
+18:End LearnTree
+Table 2: The learning algorithm recursively ﬁnds the distin-
+guishing assignments of each node and learns its CPT in top
+down fashion.
+xi= 1, and toz(ni)ifxi= 0. Ifniis not distinguishable,
+its leavesy(ni)are set according to z(n). We set the context
+ofnaccording to its context input c(n). We use the previous
+equation to infer the distribution P(n= 1jy(n);c(n))and
+assign it to the CPT entry P(n=1jPa(n) =x).
+Finding control and context inputs
+We now describe the crucial step of ﬁnding the control in-
+putsd(n)andz(n)and the context input c(n)for any node
+n. It is here that we need random example set Schosen ac-
+cording to the natural distribution D. Without random ex-
+amples from a natural distribution, the search for control and
+context inputs will have to be exhaustive and impractical.
+For any random example xand internal node n, let
+xnbe the part of the input at the leaves of node n
+andxnibe the input under all parents of nother than
+ni. To ﬁndc(n), we ﬁnd an x2Swhich maximizes
+the absolute difference between P(targetjxn;c(n))and
+P(targetjz(n)ni;c(n);xni), wherez(n)niis the part of
+the control input z(n)of nodenwhich is under the
+nodeni. If this difference is greater than a small thresh-
+old, we setc(ni)toxni. If it is not, we conclude
+that the node niis not distinguishable. Finally, we set
+d(ni) = argmaxx2SP(targetjxni;c(ni))andz(ni) =
+argminx2sP(targetjxni;c(ni))to achieve maximum dif-
+ference between the target probabilities for the two control
+inputs and to make sure that the probabilities are within the
+range of [0;1]after transformation.
+Putting it all together
+We now put it all together in Algorithm 1. Our recursivealgorithm ControlExp takes as input the random example
+sets, the current node nand its context input c(n)(line 1).
+It starts from the root node of the causal tree and proceeds
+top-down by ﬁnding distinguishing inputs and the context
+for the children of the current node n(line 3). The calls to
+EXP return the probability that the target variable is 1 given
+the inputs (lines 4-5). It then systematically sets the values
+of the parents to each k-tuplex. To set a parent nito1, it
+sets the inputs under that node to d(ni)(line 9). To set it to
+0, it sets its inputs to z(ni)(line 10). It sets the context of the
+current node ntoc(n)and calls EXP (line 12). The value re-
+turned by EXP which represents the probability of the target
+is used to infer the probability of the current node nwhen its
+parents are set according to x(line 13). This probability will
+be used to ﬁll the CPT entry of node nandk-tuplex. It then
+recursively calls itself on the parents of the current node and
+their context vectors (lines 15–17).
+ControlExp makes O(n2k)experimental queries, where
+nis the number of nodes and kis the maximum number
+of parents of any node in the causal tree. The number of
+random examples is bounded by m=O(kn
+logn
+), which
+guarantees that all CPT entries used in computing the condi-
+tional probabilities of examples xofD(x)> are learned
+with a probability at least 1 . The time complexity of the
+algorithm is O(nm+n2k).
+Experimental Results
+... 128...... 128...
+Inputs ( 1-16)Hidden Layers 
+with ReLU 
+ActivationOutputs
+Figure 2: Diagram of MLP network. The blue nodes are the
+16 inputs, the 256 orange nodes are divided into two equally
+sized layers of ReLU units, and the green nodes comprise
+the softmax output layer.
+Experimental Setup
+We evaluated our results on synthetic data generated using
+a target causal tree, which is a full binary tree with depth
+4 and 16 leaf nodes. At each node we randomly selected a
+CPT, where each probability in the table is chosen indepen-
+dently with 50% chance the probability is either close to 1
+or to 0 by less than = 0:1. The extreme probabilities are
+chosen to make the learning problem challenging. We show
+the results of our program on 9 causal trees, i.e., 9 different
+sets of CPTs. We compare our results to a neural network
+baseline which is described later.
+Figure 3: L1-error for ControlExp and Neural Nets. Obs+Exp is based on training the neural net on the same observational and
+experimental data as ControlExp. Obs is based on choosing the same amount of data drawn from the observational distribution.
+Each evaluation consists of 40 runs on different training
+sets. Each training input is chosen uniformly randomly. The
+training was performed on batches of increasing sizes of ran-
+dom examples from 0 to 40 in increments of 4. During the
+training of each batch, the algorithm also asks experimental
+queries, which are answered by referring to the target tree.
+When a query is answered, its response is stored so that it is
+never asked again. After each batch of training the learned
+tree was evaluated on 100 test examples which were chosen
+randomly from the pool of examples not used for training.
+The baseline neural network we compared to is shown in
+Figure 2. Speciﬁcally, it is a multi-layered perceptron (MLP)
+with two hidden layers, each with 128 nodes, which use
+the ReLU activation function. The network’s output takes
+the form of a two-valued probability distribution, as deﬁned
+by the softmax function over the last layer of two outputs.
+The ﬁrst output value indicates the learned probability of
+the Bayesian network outputting a 0 and the second value
+indicates the learned probability of it outputting a 1.
+The neural network was trained using stochastic gradi-
+ent descent to minimize the Kullback-Leibler divergence be-
+tween the learned probability distribution and the ground
+truth distribution. We found that a learning rate of 1.0, a
+weight decay of 0.001, and a momentum of 0.9 produced
+the best results. Training of the neural network was done
+with 1000 epochs of each batch of examples.Discussion of Results
+The learning curves shows the average L1-error of the condi-
+tional probability P(targetjx)for the test example xcom-
+pared to the true probability plotted against the number of
+unique experiments or random examples in each training
+batch. Each subﬁgure is based on a different target tree. The
+green plot labeled ControlExp shows the performance of
+our algorithm. The blue plot labeled NNets(Obs+Exp) is the
+performance of our neural network on the same observed ex-
+amples and experiments as used by our algorithm. The red
+plot is the performance of the neural network on the same
+amount of data as the other two, but chosen using the obser-
+vational distribution (uniformly random). As is evident from
+the plots in Figure 3, ControlExp decisively outperforms the
+two neural network approaches in all cases.
+Interestingly, in most cases the L1 error of the MLP net-
+work is smaller and much less noisy when training on only
+the observational data than when training on both the obser-
+vational and the experimental data. This is because the distri-
+bution of the mixture of observational and experimental data
+is very different from that of the test distribution. However,
+the test distribution is identical to that of the observational
+data. Since the neural network learning optimizes its perfor-
+mance to the training distribution, it is misled by mixing in
+the experimental data and performs better with the purely
+observational data.
+ControlExp is able to do better than the neural networks
+because it systematically targets its queries to reduce uncer-
+tainty. It fully takes advantage of the tree structure of the
+causal network by exposing and controlling one node at a
+time. The neural network, on the other hand, is oblivious to
+the known structure and goes about its learning blindly.
+We also tested other learning architectures including a
+sparser and deeper network that mirrors the structure of
+the true causal tree, other denser and deeper MLP net-
+works, convolutional networks, and support vector machines
+(SVMs). While SVMs performed slightly better than the
+others, the prediction accuracies of all these methods were
+fairly similar and were considerably worse than the MLP
+network described in Figure 2. The fact that the best results
+were obtained with a relatively simple and shallow network
+with fully connected layers suggests that the depth of the
+networks is not their key strength in this domain.
+Conclusions
+While the need for experiments to uncover causal laws has
+been known for a long time, there appear to be more than
+one reason for this need. The classical reason is that the di-
+rection and structure of causality can only be discovered by
+changing the data distribution through interventions. While
+certainly true, even when the structure and the direction of
+causality are known, there are other obstacles. In this pa-
+per we argued that the latency of variables and the resulting
+computational intractability are other obvious hurdles, and
+showed that they too can be tackled to some extent through
+experimentation. However, the experimentation must be de-
+liberate, targeted, and adaptive to mirror what scientists do
+in their everyday lives. It must be algorithmic to overcome
+human limitations and scale to large real world problems.
+We hope that this work paves the way for pushing the study
+of causality in these directions.
+References
+Bello, K., and Honorio, J. 2017. Learning bayes networks
+using interventional path queries in polynomial time and
+sample complexity.
+Binder, J.; Koller, D.; Russell, S.; and Kanazawa, K. 1997.
+Adaptive probabilistic networks with hidden variables. Ma-
+chine Learning 29:213–244.
+Colombo, D.; Maathuis, M. H.; Kalisch, M.; and Richard-
+son, T. S. 2012. Learning high dimensional direct acyclic
+graphs with latent and selection variables. The Annals of
+Statistics 40(1):294–321.
+Cooper, G. F., and Yoo, C. 1999. Causal discovery from a
+mixture of experimental and observational data. In Proceed-
+ings of the Fifteenth conference on Uncertainty in artiﬁcial
+intelligence , 116–125. Morgan Kaufmann Publishers Inc.
+Dasgupta, S. 1997. The sample complexity of learning ﬁxed
+structure bayesian networks. Machine Learning 29:165–
+180.
+Eaton, D., and Murphy, K. 2007. Exact bayesian structure
+learning from uncertain interventions. In Artiﬁcial Intelli-
+gence and Statistics , 107–114.
+Hauser, A., and B ¨uhlmann, P. 2014. Two optimal strategies
+for active learning of causal models from interventional data.International Journal of Approximate Reasoning 55(4):926–
+939.
+Haussler, D. 1992. Decision theoretic generalizations of the
+PAC model for neural net and other learning applications.
+Inf. Comput. 100(1):78–150.
+He, Y .-B., and Geng, Z. 2008. Active learning of causal net-
+works with intervention experiments and optimal designs.
+JMLR 9:2523–2547.
+Hyttinen, A.; Hoyer, P. O.; Eberhardt, F.; and J ¨arvisalo, M.
+2013. Discovering cyclic causal models with latent vari-
+ables: A general SAT-based procedure. In Proceedings of
+the Conference on Uncertainty in Artiﬁcial Intelligence .
+Kearns, M. J., and Schapire, R. E. 1994. Efﬁcient
+distribution-free learning of probabilistic concepts. J. Com-
+put. Syst. Sci. 48(3):464–497.
+Kocaoglu, M.; Shanmugam, K.; and Bareinboim, E. 2017.
+Experimental design for learning causal graphs with latent
+variables. In Guyon, I.; Luxburg, U. V .; Bengio, S.; Wallach,
+H.; Fergus, R.; Vishwanathan, S.; and Garnett, R., eds., Ad-
+vances in Neural Information Processing Systems 30 , 7018–
+7028. Curran Associates, Inc.
+Li, G., and Leong, T.-Y . 2009. Active learning for causal
+bayesian network structure with non-symmetrical entropy.
+InPAKDD , 290–301. Springer-Verlog.
+Pearl, J. 2009. Causality . Cambridge university press.
+Peters, J.; B ¨uhlmann, P.; and Meinshausen, N. 2016. Causal
+inference by using invariant prediction: identiﬁcation and
+conﬁdence intervals. Journal of the Royal Statistical So-
+ciety: Series B (Statistical Methodology) 78(5):947–1012.
+Pitt, L., and Valiant, L. G. 1988. Computational limitations
+on learning from examples. J. ACM 35(4):965–984.
+Pitt, L., and Warmuth, M. K. 1990. Prediction-preserving
+reducibility. J. Comput. Syst. Sci. 41(3):430–467.
+Pollard, D. 1984. Convergence of Stochastic Processes .
+New York, Berlin: Springer Verlog.
+Ramoni, M., and Sebastiani, P. 2001. Robust learning with
+missing data. Machine Learning 45:147170.
+Reichenbach, H. 1991. The direction of time , volume 65.
+Univ of California Press.
+Silander, T., and Myllymaki, P. 2012. A simple approach
+for ﬁnding the globally optimal bayesian network structure.
+arXiv preprint arXiv:1206.6875 .
+Spirtes, P.; Glymour, C.; and Scheines, R. 2000. Causation,
+prediction, and search. adaptive computation and machine
+learning.
+Tadepalli, P., and Russell, S. J. 1998. Learning from ex-
+amples and membership queries with structured determina-
+tions. Machine Learning 32(3):245–295.
+Tong, S., and Koller, D. 2001. Active learning for structure
+in Bayesian networks. In IJCAI , 863–869.
+Acknowledgments
+We acknowledge the support of DARPA under contract
+N66001-17-2-4030 and NSF under grant IIS-1619433.

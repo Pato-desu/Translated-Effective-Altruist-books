@@ -1,0 +1,23 @@
+Riesgo de la IA Amplificación iterada
+Portada. Esto puede ser trivial u obvio para mucha gente, pero no parece que nadie se haya molestado en escribirlo (o yo no he buscado con suficiente atención). Empezó como una generalización de la IDA de Paul Christiano, pero también abarca cosas como la automejora recursiva segura. Se parte de un equipo de uno o más humanos (investigadores, programadores, entrenadores o supervisores), con acceso a cero o más IA (al principio como asistentes). El equipo humano/IA, en cada ronda, desarrolla una nueva IA y la añade al equipo, y repite esto hasta alcanzar la madurez de la tecnología de IA. La seguridad y la alineación se garantizan manteniendo en el equipo un conjunto de propiedades de seguridad y alineación que el proceso de desarrollo mantiene de forma inductiva. La razón por la que empecé a pensar en esta dirección es que el enfoque de Paul parecía muy difícil de refutar, porque cada vez que se señala un defecto o una dificultad, o alguien expresa escepticismo sobre alguna técnica que usa o sobre el invariante general de seguridad, siempre hay una lista de otras técnicas o invariantes que podrían sustituir esa parte (a veces incluso en mi propia mente, mientras intentaba criticar alguna parte). Con el tiempo me di cuenta de que esto no debería sorprender, porque la IDA es una instancia de este modelo más general de desarrollo de IA orientado a la seguridad, así que es probable que haya muchos puntos cercanos a ella en el espacio de posibles prácticas de desarrollo de IA orientadas a la seguridad. (De nuevo, esto puede que ya sea obvio para otros, incluido Paul, y que en sus mentes la IDA sea quizá ya un grupo de posibles prácticas de desarrollo que consiste en las técnicas e invariantes de seguridad más prometedoras, en lugar de un único punto.) Si este modelo resulta no haber sido escrito antes, quizá debería recibir un nombre, como Desarrollo de IA asistida con invariantes de seguridad iterados, o algo más breve? Riesgo de la IA 1 Amplificación iterada 1
+Portada. Un modelo general de desarrollo de IA orientado a la seguridad, por Wei Dai, 11 jun 2018
+20
+Mencionado en 40 1
+5 comentarios, ordenados por puntuación más alta. Vladimir Slepnev 5
+William Saunders 4
+[-]
+Mis dos objeciones más grandes a ese tipo de plan: 1) Se siente como pasar la pelota, lo cual es un antipatrón conocido al pensar en IA. 2) Con una entidad que se automejora de forma “blanda”, como un equipo de personas e IA, la mayoría de los invariantes que se puedan definir también serán “blandos” y propensos a desviarse a lo largo de muchas iteraciones. Por eso preferiría una solución más directa, a nivel de objeto, para la alineación, si es posible tenerla. Pero quizá no lo sea.
+Wei Dai 5
+[-]
+1) Se siente como pasar la pelota, lo cual es un antipatrón conocido al pensar en IA. No estoy seguro de qué quiere decir esto, ni de qué quiere decir con “una solución más a nivel de objeto para la alineación”. ¿Podría explicarlo mejor? 2) Con una entidad “blanda” que se automejora, como un equipo de personas e IA, la mayoría de los invariantes que se puedan definir también serán “blandos” y propensos a desviarse a lo largo de muchas iteraciones. Sí, estoy de acuerdo con esta parte. Creo que definir un invariante que sea a la vez “lo bastante bueno” y alcanzable o demostrable será muy difícil, o quizá simplemente imposible.
+Vladimir Slepnev 3
+[-]
+No estoy seguro de qué quiere decir esto ni de “una solución más a nivel de objeto para la alineación”. ¿Podría explicarlo mejor? La configuración propuesta puede verse como una IA que se automejora, pero bastante opaca. Para explicar por qué toma una decisión particular, tenemos que apelar al antropomorfismo, como “nuestro equipo de investigadores no haría algo tan estúpido”. Eso parece propenso al pensamiento ilusorio. Preferiría lanzar una IA para la que al menos algunas decisiones tengan explicaciones no antropomórficas.
+[-]
+Nombres alternativos más cortos: Desarrollo de IA alineada inductivamente; Asistentes de IA alineados inductivamente; 2018 AI Alignment Literature Review and Charity Comparison; The Alignment Newsletter #11: 06/18/18 hace 5 años 
+hace 5 años 
+hace 5 años 
+hace 5 años 
+William Saunders 3
+[-]
+Es una buena propiedad de este modelo que invite a considerar la interacción entre humanos e IA en cada paso (para destacar cosas como los riesgos de que los humanos tengan acceso a algún conjunto de sistemas de IA con fines de manipulación o por riesgo moral). hace 5 años 

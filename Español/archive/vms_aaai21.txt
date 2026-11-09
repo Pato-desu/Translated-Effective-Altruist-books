@@ -1,0 +1,1037 @@
+Hacer las preguntas correctas:
+Aprendizaje de modelos de acción interpretables mediante respuestas a consultas
+Pulkit Verma, Shashank Rao Marpally y Siddharth Srivastava
+Escuela de Computación, Informática e Ingeniería de Sistemas de Decisión
+Arizona State University, Tempe, AZ 85281, USA
+fverma.pulkit, smarpall, siddharths g@asu.edu
+Resumen
+Este artículo desarrolla un nuevo enfoque para estimar un inter-
+pretable, relacional, de un agente autónomo de caja negra
+que puede planificar y actuar. Nuestras contribuciones principales son un nuevo
+paradigma para estimar tales modelos mediante una interfaz de consulta rudimentaria
+con el agente y un algoritmo de consulta jerárquico
+que genera una política de interrogación para estima-
+ndo el modelo interno del agente en un vocabulario interpretable para el usuario.
+La evaluación empírica de nuestro enfoque muestra que, pese
+al espacio de búsqueda intratable de posibles modelos del agente,
+nuestro enfoque permite una estimación correcta y escalable de modelos inter-
+pretables para una amplia clase de agentes autónomos de caja negra.
+Nuestros resultados también muestran que este enfoque
+puede usar clasificadores de predicados para aprender modelos interpretables de
+agentes de planificación que representan los estados como imágenes.
+1 Introducción
+El creciente despliegue de sistemas de IA, que van desde asistentes per-
+sonales digitales hasta automóviles autónomos, da lugar a un
+problema omnipresente: ¿cómo podría un usuario determinar si un sistema de IA
+será seguro, confiable o útil en una situación dada? Este problema
+se vuelve particularmente difícil cuando
+consideramos que la mayoría de los sistemas autónomos no son diseñados
+por sus usuarios; su software interno puede no estar disponible o
+ser difícil de entender, e incluso puede cambiar respecto de las especificaciones iniciales
+como resultado del aprendizaje. Estos escenarios presentan
+agentes de IA de caja negra cuyos modelos pueden no estar disponibles en
+una terminología que el usuario entienda. También muestran que
+además de desarrollar mejores sistemas de IA, necesitamos desarrollar
+nuevos paradigmas algorítmicos para evaluar sistemas de IA arbitrarios
+y determinar los requisitos mínimos para
+los sistemas de IA a fin de garantizar la interpretabilidad y respaldar
+tales evaluaciones (Srivastava 2021).
+Este artículo presenta un nuevo enfoque para abordar estas
+preguntas. Desarrolla un algoritmo para estimar modelos inter-
+pretables y relacionales de agentes de IA consultándolos.
+Para ello, requiere que el sistema de IA tenga solo una capacidad
+primitiva de consulta-respuesta para garantizar la interpretabilidad.
+Considere una situación en la que Hari(ette) (H) quiere un robot de reparto de comestibles (A)
+que traiga algunas compras, pero no está seguro de si es capaz de la tarea
+y desea estimar el modelo inter-
+no de A en una representación interpretable que le resulte com-
+Derechos de autor © 2021, Asociación para el Avance de la Inteligencia Artificial
+Intelligence (www.aaai.org). Todos los derechos reservados.
+Figura 1: El módulo de evaluación del agente usa el vocabulario pre-
+ferido de su usuario, consulta el sistema de IA y entrega un modelo causal
+interpretable de las capacidades del sistema de IA.
+El sistema de IA no necesita conocer el vocabulario del usuario
+ni el lenguaje de modelado.
+prensible (p. ej., un lenguaje relacional tipo STRIPS (Fikes
+y Nilsson 1971; McDermott et al. 1998; Fox y Long
+2003)). Si H tratara con un repartidor, podría
+hacerle preguntas como “¿recogería pedidos de
+varias personas?” y “¿le parecería bien
+llevar artículos refrigerados en una bolsa normal?” Si las respuestas
+son “sí” en verano, sería motivo de preocupación.
+Los enfoques ingenuos para generar tales preguntas y determinar
+los límites y capacidades de un agente son inviables.1
+Proponemos un módulo de evaluación del agente (AAM), mostrado
+en la Fig. 1, que puede conectarse con cualquier agente de IA
+que tenga una capacidad rudimentaria de consulta-respuesta: el módulo de evalua-
+ción conecta A con un simulador y proporciona
+una secuencia de instrucciones, o un plan, como consulta. A ejecuta
+el plan en el simulador, y el módulo de evaluación usa
+el resultado simulado como respuesta a la consulta. Así,
+dado un agente, el módulo de evaluación usa como entrada: un vocabulario
+definido por el usuario, el conjunto de instrucciones del agente y un simulador
+compatible. Estas entradas reflejan requisitos naturales
+de la tarea y ya son bastante habituales: los sistemas de IA
+se diseñan y prueban con simuladores compatibles,
+y necesitan especificar sus conjuntos de instrucciones para
+ser utilizables. El usuario proporciona los conceptos que
+1Solo 2 acciones y 5 proposiciones fundamentadas producirían
+72×5×108 posibles modelos tipo STRIPS: cada proposición podría
+estar ausente, ser positiva o negativa en la precondición y en los efectos de
+cada acción, y no puede ser positiva (o negativa) en ambas precon-
+diciones y efecto a la vez. Una estrategia de consulta que indague
+sobre cada aparición de cada proposición no solo sería inescalable,
+sino también inaplicable a agentes basados en simuladores que no
+conocen las precondiciones y los efectos de sus acciones.
+pueden entender, y estos conceptos pueden definirse como funcio-
+nes sobre los estados del simulador.
+Al desarrollar los primeros pasos hacia este paradigma, suponemos
+que el usuario desea estimar el modelo interno de A como
+un modelo relacional tipo STRIPS con precondiciones conjuntivas,
+listas de adición y listas de eliminación, y que el modelo del agente
+es expresable como tal. Estos modelos pueden traducirse fácilmente
+a descripciones interpretables como “en situaciones
+donde se cumplen las precondiciones, si el agente A ejecuta acciones
+a1,...,ak, el resultado serían los efectos”, donde las precondiciones
+y los efectos usan solo los conceptos proporcionados por el usuario. Además,
+estos modelos pueden usarse para investigar contrafactuales
+y respaldar evaluaciones de causalidad (Halpern 2016).
+Este marco fundamental (Sec. 3) puede desarrollarse para admitir distintos tipos de agentes,
+así como diversas modalidades de consulta y respuesta. Por ejemplo, las consultas y las respuestas podrían
+usar una interfaz de voz para mayor accesibilidad, y los agentes
+con simuladores o modelos de anticipación integrados fiables quizá no
+necesiten simuladores externos. Esto permitiría que AAM plantee
+consultas como “¿qué cree que pasaría si usted
+ejecutara el plan i?”, y el modelo aprendido reflejaría la autoevaluación de A.
+El “agente” podría ser una entidad arbitraria, aunque
+la expresividad del vocabulario interpretable para el usuario
+determinaría el alcance de los modelos aprendidos y su
+precisión. Usar AAM con tales agentes también ayudaría a
+hacerlos compatibles con la IA asistencial de nivel II: sistemas
+que facilitan a los operadores aprender a usarlos
+de forma segura (Srivastava 2021).
+Nuestro algoritmo para el módulo de evaluación (Sec. 3.1) gene-
+ra una secuencia de consultas (Q) que depende de las
+respuestas del agente (θ) durante el proceso de consulta; el resultado del proceso
+completo es un modelo completo de A. Para generar consultas,
+usamos un proceso descendente que elimina grandes clases de
+modelos incompatibles con el agente, calculando consultas que dis-
+tinguen entre pares de modelos abstractos. Cuando un ab-
+stracto responde a una consulta de forma distinta a como responde el agente,
+eliminamos efectivamente todo el conjunto de modelos concretos
+posibles que son refinamientos de este modelo abstracto.
+La Sec. 3 presenta nuestro marco general, con algoritmos y
+resultados teóricos sobre sus propiedades de convergencia.
+Nuestra evaluación empírica (Sec. 4) muestra que este método
+puede aprender eficientemente modelos correctos para versiones de caja negra
+de agentes que usan modelos ocultos del IPC2. También muestra
+que AAM puede usar clasificadores de predicados basados en imágenes para inferir
+modelos correctos para agentes basados en simuladores que responden con
+una imagen que representa el resultado de la ejecución del plan de consulta.
+una imagen que representa el resultado de la ejecución del plan de consulta.
+Varios investigadores han explorado el problema de aprender
+modelos de agentes a partir de observaciones de su comportamiento (Gil
+1994; Yang, Wu y Jiang 2007; Cresswell, McCluskey,
+y West 2009; Zhuo y Kambhampati 2013). Estos enfoques de aprendizaje de acciones
+de modelos de acción también han encontrado aplicaciones prácti-
+cas en navegación robótica (Balac, Gaines y Fisher 2000),
+modelado del comportamiento de jugadores (Krishnan, Williams y Martens
+2020), etc. Hasta donde sabemos, nuestro es el primer enfoque
+que aborda el problema de generar estrategias de consulta
+para inferir modelos relacionales de agentes de caja negra.
+2 https://www.icaps-conference.org/competitionsfor para inferir modelos relacionales de agentes de caja negra.
+Amir y Chang (2008) usan filtrado lógico (Amir y
+Russell 2003) para aprender modelos de acción parcialmente observables
+a partir de las trazas de observación. LOCM (Cresswell, McCluskey,
+y West 2009) y LOCM2 (Cresswell y Gregory 2011)
+presentan otra clase de algoritmos que usan máquinas de estados finitos
+para crear modelos de acción a partir de trazas de planes observados.
+Camacho y McIlraith (2019) presentan un enfoque para
+aprender modelos LTL muy expresivos a partir de las trayectorias de estado de un agente,
+observadas, usando un oráculo con conocimiento de
+la representación LTL objetivo. Este oráculo también puede generar
+contraejemplos cuando el modelo estimado difiere del
+modelo verdadero. En cambio, nuestro enfoque no requiere
+tal oráculo. Además, a diferencia de Stern y Juba (2017), nuestro
+enfoque no necesita estados intermedios en la ejecución
+de las trazas. A diferencia de los enfoques de mantenimiento de modelos de caja blanca
+(Bryce, Benton y Boldt 2016), nuestro enfoque no
+requiere que A conozca el vocabulario preferido de H.
+LOUGA (Kučera y Barták 2018) combina un algoritmo genético
+con un método ad hoc para aprender operadores de planificación
+a partir de trazas de planes observadas. FAMA (Aineto, Celorrio,
+y Onaindia 2019) reduce el reconocimiento de modelos a un problema
+de planificación y puede trabajar con secuencias de acciones parciales y/o
+trazas de estados siempre que se proporcionen los estados inicial y objetivo correctos.
+Aunque FAMA y LOUGA requieren un paso de posprocesamiento para actualizar
+las precondiciones del modelo aprendido, de modo que incluyan la intersección de todos los estados
+en los que se aplica una acción,
+no está claro que tal proceso converja necesariamente
+al modelo correcto. Nuestros experimentos indican que tales enfoques
+presentan un comportamiento oscilante en cuanto a la precisión del modelo, porque
+algunas trazas de datos pueden incluir predicados espurios, lo que
+provoca que se agreguen precondiciones espurias al modelo
+de acciones. FAMA también asume que no hay literales negativos
+en las precondiciones de las acciones.
+Bonet y Geffner (2020) presentan un algoritmo para aprender
+modelos relacionales mediante un método basado en SAT, cuando el
+esquema de acciones, los predicados, etc., no están disponibles. Este
+enfoque toma como entrada un grafo dirigido predeterminado, correcto y completo, que codifica
+la estructura de todo el espacio de estados.
+Los autores señalan que su enfoque es viable para problemas
+con espacios de estados pequeños. Aunque nuestro método ofrece una solución de extremo
+a extremo, también puede usarse junto con enfoques de este tipo
+para crear los insumos que necesitan. Khardon y Roth
+(1996) abordan el problema de hacer más rápida la inferencia basada en modelos
+dado un conjunto de consultas, bajo el supuesto de que
+un conjunto estático de modelos representa la base de conocimiento verdadera.
+En contraste con estas líneas de investigación, nuestro enfoque
+consulta directamente al agente y garantiza converger al
+modelo verdadero mientras presenta una estimación continua de la
+precisión del modelo derivado; por ello, puede usarse en escenarios
+donde el modelo del agente cambia debido al aprendizaje o a una actualización
+de software. En tal caso, nuestro algoritmo puede reiniciar la
+consulta al sistema, mientras que los enfoques que derivan modelos de
+trazas de planes observadas requerirían sesiones de recolección de datos
+arbitrariamente largas para obtener datos no correlacionados suficientes.
+El Incremental Learning Model (Ng y Petrick 2019) usa
+aprendizaje por refuerzo para aprender un modelo no estacionario sin
+usar trazas de planes, y requiere un entrenamiento extenso para aprender
+el modelo completo correctamente. Chitnis et al. (2021) presentan un
+enfoque para aprender modelos relacionales probabilísticos en los que
+usan muestreo de metas como heurística para generar datos
+relevantes, mientras que nosotros reducimos ese problema a la síntesis de consultas usando
+planificación. Se muestra que su enfoque funciona bien en entornos
+estocásticos, pero impone una carga mucho mayor sobre el sistema de IA
+para inferir su modelo. Esto ocurre porque el sistema de IA
+debe generar una fórmula de meta conjuntiva mientras maximiza
+la exploración, encontrar un plan para alcanzar esa meta y corregir el
+modelo a medida que recoge observaciones mientras ejecuta el plan.
+El campo del aprendizaje activo (Settles 2012) aborda el
+problema relacionado de seleccionar qué etiquetas de datos adquirir
+para aprender modelos de toma de decisiones de un solo paso usando medidas
+estadísticas de información. Sin embargo, el conjunto efectivo de
+características aquí es el conjunto de todos los planes posibles, lo que hace
+inviables los métodos convencionales para evaluar la ganancia de información
+de los posibles etiquetados de características. En cambio, nuestro enfoque
+usa una abstracción jerárquica para seleccionar las consultas que
+hacer, mientras infiere un modelo de toma de decisiones de varios pasos (planificación)
+modelo. También podrían usarse métricas de teoría de la información en
+nuestro enfoque siempre que tal información esté disponible.
+3 La tarea de interrogación de agentes
+Suponemos que H necesita estimar el modelo de A como
+un modelo de planificación de tipo STRIPS, representado como un par M=⟨P;A⟩,
+donde P={p^k1
+1,…,p^kn_n} es un conjunto finito de predicados con
+aridades k_i; A={a1,…,ak} es un conjunto finito de acciones parametrizadas
+(operadores). Cada acción a_j ∈ A se representa como una
+tupla ⟨header(a_j); pre(a_j); eff(a_j)⟩, donde header(a_j) es
+el encabezado de la acción, que consiste en el nombre de la acción y los parámetros
+de la acción, pre(a_j) representa el conjunto de átomos predicado que
+deben ser verdaderos en un estado donde a_j puede aplicarse, eff(a_j)
+es el conjunto de átomos predicado positivos o negativos que
+cambiarán a verdadero o falso, respectivamente, como resultado de la ejecución
+de la acción a_j. Cada predicado puede instanciarse usando
+los parámetros de una acción, donde el número de parámetros
+está acotado por la aridad máxima de la acción. P. ej.,
+considere la acción load truck(?v1;?v2;?v3) y el predicado
+at(?x;?y) en el dominio Logistics de la IPC. Este predicado puede
+instanciarse usando los parámetros de acción ?v1, ?v2 y ?v3
+como at(?v1;?v1), at(?v1;?v2), at(?v1;?v3), at(?v2;?v2),
+at(?v2;?v1), at(?v2;?v3), at(?v3;?v3), at(?v3;?v1) y
+at(?v3;?v2). Representamos el conjunto de todos los predicados posibles de este tipo, instanciados con los parámetros de la acción,
+icados instanciados con parámetros de acción como P.
+AAM usa la siguiente información como entrada. Recibe
+su conjunto de instrucciones en forma de header(a) para cada a ∈ A
+del agente. AAM también recibe un vocabulario de predicados P
+del usuario, con definiciones funcionales de cada predicado.
+Esto le da a AAM información suficiente para sostener un diálogo
+con A sobre los resultados de secuencias de acciones hipotéticas.
+Definimos el problema general de la interrogación de agentes como
+sigue. Dada una clase de consultas y un agente con un
+modelo desconocido que puede responder estas consultas, determinar el
+modelo del agente. Más precisamente, una tarea de interrogación de agentes
+se define como una tupla ⟨M_A; Q; P; A_H⟩, donde M_A es
+el modelo verdadero (desconocido para AAM) del agente A que se está
+interrogando, Q es la clase de consultas que AAM puede plantear al
+agente, y P y A_H son los conjuntos de predicados y
+encabezados de acción que AAM usa a partir de las entradas de H y A. El objetivo de la tarea de interrogación de agentes es derivar
+el modelo del agente M_A usando P y A_H. Sea Σ el conjunto de
+respuestas posibles a las consultas. Así, las cadenas s ∈ Σ*
+denotan la información recibida por AAM en cualquier punto del
+proceso de consulta. Las políticas de consulta para la tarea de interrogación de agentes son
+funciones π: Σ* → Q ∪ {Stop} que asocian secuencias de respuestas
+a la siguiente consulta que el interrogador debe formular. El proceso
+se detiene con la consulta Stop. En otras palabras, para todas las
+respuestas s ∈ Σ, todas las políticas válidas asocian todas las secuencias x
+a Stop siempre que x ∈ Σ* sea asociada a Stop. Esta política se
+calcula y ejecuta en línea.
+Componentes de los modelos de agentes. Para formular nuestro
+enfoque de solución, consideramos que un modelo M está compuesto
+por componentes llamados tuplas PALM de la forma =
+⟨p;a;l;m⟩, donde p es un predicado instanciado del
+vocabulario P; a es una acción del conjunto de acciones
+parametrizadas A, l ∈ {pre, eff}, y m ∈ {+, −, ∅}. Para
+mayor comodidad, usamos los subíndices p; a; l; o m para denotar
+el componente correspondiente en una tupla PALM. La presencia
+de una tupla PALM en un modelo indica que, en ese
+modelo, el predicado p aparece en una acción a en una ubicación
+l como literal verdadero (falso) cuando el signo m es positivo
+(negativo), y está ausente cuando m=∅. Esto nos permite
+definir la operación de diferencia de conjuntos M \ τ sobre este modelo como
+eliminar la tupla PALM del modelo. Consideramos dos
+tuplas PALM τ1=⟨p1;a1;l1;m1⟩ y τ2=⟨p2;a2;l2;m2⟩
+variantes entre sí (τ1 ≈ τ2) si y solo si difieren únicamente
+en modem, es decir, ∈1∪∈2, (∈1p=∈2p)^(∈1a=
+∈2a)^(∈1l=∈2l)^(∈1m6=∈2m). Por tanto, la asignación de modos
+a la tupla palm
+=hp;a;l) puede resultar en 3 variantes de tupla palm
+
++=hp;a;l; +i,
+ Π=hp;a;lΠi, y
+;=hp;a;l;;i.
+Abstracción del modelo. Definimos ahora la noción de abstracción utilizada en nuestro enfoque de solución. Varios enfoques han explorado el uso de la abstracción en planificación (Sacerdoti
+1974; Giunchiglia y Walsh 1992; Helmert et al. 2007;
+Bäckström y Jonsson 2013; Srivastava, Russell y Pinto
+2016). La definición de abstracción usada en este trabajo extiende el concepto de abstracciones de dominio de predicados y proposicionales (Srivastava, Russell y Pinto 2016) para permitir la proyección de una única tupla palm ∈.
+Un modelo abstracto es aquel en el que todas las variantes de al menos una tupla palm están ausentes. Sea Σ el conjunto de todas las tuplas palm posibles que pueden generarse usando un vocabulario de predicados PΣ y un conjunto de cabeceras de acción AH. Sea U el conjunto de todos los modelos consistentes (abstractos y concretos) que pueden expresarse como subconjuntos de Σ, tales que ningún modelo tiene múltiples variantes de la misma tupla palm. Definimos la abstracción de un modelo como:
+Definición 1. La abstracción de un modelo M con respecto a una tupla palm ∈Σ se define por f∈:U→U como f∈(M) =
+M∖∈.
+Extendemos esta notación para definir la abstracción de un conjunto de modelos M con respecto a una tupla palm ∈ como X={f∈(m) :
+m∈M}. Usamos este marco de abstracción para definir un retículo de subconjuntos sobre modelos abstractos (Fig. 2(b)). Cada nodo del retículo representa una colección de posibles modelos abstractos que son variantes posibles de una tupla palm
+. Por ejemplo, en el nodo etiquetado 1 en la Fig. 2(b), tenemos modelos correspondientes
+...
+...
+...
+(a) (b) (c)
+Figura 2: (b) Segmento del retículo explorado en orden aleatorio de
+
+i2Π; (a) En cada nodo se generan 3 modelos abstractos
+y 2 de ellos se descartan según las respuestas a las consultas; (c)
+Un modelo abstracto rechazado en cualquier nivel equivale a re-
+chazar 3 modelos en el nivel inferior, 9 modelos dos niveles
+más abajo, y así sucesivamente.
+a
++
+1,
+ 
+1, y
+;
+1. Dos nodos del retículo están en el mismo
+nivel de abstracción si contienen el mismo número de palm
+tuplas. Dos nodos ni y nj del retículo están conectados si
+todos los modelos en ni difieren de todos los modelos en nj por una sin-
+gle tupla palm. Al subir en el retículo siguiendo estas
+aristas, obtenemos versiones más abstraídas de los modelos, es decir,
+que contienen menos número de tuplas palm; y obtenemos versiones más con-
+cretas de los modelos, es decir, que contienen más número de tuplas palm,
+al bajar. Ahora definimos este retículo de modelos:
+Definición 2. Un retículo de modelos L es una 5-tupla L=
+hN;E;Π;`N;`Ei, donde N es un conjunto de nodos del retículo, Π es
+el conjunto de todas las tuplas palm hp;a;li, `N:N→2Σ es una
+función de etiqueta de nodo donde Σ = Π×{+;−;∗} es el conjunto de todas
+las tuplas palm, E es el conjunto de aristas del retículo, y `E:E→Π es
+una función que asigna a las aristas etiquetas de arista tales que para cada
+arista ni→nj; `N(nj) =f∪[f
+kgj∪2`N(ni);
+=
+`E(ni→nj);k∈{+;Π;−;}}, y `N(>) ={∅}, donde >
+es el supremo que contiene el modelo vacío ∅.
+Un nodo n∈N en este retículo L puede identificarse de forma única
+por la secuencia de tuplas palm que etiquetan las aristas que conducen
+a él desde el supremo. Como se muestra en la Fig. 2(a), aunque
+teóricamente `N:N→2Σ, no todos los modelos se almacenan en
+ningún nodo, ya que al menos uno se poda según alguna consulta
+Q∈Q. Además, en estos retículos de modelos, cada nodo tiene
+una arista que sale de él correspondiente a cada tupla palm
+que no está presente en los caminos que conducen a él desde el nodo más abs-
+traído. En cualquier etapa de la interrogación, los nodos en
+tal retículo se usan para representar el conjunto de modelos posibles
+dadas las respuestas del agente hasta ese punto. En cada paso,
+nuestro algoritmo crea consultas en línea que nos ayudan a determinar
+la siguiente arista descendente que tomar desde un nodo del retículo; corres-
+pondiendo al camino 0;:::;i en la Fig. 2(b). Esto también evita
+generar y almacenar el retículo completo, que puede ser
+doblemente exponencial en el número de predicados y acciones.
+Forma de las consultas al agente. Como se discutió antes, con base en las respuestas de A,
+respuestas, planteamos consultas al agente e inferimos el modelo de A. Expresamos las consultas como funciones que asignan modelos a
+respuestas. Recordemos que U es el conjunto de todos los modelos posibles (concretos y
+abstractos), y Ω es el conjunto de respuestas posibles. Una
+consulta Q es una función Q:U→Ω.
+En este artículo usamos solo una clase de consultas: consultas de
+resultado de plan (QPO), parametrizadas por un estado
+sI y un plan π. Sea P el conjunto de predicados PΣ in-
+stanciados con objetos O en un entorno. Las consultas QPO
+preguntan a A la longitud del prefijo más largo del plan π que
+puede ejecutar con éxito al comenzar en el estado sI∈
+P, así como el estado final sF∈P al que lleva esta ejecu-
+ción. Por ejemplo, “Dado que el camión t1 y el paquete
+p1 están en la ubicación l1, ¿qué pasaría si ejecutara
+el plan <cargar camión (p1;t1;l1), conducir (t1;l1;l2),
+descargar camión (p1;t1;l2)>?”
+Una respuesta a tales consultas puede tener la forma “Puedo ejecu-
+tar el plan hasta el paso ` y al final de él p1 está en el camión
+t1, que está en la ubicación l1”. Formalmente, la respuesta PO para
+consultas de resultado de plan es una tupla h`;sFi, donde ` es el núm-
+ero de pasos para los que el plan π pudo ejecutarse, y
+sF∈P es el estado final tras ejecutar ` pasos del plan.
+Si el plan π no puede ejecutarse por completo según el modelo del
+agente MA entonces ` < len (π), de lo contrario `=len(π). El
+estado final sF∈P es tal que MAj=π[1 :`](sI) =sF,
+es decir, comenzando en un estado sI, MA ejecutó con éxito los primeros
+` pasos del plan π. Así, QPO:U→N×2P, donde N
+es el conjunto de los números naturales.
+No todas las consultas son útiles, ya que algunas podrían no
+aumentar en absoluto nuestro conocimiento del modelo del agente. Por ello,
+definimos algunas propiedades asociadas a cada consulta para ase-
+gurar su utilidad. Una consulta es útil solo si puede distin-
+guir entre dos modelos. Más precisamente, se dice que una consulta Q
+distingue un par de modelos Mi y Mj, denotado
+como Mi Q Mj, si y solo si Q(Mi)6=Q(Mj).
+Definición 3. Se dice que dos modelos Mi y Mj son distin-
+guibles, denotado Mi Mj, si y solo si existe una consulta que
+puede distinguir entre ellos, es decir, ∃Q Mi Q Mj.
+Dado un par de modelos abstractos, deseamos determinar
+si uno de ellos puede podarse, es decir, si existe
+una consulta para la cual al menos una de sus respuestas es incons-
+istente con la respuesta del agente. Como esto es computacionalmente
+costoso de determinar, y deseamos reducir el número
+de consultas hechas al agente, primero evaluamos si los
+dos modelos pueden distinguirse mediante alguna consulta, independientemente
+de la consistencia de su respuesta con la del agente. Si los
+modelos no son distinguibles, es redundante intentar podar
+uno de ellos bajo la clase de consultas dada.
+A continuación, determinamos si al menos uno de los dos modelos distin-
+guibles es consistente con el agente. Al comparar
+las respuestas de dos modelos en distintos niveles de abstrac-
+ción, debemos considerar que la respuesta del agente puede
+estar en un nivel de abstracción diferente si el par dado de mod-
+elos es abstracto. Teniendo esto en cuenta, definimos formalmente
+qué significa que la respuesta de un modelo abstracto Mi sea
+consistente con la del modelo del agente MA:
+Definición 4. Sea Q una consulta tal que
+MiQMj; Q(Mi) =h`i;hpi
+1;…;pi
+mii, Q(Mj) =
+(a) La acción load truck(?p,?t,?l) de MA (desconocida para H)
+at(?t,?l),
+at(?p,?l) → in(?p,?t),
+¬(at(?p,?l))
+(b) La acción load truck(?p,?t,?l) de M1
+at(?t,?l),
+at(?p,?l) → in(?p,?t)
+(c) La acción load truck(?p,?t,?l) de M2
+at(?t,?l) → in(?p,?t)
+(d) La acción load truck(?p,?t,?l) de M3
+at(?t,?l) → ()
+Figura 3: acciones load truck del modelo del agente MA y de 3
+modelos abstraídos M1, M2 y M3. Aquí X→Y significa
+que X es la precondición de una acción e Y es el efecto.
+h`j;hpj
+1;…;pj
+nii, y Q(MA) =h`A;hpA
+1;…;pA
+kii.
+La respuesta de Mi a Q es consistente con la de MA, es decir,
+Q(MA)j=Q(Mi) si `A=len(πQ), len(πQ) =`i y
+fpi
+1;…;pi
+mg⊆fpA
+1;…;pA
+kg.
+Usando esta noción de consistencia, podemos razonar que
+dados un conjunto de modelos distinguibles Mi y Mj, sus
+respuestas además de la respuesta del agente a la consulta distin-
+guidora, los modelos son podables si y solo si exactamente una de sus
+respuestas es consistente con la del
+agente. Formalmente, definimos la podabilidad como:
+Definición 5. Dada una tarea de interrogatorio del agente
+<MA;Q;P;AH>, dos modelos Mi y Mj son pod-
+ables, denotado Mi hi Mj, si y solo si ∃Q∈Q: Mi Q Mj
+^(Q(MA)j=Q(Mi)^ Q(MA)6j=Q(Mj))_
+(Q(MA)6j=Q(Mi)^Q(MA)j=Q(Mj)).
+3.1 Resolución de la tarea de interrogatorio
+Ahora explicamos cómo resolvemos la tarea de interrogatorio de agentes
+añadiendo de forma incremental variantes de palm a la clase de modelos
+abstractos y descartando los modelos inconsistentes mediante la generación de
+consultas distintivas.
+Ejemplo 1. Considere el caso de un agente de reparto. Suponga
+que AAM está considerando dos modelos abstractos M1yM2
+que tienen una sola acción loadtruck (?p;?t;?l)y los pre-
+dicadosat(?p;?l),at(?t;?l),in(?p;?t), y que el modelo del agente
+esMA(Fig. 3). AAM puede preguntar al agente qué ocurrirá
+siAcarga el paquete p1en el camiónt1en la ubicaciónl1
+dos veces. El agente respondería que solo pudo ejecutar el
+plan hasta la longitud 1, y que el estado en el momento de este fallo
+seríaat(t1;l1)^in(p1;t1).
+El Algoritmo 1 muestra el algoritmo general de AAM. Toma el
+agenteA, el conjunto de predicados instanciados P, el conjunto de todos los
+encabezados de acción AH, y un conjunto de estados aleatorios Scomo entrada,
+y entrega el conjunto de modelos estimados funcionalmente equivalentes
+representados por possmodels como salida. Scomo entrada se puede generar en
+un paso de preprocesamiento dado P. AIA inicializa possmodels
+como un conjunto que consiste en el modelo vacío (línea 3) que representa
+que AAM comienza en el supremo >del retículo de modelos.
+En cada iteración del bucle principal (línea 4), AIA mantiene
+un retículo de abstracción y lleva el registro del nodo actual enAlgoritmo 1 Algoritmo de interrogatorio de agentes (AIA)
+1:Entrada:A;AH;P;S
+2:Salida: poss models
+3:Inicializar poss models =fg
+4:para
+en algún orden de pal de entrada  hacer
+5: new models poss models
+6: pruned models =fg
+7: para cadaM0en new models hacer
+8: para cada parfi;jginf+; ;;gcomo
+9:Q,Mi,Mj generate query(M0;i;j;
+; S)
+10:Mprune ﬁlter models(Q;MA;Mi;Mj)
+11: pruned models pruned models[Mprune
+12: fin para
+13: fin para
+14: sipruned models es;entonces
+15: update palordering(  ;S)
+16: continuar
+17: fin si
+18: poss models new modelsf
++;
+ ;
+;gn
+pruned models
+19:fin para
+el retículo. Elige una tupla pal 
+correspondiente a una de las
+aristas descendentes del retículo desde un nodo dado por algún
+orden de entrada de  . La corrección del algoritmo no
+depende de este orden. Luego guarda una copia temporal
+depossmodels comonewmodels (línea 5) e inicializa un
+conjunto vacío en cada nodo para guardar los modelos podados (línea 6).
+El bucle interno (línea 7) itera sobre el conjunto de todos los mo-
+delos abstractos posibles que AIA aún no ha rechazado, guardados
+comonewmodels . Luego recorre pares de modos (línea 8),
+que más adelante se usan para generar consultas y refi-
+nar modelos. Para el par de modos elegido, se llama a generate query()
+(línea 9), que devuelve dos modelos concretados con los mo-
+dos elegidos y una consulta Qque puede distinguir entre
+ellos según sus respuestas.
+Luego AIA llama a ﬁlter models(), que plantea la consulta Qal
+agente y a los dos modelos. Según sus respuestas, AIA
+poda los modelos cuyas respuestas no son consistentes con
+las del agente (línea 11). Luego actualiza el conjunto estimado
+de modelos posibles representado por possmodels (línea 18).
+Si AIA no puede podar ningún modelo en un nodo (línea 14),
+modifica el orden de las tuplas pal (línea 15). AIA continúa
+este proceso hasta que llega al nodo más concretizado del
+retículo (es decir, todas las tuplas palm posibles 2están refinadas
+en este nodo). El conjunto restante de modelos representa el
+conjunto estimado de modelos para A. El número de tuplas palm
+resueltas puede usarse como una estimación continua de la exactitud de los
+modelos derivados. AIA requiere O(jPjjAj)consultas, ya que hay
+2jPjjAjtuplas pal. Sin embargo, nuestros estudios empíricos
+muestran que nunca generamos tantas consultas.
+3.2 Generación de consultas
+El proceso de generación de consultas corresponde al módulo gener-
+atequery() de AIA, que toma un modelo M0, la tupla pal
+tupla
+, y 2 modos i;j2f+; ;;gcomo entrada; y devuelve
+los modelosMi=M0[f
+igyMj=M0[f
+jg, y una
+Algoritmo 2 Algoritmo de generación de consultas
+1:Entrada:M0;i;j;
+; S
+2:Salida:Q;Mi;Mj
+3:Mi;Mj addpalm(M0;i;j;
+ )
+4:parasIenS hacer
+5: dom, prob getplanning prob (sI;Mi;Mj)
+6: planificador(dom, prob)
+7:Q hsI;i
+8: sientonces break fin si
+9:fin para
+10:devolverQ,M0[f
+ig,M0[f
+jg
+consulta de resultado de plan Qque los distingue, es decir, MiQMj.
+Las consultas de resultado de plan tienen 2 componentes, un estado inicial
+sIy un plan. AIA obtienesIdel conjunto de entrada de
+estados aleatoriosS(línea 4). Usando sIcomo estado inicial, la idea es
+encontrar un plan que, al ser ejecutado por MiyMj, los lleve
+a estados distintos, o a un estado donde solo uno
+de ellos pueda seguir ejecutando el plan. Después planteamos la misma
+consulta aAy podamos al menos uno de MiyMj. Por tanto,
+buscamos impedir que los modelos inconsistentes con el modelo del agente
+MAlleguen al mismo estado final queMAtras ejecu-
+tar la consultaQ y seguir una trayectoria de estados distinta.
+Para lograrlo, reducimos el problema de generar una consulta
+de resultado de plan a partir de MiyMjen un problema de planificación.
+La reducción procede creando modelos temporales
+M00
+iyM00
+j. Ahora explicamos cómo generarlos. Nosotros
+agregamos la tupla pal 
+=hp;a;lien los modosiyjaM0para obtener
+M0
+iyM0
+j, respectivamente. Si la ubicación l=eff, agregamos la
+tupla palm normalmente aM0, es decir,M0
+m=M0[hp;a;l;mi,
+dondem2fi;jg. Sil=pre, agregamos un predicado ficticio
+puen disyunción con el predicadopa la precondición de
+ambos modelos. Luego modificamos los modelos M0
+iyM0
+j
+más adelante de la siguiente manera:
+M00
+m=M0
+m[fhpu;a0;l0;+i:8a0;l0ha0;l0i62
+fha;li:9mhp;a;l;mi2M0gg
+[fhpu;a0;l0; i:8a0;l0ha0;l0i2
+fha;li:l=eff^9mhp;a;l;mi2M0gg
+puse agrega solo para generar una consulta distintiva y
+no forma parte de los modelos MiyMjdevueltos por el proceso de
+generación de consultas. Sin esta modificación, un modelo
+abstracto inconsistente podría tener una respuesta consistente con A.
+Ahora mostramos cómo reducir la generación de consultas de resultado
+de plan a un problema de planificación PPO(línea 5).PPOusa efec-
+tos condicionales en sus acciones (de acuerdo con PDDL (Mc-
+Dermott et al. 1998; Fox y Long 2003)). El modelo usado
+para definirPPOtiene predicados de ambos modelos M00
+iyM00
+j
+representados comoPM00
+iyPM00
+jrespectivamente, además de un
+nuevo predicado ficticio p . Los encabezados de acción son los mismos
+queAH. La precondición de cada acción es una disyunción de las pre-
+condiciones deM00
+iyM00
+j. Esto hace que una acción sea aplicable
+en un estadossi o bienM00
+io bienM00
+jpuede ejecutarla ens. El efecto
+de cada acción tiene 2 efectos condicionales: el primero aplica los
+efectos de la acción de ambosM00
+iyM00
+j si las precondiciones de ambosM00
+iyM00
+json verdaderas, mientras que el segundo hace que el predicado ficticio
+psea verdadero si la precondición de solo uno deM00
+iy
+M00
+jes verdadera. Formalmente, expresamos este problema de planificación como
+PPO=hMPO;sI;Gi, dondeMPOes un modelo con pre-
+icatesPPO=PM00
+i[PM00
+j[p , y acciones APOdonde
+para cada acción a2APO,pre(a) =pre(aM00
+i)_pre(aM00
+j)
+andeff(a)=
+(when (pre(aM00
+i)^pre(aM00
+j))(eff(aM00
+i)^eff(aM00
+j)))
+(when ((pre(aM00
+i)^:pre(aM00
+j))_
+(:pre(aM00
+i)^pre(aM00
+j))) (p ));
+El estado inicial sI=sM00
+i
+I^sM00
+j
+I, wheresM00
+i
+IandsM00
+j
+I
+son copias de todos los predicados en sI, yGes la fórmula meta
+expresado como9p(pM00
+i^:pM00
+j)_(:pM00
+i^pM00
+j)_p .
+Con esta formulación, la meta se alcanza cuando una ac-
+ción enM00
+iyM00
+jdifiere en una precondición (haciendo que
+solo uno de ellos sea ejecutable en un estado), o en un efecto (lo que lleva
+a estados finales distintos al aplicar la acción). P. ej., con-
+sidere los modelos con diferencias en load truck(p1;t1;l1)
+como se muestra en la Fig. 3. Desde el estado at(t1;l1)^:at(p1;l1),
+M2puede ejecutar load truck(p1;t1;l1)peroM1no
+puede. De forma similar, en el estado at(t1;l1)^at(p1;l1), ejecutar
+load truck(p1;t1;l1)hará queMAyM1terminen en
+estados que difieren en el predicado at(p1;l1). Por tanto, dado el estado inicial
+correcto, la solución al problema de planificación PPO
+dará el plan distintivo correcto.
+Teorema 1. Dado un par de modelos MiyMj, el pro-
+blema de planificación PPOtiene una solución si y solo siMiyMjtienen un
+resultado de plan distintivo, la consulta QPO.
+Demostración (esbozo). La entrada del problema de planificación PPO
+consiste en un estado inicial sI. Si el planificador puede resolver PPO
+con el estado inicial sIpara dar un plan , la consulta distintiva
+es una combinación de sIy. De forma similar, siMiQPOMj,
+entonces al dar el estado inicial sIcomo parte del problema de planificación
+PPO, el planserá una solución que forma parte de QPO.
+3.3 Filtrado de modelos posibles
+Esta sección describe el módulo ﬁlter models() en el Algo-
+rithmo 1, que toma como entrada MA, Mi, Mj y la consulta Q
+(Sec. 3.2), y devuelve el subconjunto Mprune que no es
+consistente con MA. Primero,
+AAM formula la consulta Q a Mi, Mj y al agente A.
+Con base en las respuestas de los tres, determina si los dos
+modelos son podables, es decir, Mi ⇝ Mj. Como se menciona en la
+Def. 5, verificar la podabilidad implica comprobar si la respuesta
+a la consulta Q de uno de los modelos Mi o Mj es consistente
+con la del agente o no. Teorema 2. Sean
+Mi, Mj ∈ {M+, M−, M∅} los modelos generados
+añadiendo la tupla palm τ a M0, que es una 
+abstracción
+del verdadero modelo del agente MA. Supongamos que Q =
+⟨sQI; Q⟩
+es una consulta distintiva para dos modelos distintos
+Mi, Mj, es decir, Mi Q Mj, y que la respuesta de los
+modelos Mi, Mj y MA a la consulta Q es
+Q(Mi) =
+⟨`i;
+⟨pi1,…,pimi⟩⟩, Q(Mj) =
+⟨`j;
+⟨pj1,…,pjni⟩⟩,
+y Q(MA) = ⟨`A;
+⟨pA1,…,pAk⟩⟩.
+Cuando `A = len(Q),
+Mi no es una abstracción de MA si len(Q) ≠ `i
+o
+{pi1,…,pimi}
+⊄
+{pA1,…,pAk}.
+Demostración
+(esbozo). Probamos por inducción. El caso base es
+añadir una sola tupla palm ⟨p;a;l⟩ a un modelo vacío (que es una
+abstracción consistente de MA), lo que da 3 modelos. Se puede mostrar
+que los 2 modelos podados según la Def. 4 son inconsistentes
+con MA, quedando solo el modelo consistente. Para el paso
+inductivo, se puede mostrar que, tras añadir una tupla palm a un modelo
+consistente, este deja de ser consistente con MA solo si no ejecuta el
+plan completo (la precondición es inconsistente), o si el estado final
+que alcanza el modelo no es un subconjunto del estado del agente (el
+efecto es inconsistente). Si los modelos son podables, entonces
+la tupla palm que se añade en el modelo inconsistente no
+puede aparecer en ningún modelo consistente con A. Como descartamos
+tales tuplas palm en niveles abstractos (como se muestra en
+la Fig. 2(a)), podamos un gran número de modelos hacia abajo del
+retículo (como se muestra en la Fig. 2(c)); así mantenemos bajo control
+la intratabilidad y la tractabilidad del enfoque y terminamos formulando
+menos consultas. 3.4 Actualización
+del orden de las tuplas palm
+Esta sección describe el módulo update_palordering() de AIA
+(línea 15). Se llama cuando la consulta generada por el módulo
+generate_query() no es ejecutable por A, es decir, len(Q) ≠
+`A. Por ejemplo, consideremos dos modelos abstractos M2 y M3
+que está considerando AAM (Fig. 3). En este nivel de abstracción,
+AAM no conoce el predicado at(?p;?l), por lo que generará
+una consulta de resultado de plan con estado inicial at(?t;?l) y
+plan load truck(p1;t1;l1) para distinguir entre M2 y M3. Pero el
+agente A no puede ejecutar esto, porque su precondición
+at(?p;?l) no se cumple, por lo que no podemos descartar ninguno de
+los modelos. Recordemos que, en respuesta a la
+consulta de resultado de plan, obtenemos la acción fallida aF =
+[`+1] y el estado final sF. Como el plan de consulta se genera
+usando Mi y Mj (que difieren solo en la tupla palm recién
+añadida), ambos alcanzarían el mismo estado sF tras ejecutar los
+primeros ` pasos del plan. Así, buscamos en S un estado s′F
+donde A pueda ejecutar aF. De forma similar a Stern
+y Juba (2017), inferimos que cualquier predicado que sea falso en
+s no aparecerá en la precondición de aF en modo positivo. A
+continuación, recorremos el conjunto de predicados p′ ∈ s′ ∖ sF y los
+añadimos a sF para comprobar si A aún puede ejecutar aF. Así,
+al añadir un predicado p ∈ p′ al estado sF, si A no puede
+ejecutar aF, añadimos p en modo negativo a la precondición
+de aF; en caso contrario, en modo ∅. Todas las tuplas palm
+cuyos modos se infieren correctamente de esta manera se eliminan, por
+tanto, del orden de las tuplas palm. Modelos
+equivalentes. Es posible que AIA encuentre un par de modelos
+Mi y Mj que no son podables. En tales casos, los modelos
+Mi y Mj son funcionalmente equivalentes y ninguno de ellos
+puede descartarse. Por ello, ambos modelos terminan en el conjunto
+possmodels en la línea 18 de AIA. 3.5 Corrección
+del algoritmo de interrogatorio de agentes En esta
+sección demostramos que el conjunto de modelos estimados devuelto
+por AIA es correcto, y que los modelos devueltos son funcionalmente equivalentes al modelo del
+agente, y que ningún modelo
+correcto se descarta en el
+proceso. Dominio |P| |A|
+|Q̂| t̄(ms) t(s) Gripper 5
+3 17 18.0 0.2 Blocksworld 9 4
+48 8.4 36 Miconic 10 4 39 9.2
+1.4 Parking 18 4 63 16.5 806
+Logistics 18 6 68 24.4 1.73
+Satellite 17 5 41 11.6 0.87
+Termes 22 7 134 17.0 110.2 Rovers
+82 9 370 5.1 60.3 Barman 83 17 357 18.5 1605 Freecell 100 10 535
+2.24y33.4y Tabla 1: El número de consultas (|Q̂|), el tiempo promedio
+por consulta (t̄) y la varianza del tiempo por consulta (σt)
+generados por AIA con FD. El promedio y la varianza se
+calculan para 10 ejecuciones de AIA, cada una sobre un problema
+distinto. y Tiempo en segundos. Teorema
+3. El algoritmo de interrogatorio de agentes (algoritmo 1)
+siempre termina y devuelve un conjunto de modelos, cada uno de los
+cuales es funcionalmente equivalente al modelo MA del agente.
+Demostración (esbozo). Los teoremas 1 y 2 demuestran que, cada vez
+que obtenemos una consulta podable, descartamos solo modelos
+inconsistentes, lo que garantiza que ningún modelo correcto se
+descarte. Cuando no obtenemos una consulta podable, inferimos
+la precondición correcta de la acción fallida usando update_palordering();
+por tanto, el número de tuplas palm refinadas aumenta
+siempre con el número de iteraciones de AIA, lo que garantiza su
+terminación en tiempo finito. 4 Evaluación empírica
+Implementamos AIA en
+Python para evaluar la eficacia de nuestro enfoque. En esta
+implementación, los estados iniciales (S, línea 1 del algoritmo 1) se
+recogieron haciendo que el agente realizara caminatas aleatorias en
+un entorno simulado. Usamos un máximo de 60 de tales estados
+iniciales aleatorios para cada dominio en nuestros experimentos.
+La implementación supone que los dominios no tienen
+constantes y que las acciones y los predicados no usan variables
+repetidas (p. ej., at(?v;?v)), aunque estos supuestos pueden eliminarse
+en la práctica sin afectar la corrección de los algoritmos. La
+implementación está optimizada para almacenar las respuestas del
+agente a las consultas; por ello, las respuestas almacenadas se usan
+si una consulta se repite. Probamos AIA con dos tipos de agentes:
+agentes simbólicos que usan modelos de la IPC (desconocidos
+para AIA), y agentes simuladores que informan los estados
+como imágenes usando PDDLGym. Escribimos clasificadores de imágenes
+para cada predicado para estos últimos experimentos y los
+usamos para derivar representaciones de estado para el algoritmo AIA.
+Todos los experimentos se ejecutaron en CPUs Intel i9-9900 de 5.0
+GHz con 64 GB de RAM, con Ubuntu 18.04. El análisis presentado
+a continuación muestra
+que AIA aprende el modelo correcto con un número
+razonable de consultas, y compara nuestros resultados con el
+trabajo relacionado más cercano, 3 Código disponible en
+https://git.io/Jtpej 0 20 40 0.0 0.5 1.0 Gripper 0
+20 40 0.0 0.5 1.0
+Blocksworld 0 20 40 0.0 0.5 1.0
+Miconic 0 20 40 60 0.0 0.5
+1.0 Parking 0 20 40 60 0.0 0.5
+1.0 Precisión del modelo Logistics 0 20 40 0.0
+0.5 1.0 Satellite 0 200 400
+0.0 0.5 1.0 Freecell 0 50
+100 0.0 0.5 1.0 Termes 0 100
+200 300 0.0 0.5 1.0 Barman 0
+100 200 300 0.0 0.5 1.0 Rovers 0
+0510
+010
+05×10−1
+2.02.53.0×10−2
+0.00.51.0
+2 Tiempo por consulta
+012
+010
+24×10−2
+01020
+(seg.) Número de consultas Precisión: AIA FAMA Tiempo: AIA FAMA Figura 4: Comparación del rendimiento de AIA y FAMA
+en términos de precisión del modelo y tiempo por consulta, con
+un número creciente de consultas.
+FAMA (Aineto, Celorrio y Onaindia 2019). En el siguiente
+análisis usamos la métrica de precisión del modelo: el número
+de tuplas palm aprendidas correctamente, normalizado con el número
+total de tuplas palm en MA. Experimentos
+con agentes simbólicos. Inicializamos el agente con
+uno de los 10 modelos de dominio de la IPC y ejecutamos AIA
+sobre el agente resultante. Se usaron 10 instancias de problema
+distintas para obtener estimaciones de rendimiento
+promedio. La Tabla 1 muestra que el número de consultas
+requeridas aumenta con el número de predicados y acciones del dominio.
+Usamos Fast Downward (Helmert 2006) con la heurística
+LM-Cut (Helmert y Domshlak 2009) para resolver los
+problemas de planificación. Como nuestro enfoque es independiente
+del planificador, también probamos usar FF (Hoffmann y Nebel
+2001) y los resultados fueron similares. La baja varianza muestra
+que el método es estable en múltiples ejecuciones.
+Comparación con FAMA. Comparamos el rendimiento de
+AIA con el de FAMA en términos de estabilidad de los modelos
+aprendidos y tiempo por consulta. Como el foco de nuestro enfoque está
+en generar automáticamente trazas útiles, proporcionamos a FAMA
+trazas generadas aleatoriamente de longitud 3 (la longitud de
+los planes más largos en las consultas generadas por AIA), de la
+forma usada a lo largo de este artículo (⟨sI;a1;a2;a3;sG⟩).
+La Fig. 4 resume nuestros hallazgos. AIA requiere menos tiempo por
+consulta y muestra una mejor convergencia hacia el modelo correcto.
+Figura 5: Sokoban simulado de PDDLGym (izquierda) y Doors
+(derecha), entornos usados en los experimentos.
+FAMA a veces alcanza modelos casi exactos más rápido, pero
+su precisión sigue oscilando, lo que dificulta determinar
+con certeza cuándo debe detenerse el proceso de aprendizaje (aumentamos
+el número de trazas proporcionadas a FAMA hasta que se quedó
+sin memoria). Esto se debe a que la solución del problema de planificación
+interno de FAMA introduce tuplas palm espurias en
+su modelo si las trazas de entrada no capturan la dinámica completa del
+dominio. En Logistics, FAMA generó un problema de planificación incorrecto,
+mientras que en Freecell y Barman se quedó
+sin memoria (AIA también tardó bastante en Free-
+cell). Además, en dominios con precondiciones negativas como Ter-
+mes, FAMA no pudo aprender el modelo correcto. Usamos
+Madagascar (Rintanen 2014) con FAMA, ya que es el planificador
+preferido para ello. También probamos FD y FF con FAMA,
+pero, como señalaron los autores originales, no escalaba y se quedó
+sin memoria en casi todos los problemas de Blocksworld y Gripper, salvo unos pocos,
+donde era mucho más lento que con Madagascar.
+Experimentos con agentes simuladores. AIA también puede
+usarse con agentes simuladores que no conocen los predi-
+cados y que informan de los estados como imágenes. Para probarlo, escribimos
+clasificadores para detectar predicados a partir de imágenes de estados del simulador
+en el marco PDDLGym (Silver and Chitnis 2020). Este marco
+proporciona modelos PDDL de referencia, lo que
+simplifica la estimación de la precisión. Inicializamos el
+agente con uno de los dos entornos de PDDLGym
+(Sokoban y Doors, mostrados en la Fig. 5). AIA infirió el
+modelo correcto en ambos casos, y el número de predicados
+instanciados, acciones y el número promedio de consultas (sobre
+5 ejecuciones) usadas para predecir el modelo correcto para Sokoban fueron
+35, 3 y 201, y para Doors, 10, 2 y 252.
+5 Conclusión
+Presentamos un enfoque novedoso para aprender de forma eficiente el
+modelo interno de un agente autónomo en una forma similar a STRIPS
+mediante respuestas a consultas. Nuestros resultados teóricos y empí-
+ricos mostraron que el enfoque funciona bien tanto para
+agentes simbólicos como simuladores.
+Extender nuestro clasificador de predicados para manejar la detección ruidosa de estados, de forma
+similar a los enfoques prevalentes que usan clasificadores para
+detectar estados simbólicos (Konidaris, Kaelbling, y Lozano-
+Perez 2014; Asai y Fukunaga 2018) es una buena dirección
+para trabajos futuros. Otras extensiones prometedoras incluyen
+reemplazar las interfaces de comunicación de consulta y respuesta entre
+el agente y AAM por un lenguaje natural similar al de
+Lindsay et al. (2017), o aprender otras representaciones como
+Zhuo, Muñoz-Avila, y Yang (2014).
+Agradecimientos
+Agradecemos a Abhyudaya Srinet su ayuda con la implemen-
+tación. Este trabajo fue apoyado en parte por la NSF mediante
+las subvenciones IIS 1844325, IIS 1942856 y OIA 1936997.
+Declaración de ética
+Aprender el modelo interno de un agente de IA es uno de los principales
+ejes de la comunidad de IA en el pasado reciente. Este
+trabajo permitiría a una persona no experta evaluar esos
+agentes autónomos y verificar si son seguros para trabajar con ellos. Esto
+aumentaría la tasa de adopción de los sistemas de IA, ya que eliminaría
+la dependencia de los sistemas que usan IA de expertos que pudieran
+verificar el funcionamiento interno del agente.
+Nuestro sistema hace consultas al agente y supone que el
+agente puede conectarse a un simulador para garantizar la correc-
+ción de las respuestas. Nuestro enfoque para este aprendizaje de modelos
+viene con garantías de corrección y completitud. Esto
+implica que encontrará el modelo del agente si existe uno,
+y que el modelo que aprende será correcto según las simula-
+ciones. Como en cualquier enfoque que use simuladores, este método
+es susceptible a errores de programación y de diseño del simula-
+dor. Esto puede abordarse de forma independiente mediante investigación
+sobre verificación formal de simuladores usados en IA.
+Referencias
+Aineto, D.; Celorrio, S. J.; y Onaindia, E. 2019. Learn-
+ing Action Models With Minimal Observability. Artificial
+Intelligence 275: 104–137.
+Amir, E.; y Chang, A. 2008. Learning Partially Observ-
+able Deterministic Action Models. Journal of Artificial In-
+telligence Research 33: 349–402.
+Amir, E.; y Russell, S. 2003. Logical Filtering. En Proc.
+IJCAI .
+Asai, M.; y Fukunaga, A. 2018. Classical Planning in
+Deep Latent Space: Bridging the Subsymbolic-Symbolic
+Boundary. En Proc. AAAI .
+Bäckström, C.; y Jonsson, P. 2013. Bridging the Gap Be-
+tween Refinement and Heuristics in Abstraction. En Proc.
+IJCAI .
+Balac, N.; Gaines, D.; y Fisher, D. 2000. Learning Action
+Models for Navigation in Noisy Environments. En ICML
+Workshop on Machine Learning of Spatial Knowledge .
+Bonet, B.; y Geffner, H. 2020. Learning First-Order Sym-
+bolic Representations for Planning from the Structure of the
+State Space. En Proc. ECAI .
+Bryce, D.; Benton, J.; y Boldt, M. W. 2016. Maintaining
+Evolving Domain Models. En Proc. IJCAI .
+Camacho, A.; y McIlraith, S. A. 2019. Learning Inter-
+pretable Models Expressed in Linear Temporal Logic. En
+Proc. ICAPS .
+Chitnis, R.; Silver, T.; Tenenbaum, J.; Kaelbling, L. P.; y
+Lozano-Perez, T. 2021. GLIB: Efficient Exploration for
+Relational Model-Based Reinforcement Learning via Goal-
+Literal Babbling. En Proc. AAAI .Cresswell, S.; y Gregory, P. 2011. Generalised Domain
+Model Acquisition from Action Traces. En Proc. ICAPS .
+Cresswell, S.; McCluskey, T.; y West, M. 2009. Acquisi-
+tion of Object-Centred Domain Models from Planning Ex-
+amples. En Proc. ICAPS .
+Fikes, R. E.; y Nilsson, N. J. 1971. STRIPS: A New Ap-
+proach to the Application of Theorem Proving to Problem
+Solving. Artificial Intelligence 2(3-4): 189–208.
+Fox, M.; y Long, D. 2003. PDDL2.1: An Extension to
+PDDL for Expressing Temporal Planning Domains. Journal
+of Artificial Intelligence Research 20(1): 61–124.
+Gil, Y . 1994. Learning by Experimentation: Incremental Re-
+finement of Incomplete Planning Domains. En Proc. ICML .
+Giunchiglia, F.; y Walsh, T. 1992. A Theory of Abstrac-
+tion. Artificial Intelligence 57(2-3): 323–389.
+Halpern, J. Y . 2016. Actual Causality . The MIT Press. ISBN
+0262035022.
+Helmert, M. 2006. The Fast Downward Planning System.
+Journal of Artificial Intelligence Research 26: 191–246.
+Helmert, M.; y Domshlak, C. 2009. Landmarks, Critical
+Paths and Abstractions: What’s the Difference Anyway? En
+Proc. ICAPS .
+Helmert, M.; Haslum, P.; Hoffmann, J.; et al. 2007. Flexible
+Abstraction Heuristics for Optimal Sequential Planning. En
+Proc. ICAPS .
+Hoffmann, J.; y Nebel, B. 2001. The FF Planning System:
+Fast Plan Generation Through Heuristic Search. Journal of
+Artificial Intelligence Research 14: 253–302.
+Khardon, R.; y Roth, D. 1996. Reasoning with Models.
+Artificial Intelligence 87(1-2): 187–213.
+Konidaris, G.; Kaelbling, L. P.; y Lozano-Perez, T.
+2014. Constructing Symbolic Representations for High-
+Level Planning. En Proc. AAAI .
+Krishnan, A.; Williams, A.; y Martens, C. 2020. Towards
+Action Model Learning for Player Modeling. En Proc. AI-
+IDE.
+Kučera, J.; y Barták, R. 2018. LOUGA: Learning Plan-
+ning Operators Using Genetic Algorithms. En Knowledge
+Management and Acquisition for Intelligent Systems .
+Lindsay, A.; Read, J.; Ferreira, J.; Hayton, T.; Porteous, J.;
+y Gregory, P. 2017. Framer: Planning Models from Natu-
+ral Language Action Descriptions. En Proc. ICAPS .
+McDermott, D.; Ghallab, M.; Howe, A.; Knoblock, C.; Ram,
+A.; Veloso, M.; Weld, D. S.; y Wilkins, D. 1998. PDDL –
+The Planning Domain Definition Language. Informe técnico Re-
+port CVC TR-98-003/DCS TR-1165, Yale Center for Com-
+putational Vision and Control.
+Ng, J. H. A.; y Petrick, R. P. A. 2019. Incremental
+Learning of Planning Actions in Model-Based Reinforce-
+ment Learning. En Proc. IJCAI .
+Rintanen, J. 2014. Madagascar: Scalable Planning with SAT.
+En Proc. 8th International Planning Competition.
+Sacerdoti, E. D. 1974. Planning in a Hierarchy of Abstrac-
+tion Spaces. Artificial Intelligence 5(2): 115–135.
+Settles, B. 2012. Active Learning . Morgan & Claypool Pub-
+lishers. ISBN 1608457257.
+Silver, T.; y Chitnis, R. 2020. PDDLGym: Gym Envi-
+ronments from PDDL Problems. En ICAPS Workshop on
+Bridging the Gap Between AI Planning and Reinforcement
+Learning (PRL) .
+Srivastava, S. 2021. Unifying Principles and Metrics for
+Safe and Assistive AI. En Proc. AAAI .
+Srivastava, S.; Russell, S.; y Pinto, A. 2016. Metaphysics
+of Planning Domain Descriptions. En Proc. AAAI .
+Stern, R.; y Juba, B. 2017. Efficient, Safe, and Probably
+Approximately Complete Learning of Action Models. En
+Proc. IJCAI .
+Yang, Q.; Wu, K.; y Jiang, Y . 2007. Learning Action Mod-
+els from Plan Examples Using Weighted MAX-SAT. Artifi-
+cial Intelligence 171(2-3): 107–143.
+Zhuo, H. H.; y Kambhampati, S. 2013. Action-Model Ac-
+quisition from Noisy Plan Traces. En Proc. IJCAI .
+Zhuo, H. H.; Muñoz-Avila, H.; y Yang, Q. 2014. Learn-
+ing Hierarchical Task Network Domains from Partially Ob-
+served Plan Traces. Artificial Intelligence 212: 134 – 157.

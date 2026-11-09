@@ -1,0 +1,954 @@
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+Zeyu Zheng*y1Junhyuk Oh* 2Matteo Hessel2Zhongwen Xu2Manuel Kroiss2Hado van Hasselt2
+David Silver2Satinder Singh2
+Resumen
+El objetivo de un agente de aprendizaje por refuerzo
+es comportarse de manera que maximice la suma de una función escalar
+adecuada del estado: la recompensa. Estas
+recompensas suelen ser dadas e inmutables. En
+este artículo consideramos, en cambio, la proposición
+de que la propia función de recompensa puede ser un buen foco
+de conocimiento aprendido. Para investigarlo,
+proponemos un marco de metagradiente escalable para
+aprender funciones de recompensa intrínsecas útiles a lo largo de
+múltiples vidas de experiencia. Mediante varios
+experimentos de prueba de concepto, mostramos que
+es factible aprender y capturar conocimiento sobre
+la exploración y la explotación a largo plazo en una re-
+compensa. Además, mostramos que, a diferencia de
+los métodos de transferencia de políticas, que capturan el “cómo”
+debe comportarse el agente, las funciones de recompensa aprendidas
+pueden generalizarse a otros tipos de agentes y a
+cambios en la dinámica del entorno al
+capturar el “qué” que el agente debe procurar hacer.
+1. Introducción
+Los agentes de aprendizaje por refuerzo (RL) pueden almacenar conocimiento
+en sus políticas, funciones de valor, representaciones del estado y
+modelos de la dinámica del entorno. Estos componentes
+pueden ser los loci del conocimiento, en el sentido de que son estruc-
+turas en las que el conocimiento, aprendido de la experiencia por
+el algoritmo del agente o dado por el diseñador del agente, puede
+depositarse y reutilizarse. El objetivo del agente se define
+mediante una función de recompensa, y la meta es aprender a actuar de modo que
+maximice las recompensas acumuladas. En este artículo consideramos la
+proposición de que la propia función de recompensa es un buen locus
+de conocimiento. Esto es inusual (aunque no novedoso), ya que la mayoría de
+los trabajos previos tratan la recompensa como dada e inmutable, al
+*Contribución igualitaria. yTrabajo realizado durante una pasantía en
+DeepMind.1University of Michigan2DeepMind. Correspondencia a:
+Zeyu Zheng <zeyu@umich.edu >, Junhyuk Oh <jun-
+hyuk@google.com >.
+Actas de la 37.ª Conferencia Internacional sobre Aprendizaje Automático,
+en línea, PMLR 119, 2020. Copyright 2020 por el/los autor(es).
+tor(es). Al menos en lo que respecta al algoritmo de aprendizaje. De hecho,
+los diseñadores de agentes suelen considerar conveniente modificar la
+función de recompensa que se da al agente para facilitar el aprendizaje. Es
+por ello útil distinguir entre dos tipos de funciones de recompensa
+(Singh et al., 2010): las recompensas extrínsecas definen la
+tarea y capturan las preferencias del diseñador sobre el comportamiento
+del agente, mientras que las recompensas intrínsecas sirven como señales útiles
+para mejorar la dinámica de aprendizaje del agente.
+La mayor parte del trabajo existente sobre recompensas intrínsecas se divide en dos
+grandes categorías: dependientes de la tarea e independientes de la tarea. Ambas son
+típicamente diseñadas a mano. Diseñar a mano recompensas dependientes de la tarea
+puede ser muy difícil, ya que incluso pequeños desajustes
+entre la recompensa real y los objetivos previstos
+pueden provocar consecuencias no deseadas y, a veces, catastróficas
+(Clark & Amodei, 2016). Las recompensas intrínsecas independientes de la tarea
+también suelen diseñarse a mano, a menudo
+basadas en una comprensión intuitiva del comportamiento animal o humano o en
+heurísticas sobre el comportamiento exploratorio deseado.
+Sin embargo, puede ser difícil ajustar estas recompensas intrínsecas independientes de la tarea
+a la dinámica de aprendizaje específica que induce
+la interacción entre agente y entorno. En este
+artículo nos interesa la posibilidad, relativamente poco explorada,
+de recompensas intrínsecas dependientes de la tarea aprendidas (no diseñadas
+a mano). Aunque ha habido algunos intentos
+de aprender recompensas intrínsecas útiles a partir de la experiencia (Singh
+et al., 2009; Zheng et al., 2018), pero cómo capturar conocimiento complejo
+como la exploración a lo largo de episodios en una función de recompensa
+sigue siendo una pregunta abierta.
+Subrayamos que no es nuestro objetivo mostrar que las re-
+compensas son un mejor foco de conocimiento aprendido que otras;
+el mejor foco probablemente depende del tipo de conocimiento
+que sea más útil en una tarea dada. En particular, el conocimiento
+capturado en las recompensas orienta sobre el “qué” que
+el agente debe procurar hacer, mientras que el conocimiento capturado en las políti-
+cas orienta sobre el “cómo” debe comportarse un agente.
+El conocimiento sobre el “qué” capturado en las recompensas es indirecto
+y, por tanto, tarda más en influir en el comportamiento, porque
+actúa a través del aprendizaje, mientras que el conocimiento sobre el “cómo”
+puede tener un efecto inmediato sobre el comportamiento. Al mismo
+tiempo, por su carácter indirecto, el primero puede generali-
+zarse mejor a cambios en la dinámica y a agentes de aprendizaje distintos,
+como mostramos empíricamente en este artículo.
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+¿Cómo debemos medir la utilidad de una función de recompensa
+aprendida? Idealmente, querríamos medir el efecto que
+la función de recompensa aprendida tiene sobre la dinámica de aprendizaje. Por
+supuesto, el aprendizaje ocurre a lo largo de múltiples episodios, de hecho
+ocurre a lo largo de toda una vida. Por ello, elegimos
+el retorno de vida, es decir, la recompensa extrínseca acumulada obtenida por
+el agente durante toda su vida, como objetivo principal. Para ello
+adoptamos el escenario de múltiples vidas del Optimal
+Rewards Framework (Singh et al., 2009), en el que un agente
+se inicializa aleatoriamente al comienzo de cada vida y luego
+enfrenta una tarea estacionaria o no estacionaria extraída de alguna
+distribución. En este escenario, el único conocimiento que se trans-
+fiere entre vidas es la recompensa, en lugar de la política.
+Concretamente, el objetivo es aprender una única función de recompensa intrínseca
+que, al usarse para adaptar la política del agente mediante
+un algoritmo episódico estándar de RL, termine optimizando la
+recompensa extrínseca acumulada a lo largo de su vida.
+En trabajos previos, las buenas funciones de recompensa se encontraban mediante
+búsqueda exhaustiva, lo que limitaba su rango de aplicación. Desarrollamos
+un método basado en gradientes, más escalable, para aprender
+recompensas intrínsecas aprovechando el hecho de que la interacción
+entre la actualización de la política y la función de recompensa es dife-
+renciable (Zheng et al., 2018). Además, a diferencia del trabajo previo,
+parametrizamos la función de recompensa mediante una red recurrente
+neuronal desplegada a lo largo de toda la vida, y la entrenamos
+para maximizar el retorno de vida, lo cual es crucial para que la recompensa
+función capture dependencias temporales a largo plazo (por ejemplo,
+la novedad de los estados a lo largo de episodios). Para manejar la asignación
+de crédito a largo plazo que abarca toda la vida, usamos una función de valor de vida
+que estima el retorno de vida restante.
+Nuestras principales contribuciones y hallazgos son los siguientes: (1)
+Mediante entornos cuidadosamente diseñados, mostramos que
+las funciones de recompensa intrínseca aprendidas pueden capturar una rica forma
+de conocimiento, como la exploración a largo plazo (por ejemplo, explorar
+estados inciertos) y la explotación (por ejemplo, anticipar cambios del entorno)
+a lo largo de múltiples episodios. Hasta donde sabemos,
+este es el primer trabajo que muestra la viabilidad de aprender
+ese tipo de conocimiento complejo en funciones de recompensa. (2) Mostramos que
+el conocimiento sobre “qué hacer” capturado por las funciones de recompensa
+puede generalizarse a dinámicas cambiantes del entorno
+y a nuevos agentes de aprendizaje, mientras que la transferencia de políticas
+no generaliza bien, lo que aporta información
+sobre la utilidad de las recompensas como foco de conocimiento.
+2. Trabajo relacionado
+Recompensas diseñadas a mano. Existe una larga historia de trabajos
+sobre el diseño de recompensas para acelerar el aprendizaje por re-
+fuerzo. La modelación de recompensas busca diseñar recompensas específicas de la tarea
+orientadas a comportamientos óptimos conocidos, normalmente requiriendo
+conocimiento del dominio. Se han estudiado tanto los beneficios (Randløv &
+Alström, 1998; Ng et al., 1999; Harutyunyan et al., 2015)
+como la dificultad (Clark & Amodei, 2016) de la modelación de recompensas específicas de la tarea. Por otro lado, se han propuesto muchas recompensas intrínsecas
+para fomentar la exploración,
+inspiradas en el comportamiento animal. Entre los ejemplos está el error de predicción
+(Schmidhuber, 1991a;b; Oudeyer et al., 2007; Gordon
+& Ahissar, 2011; Mirolli & Baldassarre, 2013; Pathak et al.,
+2017), la sorpresa (Itti & Baldi, 2006), la desviación de una política por defecto
+(Goyal et al., 2018), el cambio de pesos (Linke et al.,
+2019), y los conteos de visitas a estados (Sutton, 1990; Poupart
+et al., 2006; Strehl & Littman, 2008; Bellemare et al., 2016;
+Ostrovski et al., 2017). Aunque estos tipos de recompensas intrínsecas
+las recompensas no son específicas del dominio, a menudo no están bien
+alineadas con la tarea que resuelve el agente, e ignoran
+el efecto sobre la dinámica de aprendizaje del agente. En cambio, nuestro
+trabajo busca aprender recompensas intrínsecas a partir de datos que tengan en
+cuenta la dinámica de aprendizaje del agente sin requerir
+conocimiento previo de un humano.
+Recompensas aprendidas de la experiencia. Ha habido algunos
+intentos de aprender recompensas intrínsecas útiles a partir de datos.
+Singh et al. (2009) introdujeron el Optimal Reward Frame-
+work, que busca encontrar una buena función de recompensa que per-
+mita a los agentes resolver una distribución de tareas mediante búsqueda
+exhaustiva. El estudio empírico solo mostró recompensas intrínsecas simples
+como la preferencia por ciertos objetos, debido
+al método de búsqueda exhaustiva ineficiente empleado. Aun-
+que ha habido trabajos posteriores (Sorg et al., 2010;
+Guo et al., 2016) que usan un método basado en gradientes, estos
+consideran una política no paramétrica basada en Monte-Carlo Tree
+Search. Nuestro trabajo está estrechamente relacionado con LIRPG (Zheng et al.,
+2018), que propuso un método de metagradiente para aprender
+recompensas intrínsecas. Sin embargo, LIRPG considera una sola tarea
+en una sola vida con un objetivo de retorno de episodio miope,
+lo que limita, porque no permite la exploración a través de
+episodios ni la generalización a agentes distintos. En cambio,
+nuestro enfoque tiene en cuenta tanto el efecto a largo plazo de
+las recompensas intrínsecas sobre la dinámica de aprendizaje como la historia
+de vida del agente. Mostramos que esto es crucial para capturar
+conocimiento a largo plazo, como buscar estados novedosos
+a lo largo de episodios, lo que no se logra en trabajos previos. Fi-
+nalmente, a diferencia de AGILE (Bahdanau et al., 2019), que mostró
+que una función de recompensa aprendida puede generalizarse a instrucciones
+no vistas en problemas de RL de seguimiento de instrucciones, nuestro trabajo
+muestra un tipo nuevo e interesante de generalización: a nuevas
+interfaces agente-entorno y a nuevos algoritmos.
+Metaaprendizaje para la exploración y la adaptación a tareas
+El metaaprendizaje (Schmidhuber et al., 1996; Thrun & Pratt,
+1998) ha recibido recientemente considerable atención en RL.
+Los avances recientes incluyen la adaptación de pocos ejemplos (Finn et al.,
+2017a), la imitación de pocos ejemplos (Finn et al., 2017b; Duan et al.,
+2017), la adaptación de modelos (Clavera et al., 2019) y el RL inverso
+(Xu et al., 2019). En particular, nuestro trabajo está relacionado con
+los trabajos previos sobre metaaprendizaje de buenas estrategias de
+exploración (Wang et al., 2016; Duan et al., 2016; Stadie et al.,
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+Vida	con	tarea
+Recompensa	intrínseca
+Episodio	1 Episodio	2
+Figura 1. Ilustración del marco propuesto de aprendizaje de recompensas intrínsecas
+marco. La recompensa intrínseca r se usa para actualizar el pa-
+rámetro i a lo largo de su vida, que consta de muchos episodios.
+El objetivo es encontrar los parámetros óptimos de la recompensa intrínseca 
+a lo largo de muchas vidas que maximicen el retorno de vida (Glife)
+dados agentes inicializados aleatoriamente y tareas posiblemente no estacionarias
+extraídas de alguna distribución p(T).
+2018; Xu et al., 2018a) en que ambos realizan asignación temporal de crédito
+a través de los límites de los episodios maximizando las re-
+compensas acumuladas más allá de un episodio. A diferencia del trabajo
+previo, que busca transferir directamente una política exploratoria,
+nuestro marco impulsa la exploración de forma indirecta mediante una
+función de recompensa que puede reutilizarse por distintos agentes de aprendizaje.
+Reglas de actualización por metaaprendizaje. Ha habido algunos
+estudios que metaaprenden directamente cómo actualizar los
+parámetros del agente mediante metaparámetros, incluido el factor de descuento
+y los retornos (Xu et al., 2018b), las tareas auxiliares (Schlegel
+et al., 2018; Veeriah et al., 2019), las reglas de aprendizaje no supervisado
+(Metz et al., 2019) y los objetivos de RL (Bechtle et al.,
+2019; Kirsch et al., 2019). Nuestro trabajo también pertenece a esta
+categoría, en que nuestros metaparámetros son la función de recompensa
+usada en la actualización del agente. En particular, nuestra formulación de múltiples
+vidas es similar a ML3 (Bechtle et al., 2019) y
+MetaGenRL (Kirsch et al., 2019). Sin embargo, ML3 no puede
+generalizarse a interfaces agente-entorno distintas,
+mientras que las recompensas intrínsecas sí pueden, como se muestra en la Sección 6. Además,
+proponemos usar el retorno de vida en lugar del
+objetivo episódico miope de ML3 y MetaGenRL,
+lo cual es crucial para la exploración entre episodios.
+Estudio cognitivo sobre exploración-explotación. Varios
+estudios de ciencia cognitiva sobre el dilema exploración-explotación
+(Cohen et al., 2007; Wilson et al., 2014) han
+mostrado que los humanos usan tanto una estrategia de exploración aleatoria
+(Thompson, 1933; Watkins, 1989) como una estrategia de búsqueda de
+información (Gittins, 1974; 1979) al enfrentar incer-
+tidumbre. Computacionalmente, la primera puede implementarse fácilmente,
+mentada, mientras que la segunda suele requerir métodos cuidadosamente diseñados a
+mano para guiar el comportamiento del agente. En este trabajo,
+planteamos la hipótesis y verificamos empíricamente que una recompensa intrínseca
+de búsqueda de información puede surgir de forma natural si
+es útil para resolver las tareas. La condición de ser útil
+se parece a un estudio reciente (Dubey & Griffiths, 2019), que
+plantea que un agente racional debe explorar de modo que
+la utilidad de su conocimiento se maximice. 3. El problema de la recompensa óptima
+Primero introducimos algo de terminología.
+Agente: un sistema de aprendizaje que interactúa con un entorno. En cada
+paso t el agente selecciona una acción
+at y recibe del entorno una observación
+st+1 y una recompensa extrínseca rt+1 definida por una tarea T.
+El agente elige acciones según una política (atjst)
+parametrizada por .
+Episodio: una secuencia finita de interacciones agente-entorno
+hasta el final del episodio definido por la tarea.
+El retorno de episodio se define como: Gep=PTep 1
+t=0
+rt+1,
+donde
+es un factor de descuento, y la variable aleatoria
+Tep indica el número de pasos hasta el final del
+episodio.
+Vida: una secuencia finita de interacciones agente-entorno
+hasta el final del entrenamiento definido por el diseñador del
+agente, que puede constar de múltiples episodios. El
+retorno de vida es Glife=PT 1
+t=0
+rt+1, donde
+es un
+factor de descuento, y T es el número de pasos en la
+vida.
+Recompensa intrínseca: una función de recompensa
+r(t+1) parametrizada por , donde t=
+(s0;a0;r1;d1;s1;:::;rt;dt;st) es el historial de vida
+con los terminadores de episodio (binarios) di.
+El problema de la recompensa óptima (Singh et al., 2010), ilustrado
+en la Figura 1, busca aprender los parámetros de la recompensa intrín-
+seca de modo que las recompensas resultantes logren una dinámica de aprendizaje
+para un agente de RL que maximiza el retorno de vida (extrín-
+seco) en tareas extraídas de alguna distribución. Formalmente,
+la función objetivo se define como:
+J() =E0;Tp(T)
+Ep(j0)
+Glife
+;(1)
+donde  y p(T) son una distribución inicial de políticas y una
+distribución sobre tareas posiblemente no estacionarias, respectivamente.
+La verosimilitud de un historial de vida  es p(j0) =
+p(s0)QT 1
+t=0t(atjst)p(dt+1;rt+1;st+1jst;at), donde
+t=f(t 1;) es un parámetro de política tal como se actualiza con
+la función de actualización f, que en este artículo es el gradiente de política.1
+Nótese que la optimización de  abarca múltiples vidas,
+cada una de las cuales puede abarcar múltiples episodios.
+Usar el retorno de vida Glife como objetivo en lugar del
+retorno episódico convencional Gep permite la exploración a través de
+múltiples episodios, siempre que el retorno de vida se maximice
+a largo plazo. En particular, cuando la vida se define como
+un número fijo de episodios, encontramos que el objetivo de retorno de vida
+es a veces más beneficioso que el objetivo episódico
+1 Suponemos que el parámetro de política se actualiza tras cada
+paso de tiempo a lo largo del artículo por brevedad. Sin embargo, el parámetro
+puede actualizarse con menos frecuencia en la práctica.
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+Algoritmo 1 Aprendizaje de recompensas intrínsecas
+Entrada: p(T): distribución de tareas
+Entrada: : distribución de políticas inicializada aleatoriamente
+Inicializar la recompensa intrínseca  y el valor de vida 
+repetir
+Inicializar la tarea T  p(T) y la política   
+mientras la vida no haya terminado, hacer
+0 
+para k= 1;2;:::;N hacer
+Generar una trayectoria usando k 1
+Actualizar la política k k 1+rk 1J(k 1)
+usando recompensas intrínsecas r (Ec. 3)
+fin para
+Actualizar la función de recompensa intrínseca  usando la Ec. 4
+Actualizar la función de valor de vida  usando la Ec. 6
+ N
+fin mientras
+hasta que  converja
+objetivo de retorno, incluso para la medida de rendimiento de retorno episódico.
+Sin embargo, distintos objetivos (por ejemplo, el episodio final
+retorno) puede considerarse según la definición de
+qué es una buena función de recompensa.
+4. Metaaprendizaje de la recompensa intrínseca
+Proponemos un enfoque de metagradiente (Xu et al., 2018b;
+Zheng et al., 2018) para resolver el problema de la recompensa óptima. A
+grandes rasgos, muestreamos una nueva tarea T y un nuevo parámetro de pol-
+tica  en cada iteración de vida. Luego simulamos
+la vida de un agente actualizando el parámetro  usando una
+función de recompensa intrínseca r (Sección 4.1) con gradiente de política
+(Sección 4.2). Simultáneamente, calculamos el metagradiente
+teniendo en cuenta el efecto de las recompensas intrínsecas sobre
+los parámetros de la política para actualizar la función de recompensa intrínseca
+con una función de valor de vida (Sección 4.3). El Algoritmo 1
+ofrece una visión general de nuestro algoritmo. Las siguientes secciones
+describen los detalles.
+4.1. Arquitecturas
+La función de recompensa intrínseca es una red neuronal recurrente
+(RNN) parametrizada por , que produce una recompensa escalar
+al llegar al estado st, teniendo en cuenta el historial
+de la vida de un agente t= (s0;a0;r1;d1;s1;:::;rt;dt;st).
+Afirmamos que dar el historial de vida a través de los episodios
+como entrada es crucial para equilibrar la exploración y la explota-
+ción, por ejemplo capturando con qué frecuencia se visita un
+estado determinado para calcular una recompensa de bonificación por exploración. La
+función de valor de vida es una red neuronal recurrente
+separada parametrizada por , que recibe las mismas entradas que
+la función de recompensa intrínseca y produce una estimación escalar
+del retorno futuro esperado dentro de la vida.4.2. Actualización de la política
+Cada agente interactúa con un entorno y con una tarea muestreada
+de una distribución T  p(T). Sin embargo, en lugar de maximizar directamente
+las recompensas extrínsecas definidas por la tarea, el
+agente maximiza las recompensas intrínsecas (r) usando gradiente de
+política (Williams, 1992; Sutton et al., 2000):
+J() =ETep 1X
+t=0
+tr(t+1)
+(2)
+rJ() =E
+Gep
+;trlog(ajs)
+; (3)
+donde r(t+1) es la recompensa intrínseca en el tiempo t, y Gep
+;t=PTep 1
+k=t
+k tr(k+1) es el retorno de las recompensas intrínsecas
+acumuladas en un episodio con factor de descuento 
+.
+4.3. Actualización de la recompensa intrínseca y del valor de vida
+Para actualizar los parámetros de la recompensa intrínseca , tomamos directamente
+un paso de ascenso por metagradiente usando el objetivo global
+(Ecuación 1). Concretamente, el gradiente es (véase el material suple-
+mentario para la derivación)
+rJ() =Et;T
+Glife
+trtlogt(atjst)rt
+;(4)
+Se usa la regla de la cadena para obtener el metagradiente (rt), como en
+trabajos previos (Zheng et al., 2018). El grafo de cómputo
+de este procedimiento se ilustra en la Figura 1.
+Calcular el verdadero metagradiente de la Ecuación 4 requiere
+retropropagar a través de toda la vida, lo cual es inviable
+porque cada vida puede implicar miles de actualizaciones
+de política. Para abordar parcialmente este problema, truncamos el
+metagradiente después de N actualizaciones de política, pero aproximamos el
+retorno de vida Glife;
+tGlife
+t usando una función de valor de vida
+V() parametrizada por , que se aprende usando un
+aprendizaje por diferencias temporales a partir de una trayectoria de n pasos:
+Glife;
+t=n 1X
+k=0
+krt+k+1+
+nV(t+n) (5)
+0=+0(Glife;
+t V(t))rV(t);(6)
+donde 0 es una tasa de aprendizaje. En nuestro trabajo empírico, encontramos
+que las estimaciones del valor de vida eran cruciales para permitir que la
+recompensa intrínseca realizara asignaciones de crédito a largo plazo
+a través de los episodios (Sección 5.6).
+5. Investigaciones empíricas
+Presentamos los resultados de nuestras investigaciones empíricas en
+dos secciones. En esta sección, los experimentos y los dominios
+están diseñados para responder las siguientes preguntas de investigación:
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+(a) Habitaciones vacías
+A 
+B C 
+A 
+B C (b) ABC
+C A B (c) Caja con llave
+Figura 2. Ilustración de los dominios. (a) El agente debe encontrar la
+ubicación meta, que da una recompensa positiva, pero la meta no es
+visible para el agente. (b) Cada objeto (A, B y C) da recompensas.
+(c) El agente debe primero recoger la llave y visitar una de
+las cajas (A, B y C) para recibir la recompensa correspondiente. Todos
+los objetos se colocan en ubicaciones aleatorias antes de cada episodio.
+¿Qué tipo de conocimiento aprende la
+recompensa intrínseca?
+¿Cómo influye la distribución de tareas en la recompensa intrín-
+seca?
+¿Cuál es el beneficio del objetivo de retorno de vida frente al
+retorno de episodio?
+¿Cuándo es importante proporcionar el historial de vida como
+entrada a la recompensa intrínseca?
+5.1. Configuración experimental
+Investigamos estas preguntas de investigación en los dominios de mundo en cuadrícula
+ilustrados en la Figura 2. Para cada dominio, entrenamos
+una función de recompensa intrínseca a lo largo de muchas vidas y evalu-
+amos su calidad entrenando un agente con la recompensa aprendida. Implementamos
+las siguientes líneas base.
+Extrinsic-EP: una política se entrena con recompensas extrínsecas
+para maximizar el retorno de episodio.
+Extrinsic-LIFE: una política se entrena con recompensas extrín-
+secas para maximizar el retorno de vida.
+Basado en conteos (Strehl & Littman, 2008): una política se
+entrena con recompensas extrínsecas y bonificaciones de explo-
+ración basadas en conteos.
+ICM (Pathak et al., 2017): una política se entrena con
+recompensas extrínsecas y recompensas de curiosidad basadas en un
+modelo de dinámica inversa.
+Nótese que estas líneas base, a diferencia de las recompensas intrínsecas aprendidas, re-
+compensas, no transfieren conocimiento alguno entre distintas vi-
+das. A lo largo de las Secciones 5.2-5.5, nos centramos en analizar
+qué tipo de conocimiento aprende la recompensa intrínseca, dependiendo de la natu-
+raleza de los entornos. Discutimos el beneficio de
+usar el retorno de vida y de considerar el historial de vida
+al aprender la recompensa intrínseca en la Sección 5.6.
+Los detalles de implementación y de hiperparámetros se descri-
+ben en el material suplementario.5.2. Exploración de estados inciertos
+Diseñamos ‘Habitaciones vacías’ (Figura 2a) para ver si la
+recompensa intrínseca puede aprender a fomentar la exploración de estados
+inciertos, como los métodos de exploración basados en novedad. El
+objetivo es visitar una ubicación meta invisible, que es fija
+dentro de cada vida pero varía entre vidas. Un episodio
+termina al alcanzar la meta. Cada vida consta
+de 200 episodios. Desde la perspectiva del agente, su política
+debe visitar las ubicaciones que sugiere la recompensa intrínseca.
+Desde la perspectiva de la recompensa intrínseca, debe fomentar
+que el agente vaya a ubicaciones no visitadas para localizar la meta, y
+luego explotar ese conocimiento durante el resto de la vida.
+La Figura 3 muestra que la recompensa intrínseca aprendida fue más
+eficiente que las recompensas extrínsecas y la exploración basada en conteos
+al entrenar un agente nuevo. Observamos que la recompensa intrínseca
+aprendió dos estrategias interesantes, como se visualiza en la Fi-
+gura 4. Mientras no se encuentra la meta, fomenta la exploración
+de ubicaciones no visitadas, porque aprendió el conocimiento de que
+existe una ubicación meta recompensante en algún lugar. Una vez que se
+encuentra la meta, la recompensa intrínseca anima al agente a
+explotarla sin más exploración, porque aprendió que
+solo hay una meta. Este resultado muestra que la curiosidad sobre
+estados inciertos puede surgir de forma natural cuando varios estados
+pueden ser recompensantes en un dominio, incluso cuando los estados
+recompensantes son fijos dentro de la vida de un agente.
+5.3. Exploración de objetos inciertos
+En el dominio anterior, consideramos la incertidumbre sobre dónde
+está la recompensa (o la ubicación meta). Ahora consideramos el manejo
+de la incertidumbre sobre el valor de distintos objetos. En
+el entorno ‘ABC aleatorio’ (véase la Figura 2b), para cada
+vida las recompensas de los objetos A, B y C se muestrean uniformemente
+de [ 1;1], [ 0:5;0] y [0;0:5], respectivamente,
+pero se mantienen fijas dentro de la vida. Una buena recompensa intrínseca
+debería aprender que: 1) B debe evitarse, 2) A
+y C tienen recompensas inciertas, por lo que requieren una exploración
+sistemática (primero ir a uno y luego al otro), y 3) una vez
+determinado cuál de los dos, A o C, es mejor, explotar
+ese conocimiento fomentando que el agente vaya repetidamente
+a ese objeto durante el resto de la vida.
+La Figura 3 muestra que el agente aprendió un método casi óptimo de
+exploración-y-luego-explotación con la recompensa intrínseca
+aprendida. Nótese que el agente no puede transmitir informa-
+ción sobre la recompensa de los objetos entre episodios, como es habitual en
+aprendizaje por refuerzo. La recompensa intrínseca puede propagar
+esa información entre episodios y ayudar al agente a explorar
+o explotar de forma apropiada. Visualizamos la recompensa intrín-
+ca de recompensa para distintas secuencias de acciones en la Figura 5. Las
+recompensas intrínsecas animan al agente a explorar hacia A
+y C en los primeros episodios. Una vez explorados A y C,
+el agente explota el objeto con mayor recompensa. A lo largo del
+entrenamiento, se desalienta al agente a visitar B mediante recompensas negativas
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+0 100 200
+Núm. de episodios0.250.500.751.00Retorno por episodioEmpty Rooms
+0 20 400.00.20.4Random ABC
+0 2500 50000.00.20.4Key-Box
+0250 500 750100001Non-stationary ABC
+Aprendida (nuestra)
+Extrínseca-EP
+Extrínseca-LIFE
+Basada en conteo
+ICM
+Casi óptima
+Figura 3. Evaluación de distintas funciones de recompensa, promediada sobre 30 semillas. Las curvas de aprendizaje muestran agentes entrenados con nuestra recompensa intrínseca
+(azul), con la recompensa extrínseca usando el objetivo de retorno episódico (naranja) o el objetivo de retorno de vida (marrón), y con una
+recompensa de exploración basada en conteo (verde). La línea discontinua corresponde a una estrategia de exploración casi óptima diseñada a mano.
+(a) Habitación
+ (b) Intrínseca
+ (c) Conteo
+ (d) ICM
+Figura 4. Visualización de los primeros 3000 pasos de un agente entrenado
+con distintas funciones de recompensa en Empty Rooms. (a) Los cuadrados azul
+y amarillo representan al agente y a la meta oculta, re-
+pectivamente. (b) La recompensa aprendida anima al agente a visitar
+muchas ubicaciones si no se encuentra la meta (arriba). Sin embargo, cuando la
+meta se encuentra pronto, la recompensa intrínseca hace que el agente la explote
+sin más exploración (abajo). (c-d) Tanto las recompensas basadas en conteo
+como ICM tienden a animar la exploración (arriba), pero dificultan
+la explotación cuando se encuentra la meta (abajo).
+recompensas intrínsecas. Estos resultados muestran que la evitación y
+la curiosidad por objetos inciertos puede surgir potencialmente si
+el entorno tiene objetos con recompensas variadas o fijas.
+5.4. Explotación de la relación causal invariante
+Para ver cómo trata la recompensa intrínseca la relación-
+ship entre objetos: diseñamos ‘Key-Box’, que es
+similar a Random ABC salvo que hay una llave en la
+habitación (véase la Figura 2c). El agente necesita recoger la llave
+primero para abrir una de las cajas (A, B y C) y recibir la
+recompensa correspondiente. Las recompensas de los objetos se muestrean
+de la misma distribución que en Random ABC. La llave
+en sí misma da una recompensa neutra de 0. Además, las ubicaciones de
+el agente, la llave y las cajas se muestrean aleatoriamente para
+cada episodio. Como resultado, el espacio de estados contiene más de
+3 mil millones de estados distintos y, por tanto, es inviable enu-
+merarlos por completo. La Figura 3 muestra que la recompensa intrínseca aprendida lleva a
+una exploración casi óptima. El agente entrenado con recompensas
+extrínsecas no aprendió a abrir ninguna caja. La recompensa intrínseca
+Piso 1 
+Piso 2 Piso 3 Visitar A
+Visitar C
+Piso 2 Piso 3 Visitar C 
+Visitar A 
+A=0.2   B=-0.5   C=0.1 
+Figura 5. Visualización de la recompensa intrínseca aprendida en Random
+ABC, donde las recompensas extrínsecas para A, B y C son 0.2, -0.5 y
+0.1 respectivamente. Cada figura muestra la suma de recompensas intrínsecas
+para una trayectoria hacia cada objeto (A, B y C). En el primer
+episodio, la recompensa intrínseca anima al agente a explorar A. En
+el segundo episodio, la recompensa intrínseca anima a explorar C si
+se visita A (arriba) o viceversa (abajo). En el episodio 3, después de que A
+y C se exploran, la recompensa intrínseca anima a volver a visitar A
+(tanto arriba como abajo).
+captura que la llave es necesaria para abrir cualquier caja, lo cual
+es cierto a lo largo de muchas vidas de entrenamiento. Esto demuestra
+que la recompensa intrínseca puede capturar relaciones causales
+entre objetos cuando el dominio tiene este tipo de
+dinámica invariante.
+5.5. Tratamiento de la no estacionariedad
+Investigamos cómo la recompensa intrínseca maneja las tareas no-
+estacionarias dentro de una vida en nuestro entorno ‘Non-stationary
+ABC’. Las recompensas son las siguientes: para A es ya sea
+1 o  1, para B es  0:5, para C es el valor negativo de la re-
+compensa para A. Las recompensas de A y C se intercambian cada 250
+episodios. Cada vida dura 1000 episodios. La Figura 3 muestra
+que el agente con la recompensa intrínseca aprendida se recu-
+peró rápidamente su rendimiento cuando cambia la tarea, mientras que las
+líneas base tardan más en recuperarse. La Figura 6 muestra cómo
+la recompensa intrínseca aprendida anima al agente que aprende a
+reaccionar a las recompensas cambiantes. Curiosamente, la recompensa intrín-
+seca ha aprendido a prepararse para el cambio dando
+recompensas negativas a la política de explotación del agente unos
+pocos episodios antes de que cambie la tarea. En otras palabras, la
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+470 480 490 500 510 520 530
+Episodios−4−2024Retorno de episodio Intrínseca
+Extrínseca
+470 480 490 500 510 520 530
+Episodios0.000.250.500.751.001.25Entropía
+Figura 6. Visualización de las recompensas intrínsecas y extrínsecas del agente (izquierda) y de la entropía de su política (derecha) en Non-stationary ABC. La
+tarea cambia en el episodio 500 (línea vertical discontinua). La recompensa intrínseca da una recompensa negativa incluso antes de que cambie la tarea (rectángulo
+verde) y hace que la política sea menos determinista (la entropía aumenta). Como resultado, el agente se adapta rápidamente al cambio.
+0 100 200
+Núm. de episodios0.250.500.751.00Retorno por episodioEmpty Rooms
+0 20 400.00.20.4Random ABC
+0 2500 50000.00.2Key-Box
+0250 500 7501000−0.50.00.51.0Non-stationary ABC
+LSTM-Lifetime
+LSTM-Episode
+FF-Episode
+Figura 7. Evaluación de distintas arquitecturas y objetivos de recompensa intrínseca. Para ‘LSTM’, la red de recompensa tiene una LSTM que toma el
+historial de vida como entrada. Para ‘FF’, una red de recompensa de propagación hacia adelante toma solo el paso de tiempo actual. ‘Lifetime’ y ‘Episode’ significan el
+retorno de vida y el episódico como objetivo, respectivamente.
+La recompensa intrínseca reduce el compromiso del agente con el objeto
+con la mejor recompensa actual, aumentando así la entropía de la
+política actual en anticipación del cambio, lo que finalmente facilita
+adaptarse rápidamente. Esto muestra que la recompensa intrínseca
+puede capturar la no estacionariedad repetida (regularmente) a lo largo
+de muchas vidas y hacer que el agente se motive intrínsecamente a no
+comprometerse demasiado firmemente con una política, en anticipación de
+cambios en el entorno.
+5.6. Estudio de ablación
+Para estudiar los beneficios relativos de las ideas técnicas propuestas,
+realizamos un estudio de ablación: 1) reemplazando el objetivo de retorno a largo
+plazo de vida (Glife) por el retorno episódico
+(Gep), y 2) restringiendo la entrada de la red de recompensa
+al paso de tiempo actual en lugar de toda la his-
+toria. La Figura 7 muestra que el historial de vida fue crucial para
+lograr un buen rendimiento. Esto es razonable porque todos los
+dominios requieren algo de información pasada (p. ej., recompensas de objetos
+en Random ABC, ubicaciones visitadas en Empty Rooms) para pro-
+porcionar estrategias de exploración útiles. También se muestra que el
+objetivo de retorno de vida fue beneficioso en Random ABC,
+Non-stationary ABC y Key-Box. Estos dominios requieren
+exploración a lo largo de múltiples episodios para encontrar la políti-
+ca óptima. Por ejemplo, recoger un objeto incierto (p. ej.,
+el objeto A en Random ABC) es necesario incluso si el episodio
+termina con una recompensa negativa. La función de valor episódica fun-
+ción penalizaría directamente un episodio de ex-
+ploración de bajo rendimiento al calcular el meta-gradiente, lo cual
+impide que la recompensa intrínseca aprenda a fomentar la exploración entre episodios. Por otro lado, tal com-
+portamiento puede fomentarse mediante la función de valor de vida,
+siempre que proporcione información útil para maximizar el
+retorno de vida a largo plazo.
+6. Generalización mediante recompensas
+Como se señaló antes, las recompensas capturan el conocimiento sobre cuáles deberían ser las metas de un agente, más que
+cómo debe comportarse. Al mismo
+tiempo, transferir este último en forma de políticas
+también es factible en nuestros dominios presentados arriba. Aquí lo
+confirmamos implementando y presentando resultados para los
+siguientes dos métodos de meta-aprendizaje:
+MAML (Finn et al., 2017a): una política meta-aprendida
+a partir de una distribución de tareas, de modo que pueda adaptarse
+rápidamente a la tarea dada tras unas pocas actualizaciones de parámetros.
+RL2 (Duan et al., 2016; Wang et al., 2016): una política RNN
+desplegada a lo largo de toda la vida para maximizar el
+retorno de vida, preentrenada sobre una distribución
+de tareas.
+Aunque todos los métodos que implementamos, incluido el nuestro,
+están diseñados para aprender conocimiento útil a partir de una distribución
+de tareas, tienen objetivos distintos. En concreto, el
+el objetivo de nuestro método es aprender conocimiento útil
+para entrenar “políticas inicializadas aleatoriamente” capturando
+“qué hacer”, mientras que el objetivo de los métodos de transferencia de políticas es
+transferir directamente una política útil para la adaptación rápida a la tarea
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+0 100 200
+Número de episodios0.250.500.751.00Retorno por episodioEmpty Rooms
+0 20 400.00.20.4Random ABC
+0 2500 50000.00.2Key-Box
+0250 500 7501000−101Non-stationary ABC
+Intrínseca (nuestra)
+RL2
+MAML
+Figura 8. Comparación con métodos de transferencia de políticas.
+0 10 20 30 40 500.00.20.4Retorno por episodioRandom ABC
+Original
+Permutado
+Extendido
+(a) Espacio de acciones
+0 50 100 150 2000.00.20.4Retorno por episodioRandom ABC
+AC-Intrinsic
+Q-Intrinsic
+Q-Extrinsic (b) Algoritmo
+0 10 20 30 40 500.00.20.4Retorno por episodioPermuted Random ABC
+Nuestro 
+RL2 
+MAML (c) Comparación con líneas base
+Figura 9. Generalización a nuevas interfaces agente-entorno en Random ABC. (a) Los agentes ‘Permuted’ tienen semántica de acciones diferente.
+Los agentes ‘Extended’ tienen acciones adicionales. (b) ‘AC-Intrinsic’ es el agente actor-crítico original entrenado con la recompensa intrínseca. ‘Q-Intrinsic’
+es un agente Q-learning con la recompensa intrínseca aprendida de agentes actor-crítico. ‘Q-Extrinsic’ es el agente Q-learning con la extrínseca
+recompensa. (c) El desempeño de las líneas base de transferencia de políticas con acciones permutadas durante la evaluación.
+transfiriendo conocimiento de “cómo hacer”. De hecho, puede
+ser más eficiente transferir y reutilizar políticas preentrenadas
+en lugar de reiniciar desde una política aleatoria y aprender
+usando las recompensas aprendidas ante una nueva tarea. La Figura 8 muestra
+que RL2 se desempeña mejor que nuestro enfoque de recompensa intrínseca.
+También se muestra que MAML y RL2 logran
+un buen desempeño desde el principio, ya que ya
+aprendieron a navegar los mundos de cuadrícula y a alcanzar
+los objetivos de las tareas. En nuestro método, en cambio,
+el agente parte de una política aleatoria y depende de la
+recompensa intrínseca aprendida, que le indica indirectamente qué hacer.
+No obstante, nuestro método supera a MAML y logra
+un desempeño asintótico comparable al de RL2.
+6.1. Generalización a nuevas interfaces agente-entorno
+De hecho, nuestro método puede interpretarse como una instancia de
+RL2 con una descomposición particular de parámetros (θ y
+η), que usa el gradiente de política como actualización recurrente (véase
+la Figura 1). Aunque esta estructura modular quizá no sea más
+beneficiosa que RL2 cuando se evalúa con la misma interfaz agente-
+entorno, tal descomposición ofrece una semántica clara
+de cada módulo: la política (θ) captura “cómo
+hacer”, mientras que la recompensa intrínseca (η) captura “qué hacer”,
+y esto permite tipos interesantes de generalización, como
+mostramos a continuación. En concreto, mostramos que el conocimiento “qué”
+capturado por la recompensa intrínseca puede reutilizarse por muchos
+agentes de aprendizaje distintos, como sigue.
+Generalización a espacios de acciones no vistos. Primero evaluamos
+la recompensa intrínseca aprendida en nuevos espacios de acciones. En concreto, la recompensa intrínseca se usó para entrenar nuevos agentes con
+1) acciones permutadas, donde la semántica de izquierda/derecha
+y arriba/abajo se invierte, o 2) acciones extendidas, con 4
+acciones adicionales que se mueven en diagonal. La Figura 9a muestra
+que la recompensa intrínseca proporcionó recompensas útiles a nuevos
+agentes con acciones distintas, aunque no se entrenó con
+esas acciones. Esto es posible porque la recompensa intrínseca
+asigna recompensas a los cambios de estado del agente y no a sus
+acciones. La recompensa intrínseca captura “qué hacer”, lo cual
+hace posible generalizar a nuevas acciones, siempre que el
+objetivo siga siendo el mismo. Por otro lado, no está claro cómo
+generalizar RL2 y MAML de esta manera.
+Generalización a algoritmos de aprendizaje no vistos. Además,
+investigamos qué tan general es la recompensa intrínseca aprendida,
+evaluándola en agentes con algoritmos de aprendizaje distintos.
+En concreto, después de entrenar la recompensa intrínseca a partir de agentes actor-
+crítico, la evaluamos entrenando nuevos agentes mediante
+Q-learning usando la recompensa intrínseca aprendida, como se
+indica con ‘Q-Intrinsic’ en la Figura 9b. Curiosamente, resulta
+que la recompensa intrínseca aprendida es suficientemente general para ser
+útil para agentes Q-learning, aunque se entrenó para
+agentes actor-crítico. Una vez más, no está claro cómo generalizar
+RL2 y MAML de esta manera.
+Comparación con la transferencia de políticas. Aunque es imposi-
+ble aplicar la política aprendida de RL2 y MAML cuando
+ampliamos el espacio de acciones o cuando cambiamos el
+algoritmo de aprendizaje, sí podemos hacerlo cuando solo permutamos las acciones.
+Como muestra la Figura 9c, tanto RL2 como MAML generalizan
+¿Qué pueden capturar las recompensas intrínsecas aprendidas?
+mal cuando el espacio de acciones se permuta en Random ABC,
+porque las políticas transferidas están muy sesgadas hacia el espacio de acciones orig-
+inal. Una vez más, este resultado resalta la diferencia
+entre el conocimiento de “qué hacer” que captura nuestro enfoque
+y el conocimiento de “cómo hacer” que capturan las políticas.
+7. Conclusión
+Revisitamos el problema de la recompensa óptima (Singh et al., 2009)
+y propusimos un método basado en gradientes más escalable para
+aprender recompensas intrínsecas a lo largo de toda la vida. Mediante varios
+experimentos de prueba de concepto, mostramos que la
+recompensa intrínseca no estacionaria aprendida puede capturar regu-
+laridades dentro de una distribución de entornos o, con el tiempo,
+dentro de un entorno no estacionario. Como resultado, fueron
+capaces de fomentar tanto conductas exploratorias como de explotación
+a lo largo de múltiples episodios. Además, algunas nociones de motivación
+intrínseca independientes de la tarea, como la curiosidad,
+surgieron cuando eran efectivas para la distribución de
+tareas a lo largo de la vida en la que se entrenó el agente. También
+mostramos que las recompensas intrínsecas aprendidas pueden generalizar
+a interfaces agente-entorno distintas, como distintos
+espacios de acciones y distintos algoritmos de aprendizaje, mientras que las pol-
+íticas de los métodos de transferencia no logran generalizar ante tales cambios. Esto
+resalta la diferencia entre el conocimiento “qué” de las recom-
+pensas y el tipo de conocimiento “cómo”
+capturado por las políticas. La flexibilidad y el alcance del conocimiento
+capturado por las recompensas intrínsecas en nuestros experimentos de prueba de concepto
+mentos anima a seguir trabajando para combinar distintos
+focos de conocimiento para lograr mayores beneficios prácticos.
+Agradecimientos
+Agradecemos a Joseph Modayil por sus útiles comentarios sobre el
+manuscrito.
+Referencias
+Bahdanau, D., Hill, F., Leike, J., Hughes, E., Hosseini, A.,
+Kohli, P., y Grefenstette, E. Learning to understand
+goal specifications by modelling reward. En International
+Conference on Learning Representations, 2019.
+Bechtle, S., Molchanov, A., Chebotar, Y., Grefenstette, E.,
+Righetti, L., Sukhatme, G., y Meier, F. Meta-learning
+via learned loss. Preprint arXiv:1906.05374, 2019.
+Bellemare, M., Srinivasan, S., Ostrovski, G., Schaul, T.,
+Saxton, D., y Munos, R. Unifying count-based explo-
+ration and intrinsic motivation. En Advances in Neural
+Information Processing Systems, pp. 1471–1479, 2016.
+Clark, J. y Amodei, D. Faulty reward functions in the wild.
+CoRR, 2016. URL https://blog.openai.com/.
+Clavera, I., Nagabandi, A., Liu, S., Fearing, R. S., Abbeel, P., Levine, S., y Finn, C. Learning to adapt in dynamic,
+real-world environments through meta-reinforcement
+learning. En International Conference on Learning Rep-
+resentations, 2019. URL https://openreview.
+net/forum?id=HyztsoC5Y7.
+Cohen, J. D., McClure, S. M., y Yu, A. J. Should i stay
+or should i go? how the human brain manages the trade-
+off between exploitation and exploration. Philosophical
+Transactions of the Royal Society B: Biological Sciences,
+362(1481):933–942, 2007.
+Duan, Y., Schulman, J., Chen, X., Bartlett, P. L., Sutskever,
+I., y Abbeel, P. RL2: Fast reinforcement learn-
+ing via slow reinforcement learning. Preprint
+arXiv:1611.02779, 2016.
+Duan, Y., Andrychowicz, M., Stadie, B., Ho, O. J., Schnei-
+der, J., Sutskever, I., Abbeel, P., y Zaremba, W. One-
+shot imitation learning. En Advances in Neural Informa-
+tion Processing Systems, pp. 1087–1098, 2017.
+Dubey, R. y Griffiths, T. L. Reconciling novelty and
+complexity through a rational analysis of curiosity. Psy-
+chological Review, 2019.
+Finn, C., Abbeel, P., y Levine, S. Model-agnostic meta-
+learning for fast adaptation of deep networks. En Proceed-
+ings of the 34th International Conference on Machine
+Learning-Volume 70 , pp. 1126–1135. JMLR. org, 2017a.
+Finn, C., Yu, T., Zhang, T., Abbeel, P., y Levine, S. One-
+shot visual imitation learning via meta-learning. En Con-
+ference on Robot Learning , pp. 357–368, 2017b.
+Gittins, J. A dynamic allocation index for the sequential
+design of experiments. Progress in statistics , pp. 241–266,
+1974.
+Gittins, J. C. Bandit processes and dynamic allocation
+indices. Journal of the Royal Statistical Society: Series B
+(Methodological) , 41(2):148–164, 1979.
+Gordon, G. y Ahissar, E. Reinforcement active learn-
+ing hierarchical loops. En The 2011 International Joint
+Conference on Neural Networks , pp. 3008–3015. IEEE,
+2011.
+Goyal, A., Islam, R., Strouse, D., Ahmed, Z., Larochelle,
+H., Botvinick, M., Bengio, Y ., y Levine, S. Infobot:
+Transfer and exploration via the information bottleneck.
+En International Conference on Learning Representations ,
+2018.
+Guo, X., Singh, S., Lewis, R., y Lee, H. Deep learning
+for reward design to improve monte carlo tree search in
+atari games. En Proceedings of the Twenty-Fifth Inter-
+national Joint Conference on Artiﬁcial Intelligence , pp.
+1519–1525. AAAI Press, 2016.
+What Can Learned Intrinsic Rewards Capture?
+Harutyunyan, A., Devlin, S., Vrancx, P., y Nowe, A. Ex-
+pressing arbitrary reward functions as potential-based
+advice. En Proceedings of the Twenty-Ninth AAAI Con-
+ference on Artiﬁcial Intelligence , pp. 2652–2658. AAAI
+Press, 2015.
+Itti, L. y Baldi, P. F. Bayesian surprise attracts human
+attention. En Advances in neural information processing
+systems , pp. 547–554, 2006.
+Kirsch, L., van Steenkiste, S., y Schmidhuber, J. Im-
+proving generalization in meta reinforcement learning
+using learned objectives. En International Conference on
+Learning Representations , 2019.
+Linke, C., Ady, N. M., White, M., Degris, T., y White, A.
+Adapting behaviour via intrinsic reward: A survey and
+empirical study. arXiv preprint arXiv:1906.07865 , 2019.
+Metz, L., Maheswaranathan, N., Cheung, B., y Sohl-
+Dickstein, J. Meta-learning update rules for unsuper-
+vised representation learning. En International Confer-
+ence on Learning Representations , 2019. URL https:
+//openreview.net/forum?id=HkNDsiC9KQ .
+Mirolli, M. y Baldassarre, G. Functions and mechanisms
+of intrinsic motivations. En Intrinsically Motivated Learn-
+ing in Natural and Artiﬁcial Systems , pp. 49–72. Springer,
+2013.
+Ng, A. Y ., Harada, D., y Russell, S. J. Policy invariance
+under reward transformations: Theory and application to
+reward shaping. En Proceedings of the Sixteenth Inter-
+national Conference on Machine Learning , pp. 278–287.
+Morgan Kaufmann Publishers Inc., 1999.
+Ostrovski, G., Bellemare, M. G., van den Oord, A., y
+Munos, R. Count-based exploration with neural density
+models. En Proceedings of the 34th International Confer-
+ence on Machine Learning-Volume 70 , pp. 2721–2730.
+JMLR. org, 2017.
+Oudeyer, P.-Y ., Kaplan, F., y Hafner, V . V . Intrinsic
+motivation systems for autonomous mental development.
+IEEE transactions on evolutionary computation , 11(2):
+265–286, 2007.
+Pathak, D., Agrawal, P., Efros, A. A., y Darrell, T.
+Curiosity-driven exploration by self-supervised predic-
+tion. En Proceedings of the 34th International Conference
+on Machine Learning-Volume 70 , pp. 2778–2787. JMLR.
+org, 2017.
+Poupart, P., Vlassis, N., Hoey, J., y Regan, K. An ana-
+lytic solution to discrete bayesian reinforcement learning.
+En Proceedings of the 23rd International Conference on
+Machine Learning , pp. 697–704. ACM, 2006.Randl ¨ov, J. y Alstr ¨om, P. Learning to drive a bicycle using
+reinforcement learning and shaping. En Proceedings of the
+Fifteenth International Conference on Machine Learning ,
+pp. 463–471. Morgan Kaufmann Publishers Inc., 1998.
+Schlegel, M., Patterson, A., White, A., y White, M.
+Discovery of predictive representations with a network
+of general value functions, 2018. URL https://
+openreview.net/forum?id=ryZElGZ0Z .
+Schmidhuber, J. Curious model-building control systems. En
+Proc. international joint conference on neural networks ,
+pp. 1458–1463, 1991a.
+Schmidhuber, J. A possibility for implementing curiosity
+and boredom in model-building neural controllers. En
+Proc. of the international conference on simulation of
+adaptive behavior: From animals to animats , pp. 222–
+227, 1991b.
+Schmidhuber, J., Zhao, J., y Wiering, M. Simple princi-
+ples of metalearning. Informe técnico IDSIA , 69:1–23,
+1996.
+Singh, S., Lewis, R. L., y Barto, A. G. Where do rewards
+come from. En Proceedings of the annual conference of
+the cognitive science society , pp. 2601–2606. Cognitive
+Science Society, 2009.
+Singh, S., Lewis, R. L., Barto, A. G., y Sorg, J. Intrinsi-
+cally motivated reinforcement learning: An evolutionary
+perspective. IEEE Transactions on Autonomous Mental
+Development , 2(2):70–82, 2010.
+Sorg, J., Lewis, R. L., y Singh, S. Reward design via
+online gradient ascent. En Advances in Neural Information
+Processing Systems , pp. 2190–2198, 2010.
+Stadie, B., Yang, G., Houthooft, R., Chen, P., Duan, Y .,
+Wu, Y ., Abbeel, P., y Sutskever, I. The importance of
+sampling inmeta-reinforcement learning. En Advances in
+Neural Information Processing Systems , pp. 9280–9290,
+2018.
+Strehl, A. L. y Littman, M. L. An analysis of model-
+based interval estimation for markov decision processes.
+Journal of Computer and System Sciences , 74(8):1309–
+1331, 2008.
+Sutton, R. S. Integrated architectures for learning, plan-
+ning, and reacting based on approximating dynamic pro-
+gramming. En Proceedings of the Seventh International
+Conference on Machine Learning , pp. 216–224. Morgan
+Kaufmann, 1990.
+Sutton, R. S., McAllester, D. A., Singh, S., y Mansour,
+Y . Policy gradient methods for reinforcement learning
+with function approximation. En Advances in Neural
+Information Processing Systems , pp. 1057–1063, 2000.
+What Can Learned Intrinsic Rewards Capture?
+Thompson, W. R. On the likelihood that one unknown
+probability exceeds another in view of the evidence of
+two samples. Biometrika , 25(3/4):285–294, 1933.
+Thrun, S. y Pratt, L. Learning to learn: Introduction and
+overview. En Learning to learn , pp. 3–17. Springer, 1998.
+Veeriah, V ., Hessel, M., Xu, Z., Rajendran, J., Lewis, R. L.,
+Oh, J., van Hasselt, H. P., Silver, D., y Singh, S. Discov-
+ery of useful questions as auxiliary tasks. En Advances in
+Neural Information Processing Systems , pp. 9306–9317,
+2019.
+Wang, J. X., Kurth-Nelson, Z., Tirumala, D., Soyer, H.,
+Leibo, J. Z., Munos, R., Blundell, C., Kumaran, D., y
+Botvinick, M. M. Learning to reinforcement learn. ArXiv ,
+abs/1611.05763, 2016.
+Watkins, C. J. C. H. Learning from delayed rewards. 1989.
+Williams, R. J. Simple statistical gradient-following algo-
+rithms for connectionist reinforcement learning. Machine
+learning , 8(3-4):229–256, 1992.
+Wilson, R. C., Geana, A., White, J. M., Ludvig, E. A., y
+Cohen, J. D. Humans use directed and random explo-
+ration to solve the explore–exploit dilemma. Journal of
+Experimental Psychology: General , 143(6):2074, 2014.
+Xu, K., Ratner, E., Dragan, A., Levine, S., y Finn, C.
+Learning a prior over intent via meta-inverse reinforce-
+ment learning. En Proceedings of the 36th International
+Conference on Machine Learning , pp. 6952–6962, 2019.
+Xu, T., Liu, Q., Zhao, L., y Peng, J. Learning to explore
+via meta-policy gradient. En International Conference on
+Machine Learning , pp. 5459–5468, 2018a.
+Xu, Z., van Hasselt, H. P., y Silver, D. Meta-gradient re-
+inforcement learning. En Advances in Neural Information
+Processing Systems , pp. 2396–2407, 2018b.
+Zheng, Z., Oh, J., y Singh, S. On learning intrinsic
+rewards for policy gradient methods. En Advances in
+Neural Information Processing Systems , pp. 4644–4654,
+2018.

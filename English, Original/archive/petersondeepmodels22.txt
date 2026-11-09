@@ -1,0 +1,739 @@
+RESEARCHARTICLE PSYCHOLOGICALANDCOGNITIVESCIENCES OPEN ACCESS
+Deep models of superficial face judgments
+JoshuaC.Petersona,1,StefanUddenbergb,ThomasL.Griﬃthsa,c,AlexanderT odorovb,andJordanW.Suchowd
+EditedbyWinrichFreiwald,TheRockefellerUniversity,NewYork,NY;receivedAugust17,2021;acceptedMarch7,2022,byEditorialBoardMember
+CharlesD.Gilbert
+The diversity of human faces and the contexts in which they appear gives rise to an
+expansive stimulus space over which people infer psychological traits (e.g., trustwor-
+thiness or alertness) and other attributes (e.g., age or adiposity). Machine learningmethods,inparticulardeepneuralnetworks,provideexpressivefeaturerepresentations
+of face stimuli, but the correspondence between these representations and various
+human attribute inferences is difficult to determine because the former are high-dimensionalvectorsproducedviablack-boxoptimizationalgorithms.Herewecombine
+deep generative image models with over 1 million judgments to model inferences of
+morethan30attributesoveracomprehensivelatentfacespace.Thepredictiveaccuracyofourmodelapproacheshumaninterraterreliability,whichsimulationssuggestwould
+nothavebeenpossiblewithfewerfaces,fewerjudgments,orlower-dimensionalfeature
+representations. Our model can be used to predict and manipulate inferences withrespecttoarbitraryfacephotographsortogeneratesyntheticphotorealisticfacestimuli
+thatevokeimpressionstunedalongthemodeledattributes.
+faceperception |socialtraits |computationalmodels
+Facesareamongthemostimportantstimulithatpeople encounter—theyarerecognized
+byinfantslongbeforeotherobjectsintheirenvironment(1),recruitspecializedcircuitsin
+thebrain(2),andarefundamentaltosocialinteraction(3).Centraltoourexperiencewith
+faces are the attributes that we assign to them, often implicitly. These include attributesthatarereadoff,describinglargelyobjectiveattributesoffaces(e.g.,ageandadiposity),and
+thosethatarereadinto,suchashowtrustworthyapersonis(4).Althoughtheinferences
+of the latter attributes are more subjective and generally inaccurate, they are similarlypsychologicallyconsistentacrosspeople(4–6)aroundtheglobe(7–9)andhaveimportant
+consequences (10) ranging from electoral success (11, 12) to sentencing decisions (13,
+14). Because any face can be judged with respect to such attributes, these psychologicaldimensions are universal in that they are implicitly defined over the space of nearly all
+possible faces, contexts, and observational conditions. These factors combine to form
+a diverse landscape of stimuli that makes it challenging to capture the correspondingpsychological content in its entirety. Such content forms the basis of scientific models of
+faceperceptionanddefinesthescopeofdownstreamapplicationssuchastrainingpeople
+toovercome stereotypes(15).
+The importance of face attribute inferences has led to the proliferation of techniques
+forscientificmodelingoffaces,whichcanbeorganizedbroadlyintotwoapproaches.The
+firstextrapolatesfromfacephotographs,oftenrelatedvialandmarkannotations(16,17).Thesecondgeneratesartificialfacesusingparametricthree-dimensionalfacemeshes(18).
+Photographs offer greater realism but are limited to available datasets of face stimuli that
+serveasthebasisforinterpolationandbytheinterpolationalgorithmsthemselves,which
+oftenrequirehigh-qualitylandmarkannotationsunattainablewithoutcostlymanualwork
+(19).Artificiallygeneratedfacesarenotsubjecttotheselimitationsbutlackdiversityandrealism. Neither approach provides workable models that express the full richness and
+diversity ofhuman faces.
+Machinelearningmethods,inparticulardeepneuralnetworkssuchasgenerativeadver-
+sarialnetworks(GANs),canlearntomodelfacesfrommassivecollectionsofphotographs
+scraped from image-sharing websites (20–23). These methods present a third option
+for developing scientific models of faces, providing expressive feature representationsfor arbitrary realistic face images. However, relating these representations to human
+perception is difficult because they are high-dimensional vectors produced via black-box
+optimization algorithms(24).
+We show that the keys to unlocking the scientific potential of these models and their
+downstream applications are large-scale datasets of human behavior unattainable using
+traditional laboratory experiments. In particular, such large datasets provide sufficientevidence to determine a robust mapping between expressive high-dimensional repre-
+sentations from machine learning models and human mental representations of faces.Significance
+Wequicklyandirresistiblyform
+impressionsofwhatotherpeople
+arelikebasedsolelyonhowtheir
+faceslook.Theseimpressions
+havereal-lifeconsequencesrangingfromhiringdecisionsto
+sentencingdecisions.Wemodel
+andvisualizetheperceptualbasesoffacialimpressionsinthemost
+comprehensivefashiontodate,
+producingphotorealisticmodelsof34perceivedsocialand
+physicalattributes(e.g.,
+trustworthinessandage).Thesemodelsleverageanddemonstrate
+theutilityofdeeplearninginface
+evaluation,allowingfor1)generationofaninﬁnite
+numberoffacesthatvaryalong
+theseperceivedattribute
+dimensions,
+2)manipulationofanyfacephotographalongthese
+dimensions,and3)predictionof
+theimpressionsanyfaceimagemayevokeinthegeneral(mostly
+White,NorthAmerican)
+population.
+Author contributions: J.C.P., S.U., T.L.G., A.T., and J.W.S.
+designed research; J.C.P. and S.U. performed research;
+J.C.P., S.U., T.L.G., A.T., and J.W.S. contributed new
+reagents/analytic tools; J.C.P., S.U., and J.W.S. analyzed
+data; and J.C.P., S.U., T.L.G., A.T., and J.W.S. wrote the
+paper.
+Competing interest statement: All authors are listed as
+inventors on a related patent (US Patent no. 11,250,245,
+“Data-driven, photorealistic social face-trait encoding,
+prediction, and manipulation using deep neural
+networks”).
+This article is a PNAS Direct Submission. W.F. is a guest
+editorinvitedbytheEditorialBoard.
+Copyright © 2022 the Author(s). Published by PNAS.
+This open access article is distributed under Creative
+Commons Attribution-NonCommercial-NoDerivatives
+License4.0(CCBY-NC-ND) .
+1To whom correspondence may be addressed. Email:
+joshuacp@princeton.edu.
+This article contains supporting information online at
+https://www.pnas.org/lookup/suppl/doi:10.1073/pnas.
+2115228119/-/DCSupplemental .
+PublishedApril21,2022.
+PNAS2022 Vol. 119 No. 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 1of9
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+Fig. 1.Correlationmatrixfor34averageattributeratingsforeachof1,000faces.Rowsandcolumnsarearrangedaccordingtoahierarchicalclusteringoft he
+correlationvalues.
+We quantify an upper bound on the robustness of the mapping
+in terms of the reliability of the underlying attribute inferences
+and determine how that robustness scales as a function of the
+number of faces rated, the number of ratings per face, andthe dimensionality of the deep feature space. We then use this
+mapping to predict and manipulate inferences over arbitrary face
+images, enabling us, for example, to adjust a photograph so as toincreaseordecreasetheperceivedtrustworthinessofitssubjectto
+match a targetrating.
+Such a mapping can be computed for any psychologically
+meaningful attribute inference. We focus on three classes of such
+inferences.First,thereareinferencesdefinedbysubjectiveimpres-
+sions of relatively objective properties (e.g., age and adiposity).These more objective properties, which also include hair styling,
+presence of accessories (e.g., glasses), gaze, and facial expression,
+arecommonlystudiedincomputervision,wheretheyarereferredto as “attributes” (25) or “soft biometrics” (26). Next, there are
+inferences of subjective and socially constructed attributes, such
+astrustworthy andmasculine/feminine , the conventional targets
+of social scientific study (4). Finally, there are inferences of fully
+subjective attributes such as familiar,w h e r et h eo b s e r v e ri st h e
+only arbiter of truth (27). For ease of presentation, we refer to
+inferences of all three classes as “attribute inferences” and the
+underlyingattributesas“attributes,”drawingdistinctionsbetweentheclassesinthetextasnecessary.Pleasenotethattheseattribute
+inferences,especiallythoseofthemoresubjectiveorsociallycon-
+structedattributes,havenonecessarycorrespondencetotheactualidentities, attitudes, or competencies of people whom the images
+resemble or depict (e.g., a trustworthy person may be wrongly
+assumedtobeuntrustworthyonthebasisofappearance).Rather,theseinferences,andinturnourmeasurements,reflectsystematic
+biasesandstereotypesaboutattributessharedbythepopulationof
+raters. Nevertheless, these inferences are driven by (combinationsof) physical cues present in the faces themselves—for example,
+facesjudged tolook moretrustworthymay have moreneotenous
+features(e.g.,largeeyes) orupturnedlips, asin a smile(4).We used online crowdsourcing to obtain attribute inference
+ratingsforjustover1,000synthetic(althoughhighlynaturalistic)
+face stimuli for 34 attributes, with ratings by at least 30 unique
+participants per attribute–stimulus pair, for a total of 1,020,000humanjudgments( MaterialsandMethods ).Wecallthiscollection
+of face stimuli and the corresponding behavioral data the One
+Million Impressions dataset. A detailed summary of these ratingsandinterattribute relationships can be foundin SI Appendix .
+Results
+The Structure of Attribute Inferences. To explore the structure
+ofattributeinferences,wefirstcomputedthecorrelationbetween
+the mean face ratings for each pair of attributes (Fig. 1). Manyattributes were highly correlated, including happy–outgoing(r=
+0.93)anddominant–trustworthy (r=−0.81),whileotherswere
+largely unrelated, including smart–attractive (r=0 . 0 1),smart–
+trustworthy (r=0 . 0 2),liberal/conservative –believes in god (r=
+0.08), andelectable–attractive(r=0 . 0 5).
+Although some of these correlations are consistent with pre-
+vious findings (8), others are not. First, although past work has
+foundthatjudgmentsoftrustworthinessanddominanceareoftennegatively correlated, the correlation is generally small (on the
+order of –0.2), whereas the correlation observed here (–0.81)
+was much stronger (4, 28). Second, judgments of smartness orcompetence have been found to be highly positively correlated
+withjudgmentsofattractivenessandtrustworthiness(withvalues
+as high as ≈0.8), whereas we found only marginal correlations
+between those attribute inferences (8). One explanation for these
+discrepancies is that the face stimuli used here are more diverse
+thaninthecomparisonstudies,especiallywithrespecttoage;thepresent study includes (simulated) childrens’ faces. This explana-
+tionisplausiblegiventhatthecorrelationalstructureofjudgments
+of children’s faces is different from the structure of judgmentsof adult faces (29). To probe this hypothesis, we recomputed
+interattributecorrelationsonsubsetsofthedatawithrestrictedage
+2of9https://doi.org/10.1073/pnas.2115228119 pnas.org
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+ranges (SIAppendix ,F i g.S9). We found that the inclusion of the
+children’s faces partially explains some discrepancies (e.g., smart–
+attractive) and does not explain others ( trustworthy –dominant).
+Third,memorable faces were more attractive, as observed in the
+positive correlation between the respective ratings (Fig. 1). This
+findingisinconsistentwithworkshowingthatactualmemorabil-
+ityoffacesisnegativelycorrelatedwithattractivenesstotheextentthat predictions of memorability are veridical (30). Last, familiar
+faceswereseenasmoreattractiveandaverage-looking,consistent
+with the finding that average faces tend to be perceived as moreattractive(ref. 31,but seeref. 32).
+Theattribute outdoors(whetherthephotoappearedtobetaken
+outdoors or indoors) was included to assess potential confoundsin using naturalistic face photos. It was found to be the least
+correlated with other attributes, having the lowest per-attribute
+maximum absolute correlation ( outdoors–electable,r=0 . 2 0). In
+comparison, the attribute with the next-lowest maximum was
+skinny/fat(skinny/fat–attractive,r=0 . 4 3), which despite having
+twice the magnitude was one of the easier attributes to predict
+(Fig.2).Furthermore,that outdoorshadthelowestmeanabsolute
+correlationwithallotherattributes( r=0 . 0 8)indicatesminimal
+contributionofcontextualeffectsduetonaturalisticbackgrounds
+andlighting.
+Predicting Attribute Inferences. To model an attribute, we
+start with the high-dimensional representation vectors zi=
+{z1,...zd}assigned to each synthetic face iin our stimulus
+set by a pretrained state-of-the-art GAN (21, 22, 33). The GAN
+haslearnedamappingfromeachsuchvectortoanimagethrough
+extensive training on a large database of real, nonsynthetic facephotographs ( Methods and Materials ). We then model each
+psychological attribute, measured via average ratings y
+i,a sa
+linear combination of features: yi=w0+w1z1+...+wdzd.
+Thevectorofweights wk={w1,...wd}representstheattribute
+as a linear dimension cross-cutting the representational space
+and is fit using cross-validated, L2-regularized linear regression.
+A diagram summarizing the modeling pipeline for predicting
+attribute inferences is provided in SI Appendix ,F i g.S 1.
+Average cross-validated (i.e., out-of-sample) model perfor-
+manceforeachattributeisreportedinFig.2.Predictionformost
+attributeswasreasonablysuccessful,withmost R2valuesranging
+fromabove0.5toalmost0.8,withattributes typical,familiar,and
+gaybeing the exceptions.
+Because participants partly disagree in their appraisals (34),
+perfect prediction is impossible. To better understand the pre-
+diction ceiling imposed by limited interrater reliability, we com-
+puted the split-half reliability for each attribute, averaging thesquared correlations between the averages of 100 random splits
+oftheratingsforeachimage.Thesepredictionceilingsvaryacross
+attributes and are plotted in Fig. 2 alongside the correspondingmodel shortfalls they imply. (See Factors Influencing Prediction
+Performance for a detailed characterization.)
+Interestingly, the models of familiarandlooks like you showed
+the smallest gaps between performance and reliability, indicating
+that their unpredictability is not due to poor model quality or
+lack of useful input features. Rather, it seems likely that familiar
+more so than other attributes is based on both a shared concept
+or experience and a much larger personal concept or experience;
+onlytheformercanbepredictedforparticipantsinaggregate.Thisis corroborated by a similar effect for the attribute looks like you ,
+whichcanbepredictedonlyattheaggregateleveltotheextentthat
+ourparticipantpoolhasasharedrepresentationoftheirrespectivefacial features, which may be a byproduct of the participant pool
+having less diversity in appearance than does the stimulus set.Fig. 2.Average cross-validated model performance (black bars) compared
+tointersubjectreliability(redmarkers).
+Attributes corresponding to some racial or ethnic social cat-
+egories, such as “Black,” exhibited a larger gap between relia-
+bility and model performance than did other attributes. One
+possible reason for this gap is a sampling bias in the stimulusgenerator. Indeed, rating-distribution violin plots provide some
+indication that, for example, Black faces were undersampled
+(SI Appendix ,F i g.S 3).Asecondpossiblereasonforthegapisthat
+thedegreeofundersamplingofparticipantswhoreportmember-
+ship in a racially or ethnically minoritized group might correlate
+with the content of the aggregate attribute inferences. However,weobservenosuchcorrelation:thesecondmostcommonpartici-
+pant self-identifier was Black, which had one of the largest gaps
+between reliability and model performance, whereas attributescorresponding to even less commonly self-reported racial and
+ethnic social categories had a smaller gap. A third possible reason
+is that the predominantly White participant pool might havesimilarstereotypesofallraciallyorethnicallyminoritizedgroups,
+leadingtocomparablepredictabilityacrosstherelevantattributes.
+However, this explanation is inconsistent with the lack of strongcorrelation observed across those attributes (Fig. 1). Taken to-
+gether, this suggests that the stimulus selection contributes more
+PNAS2022 Vol. 119 No.17 e2115228119 https://doi.org/10.1073/pnas.2115228119 3of9
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+0.8
+0.6
+0.00.20.4
+Model performance R²
+Number of ratings per face 5 30
+Number of feature dimensions 012 150.8
+0.6
+0.00.20.4
+0.8
+0.6
+0.00.20.4gay Blackprivileged Asianelectable agehappy liberal/conservativealertsmugMiddle Eastern familiar memorable typicalbelieves in god smart skin color hair color outdoors trustworthywell groomedattractivePaciﬁc Islanderskinny/fatdominantWhite feminine/masculineoutgoingcutelong hair Native American dorkyHispanic looks like you
+Number of faces 10000.8
+0.6
+0.00.20.4
+0.8
+0.6
+0.00.20.4
+0.8
+0.6
+0.00.20.4100
+Fig. 3.Modelperformance( R2)foreachattributeasafunctionofthenumberoffaceexamples( Top),thenumberofparticipantratingsforeachfaceexample
+(Middle),andthenumberofimagefeaturedimensions( Bottom).Attributesareorderedbythemaximummodelperformanceobservedin Top.
+to the observed gap than does the composition of the participant
+pool.Evenso,nofirmconclusioncanbedrawnbecausewecannotrule out limitations in the representational capacity of the neural
+networkfeatures.
+FactorsInﬂuencingPredictionPerformance. Tocharacterizethe
+factors influencing prediction performance, we first investigated
+the effect of the number of faces rated on predictive performance
+(Fig.3,Top).Performancecurvesweregeneratedbyfittingmodels
+for each of 30 random samples of images with sizes ranging
+from 100 to 1,000. Most attributes benefit from increases in the
+numberoffacesrated,withsignificantvariationacrossthemwithrespecttohowperformancescaleswiththenumberofuniquefaces
+thatwererated.Interestingly,fewerimageswereneededtosaturate
+model performance for the attribute feminine/masculine than for
+most other attributes. For all other attributes, adding additional
+images improved performance throughthe full range.
+Next, we investigated the relationship between the number of
+ratingsbyuniqueparticipantsobtainedforeachfacestimulusand
+predictiveperformance(Fig.3, Middle).Performancecurveswere
+generated by fitting models on down-sampled datasets with sizesranging from 5 to 30 unique ratings per image, with 30 datasets
+sampledpersize.Asidefromattributes feminine/masculine andage,
+whichelicitlessdisagreement,performanceincreasesconsiderably
+as the number of ratings increases for all attributes. Gains due to
+the number of ratings diminish with increases in the number ofunique ratings but at a slower rate than gains due to the number
+of faces (Fig. 3, Top). It remains to be seen the extent to which
+scaling the number of rated faces and the number of ratingsper face beyond the range explored here accounts for the gap
+betweenmodelperformanceandtheceilingimposedbyinterrater
+reliability.
+Finally, we investigated the relationship between the number
+of image features (512 total) and predictive performance (Fig. 3,
+Bottom). Performance curves were generated by fitting models
+using reduced feature sets obtained via principal components
+analysis, varying the dimensionality between 10 and 512. In all
+cases, performance saturates quickly but is improved marginallywith a greater number of dimensions in some cases. The various
+profilesofsaturationindicatethatasfewas10dimensionsofthis
+latentfeaturespacemaybeenoughtoaccountforthebulkofvari-ance in attribute inferences, with a subset of attributes benefiting
+considerably fromhigher-dimensional feature representations.Itispossiblethatthequalityofthelearnedrepresentationfrom
+the particular deep neural network we employed was a limitingfactor in predictive performance. Factors beyond predictive per-formance(specifically,theabilitytogenerateimagesinadditiontorepresentingthem)guidednetworkselectionforthepresentstudy.Other architectures with other forms of supervision may offer
+improvement in predictive performance. For example, there is
+evidence that identity-supervised models provide representationsthat are highly predictive of diverse attribute information (26,35,36).
+Manipulating Attribute Inferences. Because the learned
+attribute vectors correspond to linear dimensions, we canmanipulate an arbitrary face represented by features z
+iwith
+respect to attribute kusing vector arithmetic: zi+βwk,w h e r e
+βis a scalar that controls the positive or negative modulation of
+theattributes.Weapplyasymmetricrangeof βaround0toeach
+attributevectortomanipulateaseriesofbasefacerepresentationsinboththenegativeandpositivedirectionsanddecodetheresultsfor visualization using the same decoder/generator component of
+the neural network that was used to derive representations (see
+SIAppendix formore details).
+The results of these transformations for six sample attribute
+inferences are shown in Fig. 4. The manipulations are strikinglysmooth and effective along each attribute dimension. For ex-ample, modulating trustworthiness increases features associated
+with perceptions of trustworthiness, such as eye gaze, degree ofsmiling, face shape, and facial femininity (4, 37). Manipulationsof attribute inferences may affect more than one dimension ofappearance. For example, increasing smartnessmay add glasses or
+change the facial expression. Increasing outgoingness may increase
+smiling, as expected, but also give glasses a more rounded andcartoonish appearance. Other dimensions allow for greater levelsof extrapolation. For example, faces can be made considerablyskinnierorfatterthan any examples in the dataset, yet still
+maintain a realistic appearance. Faces with strongly manipulatedhappinessalso resemble convincing caricatures.
+It is possible to manipulate one dimension s(e.g.,smartness)
+while controlling for another t(e.g.,trustworthiness )b yc r e a t i n g
+anorthogonalvector,subtractingtheprojectedcomponentofthe
+dimension to be controlled for:
+s−ts·t
+||t||2. [1]
+4of9https://doi.org/10.1073/pnas.2115228119 pnas.org
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+B A
+Fig. 4.(A)Thefacesjudgedonaveragetohavethehighestandlowestratingsalongsixsampleperceivedattributedimensions.( B)Model-basedmanipulations
+oftwosamplebasefacesalongthesampledimensions,demonstratingsmoothandeﬀectivemanipulationsalongeachattribute.
+An example of such transformations controlling for trustwor-
+thiness on a given exemplar face can be seen in SI Appendix ,
+Fig. S11.
+Notethattheattribute-inferencemanipulationscanaffectboth
+internal facial features and external features. When only internal
+face features are altered, it is not because the GAN manipulatesonlyinternalfeaturesbutbecausetheexternalfeaturesareorthog-onal or irrelevant to that attribute inference in the region of the
+manipulated face.
+Validating Models of Attribute Inferences. Do the attribute
+models generated above reliably change participants’ impressions
+of faces transformed with them? To answer this question, we
+ran a series of 20 preregistered experiments with over 1,000participants to verify that our models can indeed manipulateattributeimpressionsinobservers.Eachoftheexperimentspaired
+one of two face image types (artificial vs. real) with one of
+10 different attribute dimensions, chosen to represent a widerange of different model performances and levels of objectiv-
+ity/subjectivity ( age,feminine/masculine ,skinny/fat,trustworthy ,
+attractive,dominant,smart,outgoing,memorable ,a n dfamiliar).
+Like in the attribute-modeling experiments, for the artificial faceexperiments we generated 50 unique synthetic faces at randomusing StyleGAN2 (21, 22), a state-of-the-art GAN architecture
+(SG2). However, for the real-face experiments, we encoded intoourmodel50uniquefacephotograph,chosenfromacommonlyused database of real faces from the psychological literature (38).
+On each trial, participants were shown a single face and asked
+to rate it. Critically, each face image was transformed by one(experimentally assigned) perceived attribute model to evoke oneof three levels of that impression; faces could be set to the mean
+observed value of the perceived attribute or at ±0.5 SD from
+that mean. Every face was shown at every level of the assignedattribute (50 identities ×3 transformation levels = 150unique
+faces), and once again, 20% of trials were repeated to measure
+test–retest reliability (in order to exclude subjects with negative
+such reliability) for a total of 180 trials. If the attribute modeltransformations indeed change participants’ impressions of the
+faces,thenweshouldobservethatparticipants’ratingsofthefaces
+increase with increasing levels of the manipulation. We foundjust that: repeated measures ANOVAs revealed that all of themanipulations yielded highly significant results [all F(2, 98)s>
+14.13, all values of P<0.000005, all values of η
+2>0.223].
+Critically,alloftheexperiments’datashowedastronglysignificantpositive linear trend [all values of t(98)>2.69, all values of
+P≤0.008, with the exception of real faces manipulated along
+PNAS2022 Vol. 119 No.17 e2115228119 https://doi.org/10.1073/pnas.2115228119 5of9
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+thefamiliarattribute dimension, t(98) =−1.60,P= 0.112;s e e
+SIAppendix , Fig.S12 for a swarmplotof all the data].*
+General Discussion
+Wesetouttodevelopacomprehensivemodelofattributepercep-
+tionthatcanpredicthumanattributeinferencesfromfaceimages
+and manipulate them along psychologically meaningful dimen-
+sions. With no explicit featurization or interpolation algorithm,the model accomplishes this in a fully data-driven manner with
+relatively high accuracy and generalization. Large datasets (with
+respecttoboththenumberoffacestimuliandthenumberofrat-ingsperface)arenecessarytoachievethis.Qualitativeresultsand
+validation experiments demonstrate that psychological attribute
+manipulations of realistic face photos can be accomplished usingsimple vector arithmetic. Moreover, our pipeline provides a gen-
+eralformulaformodelinginferencesofanyattributesthatcanbe
+measuredviaimageannotations.Becausethemodelsofattributesareexpressedinthesamemultidimensionalspace,theirsimilarity
+isimmediatelygiven,enablingtestingofspecifichypothesesabout
+the relation between psychological attributes, predicting novelattributes based on their relationships with models of existing
+attributes,andcontrollingforsharedvariancebetweenattributes.
+The model broadly characterizes inferences about diverse faces
+in their everyday contexts and viewing conditions. For exam-
+ple, in any particular image, one can generally discern whether
+the photograph is candid or contrived, environment conditions(e.g., outside in direct sunlight near vegetation versus inside of
+a building with warm lighting), the subject’s pose and gaze,
+grooming habits, and even hints of their culture or tastes basedonpartiallyvisibleclothing,necklines,headwear,jewelry,glasses,
+etc. Other factors of variation include viewing angle, head pose,
+photo quality, focal length, and depth of field, among others.While capturing behavior in a way that generalizes across these
+variations (and includes their effects) is the primary goal, it
+has the considerable disadvantage of making interpretation more
+challenging. Consider, for example, when one face is inferred
+to be more trustworthy than another. Is it because of furrowedbrowsandawidejaworbecauseofahighlyatypicalhatanddark
+lighting? Although our stimuli are synthetic, they are not highly
+controlled, more comparable to randomly sampled and weaklycurated photographs. Thus, understanding the bases of attribute
+inferences will require significant additional lower-level attribute
+annotations (e.g., hair color). Fig. 1, for example, implies thatskinny/fat,long hair,a n dhair color (hair darkness) are not partic-
+ularly explanatory of attribute inferences, with some exceptions
+(e.g.,skinny/fat–attractive). Qualitative inspection revealed that
+transformationsdidnotappeartofrequentlyorsignificantlyalter
+nonface features (with the notable exception of spawning glasses
+when increasing smart-ness).
+Another notable consideration when interpreting the current
+work is that the diversity of the faces used in the experiment will
+almost certainly influence and may even obfuscate the meaningof some attributes. For example, the semantics of the attribute
+attractivemaydifferwhenratingimagesofchildrenversusadults.
+It is not enough to simply analyze subsets of faces in the data,because the context of the experiment may induce order effects
+or serial dependence (39) that influences participant ratings of
+all faces. It is also difficult to manipulate the context of theexperiment because so many different contexts are possible. Fu-
+*The fact that familiarperformed so poorly is not unexpected, as this dimension was
+speciﬁcally chosen to represent a poorly performing attribute model from the model-
+generationstudies.ture work could consider two possible solutions. The first is to
+exploit the fact that our experiment sampled faces and their
+ordering, and thus contexts, at random and relatively densely.
+Because some of these contexts will cluster into, e.g., many-children/few-children groups, this provides one possible avenue
+for probing relevant effects. The second is to model attributes
+as multimodal, wherein attributes are not single linear factors(linear combinations of features) but many potentially correlated
+but not wholly colinear factors that cluster in different regions of
+the underlying representation space of the attribute model. Thismay also explain part of the current gap between our predictive
+models and the corresponding estimated upper bounds based on
+intersubject reliability.
+Last,itisunclearwhethersyntheticstimuligeneratedbyarchi-
+tectures like SG2, despite being generally convincingly realistic,
+are in fact different from real faces in ways that could bias
+conclusions that make use of them. For this reason, researchers
+making use of these stimuli to draw conclusions about humanperceptionshouldtakecaretovalidatefindingsderivedfromthem
+usingphotos ofreal facesas appropriate.
+EthicalImplications. Importantly,whiletheprimarygoalofthis
+work is to support scientific modeling, the framework developedhere adds significantly to the ethical concerns that already en-
+shroud image manipulation software. In contrast to traditional
+photo editing, which may be limited in effectiveness by theintuitions of a particular artist, the current method may be more
+accurate and at the least is faster and more efficient through its
+automation. Further, in contrast to other methods making use ofdeepneuralnetworkssuchasDeepFakes(40),whichcanaffectthe
+socialperceptionofanindividualbyplacingtheminanunwanted
+or compromising context (e.g., superimposed on a body in anarbitrarytargetimage),ourmodelcaninduce(perceived)changes
+within the individual’s face itself and may be difficult to detect
+when applied subtly enough. We argue that such methods (aswell as their implementations and supporting data) should be
+made transparent from the start, such that the community can
+develop robust detection and defense protocols to accompanythe technology, as they have done, for example, in developing
+highly accurate image forensics techniques to detect synthetic
+faces generated by SG2 (41, 42). More generally, to the extentthatimproperuseoftheimagemanipulationtechniquesdescribed
+here is not covered by existing defamation law (43, 44), it is
+appropriate to consider ways to limit use of these technologies
+through regulatory frameworks proposed in the broader context
+of face-recognition technologies (45,46).
+There is also potential for our data and models to perpetuate
+the biases they measure, which are first impressions of the popu-
+lation under study and have no necessary correspondence to theactual identities, attitudes, or competencies of people whom the
+images resemble or depict. While the bias in our sample of raters
+comes from the same population as most crowdsourced studies,it may be particularly important to understand in the context
+of social attribute perception, given that it consists of primarily
+White participants from the United States. Further, we foundthat the generative model that synthesized our stimuli, while
+highly diverse, nonetheless undersamples faces of Black people
+and other minoritized groups. Applications of the model willthereby produce face images that are more closely aligned with
+this bias than are the original inputs. We quantify part of this
+bias beyond participant demographics primarily using the White,
+familiar,a n dlooks like you attributes, all of which are moderately
+correlated(Fig. 1).
+6of9https://doi.org/10.1073/pnas.2115228119 pnas.org
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+Conclusion. Modern data-driven methods from machine learn-
+ingprovidenewtoolsforrepresentingandmanipulatingcomplex,
+naturalistic stimuli but are not explicitly designed to model or
+explain human mental representations. However, applying thesame “big data” philosophy to behavioral experiments allows us
+toalignthesepowerfulmodelswithhumanperception.Thedeep
+modelsofsuperficialfacejudgmentsthatweexploreinthispapercan in turn be used to broaden the range of behavioral data
+we can collect because they define an infinite set of realistic
+and psychologically controlled stimuli for a new generation ofbehavioral experiments.
+Materials and Methods
+Stimuli.Ourexperimentsmakeuseof1,004syntheticyetphotorealisticimages
+offacesgeneratedusingSG2.ThegeneratornetworkcomponentofSG2modelsthedistributionoffaceimagesconditionedona512-dimensional,unit-variance,multivariate normal latent variable.When a vector is sampled from this distri-
+butionandpassedthroughthenetwork,itismappedtoasecond,intermediate
+512-dimensionalrepresentation(forwhichthedistributionisunknown),whichisinturnfedthroughmultiplelayersandultimatelymappedtoanoutputimage
+resemblingthosefromthedatasetonwhichthemodelwastrained.Thus,either
+of thetwo512-dimensional representationscanbeusedforourmodelingap-plications,eachassociatingonefullydescriptive(latent)featurevectorwitheach
+face.Weusedthelatterrepresentationthroughoutbecauseityieldedsuperior
+resultsinallanalyses.Speciﬁcally,weusetheserepresentationsfromapretrainedmodelthatwastrainedontheFlickr-Faces-HQDataset(21),containing70,000
+high-qualityimagesataresolutionof1,024 ×1,024pixels.Imagesgenerated
+bythismodelarerenderedatthesameresolution.
+The synthetic faces generated by SG2 are diverse and convincingly realistic
+in most cases but can occasionally contain visual artifacts that appear odd or
+even jarring.We minimized these artifacts in our dataset using two strategies.
+First,SG2employsaparameter ψforposttrainingimagegenerationthatbounds
+thenormofeachmultivariateinputsampleand,asaresult,tradesoffbetween
+sample diversity and sample quality. We set ψto 0.75, which by inspection
+appearedtojointlymaximizethecriteriaforourpurposes.Second,wemanuallyinspected and ﬁltered the generated images,removing all instances that con-
+tainedobviouslydistortedfaces,multiplefaces,hands,localizedblotchesofcolor,
+implausible headdress, or any particularly notable visual artifact. Speciﬁcally,wesampled ∼10,000512-dimensional normal vectors,fedthemthrough the
+generatornetworkofSG2toobtain10,000candidatefacestimuliforourdataset,
+and took the ﬁrst ≈1,000 that met the criteria for quality.Random examples
+fromthestimulussetareprovidedin SI Appendix .
+For the model-validation studies,50 real face identities were generated by
+encoding 50 faces from the Chicago Face Database (CFD ) (38).The CFD faces
+usedinthesereal-faceexperimentswereroughlybalancedintermsofthefourracesandtwogendersavailableinthemainstimulusset.Theﬁnalsetincluded
+12 East Asian, 14 Black, 12 Latin American, and 12 White faces (with equal
+numbersofmaleandfemalefacesineachracialgroup).The50facesusedintheartiﬁcialfaceexperimentswerechosenviathesameprocedureasintheprevious
+attributemodelingstudies.Eachuniquefaceidentitywasthentransformedalong
+oneof 10perceivedattributedimensions( age,feminine/masculine ,skinny/fat,
+trustworthy ,attractive,dominant,smart,outgoing,memorable ,and familiar)a t
+threelevelsoftheattribute(–0.5SD,0SD,and+0.5SDfromthemeanratings
+observed in the attribute model studies).This yielded 150 unique images permodel-validationstudyandtherefore3,000uniqueimagesintotal.
+Participants. Fortheattributemodelstudies,weusedAmazonMechanicalTurk
+torecruitatotalof 4,157participantsacross10,974sessions,of which10,633(≈97%) met our criteria for inclusion ( SI Appendix ,Data Quality ).Participants
+identiﬁedtheirgenderasfemale(2,065)ormale(2,053),preferrednottosay
+(21),or did not have their gender listed as an option (18).The mean age was
+∼39 y old. Participants identiﬁed their race/ethnicity as either White (2,935),
+Black/African American (458), Latinx/a/o or Hispanic (158), East Asian (174),
+SoutheastAsian(71),SouthAsian(70),NativeAmerican/AmericanIndian(31),
+Middle Eastern (12), Native Hawaiian or Other Paciﬁc Islander (3), or somecombinationof twoormoreraces/ethnicities(215).Theremainingparticipantseitherpreferrednottosay(22)ordidnothavetheirrace/ethnicitylistedasan
+option(8).
+Forthemodel-validationstudies,werecruitedatotalof1,022workersfrom
+Amazon Mechanical Turk via CloudResearch (47),of which 1,000 ( ∼98%) met
+our criteria for inclusion.Of those,18 participants were excluded for low test–
+retestreliability,onewasexcludedforparticipatingintheexperimenttwice,and
+three were overrecruited beyond our target sample size of 1,000. Participantsidentiﬁedtheirgenderasfemale(530)ormale(484),preferrednottosay(3),ordidnothavetheirgenderlistedasanoption(5).Themeanagewas ∼42y
+old.Participantsidentiﬁedtheirrace/ethnicityaseitherWhite(781),Black/African
+American (77), Latinx/a/o or Hispanic (37), East Asian (37), Southeast Asian(11), South Asian (12), Native Hawaiian or Other Paciﬁc Islander (3), or some
+combination of two or more races/ethnicities (57). The remaining participants
+either preferred not to say (3) or did not have their race/ethnicity listed as anoption(4).
+TheInstitutionalReviewBoardatPrincetonUniversityapprovedbothsetsof
+studies.Participantsprovidedinformedconsentbeforebeginningthestudy.
+Procedure. Fortheattributemodelstudies,weusedabetween-subjectsdesign
+whereparticipantsevaluatedfaceswithrespecttoeachattribute.Participantsﬁrst
+consented. Then they completed a preinstruction agreement to answer open-ended questions at the end of the study.In the instructions,participants were
+given 25 examples of face images in order to provide a sense of the diversity
+theywouldencounterduringtheexperiment.Participantswereinstructedtorateaseriesoffacesonacontinuoussliderscalewhereextremeswerebipolardescrip-
+torssuchas“trustworthy”and“nottrustworthy.”Wedidnotsupplydeﬁnitionsof
+eachattributetoparticipantsandinsteadreliedonparticipants’intuitivenotionsofeach.
+Eachparticipantthencompleted120trialswiththesingleattributetowhich
+they were assigned. One hundred of these trials displayed images randomlyselected (without replacement) from the full set; the remaining 20 trials wererepeatsofearliertrials,selectedrandomlyfromthe100uniquetrials,whichwe
+usedtoassessintraraterreliability.Eachstimulusinthefullsetwasjudgedbyat
+least30uniqueparticipants.
+Attheendof theexperiment,participantsweregivenasurveythatqueried
+whatparticipantsbelievedwewereassessingandaskedforaself-assessmentof
+theirperformanceandfeedbackonanypotentialpointsofconfusion,aswellasdemographicinformationsuchasage,race,andgender.Participantsweregiven
+30mintocompletetheentireexperiment,butmostcompleteditinunder20
+min.Eachparticipantwaspaid$1.50.
+Themodel-validation studiesfollowedanidenticalproceduretothatof the
+attributemodelingstudiesabove,exceptwherenotedbelow.
+Eachparticipantcompletedoneof20preregisteredexperimentsinvolvinga
+pair of one of two different face image types (artiﬁcial vs.real) with manipula-
+tionsalongoneof 10differentattributedimensions( age,feminine/masculine ,
+skinny/fat,trustworthy ,attractive,dominant,smart,outgoing,memorable ,a n d
+familiar). In each experiment, observers rated 150 unique images (with 30
+repeats)alongtheassignedperceivedattributedimension.Eachparticipantwas
+paid$2.00duetothelongerexperimentduration.
+Face Attribute Model. Tobroadlycapturehumanfaceattributeperception,a
+model should accurately reproduce human judgments about the attributes of
+naturalfaces.Moreformally,weseekafunction φ(·)PE(whatwecalla“psycho-
+logicalencoder”)thatmapsfromanypossiblefacestimulus xi={x1,...xm}
+(i.e.,an m-dimensionalvectorof rawpixelintensities)toagivenpsychological
+attributeinference(averagejudgmentforface xi):
+φ(xi)PE=yi. [2]
+Wefurtherdeﬁne φ(·)PEasadecompositionoffunctions:
+φ(x)PE=φ(φ(x)F)S, [3]
+whereφ(xi)F=zi={z1,...zd}isarichfeaturerepresentationoffacestim-
+ulusxiandφ(·)Smapsthesefeaturestopsychologicaldimensionsof interest.
+Thisformulationallowsustoleveragestate-of-the-artneuralnetworkstofeaturizearbitrary,complexfaceimages.
+PNAS2022 Vol. 119 No.17 e2115228119 https://doi.org/10.1073/pnas.2115228119 7of9
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+Wethenrelatethesefeatures zitopsychologicalfeaturesbyassumingthat
+φ(·)Sis a linear function and thereby implying that each attribute is a 512-
+dimensional (potentially sparse) vector in the overall feature space. The func-
+tionφ(·)Sislearnedfromhumanattributejudgmentdata.Inparticular,given
+continuous-scaleattributejudgments(i.e.,degreeoftrustworthinessonascale
+from1to100),weuselinearregressiontomap512-dimensionalfeaturevectors
+zitoaverageattributeratings yi:
+yi=φ(zi)S=w0+w1z1+...+wdzd. [4]
+Inbothcases,weightvector wk={w1,...wd}representsasingleattribute k
+asalinearfactor.Therefore,attheheartof ourmodelisamatrix W∈IRk×d,a
+setof d-dimensionallinearfactorsforeachofthe kattributes,eachobtainedby
+ﬁttingaseparatelinearmodel.
+The above components of the model enable predictions of attributes to be
+made for arbitrary face stimuli. We further desire the ﬂexibility to manipulate
+theseattributesforagivenface.Becausewerepresenteachattributeasavectorw
+kinthefeaturerepresentationspace,wecanmanipulateeachfaceinthisspace
+(i.e.,representedby zi)usingvectoraddition:
+z/prime
+i=zi+βwk, [5]
+where z/prime
+iisthenewtransformedfaceand βisascalarparameterthatcontrolsthe
+strengthofthetransformation,whichcanbepositiveornegative.When β=0,
+z/prime
+i=zi,andnotransformationtakesplace.Inotherwords, βscalestheattribute
+vectorthatisaddedtothegivenfacerepresentation.Finally,inordertogenerate
+anewstimuluscorrespondingtoourtransformation,theinversefeaturizer(i.e.,
+decoder/generatornetworkofSG2) φ−1(·)Fisemployedtomapfromfeatures
+zibacktoafacestimulus xi,suchthatmanipulationoffaceimagescanbefully
+describedby
+x/prime
+i=φ−1(z/prime
+i)F=φ−1(zi+βwk)=φ−1(φ(xi)F+βwk), [6]
+where x/prime
+iistheattribute-transformedversionofinputface xi.
+The success of the above formulation (i.e., good prediction of human at-
+tributejudgmentsforarbitraryfaces)ishighlydependentonthechoiceof the
+feature encoder φ(·)F,which abstracts over raw pixels and provides the basis
+formodelingattributes.Ifthefeaturesarenotsufﬁcientlyexpressive,themodel
+willfailtomakegoodpredictionsof humanattributejudgments.Likewise,the
+ability of the inverse function φ−1(·)Fto generate face stimuli given their
+feature representations determines whether attribute-transformed face stimuliwillsuccessfullyavoidtheuncannyvalleyeffect.Therearemanymodernneural
+networks that could make for a good choice of featurizer φ(·)
+F. For example,
+convolutional neural networks, which learn hierarchies of translation-invariantfeatures, can be trained to classify faces to a high level of accuracy, and their
+hiddenrepresentationscanbetakenasafeaturerepresentation z.However,this
+method does not yield an inverse function from features back to stimuli andattemptstoinvertmodelsafterthefactoftenintroduceartifacts(48).
+Instead,weselectedamodelprimarilyaimedatsolvingtheinverseproblem
+alone.GANsareaformofdeeplatentvariablemodelthatlearntomodeladis-tributionofimagesusingtwocomponents:ageneratornetworkthatgenerates
+images by mapping Gaussian noise to (synthetic) images and a discriminatornetwork that discriminates between real and generated data. When properly
+trained in a way that balances the two components,the discriminator network
+forces the generator to produce realistic images,and the discriminator can no
+longerdistinguishbetweenrealandgeneratedimages.SG2,describedearlier,is one of the most successful applications of this model structure and training
+paradigm; it includes several key improvements that yield highly convincing
+results(seeexamplefacesin SI Appendix ).
+SG2yieldsonlytheinversefunction φ(x
+i)−1
+F,alearnedconvolutionalgenera-
+torordecoderfunctionwhichmapsfromfeaturestoimages.Inordertoapplyour
+modeltoarbitraryfaceimagesoutsideofoursetof1,004,invertingthisfunction
+isrequired.WhiletheauthorsofSG2supplytheirownsolutiontothisproblem,we ﬁnd that it is not accurate enough for our purposes.Instead,we deﬁne an
+encoderfunctionandfeaturizer φ(x
+i)Fasanoptimizationprocessthatsearches
+viagradientdescentforthevectorinputtoSG2thatproducesanoutputimagewithagoodlikenesstotheonewewishtofeaturize.Thislikenessisdeﬁnedas
+Euclideandistanceinthefeaturespaceofanotherexternalconvolutionalnetwork
+pretrainedtorecognizefaces(20).Additionally,becausethisprocessisslow,weinitialize the image-encoding vector using a ﬁrst-pass approximation from yet
+another convolutional neural network that we trained to regress thousands of
+SG2imagesamplestotheoutputvectorsthatgeneratedthem.Thisencoderismuchlessaccurate,butmuchfaster,anddrasticallyspeedsconvergenceof theslowerandmoreaccuratedecodingprocessoutlinedabove.
+A summary diagram of our modeling pipeline is provided in SI Appendix ,
+Fig.S1.
+ModelFittingandGeneralization. Alllinearregressionmodelswereﬁtusing
+theleastsquaresalgorithm.Becauseimagefeaturerepresentations(i.e.,vectors
+ofpredictorsinthedesignmatrix)arehigh-dimensional,thereisasigniﬁcantriskofoverﬁtting,whichcouldpotentiallyresultinsuboptimalormeaninglessmodel
+solutions.Toaddressthis,weuseridgeregression,whichpenalizessolutions w
+k
+thathavealargeeuclideandistancefromthe 0vector.Thestrengthofthispenalty
+anditsinﬂuenceontheresultingsolutioniscontrolledbyafreeparameter λ.
+Wesearchfortheoptimalvalueof thisparameterbasedonthegeneralization
+performanceofthemodel,speciﬁcallyusing10-foldcross-validation.Allreported
+modelscoresareaveragesoverthoseforeachofthe10folds,suchthatweneverreportperformanceondatathatwasusedtoﬁtourmodels.
+Data Availability. The One Million Impressions dataset and all behavioral
+judgmentsandsynthesizedimageshavebeendepositedinaGitHubrepository(https://github.com/jcpeterson/omi )(49).
+ACKNOWLEDGMENTS. A.T. was supported by the Richard N. Rosett Faculty
+FellowshipattheUniversityofChicagoBoothSchoolofBusiness.DatacollectionwasfundedbytheInnovationFundforNewIdeasintheNaturalSciencesfrom
+PrincetonUniversity’sDeanforResearch.
+Author aﬃliations:aDepartment of Computer Science, Princeton University, Princeton, NJ
+08540;bBooth School of Business, University of Chicago, Chicago, IL 60637;cDepartment
+ofPsychology,PrincetonUniversity,Princeton,NJ08540;anddSchoolofBusiness,Stevens
+InstituteofTechnology,Hoboken,NJ07030
+1. F.Farzin,C.Hou,A.M.Norcia,Piecingittogether:Infants’neuralresponsestofaceandobject
+structure. J. Vis. 12,6–6(2012).
+2. N.Kanwisher,J.McDermott,M.M.Chun,Thefusiformfacearea:Amoduleinhumanextrastriate
+cortexspecializedforfaceperception. J. Neurosci. 17,4302–4311(1997).
+3. C.Frith,Roleoffacialexpressionsinsocialinteractions. Philos. Trans. R. Soc. Lond. B Biol. Sci. 364,
+3453–3458(2009).
+4. N.N.Oosterhof,A.Todorov,Thefunctionalbasisoffaceevaluation. P r o c .N a t l .A c a d .S c i .U . S . A . 105,
+11087–11092(2008).
+5. C.A.Sutherland et al.,Socialinferencesfromfaces:Ambientimagesgenerateathree-dimensional
+model. Cognition 127,105–118(2013).
+6. L.A.Zebrowitz,Firstimpressionsfromfaces. C u r r .D i r .P s y c h o l .S c i . 26,237–242(2017).
+7. B.C.Jones et al.,Towhichworldregionsdoesthevalence-dominancemodelofsocialperception
+apply? Nat. Hum. Behav. 5,159–169(2021).
+8. A.Todorov,D.Oh,Thestructureandperceptualbasisofsocialjudgmentsfromfaces. A d v .E x p .S o c .
+Psychol. 63,189–245(2021).
+9. C.A.M.Sutherland et al.,Facialﬁrstimpressionsacrossculture:Data-drivenmodelingofChineseand
+Britishperceivers’unconstrainedfacialimpressions. P e r s .S o c .P s y c h o l .B u l l . 44,521–537(2018).
+10. A.Todorov,C.Y.Olivola,R.Dotsch,P.Mende-Siedlecki,Socialattributionsfromfaces:Determinants,
+consequences,accuracy,andfunctionalsigniﬁcance. Annu. Rev. Psychol. 66,519–545(2015).11. A.Todorov,A.N.Mandisodza,A.Goren,C.C.Hall,Inferencesofcompetencefromfacespredict
+electionoutcomes. Science 308,1623–1626(2005).
+12. A.C.Little,R.P.Burriss,B.C.Jones,S.C.Roberts,Facialappearanceaffectsvotingdecisions. Evol. Hum.
+Behav. 28,18–27(2007).
+13. I.V.Blair,C.M.Judd,K.M.Chapleau,TheinﬂuenceofAfrocentricfacialfeaturesincriminal
+sentencing. Psychol. Sci. 15,674–679(2004).
+14. J.L.Eberhardt,P.G.Davies,V.J.Purdie-Vaughns,S.L.Johnson,Lookingdeathworthy:Perceived
+stereotypicalityofBlackdefendantspredictscapital-sentencingoutcomes. Psychol. Sci. 17,383–386
+(2006).
+15. C.J.Bohil,H.M.Kleider-Offutt,C.Killingsworth,A.M.Meacham,Trainingawayface-typebias:
+Perceptionanddecisionsaboutemotionalexpressioninstereotypicallyblackfaces. Psychol. Res. 85,
+2727–2741(2021).
+16. M.Turk,A.Pentland,Eigenfacesforrecognition. J. Cogn. Neurosci. 3,71–86(1991).
+17. B.Tiddeman,M.Stirrat,D.Perrett,Towardsrealisminfacialprototyping:Resultsofawaveletmrf
+method. Proc. Theory Pract Comp. Graph. 1,20–30(2006).
+18. V.Blanz,T.Vetter,“Amorphablemodelforthesynthesisof3dfaces”in Proceedings of the 26th Annual
+Conference on Computer Graphics and Interactive Techniques ,A.Rockwood,Ed.(ACM
+Press/Addison-WesleyPublishingCo.,1999),pp.187–194.
+19. C.A.Sutherland,G.Rhodes,A.W.Young,Facialimagemanipulation:Atoolforinvestigatingsocial
+perception. Soc. Psychol. Personal. Sci. 8,538–551(2017).
+8of9https://doi.org/10.1073/pnas.2115228119 pnas.org
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+
+20. O.M.Parkhi,A.Vedaldi,A.Zisserman,“Deepfacerecognition”in Proceedings of the British Machine
+Vision Conference (BMVC) ,X.Xi,M.W.Jones,G.K.L.Tam,Eds.(BMVAPress,2015),pp.41.1–41.12.
+21. T.Karras,S.Laine,T.Aila,“Astyle-basedgeneratorarchitectureforgenerativeadversarialnetworks”in
+CVF Conference on Computer Vision and Pattern Recognition (CVPR) (IEEE,2018),pp.4396–4405.
+22. T.Karras et al.,“AnalyzingandimprovingtheimagequalityofStyleGAN”in Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern Recognition (IEEE,2020),pp.8110–8119.
+23. Y.Choi et al.,“StarGAN:Uniﬁedgenerativeadversarialnetworksformulti-domainimage-to-image
+translation”in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (IEEE,
+2018),pp.8789–8797.
+24. A.J.O’Toole,C.D.Castillo,C.J.Parde,M.Q.Hill,R.Chellappa,Facespacerepresentationsindeep
+convolutionalneuralnetworks. Trends Cogn. Sci. 22,794–809(2018).
+25. Z.He,W.Zuo,M.Kan,S.Shan,X.Chen,AttGAN:Facialattributeeditingbyonlychangingwhatyou
+want. IEEE Trans. Image Process. 28,5464–5478(2019).
+26. P.Terh ¨orst,D.F¨ahrmann,N.Damer,F.Kirchbuchner,A.Kuijper,“Beyondidentity:Whatinformationis
+storedinbiometricfacetemplates?”in 2020 IEEE International Joint Conference on Biometrics (IJCB)
+(IEEE,2020),pp.1–10.
+27. V.Bruce,A.Young,Understandingfacerecognition. B r .J .P s y c h o l . 77,305–327(1986).
+28. D.Oh,R.Dotsch,J.Porter,A.Todorov,Genderbiasesinimpressionsfromfaces:Empiricalstudiesand
+computationalmodels. J. Exp. Psychol. Gen. 149,323–342(2020).
+29. J.R.Collova,C.A.M.Sutherland,G.Rhodes,Testingthefunctionalbasisofﬁrstimpressions:
+Dimensionsforchildren’sfacesarenotthesameasforadults’faces. J. Pers. Soc. Psychol. 117,
+900–924(2019).
+30. W.A.Bainbridge,P.Isola,A.Oliva,Theintrinsicmemorabilityoffacephotographs. J. Exp. Psychol. Gen.
+142,1323–1334(2013).
+31. G.Rhodes,Theevolutionarypsychologyoffacialbeauty. Annu. Rev. Psychol. 57,199–226(2006).
+32. C.P.Said,A.Todorov,Astatisticalmodeloffacialattractiveness. Psychol. Sci. 22,1183–1190(2011).
+33. I.J.Goodfellow et al.,“Generativeadversarialnetworks.”in Advances in Neural Information Processing
+Systems,Z.Ghahramani,M.Welling,C.Cortes,N.Lawrence,K.Q.Weinberger,Eds.(CurranAssociates,
+Inc.,2014),vol.27.
+34. J.E.Martinez,F.Funk,A.Todorov,Quantifyingidiosyncraticandsharedcontributionstojudgment.
+Behav. Res. Methods 52,1428–1444(2020).
+35. A.Song,L.Linjie,C.Atalla,G.Cottrell,“Learningtoseepeoplelikepeople:Predictingsocial
+impressionsoffaces.”in 39th Annual Meeting of the Cognitive Science Society (CogSci,2017).36. C.J.Parde,Y.Hu,C.Castillo,S.Sankaranarayanan,A.J.O’Toole,Socialtraitinformationindeep
+convolutionalneuralnetworkstrainedforfaceidentiﬁcation. Cogn. Sci. 43,e12729(2019).
+37. M.L.Willis,R.Palermo,D.Burke,Socialjudgmentsareinﬂuencedbybothfacialexpressionand
+directionofeyegaze. Soc. Cogn. 29,415–429(2011).
+38. D.S.Ma,J.Correll,B.Wittenbrink,TheChicagofacedatabase:Afreestimulussetoffacesand
+normingdata. Behav. Res. Methods 47,1122–1135(2015).
+39. A.Kiyonaga,J.M.Scimeca,D.P.Bliss,D.Whitney,Serialdependenceacrossperception,attention,and
+memory. Trends Cogn. Sci. 21,493–497(2017).
+40. P.Korshunov,S.Marcel,Deepfakes:Anewthreattofacerecognition?Assessmentanddetection.arXiv
+[Preprint](2018).https://arxiv.org/abs/1812.08685(Accessed20December2018).
+41. D.Gragnaniello,D.Cozzolino,F.Marra,G.Poggi,L.Verdoliva,“AreGANgeneratedimageseasyto
+detect?Acriticalanalysisofthestate-of-the-art”in 2021 IEEE International Conference on Multimedia
+and Expo (ICME) (IEEE,2021),pp.1–6.
+42. G.Tang et al.,DetectionofGAN-synthesizedimagebasedondiscretewavelettransform. Secur.
+Commun. Netw. 2021,5511435(2021).
+43. R.Winick,Intellectualproperty,defamationandthedigitalalterationofvisualimages. Columbia VLA
+J. Law Arts 21,143(1996).
+44. L.B.A.Potter,Alteredrealities:Theeffectofdigitalimagingtechnologyonlibelandrightofprivacy.
+Hast. Comm. Ent. LJ 17,495(1994).
+45. D.Almeida,K.Shmarko,E.Lomas,Theethicsoffacialrecognitiontechnologies,surveillance,and
+accountabilityinanageofartiﬁcialintelligence:AcomparativeanalysisofUS,EU,andUKregulatoryframeworks. AI Ethics,10.1007/s43681-021-00077-w(2021).
+46. E.Learned-Miller,V.Ord ´o˜nez,J.Morgenstern,J.Buolamwini,Facialrecognitiontechnologiesinthe
+wild:Acallforafederalofﬁce(2020).https://www.ajl.org/federal-ofﬁce-call.Accessed6April2022.
+47. L.Litman,J.Robinson,T.Abberbock,TurkPrime.com:Aversatilecrowdsourcingdataacquisition
+platformforthebehavioralsciences. Behav. Res. Methods 49,433–442(2017).
+48. A.Dosovitskiy,T.Brox,“Generatingimageswithperceptualsimilaritymetricsbasedondeep
+networks”in Advances in Neural Information Processing Systems ,D.Lee,M.Sugiyama,U.Luxburg,
+I.Guyon,R.Garnett,Eds.(CurranAssociates,Inc.,2016),pp.658–666.
+49. J.C.Peterson,S.Uddenberg,J.W.Suchow,OneMillionImpressions(OMI)Dataset.GitHub.
+https://github.com/jcpeterson/omi.Deposited14March2022.
+PNAS2022 Vol. 119 No.17 e2115228119 https://doi.org/10.1073/pnas.2115228119 9of9
+Downloaded from https://www.pnas.org by 38.39.170.102 on July 27, 2022 from IP address 38.39.170.102.
+

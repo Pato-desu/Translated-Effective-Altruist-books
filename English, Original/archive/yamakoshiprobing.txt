@@ -1,0 +1,1099 @@
+Probing BERT’s priors with serial reproduction chains
+Takateru Yamakoshi1;2, Thomas L. Grifﬁths1, Robert D. Hawkins1
+1Princeton University,2The University of Tokyo
+{takateru,tomg,rdhawkins}@princeton.edu
+Abstract
+Sampling is a promising bottom-up method for
+exposing what generative models have learned
+about language, but it remains unclear how to
+generate representative samples from popular
+masked language models (MLMs) like BERT.
+The MLM objective yields a dependency net-
+work with no guarantee of consistent condi-
+tional distributions, posing a problem for naive
+approaches. Drawing from theories of iter-
+ated learning in cognitive science, we explore
+the use of serial reproduction chains to sam-
+ple from BERT’s priors. In particular, we ob-
+serve that a unique and consistent estimator of
+the ground-truth joint distribution is given by
+a Generative Stochastic Network (GSN) sam-
+pler, which randomly selects which token to
+mask and reconstruct on each step. We show
+that the lexical and syntactic statistics of sen-
+tences from GSN chains closely match the
+ground-truth corpus distribution and perform
+better than other methods in a large corpus of
+naturalness judgments. Our ﬁndings establish
+a ﬁrmer theoretical foundation for bottom-up
+probing and highlight richer deviations from
+human priors1.
+1 Introduction
+Large neural language models have become the
+representational backbone of natural language pro-
+cessing. By learning to predict words from their
+context, these models have induced surprisingly
+human-like linguistic knowledge, from syntactic
+structure (Linzen and Baroni, 2021; Tenney et al.,
+2019; Warstadt et al., 2019) and subtle lexical bi-
+ases (Hawkins et al., 2020) to more insidious so-
+cial biases and stereotypes (Caliskan et al., 2017;
+Garg et al., 2018). At the same time, efforts to
+probe these models have revealed signiﬁcant de-
+viations from natural language (Braverman et al.,
+2020; Holtzman et al., 2019; Dasgupta et al., 2020).
+1Code and data are available at https://github.
+com/taka-yamakoshi/TelephoneGame
+chain 2chain 1
+food was running short, and winters were colder.
+time was running short, and winters were colder.
+time was running out, and winters were colder.Figure 1: We use a serial reproduction method to probe
+BERT’s prior over possible sentences (visualization of
+reproduction chains obtained by running t-sne on sen-
+tence embeddings; chains are color-coded and fade to
+black across their burn-in period).
+Observations of incoherent or “weird” behavior
+may often be amusing, as when a generated recipe
+begins with “1/4 pounds of bones or fresh bread”
+(Shane, 2019), but also pose signiﬁcant dangers in
+real-world settings (Bender et al., 2021).
+These deviations present a core theoretical and
+methodological puzzle for computational linguis-
+tics. How do we elicit and characterize the full
+prior2that a particular model has learned over pos-
+sible sentences in a language? A dominant ap-
+proach has been to design benchmark suites that
+2We use the term prior to refer to graded linguistic knowl-
+edge assigning probabilities to all possible sentences. While
+we focus on text, this prior is also the foundation for more
+grounded, pragmatic language use.arXiv:2202.12226v2  [cs.CL]  18 Mar 2022
+Type of unnaturalness Example
+word-level morphological Higher education school xurdivided into six institutions.
+phrase-levelsyntacticSwallowing hard, Verity stared at the these , desperately wanting
+to see if they congealed.
+semanticThe west section is a ﬁg octagon .
+A private apartment with nothing but hot cooled water.
+predicationHe already costumes his relationship with my mother carefully.
+V oices rapped on the incremental door .
+sentence-levelout-of-context Like a cataract , Horatius responds, “You are better than me.”
+self-contradictory The newspaper is published weekly andbiannually .
+pragmaticShe grew up with three sisters andten sisters .
+It should apply between the extreme andthe extreme .
+Table 1: Examples of sentences sampled from BERT’s prior that received low naturalness ratings from our partic-
+ipants, including sources forms of unnaturalness like predicability or category errors (e.g. doors typically do not
+have the property of “incrementality”), semantic incoherence (“hot cooled water”), or contradictory constructions
+(especially for longer sentences). More examples can be found in table S2 and in the online supplement.
+probe theoretically important aspects of the prior,
+and compare model behavior to human behavior
+on those tasks (e.g. Warstadt et al., 2020; Ettinger,
+2020). Yet this approach can be restrictive and
+piecemeal: it is not clear ahead of time which
+tasks will be most diagnostic, and many sources of
+“weirdness” are not easily operationalized (Kurib-
+ayashi et al., 2021).
+A more holistic, bottom-up alternative is to di-
+rectly examine samples from the model’s prior and
+compare them against those from human priors.
+However, many successful models do not explicitly
+expose this distribution, and many generation meth-
+ods optimize the “best” sentences rather than the-
+oretically meaningful or representative ones. For
+example, masked language models (MLMs) like
+BERT (Devlin et al., 2018) are dependency net-
+works (Heckerman et al., 2000; Toutanova et al.,
+2003), trained to efﬁciently learn an independent
+collection of conditional distributions without en-
+forcing consistency between them. In other words,
+these conditionals may not correspond to any co-
+herent joint distribution at all, leading recent work
+to focus on other score-based sampling objectives
+(Goyal et al., 2021).
+Here, we explore the use of serial reproduction
+chains (see Fig. 1) to overcome these challenges.
+While a naive (pseudo-)Gibbs sampler is indeed
+problematic for MLMs, the literature on Generative
+Stochastic Networks (GSNs; Bengio et al., 2014)
+has formally shown that a simple algorithmic vari-
+ant we call GSN sampling produces a stationary
+distribution that is, in fact, a unique and consis-tent estimator of the ground-truth joint distribution.
+Furthermore, while the independent conditionals
+learned by dependency networks may be arbitrarily
+inconsistent in theory, empirical work has found
+that these deviations tend to be negligible in prac-
+tice, especially on larger datasets (Heckerman et al.,
+2000; Neville and Jensen, 2007). Thus, we argue
+that it is both theoretically and empirically justiﬁed
+to take these samples as uniquely representative of
+the model’s prior over language.
+We begin in Section 2 by introducing the serial
+reproduction approach and clarifying the problem
+of re-constructing a joint distribution from a depen-
+dency network. We then validate that our chains are
+well-behaved (Section 3) and compare the statis-
+tics of samples from BERT’s prior to the lexical
+and syntactic statistics of its ground-truth training
+corpus to measure distributional similarity (Section
+4). Finally, in Section 5, we present a large-scale
+behavioral study eliciting naturalness judgments
+from human speakers and identify features of the
+generated sentences which most strongly predict
+human ratings of “weirdness” (see Table 1). We
+ﬁnd that GSN samples closely approximate the
+ground-truth distribution and are judged to be more
+natural than other methods, while also revealing
+areas of improvement that have been difﬁcult to
+quantify with top-down benchmarks.
+2 Approach
+2.1 Serial reproduction
+Our approach is inspired by serial reproduction
+games like Telephone, where an initial message is
+Bayes net (acyclic)
+dependency net (cyclic)LM MLM
+Figure 2: While autoregressive language models (LMs)
+are Bayes nets, masked language models (MLMs) are
+dependency networks with cyclic dependencies.
+gradually relayed along a chain from one speaker
+to the next. At each step, the message is changed
+subtly as a result of noisy transmission and recon-
+struction, and the ﬁnal version of the message often
+differs drastically from the ﬁrst. This serial repro-
+duction method, initially introduced to psychology
+by Bartlett (1932), has become an invaluable tool
+for revealing human inductive biases (Xu and Grif-
+ﬁths, 2010; Langlois et al., 2021; Sanborn et al.,
+2010; Harrison et al., 2020). Because reconstruct-
+ing a noisy message is guided by the listener’s prior
+expectations, such chains eventually converge to a
+stationary distribution that is equivalent to the pop-
+ulation’s prior, reﬂecting what people expect others
+to say (Kalish et al., 2007; Grifﬁths and Kalish,
+2007; Beppu and Grifﬁths, 2009). For example,
+Meylan et al. (2021) recently evaluated the ability
+of neural language models to predict the changes
+made to sentences by human participants at each
+step of a serial reproduction chain. Thus, while
+serial reproduction is commonly used to probe hu-
+man priors, and to compare models against human
+data, it is not yet in wide use for probing the models
+themselves.
+2.2 BERT as a dependency network
+There has been considerable confusion in the recent
+literature over how to interpret the MLM objective
+used to train models like BERT, and how to inter-
+pret samples from such models. Wang and Cho
+(2019) initially observed that BERT was a Markov
+Random Field (MRF) and proposed a Gibbs sam-
+pler that iteratively masks and reconstructs differ-
+ent siteskby sampling from the conditional given
+the tokens at all other sites ^P(wkjw k). As ob-
+served by Goyal et al. (2021), however, this pro-
+cedure does not actually correspond to inference
+in the MRF. Unlike auto-regression language mod-
+els (LMs) like GPT-3 (Brown et al., 2020), which
+deﬁne an acyclic dependency graph (or Bayes net)from left-to-right, MLMs have cyclic dependencies
+(see Fig. 2) and are therefore usefully interpreted as
+dependency networks rather than Bayes networks
+(Heckerman et al., 2000). Because dependency net-
+works estimate independent conditionals, there is
+no guarantee that these conditionals are consistent
+(i.e. they may violate Bayes rule) and therefore do
+not represent a coherent joint distribution.
+Still, it is possible to re-construct a joint dis-
+tributions from these conditionals. For example,
+Heckerman et al. (2000) proved that if sites are
+visited in a ﬁxed order, a (pseudo-)Gibbs chain
+similar to the one used by Wang and Cho (2019)
+does converge to a stationary distribution that is
+a well-formed joint. The problem is that differ-
+ent orders may yield different joint distributions,
+making it difﬁcult to interpret any distributions as
+deﬁnitive. This ambiguity was resolved by the Gen-
+erative Stochastic Network framework proposed by
+Bengio et al. (2014). Instead of visiting sites in
+a ﬁxed order, a GSN sampler randomly chooses
+which site to visit at each step (with replacement),
+thus preserving aperiodicity and ergodicity. Specif-
+ically, this algorithm begins by initializing with
+a sequencefw0
+1;:::;w0
+ng. At each step tof the
+chain, we randomly choose a site k21;:::;n to
+mask out, and we sample a new value wt+1
+kfrom
+the conditional distribution P(wkjwt
+ k)with the
+othern 1sites ﬁxed.
+A key theorem of Bengio et al. (2013, 2014)
+proves that the stationary distribution arising from
+the GSN sampler deﬁnes a unique joint distribu-
+tion, and furthermore, this stationary distribution
+is a consistent estimator of the ground-truth joint
+distribution3. Importantly, this stationary distribu-
+tion differs from the one given by the Metropolis-
+Hastings (MH) approach suggested by Goyal et al.
+(2021), which uses the GSN sampler as a proposal
+distribution but accepts or rejects proposals based
+on an energy-based pseudo-likelihood deﬁned by
+the sum of the conditional scores at each location
+(Salazar et al., 2020). This MH sampler instead
+converges to an implicit stationary distribution de-
+ﬁned by the energy objective4.
+3Technically, the proof only holds if the dependency net-
+work was trained using consistent estimators for the condition-
+als, which is the case for the cross-entropy loss used by BERT;
+see also McAllester (2019).
+4Although our focus is on evaluation rather than algorith-
+mic performance characteristics, we note that because GSN
+sampling does not require calculating energy scores to deter-
+mine the acceptance probability for each sample, it is signiﬁ-
+cantly faster, especially for longer sequences.
+2.3 Mixture kernels
+In practice, Markov chain sampling methods have
+many failure modes. Most prominently, because
+samples in the chains are not independent, it is
+challenging to guarantee convergence to a station-
+ary distribution, and the chain is easily “stuck” in
+local regions of the sample space (Gelman et al.,
+1992). Typically, samples from a burn-in period
+(e.g. the ﬁrst mepochs) are discarded to reduce
+dependence on the initial state, and a lagbetween
+samples (e.g. recording only every lepochs) is in-
+troduced to reduce auto-correlation. However, the
+problem is particularly severe for language models
+like BERT where there are strong mutual dependen-
+cies between words at different sites. For example,
+once the chain reaches a tri-gram like ‘Papua New
+Guinea’, it is unlikely to change any single word
+while keeping the other words constant. To ensure
+ergodicity, we use a mixture kernel introducing a
+small constant probability ( = 0:001) of return-
+ing to the initial distribution of [MASK] tokens on
+each epoch, allowing the chain to burn in again.
+3 Validating the stationary distribution
+In this section, we validate that the samples pro-
+duced by our serial reproduction method are repre-
+sentative of the stationary prior distribution. More
+speciﬁcally, we consider two basic properties of the
+chain: convergence andindependence . For these
+analyses, we consider samples from the pretrained
+bert-base-uncased model with 12 layers, 12
+heads, and 110M parameters5.
+3.1 Convergence
+We begin by checking the convergence time for
+chains generated by GSN sampling. Theoretical
+bounds derived for serial reproduction chains give a
+convergence time of nlogn, wherenis the number
+of sites (see Rafferty et al., 2014). To check these
+convergence bounds in practice, we set n= 21
+and select 20 sentences from Wikipedia to serve as
+initial states, and run 10 chains initialized at each
+sentence. We ensured that half of these sentences
+have high initial probability (under BERT’s energy
+score) and half have low initial probability. We
+ﬁnd that these distributions indeed begin to quickly
+mix in probability (see Figure S1). Because longer
+sentences may require a longer burn-in time, we
+conservatively set our burn-in window to m=
+1000 epochs for our subsequent experiments.
+5https://huggingface.co/bert-base-uncased3.2 Independence
+Second, we want to roughly ensure independence
+of samples, so that the statistics of our distribution
+of samples isn’t simply reﬂecting auto-correlation
+in the chain. For a worst-case analysis of a local
+minimum, suppose P(wijw i)< (0<  < 1)
+for alli2[1;:::;k ], wherekis the sentence length
+in tokens. Then the probability of re-sampling the
+same sentence is roughly < knafternepochs.
+We can solve for the number of epochs nwe need
+to bound the probability of re-sampling the exact
+same sentence under for a given worst-case . For
+example, if = 0:99and we want to ensure that
+the probability of re-sampling the same sentence is
+below a threshold = 0:01, thenn= 47 epochs
+will likely sufﬁce. Ensuring complete turnover in
+the worst case scenario requires much longer lags,
+i.e.[1 (1 )k]n<.
+To evaluate the extent to which these cases arise
+in practice, we examine auto-correlation rates on
+longer chains (50,000 epochs). We calculate cor-
+relations between the energy scores at each epoch
+as a proxy for the state: when the chain gets stuck
+re-sampling the same sentence, the same scores
+appear repeatedly. We ﬁnd that auto-correlation is
+generally high, but our mixture kernel prevents the
+worst local minima for both the MH chain (Goyal
+et al., 2021) and our GSN chain (see Fig. S2),
+although we still found higher auto-correlation
+rates for the MH chain. To further examine these
+minima, we examined edit rates: the number of
+changes made to the sentence within an epoch.
+Without the mixture kernel, we observe long re-
+gions of consistently low edit rates (e.g. in some
+cases, 5000 epochs in a row of exactly the same
+sentence) which disappear under the mixture kernel
+(see Fig. S3).
+Based on these observations, we set the lag to
+l= 500 epochs to maintain relatively high inde-
+pendence between samples.
+4 Distributional comparisons
+In this section, we examine the extent to which
+higher-order statistics of sentences from BERT’s
+prior are well-calibrated to the data it was trained
+on. This kind of comparison provides a richer sense
+of what the model has learned or failed to learn
+than traditional scalar metrics like perplexity (Taka-
+hashi and Tanaka-Ishii, 2017; Meister and Cotterell,
+2021; Takahashi and Tanaka-Ishii, 2019; Pillutla
+et al., 2021).
+10−610−410−2
+100101102103
+(log) rank of word(log) frequency of wordcorpus GSN mh
+100101102103
+100101102103
+rank of word (BERT distribution)rank of word (corpus distribution)GSN MHFigure 3: The lexical frequencies of our GSN samples (A) closely match the Zipﬁan distribution of the corpus and
+(B) closely correlate with the corresponding frequencies of the corpus distribution.
+4.1 Corpus preparation
+The version of BERT we analyzed in the previ-
+ous section was trained on a combination of two
+corpora: Wikipedia andBookCorpus . In order to
+make valid comparisons between human priors and
+machine priors, we needed to closely match BERT-
+generated sentences with a comparable subset of
+human-generated sentences from these combined
+corpora. There are two technical challenges we
+must overcome to ensure comparable samples, con-
+cerning the sentencizer andtokenizer steps.
+First, because our unit of comparison is the sen-
+tence , we needed to control for any artifacts that
+may be induced by how we determine what sen-
+tences are (e.g. if our Wikipedia sentences were
+systematically split on abbreviations, skewing the
+distribution toward fragments). We therefore ap-
+plied the same punkt sentencizer to create our
+distribution of Wikipedia sentences and to check
+our BERT samples for cases where the generated
+sequence contained multiple sentences or ended
+with a colon or semicolon.
+Second, we needed a tokenizer that equates sen-
+tence length. Because bi-directional models like
+BERT operate over sequences of ﬁxed length, all
+samples drawn from a single chain have the same
+number of tokens.
+Critically, however, BERT chains are deﬁned
+over sequences of WordPiece tokens, so once these
+sequences are decoded back into natural language
+text, they may yield sentences of varying length,depending on how the sub-word elements are com-
+bined together6(see Fig. S5). We solve this align-
+ment problem by using the WordPiece tokenizer to
+extract sentences of ﬁxed sub-word token length
+from our text corpora, yielding equivalence classes
+of corpus sentences that are all tokenized to the
+same number of WordPiece tokens. We ran GSN
+and MH chains over sentences of n= 11 tokens,
+representing the modal lengths of sentences in
+BookCorpus (see Fig. S4). We obtained 5,000 in-
+dependent sentences from each sampling method
+after applying our conservative burn-in and lag,
+and combined the Wikipedia and BookCorpus sen-
+tences together into a single corpus that is represen-
+tative of BERT’s training regime.
+4.2 Lexical distributions
+We begin by comparing the lexical frequency statis-
+tics of our samples from BERT against the ground-
+truth corpus statistics. First, we note that the rela-
+tionship between rank and frequency of tokens in
+the GSN sampling matches the Zipﬁan distribution
+of its training corpus better than those produced by
+MH sampling (see Fig. 3A). However, it is possible
+to produce the same overall distribution without
+6One additional complexity is that the mapping between
+WordPiece tokens and word tokens is non-injective. There
+exist multiple sequences of sub-word tokens that render to
+the same word (e.g. the WordPiece vocabulary contains a
+token for the full word ‘missing’ but it is also able to generate
+‘missing’ by combining the sub-word tokens ‘miss’+‘#ing’).
+However, these cases are rare.
+NUMCCONJADJADVAUXADPPROPNDETPRONVERBNOUNPUNCT
+0.0 0.1 0.2 0.3
+frequency of part of speechsource corpus GSN MH
+negprtadvclnpadvmodnsubjpassxcompauxpassnummodacompccompattrconjccposscompoundamoddobjadvmodpobjnsubj
+0.0 0.1 0.2 0.3
+frequency of dependencysource corpus GSN MHFigure 4: The relative frequencies of different parts of speech (left) and dependencies (right) in the ground-truth
+training corpora closely matched for GSN samples. In all cases, the GSN frequencies fell closer to the ground-truth
+than the MH frequencies.
+matching the empirical frequencies of individual
+words. We next examined the respective ranks of
+each word across the two distributions. Overall,
+the word ranks in the GSN samples had a strong
+Spearman rank correlation of r= 0:75with the
+word ranks in the ground-truth corpus; the MH
+samples had a signiﬁcantly lower correlation of
+r= 0:48(Pearsonz= 17;p < 0:001, Fig 3B).
+Most disagreements lay in the tails where frequency
+estimates are particularly poor (e.g. many words
+only appeared once in our collection of samples).
+Indeed, among words with greater than 10 occur-
+rences, the correlation improved to r= 0:83for
+GSN andr= 0:65for MH.
+To understand this relationship further, we con-
+ducted an error analysis of lexical items which
+were systematically over- or under-produced by
+BERT relative to its training corpus. We found
+that certain punctuation tokens (e.g. parentheses)
+were over-represented in both the GSN samples
+and the MH samples, while contractions like ’s
+and’dwere under-represented. The MH samples
+speciﬁcally over-produced proper names such as
+Nina andJones . Finally, due to the use of sub-word
+representations, we found a long tail of morpho-
+logically complex words that did not appear at all
+in the training corpus (e.g. names like Kyftenberg
+or Streckenstein and seemingly invented scientiﬁc
+terms like lymphoplasmic, neopomphorus, or pyra-
+nolamines).4.3 Syntactic distributions
+While the lexical distributions were overall well-
+matched for GSN samples, our error analysis sug-
+gested potential structure in the deviations. In
+other words, entire grammatical constructions may
+be over- or under-represented, not just particular
+words. To investigate these patterns, we used the
+spacy library to extract the parts of speech and
+dependency relations that are present within each
+sentence. We are then able to examine, in aggre-
+gate, whether certain classes of constructions are
+disproportionately responsible for deviations. Our
+ﬁndings are shown in Fig. 4. Overall, the distri-
+butions are close, but several areas of misalign-
+ment emerge. For parts of speech, we observe
+that the GSN sampler is slightly over-producing
+nouns (and proper nouns) while under-producing
+verbs and prepositions. We also observe that it
+is over-producing noun-related dependencies (e.g.
+compound nouns and appositional modiﬁers, which
+are noun phrases modifying other noun phrases, as
+in “Bill, my brother, visited town”). This pattern
+suggests that BERT’s prior may be skewed toward
+(simpler) noun phrases while neglecting more com-
+plex constructions.
+4.4 Sentence complexity
+One hypothesis raised by comparing distributions
+of syntactic features is that BERT may be regu-
+larizing the complex structure of its input toward
+0.000.250.500.751.00
+0 10 20 30
+dependency lengthCDFcombined
+corporaGSN MHFigure 5: Cumulative probability distribution of depen-
+dency lengths across sentences from BERT chains and
+from the training corpus.
+simpler constructions. To test this hypothesis, we
+operationalize syntactic complexity using a mea-
+sure known as the average dependency length of
+a sentence (Futrell et al., 2015; Grodner and Gib-
+son, 2005). This measure captures the (linear) dis-
+tance between syntactically related words, which
+increases with more complex embedded phrase
+structures. We found that the distribution of de-
+pendency distances in the sentences produced by
+GSN sampling is overall more similar to those in
+its training corpus than the MH (Fig. 5), although
+closer analysis suggests it is still skewed slightly
+simpler (see Fig. S6).
+5 Human judgments
+Finally, while our corpus comparisons highlighted
+particular ways in which samples from BERT’s
+prior were well-calibrated to the high-level statis-
+tics of its training distribution, it is unclear whether
+these agreements or deviations ‘matter’ in terms of
+naturalness. In this section, we elicit human natu-
+ralness judgments in order to provide a more holis-
+tic measure of potential ‘weirdness’ with BERT
+sentences.
+5.1 Experimental methods
+We recruited 1016 ﬂuent English speakers on the
+Proliﬁc platform and asked them to judge the natu-
+ralness of 4040 unique sentences from three length
+classes: short (11 tokens), medium (21 tokens),
+and long (37 tokens). 1675 of these sentences were
+from the stationary state of the different chains,
+2339 were from the burn-in phase (i.e. <1000
+epochs), and the remainder were baseline sentences
+(149 from Wikipedia, 48 from a 5-gram model, and
+42 from an LSTM model; see Appendix for details).Each participant was shown a sequence of 25 sen-
+tences in randomized order, balanced across differ-
+ent properties of the stimulus set7. On each trial,
+one of these sentences appeared with a slider rang-
+ing from 0 (“very weird”) to 100 (“completely nat-
+ural”)8. After excluding 8 participants who failed
+the attention check (i.e. failed to rate a scram-
+bled sentence below the midpoint of the scale and
+a human-generated sentence above the midpoint),
+we were left with an average of 7.3 responses per
+sentence.
+5.2 Behavioral results
+We begin by comparing the naturalness of sen-
+tences from the stationary GSN distribution to
+other baselines (see Fig. 6), using a linear regres-
+sion model predicting trial-by-trial judgments as
+a function of categorical variables encoding sen-
+tence length (short, medium, long) and the source
+of the sentence (Wikipedia, GSN, MH, LSTM, or
+n-gram). First, we ﬁnd that the naturalness of sen-
+tences from GSN declines by 14 points at longer
+sentence lengths, p < 0:001, while the natural-
+ness of Wikipedia sentences is unaffected by length
+(interaction term, p <0:001), consistent with re-
+sults reported by Ippolito et al. (2020). Further-
+more, among short sentences, where we included
+additional baselines, we ﬁnd that GSN sentences
+tend to be rated as slightly less natural than sen-
+tences from Wikipedia (+10 points, p<0:001) but
+more natural than those produced by an n-gram
+model (-52 points, p < 0:001), LSTM model (-
+25 points,p<0:001); or MH sampling from the
+same BERT conditionals (-15 points, p <0:001;
+see Table S1). MH samples also deteriorate sig-
+niﬁcantly in naturalness for longer sentences com-
+pared to GSN samples ( p < 0:001). Finally, we
+examine naturalness ratings across the the burn-in
+period, ﬁnding that ratings decline steadily across
+the board as the chain takes additional steps (linear
+term:t(7297) = 12:4;p < 0:001), suggesting
+gradual deviation away from the initial distribu-
+tion of Wikipedia sentences toward the stationary
+distribution (shown as the green and grey regions,
+respectively, in Fig. S7).
+7In a later batch, we increased the number of sentences
+per participant to 40. The task was approximately 10 minutes
+and participants were paid $2.50, for an average compensation
+rate of $15/hr.
+8See Clark et al. (2021) for a discussion of the merits of
+phrasing the question in terms of naturalness instead of asking
+participants to judge whether it was produced by a human or
+machine.
+short medium longwiki
+GSN
+MH
+lstm
+ngram
+wiki
+GSN
+MH
+wiki
+GSN
+MH0255075100mean naturalnessFigure 6: Empirical naturalness ratings elicited from
+the stationary GSN distribution, compared to different
+baselines at different sentence lengths. Error bars are
+bootstrapped 95% CIs.
+5.3 Predicting naturalness
+Given that sentences from the stationary GSN dis-
+tribution are judged to be less natural than human-
+generated sentences overall, we are interested in
+explaining why. Which properties of these sen-
+tences make them sound strange? We approach this
+problem by training a regression model to predict
+human judgments from attributes of each sentence.
+We include all part of speech tag counts and depen-
+dency counts, as well as the sentence probability
+scored under BERT, and the sentence length. We
+use a cross-validated backwards feature selection
+procedure to select the most predictive set of these
+features for a linear regression (Kuhn and Johnson,
+2013)9.
+The best-ﬁtting model used 26 features and
+achieved an (adjusted) R2= 0:21. The only fea-
+tures associated with signiﬁcantly lower ratings
+were the use of adpositions (e.g. before ,after )
+and coordinating conjunctions. Importantly, we
+found that including a categorical variable of cor-
+pus (i.e. Wikipedia vs. GSN) signiﬁcantly im-
+proved model ﬁt even after controlling for all other
+features,2(1) = 7135 ;p < 0:001, suggesting
+that sources of “weirdness” are not being captured
+by typical statistics. We show some of these low-
+naturalness sentences in Table 1 and S2.
+6 Discussion
+6.1 Probing through generation
+A core idea of our serial reproduction approach
+is to use generation as a window into a model’s
+prior over language. While a variety of metrics
+9Speciﬁcally, we used the lmStepAIC procedure imple-
+mented in the caret R package, with k= 10 folds.and techniques have been proposed to quantify the
+“quality” of generation, especially in the domains of
+open-ended text generation and dialogue systems
+(Caccia et al., 2020; Li et al., 2020; Guidotti et al.,
+2018; Celikyilmaz et al., 2020), these metrics have
+typically been applied to compare speciﬁc genera-
+tion algorithms and operationalize speciﬁc pitfalls,
+such as incoherence, excess repetition, or lack of
+diversity. Consequently, it has been difﬁcult to dis-
+entangle the extent to which deviations resulting
+from generations are an artifact of speciﬁc decod-
+ing algorithms (e.g. greedy search vs. beam search)
+or run deeper, into the prior itself. For the purposes
+of probing, we suggest that it is important to ask
+not only how to generate the highest-scoring sen-
+tences but how to generate sentences that may be
+interpreted as representative of the model’s prior, as
+formal results on GSNs have effectively provided.
+6.2 GSN vs. energy-based objectives
+We found that the prior distribution yielded by the
+GSN sampler more closely approximated the lexi-
+cal and syntactic distributions of the ground-truth
+corpus and also sounded more “natural” to humans
+than the samples yielded by MH. These results are
+in contrast to ﬁndings by Goyal et al. (2021), show-
+ing that MH produced high-quality BLEU scores
+on a Machine Translation (MT) task compared to
+a degenerate (pseudo-)Gibbs sampler. There are
+several possible reasons for this discrepancy. One
+possibility may be task-speciﬁc: while we focused
+on unconditional generation, Goyal et al. (2021)
+focused on a neural machine translation (MT) task,
+where sentence generation was always conditioned
+on a high-quality source text and thus remained
+within a constrained region of sentence space. An-
+other possibility is that we ran substantially longer
+chains (50,000 epochs compared to only 33 epochs)
+and the pitfalls of MH sampling only emerged later
+in the chain.
+More broadly, our corpus comparisons and hu-
+man evaluations suggest serious limitations of sim-
+ple “quality” metrics like energy values. We found
+that the best-scoring states were often degenerate
+local minima with mutually supporting n-grams
+(such as repetitive phases and names like “Papua
+New Guinea”). Indeed, there was only a loose re-
+lationship between energy scores and participants’
+judgments in our study, with many poorer-scoring
+sentences judged to be more natural than better-
+scoring sentences (e.g. overall, the distribution
+of Wikipedia sentences tended to be much lower-
+scoring under the energy function despite being
+rated as more natural). We empirically validated
+that the stationary distribution of the GSN chain
+successfully approximates even higher-order statis-
+tics of the ground-truth corpus, suggesting that the
+raw conditionals of the dependency network may
+implicitly acquire the joint distribution, without
+requiring guarantees of consistency.
+6.3 Other architectures
+Serial reproduction methods are particularly useful
+for probing models that do not directly generate
+samples from their prior. For auto-regressive mod-
+els like GPT-2, these samples are obtained more
+directly by running the model forward (and, in-
+deed, ancestral sampling produces text that better
+balances the precision-recall tradeoff than other al-
+gorithms; Pillutla et al., 2021). While we focused
+on BERT, this method may be particularly use-
+ful for encoder-decoder architectures like BART
+(Lewis et al., 2020) which more closely resemble
+the human Telephone Game task, requiring full re-
+construction of the entire sentence from noisy input
+rather than reconstruction of a single missing word.
+Indeed, these architectures may overcome an im-
+portant limitation of serial reproduction with BERT:
+because these chains operate over a ﬁxed sequence
+length, the resulting prior is not over all of language
+but only over sentences with the given number of
+WordPiece tokens. Finally, while we focused on
+unconditional generation, the GSN sampler also
+generalizes straightforwardly to conditional gen-
+eration, where a subset of sites are ﬁxed and the
+masked site is chosen from the remaining set.
+6.4 Conclusions
+Serial reproduction paradigms have been central
+for exposing human priors in the cognitive sci-
+ences. In this paper, we drew upon the theory
+of iterated learning and of Generative Stochastic
+Networks (GSNs) to expose the priors of large neu-
+ral language models, which are often similarly in-
+scrutable. We hope future work will consider other
+points of contact between these areas and draw
+more extensively from the theory developed to un-
+derstand dependency networks. More broadly, as
+language models become increasingly adaptive and
+deployed in increasingly unconstrained settings,
+bottom-up probing has the potential to reveal a
+broader spectrum of “weirdness” than top-down
+evaluative benchmarks.Acknowledgements
+This work was supported by NSF grant #1911835
+to RDH. We are grateful to Jay McClelland, Adele
+Goldberg, and Stephan Meylan for helpful con-
+versations, and to three anonymous reviewers for
+feedback that improved our work.
+References
+Frederic Charles Bartlett. 1932. Remembering: A study
+in experimental and social psychology . Cambridge
+University Press.
+Emily M Bender, Timnit Gebru, Angelina McMillan-
+Major, and Shmargaret Shmitchell. 2021. On the
+dangers of stochastic parrots: Can language models
+be too big? In Proceedings of the 2021 ACM Confer-
+ence on Fairness, Accountability, and Transparency ,
+pages 610–623.
+Yoshua Bengio, Eric Laufer, Guillaume Alain, and
+Jason Yosinski. 2014. Deep generative stochastic
+networks trainable by backprop. In International
+Conference on Machine Learning , pages 226–234.
+PMLR.
+Yoshua Bengio, Li Yao, Guillaume Alain, and Pas-
+cal Vincent. 2013. Generalized denoising auto-
+encoders as generative models. Advances in neural
+information processing systems , 26.
+Aaron Beppu and Thomas Grifﬁths. 2009. Iterated
+learning and the cultural ratchet. In Proceedings of
+the Annual Meeting of the Cognitive Science Society ,
+volume 31.
+Mark Braverman, Xinyi Chen, Sham Kakade, Karthik
+Narasimhan, Cyril Zhang, and Yi Zhang. 2020. Cali-
+bration, entropy rates, and memory in language mod-
+els. In International Conference on Machine Learn-
+ing, pages 1089–1099. PMLR.
+Tom B Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, et al. 2020. Language models are few-shot
+learners. Advances in Neural Information Process-
+ing Systems, 34 .
+Massimo Caccia, Lucas Caccia, William Fedus, Hugo
+Larochelle, Joelle Pineau, and Laurent Charlin.
+2020. Language GANs falling short. International
+Conference on Learning Representations .
+Aylin Caliskan, Joanna J Bryson, and Arvind
+Narayanan. 2017. Semantics derived automatically
+from language corpora contain human-like biases.
+Science , 356(6334):183–186.
+Asli Celikyilmaz, Elizabeth Clark, and Jianfeng Gao.
+2020. Evaluation of text generation: A survey.
+arXiv preprint arXiv:2006.14799 .
+Elizabeth Clark, Tal August, Soﬁa Serrano, Nikita
+Haduong, Suchin Gururangan, and Noah A. Smith.
+2021. All that’s ‘human’ is not gold: Evaluating hu-
+man evaluation of generated text. In Proceedings of
+the 59th Annual Meeting of the Association for Com-
+putational Linguistics. , pages 7282–7296.
+Ishita Dasgupta, Demi Guo, Samuel J Gershman, and
+Noah D Goodman. 2020. Analyzing machine-
+learned representations: A natural language case
+study. Cognitive Science , 44(12):e12925.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and
+Kristina Toutanova. 2018. BERT: Pre-training of
+deep bidirectional transformers for language under-
+standing. In Proceedings of NAACL-HLT .
+Allyson Ettinger. 2020. What bert is not: Lessons from
+a new suite of psycholinguistic diagnostics for lan-
+guage models. Transactions of the Association for
+Computational Linguistics , 8:34–48.
+Richard Futrell, Kyle Mahowald, and Edward Gibson.
+2015. Large-scale evidence of dependency length
+minimization in 37 languages. Proceedings of
+the National Academy of Sciences , 112(33):10336–
+10341.
+Nikhil Garg, Londa Schiebinger, Dan Jurafsky, and
+James Zou. 2018. Word embeddings quantify
+100 years of gender and ethnic stereotypes. Pro-
+ceedings of the National Academy of Sciences ,
+115(16):E3635–E3644.
+Andrew Gelman, Donald B Rubin, et al. 1992. In-
+ference from iterative simulation using multiple se-
+quences. Statistical science , 7(4):457–472.
+Kartik Goyal, Chris Dyer, and Taylor Berg-Kirkpatrick.
+2021. Exposing the implicit energy networks behind
+masked language models via Metropolis–Hastings.
+arXiv preprint arXiv:2106.02736 .
+Thomas L Grifﬁths and Michael L Kalish. 2007. Lan-
+guage evolution by iterated learning with Bayesian
+agents. Cognitive Science , 31(3):441–480.
+Daniel Grodner and Edward Gibson. 2005. Conse-
+quences of the serial nature of linguistic input for
+sentenial complexity. Cognitive Science , 29(2):261–
+290.
+Riccardo Guidotti, Anna Monreale, Salvatore Ruggieri,
+Franco Turini, Fosca Giannotti, and Dino Pedreschi.
+2018. A survey of methods for explaining black box
+models. ACM computing surveys (CSUR) , 51(5):1–
+42.
+Kristina Gulordava, Piotr Bojanowski, Edouard Grave,
+Tal Linzen, and Marco Baroni. 2018. Colorless
+green recurrent networks dream hierarchically. In
+Proceedings of NAACL-HLT , page 1195–1205.
+Peter Harrison, Raja Marjieh, Federico Adolﬁ, Pol van
+Rijn, Manuel Anglada-Tort, Ofer Tchernichovski,
+Pauline Larrouy-Maestri, and Nori Jacoby. 2020.Gibbs sampling with people. Advances in Neural
+Information Processing Systems , 33.
+Robert Hawkins, Takateru Yamakoshi, Thomas Grif-
+ﬁths, and Adele Goldberg. 2020. Investigating rep-
+resentations of verb bias in neural language models.
+InProceedings of the 2020 Conference on Empirical
+Methods in Natural Language Processing (EMNLP) ,
+pages 4653–4663.
+Kenneth Heaﬁeld. 2011. Kenlm: Faster and smaller
+language model queries. In Proceedings of the sixth
+workshop on statistical machine translation , pages
+187–197.
+David Heckerman, David Maxwell Chickering,
+Christopher Meek, Robert Rounthwaite, and Carl
+Kadie. 2000. Dependency networks for inference,
+collaborative ﬁltering, and data visualization. Jour-
+nal of Machine Learning Research , 1(Oct):49–75.
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and
+Yejin Choi. 2019. The curious case of neural text de-
+generation. International Conference on Learning
+Representations .
+Daphne Ippolito, Daniel Duckworth, Chris Callison-
+Burch, and Douglas Eck. 2020. Automatic detec-
+tion of generated text is easiest when humans are
+fooled. In Proceedings of the 58th Annual Meet-
+ing of the Association for Computational Linguistics ,
+pages 1808–1822.
+Michael L Kalish, Thomas L Grifﬁths, and Stephan
+Lewandowsky. 2007. Iterated learning: Intergener-
+ational knowledge transmission reveals inductive bi-
+ases. Psychonomic Bulletin & Review , 14(2):288–
+294.
+Reinhard Kneser and Hermann Ney. 1995. Improved
+backing-off for m-gram language modeling. In 1995
+international conference on acoustics, speech, and
+signal processing , volume 1, pages 181–184. IEEE.
+Max Kuhn and Kjell Johnson. 2013. An introduction
+to feature selection. In Applied predictive modeling ,
+pages 487–519. Springer.
+Tatsuki Kuribayashi, Yohei Oseki, Takumi Ito, Ryo
+Yoshida, Masayuki Asahara, and Kentaro Inui. 2021.
+Lower perplexity is not always human-like. In Pro-
+ceedings of the 59th Annual Meeting of the Asso-
+ciation for Computational Linguistics , pages 5203–
+5217.
+Thomas A Langlois, Nori Jacoby, Jordan W Suchow,
+and Thomas L Grifﬁths. 2021. Serial reproduction
+reveals the geometry of visuospatial representations.
+Proceedings of the National Academy of Sciences ,
+118(13).
+Mike Lewis, Yinhan Liu, Naman Goyal, Mar-
+jan Ghazvininejad, Abdelrahman Mohamed, Omer
+Levy, Veselin Stoyanov, and Luke Zettlemoyer.
+2020. BART: Denoising sequence-to-sequence pre-
+training for natural language generation, translation,
+and comprehension. In Proceedings of the 58th An-
+nual Meeting of the Association for Computational
+Linguistics , pages 7871–7880.
+Margaret Li, Stephen Roller, Ilia Kulikov, Sean
+Welleck, Y-Lan Boureau, Kyunghyun Cho, and Ja-
+son Weston. 2020. Don’t say that! making inconsis-
+tent dialogue unlikely with unlikelihood training. In
+Proceedings of the 58th Annual Meeting of the Asso-
+ciation for Computational Linguistics , pages 4715–
+4728.
+Tal Linzen and Marco Baroni. 2021. Syntactic struc-
+ture from deep learning. Annual Review of Linguis-
+tics, 7(1).
+David McAllester. 2019. A consistency theorem for
+BERT. Retrieved November 1, 2021 from https:
+//machinethoughts.wordpress.com/2019/
+07/14/a-consistency-theorem-for-bert/ .
+Clara Meister and Ryan Cotterell. 2021. Language
+model evaluation beyond perplexity. In Proceedings
+of the 59th Annual Meeting of the ACL , pages 5328–
+5339.
+Stephan C Meylan, Sathvik Nair, and Thomas L Grif-
+ﬁths. 2021. Evaluating models of robust word
+recognition with serial reproduction. Cognition ,
+210:104553.
+Jennifer Neville and David Jensen. 2007. Relational
+dependency networks. Journal of Machine Learning
+Research , 8(3):653–692.
+Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+John Thickstun, Sean Welleck, Yejin Choi, and Zaid
+Harchaoui. 2021. Mauve: Measuring the gap be-
+tween neural text and human text using divergence
+frontiers. Advances in Neural Information Process-
+ing Systems , 34.
+Anna N Rafferty, Thomas L Grifﬁths, and Dan Klein.
+2014. Analyzing the rate at which languages lose
+the inﬂuence of a common ancestor. Cognitive Sci-
+ence, 38(7):1406–1431.
+Julian Salazar, Davis Liang, Toan Q. Nguyen, and Ka-
+trin Kirchhoff. 2020. Masked language model scor-
+ing. In Proceedings of the 58th Annual Meeting
+of the Association for Computational Linguistics ,
+pages 2699–2712.
+Adam N Sanborn, Thomas L Grifﬁths, and Richard M
+Shiffrin. 2010. Uncovering mental representations
+with Markov chain Monte Carlo. Cognitive psychol-
+ogy, 60(2):63–106.
+Janelle Shane. 2019. You look like a thing and I love
+you. Hachette UK.
+Shuntaro Takahashi and Kumiko Tanaka-Ishii. 2017.
+Do neural nets learn statistical laws behind natural
+language? PloS one , 12(12):e0189326.Shuntaro Takahashi and Kumiko Tanaka-Ishii. 2019.
+Evaluating computational language models with
+scaling properties of natural language. Computa-
+tional Linguistics , 45(3):481–513.
+Ian Tenney, Dipanjan Das, and Ellie Pavlick. 2019.
+BERT rediscovers the classical NLP pipeline. In
+Proceedings of ACL , page 4593–4601.
+Kristina Toutanova, Dan Klein, Christopher D Man-
+ning, and Yoram Singer. 2003. Feature-rich part-of-
+speech tagging with a cyclic dependency network.
+InProceedings of the 2003 Human Language Tech-
+nology Conference of the North American Chapter
+of the Association for Computational Linguistics ,
+pages 252–259.
+Alex Wang and Kyunghyun Cho. 2019. BERT has a
+mouth, and it must speak: BERT as a Markov Ran-
+dom Field language model. In Proceedings of the
+Workshop on Methods for Optimizing and Evaluat-
+ing Neural Language Generation (NeuralGen) , page
+30–36.
+Alex Warstadt, Alicia Parrish, Haokun Liu, Anhad Mo-
+hananey, Wei Peng, Sheng-Fu Wang, and Samuel R
+Bowman. 2020. Blimp: The benchmark of linguis-
+tic minimal pairs for english. Transactions of the As-
+sociation for Computational Linguistics , 8:377–392.
+Alex Warstadt, Amanpreet Singh, and Samuel R Bow-
+man. 2019. Neural network acceptability judgments.
+Transactions of the Association for Computational
+Linguistics , 7:625–641.
+Jing Xu and Thomas L Grifﬁths. 2010. A rational anal-
+ysis of the effects of memory biases on serial repro-
+duction. Cognitive psychology , 60(2):107–126.
+Appendix A: Baseline details
+Wikipedia sentences were randomly selected from
+the full sentencized corpus English Wikipedia that
+tokenized to 12, 21, and 37 WordPiece tokens for
+the short, medium, and long conditions, respec-
+tively. These sentences were also chosen to span a
+broad range of sentence probabilities under BERT
+(i.e.logP(p1;:::;p n) =P
+klogP(pkjp k)).
+For our ngram baseline, we trained a 5-gram
+model with Kneser-Ney smoothing (Kneser and
+Ney, 1995) on English Wikipedia using the kenlm
+library (Heaﬁeld, 2011), and generated sentences
+of length 10 by sampling from the resulting condi-
+tional distributions. Because this model stripped
+punctuation, and was therefore unable to emit an
+“end of sentence” token, we expected it to serve as
+a lower bound on the naturalness scale.
+For our LSTM baseline, we used the network
+pre-trained by Gulordava et al. (2018) on English
+Wikipedia. This model was trained to emit an end
+of sentence ( <eos> ) token, allowing us to rejec-
+tion sample to obtain sentences that were exactly 10
+words long with no unknown words (i.e. <unk> to-
+kens). Because it was not trained with a <start>
+token, however, we needed to initialize it with the
+initial word of the sentence. We randomly selected
+this initial word from a small set of common sen-
+tence openers (e.g. the,a,it,his,her). As a
+result of our initial token selection, this model does
+not precisely sample from its true prior over sen-
+tences. Thus, it is best viewed as another baseline
+of sentences rather than as a careful architectural
+comparison.
+Because we were asking participants to judge
+the naturalness of complete sentences , we did not
+want to include samples which clearly violated sen-
+tencehood, as these would not be informative (e.g.
+fragments from Wikipedia that were incorrectly
+sentencized and ended with an abbreviation, bibli-
+ographic text like “korsakov (1976) r.s.,” or table
+markdown with pipes like “ jajbj”). We automat-
+ically removed any sentences containing pipes or
+ending with colons or semicolons, as these were
+associated with sentencizer inconsistency, as well
+as sequences that contained multiple sentences (ac-
+cording to our sentencizer). Finally, the authors
+took a manual pass to exclude other non-sentential
+fragments from the stimulus set.
+Appendix B: Corpus details
+We downloaded cleaned Wikipedia data provided
+by GluonNLP (https://github.com/dmlc/gluon-
+nlp/tree/master/scripts/datasets/pretrain_corpus),
+and BookCorpus data from HuggingFace Datasets
+(https://huggingface.co/datasets/bookcorpus).
+−60−40−200
+0100200300
+epochsentence scoreFigure S1: We examine the convergence time by initial-
+izing different chains at different classes of sentences
+(red is high probability under BERT’s energy function,
+blue is low probability). Faint lines show smoothed tra-
+jectories for individual chains and error bars are boot-
+strapped 95% conﬁdence intervals across chains.
+no mixture
+MH mixture
+GSN mixture0.00.20.40.6
+010002000300040005000
+lag (epochs)auto−correlation
+Figure S2: MCMC methods like GSN and MH sam-
+pling tend to get stuck in local regions with high auto-
+correlation. We ﬁnd that a minimal autocorrelation is
+achievable with lower lag (500 epochs between sam-
+ples) using a mixture kernel with a constant probabil-
+ity of resetting the chain. Error ribbons are 95% conﬁ-
+dence intervals.
+term estimate std.error statistic p.value
+1 (Intercept) 67.33 1.14 59.08 <0:001
+2 short vs. long (GSN) -14.49 1.60 -9.08 <0:001
+3 short vs. medium (GSN) -10.21 1.60 -6.39 <0:001
+5 GSN vs. LSTM (short) -28.60 2.04 -14.05 <0:001
+6 GSN vs. MH (short) -14.76 1.59 -9.26 <0:001
+7 GSN vs. ngram (short) -54.26 2.00 -27.07 <0:001
+8 GSN vs. wiki (short) 10.40 1.70 6.13 <0:001
+13 interaction (short vs. long; GSN vs. MH) -12.31 2.23 -5.51 <0:001
+14 interaction (short vs. medium; GSN vs. MH) -7.33 2.23 -3.29 <0:001
+17 interaction (short vs. long; GSN vs. wiki) 11.22 2.39 4.70 <0:001
+18 interaction (short vs. medium; GSN vs. wiki) 5.56 2.37 2.35 0.02
+Table S1: Fixed effect estimates for regression on human scores. Length class and source are dummy coded with
+short lengths and GSN as baselines.
+base mixture
+01000020000300004000050000010000200003000040000500000.000.250.500.751.00
+stepedit rate
+Figure S3: Without mixing in a constant probability of returning to the initial distribution, the GSN chain (and MH
+chain, not shown) goes through periods of stasis with low edit rates (red curves), contributing to high autocorrela-
+tions.
+Figure S4: Empirical distribution of sentence lengths in Wikipedia and BookCorpus training corpora, after Word-
+Piece tokenization. For our corpus comparisons, we selected the modal Wikipedia sentence length of 21 tokens and
+the modal BookCorpus length of 11 tokens. For our human judgment experiment, we included baseline sentences
+only from Wikipedia for shorter (12 tokens) and longer sentences (37 tokens), with roughly equal prevalence in
+the corpus (orange dots).
+types of unnaturalness examples
+character-level He preened on a Ldrink of copper.
+phrase-level semanticThe little wattled songbird, also called the Chink Warbler,
+Orange Garver or Quickcumber is a socially luscious and
+habituated bird species.
+sentence-levelconstruction There were two hours before he made the walk .
+out-of-context word No need to focus on bicycling .
+self-contradictoryThe symbols ()read as ()and()are written as
+( ), not as ().
+repetitionThe college of arts and sciences, adjacent to the business
+school, is majoring in business.
+He saw Cronus and Cronus, Cronus and James Cronus he
+saw Cronus and Cronus and Cronus and Cronus Cronus
+when he saw Cronus.
+Table S2: More examples of sentences from BERT’s prior with low naturalness ratings.
+sub-word tokens
+word tokens
+BERT chains corpus textFigure S5: There is a misalignment between the space
+of sentences obtainable by a BERT chain of a ﬁxed to-
+ken length (in sub-word tokens) and natural language
+sentences of a ﬁxed length (in words). We consider
+the distribution of corpus sentences that are obtainable
+from a ﬁxed-length BERT chain, which may decode to
+different lengths in natural text (black arrows).
+0.0000.0250.0500.0750.100
+01020304050
+dependency lengthdensitycombined
+corporagibbs mh
+Figure S6: Dependency distances are similar for sen-
+tences sampled from BERT’s prior and sentences from
+its training corpus, but the BERT distribution is more
+bimodal and tends to skew simpler.
+long medium shorthigh low
+0 2 4 60 2 4 60 2 4 6406080
+406080
+log1p(step)empirical_stat_GSN_earlyFigure S7: Sentences gradually drift away from the initial distribution across the burn-in period. Light green
+region represents the 95% conﬁdence interval for the mean naturalness of Wikipedia sentences while grey region
+represents the same interval around the stationary distribution of the converged chain. Top row represents chains
+that are initialized at high-probability states, while bottom row is initialized in low-probability states.

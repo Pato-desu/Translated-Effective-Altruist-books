@@ -1,0 +1,987 @@
+Differential Assessment of Black-Box AI Agents
+Rashmeet Kaur Nayyar*, Pulkit Verma*,andSiddharth Srivastava
+Autonomous Agents and Intelligent Robots Lab,
+School of Computing and Augmented Intelligence, Arizona State University, AZ, USA
+{rmnayyar, verma.pulkit, siddharths }@asu.edu
+Abstract
+Much of the research on learning symbolic models of AI
+agents focuses on agents with stationary models. This as-
+sumption fails to hold in settings where the agent’s capa-
+bilities may change as a result of learning, adaptation, or
+other post-deployment modifications. Efficient assessment of
+agents in such settings is critical for learning the true capabil-
+ities of an AI system and for ensuring its safe usage. In this
+work, we propose a novel approach to differentially assess
+black-box AI agents that have drifted from their previously
+known models. As a starting point, we consider the fully ob-
+servable and deterministic setting. We leverage sparse obser-
+vations of the drifted agent’s current behavior and knowl-
+edge of its initial model to generate an active querying pol-
+icy that selectively queries the agent and computes an up-
+dated model of its functionality. Empirical evaluation shows
+that our approach is much more efficient than re-learning the
+agent model from scratch. We also show that the cost of dif-
+ferential assessment using our method is proportional to the
+amount of drift in the agent’s functionality.
+1 Introduction
+With increasingly greater autonomy in AI systems in recent
+years, a major problem still persists and has largely been
+overlooked: how do we accurately predict the behavior of a
+black-box AI agent that is evolving and adapting to changes
+in the environment it is operating in? And how do we ensure
+its reliable and safe usage? Numerous factors could cause
+unpredictable changes in agent behaviors: sensors and actu-
+ators may fail due to physical damage, the agent may adapt
+to a dynamic environment, users may change deployment
+and use-case scenarios, etc. Most prior work on the topic
+presumes that the functionalities and the capabilities of AI
+agents are static, while some works start with a tabula-rasa
+and learn the entire model from scratch. However, in many
+real-world scenarios, the agent model is transient and only
+parts of its functionality change at a time.
+Bryce, Benton, and Boldt (2016) address a related prob-
+lem where the system learns the updated mental model of a
+user using particle filtering given prior knowledge about the
+user’s mental model. However, they assume that the entity
+*Equal contribution. Alphabetical order.
+Copyright © 2022, Association for the Advancement of Artificial
+Intelligence (www.aaai.org). All rights reserved.
+Agent update 
+Model learning from scratch 
+(expensive)
+Initially known model of   
+ Sparse observations  
+(collected once) Query Response 
+Learned model of  
+ Model learning from scratch 
+not needed
+Differential Assessment of 
+AI System (DAAISy)events 
+XFigure 1: The Differential Assessment of AI System
+(DAAISy) takes as input the initially known model of the
+agent prior to model drift, available observations of the up-
+dated agent’s behavior, and performs a selective dialog with
+the black-box AI agent to output its updated model through
+efficient model learning.
+being modeled can tell the learning system about flaws in
+the learned model if needed. This assumption does not hold
+in settings where the entity being modeled is a black-box
+AI system: most such systems are either implemented using
+inscrutable representations or otherwise lack the ability to
+automatically generate a model of their functionality (what
+they can do and when) in terms the user can understand.
+The problem of efficiently assessing, in human-interpretable
+terms, the functionality of such a non-stationary AI system
+has received little research attention.
+The primary contribution of this paper is an algorithm for
+differential assessment of black-box AI systems (Fig. 1).
+This algorithm utilizes an initially known interpretable
+model of the agent as it was in the past, and a small set of
+observations of agent execution. It uses these observations to
+develop an incremental querying strategy that avoids the full
+cost of assessment from scratch and outputs a revised model
+of the agent’s new functionality. One of the challenges in
+learning agent models from observational data is that reduc-
+tions in agent functionality often do not correspond to spe-
+cific “evidence” in behavioral observations, as the agent may
+not visit states where certain useful actions are no longer ap-
+plicable. Our analysis shows that if the agent can be placed
+in an “optimal” planning mode, differential assessment can
+indeed be used to query the agent and recover information
+about reduction in functionality. This “optimal” planning
+mode is not necessarily needed for learning about increase in
+functionality. Empirical evaluations on a range of problems
+clearly demonstrate that our method is much more efficient
+than re-learning the agent’s model from scratch. They also
+exhibit the desirable property that the computational cost of
+differential assessment is proportional to the amount of drift
+in the agent’s functionality.
+Running Example Consider a battery-powered rover with
+limited storage capacity that collects soil samples and takes
+pictures. Assume that its planning model is similar to IPC
+domain Rovers (Long and Fox 2003). It has an action that
+collects a rock sample at a waypoint and stores it in a stor-
+age iff it has at least half of the battery capacity remaining.
+Suppose there was an update to the rover’s system and as
+a result of this update, the rover can now collect the rock
+sample only when its battery is full, as opposed to at least
+half-charged battery that it needed before. Mission planners
+familiar with the earlier system and unaware about the ex-
+act updates in the functionality of the rover would struggle
+to collect sufficient samples. This could jeopardise multiple
+missions if it is not detected in time.
+This example illustrates how our system could be of value
+by differentially detecting such a drift in the functionality of
+a black-box AI system and deriving its true functionality.
+The rest of this paper is organized as follows: The next
+section presents background terminology. This is followed
+by a formalization of the differential model assessment prob-
+lem in Section 3. Section 4 presents our approach for differ-
+ential assessment by first identifying aspects of the agent’s
+functionality that may be affected (Section 4.1) followed by
+the process for selectively querying the agent using a primi-
+tive set of queries. We present empirical evaluation of the ef-
+ficiency of our approach on randomly generated benchmark
+planning domains in Section 5. Finally, we discuss relevant
+related work in Section 6 and conclude in Section 7.
+2 Preliminaries
+We consider models that express an agent’s functionalities in
+the form of STRIPS-like planning models (Fikes and Nils-
+son 1971; McDermott et al. 1998; Fox and Long 2003) as
+defined below.
+Definition 1. A planning domain model is a tuple M=
+⟨P, A⟩, where P={pr1
+1, . . . , prnn}is a finite set of predi-
+cates with arities ri,i∈[1, n]; andA={a1, . . . , a k}is a fi-
+nite set of parameterized relational actions. Each action ai∈
+Ais represented as a tuple ⟨header (ai),pre(ai),eff(ai)⟩,
+where header (ai)represents the action header consisting
+of the name and parameters for the action ai,pre(ai)rep-
+resents the conjunction of positive or negative literals that
+must be true in a state where the action aiis applicable, and
+eff(ai)is the conjunction of positive or negative literals that
+become true as a result of execution of the action ai.
+In the rest of the paper, we use the term “model” to refer
+to planning domain models and use closed-world assump-tion as used in the Planning Domain Definition Language
+(PDDL) (McDermott et al. 1998). Given a model Mand a
+set of objects O, letSM,O be the space of all states defined
+as maximally consistent sets of literals over the predicate
+vocabulary of MwithOas the set of objects. We omit the
+subscript when it is clear from context. An action a∈Ais
+applicable in a state s∈Sifs|=pre(a). The result of exe-
+cuting ais a state a(s) =s′∈Ssuch that s′|=eff(a), and
+all atoms not in eff(a)have literal forms as in s.
+A literal corresponding to a predicate p∈Pcan ap-
+pear in pre(a)oreff(a)of an action a∈Aif and only if
+it can be instantiated using a subset of parameters of a. E.g.,
+consider an action navigate (?rover ?src ?dest) and a pred-
+icate (can traverse ?rover ?x ?y) in the Rovers domain dis-
+cussed earlier. Suppose a literal corresponding to predicate
+(can traverse ?rover ?x ?y) can appear in the precondition
+and/or the effect of navigate (?rover ?src ?dest) action. As-
+suming we know ?xand?yincantraverse , and ?src and
+?dest innavigate are of the same type waypoint , the possi-
+ble lifted instantiations of predicate cantraverse compatible
+with action navigate are(can traverse ?rover ?src ?dest) ,
+(can traverse ?rover ?dest ?src) ,(can traverse ?rover ?src
+?src) , and (can traverse ?rover ?dest ?dest) . The number of
+parameters in a predicate p∈Pthat is relevant to an action
+a∈A, i.e., instantiated using a subset of parameters of the
+action a, is bounded by the maximum arity of the action a.
+We formalize this notion of lifted instantiations of a predi-
+cate with an action as follows:
+Definition 2. Given a finite set of predicates P=
+{pr1
+1, . . . , prnn}with arities ri,i∈[1, n]; and a finite set
+of parameterized relational actions A={aψ1
+1, . . . , aψk
+k}
+with arities ψjand parameters par(aψj
+j) =⟨α1, . . . , α ψj⟩,
+j∈[1, k], the set of lifted instantiations of predicates P∗
+is defined as the collection {pi(σ(x1), . . . , σ (xri))|pi∈
+P, a∈A, σ:{x1, . . . , x ri} → par(a)}.
+2.1 Representing Models
+We represent a model Musing the set of all possible pal-
+tuples ΓMof the form γ=⟨p, a, ℓ⟩, where ais a parameter-
+ized action header for an action in A,p∈P∗is a possible
+lifted instantiation of a predicate in P, andℓ∈ {pre,eff}de-
+notes a location in a, precondition or effect, where pcan ap-
+pear. A model Mis thus a function µM: ΓM→ {+,−,∅}
+that maps each element in ΓMto amode in the set {+,−,∅}.
+The assigned mode for a pal-tuple γ∈ΓMdenotes whether
+pis present as a positive literal ( +), as a negative literal ( −),
+or absent ( ∅) in the precondition ( ℓ=pre) or effect ( ℓ=eff)
+of the action header a.
+This formulation of models as pal-tuples allows us to view
+the modes for any predicate in an action’s precondition and
+effect independently. However, at times it is useful to con-
+sider a model at a granularity of relationship between a pred-
+icate and an action. We address this by representing a model
+Mas a set of pa-tuples ΛMof the form ⟨p, a⟩where ais a
+parameterized action header for an action in A, and p∈P∗
+is a possible lifted instantiation of a predicate in P. Each
+pa-tuple can take a value of the form ⟨mpre, m eff⟩, where
+mpreandmeffrepresents the mode in which pappears in the
+precondition and effect of a, respectively. Since a predicate
+cannot appear as a positive (or negative) literal in both the
+precondition and effect of an action, ⟨+,+⟩and⟨−,−⟩are
+not in the range of values that pa-tuples can take. Hence-
+forth, in the context of a pal-tuple or apa-tuple , we refer to
+aas an action instead of an action header.
+Measure of model difference Given two models M1=
+⟨P, A 1⟩andM2=⟨P, A 2⟩, defined over the same sets
+of predicates Pand action headers A, the difference be-
+tween the two models ∆(M1, M 2)is defined as the num-
+ber of pal-tuples that differ in their modes in M1andM2,
+i.e.,∆(M1, M 2) =|{γ∈P×A× {+,−,∅}|µM1(γ)̸=
+µM2(γ)}|.
+2.2 Abstracting Models
+Several authors have explored the use of abstraction in
+planning (Sacerdoti 1974; Giunchiglia and Walsh 1992;
+Helmert, Haslum, and Hoffmann 2007; B ¨ackstr ¨om and Jon-
+sson 2013; Srivastava, Russell, and Pinto 2016). We define
+an abstract model as a model that does not have a mode as-
+signed for at least one of the pal-tuples . LetΓMbe the set
+of all possible pal-tuples , and ?⃝be an additional possible
+value that a pal-tuple can take. Assigning ?⃝mode to a pal-
+tuple denotes that its mode is unknown. An abstract model
+Mis thus a function µM: ΓM→ {+,−,∅,?⃝}that maps
+each element in ΓMto amode in the set {+,−,∅,?⃝}. Let
+Ube the set of all abstract and concrete models that can pos-
+sibly be expressed by assigning modes in {+,−,∅,?⃝}to
+each pal-tuple γ∈ΓM. We now formally define model ab-
+straction as follows:
+Definition 3. Given models M1andM2,M2is an ab-
+straction of M1over the set of all possible pal-tuples Γiff
+∃Γ2⊆Γs.t.∀γ∈Γ2,µM2(γ) = ?⃝and∀γ∈Γ\Γ2,
+µM2(γ) =µM1(γ).
+2.3 Agent Observation Traces
+We assume limited access to a set of observation traces O,
+collected from the agent, as defined below.
+Definition 4. Anobservation trace ois a sequence of states
+and actions of the form ⟨s0, a1, s1, a2, . . . , s n−1, an, sn⟩
+such that ∀i∈[1, n]ai(si−1) =si.
+These observation traces can be split into multiple action
+triplets as defined below.
+Definition 5. Given an observation trace o=
+⟨s0, a1, s1, a2, . . . , s n−1, an, sn⟩, an action triplet is a
+3-tuple sub-sequence of oof the form ⟨si−1, ai, si⟩, where
+i∈[1, n]and applying an action aiin state si−1results in
+statesi, i.e.,ai(si−1) =si. The states si−1andsiare called
+pre- and post-states of action ai, respectively.
+An action triplet ⟨si−1, ai, si⟩is said to be optimal if there
+does not exist an action sequence (of length ≥1) that takes
+the agent from state si−1tosiwith total action cost less than
+that of action ai, where each action aihas unit cost.
+2.4 Queries
+We use queries to actively gain information about the func-
+tionality of an agent to learn its updated model. We assumethat the agent can respond to a query using a simulator. The
+availability of such agents with simulators is a common as-
+sumption as most AI systems already use simulators for de-
+sign, testing, and verification.
+We use a notion of queries similar to Verma, Marpally,
+and Srivastava (2021), to perform a dialog with an au-
+tonomous agent. These queries use an agent to deter-
+mine what happens if it executes a sequence of actions
+in a given initial state. E.g., in the rovers domain, the
+rover could be asked: what happens when the action sam-
+plerock(rover1 storage1 waypoint1) is executed in an ini-
+tial state {(equipped rock analysis rover1), (battery half
+rover1), (at rover1 waypoint1) }?
+Formally, a query is a function that maps an agent to a
+response, which we define as:
+Definition 6. Given a set of predicates P, a set of actions
+A, and a set of objects O, aquery Q⟨s, π⟩:A →N×S
+is parameterized by a start state sI∈Sand a plan π=
+⟨a1, . . . , a N⟩, where Sis the state space over PandO, and
+{a1, . . . , a N}is a subset of action space over AandO. It
+maps agents to responses θ=⟨nF, sF⟩such that nFis the
+length of the longest prefix of πthatAcan successfully ex-
+ecute and sF∈Sis the result of that execution.
+Responses to such queries can be used to gain use-
+ful information about the model drift. E.g., consider an
+agent with an internal model MA
+driftas shown in Tab. 1.
+If a query is posed asking what happens when the ac-
+tion sample rock(rover1 storage1 waypoint1) is executed
+in an initial state {(equipped rock analysis rover1), (bat-
+tery half rover1), (at rover1 waypoint1) }, the agent would
+respond ⟨0,{(equipped rock analysis rover1), (battery half
+rover1), (at rover1 waypoint1) }⟩, representing that it was
+not able to execute the plan, and the resulting state was
+{(equipped rock analysis rover1), (battery half rover1), (at
+rover1 waypoint1) }(same as the initial state in this case).
+Note that this response is inconsistent with the model MA
+init,
+and it can help in identifying that the precondition of action
+sample rock(?r ?s ?w) has changed.
+3 Formal Framework
+Our objective is to address the problem of differential assess-
+ment of black-box AI agents whose functionality may have
+changed from the last known model. Without loss of gen-
+erality, we consider situations where the set of action head-
+ers is same because the problem of differential assessment
+with changing action headers can be reduced to that with
+uniform action headers. This is because if the set of actions
+has increased, new actions can be added with empty precon-
+ditions and effects to MA
+init, and if it has decreased, MA
+initcan
+be reduced similarly. We assume that the predicate vocabu-
+lary used in the two models is the same; extension to situ-
+ations where the vocabulary changes can be used to model
+open-world scenarios. However, that extension is beyond the
+scope of this paper.
+Suppose an agent A’s functionality was known as a model
+MA
+init=⟨P,Ainit⟩, and we wish to assess its current func-
+tionality as the model MA
+drift=⟨P,Adrift⟩. The drift in the
+functionality of the agent can be measured by changes in the
+Model Precondition Effect
+MA
+init (equipped rock analysis?r)
+(battery half ?r)
+(at ?r ?w)→(rock sample taken?r)
+(store full ?r ?s)
+¬(battery half ?r)
+(battery reserve ?r)
+MA
+drift (equipped rock analysis?r)
+(battery full ?r)
+(at ?r ?w)→(rock sample taken ?r)
+(store full ?r ?s)
+¬(battery full ?r)
+(battery half ?r)
+Table 1: sample rock (?r ?s ?w) action of the agent Ain
+MA
+initand a possible drifted model MA
+drift.
+preconditions and/or effects of all the actions in Ainit. The
+extent of the drift between MA
+initandMA
+driftis represented as
+the model difference ∆(MA
+init, MA
+drift).
+We formally define the problem of differential assessment
+of an AI agent below.
+Definition 7. Given an agent Awith a functionality model
+MA
+init, and a set of observations Ocollected using its current
+version of Adriftwith unknown functionality MA
+drift, the dif-
+ferential model assessment problem ⟨MA
+init, MA
+drift,O,A⟩is
+defined as the problem of inferring Ain form of MA
+driftusing
+the inputs MA
+init,O, andA.
+We wish to develop solutions to the problem of differ-
+ential assessment of AI agents that are more efficient than
+re-assessment from scratch.
+3.1 Correctness of Assessed Model
+We now discuss the properties that a model, which is a so-
+lution to the differential model assessment problem, should
+satisfy. A critical property of such models is that they should
+be consistent with the observation traces. We formally define
+consistency of a model w.r.t. an observation trace as follows:
+Definition 8. Let obe an observation trace
+⟨s0, a1, s1, a2, . . . , s n−1, an, sn⟩. A model M=⟨P, A⟩
+isconsistent with the observation trace oiff
+∀i∈ {1, .., n} ∃a∈Aandaiis a grounding of ac-
+tiona s.t. s i−1|=pre(ai)∧ ∀l∈eff(ai)si|=l.
+In addition to being consistent with observation traces, a
+model should also be consistent with the queries that are
+asked and the responses that are received while actively in-
+ferring the model of the agent’s new functionality. We for-
+mally define consistency of a model with respect to a query
+and a response as:
+Definition 9. LetM=⟨P, A⟩be a model; Obe a set of ob-
+jects; Q=⟨sI, π=⟨a1, . . . a n⟩⟩be a query defined using
+P, A, andO, and let θ=⟨nF, sF⟩, (nF≤n) be a response
+toQ.Misconsistent with the query-response ⟨Q, θ⟩iff
+there exists an observation trace ⟨sI, a1, s1, . . . , a nF, snF⟩
+thatMis consistent with and snF̸|=pre(anF+1)where
+pre(anF+1)is the precondition of anF+1inM.
+We now discuss our methodology for solving the problem
+of differential assessment of AI systems.4 Differential Assessment of AI Systems
+Differential Assessment of AI Sy stems (Alg. 1) -- DAAISy
+-- takes as input an agent Awhose functionality has drifted,
+the model MA
+init=⟨P, A⟩representing the previously known
+functionality of A, a set of arbitrary observation traces O,
+and a set of random states S ⊆ S. Alg. 1 returns a set of
+updated models MA
+drift, where each model MA
+drift∈ MA
+drift
+represents A’s updated functionality and is consistent with
+all observation traces o∈O.
+A major contribution of this work is to introduce an ap-
+proach to make inferences about not just the expanded func-
+tionality of an agent but also its reduced functionality using a
+limited set of observation traces. Situations where the scope
+of applicability of an action reduces, i.e., the agent can no
+longer use an action ato reach state s′from state swhile
+it could before (e.g., due to addition of a precondition lit-
+eral), are particularly difficult to identify because observing
+its behavior does not readily reveal what it cannot do in a
+given state. Most observation based action-model learners,
+even when given access to an incomplete model to start with,
+fail to make inferences about reduced functionality. DAAISy
+uses two principles to identify such a functionality reduc-
+tion. First, it uses active querying so that the agent can be
+made to reveal failure of reachability, and second, we show
+that if the agent can be placed in optimal planning mode,
+plan length differences can be used to infer a reduction in
+functionality.
+DAAISy performs two major functions; it first identifies a
+salient set of pal-tuples whose modes were likely affected
+(line 1 of Alg. 1), and then infers the mode of such af-
+fected pal-tuples accurately through focused dialog with the
+agent (line 2 onwards of Alg. 1). In Sec. 4.1, we present
+our method for identifying a salient set of potentially af-
+fected pal-tuples that contribute towards expansion in the
+functionality of the agent through inference from available
+arbitrary observations. We then discuss the problem of iden-
+tification of pal-tuples that contribute towards reduction in
+the functionality of the agent and argue that it cannot be per-
+formed using successful executions in observations of sat-
+isficing behavior. We show that pal-tuples corresponding to
+reduced functionality can be identified if observations of op-
+timal behavior of the agent are available (Sec. 4.1). Finally,
+we present how we infer the nature of changes in all affected
+pal-tuples through a query-based interaction with the agent
+(Sec. 4.2) by building upon the Agent Interrogation Algo-
+rithm (AIA) (Verma, Marpally, and Srivastava 2021). Iden-
+tifying affected pal-tuples helps reduce the computational
+cost of querying as opposed to the exhaustive querying strat-
+egy used by AIA. We now discuss the two major functions
+of Alg. 1 in detail.
+4.1 Identifying Potentially Affected pal-tuples
+We identify a reduced set of pal-tuples whose modes were
+potentially affected during the model drift, denoted by Γδ,
+using a small set of available observation traces O. We draw
+two kinds of inferences from these observation traces: in-
+ferences about expanded functionality, and inferences about
+reduced functionality. We discuss our method for inferring
+Algorithm 1: Differential Assessment of AI Systems
+Input: MA
+init,O,A,S
+Output: MA
+drift
+1:Γδ←identify affected pals()
+2:Mabs←setpal-tuples inMA
+initcorresponding to Γδto?⃝
+3:MA
+drift← {Mabs}
+4:foreachγinΓδdo
+5: foreachMabsinMA
+driftdo
+6: Mabs←Mabs× {γ+, γ−, γ∅}
+7: Msieved← {}
+8: ifaction corresponding to γ:γainOthen
+9: spre←states where γaapplicable (O, γa)
+10: Q← ⟨spre\ {γp∪ ¬γp},γa⟩
+11: θ←askquery (A, Q)
+12: Msieved←sieve models (Mabs, Q, θ)
+13: else
+14: foreach pair ⟨Mi, Mj⟩inMabsdo
+15: Q←generate query (Mi, Mj, γ, S)
+16: θ←askquery (A, Q)
+17: Msieved←sieve models ({Mi, Mj}, Q, θ)
+18: end for
+19: end if
+20: Mabs← M abs\ M sieved
+21: end for
+22:MA
+drift← M abs
+23:end for
+Γδfor both types of changes in the functionality below.
+Expanded functionality To infer expanded functionality
+of the agent, we use the previously known model of the
+agent’s functionality and identify its differences with the
+possible behaviors of the agent that are consistent with O.
+To identify the pal-tuples that directly contribute to an ex-
+pansion in the agent’s functionality, we perform an analysis
+similar to Stern and Juba (2017), but instead of bounding
+the predicates that can appear in each action’s precondition
+and effect, we bound the range of possible values that each
+pa-tuple inMA
+driftcan take using Tab. 2. For any pa-tuple ,
+a direct comparison between its value in MA
+initand possible
+inferred values in MA
+driftprovides an indication of whether it
+was affected.
+To identify possible values for a pa-tuple ⟨p, a⟩, we first
+collect a set of all the action-triplets from Othat contain the
+action a. For a given predicate pand state s, ifs|=pthen
+the presence of predicate pis represented as pos, similarly,
+ifs|=¬pthen the presence of predicate pis represented as
+neg. Using this representation, a tuple of predicate presence
+∈ {(pos,pos) ,(pos,neg) ,(neg,pos) ,(neg,neg) }is determined
+for the pa-tuple ⟨p, a⟩for each action triplet ⟨s, a, s′⟩ ∈O
+by analyzing the presence of predicate pin the pre- and
+post-states of the action triplets. Possible values of the pa-
+tuple that are consistent with Oare directly inferred from
+the Tab. 2 using the inferred tuples of predicate presence.
+E.g., for a pa-tuple , the values ⟨+,−⟩and⟨∅,−⟩are consis-
+tent with (pos, neg ), whereas, only ⟨∅,+⟩is consistent with⟨mpre, m eff⟩(pos,pos) (pos,neg) (neg,pos) (neg,neg)
+⟨+,−⟩ ✗ ✓ ✗ ✗
+⟨+,∅⟩ ✓ ✗ ✗ ✗
+⟨−,+⟩ ✗ ✗ ✓ ✗
+⟨−,∅⟩ ✗ ✗ ✗ ✓
+⟨∅,+⟩ ✓ ✗ ✓ ✗
+⟨∅,−⟩ ✗ ✓ ✗ ✓
+⟨∅,∅⟩ ✓ ✗ ✗ ✓
+Table 2: Each row represents a possible value ⟨mpre, m eff⟩
+for a pa-tuple ⟨p, a⟩. Each column represents a possible tuple
+representing presence of predicate pin the pre- and post-
+states of an action triplet ⟨si, a, s i+1⟩(discussed in Sec.4.1).
+The cells represent whether a value for pa-tuple is consistent
+with an action triplet in observation traces.
+(pos, pos )and(neg, pos )tuples of predicate presence that
+are inferred from O.
+Once all the possible values for each pa-tuple inMA
+drift
+are inferred, we identify pa-tuples whose previously known
+value in MA
+initis no longer possible due to inconsistency
+withO. The pal-tuples corresponding to such pa-tuples are
+added to the set of potentially affected pal-tuples Γδ. Our
+method also infers the correct modes of a subset of pal-
+tuples . E.g., consider a predicate pand two actions triplets in
+Oof the form ⟨s1, a, s′
+1⟩and⟨s2, a, s′
+2⟩that satisfy s1|=p
+ands2|=¬p. Such an observation clearly indicates that p
+is not in the precondition of action a, i.e., mode for ⟨p, a⟩
+in the precondition is ∅. Such inferences of modes are used
+to update the known functionality of the agent. We remove
+such pal-tuples , whose modes are already inferred, from Γδ.
+A shortcoming of direct inference from successful execu-
+tions in available observation traces is that it cannot learn
+any reduction in the functionality of the agent, as discussed
+in the beginning of Sec. 4. We now discuss our method to
+address this limitation and identify a larger set of potentially
+affected pal-tuples .
+Reduced functionality We conceptualize reduction in
+functionality as an increase in the optimal cost of going from
+one state to another. More precisely, reduction in functional-
+ity represents situations where there exist states si, sjsuch
+that the minimum cost of going from sitosjis higher in
+MA
+driftthan in MA
+init. In this paper, this cost refers to the num-
+ber of steps between the pair of states as we consider unit
+action costs. This notion encompasses situations with reduc-
+tions in reachability as a special case. In practice, a reduction
+in functionality may occur if the precondition of at least one
+action in MA
+drifthas new pal-tuples , or the effect of at least
+one of its actions has new pal-tuples that conflict with other
+actions required for reaching certain states.
+Our notion of reduced functionality captures all the vari-
+ants of reduction in functionality. However, for clarity, we
+illustrate an example that focuses on situations where pre-
+condition of an action has increased. Consider the case from
+Tab. 1 where A’s model gets updated from MA
+inittoMA
+drift.
+The action sample rock’s applicability in MA
+drifthas reduced
+from that in MA
+initasAcan no longer sample rocks in sit-
+uations where the battery is half charged but needs a fully
+charged battery to be able to execute the action. In such sce-
+narios, instead of relying on observation traces, our method
+identifies traces containing indications of actions that were
+affected either in their precondition or effect, discovers ad-
+ditional salient pal-tuples that were potentially affected, and
+adds them to the set of potentially affected pal-tuples Γδ.
+To find pal-tuples corresponding to reduced functional-
+ity of the agent, we place the agent in an optimal plan-
+ning mode and assume limited availability of observation
+tracesOin the form of optimal unit-cost state-action tra-
+jectories ⟨s0, a1, s1, a2, . . . , s n−1, an, sn⟩. We generate op-
+timal plans using MA
+initfor all pairs of states in O. We hy-
+pothesize that, if for a pair of states, the plan generated us-
+ingMA
+initis shorter than the plan observed in O, then some
+functionality of the agent has reduced.
+Our method performs comparative analysis of optimality
+of the observation traces against the optimal solutions gen-
+erated using MA
+initfor same pairs of initial and final states. To
+begin with, we extract all the continuous state sub-sequences
+fromOof the form ⟨s0, s1, . . . , s n⟩denoted by Odriftas they
+are all optimal. We then generate a set of planning problems
+Pusing the initial and final states of trajectories in Odrift.
+Then, we provide the problems in PtoMA
+initto get a set of
+optimal trajectories Oinit. We select all the pairs of optimal
+trajectories of the form ⟨oinit, odrift⟩for further analysis such
+that the length of oinit∈Oinitfor a problem is shorter than
+the length of odrift∈Odriftfor the same problem. For all
+such pairs of optimal trajectories, a subset of actions in each
+oinit∈Oinitwere likely affected due to the model drift. We
+focus on identifying the first action in each oinit∈Oinitthat
+was definitely affected.
+To identify the affected actions, we traverse each pair of
+optimal trajectories ⟨oinit, odrift⟩simultaneously starting from
+the initial states. We add all the pal-tuples corresponding to
+the first differing action in oinittoΓδ. We do this because
+there are only two possible explanations for why the action
+differs: (i) either the action in oinitwas applicable in a state
+using MA
+initbut has become inapplicable in the same state
+inMA
+drift, or (ii) it can no longer achieve the same effects in
+MA
+driftasMA
+init. We also discover the first actions that are ap-
+plicable in the same states in both the trajectories but result
+in different states. The effect of such actions has certainly
+changed in MA
+drift. We add all the pal-tuples corresponding
+to such actions to Γδ. In the next section, we describe our
+approach to infer the correct modes of pal-tuples inΓδ.
+4.2 Investigating Affected pal-tuples
+This section explains how the correct modes of pal-tuples in
+Γδare inferred (line 2 onwards of Alg.1). Alg. 1 creates an
+abstract model in which all the pal-tuples that are predicted
+to have been affected are set to ?⃝(line 2). It then iterates
+over all pal-tuples with mode ?⃝(line 4).
+Removing inconsistent models Our method generates
+candidate abstract models and then removes the abstractmodels that are not consistent with the agent (lines 7-18 of
+Alg. 1). For each pal-tuple γ∈Γ, the algorithm computes a
+set of possible abstract models Mabsby assigning the three
+mode variants +,−, and∅to the current pal-tuple γin model
+Mabs(line 6). Only one model in Mabscorresponds to the
+agent’s updated functionality.
+If the action γain the pal-tuple γis present in the set
+of action triplets generated using O, then the pre-state of
+that action spreis used to create a state sI(lines 9-10). sIis
+created by removing the literals corresponding to predicate
+γpfromspre. We then create a query Q=⟨sI,⟨γa⟩⟩(line 10),
+and pose it to the agent A(line 11). The three models are
+then sieved based on the comparison of their responses to the
+query Qwith that of A’s response θtoQ(line 12). We use
+the same mechanism as AIA for sieving the abstract models.
+If the action corresponding to the current pal-tuple γbe-
+ing considered is not present in any of the observed action
+triplets, then for every pair of abstract models in Mabs(line
+14), we generate a query Qusing a planning problem (line
+15). We then pose the query Qto the agent (line 16) and
+receive its response θ. We then sieve the abstract models
+by asking them the same query and discarding the models
+whose responses are not consistent with that of the agent
+(line 17). The planning problem that is used to generate the
+query and the method that checks for consistency of abstract
+models’ responses with that of the agent are used from AIA.
+Finally, all the models that are not consistent with the
+agent’s updated functionality are removed from the possi-
+ble set of models Mabs. The remaining models are returned
+by the algorithm. Empirically, we find that only one model
+is always returned by the algorithm.
+4.3 Correctness
+We now show that the learned drifted model representing
+the agent’s updated functionality is consistent as defined in
+Def. 8 and Def. 9. The proof of the theorem is available in
+the extended version of the paper (Nayyar, Verma, and Sri-
+vastava 2022).
+Theorem 1. Given a set of observation traces Ogenerated
+by the drifted agent Adrift, a set of queries Qposed to Adrift
+by Alg. 1, and the model MA
+initrepresenting the agent’s func-
+tionality prior to the drift, each of the models M=⟨P, A⟩
+inMA
+driftlearned by Alg. 1 are consistent with respect to all
+the observation traces o∈Oand query-responses ⟨q, θ⟩for
+all the queries q∈Q.
+There exists a finite set of observations that if collected
+will allow Alg. 1 to achieve 100% correctness with any
+amount of drift: this set corresponds to observations that al-
+low line 1 of Alg. 1 to detect a change in the functionality.
+This includes an action triplet in an observation trace hinting
+at increased functionality, or a shorter plan using the previ-
+ously known model hinting at reduced functionality. Thus,
+models learned by DAAISy are guaranteed to be completely
+correct irrespective of the amount of the drift if such a finite
+set of observations is available. While using queries signifi-
+cantly reduces the number of observations required, asymp-
+totic guarantees subsume those of passive model learners
+while ensuring convergence to the true model.
+5 Empirical Evaluation
+In this section, we evaluate our approach for assessing a
+black-box agent to learn its model using information about
+its previous model and available observations. We imple-
+mented the algorithm for DAAISy in Python1and tested it
+on six planning benchmark domains from the International
+Planning Competition (IPC)2. We used the IPC domains as
+the unknown drifted models and generated six initial do-
+mains at random for each domain in our experiments.
+To assess the performance of our approach with increas-
+ing drift, we employed two methods for generating the initial
+domains: (a) dropping the pal-tuples already present, and (b)
+adding new pal-tuples . For each experiment, we used both
+types of domain generation. We generated different initial
+models by randomly changing modes of random pal-tuples
+in the IPC domains. Thus, in all our experiments an IPC do-
+main plays the role of ground truth M∗
+driftand a randomized
+model is used as MA
+init.
+We use a very small set of observation traces O(single
+observation trace containing 10 action triplets) in all the ex-
+periments for each domain. To generate this set, we gave
+the agent a random problem instance from the IPC corre-
+sponding to the domain used by the agent. The agent then
+used Fast Downward (Helmert 2006) with LM-Cut heuris-
+tic (Helmert and Domshlak 2009) to produce an optimal
+solution for the given problem. The generated observation
+trace is provided to DAAISy as input in addition to a ran-
+domMA
+initas discussed in Alg. 1. The exact same observation
+trace is used in all experiments of the same domain, without
+the knowledge of the drifted model of the agent, and irre-
+spective of the amount of drift.
+We measure the final accuracy of the learned model
+MA
+driftagainst the ground truth model M∗
+driftusing the mea-
+sure of model difference ∆(MA
+drift, M∗
+drift). We also mea-
+sure the number of queries required to learn a model with
+significantly high accuracy. We compare the efficiency of
+DAAISy (our approach) with the Agent Interrogation Algo-
+rithm (AIA) (Verma, Marpally, and Srivastava 2021) as it is
+the most closely related querying-based system.
+All of our experiments were executed on 5.0 GHz Intel
+i9 CPUs with 64 GB RAM running Ubuntu 18.04. We now
+discuss our results in detail below.
+5.1 Results
+We evaluated the performance of DAAISy along 2 direc-
+tions; the number of queries it takes to learn the updated
+model MA
+driftwith increasing amount of drift, and the cor-
+rectness of the model MA
+driftit learns compared to M∗
+drift.
+Efficiency in number of queries As seen in Fig. 2, the
+computational cost of assessing each agent, measured in
+terms of the number of queries used by DAAISy, increases
+as the amount of drift in the model M∗
+driftincreases. This is
+expected as the amount of drift is directly proportional to the
+1Code available at https://github.com/AAIR-lab/DAAISy
+2https://www.icaps-conference.org/competitions
+Accur acy gained b y DAAIS y Number of queries b y DAAIS yAccur acy of initial model
+ Accur acy of model computed b y DAAIS y
+Model Accur acyNumber of Queries
+% driftFigure 2: The number of queries used by DAAISy (our ap-
+proach) and AIA (marked on y-axis), as well as accuracy
+of model computed by DAAISy with increasing amount of
+drift. Amount of drift equals the ratio of drifted pal-tuples
+and the total number of pal-tuples in the domains (nPals).
+The number of action triplets in the observation trace used
+for each domain is 10.
+number of pal-tuples affected in the domain. This increases
+the number of pal-tuples that DAAISy identifies as affected
+as well as the number of queries as a result. As demonstrated
+in the plots, the standard deviation for number of queries re-
+mains low even when we increase the amount of drift, show-
+ing the stability of DAAISy.
+Comparison with AIA Tab. 3 shows the average number
+of queries that AIA took to achieve the same level of accu-
+racy as our approach for 50% drifted models, and DAAISy
+requires significantly fewer queries to reach the same levels
+of accuracy compared to AIA. Fig. 2 also demonstrates that
+DAAISy always takes fewer queries as compared to AIA to
+reach reasonably high levels of accuracy.
+This is because AIA does not use information about the
+previously known model of the agent and thus ends up
+querying for all possible pal-tuples . DAAISy, on the other
+hand, predicts the set of pal-tuples that might have changed
+based on the observations collected from the agent and thus
+requires significantly fewer queries.
+Correctness of learned model DAAISy computes mod-
+els with at least 50% accuracy in all six domains even when
+they have completely drifted from their initial model, i.e.,
+∆(MA
+drift, M∗
+drift) =nPals . It attains nearly accurate models
+for Gripper and Blocksworld for upto 40% drift. Even in
+scenarios where the agent’s model drift is more than 50%,
+DAAISy achieves at least 70% accuracy in five domains.
+Note that DAAISy is guaranteed to find the correct mode
+for an identified affected pal-tuple . The reason for less than
+100% accuracy when using DAAISy is that it does not pre-
+dict a pal-tuple to be affected unless it encounters an obser-
+Domain #Pals AIA DAAISy
+Gripper 20 15.0 6 .5
+Miconic 36 32.0 7 .7
+Satellite 50 34.0 9 .0
+Blocksworld 52 40.0 11 .4
+Termes 134 115.0 27 .0
+Rovers 402 316.0 61 .0
+Table 3: The average number of queries taken by AIA to
+achieve the same level of accuracy as DAAISy (our ap-
+proach) for 50% drifted models.
+vation trace conflicting with MA
+init. Thus, the learned model
+MA
+drift, even though consistent with all the observation traces,
+may end up being inaccurate when compared to M∗
+drift.
+Discussion AIA always ends up learning completely accu-
+rate models, but as noted above, this is because AIA queries
+exhaustively for all the pal-tuples in the model. There is a
+clear trade-off between the number of queries that DAAISy
+takes to learn the model as compared to AIA and the correct-
+ness of the learned model. As evident from the results, if the
+model has not drifted much, DAAISy can serve as a better
+approach to efficiently learn the updated functionality of the
+agent with less overhead as compared to AIA. Deciding the
+amount of drift after which it would make sense to switch
+to querying the model from scratch is a useful analysis not
+addressed in this paper.
+6 Related Work
+White-box model drift Bryce, Benton, and Boldt (2016)
+address the problem of learning the updated mental model
+of a user using particle filtering given prior knowledge about
+the user’s mental model. However, they assume that the en-
+tity being modeled can tell the learning system about flaws
+in the learned model if needed. Eiter et al. (2005, 2010) pro-
+pose a framework for updating action laws depicted in the
+form of graphs representing the state space. They assume
+that changes can only happen in effects, and that knowledge
+about the state space and what effects might change is avail-
+able beforehand. Our work does not make such assumptions
+to learn the correct model of the agent’s functionalities.
+Action model learning The problem of learning agent
+models from observations of its behavior is an active area
+of research (Gil 1994; Yang, Wu, and Jiang 2007; Cress-
+well, McCluskey, and West 2009; Zhuo and Kambhampati
+2013; Arora et al. 2018; Aineto, Celorrio, and Onaindia
+2019). Recent work addresses active querying to learn the
+action model of an agent (Rodrigues et al. 2011; Verma,
+Marpally, and Srivastava 2021). However, these methods do
+not address the problem of reducing the computational cost
+of differential model assessment, which is crucial in non-
+stationary settings.
+Online action model learning approaches learn the model
+of an agent while incorporating new observations of the
+agent behavior ( ˇCertick ´y 2014; Lamanna et al. 2021a,b).Unlike our approach, they do not handle cases where (i) the
+new observations are not consistent with the older ones due
+to changes in the agent’s behavior; and/or (ii) there is reduc-
+tion in functionality of the agent. Lindsay (2021) solve the
+problem of learning all static predicates in a domain. They
+start with a correct partial model that captures the dynamic
+part of the model accurately and generate negative examples
+by assuming access to all possible positive examples. Our
+method is different in that it does not make such assump-
+tions and leverages a small set of available observations to
+infer about increased and reduced functionality of an agent’s
+model.
+Model reconciliation Model reconciliation litera-
+ture (Chakraborti et al. 2017; Sreedharan et al. 2019;
+Sreedharan, Chakraborti, and Kambhampati 2021) deals
+with inferring the differences between the user and the
+agent models and removing them using explanations. These
+methods consider white-box known models whereas our
+approach works with black-box models of the agent.
+7 Conclusions and Future Work
+We presented a novel method for differential assessment of
+black-box AI systems to learn models of true functional-
+ity of agents that have drifted from their previously known
+functionality. Our approach provides guarantees of correct-
+ness w.r.t. observations. Our evaluation demonstrates that
+our system, DAAISy, efficiently learns a highly accurate
+model of agent’s functionality issuing a significantly lower
+number of queries as opposed to relearning from scratch. In
+the future, we plan to extend the framework to more general
+classes, stochastic settings, and models. Analyzing and pre-
+dicting switching points from selective querying in DAAISy
+to relearning from scratch without compromising the cor-
+rectness of the learned models is also a promising direction
+for future work.
+Acknowledgements
+We thank anonymous reviewers for their helpful feedback
+on the paper. This work was supported in part by the NSF
+under grants IIS 1942856, IIS 1909370, and the ONR grant
+N00014-21-1-2045.
+References
+Aineto, D.; Celorrio, S. J.; and Onaindia, E. 2019. Learn-
+ing Action Models With Minimal Observability. Artificial
+Intelligence , 275: 104–137.
+Arora, A.; Fiorino, H.; Pellier, D.; M ´etivier, M.; and Pesty,
+S. 2018. A Review of Learning Planning Action Models.
+The Knowledge Engineering Review , 33: E20.
+B¨ackstr ¨om, C.; and Jonsson, P. 2013. Bridging the Gap Be-
+tween Refinement and Heuristics in Abstraction. In Proc.
+IJCAI .
+Bryce, D.; Benton, J.; and Boldt, M. W. 2016. Maintaining
+Evolving Domain Models. In Proc. IJCAI .
+ˇCertick ´y, M. 2014. Real-Time Action Model Learning
+with Online Algorithm 3SG. Applied Artificial Intelligence ,
+28(7): 690–711.
+Chakraborti, T.; Sreedharan, S.; Zhang, Y .; and Kambham-
+pati, S. 2017. Plan Explanations as Model Reconciliation:
+Moving Beyond Explanation as Soliloquy. In Proc. IJCAI .
+Cresswell, S.; McCluskey, T.; and West, M. 2009. Acquisi-
+tion of Object-Centred Domain Models from Planning Ex-
+amples. In Proc. ICAPS .
+Eiter, T.; Erdem, E.; Fink, M.; and Senko, J. 2005. Updating
+Action Domain Descriptions. In Proc. IJCAI .
+Eiter, T.; Erdem, E.; Fink, M.; and Senko, J. 2010. Up-
+dating Action Domain Descriptions. Artificial Intelligence ,
+174(15): 1172–1221.
+Fikes, R. E.; and Nilsson, N. J. 1971. STRIPS: A New Ap-
+proach to the Application of Theorem Proving to Problem
+Solving. Artificial Intelligence , 2(3-4): 189–208.
+Fox, M.; and Long, D. 2003. PDDL2.1: An Extension to
+PDDL for Expressing Temporal Planning Domains. Journal
+of Artificial Intelligence Research , 20(1): 61–124.
+Gil, Y . 1994. Learning by Experimentation: Incremental Re-
+finement of Incomplete Planning Domains. In Proc. ICML .
+Giunchiglia, F.; and Walsh, T. 1992. A Theory of Abstrac-
+tion. Artificial Intelligence , 57(2-3): 323–389.
+Helmert, M. 2006. The Fast Downward Planning System.
+Journal of Artificial Intelligence Research , 26: 191–246.
+Helmert, M.; and Domshlak, C. 2009. Landmarks, Critical
+Paths and Abstractions: What’s the Difference Anyway? In
+Proc. ICAPS .
+Helmert, M.; Haslum, P.; and Hoffmann, J. 2007. Flexible
+Abstraction Heuristics for Optimal Sequential Planning. In
+Proc. ICAPS .
+Lamanna, L.; Gerevini, A. E.; Saetti, A.; Serafini, L.; and
+Traverso, P. 2021a. On-line Learning of Planning Domains
+from Sensor Data in PAL: Scaling up to Large State Spaces.
+InProc. AAAI .
+Lamanna, L.; Saetti, A.; Serafini, L.; Gerevini, A.; and
+Traverso, P. 2021b. Online Learning of Action Models for
+PDDL Planning. In Proc. IJCAI .
+Lindsay, A. 2021. Reuniting the LOCM Family: An Alterna-
+tive Method for Identifying Static Relationships. In ICAPS
+2021 KEPS Workshop .
+Long, D.; and Fox, M. 2003. The 3rd International Planning
+Competition: Results and Analysis. Journal of Artificial In-
+telligence Research , 20: 1–59.
+McDermott, D.; Ghallab, M.; Howe, A.; Knoblock, C.; Ram,
+A.; Veloso, M.; Weld, D. S.; and Wilkins, D. 1998. PDDL –
+The Planning Domain Definition Language. Technical Re-
+port CVC TR-98-003/DCS TR-1165, Yale Center for Com-
+putational Vision and Control.
+Nayyar, R. K.; Verma, P.; and Srivastava, S. 2022. Differ-
+ential Assessment of Black-Box AI Agents. arXiv preprint
+arXiv: 2203.13236 .
+Rodrigues, C.; G ´erard, P.; Rouveirol, C.; and Soldano, H.
+2011. Active Learning of Relational Action Models. In
+Proc. ILP .
+Sacerdoti, E. D. 1974. Planning in a Hierarchy of Abstrac-
+tion Spaces. Artificial Intelligence , 5(2): 115–135.Sreedharan, S.; Chakraborti, T.; and Kambhampati, S. 2021.
+Foundations of Explanations as Model Reconciliation. Arti-
+ficial Intelligence , 103558.
+Sreedharan, S.; Hernandez, A. O.; Mishra, A. P.; and Kamb-
+hampati, S. 2019. Model-Free Model Reconciliation. In
+Proc. IJCAI .
+Srivastava, S.; Russell, S.; and Pinto, A. 2016. Metaphysics
+of Planning Domain Descriptions. In Proc. AAAI .
+Stern, R.; and Juba, B. 2017. Efficient, Safe, and Probably
+Approximately Complete Learning of Action Models. In
+Proc. IJCAI .
+Verma, P.; Marpally, S. R.; and Srivastava, S. 2021. Asking
+the Right Questions: Learning Interpretable Action Models
+Through Query Answering. In Proc. AAAI .
+Yang, Q.; Wu, K.; and Jiang, Y . 2007. Learning Action Mod-
+els from Plan Examples Using Weighted MAX-SAT. Artifi-
+cial Intelligence , 171(2-3): 107–143.
+Zhuo, H. H.; and Kambhampati, S. 2013. Action-Model Ac-
+quisition from Noisy Plan Traces. In Proc. IJCAI .

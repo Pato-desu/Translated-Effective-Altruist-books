@@ -1,0 +1,1174 @@
+Responsive Safety in Reinforcement Learning by PID Lagrangian Methods
+Adam Stooke1 2Joshua Achiam1 2Pieter Abbeel1
+Resumen
+Los métodos lagrangianos son algoritmos de uso amplio
+para la optimización con restricciones, pero su
+dinámica de aprendizaje presenta oscilaciones y sobre-
+impulsos que, al aplicarse al aprendizaje por refuerzo seguro,
+provocan un comportamiento que viola las restricciones
+durante el entrenamiento del agente. Abordamos esta limita-
+ción proponiendo un método novedoso de actualización del multiplicador de Lagrange
+que utiliza derivadas de la restric-
+ción. Adoptamos una perspectiva de control, en la que
+la actualización tradicional del multiplicador de Lagrange
+se comporta como control integral; nuestros términos introducen
+control proporcional y derivativo, lo que logra una
+dinámica de aprendizaje favorable mediante amortiguamiento y medidas
+predictivas. Aplicamos nuestros métodos lagrangianos PID al
+aprendizaje por refuerzo profundo, estableciendo un nuevo estado del arte en
+Safety Gym, un banco de pruebas de RL seguro. Por último,
+presentamos un método nuevo para facilitar el ajuste del
+controlador al proporcionar invarianza a las escalas numéricas
+relativas de la recompensa y del costo. Nuestros amplios
+experimentos demuestran un mejor rendimiento y una mayor
+robustez frente a los hiperparámetros, mientras que nuestros
+algoritmos siguen siendo casi tan sencillos de derivar
+e implementar como el enfoque lagrangiano
+tradicional.
+1. Introducción
+El aprendizaje por refuerzo ha resuelto tareas de decisión secuencial
+de gran dificultad maximizando funciones de recompensa
+mediante ensayo y error. Ejemplos recientes que usan aprendizaje profun-
+do van desde la locomoción robótica (Schulman et al., 2015;
+Gu et al., 2016; Schulman et al., 2017; Levine et al., 2016)
+hasta videojuegos sofisticados (Mnih et al., 2013; Schulman
+et al., 2017; OpenAI, 2018; Jaderberg et al., 2019). Mientras que
+los errores durante el entrenamiento en estos dominios no tienen costo,
+en algunos escenarios de aprendizaje es importante limitar la frecuencia de
+resultados peligrosos. Un ejemplo sería el desgaste de
+1University of California, Berkeley 2OpenAI. Correspondencia
+a: Adam Stooke <adam.stooke@berkeley.edu >.
+Actas de la 37.ª International Conference on Machine
+Learning, Viena, Austria, PMLR 119, 2020. Copyright 2020 por
+el/los autor(es). Sobre los componentes de un robot o su entorno. Puede que no sea
+posible imponer tales límites prescribiendo restricciones en
+el espacio de acciones o de estados directamente; en cambio, el comportamiento que evita riesgos
+debe aprenderse. Para ello usamos el
+conocido marco del proceso de decisión de Markov con restricciones
+(CMDP) (Altman, 1999), que limita la acumu-
+lación de una señal de “costo”, análoga a la recompensa.
+La política óptima es aquella que maximiza la recom-
+pensa habitual cumpliendo la restricción de costo. En RL seguro el
+agente debe evitar riesgos no solo al converger, sino también
+durante la exploración y el aprendizaje.
+Los métodos lagrangianos son un enfoque clásico para resolver
+problemas de optimización con restricciones. Por ejemplo, el problema con restricción de
+igualdad sobre el vector real x:
+mín
+x f(x) s.a. g(x) = 0 (1)
+se transforma en uno sin restricciones mediante la introducción
+de una variable dual, el multiplicador de Lagrange λ, para formar el
+lagrangiano L(x, λ) = f(x) + λg(x), que se usa para hallar
+la solución como:
+(x∗,λ∗) = argmax
+λmin
+xL(x,λ) (2)
+Los algoritmos basados en gradiente actualizan iterativamente las variables primales y
+duales:
+−∇xL(x,λ) =−∇xf(x)−λ∇xg(x) (3)
+∇λL(x,λ) =g(x) (4)
+de modo que λ actúa como un coeficiente de penalización aprendido en el objetivo,
+lo que finalmente conduce a una solución que cumple las restricciones (véase
+p. ej., Bertsekas (2014)). El método del multiplicador de Lagrange
+se adapta fácilmente al escenario de RL con restricciones (Altman,
+1998; Geibel & Wysotzki, 2011) y se ha convertido en una línea base popular
+en RL profundo (Achiam et al., 2017; Chow et al., 2019)
+por su simplicidad y efectividad.
+Aunque se ha demostrado que convergen a políticas óptimas
+que cumplen las restricciones (Tessler et al., 2018; Paternain
+et al., 2019), una limitación de los métodos lagrangianos basados en gradiente
+para RL seguro es que las iteraciones intermedias suelen violar las restric-
+ciones. El sobreimpulso del costo y las oscilaciones son, de hecho, inherentes
+a la dinámica de aprendizaje (Platt & Barr, 1988; Wah et al.,
+2000), y observamos numerosos casos problemáticos en nuestros
+propios experimentos. La Figura 1 (izquierda) muestra un ejemplo de un
+Responsive Safety in RL by PID Lagrangian Methods
+escenario de RL profundo, donde los valores del costo y del multiplicador oscilan
+durante el entrenamiento. Nuestra idea clave respecto a esta
+deficiencia es que la actualización tradicional del multiplicador de Lagrange
+en (4) equivale a un control integral sobre la restricción. El
+desfase de 90 grados entre las curvas es característico
+de los controladores integrales mal ajustados.
+Nuestra contribución es ampliar el alcance de las posibles reglas de actualización del
+multiplicador de Lagrange más allá de (4), al interpretar el conjunto del
+algoritmo de aprendizaje como un sistema dinámico. En concreto,
+empleamos los mecanismos más simples siguientes, el control proporcional y
+derivativo, sobre λ, añadiendo términos correspondientes a
+derivadas de la función de restricción en (4) (derivadas
+respecto a la iteración de aprendizaje). Hasta donde sabemos, esta
+es la primera vez que una regla de actualización ampliada se con-
+sidera para un multiplicador de Lagrange aprendido. El control PID es
+una mejora atractiva, como demuestra el hecho de que es
+una de las técnicas de control más usadas y estudiadas
+(Åström & Hägglund, 2006). El resultado es un mecanismo de seguridad más res-
+ponsivo, como se muestra en la Figura 1 (derecha),
+donde las oscilaciones del costo se han amortiguado, reduciendo
+drásticamente las violaciones.
+0
+ 2
+ 4
+Pasos del agente 1e7
+180
+200
+220
+240g(x)Δ ≈ 90∘ Lagrangiano tradicional
+0
+ 2
+ 4
+Pasos del agente 1e7
+180
+200
+220
+240g(x) Lagrangiano PID
+0.5
+1.0
+1.5
+λ
+0.5
+1.0
+1.5
+λ
+Figura 1. Izquierda: el método lagrangiano tradicional presenta oscila-
+ciones con un desfase de 90◦ entre la función de restricción y el
+multiplicador de Lagrange, característico del control integral. Derecha: control PID
+sobre el multiplicador de Lagrange amortigua las oscilaciones y respeta
+las restricciones. Entorno: DOGGO BUTTON 1, límite de costo 200.
+Nuestras contribuciones en este artículo se resumen a continuación. Primero,
+ofrecemos más contexto mediante trabajos relacionados y definicio-
+nes preliminares. En la Sección 4 proponemos métodos de multiplicador de
+Lagrange modificados y analizamos sus beneficios
+en la dinámica de aprendizaje. A continuación, en la Sección 5, planteamos el RL con restric-
+ciones como un sistema dinámico, con el multipli-
+cador de Lagrange como entrada de control, al que aplicamos control PID como
+un algoritmo nuevo. En la Sección 6 adaptamos un RL profundo líder
+algoritmo, Proximal Policy Optimization (PPO) (Schulman
+et al., 2017), con nuestros métodos, y logramos el estado del arte
+en el rendimiento de la suite de entornos OpenAI Safety-Gym
+(Ray et al., 2019). Por último, en la Sección 7 presentamos
+otra técnica novedosa que facilita el ajuste al proporcio-
+nar invarianza a las escalas numéricas relativas de las recompensas y de los
+costos, y la demostramos en un conjunto adicional de experimentos.
+Nuestros amplios resultados empíricos muestran que nuestros algoritmos, que son intuitivos y sencillos de implementar, mejoran el rendimiento en costo
+y promueven la robustez frente a hiperparámetros en un
+entorno de RL profundo.
+2. Trabajos relacionados
+RL profundo con restricciones. Las adaptaciones del método del multi-
+plicador de Lagrange al escenario de RL actor-crítico han mostrado
+converger a la solución óptima que cumple las restricciones
+bajo ciertos supuestos (Tessler et al., 2018). Las demostraciones de conver-
+gencia se han basado en actualizar el multiplicador más
+lentamente que los parámetros de la política (Tessler et al., 2018; Pa-
+ternain et al., 2019), lo que implica que pueden ocurrir muchas iteraciones de política
+que violan las restricciones antes de que la penalización surta
+pleno efecto.
+Varios trabajos recientes han buscado mejorar la satisfacción de restricciones
+en RL frente al método lagrangiano, pero
+tienden a añadir complejidad. Achiam et al. (2017) pre-
+sentaron Constrained Policy Optimization (CPO), un algoritmo de búsqueda de políticas
+con garantías de cumplimiento casi exacto de las restricciones en cada
+iteración, basado en una nueva cota sobre el retorno esperado
+de dos políticas cercanas. CPO incluye un paso de proyección
+sobre los parámetros de la política, que en la práctica requiere
+una búsqueda lineal con retroceso que consume mucho tiempo. Sin embargo, los algoritmos lagrangianos simples
+basados en Lagrange rindieron igual o mejor en
+una comparación empírica reciente en Safety Gym (Ray et al.,
+2019). Los enfoques de RL seguro basados en funciones de
+Lyapunov se han desarrollado en una serie de estudios (Chow et al.,
+2018; 2019), lo que da lugar a algoritmos que combinan un paso de proyec-
+ción, como en CPO, con intervenciones en la capa de acción como la
+capa de seguridad de Dalal et al. (2018). Experimentalmente, esta línea
+de trabajo mostró mejoras de rendimiento mixtas frente a los métodos lagrangianos,
+con un costo de implementación considerable y sin una guía clara
+para el ajuste. Liu et al. (2019) desarrollaron métodos de punto interior
+para RL, que aumentan el objetivo con
+funciones de barrera logarítmica. Se muestra
+teóricamente que estos métodos producen soluciones subóptimas. Además,
+requieren ajustar la intensidad de la barrera y normalmente
+suponen iteraciones ya factibles, un punto que puede resultar
+problemático con inicializaciones aleatorias del agente o bajo
+estimaciones de costo ruidosas. Más recientemente, Yang et al. (2020) ex-
+tendieron CPO con un enfoque de optimización en dos pasos basado en
+proyección. En cambio, nuestro método
+mantiene casi tan simple de implementar y calcular como el
+método lagrangiano base.
+Visión de optimización como sistema dinámico. Varios trabajos recientes
+han propuesto distintos puntos de vista de sistemas dinámicos para
+analizar algoritmos de optimización, incluidos los que
+suelen aplicarse al aprendizaje profundo. Hu & Lessard (2017) rein-
+terpretaron la optimización de gradiente de primer orden como un sistema dinámico;
+compararon el gradiente del objetivo, ∇xf,
+con la planta, a la que el controlador busca llevar a cero para
+llegar a los parámetros óptimos, x∗. El descenso de gra-
+Responsive Safety in RL by PID Lagrangian Methods
+diente básico se corresponde con la forma de control integral (sobre ∇xf).
+Extienden la analogía a métodos basados en momento, por
+ejemplo, relacionando el momento de Nesterov con el control PID con
+compensación de retardo. En otro ejemplo, An et al. (2018)
+interpretaron SGD como control P y los métodos de momento como
+control PI. Introdujeron un término derivativo, basado en
+el cambio en el gradiente, y aplicaron el controlador PID resultante
+para mejorar la optimización de redes convolucionales profundas
+. Otros trabajos recientes aportan otras perspectivas
+de sistemas dinámicos al aprendizaje profundo y a la optimización,
+véase por ejemplo (Lessard et al., 2014; Nishihara et al., 2015;
+Liu & Theodorou, 2019)). Ninguno de estos trabajos aborda RL con
+restricciones. Sin embargo, esto exige nuestra formulación distinta
+para ese problema.
+Optimización con restricciones. Décadas de literatura
+se han acumulado sobre métodos lagrangianos. Pero incluso libros de texto recientes
+sobre el tema (Bertsekas, 2014; Nocedal & Wright,
+2006) solo consideran actualizar el multiplicador de Lagrange usando
+el valor de la función de restricción, g(x), y pasan por alto
+nunca usar sus derivadas, ġ(x) o g̈(x), que nosotros introducimos.
+La modificación del método lagrangiano más similar
+en efecto a nuestro término de control proporcional (aquí usando ġ(x))
+es el método de penalización cuadrática (Hestenes (1969); Powell
+(1969); véase también, p. ej., Bertsekas (1976)), que comparamos
+en la Sección 4. Song & Leland (1998) propusieron una perspectiva de control
+(en tiempo continuo) para optimizar redes neuronales
+para problemas con restricciones y llegaron solo a reglas de control
+proporcional. Relacionado con nuestros experimentos finales sobre invarianza a la escala de
+recompensa, Wah et al. (2000) desarrollaron un esquema adaptativo de pesos
+para objetivos lagrangianos en tiempo continuo, pero
+es un procedimiento complejo que no se aplica directamente
+a RL seguro.
+3. Preliminares
+Aprendizaje por refuerzo con restricciones. Los procesos de decisión de Markov
+con restricciones (CMDP) (Altman, 1998)
+amplían los MDP (véase Sutton & Barto (1998)) para incorporar
+restricciones al aprendizaje por refuerzo. Un CMDP es la
+tupla ampliada (S,A,R,T,µ,C0,C1,...,d0,d1,...), con
+las funciones de costo Ci:S×A×S→R definidas de la
+misma forma que la recompensa, y di:R denotando límites sobre los
+costos. Para simplificar la notación, solo consideraremos un único
+costo que lo abarca todo.
+La suma esperada de recompensas descontadas sobre las tra-
+yectorias, τ = (s0,a0,s1,a1,...), inducidas por la
+política π(a|s), es un objetivo de rendimiento común:
+J(π) =Eτ∼π[/summationtext∞
+t=0γtR(st,at,st+1)]. El análo-
+go función de valor para el costo se define como: JC(π) =
+Eτ∼π[/summationtext∞
+t=0γtC(st,at,st+1)]. El problema de aprendizaje por refuerzo con restric-
+ciones consiste en resolver la mejor política factible:
+π∗= argmax
+πJ(π) s.a. JC(π)≤d (5). El aprendizaje por refuerzo profundo usa una red neuronal profunda
+para la política, πθ=π(·|s;θ), con vector de parámetros θ, y
+los algoritmos de gradiente de política mejoran la política iterativamente
+reuniendo experiencia en la tarea para estimar el gradiente
+de la recompensa, ∇θJ(πθ). Así, nuestro problema de interés
+se expresa mejor como maximizar la puntuación en alguna iteración πk,
+cumpliendo idealmente las restricciones en cada iteración:
+máx
+πJ(πk)
+s.a. JC(πm)≤d m∈{0,1,...,k} (6)
+Los escenarios prácticos suelen permitir intercambiar rendimiento en recompensa
+frente a algunas violaciones de restricciones (p. ej., las restricciones
+pueden incluir un margen de seguridad). Para ello
+introducimos una figura de mérito de restricción en nuestros experimentos.
+3.1. Sistemas dinámicos y control óptimo
+Los sistemas dinámicos son procesos que pueden estar sujetos a
+una influencia externa, o control. Una formulación general para
+sistemas de tiempo discreto con control por retroalimentación es:
+xk+1=F(xk,uk)
+yk=Z(xk)
+uk=h(y0,...,yk)(7)
+con vector de estado x, función de dinámica F, salidas de medición
+y, control aplicado u, y el subíndice que denota
+el paso de tiempo. La regla de retroalimentación h tiene acceso a las mediciones
+pasadas y presentes. Un problema de control óptimo consiste en
+diseñar una regla de control, h, que genere una secuencia y0:T.
+={y0,...,yT} (o x0:T directamente) que obtenga una buena puntuación según
+alguna función de costo C. Ejemplos incluyen simplemente alcanzar
+una condición de meta, C=|yT−y|, o seguir de cerca una
+trayectoria deseada, y0:T.
+Los sistemas con una dependencia más simple de la entrada suelen
+ser más fáciles de analizar y controlar (es decir, una h más simple funciona bien),
+incluso si la dependencia del estado es complicada (Skelton,
+1988). Los sistemas afines al control son una amplia clase de sistemas dinámicos
+especialmente adecuados para el análisis (Isidori
+et al., 1995). Tienen la forma:
+F(xk,uk) =f(xk)+g(xk)uk (8)
+donde f y g pueden ser no lineales en el estado, y son posiblemente
+inciertas, es decir, desconocidas. Buscaremos una forma afín al control
+por facilidad de control y para apoyar análisis futuros.
+4. Métodos lagrangianos modificados para
+optimización con restricciones
+Los métodos lagrangianos son una familia clásica de enfoques para
+resolver problemas de optimización con restricciones. Proponemos
+una forma intuitiva, antes pasada por alto, para la actualización del multiplicador
+Responsive Safety in RL by PID Lagrangian Methods
+y deducir su efecto beneficioso sobre la dinámica de apren-
+dizaje. Comenzamos revisando una formulación previa para el
+problema con restricción de igualdad.1
+4.1. Repaso: “Método diferencial básico del multiplicador”
+Seguimos el desarrollo de Platt & Barr (1988), quienes
+analizaron la dinámica de un sistema neuronal de aprendizaje en tiempo continuo
+aplicado a este problema (nuestro resultado puede obtenerse de forma
+análoga para métodos de gradiente iterativos). Parten de las
+ecuaciones diferenciales componente a componente:
+˙xi=−∂L(x,λ)
+∂xi=−∂f
+∂xi−λ∂g
+∂xi(9)
+˙λ=α∂L(x,λ)
+∂λ=αg(x) (10)
+donde hemos introducido la constante escalar α como tasa de aprendizaje
+para λ. Derivando (9) y sustituyendo con (10) se obtiene
+la dinámica de segundo orden, escrita en formato vectorial:
+¨x+A˙x+αg(x)∇g= 0 (11)
+que es un oscilador forzado con matriz de amortiguamiento igual a
+la suma ponderada de Hessianos:
+Aij=∂2f
+∂xi∂xj+λ∂2g
+∂xi∂xj,or,A=∇2f+λ∇2g(12)
+Platt & Barr (1988) demostraron que si A es definida positiva,
+entonces el sistema (11) converge a una solución que satisface la
+restricción. Platt & Barr (1988) también observaron que el sistema
+(9)-(10) es propenso a oscilaciones al converger hacia la
+región factible, con frecuencia y tiempo de asentamiento que dependen
+de α. Proporcionamos derivaciones completas de la dinámica en
+(11) y de nuestros métodos en un apéndice.
+4.2. Método del multiplicador proporcional-integral
+En (10), λ simplemente integra la restricción. Para mejorar la
+dinámica hacia un cumplimiento más rápido y estable de las restric-
+ciones, introducimos un nuevo término en λ que es proporcional al
+valor actual de la restricción. En la ecuación diferencial para
+λ, este término aparece como la derivada temporal de la restricción:
+˙λ=αg(x)+β˙g(x) =αg(x)+β/summationdisplay
+j∂g
+∂xj˙xj (13)
+con coeficiente de intensidad β. Reemplazando (10) por (13) y
+combinando con (9) se obtiene una dinámica de segundo orden similar a
+(11), salvo que con un término adicional en la matriz de amortiguamiento:
+¨x+/parenleftbig
+A+β∇g∇⊤g/parenrightbig˙x+αg(x)∇g= 0 (14)
+1Las técnicas estándar extienden nuestros resultados a restricciones
+de desigualdad y a múltiples restricciones, como en Platt & Barr (1988), y
+la notación es más simple para una restricción de igualdad. El nuevo término es beneficioso porque es positivo
+semidefinido, ya que es el producto externo de un vector por sí mismo, por lo que
+puede aumentar los autovalores de amortiguamiento, favoreciendo la conver
+gencia. Los resultados de (Platt & Barr, 1988) se cumplen bajo (13,
+14), porque las condiciones de la solución, a saber ẋ = 0
+y g(x) = 0, permanecen sin cambios y se extienden inmediatamente a
+ġ(x) = 0 (y para lo que sigue, a g̈(x) = 0). Hasta donde
+sabemos, es la primera vez que se considera una regla de actualización proporcional-integral
+se ha considerado para un multiplicador de Lagrange aprendido.
+El conocido método de penalización (Hestenes, 1969; Powell,
+1969) aumenta el lagrangiano con un término adicional,
+c
+2g(x)2, el cual produce un efecto similar en la matriz de
+amortiguamiento, como se muestra en (Platt & Barr, 1988):
+Apenalty=A+c∇g∇⊤g+cg(x)∇2g (15)
+Nuestro enfoque parece ofrecer el mismo beneficio, sin
+las dos complicaciones siguientes del método de penalización.
+Primero, el término de penalización debe implementarse en la derivada
+ẋ, mientras que nuestros métodos no modifican el lagrangiano
+ni la derivada en (9). Segundo, la penalización introduce
+otra instancia del hessiano ∇2g en la matriz de amortiguamiento,
+la cual podría no ser semidefinida positiva pero comparte el
+factor de proporcionalidad, c, con el término deseado.
+4.3. Método del multiplicador integral-derivativo
+Un análisis similar se extiende a la adición de un término en λ
+basado en la derivada del valor de la restricción. Aparece en
+λ̇ como la segunda derivada de la restricción:
+λ̇=αg(x)+γ g̈(x) (16)
+con coeficiente de intensidad γ. La dinámica resultante es:
+¨x+B−1A˙x+/parenleftbig
+αg(x)+γ˙x⊤∇2g˙x/parenrightbig
+B−1∇g= 0 (17)
+con B=/parenleftbig
+I+γ∇g∇⊤g/parenrightbig
+, e I la matriz identidad.
+Los efectos del método de actualización derivativo son de dos tipos.
+Primero, dado que los autovalores de la matriz B−1 serán menores
+que 1, tanto el término de amortiguamiento (A) como el de fuerza (∇g) se
+debilitan (y, en general, se rotan). Segundo, el nuevo término de fuerza
+puede interpretarse como un arrastre cuadrático en la velocidad y
+modulado por la curvatura de la restricción a lo largo de la dirección
+de movimiento. Para ilustrar casos, si la curvatura de g es
+positiva a lo largo de la dirección de avance, entonces este término se vuelve
+una fuerza para disminuir g. Si al mismo tiempo g(x)>0, entonces
+la fuerza tradicional también se dirigirá a disminuir g, por lo que
+ambas se sumarán. Por otro lado, si g curva negativamente
+a lo largo de la velocidad, entonces la nueva fuerza favorece aumentar
+g; si g(x)>0, entonces las dos fuerzas se restan, debilitando la
+aceleración ẍ. Mediante el uso de la curvatura, el método derivativo
+actúa de forma predictiva, pero puede ser propenso a la inestabilidad.
+El método del multiplicador proporcional-integral-derivativo
+es la combinación de los dos desarrollos anteriores, lo cual
+Responsive Safety in RL by PID Lagrangian Methods
+induce cambios independientes en la dinámica (es decir, insertar
+la matriz de amortiguamiento de (14) en (17)). Dejamos para trabajo futuro
+un análisis más riguroso de los efectos de los nuevos
+términos, junto con consideraciones teóricas sobre los valores de
+coeficientes α, β y γ. En la siguiente sección, llevamos las
+intuiciones de nuestro análisis para hacer mejoras prácticas
+a los algoritmos de RL restringido basados en lagrangiano.
+5. Control por retroalimentación para RL restringido
+Avanzamos en la consideración más amplia de posibles reglas de
+actualización del multiplicador al reinterpretar el RL restringido como un sistema
+dinámico; el coeficiente de penalización adaptativo es una entrada de control,
+y el umbral de costo es un punto de consigna que el sistema
+debe mantener. A medida que el agente aprende las recompensas, la presión
+al alza sobre los costos del aprendizaje de recompensas puede cambiar,
+lo que requiere una respuesta dinámica. En el RL lagrangiano práctico,
+las iteraciones λk pueden desviarse del valor óptimo, incluso para
+una inicialización afortunada λ0=λ∗, ya que la política solo está parcialmente
+optimizada en cada iteración. Las secuencias adaptativas λ0,...,λK
+distintas de las prescritas por el método lagrangiano pueden
+lograr un control de costos superior para el Problema (6). En esta sección
+relacionamos el método lagrangiano con un sistema dinámico,
+formalizando cómo incorporar reglas de actualización genéricas usando
+retroalimentación. Volvemos al caso de un CMDP con restricción de desigualdad
+para presentar nuestra principal contribución algorítmica: el
+uso de control PID para adaptar el coeficiente de penalización.
+5.1. RL restringido como sistema dinámico
+Escribimos el RL restringido como el sistema dinámico de primer orden
+siguiente:
+θk+1=F(θk,λk)
+yk=JC(πθk)
+λk=h(y0,...,yk,d)(18)
+donde F es una función no lineal desconocida2 correspondiente
+a la actualización de la política del algoritmo RL sobre el vector de parámetros
+del agente, θ. El objetivo de costo sirve como medida del sistema,
+y, que se suministra a la regla de control por retroalimentación, h, junto
+con el límite de costo, d. A partir de este punto de partida general, tanto el
+algoritmo RL, F, como la regla de actualización del coeficiente de penalización, h, pueden
+adaptarse para resolver el Problema (6).
+Los gradientes de política de recompensa y de costo del método lagrangiano de primer orden3
+∇θL(θ,λ) = ∇θJ(πθ)−λ∇θJC(πθ),
+pueden organizarse en la forma de (18) como:
+F(θk,λk) =f(θk)+g(θk)λk (19)
+f(θk) =θk+η∇θJ(πθk) (20)
+2Conocida como función no lineal “incierta” en la teoría de control
+de la literatura, lo que significa que carecemos de una expresión analítica para ella.
+3Solo discutimos el caso de primer orden, que proporciona suficiente
+claridad para nuestros desarrollos. g(θk) =−η∇θJC(πθk) (21)
+con tasa de aprendizaje SGD η. El papel del controlador es
+llevar a cero las violaciones de la restricción de desigualdad (Jc−d)+ en
+presencia de deriva por el aprendizaje de recompensas debido a f. La
+regla de actualización del multiplicador de Lagrange para una restricción de desigualdad
+usa descenso por subgradiente:
+λk+1= (λk+KI(JC−d))+ (22)
+con tasa de aprendizaje KI y proyección sobre λ≥0. Esta
+actualización es claramente una regla de control integral, para h.
+5.2. RL controlado por restricciones
+Nuestro procedimiento general, el RL controlado por restricciones, se presenta en
+el Algoritmo 1. Sigue el esquema típico de RL por minilotes,
+y las estimaciones muestreadas del criterio de costo, ˆJC, se retroalimentan
+para controlar el multiplicador de Lagrange. A diferencia de trabajos previos
+(Tessler et al., 2018; Paternain et al., 2019), que usa un
+único aproximador de valor y trata r+λc como la recompensa,
+nosotros usamos aproximadores separados de valor y de valor de costo, ya que
+λ puede cambiar rápidamente.
+Cuando λ es grande, la actualización en (19) puede causar un cambio excesivamente
+grande en los parámetros, θ, desestabilizando el aprendizaje. Para
+mantener un tamaño de paso consistente, usamos un objetivo reescalado
+para el bucle de aprendizaje de θ:
+θ∗(λ) = argmax
+θJ−λJC= argmax
+θ1
+1+λ(J−λJC)
+Esta combinación convexa de objetivos produce el gradiente de
+política usado en el Algoritmo 1. Nuestros experimentos usan este
+reescalado, incluso para las líneas base lagrangianas tradicionales.
+Algoritmo 1
+Aprendizaje por refuerzo controlado por restricciones
+1: procedimiento RL RESTRINGIDO(πθ0(·|s),d)
+2: Inicializar la regla de control (según sea necesario)
+3: JC←{} ⊲ historial de mediciones de costo
+4: repetir
+5: Muestrear el entorno: ⊲ un minilote
+6: a∼π(·|s;θ),s′∼T(s,a),
+7: r∼R(s,a,s′),c∼C(s,a,s′)
+8: Aplicar control por retroalimentación:
+9: Almacenar la estimación muestral ˆJC en JC
+10: λ←h(JC,d), λ≥0
+11: Actualizar π mediante RL: ⊲ según el objetivo lagrangiano
+12: Actualizar los críticos, Vφ(s), VC,ψ(s) ⊲ si se usa
+13: ∇θL=1
+1+λ/parenleftBig
+∇θˆJ(πθ)−λ∇θˆJC(πθ)/parenrightBig
+14: hasta converger
+15: devolver πθ
+16: fin del procedimiento
+De paso, observamos que es posible mantener la
+forma afín en el control de (19) con este reescalado, reparametrizando
+Responsive Safety in RL by PID Lagrangian Methods
+el control como 0≤u=λ
+1+λ≤1 y sustituyendo
+en (21) por:
+g(θk) =−η∇θ(J(πθk)+JC(πθk)) (23)
+Esta parametrización simplemente pondera los gradientes de recompensa y de costo
+en el objetivo lagrangiano como:
+∇θL(θ,λ) = (1−u)∇θJ(πθ)−u∇θJC(πθ) (24)
+Puede ofrecer un rendimiento superior en algunos casos, ya que
+se comportará de forma distinta con respecto a la no linealidad en
+el control que surge de la restricción de desigualdad. Dejamos
+la experimentación con control directo sobre u∈[0,1] para
+trabajo futuro.
+5.3. El método lagrangiano PID
+Ahora especificamos una nueva regla de control para usar en el Algoritmo
+1. Para superar las limitaciones del control solo integral,
+seguimos los desarrollos de la sección anterior e
+introducimos los siguientes componentes más simples: proporcional y
+términos derivativos. Nuestra regla de actualización PID para reemplazar (22) es
+mostrada en el Algoritmo 2. El término proporcional acelerará
+la respuesta a las violaciones de restricciones y amortiguará las oscilaciones
+como se deriva en la Sección 4. A diferencia de la actualización lagrangiana,
+el control derivativo puede actuar anticipándose a las violaciones. Puede
+tanto evitar el sobreimpulso del costo como limitar la tasa de aumento del costo
+dentro de la región factible, útil al monitorear
+un sistema para futuras intervenciones de seguridad. Nuestro término derivativo
+se proyecta como (·)+ de modo que actúa contra los aumentos del
+costo pero no impide las disminuciones. En conjunto, el control PID
+ofrece un conjunto de controladores mucho más rico y sigue siendo
+casi tan simple de implementar; al fijar KP=KD=0 se recupera
+el método lagrangiano tradicional. El término integral
+sigue siendo necesario para eliminar las violaciones en estado estacionario
+en la convergencia. Nuestros experimentos se centran principalmente en los efectos
+de los controles proporcional y derivativo del multiplicador de Lagrange
+en el RL profundo restringido.
+Algoritmo 2 Multiplicador de Lagrange controlado por PID
+1: Elegir los parámetros de ajuste: KP,KI,KD≥0
+2: Integral: I←0
+3: Costo previo: JC,prev←0
+4: repetir en cada iteración k
+5: Recibir el costo JC
+6: ∆←JC−d
+7: ∂←(JC−JC,prev)+
+8: I←(I+∆)+
+9: λ←(KP∆+KII+KD∂)+
+10: JC,prev←JC
+11: devolver λ 6. Experimentos de control PID
+Investigamos el rendimiento de nuestros algoritmos en el problema
+(6) en un entorno de RL profundo. En particular, mostramos la
+eficacia del control PID para reducir las violaciones de restricciones
+causadas por oscilaciones y sobreimpulsos presentes en el método base
+lagrangiano. Se consideran tanto el rendimiento máximo como la
+robustez frente a la selección de hiperparámetros. Aunque
+existen muchos métodos para ajustar los parámetros PID, elegimos
+hacerlo manualmente, demostrando la facilidad de uso.
+6.1. Entornos: Safety-Gym
+Usamos el reciente conjunto Safety-Gym (Ray et al., 2019), que
+consiste en tareas de locomoción robótica construidas sobre el simulador
+MuJoCo (Todorov et al., 2012). Los robots van en complejidad
+desde un robot Point simple hasta el Doggo de 12 articulaciones, y se
+mueven en un suelo de arena abierta. Las recompensas tienen un componente
+pequeño y denso que fomenta el movimiento hacia la meta, y uno
+grande y disperso por alcanzarla. Cuando se alcanza una meta,
+se genera aleatoriamente una nueva ubicación de meta, y
+el episodio continúa hasta el límite de tiempo de 1,000 pasos.
+Cada tarea tiene múltiples niveles de dificultad, correspondientes a
+la densidad y el tipo de peligros, que inducen un costo cuando
+los toca el robot (sin necesariamente obstaculizar su
+movimiento). Los peligros se colocan aleatoriamente en cada episodio
+y a menudo se encuentran en el camino hacia la meta. Por ello, los objetivos de
+obtener altas recompensas y bajos costos están en oposición. El
+robot percibe la posición de los peligros y de la meta mediante un
+modo grueso, similar a LIDAR. La salida de este sensor, junto
+con lecturas internas como las posiciones y velocidades de las articulaciones,
+forma el estado que se entrega al agente. La Figura 2 muestra una
+escena del entorno DOGGO GOAL1.
+Figura 2. Renderizado del entorno DOGGO GOAL1 de
+Safety Gym. El robot rojo de cuatro patas debe caminar hacia el
+cilindro verde mientras evita otros objetos, y recibe lecturas egocéntricas gruesas
+de sensor sobre la ubicación de esos objetos.
+6.2. Algoritmo: PPO controlado por restricciones
+Implementamos el Algoritmo 1 sobre Proximal Policy
+Optimization (PPO) (Schulman et al., 2017) para obtener PPO controlado por restricciones
+(CPPO). CPPO usa un objetivo sustituto recortado análogo
+para el costo como para la recompensa. Nuestra
+Responsive Safety in RL by PID Lagrangian Methods
+política es un MLP de 2 capas seguido de un LSTM con una
+conexión de salto. Aplicamos suavizado a los controles
+proporcional y derivativo para acomodar estimaciones ruidosas.
+Los horizontes finitos de los entornos permitieron usar costos episódicos no
+descontados como restricción y entrada del
+controlador. Los detalles adicionales de entrenamiento se encuentran en el material suple-
+mentario, y nuestra implementación está disponible
+en https://github.com/astooke/safe-rlpyt .
+6.3. Resultados principales
+Comparamos el rendimiento del controlador PID con la línea base La
+grangiana bajo una amplia gama de configuraciones. Los gráficos
+que muestran el rendimiento del análogo sin restricciones
+confirman que las restricciones no se satisfacen trivialmente, y
+aparecen en el material suplementario.
+6.3.1. SEGURIDAD ROBUSTA CON CONTROL PI
+Observamos oscilaciones de costo o sobreimpulso con un asentamiento lento
+en la mayoría de los entornos de Safety Gym al usar
+el método lagrangiano. La Figura 3 muestra un ejemplo en el que
+el control PI eliminó este comportamiento manteniendo un buen
+rendimiento de recompensa, en el desafiante entorno DOGGO BUTTON 1
+. Se grafican las ejecuciones individuales para distintos
+límites de costo.
+0
+ 2
+ 4
+ 6
+ 8
+1e7
+50
+100
+150
+200Costo
+0
+ 2
+ 4
+ 6
+ 8
+Pasos del entorno 1e7
+0
+5
+10
+15Retorno
+KP= 0
+KP= 1 (nuestro)
+Figura 3. Oscilaciones en los costos episódicos (y retornos) del método La
+grangiano, KP= 0, KI= 10−2, se amortiguan mediante el control propor
+cional, KP= 1 (nuestro), con límites de costo 50, 100, 150, 200
+(curvas sombreadas) en DOGGO BUTTON 1.
+Como predijeron Platt & Barr (1988), encontramos que la severidad
+del sobreimpulso y las oscilaciones de costo depende del
+coeficiente de penalización, la tasa de aprendizaje KI. El panel superior izquierdo de la Figura
+4 muestra curvas de costo de ejemplo de DOGGO GOAL2 bajo
+control I, para un amplio rango de valores de KI (nos referimos a
+variar KI, suponiendo KI= 1; ambos son intercambiables
+en nuestro diseño). Al aumentar KI, el periodo y la amplitud de las oscilaciones de costo disminuyen y finalmente desaparecen.
+La parte inferior izquierda de la Figura 4, sin embargo, muestra que un KI mayor
+también trae rendimientos decrecientes. Estudiamos este efecto en la
+siguiente sección. Las columnas central y derecha de la Figura 4 muestran
+el costo y el retorno al usar control PI, con KP= 0.25
+y KP= 1, respectivamente. El control proporcional estabilizó
+el costo, reduciendo la mayoría de las oscilaciones al nivel de ruido
+para KI>10−4. Sin embargo, los retornos se mantuvieron relativamente altos en
+un amplio rango, KI<10−1. Curvas similares para otros entornos de Safety
+Gym se incluyen en un apéndice.
+0.0
+ 0.5
+ 1.0
+1e8
+30
+50
+70CostoKP= 0
+0.0
+ 0.5
+ 1.0
+1e8
+30
+50
+70KP= 0.25
+0.0
+ 0.5
+ 1.0
+1e8
+30
+50
+70KP= 1
+0.0
+ 0.5
+ 1.0
+Pasos del entorno 1e8
+0
+5
+10
+15
+20Retorno
+0.0
+ 0.5
+ 1.0
+1e8
+0
+5
+10
+15
+20
+0.0
+ 0.5
+ 1.0
+1e8
+0
+5
+10
+15
+20
+KI= 1e-4
+KI= 1e-3
+KI= 1e-2
+KI= 1e-1
+KI= 1
+Figura 4. Fila superior: las oscilaciones que violan restricciones disminuyen en
+magnitud y periodo al aumentar la tasa de aprendizaje del multiplicador de Lagrange
+KI. En todos los niveles, las oscilaciones se amortiguan mediante el control PI-
+control, KP= 0.25, 1. Fila inferior: los retornos disminuyen para valores grandes de
+KI; el control proporcional mantiene retornos altos mientras reduce
+las violaciones de restricciones. Entorno: DOGGO GOAL2, límite de costo 50.
+Examinamos el equilibrio entre recompensa y violación de
+restricciones mediante una figura de mérito (FOM) de costo general. Usamos
+la suma de las violaciones de restricciones no descontadas a lo largo de las
+iteraciones de aprendizaje, CFOM=/summationtext
+k(D(πθk)−d)+,D(πθ) =
+Eτ∼π/bracketleftBig/summationtextT
+t=0C(st,at,s′
+t)/bracketrightBig
+, y la estimamos en línea a partir de los
+datos de aprendizaje. La Figura 5 compara los retornos finales frente a este
+FOM de costo para el mismo conjunto de experimentos que en la Figura 4.
+Cada punto representa una configuración distinta de KI, promediada
+sobre cuatro ejecuciones. El control PI expandió la frontera de Pareto de
+este equilibrio hacia una nueva región de altas recompensas con costos
+relativamente bajos, a los que no se podía acceder con el
+método lagrangiano. Estos resultados constituyen un nuevo estado del arte sobre
+los puntos de referencia de Ray et al. (2019).
+Realizamos experimentos similares en varios entornos de Safety Gym
+además de DOGGO GOAL2: POINT GOAL1,
+el dominio más simple con un robot de tipo punto, CARBUTTON 1,
+para un control locomotor algo más desafiante, y DOG-
+GOBUTTON 1 para otra tarea más desafiante (véase el apéndice
+para curvas de aprendizaje como la Figura 4). La Figura 6 grafica el costo
+figura de mérito sobre el mismo rango de valores de KI, y
+Responsive Safety in RL by PID Lagrangian Methods
+0
+ 1000
+ 2000
+ 3000
+FOM de costo
+8
+10
+12
+14Retorno
+KP= 0
+KP= 0.25
+KP= 1
+Figura 5. Frontera de Pareto del retorno frente al FOM de costo, que mejora
+(hacia arriba y a la izquierda) con control PI, KP= 0.25, 1. Cada
+punto es una configuración distinta de KI (véase la Figura 4).
+para dos intensidades de control proporcional añadido, en estos
+entornos. El control PI mejoró claramente el FOM de costo
+(menor es mejor) para KI<10−1, por encima del cual el control integral
+rápido domina. Por ello, la robustez frente al valor
+de KI mejoró significativamente en todas las tareas de aprendizaje
+estudiadas.
+10−4
+10−2
+100
+101
+102
+103
+104
+DoggoButton1
+10−4
+10−2
+100
+102
+103
+104
+DoggoGoal2
+10−4
+10−2
+100
+KI
+101
+102
+103
+104
+FOM de costo
+CarButton1
+KP= 0
+KP= 0.25
+KP= 1
+10−4
+10−2
+100
+100
+101
+102
+103
+PointGoal1
+Figura 6. Costo de la ejecución de aprendizaje FOM frente a la tasa de aprendizaje de la penalización, KI,
+en cuatro entornos que abarcan los robots de Safety Gym. Cada
+punto es un promedio de cuatro ejecuciones. En todos los casos, el control PI mejora
+el rendimiento (menor es mejor) en un rango amplio y útil de KI,
+lo que facilita la selección de ese hiperparámetro.
+6.3.2. E FICIENCIA DEL CONTROL
+Investigamos además por qué aumentar la tasa de aprendizaje de la penalización,
+KI, termina reduciendo el rendimiento de la recompensa, como se
+vio en el estudio de robustez. La Figura 7muestra curvas de aprendizaje
+para tres configuraciones: control I y PI con el mismo KI moderado,
+KI= 10−3, y control I con KI alto, KI= 10−1. La configuración de
+KIalto logró un rendimiento de costo receptivo pero menores
+retornos a largo plazo, lo cual parece deberse a un control con ﬂuc-
+tuaciones extremas. En contraste, el control PI se mantuvo relativamente estable,
+a pesar del ruido, lo que permitió al agente aprender la recompensa
+en cada iteración. El panel inferior muestra las
+iteraciones individuales del control, aquí representadas como u=λ/(1+λ), durante los
+primeros 7M pasos del entorno, mientras que los demás muestran curvas
+suavizadas a lo largo de toda la ejecución de aprendizaje, de más de 40M pasos.
+0
+ 1
+ 2
+ 3
+ 4
+1e7
+0
+5
+10Retorno
+IKI+
+PI
+I
+0
+ 1
+ 2
+ 3
+ 4
+1e7
+150
+200Costo
+0
+ 1
+ 2
+ 3
+ 4
+1e7
+0.0
+0.5Control
+0
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+Pasos del entorno 1e6
+0.0
+0.5
+1.0Control
+Figura 7. Control I y PI con KI moderado = 10−3y control I
+con KI rápido = 10−1(IKI+).Arriba Los retornos disminuyen con
+KI rápido, pero son altos con PI. Segundo Las oscilaciones del costo se amortiguan en su mayoría
+con PI y se eliminan con KI rápido.Tercero El control (suavizado) varía más
+rápidamente con KI rápido y es relativamente estable con PI. Abajo El con-
+trol durante las primeras 500 iteraciones de RL; el KI rápido lanza el control a los
+extremos, lo que causa los retornos disminuidos. Entorno: D OG-
+GOBUTTON 1, límite de costo 200.
+6.3.3. C ONTROL PREDICTIVO MEDIANTE DERIVADAS
+La Figura 8demuestra las capacidades predictivas del control de costo
+por derivadas en un entorno ruidoso de RL profundo. Eliminó
+el sobreimpulso del costo tanto en las líneas base controladas por I como por PI.
+Además, logró ralentizar la aproximación de la curva de costo
+hacia el límite, un comportamiento deseable para sistemas de aprendizaje
+en línea que requieren monitoreo de seguridad. Las curvas de otros en-
+tornos están disponibles en un apéndice.
+7. Invariancia a la escala de la recompensa
+En las secciones anteriores mostramos que el control PID mejora
+la robustez de los hiperparámetros en todos los entornos de RL con restricciones
+que probamos. Aquí proponemos un método comple-
+mentario para promover la robustez tanto dentro de los entornos como entre
+ellos. En concreto, aborda la sensibilidad de
+la dinámica de aprendizaje a la escala numérica relativa de los objetivos de recompensa
+y de costo.
+Considere dos CMDP que son idénticos salvo que en uno
+las recompensas están escaladas por un factor constante, ρ. Los parámetros
+óptimos de la política, θ∗permanecen sin cambios, pero claramente λ∗
+debe escalarse por ρ. Para alcanzar la misma dinámica de aprendizaje, todos los
+Seguridad receptiva en RL mediante métodos lagrangianos PID
+0.0
+ 0.6
+ 1.2
+1e7
+100
+150
+200CostoKI= 1, KP= 0
+KD= 0
+KD= 4
+KD= 5
+0.0
+ 0.6
+ 1.2
+1e7
+150
+200KI= 1, KP= 2
+KD= 0
+KD= 2
+KD= 4
+0.0
+ 0.6
+ 1.2
+1e7
+0
+5Retorno
+0.0
+ 0.6
+ 1.2
+Pasos del entorno 1e7
+0
+5
+Figura 8. El control por derivadas puede evitar el sobreimpulso del costo y ralentizar
+la tasa de aumento del costo dentro de las regiones factibles, algo que el método la-
+grangiano no puede hacer. Entorno: D OGGO BUTTON 1,
+límite de costo 200.
+ajustes del controlador, λ0,KI,KP yKDdeben, por lo tanto,
+escalarse por ρ. Esta situación podría presentarse de forma natural dentro de
+una colección de entornos de aprendizaje relacionados. Además,
+en el curso del aprendizaje de un CMDP individual, el
+equilibrio entre las magnitudes de la recompensa y del costo puede cambiar
+considerablemente, lo que impone al controlador la carga de seguir los
+cambios necesarios en la escala de λ.
+Una forma de promover el rendimiento de una única elección de
+ajustes del controlador en estos casos sería mantener
+un signiﬁcado ﬁjo para el valor de λen términos de la
+inﬂuencia relativa de la recompensa frente al costo en la actualización de parámetros. Con
+este ﬁn, introducimos un factor de escala ajustable, βk, en
+el gradiente de la política:
+∇θL= (1−uk)∇θJ(πθk)−ukβk∇θJC(πθk)(25)
+Una elección evidente para βkes la razón de los gradientes de política
+sin escalar:
+β∇,k=||∇θJ(πθk)||
+||∇θJC(πθk)||(26)
+ya que equilibra el gradiente total para que haya una contribución de igual magnitud
+de los objetivos de recompensa y de costo en λ= 1y
+favorece λ∗= 1. Además, β∇se calcula fácilmente
+con los componentes existentes del algoritmo.
+Para probar este método, realizamos experimentos en entornos de Safety Gym
+con sus recompensas escaladas hacia arriba o hacia abajo por un factor
+de 10. La Figura 9muestra un corte transversal representativo de los re-
+sultados del entorno P OINT GOAL1 usando control PI.
+Las diferentes curvas de cada gráfica corresponden a distintas
+escalas de recompensa. Sin escalado de objetivos (es decir, β= 1), la
+dinámica con ρ= 10 es como si los parámetros del controlador
+se hubieran dividido entre 10, y lo mismo para ρ= 0.1. Obsérvese el
+espaciado casi logarítmico de λ(λρ=10no ha convergido a
+su valor completo). En cambio, al usar β∇, la dinámica de
+aprendizaje es casi idéntica a lo largo de dos órdenes de magni-
+tud de escala de la recompensa. λ0= 1se convierte en una elección obvia para lainicialización, un punto en el que la teoría previa ofrece poca
+orientación ( Chow et al. ,2019 ) (aunque aquí dejamos λ0= 0).
+Los experimentos en otros entornos y con otros ajustes del controlador
+arrojaron resultados similares y se incluyen en los materiales
+suplementarios. Otros métodos, como la normalización continua de
+recompensas y costos, podrían lograr efectos similares y
+vale la pena investigarlos, pero nuestra técnica simple es sorprendentemente
+eﬁcaz y no es especíﬁca de RL.
+0.0
+ 0.5
+ 1.0
+ 1.5
+1e7
+20
+40
+60Costoβ= 1
+0.0
+ 0.5
+ 1.0
+ 1.5
+1e7
+20
+40
+60β=β∇
+0.0
+ 0.5
+ 1.0
+ 1.5
+1e7
+10
+20Retorno
+ρ= 0.1
+ρ= 1
+ρ= 10
+0.0
+ 0.5
+ 1.0
+ 1.5
+1e7
+10
+20
+0.0
+ 0.5
+ 1.0
+ 1.5
+Pasos del entorno 1e7
+10−1
+100
+101λ
+0.0
+ 0.5
+ 1.0
+ 1.5
+1e7
+10−1
+100
+101
+Figura 9. Costos, retornos y multiplicador de Lagrange con recompensas
+escaladas por ρ∈ {0.1,1,10}; control PI con KI= 1e−3,KP=
+0.1.Columna izquierda : sin ponderación de objetivos, la dinámica de aprendizaje di-
+ﬁere drásticamente debido a la escala requerida de λ.Columna derecha :
+con ponderación de objetivos, la dinámica de aprendizaje es casi idéntica.
+Entorno: P OINT GOAL1, límite de costo 25.
+8. Conclusión
+A partir de un desarrollo novedoso en los métodos
+lagrangianos clásicos, presentamos un nuevo conjunto de soluciones de RL con restricciones
+que son fáciles de entender e imple-
+mentar, y hemos demostrado que son eﬁcaces cuando se combinan
+con el aprendizaje profundo.
+Quedan varias oportunidades para trabajos futuros. El análisis
+del método lagrangiano modiﬁcado y del RL con restricciones como
+un sistema dinámico podría relajar los requisitos teóricos de
+un multiplicador de cambio lento. El maduro campo de la teoría
+de control (y la práctica) ofrece herramientas para ajustar los parámetros
+del controlador. Por último, la forma aﬁn en el control puede ayudar tanto
+en el análisis (véanse Liang-Liang Xie y Lei Guo (2000 ) y
+Galbraith y Vinter (2003 ) sobre las propiedades de controlabilidad para
+dinámicas no lineales inciertas) como al abrir la puerta a otras
+técnicas de control, como la linealización por retroalimentación.
+Nuestras contribuciones mejoran quizás el algoritmo de RL con restricciones
+más utilizado, que es una línea base de referencia.
+Hemos abordado su principal deﬁciencia a la vez que preservamos
+su simplicidad e incluso lo hacemos más fácil de usar, una combinación
+convincente para ayudar en una amplia gama de aplicaciones.
+Seguridad receptiva en RL mediante métodos lagrangianos PID
+Agradecimientos
+Adam Stooke agradece el apoyo previo
+de la Fannie and John Hertz Foundation y de la NVIDIA
+Corporation. Agradecemos a Carlos Florensa y a los revisores
+anónimos por sus muchas sugerencias útiles que mejoraron el
+manuscrito.
+Referencias
+Achiam, J., Held, D., Tamar, A. y Abbeel, P. Optimización de
+políticas con restricciones. CoRR , abs/1705.10528, 2017. URL
+http://arxiv.org/abs/1705.10528 .
+Altman, E. Procesos de decisión de Markov restringidos con
+criterios de costo total: enfoque lagrangiano y programa
+lineal dual. Métodos matemáticos de la investigación de operaciones ,
+48(3):387–417, 1998.
+Altman, E. Procesos de decisión de Markov con restricciones , vo-
+lumen 7. CRC Press, 1999.
+An, W., Wang, H., Sun, Q., Xu, J., Dai, Q. y Zhang, L.
+Un enfoque de controlador pid para la optimización estocástica de
+redes profundas. Conferencia IEEE/CVF 2018 sobre Visión
+por Computadora y Reconocimiento de Patrones , págs. 8522–8531, 2018.
+˚Astr¨om, K. J. y H ¨agglund, T. Control pid. IEEE Control
+Systems Magazine , 1066(033X/06), 2006.
+Bertsekas, D. P. Sobre los métodos de penalización y de multiplicadores para la
+minimización con restricciones. SIAM Journal on Control and
+Optimization , 14(2):216–235, 1976.
+Bertsekas, D. P. Optimización con restricciones y métodos
+de multiplicadores de Lagrange . Academic press, 2014.
+Chow, Y ., Nachum, O., Du ´e˜nez-Guzm ´an, E. A. y
+Ghavamzadeh, M. A lyapunov-based approach to safe
+reinforcement learning. CoRR , abs/1805.07708, 2018.
+URLhttp://arxiv.org/abs/1805.07708 .
+Chow, Y ., Nachum, O., Faust, A., Ghavamzadeh, M.,
+y Du ´e˜nez-Guzm ´an, E. A. Lyapunov-based safe
+policy optimization for continuous control. CoRR ,
+abs/1901.10031, 2019. URL http://arxiv.org/
+abs/1901.10031 .
+Dalal, G., Dvijotham, K., Vecer ´ık, M., Hester, T., Paduraru,
+C., y Tassa, Y . Safe exploration in continuous action
+spaces. CoRR , abs/1801.08757, 2018. URL http://
+arxiv.org/abs/1801.08757 .
+Galbraith, G. N. y Vinter, R. B. Lipschitz continuity of
+optimal controls for state constrained problems. SIAM
+Journal on Control and Optimization , 42(5):1727–1744,
+2003. doi: 10.1137/S0363012902404711. URL https:
+//doi.org/10.1137/S0363012902404711 .Geibel, P. y Wysotzki, F. Risk-sensitive reinforcement
+learning applied to control under constraints. CoRR ,
+abs/1109.2147, 2011. URL http://arxiv.org/
+abs/1109.2147 .
+Gu, S., Lillicrap, T., Sutskever, I., y Levine, S. Con-
+tinuous deep q-learning with model-based acceleration.
+En International Conference on Machine Learning , pp.
+2829–2838, 2016.
+Hestenes, M. R. Multiplier and gradient methods. Journal
+of optimization theory and applications , 4(5):303–320,
+1969.
+Hu, B. y Lessard, L. Control interpretations for first-order
+optimization methods. CoRR , abs/1703.01670, 2017.
+URLhttp://arxiv.org/abs/1703.01670 .
+Isidori, A., Thoma, M., Sontag, E. D., Dickinson, B. W.,
+Fettweis, A., Massey, J. L., y Modestino, J. W. Nonlin-
+ear Control Systems . Springer-Verlag, Berlin, Heidelberg,
+3.ª edición, 1995. ISBN 3540199160.
+Jaderberg, M., Czarnecki, W. M., Dunning, I., Marris, L.,
+Lever, G., Castaneda, A. G., Beattie, C., Rabinowitz,
+N. C., Morcos, A. S., Ruderman, A., et al. Human-level
+performance in 3d multiplayer games with population-
+based reinforcement learning. Science , 364(6443):859–
+865, 2019.
+Lessard, L., Recht, B., y Packard, A. Analysis and de-
+sign of optimization algorithms via integral quadratic
+constraints, 2014.
+Levine, S., Finn, C., Darrell, T., y Abbeel, P. End-to-
+end training of deep visuomotor policies. The Journal of
+Machine Learning Research , 17(1):1334–1373, 2016.
+Liang-Liang Xie y Lei Guo. How much uncertainty can be
+dealt with by feedback? IEEE Transactions on Automatic
+Control , 45(12):2203–2217, Dec 2000. ISSN 2334-3303.
+doi: 10.1109/9.895559.
+Liu, G.-H. y Theodorou, E. A. Deep learning theory
+review: An optimal control and dynamical systems per-
+spective, 2019.
+Liu, Y ., Ding, J., y Liu, X. Ipo: Interior-point pol-
+icy optimization under constraints. arXiv preprint
+arXiv:1910.09615 , 2019.
+Mnih, V ., Kavukcuoglu, K., Silver, D., Graves, A.,
+Antonoglou, I., Wierstra, D., y Riedmiller, M. Playing
+atari with deep reinforcement learning. arXiv preprint
+arXiv:1312.5602 , 2013.
+Nishihara, R., Lessard, L., Recht, B., Packard, A., y
+Jordan, M. I. A general analysis of the convergence of
+admm, 2015.
+Responsive Safety in RL by PID Lagrangian Methods
+Nocedal, J. y Wright, S. Numerical optimization . Springer
+Science & Business Media, 2006.
+OpenAI. Openai five. https://blog.openai.com/
+openai-five/ , 2018.
+Paternain, S., Chamon, L., Calvo-Fullana, M., y Ribeiro,
+A. Constrained reinforcement learning has zero dual-
+ity gap. En Advances in Neural Information Processing
+Systems , pp. 7553–7563, 2019.
+Platt, J. C. y Barr, A. H. Constrained differential opti-
+mization. En Neural Information Processing Systems , pp.
+612–621, 1988.
+Powell, M. J. A method for nonlinear constraints in mini-
+mization problems. Optimization , pp. 283–298, 1969.
+Ray, A., Achiam, J., y Amodei, D. Benchmarking Safe
+Exploration in Deep Reinforcement Learning. 2019.
+Schulman, J., Levine, S., Abbeel, P., Jordan, M., y Moritz,
+P. Trust region policy optimization. En International
+conference on machine learning , pp. 1889–1897, 2015.
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., y
+Klimov, O. Proximal policy optimization algorithms.
+arXiv preprint arXiv:1707.06347 , 2017.
+Skelton, R. Dynamic Systems Control: Linear
+Systems Analysis and Synthesis . Dynamic Sys-
+tems Control. John Wiley & Sons, 1988. ISBN
+9780471837794. URL https://books.google.
+com/books?id=egFRAAAAMAAJ .
+Song, Q. y Leland, R. P. An optimal control model of
+neural networks for constrained optimization problems.
+Optimal Control Applications and Methods , 19(5):371–
+376, 1998. doi: 10.1002/(SICI)1099-1514(199809/10)19:
+5/an}b∇acketle{t371::AID-OCA636 /an}b∇acket∇i}ht3.0.CO;2-8. URL https:
+//onlinelibrary.wiley.com/doi/abs/10.
+1002/%28SICI%291099-1514%28199809/10%
+2919%3A5%3C371%3A%3AAID-OCA636%3E3.0.
+CO%3B2-8 .
+Sutton, R. S. y Barto, A. G. Introduction to Reinforcement
+Learning . MIT Press, Cambridge, MA, USA, 1st edition,
+1998. ISBN 0262193981.
+Tessler, C., Mankowitz, D. J., y Mannor, S. Reward con-
+strained policy optimization. CoRR , abs/1805.11074,
+2018. URL http://arxiv.org/abs/1805.
+11074 .
+Todorov, E., Erez, T., y Tassa, Y . Mujoco: A physics
+engine for model-based control. En 2012 IEEE/RSJ Inter-
+national Conference on Intelligent Robots and Systems ,
+pp. 5026–5033. IEEE, 2012.Wah, B. W., Wang, T., Shang, Y ., y Wu, Z. Improving the
+performance of weighted lagrange-multiplier methods for
+nonlinear constrained optimization. Information Sciences ,
+124(1-4):241–272, 2000.
+Yang, T.-Y ., Rosca, J., Narasimhan, K., y Ramadge, P. J.
+Projection-based constrained policy optimization. En
+International Conference on Learning Representations ,
+2020. URL https://openreview.net/forum?
+id=rke3TJrtPS .

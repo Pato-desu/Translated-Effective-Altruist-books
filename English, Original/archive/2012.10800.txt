@@ -1,0 +1,1268 @@
+Probabilistic Dependency Graphs
+Oliver Richardson, Joseph Y. Halpern
+Computer Science Department
+Cornell University
+Ithaca, NY 14853
+foli, halperng@cs.cornell.edu
+Abstract
+We introduce Probabilistic Dependency Graphs (PDGs), a
+new class of directed graphical models. PDGs can capture
+inconsistent beliefs in a natural way and are more modular
+than Bayesian Networks (BNs), in that they make it easier to
+incorporate new information and restructure the representa-
+tion. We show by example how PDGs are an especially natural
+modeling tool. We provide three semantics for PDGs, each of
+which can be derived from a scoring function (on joint distri-
+butions over the variables in the network) that can be viewed
+as representing a distribution’s incompatibility with the PDG.
+For the PDG corresponding to a BN, this function is uniquely
+minimized by the distribution the BN represents, showing that
+PDG semantics extend BN semantics. We show further that
+factor graphs and their exponential families can also be faith-
+fully represented as PDGs, while there are signiﬁcant barriers
+to modeling a PDG with a factor graph.
+1 Introduction
+In this paper we introduce yet another graphical tool for
+modeling beliefs, Probabilistic Dependency Graphs (PDGs).
+There are already many such models in the literature, in-
+cluding Bayesian networks (BNs) and factor graphs. (For an
+overview, see (Koller and Friedman 2009).) Why does the
+world need one more?
+Our original motivation for introducing PDGs was to be
+able capture inconsistency. We want to be able to model
+the process of resolving inconsistency; to do so, we have to
+model the inconsistency itself. But our approach to modeling
+inconsistency has many other advantages. In particular, PDGs
+are signiﬁcantly more modular than other directed graphical
+models: operations like restriction and union that are easily
+done with PDGs are difﬁcult or impossible to do with other
+representations. The following examples motivate PDGs and
+illustrate some of their advantages.
+Example 1. Grok is visiting a neighboring district. From
+prior reading, she thinks it likely (probability .95) that guns
+are illegal here. Some brief conversations with locals lead her
+to believe that, with probility .1, the law prohibits ﬂoomps.
+The obvious way to represent this as a BN is to use two
+random variables FandG(respectively taking values ff;fg
+Copyright ©2021, Association for the Advancement of Artiﬁcial
+Intelligence (www.aaai.org). All rights reserved.andg;g), indicating whether ﬂoomps and guns are prohibited.
+The semantics of a BN offer her two choices: either assume
+thatFandGto be independent and give (unconditional)
+probabilities of FandG, or choose a direction of dependency,
+and give one of the two unconditional probabilities and a
+conditional probability distribution. As there is no reason to
+choose either direction of dependence, the natural choice is
+to assume independence, giving her the BN on the left of
+Figure 1.
+ff
+.9 .1g g
+.05 .95
+F G
+1 1
+F Gff/bracketleftbig
+.90.10/bracketrightbig
+⋆gg/bracketleftbig
+.05.95/bracketrightbig
+⋆
+pp/prime
+p=gg/bracketleftbigg
+.92.08
+.08.92/bracketrightbigg
+f
+f= (p/prime)T
+Figure 1: A BN (left) and corresponding PDG (right), which
+can include more cpds; porp0make it inconsistent.
+A traumatic experience a few hours later leaves Grok be-
+lieving that “ﬂoomp” is likely (probability .92) to be another
+word for gun. Let p(GjF)be the conditional probability
+distribution (cpd) that describes the belief that if ﬂoomps are
+legal (resp., illegal), then with probability .92, guns are as
+well, andp0(FjG)be the reverse. Starting with p, Grok’s
+ﬁrst instinct is to simply incorporate the conditional informa-
+tion by adding Fas a parent of G, and then associating the
+cpdpwithG. But then what should she do with the original
+probability she had for G? Should she just discard it? It is
+easy to check that there is no joint distribution that is consis-
+tent with both the two original priors on FandGand also
+p. So if she is to represent the information with a BN, which
+always represents a consistent distribution, she must resolve
+the inconsistency.
+However, sorting this out immediately may not be ideal.
+For instance, if the inconsistency arises from a conﬂation
+between two deﬁnitions of “gun”, a resolution will have
+destroyed the original cpds. A better use of computation may
+be to notice the inconsistency and look up the actual law.
+By way of contrast, consider the corresponding PDG. In
+a PDG, the cpds are attached to edges, rather than nodes of
+the graph. In order to represent unconditional probabilities,arXiv:2012.10800v1  [cs.AI]  19 Dec 2020
+we introduce a unit variable 1 1which takes only one value,
+denoted?. This leads Grok to the PDG depicted in Figure 1,
+where the edges from 1 1toFandGare associated with
+the unconditional probabilities of FandG, and the edges
+betweenFandGare associated with pandp0.
+The original state of knowledge consists of all three nodes
+and the two solid edges from 1 1. This is like Bayes Net that
+we considered above, except that we no longer explicitly take
+FandGto be independent; we merely record the constraints
+imposed by the given probabilities.
+The key point is that we can incorporate the new informa-
+tion into our original representation (the graph in Figure 1
+without the edge from FtoG) simply by adding the edge
+fromFtoGand the associated cpd p(the new infromation
+is shown in blue). Doing so does not change the meaning of
+the original edges. Unlike a Bayesian update, the operation is
+even reversible: all we need to do recover our original belief
+state is delete the new edge, making it possible to mull over
+and then reject an observation. 
+The ability of PDGs to model inconsistency, as illustrated
+in Example 1, appears to have come at a signiﬁcant cost.
+We seem to have lost a key beneﬁt of BNs: the ease with
+which they can capture (conditional) independencies, which,
+as Pearl (1988) has argued forcefully, are omnipresent.
+Example 2 (emulating a BN) .We now consider the classic
+(quantitative) Bayesian network B, which has four binary
+variables indicating whether a person ( C) develops cancer,
+(S) smokes, ( SH) is exposed to second-hand smoke, and
+(PS) has parents who smoke, presented graphically in Fig-
+ure 2(a). We now walk through what is required to represent
+Bas a PDG, which we call MB, shown as the solid nodes
+and edges in Figure 2(b).
+PS
+SH S
+C
+1 1
+PSS
+SHC TRestricted PDG in Examples 3 and 4
+Figure 2: (a) The Bayesian Network Bin Example 2 (left),
+and (b)MB, its corresponding PDG (right). The shaded box
+indicates a restriction of MBto only the nodes and edges it
+contains, and the dashed node Tand its arrow to Ccan be
+added in the PDG, without taking into account SandSH.
+We start with the nodes corresponding to the variables in B,
+together with the special node 1 1from Example 1; we add an
+edge from 1 1toPS, to which we associate the unconditional
+probability given by the cpd for PSinB. We can also re-
+use the cpds for SandSH, assigning them, respectively, to
+the edgesPS!SandPS!SHinMB. There are two
+remaining problems: (1) modeling the remaining table in B,
+which corresponds to the conditional probability of Cgiven
+SandSH; and (2) recovering the additional conditional
+independence assumptions in the BN.For (1), we cannot just add the edges S!Cand
+SH!Cthat are present in B. As we saw in Example 1,
+this would mean supplying two separate tables, one indicat-
+ing the probability of CgivenS, and the other indicating
+the probability of Cgiven SH. We would lose signiﬁcant
+information that is present in Babout howCdepends jointly
+onSandSH. To distinguish the joint dependence on Sand
+SH, for now, we draw an edge with two tails—a (directed)
+hyperedge —that completes the diagram in Figure 2(b). With
+regard to (2), there are many distributions consistent with
+the conditional marginal probabilities in the cpds, and the
+independences presumed by Bneed not hold for them. Rather
+than trying to distinguish between them with additional con-
+straints, we develop a a scoring-function semantics for PDGs
+which is in this case uniquely minimized by the distribu-
+tion speciﬁed byB(Theorem 4.1). This allows us to recover
+the semantics of Bayesian networks without requiring the
+independencies that they assume.
+Next suppose that we get information beyond that captured
+by the original BN. Speciﬁcally, we read a thorough empirical
+study demonstrating that people who use tanning beds have
+a 10% incidence of cancer, compared with 1% in the control
+group (call the cpd for this p); we would like to add this
+information toB. The ﬁrst step is clearly to add a new node
+labeledT, for “tanning bed use”. But simply making Ta
+parent ofC(as clearly seems appropriate, given that the
+incidence of cancer depends on tanning bed use) requires a
+substantial expansion of the cpd; in particular, it requires us
+to make assumptions about the interactions between tanning
+beds and smoking. The corresponding PDG, MB, on the
+other hand, has no trouble: We can simply add the node
+Twith an edge to Cthat is associated with p. But note
+that doing this makes it possible for our knowledge to be
+inconsistent. To take a simple example, if the distribution on
+CgivenSandHencoded in the original cpd was always
+deterministically “has cancer” for every possible value of S
+andH, but the distribution according to the new cpd from T
+was deterministically “no cancer”, the resulting PDG would
+be inconsistent. 
+We have seen that we can easily add information to PDGs;
+removing information is equally painless.
+Example 3 (restriction) .After the Communist party came
+to power, children were raised communally, and so parents’
+smoking habits no longer had any impact on them. Grok
+is reading her favorite book on graphical models, and she
+realizes that while the node PSin Figure 2(a) has lost its
+usefulness, and nodes SandSHno longer ought to have PS
+as a parent, the other half of the diagram—that is, the node
+Cand its dependence on SandSH—should apply as before.
+Grok has identiﬁed two obstacles to modeling deletion of
+information from a BN by simply deleting nodes and their
+associated cpds. First, this restricted model is technically no
+longer a BN (which in this case would require unconditional
+distributions on SandSH), but rather a conditional BN
+(Koller and Friedman 2009), which allows for these nodes
+to be marked as observations; observation nodes do not have
+associated beliefs. Second, even regarded as a conditional
+BN, the result of deleting a node may introduce newindepen-
+C T
+SLq
+C T
+SLq S
+SHpFigure 3: Grok’s prior (left) and combined (right) knowledge.
+dence information, incompatible with the original BN. For
+instance, by deleting the node Bin a chainA!B!C,
+one concludes that AandCare independent, a conclusion
+incompatible with the original BN containing all three nodes.
+PDGs do not suffer from either problem. We can easily delete
+the nodes labeled 1 and PSin Figure 2(b) to get the restricted
+PDG shown in the ﬁgure, which captures Grok’s updated in-
+formation. The resulting PDG has no edges leading to Sor
+SH, and hence no distributions speciﬁed on them; no special
+modeling distinction between observation nodes and other
+nodes are required. Because PDGs do not directly make in-
+dependence assumptions, the information in this fragment is
+truly a subset of the information in the whole PDG. 
+Being able to form a well-behaved local picture and restrict
+knowledge is useful, but an even more compelling reason to
+use PDGs is their ability to aggregate information.
+Example 4. Grok dreams of becoming Supreme Leader
+(SL), and has come up with a plan. She has noticed that
+people who use tanning beds have signiﬁcantly more power
+than those who don’t. Unfortunately, her mom has always
+told her that tanning beds cause cancer; speciﬁcally, that 15%
+of people who use tanning beds get it, compared to the base-
+line of 2%. Call this cpd q. Grok thinks people will make
+fun of her if she uses a tanning bed and gets cancer, making
+becoming Supreme Leader impossible. This mental state is
+depicted as a PDG on the left of Figure 3.
+Grok is reading about graphical models because she
+vaguely remembers that the variables in Example 2 match
+the ones she already knows about. When she ﬁnishes reading
+the statistics on smoking and the original study on tanning
+beds (associated to a cpd pin Example 2), but before she has
+time to reﬂect, we can represent her (conﬂicted) knowledge
+state as the union of the two graphs, depicted graphically on
+the right of Figure 3.
+The union of the two PDGs, even with overlapping nodes,
+is still a PDG. This is not the case in general for BNs. Note
+that the PDG that Grok used to represent her two different
+sources of information (the mother’s wisdom and the study)
+regarding the distribution of Cis amultigraph : there are two
+edges fromTtoC, with inconsistent information. Had we
+not allowed multigraphs, we would have needed to choose be-
+tween the two edges, or represent the information some other
+(arguably less natural) way. As we are already allowing in-
+consistency, merely recording both is much more in keeping
+with the way we have handled other types of uncertainty. 
+Not all inconsistencies are equally egregious. For example,
+even though the cpds pandqare different, they are numeri-cally close, so, intuitively, the PDG on the right in Figure 3
+is not very inconsistent. Making this precise is the focus of
+Section 3.2.
+These examples give a taste of the power of PDGs. In the
+coming sections, we formalize PDGs and relate them to other
+approaches.
+2 Syntax
+We now provide formal deﬁnitions for PDGs. Although it
+is possible to formalize PDGS with hyperedges directly, we
+opt for a different approach here, in which PDGs have only
+regular edges, and hyperedges are captured using a simple
+construction that involves adding an extra node.
+Deﬁnition 2.1. AProbabilistic Dependency Graph is a tuple
+M= (N;E;V;p;; ), where
+Nis a ﬁnite set of nodes, corresponding to variables;
+Eis a set of labeled edges fXL!Yg, each with a source X
+and targetYinN;
+Vassociates each variable N2N with a setV(N)of values
+that the variable Ncan take;
+passociates to each edge XL!Y2Ea distribution pL(x)
+onYfor eachx2V(X);
+associates to each edge XL!Ya non-negative number
+Lwhich, roughly speaking, is the modeler’s conﬁdence
+in the functional dependence of YonXimplicit inL;
+associates to each edge La positive real number L, the
+modeler’s subjective conﬁdence in the reliability of pL.
+Note that we allow multiple edges in Ewith the same source
+and target; thus (N;E)is a multigraph. We occasionally write
+a PDG as M= (G;p;; ), whereG= (N;E;V), and
+abuse terminology by referring to Gas a multigraph. We refer
+toN= (G;p)as an unweighted PDG, and give it semantics
+as though it were the (weighted) PDG (G;p;1;1), where 1
+is the constant function (i.e., so that L=L= 1for allL).
+In this paper, with the exception of Section 4.3, we implicitly
+take=1and omit, writing M= (G;p;).1
+IfMis a PDG, we reserve the names NM;EM;:::, for
+the components of M, so that we may reference one without
+naming them all explicitly. We write V(S)for the set of
+possible joint settings of a set Sof variables, and write V(M)
+for all settings of the variables in NM; we refer to these
+settings as “worlds”. While the deﬁnition above is sufﬁcient
+to represent the class of all legal PDGs, we often use two
+additional bits of syntax to indicate common constraints: the
+special variable 1 1such thatV(1 1) =f?gfrom Examples 1
+and 2, and double-headed arrows, A! !B, which visually
+indicate that the corresponding cpd is degenerate, effectively
+representing a deterministic function f:V(A)!V(B).
+Construction 2.2. We can now explain how we capture the
+multi-tailed edges that were used in Examples 2 to 4. That
+notation can be viewed as shorthand for the graph that results
+by adding a new node at the junction representing the joint
+value of the nodes at the tails, with projections going back.
+For instance, the diagram displaying Grok’s prior knowledge
+1The appendix gives results for arbitrary .
+in Example 4, on the left of Figure 3 is really shorthand for
+the following PDG, where where we insert a node labeled
+CTat the junction:
+SL C×T
+CT
+As the notation suggests, V(CT) =V(C)V(T). For
+any joint setting (c;t)2V(CT)of both variables, the
+cpd for the edge from CTtoCgives probability 1 to
+c; similarly, the cpd for the edge from CTtoTgives
+probability 1 to t. 
+3 Semantics
+Although the meaning of an individual cpd is clear, we have
+not yet given PDGs a “global” semantics. We discuss three
+related approaches to doing so. The ﬁrst is the simplest: we
+associate with a PDG the set of distributions that are consis-
+tent with it. This set will be empty if the PDG is inconsistent.
+The second approach associates a PDG with a scoring func-
+tion, indicating the ﬁt of an arbitrary distribution , and can
+be thought of as a weighted set of distributions (Halpern
+and Leung 2015). This approach allows us to distinguish
+inconsistent PDGs, while the ﬁrst approach does not. The
+third approach chooses the distributions with the best score,
+typically associating with a PDG a unique distribution.
+3.1 PDGs As Sets Of Distributions
+We have been thinking of a PDG as a collection of constraints
+on distributions, speciﬁed by matching cpds. From this per-
+spective, it is natural to consider the set of all distributions
+that are consistent with the constraints.
+Deﬁnition 3.1. IfMis a PDG (weighted or unweighted)
+with edgesEand cpds p, let[ [M] ]sdbe the set of distributions
+over the variables in Mwhose conditional marginals are
+exactly those given by p. That is,2[ [M] ]sdiff, for all edges
+L2EfromXtoY,x2V(X), andy2V(Y), we have that
+(Y=yjX=x) =pL(x).Misinconsistent if[ [M] ]sd=;,
+andconsistent otherwise. 
+Note that [ [M] ]sdis independent of the weights and.
+3.2 PDGs As Distribution Scoring Functions
+We now generalize the previous semantics by viewing a PDG
+Mas ascoring function that, given an arbitrary distribution
+onV(M), returns a real-valued score indicating how well
+ﬁtsM. Distributions with the lowest (best) scores are those
+that most closely match the cpds in M, and contain the fewest
+unspeciﬁed correlations.
+We start with the ﬁrst component of the score, which as-
+signs higher scores to distributions that require a larger per-
+turbation in order to be consistent with M. We measure the
+magnitude of this perturbation with relative entropy. In par-
+ticular, for an edge XL!Yandx2V(X), we measure the
+relative entropy from pL(x)to(Y=jX=x), and take
+the expectation over X(that is, the marginal of onX).
+We then sum over all the edges Lin the PDG, weighted by
+their reliability.Deﬁnition 3.2. For a PDG M, the incompatibility of a a joint
+distributionoverV(M), is given by
+IncM() :=X
+XL!Y2EMM
+LE
+xXh
+I D
+(YjX=x)pM
+L(x)i
+;
+whereI D(k) =P
+w2Supp()(w) log(w)
+(w)is the relative
+entropy from to. 
+[ [M] ]sdandIncMdistinguish between distributions based
+on their compatibility with M, but even among distributions
+that match the marginals, some more closely match the qual-
+itative structure of the graph than others. We think of each
+edgeXL!Yas representing a qualitative claim (with con-
+ﬁdenceL) that the value of Ycan be computed from X
+alone. To formalize this, we require only the multigraph GM.
+Given a multigraph Gand distribution on its variables,
+contrast the amount of information required to
+(a) directly describe a joint outcome wdrawn from , and
+(b)separately specify, for each edge XL!Y, the value wY
+(ofYin world w) given the value wX, in expectation.
+If (a) =(b), a speciﬁcation of (b) has exactly the same length
+as a full desciption of the world. If (b) >(a), then there are
+correlations in that allow for a more compact representation
+thanGprovides. The larger the difference, the more informa-
+tion is needed to determine targets Ybeyond the conditional
+probabilities associated with the edges X!Yleading toY
+(which according to Gshould be sufﬁcient to compute them),
+and the poorer the qualitative ﬁt of toG. Finally, if (a) >
+(b), thenrequires additional information to specify, beyond
+what is necessary to determine outcomes of the marginals
+selected byG.
+Deﬁnition 3.3. For a multigraph G= (N;E;V)over a set
+Nof variables, deﬁne the G-information deﬁciency of distri-
+bution, denoted IDefG(), by considering the difference
+between (a) and (b), where we measure the amount of infor-
+mation needed for a description using entropy:
+IDefG() :=X
+(X;Y)2EH(YjX) H(): (1)
+(Recall that H(YjX), the (-)conditional entropy of Y
+givenX, is deﬁned as P
+x;y2V(X;Y)(x;y) log(yjx).)
+For a PDG M, we take IDefM=IDefGM. 
+We illustrate IDefMwith some simple examples. Suppose
+thatMhas two nodes, XandY. IfMhas no edges, the
+IDefM() = H(). There is no information required to
+specify, for each edge in MfromXtoY, the value wYgiven
+wX, since there are no edges. Since we view smaller num-
+bers as representing a better ﬁt, IDefMin this case will prefer
+the distribution that maximizes entropy. If Mhas one edge
+fromXtoY, then since H() = H(YjX) + H(X)
+by the well known entropy chain rule (MacKay 2003),
+IDefM() = H(X). Intuitively, while knowing the con-
+ditional probability (YjX)is helpful, to completely spec-
+ifywe also need (X). Thus, in this case, IDefMprefers
+distributions that maximize the entropy of the marginal on
+X. IfMhas sufﬁciently many parallel edges from XtoY
+andH(YjX)>0(so thatYis not totally determined
+byX) then we have IDefM()>0, because the redundant
+edges add no information, but there is still a cost to spec-
+ifying them. In this case, IDefMprefers distributions that
+makeYa deterministic function of Xwill maximizing the
+entropy of the marginal on X. Finally, if Mhas an edge
+fromXtoYand another from YtoX, then a distribution
+minimizes IDefMwhenXandYvary together (so that
+H(YjX) = H(XjY) = 0 ) while maximizing H(),
+for example, by taking (0;0) =(1;1) = 1=2.
+IncM()andIDefM()give us two measures of compat-
+ibility between Mand a distribution . We take the score
+of interest to be their sum, with the tradeoff controlled by a
+parameter0:
+[ [M] ]() :=IncM() +IDefM() (2)
+The following just makes precise that the scoring semantics
+generalizes the ﬁrst semantics.
+Proposition 3.1. [ [M] ]sd=f: [ [M] ]0()=0gfor allM.
+While we focus on this particular scoring function in the
+paper, in part because it has deep connections to the free
+energy of a factor graph (Koller and Friedman 2009), other
+scoring functions may well end up being of interest.
+3.3 PDGs As Unique Distributions
+Finally, we provide an interpretation of a PDG as a probability
+distribution. Before we provide this semantics, we stress
+that this distribution does notcapture all of the important
+information in the PDG—for example, a PDG can represent
+inconsistent knowledge states. Still, by giving a distribution,
+we enable comparisons with other graphical models, and
+show that PDGs are a surprisingly ﬂexible tool for specifying
+distributions. The idea is to select the distributions with the
+best score. We thus deﬁne
+[ [M] ]
+= arg min
+2V(M)[ [M] ](): (3)
+In general, [ [M] ]
+does not give a unique distribution. But
+ifis sufﬁciently small, then it does:
+Proposition 3.2. IfMis a PDG and 0< minLM
+L,
+then[ [M] ]
+is a singleton.
+In this paper, we are interested in the case where is small;
+this amounts to emphasizing the accuracy of the probabil-
+ity distribution as a description of probabilistic information,
+rather than the graphical structure of the PDG. This moti-
+vates us to consider what happens as goes to 0. If Sis a
+set of probability distributions for all 2[0;1], we deﬁne
+lim!0Sto consist of all distributions such that there is
+a sequence (i;i)i2Nwithi!0andi!such that
+i2Sifor alli. It can be further shown that
+Proposition 3.3. For allM,lim!0[ [M] ]
+is a singleton.
+Let[ [M] ]be the unique element of lim
+!0[ [M] ]
+. The seman-
+tics has an important property:
+Proposition 3.4. [ [M] ]2[ [M] ]
+0, so ifMis consistent, then
+[ [M] ]2[ [M] ]sd.4 Relationships to Other Graphical Models
+We start by relating PDGs to two of the most popular graphi-
+cal models: BNs and factor graphs. PDGs are strictly more
+general than BNs, and can emulate factor graphs for a partic-
+ular value of .
+4.1 Bayesian Networks
+Construction 2.2 can be generalized to convert arbitrary
+Bayesian Networks into PDGs. Given a BN Band a pos-
+itive conﬁdence Xfor the cpd of each variable XofB, let
+MB;be the PDG comprising the cpds of Bin this way; we
+defer the straightforward formal details to the appendix.
+Theorem 4.1. IfBis a Bayesian network and PrBis the
+distribution it speciﬁes, then for all  >0and all vectors 
+such thatL>0for all edges L,[ [MB;] ]
+=fPrBg, and
+thus[ [MB;] ]= PrB.
+Theorem 4.1 is quite robust to parameter choices: it holds
+for every weight vector and all >0. However, it does
+lean heavily on our assumption that =1, making it our
+only result that does not have a natural analog for general .
+4.2 Factor Graphs
+Factor graphs (Kschischang, Frey, and Loeliger 2001), like
+PDGs, generalize BNs. In this section, we consider the rela-
+tionship between factor graphs (FGs) and PDGs.
+Deﬁnition 4.1. Afactor graph is a set of random variables
+X=fXigandfactorsfJ:V(XJ)!R0gJ2J, where
+XJX . More precisely, each factor Jis associated with a
+subsetXJX of variables, and maps joint settings of XJ
+to non-negative real numbers. speciﬁes a distribution
+Pr(~ x) =1
+ZY
+J2JJ(~ xJ);
+where~ xis a joint setting of all of the variables, ~ xJis the re-
+striction of~ xto only the variables XJ, andZis the constant
+required to normalize the distribution. 
+The cpds of a PDG naturally constitute a collection of
+factors, so it natural to wonder how the semantics of a PDG
+compares to simply treating the cpds as factors in a factor
+graph. To answer this, we start by making the translation
+precise.
+Deﬁnition 4.2 (unweighted PDG to factor graph) .IfN=
+(G;p)is an unweighted PDG, deﬁne the associated FG N
+on the variables (N;V)by takingJto be the set of edges,
+and for an edge LfromZtoY, takingXL=fZ;Yg, and
+L(z;y)to bepM
+L(yjz)(i.e.,(pM
+L(z))(y)). 
+It turns out we can also do the reverse. Using essentially
+the same idea as in Construction 2.2, we can encode a factor
+graph as an assertion about the unconditional probability
+distribution over the variables associated to each factor.
+Deﬁnition 4.3 (factor graph to unweighted PDG) .For a FG
+, letNbe the unweighted PDG consisting of
+•the variables in together with 1 1and a variable XJ:=Q
+j2JXjfor every factor J2J, and
+•edges 1 1!XJfor eachJandXJ! !Xjfor eachXj2XJ,
+where the edges XJ! !Xjare associated with the appropriate
+projections, and each 1 1!XJis associated with the uncondi-
+tional joint distribution on XJobtained by normalizing J.
+The process is illustrated in Figure 4. 
+PDGs are directed graphs, while factors graphs are undi-
+rected. The map from PDGs to factor graphs thus loses some
+important structure. As shown in Figure 4, this mapping can
+change the graphical structure signiﬁcantly. Nevertheless,
+Theorem 4.2. Pr= [ [N] ]
+1for all factor graphs .2
+Theorem 4.3. [ [N] ]
+1= Pr Nfor all unweighted PDGs N.
+The correspondence hinges on the fact that we take =
+1, so that IncandIDef are weighted equally. Because the
+user of a PDG gets to choose , the fact that the translation
+from factor graphs to PDGs preserves semantics only for
+= 1poses no problem. Conversely, the fact that the reverse
+correspondence requires = 1suggests that factor graphs
+are less ﬂexible than PDGs.
+What about weighted PDGs (G;p;)where6=1? There
+is also a standard notion of weighted factor graph, but as long
+as we stick with our convention of taking =1, we cannot
+relate them to weighted PDGs. As we are about to see, once
+we drop this convention, we can do much more.
+4.3 Factored Exponential Families
+Aweighted factor graph (WFG) 	is a pair (;)consisting
+of a factor graph together with a vector of non-negative
+weightsfJgJ2J.	speciﬁes a canonical scoring function
+GFE 	() :=E
+~ x"X
+J2JJlog1
+J(~ xJ)#
+ H();(4)
+called the variational Gibbs free energy (Mezard and Mon-
+tanari 2009). GFE 	is uniquely minimized by the distribu-
+tionPr	(~ x) =1
+Z	Q
+J2JJ(~ xJ)J, which matches the un-
+weighted case when every J= 1. The mapping 7!Pr(;)
+is known as ’sexponential family and is a central tool in the
+analysis and development of many algorithms for graphical
+models (Wainwright, Jordan et al. 2008).
+PDGs can in fact capture the full exponential family of a
+factor graph, but only by allowing values of other than 1. In
+this case, the only deﬁnition that requires alteration is IDef ,
+which now depends on the weighted multigraph (GM;M),
+and is given by
+IDefM() :=X
+XL!Y2ELH(YjX) H():(5)
+Thus, the conditional entropy H(YjX)associated with the
+edgeXL!Yis multiplied by the weight Lof that edge.
+One key beneﬁt of using is that we can capture arbitrary
+WFGs, not just ones with a constant weight vector. All we
+have to do is to ensure that in our translation from factor
+graphs to PDGs, the ratio L=Lis a constant. (Of course,
+if we allow arbitrary weights, we cannot hope to do this if
+L= 1 for all edges L.) We therefore deﬁne a family of
+translations, parameterized by the ratio of LtoL.
+2Recall that we identify the unweighted PDG (G;p)with the
+weighted PDG (G;p;1;1).Deﬁnition 4.4 (WFG to PDG) .Given a WFG 	 = (;),
+and postive number k, we deﬁne the corresponding PDG
+M	;k= (N;;)by takingJ=kJandJ=Jfor
+the edge 1 1!XJ, and taking L=kandL= 1for the
+projectionsXJ! !Xj. 
+We now extend Deﬁnitions 4.2 and 4.3 to (weighted) PDGs
+and WFGs. In translating a PDG to a WFG, there will neces-
+sarily be some loss of information: PDGs have two sets, while
+WFGs have only have one. Here we throw out and keep
+, though in its role here as a left inverse of Deﬁnition 4.4,
+either choice would sufﬁce.
+Deﬁnition 4.5 (PDG to WFG) .Given a (weighted) PDG
+M= (N;), we take its corresponding WFG to be 	M:=
+(N;); that is,L:=Lfor all edges L. 
+We now show that we can capture the entire exponential
+family of a factor graph, and even its associated free energy,
+but only for equal to the constant kused in the translation.
+Theorem 4.4. For all WFGs 	 = (;)and all >0, we
+have that GFE 	=1=[ [M	;] ]+Cfor some constant C,
+soPr	is the unique element of [ [M	;] ]
+.
+In particular, for k= 1, so thatis used for both the
+functionsandof the resulting PDG, Theorem 4.4 strictly
+generalizes Theorem 4.2.
+Corollary 4.4.1. For all weighted factor graphs (;), we
+have that Pr(;)= [ [(N;;)] ]
+1
+Conversely, as long as the ratio of LtoLis constant,
+the reverse translation also preserves semantics.
+Theorem 4.5. For all unweighted PDGs Nand non-
+negative vectors voverEN, and all  > 0, we
+have that [ [(N;v;v)] ]=GFE (N;v); consequently,
+[ [(N;v;v)] ]
+=fPr(N;v)g.
+The key step in proving Theorems 4.4 and 4.5 (and in the
+proofs of a number of other results) involves rewriting [ [M] ]
+as follows:
+Proposition 4.6. Lettingxwandywdenote the values of X
+andY, respectively, in w2V(M), we have
+[ [M] ]() =E
+w(X
+XL  !Ylog likelihood / cross entropyz}|{
+Llog1
+pL(ywjxw)+
+(L L) log1
+(ywjxw)|{z}
+local regularization (if L>L)
+ log1
+(w)|{z}
+global regularization)
+:(6)
+For a ﬁxed, the ﬁrst and last terms of (6)are equal to a
+scaled version of the free energy, GFE , if we setJ:=pL
+andJ:=L=. If, in addition, L=Lfor all edges L,
+then the local regularization term disappears, giving us the
+desired correspondence.
+Equation (6) also makes it clear that taking L=L
+for all edges Lis essentially necessary to get Theorems 4.2
+and 4.3. Of course, ﬁxed precludes taking the limit as 
+goes to 0, so Proposition 3.4 does apply. This is reﬂected in
+some strange behavior in factor graphs trying to capture the
+same phenomena as PDGs, as the following example shows.
+PSS
+SHC
+T
+PSS
+SHC
+1 1 TFigure 4: Conversion of the PDG in Example 2 to a factor graph according to Deﬁnition 4.2 (left), and from that factor graph
+back to a PDG by Deﬁnition 4.3 (right). In the latter, for each Jwe introduce a new variable XJ(displayed as a smaller darker
+rectangle), whose values are joint settings of the variables connected it, and also an edge 1!XJ(shown in blue), to which we
+associate the unconditional distribution given by normalizing J.
+Example 5. Consider the PDG Mcontaining just Xand1,
+and two edges p;q: 1!X. (Recall that such a PDG can
+arise if we get different information about the probability of
+Xfrom two different sources; this is a situation we certainly
+want to be able to capture!) Consider the simplest situation,
+wherepandqare both associated with the same distribution
+onX; further suppose that the agent is certain about the
+distribution, so p=q= 1. For deﬁniteness, suppose that
+V(X) =fx1;x2g, and that the distribution associated with
+both edges is :7, which ascribes probability :7tox1. Then,
+as we would hope [ [M] ]=f:7g; after all, both sources
+agree on the information. However, it can be shown that
+Pr	M=:85, so[ [M] ]
+1=f:85g. 
+Although both andare measures of conﬁdence, the
+way that the Gibbs free energy varies with is quite dif-
+ferent from the way that the score of a PDG varies with .
+The scoring function that we use for PDGs can be viewed
+as extending GFE ;by including the local regularization
+term. Asapproaches zero, the importance of the global
+regularization terms decreases relative to that of the local
+regularization term, so the PDG scoring function becomes
+quite different from Gibbs free energy.
+5 Discussion
+We have introduced PDGs, a powerful tool for representing
+probabilistic information. They have a number of advantages
+over other probablisitic graphical models.
+•They allow us to capture inconsistency, including con-
+ﬂicting information from multiple sources with varying
+degrees of reliability.
+•They are much more modular than other representations;
+for example, we can combine information from two
+sources by simply taking the union of two PDGs, and it is
+easy to add new information (edges) and features (nodes)
+without affecting previously-received information.
+•They allow for a clean separation between quantitiatve
+information (the cpds and weights ) and more qualita-
+tive information contained by the graph structure (and the
+weights); this is captured by the terms IncandIDef in
+our scoring function.
+•PDGs have (several) natural semantics; one of them allows
+us to pick out a unique distribution. Using this distrbution,PDGs can capture BNs and factor graphs. In the latter
+case, a simple parameter shift in the corresponding PDG
+eliminates arguably problematic behavior of a factor graph.
+We have only scratched the surface of what can be done
+with PDGs here. Two major issues that need to be tackled are
+inference and dynamics. How should we query a PDG for
+probabilistic information? How should we modify a PDG in
+light of new information or to make it more consistent? These
+issues turn out to be closely related. Due to space limitations,
+we just brieﬂy give some intuitions and examples here.
+Suppose that we want to compute the probability of Y
+givenXin a PDG M. For a cpdp(YjX), letM+pbe the
+PDG obtained by associating pwith a new edge in Mfrom
+XtoY, withp= 0. We judge the quality of a candidate
+answerpby the best possible score that M+pgives to any
+distribution (which we call the degree of inconsistency of
+M+p). It can be shown that the deegree of inconsistency is
+minimized by [ [M] ](YjX). Since the degree of inconsis-
+tency of M+pis smooth and strongly convex as a function
+ofp, we can compute its optimum values by standard gradi-
+ent methods. This approach is inefﬁcient as written (since it
+involves computing the full joint distribution [ [M+p] ]), but
+we believe that standard approximation techniques will allow
+us to draw inferences efﬁciently.
+To take another example, conditioning can be understood
+in terms of resolving inconsistencies in a PDG. To condition
+on an observation Y=y, given a situation described by a
+PDGM, we can add an edge from 1 1toYinM, annoted
+with the cpd that gives probability 1 to y, to get the (possibly
+inconsistent) PDG M+(Y=y). The distribution [ [M+(Y=y)] ]
+turns out to be the result of conditioning [ [M] ]onY=y. This
+account of conditioning generalizes without modiﬁcation to
+give Jeffrey’s Rule (Jeffrey 1968), a more general approach
+to belief updating.
+Issues of updating and inconsistency also arise in vari-
+ational inference. A variational autoencoder (Kingma and
+Welling 2013), for instance, is essentially three cpds: a prior
+p(Z), a decoderp(XjZ), and an encoder q(ZjX). Because
+two cpds target Z(and the cpds are inconsistent until fully
+trained), this situation can be represented by PDGs but not by
+other graphical models. We hope to report further on the deep
+connection between inference, updating, and the resolution
+of inconsistency in PDGs in future work.
+References
+Cover, T. M.; and Thomas, J. A. 1991. Elements of Informa-
+tion Theory . New York: Wiley.
+Halpern, J. Y .; and Leung, S. 2015. Weighted sets of probabil-
+ities and minimax weighted expected regret: new approaches
+for representing uncertainty and making decisions. Theory
+and Decision 79(3): 415–450.
+Jeffrey, R. C. 1968. Probable knowledge. In Lakatos, I., ed.,
+International Colloquium in the Philosophy of Science: The
+Problem of Inductive Logic , 157–185. Amsterdam: North-
+Holland.
+Kingma, D. P.; and Welling, M. 2013. Auto-Encoding Varia-
+tional Bayes.
+Koller, D.; and Friedman, N. 2009. Probabilistic Graphical
+Models . Cambridge, MA: MIT Press.
+Kschischang, F. R.; Frey, B. J.; and Loeliger, H. . 2001. Fac-
+tor graphs and the sum-product algorithm. IEEE Transactions
+on Information Theory 47(2): 498–519.
+MacKay, D. J. C. 2003. Information Theory, Inference and
+Learning Algorithms . Cambridge University Press.
+Mezard, M.; and Montanari, A. 2009. Information, physics,
+and computation . Oxford University Press.
+Pearl, J. 1988. Probabilistic Reasoning in Intelligent Systems .
+San Francisco: Morgan Kaufmann.
+Wainwright, M. J.; Jordan, M. I.; et al. 2008. Graphical mod-
+els, exponential families, and variational inference. Founda-
+tions and Trends in Machine Learning 1(1–2): 1–305.
+Ethics Statement
+Because PDGs are a recent theoretical development, there
+is a lot of guesswork in evaluating the impact. Here are two
+views of opposite polarity.
+5.1 Positive Impacts
+One can imagine many applications of enabling simple and
+coherent aggregation of (possibly inconsistent) information.
+In particular we can imagine using PDGs to build and inter-
+pret a communal and global database of statistical models, in
+a way that may not only enable more accurate predictions,
+but also highlights conﬂicts between information.
+This could have many beneﬁts. Suppose, for instance, that
+two researchers train models, but use datasets with different
+racial makeups. Rather than trying to get an uninterpretable
+model to “get it right” the ﬁrst time, we could simply high-
+light any such clashes and ﬂag them for review.
+Rather than trying to ensure fairness by design, which is
+both tricky and costly, we envision an alternative: simply
+aggregate (conﬂicting) statistically optimal results, and allow
+existing social structure to resolve conﬂicts, rather than send-
+ing researchers to ﬁddle with loss functions until they look
+fair.5.2 Negative Impacts
+We can also imagine less rosy outcomes. To the extent that
+PDGs can model and reason with inconsistency, if we adopt
+the attitude that a PDG need not wait until it is consistent
+to be used, it is not hard to imagine a world where a PDG
+gives biased and poorly-thought out conclusions. It is clear
+that PDGs need a great deal more vetting before they can be
+used for such important purposes as aggregating the world’s
+statistical knowledge.
+PDGs are powerful statistical models, but are by necessity
+semantically more complicated than many existing methods.
+This will likely restrict their accessibility. To mitigate this,
+we commit to making sure our work is widely accessible to
+researchers of different backgrounds.
+A Proofs
+For brevity, we use the standard notation and write (x;y)instead of(X=x;Y=y),(xjy)instead of(X=xjY=y),
+and so forth.
+A.1 Properties of Scoring Semantics
+In this section, we prove the properties of scoring functions that we mentioned in the main text, Propositions 3.1, 3.2, and 3.4.
+We repeat the statements for the reader’s convenience.
+Proposition 3.1. [ [M] ]sd=f: [ [M] ]0()=0gfor allM.
+Proof. By taking= 0, the score is just Inc. By deﬁnition, a distribution 2[ [M] ]sdsatisﬁes all the constraints, so (Y=
+ jX=x) =pL(x)for all edges X!Y2 EMandxwith(X=x)>0. By Gibbs inequality (MacKay 2003),
+I D((Yjx)kpL(x)) = 0 . Since this is true for all edges, we must have IncM() = 0 . Conversely, if  =2[ [M] ]sd, then it fails to
+marginalize to the cpd pLon some edge L, and so again by Gibbs inequality, I D((Yjx)kpL(x))>0. As relative entropy is
+non-negative, the sum of these terms over all edges must be positive as well, and so IncM()6= 0.
+Before proving the remaining results, we prove a lemma that will be useful in other contexts as well.
+Lemma A.1. IncM()is a convex function of .
+Proof. It is well known that I Dis convex (Cover and Thomas 1991, Theorem 2.7.2), in the sense that
+I D(q1+ (1 )q2kp1+ (1 )p2)I D(q1kp1) + (1 )I D(q2kp2):
+Given an edge L2EfromAtoBanda2V(A), and setting q1=q2=pL(a), we get that
+I D(pL(a)jjp1+ (1 )p2)I D(pL(a)jjp1) + (1 )I D(pL(a)jjp2):
+Since this is true for every aand edge, we can take a weighted sum of these inequalities for each aweighted by p(A=a); thus,
+E
+apAI D(pL(a)kp1+ (1 )p2)E
+apAI D(pL(a)kp1) + (1 )I D(pL(a)kp2):
+Taking a sum over all edges, we get that
+X
+(A;B)2EE
+apAI D(pL(a)kp1+ (1 )p2)X
+(A;B)2EE
+apAI D(pL(a)kp1) + (1 )I D(pL(a)kp2):
+It follows that
+IncM(p1) + (1 )p2)IncM(p1) + (1 )IncM(p2):
+Therefore, IncM()is a convex function of .
+The next proposition gives us a useful representation of [ [M] ].
+Proposition 4.6. Lettingxwandywdenote the values of XandY, respectively, in w2V(M), we have
+[ [M] ]() =E
+w(X
+XL  !Y
+Llog1
+pL(ywjxw)+ (L L) log1
+(ywjxw)
+ log1
+(w))
+:
+Proof. We use the more general formulation of IDef given in Section 4.3, in which each edge L’s conditional information is
+weighted by L.
+[ [M] ]() :=IncM() +IDefM()
+="X
+XL!YLE
+xXI D
+(YjX=x)pL(x)#
++"X
+XL!YLH(YjX) H()#
+=X
+XL!YE
+xXh
+LI D
+(Yjx)pL(Yjx)
++ LH(YjX=x)i
+ H()
+=X
+XL!YE
+xX2
+4L0
+@X
+y2V(Y)(yjx) log(yjx)
+pL(yjx)1
+A+L0
+@X
+y2V(Y)(yjx) log1
+(yjx)1
+A3
+5 H()
+=X
+XL!YE
+xX2
+4X
+y2V(Y)(yjx)
+Llog(yjx)
+pL(yjx)+Llog1
+(yjx)3
+5 H()
+=X
+XL!YE
+xX
+E
+y(YjX=x)
+Llog(yjx)
+pL(yjx)+Llog1
+(yjx)
+ X
+w2V(M)(w) log1
+(w)
+=X
+XL!YE
+x;yXY
+Llog(yjx)
+pL(yjx)+Llog1
+(yjx)
+ E
+w
+log1
+(w)
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx) Llog1
+(yjx)+Llog1
+(yjx))
+ E
+w
+log1
+(w)
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L L) log1
+(yjx)
+ log1
+(w))
+:
+We can now prove Proposition 3.2.
+Proposition 3.2. IfMis a PDG and 0<minLM
+L=M
+L, then [ [M] ]
+is a singleton.
+Proof. It sufﬁces to show that [ [M] ]is a strictly convex function of , since every strictly convex function has a unique minimum.
+Note that
+[ [M] ]() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L L) log1
+(yjx)
+ log1
+(w))
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L L) log1
+pL(yjx) (L L) log1
+(yjx)
+ log1
+(w))
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L L) log(yjx)
+pL(yjx)
+ log1
+(w))
+=X
+XL  !Y
+LE
+x;yXY
+log1
+pL(yjx)
++ (L L)E
+xXI D
+(Yjx)pL(x)
+ H():
+The ﬁrst term, Ex;yXY[ logpL(yjx)]is linear in, aspL(yjx)does not depend on . As for the second term, it is
+well-known that KL divergence is convex, in the sense that
+I D(q1+ (1 )q2kp1+ (1 )p2)I D(q1kp1) + (1 )I D(q2kp2):
+Therefore, for a distribution on Y, settingp1=p2=pL(x), for all conditional marginals 1(YjX=x)and2(YjX=x),
+I D(1(Yjx) + (1 )2(Yjx)kpL(x))I D(1(Yjx)kpL(x)) + (1 )I D(2(Yjx)kpL(x)):
+SoI D((Yjx)kpL(x))is convex. As convex combinations of convex functions are convex, the second term,
+ExXI D((Yjx)kpL(x)), is convex. Finally, negative entropy is well known to be strictly convex.
+Any non-negative linear combinations of the three terms is convex, and if this combination applies a positive coefﬁcient to the
+(strictly convex) negative entropy, it must be strictly convex. Therefore, as long as Lfor all edges L2EM,[ [M] ]is strictly
+convex. The result follows.
+We next prove Proposition 3.3. The ﬁrst step is provided by the following lemma.
+Lemma A.2. lim
+!0[ [M] ]
+[ [M] ]
+0.
+Proof. Since IDefMis a ﬁnite weighted sum of entropies and conditional entropies over the variables NM, which have ﬁnite
+support, it is bounded. Thus, there exist bounds kandKdepending only on NMandVM, such thatkIDefM()Kfor all
+. Since [ [M] ]=IncM+IDefM, it follows that, for all 2V(M), we have
+IncM() +k[ [M] ]()IncM() +K:
+For a ﬁxed, since this inequality holds for all , and both IncandIDef are bounded below, it must be the case that
+min
+2V(M)h
+IncM() +ki
+ min
+2V(M)[ [M] ]() min
+2V(M)h
+IncM() +Ki
+;
+even though the distributions that minimize each expression will in general be different. Let Inc(M) = minIncM(). Since
+V(M)is compact, the minimum of the middle term is achieved. Therefore, for 2[ [M] ]
+()that minimizes it, we have
+Inc(M) +k[ [M] ]()Inc(M) +K
+for all0:Now taking the limit as !0from above, we get that Inc(M) = [ [M] ]0(). Thus,2[ [M] ]
+0, as desired.
+We now apply Lemma A.2 to show that the limit as !0is unique, as stated in Proposition 3.3.
+Proposition 3.3. For allM,lim!0[ [M] ]
+is a singleton.
+Proof. First we show that lim!0[ [M] ]
+cannot be empty. Let (n) =1;2;:::be a sequence of positive reals converging to
+zero. For all n, choose some n2[ [M] ]
+n. Because V(M)is a compact metric space, it is sequentially compact, and so, by
+the Bolzano–Weierstrass Theorem, the sequence (n)has at least one accumulation point, say . By our deﬁnition of the limit,
+2lim!0[ [M] ]
+, as witnessed by the sequence (n;n)n. It follows that lim!0[ [M] ]
+6=;.
+Now, choose 1;22lim!0[ [M] ]
+. Thus, there are subsequences (i)and(j)of(n)converging to 1and2, respectively.
+By Lemma A.2, 1;22[ [M] ]
+0, soIncM(1) =IncM(2). Because (jn)!1,(kn)!2, and IDefMis continuous on
+V(M), we conclude that (IDefM(i))!IDefM(1)and(IDefM(j))!IDefM(2).
+Suppose that IDefM(1)6=IDefM(2). Without loss of generality, suppose that IDefM(1)>IDefM(2). Since
+(IDefM(i))!IDefM(1), there exists some i2Nsuch that for all i > i,IDefM(i)>IDefM(2). But then for
+allandi>i, we have
+[ [M] ](i) =Inc(i) +IDefM(i)>Inc(2) +IDefM(2) = [ [M] ](2);
+contradicting the assumption that iminimizes [ [M] ]i. We thus conclude that we cannot have IDefM(1)>IDefM(2). By the
+same argument, we also cannot have IDefM(1)<IDefM(2), soIDefM(1) =IDefM(2).
+Now, suppose that 1and2distinct. Since [ [M] ]is strictly convex for  >0, among the possible convex combinations of 1
+and2, the distribution 3=1+ (1 )2that minimizes [ [M] ]must lie strictly between 1and2. Because Incitself is
+convex and IncM(1) =IncM(2) =:v, we must have IncM(3)v. But since1;22[ [M] ]
+0minimize Inc, we must have
+IncM(3)v. Thus, IncM(3) =v. Now, because, for all  >0,
+[ [M] ](3) =v+IDefM(3)<v+IDefM(1) = [ [M] ](1);
+it must be the case that IDefM(3)<IDefM(1).
+We can now get a contradiction by applying the same argument as that used to show that IDefM(1) =IDefM(2). Because
+(i)!1, there exists some isuch that for all i>i, we have IDefM(i)>IDefM(3). Thus, for all i>iand all >0,
+[ [M] ](i) =Inc(i) +IDefM(i)>Inc(3) +IDefM(3) = [ [M] ](3);
+again contradicting the assumption that iminimizes [ [M] ]i. Thus, our supposition that 1was distinct from 2cannot hold, and
+solim!0[ [M] ]
+must be a singleton, as desired.
+Finally, Proposition 3.4 is a simple corollary of Lemma A.2 and Proposition 3.3, as we now show.
+Proposition 3.4. [ [M] ]2[ [M] ]
+0, so ifMis consistent, then [ [M] ]2[ [M] ]sd.
+Proof. By Proposition 3.3, lim!0[ [M] ]
+is a singleton. As in the body of the paper, we refer to its unique element by [ [M] ]
+Lemma A.2 therefore immediately gives us [ [M] ]2[ [M] ]
+0.
+IfMis consistent, then by Proposition 3.1, Inc(M) = 0 , so[ [M] ]0([ [M] ]) = 0 , and thus [ [M] ]2[ [M] ]sd.
+A.2 PDGs as Bayesian Networks
+In this section, we prove Theorem 4.1. We start by recounting some standard results and notation, all of which can be found in a
+standard introduction to information theory (e.g., (MacKay 2003, Chapter 1)).
+First, note that just as we introduced new variables to model joint dependence in PDGs, we can view a ﬁnite collection
+X=X1;:::;Xnof random variables, where each Xihas the same sample space, as itself a random variable, taking the value
+(x1;:::;xn)iff eachXitakes the value xi. Doing so allows us to avoid cumbersome and ultimately irrelevant notation which
+treats sets of raomd variables differently, and requires lots of unnecessary braces, bold face, and uniqueness issues. Note the
+notational convention that the joint variable X;Y may be indicated by a comma.
+Deﬁnition A.1 (Conditional Independence) .IfX,Y, andZare random variables, and is a distribution over them, then X
+isconditionally independent of ZgivenY, (according to ), denoted ‘X? ?ZjY, iff for allx;y;z2V(X;Y;Z ), we have
+(xjy)(zjy) =(x;zjy). 
+Fact A.3 (Entropy Chain Rule) .IfXandYare random variables, then the entropy of the joint variable (X;Y )can be written
+asH(X;Y ) = H(YjX) + H(X). It follows that if is a distribution over the nvariablesX1;:::;Xn, then
+H() =nX
+i=1H(XijX1;:::Xi 1):
+Deﬁnition A.2 (Conditional Mutual Information) .Theconditional mutual information between two (sets of) random variables
+is deﬁned as
+I(X;YjZ) :=X
+x;y;z2V(X;Y;Z )(x;y;z ) log(z)(x;y;z )
+(x;z)(y;z):
+
+Fact A.4 (Properties of Conditional Mutual Information) .For random variables X;Y , andZover a common set of outcomes,
+distributed according to a distribution , the following properties hold:
+1.(difference identity) I(X;YjZ) = H(XjY) H(XjY;Z);
+2.(non-negativity) I(X;YjZ)0;
+3.(relation to independence) I(X;YjZ) = 0 iffX? ?ZjY.
+We now provide the formal details of the transformation of a BN into a PDG.
+Deﬁnition A.3 (Transformation of a BN to a PDG) .Recall that a (quantitative) Bayesian Network (G;f)consists of two parts:
+its qualitative graphical structure G, described by a dag, and its quantitative data f, an assignment of a cpd pi(XijPa(Xi))to
+each variable Xi. IfBis a Bayesian network on random variables X1;:::;Xn, we construct the corresponding PDG MBas
+follows: we takeN:=fX1;:::;Xng[fPa(X1);:::;Pa(Xn)g. That is, the variables of MBconsist of all the variables in B
+together with a variable corresponding to the parents of Xi. (This will be used to deal with the hyperedges.) The values V(Xi)for
+a random variable Xiare unchanged, (i.e., VMB(fXig) :=V(Xi)) andVMB(Pa(Xi)) :=Q
+Y2Pa(Xi)V(Y)(ifPa(Xi) =;,
+so thatXihas no parents, then we then we identify Pa(Xi)with1 1and takeV(Pa(Xi)) =f?g). We take the set of edges
+EMB:=f(Pa(Xi);Xi) :i= 1;:::;ng[f (Pai;Y) :Y2Pa(Xi)gto be the set of edges to a variable Xifrom its parents,
+together with an edge from from Pa(Xi)to each of the elements of Pa(Xi), fori= 1;:::;n . Finally, we set pMB
+(Pa(Xi);Xi)to
+be the cpd associated with XiinB, and for each node Xj2Pa(Xi), we deﬁne
+pMB
+(Pa(Xi);Xj)(:::;xj;:::) =xj;
+that is, pMB;
+(Pa(Xi);Xj)is the the cpd on Xjthat, given a setting (:::;xj;:::)ofPa(Xi), yields the distribution that puts all mass
+onxj. 
+LetXbe the variables of some BN B, andM= (N;E;V;p;)be the PDG MB. Because the setNof variables in MB;
+includes variables of the form Pa(Xi), it is a strict superset of X=fX1;:::;Xng, the set of variables of B. For the purposes
+of this theorem, we identify a distribution XoverXwith the unique distribution PrBwhose marginal on the variables in Xis
+Xsuch that ifXj2Pa(Xi), thenN(Xj=x0
+jjPa(Xi) = (:::;xj;:::)) = 1 iffxj=x0
+j. In the argument below, we abuse
+notation, dropping the the subscripts XandNon a distribution .
+Theorem 4.1. IfBis a Bayesian network and PrBis the distribution it speciﬁes, then for all  >0and all vectors such that
+L>0for all edges L,[ [MB;] ]
+=fPrBg, and thus [ [MB;] ]= PrB.
+Proof. For the cpdp(XijPa(Xi))associated to a node XiinB, we have that PrB(XijPa(Xi)) =p(XijPa(Xi)). For all
+nodesXiinBandXj2Pa(Xi), by construcction, PrB, when viewed as a distribution on N, is also with the cpd on the edge
+fromPa(Xi)toXj. Thus, PrBis consistent with all the cpds in MB;; soIncMB;(PrB) = 0 .
+We next want to show that IDefMB;()0for all distributions . To do this, we ﬁrst need some deﬁnitions. Let be a
+permutation of 1;:::;n . Deﬁne an orderby takingjiifjprecedesiin the permutation; that is, if  1(j)¡ 1(i). Say
+that a permutation is compatible withBifXj2Pa(Xi)impliesji. There is at least one permutation compatible with B,
+since the graph underlying Bis acyclic.
+Consider an arbitrary distribution over the variables in X(which we also view as a distribution over the variables in N, as
+discussed above). Recall from Deﬁnition A.3 that the cpd on the edge in MB;fromPa(Xi)toXiis just the cpd associated
+withXiinB, while the cpd on the edge in MB;fromPa(Xi)toXj2Pa(Xi)consists only of deterministic distributions (i.e.,
+ones that put probability 1 on one element), which all have entropy 0. Thus,
+X
+XL!Y2EMBH(YjX) =nX
+i=1H(XijPa(Xi)): (7)
+Given a permutation , letXi=fXj:jig. Observe that
+IDefMB;() =2
+4X
+XL!Y2EMBH(YjX)3
+5 H()
+=nX
+i=1H(XijPa(Xi)) nX
+i=1H(XijXi) [by Fact A.3 and (7)]
+=nX
+i=1h
+H(XijPa(Xi)) H(XijXi)i
+=nX
+i=1I
+Xi;XinPa(Xi)Pa(Xi)
+: [by Fact A.4]
+Using Fact A.4, it now follows that, for all distributions ,IDefMB()0. Furthermore, for all and permutations ,
+IDefMB() = 0 iff8i:Xi? ?Xi: (8)
+Since the left-hand side of (8) is independent of , it follows that Xiis independent of Xifor some permutation iffXiis
+independent of Xifor every permutation . Since there is a permutation compatible with B, we get that IDefMB;(PrB) = 0 .
+We have now shown that that IDefMB;andIncare non-negative functions of , and both are zero at Pr0B. Thus, for all 0
+and all vectors , we have that [ [MB;] ](PrB)[ [MB;] ]()for all distributions . We complete the proof by showing that if
+6= PrB, then [ [MB;] ]()>0for >0.
+So suppose that 6= PrB. Thenmust also match each cpd of B, for otherwise IncMB;()>0, and we are done. Because
+PrBis the unique distribution that matches the both the cpds and independencies of B,must not have all of the independencies
+ofB. Thus, some variable Xi,Xiis not independent of some nondescendant XjinBwith respect to . There must be some
+permutation of the variables inXcompatible withBsuch thatXjXi(e.g., we can start with Xjand its ancestors, and then
+add the remaining variables appropriately). Thus, it is not the case that Xiis independent of X;i, so by (8), IDefMB()>0.
+This completes the proof.
+A.3 Factor Graph Proofs
+Theorems 4.2 and 4.3 are immediate corolaries of their more general counterparts, Theorems 4.4 and 4.5, which we now prove.
+Theorem 4.5. For all unweighted PDGs Nand non-negative vectors voverEN, and all >0, we have that [ [(N;v;v)] ]=
+GFE (N;v); consequently, [ [(N;v;v)] ]
+=fPr(N;v)g.
+Proof. LetM:= (N;v;v)be the PDG in question. Explicitly, M
+L=vLandM
+L=vL. By Proposition 4.6,
+[ [M] ]() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L L) log1
+(yjx)
+ log1
+(w))
+:
+LetfLgL2E:= Ndenote the factors of the factor graph associated with M. Because we have L=L, the middle term
+cancels, leaving us with
+[ [M] ]() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)
+ log1
+(w))
+=E
+w(X
+XL  !Y
+vLlog1
+(x;y)
+ log1
+(w))
+[asL=vL]
+=E
+w(X
+XL  !Y
+vLlog1
+(x;y)
+ log1
+(w))
+=GFE (N;v):
+It immediately follows that the associated factor graph has [ [M] ]
+=fPr(M)g, because the free energy is clearly a constant plus
+the KL divergence from its associated probability distribution.
+Theorem 4.2. For all WFGs 	 = (;)and all >0, we have that GFE 	=1=[ [M	;] ]+Cfor some constant C, soPr	is
+the unique element of [ [M	;] ]
+.
+Proof. InM	;, there is an edge 1!XJfor everyJ2J, and also edges XJ! !Xjfor eachXj2XJ. Because the latter
+edges are deterministic, a distribution that is not consistent with one of the edges, say XJ! !Xj, hasIncM() =1. This is a
+property of relative entropy: if there exist j2V(Xj)andz2V(J)such that z
+J6=jandplaces positive probability on
+their co-occurance (i.e., (j;z)>0), then we would have
+E
+zJI D
+(XjjXJ=z) 1[Xj=zj]
+=X
+z2V(XJ);
+2V(Xj)(z;) log(jz)
+1[zj=](z;j) log(jjz)
+1[z
+j=j]=1:
+Consequently, a distribution that does not satisfy the the projections has [ [M	;] ]() =1for every. Thus, a distribution
+that has a ﬁnite score must match the constraints, so we can identify such a distribution with its restriction to the original variables
+of. Moreover, for all distributions with ﬁnite score and projections XJ! !Xj, the conditional entropy H(XjjXJ) =
+ Elog((xjjxJ))and divergence from the constraints are both zero. Therefore the per-edge terms for both IDefMandIncM
+can be safely ignored for the projections. Let pJbe the normalized distribution1
+ZJJoverXJ, whereZJ=P
+xJJ(xJ)is the
+appropriate normalization constant. By Deﬁnition 4.4, we have M	;= (N;; ), so by Proposition 4.6,
+[ [M	;] ]() =E
+x(X
+J2J
+Jlog1
+pJ(xJ)+ (J J) log1
+(xJ)
+ log1
+(x))
+=E
+x(X
+J2J
+(J) log1
+pJ(xJ)+ (J J) log1
+(xJ)
+ log1
+(x))
+=E
+x(X
+J2J
+Jlog1
+pJ(xJ)
+ log1
+(x))
+=E
+x(X
+J2JJlogZJ
+J(xJ) log1
+(x))
+=E
+x(X
+J2JJ
+log1
+J(xJ)+ logZJ
+ log1
+(x))
+=E
+x(X
+J2JJlog1
+J(xJ) log1
+(x))
++X
+J2JJlogZJ
+=GFE 	+klogY
+JZJ;
+which differs from GFE 	by the valueP
+JJlogZJ, which is constant in .

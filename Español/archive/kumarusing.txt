@@ -1,0 +1,705 @@
+Uso del lenguaje natural para guiar a los agentes de metaaprendizaje hacia
+sesgos inductivos semejantes a los humanos
+Sreejan Kumar1, Ishita Dasgupta2, Michael Hu1, Raja Marjieh1, Robert D. Hawkins1,
+Nathaniel D. Daw1, Jonathan D. Cohen1, Karthik Narasimhan1, y Thomas L. Griffiths1
+1Princeton University
+2Deepmind
+Resumen
+Los sesgos inductivos son un componente clave de la
+inteligencia humana, que permite a las personas adquirir, repre-
+sentar y usar conocimiento abstracto. Aunque
+el metaaprendizaje ha surgido como un enfoque para
+dotar a las redes neuronales de sesgos inductivos; sin embargo, los
+agentes entrenados mediante metaaprendizaje pueden usar
+estrategias muy distintas a las de los humanos.
+Mostramos que entrenar conjuntamente a estos agentes para pre-
+decir descripciones de tareas en lenguaje natural generadas por humanos
+los guía hacia sesgos inductivos semejantes a los humanos que
+capturan con mayor precisión
+la estructura de la distribución de tareas tal como la ven los humanos.
+Además, mostramos que el nivel de abstracción
+con el que los humanos escriben estas descripciones
+influye en la magnitud del efecto. Este trabajo
+sienta las bases para investigar cómo
+recopilar descripciones de tareas al nivel de abstracción
+adecuado para aprovecharlas en la aproximación
+del aprendizaje de representaciones estructuradas semejante al humano
+en redes neuronales.
+1 Introducción
+Los aprendices humanos se guían por fuertes sesgos inductivos
+hacia el conocimiento abstracto (Tenenbaum
+et al., 2011; Griffiths et al., 2010); estos sesgos
+constituyen una de las diferencias más notorias entre
+los humanos y los aprendices basados en redes neuronales (Lake
+et al., 2017). Un enfoque emergente para dotar
+de sesgos inductivos semejantes a los humanos a las redes neuronales es
+el metaaprendizaje (Griffiths et al., 2019; Hospedales
+et al., 2020). En los paradigmas de metaaprendizaje, un agente
+se entrena no solo con una única tarea sino con una distribución de
+tareas, con el objetivo de adquirir las
+abstracciones subyacentes que estas tareas comparten
+. Sin embargo, como las redes neuronales no son
+fácilmente interpretables, puede ser difícil saber si la
+red neuronal resultante adquirió realmente este
+conocimiento abstracto o si simplemente
+aprendió artefactos estadísticos correlacionados con reglas
+abstractas. Recientemente, Kumar et al. (2021) encontraron que
+los agentes neuronales tienden a aprender esto último.
+En concreto, mediante el uso de una distribución de tareas generada a partir de una gramática composicional abstracta
+y una distribución de tareas de control correspondiente con
+estadísticas muy similares; hallaron que los agentes rinden mejor
+en la distribución de control, mientras que los humanos
+rinden mejor en la distribución abstracta, lo que demuestra
+una diferencia en los sesgos inductivos entre
+humanos y agentes.
+¿Qué explica estas diferencias? Una posibilidad
+es que los sesgos humanos hacia la estructura abstracta
+estén relacionados con nuestra capacidad lingüística (Spelke,
+2003; Lupyan y Bergen, 2016). De hecho, trabajos recientes
+en aprendizaje automático han revelado cómo las redes
+neuronales pueden moldear y estructurar sus representaciones
+mediante la supervisión en lenguaje natural (An-
+dreas et al., 2018; Luketina et al., 2019; Wong et al.,
+2021; Narasimhan et al., 2018; Mu et al., 2020).
+En este trabajo mostramos que guiar a los agentes de meta-
+aprendizaje por refuerzo con descripciones en lenguaje natural
+no solo aumenta el desempeño
+en distribuciones de tareas abstractas, sino que también produce
+un comportamiento más humano: disminuye el desempeño
+en distribuciones de tareas de control en las que los humanos
+rinden mal. Además, mientras que buena parte del trabajo sobre aprendizaje por refuerzo guiado por lenguaje
+se centra en descripciones sintéticas,
+investigamos distintos tipos de descripciones generadas por humanos.
+Recopilamos descripciones humanas en
+distintos niveles de abstracción y encontramos que la guía
+con descripciones más abstractas conduce a sesgos inductivos más
+semejantes a los humanos en los agentes.
+Nuestro enfoque consiste primero en extender y replicar los
+resultados de Kumar et al. (2021). En concreto, en lugar
+de desarrollar una distribución de tareas abstracta usando
+reglas escritas a mano como en Kumar et al. (2021), proyectamos
+directamente los priors humanos sobre una distribución de tareas
+(véase la Fig. 1B). Luego evaluamos la capacidad de un agente de meta-RL
+para adquirir los priors abstractos emergentes de esta distribución de tareas
+construyendo una distribución de tareas de control con
+el mismo enfoque que Kumar et al. (2021) (véase la Fig.
+1C). Replicamos el efecto de doble disociación
+observado en Kumar et al. (2021) (Fig. 1E) y luego
+mostramos además que podemos guiar al agente hacia
+Tablero subyacente Inicio Paso 1 Paso 2 Paso 3 Paso 4 Paso 10
+Objetivo: descubrir todas las rojas con
+ el menor número posible de azules. Tarea RL 
+Paradigma A
+...
+¿Qué color debería 
+tener la casilla blanca 
+dado que el 
+tablero se genera 
+con una regla muy simple? Muestreo de Gibbs con personas B
+Entrenar una red para predecir la casilla omitida. Muestreo desde el sesgo inductivo humano. Muestreo desde el sesgo inductivo de la red neuronal C
+Usar la red para el muestreo de Gibbs. Muestrear de 
+la distribución humana
+y enmascarar la casilla. Rellenar la casilla 
+enmascarada
+Inicialización aleatoria
+Muestras humanas
+Muestras de control D. Desempeño en la tarea ERL
+Muestra de control. Generada por humanos
+(GSP). Generada por máquina
+(Control)
+Distribución de tareas. Casillas azules reveladas (puntuación z) 
+según la heurística del vecino más cercano. Figura 1: Paradigma de tarea meta-RL. (A) En la tarea de revelar casillas, un agente revela secuencialmente casillas para descubrir
+una imagen en una cuadrícula 2D. Obtenemos (B) los priors humanos y (C) los priors de control sobre la distribución de tareas mediante muestreo de Gibbs
+(Geman y Geman, 1984). (D) Muestras de las distribuciones humana y de control. (E) Desempeño de
+humanos (independientes) y agentes de aprendizaje automático en la tarea de revelar casillas con tableros humanos y de control.
+El desempeño se basa en el número de casillas azules reveladas (cuanto menor, mejor; véase el apéndice para más detalles). Las barras de error son
+intervalos de confianza del 95%.
+el aprendizaje de un sesgo inductivo semejante al humano mediante el
+uso de coentrenamiento supervisado con lenguaje natural.
+2 Métodos
+Tarea de revelar casillas. Empleamos el paradigma de la tarea de
+revelar casillas desarrollado en Kumar et al.
+(2021) (véase la Fig. 1A). La observación es una cuadrícula de 4×4
+casillas que inicialmente son blancas, salvo una
+casilla roja. Las acciones (hacer clic en casillas blancas) revelan
+esas casillas como rojas o azules. El episodio
+termina cuando el agente revela todas las casillas rojas. Hay
+una recompensa por cada casilla roja revelada y una penalización
+por cada casilla azul revelada. Por tanto, el objetivo es
+revelar todas las casillas rojas revelando la menor cantidad posible de
+casillas azules. Un “tablero” con una configuración fija
+de casillas rojas define una única tarea. Una
+distribución sobre tareas se define especificando una
+distribución sobre distintas cuadrículas de 4×4 de casillas rojas y
+azules (tableros).
+Obtención de priors humanos mediante muestreo de Gibbs.
+Para obtener los sesgos inductivos humanos, usamos
+una técnica llamada Muestreo de Gibbs con personas
+(GSP; Harrison et al., 2020, véase la Fig. 1B). Inicializamos
+una cuadrícula aleatoria de 4×4 con casillas rojas y azules,
+enmascaramos una casilla y pedimos a un participante humano que
+prediga el color de la casilla enmascarada. Luego
+cambiamos esa casilla para que coincida con la predicción humana
+y presentamos la cuadrícula actualizada a otro participante,
+enmascarando otra casilla distinta. Esta secuencia de
+decisiones implementa una cadena de Markov; la distribución
+estacionaria de esta cadena es la distribución de priors implícita
+que las personas tienen sobre las coloraciones de cuadrículas de 4×4 (Har-
+rison et al., 2020). Surgen varios conceptos abstractos reconocibles
+en las cuadrículas resultantes, como líneas, cuadrados y formas continuas
+(véase la Fig. 1D).
+Construcción de una distribución de control. Creamos
+una distribución de control, siguiendo a Kumar et al.
+2021, que iguala las estadísticas de los tableros GSP
+pero usa un proceso generativo subyacente distinto
+(es decir, no producido por decisiones humanas; véase la Fig. 1C).
+En concreto, entrenamos una red neuronal totalmente conectada
+para codificar las distribuciones condicionales de los
+tableros GSP: enmascaramos una casilla aleatoria en cada
+tablero y entrenamos la red para predecir su valor
+dadas las demás casillas (similar a los modelos de lenguaje
+enmascarado; Devlin et al., 2018). Luego muestreamos
+tableros a partir de las condicionales aprendidas por la red
+mediante muestreo de Gibbs. Es el mismo proceso
+que usamos para generar los tableros GSP, pero usando la
+red neuronal entrenada para generar las distribuciones condicionales
+en lugar de muestras humanas. Por tanto, muestreamos
+de la distribución que la red asigna a las
+cuadrículas de 4×4 (combinando su propio
+sesgo inductivo y los datos de los tableros GSP).
+Nos referimos a esta distribución como “control”, la distribución de control.
+ción, que se compone de tareas generadas
+con procesos generativos subyacentes distintos pero
+que comparten ciertas propiedades estadísticas.
+Recopilación de descripciones en lenguaje natural. Partimos
+de la hipótesis de que las descripciones lingüísticas de los
+tableros GSP podrían ayudar a guiar el sesgo inductivo del agente
+hacia abstracciones más semejantes a las humanas. Para probar esta
+hipótesis, recopilamos descripciones en lenguaje natural
+de 500 tableros GSP de un grupo ingenuo de
+participantes. Se recopilaron tres tipos de descrip-
+ciones: dos generadas por humanos
+Instrucción de nivel alto: sé conciso. 
+• “Una forma de U”
+• “Una letra U ancha”
+Instrucción de nivel bajo: sé lo más detallado posible
+• “Grupo en forma de cuadrado de casillas blancas hacia la zona superior-media. 
+Una formación de casillas rojas con forma de mesa invertida. ”
+• “Las casillas roja y blanca representan el 50 por ciento de la 
+imagen. ’ , 'Una gran cuadrícula formada por 16 cuadrados de igual tamaño. 
+8 de ellos están coloreados de rojo. Las rojas llenan la fila 3 
+hacia abajo y las 3 de arriba de la columna 1 y de la columna 4' , 'cuadrados en 
+forma de U'”
+Plantilla sintética de nivel bajo
+• “Las rojas están en la primera fila y la primera columna, la primera fila y 
+la cuarta columna, la segunda fila y la primera columna, la segunda fila 
+y la cuarta columna, la tercera fila y la primera columna, la tercera fila 
+y la segunda columna, la tercera fila y la tercera columna, la tercera fila 
+y la cuarta columna. ” Estímulo del tablero. Figura 2: Tipos de descripciones de texto obtenidas para
+los tableros GSP. Obtuvimos tres tipos de descripciones
+de 500 de los tableros GSP: de nivel alto, de nivel bajo y
+de nivel bajo sintéticas. Las dos primeras se recopilaron directamente
+de humanos mediante distintos tipos de instrucciones que enfatizaban
+la concisión y el detalle, respectivamente. La tercera
+se generó a partir de una plantilla hecha a mano que verbaliza
+la ubicación de las casillas rojas. Al mostrar a los participantes los
+tableros, convertimos las casillas azules en blancas para
+que centraran su descripción en la ubicación de las
+casillas rojas.
+con distintas instrucciones, y una sintética
+generada mediante una plantilla (véase la Fig. 2 y el
+apéndice para la redacción exacta de las instrucciones). Las descripciones de
+nivel alto se recopilaron de humanos a quienes
+se les dio una instrucción que fomentaba la concisión
+en las descripciones. Las descripciones de nivel bajo se recopilaron
+de humanos a quienes se les dio una instrucción que
+fomentaba ser prolijo y detallado. Las descripciones sintéticas de
+nivel bajo no son generadas por humanos y se obtuvieron
+mediante una plantilla escrita a mano que
+verbaliza la ubicación de todas las casillas rojas.
+Anclaje de agentes mediante descripciones. Entrenamos
+un agente de meta-aprendizaje por refuerzo basado en RNN, de uso
+común (Wang et al., 2018; Duan et al.,
+2016), usando Proximal Policy Optimization (PPO;
+Schulman et al. (2017)). Véanse la Fig. 3 y el apéndice
+para más detalles.
+Para guiar al agente hacia un aprendizaje de
+sesgo inductivo semejante al humano, introducimos un término de anclaje lingüístico
+en la función de pérdida: pérdida = LPPO(θ) +
+clangLlang(ˆψθ, ψ). Aquí LPPO(θ) es la
+Observación 
+x(t)enca(t-1)
+V
+πenc(x(t))
+Subyacente 
+Tablero
+“Una forma de U”
+Tablero 
+DescripciónBERT
+r(t-1)
+Incrustación BERT. Anclaje
+Tarea RL. Figura 3: Arquitectura de anclaje. Un codificador CNN ob-
+serva el estado del tablero y lo pasa a una red de política LSTM
+de política condicionada por la acción del paso anterior
+y la recompensa. El agente predice simultáneamente
+la incrustación BERT de la descripción lingüística
+correspondiente usando el codificador.
+de la función de pérdida PPO; clang es un coeficiente hiperparamétrico
+que pondera la pérdida lingüística Llang,ψ
+; ψ es el atributo lingüístico y ˆψθ es la
+predicción del agente sobre el atributo lingüístico. Optimizar
+una tarea lingüística auxiliar junto con la tarea original
+ha demostrado previamente moldear las
+representaciones latentes usadas en la tarea original (Mu et al.,
+2020; Lampinen et al., 2021).
+En nuestro estudio, ψ es la incrustación BERT de la
+descripción lingüística correspondiente del tablero revelado
+, obtenida con el paquete SentenceTransformer
+(https://www.sbert.net/ , basado en
+Reimers y Gurevych (2019)). ˆψθ se genera
+usando una red pequeña (MLP de dos capas) sobre
+la codificación del tablero compartida con la tarea RL (véase
+la Figura 3). Llang es el MSE entre la
+incrustación BERT predicha y la real de la descripción
+lingüística.
+3 Resultados
+Entrenamos a todos los agentes con los tableros GSP (véase el Ap-
+éndice para más detalles) y los evaluamos con tableros GSP y de control
+reservados para prueba. Luego comparamos este
+desempeño en prueba con el desempeño humano
+en esos tableros de prueba (véase la Fig. 1E). El desem-
+peño se basa en el número de casillas azules reveladas
+en el episodio, normalizado en puntuación z según el desempeño de una
+heurística del vecino más cercano; por tanto, cuanto menor, mejor (véase
+el apéndice). Los resultados se muestran en la Fig. 4. Primero, al examinar
+el desempeño de los participantes humanos y de los
+agentes no lingüísticos, observamos el mismo
+resultado de doble disociación encontrado por Kumar et al. (2021):
+los humanos rinden mejor en la distribución de tareas abstracta
+y los agentes rinden mejor en la distribución de tareas de control.
+Luego examinamos los agentes que fueron
+entrenados conjuntamente con una pérdida lingüística Llang en tres tipos
+distintos de datos lingüísticos: de nivel bajo, de nivel alto
+y de nivel bajo sintéticos (véase la Fig. 2 para ejemplos
+de los distintos tipos de datos lingüísticos). Como última
+línea base, también consideramos un agente autoencoder
+entrenado para predecir el estado subyacente del tablero (es decir,
+qué casillas son rojas o azules) en lugar de
+el atributo lingüístico correspondiente del tablero.
+Desempeño en la tarea RL
+Generada por humanos (GSP). Distribución de tareas
+Generada por máquina (Control)
+Casillas azules reveladas, en puntuación z según 
+la heurística del vecino más cercano
+Figura 4: Experimento con agentes anclados en lenguaje
+Resultados. Desempeño de distintos agentes en tareas de prueba
+para cada distribución de tareas, usando agentes entrenados conjuntamente con
+el objetivo lingüístico. Como en la Fig. 1, el desempeño se
+evalúa mediante la puntuación z del número de casillas azules reveladas
+(cuanto menor, mejor) respecto de la heurística del vecino más cercano.
+Las barras de error son intervalos de confianza del 95%.
+Nos propusimos probar si el anclaje en descripciones en lenguaje natural
+generadas por humanos da lugar a
+que nuestro agente de meta-RL produzca un desempeño más
+semejante al humano. Sabemos que los humanos rinden mejor en
+los tableros GSP que en los de control (Fig. 1), mientras que
+los agentes genéricos hacen lo contrario. Un agente que rinde
+mejor en los tableros GSP y peor en los
+de control indica, por tanto, un comportamiento más
+humano.
+Vemos que el anclaje en descripciones generadas por humanos
+conduce a un sesgo inductivo semejante al humano
+(barras de nivel bajo y alto de la Fig. 4). Cada uno de ellos rinde
+mejor en los tableros GSP que en los de control,
+igual que los humanos. En cambio, aunque el agente autoencoder
+(que no usa lenguaje) rinde
+sustancialmente mejor en los tableros GSP que el
+agente original, su pérdida de anclaje autoencoder también
+mejora su desempeño en los tableros de control, lo que
+indica que su mejora de desempeño respecto del agente original no proviene de adquirir un
+sesgo inductivo semejante al humano (pero podría ser un interesante
+sesgo inductivo en sí mismo). También encontramos que
+el anclaje en texto sintético no parece
+conducir a adquirir sesgos inductivos semejantes a los humanos, ya
+que el agente que usa texto sintético de nivel bajo
+se parece mucho al autoencoder y rinde mejor en
+la distribución de control que en la distribución GSP.
+También encontramos que el nivel de abstracción con el que los
+humanos escriben sus descripciones influye
+en el sesgo inductivo que adquiere el agente, como indican
+las diferencias de desempeño entre los agentes anclados de nivel bajo y
+de nivel alto. En todas las descripciones
+(incluso en las de nivel bajo), los humanos escriben sobre conceptos abs-
+tractos (p. ej., “cuadrados”, “casillas”, “grupos”,
+etc.). Estos conceptos abstractos están más presentes en
+las descripciones de nivel alto, ya que permiten a los humanos ser
+lo más concisos posible en sus descripciones. El
+agente entrenado conjuntamente para predecir estas descrip-
+ciones de nivel alto podría, por tanto, destilar estos conceptos abstractos
+con mucha fuerza en las representaciones que aprende. Esto
+podría explicar por qué el agente de nivel alto tiene un sesgo inductivo “sobre-
+humano” hacia la abstracción, en el que
+rinde mejor en los tableros GSP (en relación con todos los demás
+agentes e incluso humanos) y peor en los tableros de con-
+trol (peor que los humanos e incluso peor
+que la heurística del vecino más cercano).
+4 Conclusión
+En este trabajo mostramos cómo los agentes de meta-aprendizaje por
+refuerzo pueden guiarse para tener sesgos inductivos
+semejantes a los humanos hacia la abstracción. Para lograrlo,
+usamos el paradigma de tarea de Kumar et al. (2021)
+con una distribución de tareas que incorpora directamente priors hu-
+manos mediante personas que usan el Muestreo de Gibbs
+con personas (Fig. 1B). Usamos el procedimiento in-
+troducido en Kumar et al. (2021) para construir una distribución de
+tareas de control (véase la Fig. 1D) que sirva de referencia
+para la adquisición de sesgos inductivos semejantes a los humanos. Nuestros
+resultados muestran que hacer que el agente prediga descripciones
+en lenguaje natural generadas por humanos mientras realiza la
+tarea durante el entrenamiento puede guiar al agente hacia
+el aprendizaje de sesgos inductivos semejantes a los humanos (Figura 4).
+También manipulamos el nivel de abstracción con el que
+los humanos escriben sus descripciones (Fig. 2) y
+mostramos que esto puede afectar qué tan bien el aprendiz
+adquiere un sesgo inductivo más consistente con el comportamiento hu-
+mano. Esto sienta las bases para futuras
+investigaciones sobre el aprendizaje de representaciones abstractas semejantes a las humanas
+que permitan avanzar hacia cerrar la brecha entre
+la inteligencia humana y la automática.
+Referencias
+Jacob Andreas, Dan Klein, y Sergey Levine. 2018.
+Learning with latent language. En Actas de
+the 2018 Conference of the North American Chap-
+ter of the Association for Computational Linguistics:
+Human Language Technologies, Volume 1 (Long Pa-
+pers) , págs. 2166–2179.
+James Bergstra, Rémi Bardenet, Yoshua Bengio, y
+Balázs Kégl. 2011. Algorithms for hyper-parameter
+optimization. Advances in neural information pro-
+cessing systems , 24.
+Michael Chmielewski y Sarah C Kucker. 2020. An
+mturk crisis? shifts in data quality and the impact on
+study results. Social Psychological and Personality
+Science , 11(4):464–473.
+JH Clark. 1924. The ishihara test for color blindness.
+American Journal of Physiological Optics .
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, y
+Kristina Toutanova. 2018. Bert: Pre-training of deep
+bidirectional transformers for language understand-
+ing. arXiv preprint arXiv:1810.04805 .
+Yan Duan, John Schulman, Xi Chen, Peter L Bartlett,
+Ilya Sutskever, y Pieter Abbeel. 2016. Rl Θ 2: Fast
+reinforcement learning via slow reinforcement learn-
+ing. arXiv preprint arXiv:1611.02779 .
+Stuart Geman y Donald Geman. 1984. Stochastic re-
+laxation, gibbs distributions, and the bayesian restora-
+tion of images. IEEE Transactions on pattern analy-
+sis and machine intelligence , (6):721–741.
+Thomas L Griffiths, Frederick Callaway, Michael B
+Chang, Erin Grant, Paul M Krueger, y Falk Lieder.
+2019. Doing more with less: meta-reasoning and
+meta-learning in humans and machines. Current
+Opinion in Behavioral Sciences , 29:24–30.
+Thomas L Griffiths, Nick Chater, Charles Kemp, Amy
+Perfors, y Joshua B Tenenbaum. 2010. Probabilis-
+tic models of cognition: Exploring representations
+and inductive biases. Trends in cognitive sciences ,
+14(8):357–364.
+Thomas L Griffiths, Dylan Daniels, Joseph L Auster-
+weil, y Joshua B Tenenbaum. 2018. Subjective
+randomness as statistical inference. Cognitive psy-
+chology , 103:85–109.
+Peter Harrison, Raja Marjieh, Federico Adolfi, Pol van
+Rijn, Manuel Anglada-Tort, Ofer Tchernichovski,
+Pauline Larrouy-Maestri, y Nori Jacoby. 2020.
+Gibbs sampling with people. Advances in Neural
+Information Processing Systems , 33:10659–10671.
+Timothy Hospedales, Antreas Antoniou, Paul Micaelli,
+y Amos Storkey. 2020. Meta-learning in neural net-
+works: A survey. arXiv preprint arXiv:2004.05439 .Sreejan Kumar, Ishita Dasgupta, Jonathan Cohen,
+Nathaniel Daw, y Thomas Griffiths. 2021. Meta-
+learning of structured task distributions in humans
+y machines. En International Conference on Learn-
+ing Representations .
+Brenden M Lake, Tomer D Ullman, Joshua B Tenen-
+baum, y Samuel J Gershman. 2017. Building ma-
+chines that learn and think like people. Behavioral
+and brain sciences , 40.
+Andrew K Lampinen, Nicholas A Roy, Ishita Dasgupta,
+Stephanie CY Chan, Allison C Tam, James L McClel-
+land, Chen Yan, Adam Santoro, Neil C Rabinowitz,
+Jane X Wang, et al. 2021. Tell me why!–explanations
+support learning of relational and causal structure.
+arXiv preprint arXiv:2112.03753 .
+Jelena Luketina, Nantas Nardelli, Gregory Farquhar,
+Jakob N Foerster, Jacob Andreas, Edward Grefen-
+stette, Shimon Whiteson, y Tim Rocktäschel. 2019.
+A survey of reinforcement learning informed by nat-
+ural language. En IJCAI .
+Gary Lupyan y Benjamin Bergen. 2016. How lan-
+guage programs the mind. Topics in cognitive sci-
+ence, 8(2):408–424.
+Jesse Mu, Percy Liang, y Noah Goodman. 2020.
+Shaping visual representations with language for few-
+shot classification. En Actas de la 58.ª Annual
+Meeting of the Association for Computational Lin-
+guistics , págs. 4823–4830.
+Karthik Narasimhan, Regina Barzilay, y Tommi
+Jaakkola. 2018. Grounding language for transfer
+in deep reinforcement learning. Journal of Artificial
+Intelligence Research , 63:849–874.
+Antonin Raffin, Ashley Hill, Maximilian Ernestus,
+Adam Gleave, Anssi Kanervisto, y Noah Dormann.
+2019. Stable baselines3.
+Nils Reimers y Iryna Gurevych. 2019. Sentence-bert:
+Sentence embeddings using siamese bert-networks.
+En Proceedings of the 2019 Conference on Empirical
+Methods in Natural Language Processing and the 9th
+International Joint Conference on Natural Language
+Processing (EMNLP-IJCNLP) , págs. 3982–3992.
+John Schulman, Filip Wolski, Prafulla Dhariwal,
+Alec Radford, y Oleg Klimov. 2017. Proxi-
+mal policy optimization algorithms. arXiv preprint
+arXiv:1707.06347 .
+Elizabeth S Spelke. 2003. What makes us smart? core
+knowledge. Language in mind: Advances in the
+study of language and thought , pág. 277.
+Joshua B Tenenbaum, Charles Kemp, Thomas L Grif-
+fiths, y Noah D Goodman. 2011. How to grow a
+mind: Statistics, structure, and abstraction. science ,
+331(6022):1279–1285.
+Jane X Wang, Zeb Kurth-Nelson, Dharshan Kumaran,
+Dhruva Tirumala, Hubert Soyer, Joel Z Leibo, Demis
+Hassabis, y Matthew Botvinick. 2018. Prefrontal
+cortex as a meta-reinforcement learning system. Na-
+ture neuroscience , 21(6):860–868.
+Catherine Wong, Kevin M Ellis, Joshua Tenenbaum, y
+Jacob Andreas. 2021. Leveraging language to learn
+program abstractions and search heuristics. En In-
+ternational Conference on Machine Learning , págs.
+11193–11204. PMLR.
+A. Construcción de una distribución de tareas abstracta
+mediante muestreo de Gibbs con personas
+Para generar una distribución de tableros de tareas directamente
+a partir de humanos usamos el Muestreo de Gibbs con personas
+(GSP; Harrison et al. 2020, y una tarea similar para
+secuencias binarias en Griffiths et al. 2018). GSP
+muestrea distribuciones de priors internos al poner a los hu-
+manos “en el bucle” de un muestreador de Gibbs. En nuestro caso,
+el espacio de estímulos consistía en el espacio de tableros de 4×4
+y cada una de las 16 dimensiones del estímulo corres-
+pondía al color binario de cada casilla, es decir,
+roja o azul. Una de estas dimensiones se enmascaró
+(es decir, “en gris”) para la tarea de predicción. Cada
+ensayo GSP consistía en una tarea de predicción de
+qué color tiene el único cuadrado enmascarado en la
+cuadrícula, condicionado a los colores de todos los demás cuadrados
+de la cuadrícula. Una vez tomada una decisión, el estímulo resul-
+tante se pasa a un nuevo participante, quien
+repite la tarea con otro cuadrado enmascarado y
+así sucesivamente. Se genera una muestra cuando se completa un barrido
+completo por los dieciséis cuadrados, de forma
+similar al procedimiento estándar del muestreo de Gibbs.
+En cada ensayo, a los participantes se les presentaba un
+tablero con una de sus casillas cubierta (indicada por una
+casilla blanca) y la siguiente instrucción: “¿qué
+debería ser el color subyacente de la casilla blanca cubierta
+para que el tablero se describa mediante una regla muy sim-
+ple?” (Fig. 4A). Luego daban su
+respuesta haciendo clic en un botón que correspondía
+al color elegido. En total, ejecutamos 100 cadenas GSP
+en paralelo durante 15 barridos cada una (24000 tableros únicos posibles en total),
+y las cadenas se inicializaron
+con tableros muestreados al azar. El orden en
+el que se enmascararon las casillas dentro de cada barrido
+también se aleatorizó entre cadenas para evitar posibles
+sesgos. Al muestrear de esta distribución,
+la probabilidad de cada tablero se basa en la frecuencia con que
+apareció durante el proceso de muestreo GSP.
+Usamos los 500 tableros más probables para recopilar
+descripciones lingüísticas.
+Los participantes se reclutaron en Amazon Mechan-
+ical Turk (AMT) y un total de 272 participantes completaron el estudio. Para asegurar que los participantes
+no tuvieran ningún tipo de deficien-
+cia de percepción del color, aplicamos la prueba de ceguera al color de Ishihara (Clark,
+1924) como tarea de preselección. Esto también ayudó a
+filtrar los scripts automatizados (“bots”) que se hacían pasar por
+participantes (Chmielewski y Kucker,
+2020).
+B Generación de la distribución de
+tareas de control
+Se usó el mismo protocolo de Kumar et al. 2021.
+Entrenamos una red neuronal totalmente conectada (3
+capas, 16 unidades cada una) para aprender la distribu-
+ción condicional de cada casilla dadas todas las demás en los tableros GSP
+Estas distribuciones condicionales contienen toda
+la información estadística relevante sobre los tableros.
+A la red se le dio un tablero generado con una
+regla abstracta, con una casilla al azar enmascarada, y
+se entrenó para reproducir todo el tablero, incluida la
+casilla enmascarada al azar. La pérdida fue la entropía
+cruzada binaria entre cada una de las casillas predichas y
+reales enmascaradas, sumada sobre todas las casillas. La red
+se entrenó con muestras de los tableros GSP,
+y alcanzó una precisión superior al 99%.
+Usamos estas distribuciones condicionales para gene-
+rar muestras de la distribución de tableros aprendida
+mediante muestreo de Gibbs. Comenzamos con una cuadrícula en
+la que cada casilla se fija al azar en rojo o azul, con
+probabilidad 0.5. Luego enmascaramos una casilla a la vez y
+pasamos la cuadrícula por la red para ex-
+traer la probabilidad de que la casilla faltante sea roja o
+azul a partir del modelo condicional entrenado. Luego
+asignamos el color de esta casilla muestreando a partir de
+esta probabilidad binomial. Repetimos esto enmascarando
+cada casilla de la cuadrícula 4×4 (en orden aleatorio) para
+completar un solo barrido de Gibbs, y repetimos este
+barrido completo de Gibbs 20 veces para generar una sola
+muestra. Generamos 25 muestras independientes de este tipo
+de la distribución de control como datos de prueba reservados
+para el agente de meta-aprendizaje y muestreamos de esta
+distribución durante el entrenamiento (manteniendo apartado el
+conjunto de prueba).
+C Evaluación de humanos en tareas abstractas y
+tareas de control
+Recopilamos mediante crowdsourcing el desempeño humano en nuestra tarea
+usando Prolific ( http://www.prolific.co )
+con una compensación de $2.25 (promedio de $13.55
+por hora). A los participantes se les mostró la cuadrícula 4×4
+en su navegador web y usaron clics del ratón para re-
+velar casillas. Cada participante fue asignado al azar
+a los tableros GSP o de control. Cada partici-
+pante fue evaluado con el mismo conjunto de prueba de cuadrículas
+usado para evaluar los modelos (24 cuadrículas de su asig-
+nada de tareas, en orden aleatorio). Cabe señalar
+que una diferencia clave entre los participantes hu-
+manos y los agentes modelo es que los humanos no
+recibieron entrenamiento directo en ninguna de las distribu-
+ciones de tareas. Como los participantes debían revelar todas las casillas rojas
+para pasar a la siguiente cuadrícula, estaban implícitamente
+incentivados a ser eficientes (hacer clic en el menor número posible de casillas
+azules) para terminar la tarea rápidamente.
+Encontramos que esto era adecuado para obtener un buen desem-
+peño. Se mostró una estructura de recompensas similar a la dada
+a los agentes como número de puntos
+acumulados, pero no se traducía en recompensa monetaria.
+Hubo 50 participantes en cada condición (GSP
+y control), es decir, 100 participantes en total. Este fue
+el mismo protocolo usado en Kumar et al. 2021.
+D Entrenamiento de agentes de meta-
+refuerzo en la tarea de cuadrícula
+Siguiendo trabajos previos de meta-aprendizaje por
+refuerzo (Wang et al., 2018), usamos un LSTM
+meta-aprendiz que toma el tablero completo como entrada,
+lo pasa por una capa convolucional y alimenta
+eso, junto con la acción y la recompensa previas,
+a 120 unidades LSTM. El agente tenía 16 acciones
+posibles correspondientes a elegir una casilla (en el
+tablero 4×4) para revelar. La función de recompensa era:
++1 por revelar casillas rojas, -1 por azules, +5 por
+la última casilla roja, y -2 por elegir una casilla ya re-
+velada. El agente fue entrenado con optimización proximal de
+políticas (PPO; Schulman et al. 2017
+usando el paquete Stable Baselines, Raffin et al.
+2019) durante un millón de episodios. Realizamos una
+búsqueda de hiperparámetros por separado para los agentes
+sin la pérdida de anclaje (es decir, agentes originales)
+y con la pérdida de anclaje, ya que debemos ajustar
+el nuevo clangweight sobre la pérdida de anclaje de forma conjunta.
+Realizamos una búsqueda de hiperparámetros para: tamaño de
+lote, n_steps (número de pasos a ejecutar en un entorno
+de actualización), gamma, tasa de aprendizaje, programación de la
+tasa de aprendizaje (constante o lineal), rango de recorte (clip range), número de
+épocas, la λ para la estimación de ventaja generalizada
+(GAE λ), norma máxima del gradiente, función de activación, coeficiente de valor
+de pérdida, coeficiente de entropía y de anclaje
+de pérdida para agentes con pérdida de anclaje.
+La búsqueda de hiperparámetros se hizo muestreando
+del espacio de hiperparámetros usando el Tree-
+Structured Parzen Estimator (Bergstra et al., 2011).
+Evaluamos 200 muestras de hiperparámetros del espacio para todos los agentes. Tanto los agentes con anclaje como los no-
+con anclaje usaron los mismos espacios de hiperparámetros
+para la búsqueda. Inicialmente hicimos una búsqueda por separado de hi-
+perparámetros para distintos agentes con anclaje,
+pero en experimentos iniciales encontramos que todos
+alcanzaban valores de hiperparámetros similares y de entrena-
+miento similares tras la búsqueda. Los hiperparámetros se
+evaluaron entrenando con 100,000 episodios y mirando
+la recompensa de entrenamiento. Los entornos usados
+durante la prueba (Fig. 4) fueron completamente reservados
+durante este proceso.
+E Evaluación del desempeño en la tarea
+Un buen desempeño en la tarea se indica por la capacidad de
+revelar todas las casillas rojas de una cuadrícula revelando el menor número
+de casillas azules posible. Por eso medimos el desempeño
+contando el número de casillas azules reveladas en el
+episodio. Como distintos tableros tendrán distinto
+número de casillas rojas/tienen distintos niveles de dificultad,
+controlamos la dificultad/longitud de la tarea midiendo
+el desempeño relativo a una heurística del “vecino
+más cercano”. Esta heurística elige al azar
+casillas cubiertas que son adyacentes a las casillas
+rojas actualmente descubiertas (o cualquier casilla cubierta si no
+existe ninguna). Para cada tablero, ejecutamos esta
+heurística 1000 veces para generar una distri-
+bución de desempeños (es decir, número de casillas azules
+reveladas) y calculamos el z-score del número de
+casillas azules reveladas por el humano o agente según esta distribución.
+Un z-score menor que 0 significa que el humano o agente
+lo hizo mejor que el desempeño medio de la heurística del
+vecino más cercano, y el valor específico del
+z-score refleja cuántas desviaciones estándar
+el humano o agente superó el desempeño medio
+de la heurística del vecino más cercano.
+F Descripciones en lenguaje natural de los
+tableros GSP
+Tomamos 500 de los tableros GSP de mayor probabilidad y los
+dividimos en conjuntos de 25. Luego
+asignamos al azar a participantes de Prolific
+(http://www.prolific.co ) a estos conjuntos de
+25 tableros. Unos 10 participantes hicieron cada conjunto de
+tableros con la instrucción de nivel bajo y unos
+10 participantes hicieron cada uno de los tableros con la instrucción de
+nivel alto. Como resultado, cada participante escribió
+descripciones de 25 tableros y cada tablero tiene aproxi-
+madamente 20 descripciones, de las cuales cerca de la mitad
+provienen de la instrucción de nivel bajo y la otra mitad de la
+instrucción de nivel alto.
+La instrucción de nivel bajo era: “Su objetivo es des-
+cribir este patrón de casillas rojas con palabras. Sea lo
+más detallado posible. Alguien debería poder
+reproducir todo el tablero con su descripción.
+Puede recibir una recompensa según qué tan detallada sea su
+descripción.” y la instrucción de nivel alto fue “Sea
+lo más general posible en su descripción. Su des-
+cripción debe usar la menor cantidad de palabras posible y
+centrarse en el patrón de casillas rojas en conjunto y
+no en casillas individuales. Puede recibir una recompensa según
+qué tan concisa sea su descripción.” Convertimos
+las casillas azules en blancas al mostrar los tableros
+a los participantes, para que concentraran sus
+descripciones en las casillas rojas.
+Las descripciones sintéticas de nivel bajo fueron no-
+humanas y usaron la plantilla. La plan-
+tilla recorre la ubicación de cada casilla y
+dice “Las rojas están en: columna X y fila Y,...,”
+para cada ubicación de casilla roja.
+G Valores de hiperparámetros
+La siguiente tabla contiene los hiperparámetros
+usados.
+Agente Sin pérdida de anclaje Con pérdida de anclaje
+batch_size 16 256
+n_steps 2048 8
+gamma 0.9 0.9
+learning_rate 0.000516501 0.000376021
+lr_schedule linear linear
+ent_coef 1.3907E-05 1.45674E-06
+clip_range 0.3 0.3
+n_epochs 10 5
+gae_lambda 0.8 0.95
+max_grad_norm 2 0.6
+vf_coef 0.000914363 0.016291309
+activation_fn relu tanh
+grounding_coef 0 0.494866282
+H Curvas de entrenamiento de los agentes
+Figura 5: Curvas de recompensa durante el entrenamiento para todos los agentes

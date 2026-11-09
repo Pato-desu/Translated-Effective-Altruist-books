@@ -1,0 +1,1028 @@
+Asking the Right Questions:
+Learning Interpretable Action Models Through Query Answering
+Pulkit Verma, Shashank Rao Marpally, andSiddharth Srivastava
+School of Computing, Informatics, and Decision Systems Engineering
+Arizona State University, Tempe, AZ 85281, USA
+fverma.pulkit, smarpall, siddharths g@asu.edu
+Abstract
+This paper develops a new approach for estimating an inter-
+pretable, relational model of a black-box autonomous agent
+that can plan and act. Our main contributions are a new
+paradigm for estimating such models using a rudimentary
+query interface with the agent and a hierarchical querying
+algorithm that generates an interrogation policy for estimat-
+ing the agent’s internal model in a user-interpretable vocab-
+ulary. Empirical evaluation of our approach shows that de-
+spite the intractable search space of possible agent models,
+our approach allows correct and scalable estimation of in-
+terpretable agent models for a wide class of black-box au-
+tonomous agents. Our results also show that this approach
+can use predicate classiﬁers to learn interpretable models of
+planning agents that represent states as images.
+1 Introduction
+The growing deployment of AI systems ranging from per-
+sonal digital assistants to self-driving cars leads to a per-
+vasive problem: how would a user ascertain whether an AI
+system will be safe, reliable, or useful in a given situa-
+tion? This problem becomes particularly challenging when
+we consider that most autonomous systems are not designed
+by their users; their internal software may be unavailable or
+difﬁcult to understand, and it may even change from initial
+speciﬁcations as a result of learning. Such scenarios feature
+black-box AI agents whose models may not be available in
+terminology that the user understands. They also show that
+in addition to developing better AI systems, we need to de-
+velop new algorithmic paradigms for assessing arbitrary AI
+systems and for determining the minimal requirements for
+AI systems in order to ensure interpretability and to support
+such assessments (Srivastava 2021).
+This paper presents a new approach for addressing these
+questions. It develops an algorithm for estimating inter-
+pretable, relational models of AI agents by querying them.
+In doing so, it requires the AI system to have only a prim-
+itive query-response capability to ensure interpretability.
+Consider a situation where Hari(ette) ( H) wants a grocery-
+delivery robot (A) to bring some groceries, but s/he is unsure
+whether it is up to the task and wishes to estimate A’s inter-
+nal model in an interpretable representation that s/he is com-
+Copyright © 2021, Association for the Advancement of Artiﬁcial
+Intelligence (www.aaai.org). All rights reserved.
+Figure 1: The agent-assessment module uses its user’s pre-
+ferred vocabulary, queries the AI system, and delivers a user-
+interpretable causal model of the AI system’s capabilities.
+The AI system does not need to know the user’s vocabulary
+or modeling language.
+fortable with (e.g., a relational STRIPS-like language (Fikes
+and Nilsson 1971; McDermott et al. 1998; Fox and Long
+2003)). IfHwas dealing with a delivery person, s/he might
+ask them questions such as “would you pick up orders from
+multiple persons?” and “do you think it would be alright to
+bring refrigerated items in a regular bag?” If the answers
+are “yes” during summer, it would be a cause for concern.
+Na¨ıve approaches for generating such questions to ascertain
+the limits and capabilities of an agent are infeasible.1
+We propose an agent-assessment module (AAM), shown
+in Fig. 1, which can be connected with an arbitrary AI agent
+that has a rudimentary query-response capability: the assess-
+ment module connects Awith a simulator and provides a
+sequence of instructions, or a plan as a query .Aexecutes
+the plan in the simulator and the assessment module uses
+the simulated outcome as the response to the query. Thus,
+given an agent, the assessment module uses as input: a user-
+deﬁned vocabulary, the agent’s instruction set, and a com-
+patible simulator. These inputs reﬂect natural requirements
+of the task and are already quite commonly supported: AI
+systems are already designed and tested using compatible
+simulators, and they need to specify their instruction sets in
+order to be usable. The user provides the concepts that they
+1Just 2 actions and 5 grounded propositions would yield
+725108possible STRIPS-like models – each proposition could
+be absent, positive or negative in the precondition and effects of
+each action, and cannot be positive (or negative) in both precon-
+ditions and effect simultaneously. A query strategy that inquires
+about each occurrence of each proposition would be not only un-
+scalable but also inapplicable to simulator-based agents that do not
+know their actions’ preconditions and effects.
+can understand and these concepts can be deﬁned as func-
+tions on simulator states.
+In developing the ﬁrst steps towards this paradigm, we as-
+sume that the user wishes to estimate A’s internal model as
+a STRIPS-like relational model with conjunctive precondi-
+tions, add lists, and delete lists, and that the agent’s model
+is expressible as such. Such models can be easily trans-
+lated into interpretable descriptions such as “under situations
+where preconditions hold, if the agent Aexecutes actions
+a1;:::;akit would result in effects ,” where preconditions
+and effects use only the user-provided concepts. Further-
+more, such models can be used to investigate counterfactuals
+and support assessments of causality (Halpern 2016).
+This fundamental framework (Sec. 3) can be developed to
+support different types of agents as well as various query
+and response modalities. E.g., queries and responses could
+use a speech interface for greater accessibility, and agents
+with reliable inbuilt simulators/lookahead models may not
+need external simulators. This would allow AAM to pose
+queries such as “what do you think would happen if you
+didhquery plani”, and the learnt model would reﬂect A’s
+self-assessment. The “agent” could be an arbitrary entity, al-
+though the expressiveness of the user-interpretable vocabu-
+lary would govern the scope of the learnt models and their
+accuracy. Using AAM with such agents would also help
+make them compliant with Level II assistive AI – systems
+that make it easy for operators to learn how to use them
+safely (Srivastava 2021).
+Our algorithm for the assessment module (Sec. 3.1) gen-
+erates a sequence of queries ( Q) depending on the agent’s
+responses () during the query process; the result of the over-
+all process is a complete model of A. To generate queries,
+we use a top-down process that eliminates large classes of
+agent-inconsistent models by computing queries that dis-
+criminate between pairs of abstract models . When an ab-
+stract model’s answer to a query differs from the agent’s
+answer, we effectively eliminate the entire set of possible
+concrete models that are reﬁnements of this abstract model.
+Sec. 3 presents our overall framework with algorithms and
+theoretical results about their convergence properties.
+Our empirical evaluation (Sec. 4) shows that this method
+can efﬁciently learn correct models for black-box versions
+of agents using hidden models from the IPC2. It also shows
+that AAM can use image-based predicate classiﬁers to infer
+correct models for simulator-based agents that respond with
+an image representing the result of query plan’s execution.
+2 Related Work
+A number of researchers have explored the problem of learn-
+ing agent models from observations of its behavior (Gil
+1994; Yang, Wu, and Jiang 2007; Cresswell, McCluskey,
+and West 2009; Zhuo and Kambhampati 2013). Such action-
+model learning approaches have also found practical appli-
+cations in robot navigation (Balac, Gaines, and Fisher 2000),
+player behavior modeling (Krishnan, Williams, and Martens
+2020), etc. To the best of our knowledge, ours is the ﬁrst ap-
+proach to address the problem of generating query strategies
+2https://www.icaps-conference.org/competitionsfor inferring relational models of black-box agents.
+Amir and Chang (2008) use logical ﬁltering (Amir and
+Russell 2003) to learn partially observable action models
+from the observation traces. LOCM (Cresswell, McCluskey,
+and West 2009) and LOCM2 (Cresswell and Gregory 2011)
+present another class of algorithms that use ﬁnite-state ma-
+chines to create action models from observed plan traces.
+Camacho and McIlraith (2019) present an approach for
+learning highly expressive LTL models from an agent’s ob-
+served state trajectories using an oracle with knowledge of
+the target LTL representation. This oracle can also gener-
+ate counterexamples when the estimated model differs from
+the true model. In contrast, our approach does not require
+such an oracle. Also, unlike Stern and Juba (2017), our
+approach does not need intermediate states in execution
+traces. In contrast to approaches for white-box model main-
+tenance (Bryce, Benton, and Boldt 2016), our approach does
+not requireAto know aboutH’s preferred vocabulary.
+LOUGA (Ku ˇcera and Bart ´ak 2018) combines a genetic
+algorithm with an ad-hoc method to learn planning oper-
+ators from observed plan traces. FAMA (Aineto, Celorrio,
+and Onaindia 2019) reduces model recognition to a planning
+problem and can work with partial action sequences and/or
+state traces as long as correct initial and goal states are pro-
+vided. While both FAMA and LOUGA require a postpro-
+cessing step to update the learnt model’s preconditions to in-
+clude the intersection of all states where an action is applied,
+it is not clear that such a process would necessarily converge
+to the correct model. Our experiments indicate that such ap-
+proaches exhibit oscillating behavior in terms of model ac-
+curacy because some data traces can include spurious predi-
+cates, which leads to spurious preconditions being added to
+the model’s actions. FAMA also assumes that there are no
+negative literals in action preconditions.
+Bonet and Geffner (2020) present an algorithm for learn-
+ing relational models using a SAT-based method when the
+action schema, predicates, etc. are not available. This ap-
+proach takes as input a predesigned correct and complete di-
+rected graph encoding the structure of the entire state space.
+The authors note that their approach is viable for problems
+with small state spaces. While our method provides an end-
+to-end solution, it can also be used in conjunction with such
+approaches to create the inputs they need. Khardon and Roth
+(1996) address the problem of making model-based infer-
+ence faster given a set of queries , under the assumption that
+a static set of models represents the true knowledge base.
+In contrast to these directions of research, our approach
+directly queries the agent and is guaranteed to converge to
+the true model while presenting a running estimate of the ac-
+curacy of the derived model; hence, it can be used in settings
+where the agent’s model changes due to learning or a soft-
+ware update. In such a scenario, our algorithm can restart to
+query the system, while approaches that derive models from
+observed plan traces would require arbitrarily long data col-
+lection sessions to get sufﬁcient uncorrelated data.
+Incremental Learning Model (Ng and Petrick 2019) uses
+reinforcement learning to learn a nonstationary model with-
+out using plan traces, and requires extensive training to learn
+the full model correctly. Chitnis et al. (2021) present an
+approach for learning probabilistic relational models where
+they use goal sampling as a heuristic for generating relevant
+data, while we reduce that problem to query synthesis using
+planning. Their approach is shown to work well for stochas-
+tic environments, but puts a much higher burden on the AI
+system for inferring its model. This is because the AI system
+has to generate a conjunctive goal formula while maximiz-
+ing exploration, ﬁnd a plan to reach that goal, and correct the
+model as it collects observations while executing the plan.
+The ﬁeld of active learning (Settles 2012) addresses the
+related problem of selecting which data-labels to acquire
+for learning single-step decision-making models using sta-
+tistical measures of information. However, the effective fea-
+ture set here is the set of all possible plans, which makes
+conventional methods for evaluating the information gain
+of possible feature labelings infeasible. In contrast, our ap-
+proach uses a hierarchical abstraction to select queries to
+ask, while inferring a multistep decision-making (planning)
+model. Information-theoretic metrics could also be used in
+our approach whenever such information is available.
+3 The Agent-Interrogation Task
+We assume thatHneeds to estimateA’s model as a STRIPS-
+like planning model represented as a pair M=hP;Ai,
+where P=fpk1
+1;:::;pknngis a ﬁnite set of predicates with
+aritieski;A=fa1;:::;akgis a ﬁnite set of parameterized
+actions (operators). Each action aj2Ais represented as a
+tuplehheader (aj);pre(aj);eff(aj)i, whereheader (aj)is
+the action header consisting of action name and action pa-
+rameters,pre(aj)represents the set of predicate atoms that
+must be true in a state where ajcan be applied, eff(aj)
+is the set of positive or negative predicate atoms that will
+change to true or false respectively as a result of execution
+of the action aj. Each predicate can be instantiated using
+the parameters of an action, where the number of parame-
+ters are bounded by the maximum arity of the action. E.g.,
+consider the action load truck(?v1;?v2;?v3)and predicate
+at(?x;?y)in the IPC Logistics domain. This predicate can
+be instantiated using action parameters ?v1,?v2, and ?v3
+asat(?v1;?v1),at(?v1;?v2),at(?v1;?v3),at(?v2;?v2),
+at(?v2;?v1),at(?v2;?v3),at(?v3;?v3),at(?v3;?v1), and
+at(?v3;?v2). We represent the set of all such possible pred-
+icates instantiated with action parameters as P.
+AAM uses the following information as input. It receives
+its instruction set in the form of header (a)for eacha2A
+from the agent. AAM also receives a predicate vocabulary P
+from the user with functional deﬁnitions of each predicate.
+This gives AAM sufﬁcient information to perform a dialog
+withAabout the outcomes of hypothetical action sequences.
+We deﬁne the overall problem of agent interrogation as
+follows. Given a class of queries and an agent with an un-
+known model which can answer these queries, determine the
+model of the agent. More precisely, an agent interrogation
+task is deﬁned as a tuple hMA;Q;P;AHi, whereMAis
+the true model (unknown to AAM) of the agent Abeing in-
+terrogated, Qis the class of queries that can be posed to the
+agent by AAM, and PandAHare the sets of predicates and
+action headers that AAM uses based on inputs from HandA. The objective of the agent interrogation task is to derive
+the agent modelMAusingPandAH. Let be the set of
+possible answers to queries. Thus, strings 2denote
+the information received by AAM at any point in the query
+process. Query policies for the agent interrogation task are
+functions!Q[fStopgthat map sequences of answers
+to the next query that the interrogator should ask. The pro-
+cess stops with the Stop query. In other words, for all an-
+swers2, all valid query policies map all sequences x
+toStop wheneverx2is mapped to Stop. This policy is
+computed and executed online.
+Components of agent models In order to formulate our
+solution approach, we consider a model Mto be com-
+prised of components called palm tuples of the form =
+hp;a;l;mi, wherepis an instantiated predicate from the
+vocabulary P;ais an action from the set of parameter-
+ized actions A,l2 fpre;effg, andm2 f+; ;;g. For
+convenience, we use the subscripts p;a;l; ormto denote
+the corresponding component in a palm tuple. The presence
+of a palm tuple in a model denotes the fact that in that
+model, the predicate pappears in an action aat a lo-
+cationlas a true (false) literal when sign mis positive
+(negative), and is absent when m=;. This allows us to
+deﬁne the set-minus operation Mnon this model as re-
+moving the palm tuple from the model. We consider two
+palm tuples 1=hp1;a1;l1;m1iand2=hp2;a2;l2;m2i
+to be variants of each other ( 12) iff they differ only
+on modem, i.e.,12,(1p=2p)^(1a=
+2a)^(1l=2l)^(1m6=2m). Hence, mode assignment
+to apaltuple=hp;a;lican result in 3 palm tuple variants
++=hp;a;l; +i, =hp;a;l; i, and;=hp;a;l;;i.
+Model abstraction We now deﬁne the notion of abstrac-
+tion used in our solution approach. Several approaches
+have explored the use of abstraction in planning (Sacerdoti
+1974; Giunchiglia and Walsh 1992; Helmert et al. 2007;
+B¨ackstr ¨om and Jonsson 2013; Srivastava, Russell, and Pinto
+2016). The deﬁnition of abstraction used in this work ex-
+tends the concept of predicate and propositional domain ab-
+stractions (Srivastava, Russell, and Pinto 2016) to allow for
+the projection of a single palm tuple.
+An abstract model is one in which all variants of at least
+one pal tuple are absent. Let be the set of all possible palm
+tuples which can be generated using a predicate vocabulary
+Pand an action header set AH. LetUbe the set of all con-
+sistent (abstract and concrete) models that can be expressed
+as subsets of , such that no model has multiple variants of
+the same palm tuple. We deﬁne abstraction of a model as:
+Deﬁnition 1. Theabstraction of a model Mwith respect to
+a palm tuple 2, is deﬁned by f:U!U asf(M) =
+Mn.
+We extend this notation to deﬁne the abstraction of a set of
+modelsMwith respect to a palm tuple asX=ff(m) :
+m2Mg . We use this abstraction framework to deﬁne a
+subset-lattice over abstract models (Fig. 2(b)). Each node in
+the lattice represents a collection of possible abstract mod-
+els which are possible variants of a pal tuple . E.g., in the
+node labeled 1 in Fig. 2(b), we have models corresponding
+...
+...
+...
+(a) (b) (c)
+Figure 2: (b) Lattice segment explored in random order of
+i2 ; (a) At each node, 3 abstract models are generated
+and 2 of them are discarded based on query responses; (c)
+An abstract model rejected at any level is equivalent to re-
+jecting 3 models at the level below, 9 models two levels
+down, and so on.
+to+
+1, 
+1, and;
+1. Two nodes in the lattice are at the same
+level of abstraction if they contain the same number of pal
+tuples. Two nodes niandnjin the lattice are connected if
+all the models at nidiffer with all the models in njby a sin-
+gle palm tuple. As we move up in the lattice following these
+edges, we get more abstracted versions of the models, i.e.,
+containing less number of pal tuples; and we get more con-
+cretized models, i.e., containing more number of pal tuples,
+as we move downward. We now deﬁne this model lattice:
+Deﬁnition 2. Amodel latticeLis a 5-tupleL=
+hN;E;  ;`N;`Ei, whereNis a set of lattice nodes,  is
+the set of all pal tuples hp;a;li,`N:N!22is a node
+label function where  =  f+; ;;gis the set of all
+palm tuples, Eis the set of lattice edges, and `E:E! is
+a function mapping edges to edge labels such that for each
+edgeni!nj; `N(nj) =f[fkgj2`N(ni);=
+`E(ni!nj);k2f+; ;;gg, and`N(>) =fgwhere>
+is the supremum containing the empty model .
+A noden2Nin this latticeLcan be uniquely identiﬁed
+by the sequence of pal tuples that label the edges leading to
+it from the supremum. As shown in Fig. 2(a), even though
+theoretically `N:N!22, not all the models are stored at
+any node as at least one is pruned out based on some query
+Q2Q. Additionally, in these model lattices, every node has
+an edge going out from it corresponding to each pal tuple
+that is not present in the paths leading to it from the most ab-
+stracted node. At any stage during the interrogation, nodes in
+such a lattice are used to represent the set of possible models
+given the agent’s responses up to that point. At every step,
+our algorithm creates queries online that help us determine
+the next descending edge to take from a lattice node; corre-
+sponding to the path 0;:::;i in Fig. 2(b). This also avoids
+generating and storing the complete lattice, which can be
+doubly exponential in number of predicates and actions.
+Form of agent queries As discussed earlier, based on A’s
+responses, we pose queries to the agent and infer A’smodel. We express queries as functions that map models to
+answers. Recall that Uis the set of all possible (concrete and
+abstract) models, and is the set of possible responses. A
+queryQis a functionQ:U! .
+In this paper, we utilize only one class of queries: plan
+outcome queries (QPO), which are parameterized by a state
+sIand a plan . LetPbe the set of predicates Pin-
+stantiated with objects Oin an environment. QPOqueries
+askAthe length of the longest preﬁx of the plan that it
+can execute successfully when starting in the state sI
+Pas well as the ﬁnal state sFPthat this execu-
+tion leads to. E.g., “Given that the truck t1and pack-
+agep1are at location l1, what would happen if you ex-
+ecuted the planhloadtruck (p1;t1;l1),drive (t1;l1;l2),
+unloadtruck (p1;t1;l2)i?”
+A response to such queries can be of the form “I can ex-
+ecute the plan till step `and at the end of it p1is in truck
+t1which is at location l1”. Formally, the response POfor
+plan outcome queries is a tuple h`;sFi, where`is the num-
+ber of steps for which the plan could be executed, and
+sFPis the ﬁnal state after executing `steps of the plan.
+If the plancannot be executed fully according to the agent
+modelMAthen` < len (), otherwise`=len(). The
+ﬁnal statesFPis such thatMAj=[1 :`](sI) =sF,
+i.e., starting with a state sI,MAsuccessfully executed ﬁrst
+`steps of the plan . Thus,QPO:U!N2P, where N
+is the set of natural numbers.
+Not all queries are useful, as some of them might not
+increase our knowledge of the agent model at all. Hence,
+we deﬁne some properties associated with each query to as-
+certain its usability. A query is useful only if it can distin-
+guish between two models. More precisely, a query Qis
+said to distinguish a pair of modelsMiandMj, denoted
+asMiQMj, iffQ(Mi)6=Q(Mj).
+Deﬁnition 3. Two modelsMiandMjare said to be distin-
+guishable , denoted asMiMj, iff there exists a query that
+can distinguish between them, i.e., 9QMiQMj.
+Given a pair of abstract models, we wish to determine
+whether one of them can be pruned, i.e., whether there is
+a query for which at least one of their answers is inconsis-
+tent with the agent’s answer. Since this is computationally
+expensive to determine, and we wish to reduce the number
+of queries made to the agent, we ﬁrst evaluate whether the
+two models can be distinguished by any query, independent
+of consistency of their response with that of the agent. If the
+models are not distinguishable, it is redundant to try to prune
+one of them under the given query class.
+Next, we determine if at least one of the two distinguish-
+able models is consistent with the agent. When comparing
+the responses of two models at different levels of abstrac-
+tion, we must consider the fact that the agent’s response may
+be at a different level of abstraction if the given pair of mod-
+els is abstract. Taking this into account, we formally deﬁne
+what it means for an abstract model Mi’s response to be
+consistent with that of agent model MA:
+Deﬁnition 4. LetQ be a query such that
+MiQMj;Q(Mi) =h`i;hpi
+1;:::;pi
+mii,Q(Mj) =
+(a)MA’sload truck(?p,?t,?l) action (unknown to H)
+at(?t,?l),
+at(?p,?l) ! in(?p,?t),
+:(at(?p,?l))
+(b)M1’sload truck(?p,?t,?l) action
+at(?t,?l),
+at(?p,?l) ! in(?p,?t)
+(c)M2’sload truck(?p,?t,?l) action
+at(?t,?l)  ! in(?p,?t)
+(d)M3’sload truck(?p,?t,?l) action
+at(?t,?l)  ! ()
+Figure 3: load truck actions of the agent model MAand 3
+abstracted modelsM1,M2, andM3. HereX!Ymeans
+thatXis the precondition of an action and Yis the effect.
+h`j;hpj
+1;:::;pj
+nii, andQ(MA) =h`A;hpA
+1;:::;pA
+kii.
+Mi’s response toQisconsistent with that ofMA, i.e.,
+Q(MA)j=Q(Mi)if`A=len(Q),len(Q) =`iand
+fpi
+1;:::;pi
+mgfpA
+1;:::;pA
+kg.
+Using this notion of consistency, we can now reason that
+given a set of distinguishable models MiandMj, and their
+responses in addition to the agent’s response to the distin-
+guishing query, the models are prunable if and only if ex-
+actly one of their responses is consistent with that of the
+agent. Formally, we deﬁne prunability as:
+Deﬁnition 5. Given an agent-interrogation task
+hMA;Q;P;AHi, two modelsMiandMjareprun-
+able, denoted asMihiMj, iff9Q 2 Q:MiQMj
+^(Q(MA)j=Q(Mi)^ Q(MA)6j=Q(Mj))_
+(Q(MA)6j=Q(Mi)^Q(MA)j=Q(Mj)).
+3.1 Solving the Interrogation Task
+We now discuss how we solve the agent interrogation task by
+incrementally adding palm variants to the class of abstract
+models and pruning out inconsistent models by generating
+distinguishing queries.
+Example 1. Consider the case of a delivery agent. Assume
+that AAM is considering two abstract models M1andM2
+having only one action loadtruck (?p;?t;?l)and the pred-
+icatesat(?p;?l),at(?t;?l),in(?p;?t), and that the agent’s
+model isMA(Fig. 3). AAM can ask the agent what will
+happen ifAloads package p1into truckt1at locationl1
+twice. The agent would respond that it could execute the
+plan only till length 1, and the state at the time of this failure
+would beat(t1;l1)^in(p1;t1).
+Algorithm 1 shows AAM’s overall algorithm. It takes the
+agentA, the set of instantiated predicates P, the set of all
+action headers AH, and a set of random states Sas input,
+and gives the set of functionally equivalent estimated models
+represented by possmodels as output. Scan be generated in
+a preprocessing step given P. AIA initializes possmodels
+as a set consisting of the empty model (line 3) representing
+that AAM is starting at the supremum >of the model lattice.
+In each iteration of the main loop (line 4), AIA maintains
+an abstraction lattice and keeps track of the current node inAlgorithm 1 Agent Interrogation Algorithm (AIA)
+1:Input:A;AH;P;S
+2:Output: poss models
+3:Initialize poss models =fg
+4:forin some input pal ordering  do
+5: new models poss models
+6: pruned models =fg
+7: foreachM0in new models do
+8: foreach pairfi;jginf+; ;;gdo
+9:Q,Mi,Mj generate query(M0;i;j;; S)
+10:Mprune ﬁlter models(Q;MA;Mi;Mj)
+11: pruned models pruned models[Mprune
+12: end for
+13: end for
+14: ifpruned models is;then
+15: update palordering(  ;S)
+16: continue
+17: end if
+18: poss models new modelsf+; ;;gn
+pruned models
+19:end for
+the lattice. It picks a pal tuple corresponding to one of the
+descending edges in the lattice from a node given by some
+input ordering of  . The correctness of the algorithm does
+not depend on this ordering. It then stores a temporary copy
+ofpossmodels asnewmodels (line 5) and initialize an
+empty set at each node to store the pruned models (line 6).
+The inner loop (line 7) iterates over the set of all pos-
+sible abstract models that AIA has not rejected yet, stored
+asnewmodels . It then loops over pairs of modes (line 8),
+which are later used to generate queries and reﬁne mod-
+els. For the chosen pair of modes, generate query() is called
+(line 9) which returns two models concretized with the cho-
+sen modes and a query Qwhich can distinguish between
+them based on their responses.
+AIA then calls ﬁlter models() which poses the query Qto
+the agent and the two models. Based on their responses, AIA
+prunes the models whose responses are not consistent with
+that of the agent (line 11). Then it updates the estimated set
+of possible models represented by possmodels (line 18).
+If AIA is unable to prune any model at a node (line 14),
+it modiﬁes the pal tuple ordering (line 15). AIA continues
+this process until it reaches the most concretized node of the
+lattice (meaning all possible palm tuples 2are reﬁned
+at this node). The remaining set of models represents the
+estimated set of models for A. The number of resolved palm
+tuples can be used as a running estimate of accuracy of the
+derived models. AIA requires O(jPjjAj)queries as there
+are2jPjjAjpal tuples. However, our empirical studies
+show that we never generate so many queries.
+3.2 Query Generation
+The query generation process corresponds to the gener-
+atequery() module in AIA which takes a model M0, the pal
+tuple, and 2 modes i;j2f+; ;;gas input; and returns
+the modelsMi=M0[figandMj=M0[fjg, and a
+Algorithm 2 Query Generation Algorithm
+1:Input:M0;i;j;; S
+2:Output:Q;Mi;Mj
+3:Mi;Mj addpalm(M0;i;j; )
+4:forsIinSdo
+5: dom, prob getplanning prob (sI;Mi;Mj)
+6: planner(dom, prob)
+7:Q hsI;i
+8: ifthen break end if
+9:end for
+10:returnQ,M0[fig,M0[fjg
+plan outcome query Qdistinguishing them, i.e., MiQMj.
+Plan outcome queries have 2 components, an initial state
+sIand a plan. AIA getssIfrom the input set of random
+statesS(line 4). Using sIas the initial state, the idea is to
+ﬁnd a plan, which when executed by MiandMjwill lead
+them either to different states, or to a state where only one
+of them can execute the plan further. Later we pose the same
+query toAand prune at least one of MiandMj. Hence, we
+aim to prevent the models inconsistent with the agent model
+MAfrom reaching the same ﬁnal state as MAafter exe-
+cuting the queryQand following a different state trajectory.
+To achieve this, we reduce the problem of generating a plan
+outcome query from MiandMjinto a planning problem.
+The reduction proceeds by creating temporary models
+M00
+iandM00
+j. We now discuss how to generate them. We
+add the pal tuple =hp;a;liin modesiandjtoM0to get
+M0
+iandM0
+j, respectively. If the location l=eff, we add the
+palm tuple normally to M0, i.e.,M0
+m=M0[hp;a;l;mi,
+wherem2fi;jg. Ifl=pre, we add a dummy predicate
+puin disjunction with the predicate pto the precondition of
+both the models. We then modify the models M0
+iandM0
+j
+further in the following way:
+M00
+m=M0
+m[fhpu;a0;l0;+i:8a0;l0ha0;l0i62
+fha;li:9mhp;a;l;mi2M0gg
+[fhpu;a0;l0; i:8a0;l0ha0;l0i2
+fha;li:l=eff^9mhp;a;l;mi2M0gg
+puis added only for generating a distinguishing query and
+is not part of the models MiandMjreturned by the query
+generation process. Without this modiﬁcation, an inconsis-
+tent abstract model may have a response consistent with A.
+We now show how to reduce plan outcome query genera-
+tion into a planning problem PPO(line 5).PPOuses condi-
+tional effects in its actions (in accordance with PDDL (Mc-
+Dermott et al. 1998; Fox and Long 2003)). The model used
+to deﬁnePPOhas predicates from both models M00
+iandM00
+j
+represented asPM00
+iandPM00
+jrespectively, in addition to a
+new dummy predicate p . The action headers are the same
+asAH. Each action’s precondition is a disjunction of the pre-
+conditions ofM00
+iandM00
+j. This makes an action applicable
+in a statesif eitherM00
+iorM00
+jcan execute it in s. The effect
+of each action has 2 conditional effects, the ﬁrst applies the
+effects of bothM00
+iandM00
+j’s action if preconditions of bothM00
+iandM00
+jare true, whereas the second makes the dummy
+predicatep true if precondition of only one of M00
+iand
+M00
+jis true. Formally, we express this planning problem as
+PPO=hMPO;sI;Gi, whereMPOis a model with pred-
+icatesPPO=PM00
+i[PM00
+j[p , and actions APOwhere
+for each action a2APO,pre(a) =pre(aM00
+i)_pre(aM00
+j)
+andeff(a)=
+(when (pre(aM00
+i)^pre(aM00
+j))(eff(aM00
+i)^eff(aM00
+j)))
+(when ((pre(aM00
+i)^:pre(aM00
+j))_
+(:pre(aM00
+i)^pre(aM00
+j))) (p ));
+The initial state sI=sM00
+i
+I^sM00
+j
+I, wheresM00
+i
+IandsM00
+j
+I
+are copies of all predicates in sI, andGis the goal formula
+expressed as9p(pM00
+i^:pM00
+j)_(:pM00
+i^pM00
+j)_p .
+With this formulation, the goal is reached when an ac-
+tion inM00
+iandM00
+jdiffers in either a precondition (making
+only one of them executable in a state), or an effect (leading
+to different ﬁnal states on applying the action). E.g., con-
+sider the models with differences in load truck(p1;t1;l1)
+as shown in Fig. 3. From the state at(t1;l1)^:at(p1;l1),
+M2can execute load truck(p1;t1;l1)butM1can-
+not. Similarly, in state at(t1;l1)^at(p1;l1), executing
+load truck(p1;t1;l1)will causeMAandM1to end up in
+states differing in predicate at(p1;l1). Hence, given the cor-
+rect initial state, the solution to the planning problem PPO
+will give the correct distinguishing plan.
+Theorem 1. Given a pair of models MiandMj, the plan-
+ning problem PPOhas a solution iffMiandMjhave a
+distinguishing plan outcome query QPO.
+Proof (Sketch). The input to the planning problem PPO
+consists of an initial state sI. If the planner can solve PPO
+with initial state sIto give a plan , the distinguishing query
+is a combination of sIand. Similarly, ifMiQPOMj,
+then giving the initial state sIas part of planning problem
+PPO, the planwill be a solution which is part of QPO.
+3.3 Filtering Possible Models
+This section describes the ﬁlter models() module in Algo-
+rithm 1 which takes as input MA,Mi,Mj, and the query
+Q(Sec. 3.2), and returns the subset Mprune which is not
+consistent withMA.
+First, AAM poses the queryQtoMi,Mj, and the agent
+A. Based on the responses of all three, it determines if
+the two models are prunable, i.e., MihiMj. As mentioned
+in Def. 5, checking for prunability involves checking if re-
+sponse to the query Qby one of the models MiorMjis
+consistent with that of the agent or not.
+Theorem 2. LetMi;Mj2 fM +;M ;M;gbe the
+models generated by adding the pal tuple toM0which
+is an abstraction of the true agent model MA. Suppose
+Q=hsQ
+I;Qiis a distinguishing query for two distinct
+modelsMi;Mj, i.e.MiQMj, and the response of mod-
+elsMi;Mj;andMAto the queryQareQ(Mi) =
+h`i;hpi
+1;:::;pi
+mii,Q(Mj) =h`j;hpj
+1;:::;pj
+nii, and
+Q(MA) =h`A;hpA
+1;:::;pA
+kii. When`A=len(Q),
+Miis not an abstraction of MAiflen(Q)6=`ior
+fpi
+1;:::;pi
+mg6fpA
+1;:::;pA
+kg.
+Proof (Sketch). Proving by induction, the base case is
+adding a single pal tuple hp;a;lito an empty model (which
+is a consistent abstraction of MA) resulting in 3 models. The
+2 models pruned based on Def. 4 can be shown to be incon-
+sistent withMA, leaving out the one consistent model. For
+the inductive step, it can be shown that after adding a pal tu-
+ple to a consistent model it is not consistent with MAonly if
+it does not execute the full plan (the precondition is inconsis-
+tent), or if the end state reached by the model is not a subset
+of the state of the agent (the effect is inconsistent).
+If the models are prunable, then the palm tuple being
+added in the inconsistent model cannot appear in any model
+consistent withA. As we discard such palm tuples at ab-
+stract levels (as depicted in Fig. 2 (a)), we prune out a large
+number of models down the lattice (as depicted in Fig. 2 (c)),
+hence we keep the intractability of the approach in check and
+end up asking less number of queries.
+3.4 Updating PAL ordering
+This section describes the update palordering() module
+in AIA (line 15). It is called when the query generated
+bygenerate query() module is not executable by A, i.e.,
+len(Q)6=`A. E.g., consider two abstract models M2and
+M3being considered by AAM (Fig. 3). At this level of ab-
+straction, AAM does not have knowledge of the predicate
+at(?p;?l), hence it will generate a plan outcome query with
+initial stateat(?t;?l)and plan load truck(p1;t1;l1)to dis-
+tinguish betweenM2andM3. But this cannot be executed
+by the agentAas its precondition at(?p;?l)is not satisﬁed,
+and hence we cannot discard any of the models.
+Recall that in response to the plan outcome query we get
+the failed action aF=[`+1] and the ﬁnal state sF. Since
+the query plan is generated usingMiandMj(which dif-
+fer only in the newly added palm tuple), they both would
+reach the same state sFafter executing ﬁrst `steps of.
+Thus, we search Sfor a statessFwhereAcan exe-
+cuteaF. Similar to Stern and Juba (2017), we infer that any
+predicate which is false in swill not appear in aF’s precon-
+dition in the positive mode. Next, we iterate through the set
+of predicates p0snsFand add them to sFto check if
+Acan still execute aF. Thus, on adding a predicate p2p0
+to the statesF, ifAcannot execute aF, we addpin neg-
+ative mode in aF’s precondition, otherwise in ;mode. All
+pal tuples whose modes are correctly inferred in this way are
+therefore removed from the pal ordering.
+Equivalent Models It is possible for AIA to encounter a
+pair of modelsMiandMjthat are not prunable. In such
+cases, the modelsMiandMjare functionally equivalent
+and none of them can be discarded. Hence, both the models
+end up in the set possmodels in line 18 of AIA.
+3.5 Correctness of Agent Interrogation Algorithm
+In this section, we prove that the set of estimated mod-
+els returned by AIA is correct and the returned models areDomainjPjjAjj^Qj t(ms) t(s)
+Gripper 5 3 17 18.0 0.2
+Blocksworld 9 4 48 8.4 36
+Miconic 10 4 39 9.2 1.4
+Parking 18 4 63 16.5 806
+Logistics 18 6 68 24.4 1.73
+Satellite 17 5 41 11.6 0.87
+Termes 22 7 134 17.0 110.2
+Rovers 82 9 370 5.1 60.3
+Barman 83 17 357 18.5 1605
+Freecell 100 10 535 2.24y33.4y
+Table 1: The number of queries ( j^Qj), average time per query
+(t), and variance of time per query ( t) generated by AIA
+with FD. Average and variance are calculated for 10 runs of
+AIA, each on a separate problem.yTime in sec.
+functionally equivalent to the agent’s model, and no correct
+model is discarded in the process.
+Theorem 3. The Agent Interrogation Algorithm (algorithm
+1) will always terminate and return a set of models, each of
+which are functionally equivalent to the agent’s model MA.
+Proof (Sketch). Theorem 1 and Theorem 2 prove that when-
+ever we get a prunable query, we discard only inconsis-
+tent models, thereby ensuring that no correct model is dis-
+carded. When we do not get a prunable query, we in-
+fer the correct precondition of the failed action using up-
+date palordering() , hence the number of reﬁned palm tu-
+ples always increases with the number of iterations of AIA,
+thereby ensuring its termination in ﬁnite time.
+4 Empirical Evaluation
+We implemented AIA in Python to evaluate the efﬁcacy of
+our approach.3In this implementation, initial states ( S, line
+1 in Algorithm 1) were collected by making the agent per-
+form random walks in a simulated environment. We used
+a maximum of 60 such random initial states for each do-
+main in our experiments. The implementation assumes that
+the domains do not have any constants and that actions and
+predicates do not use repeated variables (e.g., at(?v;?v)),
+although these assumptions can be removed in practice with-
+out affecting the correctness of algorithms. The implemen-
+tation is optimized to store the agent’s answers to queries;
+hence the stored responses are used if a query is repeated.
+We tested AIA on two types of agents: symbolic agents
+that use models from the IPC (unknown to AIA), and sim-
+ulator agents that report states as images using PDDLGym.
+We wrote image classiﬁers for each predicate for the latter
+series of experiments and used them to derive state represen-
+tations for use in the AIA algorithm. All experiments were
+executed on 5.0 GHz Intel i9-9900 CPUs with 64 GB RAM
+running Ubuntu 18.04.
+The analysis presented below shows that AIA learns
+the correct model with a reasonable number of queries,
+and compares our results with the closest related work,
+3Code available at https://git.io/Jtpej
+0 20 400.51.0Gripper
+0 20 400.00.51.0Blocksworld
+0 20 400.00.51.0Miconic
+0 20 40 600.00.51.0Parking
+0 20 40 600.00.51.0Model AccuracyLogistics
+0 20 400.00.51.0Satellite
+0 200 4000.00.51.0Freecell
+0 50 1000.00.51.0Termes
+0 100 200 3000.00.51.0Barman
+0 100 200 3000.00.51.0Rovers02
+0510
+010
+05×10−1
+2.02.53.0×10−2
+0.00.51.0
+Time per Query (sec.)
+012
+010
+24×10−2
+01020
+Number of QueriesAccuracy: AIA FAMA Time: AIA FAMAFigure 4: Performance comparison of AIA and FAMA in
+terms of model accuracy and time taken per query with an
+increasing number of queries.
+FAMA (Aineto, Celorrio, and Onaindia 2019). We use the
+metric of model accuracy in the following analysis: the
+number of correctly learnt palm tuples normalized with the
+total number of palm tuples in MA.
+Experiments with symbolic agents We initialized the
+agent with one of the 10 IPC domain models, and ran AIA
+on the resulting agent. 10 different problem instances were
+used to obtain average performance estimates.
+Table 1 shows that the number of queries required in-
+creases with the number of predicates and actions in the
+domain. We used Fast Downward (Helmert 2006) with
+LM-Cut heuristic (Helmert and Domshlak 2009) to solve
+the planning problems. Since our approach is planner-
+independent, we also tried using FF (Hoffmann and Nebel
+2001) and the results were similar. The low variance shows
+that the method is stable across multiple runs.
+Comparison with FAMA We compare the performance
+of AIA with that of FAMA in terms of stability of the models
+learnt and the time taken per query. Since the focus of our
+approach is on automatically generating useful traces, we
+provided FAMA randomly generated traces of length 3 (the
+length of the longest plans in AIA-generated queries) of the
+form used throughout this paper ( hsI;a1;a2;a3;sGi).
+Fig. 4 summarizes our ﬁndings. AIA takes lesser time per
+query and shows better convergence to the correct model.
+Figure 5: PDDLGym’s simulated Sokoban (left) and Doors
+(right) environments used for the experiments.
+FAMA sometimes reaches nearly accurate models faster, but
+its accuracy continues to oscillate, making it difﬁcult to as-
+certain when the learning process should be stopped (we in-
+creased the number of traces provided to FAMA until it ran
+out of memory). This is because the solution to FAMA’s in-
+ternal planning problem introduces spurious palm tuples in
+its model if the input traces do not capture the complete do-
+main dynamics. For Logistics, FAMA generated an incorrect
+planning problem, whereas for Freecell and Barman it ran
+out of memory (AIA also took considerable time for Free-
+cell). Also, in domains with negative preconditions like Ter-
+mes, FAMA was unable to learn the correct model. We used
+Madagascar (Rintanen 2014) with FAMA as it is the pre-
+ferred planner for it. We also tried FD and FF with FAMA,
+but as the original authors noted, it could not scale and ran
+out of memory on all but a few Blocksworld and Gripper
+problems where it was much slower than with Madagascar.
+Experiments with simulator agents AIA can also be
+used with simulator agents that do not know about pred-
+icates and report states as images. To test this, we wrote
+classiﬁers for detecting predicates from images of simulator
+states in the PDDLGym (Silver and Chitnis 2020) frame-
+work. This framework provides ground-truth PDDL mod-
+els, thereby simplifying the estimation of accuracy. We ini-
+tialized the agent with one of the two PDDLGym environ-
+ments, Sokoban and Doors shown in Fig. 5. AIA inferred the
+correct model in both cases and the number of instantiated
+predicates, actions, and the average number of queries (over
+5 runs) used to predict the correct model for Sokoban were
+35, 3, and 201, and that for Doors were 10, 2, and 252.
+5 Conclusion
+We presented a novel approach for efﬁciently learning the
+internal model of an autonomous agent in a STRIPS-like
+form through query answering. Our theoretical and empir-
+ical results showed that the approach works well for both
+symbolic and simulator agents.
+Extending our predicate classiﬁer to handle noisy state de-
+tection, similar to prevalent approaches using classiﬁers to
+detect symbolic states (Konidaris, Kaelbling, and Lozano-
+Perez 2014; Asai and Fukunaga 2018) is a good direction
+for future work. Some other promising extensions include
+replacing query and response communication interfaces be-
+tween the agent and AAM with a natural language similar to
+Lindsay et al. (2017), or learning other representations like
+Zhuo, Mu ˜noz-Avila, and Yang (2014).
+Acknowledgements
+We thank Abhyudaya Srinet for his help with the implemen-
+tation. This work was supported in part by the NSF under
+grants IIS 1844325, IIS 1942856, and OIA 1936997.
+Ethics Statement
+Learning the internal model of an AI agent is one of the main
+focus areas of the AI community in the recent past. This
+work would enable a layperson to assess such autonomous
+agents and to verify if they are safe to work with. This would
+increase the adaption rate of AI systems, as it would remove
+the dependence of systems using AI on experts who could
+verify the internal working of the agent.
+Our system asks the agent queries and assumes that the
+agent can be connected to a simulator to ensure the correct-
+ness of responses. Our approach for such model learning
+comes with soundness and completeness guarantees. This
+implies that it will ﬁnd the agent model if there exists one,
+and the model that it learns will be correct as per the simula-
+tions. As in any approach that uses simulators, this method
+is susceptible to errors in programming and simulator de-
+sign. This can be addressed independently through research
+on formal veriﬁcation of simulators used in AI.
+References
+Aineto, D.; Celorrio, S. J.; and Onaindia, E. 2019. Learn-
+ing Action Models With Minimal Observability. Artiﬁcial
+Intelligence 275: 104–137.
+Amir, E.; and Chang, A. 2008. Learning Partially Observ-
+able Deterministic Action Models. Journal of Artiﬁcial In-
+telligence Research 33: 349–402.
+Amir, E.; and Russell, S. 2003. Logical Filtering. In Proc.
+IJCAI .
+Asai, M.; and Fukunaga, A. 2018. Classical Planning in
+Deep Latent Space: Bridging the Subsymbolic-Symbolic
+Boundary. In Proc. AAAI .
+B¨ackstr ¨om, C.; and Jonsson, P. 2013. Bridging the Gap Be-
+tween Reﬁnement and Heuristics in Abstraction. In Proc.
+IJCAI .
+Balac, N.; Gaines, D.; and Fisher, D. 2000. Learning Action
+Models for Navigation in Noisy Environments. In ICML
+Workshop on Machine Learning of Spatial Knowledge .
+Bonet, B.; and Geffner, H. 2020. Learning First-Order Sym-
+bolic Representations for Planning from the Structure of the
+State Space. In Proc. ECAI .
+Bryce, D.; Benton, J.; and Boldt, M. W. 2016. Maintaining
+Evolving Domain Models. In Proc. IJCAI .
+Camacho, A.; and McIlraith, S. A. 2019. Learning Inter-
+pretable Models Expressed in Linear Temporal Logic. In
+Proc. ICAPS .
+Chitnis, R.; Silver, T.; Tenenbaum, J.; Kaelbling, L. P.; and
+Lozano-Perez, T. 2021. GLIB: Efﬁcient Exploration for
+Relational Model-Based Reinforcement Learning via Goal-
+Literal Babbling. In Proc. AAAI .Cresswell, S.; and Gregory, P. 2011. Generalised Domain
+Model Acquisition from Action Traces. In Proc. ICAPS .
+Cresswell, S.; McCluskey, T.; and West, M. 2009. Acquisi-
+tion of Object-Centred Domain Models from Planning Ex-
+amples. In Proc. ICAPS .
+Fikes, R. E.; and Nilsson, N. J. 1971. STRIPS: A New Ap-
+proach to the Application of Theorem Proving to Problem
+Solving. Artiﬁcial Intelligence 2(3-4): 189–208.
+Fox, M.; and Long, D. 2003. PDDL2.1: An Extension to
+PDDL for Expressing Temporal Planning Domains. Journal
+of Artiﬁcial Intelligence Research 20(1): 61–124.
+Gil, Y . 1994. Learning by Experimentation: Incremental Re-
+ﬁnement of Incomplete Planning Domains. In Proc. ICML .
+Giunchiglia, F.; and Walsh, T. 1992. A Theory of Abstrac-
+tion. Artiﬁcial Intelligence 57(2-3): 323–389.
+Halpern, J. Y . 2016. Actual Causality . The MIT Press. ISBN
+0262035022.
+Helmert, M. 2006. The Fast Downward Planning System.
+Journal of Artiﬁcial Intelligence Research 26: 191–246.
+Helmert, M.; and Domshlak, C. 2009. Landmarks, Critical
+Paths and Abstractions: What’s the Difference Anyway? In
+Proc. ICAPS .
+Helmert, M.; Haslum, P.; Hoffmann, J.; et al. 2007. Flexible
+Abstraction Heuristics for Optimal Sequential Planning. In
+Proc. ICAPS .
+Hoffmann, J.; and Nebel, B. 2001. The FF Planning System:
+Fast Plan Generation Through Heuristic Search. Journal of
+Artiﬁcial Intelligence Research 14: 253–302.
+Khardon, R.; and Roth, D. 1996. Reasoning with Models.
+Artiﬁcial Intelligence 87(1-2): 187–213.
+Konidaris, G.; Kaelbling, L. P.; and Lozano-Perez, T.
+2014. Constructing Symbolic Representations for High-
+Level Planning. In Proc. AAAI .
+Krishnan, A.; Williams, A.; and Martens, C. 2020. Towards
+Action Model Learning for Player Modeling. In Proc. AI-
+IDE.
+Kuˇcera, J.; and Bart ´ak, R. 2018. LOUGA: Learning Plan-
+ning Operators Using Genetic Algorithms. In Knowledge
+Management and Acquisition for Intelligent Systems .
+Lindsay, A.; Read, J.; Ferreira, J.; Hayton, T.; Porteous, J.;
+and Gregory, P. 2017. Framer: Planning Models from Natu-
+ral Language Action Descriptions. In Proc. ICAPS .
+McDermott, D.; Ghallab, M.; Howe, A.; Knoblock, C.; Ram,
+A.; Veloso, M.; Weld, D. S.; and Wilkins, D. 1998. PDDL –
+The Planning Domain Deﬁnition Language. Technical Re-
+port CVC TR-98-003/DCS TR-1165, Yale Center for Com-
+putational Vision and Control.
+Ng, J. H. A.; and Petrick, R. P. A. 2019. Incremental
+Learning of Planning Actions in Model-Based Reinforce-
+ment Learning. In Proc. IJCAI .
+Rintanen, J. 2014. Madagascar: Scalable Planning with SAT.
+InProc. 8th International Planning Competition.
+Sacerdoti, E. D. 1974. Planning in a Hierarchy of Abstrac-
+tion Spaces. Artiﬁcial Intelligence 5(2): 115–135.
+Settles, B. 2012. Active Learning . Morgan & Claypool Pub-
+lishers. ISBN 1608457257.
+Silver, T.; and Chitnis, R. 2020. PDDLGym: Gym Envi-
+ronments from PDDL Problems. In ICAPS Workshop on
+Bridging the Gap Between AI Planning and Reinforcement
+Learning (PRL) .
+Srivastava, S. 2021. Unifying Principles and Metrics for
+Safe and Assistive AI. In Proc. AAAI .
+Srivastava, S.; Russell, S.; and Pinto, A. 2016. Metaphysics
+of Planning Domain Descriptions. In Proc. AAAI .
+Stern, R.; and Juba, B. 2017. Efﬁcient, Safe, and Probably
+Approximately Complete Learning of Action Models. In
+Proc. IJCAI .
+Yang, Q.; Wu, K.; and Jiang, Y . 2007. Learning Action Mod-
+els from Plan Examples Using Weighted MAX-SAT. Artiﬁ-
+cial Intelligence 171(2-3): 107–143.
+Zhuo, H. H.; and Kambhampati, S. 2013. Action-Model Ac-
+quisition from Noisy Plan Traces. In Proc. IJCAI .
+Zhuo, H. H.; Mu ˜noz-Avila, H.; and Yang, Q. 2014. Learn-
+ing Hierarchical Task Network Domains from Partially Ob-
+served Plan Traces. Artiﬁcial Intelligence 212: 134 – 157.

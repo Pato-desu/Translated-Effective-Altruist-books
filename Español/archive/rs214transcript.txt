@@ -1,0 +1,575 @@
+Rationally Speaking #214: Anthony Aguirre sobre “Predecir el futuro de la ciencia y la tecnología, con
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Metaculus”
+
+Bienvenidos a Rationally Speaking, el programa en el que exploramos las fronteras entre la razón y el absurdo. Soy Julia Galef, su anfitriona, y hoy estoy aquí con Anthony Aguirre, cosmólogo teórico de UC Santa Cruz. Es director asociado del Foundational Questions Institutes y cofundador del Future of Life Institute.
+
+Pero hoy vamos a hablar del proyecto más reciente de Anthony, Metaculus. Es un sitio que agrega predicciones sobre ciencia y tecnología. Así que hay preguntas como: ¿SpaceX aterrizará en Marte para el año 2030? ¿O alguien en Estados Unidos morirá a causa de un dron para finales de 2018? Cosas así.
+
+Así que Anthony y yo vamos a hablar de por qué es útil agregar predicciones sobre preguntas como estas, cuáles son algunos de los desafíos de operar un motor de predicciones como este, y algunas posibles soluciones, esperemos.
+
+Anthony, bienvenido a Rationally Speaking. Gracias, es un gusto estar aquí.
+
+Primero, bueno, hay otros sitios que agregan predicciones de una manera similar a Metaculus, como PredictIt o InTrade. Probablemente los oyentes estén más familiarizados con los mercados de predicción que tienen mercados sobre, por ejemplo, el resultado de elecciones políticas o de una votación como la del Brexit.
+
+Entonces, ¿en qué se diferencia Metaculus? ¿Cuál es su razón de existir, por así decirlo, única?
+
+Diría que es distinto, tanto en el modo que usa —no es realmente un mercado de predicción en sentido estricto— como en el tipo de preguntas que aborda. Son preguntas de interés tecnológico y científico, y más relevantes para las cosas que siempre me han interesado. Esas no suelen estar bien cubiertas por los mercados de apuestas o de predicción, que tienden a centrarse en los deportes y la política, y a veces en la geopolítica y los acontecimientos mundiales. Pero no en los detalles concretos, y no en general en el lado científico o técnico.
+
+¿Y por qué no fue, desde su perspectiva, la solución ideal simplemente empezar a sembrar preguntas científicas y tecnológicas en sitios ya establecidos y consolidados como PredictIt?
+
+Bueno, creo que los mercados de predicción tienen ventajas y desventajas en sí mismos. Quiero decir, parte de la motivación fue simplemente tener un sistema en el que yo estuviera integrado y que, en cierto modo, estuviera a cargo. Así que ese es un aspecto: querer algo con lo que puedas hacer exactamente lo que quieres.
+
+Pero también hay cosas que simplemente no me gustan tanto de los mercados de predicción, para el tipo de cosas que queríamos hacer.
+
+Página 1 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Creo que los mercados de predicción son realmente geniales en ciertos sentidos, y sobre todo para asuntos de gran envergadura como las elecciones, donde todo el mundo sabe hasta cierto punto lo que pasa en la elección. Hay muchas personas que incluso están dispuestas a poner dinero para apostar, y si no lo están, les interesa y opinan al respecto. Cosas que tienen un impacto significativo para un gran número de personas, y... un impacto financiero para un gran número de personas.
+
+Así que creo que los mercados son especialmente adecuados para eso.
+
+En cambio, cuando llegas a una pregunta concreta y puntual, como si SpaceX aterrizará en Marte en tal o cual fecha... va a ser muy difícil encontrar a muchas personas dispuestas a poner dinero para hacer predicciones sobre eso, y que tengan la experiencia y hayan seguido las noticias lo suficiente.
+
+Esa es incluso más popular que algunas. Pero, en general, va a ser difícil conseguir, bueno, la liquidez; y yo tengo un mercado pequeño como ese.
+
+Entiendo. Entonces querían una especie de punto focal de Schelling para todas las personas interesadas en este tipo de preguntas científicas específicas y acotadas, en lugar de que se pierdan en el mar de preguntas más populares de PredictIt.
+
+¿Puede hablar un poco de cómo Metaculus no es un mercado de predicción como PredictIt?
+
+Sí. Bueno, un mercado de predicción es esencialmente algo en lo que, en efecto, compras y vendes acciones, como en un mercado bursátil o cualquier otro mercado. Y si crees, por ejemplo, que hay un 20% de probabilidad de que algo ocurra, entonces, si lo que está a la venta ahora cuesta menos de veinte centavos, y si vas a recibir un dólar de vuelta, querrás comprarlo. Si crees que la probabilidad es mayor que el precio de venta, y así sucesivamente, o el precio de compra, y así sucesivamente.
+
+Así que es un mecanismo en el que compras y vendes acciones, y en la práctica simplemente estás apostando. Un mercado de predicción y un mercado de apuestas son, en cierto sentido, exactamente lo mismo. Y lo realmente bueno de esto es que es un mecanismo sencillo: si crees que el mercado es muy eficiente, debería converger en el precio correcto que da la probabilidad correcta.
+
+Y otra cosa buena es que puedes usarlo para cubrirte: si, digamos, va a aprobarse alguna ley particularmente detestable, o va a ser elegida alguna persona para un cargo, y te gustaría mitigar tu dolor obteniendo algo de dinero, entonces puedes hacer una apuesta así. O si eres una empresa con algún interés financiero real, puedes cubrirte del peligro de que ocurra algún evento en el mundo real entrando en un mercado de predicción o de apuestas—
+
+Pero… perdón, un breve desvío: ¿el tema de la cobertura no distorsiona de algún modo la capacidad del mercado de predicción para converger en la estimación más precisa? Como, bueno, yo me cubrí un poco antes de la última elección presidencial. Pensé: “Bueno, al menos si gana Trump, voy a ganar algo de dinero con esto”.
+
+Pero, si mucha gente piensa así, entonces no estamos logrando que la gente apueste
+
+su verdadera creencia. Estamos logrando que apuesten una mezcla de su verdadera creencia más, bueno, algo así como control de daños emocionales.
+
+Página 2 de 16
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Creo que tienes razón. Hay varios efectos sistemáticos de ese tipo que, creo, cualquier mecanismo de predicción, como un mercado, puede tener.
+
+Otro, por ejemplo: si tienes mucho dinero en juego en algo, podrías intentar influir en ello. Eso es menos problema con algo como una carrera presidencial, donde mucha gente intenta influir en ella, y buena suerte con tus $1,000 para tratar de influir.
+
+Pero si es un asunto más pequeño, o un asunto realmente pequeño sobre el que intentas obtener una predicción... y tienes mucho dinero en juego, entonces podría valer la pena intentar influir de alguna manera, para inclinar la apuesta a tu favor.
+
+Así que, bueno, los juegos tienen apuestas: los deportes y cosas así están muy controlados cuando la gente apuesta en ellos, para que no se pueda hacer trampa. Y si simplemente tienes un mercado de apuestas o de predicción directo sobre eventos relativamente pequeños que se pueden influir, entonces ese es otro gran problema del que hay que preocuparse. Así que sí, estoy de acuerdo contigo.
+
+O, potencialmente, mercados de asesinatos, como apostar sobre si alguien va a ser asesinado.
+
+Cosas así pueden ser especialmente complicadas. Quiero decir, no solo por... hay un peligro real, supongo, de que alguien vaya y asesine a alguien si tuviera suficiente dinero en juego.
+
+Pero hay una especie de rechazo general a algo como: esta persona muere de una forma horrible y tú ganas dinero por ello. Y creo que esto fue un problema real con algunos mercados de predicción anteriores. Quizás fue injusto, pero, sea justo o no, existe ese peligro en ese sentido: que si te pagan por un resultado particular y ese resultado es detestable para mucha gente involucrada, eso puede resultar desagradable.
+
+Bien. Bueno, ya hablamos un poco de qué hace que un mercado de predicción sea un mercado de predicción, pero ¿cómo funciona Metaculus si la gente no gana dinero por sus apuestas?
+
+Bien, la idea de Metaculus es que, en lugar de preguntarte “¿Quieres comprar o vender un fondo a tal o cual precio?”, simplemente se le pregunta directamente a la gente: “¿Cuál es su predicción sobre la probabilidad de que ocurran ciertos eventos?”, o “¿Cuándo cree que va a pasar algo?”, o “¿Cuál es su predicción sobre algún número?”.
+
+En el caso de los plazos o los números, en realidad se da una distribución de probabilidad. Así que dirás: creo que el número más probable es, digamos, 1,000 Teslas vendidos este mes, o lo que sea. Y yo diré que la probabilidad de que sean menos de 500 es del 25%, o de que sean más de 2000, también del 25%. Así que das unos cuantos números que definen una especie de distribución de probabilidad. Es efectivamente una forma de entrenar a la gente para pensar en hacer predicciones probabilísticas, y luego simplemente obtener esas predicciones probabilísticas de ellos.
+
+Luego, cuando se reúnen todas esas predicciones, algún algoritmo puede —y podría ser uno muy simple, como promediarlas todas o algo así y tomar
+
+Página 3 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+la mediana — pero algún algoritmo puede combinar todas esas predicciones en una única predicción destacada para esa cosa.
+
+Así que ese es el mecanismo básico, es muy simple en cierto sentido. Solo se trata de encuestar a la gente para conocer sus predicciones. Pero se puede hacer mucho con esos datos una vez que están reunidos, en la forma en que se agregan y en la forma en que se ponderan para los distintos predictores que introducen sus predicciones.
+
+Ahora bien, lo bueno de un mercado de predicción es que la gente tiene incentivos para intentar ser precisa, porque se la recompensa si lo es. Si no hay ninguna recompensa financiera
+
+por hacer predicciones precisas, ¿qué nos hace pensar que el resultado de los algoritmos de Metaculus es confiable?
+
+Bien. Bueno, hay varias formas de verlo. Una es desde el lado de los incentivos y otra es simplemente desde el lado de los resultados.
+
+En cuanto a los resultados, ahora hay un historial acumulado de un par de cientos de predicciones que ya se han resuelto, y puedes simplemente mirar los números. Eso muestra que funciona bastante bien.
+
+Ah, ¿cómo miden qué tan bien funciona?
+
+Hay varias formas: desde la que es mala pero fácil de explicar, hasta la mejor pero más difícil de explicar…
+
+Es una buena progresión.
+
+Y está la peor forma, que ni siquiera voy a usar: simplemente darle algunos ejemplos de grandes predicciones que hizo. Esto lo odio, así que ni siquiera lo voy a hacer.
+
+Qué bueno que lo evite.
+
+Así que, mirando más o menos el último semestre, desde el 1 de diciembre, por ejemplo… Si preguntas en cuántas ocasiones Metaculus estuvo del lado correcto del 50%, es decir, por encima del 50% si ocurrió o por debajo del 50% si no ocurrió, eso sucede 77 de las 81 veces en que se resolvió la pregunta, así que es bastante bueno.
+
+Y algunos aficionados conocerán las puntuaciones Brier. Esa es la forma relativamente fácil de entenderlo: se asigna un cero si algo no ocurre y un uno si sí ocurre. Luego se toma la diferencia entre la probabilidad predicha y ese número. Así que si predices un 20% y no ocurrió, eso da .2; o si es 80% y sí ocurre, también .2, porque es la diferencia entre el 80% y uno; y luego se eleva ese número al cuadrado.
+
+Así que las puntuaciones Brier pueden ir básicamente de cero a uno, donde los números bajos son buenos. Y si lo calculas para ese mismo conjunto de 80 preguntas, da .072, que es una puntuación bastante buena.
+
+Sí, bueno, no tengo realmente un marco de referencia, o sea, no sé qué
+
+se esperaría que adivinara una persona promedio con educación universitaria sobre estas preguntas, o qué puntuación Brier obtendría. Pero ciertamente parece baja.
+
+Página 4 de 16
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Eso es algo que puedes... Bueno, algunas referencias: un .25 es lo que obtendrías si adivinaras 50% para todo, así que es algo totalmente incierto. Un .33 es lo que obtendrías si asignaras al azar una probabilidad entre cero y uno para todo. Son cosas un poco diferentes.
+
+Muy interesante, sí.
+
+Y un usuario típico… por ejemplo, si tomas a un usuario de Metaculus de término medio, estaría entre .18 y .22, y los mejores están alrededor de .1; la gente de término medio está entre los .1 altos y los .2 bajos.
+
+Ah, ya veo. Entonces esto es realmente una prueba de que la agregación es mejor que la suma de las partes.
+
+La agregación funciona totalmente, sí. Así que se puede ver eso. Es muy, muy raro que alguien, un individuo, supere la puntuación agregada. Eso puede pasar porque simplemente tiene suerte, pero es muy poco frecuente.
+
+Y este .072 se aplica a las predicciones de Metaculus que están agregadas con más cuidado, así que no es solo un promedio simple o una mediana o algo así. Hay una especie de proceso cuidadoso que incluye recalibración y… cosas de las que hemos hablado. Pero funciona como una sola entidad.
+
+Sí. Entonces supongo que la otra mitad de la pregunta es: ¿por qué funciona? ¿Por qué es tan preciso si la gente no recibe una recompensa económica?
+
+La recompensa que la gente tiene ahora es simplemente la diversión. Lo que la gente en el sitio llama “puntos de internet sin sentido”. Compiten sorprendentemente con vigor por eso. Así que es divertido e interesante. Hemos encuestado a los usuarios: “¿Por qué usas el sitio?”. Las principales razones por las que llegan al sitio son:
+
+Uno, para mejorar en predecir. Así que tienen el incentivo de ser precisos, porque quieren acertar para ver dónde se equivocan y mejorar.
+
+Dos, por el aspecto competitivo: jugarlo como un juego. Esto es divertido y quiero ver si puedo superar a otras personas.
+
+Y para pensar en temas que invitan a la reflexión sobre el futuro, en un contexto en el que mucha gente piensa de forma similar y el nivel de discusión es alto.
+
+Ahora bien, claro que existe un modelo para añadir un incentivo económico. Ese modelo no está funcionando ahora en el sitio. Puede que lo haga en el futuro. Pero el modelo que tenemos en mente, en lugar de un mercado en el que la gente apuesta unos contra otros, es que… si piensas en lo que proporciona un mercado de predicción, lo que proporciona son predicciones, ¿no? Así que, si esas predicciones son de valor para alguien, deberían estar dispuestos a pagar por ellas.
+
+Así que, en un mercado de predicción normal, tienes tanto a las personas que hacen las predicciones como a las que consumen esas predicciones, todas juntas en un mismo bote. O bien puedes quedarte afuera y consumir predicciones de un mercado de predicción gratis, sin aportar nada al mercado. La gente
+
+Página 5 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+que subvenciona el mercado son, en realidad, las personas que hacen las apuestas y generan las predicciones.
+
+Y siempre me ha parecido que, si las predicciones son de valor para alguien, deberían en algún nivel subvencionarlas. Y las personas que hacen las predicciones, y que trabajan duro para generarlas, deberían recibir una subvención y una compensación por hacerlo.
+
+Así que el mecanismo que podría entrar en juego, si Metaculus sigue creciendo y quiere hacer esto, es un método en el que las personas interesadas en tener una predicción sobre algo en particular dirían: “Aquí está mi pregunta, que me interesa. Voy a poner algo de dinero en juego en esta pregunta; vengan a hacer predicciones sobre ella”.
+
+Y Metaculus ofrecería entonces ese dinero, esencialmente, como recompensa a las personas que vengan a hacer predicciones sobre ello, según qué tan buenos predictores sean y cuál sea su reputación como predictores. Así que recibirían ese dinero, acierten o no, en esa pregunta en particular.
+
+Ah, interesante.
+
+Pero para obtener recompensas futuras, tendrían que mantener un buen historial. Así que todos tienen el incentivo de tener una buena reputación, para que se les ofrezcan las recompensas, pero nadie recibe un pago individual en función del resultado de una predicción en particular.
+
+¿Por qué hacerlo de esa manera, en lugar de repartir la recompensa de alguna forma según la precisión relativa de las personas que hicieron las predicciones?
+
+Podría hacerse, pero el peligro es que… Una de las principales razones por las que, en Estados Unidos al menos, no tenemos mercados de predicción en funcionamiento es que existen regulaciones en su contra. Así que los mercados de predicción, lamentablemente, entran en conflicto tanto con las leyes sobre juegos de azar en línea como con las del comercio no regulado de valores. Por eso están doblemente prohibidos en Estados Unidos.
+
+¿Y PredictIt no tiene base en Estados Unidos?
+
+PredictIt tiene una exención especial, porque es un esfuerzo semiacadémico o algo así, y las cantidades de dinero son pequeñas. Así que obtuvieron una excepción particular, y los mercados de predicción de Iowa han hecho lo mismo.
+
+Bueno, ustedes me parecen bastante académicos.
+
+Sí. Así que probablemente podríamos obtener algún tipo de exención, de manera similar.
+
+Pero creo que, lamentablemente, una limitación que tienen los mercados de predicción por tener esa exención es que la cantidad total de dinero que se puede apostar es bastante pequeña. Así que nunca pueden usarlos, digamos, una empresa para cubrirse
+
+frente a algún resultado, porque ninguna empresa se va a preocupar por unos cuantos cientos de dólares.
+
+Página 6 de 16
+
+Julia:
+
+Anthony:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Pero también creo que evita los otros problemas, los incentivos extraños de la cobertura de los que hablamos: el intento de influir en el resultado.
+
+Y ayuda a superar una barrera de entrada. Porque si, para hacer una predicción sobre algo, tienes que ingresar tu número de tarjeta de crédito, poner dinero en juego y preocuparte —ya sabes, la gente es muy aversa a las pérdidas, le preocupa perder dinero—, eso supone muchos obstáculos para que la gente realmente lo haga.
+
+También está el hecho de tener tu dinero atado durante un tiempo, si es una apuesta a más largo plazo. Eso es cierto. Si es una cantidad significativa para ti, la tienes inmovilizada.
+
+Así que hemos procurado mantener todas esas barreras lo más bajas posible, y, tal como está configurado, no hay ningún riesgo para nadie. En el sentido de que, si haces predicciones y simplemente te equivocas, entonces sí, perderás puntos de reputación y recibirás menos ofertas. Pero nunca vas a perder dinero realmente. Así que esa barrera es mucho más baja.
+
+Ese es más o menos el razonamiento detrás de todo esto.
+
+Y creo que también es otro efecto secundario de los mercados de predicción: que no hay realmente ningún incentivo, a menos que estés coinvirtiendo con alguien, para compartir información sobre la predicción que estás haciendo.
+
+¿Quieres decir compartir tu razonamiento?
+
+Compartir tu razonamiento, sí. Podrías intentar persuadir a alguien de algo equivocado. Pero al final terminas compitiendo contra todos. Así que podrías intentar convencer a la gente, manipularla en una dirección u otra, para que te ayude.
+
+Pero no existe ningún nivel honesto de intercambio de información, lo cual, viniendo de un trasfondo científico, me resulta muy frustrante. La ciencia es un esfuerzo muy colectivo, donde parte de la recompensa del sistema es convencer correctamente a otras personas y llegar a la verdad por consenso. Y trabajar juntos y cooperar además de competir; claro, los científicos compiten entre sí.
+
+Así que me gusta tener un mecanismo que no sea estrictamente competitivo. Y estamos trabajando en formas de incorporar más elementos, como la cooperación directa o la formación de equipos, para que la gente tenga aún más incentivos para compartir su información y razonamiento, e intentar persuadirse mutuamente de manera honesta.
+
+¿Cuál es el incentivo en Metaculus para compartir? Parece que, en términos de puntos de internet sin sentido, actualmente... Hay una tabla de posiciones, y todavía quieres estar arriba, en la medida en que te importe. Y si además sumas el modelo de negocio que describías hace unos minutos, quieres ser una de las personas que pueden participar en las recompensas.
+
+Claro.
+
+Página 7 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Así que si compartes tu razonamiento, simplemente estás ayudando a otras personas.
+
+… Aunque supongo que, en teoría, sí estás haciendo que el sitio sea más eficaz en general, lo que aumenta la cantidad de recompensas que es probable que se ofrezcan. Eso también cuenta.
+
+Claro. Así que eso es bastante interactivo.
+Sí.
+
+Creo que en este momento el incentivo principal es solo la diversión y tener una buena conversación. Creo que simplemente no hay un desincentivo tan fuerte como el que podría haber en un mercado. Pero creo que, con algunas adiciones… creo que la forma en que es probable que se pueda incentivar, si esa es una palabra, es tener algún tipo de equipos, ya sea entre preguntas o incluso en una pregunta en particular, donde uno forma un equipo improvisado.
+
+O simplemente intentar tener un predictor que consiga seguidores de algún tipo. Así que podría querer persuadir a la gente de que su predicción es realmente buena, para que consiga seguidores; entonces los seguidores recibirán algo, y el predictor obtendrá algo de esa relación.
+
+Ese es el tipo de mecanismo en el que estamos trabajando ahora mismo para fomentar eso.
+
+Muy bien. Retrocediendo un paso, ¿cuál es un ejemplo de por qué alguien (una persona, una empresa, o incluso quizá un gobierno) querría tener predicciones sobre ciencia y tecnología?
+
+Sí. Curiosamente, la motivación real para Metaculus surgió justo cuando estábamos fundando el Future of Life Institute. Y yo pensaba: “Vaya, de verdad me gustaría pensar en lo que podríamos hacer ahora para afectar el futuro de alguna manera positiva, en el panorama general”.
+
+Y me di cuenta de que, ¿cómo vamos a tomar decisiones de cualquier tipo si no podemos hacer buenas predicciones al respecto? Creo que, en cierto nivel, todos deberíamos hacernos esa misma pregunta cuando tomamos decisiones. Porque toda buena decisión es, realmente, en cierta forma, implícitamente una predicción. Y una especie de función de valor sobre cómo las distintas opciones van a afectar lo que valoras.
+
+Nunca lo había pensado con tanto detalle hasta que empezamos el Future of Life Institute y realmente empecé a pensar: “Bueno, ¿dónde están esos puntos de mayor apalancamiento?”. Pues, tenemos que tener buenas predicciones. Y eso nos llevó, a través de varios pasos diferentes, a Metaculus.
+
+Así que creo que, en cierto nivel, todos estamos haciendo predicciones continuas todo el tiempo; buena parte de lo que hace nuestra mente es eso.
+
+Claro. Pero al hacer eso más explícito, haces mejores predicciones. Y he llegado
+
+al punto en que ahora me frustro mucho cuando siento que no tengo suficiente
+
+Página 8 de 16
+
+Julia:
+
+Anthony:
+
+información para hacer una predicción cuantitativa sobre algo. Si estamos arreglando algo en la casa, ¿cuál es la probabilidad de que esta cosa falle en el próximo año si no la arreglo ahora? ¿Es 70%? ¿Es 80%? Realmente quiero saberlo. Así que llegué a esa mentalidad, precisamente por estar obsesionado con Metaculus.
+
+Pero es una mentalidad que las empresas y otras entidades, los gobiernos y demás, realmente deberían tener. Porque cuando piensas en... cuando inviertes miles de millones de dólares en algo, ya sea una valoración bursátil de miles de millones de dólares, o asignas recursos por miles de millones de dólares, incluso un error relativamente pequeño en la evaluación correcta de la probabilidad de que algo ocurra equivale a cientos de millones o miles de millones de dólares que simplemente estás desperdiciando, en valor esperado.
+
+Así que creo que cualquier organización que tome decisiones cuantitativas sobre cómo desplegar sus recursos, es decir, cualquier organización, debería pensar en estas líneas. Incluso si no usan un mecanismo como este, deberían pensar: “¿Cuáles son las posibilidades, y qué tipo de probabilidad deberíamos asignarles?”.
+
+Otro ejemplo es el de las subvenciones. Yo participo en la concesión de subvenciones a través del Future of Life Institute y de la Foundational Questions Institute. Y he empezado a pedirles a las personas que evalúan las posibles subvenciones que piensen en lo siguiente: ¿cuáles son los tres resultados principales posibles de esta investigación si se financiara? Para cada uno, ¿cuál es la probabilidad de que usted considere que lograrán ese resultado? Y luego, en una escala logarítmica, ¿qué tan importante cree que sería ese resultado, desde algo que cambiaría el mundo hasta algo completamente trivial?
+
+Y, si quiere, puede calcular los números. Sumar el impacto exponenciado multiplicado por la probabilidad, sumar todos ellos y cosas por el estilo. En realidad no otorgamos subvenciones con eso, pero es un número interesante de ver.
+
+Y lo más importante, creo, es que simplemente pedirle a la gente que haga eso la lleva a pensar las cosas de una manera un poco distinta. Si usted decide financiar esto, pero al mirar los números resulta que tiene un impacto muy bajo según los valores que le asignó — frente a otra cosa que tiene un impacto muy alto, aunque su probabilidad sea baja o algo así —, ¿qué está pasando ahí? ¿Por qué le atrae tanto ese proyecto? ¿Es porque conoce muy bien a esa persona y le cae bien, o porque es atractivo o algo por el estilo?
+
+Así que es otro dato interesante para observar: cuáles son sus criterios reales... Si sus criterios reales son «queremos tener un gran impacto», ¿qué otras cosas se están colando ahí? Quizá esas cosas estén bien. Pero seamos conscientes de cuáles son.
+
+Una de las mayores dificultades que tengo al hacer predicciones es precisamente especificarlas con suficiente claridad como para que quede claro si se cumplieron o no. Estoy seguro de que usted debe tener este problema en Metaculus. ¿Cómo lo resuelve?
+
+Sí, es un problema que no se aprecia realmente hasta que uno empieza a hacerlo. Lo difícil que es definir con precisión una pregunta para que no sea ambigua.
+
+Página 9 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Algunas son, en su mayoría, inequívocas de por sí, como quién va a ganar algún evento deportivo. Pero incluso... Por fin publicamos una pregunta sobre si Trump sería elegido en 2020, y hubo 20 comentarios aclarando los detalles: ¿estamos hablando de “obtener suficientes votos” o de tomar realmente posesión del cargo? ¿O qué pasa entre los votos estatales y la reunión del colegio electoral? Así que hay todo tipo de casos de probabilidad bastante baja, pero cuando hay suficientes, se acumulan.
+
+Sí.
+Muchas preguntas salen mal si no se dejan bien definidas esas cosas.
+
+La manera en que lo manejamos, en la práctica, es esta: alguien formula una pregunta y luego otra persona la revisa con un ojo particular, pensando: «Hagamos una condición de resolución muy clara e inequívoca». Y, por lo general, publicamos la pregunta algunos días antes de que entre realmente en vivo, y la gente da su opinión y dice: “¿Qué pasa con esto? ¿Y con aquello?” ¿El cohete solo tiene que salir de la plataforma de lanzamiento, o tiene que llegar al espacio? ¿O qué pasa si explota en el...
+
+Y es interesante, porque creo que de eso se aprenden un par de cosas. Una es lo vagas que son la mayoría de las predicciones que hacemos. Y eso incluso cuando intentamos ser bastante precisos. ... Si observa la mayoría de las predicciones que la gente hace en los medios, como «20 predicciones sobre lo que pasará en 2018», casi ninguna puede operacionalizarse en algo que se pueda comprobar después, para saber si ocurrió o no. Lo he intentado.
+
+Así que creo que hay dos maneras. Una manera de manejarlo es la que ya le describí: esforzarse mucho por transformar la pregunta en una más operativa. A menudo, he descubierto, se puede hacer eso sin traicionar demasiado lo que realmente se quiere averiguar.
+
+A veces no se puede. Así que publicamos una, por ejemplo, sobre si Ray Kurzweil resultará básicamente acertado.
+
+Uf. Eso es —
+
+Es una pregunta muy vaga. Se formuló así de vaga a propósito. Pero es el tipo de cosa que uno quisiera saber. Algo como: «Sí, ¿hay un progreso exponencial y una singularidad dentro de 20 años, o eso está básicamente equivocado?». Eso es lo que uno quiere saber, pero es muy difícil averiguar cómo convertirlo en una pregunta precisa.
+
+Otra opción que hemos estado explorando son cosas como... No vamos a operacionalizar esto, pero sí vamos a tener a alguien —o a una persona, una de las dos— encargada de tomar una decisión al respecto. Así que parte de su predicción tendrá que ser modelar a esa persona, o a ese grupo de personas que [juzga] la decisión.
+
+Y entonces, se pueden dejar las preguntas un poco más vagas. Así que puede tener un
+
+grupo que [juzga]: «¿Es real la fusión fría?». Yo mismo soy una de esas personas que responderán esa pregunta.
+
+Página 10 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Así que se nombraría a las personas. Uno entiende quiénes son, cuál es su reputación, etc., y tiene que incorporar eso en su predicción. Así que creo que hay distintas maneras de manejarlo.
+
+Esa es la forma típica en que he intentado resolverlo, cuando hago apuestas con amigos. Elegimos a un tercero en quien ambos confiamos para que sea básicamente razonable.
+
+Y sí, creo que es un buen método. Pero también se pierde algo, porque precisar la pregunta es, creo, un ejercicio muy valioso que también hay que hacer.
+
+Algo que vi mencionado en una de las preguntas de Metaculous. Era «consensus forming». ¿Qué es eso?
+
+Eso es algo en lo que hemos estado pensando un poco últimamente. De hecho, la pregunta de Kurzweil es de esta naturaleza, donde... si uno piensa en lo que es una predicción, es básicamente una evaluación de la probabilidad de que algo sea el caso, antes de que eso ocurra en el tiempo.
+
+Digamos que hay algo en el mundo ahora mismo, como «¿Cuál es el producto interno bruto de Rusia?». No lo sé. Podría estimarlo, podría darle una distribución de probabilidad. Si dedicara un minuto a Google, podría reducir mucho mi distribución de probabilidad, pero aun así podría haber cierta distribución de fuentes y métodos distintos, etc.
+
+Cualquier cosa de la que hablamos en el mundo real... se vuelve cierta en algún nivel, y hay una distribución de probabilidad que queremos asignarle. Y los eventos futuros son solo una clase particular de hechos que, por casualidad, no son muy accesibles en este momento. Pero con el tiempo, generalmente podemos reducir la distribución de probabilidad sobre ellos.
+
+Así que la idea, en cierto sentido, es esta: si uno piensa que lo que la gente llama «predecir» es en realidad solo evaluar la probabilidad de que un hecho dado sea verdadero, y que ese hecho resulta estar, digamos, 20 años en el futuro. Con el paso del tiempo, con suerte, habrá más información disponible y esa distribución de probabilidad se irá reduciendo cada vez más hasta llegar a un resultado concreto. Y luego, cuando el momento se acerca mucho, o incluso ya está presente, esa distribución de probabilidad se reducirá, con suerte, a algo como 99.99% sí y .01% no, o a este valor más o menos algún pequeñísimo margen.
+
+Así que, en cierto sentido, creo que eso puede considerarse un continuo, donde, a medida que pasa el tiempo, uno simplemente obtiene cada vez más información pertinente que permite reducir sus probabilidades. Y a veces llega una pieza enorme de información, por ejemplo cuando ocurre el evento deportivo y la transmisión llega a la televisión, y uno ve que un equipo ganó.
+
+Uno sigue sin estar seguro, en un sentido filosófico. Podría ser que alguien le esté engañando y que usted esté alucinando, o todo... Es decir, hay una pequeñísima franja de probabilidad de que no sea verdad lo que usted cree que es verdad. Pero hay una pieza enorme de información que la reduce en gran medida.
+
+Página 11 de 16
+
+Julia:
+
+Anthony:
+Julia:
+
+Anthony:
+
+Julia:
+
+Así que la idea es simplemente pensar en ese continuo, dejar que las preguntas permanezcan abiertas, observar cómo esa distribución de probabilidad se reduce, y se reduce, y se reduce, y en algún momento decir: sí, ya se redujo lo suficiente como para decir que esto ocurrió. Y hasta que eso pase, sigue siendo una pregunta abierta.
+
+Así que ese es un punto de vista con el que estamos experimentando, creo, para ver si puede... Metaculus no solo puede pensar en eventos futuros, sino también en algunos eventos actuales, en términos de cómo se resolverán en el futuro. Sobre cosas que hoy son polémicas también se pueden hacer predicciones.
+
+Sí, siento que... Y esto es solo mi impresión aproximada, pero siento que hace 10 años era mucho más una visión marginal que la inteligencia artificial general fuera probablemente algo que ocurriría en los próximos un par de siglos, y que también era plausible que hubiera consecuencias serias y significativas de la invención de la inteligencia artificial general.
+
+Y siento que ahora es mucho menos marginal. Es más bien, como, la visión normal: sí, eso es —quizá no probable en los próximos 10 o 20 años, pero sí probable en los próximos siglos—, y que sí, las consecuencias serias son plausibles y merecen una consideración seria. Esa es quizá la visión estándar. Sin entrar demasiado en probabilidades exactas de ese resultado, ni de la IAG en un plazo específico.
+
+Y no podríamos haber tenido realmente una predicción sobre la invención de la IAG, ni, bueno, sobre cuáles serían las consecuencias, que se resolviera a tiempo para ser útil a la gente. Pero si hubiéramos abierto un mercado sobre «¿Cómo evolucionaría el consenso?», entonces eso sí podría haber dado frutos ya, apenas 10 años después. Así que eso es interesante.
+
+... Aunque, me pregunto: ¿no crea una especie de incentivos extraños para que la gente... Es decir, si lo que uno apuesta es cuáles serán finalmente las apuestas en el sitio, entonces-
+
+Sí.
+Sí.
+
+Creo que al menos es posible que esa calidad meta se desboque en la dirección equivocada, ¿no? Es decir, uno podría imaginar a la gente preguntando: ¿cuál es la probabilidad de que, en cierto modo, esta pregunta se resuelva como verdadera? Y en Metaculus hemos tenido una serie de metapreguntas extrañas de ese tipo para jugar con ello, porque se puede imaginar que pasen cosas raras, ya que es un sistema autorreferencial.
+
+Así que creo que todavía tenemos que resolver cuál es la manera correcta de pensar sobre eso. ¿Cómo se llega realmente a... Es algo inesperadamente profundo cuando uno empieza a pensarlo. ¿Cómo nos ponemos realmente de acuerdo en algo, o encontramos consenso sobre algo, de una manera matemáticamente rigurosa? Así que creo que todavía estamos experimentando un poco con las formas correctas de pensar sobre eso.
+
+Bien, una pregunta relacionada: la precisión y la calibración de la comunidad de Metaculus que usted mencionó antes... Estaba implícito en su descripción que se trata de precisión y calibración en pronósticos a corto plazo. Porque, claro, usted no ha estado por aquí durante décadas. Y además, por otro lado, en
+
+Página 12 de 16
+
+Anthony:
+
+Metaculus, pidiendo a la gente que prediga cosas a muy largo plazo —como, ya sabe, ¿aterrizará SpaceX en Marte para 2030?—
+
+Y la premisa ahí es que la habilidad de la comunidad para hacer pronósticos a corto plazo se traslada a su capacidad para hacer pronósticos precisos a largo plazo. O si no, lo primero no sería relevante para juzgar los pronósticos a largo plazo. Me siento bastante dividido sobre cuánto esperaría que el pronóstico a corto plazo sea la misma habilidad que el pronóstico a largo plazo, o lo bastante similar como para ser útil. ¿Cuál es su opinión?
+
+Sí, claro, en realidad no lo sabemos, porque no tenemos ambos conjuntos de datos para compararlos. Mi impresión es que hacia donde van las cosas es que, cuando uno piensa en alguna pregunta a largo plazo, debería considerarse... y lo que esperamos hacer en el futuro es considerarla como una pregunta general que quisiéramos descomponer en otras preguntas que podamos evaluar antes.
+
+Y que, en cierto sentido, si realmente quiere una predicción a largo plazo, lo que debería tener es algún tipo de modelo para ello, basado en algunas preguntas subsidiarias, cuyas probabilidades luego combina para obtener una probabilidad para la de largo plazo.
+
+Por ejemplo: ¿habrá paridad de inteligencia humano-máquina para 2040? Es una gran pregunta que todos deberían querer responder, y simplemente hacer una predicción directa sobre esa pregunta —puede hacerlo, pero no estoy seguro de qué tan buena razón tenemos para creer los números que llegan a eso.
+
+Lo que sería, y será, mucho más interesante es tener un modelo para eso, que diga: aquí está cierta estructura de lo que haría falta para que haya paridad de inteligencia humano-máquina. Por ejemplo, un árbol de eventos que tendrían que ocurrir para que eso suceda o no suceda, y descomponerlos en subeventos que tendrían que ocurrir o no. Así que hay distintas estructuras, como un árbol de fallos, o redes bayesianas, y otras cosas que pueden construirse de esta manera.
+
+Y luego intentar hacer predicciones sobre las piezas pequeñas, que, con suerte, no serán tan a largo plazo como la grande. Y luego ver cómo, en su modelo, cambian las predicciones sobre lo que ocurre a largo plazo a medida que cambian esas predicciones sobre lo de corto plazo. Y, con el tiempo, puede ver cómo esa predicción a largo plazo cambia a medida que reúne más y más información.
+
+Creo que probablemente se necesite algo así. Porque no vamos a tener los datos durante décadas para saber cómo las predicciones a corto plazo se traducen en las de largo plazo. Y si queremos algo en lo que podamos confiar hasta cierto punto, o de lo que podamos sacar ideas, creo que va a tener que ser más bien un conjunto de preguntas en red con una estructura como esa. Porque estoy de acuerdo en que, en este momento, si uno se acerca a alguien y le dice: mire, Metaculus ha acertado muchísimo hasta ahora en preguntas de un año, y esto es lo que dicen sobre 2070... bueno, nadie se lo va a creer, y no deberían.
+
+Así que estoy de acuerdo. Creo que mi punto de vista es que, como otras... ya sabe, como muchas
+
+actividades, incluidas las científicas, la previsión va a tener... no habrá una respuesta única que sirva para todo.
+
+Página 13 de 16
+
+Julia:
+
+Anthony:
+
+Y va a haber que añadir muchísima más maquinaria encima de otras formas que tenemos de pronosticar, como modelos científicos estrictos, en los que se tiene algún conjunto particular de ecuaciones que se pueden resolver, o una simulación por computadora que uno hace. Metaculus es otra cosa dentro del espectro de hacer estimaciones de probabilidad agregadas a partir de personas. Pero hay muchas otras estructuras, entre medias y en medio de esas, que tendremos que resolver, y añadir distintos ingredientes, para obtener el mejor sistema de pronóstico posible.
+
+Acabo de recordar una pregunta que quería hacerle antes en el episodio. Estaba comparando Metaculus con mercados de predicción, como PredictIt o Intrade, pero otra comparación que se podría hacer es con inversores en el mundo real, que toman decisiones sobre dónde poner su dinero basándose en sus predicciones implícitas. Así que esto es más relevante para la predicción en ciencia y tecnología que, quizá, para predecir los resultados de elecciones o... no sé, otras cosas en las que no se puede apostar de forma natural en el mundo real.
+
+Pero mi pregunta es: ¿por qué alguien que quiere tener una idea de, ya sabe, lo que piensan los buenos pronosticadores que es probable que ocurra, debería mirar Metaculus? En lugar de, digamos, mirar cuánto gastan las empresas en IAG, y el precio de las acciones de SpaceX, u otras cosas que representan cómo las personas en el mundo real están apostando de verdad, ya sabe, con base en sus predicciones implícitas sobre ciencia y tecnología?
+
+Sí, y debería, desde luego, pero creo que lo complicado es que, ya sabe, si toma, digamos, el precio de las acciones de alguna... de SpaceX, o de Tesla, supongo... [SpaceX no cotiza en bolsa] que incorpora muchísimas cosas distintas en su precio. Y, en el más racional y perfecto de todos los mundos posibles, sería una especie de suma ponderada de probabilidades de distintos resultados. Y el precio de Tesla si ocurre este resultado, frente a si ocurre aquel, sería como una superposición de esos dos como valor, y así sucesivamente.
+
+Y se puede modelar así. Pero si quiere saber, por ejemplo, cuál es la probabilidad de que el Model 3 se produzca en cantidades suficientes en los próximos seis meses, separar eso de todo lo demás que influye en las acciones de Tesla es muy, muy difícil. En principio está ahí, si todos hacen bien su trabajo, pero le costará mucho avanzar en esa dirección. Es mucho, mucho más fácil decir: «Hagamos una evaluación de esa probabilidad de cifras de producción», y luego pensar qué influencia va a tener eso en las acciones de Tesla, que hacer el camino inverso, porque hay muchísimas más piezas de información.
+
+Y creo que esa es en realidad una de las utilidades financieras. Sin duda, los fondos de cobertura y demás lo hacen, ¿no? Piensan: «Hay un fallo de la Corte Suprema que pronto afectará a varias empresas farmacéuticas, digamos, y pensemos en cuál sería el efecto sobre las empresas A, B y C si sale el resultado uno o el dos de la Corte Suprema, y cuáles son las probabilidades de esos...» y, bueno, invierten en consecuencia. Así que, claramente, lo hacen implícita o explícitamente, y por eso podrían estar interesados en los números que tiene Metaculus.
+
+Pero otras personas también deberían hacerlo. Y no está claro que vayan a
+
+tener acceso al tipo de equipo dedicado de personas altamente cuantitativas que pueden evaluar las probabilidades que tiene un fondo de cobertura, ¿verdad? Así que, en cierto sentido, yo
+
+Página 14 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+lo concibo como un recurso para quienes no son fondos de cobertura —porque ellos tienen su propio equipo que lo hace— para quienes no lo son y quisieran hacer algo similar, y realmente tener alguna forma de obtener esas probabilidades.
+
+Genial. Bueno, Anthony, antes de dejarle ir, quería pedirle un libro, un blog u otro recurso con el que usted esté sustancialmente en desacuerdo —como, que no comparte la visión del mundo del autor, o el argumento que plantea, o algo así—, pero que, aun así, considere valioso para discutir. Como, que respeta sus métodos, o que piensa que las preguntas que plantea vale la pena considerarlas, o algo por el estilo. ¿Tiene algo en esa categoría?
+
+Bueno, pensé bastante en esta pregunta y me di cuenta de que es difícil. Porque cuando pienso en estar de acuerdo o en desacuerdo con un libro, casi nunca lo hago. Es decir, un libro va a tener muchas cosas verdaderas, y muchas cosas de las que soy escéptico, y una persona también es algo complicado.
+
+¿No podría ponerle una probabilidad, ya sabe, o un número del uno al 100...?
+
+Quizá una fracción de las cosas con las que estoy de acuerdo en un libro. Pero descubrí que lo más largo que puedo imaginar en lo que disiento por completo es algo como un artículo o una entrada de blog. Pero eso me dijo algo... Y estoy esquivando un poco la pregunta, pero eso me dijo algo que creo que es importante: que cuando intercambiamos frases sueltas o argumentos de un párrafo, es muy fácil encontrar formas de estar en desacuerdo con la gente y tener muchas disputas.
+
+En cambio, si se toma el tiempo de comprometerse de una manera más completa con un libro, con una persona o con, bueno, varios párrafos, el terreno común está ahí, si uno lo busca en absoluto. Y creo que buscar ese terreno común y luego ir avanzando desde ahí, para ver: bien, ahora que tenemos ese terreno común, ¿dónde están los puntos de desacuerdo, y podemos identificar por qué?
+
+Es una manera mucho más agradable de interactuar con distintas ideas y distintas personas que decir: «Bueno, mi premisa es que ellos piensan esto, y yo pienso aquello, y por eso estamos en desacuerdo, y ahora, ¿cómo voy a defender mi punto de vista?»
+
+Así que creo que hay... Puedo dar ejemplos de un par de artículos con los que no estuve de acuerdo, pero creo que lo que esto me dijo en el panorama general fue: lea más libros y hable con más personas en profundidad. Porque es mucho, mucho más difícil estar en desacuerdo en conjunto y no sacar nada de leer algo o de interactuar con algo tan grande.
+
+Bueno, esa es una linda reflexión, pero ¡no me ha hecho olvidar que no respondió la pregunta!
+
+Bueno, bueno, diría que lo más reciente, porque decidí que la única forma de hacerlo era elegir algo muy, muy reciente... Estaba leyendo un artículo sobre el argumento de que salir a colonizar la galaxia, que suele verse como una gran manera de obtener mucha utilidad positiva, era un balance neto
+
+Página 15 de 16
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+Anthony:
+
+Julia:
+
+negativo. Es decir, que si nos quedamos aquí en la Tierra, podríamos seguir con nuestras felices vidas y quizá matarnos o no. Pero si colonizamos la galaxia nos dividiremos en todo tipo de especies, sociedades y facciones diversas, que estarían constantemente peleando entre sí, usando terribles armas de destrucción masiva y demás, y sería un lugar terrible.
+
+Y por eso no estoy de acuerdo en absoluto. Es decir, mi visión de salir a la galaxia y tener muchas especies diferentes, y facciones, y civilizaciones, y demás es, como —
+
+¡Es bastante genial! Sí.
+
+— el premio. Y aquí se presentaba como el resultado negativo.
+
+Así que no compartía en absoluto esa visión, pero, pensando en qué es lo más probable que pase, ¿qué pasa si no podemos comunicarnos más rápido que la luz [entre] todas estas especies aisladas? ¿Qué pasa si lo primero que se sabe de una nueva civilización es el arma que pone fin al mundo que aparece de ellos? Porque eso podría ser lo correcto desde la teoría de juegos en ciertos tipos de dinámicas, y en galaxias, y demás.
+
+Así que soy, en cierto modo, un optimista congénito. Entonces leer algo bastante pesimista, pero bien elaborado y pensado, me pareció muy interesante y útil para mí.
+
+¿Eso le —
+Ese artículo era de Torres, en realidad, Phil Torres.
+
+¡Ah, genial! Sí, lo enlazaremos en la página web del podcast. Entonces, ¿eso básicamente lo obligó a ser más específico o riguroso consigo mismo? Sobre las condiciones que tendrían que cumplirse para que esto sea un buen futuro... O, bueno, los posibles «contras» en el cálculo de pros y contras, aunque el efecto neto general siga siendo a favor?
+
+Sí, creo que me hizo darme cuenta de que tenía una suposición oculta de fondo de que el resultado iba a ser en general positivo, y que eso no era un hecho. Y si el resultado podría ser positivo o negativo, entonces pensemos en por qué se volvería positivo o negativo. ¿Y hay dinámicas que llevarían a uno u otro, y podemos hacer algo al respecto?
+
+Así que... Bueno, descubrir eso me ayudó a ver: oh, quizá hay una oportunidad para alguna contribución aquí. Quizá no por mí, sino por nuestros descendientes algún día. En lugar de simplemente decir: «Sigamos adelante y veamos, con suerte todo saldrá bien, porque creo que eso es lo que va a pasar».
+
+Sí, bien. Es una buena respuesta. Bueno, muchas gracias por venir al programa, Anthony. Ha sido una hora iluminadora.
+
+Gracias por invitarme. Ha sido un placer.
+
+Así concluye otro episodio de Rationally Speaking. Acompáñenos la próxima vez para más exploraciones en las fronteras entre la razón y el absurdo.
+
+Página 16 de 16
+

@@ -1,0 +1,1459 @@
+Grafos de dependencia probabilística
+Oliver Richardson, Joseph Y. Halpern
+Departamento de Ciencias de la Computación
+Universidad de Cornell
+Ithaca, NY 14853
+foli, halperng@cs.cornell.edu
+Resumen
+Presentamos los grafos de dependencia probabilística (PDG), una
+nueva clase de modelos gráficos dirigidos. Los PDG pueden capturar
+creencias inconsistentes de forma natural y son más modulares
+que las redes bayesianas (BN), en el sentido de que facilitan
+incorporar nueva información y reestructurar la representa-
+ción. Mostramos con ejemplos que los PDG son una herramienta de modelado especialmente natural.
+Proporcionamos tres semánticas para los PDG, cada una de las
+cuales puede derivarse de una función de puntuación (sobre distribuciones conjuntas de
+las variables de la red) que puede interpretarse
+como la representación de la incompatibilidad de una distribución con el PDG.
+Para el PDG que corresponde a una BN, esta función se minimiza de
+forma única por la distribución que representa la BN, lo que muestra que
+la semántica de los PDG extiende la semántica de las BN. Mostramos además que
+los grafos de factores y sus familias exponenciales también pueden repre-
+sentarse fielmente como PDG, mientras que existen barreras significativas
+para modelar un PDG con un grafo de factores.
+1 Introducción
+En este artículo presentamos otra herramienta gráfica para
+modelar creencias: los grafos de dependencia probabilística (PDG).
+Ya existen muchos modelos de este tipo en la literatura, in-
+cluidas las redes bayesianas (BN) y los grafos de factores. (Para una
+visión general, véase (Koller y Friedman 2009).) ¿Por qué el
+mundo necesita uno más?
+Nuestra motivación original para introducir los PDG fue poder
+capturar la inconsistencia. Queremos poder modelar
+el proceso de resolución de la inconsistencia; para ello hay que
+modelar la propia inconsistencia. Pero nuestro enfoque para modelarla
+tiene muchas otras ventajas. En particular, los PDG
+son significativamente más modulares que otros grafos dirigidos:
+operaciones como la restricción y la unión, que con los PDG se hacen fácilmente,
+son difíciles o imposibles con otras
+representaciones. Los siguientes ejemplos motivan los PDG y
+ilustran algunas de sus ventajas.
+Ejemplo 1. Grok visita un distrito vecino. Por
+lecturas previas, considera probable (probabilidad .95) que las armas
+son ilegales aquí. Algunas breves conversaciones con los lugareños la llevan
+a creer que, con probabilidad .1, la ley prohíbe los floomps.
+La forma obvia de representar esto como una BN es usar dos
+variables aleatorias F y G (que toman respectivamente los valores ff;fg
+Derechos de autor ©2021, Association for the Advancement of Artificial
+Intelligence (www.aaai.org). Todos los derechos reservados. y g;g), que indica si los floomps y las armas están prohibidos.
+La semántica de una BN le ofrece dos opciones: o bien suponer
+que F y G son independientes y dar las probabilidades (incondicionales)
+de F y de G, o bien elegir una dirección de dependencia,
+y dar una de las dos probabilidades incondicionales y una
+distribución de probabilidad condicional. Como no hay razón para
+elegir una dirección de dependencia u otra, la opción natural es
+suponer independencia, lo que le da la BN de la izquierda de la
+Figura 1.
+ff
+.9 .1g g
+.05 .95
+F G
+1 1
+F Gff/bracketleftbig
+.90.10/bracketrightbig
+⋆gg/bracketleftbig
+.05.95/bracketrightbig
+⋆
+pp/prime
+p=gg/bracketleftbigg
+.92.08
+.08.92/bracketrightbigg
+f
+f= (p/prime)T
+Figura 1: Una BN (izquierda) y el PDG correspondiente (derecha), que
+puede incluir más cpd; porp0 lo hace inconsistente.
+Una experiencia traumática unas horas después lleva a Grok a
+creer que “floomp” es probablemente (probabilidad .92) otra
+palabra para arma. Sea p(G|F) la distribución de probabilidad
+condicional (cpd) que describe la creencia de que si los floomps son
+legales (resp., ilegales), entonces con probabilidad .92 las armas también lo son,
+y sea p'(F|G) lo contrario. Partiendo de p, la primera reacción de Grok
+es simplemente incorporar la información condicional
+añadiendo F como padre de G, y luego asociar la
+cpd p con G. Pero entonces, ¿qué debe hacer con la probabilidad original
+que tenía para G? ¿Debe descartarla sin más? Es
+fácil comprobar que no existe ninguna distribución conjunta consistente
+con ambas probabilidades a priori originales sobre F y G, y también
+con p. Así que, si quiere representar la información con una BN, que
+siempre representa una distribución consistente, debe resolver
+la inconsistencia.
+Sin embargo, resolverlo de inmediato puede no ser lo ideal.
+Por ejemplo, si la inconsistencia surge de una confusión
+entre dos definiciones de “arma”, una resolución habrá
+destruido las cpd originales. Puede ser mejor usar la computación para
+notar la inconsistencia y consultar la ley real.
+En cambio, consideremos el PDG correspondiente. En
+un PDG, las cpd se asocian a las aristas, en lugar de a los nodos del
+grafo. Para representar probabilidades incondicionales, arXiv:2012.10800v1  [cs.AI]  19 Dec 2020
+introducimos una variable unitaria 1 1 que solo toma un valor,
+denotado ?. Esto lleva a Grok al PDG representado en la Figura 1,
+donde las aristas de 1 1 a F y G se asocian con
+las probabilidades incondicionales de F y G, y las aristas
+entre F y G se asocian con p y p'.
+El estado original del conocimiento consta de los tres nodos
+y de las dos aristas sólidas desde 1 1. Esto es como la red bayesiana que
+consideramos antes, salvo que ya no tomamos explícitamente
+F y G como independientes; solo registramos las restricciones
+impuestas por las probabilidades dadas.
+El punto clave es que podemos incorporar la nueva informa-
+ción a nuestra representación original (el grafo de la Figura 1
+sin la arista de F a G) simplemente añadiendo la arista
+de F a G y la cpd asociada p (la nueva información
+se muestra en azul). Hacerlo no cambia el significado de
+las aristas originales. A diferencia de una actualización bayesiana, la operación es
+incluso reversible: basta con eliminar la nueva arista para recuperar nuestro estado
+original de creencias, lo que permite reflexionar sobre una observación
+y luego rechazarla. 
+La capacidad de los PDG para modelar la inconsistencia, como se ilustra
+en el Ejemplo 1, parece haber tenido un coste importante.
+Parece que hemos perdido un beneficio clave de las BN: la facilidad con
+la que pueden capturar independencias (condicionales), que,
+como ha argumentado con firmeza Pearl (1988), están omnipresentes.
+Ejemplo 2 (emulando una BN). Consideramos ahora la clásica
+red bayesiana (cuantitativa) B, que tiene cuatro variables binarias
+que indican si una persona (C) desarrolla cáncer,
+(S) fuma, (SH) está expuesta al humo de segunda mano, y
+(PS) tiene padres que fuman, representada gráficamente en la Fig-
+ura 2(a). Ahora repasamos qué se requiere para representar
+B como un PDG, que llamamos MB, mostrado como los nodos sólidos
+y las aristas en la Figura 2(b).
+PS
+SH S
+C
+1 1
+PSS
+SHC TPDG restringido en los Ejemplos 3 y 4
+Figura 2: (a) La red bayesiana B del Ejemplo 2 (izquierda),
+y (b) MB, su PDG correspondiente (derecha). El recuadro sombreado
+indica una restricción de MB solo a los nodos y aristas que
+contiene, y el nodo discontinuo T y su flecha hacia C pueden
+añadirse al PDG sin tener en cuenta S y SH.
+Empezamos con los nodos que corresponden a las variables de B,
+junto con el nodo especial 1 1 del Ejemplo 1; añadimos una
+arista de 1 1 a PS, a la que asociamos la probabilidad incondicional
+dada por la cpd de PS en B. También podemos reutilizar
+las cpd de S y SH, asignándolas, respectivamente, a
+las aristas PS→S y PS→SH en MB. Quedan dos
+problemas: (1) modelar la tabla restante de B,
+que corresponde a la probabilidad condicional de C dado
+S y SH; y (2) recuperar las independencias condicionales adicionales
+de la BN. Para (1), no basta con añadir las aristas S→C y
+SH→C que están presentes en B. Como vimos en el Ejemplo 1,
+esto significaría proporcionar dos tablas separadas, una que indica
+la probabilidad de C dado S, y otra que indica
+la probabilidad de C dado SH. Perderíamos información significativa
+presente en B sobre cómo C depende conjuntamente
+de S y SH. Para distinguir la dependencia conjunta de S y
+SH, por ahora dibujamos una arista con dos colas, una hiperarista (dirigida)
+que completa el diagrama de la Figura 2(b). Respecto a
+(2), hay muchas distribuciones consistentes con
+las probabilidades marginales condicionales de las cpd, y las
+independencias supuestas por B no tienen por qué cumplirse en ellas. En lugar de
+tratar de distinguirlas con restricciones adicionales,
+desarrollamos una semántica de función de puntuación para los PDG
+que, en este caso, se minimiza de forma única por la distribu-
+ción especificada por B (Teorema 4.1). Esto nos permite recuperar
+la semántica de las redes bayesianas sin exigir las
+independencias que estas suponen.
+Supongamos ahora que obtenemos información más allá de la capturada
+por la BN original. En concreto, leemos un estudio empírico exhaustivo
+que demuestra que las personas que usan camas de bronceado tienen
+una incidencia de cáncer del 10%, frente al 1% en el grupo
+de control (llamemos p a la cpd para esto); nos gustaría añadir esta
+información a B. El primer paso es claramente añadir un nuevo nodo
+etiquetado T, por “uso de cama de bronceado”. Pero hacer de T un
+padre de C (como parece claramente apropiado, dado que la
+incidencia de cáncer depende del uso de camas de bronceado) requiere una
+ampliación sustancial de la cpd; en particular, nos obliga
+a hacer suposiciones sobre las interacciones entre las camas de
+bronceado y el tabaquismo. El PDG correspondiente, MB, en cambio,
+no tiene problemas: simplemente podemos añadir el nodo
+T con una arista hacia C asociada con p. Pero nótese
+que hacer esto permite que nuestro conocimiento sea
+inconsistente. Por un ejemplo sencillo: si la distribución de C dado
+S y H codificada en la cpd original fuera siempre
+determinísticamente “tiene cáncer” para cada valor posible de S
+y H, pero la distribución según la nueva cpd a partir de T
+fuera determinísticamente “no tiene cáncer”, el PDG resultante sería
+inconsistente. 
+Hemos visto que podemos añadir información a los PDG con facilidad;
+eliminar información es igual de sencillo.
+Ejemplo 3 (restricción). Después de que el partido comunista llegó
+al poder, los niños se criaban en comunidad, y por ello los hábitos
+de fumar de los padres ya no tenían ningún efecto sobre ellos. Grok
+lee su libro favorito sobre modelos gráficos y se da cuenta de que,
+aunque el nodo PS de la Figura 2(a) ha perdido su
+utilidad, los nodos S y SH ya no deberían tener a PS
+como padre; la otra mitad del diagrama —es decir, el nodo
+C y su dependencia de S y SH— debería seguir valiendo como antes.
+Grok ha identificado dos obstáculos para modelar la eliminación de
+información de una BN simplemente borrando nodos y sus
+cpd asociadas. Primero, este modelo restringido técnicamente ya no es
+una BN (lo que en este caso exigiría distribuciones incondicionales
+sobre S y SH), sino una BN condicional
+(Koller y Friedman 2009), que permite marcar estos nodos
+como observaciones; los nodos de observación no tienen
+creencias asociadas. Segundo, incluso considerada como BN condicional,
+el resultado de eliminar un nodo puede introducir nuevas independen-
+C T
+SLq
+C T
+SLq S
+SHpFigura 3: Conocimiento previo de Grok (izquierda) y combinado (derecha).
+cias incompatibles con la BN original. Por
+ejemplo, al eliminar el nodo B en una cadena A→B→C,
+se concluye que A y C son independientes, una conclusión
+incompatible con la BN original que contiene los tres nodos.
+Los PDG no sufren ninguno de los dos problemas. Podemos eliminar fácilmente
+los nodos etiquetados 1 1 y PS en la Figura 2(b) para obtener el PDG
+restringido mostrado en la figura, que captura la información
+actualizada de Grok. El PDG resultante no tiene aristas que lleguen a S ni
+a SH, y por tanto ninguna distribución especificada sobre ellos; no se requiere
+ninguna distinción especial de modelado entre nodos de observación y otros
+nodos. Como los PDG no hacen directamente suposiciones de
+independencia, la información de este fragmento es
+realmente un subconjunto de la información del PDG completo. 
+Poder formar una imagen local bien comportada y restringir
+el conocimiento es útil, pero una razón aún más convincente para
+usar PDG es su capacidad para agregar información.
+Ejemplo 4. Grok sueña con llegar a ser Líder Supremo
+(SL), y ha ideado un plan. Ha notado que
+las personas que usan camas de bronceado tienen un poder
+considerablemente mayor que quienes no las usan. Por desgracia, su madre siempre
+le ha dicho que las camas de bronceado causan cáncer; concretamente, que el 15%
+de quienes usan camas de bronceado lo contraen, frente a la línea
+base del 2%. Llamemos a esta cpd q. Grok cree que la gente se burlará
+de ella si usa una cama de bronceado y contrae cáncer, lo que hará
+imposible llegar a ser Líder Supremo. Este estado mental se
+representa como un PDG a la izquierda de la Figura 3.
+Grok lee sobre modelos gráficos porque
+recuerda vagamente que las variables del Ejemplo 2 coinciden
+con las que ya conoce. Cuando termina de leer
+las estadísticas sobre el tabaquismo y el estudio original sobre camas de
+bronceado (asociado a una cpd p en el Ejemplo 2), pero antes de que tenga
+tiempo de reflexionar, podemos representar su conocimiento (en conflicto)
+como la unión de los dos grafos, representada gráficamente a
+la derecha de la Figura 3.
+La unión de los dos PDG, incluso con nodos que se solapan,
+sigue siendo un PDG. Esto no ocurre en general con las BN. Nótese
+que el PDG que Grok usó para representar sus dos fuentes
+distintas de información (la sabiduría de su madre y el estudio)
+sobre la distribución de C es un multigrafo: hay dos
+aristas de T a C, con información inconsistente. Si
+no hubiéramos permitido multigrafos, habríamos tenido que elegir entre
+las dos aristas, o representar la información de otra
+forma (quizá menos natural). Como ya permitimos la inconsis-
+tencia, simplemente registrar ambas es mucho más coherente
+con la forma en que hemos tratado otros tipos de incertidumbre. 
+No todas las inconsistencias son igual de graves. Por ejemplo,
+aunque las cpd p y q son diferentes, son numéricamente cercanas, así que, intuitivamente, el PDG de la derecha de la Figura 3
+no es muy inconsistente. Precisar esto es el objetivo de
+la Sección 3.2.
+Estos ejemplos dan una idea del poder de los PDG. En las
+próximas secciones formalizamos los PDG y los relacionamos con otros
+enfoques.
+2 Sintaxis
+Damos ahora definiciones formales de los PDG. Aunque es
+posible formalizar los PDG con hiperaristas directamente, optamos
+aquí por un enfoque distinto, en el que los PDG solo tienen
+aristas regulares, y las hiperaristas se capturan mediante una
+construcción sencilla que consiste en añadir un nodo extra.
+Definición 2.1. Un grafo de dependencia probabilística es una tupla
+M = (N;E;V;p;; ), donde
+N es un conjunto finito de nodos, que corresponden a variables;
+E es un conjunto de aristas etiquetadas {X→Y}, cada una con origen X
+y destino Y en N;
+V asocia a cada variable N ∈ N un conjunto V(N) de valores
+que puede tomar la variable N;
+p asocia a cada arista X→Y ∈ E una distribución pL(x)
+sobre Y para cada x ∈ V(X);
+asocia a cada arista X→Y un número no negativo
+L que, en términos generales, es la confianza del modelador
+en la dependencia funcional de Y respecto de X implícita en L;
+asocia a cada arista L un número real positivo L, la
+confianza subjetiva del modelador en la fiabilidad de pL.
+Nótese que permitimos varias aristas en E con el mismo origen
+y destino; por tanto (N;E) es un multigrafo. A veces escribimos
+un PDG como M = (G;p;; ), donde G = (N;E;V), y
+abusamos de la terminología al llamar a G multigrafo. Nos referimos
+a N = (G;p) como PDG sin pesos, y le damos una semántica
+como si fuera el PDG (ponderado) (G;p;1;1), donde 1
+es la función constante (es decir, de modo que L=L= 1 para todo L).
+En este artículo, salvo en la Sección 4.3, tomamos implícitamente
+ = 1 y omitimos , escribiendo M = (G;p;).1
+Si M es un PDG, reservamos los nombres NM, EM, ..., para
+los componentes de M, de modo que podemos referirnos a uno sin
+nombrarlos todos explícitamente. Escribimos V(S) para el conjunto de
+configuraciones conjuntas posibles de un conjunto S de variables, y escribimos V(M)
+para todas las configuraciones de las variables en NM; nos referimos a estas
+configuraciones como “mundos”. Aunque la definición anterior es suficiente
+para representar la clase de todos los PDG válidos, a menudo usamos dos
+elementos adicionales de sintaxis para indicar restricciones comunes: la
+variable especial 1 1 tal que V(1 1) = {?} de los Ejemplos 1
+y 2, y las flechas de doble punta, A ⇒ B, que indican visualmente
+que la cpd correspondiente es degenerada, representando efectivamente
+una función determinística f: V(A) → V(B).
+Construcción 2.2. Podemos explicar ahora cómo capturamos las
+aristas con varias colas que se usaron en los Ejemplos 2 a 4. Esa
+notación puede verse como una abreviatura del grafo que resulta
+de añadir un nuevo nodo en la unión que representa el valor conjunto
+de los nodos de las colas, con proyecciones de vuelta.
+Por ejemplo, el diagrama que muestra el conocimiento previo de Grok
+1El apéndice ofrece resultados para  arbitrario.
+del Ejemplo 4, a la izquierda de la Figura 3, es en realidad una abreviatura de
+el siguiente PDG, donde insertamos un nodo etiquetado
+CT en la unión:
+SL C×T
+CT
+Como sugiere la notación, V(CT) = V(C)V(T). Para
+cualquier configuración conjunta (c;t) ∈ V(CT) de ambas variables, la
+cpd de la arista de CT a C da probabilidad 1 a
+c; de igual modo, la cpd de la arista de CT a T da
+probabilidad 1 a t. 
+3 Semántica
+Aunque el significado de cada cpd individual es claro, todavía no hemos
+dado a los PDG una semántica “global”. Analizamos tres
+enfoques relacionados para hacerlo. El primero es el más sencillo: asociamos
+a un PDG el conjunto de distribuciones consis-
+tentes con él. Este conjunto estará vacío si el PDG es inconsistente.
+El segundo enfoque asocia un PDG con una función de puntuación
+que indica el ajuste de una distribución arbitraria , y puede
+entenderse como un conjunto ponderado de distribuciones (Halpern
+y Leung 2015). Este enfoque nos permite distinguir
+PDG inconsistentes, algo que el primer enfoque no permite. El
+tercer enfoque elige las distribuciones con la mejor puntuación,
+asociando típicamente a un PDG una única distribución.
+3.1 Los PDG como conjuntos de distribuciones
+Hemos pensado en un PDG como una colección de restricciones
+sobre distribuciones, especificadas mediante cpd coincidentes. Desde esta pers-
+pectiva, es natural considerar el conjunto de todas las distribuciones
+que son consistentes con las restricciones.
+Definición 3.1. Si M es un PDG (ponderado o no ponderado)
+con aristas E y cpd p, sea [[M]]_sd el conjunto de distribuciones
+sobre las variables de M cuyas marginales condicionales son
+exactamente las dadas por p. Es decir,  ∈ [[M]]_sd si y solo si, para todas las aristas
+L ∈ E de X a Y, x ∈ V(X) e y ∈ V(Y), se cumple que
+(Y=y|X=x) = pL(x). M es inconsistente si [[M]]_sd = ∅,
+y consistente en caso contrario. 
+Nótese que [[M]]_sd es independiente de los pesos  y .
+3.2 Los PDG como funciones de puntuación de distribuciones
+Generalizamos ahora la semántica anterior viendo un PDG
+M como una función de puntuación que, dada una distribución arbitraria
+ sobre V(M), devuelve una puntuación real que indica lo bien
+que  se ajusta a M. Las distribuciones con las puntuaciones más bajas (mejores) son aquellas
+que más se ajustan a las cpd de M y contienen menos
+correlaciones no especificadas.
+Empezamos con el primer componente de la puntuación, que asig-
+na puntuaciones más altas a las distribuciones que requieren una mayor per-
+turbación para ser consistentes con M. Medimos la
+magnitud de esta perturbación con la entropía relativa. En par-
+ticular, para una arista X→Y y x ∈ V(X), medimos la
+entropía relativa de pL(x) a (Y=·|X=x), y tomamos
+la esperanza respecto de X (es decir, la marginal de  sobre X).
+Después sumamos sobre todas las aristas L del PDG, ponderadas por
+su fiabilidad. Definición 3.2. Para un PDG M, la incompatibilidad de una distribución conjunta
+ sobre V(M) viene dada por
+IncM() :=X
+XL!Y2EMM
+LE
+xXh
+I D
+(YjX=x)
+
+
+pM
+L(x)i
+;
+donde I D(k) =P
+w2Supp()(w) log(w)
+(w) es la entropía relativa
+de  a . 
+[[M]]_sd e IncM distinguen entre distribuciones según
+su compatibilidad con M, pero incluso entre distribuciones
+que coinciden en las marginales, algunas se ajustan más a la estructura cuali-
+tativa del grafo que otras. Pensamos cada
+arista X→Y como una afirmación cualitativa (con con-
+fianza L) de que el valor de Y puede calcularse a partir de X
+solo. Para formalizar esto, basta con el multigrafo GM.
+Dados un multigrafo G y una distribución  sobre sus variables,
+comparemos la cantidad de información necesaria para
+(a) describir directamente un resultado conjunto w extraído de , y
+(b) especificar por separado, para cada arista X→Y, el valor wY
+(de Y en el mundo w) dado el valor wX, en esperanza.
+Si (a) = (b), una especificación de (b) tiene exactamente la misma longitud
+que una descripción completa del mundo. Si (b) > (a), entonces hay
+correlaciones en  que permiten una representación más compacta
+que la que proporciona G. Cuanto mayor es la diferencia, más infor-
+mación se necesita para determinar Y más allá de las probabilidades
+condicionales asociadas a las aristas X→Y que llegan a Y
+(que, según G, deberían bastar para calcularlas),
+y peor el ajuste cualitativo de  a G. Por último, si (a) >
+(b), entonces  requiere información adicional para especificarse, más allá
+de lo necesario para determinar los resultados de las marginales
+seleccionadas por G.
+Definición 3.3. Para un multigrafo G = (N;E;V) sobre un conjunto
+N de variables, definimos la deficiencia de información G de la distri-
+bución , denotada IDefG(), considerando la diferencia
+entre (a) y (b), donde medimos la cantidad de infor-
+mación necesaria para una descripción mediante entropía:
+IDefG() :=X
+(X;Y)2EH(YjX) H(): (1)
+(Recuérdese que H(YjX), la entropía condicional (de ) de Y
+dado X, se define como  P
+x;y2V(X;Y)(x;y) log(yjx).)
+Para un PDG M, tomamos IDefM = IDefGM. 
+Ilustramos IDefM con algunos ejemplos sencillos. Supongamos
+que M tiene dos nodos, X e Y. Si M no tiene aristas, la
+IDefM() = −H(). No se requiere información para
+especificar, para cada arista de M de X a Y, el valor wY dado
+wX, puesto que no hay aristas. Como consideramos que los números más pequeños
+representan un mejor ajuste, IDefM en este caso preferirá
+la distribución que maximiza la entropía. Si M tiene una arista
+de X a Y, entonces, como H() = H(YjX) + H(X)
+por la conocida regla de la cadena de la entropía (MacKay 2003),
+IDefM() = −H(X). Intuitivamente, aunque conocer la probabilidad con-
+dicional (YjX) es útil para especificar por completo
+ también necesitamos (X). Así, en este caso, IDefM prefiere
+distribuciones que maximizan la entropía de la marginal sobre
+X. Si M tiene suficientes aristas paralelas de X a Y
+y H(YjX) >0 (de modo que Y no esté totalmente determinado
+por X), entonces IDefM() >0, porque las aristas redundantes
+no añaden información, pero sigue habiendo un coste al especificar-
+las. En este caso, IDefM prefiere distribuciones que
+hacen de Y una función determinística de X, maximizando la
+entropía de la marginal sobre X. Por último, si M tiene una arista
+de X a Y y otra de Y a X, entonces una distribución
+ minimiza IDefM cuando X e Y varían juntas (de modo que
+H(YjX) = H(XjY) = 0) mientras maximiza H(),
+por ejemplo, tomando (0;0) = (1;1) = 1/2.
+IncM() e IDefM() nos dan dos medidas de compat-
+ibilidad entre M y una distribución . Tomamos como puntuación
+de interés su suma, con el compromiso controlado por un
+parámetro
+0:
+[ [M] ]
+() :=IncM() +
+IDefM() (2)
+Lo siguiente precisa simplemente que la semántica de puntuación
+generaliza la primera semántica.
+Proposición 3.1. [[M]]_sd = { : [[M]]_0()=0} para todo M.
+Aunque nos centramos en esta función de puntuación concreta en el
+artículo, en parte porque tiene profundas conexiones con la energía libre
+de un grafo de factores (Koller y Friedman 2009), otras
+funciones de puntuación podrían resultar igualmente interesantes.
+3.3 Los PDG como distribuciones únicas
+Por último, damos una interpretación de un PDG como una distribución
+de probabilidad. Antes de presentar esta semántica, subrayamos
+que esta distribución no captura toda la
+información importante del PDG (por ejemplo, un PDG puede representar
+estados de conocimiento inconsistentes). Aun así, al dar una distribución,
+permitimos comparaciones con otros modelos gráficos, y
+mostramos que los PDG son una herramienta sorprendentemente flexible para especificar
+distribuciones. La idea es seleccionar las distribuciones con la
+mejor puntuación. Definimos así
+[ [M] ]
+
+= arg min
+2V(M)[ [M] ]
+(): (3)
+En general, [ [M] ]
+
+no da una distribución única. Pero
+si
+es suficientemente pequeño, sí la da:
+Proposición 3.2. Si M es un PDG y 0< 
+minLM
+L,
+entonces [ [M] ]
+
+es un conjunto unitario.
+En este artículo nos interesa el caso en que 
+es pequeño;
+esto equivale a enfatizar la precisión de la distribución de probabilidad como descripción de la información probabilística,
+más que la estructura gráfica del PDG. Esto nos
+motiva a considerar qué ocurre cuando 
+tiende a 0. Si S
+es un
+conjunto de distribuciones de probabilidad para todo 
+∈[0;1], definimos
+lim
+→0S
+como el conjunto de todas las distribuciones  tales que existe
+una sucesión (
+i;i)i∈N con
+i→0 y i→ tal que
+i∈S
+para todo i. Puede demostrarse además que
+Proposición 3.3. Para todo M, lim
+→0 [ [M] ]
+
+es un conjunto unitario.
+Sea [ [M] ] el único elemento de lim
+
+→0 [ [M] ]
+
+. La semán-
+tica tiene una propiedad importante:
+Proposición 3.4. [ [M] ]2[ [M] ]
+0, así que si M es consistente, entonces
+[ [M] ]2[ [M] ]sd.4 Relaciones con otros modelos gráficos
+Empezamos relacionando los PDG con dos de los modelos gráficos más populares: las BN y los grafos de factores. Los PDG son estrictamente más generales que las BN, y pueden emular grafos de factores para un valor particular de 
+.
+4.1 Redes bayesianas
+La Construcción 2.2 puede generalizarse para convertir redes bayesianas arbitrarias en PDG. Dada una BN B y una confianza positiva X para la cpd de cada variable X de B, sea MB; el PDG formado por las cpd de B de esta manera; dejamos los detalles formales directos para el apéndice.
+Teorema 4.1. Si B es una red bayesiana y PrB es la distribución que especifica, entonces para todo 
+ >0 y todos los vectores 
+tales que L>0 para todas las aristas L, [ [MB;] ]
+
+=fPrBg, y
+así que [ [MB;] ]= PrB.
+El Teorema 4.1 es bastante robusto frente a la elección de parámetros: se cumple
+para todo vector de pesos  y todos
+ >0. Sin embargo, sí
+depende en gran medida de nuestra suposición de que =1, lo que hace que sea nuestro
+único resultado que no tiene un análogo natural para  general.
+4.2 Grafos de factores
+Los grafos de factores (Kschischang, Frey y Loeliger 2001), al igual que
+los PDG, generalizan las BN. En esta sección consideramos la rela-
+ción entre los grafos de factores (FG) y los PDG.
+Definición 4.1. Un grafo de factores  es un conjunto de variables aleatorias
+X={Xi} y factores {J: V(XJ) → R0}J∈J, donde
+XJ ⊆ X. Más precisamente, cada factor J está asociado a un
+subconjunto XJ ⊆ X de variables, y asigna a las configuraciones conjuntas de XJ
+números reales no negativos.  especifica una distribución
+Pr(~ x) =1
+ZY
+J2JJ(~ xJ);
+donde ~ x es una configuración conjunta de todas las variables, ~ xJ es la restric-
+ción de ~ x solo a las variables XJ, y Z es la constante
+necesaria para normalizar la distribución. 
+Las cpd de un PDG constituyen naturalmente una colección de
+factores, así que es natural preguntarse cómo se compara la semántica de un PDG
+con simplemente tratar las cpd como factores en un grafo de
+factores. Para responder, empezamos precisando la traducción
+con precisión.
+Definición 4.2 (PDG sin pesos a grafo de factores). Si N =
+(G;p) es un PDG sin pesos, definimos el FG asociado N
+sobre las variables (N;V) tomando J como el conjunto de aristas,
+y para una arista L de Z a Y, tomando XL = {Z;Y}, y
+L(z;y) igual a pM
+L(yjz) (es decir, (pM
+L(z))(y)). 
+Resulta que también podemos hacer lo contrario. Usando esencialmente
+la misma idea de la Construcción 2.2, podemos codificar un grafo de
+factores como una afirmación sobre la distribución de probabilidad incondicional
+sobre las variables asociadas a cada factor.
+Definición 4.3 (grafo de factores a PDG sin pesos). Para un FG
+, sea N el PDG sin pesos formado por
+•las variables de  junto con 1 1 y una variable XJ :=Q
+j∈J Xj para cada factor J∈J, y
+•aristas 1 1 → XJ para cada J y XJ ⇒ Xj para cada Xj ∈ XJ,
+donde las aristas XJ ⇒ Xj están asociadas con las proyecciones
+adecuadas, y cada 1 1 → XJ está asociada con la distribución incondi-
+cional conjunta sobre XJ obtenida normalizando J.
+El proceso se ilustra en la Figura 4. 
+Los PDG son grafos dirigidos, mientras que los grafos de factores son no dirigi-
+dos. La transformación de PDG a grafos de factores pierde así parte de
+la estructura importante. Como muestra la Figura 4, esta transformación puede
+cambiar significativamente la estructura gráfica. No obstante,
+Teorema 4.2. Pr= [ [N] ]
+1 para todos los grafos de factores .2
+Teorema 4.3. [ [N] ]
+1= Pr N para todos los PDG sin pesos N.
+La correspondencia depende del hecho de que tomamos 
+=
+1, de modo que Inc e IDef pesan igual. Como el
+usuario de un PDG puede elegir 
+, el hecho de que la traducción
+de grafos de factores a PDG conserva la semántica solo para
+
+= 1 no supone problema alguno. Por el contrario, el hecho de que la correspondencia inversa
+requiera 
+= 1 sugiere que los grafos de factores
+son menos flexibles que los PDG.
+¿Qué ocurre con los PDG ponderados (G;p;) donde ≠1? Existe
+también una noción estándar de grafo de factores ponderado, pero mientras
+sigamos con nuestra convención de tomar =1, no podemos
+relacionarlos con PDG ponderados. Como veremos a continuación, una vez
+abandonada esta convención, podemos hacer mucho más.
+4.3 Familias exponenciales factorizadas
+Un grafo de factores ponderado (WFG) 	 es un par (;) que consta
+de un grafo de factores  junto con un vector de pesos no negativos
+{J}J∈J. 	 especifica una función de puntuación canónica
+GFE 	() :=E
+~ x"X
+J2JJlog1
+J(~ xJ)#
+ H();(4)
+llamada energía libre de Gibbs variacional (Mezard y Mon-
+tanari 2009). GFE 	 se minimiza de forma única por la distribu-
+ciónPr	(~ x) =1
+Z	Q
+J2JJ(~ xJ)J, que coincide con el caso
+sin pesos cuando cada J = 1. La aplicación 7!Pr(;)
+se conoce como familia exponencial de  y es una herramienta central en el
+análisis y desarrollo de muchos algoritmos para modelos
+gráficos (Wainwright, Jordan et al. 2008).
+De hecho, los PDG pueden capturar toda la familia exponencial de un
+grafo de factores, pero solo permitiendo valores de  distintos de 1. En
+este caso, la única definición que requiere modificación es IDef ,
+que ahora depende del multigrafo ponderado (GM;M),
+y se define como
+IDefM() :=X
+XL!Y2ELH(YjX) H():(5)
+Así, la entropía condicional H(YjX) asociada a la
+arista X→Y se multiplica por el peso L de esa arista.
+Una ventaja clave de usar  es que podemos capturar WFG
+arbitrarios, no solo los que tienen un vector de pesos constante. Lo único que
+debemos hacer es asegurar que, en nuestra traducción de grafos de
+factores a PDG, la razón L/L sea constante. (Por supuesto,
+si permitimos pesos arbitrarios, no podemos esperar lograrlo si
+L = 1 para todas las aristas L.) Por ello definimos una familia de
+traducciones, parametrizada por la razón entre L y L.
+2Recuérdese que identificamos el PDG sin pesos (G;p) con el
+PDG ponderado (G;p;1;1). Definición 4.4 (WFG a PDG). Dado un WFG 	 = (;),
+y un número positivo k, definimos el PDG correspondiente
+M	;k= (N;;) tomando J = kJ y J = J para
+la arista 1 1 → XJ, y tomando L = k y L = 1 para las
+proyecciones XJ ⇒ Xj. 
+Extendemos ahora las Definiciones 4.2 y 4.3 a PDG (ponderados)
+y WFG. Al traducir un PDG a un WFG habrá necesariamente cierta pérdida de
+información: los PDG tienen dos conjuntos, mientras que
+los WFG tienen solo uno. Aquí descartamos  y conservamos
+, aunque en su papel aquí como inversa por la izquierda de la Definición 4.4,
+cualquiera de las dos opciones bastaría.
+Definición 4.5 (PDG a WFG). Dado un PDG (ponderado)
+M= (N;), tomamos su WFG correspondiente como 	M :=
+(N;); es decir, L := L para todas las aristas L. 
+Mostramos ahora que podemos capturar toda la familia exponencial
+de un grafo de factores, e incluso su energía libre asociada,
+pero solo para 
+igual a la constante k usada en la traducción.
+Teorema 4.4. Para todos los WFG 	 = (;) y todo
+ >0, tenemos
+que GFE 	=1=
+[ [M	;
+] ]
++C para alguna constante C,
+así que Pr	 es el único elemento de [ [M	;
+] ]
+
+.
+En particular, para k = 1, de modo que  se usa para ambas funciones  y  del PDG resultante, el Teorema 4.4 generaliza estrictamente el Teorema 4.2.
+Corolario 4.4.1. Para todos los grafos de factores ponderados (;), tenemos que Pr(;)= [ [(N;;)] ]
+1
+A la inversa, siempre que la razón entre L y L sea constante, la traducción inversa también conserva la semántica.
+Teorema 4.5. Para todos los PDG sin pesos N y vectores no negativos v sobre EN, y todo 
+ > 0, tenemos que [ [(N;v;
+v)] ]
+=
+GFE (N;v); en consecuencia,
+[ [(N;v;
+v)] ]
+
+=fPr(N;v)g.
+El paso clave para demostrar los Teoremas 4.4 y 4.5 (y en las
+demostraciones de otros varios resultados) consiste en reescribir [ [M] ]
+de la siguiente manera:
+Proposición 4.6. Sean xw e yw los valores de X
+e Y, respectivamente, en w ∈ V(M), se tiene
+[ [M] ]() =E
+w(X
+XL  !Ylog verosimilitud / entropía cruzada z}|{
+Llog1
+pL(ywjxw)+
+(L
+ L) log1
+(ywjxw)|{z}
+regularización local (si L>L
+)
+ 
+log1
+(w)|{z}
+regularización global)
+:(6)
+Para un
+, el primer y el último término de (6) son iguales a una
+versión escalada de la energía libre, 
+GFE , si hacemos J := pL
+y J := L =
+. Si, además, L=L
+para todas las aristas L,
+entonces el término de regularización local desaparece, dándonos la
+correspondencia deseada.
+La ecuación (6) también deja claro que tomar L=L
+para todas las aristas L es esencialmente necesario para obtener los Teoremas 4.2
+y 4.3. Por supuesto, fijar 
+impide tomar el límite cuando 
+tiende a 0, por lo que la Proposición 3.4 sí se aplica. Esto se refleja en
+un comportamiento extraño de los grafos de factores que intentan capturar los
+mismos fenómenos que los PDG, como muestra el siguiente ejemplo.
+PSS
+SHC
+T
+PSS
+SHC
+1 1 TFigura 4: Conversión del PDG del Ejemplo 2 a un grafo de factores según la Definición 4.2 (izquierda), y a partir de ese grafo de factores
+a un PDG mediante la Definición 4.3 (derecha). En esta última, para cada J introducimos una nueva variable XJ (representada como un rectángulo más pequeño y oscuro),
+cuyos valores son configuraciones conjuntas de las variables que conecta, y también una arista 1 1 → XJ (mostrada en azul), a la que
+asociamos la distribución incondicional dada por la normalización de J.
+Ejemplo 5. Consideremos el PDG M que contiene solo X y 1 1,
+y dos aristas p y q: 1 1 → X. (Recuérdese que un PDG así puede
+surgir si obtenemos información distinta sobre la probabilidad de
+X a partir de dos fuentes diferentes; ¡es una situación que sin duda queremos
+poder capturar!). Consideremos la situación más sencilla,
+en la que p y q están asociadas ambas a la misma distribución
+sobre X; supongamos además que el agente está seguro de la
+distribución, de modo que p=q= 1. Para concretar, supongamos que
+V(X) = {x1;x2}, y que la distribución asociada a
+ambas aristas es :7, que asigna probabilidad 0,7 a x1. Entonces,
+como cabría esperar, [ [M] ]={:7}; al fin y al cabo, ambas fuentes
+coinciden en la información. Sin embargo, puede demostrarse que
+Pr	M=:85, así que [ [M] ]
+1={:85}. 
+Aunque  y  son ambas medidas de confianza, la
+forma en que la energía libre de Gibbs varía con  es bastante dife-
+rente de la forma en que la puntuación de un PDG varía con .
+La función de puntuación que usamos para los PDG puede verse
+como una extensión de GFE ; que incluye la regularización local
+término. Conforme
+tiende a cero, la importancia de la
+regularización global disminuye en relación con la de la
+regularización local, así que la función de puntuación del PDG se vuelve
+bastante distinta de la energía libre de Gibbs.
+5 Discusión
+Hemos presentado los PDG, una herramienta potente para representar
+información probabilística. Tienen varias ventajas
+sobre otros modelos gráficos probabilísticos.
+•Permiten capturar la inconsistencia, incluida la con-
+flictiva procedente de múltiples fuentes con distintos
+grados de fiabilidad.
+•Son mucho más modulares que otras representaciones;
+por ejemplo, podemos combinar información de dos
+fuentes simplemente tomando la unión de dos PDG, y es
+fácil añadir nueva información (aristas) y características (nodos)
+sin afectar a la información recibida previamente.
+•Permiten una separación limpia entre la información cuantitativa
+(las cpd y los pesos ) y la información más cualita-
+tiva contenida en la estructura del grafo (y los
+pesos ); esto se captura mediante los términos Inc e IDef en
+nuestra función de puntuación.
+•Los PDG tienen varias semánticas naturales; una de ellas permite
+seleccionar una distribución única. Usando esta distribución, los PDG pueden capturar BN y grafos de factores. En este último
+caso, un simple desplazamiento de parámetros en el PDG correspondiente
+elimina un comportamiento discutiblemente problemático de un grafo de factores.
+Solo hemos arañado la superficie de lo que puede hacerse
+con los PDG aquí. Dos cuestiones importantes que hay que abordar son
+la inferencia y la dinámica. ¿Cómo debemos consultar un PDG para
+obtener información probabilística? ¿Cómo debemos modificar un PDG a
+la luz de nueva información o para hacerlo más consistente? Estas
+cuestiones resultan estar estrechamente relacionadas. Por limitaciones de espacio,
+aquí solo damos brevemente algunas intuiciones y ejemplos.
+Supongamos que queremos calcular la probabilidad de Y
+dado X en un PDG M. Para una cpd p(Y|X), sea M+p el
+PDG obtenido asociando p a una nueva arista en M de
+X a Y, con p = 0. Juzgamos la calidad de una respuesta candidata
+p por la mejor puntuación posible que M+p asigna a cualquier
+distribución (a la que llamamos grado de inconsistencia de
+M+p). Puede demostrarse que el grado de inconsistencia se
+minimiza por [ [M] ](Y|X). Como el grado de inconsis-
+tencia de M+p es suave y fuertemente convexo como función
+de p, podemos calcular sus valores óptimos mediante métodos de gradi-
+ente estándar. Este enfoque es ineficiente tal como está escrito (ya que
+implica calcular la distribución conjunta completa [ [M+p] ]), pero
+creemos que las técnicas de aproximación estándar permitirán
+extraer inferencias de forma eficiente.
+Por otro ejemplo, el condicionamiento puede entenderse
+en términos de resolver inconsistencias en un PDG. Para condicionar
+a una observación Y=y, dada una situación descrita por un
+PDG M, podemos añadir una arista de 1 1 a Y en M, anotada
+con la cpd que asigna probabilidad 1 a y, para obtener el PDG (posiblemente
+inconsistente) M+(Y=y). La distribución [ [M+(Y=y)] ]
+resulta ser el resultado de condicionar [ [M] ] a Y=y. Esta
+explicación del condicionamiento se generaliza sin modificación para
+dar la regla de Jeffrey (Jeffrey 1968), un enfoque más general
+para la actualización de creencias.
+Las cuestiones de actualización e inconsistencia surgen también en la inferencia varia-
+cional. Un autocodificador variacional (Kingma y
+Welling 2013), por ejemplo, consta esencialmente de tres cpd: una a priori
+p(Z), un decodificador p(X|Z) y un codificador q(Z|X). Como
+dos cpd tienen como objetivo Z (y las cpd son inconsistentes hasta que se
+entrenan por completo), esta situación puede representarse con PDG, pero no con
+otros modelos gráficos. Esperamos informar más adelante sobre la profunda
+relación entre la inferencia, la actualización y la resolución
+de la inconsistencia en los PDG en trabajos futuros.
+Referencias
+Cover, T. M.; y Thomas, J. A. 1991. Elements of Informa-
+tion Theory. Nueva York: Wiley.
+Halpern, J. Y.; y Leung, S. 2015. Weighted sets of probabil-
+ities and minimax weighted expected regret: new approaches
+for representing uncertainty and making decisions. Theory
+and Decision 79(3): 415–450.
+Jeffrey, R. C. 1968. Probable knowledge. En Lakatos, I., ed.,
+International Colloquium in the Philosophy of Science: The
+Problem of Inductive Logic, 157–185. Amsterdam: North-
+Holland.
+Kingma, D. P.; y Welling, M. 2013. Auto-Encoding Varia-
+tional Bayes.
+Koller, D.; y Friedman, N. 2009. Probabilistic Graphical
+Models. Cambridge, MA: MIT Press.
+Kschischang, F. R.; Frey, B. J.; y Loeliger, H. 2001. Fac-
+tor graphs and the sum-product algorithm. IEEE Transactions
+on Information Theory 47(2): 498–519.
+MacKay, D. J. C. 2003. Information Theory, Inference and
+Learning Algorithms. Cambridge University Press.
+Mezard, M.; y Montanari, A. 2009. Information, physics,
+and computation. Oxford University Press.
+Pearl, J. 1988. Probabilistic Reasoning in Intelligent Systems.
+San Francisco: Morgan Kaufmann.
+Wainwright, M. J.; Jordan, M. I.; et al. 2008. Graphical mod-
+els, exponential families, and variational inference. Founda-
+tions and Trends in Machine Learning 1(1–2): 1–305.
+Declaración de ética
+Como los PDG son un desarrollo teórico reciente, existe
+mucha conjetura al evaluar su impacto. Aquí presentamos dos
+puntos de vista de polaridad opuesta.
+5.1 Impactos positivos
+Se pueden imaginar muchas aplicaciones de la posibilidad de una agregación sencilla y
+coherente de información (posiblemente inconsistente).
+En particular, podemos imaginar usar los PDG para construir e inter-
+pretar una base de datos comunitaria y global de modelos estadísticos, de
+modo que pueda no solo permitir predicciones más precisas,
+sino también destacar los conflictos entre información.
+Esto podría tener muchos beneficios. Supongamos, por ejemplo, que
+dos investigadores entrenan modelos, pero usan conjuntos de datos con
+composiciones raciales distintas. En lugar de intentar que un modelo
+incomprensible “acierte” a la primera, simplemente podríamos señalar
+cualquiera de esas discrepancias y marcarlas para revisión.
+En lugar de intentar garantizar la equidad por diseño, algo
+a la vez complicado y costoso, imaginamos una alternativa: simplemente
+agregar resultados estadísticamente óptimos (en conflicto) y permitir que
+la estructura social existente resuelva los conflictos, en lugar de enviar
+a los investigadores a manipular funciones de pérdida hasta que parezcan
+justas.5.2 Impactos negativos
+También podemos imaginar resultados menos halagüeños. En la medida en que
+los PDG pueden modelar y razonar con la inconsistencia, si adoptamos
+la actitud de que un PDG no necesita esperar a ser consistente
+para usarse, no es difícil imaginar un mundo en el que un PDG
+dé conclusiones sesgadas y mal pensadas. Está claro
+que los PDG necesitan bastante más revisión antes de poder
+usarse para fines tan importantes como agregar el conocimiento
+estadístico del mundo.
+Los PDG son modelos estadísticos potentes, pero son por necesidad
+semánticamente más complicados que muchos métodos existentes.
+Esto probablemente limitará su accesibilidad. Para mitigarlo,
+nos comprometemos a asegurar que nuestro trabajo sea ampliamente accesible para
+investigadores de distintos orígenes.
+A Demostraciones
+Por brevedad, usamos la notación estándar y escribimos (x;y) en lugar de (X=x;Y=y), (xjy) en lugar de (X=xjY=y),
+y así sucesivamente.
+A.1 Propiedades de la semántica de puntuación
+En esta sección demostramos las propiedades de las funciones de puntuación que mencionamos en el texto principal, Proposiciones 3.1, 3.2 y 3.4.
+Repetimos los enunciados por comodidad del lector.
+Proposición 3.1. [ [M] ]sd=f: [ [M] ]0()=0g para todo M.
+Demostración. Tomando
+= 0, la puntuación es simplemente Inc. Por definición, una distribución 2[ [M] ]sd satisface todas las restricciones, de modo que (Y=
+ jX=x) =pL(x) para todas las aristas X!Y2 EM y x con (X=x)>0. Por la desigualdad de Gibbs (MacKay 2003),
+I D((Yjx)kpL(x)) = 0. Como esto vale para todas las aristas, debemos tener IncM() = 0. Recíprocamente, si  =2[ [M] ]sd, entonces no logra
+marginalizar la cpd pL en alguna arista L, y así, de nuevo por la desigualdad de Gibbs, I D((Yjx)kpL(x))>0. Como la entropía relativa es
+no negativa, la suma de estos términos sobre todas las aristas también debe ser positiva, y así IncM()6= 0.
+Antes de demostrar los resultados restantes, demostramos un lema que también será útil en otros contextos.
+Lema A.1. IncM() es una función convexa de .
+Demostración. Es bien sabido que I D es convexa (Cover y Thomas 1991, Teorema 2.7.2), en el sentido de que
+I D(q1+ (1 )q2kp1+ (1 )p2)I D(q1kp1) + (1 )I D(q2kp2):
+Dada una arista L2E de A a B y a 2V(A), y fijando q1=q2=pL(a), obtenemos que
+I D(pL(a)jjp1+ (1 )p2)I D(pL(a)jjp1) + (1 )I D(pL(a)jjp2):
+Como esto vale para cada a y cada arista, podemos tomar una suma ponderada de estas desigualdades para cada a, ponderada por p(A=a); así,
+E
+apAI D(pL(a)kp1+ (1 )p2)E
+apAI D(pL(a)kp1) + (1 )I D(pL(a)kp2):
+Tomando una suma sobre todas las aristas, obtenemos que
+X
+(A;B)2EE
+apAI D(pL(a)kp1+ (1 )p2)X
+(A;B)2EE
+apAI D(pL(a)kp1) + (1 )I D(pL(a)kp2):
+De ello se sigue que
+IncM(p1) + (1 )p2)IncM(p1) + (1 )IncM(p2):
+Por lo tanto, IncM() es una función convexa de .
+La siguiente proposición nos da una representación útil de [ [M] ]
+.
+Proposición 4.6. Sean xw e yw los valores de X e Y, respectivamente, en w2V(M). Tenemos
+[ [M] ]() =E
+w(X
+XL  !Y
+Llog1
+pL(ywjxw)+ (L
+ L) log1
+(ywjxw)
+ 
+log1
+(w))
+:
+Demostración. Usamos la formulación más general de IDef dada en la Sección 4.3, en la que la información condicional de cada arista L está
+ponderada por L.
+[ [M] ]
+() :=IncM() +
+IDefM()
+="X
+XL!YLE
+xXI D
+(YjX=x)
+
+
+pL(x)#
++
+"X
+XL!YLH(YjX) H()#
+=X
+XL!YE
+xXh
+LI D
+(Yjx)
+
+
+pL(Yjx)
++
+ LH(YjX=x)i
+ 
+H()
+=X
+XL!YE
+xX2
+4L0
+@X
+y2V(Y)(yjx) log(yjx)
+pL(yjx)1
+A+L
+0
+@X
+y2V(Y)(yjx) log1
+(yjx)1
+A3
+5 
+H()
+=X
+XL!YE
+xX2
+4X
+y2V(Y)(yjx)
+Llog(yjx)
+pL(yjx)+L
+log1
+(yjx)3
+5 
+H()
+=X
+XL!YE
+xX
+E
+y(YjX=x)
+Llog(yjx)
+pL(yjx)+L
+log1
+(yjx)
+ 
+X
+w2V(M)(w) log1
+(w)
+=X
+XL!YE
+x;yXY
+Llog(yjx)
+pL(yjx)+L
+log1
+(yjx)
+ 
+E
+w
+log1
+(w)
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx) Llog1
+(yjx)+L
+log1
+(yjx))
+ 
+E
+w
+log1
+(w)
+=E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L
+ L) log1
+(yjx)
+ 
+log1
+(w))
+:
+Ahora podemos demostrar la Proposición 3.2.
+Proposición 3.2. Si M es un PDG y 0<
+minLM
+L=M
+L, entonces [ [M] ]
+
+es un conjunto unitario.
+Demostración. Basta mostrar que [ [M] ]
+es una función estrictamente convexa de , ya que toda función estrictamente convexa tiene un único mínimo.
+Obsérvese que
+[ [M] ]
+() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L
+ L) log1
+(yjx)
+ 
+log1
+(w))
+=E
+w(X
+XL  !Y
+
+Llog1
+pL(yjx)+ (L L
+) log1
+pL(yjx) (L L
+) log1
+(yjx)
+ 
+log1
+(w))
+=E
+w(X
+XL  !Y
+
+Llog1
+pL(yjx)+ (L L
+) log(yjx)
+pL(yjx)
+ 
+log1
+(w))
+=X
+XL  !Y
+
+LE
+x;yXY
+log1
+pL(yjx)
++ (L L
+)E
+xXI D
+(Yjx)
+
+
+pL(x)
+ 
+H():
+El primer término, Ex;yXY[ logpL(yjx)], es lineal en , ya que pL(yjx) no depende de . En cuanto al segundo término, es bien sabido que la divergencia KL es convexa, en el sentido de que
+I D(q1+ (1 )q2kp1+ (1 )p2)I D(q1kp1) + (1 )I D(q2kp2):
+Por tanto, para una distribución sobre Y, fijando p1=p2=pL(x), para todas las marginales condicionales 1(YjX=x) y 2(YjX=x),
+I D(1(Yjx) + (1 )2(Yjx)kpL(x))I D(1(Yjx)kpL(x)) + (1 )I D(2(Yjx)kpL(x)):
+Así I D((Yjx)kpL(x)) es convexa. Como las combinaciones convexas de funciones convexas son convexas, el segundo término, ExXI D((Yjx)kpL(x)), es convexo. Por último, la entropía negativa es bien conocida como estrictamente convexa.
+Cualquier combinación lineal no negativa de los tres términos es convexa, y si esta combinación aplica un coeficiente positivo a la (estrictamente convexa) entropía negativa, debe ser estrictamente convexa. Por tanto, siempre que L
+para todas las aristas L2EM, [ [M] ]
+sea estrictamente convexa. Se sigue el resultado.
+A continuación demostramos la Proposición 3.3. El primer paso lo proporciona el siguiente lema.
+Lema A.2. lim
+
+!0[ [M] ]
+
+[ [M] ]
+0.
+Demostración. Como IDefM es una suma ponderada finita de entropías y entropías condicionales sobre las variables NM, que tienen soporte finito, está acotada. Así, existen cotas k y K que dependen solo de NM y VM, tales que kIDefM()K para todo
+. Como [ [M] ]
+=IncM+
+IDefM, se sigue que, para todo 2V(M), tenemos
+IncM() +
+k[ [M] ]
+()IncM() +
+K:
+Para un
+ fijo, como esta desigualdad vale para todo , y tanto Inc como IDef están acotadas inferiormente, debe ser el caso que
+min
+2V(M)h
+IncM() +
+ki
+ min
+2V(M)[ [M] ]
+() min
+2V(M)h
+IncM() +
+Ki
+;
+aunque las distribuciones que minimizan cada expresión serán en general diferentes. Sea Inc(M) = minIncM(). Como
+V(M) es compacto, el mínimo del término central se alcanza. Por tanto, para 
+2[ [M] ]
+
+() que lo minimiza, tenemos
+Inc(M) +
+k[ [M] ]
+(
+)Inc(M) +
+K
+para todo
+0. Ahora, tomando el límite cuando 
+!0 desde arriba, obtenemos que Inc(M) = [ [M] ]0(). Así,2[ [M] ]
+0, como se quería.
+Ahora aplicamos el Lema A.2 para mostrar que el límite cuando 
+!0 es único, como se afirma en la Proposición 3.3.
+Proposición 3.3. Para todo M, lim
+!0[ [M] ]
+
+es un conjunto unitario.
+Demostración. Primero mostramos que lim
+!0[ [M] ]
+
+no puede ser vacío. Sea (
+n) =
+1;
+2;::: una sucesión de reales positivos que converge a
+cero. Para todo n, elija algún n2[ [M] ]
+
+n. Porque V(M) es un espacio métrico compacto, es secuencialmente compacto, y por tanto, por el Teorema de Bolzano–Weierstrass, la sucesión (n) tiene al menos un punto de acumulación, digamos . Por nuestra definición del límite,
+2lim
+!0[ [M] ]
+
+, como lo testimonia la sucesión (
+n;n)n. Se sigue que lim
+!0[ [M] ]
+
+6=;.
+Ahora, elija 1;22lim
+!0[ [M] ]
+
+. Así, hay subsucesiones (i) y (j) de (n) que convergen a 1 y 2, respectivamente.
+Por el Lema A.2, 1;22[ [M] ]
+0, por tanto IncM(1) =IncM(2). Porque (jn)!1, (kn)!2, e IDefM es continua en
+V(M), concluimos que (IDefM(i))!IDefM(1) y (IDefM(j))!IDefM(2).
+Supongamos que IDefM(1)6=IDefM(2). Sin pérdida de generalidad, supongamos que IDefM(1)>IDefM(2). Como
+(IDefM(i))!IDefM(1), existe algún i2N tal que para todo i > i, IDefM(i)>IDefM(2). Pero entonces, para
+todo
+y i>i, tenemos
+[ [M] ]
+(i) =Inc(i) +
+IDefM(i)>Inc(2) +
+IDefM(2) = [ [M] ]
+(2);
+contradiciendo el supuesto de que i minimiza [ [M] ]
+i. Concluimos así que no podemos tener IDefM(1)>IDefM(2). Por el
+mismo argumento, tampoco podemos tener IDefM(1)<IDefM(2), por tanto IDefM(1) =IDefM(2).
+Ahora, supongamos que 1 y 2 son distintos. Como [ [M] ]
+es estrictamente convexa para 
+>0, entre las posibles combinaciones convexas de 1 y 2, la distribución 3=1+ (1 )2 que minimiza [ [M] ]
+debe estar estrictamente entre 1 y 2. Porque la propia Inc es convexa e IncM(1) =IncM(2) =:v, debemos tener IncM(3)v. Pero como 1;22[ [M] ]
+0 minimizan Inc, debemos tener IncM(3)v. Así, IncM(3) =v. Ahora, porque, para todo 
+>0,
+[ [M] ]
+(3) =v+
+IDefM(3)<v+
+IDefM(1) = [ [M] ]
+(1);
+debe ser el caso que IDefM(3)<IDefM(1).
+Podemos obtener una contradicción aplicando el mismo argumento que se usó para mostrar que IDefM(1) =IDefM(2). Porque (i)!1, existe algún i tal que para todo i>i, tenemos IDefM(i)>IDefM(3). Así, para todo i>i y todo 
+>0,
+[ [M] ]
+(i) =Inc(i) +
+IDefM(i)>Inc(3) +
+IDefM(3) = [ [M] ]
+(3);
+de nuevo contradiciendo el supuesto de que i minimiza [ [M] ]
+i. Así, nuestro supuesto de que 1 era distinto de 2 no puede sostenerse, y por tanto lim
+
+debe ser un conjunto unitario, como se deseaba.
+Por último, la Proposición 3.4 es un corolario simple del Lema A.2 y de la Proposición 3.3, como mostramos ahora.
+Proposición 3.4. [ [M] ]2[ [M] ]
+0, de modo que si M es consistente, entonces [ [M] ]2[ [M] ]sd.
+Demostración. Por la Proposición 3.3, lim
+!0[ [M] ]
+
+es un conjunto unitario. Como en el cuerpo del artículo, nos referimos a su único elemento mediante [ [M] ]
+Por tanto, el Lema A.2 nos da inmediatamente [ [M] ]2[ [M] ]
+0.
+Si M es consistente, entonces, por la Proposición 3.1, Inc(M) = 0, así que [ [M] ]0([ [M] ]) = 0, y por tanto [ [M] ]2[ [M] ]sd.
+A.2 PDG como redes bayesianas
+En esta sección demostramos el Teorema 4.1. Comenzamos recordando algunos resultados y notación estándar, todos los cuales pueden encontrarse en una
+introducción estándar a la teoría de la información (por ejemplo, (MacKay 2003, capítulo 1)).
+Primero, observemos que, así como introdujimos nuevas variables para modelar la dependencia conjunta en los PDG, podemos ver una colección finita
+X=X1;:::;Xn de variables aleatorias, donde cada Xi tiene el mismo espacio muestral, como una variable aleatoria en sí misma, que toma el valor
+(x1;:::;xn) si y solo si cada Xi toma el valor xi. Hacerlo nos permite evitar una notación engorrosa y, en última instancia, irrelevante, que
+trata de forma distinta los conjuntos de variables aleatorias, y requiere muchas llaves innecesarias, negritas y cuestiones de unicidad. Nótese la
+convención de notación según la cual la variable conjunta X;Y puede indicarse con una coma.
+Definición A.1 (Independencia condicional). Si X, Y y Z son variables aleatorias, y  es una distribución sobre ellas, entonces X
+es condicionalmente independiente de Z dado Y (según ), denotado ‘X? ?ZjY, si y solo si para todos x;y;z2V(X;Y;Z ), se tiene
+(xjy)(zjy) =(x;zjy). 
+Hecho A.3 (Regla de la cadena de la entropía). Si X e Y son variables aleatorias, entonces la entropía de la variable conjunta (X;Y ) puede escribirse
+como H(X;Y ) = H(YjX) + H(X). De ello se sigue que, si  es una distribución sobre las n variables X1;:::;Xn, entonces
+H() =nX
+i=1H(XijX1;:::Xi 1):
+Definición A.2 (Información mutua condicional). La información mutua condicional entre dos (conjuntos de) variables aleatorias
+se define como
+I(X;YjZ) :=X
+x;y;z2V(X;Y;Z )(x;y;z ) log(z)(x;y;z )
+(x;z)(y;z):
+
+Hecho A.4 (Propiedades de la información mutua condicional). Para variables aleatorias X;Y y Z sobre un conjunto común de resultados,
+distribuidas según una distribución , se cumplen las siguientes propiedades:
+1. (identidad de diferencia) I(X;YjZ) = H(XjY) H(XjY;Z);
+2. (no negatividad) I(X;YjZ)0;
+3. (relación con la independencia) I(X;YjZ) = 0 si y solo si X? ?ZjY.
+Ahora damos los detalles formales de la transformación de una BN en un PDG.
+Definición A.3 (Transformación de una BN en un PDG). Recordemos que una red bayesiana (cuantitativa) (G;f) consta de dos partes:
+su estructura gráfica cualitativa G, descrita por un dag, y sus datos cuantitativos f, una asignación de una cpd pi(XijPa(Xi)) a
+cada variable Xi. Si B es una red bayesiana sobre las variables aleatorias X1;:::;Xn, construimos el PDG correspondiente MB de la siguiente manera:
+tomamos N:=fX1;:::;Xng[fPa(X1);:::;Pa(Xn)g. Es decir, las variables de MB consisten en todas las variables de B
+junto con una variable correspondiente a los padres de Xi. (Esto se usará para tratar las hiperaristas.) Los valores V(Xi) para
+una variable aleatoria Xi no cambian (es decir, VMB(fXig) :=V(Xi)) y VMB(Pa(Xi)) :=Q
+Y2Pa(Xi)V(Y) (si Pa(Xi) =;,
+de modo que Xi no tiene padres, entonces identificamos Pa(Xi) con 1 1 y tomamos V(Pa(Xi)) =f?g). Tomamos el conjunto de aristas
+EMB:=f(Pa(Xi);Xi) :i= 1;:::;ng[f (Pai;Y) :Y2Pa(Xi)g como el conjunto de aristas hacia una variable Xi desde sus padres,
+junto con una arista desde Pa(Xi) hacia cada uno de los elementos de Pa(Xi), para i= 1;:::;n. Por último, definimos pMB
+(Pa(Xi);Xi) como
+la cpd asociada a Xi en B, y para cada nodo Xj2Pa(Xi) definimos
+pMB
+(Pa(Xi);Xj)(:::;xj;:::) =xj;
+es decir, pMB;
+(Pa(Xi);Xj) es la cpd sobre Xj que, dada una configuración (:::;xj;:::) de Pa(Xi), produce la distribución que concentra toda la masa
+en xj. 
+Sea X las variables de alguna BN B, y M= (N;E;V;p;) el PDG MB. Como el conjunto N de variables en MB;
+incluye variables de la forma Pa(Xi), es un superconjunto estricto de X=fX1;:::;Xng, el conjunto de variables de B. Para los fines
+de este teorema, identificamos una distribución X sobre X con la única distribución PrB cuya marginal sobre las variables en X es
+X tal que si Xj2Pa(Xi), entonces N(Xj=x0
+jjPa(Xi) = (:::;xj;:::)) = 1 si y solo si xj=x0
+j. En el argumento siguiente, abusamos
+de la notación, omitiendo los subíndices X y N en una distribución .
+Teorema 4.1. Si B es una red bayesiana y PrB es la distribución que especifica, entonces para todos 
+ >0 y todos los vectores such que
+L>0 para todas las aristas L, [ [MB;] ]
+
+={PrBg, y por tanto [ [MB;] ]= PrB.
+Demostración. Para la cpd p(XijPa(Xi)) asociada a un nodo Xi en B, tenemos que PrB(XijPa(Xi)) =p(XijPa(Xi)). Para todos
+nodos Xi en B y Xj2Pa(Xi), por construcción, PrB, visto como una distribución sobre N, también cumple con la cpd de la arista
+desde Pa(Xi) hacia Xj. Por tanto, PrB es consistente con todas las cpd en MB;; así que IncMB;(PrB) = 0.
+A continuación queremos mostrar que IDefMB;()0 para todas las distribuciones . Para ello, primero necesitamos algunas definiciones. Sea  una
+permutación de 1;:::;n. Definimos un orden  tomando j i si j precede a i en la permutación; es decir, si  1(j)¡ 1(i). Decimos
+que una permutación es compatible con B si Xj2Pa(Xi) implica j i. Existe al menos una permutación compatible con B,
+ya que el grafo subyacente a B es acíclico.
+Consideremos una distribución arbitraria  sobre las variables en X (que también vemos como una distribución sobre las variables en N, como
+se explicó antes). Recordemos de la Definición A.3 que la cpd en la arista de MB; desde Pa(Xi) hacia Xi es simplemente la cpd asociada
+a Xi en B, mientras que la cpd en la arista de MB; desde Pa(Xi) hacia Xj2Pa(Xi) consta solo de distribuciones deterministas (es decir,
+las que asignan probabilidad 1 a un elemento), que tienen todas entropía 0. Por tanto,
+X
+XL!Y2EMBH(YjX) =nX
+i=1H(XijPa(Xi)): (7)
+Dada una permutación , sea Xi=fXj:jig. Observemos que
+IDefMB;() =2
+4X
+XL!Y2EMBH(YjX)3
+5 H()
+=nX
+i=1H(XijPa(Xi)) nX
+i=1H(XijXi) [por el Hecho A.3 y (7)]
+=nX
+i=1h
+H(XijPa(Xi)) H(XijXi)i
+=nX
+i=1I
+Xi;XinPa(Xi)Pa(Xi)
+: [por el Hecho A.4]
+Usando el Hecho A.4, se sigue que, para todas las distribuciones , IDefMB()0. Además, para todos  y permutaciones ,
+IDefMB() = 0 si y solo si 8i:Xi? ?Xi: (8)
+Como el lado izquierdo de (8) es independiente de , se sigue que Xi es independiente de Xi para alguna permutación i si y solo si Xi es
+independiente de Xi para toda permutación . Como existe una permutación compatible con B, obtenemos que IDefMB;(PrB) = 0.
+Hemos mostrado ahora que IDefMB; e Inc son funciones no negativas de , y ambas son cero en Pr0B. Por tanto, para todos 
+0
+y todos los vectores , tenemos que [ [MB;] ]
+(PrB)[ [MB;] ]
+() para todas las distribuciones . Completamos la demostración mostrando que si
+6= PrB, entonces [ [MB;] ]
+()>0 para
+ >0.
+Supongamos entonces que 6= PrB. Entonces  también debe coincidir con cada cpd de B, pues de lo contrario IncMB;()>0, y habríamos terminado. Como
+PrB es la única distribución que coincide tanto con las cpd como con las independencias de B,  no puede tener todas las independencias
+de B. Por tanto, alguna variable Xi, Xi no es independiente de algún no descendiente Xj en B respecto de . Debe existir alguna
+permutación  de las variables en X compatible con B tal que XjXi (por ejemplo, podemos empezar con Xj y sus ancestros, y luego
+agregar las variables restantes de forma adecuada). Por tanto, no ocurre que Xi sea independiente de X;i, así que por (8), IDefMB()>0.
+Con esto concluye la demostración.
+A.3 Demostraciones de grafos de factores
+Los teoremas 4.2 y 4.3 son corolarios inmediatos de sus contrapartes más generales, los teoremas 4.4 y 4.5, que demostramos ahora.
+Teorema 4.5. Para todos los PDG no ponderados N y vectores no negativos v sobre EN, y todos
+ >0, tenemos que [ [(N;v;
+v)] ]
+=
+
+GFE (N;v); en consecuencia, [ [(N;v;
+v)] ]
+
+={Pr(N;v)}.
+Demostración. Sea M := (N;v;
+v) el PDG en cuestión. Explícitamente, M
+L=vL y M
+L=
+vL. Por la Proposición 4.6,
+[ [M] ]
+() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)+ (L
+ L) log1
+(yjx)
+ 
+log1
+(w))
+:
+Sea fLgL2E:= N los factores del grafo de factores asociado a M. Como tenemos L
+=L, el término medio
+se cancela, quedándonos con
+[ [M] ]
+() =E
+w(X
+XL  !Y
+Llog1
+pL(yjx)
+ 
+log1
+(w))
+=E
+w(X
+XL  !Y
+
+vLlog1
+(x;y)
+ 
+log1
+(w))
+[comoL=vL
+]
+=
+E
+w(X
+XL  !Y
+vLlog1
+(x;y)
+ log1
+(w))
+=
+GFE (N;v):
+Se sigue inmediatamente que el grafo de factores asociado tiene [ [M] ]
+
+=fPr(M)g, porque la energía libre es claramente una constante más
+la divergencia KL respecto de su distribución de probabilidad asociada.
+Teorema 4.2. Para todos los WFG 	 = (;) y todos
+ >0, tenemos que GFE 	=1=
+[ [M	;
+] ]
++C para alguna constante C, así que Pr	 es
+el único elemento de [ [M	;
+] ]
+
+.
+Demostración. En M	;
+, hay una arista 1!XJ para todo J2J, y además aristas XJ! !Xj para cada Xj2XJ. Como estas últimas
+aristas son deterministas, una distribución  que no es consistente con una de las aristas, digamos XJ! !Xj, tiene IncM() =1. Esta es una
+propiedad de la entropía relativa: si existen j2V(Xj) y z2V(J) tales que z
+J6=j y  asigna probabilidad positiva a
+su coocurrencia (es decir, (j;z)>0), entonces tendríamos
+E
+zJI D
+(XjjXJ=z)
+
+
+ 1[Xj=zj]
+=X
+z2V(XJ);
+2V(Xj)(z;) log(jz)
+1[zj=](z;j) log(jjz)
+1[z
+j=j]=1:
+En consecuencia, una distribución  que no satisface las proyecciones tiene [ [M	;
+] ]
+() =1 para todo
+. Por tanto, una distribución
+con puntuación finita debe cumplir las restricciones, de modo que podemos identificar tal distribución con su restricción a las variables originales
+de. Además, para todas las distribuciones  con puntuación finita y proyecciones XJ! !Xj, la entropía condicional H(XjjXJ) =
+ Elog((xjjxJ)) y la divergencia respecto de las restricciones son ambas cero. Por tanto, los términos por arista tanto de IDefM como de IncM
+pueden ignorarse sin riesgo para las proyecciones. Sea pJ la distribución normalizada 1
+ZJJ sobre XJ, donde ZJ=P
+xJJ(xJ) es la
+constante de normalización apropiada. Por la Definición 4.4, tenemos M	;
+= (N;;
+ ), así que por la Proposición 4.6,
+[ [M	;
+] ]
+() =E
+x(X
+J2J
+Jlog1
+pJ(xJ)+ (J
+ J) log1
+(xJ)
+ 
+log1
+(x))
+=E
+x(X
+J2J
+(
+J) log1
+pJ(xJ)+ (J
+ 
+J) log1
+(xJ)
+ 
+log1
+(x))
+=E
+x(X
+J2J
+
+Jlog1
+pJ(xJ)
+ 
+log1
+(x))
+=
+E
+x(X
+J2JJlogZJ
+J(xJ) log1
+(x))
+=
+E
+x(X
+J2JJ
+log1
+J(xJ)+ logZJ
+ log1
+(x))
+=
+E
+x(X
+J2JJlog1
+J(xJ) log1
+(x))
++X
+J2JJlogZJ
+=
+GFE 	+klogY
+JZJ;
+lo cual difiere de GFE 	 en el valor P
+JJlogZJ, que es constante en .

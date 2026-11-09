@@ -1,0 +1,856 @@
+Memoria gráfica dispersa para planificación robusta
+Scott Emmons*
+Berkeley AI Research Ajay Jain*
+Berkeley AI Research Michael Laskin*
+Berkeley AI Research
+Thanard Kurutach
+Berkeley AI Research Pieter Abbeel
+Berkeley AI Research Deepak Pathak
+Carnegie Mellon University
+Resumen
+Para operar con eficacia en el mundo real, los agentes deben poder actuar a partir de entradas brutas de alta-
+dimensionalidad, como imágenes, y alcanzar diversos objetivos a lo largo de horizontes
+temporales largos. Los métodos actuales de aprendizaje profundo por refuerzo e imitación pueden
+aprender directamente de entradas de alta dimensionalidad, pero no escalan bien a tareas de horizonte largo.
+En cambio, los métodos gráficos clásicos, como la búsqueda A*, sí pueden resolver
+tareas de horizonte largo, pero suponen que el espacio de estados está abstraído de la entrada sensorial bruta.
+Trabajos recientes han intentado combinar las fortalezas del aprendizaje profundo
+y de la planificación clásica; sin embargo, los métodos dominantes en este campo
+siguen siendo bastante frágiles y escalan mal con el tamaño del entorno. Presentamos
+la memoria gráfica dispersa (SGM), una nueva estructura de datos que almacena estados y
+transiciones factibles en una memoria dispersa. SGM agrupa los estados según
+un novedoso criterio de consistencia bidireccional, que adapta los criterios clásicos de agregación de estados
+al aprendizaje por refuerzo condicionado a objetivos: dos estados son redundantes cuando son intercambiables
+tanto como objetivos como como estados iniciales. Teóricamente, demostramos que fusionar nodos
+según la consistencia bidireccional aumenta la longitud de los caminos más cortos de forma que
+crece solo linealmente con el umbral de fusión. Experimentalmente, mostramos que SGM
+supera de forma significativa a los métodos más avanzados en tareas de horizonte largo, con
+recompensas dispersas en tareas de navegación visual. El video y el código del proyecto están en https:
+//mishalaskin.github.io/sgm/ .
+1 Introducción
+Figura 1: Ilustración de la memoria gráfica dispersa
+(SGM). Los nuevos estados se fusionan con nodos existentes
+del grafo según nuestro criterio de consistencia bidireccional
+o se genera un nodo nuevo. Tras construir el grafo,
+las aristas incorrectas que representan transiciones infac-
+tibles se corrigen. Los enfoques de control basados en aprendizaje, como la imi-
+tación y el aprendizaje por refuerzo han sido
+muy exitosos tanto en entrenar agentes para actuar
+a partir de entradas brutas de alta dimensionalidad [34] como
+así como en alcanzar múltiples objetivos mediante condicio-
+nando a ellos [1,35]. Sin embargo, este éxito
+ha sido limitado a escenarios de horizonte corto, y escala-
+r estos métodos a objetivos lejanos sigue siendo ex-
+tremadamente difícil. Por otro lado, los algoritmos clási-
+cos de planificación han disfrutado de gran
+éxito en tareas de horizonte largo con objetivos lejanos
+mediante la reducción a búsqueda en grafos [18,25]. Por ejem-
+plo, A* se usó con éxito para controlar al
+robot Shakey para navegar en el mundo real hace
+cinco décadas [7]. Desafortunadamente, los nodos del grafo
+sobre los que operan estos algoritmos de búsqueda
+*Contribución igual. El orden de los autores se determinó al azar. {emmons, ajayj, mlaskin}@berkeley.edu
+34.ª Conferencia sobre Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canadá. arXiv:2003.06417v3  [cs.LG]  12 nov 2020
+A B C
+Grafo original: nueva imagen 
+A B C
+ Grafo modificado: (a) Ejemplo de fusión de nodos
+A B C
+Grafo original: nueva imagen 
+A B C
+ Grafo modificado: D (b) Ejemplo de creación de nodo
+Figura 2: Ejemplos en los que la consistencia bidireccional (TWC) fusiona nodos (izquierda) y crea un nodo nuevo
+(derecha). Considere un grafo dirigido con tres nodos conectados como A→B→C. Dada una nueva imagen
+en el recuadro amarillo punteado, ¿debe fusionarse con un nodo existente o crearse un nodo nuevo? (a) A la
+izquierda, podemos fusionar la nueva imagen con el nodo A sin riesgo. (b) A la derecha, la nueva imagen D contiene
+una botella que está a punto de caer por el borde de la mesa. Aunque B es perceptualmente similar a la nueva imagen,
+el agente no puede mover la botella de D a A, pero sí puede moverla de B a A. Como no podemos pasar
+a los vecinos de la misma manera, nuestro criterio TWC no se cumple y se crea un nodo nuevo.
+se abstrae de los datos sensoriales brutos mediante priors específicos del dominio, y la planificación sobre estos nodos
+supone acceso a aristas bien definidas y a un controlador perfecto para moverse entre nodos. Por ello,
+estos métodos de planificación tienen dificultades con agentes que operan directamente desde entradas de alta dimensionalidad,
+imágenes sensoriales brutas [32].
+¿Cómo podemos tener lo mejor de ambos mundos, es decir, combinar la capacidad de horizonte largo de la planificación clásica basada en grafos
+con la flexibilidad del control moderno, paramétrico y basado en aprendizaje? Una forma es construir un
+grafo a partir de la experiencia del agente en el entorno, construyendo un nodo para cada estado, y usar un
+controlador basado en aprendizaje (ya sea RL o imitación) para moverse entre esos nodos. Algunos trabajos recientes
+han investigado esta combinación en el contexto de la navegación [9,41]; sin embargo, estos grafos crecen
+cuadráticamente en número de aristas y pronto se vuelven inescalables más allá de laberintos pequeños [9]. Esta estrategia
+o bien conduce a planes extremadamente frágiles, porque grafos tan grandes contienen muchos errores (transiciones
+infactibles representadas por aristas), o bien depende de demostraciones humanas para arrancar [41].
+En este trabajo, proponemos abordar los desafíos de combinar los paradigmas clásico y moderno
+dispersando dinámicamente el grafo a medida que el agente recoge más experiencia en el entorno para construir
+lo que llamamos memoria gráfica dispersa (SGM), ilustrada en la Figura 1. De hecho, construir una memoria dispersa
+de eventos clave es algo que los neurocientíficos han defendido desde hace tiempo como fundamental para la cognición animal.
+La idea de construir mapas topológicos cognitivos se demostró por primera vez en ratas en el trabajo pionero de [47].
+El aspecto clave que hace factible construir y razonar sobre estos mapas en el mundo real, siempre cambiante,
+dinámico es la estructura dispersa impuesta por embeddings basados en puntos de referencia [12,14,48]. Sin embargo,
+en los agentes artificiales, el descubrimiento automático de nodos de referencia dispersos sigue siendo un desafío clave.
+Una forma de descubrir una estructura de grafo dispersa es fusionar dinámicamente nodos similares. Pero ¿cómo se
+obtiene una medida de similitud? Esta es una pieza sutil pero central del problema. Los estados que se ven parecidos
+en el espacio de observaciones pueden estar lejos en el espacio de acciones, y viceversa. Considere el ejemplo
+de la Figura 2, donde el grafo ya contiene 3 nodos {A,B,C}. En 2a, nodos de aspecto similar pueden
+fusionarse sin riesgo. En cambio, en 2b, aunque el nuevo nodo D es visualmente similar a B, fusionarlo con
+B implicaría que la botella puede salvarse de romperse. Por tanto, una comparación puramente visual
+de las escenas no puede servir como métrica viable. Proponemos usar una función de distancia asimétrica
+entre nodos y emplear la consistencia bidireccional (TWC) como medida de similitud para fusionar nodos
+dinámicamente. La idea básica es que dos nodos son similares si ambos pueden alcanzarse con un número similar
+de pasos desde todos sus vecinos, y también si todos sus vecinos pueden alcanzarse desde los dos nodos
+con un esfuerzo similar. En nuestro ejemplo conceptual, no es posible volver de la botella que cae a la
+botella que está de pie, y por tanto la consistencia bidireccional no se cumple para la escena B
+y el nuevo estado. A pesar de la apariencia visual similar, no se fusionarán. Derivamos la consistencia bidireccional
+como extensión de criterios de agregación previos basados en funciones Q a tareas condicionadas a objetivos,
+y demostramos que los grafos dispersos resultantes de TWC conservan (salvo un factor de error que escala
+linealmente con el umbral de fusión) la calidad de los grafos densos originales.
+Evaluamos el éxito de nuestro método, SGM, en una variedad de entornos de navegación. Primero,
+observamos en la Tabla 1 que SGM tiene una tasa de éxito significativamente mayor que los métodos anteriores, en promedio,
+aumentando la tasa de éxito 2.1x en los entornos probados. Como demuestran nuestros experimentos de ablación,
+el éxito de SGM se debe en gran medida a su estructura dispersa, que permite una corrección eficiente
+2
+de los errores de la métrica de distancia. Además, vemos que las mejoras de rendimiento de SGM se mantienen en un rango
+de dificultad de entorno, desde un laberinto de puntos simple hasta entornos visuales complejos como ViZDoom
+y SafetyGym. Por último, en comparación con los métodos previos, planificar con nuestra memoria dispersa propuesta puede
+llevar a un aumento de casi un orden de magnitud en velocidad (véase el Apéndice E).
+2 Trabajos relacionados
+Planificar es un problema clásico de la inteligencia artificial. En el contexto de la robótica, los RRT [25] usan
+muestreo para construir un árbol de planificación de rutas en el espacio de configuración, y SLAM localiza conjuntamente al
+agente y aprende un mapa del entorno para la navegación [2,8]. Dada una representación abstracta y gráfica del
+entorno, el algoritmo de Dijkstra [6] generaliza la búsqueda en anchura para hallar con eficiencia
+las rutas más cortas en grafos ponderados, y el uso de una función heurística para estimar distancias, como
+se hace en A* [18], puede mejorar la eficiencia computacional.
+Más allá de la planificación basada en grafos, existen diversos enfoques paramétricos para la planificación. Quizás el
+marco de planificación más popular es el control predictivo por modelo (MPC) [13]. En MPC, un modelo
+de dinámica, aprendido o conocido, se usa para buscar rutas en pasos de tiempo futuros. Para buscarlas,
+los planificadores resuelven un problema de optimización que busca minimizar el costo o, de forma equivalente, maximizar la recompensa.
+Existen muchos métodos de optimización de este tipo, entre ellos el disparo hacia adelante, la entropía cruzada, la colocación y los
+métodos de política [17,40]. El agente resultante puede ser de lazo abierto y simplemente seguir su plan inicial, o bien
+o de lazo cerrado y replanificar en cada paso.
+Además de MPC, diversos algoritmos de aprendizaje por refuerzo, como la optimización de políticas y el
+aprendizaje Q, aprenden una política sin un modelo de dinámica explícito [27,33,43,44]. Además de aprender
+una única política para un objetivo fijo, algunos métodos buscan aprender políticas jerárquicas para descomponer tareas
+complejas [22,36,42], y otros métodos buscan aprender políticas condicionadas a objetivos capaces de alcanzar
+objetivos arbitrarios. Por su naturaleza paramétrica, estos enfoques sin modelo son muy flexibles, pero, como ocurre con MPC
+con un modelo de dinámica aprendido, tienen dificultades para planificar en horizontes temporales largos debido a la acumulación de errores.
+Trabajos recientes combinan estos enfoques de planificación basados en grafos y paramétricos usando observaciones pasadas
+ciones como nodos del grafo y una métrica de distancia aprendida para las aristas. Las variantes de este enfoque incluyen
+Search on the Replay Buffer [9], que no intenta dispersar los nodos del grafo; Semi-Parametric
+Topological Memory [41], que supone una demostración para arrancar el grafo; Mapping State
+Space Using Landmarks for Universal Goal Reaching [20], que submuestrea las observaciones pasadas
+de entrenamiento de la política para elegir los nodos del grafo; y Composable Planning with Attributes [50], que
+guarda atributos abstraídos en cada nodo del grafo. Hallucinative Topological Memory (HTM) [28]
+usa un modelo de energía contrastivo para construir aristas más precisas, y [45] usa programación dinámica
+para planificar con un grafo aprendido.
+A diferencia de los métodos enumerados arriba, la característica definitoria de nuestro trabajo es una
+verificación de consistencia bidireccional para inducir dispersión. Trabajos previos guardan todo el búfer de repetición, lo que limita
+la escalabilidad, pues el grafo crece cuadráticamente en número de nodos, o submuestrea el búfer de repetición
+sin considerar la estructura del grafo. Además, Neural Topological SLAM [4] supone acceso a
+una cámara de 360 grados y un sensor de pose, mientras que nosotros no. En [5], los nodos del grafo se
+especifican a mano, mientras que nosotros abstraemos automáticamente los nodos a partir de los datos. A diferencia de
+nuestro método, el trabajo [31] no tiene garantías teóricas, requiere trayectorias en lugar de observaciones no
+ordenadas y utiliza demostraciones humanas.
+Trabajos previos han propuesto criterios de agregación de estados de MDP, como las métricas de bisimulación que comparan la
+dinámica de pares de estados [11,15] y la Utile distinction [30], que compara funciones de valor. Como
+la bisimulación es un criterio estricto [26] que no daría una dispersión significativa en la memoria,
+nuestro criterio de consistencia bidireccional propuesto adapta la irrelevancia aproximada de la función de valor [21] a
+entornos condicionados a objetivos y observaciones de alta dimensionalidad.
+3 Preliminares
+Consideramos tareas de horizonte largo condicionadas a objetivos. En la prueba se le da al agente su
+estado inicial sstart y un estado objetivo sgoal, y el agente busca alcanzar el estado objetivo mediante un proceso
+de decisiones secuenciales. Muchas tareas visuales se definen mediante un estado objetivo, como una imagen de la ubicación
+3
+Figura 3: Ejecución usando una memoria gráfica. En la localización, el agente encuentra el nodo más cercano usando
+discrepancias en la función de distancia asimétrica. En la planificación, el agente usa el algoritmo de Dijkstra para
+encontrar la ruta más corta. (Por simplicidad, esta ilustración omite la dirección de las aristas.) En el seguimiento de la ruta,
+el agente puede desviarse de los puntos de paso o sufrir un fallo de transición. Entonces el agente necesita
+corregir la memoria, relocalizarse y replanificar.
+para la navegación. Nuestra tarea es una instancia de RL condicionado a objetivos, de horizonte finito y sin descuento, en la que
+el agente recibe una recompensa de vida de -1 hasta alcanzar un objetivo dado.
+Para alcanzar objetivos lejanos, usamos un agente jerárquico semiparamétrico que modela transiciones factibles
+con un grafo no paramétrico (es decir, memoria gráfica) para guiar un controlador paramétrico de bajo nivel.
+Los nodos de la memoria gráfica son estados previos encontrados por el agente, conectados mediante una
+métrica de distancia aprendida. Una vez construida la memoria gráfica, el agente puede planificar usando una búsqueda en grafos
+como el algoritmo de Dijkstra [6] y ejecutar planes con un controlador de bajo nivel aprendido con
+aprendizaje por refuerzo o aprendizaje por imitación [9,41]; véase la Figura 3. Por tanto, dado un objetivo final, el
+planificador de alto nivel actúa como una política que proporciona puntos de paso, es decir, nodos a lo largo de la ruta más corta, al
+controlador de bajo nivel, y actualiza el plan a medida que el agente de bajo nivel se mueve entre puntos de paso:
+hl usa Qhl(s;a=!jg) para seleccionar un punto de paso ! del grafo para alcanzar el objetivo final g
+ll usa Qll(s;aj!) para dar un paso en el entorno a fin de alcanzar el punto de paso !:
+Como el agente recibe una recompensa de vida de -1 sin descuento, la función de valor óptima de bajo nivel mide
+el número de pasos para alcanzar un punto de paso, es decir, la distancia d(s;!) = maxa Qll(s;aj!).
+El principal desafío de este formalismo semiparamétrico es el efecto perjudicial de los errores en
+la memoria gráfica. Como los nodos están conectados por una métrica aproximada, el número de errores en
+el grafo crece como O(jVj2), donde jVj es el número de nodos del grafo. Además, para que los métodos de memoria gráfica
+escalen a entornos más grandes, resulta inviable almacenar en el grafo cada estado encontrado en
+el grafo, como se hace en trabajos previos [9,41]. Por las razones anteriores, la dispersión de nodos es una característica deseable
+para cualquier método de memoria gráfica. En este trabajo buscamos responder la siguiente pregunta de investigación:
+dada una memoria gráfica densa, ¿cuál es el algoritmo óptimo para transformarla en una dispersa?
+4 Memoria gráfica dispersa
+El número de errores en la memoria gráfica puede minimizarse eliminando estados redundantes, ya que cada
+estado en la memoria puede introducir varias transiciones infactibles a través de sus aristas incidentes. Cualquier
+algoritmo de agregación debe responder una pregunta clave: ¿cuándo podemos agregar estados?
+La memoria gráfica dispersa se construye a partir de un búfer de trayectorias de exploración, conservando el
+conjunto mínimo de estados que no cumplen nuestro criterio de agregación por consistencia bidireccional. En la Sec. 4.1 introducimos
+este criterio de consistencia bidireccional, que extiende trabajos previos al escenario de RL condicionado a objetivos.
+Luego demostramos que, mientras un grafo dispersado satisfaga la consistencia bidireccional, los planes en el grafo dispersado
+están cerca del plan óptimo del grafo original. En la Sec. 4.2 diseñamos un algoritmo en línea
+para verificar la consistencia bidireccional seleccionando el conjunto mínimo aproximado del búfer de repetición.
+Por último, en la Sec. 4.3 describimos un procedimiento de limpieza para eliminar las transiciones infactibles restantes.
+4
+4.1 Agregación de estados mediante consistencia bidireccional
+Figura 4: SGM usa un criterio de consis-
+tencia bidireccional para encontrar pares redundantes de
+estados en el búfer de repetición. Como criterio de agregación de estados, trabajos previos defienden
+la irrelevancia de valor al agregar estados con valores Q-
+similares [21,26,30]. Si las funciones Q óptimas son
+iguales en dos estados, la política óptima seleccionará la
+misma acción en cualquiera de ellos.
+Sin embargo, en el escenario condicionado a objetivos, enfrentamos un desa-
+lenge: los estados en la memoria definen el espacio de acciones
+de la política de alto nivel, es decir, los puntos de paso (waypoints) seleccionados por
+el planificador de grafos. Agregar estados cambia el espacio de acciones
+al eliminar los puntos de paso posibles.
+Para extender la irrelevancia de valor al caso condicionado por metas,
+proponemos la consistencia bidireccional (TWC). Con la consistencia bidireccional, dos
+estados son redundantes si son intercambiables tanto como metas como estados de inicio
+según la función de valor condicionada por metas.
+El planificador de grafos actúa como una política no paramétrica de alto nivel, seleccionando un punto de paso !para el controlador de bajo nivel
+como meta intermedia. Entonces, el espacio de acciones está dado por los puntos de paso candidatos. Formalmente,
+usando la función de valor óptima de la política de alto nivel, los estados s1 y s2 son intercambiables como
+estados de inicio si
+max
+!Qhl(s1;a=!jg) Qhl(s2;a=!jg)a: (1)
+Entonces, cuando a→0, la política de alto nivel se comportará igual en ambos estados. La ecuación (1) puede verse
+como la verificación de que la esparsificación es una abstracción Q-irrelevante a-aproximada [ 21] dado un conjunto fijo
+de puntos de paso como acciones. Además, decimos que los estados s1 y s2 son intercambiables como puntos de paso para
+los fines de la planificación si
+max
+s0Qhl(s0;a=s1jg) Qhl(s0;a=s2jg)a: (2)
+En consecuencia, eliminar s2 de la memoria y, por tanto, del espacio de acciones no provocará
+pérdida de valor en ningún estado de inicio, ya que la política puede seleccionar s1 en su lugar. Juntas, (1) y (2) forman las
+dos direcciones de nuestro criterio de consistencia bidireccional en el espacio de valores de alto nivel.
+Si bien hemos motivado la consistencia bidireccional en términos de Qhl cuando a→0, además se cumple que
+la consistencia bidireccional da una cota de error significativa para cualquier función de distancia asimétrica d(;)
+que satisface Cout(s1;s2)a y Cin(s1;s2)a para cualquier a finito, donde
+Cout(s1;s2) := max
+!jd(s1;!) d(s2;!)j y Cin(s1;s2) := max
+s0jd(s0;s1) d(s0;s2)j:(3)
+El siguiente teorema muestra que agregar estados según la consistencia bidireccional de d(;)
+produce un aumento acotado de la longitud del camino que escala linealmente con a. Además, dada una cota de error
+sobre la función de distancia d(;), proporciona una cota de error sobre las distancias en el grafo esparsificado.
+Teorema 1. Sea GB un grafo con todos los estados de un búfer de repetición B y pesos de una
+función de distancia d(;). Supóngase que GTWC es un grafo formado al agregar nodos de GB según la consistencia bidireccional
+Cout y Cin. Para cualquier camino más corto PTWC en GTWC, considérese el camino más corto correspondiente
+PB en GB que conecta los mismos nodos de inicio y meta. Supóngase que PB tiene k aristas. Entonces:
+(i) La longitud del camino ponderado de PTWC menos la longitud del camino ponderado de PB no es mayor que 2k.
+(ii) Además, si d(;) tiene error como máximo ε, la longitud del camino ponderado de PTWC está dentro de k+2k
+de la distancia ponderada real a lo largo de PB.
+El Teorema 1 se demuestra en el Apéndice D. Destacamos que no hace suposiciones sobre la función de distancia,
+sino que se basa en ambas direcciones de nuestro criterio. Esta distancia puede derivarse de la función de valor
+mediante negación o aprenderse de forma supervisada, según la aplicación. De acuerdo
+con el Teorema 1, podemos agregar pares de estados que satisfacen la consistencia bidireccional sin llevar a planes
+significativamente más largos (solo un aumento constante). Como la consistencia bidireccional es aproximada, al mismo
+tiempo, también lleva a más esparsidad que criterios restrictivos como la bisimilaridad.
+En contraste con la consistencia bidireccional, una estrategia ingenua como el submuestreo aleatorio del búfer de repetición
+no ofrece garantía sin suposiciones adicionales sobre los datos de exploración, como una
+5
+Algoritmo 1 BuildSparseGraph
+1: Entrada: búfer de repetición B, función de distancia d
+2: Salida: grafo esparso G= (V;E;W)
+3: Inicializar el conjunto de vértices vacío V=;
+4: para ŝ∈B, cada estado en el búfer de repetición, hacer
+5: si el estado es nuevo según TWC, es decir, Cin(s;^s)a;Cout(s;^s)a8s2V entonces
+6: añadir el estado ŝ al grafo G:
+7: V=V[f ^sg
+8: E=E[f (s;^s) :s2V;d(s;^s)MAXDISTg[f (^s;s) :s2V;d(^s;s)MAXDISTg
+9: fin si
+10: fin para
+11: asignar pesos W(si;sj)=d(si;sj) 8(si;sj)2E
+12: filtrar el conjunto de transiciones E a los k vecinos más cercanos
+13: devolver G= (V;E;W)
+cobertura del espacio de estados. Por ejemplo, al submuestrear aleatoriamente el búfer, un estado de cuello de botella
+poco visitado se descartará con la misma probabilidad que los estados de regiones muy visitadas. Como
+múltiples estados pueden estar cubiertos por el mismo estado, la consistencia bidireccional es una esparsificación priorizada
+del búfer de repetición que busca cubrir el entorno independientemente de la densidad de muestreo.
+4.2 Construcción del grafo a partir de un búfer de repetición
+La agregación de estados puede verse como una instancia de cobertura de conjuntos (set cover), un problema clásico de selección de subconjuntos. En nuestra
+formulación, seleccionamos un subconjunto de los estados del búfer de repetición para guardar en la memoria del agente, de modo que
+todos los estados del búfer de repetición queden “cubiertos”. La cobertura se determina según el criterio de agregación de estados,
+la consistencia bidireccional (3). Desafortunadamente, la cobertura de conjuntos es un problema de optimización combinatoria
+que es NP-difícil de resolver exactamente, o incluso de aproximar dentro de un factor constante [10, 29, 39].
+Motivados por la dificultad del problema de cobertura de conjuntos, proponemos un algoritmo voraz en línea para
+la selección de subconjuntos del búfer de repetición. La memoria gráfica se construye en una sola pasada por un búfer
+de experiencia según el Algoritmo 1, que requiere cuadráticamente muchas evaluaciones del criterio TWC.
+En particular, un estado solo se registra si es nuevo según el criterio de consistencia bidireccional.
+Una vez que un estado se añade al grafo, creamos aristas entrantes y salientes, y asignamos a la arista
+como peso la distancia.
+4.3 Limpieza de la memoria gráfica
+Aunque TWC produce un grafo compacto con sustancialmente menos errores que la memoria gráfica original,
+pueden seguir existiendo aristas defectuosas. Si incluso una sola transición inviable entre estados distantes permanece
+como arista en el grafo, el planificador la explotará y el agente no podrá llevar a cabo el
+plan [9]. Por ello, eliminar las aristas defectuosas es clave para la robustez.
+Acotamos el número de errores en la memoria filtrando aristas y limitando cada nodo a sus k
+sucesores más cercanos. Tras el filtrado, el número de peor caso de aristas no recorribles crece solo linealmente
+en el número de nodos esparsificados, no cuadráticamente. Es un procedimiento simple y poco costoso que
+encontramos experimentalmente que elimina muchas de las transiciones inviables.
+Finalmente, proponemos una técnica novedosa de eliminación de errores autosupervisada: la limpieza (cleanup). Durante la
+ejecución en tiempo de prueba se muestrea una meta aleatoria g y el planificador proporciona un conjunto de puntos de paso w
+para el agente de bajo nivel. Cuando el agente de bajo nivel no puede alcanzar un punto de paso consecutivo wi→wi+1,
+elimina la arista entre (wi;wi+1) y replanifica su trayectoria. Este procedimiento es eficiente para un grafo
+esparsificado con TWC, ya que |GTWC| es mucho menor que |GB|.
+5 Configuración experimental
+Evaluamos SGM bajo dos marcos de aprendizaje de alto nivel: aprendizaje por refuerzo (RL) y
+aprendizaje autosupervisado (SSL). Como estructura de datos general, SGM puede combinarse con cualquier
+6
+Figura 5: Los tres entornos usados para probar SGM. PointEnv es un laberinto pequeño con observaciones
+de coordenadas. Aumentamos su dificultad adelgazando las paredes. ViZDoom es un entorno grande,
+que puede requerir hasta 5 minutos y 5 mil pasos para recorrerlo por completo. Las acciones de ViZDoom son discretas y
+las observaciones son vistas de cámara en primera persona. SafetyGym es otro entorno grande con observaciones en primera
+persona, y admite acciones continuas.
+TÉCNICA TASA DE ÉXITO PASOS DE LIMPIEZA OBSERVACIÓN ENTORNO
+SORB 28.0 6.3% 400 K PROPRIO POINT ENV
+SORB + SGM 100.0.1% 400 K PROPRIO POINT ENV
+SPTM 39.3 4.0% - VISUAL VIZDOOM
+SPTM + SGM 60.74.0% 114 K VISUAL VIZDOOM
+CONSPTM 68.2 4.1% 1M VISUAL SAFETY GYM
+CONSPTM + SGM 92.91.4% 1M VISUAL SAFETY GYM
+Tabla 1: SGM mejora el rendimiento de todos los métodos semiparamétricos con grafos de vanguardia existentes.
+características de imagen, métrica de distancia asimétrica o controlador de bajo nivel. A continuación describimos nuestro
+procedimiento de entrenamiento en detalle.
+Comparamos con los dos entornos disponibles usados por las líneas base SoRB y SPTM, y
+con un entorno adicional de navegación visual. Estos varían en complejidad y se muestran en la Figura 5.
+Las descripciones de los entornos son las siguientes: PointEnv [9], control continuo de una masa puntual en un
+laberinto usado en SoRB. Las observaciones y los objetivos son coordenadas de posición (x;y). ViZDoom [49] discreto
+control de un agente en un entorno de laberinto visual usado en SPTM. Las observaciones y los objetivos son imágenes.
+SafetyGym [38], control continuo de un agente en un entorno de laberinto visual. Las observaciones y
+los objetivos son imágenes, aunque hay datos de odometría para las observaciones pero no para los objetivos.
+Usamos el laberinto PointEnv para los experimentos de RL, donde SGM se construye con funciones Q sin descuento
+con una recompensa dispersa de 0 (objetivo alcanzado) y 1 (objetivo no alcanzado). Aumentamos la
+dificultad de este entorno adelgazando las paredes del laberinto, lo que expone errores en la métrica de distancia
+porque dos coordenadas cercanas pueden estar a ambos lados de una pared del laberinto. SoRB también hizo
+experimentos visuales con el conjunto de datos de casas SUNCG [46], pero estos entornos ya no son públicos.
+Para evaluar SGM en entornos basados en imágenes, usamos el entorno de navegación ViZDoom y
+redes preentrenadas de SPTM. Además, evaluamos la navegación en el OpenAI SafetyGym
+[37]. En ambos entornos, el grafo se construye sobre observaciones visuales en primera persona en un
+espacio amplio con obstáculos, texturas reutilizadas y paredes. Estas observaciones plantean un verdadero desafío para
+el aprendizaje de métricas de distancia, ya que son de alta dimensionalidad y perceptualmente ambiguas: hay
+muchas imágenes visualmente similares que están alejadas en el tiempo. También implementamos algoritmos de RL de última generación
+sin el planificador gráfico, como DDPG [27] y SAC [16], combinados con el método Hindsight
+Experience Replay [1], pero encontramos que estos métodos lograron tasas de éxito cercanas a cero en todos
+los tres entornos, y solo pudieron alcanzar objetivos cercanos. Por esta razón, no incluimos
+estas líneas base en nuestras figuras.
+6 Resultados
+SGM aumenta la robustez de los planes: comparamos el desempeño de SGM frente a los métodos neuronales
+topológicos previos en la Tabla 1. SGM establece un nuevo estado del arte en cuanto a tasa de éxito en todos los
+tres entornos probados y, en promedio, supera a los métodos previos en 2.1x . De hecho, adelgazar las
+paredes del laberinto PointEnv rompe la política de la línea base de SoRB porque introduce aristas defectuosas
+a través de las paredes. SoRB no es robusto ante estas aristas defectuosas y alcanza un 28% incluso después de 400k
+pasos de limpieza autosupervisada. SGM, en cambio, logra eliminar las aristas defectuosas fusionando
+según la consistencia bidireccional y realizando la limpieza, logrando de forma robusta una tasa de éxito del 100%.
+7
+TÉCNICA FÁCIL MEDIO DIFÍCIL GLOBAL 200 M 400 M 600 M
+ACCIONES ALEATORIAS 58.0% 21.5% 12.0% 30.5%
+CONTROLADOR VISUAL 75.0% 34.5% 18.5% 42.7%
+SPTM, OBSERVACIONES SUBMUESTREADAS 70.0% 34.0% 14.0% 39.3%
+SPTM + SGM + 54K PASOS DE LIMPIEZA 88.0% 52.0% 26.0% 55.3%
+SPTM + SGM + 114K PASOS DE LIMPIEZA 92.0% 64.0% 26.0% 60.7%
+Tabla 2: SGM mejora las tasas de éxito basadas en grafos según la dificultad del objetivo en ViZDoom. Más pasos de
+limpieza producen mejor rendimiento porque se eliminan más transiciones infactibles del grafo.
+De manera similar, en entornos visuales, el grafo disperso inducido por SGM produce planes significativamente más
+robustos que las líneas base de SPTM. Mientras que SGM resuelve el entorno SafetyGym con una tasa de éxito del 96.6%
+pero en ViZDoom solo llega al 60.7% de los objetivos. Nótese que esta tasa de éxito en VizDoom es
+menor que en [41] porque [41] usa demostraciones humanas, mientras que nosotros no. Encontramos que la
+principal fuente de error en VizDoom se debió a la ambigüedad perceptual, donde dos observaciones perceptualmente similares
+en realidad están muy separadas. Para más detalles, véase el Apéndice B.
+Figura 6: Tasa de éxito en función de los pasos de
+limpieza en PointEnv (laberinto FourRooms) y Safe-
+tyGym. SGM se corrige rápidamente mientras que SoRB,
+debido a errores en su grafo denso, es inviable
+limpiar. SPTM puede limpiarse, pero solo lentamente.
+CRITERIO SIN LIMPIEZA CON LIMPIEZA
+UNIFORME 31.23.8% 64.63.4%
+PERCEPTIVO 31.83.6% 77.02.5%
+ENTRANTE 33.63.1% 84.12.0%
+SALIENTE 28.73.2% 86.82.9%
+DOS VÍAS 38.23.8% 92.91.2%
+Tabla 3: Comparación de estrategias de submuestreo de nodos
+en SafetyGym. La consistencia bidireccional mejora
+la tasa de éxito frente a otros criterios. Examinamos el desempeño de SGM con y sin
+limpieza. La Figura 6 muestra que el éxito aumenta rápidamente
+aumenta a medida que el grafo disperso se corrige. Sin-
+embargo, sin dispersión, el número de errores es
+demasiado grande como para corregirlo rápido. Las tasas de éxito en
+la Tabla 3 muestran que la limpieza habilitada por dispersión es
+esencial para una planificación robusta y que la limpieza
+mejora el rendimiento medio en 2.4x .
+También estudiamos el éxito en función de la dif-
+cultad en la Tabla 2, donde la dificultad se determina
+por la distancia real entre la posición ini-
+cial del agente y su objetivo. Incluso con
+la limpieza, el rendimiento disminuye con la dif-
+cultad, lo que probablemente se debe a la ambigüedad
+perceptual que causa aristas defectuosas (Apéndice B).
+La consistencia bidireccional es la estrategia de sub-
+muestreo preferida: probamos distintas estrategias de sub-
+muestreo para examinar el origen de nuestras
+ganancias de rendimiento. Comparamos SGM con dos-
+vías, y con variantes de SGM con consistencia de una-
+vía, en las que la conectividad entre dos nodos
+se determina comprobando solo los valores de
+de la función de distancia entrante o saliente,
+así como una estrategia simple de submuestreo aleatorio
+donde un subconjunto de nodos y aristas se elimina de
+uniformemente del grafo denso. La Tabla 3 muestra
+las tasas de éxito en una tarea de navegación de SafetyGym antes de la limpieza y tras 1M de pasos de limpieza. Antes de
+la limpieza, todos los planes tienen un mal desempeño, con una tasa de éxito máxima del 38.2% alcanzada por SGM de dos vías.
+Tras la limpieza, las variantes de SGM superan significativamente una estrategia ingenua de submuestreo uniforme, y
+el submuestreo con consistencia bidireccional logra la mayor tasa de éxito antes y después de la limpieza.
+Investigación de la calidad del grafo con consistencia bidireccional: investigamos además cómo influyen los distintos com-
+ponentes de SGM con consistencia bidireccional influyen en la calidad final del grafo y del plan. En la Figura 7 (izquierda) mostramos
+el número total de aristas para distintas longitudes de arista en la memoria gráfica de ViZDoom tras distintos pasos
+del algoritmo SGM. Como los nodos solo deben conectarse localmente, las aristas largas son las más propensas a ser
+defectuosas, pues representan transiciones infactibles. Aunque los distintos componentes del algoritmo SGM
+contribuyen a reducir errores, la consistencia bidireccional elimina más aristas incorrectas del grafo denso original
+mientras conserva la mayor cantidad de aristas correctas.
+Por último, en la Figura 7 (derecha) mostramos el número promedio de pasos que necesitan distintos agentes para
+alcanzar su objetivo en ViZDoom. El promedio se calcula solo sobre rutas exitosas, y la línea punteada
+8
+Figura 7: (Izquierda) Histogramas superpuestos de longitudes de arista para memorias gráficas en ViZDoom, donde
+las aristas largas son incorrectas. La calidad del grafo mejora significativamente con SGM, que reduce la frecuencia
+de aristas largas. (Derecha) SGM alcanza los objetivos con el menor número de pasos del entorno (longitud de la ruta más corta).
+muestra el número máximo de pasos permitido. Mostramos que, en promedio, los agentes equipados con
+memoria gráfica dispersa necesitan el menor número de pasos para alcanzar sus objetivos en comparación con otros métodos. Esto
+sugiere que las rutas más cortas son otra razón de la mejora en el éxito frente a otros métodos.
+7 Conclusión
+En este trabajo propusimos una nueva estructura de datos: una memoria gráfica dispersa y eficiente que permite
+a un agente consolidar muchos estados del entorno, modelar su capacidad para desplazarse entre estados,
+y corregir errores. En una variedad de entornos de navegación difíciles, visuales y basados en coordenadas,
+demostramos tasas de éxito significativamente mayores, trayectorias más cortas y ejecución más rápida frente a
+los grafos densos de referencia y los controladores aprendidos. Mostramos que nuestro criterio de agregación
+por consistencia bidireccional es clave para este éxito, tanto teórica como empíricamente. Esperamos que esta dirección
+de combinar la planificación clásica basada en búsqueda con técnicas modernas de aprendizaje permitirá enfoques eficientes
+para tareas de control sensoriomotor de horizonte largo. En particular, consideramos que escalar la memoria gráfica dispersa
+a tareas de manipulación desafiantes es un reto pendiente clave para trabajos futuros.
+Impacto más amplio
+Interpretabilidad. Para generar confianza en los sistemas de RL profundo, los usuarios idealmente podrían interrogar
+al sistema: “¿Qué va a hacer el sistema de RL profundo? ¿Por qué?” Con enfoques de vanguardia sin modelo
+como la optimización de políticas proximales [44], no es posible responder estas preguntas –
+la red de políticas es una caja negra. Los planes gráficos explícitos producidos por SGM, en cambio, pueden
+ofrecer una respuesta parcial a estas preguntas. Los nodos futuros de un plan dado por SGM indican qué
+intenta hacer, y los errores en un plan general pueden depurarse rastreándolos hasta aristas individuales defectuosas
+en el grafo. Por esta razón, consideramos los métodos de planificación gráfica, como SGM, ventajosos
+para la confianza y la interpretabilidad de los sistemas de RL profundo frente a los métodos sin modelo.
+Seguridad. SGM supone que la única señal de recompensa del agente es una indicación de si el
+estado actual satisface la meta. Esta formulación del problema ignora el posible daño que podría
+causarse durante los pasos intermedios tomados para alcanzar la meta, que, según la aplicación,
+podría ser significativo. Diseñar un agente de RL que pueda explorar de forma segura y alcanzar metas en su entorno
+es un desafío fundamental para todo el campo.
+Aplicaciones en el mundo real. Aunque los métodos para RL de horizonte largo son muy generales, como el
+método que presentamos en este artículo, las aplicaciones potenciales más inmediatas de nuestro método están en
+robótica. Resolver por completo la formulación del problema de este artículo, control de horizonte largo a partir de
+entradas de alta dimensionalidad con recompensa escasa, tendría un impacto amplio en las aplicaciones robóticas.
+Agradecimientos
+Este trabajo contó en parte con el apoyo de Berkeley Deep Drive (BDD), ONR PECASE N000141612723,
+Open Philanthropy Foundation, NSF CISE Expeditions Award CCF-1730628, DARPA a través del
+programa LwLL, el DOE CSGF bajo el número de subvención DE-SC0020347, el NSF GRFP bajo el
+número DGE-1752814, y Komatsu. DP cuenta con el apoyo de Google FRA.
+9
+Referencias
+[1] M. Andrychowicz, F. Wolski, A. Ray, J. Schneider, R. Fong, P. Welinder, B. McGrew, J. Tobin,
+O. P. Abbeel, y W. Zaremba. Hindsight experience replay. En NIPS, 2017. 1, 7
+[2] T. Bailey y H. Durrant-Whyte. Simultaneous localization and mapping (slam): Part ii. IEEE
+robotics & automation magazine, 13(3):108–117, 2006. 3
+[3] G. Barth-Maron, M. W. Hoffman, D. Budden, W. Dabney, D. Horgan, D. Tb, A. Muldal,
+N. Heess, y T. Lillicrap. Distributed distributional deterministic policy gradients. arXiv
+preprint arXiv:1804.08617, 2018. 13
+[4] D. S. Chaplot, R. Salakhutdinov, A. Gupta, y S. Gupta. Neural topological slam for visual
+navigation. En CVPR, 2020. 3
+[5] K. Chen, J. P. de Vicente, G. Sepulveda, F. Xia, A. Soto, M. Vázquez, y S. Savarese. A
+behavioral approach to visual navigation with graph localization networks. Robotics: Science
+and Systems, 2019. 3
+[6] E. W. Dijkstra. A note on two problems in connexion with graphs. Numerische Mathematik, 1
+(1):269–271, 1959. 3, 4
+[7] J. E. Doran y D. Michie. Experiments with the graph traverser program. Actas de la
+Royal Society of London. Series A. Mathematical and Physical Sciences, 1966. 1
+[8] H. Durrant-Whyte y T. Bailey. Simultaneous localization and mapping: part i. IEEE robotics
+& automation magazine, 13(2):99–110, 2006. 3
+[9] B. Eysenbach, R. R. Salakhutdinov, y S. Levine. Search on the replay buffer: Bridging
+planning and reinforcement learning. En NeurIPS, 2019. 2, 3, 4, 6, 7, 13
+[10] U. Feige. A threshold of ln n for approximating set cover. Journal of the ACM (JACM), 45(4):
+634–652, 1998. 6
+[11] N. Ferns, P. Panangaden, y D. Precup. Metrics for finite markov decision processes. En UAI,
+2004. 3
+[12] P. Foo, W. H. Warren, A. Duchon, y M. J. Tarr. Do humans integrate routes into a cognitive
+map? map-versus landmark-based navigation of novel shortcuts. Journal of Experimental
+Psychology: Learning, Memory, and Cognition, 2005. 2
+[13] C. E. Garcia, D. M. Prett, y M. Morari. Model predictive control: theory and practice—a
+survey. Automatica, 1989. 3
+[14] S. Gillner y H. A. Mallot. Navigation and acquisition of spatial knowledge in a virtual maze.
+Journal of cognitive neuroscience, 1998. 2
+[15] R. Givan, T. Dean, y M. Greig. Equivalence notions and model minimization in markov
+decision processes. Artificial Intelligence, 147(1-2):163–223, 2003. 3
+[16] T. Haarnoja, A. Zhou, K. Hartikainen, G. Tucker, S. Ha, J. Tan, V. Kumar, H. Zhu, A. Gupta,
+P. Abbeel, et al. Soft actor-critic algorithms and applications. arXiv preprint arXiv:1812.05905,
+2018. 7
+[17] C. R. Hargraves y S. W. Paris. Direct trajectory optimization using nonlinear programming
+and collocation. Journal of guidance, control, and dynamics, 10(4):338–342, 1987. 3
+[18] P. E. Hart, N. J. Nilsson, y B. Raphael. A formal basis for the heuristic determination of
+minimum cost paths. IEEE transactions on Systems Science and Cybernetics, 4(2):100–107,
+1968. 1, 3
+[19] I. Higgins, L. Matthey, A. Pal, C. Burgess, X. Glorot, M. Botvinick, S. Mohamed, y A. Lerch-
+ner. beta-vae: Learning basic visual concepts with a constrained variational framework. ICLR,
+2017. 13
+10
+[20] Z. Huang, F. Liu, y H. Su. Mapping state space using landmarks for universal goal reaching.
+En NeurIPS, 2019. 3
+[21] N. Jiang. Notes on state abstractions, 2018. 3, 5
+[22] L. P. Kaelbling. Learning to achieve goals. En International Joint Conference on Artificial
+Intelligence, página 1094–1099. Citeseer, 1993. 3
+[23] D. P. Kingma y J. Ba. Adam: A method for stochastic optimization. En Y. Bengio y
+Y. LeCun, editores, ICLR, 2015. 13, 14, 15
+[24] D. P. Kingma y M. Welling. Auto-encoding variational bayes. En Y. Bengio y Y. LeCun,
+editores, ICLR, 2014. 13
+[25] S. M. LaValle. Rapidly-exploring random trees: A new tool for path planning, 1998. 1, 3
+[26] L. Li, T. J. Walsh, y M. L. Littman. Towards a unified theory of state abstraction for mdps. En
+ISAIM, 2006. 3, 5
+[27] T. P. Lillicrap, J. J. Hunt, A. Pritzel, N. Heess, T. Erez, Y. Tassa, D. Silver, y D. Wierstra.
+Continuous control with deep reinforcement learning. ICLR, 2016. 3, 7, 13
+[28] K. Liu, T. Kurutach, C. Tung, P. Abbeel, y A. Tamar. Hallucinative topological memory for
+zero-shot visual planning. arXiv preprint arXiv:2002.12336, 2020. 3
+[29] C. Lund y M. Yannakakis. On the hardness of approximating minimization problems. Journal
+of the ACM (JACM), 41(5):960–981, 1994. 6
+[30] A. McCallum. Overcoming incomplete perception with util distinction memory. En Actas de la
+Décima Conferencia Internacional sobre Machine Learning, págs.
+190–196, 1993. 3, 5
+[31] X. Meng, N. Ratliff, Y. Xiang, y D. Fox. Scaling local control to large-scale topological
+navigation. En 2020 IEEE International Conference on Robotics and Automation (ICRA), págs.
+672–678. IEEE, 2020. 3
+[32] D. Mishkin, A. Dosovitskiy, y V. Koltun. Benchmarking classic and learned navigation in
+complex 3d environments. arXiv preprint arXiv:1901.10915, 2019. 2
+[33] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, y M. Riedmiller.
+Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602, 2013. 3
+[34] V. Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. G. Bellemare, A. Graves,
+M. Riedmiller, A. K. Fidjeland, G. Ostrovski, et al. Human-level control through deep rein-
+forcement learning. Nature, 518(7540):529–533, 2015. 1
+[35] A. V. Nair, V. Pong, M. Dalal, S. Bahl, S. Lin, y S. Levine. Visual reinforcement learning
+with imagined goals. En NeurIPS, 2018. 1
+[36] V. Pong, S. Gu, M. Dalal, y S. Levine. Temporal difference models: Model-free deep RL for
+model-based control. En ICLR, 2018. 3
+[37] A. Ray, J. Achiam, y D. Amodei. Benchmarking safe exploration in deep reinforcement
+learning, 2019. 7
+[38] A. Ray, J. Achiam, y D. Amodei. Benchmarking safe exploration in deep reinforcement
+learning. arXiv preprint arXiv:1910.01708, 2019. 7
+[39] R. Raz y S. Safra. A sub-constant error-probability low-degree test, y a sub-constant
+error-probability pcp characterization of np. En Actas de la vigésimo novena conferencia anual ACM
+sobre Theory of computing, págs. 475–484, 1997. 6
+[40] R. Rubinstein. The cross-entropy method for combinatorial and continuous optimization.
+Methodology and computing in applied probability , 1(2):127–190, 1999. 3
+11
+[41] N. Savinov, A. Dosovitskiy, y V . Koltun. Semi-parametric Topological Memory for Naviga-
+tion. ICLR , 2019. 2, 3, 4, 8, 13, 14
+[42] T. Schaul, D. Horgan, K. Gregor, y D. Silver. Universal value function approximators. En
+ICML , 2015. 3
+[43] J. Schulman, S. Levine, P. Abbeel, M. Jordan, y P. Moritz. Trust region policy optimization.
+En ICML , 2015. 3
+[44] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, y O. Klimov. Proximal policy optimization
+algorithms. arXiv preprint arXiv:1707.06347 , 2017. 3, 9
+[45] W. Shang, A. Trott, S. Zheng, C. Xiong, y R. Socher. Learning World Graphs to Accelerate
+Hierarchical Reinforcement Learning. arXiv e-prints , art. arXiv:1907.00664, jul 2019. 3
+[46] S. Song, F. Yu, A. Zeng, A. X. Chang, M. Savva, y T. Funkhouser. Semantic scene completion
+from a single depth image. En CVPR , 2017. 7
+[47] E. C. Tolman. Cognitive maps in rats and men. Psychological review , 1948. 2
+[48] R. F. Wang y E. S. Spelke. Human spatial representation: Insights from animals. Trends en
+cognitive sciences , 2002. 2
+[49] M. Wydmuch, M. Kempka, y W. Ja ´skowski. Vizdoom competitions: Playing doom from
+pixels. IEEE Transactions on Games , 2018. 7
+[50] A. Zhang, A. Lerer, S. Sukhbaatar, R. Fergus, y A. Szlam. Composable planning with
+attributes. ICML , 2018. 3
+12
+Apéndice
+A Entornos y hiperparámetros
+A.1 Línea base de consistencia perceptual y vía rápida
+La consistencia bidireccional (1-2) implica una maximización sobre el búfer de repetición, lo que puede resultar costoso. Nosotros
+empleamos un criterio de consistencia perceptual simétrico por pares como prueba rápida de similitud en el espacio latente para
+acelerar la construcción del grafo. Un nuevo estado ^s solo se añade a la memoria si no cumple ni la consistencia perceptual
+ni la consistencia bidireccional con cada estado ya presente en la memoria; en ese caso lo consideramos novedoso
+y útil para conservarlo en la planificación. Esto nos permite omitir la comprobación TWC para estados
+sustancialmente distintos.
+Decimos que ^s es perceptualmente consistente con un estado s2V registrado previamente si
+jj(s) (^s)jj2p; (4)
+donde jj(s) (^s)jj2 mide la similitud visual de los estados que el agente encuentra a través de
+la distancia l2 entre las incrustaciones de cada estado. En tareas propioceptivas, la función identidad es
+usada para la incrustación (). Sin embargo, en la navegación visual, ubicaciones cercanas pueden corresponder a
+imágenes que son significativamente distintas en el espacio de píxeles, como cuando un agente rota [ 41]. Para mitigar
+este problema, para imágenes de alta dimensión, ()es una red de incrustación aprendida, como un -V AE
+[19, 24] para SafetyGym o una subred de la función de distancia para ViZDoom.
+La Tabla 3 muestra que la consistencia bidireccional supera significativamente a la consistencia perceptual por sí sola,
+por lo que el criterio TWC sigue siendo importante. El Teorema 1 sigue valiendo al combinar las estrategias como (4)
+solo puede hacer la agregación más conservadora.
+A.2 Controlador de bajo nivel
+Para los experimentos de RL, usamos métodos actor-crítico para entrenar un controlador de bajo nivel (el actor) y
+la métrica de distancia correspondiente (el crítico) simultáneamente. En particular, usamos RL distribucional
+y D3PG, una variante del gradiente de política determinista profundo [ 3,27]. Para los experimentos en SafetyGym,
+usamos un controlador propioceptivo basado en estados tanto para SGM como para la línea base densa. Para el SSL
+experimentos en ViZDoom, usamos el controlador visual entrenado por clonación de comportamiento de SPTM. El
+controlador se entrena para predecir acciones a partir de un conjunto de datos de trayectorias aleatorias, donde los objetivos vienen dados por
+estados visuales alcanzados.
+A.3 Entornos
+En nuestros experimentos, ajustamos los hiperparámetros de SGM para mantener la conectividad del grafo y alcanzar un
+nivel de dispersión deseado. Los umbrales son específicos del entorno debido a las distintas escalas de la distancia
+función. La tasa de éxito solo se evalúa después de seleccionar los parámetros.
+PointEnv: PointEnv es un entorno de laberinto introducido en [ 9], donde el espacio de observación es propri-
+oceptivo. Ejecutamos todos los experimentos de SoRB en este entorno. El retorno episódico no está descontado
+
+= 1, y la recompensa es una función indicadora: r= 0 si el agente alcanza su objetivo y r= 1
+en otro caso. La distancia a los objetivos puede así aproximarse como d=jQ(s;a)j. Aproximamos una
+función Q distribucional, que hace de crítico, con una red neuronal que primero procesa la
+observación con una capa totalmente conectada de 256 unidades, que luego combina esta observación procesada
+con la acción, y que después pasa la combinación observación-acción por otra capa de 256 unidades,
+totalmente conectada. Para el actor, usamos una red totalmente conectada con dos capas de 256 unidades
+cada una. En todo momento usamos activaciones ReLU y entrenamos con un optimizador Adam [ 23] con un tamaño de paso
+de0:0003 . Para evaluar distancias, usamos un conjunto de tres de dichas funciones Q distribucionales, y
+agregamos de forma pesimista sobre el conjunto. Para SGM, fijamos MAXDIST= 10 ,p= 0:05,
+a= 5,k= 5,MAXSTEPS = 30 , y ACTING CUTOFF = 1 para el umbral de localización. Para
+SoRB, fijamos M AXDIST= 6,k= 5 y M AXSTEPS = 18 debido a una mayor densidad de estados.
+ViZDoom: para nuestros experimentos de navegación visual en laberinto en ViZDoom, usamos el laberinto de entrenamiento grande
+entorno de [ 41]. Siguiendo [ 41], la métrica de distancia es un clasificador binario entrenado con una red siamesa
+red que usa una arquitectura ResNet-18. El codificador convolucional incrusta las observaciones de imagen
+en un vector latente de 512 dimensiones. Dos incrustaciones de imagen se concatenan y luego se pasan
+13
+Figura 8: Observaciones que superan los criterios perceptual (umbral de diferencia de características) y de consistencia bidireccional
+para SafetyGym usando un -V AE para las características perceptuales y una distancia contrastiva para la
+consistencia. Las observaciones bidireccionalmente consistentes son, como cabría esperar, más diversas en orientación
+que las cercanas en términos perceptuales. Aunque la mayoría de las observaciones bidireccionalmente consistentes son correctas
+es decir, cercanas en el espacio; hay un falso positivo (suelo azul).
+Tras el filtrado k-NN|V| = 2087, |E| = 9183Grafo dispersado sobre observaciones|V| = 2087, |E| = 22398Tras 114K pasos de limpieza|V| = 2087, |E| = 6922Secuencias de exploración originalesArriba: todos los 20,100 estados. Abajo: histograma
+Figura 9: Construcción de la memoria gráfica dispersa en el entorno ViZDoom. Añadimos nodos
+de un búfer de repetición de origen que cubre el entorno de forma irregular (izquierda), creando una memoria dispersa.
+El filtrado de aristas por k vecinos más cercanos limita el número de errores, que luego se corrigen mediante limpieza.
+La memoria de imágenes en SGM cubre el entorno de forma mucho más uniforme, aunque no se usa ninguna coordenada
+información durante la construcción del grafo.
+a través de una red densa de 4 capas con activaciones ReLU, 512 unidades ocultas y una entropía cruzada binaria
+objective where y= 1if the two embeddings are temporally close and y= 0en caso contrario. Un
+optimizador Adam [ 23] con un tamaño de paso de 0:0001 se usa en las actualizaciones de gradiente para ajustar la red preentrenada
+red de [41]. Para el controlador, usamos la red preentrenada de [41] sin ajuste fino.
+Para la creación del grafo, recogemos un búfer de repetición de 100 episodios de acciones aleatorias, cada uno compuesto
+de 200 pasos (es decir, 20,100 imágenes en total) y añadimos cada imagen de forma secuencial a SGM para simular un
+proceso de recogida de datos en línea. Para SPTM y para SPTM con SGM, fijamos MAXDIST= 2,k= 5,
+ACTING CUTOFF = 5:75, y MAXSTEPS = 10 . Para SGM, p= 20 ya= 2. Para que la
+línea base SPTM sea manejable, submuestreamos aleatoriamente el búfer de repetición a 2,087 estados (el mismo tamaño que
+nuestro conjunto de vértices dispersado), ya que la creación de aristas es O(jVj2)y la localización de los nodos de inicio/meta es O(jVj). El
+grafo de la línea base tiene 2;087nodes and 18;921edges. Aunque podemos evaluar la línea base con un grafo
+compuesto por los 20;100 estados, este es un oráculo denso que tiene 20;100nodos y 1;734;524 aristas y
+tarda horas en construirse. El oráculo alcanza tasas de éxito del 75%;55%;y 35% en metas de dificultad fácil, media y
+difícil ( 55:0%6:4%en total).
+Para aumentar la robustez de la creación de aristas frente al aliasing perceptual, agregamos la distancia sobre
+ventanas temporales en la secuencia de exploración aleatoria. Para los estados s(i)
+t en el episodio i y s(j)
+t0 en el episodio
+j, establecemos la distancia como la distancia máxima por pares entre los estados s(i)
+t 2;s(i)
+t 1;s(i)
+t;s(i)
+t+1;s(i)
+t+2 y
+14
+distancia de coordenadas L2 ∈ (100, ∞] (negativos)
+distancia de coordenadas L2 ∈ [0, 100] (positivos) VP FP
+Distancia de acción (temporal) Número de pares de observación
+Número de pares de observación Frecuencia de distancia de observación
+Observación del agente. Figura 10: Visualización de la métrica de distancia SPTM afinada en ViZDoom. El agente ve
+la imagen de referencia a la izquierda. La segunda imagen muestra la distancia de acción entre la referencia
+y los estados vistos previamente en todo el laberinto según d(sagente;). Una coordenada está
+coloreada de amarillo si el estado asociado está cerca de la referencia en distancia de acción, mientras que las coordenadas verdes y azules
+están lejos con respecto al estado de referencia. Agregar la distancia de forma pesimista
+a lo largo de ventanas temporales (tercera imagen) reduce los falsos positivos que están lejos en el espacio de coordenadas pero
+cerca en el espacio de distancia de acción. En la cuarta imagen, aplicamos un umbral a la distancia agregada según
+a. Aunque la mayoría de los estados que superan el umbral están cerca del agente, algunos están lejos. Estos son falsos
+positivos. En la figura de la derecha mostramos histogramas de la distancia de acción agregada para pares negativos
+de estados lejanos (arriba) y pares cercanos positivos (abajo), con un total de 404 M pares.
+estados s(j)
+t0 2;s(j)
+t0 1;s(j)
+t0;s(j)
+t0+1;s(j)
+t0+2, agregando sobre hasta 25 pares. En cambio, SPTM agregaba con
+la mediana y comparaba solo 5 pares. Nuestra agregación es más pesimista porque nuestro buffer de repetición se
+crea con exploración aleatoria que sufre de un extenso aliasing perceptual, en lugar de un
+demostrador humano que se queda sobre todo en el centro de los pasillos. La figura 9 muestra el proceso de construcción
+del grafo.
+SafetyGym: En el entorno SafetyGym empleamos un objetivo contrastivo para distinguir
+entre observaciones de la misma ventana de un recorrido y muestras aleatorias del búfer de
+repetición. El objetivo contrastivo es una entropía cruzada multiclase sobre logits definidos por un producto interno bilineal de la
+forma f(zt;zt0) =zT
+tWzt0, donde W es una matriz de parámetros, y las puntuaciones de distancia
+son probabilidades d= exp( f(zt;zt0)). Para embeber las observaciones, que son imágenes rgb de 6464,
+usamos una red convolucional de 3 capas con activaciones ReLU y una capa densa seguida de
+LayerNorm para aplanar la salida a una dimensión latente de 50 unidades. Luego entrenamos la matriz cuadrada W
+para optimizar la función de energía contrastiva. Como antes, usamos Adam [ 23] con un tamaño de paso de 0:0001
+para la optimización.
+El modelo generativo de máxima verosimilitud -V AE para características perceptuales tiene una arquitectura idéntica
+a la de la métrica de distancia pero sin la matriz cuadrada W. Cada imagen se transforma en un embedding,
+que se almacena en el nodo del grafo. Cuando se ve una nueva imagen, para aislar vecinos visualmente similares,
+calculamos la distancia L2 entre el embedding latente de la imagen y todos los demás
+nodos del grafo. Como calcular la distancia L2 es una operación vectorial simple, es mucho más
+computacionalmente eficiente que consultar la función de distancia, que requiere un pase hacia adelante por
+una red neuronal, O(jVj) veces en cada paso de tiempo.
+Las observaciones perceptualmente consistentes y bidireccionalmente consistentes respecto a la observación actual del agente
+se muestran en la Figura 8. Para construir grafos densos y dispersos usamos MAXSTEPS = 9,
+k= 6, p= 6, y a= 5.
+B Aliasing perceptual con distancia aprendida
+Un problema común al aprender distancias a partir de imágenes es el aliasing perceptual, que ocurre cuando dos
+imágenes son visualmente similares pero se recogieron lejos en el entorno. Examinamos un mapa de calor
+de distancias aprendidas en ViZDoom en la Figura 10. Aunque la mayoría de las observaciones con distancia pequeña están
+agrupadas correctamente alrededor de la posición del agente, hay varios grupos de falsos positivos
+por todo el mapa debido al aliasing perceptual entre partes del laberinto. El aliasing perceptual produce
+conexiones tipo agujero de gusano en todo el grafo, donde dos nodos distantes están conectados por una arista,
+lo que crea un atractor para la planificación de rutas. Mostramos un ejemplo de ruta planificada por un agente que está
+corrompida por el aliasing perceptual en la Figura 11. En su plan, el agente traza una conexión entre dos
+paredes visualmente idénticas pero distantes, lo que corrompe todo su plan para llegar a la meta.
+15
+Inicio Meta Paredes con aliasing perceptual
+Plan sin limpieza ni agregación pesimista de la distancia. Figura 11: Modo de fallo en la planificación en ViZDoom cuando no se usan la limpieza ni la agregación pesimista de la distancia
+se usan. Mientras que los puntos intermedios del plan entre los estados de inicio y meta están muy agrupados en gran parte del camino, el planificador explota
+el aliasing perceptual de las paredes del entorno como un atajo
+a través del entorno. La agregación pesimista de la métrica de distancia puede ayudar con el problema, pero
+no lo resuelve del todo. Al recorrer el entorno durante la limpieza, podemos
+eliminar las aristas no transitables restantes.
+Los falsos positivos pueden reducirse aún más agregando la distancia de forma pesimista a través de observaciones
+recogidas consecutivamente. Sin embargo, hacerlo no los elimina por completo. La presencia de
+falsos positivos refuerza aún más el argumento a favor de la dispersidad. Con dispersidad y limpieza es posible
+eliminar la mayoría de las aristas incorrectas para obtener planes robustos.
+C Replanificación con un grafo disperso
+La figura 12 muestra un ejemplo de un recorrido de evaluación, que incluye un paso de limpieza cuando el agente
+encuentra un punto de paso inalcanzable. El agente crea un plan inicial y se mueve a lo largo de los
+puntos de paso propuestos hasta que encuentra un obstáculo. Incapaz de atravesar la pared (representada por los bloques azules),
+el agente elimina la arista entre dos nodos a través de la pared y replanifica. Su segundo plan no tiene
+obstáculos y por eso puede alcanzar su meta.
+D Demostración de la cota de la brecha de costo de la consistencia bidireccional
+Teorema 1. Sea GB un grafo con todos los estados de un buffer de repetición B y pesos de una función de distancia
+d(;). Supongamos que GTWC es un grafo formado al agregar nodos de GB según la consistencia bidireccional
+con umbrales Cout y Cin. Para cualquier camino más corto PTWC en GTWC, considere el camino más corto
+correspondiente PB en GB que conecta los mismos nodos de inicio y meta. Supongamos que PB tiene k aristas. Entonces:
+(i) La longitud ponderada de PTWC menos la longitud ponderada de PB no es mayor que 2k.
+16
+Figura 12: Evaluación de SGM en SafetyGym. Esta figura es una abstracción desde arriba del entorno
+SafetyGym hecha para representar limpiamente el grafo disperso. El entorno real es más complejo
+visualmente y el agente ve imágenes en primera persona.
+(ii) Además, si d(;) tiene error como máximo , la longitud ponderada de PTWC está dentro de k+2k
+de la distancia ponderada real a lo largo de PB.
+Demostración. Antes de proceder con la demostración, establecemos una notación más formal sobre el enunciado
+del teorema.
+Denotamos el grafo del buffer de repetición GB= (VB;EB;WB). Agregar nodos según TWC
+lleva al subgrafo GTWC = (VTWC;ETWC;WTWC) donde todos los VBnVTWC satisfacen la consistencia bidireccional
+con umbral a con algún nodo en VTWC.
+Para cualquier nodo de inicio y meta s1;sk+12VTWC, considere el camino más corto que los conecta en
+GB: PB= (s1;s2;:::;sk+1). Supongamos que los pesos de las aristas de PB son (w1;w2;:::;wk), dados por
+la función de distancia según w1=d(s1;s2), etc.
+Demostración de (i): Mostraremos que existe un camino más corto correspondiente en GTWC dado por PTWC =
+(s1;s0
+2;:::;s0
+k;sk+1) con pesos de aristas (distancias) (w0
+1;w0
+2;:::;w0
+k), donde el peso total de P0
+es no mayor que 2ka el peso total de PB, es decir, P
+iw0
+i2ka+P
+iwi.
+Procedemos por construcción, primero especificando s0
+i para i2f2;3;:::;kg. Si si2VTWC, sea s0
+i = si.
+De lo contrario, sea s0
+i cualquier nodo de VTWC que satisfaga la consistencia bidireccional con si.
+Dada esta elección de PTWC, mostraremos para j arbitrario en f1;2;:::;kg que
+w0
+j = d(s0
+j;s0
+j+1) 2a + d(sj;sj+1) = 2a + wj.
+Por la consistencia bidireccional saliente entre sj y s0
+j (o porque sj = s0
+j), tenemos
+jd(sj;sj+1) d(s0
+j;sj+1) ja.
+De forma similar, por la consistencia bidireccional entrante entre sj+1 y s0
+j+1 (o porque sj+1 = s0
+j+1),
+jd(s0
+j;sj+1) d(s0
+j;s0
+j+1) ja.
+Por la desigualdad triangular, jd(sj;sj+1) d(s0
+j;s0
+j+1)j 2a, es decir, w0
+j wj + 2a. Finalmente, observamos
+que el resultado (i) se sigue al sumar la cota w0
+j 2a+wj sobre todos los índices j.
+17
+Demostración de (ii): Además, supongamos que los pesos de las aristas de PB dados por (w1;w2;:::;wk) tienen todos
+error como máximo . Es decir, si (w
+1;w
+2;:::;w
+k) denotan las distancias reales a lo largo del camino PB,
+supongamos jwi w
+ij para todo i2f1;2;:::;kg. Mostraremos que la longitud ponderada del camino más corto
+en el grafo agregado GTWC difiere de la longitud ponderada real del camino más corto en GB en a lo sumo
+k+ 2k, es decir, jP
+iw0
+i P
+iw
+ij k+ 2k.
+En la demostración de (i), mostramos P
+iw0
+i2ka+P
+iwi. Por el supuesto adicional de la parte (ii),
+tenemos wiw
+i+ para todo i2f1;2;:::;kg. Encadenando estas dos desigualdades obtenemos P
+iw0
+i
+k+ 2ka+P
+iw
+i.
+De forma similar, la demostración de (i) muestra jd(sj;sj+1) d(s0
+j;s0
+j+1)j2a para j arbitrario en f1;2;:::;kg.
+Por tanto, wjw0
+j+ 2. Reordenando y sumando esta cota se obtiene  2k+P
+jwjP
+jw0
+j.
+Además, como en la parte (ii) suponemos jwi w
+ij para todo i2f1;2;:::;kg, también tenemos w
+j wj.
+Sumando y encadenando desigualdades se obtiene  k 2k+P
+iw
+iP
+iw0
+i.
+En conjunto, los resultados de los dos párrafos anteriores dan lo deseado: jP
+iw0
+i P
+iw
+ij
+k+ 2k.
+E Velocidad de planificación de SGM
+La Tabla 4 muestra el tiempo necesario para ejecutar una sola acción, incluida la planificación sobre el grafo, en un grafo denso
+construido con SoRB y con un grafo disperso en el entorno PointEnv. La memoria gráfica dispersa
+acelera significativamente la selección de acciones.
+MÉTODO TIEMPO PARA EJECUTAR UNA ACCIÓN (S)
+SORB 0.550 0.220
+SGM (NUESTRO) 0.0770.004
+Tabla 4: Tiempo medio y desviación estándar de reloj para ejecutar una acción con SGM (nuestro
+método) y SoRB (el estado del arte previo) en PointEnv.
+F Lista de verificación de reproducibilidad
+Modelos y algoritmos: la Sección 5 y la Sección A describen nuestras arquitecturas de modelo, que siguen
+trabajos previos en los dos entornos de planificación estudiados anteriormente (PointEnv y ViZDoom). Nosotros
+analizamos la complejidad de la construcción del grafo con nuestra aproximación en línea en la Sección 4.2 y de
+la creación de aristas y la localización del agente en la Sección A.3.
+Afirmaciones teóricas: enunciamos y demostramos el Teorema 1, que (i) acota el incremento en el costo del plan
+al agregar estados mediante consistencia bidireccional y (ii) dada una cota de error existente sobre la
+función de distancia, acota el error adicional inducido por agregar estados mediante consistencia bidireccional. El
+teorema se enuncia de forma informal en el artículo principal y de forma precisa, con demostración, en la Sección D.
+Conjuntos de datos: los entornos y la recolección de experiencia se describen en la Sección A.
+Código: el código y la documentación se incluyen en el sitio del proyecto: https://mishalaskin.
+github.io/sgm/ .
+Resultados experimentales: describimos la configuración de nuestros experimentos en la Sección 5 y la Sección A,
+incluida la selección y especificación de hiperparámetros. Los tiempos de ejecución se describen, incluido en la Sección E.
+18

@@ -1,0 +1,682 @@
+Cita: Mottaghi, M.; Meyer, T.K.;
+Tieman, R.J.; Denkenberger, D.;
+Pearce, J.M. Rendimiento y análisis de toxinas
+del concentrado de proteína de hoja de
+árboles coníferos comunes de Norteamérica
+Biomass 2023 ,3,
+163–187. https://doi.org/10.3390/
+biomass3020011
+Editores académicos: Awadhesh
+Kumar Rai y Lasse Rosendahl
+Recibido: 13 de enero de 2023
+Revisado: 4 de abril de 2023
+Aceptado: 15 de mayo de 2023
+Publicado: 27 de mayo de 2023
+Derechos de autor: © 2023 de los autores.
+Licenciatario MDPI, Basilea, Suiza.
+Este artículo es de acceso abierto y se distribuye
+según los términos y
+condiciones de la licencia Creative Commons
+Atribución (CC BY) (https://
+creativecommons.org/licenses/by/
+4.0/).
+Artículo
+Rendimiento y análisis de toxinas del concentrado de proteína de hoja de
+árboles coníferos comunes de Norteamérica
+Maryam Mottaghi1, Theresa K. Meyer2
+, Ross John Tieman3, David Denkenberger3,4
+y Joshua M. Pearce5,*
+1Departamento de Ingeniería Mecánica y de Materiales, Western University, London, ON N6A 5B9, Canadá
+2Departamento de Ingeniería Civil y Ambiental, Michigan Technological University,
+Houghton, MI 49931, EE. UU.
+3Alliance to Feed the Earth in Disasters (ALLFED), Lafayette, CO 80026, EE. UU.
+4Departamento de Ingeniería Mecánica, Universidad de Canterbury,
+Christchurch 8041, Canterbury, Nueva Zelanda
+5Departamento de Ingeniería Eléctrica y de Computación e Ivey Business School, Western University,
+London, ON N6A 5B9, Canadá
+*Correspondencia: joshua.pearce@uwo.ca
+Resumen: En caso de una reducción abrupta de la luz solar, existe un periodo de tiempo que transcurre entre
+el momento en que las reservas de alimentos se agotarían en muchos países (~6 meses o menos) y ~1 año,
+cuando se escalan los alimentos resilientes. Un alimento temporal resiliente prometedor es el concentrado de proteína de hoja
+(LPC). Aunque es posible extraer LPC de la biomasa de árboles (p. ej., hojas y agujas), ni los
+rendimientos ni la toxicidad de los concentrados de proteína para humanos de las especies de árboles más comunes
+han sido ampliamente investigados. Para llenar este vacío de conocimiento, este estudio usa espectrometría de masas de alta resolución
+y una cadena de herramientas de código abierto para el cribado no dirigido de toxinas en cinco coníferas comunes de Norteamérica:
+cedro occidental, abeto de Douglas, pino ponderosa, tsuga occidental
+y pino contorta. Los rendimientos de extracción de LPC de las coníferas oscilaron entre 1% y 7.5%. Los
+análisis de toxicidad confirman que estos árboles pueden contener toxinas que pueden consumirse en pequeñas cantidades, y
+se necesitan estudios adicionales que midan la cantidad de cada toxina. Los resultados indican
+que el LPC es un candidato prometedor para usarse como alimento resiliente, pero se requiere trabajo futuro antes de que los LPC
+de coníferas puedan usarse como alimento humano a gran escala.
+Palabras clave: alimento alternativo; alimento resiliente; producción distribuida; plantas comestibles; riesgo existencial;
+seguridad alimentaria; riesgo catastrófico global; concentrado de hoja; proteína de hoja; cribado no dirigido; resiliencia;
+sistemas alimentarios sostenibles; toxinas
+1. Introducción
+En caso de un escenario natural de reducción abrupta de la luz solar (ASRS), como
+una erupción supervolcánica y el impacto de un asteroide o cometa [ 1], o una causa antropogénica, como
+un invierno nuclear a gran escala [ 2], las simulaciones numéricas indican una reducción prevista
+de las calorías de alimentos producidos por cultivos del 90% [ 3]. Si esto ocurre, es probable que haya
+hambruna generalizada si no se toman las medidas adecuadas [ 4]. Esto podría afectar
+negativamente la trayectoria a largo plazo de la humanidad [ 5]. Las respuestas planificadas de The Alliance to Feed the
+Earth in Disasters (ALLFED) y otros grupos incluyen un despliegue rápido de alimentos resilientes
+o alternativos, [ 6] como la proteína unicelular (SCP) que consume gas natural [ 7],
+la conversión de fibra (material vegetal que los humanos no pueden digerir) mediante métodos industriales
+como el azúcar celulósico [ 8], la producción de macroalgas, un proceso en dos pasos que implica una descomposición parcial
+por bacterias u hongos que se dan de comer a animales, y los invernaderos para ampliar las
+condiciones de cultivo potencialmente aceptables [ 9] podrían abordar de forma factible una gran parte de este
+déficit alimentario [ 10], lo que ofrece un medio rentable para salvar vidas [ 4]. Otros alimentos resilientes
+Biomass 2023 ,3, 163–187. https://doi.org/10.3390/biomass3020011 https://www.mdpi.com/journal/biomass
+Biomass 2023 ,3 164
+incluyen plantas silvestres comestibles [ 11], proteína unicelular de hidrógeno [ 12], vinagre producido por bacterias electro-
+activas [ 13], glicerina sintetizada químicamente [ 14], conejos [ 15] y cera de petróleo
+transformada en grasa comestible [16].
+Desafortunadamente, existe una ventana de tiempo difícil de superar entre
+el momento en que las reservas de alimentos probablemente se agotarían en muchos países (~6 meses o menos, según
+cuándo ocurrió el ASRS) y ~1 año, cuando los alimentos resilientes se escalan. En este
+intervalo de tiempo, el concentrado de proteína de hoja (LPC) se ha propuesto como solución [ 6]. La baja-
+tecnología de la producción de LPC y el potencial de grandes cantidades de biomasa de árboles
+disponible de inmediato según la época del año en que ocurrió el ASRS
+indica que el LPC podría proporcionar una fuente de calorías para cubrir déficits de corto plazo hasta que los
+sistemas alimentarios resilientes se desarrollen más. Las vitaminas del LPC serían una adición valiosa
+a una dieta de alimentos resilientes [ 17]. En resumen, el LPC de árboles complementaría los alimentos resilientes existentes
+para una respuesta ASRS, al proporcionar nutrientes críticos y acceso a una fuente de alimento de corto
+plazo durante un periodo de alta vulnerabilidad tras el inicio del ASRS. Además,
+como los métodos de baja tecnología pueden bastar, el LPC podría ser valioso en escenarios donde hay
+pérdida de electricidad o industria [ 18]. Aunque hay varias especies, el tipo predominante
+de árbol que tendría biomasa no leñosa durante todo el año fuera de los trópicos es
+las coníferas. Son las plantas dominantes en grandes extensiones de tierra en la taiga del norte
+hemisferio, pero también en climas fríos similares de montañas más al sur. Las coníferas boreales
+se han adaptado para sobrevivir el invierno desprendiendo la nieve gracias a su forma y a los ángulos de sus ramas
+. También alteran su bioquímica para resistir mejor la congelación. Los
+inmensos bosques de coníferas del mundo representan el mayor sumidero de carbono terrestre y, por tanto,
+la mayor fuente potencial de LPC.
+Aunque es posible extraer el concentrado de proteína de hoja (LPC) de la biomasa de árboles
+(p. ej., hojas y agujas), ni los rendimientos ni la toxicidad de los concentrados de proteína para
+humanos de las especies de árboles más comunes han sido ampliamente investigados. Para llenar este
+vacío de conocimiento, el objetivo de este estudio es usar espectrometría de masas de alta resolución y una
+cadena de herramientas de código abierto para el cribado no dirigido de toxinas de cinco coníferas comunes de Norteamérica
+incluidas: (1) cedro occidental (WC), (2) abeto de Douglas (DF), (3) pino ponderosa (PP),
+(4) tsuga occidental (WHL) y (5) pino contorta (LPP). Los rendimientos de extracción de LPC
+de las coníferas se cuantifican, y los LPC se someten a cribado de toxinas. Este análisis es
+novedoso y es la primera investigación original y exhaustiva de la toxicidad del LPC de coníferas. El
+objetivo de este trabajo es sentar la base técnica para tratar los LPC de coníferas como alimentos resilientes
+. Los resultados se presentan y discuten en términos del potencial de las coníferas
+para proporcionar alimento resiliente en un desastre y en tiempos normales para reducir el hambre y la
+inanición. Se describe el trabajo futuro necesario antes de que los LPC de coníferas puedan
+usarse como alimento humano.
+2. Materiales y métodos
+2.1. Materiales
+Las materias primas se adquirieron de los cinco árboles coníferos comunes de Norteamérica [ 19]:
+(1) El cedro occidental (WC) es un árbol nativo de Norteamérica [ 10]. Este árbol está muy extendido
+desde el norte de California hasta el sudeste de Alaska, y desde el río McGregor hasta el oeste de
+Montana y el norte de Idaho [ 20]. El cedro occidental representó unos 750 millones de metros cúbicos
+de existencias en Columbia Británica, se plantaron 5 millones de plántulas y se cosechó 1 por ciento de
+las existencias anualmente en 2003 [21].
+(2) El abeto de Douglas (DF) es un árbol nativo de las regiones templadas del oeste de Norteamérica y
+no es nativo, pero está muy plantado en Europa [ 22,23]. Este árbol cubría el 2–3% de los bosques
+de varios países europeos en 2008 [24] y se encuentra en Columbia Británica [25].
+(3) El pino ponderosa (PP) crece en las zonas más secas y cálidas y es alimento para una
+amplia variedad de animales que consumen sus semillas [ 26]. Es uno de los pinos nativos
+más extendidos de Norteamérica [27].
+(4) La tsuga occidental (WH) es un gran árbol perennifolio nativo de Norteamérica que se dis-
+tribuye en selvas lluviosas templadas [ 28]. Este árbol es comercialmente famoso por su
+Biomass 2023 ,3 165
+calidad como madera. Se usa para construcción y pulpa, y representó el 34% del volumen de
+cosecha de troncos en 2015 [20].
+(5) El pino contorta (LPP) es uno de los árboles nativos de Norteamérica [ 29]. Unos
+75 millones de árboles contorta se plantaron en Columbia Británica en 2002 [ 30]. Los pueblos
+originarios solían consumir la corteza dulce y suculenta, fresca o almacenada. Además, la resina
+se usó en muchos medicamentos en el pasado [31].
+2.2. Procesamiento del material
+Se siguió el siguiente procedimiento para las cinco especies de coníferas. Las agujas se
+cortaron en trozos más cortos y se trituraron en un procesador de alimentos con agua a
+temperatura ambiente durante 3 min (pino contorta, pino ponderosa, cedro rojo occidental, prueba 1, tsuga
+occidental) o se pasaron por una picadora de carne (abeto de Douglas, cedro rojo occidental, prueba 2).
+Se conservaron el residuo procesado, el líquido y el agua de enjuague. El líquido de las
+muestras procesadas se separó de la mezcla pasándolo por una bolsa de poliéster tejido para
+obtener un líquido verde. El líquido se hirvió durante 3 min hasta que se formó una cuajada en la superficie.
+La mayor parte de la proteína de hoja coagulada se recogió con una cuchara. Cantidades menores de
+LPC permanecieron en suspensión y se dejaron sedimentar durante 30–60 min antes de decantar el líquido.
+El LPC sedimentado se combinó con el LPC desnatado y se secó usando un deshidratador Crawford
+Kitchen-Professional (se podrían usar otros métodos de secado, como un horno convencional, un deshidratador de alimentos
+o una secadora de vacío de código abierto [ 32]). La cuajada se
+desnató y se colocó en un deshidratador a 66C (152F) durante 16 h para obtener un sólido verde.
+La siguiente ecuación se usó para calcular el rendimiento (Y):
+Y = M c/M l (1)
+En esta ecuación, M c es la masa del concentrado seco (g), y M l es la masa de las
+hojas secas (g).
+2.3. Instrumentación LC/MS
+Se usó un espectrómetro de masas de trampa de iones híbrido orbitrap de ultra alta resolución (MS)
+(Thermo Scientific Orbitrap Elite equipado con ionización por electrospray (ESI)) acoplado a
+un sistema cromatográfico líquido bidimensional de ultra alta presión (HPLC) (sistema estándar Thermo
+Scientific Dionex Ultimate 3000) se usó para el enfoque de
+cribado no dirigido de toxinas.
+El HPLC se calibró con solución de calibración Thermo Pierce, seguida de dilu -
+ción del LPC en agua:acetonitrilo 80:20 (v:v) y filtración con un filtro de cuarzo de 0.2 m para
+análisis LC/MS. La columna analítica fue Phenomenex reversed-phase Kinetex XB-C18,
+“1502.1” mm, 100 Å, con tamaño de partícula de 1.7 m [33].
+La fase móvil A y la fase móvil B fueron ácido fórmico al 0.1% en agua LC/MS de grado 100%,
+y ácido fórmico al 0.1% en acetonitrilo–agua 95:5 (v:v) de grado LC/MS, respectivamente.
+El caudal fue constante, igual a 0.2 mL/min, y el gradiente de fase móvil fue 0 min;
+5%B, 5 min; 5%B, 65 min; 90%B, 70 min; 90%B. La fase móvil A se usó para calibrar la
+columna durante 15 min. La temperatura del horno de la columna fue de 35C y el volumen
+de inyección en bucle completo fue de 5 L. La potencia de resolución se fijó en 120 K a relación masa-carga (m/z) 400.
+Se usaron los modos de ionización por electrospray positivo y negativo (ESI+ y ESI  ) para dos
+ejecuciones LC/MS separadas de las muestras. Se usó el modo de barrido completo para registrar las masas
+en rangos de m/z de 100–600. Además, para identificar compuestos co-eluyentes, también se registró la fragmentación MS/MS dependiente de datos para
+los 5 picos más altos de cada barrido espectral con una energía de colisión
+de 25 (unidad arbitraria).
+2.4. Análisis de datos
+Se usó una cadena de herramientas de software de código abierto para analizar las muestras. El software
+incluyó análisis de espectrometría de masas con MZmine 2, asignación de fórmulas con MFAssignR,
+y filtrado de datos con ToxAssign, descrito previamente en detalle en [ 34].
+Biomass 2023 ,3 166
+ToxAssign funcionaba comparando la base de datos existente de OpenFoodTox Chemical
+Hazards de la Autoridad Europea de Seguridad Alimentaria [35].
+Con base en la toxicidad de los componentes tóxicos, la EPA de EE. UU. define cuatro clases.
+Estas clases incluyen LD50 oral y dérmica (dosis letal para el 50% de los animales de prueba), LC50 por
+inhalación (concentración letal en el aire para el 50% de los animales de prueba), y el nivel de irritación de ojos o piel
+tras el contacto [ 36]. En el Apéndice B se muestra la clase de características para pesticidas y otros agentes.
+Los agentes de la categoría I son muy tóxicos y dañinos por exposición [ 36]. Los de la
+categoría II son moderadamente tóxicos y dañinos en caso de consumo o absorción por el
+cuerpo [ 36]. Los de la categoría III son ligeramente tóxicos y podrían ser dañinos si se exponen a una gran
+cantidad. Además, las sustancias de la categoría IV tienen toxicidad muy baja y no son dañinas
+si no se consumen en grandes cantidades [ 36]. Como las categorías I y II son más peligrosas y
+tóxicas, el enfoque de este estudio se centra en estas categorías.
+Las pruebas de toxicidad se ejecutaron dos veces para las cinco muestras de árboles. Además, para el cedro
+occidental se probaron tanto el LPC como el líquido viscoso. Por último, para empezar a evaluar la
+repetibilidad de la extracción de LPC, se repitió para las muestras de pino ponderosa. Los espectros de masas
+diferentes de la muestra (que se muestran en el Apéndice A) resultaron generalmente de pequeños cambios
+en los parámetros de sensibilidad. Suponiendo que los picos distintos (los que tienen valores listados) son los
+mismos entre muestras, se puede tener alta confianza en el análisis inicial de espectrometría de masas.
+3. Resultados
+Los resultados de cada uno de los cinco árboles, tanto del rendimiento como del análisis tóxico, se detallan a con-
+tinuación. Los cromatogramas de iones totales están disponibles en el Apéndice A para todos los LPC analizados en
+las Figuras A1–A22 para ionización positiva y negativa. También hay dos ejecuciones
+de pruebas para cada árbol. El análisis de cada árbol y las diferencias de cada ejecución se explican en
+secciones separadas a continuación.
+3.1. Cedro occidental
+Los parámetros considerados para el cedro se muestran en la Tabla 1. El rendimiento seco es de 2.07% de la
+masa seca original.
+Tabla 1. Rendimiento y datos de preparación de muestra para WC #1.
+Muestra WC #1
+Peso húmedo de la hoja (g de biomasa húmeda) 50.01
+Peso del papel de secado del LPC (g) 2.33
+Peso del papel de secado de la masa de fibra (g) 1.79
+Tiempo de secado (horas) 16
+Tiempo de calentamiento (minutos) 3.0
+Tiempo de licuado (minutos) 3.0
+Papel + masa de fibra (g secos) 23.59
+Masa de fibra (g secos) 21.8
+Rendimiento de masa de fibra (% masa seca de fibra respecto al peso seco de hoja) 81.89%
+Papel + LPC (g secos) 2.88
+LPC (g secos) 0.55
+Rendimiento de LPC % (LPC seco respecto al peso seco de hoja) 2.07%
+La primera ejecución se realizó con una licuadora tipo procesador de alimentos. Al separar
+el líquido de la masa de fibra, el líquido obtenido parecía más viscoso, con una consistencia ligeramente
+gelatinosa/almibarada. Al hervir, la capacidad de la proteína para coagular en una
+capa se redujo significativamente, rindiendo poco o nada de LPC. Los intentos de aislar la proteína
+mediante enfriamiento y reposo para inducir la sedimentación también fueron ineficaces, con
+un mínimo de proteína aislada. Para la segunda ejecución se usó un procesador tipo picadora de carne. La
+segunda ejecución tampoco mostró coagulación de la proteína de hoja. Una combinación de una gran parte
+parcialmente sedimentada de proteína y líquido se secó hasta obtener un sólido cristalino. Este
+sólido cristalino probablemente contenía proteína, sólidos solubles en agua y compuestos que
+modifican la reología.
+Biomass 2023 ,3 167
+El cedro arrojó múltiples toxinas de las clases 1 y 2 que se ven en la Tabla 2 para la primera
+ejecución y la segunda ejecución.
+Tabla 2. Resultados del cribado de compuestos tóxicos para las muestras WC #1.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+WC #1Clase tóxica 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (  ) X X
+HT-2 toxin (  ) X X
+T-2 Toxin tetraol (  ) X -
+Clase tóxica 2 Deoxynivalenol 3-glucoside (  ) X X
+Alternariol monomethyl ether encontrado en los resultados es una micotoxina que se sabe que es
+mutagénica y genotóxica, pero no es muy tóxica de forma aguda [ 37]. Las micotoxinas pueden causar una gama
+de síntomas según la dosis, la exposición y otras condiciones [ 38]. El 4-Vinylphenol es un
+producto natural derivado del hidruro de un estireno [ 39] y tiene una potente citotoxicidad [ 40].
+Este compuesto se encuentra en el vino y por ello se supone que no es dañino para
+los humanos cuando se consume en pequeñas cantidades [ 41], pero debe cuantificarse. Además, el T-2
+Toxin tetraol y el HT-2 son micotoxinas y subproductos de hongos que existen de forma natural
+en el suelo y en las plantas. La concentración de la toxina HT-2 es dos tercios de la suma de la concentración de la toxina T-2
+tetraol y de la toxina HT-2 [ 42]. Estos dos compuestos son potencialmente dañinos para
+los humanos si se consumen por vía oral, se inhalan o se exponen por vía dérmica [ 42]. Sin embargo,
+existen inevitablemente en alimentos humanos, incluidos el trigo, el centeno y los cereales, y el contenido permitido
+de estas toxinas en alimentos humanos está determinado en algunos países [ 43]. En este
+sentido, el nivel de exposición diaria, E, a las toxinas T-2 y HT-2 se calcula como se muestra en la
+ecuación (2) [43]:
+E(kg/bw/day ) =cd
+w(2)
+donde c es la concentración de toxina en las muestras (g/kg), d es el consumo diario de la
+muestra (g/día/persona), y w es la masa corporal media de la persona (kg/persona).
+Deoxynivalenol 3-glucoside, una toxina de la clase 2, es una micotoxina enmascarada que tiene una
+toxicidad drásticamente reducida en los intestinos [44,45].
+Cedro occidental y líquido viscoso (WC #2 LPC (+))
+Los parámetros usados para el cedro occidental y el líquido viscoso se muestran en la Tabla 3.
+Como se puede ver al comparar las Tablas 3 y 4, hay muchos más compuestos tóxicos
+en el líquido viscoso que en el LPC.
+3.2. Abeto de Douglas (DF)
+Los parámetros del LPC del abeto de Douglas se pueden ver en la Tabla 4. El rendimiento del LPC es de 1.06%.
+Los compuestos tóxicos se muestran en la Tabla 5.
+Excepto la toxina HT-2 y el Deoxynivalenol 3-glucoside, el abeto de Douglas tiene las mismas
+toxinas que el cedro occidental, junto con 15-Acetyldeoxynivalenol y Dimethyl dicarbonate.
+15-Acetyldeoxynivalenol es una micotoxina relacionada con el deoxynivalenol y con toxicidad aguda [ 46]
+Dimethyl dicarbonate es un compuesto tóxico agudo, un compuesto organooxigenado. Este
+compuesto se usa para esterilizar refrescos y vinos [47].
+Biomass 2023 ,3 168
+Tabla 3. Resultados del cribado de compuestos tóxicos para las muestras WC #2.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+WC #2 LPC (+)Clase tóxica 14-Vinylphenol (+,  ) X X
+Alternariol monomethyl ether (+,  ) X X
+Aflatoxin M1 (  ) X X
+HT-2 toxin (+) X X
+T-2 Toxin tetraol (  ) X -
+Altenuene (+) X -
+Neosolaniol (+) - X
+Clase tóxica 2Deoxynivalenol 3-glucoside (+,  ) X X
+Aflatoxin G1 (  ) X X
+15-Acetyldeoxynivalenol (  ) X X
+Glutaraldehído (+) X X
+Carbofurano (+) X X
+2-Acetylfuran (+) X -
+Anguidine (  ) - X
+Nivalenol (+) - X
+Tabla 4. Datos de rendimiento y preparación de muestra para DF.
+Muestra DF
+Peso húmedo de la hoja (g de biomasa húmeda) 50.2
+Peso del papel de secado del LPC (g) 1.27
+Peso del papel de secado de la masa de fibra (g) 1.55
+Tiempo de secado (horas) 16
+Tiempo de calentamiento (minutos) 3.0
+Tiempo de licuado (minutos) 3.0
+Papel + masa de fibra (g secos) 19.6
+Masa de fibra (g secos) 18.05
+Rendimiento de masa de fibra (% masa seca de fibra respecto a la hoja seca
+peso)61.65%
+Papel + LPC (g secos) 1.58
+LPC (g secos) 0.31
+Rendimiento de LPC % (LPC seco respecto al peso seco de hoja) 1.06%
+Tabla 5. Resultados del cribado de compuestos tóxicos para las muestras DF.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+DFClase tóxica
+1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (+,  ) X X
+Clase tóxica
+2T-2 Toxin tetraol (  ) - X
+15-Acetyldeoxynivalenol (  ) X X
+Dimethyl dicarbonate (  ) X -
+3.3. Pino ponderosa (PP)
+Los parámetros del LPC del pino ponderosa se muestran en la Tabla 6 y el promedio del rendimiento de LPC
+se calcula en 3.05%. El rendimiento de LPC muestra una gran variación en los valores,
+lo que indica que el trabajo futuro debería considerar un gran número de experimentos en diversas
+condiciones y conjuntos de herramientas para obtener una estimación confiable del rendimiento promedio de LPC que
+podría esperarse a nivel mundial durante un desastre.
+Biomass 2023 ,3 169
+Tabla 6. Datos de rendimiento y preparación de muestra para PP .
+Muestra #1 #2 Promedio
+Peso húmedo de la hoja (g de biomasa húmeda) 50 50 50
+Peso del papel de secado del LPC (g) 2.1 1.9 2.0
+Peso del papel de secado de la masa de fibra (g) 2.12 2.60 2.36
+Tiempo de secado (horas) 14 14 14
+Tiempo de calentamiento (minutos) 3.0 3.0 3.0
+Tiempo de licuado (minutos) 3.0 3.0 3.0
+Masa de fibra (g secos) 20.58 20.58 20.58
+Rendimiento de masa de fibra (% masa seca de fibra respecto a la
+hoja seca)78.12% 78.12% 78.12%
+Papel + LPC (g secos) 3.01 2.59 2.85
+LPC (g secos) 0.91 0.7 0.80
+Rendimiento de LPC % (LPC seco respecto al peso seco de hoja) 3.45% 2.66% 3.05%
+El pino ponderosa arrojó múltiples compuestos tóxicos de las clases 1 y 2, que se muestran en la
+Tabla 7.
+Tabla 7. Resultados del cribado de compuestos tóxicos para las muestras PP.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+PPClase tóxica 14-Vinylphenol (+,  ) X -
+Alternariol monomethyl ether (  ) X X
+Altenuene (  ) - X
+Clase tóxica 2T-2 Toxin tetraol (+) - X
+Deoxynivalenol 3-glucoside (  ) X X
+Dimethyl dicarbonate (  ) - X
+Excepto la toxina T-2 tetraol, el pino ponderosa presenta las mismas toxinas que el cedro
+occidental, junto con Altenuene y Dimethyl dicarbonate. Altenuene, un metabolito
+de alternariol, es una micotoxina y no es muy tóxica de forma aguda [37].
+3.4. Tsuga occidental (WHL)
+Los parámetros del LPC para las muestras de tsuga occidental se muestran en la Tabla 8. El LPC
+rendimiento fue de 7.29%.
+Tabla 8. Datos de rendimiento y preparación de muestra para WHL.
+Muestra WHL
+Peso húmedo de la hoja (g de biomasa húmeda) 42.7
+Peso del papel de secado del LPC (g) 0.97
+Peso del papel de secado de la masa de fibra (g) 2.52
+Tiempo de secado (horas) 16
+Tiempo de calentamiento (minutos) 3.0
+Tiempo de licuado (minutos) 3.0
+Papel + masa de fibra (g secos) 18.4
+Masa de fibra (g secos) 15.88
+Rendimiento de masa de fibra (% masa seca de fibra respecto al peso seco de hoja) 74.71%
+Papel + LPC (g secos) 2.52
+LPC (g secos) 1.55
+Rendimiento de LPC % (LPC seco respecto al peso seco de hoja) 7.29%
+La Tabla 9 representa los compuestos tóxicos en la tsuga occidental.
+Biomass 2023 ,3 170
+Tabla 9. Resultados del cribado de compuestos tóxicos para las muestras PP.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+Tsuga
+occidentalClase tóxica 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (+,  ) X X
+Clase tóxica 2Carbofuran (+) X
+Aflatoxin B2 (  ) - X
+Deoxynivalenol 3-glucoside (  ) - X
+Dimethyl dicarbonate (  ) - X
+Excepto la toxina T-2 y el Altenuene, la tsuga occidental tiene la misma toxina que el pino ponderosa, junto con Carbofuran y
+Aflatoxin B2. Todas las aflatoxinas son micotoxinas. Una
+de las aflatoxinas más comunes, Aflatoxin B2, se considera mucho menos tóxica que la
+Aflatoxin B1 [ 48]. En general, las aflatoxinas solo son peligrosas para las personas que están expuestas a
+este compuesto de forma continua, incluidos los trabajadores agrícolas [ 49]. El Carbofuran es un
+pesticida común y uno de los pesticidas más tóxicos de su clase. Es “bastante persistente en el suelo y en
+los ecosistemas acuáticos” [50].
+3.5. Pino contorta (LPP)
+Los parámetros usados para el pino contorta se muestran en la Tabla 10, con un rendimiento de LPC de
+2.55%.
+Tabla 10. Datos de rendimiento y preparación de muestra para LPP .
+Muestra LPP
+Peso húmedo de la hoja (g de biomasa húmeda) 50.27
+Peso del papel de secado del LPC (g) 1.26
+Peso del papel de secado de la masa de fibra (g) 2.07
+Tiempo de secado (horas) 16
+Tiempo de calentamiento (minutos) 3.0
+Tiempo de licuado (minutos) 3.0
+Papel + masa de fibra (g secos) 22.1
+Masa de fibra (g secos) 20.03
+Rendimiento de masa de fibra (% masa seca de fibra respecto al peso seco de hoja) 23%
+Papel + LPC (g secos) 2
+LPC (g secos) 0.74
+Rendimiento de LPC % (LPC seco respecto al peso seco de hoja) 2.55%
+Los resultados de compuestos tóxicos para el pino contorta se muestran en la Tabla 11.
+Tabla 11. Resultados del cribado de compuestos tóxicos para las muestras LPP.
+Material Clase Toxina (en ESI+ o ESI  ) Ejecución 1 Ejecución 2
+LPPClase tóxica 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (  ) X X
+Aflatoxin M1 (  ) - X
+Clase tóxica 2Dimethyl dicarbonate (  ) X X
+Deoxynivalenol 3-glucoside (+) X X
+Aflatoxin G1 (  ) - X
+2-Acetylfuran (+) X -
+Biomass 2023 ,3 171
+Excepto el Altenuene y la toxina T-2 que se encuentran en el pino ponderosa, se encuentran las mismas toxinas
+en el pino contorta, junto con Aflatoxin M1, Aflatoxin G1 y 2-Acetylfuran. Aflatoxin
+G1, que es una de las aflatoxinas más comunes, se considera mucho menos tóxica que la
+Aflatoxin B1. Además, Aflatoxin M1, que es un metabolito común, es incluso menos tóxica que
+Aflatoxin G1 [ 48]. El 2-Acetylfuran, que aparece en la segunda ejecución y es de clase tóxica 2,
+es tóxico si se consume [51].
+4. Discusión
+Todos los rendimientos de los LPC se resumen en la Tabla 12, donde los valores oscilan entre
+1% y 7%. Estos son algo bajos en comparación con el LPC de residuos agrícolas y otros
+LPC. En un estudio de LPC de residuos agrícolas, los valores de rendimiento oscilaron entre 7 y 14.5% [ 52].
+Estudios adicionales de diversos productos agrícolas y otra vegetación común tropical, subtropical
+y templada mostraron valores de rendimiento de entre 2% y 9% [53]. En general, las agujas
+(de abeto, pino ponderosa y pino lodgepole) fueron extremadamente difíciles de triturar con un procesador de alimentos, debido
+a la longitud y la forma cilíndrica de las agujas, así como a la extrema dureza y
+fibrosidad de sus fibras. Esto a menudo hacía que las agujas rebotaran en las cuchillas del procesador,
+lo que las volvía imposibles de procesar con el molino de carne. El cedro fue comparativamente fácil
+de triturar, pero tiene algunos compuestos con propiedades modificadoras de la reología, porque
+formaron una textura jabonosa y gelatinosa que era difícil de separar. La consistencia del
+líquido terminó dificultando el aislamiento de la proteína, que parecía estar suspendida
+en forma de trozos coagulados muy pequeños en el líquido. Las hojas pequeñas de la cicuta se parecían mucho más
+a las hojas de “cultivo” en cuanto a dureza y textura, aunque había que desprenderlas de
+ramas pequeñas, lo que requería mucho tiempo.
+Tabla 12. Resumen de los rendimientos de residuos y rendimientos promedio.
+Árbol Rendimiento % (LPC seco/peso seco de hojas)
+Cedro rojo occidental 2.07
+Abeto de Douglas 1.06
+Pino ponderosa 3.05 (2.66–3.45)
+Cicuta occidental 7.29
+Pino lodgepole 2.55
+El cedro rojo occidental contiene varias toxinas. Muchas de estas sustancias químicas no se consideran
+agudamente tóxicas si se consumen en concentraciones bajas. Sin embargo, la toxina HT-2 junto con el tetraol de la toxina T-2
+son de mayor preocupación y podrían ser nocivas para el consumo humano. Cabe
+señalar que se encuentran en muchos alimentos que ya se utilizan. Por lo tanto, la
+dosis de estas sustancias químicas debe considerarse, y el LPC solo podría consumirse si la
+dosis no supera la que puede calcularse con la ecuación (1) [43]. De igual modo, las toxinas
+del abeto de Douglas y del pino ponderosa son en su mayoría micotoxinas, que ya pueden encontrarse en
+muchos alimentos, y pueden consumirse si su dosis es inferior a ciertos niveles específicos. Las agujas de pino y de otras coníferas
+ya se comen con regularidad [53] en varias recetas, en té de agujas de pino,
+que es rico en vitamina C, y están disponibles comercialmente [54]. La mayoría de las
+sustancias encontradas en la cicuta occidental y el pino lodgepole no impiden el uso de estos
+árboles como candidatos para alimento. Sin embargo, sí contienen aflatoxinas. La cantidad de esta toxina
+debe medirse, ya que grandes cantidades pueden ser peligrosas, pero, de nuevo, cabe señalar que
+las dosis pequeñas no son nocivas y ya existen en muchos cereales y granos.
+Sin embargo, estos árboles podrían requerir una descontaminación significativa antes del consumo humano
+si contienen altas concentraciones de aflatoxinas [35]. Como muestran los resultados, se encontraron posibles toxinas
+en todas las hojas. Se trata solo de posibles toxinas y es necesario realizar trabajo futuro
+para cuantificarlas y determinar si el consumo de grandes cantidades de LPC de coníferas representa
+un peligro. Esto puede hacerse pasando las posibles toxinas identificadas por el mismo
+sistema con estándares de calibración y repitiendo las mediciones. Además, pueden realizarse estudios
+en animales con los LPC consumidos en grandes volúmenes para ayudar a garantizar la ausencia de toxicidad y obtener
+la aprobación de la FDA. Como algunas de estas especies ya están disponibles comercialmente como alimento (p. ej.,
+Biomass 2023 ,3 172
+té de agujas de pino) [55], ya puede trabajarse para determinar la posible rentabilidad
+de usar LPC de coníferas como alimento resiliente y compararla con otros enfoques [56–58].
+5. Conclusiones
+Se investiga el rendimiento promedio, que va de 1% a 7%, de cinco LPC de coníferas.
+Aunque este rango es menor que el hallado en otros análisis de LPC (p. ej., residuos agrícolas),
+el LPC de coníferas ofrece una opción viable de proteína en zonas boscosas en caso de escasez extrema
+de alimentos. Además, este estudio aportó la primera espectrometría de masas original de alta resolución
+de muestras de LPC de coníferas y las procesó con una cadena de herramientas de código abierto
+para el cribado no dirigido de cinco residuos de árboles. Los resultados confirman que estos árboles pueden
+contener toxinas que pueden consumirse en pequeñas cantidades, y se requieren estudios adicionales que incluyan
+la medición de la cantidad de cada toxina y la determinación de las condiciones que permiten que estas
+toxinas se desarrollen (p. ej., ¿algunas de ellas fueron causadas por el entorno en el que
+se las encontró?). En general, se cumplieron los objetivos de este estudio y se demostró que el LPC
+es un candidato prometedor para usarse como alimento resiliente; sin embargo, este campo requiere un
+rango más amplio de estudios para evaluar el LPC según las diferentes condiciones en que se
+cosechan, manejan y almacenan.
+Contribuciones de los autores: Conceptualización, D.D. y J.M.P.; metodología, R.J.T., T.K.M.; software,
+T.K.M.; validación, M.M., T.K.M. y J.M.P.; análisis formal, M.M., T.K.M. y J.M.P.; investigación,
+M.M., T.K.M. y R.J.T.; recursos, D.D. y J.M.P.; curación de datos, M.M., T.K.M. y R.J.T.; redacción:
+preparación del borrador original, M.M. y J.M.P.; redacción: revisión y edición, M.M., T.K.M., R.J.T., D.D.
+y J.M.P.; visualización, T.K.M.; supervisión, D.D. y J.M.P.; obtención de financiamiento, D.D. y J.M.P.
+Todos los autores han leído y aceptado la versión publicada del manuscrito.
+Financiamiento: Este proyecto contó con el apoyo de la Thompson Endowment, el Natural Sciences and
+Engineering Research Council of Canada, ALLFED y el Future Fund Regranting Program.
+Declaración de la Junta de Revisión Institucional: No aplica.
+Declaración de consentimiento informado: No aplica.
+Declaración de disponibilidad de datos: Todos los datos del proyecto están disponibles previa solicitud.
+Agradecimientos: Los autores desean agradecer a Simeon K. Shum y Sam Breuer por su apoyo
+técnico.
+Conflictos de intereses: Los autores declaran no tener conflictos de intereses.
+Apéndice A
+Se muestran los cromatogramas de iones totales de todas las agujas analizadas en las figuras A1–A24, tanto
+para la ionización positiva como para la negativa.
+Biomass 2023 ,3 173
+Biomass  2023 , 3 173 
+ 
+Apéndice A  
+Se muestran los cromatogramas de iones totales de todas las agujas analizadas en las figuras A1 –A24, tanto 
+para la ionización positiva como para la negativa.  
+ 
+Figura A 1. Primera corrida WC #1 negativo . 
+ 
+Figura A2. Segunda corrida WC #1 negativo . 
+Figura A1. Primera corrida WC #1 negativo.
+Figura A2. Segunda corrida WC #1 negativo.
+Biomass 2023 ,3 174
+Figura A3. Primera corrida WC #2 LPC(+) negativo.
+Figura A4. Segunda corrida WC #2 LPC (+) negativo.
+Biomass 2023 ,3 175
+Figura A5. Primera corrida DF negativo.
+Figura A6. Segunda corrida DF negativo.
+Biomass 2023 ,3 176
+Figura A7. Primera corrida PP negativo.
+Figura A8. Segunda corrida DP negativo.
+Biomass 2023 ,3 177
+Figura A9. Primera corrida WHL negativo.
+Figura A10. Segunda corrida WHL negativo.
+Biomass 2023 ,3 178
+Figura A11. Primera corrida LPP negativo.
+Figura A12. Segunda corrida LPP negativo.
+Biomass 2023 ,3 179
+Figura A13. Primera corrida WC #1 positivo.
+Figura A14. Segunda corrida WC #1 positivo.
+Biomass 2023 ,3 180
+Figura A15. Primera corrida DF positivo.
+Figura A16. Segunda corrida DF positivo.
+Biomass 2023 ,3 181
+Figura A17. Primera corrida PP positivo.
+Figura A18. Segunda corrida PP positivo.
+Biomass 2023 ,3 182
+Figura A19. Primera corrida WHL positivo.
+Figura A20. Segunda corrida WHL positivo.
+Biomass 2023 ,3 183
+Figura A21. Primera corrida LPP positivo.
+Figura A22. Segunda corrida LPP positivo.
+Biomass 2023 ,3 184
+Figura A23. Primera corrida WC #2 LPC (+) positivo.
+Figura A24. Segunda corrida WC #2 LPC (+) positivo.
+Biomass 2023 ,3 185
+Apéndice B
+Tabla A1. Categorías de toxicidad aguda de los productos plaguicidas [36].
+Indicadores de peligro I II III IV
+DL50 oral Hasta e incluyendo
+50 mg/kg>50 hasta 500 mg/kg >500 hasta 5000 mg/kg >5000 mg/kg
+DL50 dérmica Hasta e incluyendo
+200 mg/kg>200 hasta 2000 mg/kg>2000
+hasta 20,000 mg/kg>20,000 mg/kg
+CL50 por inhalación Hasta e incluyendo
+0.2 mg/L>0.2 hasta 2 mg/L >2 hasta 20 mg/L >20 mg/L
+Irritación ocular Corrosivo; opacidad
+corneal no reversible
+en 7 días Opacidad corneal
+reversible en
+7 días; irritación
+que persiste durante 7 días Sin opacidad corneal;
+irritación reversible
+en 7 días Sin irritación
+Irritación cutánea Corrosivo Irritación severa a las 72 h Irritación moderada
+a las 72 h Irritación leve o ligera
+a las 72 h
+Referencias
+1. Bostrom, N.; Cirkovic, M.M. (Eds.) Global Catastrophic Risks ; Oxford University Press: Oxford, Reino Unido; Nueva York, NY, EE. UU., 2011.
+2. Robock, A.; Oman, L.; Stenchikov, G.L. Nuclear winter revisited with a modern climate model and current nuclear arsenals: Still
+catastrophic consequences. J. Geophys. Res. 2007 ,112, D13. [CrossRef]
+3. Xia, L.; Robock, A.; Scherrer, K.; Harrison, C.S.; Bodirsky, B.L.; Weindl, I.; Jägermeyr, J.; Bardeen, C.G.; Toon, O.B.; Heneghan, R.
+Global food insecurity and famine from reduced crop, marine ﬁshery and livestock production due to climate disruption from
+nuclear war soot injection. Nat. Food 2022 ,3, 586–596. [CrossRef] [PubMed]
+4. Denkenberger, D.C.; Pearce, J.M. Feeding everyone: Solving the food crisis in event of global catastrophes that kill crops or
+obscure the sun. Futures 2015 ,72, 57–68. [CrossRef]
+5. Denkenberger, D.; Sandberg, A.; Tieman, R.J.; Pearce, J.M. Long term cost-effectiveness of resilient foods for global catastrophes
+compared to artiﬁcial general intelligence safety. Int. J. Disaster Risk Reduct. 2022 ,73, 102798. [CrossRef]
+6. Denkenberger, D.; Pearce, J. Feeding Everyone No Matter What: Managing Food Security after Global Catastrophe ; Academic Press:
+Cambridge, MA, EE. UU., 2014.
+7. Garc ía Mart ínez, J.B.; Pearce, J.M.; Throup, J.; Cates, J.; Lackner, M.; Denkenberger, D.C. Methane Single Cell Protein: Potential to
+Secure a Global Protein Supply Against Catastrophic Food Shocks. Front. Bioeng. Biotechnol. 2022 ,10, 1125. [CrossRef]
+8. Throup, J.; Garc ía Mart ínez, J.B.; Bals, B.; Cates, J.; Pearce, J.M.; Denkenberger, D.C. Rapid repurposing of pulp and paper mills,
+bioreﬁneries, and breweries for lignocellulosic sugar production in global food catastrophes. Food Bioprod. Process. 2022 ,131,
+22–39. [CrossRef]
+9. Alvarado, K.A.; Mill, A.; Pearce, J.M.; Vocaet, A.; Denkenberger, D. Scaling of greenhouse crop production in low sunlight
+scenarios. Sci. Total Environ. 2020 ,707, 136012. [CrossRef]
+10. Stewart, H. Cedar: Tree of Life to the Northwest Coast Indians ; Douglas & McIntyre: Vancouver, BC, Canadá, 1984.
+11. Winstead, D.J.; Jacobson, M.G. Food resilience in a dark catastrophe: A new way of looking at tropical wild edible plants. Ambio
+2022 ,51, 1949–1962. [CrossRef]
+12. Garc ía Mart ínez, J.B.; Egbejimba, J.; Throup, J.; Matassa, S.; Pearce, J.M.; Denkenberger, D.C. Potential of microbial protein from
+hydrogen for preventing mass starvation in catastrophic scenarios. Sustain. Prod. Consum. 2021 ,25, 234–247. [CrossRef]
+13. Garc ía Mart ínez, J.B.; Brown, M.M.; Christodoulou, X.; Alvarado, K.A.; Denkenberger, D.C. Potential of microbial electrosynthesis
+for contributing to food production using CO 2during global agriculture-inhibiting disasters. Clean. Eng. Technol. 2021 ,4, 100139.
+[CrossRef]
+14. Garc ía Mart ínez, J.B.; Alvarado, K.A.; Christodoulou, X.; Denkenberger, D.C. Chemical synthesis of food from CO2 for space
+missions and food resilience. J. CO2 Util. 2021 ,53, 101726. [CrossRef]
+15. Meyer, T.K.; Pascaris, A.; Denkenberger, D.; Pearce, J.M.U.S. Potential of Sustainable Backyard Distributed Animal and Plant
+Protein Production during and after Pandemics. Sustainability 2021 ,13, 5067. [CrossRef]
+16. Garc ía Mart ínez, J.B.; Alvarado, K.A.; Denkenberger, D.C. Synthetic fat from petroleum as a resilient food for global catastrophes:
+Preliminary techno-economic assessment and technology roadmap. Chem. Eng. Res. Des. 2022 ,177, 255–272. [CrossRef]
+17. Denkenberger, D.; Pearce, J. Micronutrient Availability in Alternative Foods During Agricultural Catastrophes. Agriculture 2018 ,
+8, 169. [CrossRef]
+18. Denkenberger, D.C.; Cole, D.D.; Abdelkhaliq, M.; Griswold, M.; Hundley, A.B.; Pearce, J.M. Feeding everyone if the sun is
+obscured and industry is disabled. Int. J. Disaster Risk Reduct. 2017 ,21, 284–290. [CrossRef]
+Biomass 2023 ,3 186
+19. Fist, T.; Adesanya, A.A.; Denkenberger, D.; Pearce, J.M. Global distribution of forest classes and leaf biomass for use as alternative
+foods to minimize malnutrition. World Food Policy 2021 ,7, 128–146. [CrossRef]
+20. Addo-Danso, S.D. Responses of Western Hemlock, Western Redcedar, and Amabilis Fir to Fertilization: A Synthesis ; Province of British
+Columbia: Victoria, BC, Canadá, 2019.
+21. BC Market Outreach Network. BC Forest Information. Managing B.C. Cedar for the Future ; BC Market Outreach Network: Vancouver,
+BC, Canadá, 2003.
+22. McArdle, R.E.; Meyer, W.H.; Bruce, D. The Yield of Douglas Fir in the Paciﬁc Northwest ; IDEAS Working Paper Series from RePEc;
+US Department of Agriculture: Washington, DC, EE. UU., 1930.
+23. Gazol, A.; Valeriano, C.; Cantero, A.; Vergarechea, M.; Camarero, J.J. Douglas Fir Growth Is Constrained by Drought: Delineating
+the Climatic Limits of Timber Species under Seasonally Dry Conditions. Forests 2022 ,13, 1796. [CrossRef]
+24. Schmid, M.; Pautasso, M.; Holdenrieder, O. Ecological consequences of Douglas ﬁr ( Pseudotsuga menziesii ) cultivation in Europe.
+Eur. J. For. Res. 2014 ,133, 13–29. [CrossRef]
+25. Nuszdorfer, F.C. Old and Large Douglas-Fir and Western Redcedar in the Squamish Forest District, British Columbia, Canadá [Microform] ;
+Vancouver Forest Region: Nanaimo, BC, Canadá, 2000.
+26. Alldritt, M.J. The Ecology of the Ponderosa Pine Zone ; British Columbia Ministry of Forests: Govt Victoria, BC, Canadá, 1998.
+27. Safford, H.D.; Stevens, J.T. Natural Range of Variation for Yellow Pine and Mixed-Conifer Forests in the Sierra Nevada, Southern Cascades,
+and Modoc and Inyo National Forests, California, EE. UU. ; General Technical Report; Paciﬁc Southwest Research Station, USDA Forest
+Service: Washington, DC, EE. UU., 2017.
+28. Arno, S. Northwest Trees: Identifying and Understanding the Region’s Native Trees ; Mountaineers Books: Seattle, WA, EE. UU., 2020.
+29. Schuler, J.L. National Wildlife Federation Field Guide to Trees of North America. J. Environ. Qual. 2009 ,38, 1330. [CrossRef]
+30. Final Report of the Lodgepole Pine Seed Set Task Group, Interior Technical Advisory Committee, Forest Genetics Council of British Columbia ;
+Forest Genetics Council of British Columbia: Victoria, BC, Canadá, 2002.
+31. Lodgepole Pine 2022. Disponible en línea: https://www.for.gov.bc.ca/hfd/library/documents/treebook/lodgepolepine.htm
+(consultado el 18 de noviembre de 2022).
+32. Hubbard, B.R.; Putman, L.I.; Techtmann, S.; Pearce, J.M. Open Source Vacuum Oven Design for Low-Temperature Drying:
+Performance Evaluation for Recycled PET and Biomass. J. Manuf. Mater. Process. 2021 ,5, 52. [CrossRef]
+33. Pearce, J.M.; Khaksari, M.; Denkenberger, D. Preliminary Automated Determination of Edibility of Alternative Foods: Non-
+Targeted Screening for Toxins in Red Maple Leaf Concentrate. Plants 2019 ,8, 110. [CrossRef] [PubMed]
+34. Breuer, S.W.; Toppen, L.; Schum, S.K.; Pearce, J.M. Open source software toolchain for automated non-targeted screening for
+toxins in alternative foods. MethodsX 2021 ,8, 101551. [CrossRef] [PubMed]
+35. Dorne, J.L.C.M.; Richardson, J.; Livaniou, A.; Carnesecchi, E.; Ceriani, L.; Baldin, R.; Kovarich, S.; Pavan, M.; Saouter, E.; Biganzoli,
+F.; et al. EFSA’s OpenFoodTox: An open source toxicological database on chemicals in food and feed and its future developments.
+Environ. Int. 2021 ,146, 106293. [CrossRef]
+36. Code of Federal Regulation 2022. Disponible en línea: https://www.ecfr.gov/current/title-40/chapter-I/subchapter-E/part-156/
+subpart-D/section-156.62 (consultado el 18 de noviembre de 2022).
+37. Ostry, V . Alternaria mycotoxins: An overview of chemical characterization, producers, toxicity, analysis and occurrence in
+foodstuffs. World Mycotoxin J. 2008 ,1, 175–188. [CrossRef]
+38. Case Deﬁnition: Trichothecene Mycotoxin 2018. Disponible en línea: https://emergency.cdc.gov/agent/trichothecene/casedef.asp
+(consultado el 25 de noviembre de 2022).
+39. Dionisio, K.L.; Phillips, K.; Price, P .S.; Grulke, C.M.; Williams, A.; Biryol, D.; Hong, T.; Isaacs, K.K. The Chemical and Products
+Database, a resource for exposure-relevant data on chemicals in consumer products. Sci. Data 2018 ,5, 180125. [CrossRef]
+[PubMed]
+40. Watabe, T.; Hiratsuka, A.; Aizawa, T.; Sawahata, T.; Ozawa, N.; Isobe, M.; Takabatake, E. Studies on metabolism and toxicity of
+styrene IV . 1-Vinylbenzene 3,4-oxide, a potent mutagen formed as a possible intermediate in the metabolism in vivo of styrene to
+4-vinylphenol. Mutat. Res./Fundam. Mol. Mech. Mutagen. 1982, 93, 45–55. [CrossRef] [PubMed]
+41. Chatonnet, P.; Dubourdie, D.; Boidron, J.; Pons, M. The origin of ethylphenols in wines. J. Sci. Food Agric. 1992, 60, 165–178.
+[CrossRef]
+42. Haschek, W.M.; Voss, K.A. Mycotoxins. Haschek and Rousseaux’s Handbook of Toxicologic Pathology; Elsevier: Amsterdam, The
+Netherlands, 2013; pp. 1187–1258. [CrossRef]
+43. Adhikari, M.; Negi, B.; Kaushik, N.; Adhikari, A.; Al-Khedhairy, A.A.; Kaushik, N.K.; Choi, E.H. T-2 mycotoxin: Toxicological
+effects and decontamination strategies. Oncotarget 2017, 8, 33933–33952. [CrossRef]
+44. Berthiller, F.; Crews, C.; Dall’Asta, C.; Saeger, S.D.; Haesaert, G.; Karlovsky, P.; Oswald, I.P.; Seefelder, W.; Speijers, G.; Stroka, J.
+Masked mycotoxins: A review. Mol. Nutr. Food Res. 2013, 57, 165–186. [CrossRef]
+45. Pierron, A.; Mimoun, S.; Murate, L.S.; Loiseau, N.; Lippi, Y.; Bracarense, A.-P.F.L.; Liaubet, L.; Schatzmayr, G.; Berthiller, F.;
+Moll, W.D.; et al. Intestinal toxicity of the masked mycotoxin deoxynivalenol-3-β-d-glucoside. Arch. Toxicol. 2016, 90, 2037–2046.
+[CrossRef]
+46. Rutz, A.; Sorokina, M.; Galgonek, J.; Mietchen, D.; Willighagen, E.; Gaudry, A.; Graham, J.G.; Stephan, R.; Page, R.; Vondrášek, J.;
+et al. The LOTUS Initiative for Open Knowledge Management in Natural Products Research. eLife 2022, 11, e70780. [CrossRef]
+[PubMed]
+Biomass 2023, 3, 187
+47. PubChem. Dimethyl Dicarbonate 2022. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/3086 (consultado el 25
+de noviembre de 2022).
+48. Yu, J.; Proctor, R.H.; Brown, D.W.; Abe, K.; Gomi, K.; Machida, M.; Hasegawa, F.; Nierman, W.C.; Bhatnagar, D.; Cleveland, T.E.
+Genomics of Economically Significant Aspergillus and Fusarium Species. Appl. Mycol. Biotechnol. 2004, 4, 249–283. [CrossRef]
+49. Boonen, J.; Malysheva, S.V.; Taevernier, L.; Di Mavungu, J.D.; De Saeger, S.; De Spiegeleer, B. Human skin penetration of selected
+model mycotoxins. Toxicology 2012, 301, 21–32. [CrossRef]
+50. Mishra, S.; Zhang, W.; Lin, Z.; Pang, S.; Huang, Y.; Bhatt, P.; Chen, S. Carbofuran toxicity and its microbial degradation in
+contaminated environments. Chemosphere 2020, 259, 127419. [CrossRef] [PubMed]
+51. Substance Information—ECHA 2022. Disponible en línea: https://echa.europa.eu/substance-information/-/substanceinfo/100.013.
+416 (consultado el 18 de noviembre de 2022).
+52. Meyar, T.K.; Tieman, R.J.; Breuer, S.W.; Denkenberger, D.; Joshua, M.P. Yield and Toxic Analysis of Leaf Protein Concentrate of
+Common Agricultural Residues. submitted.
+53. Kennedy, D. Leaf for Life. Leaf Concentrate: A Field Guide for Small Scale Programs. Disponible en línea: https://www.leafforlife.
+org/gen/leaf_concentrate.html (consultado el 9 de enero de 2023).
+54. Can You Eat Pine Needles? 2022. Disponible en línea: https://www.primalsurvivor.net/can-you-eat-pine-needles/ (consultado el 25
+de noviembre de 2022).
+55. Amazon.ca: Pine Needle Tea 2022. Disponible en línea: https://www.amazon.ca/s (consultado el 25 de noviembre de 2022).
+56. Denkenberger, D.; Pearce, J.; Taylor, A.R.; Black, R. Food without sun: Price and life-saving potential. Foresight 2019, 21, 118–129.
+[CrossRef]
+57. Denkenberger, D.C.; Pearce, J.M. Cost-effectiveness of interventions for alternate food in the United States to address agricultural
+catastrophes. Int. J. Disaster Risk Reduct. 2018, 27, 278–289. [CrossRef]
+58. Denkenberger, D.C.; Pearce, J.M. Cost-Effectiveness of Interventions for Alternate Food to Address Agricultural Catastrophes
+Globally. Int. J. Disaster Risk Sci. 2016, 7, 205–215. [CrossRef]
+Descargo de responsabilidad/Nota del editor: Las declaraciones, opiniones y datos contenidos en todas las publicaciones son únicamente de los autores individuales
+autor(es) y colaborador(es) y no de MDPI y/o del editor o editores. MDPI y/o el editor o editores declinan toda responsabilidad por cualquier lesión a personas o bienes
+derivada de las ideas, métodos, instrucciones o productos mencionados en el contenido.

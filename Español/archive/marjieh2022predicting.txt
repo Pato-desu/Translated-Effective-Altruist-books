@@ -1,0 +1,521 @@
+Predicción de juicios de similitud humanos mediante grandes modelos de lenguaje
+Raja Marjieh1,*, Ilia Sucholutsky2,*, Theodore R. Sumers2,
+Nori Jacoby3, Thomas L. Griffiths1,2
+1Departamento de Psicología, Universidad de Princeton
+2Departamento de Ciencias de la Computación, Universidad de Princeton
+3Grupo de Percepción Auditiva Computacional, Instituto Max Planck de Estética Empírica
+{raja.marjieh, is2961, sumers, tomg}@princeton.edu; nori.jacoby@ae.mpg.de
+*igual contribución.
+Resumen
+Los juicios de similitud ofrecen un método bien establecido para acce-
+der a representaciones mentales, con aplicaciones en psicolo-
+gía, neurociencia y aprendizaje automático. Sin embargo, reunir
+juicios de similitud puede resultar prohibitivamente caro en conjuntos
+de datos naturalistas, pues el número de comparaciones crece cuadráti-
+camente con el número de estímulos. Una forma de abordar este problema
+es construir procedimientos de aproximación que se apoyen en indicadores
+más accesibles para predecir la similitud. Aquí aprovechamos los
+avances recientes en modelos de lenguaje y en el reclutamiento en línea,
+y proponemos un procedimiento eficiente y de dominio general para predecir
+los juicios de similitud humanos a partir de descripciones textuales. Intui-
+tivamente, los estímulos similares tienden a evocar descripciones similares,
+lo que nos permite usar la similitud entre descripciones para predecir
+los juicios de similitud por pares. Es crucial que el número de descripciones
+requeridas crezca solo linealmente con el número de estímulos, lo que reduce
+drásticamente la cantidad de datos necesarios. Probamos este proce-
+dimiento con seis conjuntos de datos de imágenes naturalistas y mostramos que
+nuestros modelos superan a los enfoques anteriores basados en información
+visual.
+Palabras clave: similitud, percepción, modelos de lenguaje, represen-
+taciones
+Introducción
+Las representaciones mentales sirven de sustrato para una variedad de
+tareas cognitivas, como la toma de decisiones, la comunicación y la
+memoria (Anderson, 1990). Comprender la estructura de
+esas representaciones es un problema central en la ciencia cognitiva
+y es el tema de un amplio corpus de trabajos en la literatura psico-
+lógica (Shepard, 1980, 1987; Ghirlanda & Enquist,
+2003; Battleday, Peterson, & Griffiths, 2020; Peterson, Ab-
+bott, & Griffiths, 2018; Jha, Peterson, & Griffiths, 2020;
+Caplette & Turk-Browne, 2022; Hebart, Zheng, Pereira, &
+Baker, 2020).
+Un ejemplo importante de esta investigación es el desarrollo
+del escalamiento multidimensional (MDS) para descubrir
+la estructura de las representaciones mentales a partir de
+juicios de similitud (Shepard, 1980). Dado un conjunto de N estímulos, el MDS
+comienza recopilando juicios de similitud por pares y agregándolos en
+una matriz N×N. Luego, un procedimiento iterativo
+encuentra un embebido que asigna los estímulos a puntos en un espacio psi-
+cológico de forma que su distancia refleje su similitud. Aplicar el MDS a
+distintos conjuntos de datos reveló una organización muy
+interpretable de los estímulos (Shepard, 1980, 1987).
+Más allá de la psicología, los juicios de similitud desempeñan un
+papel importante en otras disciplinas, como la neurociencia, por ejemplo en el
+método de análisis de similitud representacional (Kriegeskorte,
+Mur, & Bandettini, 2008), así como en el aprendizaje automático, por ejemplo como una forma de regularizar los espacios latentes para que se alineen
+con las representaciones y la percepción humanas (Esling, Bitton, et
+al., 2018).
+A pesar del éxito de estos enfoques, el crecimiento cuadrá-
+tico del número de comparaciones por pares en función
+del número de estímulos supone una seria limitación para su
+escalabilidad. De hecho, incluso un conjunto de datos relativamente
+pequeño, con ~10² estímulos, requeriría ~10⁴ juicios para
+construir la matriz completa de similitud. Esta limitación exige
+procedimientos alternativos que permitan una aproximación eficiente
+de los juicios de similitud humanos. Estudios previos han propuesto
+un método de este tipo en la modalidad visual, aprovechando
+las representaciones latentes de redes neuronales convolucionales
+(CNN) (Peterson et al., 2018; Jha et al., 2020). Sin embargo, este
+enfoque es específico de dominio y podría pasar por alto
+dimensiones semánticas importantes que pesan en los juicios de las
+personas.
+Para aliviar esta carga, aprovechamos la profunda relación
+entre la estructura conceptual y el lenguaje (Murphy, 2002)
+para usar descripciones lingüísticas como indicador de las represen-
+taciones semánticas humanas. Intuitivamente, los estímulos que se juzgan
+muy similares tienden a evocar descripciones similares, lo que nos
+permite usar la similitud entre descripciones para predecir la similitud
+entre juicios. Este enfoque ofrece dos ventajas clave
+frente a trabajos previos: primero, es escalable. Mientras que las compara-
+ciones por pares escalan cuadráticamente con el número de estí-
+mulos (Shepard, 1980), las descripciones textuales escalan linealmente. En segundo lugar,
+es de dominio general: a diferencia de las representaciones de CNN (Peterson
+et al., 2018), que se limitan a estímulos visuales, nuestro proce-
+dimiento puede aplicarse a cualquier dominio.
+Por último, señalamos que nuestro enfoque combina dos avances
+distintos e importantes. Primero, las descripciones textuales pueden
+obtenerse fácilmente por crowdsourcing mediante plataformas de reclutamiento en línea como Ama-
+zon Mechanical Turk (AMT; https://www.mturk.com/ )
+y forman parte de la práctica habitual en los flujos de trabajo modernos de
+aprendizaje automático (Parekh, Baldridge, Cer, Waters, & Yang,
+2020). Segundo, los modelos de lenguaje modernos (Speer, Chin, &
+Havasi, 2017; Devlin, Chang, Lee, & Toutanova, 2018) propor-
+cionan ricas representaciones latentes del texto. Es, por tanto, natural
+preguntarse: ¿hasta dónde podemos llegar al predecir los juicios de
+similitud humanos basándonos solo en el lenguaje?
+Exploramos esta cuestión con una colección de seis conjuntos de datos
+de imágenes naturalistas para los que se conocen las matrices de
+similitud de referencia (Peterson et al., 2018). Nuestra exploraciónarXiv:2202.04728v1  [cs.LG]  9 Feb 2022
+avanza en tres etapas. En el Estudio 1, construimos estimaciones de
+similitud aplicando un modelo de incrustación de palabras de última
+generación conocido como ConceptNet NumberBatch (CNNB) (Speer
+et al., 2017) a las etiquetas semánticas preexistentes de las imá-
+genes del conjunto de datos. En el Estudio 2, generalizamos este enfoque construyendo
+estimaciones de similitud basadas en BERT, un modelo de lenguaje grande de amplio
+uso (Devlin et al., 2018), aplicado a descripciones libres en texto
+que obtenemos por crowdsourcing en AMT. Por último, combinamos la
+representación a nivel conceptual de CNNB con la representación textual
+detallada de BERT y generamos un predictor conjunto
+de juicios de similitud. En el proceso, comparamos la precisión predictiva
+de nuestros modelos con el enfoque basado en CNN
+de Peterson et al. (2018).
+Metodología general
+Nuestro flujo general consiste en recopilar o usar descriptores lingüísticos
+preexistentes para los estímulos individuales y luego usar un modelo de
+incrustación para calcular un indicador de la similitud por pares
+(Figura 1).
+Predicción de la similitud humana
+Dado un conjunto de estímulos y sus descriptores lingüísticos (etiquetas
+semánticas o descripciones libres en texto), así como un esquema de
+incrustación adecuado (por ejemplo, un modelo de incrustación de palabras), usamos
+la similitud coseno entre los vectores que representan dos estí-
+mulos como métrica para calcular su similitud (es decir, el producto
+escalar de los dos vectores de incrustación dividido por el producto
+de sus normas). Peterson et al. (2018) mostraron que la predicción de
+la similitud humana mediante representaciones de CNN puede mejorar
+sustancialmente transformando linealmente esas representacio-
+nes. Matemáticamente, esto equivale a sustituir el producto
+escalar zT
+1z2con zT
+1Wz 2donde W es una matriz diagonal ade-
+cuada y z1 y z2 son los vectores de incrustación. Además, Pe-
+terson et al. mostraron que dicha transformación puede obtenerse
+mediante regresión de cresta con normalización L2. Aplicamos este
+enfoque a nuestras representaciones lingüísticas, usando las
+implementaciones RidgeRegression y RidgeCV de la biblioteca de Python scikit-learn.
+Para evitar el sobreajuste y simular la generalización
+en la práctica, realizamos validación cruzada de 6 pliegues sobre imágenes,
+lo que garantizó que ninguna imagen del conjunto de entrenamiento estuviera presente
+en el conjunto de validación. Esto garantiza que, incluso al combinar
+representaciones de BERT y de CNNB, donde aumenta el número de carac-
+terísticas, se siga evitando el sobreajuste. Para facilitar la comparación
+con trabajos previos cuantificamos el rendimiento mediante
+puntuaciones R2 de Pearson (varianza explicada) (Peterson
+et al., 2018; Jha et al., 2020).
+Estímulos
+Los seis conjuntos de datos de imágenes usados en este artículo se tomaron de
+Peterson et al. (2018). Los conjuntos de datos se organizaron en
+seis categorías generales, a saber, animales, frutas, verduras, auto-
+móviles, mobiliario y diversos objetos, cada una con 120
+imágenes únicas. En todas las categorías salvo animales, los conjuntos de datos
+incluían etiquetas semánticas para cada una de las imágenes individuales. En
+el caso de los animales, etiquetamos las imágenes manualmente. Ejemplos de
+imágenes y etiquetas aparecen en la Figura 2.
+Describa el contenido de la imagen.
+Estantería de madera compuesta por varios cubos abiertos. Estante de madera marrón oscuro con nueve compartimentos. Una estantería singular, inclinada, con muchos libros colocados de lado. Estantería con baldas que se caen, lista para todas sus necesidades de lectura.<bookshelf_02.png>
+<bookshelf_10.png>
+Modelo de lenguaje Predicción de similitud 𝑠!"=𝑧!#𝑊𝑧"𝑧!,𝑧"Figura 1: Esquema del procedimiento de predicción de similitud
+basado en descripciones textuales.
+Predicción de la similitud humana
+Basada en etiquetas semánticas
+Para iniciar nuestra investigación consideramos primero usar las
+etiquetas semánticas preexistentes de las imágenes de nuestros conjuntos de datos, ya que
+servían como resúmenes concisos del contenido de las imágenes. Evaluamos
+dos representaciones para predecir los juicios de similitud humanos
+basados en estas etiquetas, a saber, una representación one-hot y una
+representación mediante incrustación de palabras.
+Representación one-hot de las etiquetas
+El primer enfoque sirvió de referencia y consistió en usar las
+etiquetas semánticas como etiquetas de clase con una representación “one-hot”,
+es decir, un vector de la forma (0;…; 0;1;0;…; 0)
+donde el 1 indica a qué etiqueta semántica está asociada la
+imagen. Esta representación implica que las imágenes con la
+misma etiqueta semántica son máximamente similares, mientras que las imágenes
+con etiquetas semánticas distintas son máximamente disímiles.
+Sorprendentemente, esta representación tan simple tuvo un poder predictivo no
+trivial, como indica su puntuación R2 media bruta de 0.31 en los
+conjuntos de datos mostrados en la Tabla 1.
+Aplicar una transformación lineal adicional produjo un pequeño
+aumento en las puntuaciones de rendimiento (R2=0.40). La dispersión de
+las representaciones one-hot podría hacer ineficaz la transforma-
+ción lineal. Para remediarlo, aplicamos suavizado de etiquetas
+a todos los vectores one-hot. Si ~v es el vector one-hot, entonces
+~vsuavizado = (1−e)~v+e
+k−1(1−~v), donde e es el parámetro de suaviza-
+do (usamos un valor de 0.8) y k es el número de clases
+(que es igual a la longitud del vector). El suavizado no cambia la
+estructura relativa de la matriz resultante, pero
+permite aplicar con éxito la transformación lineal a los
+nuevos vectores.
+Encontrar correlaciones positivas pero no fuertes no resulta sorprendente,
+ya que la representación one-hot no capta la similitud de grano fino
+Águila
+ Gorila
+ Mora
+Otomana
+ Cuerpo humano
+ Coche
+Remolacha
+ Ascensor
+ Fin de tabla. Figura 2: Imágenes de muestra y sus etiquetas semánticas.
+entre etiquetas semánticas relacionadas (aunque no idénticas). En-
+efecto, aunque un tigre y un leopardo son animales distintos, comparten
+cierta similitud semántica intuitiva por ser
+miembros de la familia de los felinos; lo mismo ocurre con una silla y un sillón reclinable,
+o con una fresa y una mora. Esto se observa en la ausencia de
+estructura fuera de la diagonal en la matriz de similitud predicha
+(Figura 3). Con todo, este estudio preliminar sirve
+como evidencia inicial de que los juicios de las personas están
+efectivamente guiados por la similitud semántica.
+Representación mediante incrustación de palabras
+Para captar la estructura de similitud entre distintas etiquetas se-
+mánticas, sustituimos la representación one-hot por la
+representación latente de un modelo de incrustación de palabras de vanguardia
+conocido como ConceptNet NumberBatch (CNNB).
+CNNB se preentrena con el grafo de conocimiento ConceptNet
+(https://conceptnet.io/ ), que busca captar
+relaciones conceptuales intuitivas de sentido común.
+CNNB contiene incrustaciones no solo para palabras sueltas
+sino también para conceptos formados por varias palabras. Para aprovecharlos,
+las etiquetas formadas por varias palabras debían tener sus espacios
+sustituidos por guiones bajos (por ejemplo, ‘red_onion’ en lugar de ‘red
+onion’). Además, aunque el diccionario de CNNB es bastante amplio,
+hay ciertas palabras o conceptos que no incluye.
+En algunos de estos casos, las etiquetas formadas por varias
+palabras cuya forma conjunta no aparecía en CNNB
+tuvieron que separarse en palabras individuales y
+su incrustación conjunta se estimó mediante su suma normalizada
+(por ejemplo, CNNB(animal body) ≈ CNNB(animal)+CNNB(body)√
+2). En
+otros casos, las etiquetas tuvieron que sustituirse por un sinónimo o por el
+concepto más cercano disponible en CNNB (por ejemplo, ‘tatsoi’
+fue sustituido por ‘spoon mustard’). El uso de las representaciones de CNNB produjo un aumento sustancial
+del rendimiento frente a las representaciones one-hot, como se refleja
+en una puntuación R2 de 0.71 para las representaciones transformadas.
+La matriz de similitud predicha se muestra en la Figura 3 y
+se aprecia con claridad que se recupera una parte sustancial de la estructura fuera de la diagonal.
+De forma similar a los modelos de CNN usados por Peterson et al.
+(2018), la transformación lineal ajusta finamente las representaciones generales
+del modelo a la tarea concreta que se tiene entre manos. Para asegurarnos de que
+la transformación lineal no sobreajusta las matrices de
+similitud, realizamos validación cruzada de 6 pliegues, como se mencionó
+antes, y calculamos una puntuación R2 de control con validación cruzada (CCV)
+sobre imágenes reservadas. Estas puntuaciones se mantuvieron altas
+(R2=0.63), superando al modelo de CNN de Peterson et al.
+(2018) (Figura 4) en todos los conjuntos de datos (salvo Animales, donde
+obtuvo un valor algo menor, por un margen pequeño). Esto implica que
+las representaciones de CNNB generalizan mejor a datos nuevos. Observamos también
+que la dimensionalidad del espacio latente de CNNB (d=300)
+es mucho menor que la de la CNN (d=4096), lo que reduce el
+número de parámetros posibles sobre los que optimizar y, por tanto, el
+riesgo de sobreajuste.
+Predicción de la similitud humana
+Basada en descripciones libres en texto
+Las etiquetas semánticas concisas (y sus incrustaciones correspondientes) no siempre están
+disponibles para los estímulos de interés. Un enfoque más general
+se basaría en descripciones libres en texto, que pueden obtenerse
+fácilmente por crowdsourcing en línea. Sin embargo, estos datos requieren
+un tipo distinto de representaciones capaces de codificar de forma flexible
+oraciones completas (en lugar de agregar representaciones
+de palabras individuales, lo que podría perder una estructura importante
+dentro de la oración). Con ese fin, usamos las representaciones latentes
+de BERT (Devlin et al., 2018), un popular modelo de lenguaje a gran escala
+basado en transformadores bidireccionales, para incrustar
+las descripciones libres de cada una de las imágenes individuales
+que obtuvimos por crowdsourcing en AMT. El procedimiento de recogida
+de datos, así como ejemplos de descripciones textuales, se muestran en la Figura
+1.
+Métodos experimentales
+El reclutamiento y el flujo experimental se automatizaron
+mediante PsyNet (Harrison et al., 2020), un marco para el diseño
+experimental que se apoya en la plataforma Dallinger
+( https://github.com/Dallinger/Dallinger ) para
+la automatización del reclutamiento. En total, 328 participantes de EE. UU. completaron
+el estudio y recibieron $12 por hora. Tras firmar
+el formulario de consentimiento, los participantes debían realizar una prueba estandarizada
+de competencia en inglés LexTALE (Lemhöfer & Broersma,
+2012) para garantizar la calidad de las descripciones. Los participantes que no
+superaron la prueba previa de selección fueron excluidos del estudio.
+A continuación, los participantes recibieron las siguientes instrucciones: “En este
+experimento estudiamos cómo describe la gente las imágenes. Se le
+presentarán distintas imágenes y su tarea consistirá en
+describir su contenido. Al hacerlo, tenga en cuenta
+las siguientes indicaciones: 1) describa todas las partes importantes
+de la imagen, 2) no empiece las oraciones con “Hay”
+Animales Humano
+ Etiquetas
+ CNNB
+ BERT
+Mobiliario
+Figura 3: Matrices de similitud completas para los conjuntos de datos de “animales” y “mobiliario” con participantes humanos (izquierda), con sus
+predicciones basadas en etiquetas de clase y en las representaciones CNNB y BERT.
+o “Hay”, 3) no describa detalles poco importantes, 4) no está permitido
+copiar y pegar descripciones, 5) las descripciones deben contener
+al menos 5 palabras, 6) las descripciones deben contener
+al menos 4 palabras distintas. Nota: no se requiere experiencia previa
+para completar esta tarea; basta con describir lo que intuitivamente considere
+importante con la mayor precisión posible.” Después, a los participantes se les
+Se les presentaban nueve imágenes aleatorias del conjunto de datos para ayudarles
+a hacerse una idea de las imágenes que iban a describir.
+En cada ensayo del experimento principal, los participantes veían una
+de las imágenes junto con la siguiente instrucción: “Describa el
+contenido de la siguiente imagen” (las etiquetas semánticas
+nunca se proporcionaban). Después escribían su descripción
+en un cuadro de respuesta de texto libre, sujeta a las restricciones indicadas
+antes. Cada participante proporcionó hasta 30 descripciones textuales
+y cada imagen recibió, en promedio, 15 descripciones. Para
+asegurarnos de que los participantes no dieran respuestas repetitivas
+calculamos la distancia media de edición de Levenshtein entre
+su respuesta actual y todas las anteriores. Los participantes
+cuya distancia media era cercana a cero (<0.2) tras
+5 ensayos fueron excluidos del estudio. Las cadenas restantes aleatorias
+o de muy mala calidad se excluyeron en una
+etapa de posprocesamiento.
+Cálculo de las incrustaciones de BERT
+Usamos un modelo BERT-base-uncased preentrenado con un
+esquema de tokenización estándar, accedido a través de la biblioteca HuggingFace
+(Wolf et al., 2020). Para cada descripción textual, primero
+pasamos los tokens por el modelo BERT y luego tomamos la media
+de la incrustación de todos los tokens (p. ej., bolsa de palabras con media)
+en cada capa. Después promediamos las incrustaciones de cada capa entre todas las descripciones de una imagen dada. Empíricamente, calculamos
+puntuaciones de similitud basadas en las capas 0 a 12 y
+elegimos en cada caso la capa de mejor rendimiento. Para
+combinar las representaciones de BERT y de CNNB, primero normalizamos
+ambos conjuntos de incrustaciones restando sus respectivas medias
+y dividiéndolos entre sus respectivas desviaciones típicas, y luego concatenamos las de BERT y las de
+CNNB para obtener un único vector para cada imagen.
+BERT CNN CNNB CNNB+BERT0.00.10.20.30.40.50.60.7R2 medio
+Figura 4: Puntuación R2 media CCV de los cuatro modelos principales
+considerados (en negrita en la Tabla 1).
+Animales
+ Automóviles
+ Frutas
+Verduras
+ Mobiliario
+ VariosFigura 5: Incrustación MDS bidimensional de las predicciones conjuntas de similitud CNNB-BERT.
+Resultados
+Usamos las incrustaciones para producir estimaciones de similitud
+como antes. Observamos que, aunque las representaciones brutas de
+BERT no constituían un predictor sólido, las representaciones de BERT
+ponderadas linealmente (d=768) demostraron una capacidad de generalización
+comparable al modelo basado en CNN
+(d=4096) de Peterson et al. (2018) (Figura 4), aunque no tan
+alta como la de CNNB. Una posible explicación de esta diferencia
+es que los predictores de CNNB usaban una única etiqueta concisa por ima-
+gen, mientras que para BERT promediamos representaciones de múltiples
+descripciones, que podían captar distintos aspectos de la
+imagen (Parekh et al., 2020). Un enfoque más sofisticado
+podría aprender a agrupar incrustaciones de distintas descripciones
+de forma eficiente; sin embargo, para los fines de este trabajo
+decidimos centrarnos en transformaciones lineales sencillas.
+Como último paso, construimos un predictor combinado que
+apiló las representaciones de CNNB y BERT para captar un
+conocimiento amplio a nivel conceptual, así como descripciones de grano fino.
+El modelo combinado produjo el mejor rendimiento agregado
+, mejorando aún más el modelo de CNNB (Figura 4).
+Para apreciar el contenido semántico de las matrices de similitud predichas
+, calculamos una representación MDS bidimensional de las
+imágenes. Estas representaciones se calcularon
+con la biblioteca scikit-learn, con un límite máximo de 10 000 iteraciones
+y una tolerancia de convergencia de 1e-100. Primero se aplicó MDS métrico
+para obtener una incrustación inicial; después se aplicaron cuatro
+iteraciones de MDS no métrico y se eligió la mejor solución. Los resultados se muestran en la Figura 5 y revelan
+una organización semántica rica e interpretable de los estímulos
+que capta diversas dimensiones semánticas, como las clases naturales
+y funcionales, así como gradientes de color.
+Discusión
+Propusimos un procedimiento muy eficiente y de dominio general
+para predecir los juicios de similitud humanos a partir de descripciones
+textuales, con una complejidad lineal (y no cuadrática).
+Probamos nuestro enfoque con seis conjuntos de datos de imágenes naturalistas,
+encontrando evidencia de su validez y superando a los modelos
+anteriores que se basan en CNN. Estos resultados sugieren que
+los juicios de similitud humanos están efectivamente fundamentados en la comprensión
+semántica y en el lenguaje. Más allá del potencial inmediato
+para ampliar los estudios de similitud, nuestro trabajo también ofrece
+una nueva perspectiva sobre la similitud representacional entre
+BERT y los humanos (Lake & Murphy, 2021): al probarlo con
+conjuntos de datos naturalistas con descripciones textuales generadas libremente,
+encontramos que BERT capta con éxito una parte sustancial de
+la estructura de los juicios de similitud humanos.
+Este trabajo representa un primer paso hacia una investigación más amplia
+de la similitud en dominios naturalistas. Primero, nuestro
+enfoque ofrece la posibilidad de predecir la similitud humana
+en otros dominios, como el audio y el vídeo. En segundo lugar, podría
+usarse para explorar las diferencias entre la similitud perceptiva
+(basada en juicios brutos) y la similitud semántica (basada en
+descripciones textuales). Esta discrepancia puede variar según el dominio o
+Tabla 1: Puntuaciones R2 de los distintos modelos de predicción y conjuntos de datos.
+Modelo Metodología Animales Automóviles Frutas Verduras Mobiliario Varios ⟨R2⟩
+Etiquetas Bruto 0.23 0.69 0.20 0.24 0.34 0.19 0.31
+CNNB Bruto 0.51 0.64 0.17 0.17 0.31 0.29 0.35
+BERT Bruto 0.22 0.30 0.09 0.13 0.25 0.36 0.23
+CNN* Bruto 0.58 0.51 0.27 0.19 0.37 0.27 0.37
+Etiquetas LT-Train 0.29 0.71 0.26 0.27 0.38 0.48 0.40
+CNNB LT-Train 0.85 0.86 0.53 0.60 0.67 0.72 0.71
+BERT LT-Train 0.79 0.75 0.55 0.64 0.61 0.80 0.69
+CNN* LT-Train 0.84 0.79 0.53 0.67 0.72 0.52 0.68
+CNNB LT-CCV 0.72 0.86 0.38 0.43 0.63 0.73 0.63
+BERT LT-CCV 0.52 0.53 0.23 0.40 0.47 0.62 0.46
+CNNB + BERT LT-CCV 0.74 0.85 0.44 0.54 0.64 0.76 0.66
+CNN * LT-CCV 0.74 0.58 0.36 0.35 0.35 0.54 0.49
+Nota: “Bruto” corresponde a las representaciones brutas, “LT-Train” a las representaciones transformadas linealmente
+evaluadas sobre el conjunto de entrenamiento, y “LT-CCV” a las representaciones transformadas linealmente evaluadas sobre imágenes reservadas
+imágenes. ⟨R2⟩ es el R2 medio de todos los conjuntos de datos. * indica valores reproducidos de Peterson et al. (2018).
+experiencia. Por ejemplo, en el ámbito musical, los expertos (p. ej.,
+músicos formados) pueden ofrecer descripciones ricas de los estímulos
+(p. ej., acordes musicales), mientras que los novatos pueden carecer de un vocabulario
+adecuado, lo que genera una brecha mayor entre percepción y se-
+mántica en el segundo grupo. Un estudio de grano fino de esta brecha
+en función de la experiencia podría aportar información sobre las tra-
+yectorias del desarrollo semántico. En tercer lugar, un estudio sistemático
+podría, por ejemplo, usar representaciones de CNN y CNNB como
+una forma de aislar las contribuciones perceptivas y semánticas a un
+juicio de similitud humano. Son de particular interés los casos de
+máxima discrepancia en los que los humanos se alinean con uno de los
+predictores pero no con el otro. La Figura 6 muestra ejemplos de estos
+pares. Estos parecen sugerir que las personas tienden a centrarse en rasgos perceptivos
+de bajo nivel cuando los objetos comparados son
+desconocidos, mientras que los descartan en el caso de objetos
+familiares. Un estudio futuro podría explorar esta hipótesis con mayor
+detalle.
+Además de las aplicaciones psicológicas, nuestro paradigma
+podría permitir avances en el aprendizaje automático. Enriquecer los conjuntos de datos de
+aprendizaje automático con juicios de similitud y datos conductuales
+en general puede dotar a los modelos artificiales de
+diversas propiedades útiles, como la robustez frente a ataques adversarios
+y la alineación con los humanos (Peterson, Battleday,
+Griffiths, & Russakovsky, 2019). Reunir juicios de similitud
+sobre todos los pares es inviable para estos conjuntos de datos por el
+gran número de estímulos. Sin embargo, en muchas aplicaciones reales
+las matrices de similitud tienden a ser dispersas, es decir, solo un pequeño
+subconjunto de comparaciones produciría una similitud no nula
+(Parekh et al., 2020). Un flujo de enriquecimiento eficiente, por tanto,
+debe aprovechar esta dispersión, y nuestro procedimiento es un candidato
+prometedor para guiar estos métodos prediciendo qué
+pares es probable que sean informativos a priori. En segundo lugar, para aplicaciones
+más específicas de cada dominio, un estudio de seguimiento podría aprovechar
+los avances recientes en representaciones multimodales de transformadores
+ciones para construir mejores métricas de similitud que integren señales visuales y semánticas. Esperamos abordar todas estas
+vías en futuras investigaciones.
+Lechuga de tallo
+ AlgaCNN CNNB Humano0.00.5
+Oso
+ ChimpancéCNN CNNB Humano0.00.5
+Cama
+ CamaCNN CNNB Humano01
+Figura 6: Ejemplos de pares de imágenes que generaron grandes dis-
+crepancias entre las predicciones de los modelos CNN y CNNB y
+su relación con las puntuaciones de similitud humana.
+Agradecimientos. Este trabajo contó con el apoyo de una beca
+de la John Templeton Foundation.
+Referencias
+Anderson, J. R. (1990). The adaptive character of thought.
+Psychology Press.
+Battleday, R. M., Peterson, J. C., & Griffiths, T. L. (2020).
+Capturing human categorization of natural images by com-
+bining deep networks and cognitive models. Nature com-
+munications, 11(1), 1–14.
+Caplette, L., & Turk-Browne, N. (2022). Computational re-
+construction of mental representations using human behav-
+ior. PsyArxiv. doi: https://doi.org/10.31234/osf.io/7fdvw
+Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K.
+(2018). BERT: Pre-training of deep bidirectional trans-
+formers for language understanding. arXiv preprint
+arXiv:1810.04805.
+Esling, P., Bitton, A., et al. (2018). Generative timbre spaces:
+regularizing variational auto-encoders with perceptual met-
+rics. arXiv preprint arXiv:1805.08501.
+Ghirlanda, S., & Enquist, M. (2003). A century of
+generalization. Animal Behaviour, 66(1), 15-36. doi:
+https://doi.org/10.1006/anbe.2003.2174
+Harrison, P., Marjieh, R., Adolfi, F., van Rijn, P., Anglada-
+Tort, M., Tchernichovski, O., . . . Jacoby, N. (2020). Gibbs
+sampling with people. En H. Larochelle, M. Ranzato,
+R. Hadsell, M. F. Balcan, & H. Lin (eds.), Advances in
+neural information processing systems (Vol. 33, pp. 10659–
+10671). Curran Associates, Inc.
+Hebart, M. N., Zheng, C. Y., Pereira, F., & Baker, C. I. (2020).
+Revealing the multidimensional mental representations of
+natural objects underlying human similarity judgements.
+Nature human behaviour, 4(11), 1173–1185.
+Jha, A., Peterson, J., & Griffiths, T. L. (2020). Ex-
+tracting low-dimensional psychological representations
+from convolutional neural networks. arXiv preprint
+arXiv:2005.14363.
+Kriegeskorte, N., Mur, M., & Bandettini, P. A. (2008). Rep-
+resentational similarity analysis-connecting the branches of
+systems neuroscience. Frontiers in systems neuroscience,
+2, 4.
+Lake, B. M., & Murphy, G. L. (2021). Word meaning in
+minds and machines. Psychological review.
+Lemhöfer, K., & Broersma, M. (2012). Introducing Lex-
+TALE: A quick and valid lexical test for advanced learners
+of English. Behavior research methods, 44(2), 325–343.
+Murphy, G. (2002). The big book of concepts. MIT Press.
+Parekh, Z., Baldridge, J., Cer, D., Waters, A., & Yang, Y.
+(2020). Crisscrossed captions: Extended intramodal and
+intermodal semantic similarity judgments for MS-COCO.
+arXiv preprint arXiv:2004.15020.
+Peterson, J. C., Abbott, J. T., & Griffiths, T. L. (2018). Eval-
+uating (and improving) the correspondence between deep
+neural networks and human representations. Cognitive sci-
+ence, 42(8), 2648–2669.
+Peterson, J. C., Battleday, R. M., Griffiths, T. L., & Rus-
+sakovsky, O. (2019). Human uncertainty makes classifi-
+cation more robust. En Proceedings of the ieee/cvf interna-
+tional conference on computer vision (pp. 9617–9626).
+Shepard, R. N. (1980). Multidimensional scaling, tree-
+fitting, and clustering. Science, 210(4468), 390–398. doi:
+10.1126/science.210.4468.390
+Shepard, R. N. (1987). Toward a universal law of generalization for psychological science. Science, 237(4820),
+1317–1323. doi: 10.1126/science.3629243
+Speer, R., Chin, J., & Havasi, C. (2017). Conceptnet 5.5: An
+open multilingual graph of general knowledge. En Thirty-
+first AAAI conference on artificial intelligence.
+Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C.,
+Moi, A., . . . Rush, A. M. (2020). Transformers: State-of-
+the-art natural language processing. En Proceedings of the
+2020 Conference on Empirical Methods in Natural Lan-
+guage Processing: System Demonstrations (pp. 38–45).
+Association for Computational Linguistics.

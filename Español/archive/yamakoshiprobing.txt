@@ -1,0 +1,1099 @@
+Sondeo de las distribuciones a priori de BERT mediante cadenas de reproducción serial
+Takateru Yamakoshi1;2, Thomas L. Griffiths1, Robert D. Hawkins1
+1Universidad de Princeton,2Universidad de Tokio
+{takateru,tomg,rdhawkins}@princeton.edu
+Resumen
+El muestreo es un método prometedor de abajo hacia arriba para
+exponer lo que los modelos generativos han aprendido
+sobre el lenguaje, pero sigue sin estar claro cómo
+generar muestras representativas de modelos populares
+de lenguaje enmascarados (MLM) como BERT.
+El objetivo de los MLM produce una red de
+dependencias sin garantía de distribuciones condicionales
+consistentes, lo que plantea un problema para los
+enfoques ingenuos. Basándonos en teorías del aprendizaje
+iterado en ciencia cognitiva, exploramos
+el uso de cadenas de reproducción serial para muestrear
+a partir de la distribución a priori de BERT. En particular, observamos
+que un estimador único y consistente de
+la distribución conjunta de referencia viene dada por
+un muestreador de redes estocásticas generativas (GSN),
+que selecciona aleatoriamente qué token enmascarar
+y reconstruir en cada paso. Mostramos
+que las estadísticas léxicas y sintácticas de las
+oraciones de las cadenas GSN coinciden estrechamente con la
+distribución del corpus de referencia y superan
+a otros métodos en un gran corpus de
+juicios de naturalidad. Nuestros hallazgos establecen
+una base teórica más sólida para el sondeo de abajo hacia arriba
+y destacan desviaciones más ricas de
+las distribuciones a priori humanas1.
+1 Introducción
+Los grandes modelos neuronales de lenguaje se han convertido en la
+columna vertebral representacional del procesamiento del lenguaje natural.
+Al aprender a predecir palabras a partir de su
+contexto, estos modelos han inducido sorprendentemente
+conocimiento lingüístico de tipo humano, desde la
+estructura sintáctica (Linzen y Baroni, 2021; Tenney et al.,
+2019; Warstadt et al., 2019) y sesgos léxicos sutiles
+(Hawkins et al., 2020) hasta sesgos sociales
+y estereotipos más insidiosos (Caliskan et al., 2017;
+Garg et al., 2018). Al mismo tiempo, los esfuerzos por
+sondear estos modelos han revelado desviaciones significativas
+del lenguaje natural (Braverman et al.,
+2020; Holtzman et al., 2019; Dasgupta et al., 2020).
+1El código y los datos están disponibles en https://github.
+com/taka-yamakoshi/TelephoneGame
+cadena 2 cadena 1
+la comida escaseaba, y los inviernos eran más fríos.
+el tiempo escaseaba, y los inviernos eran más fríos.
+el tiempo se agotaba, y los inviernos eran más fríos. Figura 1: Usamos un método de reproducción serial para sondear
+la distribución a priori de BERT sobre posibles oraciones (visualización de
+cadenas de reproducción obtenidas al aplicar t-SNE a los
+embeddings de oraciones; las cadenas se codifican por colores y se desvanecen hasta
+negro a lo largo de su periodo de calentamiento (burn-in)).
+Las observaciones de comportamientos incoherentes o “raros”
+suelen ser divertidas, como cuando una receta generada
+comienza con “1/4 de libra de huesos o pan fresco”
+(Shane, 2019), pero también plantean peligros significativos en
+entornos del mundo real (Bender et al., 2021).
+Estas desviaciones plantean un enigma teórico y
+metodológico central para la lingüística computacional.
+¿Cómo obtenemos y caracterizamos la
+distribución a priori2 completa que un modelo particular ha aprendido sobre
+las posibles oraciones de un idioma? Un enfoque dominante ha sido
+diseñar conjuntos de pruebas de referencia que
+2Usamos el término a priori para referirnos al conocimiento lingüístico
+graduado que asigna probabilidades a todas las posibles oraciones. Mientras
+nos centramos en el texto, esta distribución a priori es también la base de un uso
+del lenguaje más fundamentado y pragmático.arXiv:2202.12226v2  [cs.CL]  18 mar 2022
+Tipo de anomalía Ejemplo
+morfológica a nivel de palabra Escuela de educación superior xurdividida en seis instituciones.
+sintáctica a nivel de frase Tragando saliva con dificultad, Verity miró fijamente los estos, deseando desesperadamente
+ver si se habían coagulado.
+semántica La sección oeste es un fig octágono.
+Un apartamento privado con nada más que agua caliente enfriada.
+predicación Él ya disfraza con cuidado su relación con mi madre.
+Voces golpearon la puerta incremental.
+a nivel de oración fuera de contexto Como una catarata, Horacio responde: “Eres mejor que yo.”
+autocontradictoria El periódico se publica semanalmente y bianualmente.
+pragmática Ella creció con tres hermanas y diez hermanas.
+Debería aplicarse entre lo extremo y lo extremo.
+Tabla 1: Ejemplos de oraciones muestreadas de la distribución a priori de BERT que recibieron calificaciones bajas de naturalidad de nuestros
+participantes, incluyendo formas de anomalía como la predicabilidad o errores de categoría (p. ej., las puertas normalmente no
+tienen la propiedad de “incrementalidad”), incoherencia semántica (“agua caliente enfriada”), o construcciones contradictorias
+(especialmente en oraciones más largas). Se pueden encontrar más ejemplos en la tabla S2 y en el material suplementario en línea.
+sondear aspectos teóricamente importantes de la distribución a priori,
+y comparar el comportamiento del modelo con el comportamiento humano
+en esas tareas (p. ej., Warstadt et al., 2020; Ettinger,
+2020). Sin embargo, este enfoque puede ser restrictivo y
+fragmentario: no está claro de antemano qué
+tareas serán más diagnósticas, y muchas fuentes de
+“rareza” no se operacionalizan fácilmente (Kuribayashi
+et al., 2021).
+Una alternativa más holística, de abajo hacia arriba, consiste en
+examinar directamente muestras de la distribución a priori del modelo y
+compararlas con las de las distribuciones a priori humanas.
+Sin embargo, muchos modelos exitosos no exponen
+explícitamente esta distribución, y muchos métodos de generación
+optimizan las “mejores” oraciones en lugar de las teóricamente
+significativas o representativas. Por ejemplo, los modelos de lenguaje
+enmascarados (MLM) como
+BERT (Devlin et al., 2018) son redes de
+dependencia (Heckerman et al., 2000; Toutanova et al.,
+2003), entrenadas para aprender eficientemente un conjunto
+independiente de distribuciones condicionales sin
+imponer consistencia entre ellas. En otras palabras,
+estas condicionales podrían no corresponder a ninguna
+distribución conjunta coherente en absoluto, lo que lleva a trabajos recientes
+a centrarse en otros objetivos de muestreo basados en puntuaciones
+(Goyal et al., 2021).
+Aquí exploramos el uso de cadenas de reproducción serial
+(véase la Fig. 1) para superar estos desafíos.
+Aunque un muestreador de Gibbs ingenuo (pseudo-)Gibbs es, de hecho,
+problemático para los MLM, la literatura sobre redes estocásticas
+generativas (GSN; Bengio et al., 2014)
+ha demostrado formalmente que una variante algorítmica simple
+que llamamos muestreo GSN produce una distribución estacionaria
+que es, de hecho, un estimador único y consistente de la distribución conjunta de referencia.
+Además, aunque las condicionales independientes
+aprendidas por las redes de dependencia pueden ser arbitrariamente
+inconsistentes en teoría, el trabajo empírico ha encontrado
+que estas desviaciones tienden a ser despreciables en la práctica,
+especialmente en conjuntos de datos más grandes (Heckerman et al.,
+2000; Neville y Jensen, 2007). Por lo tanto, argumentamos
+que está justificado tanto teórica como empíricamente
+tomar estas muestras como representativas de manera única de
+la distribución a priori del modelo sobre el lenguaje.
+Comenzamos en la Sección 2 presentando el enfoque
+de reproducción serial y aclarando el problema
+de reconstruir una distribución conjunta a partir de una red de
+dependencia. Luego validamos que nuestras cadenas están
+bien comportadas (Sección 3) y comparamos las estadísticas
+de las muestras de la distribución a priori de BERT con las estadísticas léxicas
+y sintácticas de su corpus de entrenamiento de referencia
+para medir la similitud distribucional (Sección
+4). Finalmente, en la Sección 5 presentamos un estudio a gran escala
+conductual que obtiene juicios de naturalidad
+de hablantes humanos e identificamos rasgos de las
+oraciones generadas que predicen con mayor fuerza
+las valoraciones humanas de la “rareza” (véase la Tabla 1). Encontramos
+que las muestras GSN aproximan de cerca la
+distribución de referencia y se juzgan más
+naturales que otros métodos, al tiempo que revelan
+áreas de mejora que han sido difíciles de
+cuantificar con pruebas de referencia de arriba hacia abajo.
+2 Enfoque
+2.1 Reproducción serial
+Nuestro enfoque se inspira en juegos de reproducción serial
+como Telephone, en los que un mensaje inicial se
+red bayesiana (acíclica)
+red de dependencia (cíclica) LM MLM
+Figura 2: Mientras que los modelos de lenguaje autorregresivos (LM)
+son redes bayesianas, los modelos de lenguaje enmascarados (MLM) son
+redes de dependencia con dependencias cíclicas.
+transmite gradualmente a lo largo de una cadena de un hablante
+al siguiente. En cada paso, el mensaje se modifica
+sutilmente como resultado de la transmisión ruidosa y de la
+reconstrucción, y la versión final del mensaje a menudo
+difiere drásticamente de la primera. Esta reproducción serial
+método, introducido inicialmente en psicología
+por Bartlett (1932), se ha convertido en una herramienta invaluable
+para revelar los sesgos inductivos humanos (Xu y
+Griffiths, 2010; Langlois et al., 2021; Sanborn et al.,
+2010; Harrison et al., 2020). Porque reconstruir
+un mensaje ruidoso está guiado por las expectativas previas
+del oyente, de modo que estas cadenas convergen finalmente a
+una distribución estacionaria equivalente a la distribución a priori de la
+población, lo que refleja lo que la gente espera que digan los demás
+decir (Kalish et al., 2007; Griffiths y Kalish,
+2007; Beppu y Griffiths, 2009). Por ejemplo,
+Meylan et al. (2021) evaluaron recientemente
+la capacidad de los modelos neuronales de lenguaje para predecir
+los cambios que los participantes humanos introdujeron en las oraciones
+en cada paso de una cadena de reproducción serial. Así, mientras que
+la reproducción serial se usa habitualmente para sondear las
+distribuciones a priori humanas y para comparar modelos con los
+datos humanos, aún no se usa ampliamente para sondear los propios modelos
+en sí mismos.
+2.2 BERT como red de dependencia
+Ha habido considerable confusión en la literatura reciente
+sobre cómo interpretar el objetivo MLM
+utilizado para entrenar modelos como BERT, y cómo
+interpretar las muestras de tales modelos. Wang y Cho
+(2019) observaron inicialmente que BERT era un campo aleatorio de Markov
+(MRF) y propusieron un muestreador de Gibbs
+que enmascara y reconstruye iterativamente distintos sitios
+muestreando de la distribución condicionada a
+los tokens de todos los demás sitios ^P(wkjw k). Como observaron
+Goyal et al. (2021), sin embargo, este procedimiento
+no corresponde en realidad a la inferencia
+en el MRF. A diferencia de los modelos de lenguaje autorregresivos
+(LM) como GPT-3 (Brown et al., 2020), que
+definen un grafo de dependencia acíclico (o red bayesiana) de izquierda a derecha; los MLM tienen dependencias cíclicas
+(véase la Fig. 2) y por eso se interpretan con más utilidad como
+redes de dependencia y no como redes bayesianas
+(Heckerman et al., 2000). Como las redes de dependencia estiman
+condicionales independientes, no hay garantía
+de que estas condicionales sean consistentes
+(es decir, pueden violar la regla de Bayes) y, por tanto, no
+representan una distribución conjunta coherente.
+Aun así, es posible reconstruir una distribución conjunta a partir de estas
+condicionales. Por ejemplo,
+Heckerman et al. (2000) demostraron que si los sitios se
+visitan en un orden fijo, una cadena (pseudo-)Gibbs
+similar a la que usaron Wang y Cho (2019)
+sí converge a una distribución estacionaria que es
+una conjunta bien formada. El problema es que
+distintos órdenes pueden producir distintas distribuciones conjuntas,
+lo que dificulta interpretar cualquier distribución como definitiva.
+Esta ambigüedad se resolvió con el marco de
+Redes Estocásticas Generativas propuesto por
+Bengio et al. (2014). En lugar de visitar los sitios en
+un orden fijo, un muestreador GSN elige aleatoriamente
+qué sitio visitar en cada paso (con reemplazo),
+con lo que se preserva la aperiodicidad y la ergodicidad. Específicamente,
+este algoritmo comienza inicializando con
+una secuencia fw0
+1;:::;w0
+ng. En cada paso t de la
+cadena, elegimos aleatoriamente un sitio k21;:::;n para
+enmascarar, y muestreamos un nuevo valor wt+1
+k a partir de
+la distribución condicional P(wkjwt
+k) con los
+otros n 1 sitios fijos.
+Un teorema clave de Bengio et al. (2013, 2014)
+demuestra que la distribución estacionaria que surge del
+muestreador GSN define una distribución conjunta única
+y, además, esta distribución estacionaria
+es un estimador consistente de la distribución conjunta de referencia
+distribución3. Es importante destacar que esta distribución estacionaria
+difiere de la que da el enfoque Metropolis-
+Hastings (MH) sugerido por Goyal et al.
+(2021), que usa el muestreador GSN como propuesta
+distribución, pero acepta o rechaza propuestas basándose en
+una pseudo-verosimilitud basada en energía definida por
+la suma de las puntuaciones condicionales en cada posición
+(Salazar et al., 2020). Este muestreador MH, en cambio,
+converge a una distribución estacionaria implícita definida por
+la función objetivo de energía4.
+3Técnicamente, la prueba solo se cumple si la red de dependencia
+fue entrenada con estimadores consistentes para las condicionales,
+lo cual sucede con la pérdida de entropía cruzada usada por BERT;
+véase también McAllester (2019).
+4Aunque nuestro enfoque se centra en la evaluación y no en las
+características de rendimiento algorítmico, señalamos que, como el
+muestreo GSN no requiere calcular puntuaciones de energía para
+determinar la probabilidad de aceptación de cada muestra, es
+significativamente más rápido, especialmente para secuencias largas.
+2.3 Núcleos de mezcla
+En la práctica, los métodos de muestreo por cadenas de Markov tienen
+muchos modos de fallo. Sobre todo, como las muestras de las cadenas
+no son independientes, es difícil garantizar la convergencia
+a una distribución estacionaria
+y la cadena queda fácilmente «atascada» en
+regiones locales del espacio muestral (Gelman et al.,
+1992). Normalmente, se toman muestras de un periodo de calentamiento
+(p. ej., las primeras m épocas) para reducir
+la dependencia del estado inicial, y se introduce un intervalo entre
+muestras (p. ej., registrando solo cada l épocas) para reducir
+la autocorrelación. Sin embargo, el problema
+es especialmente grave para modelos de lenguaje
+como BERT, donde hay fuertes dependencias mutuas
+entre palabras en distintos sitios. Por ejemplo,
+una vez que la cadena alcanza un trigrama como ‘Papúa Nueva
+Guinea’, es poco probable que cambie una sola palabra
+mientras mantiene constantes las demás. Para garantizar
+la ergodicidad, usamos un núcleo de mezcla que introduce una pequeña
+probabilidad constante (= 0:001) de volver
+a la distribución inicial de los tokens [MASK] en cada
+época, lo que permite que la cadena vuelva a calentarse.
+3 Validación de la distribución estacionaria
+En esta sección validamos que las muestras producidas por nuestro método
+de reproducción serial son representativas de
+la distribución a priori estacionaria. Más concretamente,
+consideramos dos propiedades básicas de la cadena:
+convergencia e independencia. Para estos análisis
+consideramos muestras del modelo preentrenado
+bert-base-uncased, con 12 capas, 12
+cabezas y 110M de parámetros5.
+3.1 Convergencia
+Comenzamos comprobando el tiempo de convergencia
+de las cadenas generadas por el muestreo GSN. Las cotas teóricas
+derivadas para cadenas de reproducción serial dan un tiempo de convergencia
+de nlogn, donde n es el número
+de sitios (véase Rafferty et al., 2014). Para comprobar estas
+cotas de convergencia en la práctica, fijamos n = 21
+y seleccionamos 20 oraciones de Wikipedia como estados iniciales
+y ejecutamos 10 cadenas inicializadas en cada
+oración. Nos aseguramos de que la mitad de estas oraciones
+tenga una probabilidad inicial alta (según la puntuación de energía de BERT)
+y la otra mitad una probabilidad inicial baja. Observamos
+que estas distribuciones empiezan a mezclarse rápidamente en probabilidad
+(véase la Figura S1). Como las oraciones más largas
+pueden requerir un periodo de calentamiento más largo, fijamos
+de forma conservadora la ventana de calentamiento en m =
+1000 épocas para los experimentos siguientes.
+5https://huggingface.co/bert-base-uncased3.2 Independencia
+En segundo lugar, queremos asegurar de forma aproximada la independencia
+de las muestras, para que las estadísticas de nuestra distribución
+de muestras no reflejen simplemente la autocorrelación
+en la cadena. Para un análisis del peor caso de un mínimo local, supongamos
+que P(wijw i)< (0<  < 1)
+para todo i2[1;:::;k ], donde k es la longitud de la oración
+en tokens. Entonces, la probabilidad de volver a muestrear la
+misma oración es aproximadamente < kn tras n épocas.
+Podemos despejar el número de épocas n que necesitamos
+para acotar la probabilidad de volver a muestrear exactamente la misma
+oración bajo un peor caso dado. Por ejemplo,
+si = 0:99 y queremos asegurar que la probabilidad
+de volver a muestrear la misma oración sea
+inferior a un umbral = 0:01, entonces n = 47 épocas
+probablemente bastarán. Garantizar una renovación completa en el peor caso
+requiere retardos mucho más largos,
+es decir, [1 (1 )k]n<.
+Para evaluar hasta qué punto se dan estos casos
+en la práctica, examinamos las tasas de autocorrelación
+en cadenas más largas (50 000 épocas). Calculamos correlaciones
+entre las puntuaciones de energía en cada época
+como indicador del estado: cuando la cadena se queda atascada
+volviendo a muestrear la misma oración, las mismas puntuaciones
+aparecen repetidamente. Encontramos que la autocorrelación es
+en general alta, pero nuestro núcleo de mezcla evita los peores mínimos locales
+tanto para la cadena MH (Goyal et al., 2021)
+como para nuestra cadena GSN (véase la Fig. S2),
+aunque seguimos encontrando tasas de autocorrelación más altas
+para la cadena MH. Para examinar más a fondo estos mínimos,
+analizamos las tasas de edición: el número de cambios realizados
+en la oración dentro de una época.
+Sin el núcleo de mezcla, observamos largas regiones
+de tasas de edición sistemáticamente bajas (p. ej., en algunos casos,
+5000 épocas seguidas de exactamente la misma
+oración) que desaparecen con el núcleo de mezcla
+(véase la Fig. S3).
+Sobre la base de estas observaciones, fijamos el retardo en
+l = 500 épocas para mantener una independencia relativamente alta entre
+muestras.
+4 Comparaciones distribucionales
+En esta sección examinamos hasta qué punto
+los estadísticos de orden superior de las oraciones de la distribución a priori de BERT
+están bien calibrados con respecto a los datos con los que fue entrenado.
+Este tipo de comparación ofrece una idea más rica
+de lo que el modelo ha aprendido o no ha logrado aprender
+que las métricas escalares tradicionales como la perplejidad (Taka-
+hashi y Tanaka-Ishii, 2017; Meister y Cotterell,
+2021; Takahashi y Tanaka-Ishii, 2019; Pillutla
+et al., 2021).
+10−610−410−2
+100101102103
+(log) rango de palabra (log) frecuencia de palabra corpus GSN MH
+100101102103
+100101102103
+rango de palabra (distribución de BERT) rango de palabra (distribución del corpus) GSN MH Figura 3: Las frecuencias léxicas de nuestras muestras GSN (A) coinciden estrechamente con la distribución zipfiana del corpus y
+(B) se correlacionan estrechamente con las frecuencias correspondientes de la distribución del corpus.
+4.1 Preparación del corpus
+La versión de BERT que analizamos en la sección anterior
+se entrenó con una combinación de dos
+corpus: Wikipedia y BookCorpus. Para
+hacer comparaciones válidas entre las distribuciones a priori humanas y
+las de las máquinas, necesitábamos emparejar de cerca las oraciones de BERT
+con un subconjunto comparable de
+oraciones generadas por humanos de estos corpus combinados.
+Hay dos desafíos técnicos que debemos superar
+para garantizar muestras comparables, relativos al
+segmentador de oraciones y al tokenizador.
+Primero, como nuestra unidad de comparación es la oración,
+necesitábamos controlar cualquier artefacto que
+pueda inducirse por la forma en que determinamos qué son las
+oraciones (p. ej., si nuestras oraciones de Wikipedia
+se dividieran sistemáticamente en las abreviaturas, sesgando la
+distribución hacia los fragmentos). Por eso aplicamos
+el mismo segmentador punkt para crear nuestra
+distribución de oraciones de Wikipedia y para comprobar
+nuestras muestras de BERT en los casos en que la secuencia generada
+contenía varias oraciones o terminaba
+en dos puntos o en punto y coma.
+Segundo, necesitábamos un tokenizador que igualara la longitud de las
+oraciones. Como los modelos bidireccionales como
+BERT operan sobre secuencias de longitud fija, todas las
+muestras extraídas de una misma cadena tienen el mismo
+número de tokens.
+Sin embargo, es crítico que las cadenas de BERT se definen
+sobre secuencias de tokens WordPiece, por lo que, una vez que estas
+secuencias se decodifican de nuevo en lenguaje natural
+texto, pueden dar oraciones de longitud variable, según cómo se combinen los elementos de subpalabra
+entre sí6 (véase la Fig. S5). Resolvemos este problema de alineación
+mediante el tokenizador WordPiece para
+extraer de nuestros corpus de texto oraciones de longitud fija en subpalabras
+obteniendo clases de equivalencia de oraciones del corpus
+que se tokenizan todas en el
+mismo número de tokens WordPiece. Ejecutamos cadenas GSN
+y MH sobre oraciones de n = 11 tokens,
+que representan las longitudes modales de las oraciones en
+BookCorpus (véase la Fig. S4). Obtuvimos 5000 oraciones
+independientes de cada método de muestreo
+tras aplicar nuestro calentamiento y retardo conservadores,
+y combinamos las oraciones de Wikipedia y BookCorpus
+en un único corpus que es representativo
+del régimen de entrenamiento de BERT.
+4.2 Distribuciones léxicas
+Empezamos comparando los estadísticos de frecuencia léxica
+de nuestras muestras de BERT con los estadísticos del
+corpus de referencia. Primero, observamos que la relación
+entre rango y frecuencia de los tokens en el muestreo GSN
+coincide con la distribución zipfiana de su corpus de entrenamiento
+mejor que la producida por el muestreo MH (véase la Fig. 3A).
+Sin embargo, es posible
+producir la misma distribución global sin
+6Una complejidad adicional es que la correspondencia entre
+tokens WordPiece y tokens de palabra no es inyectiva. Existen
+varias secuencias de tokens de subpalabra que se traducen a la
+misma palabra (p. ej., el vocabulario WordPiece contiene un
+token para la palabra completa ‘missing’, pero también puede generar
+‘missing’ combinando los tokens de subpalabra ‘miss’+‘#ing’).
+Sin embargo, estos casos son raros.
+NUMCCONJADJADVAUXADPPROPNDETPRONVERBNOUNPUNCT
+0.0 0.1 0.2 0.3
+frecuencia de la categoría gramatical corpus de origen GSN MH
+negprtadvclnpadvmodnsubjpassxcompauxpassnummodacompccompattrconjccposscompoundamoddobjadvmodpobjnsubj
+0.0 0.1 0.2 0.3
+frecuencia de la dependencia, corpus de origen GSN MH Figura 4: Las frecuencias relativas de las distintas categorías gramaticales (izquierda) y dependencias (derecha) en los corpus
+de entrenamiento de referencia coinciden estrechamente en las muestras GSN. En todos los casos, las frecuencias GSN quedaron más cerca de la referencia
+que las frecuencias MH.
+coinciden con las frecuencias empíricas de palabras individuales.
+A continuación examinamos los rangos respectivos de
+cada palabra en las dos distribuciones. En conjunto,
+los rangos de palabras en las muestras GSN tuvieron una fuerte
+correlación de rangos de Spearman de r = 0:75 con los
+rangos de palabras del corpus de referencia; las muestras MH
+tuvieron una correlación significativamente menor de
+r = 0:48 (Pearson z = 17; p < 0:001, Fig 3B).
+La mayoría de las discrepancias se encuentran en las colas, donde
+las estimaciones de frecuencia son especialmente deficientes (p. ej., muchas palabras
+aparecieron solo una vez en nuestra colección de muestras).
+De hecho, entre las palabras con más de 10 apariciones,
+la correlación mejoró a r = 0:83 para
+GSN y r = 0:65 para MH.
+Para entender mejor esta relación, realizamos
+un análisis de errores de los elementos léxicos que
+fueron sistemáticamente sobreproducidos o subproducidos por
+BERT en relación con su corpus de entrenamiento. Encontramos
+que ciertos signos de puntuación (p. ej., los paréntesis)
+estaban sobrerrepresentados tanto en las muestras GSN
+como en las muestras MH, mientras que las contracciones como ’s
+y ’d estaban subrepresentadas. Las muestras MH
+sobreproducían específicamente nombres propios como
+Nina y Jones. Por último, debido al uso de subpalabras
+encontramos una larga cola de palabras morfológicamente complejas
+que no aparecían en absoluto
+en el corpus de entrenamiento (p. ej., nombres como Kyftenberg
+o Streckenstein, y términos científicos aparentemente inventados
+como lymphoplasmic, neopomphorus o
+pyranolamines). 4.3 Distribuciones sintácticas
+Aunque las distribuciones léxicas estaban en general bien
+ajustadas en las muestras GSN, nuestro análisis de errores
+sugería una estructura potencial en las desviaciones. En
+otras palabras, construcciones gramaticales enteras pueden
+estar sobre- o subrepresentadas, no solo palabras concretas.
+Para investigar estos patrones, usamos
+la biblioteca spaCy para extraer las categorías gramaticales y
+relaciones de dependencia que están presentes en cada
+oración. Podemos entonces examinar, en conjunto,
+si ciertas clases de construcciones
+son responsables de forma desproporcionada de las desviaciones. Nuestros
+hallazgos se muestran en la Fig. 4. En conjunto, las
+distribuciones son cercanas, pero aparecen varias áreas de desajuste.
+En cuanto a las categorías gramaticales, observamos
+que el muestreador GSN sobreproduce ligeramente
+sustantivos (y nombres propios) mientras subproduce
+verbos y preposiciones. También observamos que sobreproduce
+dependencias relacionadas con sustantivos (p. ej.,
+sustantivos compuestos y modificadores apositivos, que son sintagmas nominales
+que modifican a otros sintagmas nominales, como en
+“Bill, mi hermano, visitó la ciudad”). Este patrón
+sugiere que la distribución a priori de BERT puede estar sesgada hacia
+sintagmas nominales (más simples) mientras descuida construcciones más
+complejas.
+4.4 Complejidad de las oraciones
+Una hipótesis que surge al comparar distribuciones
+de rasgos sintácticos es que BERT podría estar regularizando
+la estructura compleja de su entrada hacia
+0.000.250.500.751.00
+0 10 20 30
+CDF de la longitud de dependencia, combinado
+corpus GSN MH Figura 5: Distribución de probabilidad acumulada de las longitudes de dependencia
+en las oraciones de las cadenas de BERT y
+del corpus de entrenamiento.
+construcciones más simples. Para contrastar esta hipótesis,
+operacionalizamos la complejidad sintáctica mediante una medida
+conocida como la longitud media de dependencia de una
+oración (Futrell et al., 2015; Grodner y Gibson,
+2005). Esta medida captura la distancia (lineal) entre
+palabras sintácticamente relacionadas, que
+aumenta con estructuras frásicas incrustadas más complejas.
+Encontramos que la distribución de las distancias de dependencia
+en las oraciones producidas por el muestreo GSN
+es, en conjunto, más parecida a la de su corpus de entrenamiento
+que la del MH (Fig. 5), aunque
+un análisis más detallado sugiere que sigue siendo ligeramente sesgada
+hacia lo más simple (véase la Fig. S6).
+5 Juicios humanos
+Por último, aunque nuestras comparaciones con los corpus destacaron
+formas particulares en las que las muestras de la distribución a priori de BERT
+estaban bien calibradas con los estadísticos de alto nivel
+de su distribución de entrenamiento, no está claro si
+estas coincidencias o desviaciones ‘importan’ en términos de
+naturalidad. En esta sección, obtenemos juicios humanos de natu-
+ralidad para ofrecer una medida más holís-
+tica de la posible «rareza» con BERT
+oraciones.
+5.1 Métodos experimentales
+Reclutamos a 1016 hablantes de inglés con fluidez en la
+plataforma Prolific y les pedimos que juzgaran la natu-
+ralidad de 4040 oraciones únicas de tres clases de
+longitud: cortas (11 tokens), medianas (21 tokens),
+y largas (37 tokens). De estas oraciones, 1675 procedían
+del estado estacionario de las distintas cadenas,
+2339 procedían de la fase de burn-in (es decir, <1000
+épocas), y el resto eran oraciones de referencia
+(149 de Wikipedia, 48 de un modelo de 5 gramos y
+42 de un modelo LSTM; véase el Apéndice para más detalles).Cada participante vio una secuencia de 25 ora-
+ciones en orden aleatorio, equilibradas entre diferen-
+tes propiedades del conjunto de estímulos7. En cada ensayo,
+una de estas oraciones apareció con un control deslizante que iba
+de 0 («muy rara») a 100 («completamente natu-
+ral»)8. Tras excluir a 8 participantes que no superaron
+la verificación de atención (es decir, no calificaron con
+un valor menor que el punto medio de la escala una oración desordenada y
+una oración generada por humanos por encima del punto medio),
+quedaron en promedio 7.3 respuestas por
+oración.
+5.2 Resultados conductuales
+Comenzamos comparando la naturalidad de las ora-
+ciones de la distribución GSN estacionaria con
+otras referencias (véase la Fig. 6), usando un modelo de regre-
+sión lineal que predice los juicios ensayo por ensayo en función de
+variables categóricas que codifican la longitud de la ora-
+ción (corta, mediana, larga) y la fuente
+de la oración (Wikipedia, GSN, MH, LSTM o
+n-grama). Primero, encontramos que la naturalidad de las ora-
+ciones de GSN disminuye 14 puntos en longitudes mayores,
+p < 0:001, mientras que la natu-
+ralidad de las oraciones de Wikipedia no se ve afectada por la longitud
+(término de interacción, p <0:001), en línea con los re-
+sultados informados por Ippolito et al. (2020). Ade-
+más, entre las oraciones cortas, donde incluimos
+referencias adicionales, encontramos que las oraciones de GSN
+tienden a calificarse como algo menos naturales que las ora-
+ciones de Wikipedia (+10 puntos, p<0:001), pero
+más naturales que las producidas por un modelo n-grama
+(-52 puntos, p < 0:001), el modelo LSTM (-
+25 puntos, p<0:001); o el muestreo MH a partir de las
+mismas condicionales de BERT (-15 puntos, p <0:001;
+véase la Tabla S1). Las muestras MH también se deterioran signi-
+ficativamente en naturalidad en oraciones más largas en com-
+paración con las muestras de GSN ( p < 0:001). Por último,
+examinamos las calificaciones de naturalidad a lo largo del
+período de burn-in, y encontramos que las calificaciones disminuyen de forma constante en
+todo el conjunto a medida que la cadena da pasos adicionales (término
+lineal: t(7297) = 12:4; p < 0:001), lo que sugiere
+una desviación gradual de la distribución inicial de
+oraciones de Wikipedia hacia la distribución
+estacionaria (representada por las regiones verde y gris,
+respectivamente, en la Fig. S7).
+7En un lote posterior, aumentamos el número de oraciones
+por participante a 40. La tarea duró aproximadamente 10 minutos
+y a los participantes se les pagaron 2.50 $, para una compensación promedio
+de 15 $/h.
+8Véase Clark et al. (2021) para una discusión sobre los méritos de
+plantear la pregunta en términos de naturalidad en lugar de preguntar
+a los participantes si había sido producida por un humano o
+por una máquina.
+corta mediana largawiki
+GSN
+MH
+lstm
+ngram
+wiki
+GSN
+MH
+wiki
+GSN
+MH0255075100naturalidad mediaFigura 6: Calificaciones empíricas de naturalidad obtenidas de
+la distribución GSN estacionaria, comparadas con distintas
+referencias en diferentes longitudes de oración. Las barras de error son
+IC del 95% por bootstrap.
+5.3 Predicción de la naturalidad
+Dado que las oraciones de la distribución GSN estacionaria se juzgan
+como menos naturales que las generadas por humanos
+en conjunto, nos interesa
+explicar por qué. ¿Qué propiedades de estas ora-
+ciones las hacen sonar extrañas? Abordamos este
+problema entrenando un modelo de regresión para predecir
+los juicios humanos a partir de atributos de cada oración.
+Incluimos todos los recuentos de etiquetas de categoría gramatical y de depen-
+dencia, así como la probabilidad de la oración
+calificada bajo BERT, y la longitud de la oración. Usamos
+un procedimiento de selección hacia atrás de características con validación cruzada
+para seleccionar el conjunto más predictivo de estas
+características para una regresión lineal (Kuhn y Johnson,
+2013)9.
+El modelo mejor ajustado usó 26 características y
+alcanzó un R2 (ajustado) = 0:21. Las únicas carac-
+terísticas asociadas con calificaciones significativamente más bajas
+fueron el uso de adposiciones (p. ej., before, after)
+y de conjunciones coordinantes. Es importante señalar que
+encontramos que incluir una variable categórica de cor-
+pus (es decir, Wikipedia vs. GSN) mejoró significativamente el
+ajuste del modelo incluso después de controlar todas las demás
+características, χ²(1) = 7135; p < 0:001, lo que sugiere
+que las fuentes de la «rareza» no están siendo capturadas
+por las estadísticas habituales. Mostramos algunas de estas oraciones de baja
+naturalidad en la Tabla 1 y S2.
+6 Discusión
+6.1 Sondeo mediante generación
+Una idea central de nuestro enfoque de reproducción serial
+es usar la generación como una ventana hacia la distribución previa
+de un modelo sobre el lenguaje. Si bien se han propuesto diversas métricas
+9Específicamente, usamos el procedimiento lmStepAIC implemen-
+tado en el paquete caret de R, con k= 10 pliegues.y técnicas se han propuesto para cuantificar la
+«calidad» de la generación, especialmente en los dominios de
+generación de texto abierto y de sistemas de diálogo
+(Caccia et al., 2020; Li et al., 2020; Guidotti et al.,
+2018; Celikyilmaz et al., 2020), estas métricas han
+sido aplicadas típicamente para comparar algoritmos de genera-
+ción específicos y operacionalizar errores concretos,
+como la incoherencia, la repetición excesiva o la falta de
+diversidad. En consecuencia, ha sido difícil desen-
+redar en qué medida las desviaciones resultantes
+de las generaciones son un artefacto de algoritmos de decodifi-
+cación específicos (p. ej., búsqueda voraz vs. búsqueda en haz)
+o si provienen más profundamente de la propia distribución previa. Para los fines
+del sondeo, sugerimos que es importante preguntar
+no solo cómo generar las oraciones de mayor puntuación, sino
+también cómo generar oraciones que puedan interpretarse
+como representativas de la distribución previa del modelo, tal como
+lo han hecho de forma efectiva los resultados formales sobre las GSN.
+6.2 GSN vs. objetivos basados en energía
+Encontramos que la distribución previa producida por el
+muestreador GSN aproximaba más de cerca las distribuciones léxi-
+cas y sintácticas del corpus de referencia
+y además sonaba más «natural» para los humanos
+que las muestras producidas por MH. Estos resultados son
+opuestos a los hallazgos de Goyal et al. (2021), que muestran
+que MH produjo puntuaciones BLEU de alta calidad
+en una tarea de traducción automática (MT) en comparación con
+un muestreador (pseudo-)Gibbs degenerado. Hay
+varias razones posibles para esta discrepancia. Una
+posibilidad podría ser específica de la tarea: mientras nos centramos
+en la generación incondicional, Goyal et al. (2021)
+se centraron en una tarea de traducción automática neuronal (MT),
+donde la generación de oraciones siempre estaba condicionada
+a un texto fuente de alta calidad y, por tanto, permanecía
+dentro de una región restringida del espacio de oraciones. Otra
+posibilidad es que ejecutamos cadenas sustancialmente más largas
+(50 000 épocas frente a solo 33 épocas)
+y los errores del muestreo MH solo aparecieron más tarde
+en la cadena.
+En términos más generales, nuestras comparaciones de corpus y las eva-
+luaciones humanas sugieren limitaciones serias de métricas de «calidad» sim-
+ples, como las basadas en valores de energía. Encontramos
+que los estados de mayor puntuación eran a menudo mínimos locales
+degenerados con n-gramas que se respaldan mutuamente
+(como fases repetitivas y nombres como «Papúa
+Nueva Guinea»). De hecho, solo había una relación laxa
+entre las puntuaciones de energía y los juicios de los
+participantes en nuestro estudio, y muchas oraciones de peor
+puntuación fueron juzgadas más naturales que las de mejor
+puntuación (p. ej., en conjunto, la distribución
+de oraciones de Wikipedia tendía a tener puntuaciones mucho más bajas
+según la función de energía, a pesar de ser
+calificadas como más naturales). Validamos empíricamente
+que la distribución estacionaria de la cadena GSN
+aproxima con éxito incluso estadísticas de orden superior
+del corpus de referencia, lo que sugiere que las
+condicionales brutas de la red de dependencias pueden
+adquirir implícitamente la distribución conjunta, sin
+requerir garantías de consistencia.
+6.3 Otras arquitecturas
+Los métodos de reproducción serial son especialmente útiles
+para sondear modelos que no generan directamente
+muestras de su distribución previa. Para los modelos auto-regresivos
+como GPT-2, estas muestras se obtienen más
+directamente ejecutando el modelo hacia adelante (y, in-
+De hecho, el muestreo ancestral genera un texto que logra un mejor
+equilibrio entre precisión y exhaustividad que otros algoritmos
+; Pillutla et al., 2021). Aunque nos centramos
+en BERT, este método puede ser especialmente útil
+para arquitecturas codificador-decodificador como BART
+(Lewis et al., 2020), que se parecen más de cerca
+a la tarea humana del juego del teléfono, que requiere la reconstrucción
+completa de toda la oración a partir de una entrada ruidosa
+en lugar de la reconstrucción de una sola palabra faltante.
+De hecho, estas arquitecturas podrían superar una limitación im-
+portante de la reproducción en serie con BERT:
+porque estas cadenas operan sobre una longitud de secuencia fija,
+el prior resultante no abarca todo el lenguaje
+sino solo las oraciones con el número dado de
+tokens de WordPiece. Finalmente, aunque nos centramos en
+la generación incondicional, el muestreador GSN también
+se generaliza de forma directa a la generación condicional,
+en la que un subconjunto de posiciones está fijo y la
+posición enmascarada se elige del conjunto restante.
+6.4 Conclusiones
+Los paradigmas de reproducción en serie han sido centrales
+para exponer los priors humanos en las cien-
+cias cognitivas. En este artículo, nos basamos en la teoría
+del aprendizaje iterado y de las Generative Stochastic
+Networks (GSN) para exponer los priors de los grandes modelos neu-
+ronales de lenguaje, que suelen ser igualmente in-
+escrutables. Esperamos que trabajos futuros consideren otros
+puntos de contacto entre estas áreas y extraigan
+de forma más amplia la teoría desarrollada para com-
+prender las redes de dependencias. De forma más general, a medida que
+los modelos de lenguaje se vuelven cada vez más adaptativos y
+se despliegan en contextos cada vez menos restringidos,
+el sondeo ascendente tiene el potencial de revelar un
+espectro más amplio de «rarezas» que las
+evaluaciones descendentes basadas en benchmarks. Agradecimientos
+Este trabajo fue apoyado por la subvención NSF n.º 1911835
+a RDH. Agradecemos a Jay McClelland, Adele
+Goldberg y Stephan Meylan por conversaciones útiles,
+y a tres revisores anónimos por
+sus comentarios, que mejoraron nuestro trabajo.
+Referencias
+Frederic Charles Bartlett. 1932. Remembering: A study
+in experimental and social psychology. Cambridge
+University Press.
+Emily M Bender, Timnit Gebru, Angelina McMillan-
+Major, y Shmargaret Shmitchell. 2021. On the
+dangers of stochastic parrots: Can language models
+be too big? En Proceedings of the 2021 ACM Confer-
+ence on Fairness, Accountability, and Transparency,
+páginas 610–623.
+Yoshua Bengio, Eric Laufer, Guillaume Alain, y
+Jason Yosinski. 2014. Deep generative stochastic
+networks trainable by backprop. En International
+Conference on Machine Learning, páginas 226–234.
+PMLR.
+Yoshua Bengio, Li Yao, Guillaume Alain, y Pas-
+cal Vincent. 2013. Generalized denoising auto-
+encoders as generative models. Advances in neural
+information processing systems, 26.
+Aaron Beppu y Thomas Griffiths. 2009. Iterated
+learning and the cultural ratchet. En Proceedings of
+the Annual Meeting of the Cognitive Science Society,
+volumen 31.
+Mark Braverman, Xinyi Chen, Sham Kakade, Karthik
+Narasimhan, Cyril Zhang, y Yi Zhang. 2020. Cali-
+bration, entropy rates, and memory in language mod-
+els. En International Conference on Machine Learn-
+ing, páginas 1089–1099. PMLR.
+Tom B Brown, Benjamin Mann, Nick Ryder, Melanie
+Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda
+Askell, et al. 2020. Language models are few-shot
+learners. Advances in Neural Information Process-
+ing Systems, 34.
+Massimo Caccia, Lucas Caccia, William Fedus, Hugo
+Larochelle, Joelle Pineau, y Laurent Charlin.
+2020. Language GANs falling short. International
+Conference on Learning Representations.
+Aylin Caliskan, Joanna J Bryson, y Arvind
+Narayanan. 2017. Semantics derived automatically
+from language corpora contain human-like biases.
+Science, 356(6334):183–186.
+Asli Celikyilmaz, Elizabeth Clark, y Jianfeng Gao.
+2020. Evaluation of text generation: A survey.
+arXiv preprint arXiv:2006.14799.
+Elizabeth Clark, Tal August, Sofía Serrano, Nikita
+Haduong, Suchin Gururangan, y Noah A. Smith.
+2021. All that’s ‘human’ is not gold: Evaluating hu-
+man evaluation of generated text. En Proceedings of
+the 59th Annual Meeting of the Association for Com-
+putational Linguistics., páginas 7282–7296.
+Ishita Dasgupta, Demi Guo, Samuel J Gershman, y
+Noah D Goodman. 2020. Analyzing machine-
+learned representations: A natural language case
+study. Cognitive Science, 44(12):e12925.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, y
+Kristina Toutanova. 2018. BERT: Pre-training of
+deep bidirectional transformers for language under-
+standing. En Proceedings of NAACL-HLT.
+Allyson Ettinger. 2020. What bert is not: Lessons from
+a new suite of psycholinguistic diagnostics for lan-
+guage models. Transactions of the Association for
+Computational Linguistics, 8:34–48.
+Richard Futrell, Kyle Mahowald, y Edward Gibson.
+2015. Large-scale evidence of dependency length
+minimization in 37 languages. Proceedings of
+the National Academy of Sciences, 112(33):10336–
+10341.
+Nikhil Garg, Londa Schiebinger, Dan Jurafsky, y
+James Zou. 2018. Word embeddings quantify
+100 years of gender and ethnic stereotypes. Pro-
+ceedings of the National Academy of Sciences,
+115(16):E3635–E3644.
+Andrew Gelman, Donald B Rubin, et al. 1992. In-
+ference from iterative simulation using multiple se-
+quences. Statistical science, 7(4):457–472.
+Kartik Goyal, Chris Dyer, y Taylor Berg-Kirkpatrick.
+2021. Exposing the implicit energy networks behind
+masked language models via Metropolis–Hastings.
+arXiv preprint arXiv:2106.02736.
+Thomas L Griffiths y Michael L Kalish. 2007. Lan-
+guage evolution by iterated learning with Bayesian
+agents. Cognitive Science, 31(3):441–480.
+Daniel Grodner y Edward Gibson. 2005. Conse-
+quences of the serial nature of linguistic input for
+sentenial complexity. Cognitive Science, 29(2):261–
+290.
+Riccardo Guidotti, Anna Monreale, Salvatore Ruggieri,
+Franco Turini, Fosca Giannotti, y Dino Pedreschi.
+2018. A survey of methods for explaining black box
+models. ACM computing surveys (CSUR), 51(5):1–
+42.
+Kristina Gulordava, Piotr Bojanowski, Edouard Grave,
+Tal Linzen, y Marco Baroni. 2018. Colorless
+green recurrent networks dream hierarchically. En
+Proceedings of NAACL-HLT, página 1195–1205.
+Peter Harrison, Raja Marjieh, Federico Adolfi, Pol van
+Rijn, Manuel Anglada-Tort, Ofer Tchernichovski,
+Pauline Larrouy-Maestri, y Nori Jacoby. 2020. Gibbs sampling with people. Advances in Neural
+Information Processing Systems, 33.
+Robert Hawkins, Takateru Yamakoshi, Thomas Grif-
+fiths, y Adele Goldberg. 2020. Investigating rep-
+resentations of verb bias in neural language models.
+En Proceedings of the 2020 Conference on Empirical
+Methods in Natural Language Processing (EMNLP),
+páginas 4653–4663.
+Kenneth Heafield. 2011. Kenlm: Faster and smaller
+language model queries. En Proceedings of the sixth
+workshop on statistical machine translation, páginas
+187–197.
+David Heckerman, David Maxwell Chickering,
+Christopher Meek, Robert Rounthwaite, y Carl
+Kadie. 2000. Dependency networks for inference,
+collaborative filtering, and data visualization. Jour-
+nal of Machine Learning Research, 1(Oct):49–75.
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, y
+Yejin Choi. 2019. The curious case of neural text de-
+generation. International Conference on Learning
+Representations.
+Daphne Ippolito, Daniel Duckworth, Chris Callison-
+Burch, y Douglas Eck. 2020. Automatic detec-
+tion of generated text is easiest when humans are
+fooled. En Proceedings of the 58th Annual Meet-
+ing of the Association for Computational Linguistics,
+páginas 1808–1822.
+Michael L Kalish, Thomas L Griffiths, y Stephan
+Lewandowsky. 2007. Iterated learning: Intergener-
+ational knowledge transmission reveals inductive bi-
+ases. Psychonomic Bulletin & Review, 14(2):288–
+294.
+Reinhard Kneser y Hermann Ney. 1995. Improved
+backing-off for m-gram language modeling. En 1995
+international conference on acoustics, speech, and
+signal processing, volumen 1, páginas 181–184. IEEE.
+Max Kuhn y Kjell Johnson. 2013. An introduction
+to feature selection. En Applied predictive modeling,
+páginas 487–519. Springer.
+Tatsuki Kuribayashi, Yohei Oseki, Takumi Ito, Ryo
+Yoshida, Masayuki Asahara, y Kentaro Inui. 2021.
+Lower perplexity is not always human-like. En Pro-
+ceedings of the 59th Annual Meeting of the Asso-
+ciation for Computational Linguistics , páginas 5203–
+5217.
+Thomas A Langlois, Nori Jacoby, Jordan W Suchow,
+y Thomas L Grifﬁths. 2021. Serial reproduction
+reveals the geometry of visuospatial representations.
+Proceedings of the National Academy of Sciences ,
+118(13).
+Mike Lewis, Yinhan Liu, Naman Goyal, Mar-
+jan Ghazvininejad, Abdelrahman Mohamed, Omer
+Levy, Veselin Stoyanov, y Luke Zettlemoyer.
+2020. BART: Denoising sequence-to-sequence pre-
+training for natural language generation, translation,
+and comprehension. En Proceedings of the 58th An-
+nual Meeting of the Association for Computational
+Linguistics , páginas 7871–7880.
+Margaret Li, Stephen Roller, Ilia Kulikov, Sean
+Welleck, Y-Lan Boureau, Kyunghyun Cho, y Ja-
+son Weston. 2020. Don’t say that! making inconsis-
+tent dialogue unlikely with unlikelihood training. En
+Proceedings of the 58th Annual Meeting of the Asso-
+ciation for Computational Linguistics , páginas 4715–
+4728.
+Tal Linzen y Marco Baroni. 2021. Syntactic struc-
+ture from deep learning. Annual Review of Linguis-
+tics, 7(1).
+David McAllester. 2019. A consistency theorem for
+BERT. Consultado el 1 de noviembre de 2021 desde https:
+//machinethoughts.wordpress.com/2019/
+07/14/a-consistency-theorem-for-bert/ .
+Clara Meister y Ryan Cotterell. 2021. Language
+model evaluation beyond perplexity. En Proceedings
+of the 59th Annual Meeting of the ACL , páginas 5328–
+5339.
+Stephan C Meylan, Sathvik Nair, y Thomas L Grif-
+ﬁths. 2021. Evaluating models of robust word
+recognition with serial reproduction. Cognition ,
+210:104553.
+Jennifer Neville and David Jensen. 2007. Relational
+dependency networks. Journal of Machine Learning
+Research , 8(3):653–692.
+Krishna Pillutla, Swabha Swayamdipta, Rowan Zellers,
+John Thickstun, Sean Welleck, Yejin Choi, y Zaid
+Harchaoui. 2021. Mauve: Measuring the gap be-
+tween neural text and human text using divergence
+frontiers. Advances in Neural Information Process-
+ing Systems , 34.
+Anna N Rafferty, Thomas L Grifﬁths, and Dan Klein.
+2014. Analyzing the rate at which languages lose
+the inﬂuence of a common ancestor. Cognitive Sci-
+ence, 38(7):1406–1431.
+Julian Salazar, Davis Liang, Toan Q. Nguyen, y Ka-
+trin Kirchhoff. 2020. Masked language model scor-
+ing. En Proceedings of the 58th Annual Meeting
+of the Association for Computational Linguistics ,
+páginas 2699–2712.
+Adam N Sanborn, Thomas L Grifﬁths, y Richard M
+Shiffrin. 2010. Uncovering mental representations
+with Markov chain Monte Carlo. Cognitive psychol-
+ogy, 60(2):63–106.
+Janelle Shane. 2019. You look like a thing and I love
+you. Hachette UK.
+Shuntaro Takahashi and Kumiko Tanaka-Ishii. 2017.
+Do neural nets learn statistical laws behind natural
+language? PloS one , 12(12):e0189326.Shuntaro Takahashi and Kumiko Tanaka-Ishii. 2019.
+Evaluating computational language models with
+scaling properties of natural language. Computa-
+tional Linguistics , 45(3):481–513.
+Ian Tenney, Dipanjan Das, and Ellie Pavlick. 2019.
+BERT rediscovers the classical NLP pipeline. En
+Proceedings of ACL , página 4593–4601.
+Kristina Toutanova, Dan Klein, Christopher D Man-
+ning, y Yoram Singer. 2003. Feature-rich part-of-
+speech tagging with a cyclic dependency network.
+En Proceedings of the 2003 Human Language Tech-
+nology Conference of the North American Chapter
+of the Association for Computational Linguistics ,
+páginas 252–259.
+Alex Wang y Kyunghyun Cho. 2019. BERT has a
+mouth, and it must speak: BERT as a Markov Ran-
+dom Field language model. En Proceedings of the
+Workshop on Methods for Optimizing and Evaluat-
+ing Neural Language Generation (NeuralGen) , página
+30–36.
+Alex Warstadt, Alicia Parrish, Haokun Liu, Anhad Mo-
+hananey, Wei Peng, Sheng-Fu Wang, y Samuel R
+Bowman. 2020. Blimp: The benchmark of linguis-
+tic minimal pairs for english. Transactions of the As-
+sociation for Computational Linguistics , 8:377–392.
+Alex Warstadt, Amanpreet Singh, y Samuel R Bow-
+man. 2019. Neural network acceptability judgments.
+Transactions of the Association for Computational
+Linguistics , 7:625–641.
+Jing Xu y Thomas L Grifﬁths. 2010. A rational anal-
+ysis of the effects of memory biases on serial repro-
+duction. Cognitive psychology , 60(2):107–126.
+Apéndice A: Detalles de la línea base
+Las oraciones de Wikipedia se seleccionaron al azar a partir de
+el corpus completo de oraciones en inglés de Wikipedia, que
+se tokenizaron en 12, 21 y 37 tokens WordPiece para
+las condiciones corta, media y larga, respec-
+tivamente. Estas oraciones también se eligieron para abarcar un
+amplio rango de probabilidades de oración según BERT
+(i.e.logP(p1;:::;p n) =P
+klogP(pkjp k)).
+Para nuestra línea base de n-gramas, entrenamos un modelo de 5-gramas
+con suavizado Kneser-Ney (Kneser y
+Ney, 1995) sobre la Wikipedia en inglés con la biblioteca kenlm
+(Heaﬁeld, 2011), y generamos oraciones
+de longitud 10 mediante muestreo a partir de las distribuciones condi-
+cionales resultantes. Como este modelo eliminaba
+la puntuación y, por tanto, no podía emitir un
+token de “fin de oración”, esperábamos que sirviera como
+límite inferior en la escala de naturalidad.
+Para nuestra línea base LSTM, usamos la red
+preentrenada por Gulordava et al. (2018) sobre
+la Wikipedia en inglés. Este modelo fue entrenado para emitir un token
+de fin de oración ( <eos> ), lo que nos permitió el muestreo por recha-
+zo para obtener oraciones de exactamente 10
+palabras, sin palabras desconocidas (es decir, <unk> to-
+kens). Como no fue entrenado con un <start>
+token, sin embargo, tuvimos que inicializarlo con la
+primera palabra de la oración. Seleccionamos esta palabra inicial al azar
+de un pequeño conjunto de frases típicas de inicio de ora-
+ción (p. ej. the,a,it,his,her). Como
+resultado de nuestra selección del token inicial, este modelo no
+muestrea con precisión su verdadera distribución a priori sobre las ora-
+ciones. Por tanto, es mejor verlo como otra línea base
+de oraciones, y no como una cuidadosa
+comparación arquitectónica.
+Como pedíamos a los participantes que juzgaran
+la naturalidad de oraciones completas, no quisimos incluir muestras
+que violaran claramente la oracio-
+nalidad, ya que no serían informativas (p. ej.
+fragmentos de Wikipedia que se segmentaron incorrectamente y
+terminaban en una abreviatura, texto bibli-
+ográfico como “korsakov (1976) r.s.,” o una tabla
+en markdown con barras verticales, como “ jajbj”). Eliminamos automáti-
+camente cualquier oración que contuviera barras verticales o
+terminara en dos puntos o punto y coma, pues estas se asociaban
+con inconsistencias del segmentador de oraciones, así como
+con secuencias que contenían varias oraciones (se-
+gún nuestro segmentador). Finalmente, los autores
+hicieron una revisión manual para excluir otros
+fragmentos no oracionales del conjunto de estímulos.
+Apéndice B: Detalles del corpus
+Descargamos los datos de Wikipedia limpios proporcionados
+por GluonNLP (https://github.com/dmlc/gluon-
+nlp/tree/master/scripts/datasets/pretrain_corpus),
+y los datos de BookCorpus de HuggingFace Datasets
+(https://huggingface.co/datasets/bookcorpus).
+−60−40−200
+0100200300
+época, puntuación de oraciónFigura S1: Examinamos el tiempo de convergencia al inicia-
+lizar distintas cadenas en diferentes clases de oraciones
+(en rojo, alta probabilidad según la función de energía de BERT,
+en azul, baja probabilidad). Las líneas tenues muestran las tra-
+yectorias suavizadas de cadenas individuales, y las barras de error son boot-
+strapped, intervalos de confianza del 95% entre cadenas.
+sin mezcla
+mezcla MH
+mezcla GSN0.00.20.40.6
+010002000300040005000
+retardo (épocas)autocorrelación
+Figura S2: Los métodos MCMC como GSN y MH mues-
+treo tienden a quedarse atascados en regiones locales con alta auto-
+correlación. Encontramos que una autocorrelación mínima es
+alcanzable con un retardo menor (500 épocas entre mues-
+tras) usando un núcleo de mezcla con una probabil-
+idad constante de reiniciar la cadena. Las bandas de error muestran intervalos de con-
+fianza del 95%.
+término estimación error estándar estadístico valor p
+1 (Intercepto) 67.33 1.14 59.08 <0:001
+2 corto vs. largo (GSN) -14.49 1.60 -9.08 <0:001
+3 corto vs. medio (GSN) -10.21 1.60 -6.39 <0:001
+5 GSN vs. LSTM (corto) -28.60 2.04 -14.05 <0:001
+6 GSN vs. MH (corto) -14.76 1.59 -9.26 <0:001
+7 GSN vs. ngram (corto) -54.26 2.00 -27.07 <0:001
+8 GSN vs. wiki (corto) 10.40 1.70 6.13 <0:001
+13 interacción (corto vs. largo; GSN vs. MH) -12.31 2.23 -5.51 <0:001
+14 interacción (corto vs. medio; GSN vs. MH) -7.33 2.23 -3.29 <0:001
+17 interacción (corto vs. largo; GSN vs. wiki) 11.22 2.39 4.70 <0:001
+18 interacción (corta vs. media; GSN vs. wiki) 5.56 2.37 2.35 0.02
+Tabla S1: Estimaciones de efectos fijos para la regresión sobre las puntuaciones humanas. La clase de longitud y la fuente se codifican como variables ficticias, con
+longitudes cortas y GSN como referencias.
+mezcla base
+01000020000300004000050000010000200003000040000500000.000.250.500.751.00
+tasa de edición por paso
+Figura S3: Sin mezclar una probabilidad constante de volver a la distribución inicial, la cadena GSN (y MH
+cadena, no mostrada) atraviesa periodos de estancamiento con tasas de edición bajas (curvas rojas), lo que contribuye a una alta autocorrela-
+ciones.
+Figura S4: Distribución empírica de las longitudes de oración en los corpus de entrenamiento de Wikipedia y BookCorpus, tras la tokenización de Word-
+Piece. Para las comparaciones de corpus seleccionamos la longitud modal de oración de Wikipedia, de 21 tokens, y
+la longitud modal de BookCorpus, de 11 tokens. Para nuestro experimento de juicio humano incluimos oraciones de referencia
+solo de Wikipedia para las oraciones más cortas (12 tokens) y más largas (37 tokens), con prevalencia aproximadamente igual en
+el corpus (puntos naranjas).
+tipos de ejemplos de antinaturalidad
+nivel de carácter: Se acicaló sobre un Ldrink de cobre.
+nivel de frase semántico: El pequeño pájaro cantor de carúnculas, también llamado Chink Warbler,
+Orange Garver o Quickcumber es una especie de ave socialmente
+exuberante y habituada.
+nivel de construcción de oración: Hubo dos horas antes de que hiciera la caminata .
+palabra fuera de contexto: No hace falta concentrarse en andar en bicicleta .
+autocontradictorio: Los símbolos ()se leen como ()y()se escriben como
+( ), not as ().
+repetición: El colegio de artes y ciencias, contiguo a la
+escuela de negocios, se especializa en negocios.
+Vio a Cronus y Cronus, Cronus y James Cronus él
+vio a Cronus y Cronus y Cronus y Cronus Cronus
+cuando vio a Cronus.
+Tabla S2: Más ejemplos de oraciones del prior de BERT con calificaciones bajas de naturalidad.
+tokens de subpalabras
+tokens de palabras
+cadenas de BERT, texto del corpus. Figura S5: Hay una desalineación entre el espacio
+de oraciones obtenibles mediante una cadena BERT de longitud fija de to-
+ken (en tokens de subpalabras) y lenguaje natural
+oraciones de longitud fija (en palabras). Consideramos
+la distribución de las oraciones del corpus que son obtenibles
+a partir de una cadena BERT de longitud fija, que puede decodificarse en
+longitudes distintas en texto natural (flechas negras).
+0.0000.0250.0500.0750.100
+01020304050
+longitud de dependencia, densidad, combinada
+corpus gibbs mh
+Figura S6: Las distancias de dependencia son similares para ora-
+ciones muestreadas del prior de BERT y oraciones de
+su corpus de entrenamiento, pero la distribución de BERT es más
+bimodal y tiende a ser más simple.
+larga media corta alta baja
+0 2 4 60 2 4 60 2 4 6406080
+406080
+log1p(paso)empirical_stat_GSN_early Figura S7: Las oraciones se alejan gradualmente de la distribución inicial a lo largo del periodo de burn-in. La región verde claro
+representa el intervalo de confianza del 95% para la naturalidad media de las oraciones de Wikipedia, mientras que la región gris
+representa el mismo intervalo alrededor de la distribución estacionaria de la cadena convergida. La fila superior representa cadenas
+que se inicializan en estados de alta probabilidad, mientras que la fila inferior se inicializa en estados de baja probabilidad.

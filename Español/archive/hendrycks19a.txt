@@ -1,0 +1,843 @@
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+Dan Hendrycks1Kimin Lee2Mantas Mazeika3
+Resumen
+He et al. (2018) han cuestionado la
+utilidad del preentrenamiento al mostrar que entrenar
+desde cero puede producir a menudo un rendimiento similar
+al del preentrenamiento. Mostramos que, aunque
+el preentrenamiento puede no mejorar el rendimiento
+en las métricas tradicionales de clasificación, sí mejora
+la robustez del modelo y la estimación de la
+incertidumbre. Mediante amplios experimentos sobre la
+corrupción de etiquetas, el desbalance de clases, los ejemplos adversarios,
+la detección fuera de distribución y la calibración de la
+confianza, demostramos grandes ganancias gracias al
+preentrenamiento y efectos complementarios con métodos
+específicos de cada tarea. Mostramos una mejora de
+aproximadamente un 10 % absoluto sobre el
+estado del arte previo en robustez adversarial
+. En algunos casos, usar preentrenamiento sin
+métodos específicos también supera al
+estado del arte, lo que subraya la necesidad de preentrenar
+al evaluar métodos futuros en robustez
+e incertidumbre.
+1. Introducción
+El preentrenamiento es una técnica central en la investigación y las aplica-
+ciones de las redes neuronales convolucionales profundas (Krizhevsky
+et al., 2012). En la investigación, el preentrenamiento se aplica de manera ubicua
+en la detección y segmentación de objetos de última generación
+(He et al., 2017). Además, algunos investigadores
+buscan usar el preentrenamiento para crear «representaciones universales»
+que se transfieran a múltiples dominios (Rebuffi et al., 2017). En
+las aplicaciones, el paradigma «preentrenar y ajustar» es omnipresente,
+sobre todo cuando los datos de la tarea objetivo son muy escasos
+(Zeiler & Fergus, 2014). Esta técnica, de aplicación amplia,
+permite alcanzar una convergencia del modelo de última generación.
+Sin embargo, He et al. (2018) sostienen que la convergencia del modelo
+solo es más rápida con preentrenamiento, de modo que el beneficio en
+los conjuntos de datos modernos es solo una mejora del tiempo de cómputo real.
+1UC Berkeley2KAIST3University of Chicago. Corres-
+pondencia a: Dan Hendrycks <hendrycks@berkeley.edu >.
+Actas de la 36.ª Conferencia Internacional sobre Aprendizaje
+Automático, Long Beach, California, PMLR 97, 2019. Derechos de autor
+2019 de los autores. Sorprendentemente, el preentrenamiento no aporta ninguna mejora de rendimiento
+en diversas tareas y arquitecturas frente a entrenar desde
+cero, siempre que el modelo se entrene durante el tiempo suficiente. Incluso
+los modelos entrenados desde cero con solo el 10 % del conjunto COCO
+(Lin et al., 2014) alcanzan el mismo rendimiento que los
+modelos preentrenados. Esto pone en duda nuestra comprensión del preentrenamiento
+y plantea la importante pregunta de si existen usos del preentrenamiento
+más allá de afinar con conjuntos de datos
+extremadamente pequeños. Concluyen que, con los conjuntos de datos modernos,
+el preentrenamiento con ImageNet no es necesario.
+En este trabajo demostramos que el preentrenamiento no es
+innecesario. Aunque He et al. (2018) tienen razón en que los modelos
+para tareas tradicionales, como la clasificación, funcionan bien
+sin preentrenamiento, pero el preentrenamiento mejora sustancialmente
+la calidad de diversos componentes complementarios del modelo.
+Por ejemplo, mostramos que, aunque la precisión puede no cambiar de forma notable
+con el preentrenamiento, lo que sí mejora enormemente es
+con el preentrenamiento la robustez adversarial del modelo.
+. Además, aunque entrenar durante más tiempo
+con conjuntos de datos limpios permite que los modelos sin preentrenamiento alcancen
+a los demás, pero entrenar durante más tiempo con un conjunto de datos corrupto lleva
+a la degradación del modelo. Y la afirmación de que «el preentrenamiento
+no necesariamente ayuda a reducir el sobreajuste» (He et al.,
+2018) es válida cuando solo se mide la precisión del modelo,
+pero se hace evidente que el preentrenamiento sí reduce
+el sobreajuste cuando también se mide la calibración del modelo. Demostramos
+que el preentrenamiento aclara las dudas planteadas sobre él
+al mostrar que puede mejorar la robustez del modelo frente a
+la corrupción de etiquetas (Sukhbaatar et al., 2014), el desbalance de clases
+(Japkowicz, 2000) y los ataques adversarios (Szegedy et al.,
+2014); además, mejora las estimaciones de incertidumbre
+para la detección fuera de distribución (Hendrycks & Gimpel,
+2017b) y la calibración (Nguyen & O’Connor, 2015),
+aunque no necesariamente en las métricas tradicionales de precisión.
+El preentrenamiento produce mejoras tan significativas que en
+muchas tareas de robustez e incertidumbre superamos al estado del
+arte. Incluso encontramos que el preentrenamiento
+por sí solo mejora las técnicas diseñadas para una tarea específica.
+Cabe señalar que los experimentos en estas tareas suelen pasar por alto
+el preentrenamiento, aunque este es omnipresente en otros
+ámbitos. Esto es problemático, ya que encontramos que hay técnicas
+que no se combinan bien con el preentrenamiento; por tanto,
+algunas evaluaciones de la robustez son menos representativas de
+el rendimiento en el mundo real de lo que se pensaba. Así, los investi-
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+0 50 100 150 200
+Época405060708090100Error (%)CIFAR-100, corrupción uniforme de etiquetas
+Error de entrenamiento
+Error de prueba
+Figura 1. Entrenar durante más tiempo no es una estrategia adecuada para la corrupción de etiquetas.
+Al entrenar durante más tiempo, la red acaba por empezar a modelar y memorizar
+el ruido de las etiquetas, lo que perjudica su rendimiento general.
+Las etiquetas se corrompen de forma uniforme hacia clases incorrectas
+con una probabilidad del 60 %, y el clasificador Wide Residual Network
+tiene caídas de la tasa de aprendizaje en las épocas 80, 120 y 160.
+Los investigadores harían bien en adoptar el paradigma «preentrenar y ajustar»
+para lograr un mayor rendimiento y un mayor realismo.
+2. Trabajos relacionados
+Preentrenamiento. Es bien sabido que el preentrenamiento mejora
+la generalización cuando el conjunto de datos de la tarea objetivo
+es muy pequeño. Trabajos previos sobre aprendizaje por transferencia han
+analizado las propiedades de este efecto, como cuándo debe detenerse
+el ajuste fino (Agrawal et al., 2014) y qué capas
+deben ajustarse (Yosinski et al., 2014). En una serie de
+estudios de ablación, Huh et al. (2016) muestran que los beneficios del
+preentrenamiento son robustos frente a variaciones significativas del conjunto de datos
+usado para el preentrenamiento, incluida la eliminación de clases re-
+lacionadas con la tarea objetivo. En nuestro trabajo observamos una robustez similar
+ante cambios en el conjunto de datos usado para el preentrenamiento.
+El preentrenamiento también se ha usado cuando el conjunto de datos de la tarea
+objetivo es grande, como Microsoft COCO (Lin et al., 2014)
+para la detección y segmentación de objetos. Sin embargo, en un trabajo reciente
+He et al. (2018) muestran que el preentrenamiento solo acelera
+la convergencia en estas tareas, y las mejoras reales de rendimiento
+desaparecen si se entrena desde cero durante el tiempo suficiente, incluso con
+solo el 10 % de los datos de la tarea objetivo. Concluyen
+que el preentrenamiento no es necesario para estas tareas. Además,
+Sun et al. (2017) muestran que las ganancias de precisión al aumentar
+los datos disminuyen exponencialmente, lo que limita severamente la
+utilidad del preentrenamiento para mejorar las métricas de rendimiento
+en tareas tradicionales. En cambio, mostramos que el preentrenamiento
+sí mejora notablemente la robustez y la incertidumbre del modelo.
+Robustez. El aprendizaje en presencia de etiquetas corruptas
+ha sido bien estudiado. En el contexto del aprendizaje profundo, Sukhbaatar et al. (2014) estudian el uso de una ma-
+triz estocástica que codifica el ruido de las etiquetas, aunque señalan que esta ma-
+triz es difícil de estimar. Patrini et al. (2017) proponen un
+procedimiento de entrenamiento en dos pasos para estimar esta matriz estocástica
+y entrenar un clasificador corregido. Estos enfoques son
+ampliados por Hendrycks et al. (2018), quienes consideran disponer de
+un pequeño conjunto de ejemplos limpiamente etiquetados,
+y aprovechar esos datos confiables para mejorar el rendimiento.
+Zhang & Sabuncu (2018) muestran que las redes se sobreajustan a
+las etiquetas incorrectas cuando se entrenan durante demasiado tiempo (Figura 1).
+Esta observación sugiere el preentrenamiento como una posible solución,
+ya que basta con ajustar durante un período corto para alcanzar
+un buen rendimiento. Mostramos que el preentrenamiento no solo mejora el
+rendimiento sin corrección de etiquetas, sino también
+complementa los métodos propuestos en trabajos previos. Cabe señalar también
+que la mayoría de los trabajos previos (Goldberger & Ben-Reuven, 2017;
+Ma et al., 2018; Han et al., 2018) solo experimentan con
+imágenes a pequeña escala, ya que las demostraciones de corrupción de etiquetas
+pueden requerir entrenar cientos de modelos (Hendrycks et al.,
+2018). Como el preentrenamiento suele reservarse para conjuntos de datos a gran
+escala, estos trabajos no exploran el impacto del pre-
+entrenamiento.
+Las redes tienden a no modelar bien las clases subrepresentadas,
+lo que puede afectar la equidad del clasificador con las clases subre-
+grupos subrepresentados. Para tratar el desbalance de clases, en la literatura se han investigado muchas
+estrategias de entrenamiento se han investigado en la literatura. Una
+dirección consiste en reequilibrar un conjunto de entrenamiento desbalanceado. Para
+ello, He & Garcia (2008) proponen eliminar muestras
+de las clases mayoritarias, mientras que Huang et al. (2016)
+replican muestras de las clases minoritarias. La generación
+de muestras sintéticas mediante interpolación lineal entre
+muestras de datos de la misma clase minoritaria se ha estudiado
+en Chawla et al. (2002). Un enfoque alternativo
+es modificar la función de pérdida supervisada. El costo
+del aprendizaje sensible (Japkowicz, 2000) equilibra la pérdida
+ponderando cada muestra según el inverso
+de la frecuencia de su clase. Huang et al. (2016) y Dong et al.
+(2018) demuestran que ampliar el margen de un clasificador
+ayuda a mitigar el problema del desbalance de clases. Sin embargo,
+adoptar estos métodos de entrenamiento suele implicar diversos costos
+de tiempo y memoria.
+La susceptibilidad de las redes neuronales a pequeñas perturbaciones de entrada
+elegidas de forma adversarial ha recibido mucha aten-
+ción. A lo largo de los años se han propuesto muchos métodos como
+defensas frente a ejemplos adversarios (Metzen et al., 2017;
+Hendrycks & Gimpel, 2017a), pero a menudo se eluden
+en poco tiempo (Carlini & Wagner, 2017). De hecho,
+la única defensa ampliamente reconocida por haber resistido la prueba
+del tiempo es el procedimiento de entrenamiento adversarial de Madry et al.
+(2018). En este algoritmo, los ejemplos adversarios de caja blanca
+se generan en cada paso del entrenamiento y sustituyen
+a los ejemplos normales. Esto proporciona cierta
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-100, sin corrección
+Normal
+Preentrenamiento
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-100, corrección hacia adelante
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-100, GLC 5 % confiable
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-10, sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-10, corrección hacia adelante
+0.0 0.2 0.4 0.6 0.8 1.0
+Fuerza de la corrupción020406080100Error de prueba (%)
+CIFAR-10, GLC 5 % confiable
+Figura 2. Curvas de error de los métodos de corrección del ruido de etiquetas con entrenamiento desde cero y con preentrenamiento, en todo el rango de fuerzas de corrupción de
+etiquetas. Para la línea base Sin corrección, usar preentrenamiento produce una pendiente de degradación visiblemente mejor, con un
+codo más pronunciado a fuerzas de corrupción mayores. Esto también ocurre en las combinaciones complementarias del preentrenamiento con
+métodos de corrección propuestos previamente.
+robustez adversarial, pero requiere tiempos de entrenamiento sustancialmente más largos.
+Sin embargo, en un trabajo posterior, Schmidt et al. (2018) sostienen que
+un mayor avance en este problema podría requerir datos específicos de la tarea
+en cantidad significativamente mayor. Sin embargo, dado que los datos de una
+distribución diferente pueden ser beneficiosos para una tarea dada (Huh
+et al., 2016), es concebible que la necesidad de datos específicos de la tarea
+pudiera eliminarse con el preentrenamiento.
+Incertidumbre. Aunque las redes profundas han alcanzado
+una alta precisión en muchas tareas de clasificación, medir
+la incertidumbre de sus predicciones sigue siendo un problema desafiante.
+Obtener una incertidumbre predictiva bien calibrada
+podría ser útil en muchas aplicaciones de aprendizaje automático, como
+la medicina o los vehículos autónomos. Las estimaciones de incertidumbre
+deben ser útiles para detectar muestras fuera de distribución.
+Hendrycks & Gimpel (2017b) proponen tareas de detección fuera de
+distribución y usan el valor máximo de la distribución de un clasificador
+softmax como método de referencia. Lee et al.
+(2018b) proponen puntuaciones basadas en la distancia de Mahalanobis, que
+caracterizan las muestras fuera de distribución usando características ocultas.
+Lee et al. (2018a) proponen usar una GAN (Goodfellow
+et al., 2014) para generar muestras fuera de distribución; la
+red aprende a asignar baja confianza a estas muestras generadas por GAN.
+Hendrycks et al. (2019) demuestran que usar imágenes atípicas
+no específicas, reales y diversas, o textos, en lugar de muestras generadas por GAN,
+puede permitir que los clasificadores y los estimadores de densidad mejoren
+su rendimiento en la detección fuera de distribución y en la calibración. Guo
+et al. (2017) muestran que las redes actuales pueden descalibrarse fácilmente
+sin regularización adicional,
+y nosotros mostramos que el preentrenamiento puede proporcionar una regularización útil.
+3. Robustez
+Conjuntos de datos. Para los siguientes experimentos de robustez, evaluamos
+con CIFAR-10 y CIFAR-100 (Krizhevsky &
+Hinton, 2009). Estos conjuntos de datos contienen imágenes en color de 32×32,
+con 60 000 imágenes divididas en 50 000 para
+entrenamiento y 10 000 para prueba. CIFAR-10 y CIFAR-
+100 tienen 10 y 100 clases, respectivamente. Para el pre-
+entrenamiento usamos ImageNet reducido (Chrabaszcz
+et al., 2017), que es el conjunto ImageNet de 1000 clases
+(Deng et al., 2009) redimensionado a una resolución de 32×32. Para
+los experimentos de ablación, eliminamos 153 clases relacionadas con CIFAR-10
+del conjunto ImageNet reducido. En este
+artículo ajustamos toda la red. El código está disponible en
+github.com/hendrycks/pre-training .
+3.1. Robustez frente a la corrupción de etiquetas
+Configuración. En la tarea de clasificación bajo corrupción de etiquetas
+el objetivo es aprender un clasificador lo mejor posible
+en un conjunto de datos con etiquetas corruptas. De acuerdo con trabajos previos
+(Sukhbaatar et al., 2014) nos centramos en la clasificación multiclase.
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+Tabla 1. Resultados de robustez frente a la corrupción de etiquetas con y sin preentrenamiento. Cada valor es el área bajo la curva de error que resume
+el rendimiento en 11 fuerzas de corrupción. Menor es mejor. Todos los valores son porcentajes. El preentrenamiento mejora mucho el rendimiento, en algunos
+casos reduciendo a la mitad el error, e incluso puede superar a la corrección hacia adelante específica de la tarea.
+CIFAR-10 CIFAR-100
+Entrenamiento normal Preentrenamiento Entrenamiento normal Preentrenamiento
+Sin corrección 28.7 15.9 55.4 39.1
+Corrección hacia adelante 25.5 15.7 52.6 42.8
+GLC (5 % confiable) 14.0 7.2 46.8 33.7
+GLC (10 % confiable) 11.5 6.4 38.9 28.4
+sificación. Sean x, y e ỹ una entrada, una etiqueta limpia y la etiqueta po-
+tencialmente corrupta, respectivamente. Las etiquetas toman valores de
+1 a K. Dado un conjunto de datos D de pares (x; ỹ) con x
+extraído de p(x) y ỹ extraído de p(ỹ|y; x), la tarea es
+predecir arg máx_y p(y|x).
+Para experimentar con una variedad de severidades de corrupción, corrompemos
+la etiqueta verdadera con una probabilidad dada hacia una clase
+incorrecta elegida al azar. Formalmente, generamos etiquetas corruptas con una
+matriz de probabilidades de corrupción de referencia
+C, donde C_ij = p(ỹ = j | y = i) es la probabilidad de
+corromper un ejemplo con la etiqueta i hacia la etiqueta j. Dada una fuerza de
+corrupción s, construimos C con (1 − s)I + s11ᵀ/K,
+siendo I la matriz identidad K×K. Para medir el rendimiento,
+usamos el área bajo la curva que grafica el error de prueba frente a la fuerza de
+corrupción. Esta se genera mediante interpolación lineal
+entre los errores de prueba en fuerzas de corrupción de 0 a 1 en
+incrementos de 0.1, lo que resume un total de 11 experimentos.
+Métodos. Primero consideramos la línea base de entrenar desde
+cero. Esta se denota como Entrenamiento normal en la Tabla 1.
+También consideramos métodos de vanguardia para la clasificación
+con ruido de etiquetas. El método Forward de Patrini et al.
+(2017) usa un procedimiento de entrenamiento en dos etapas. La primera etapa
+estima la matriz C que describe el ruido de etiquetas esperado,
+y la segunda etapa entrena un clasificador corregido para pre-
+decir la distribución de la etiqueta limpia. También consideramos el método Gold
+Loss Correction (GLC) de Hendrycks et al. (2018),
+que supone acceso a un conjunto pequeño y confiable de datos limpiamente
+etiquetados (de referencia de oro), también conocido como
+un escenario semiverificado (Charikar et al., 2017). Este método
+también intenta estimar C. Para este método especificamos
+la «fracción confiable», que es la fracción de los datos de entrenamiento disponibles
+que se considera confiable o que se sabe que está etiquetada limpiamente.
+En todos los experimentos usamos Wide Residual Networks 40-2,
+SGD con momento de Nesterov y una tasa de aprendizaje coseno
+(Loshchilov & Hutter, 2016). Los experimentos «Normal» se
+entrenan durante 100 épocas con una tasa de aprendizaje de 0.1
+y usan dropout con una tasa de 0.3, como en Zagoruyko
+& Komodakis (2016). Los experimentos con preentrenamiento
+entrenan durante 10 épocas sin dropout y usan una tasa de aprendizaje
+de 0.001 en el experimento «Sin corrección» y de 0.01 en los experimentos con correcciones de ruido de etiquetas. Encontramos que
+los últimos experimentos requirieron una tasa de aprendizaje mayor debido
+a la varianza introducida por las correcciones con matriz estocástica.
+La mayoría de las elecciones de parámetros y de arquitectura se repiten en las secciones
+posteriores de este artículo. Los resultados están en la Tabla 1.
+Análisis. En todos los experimentos, el preentrenamiento produce grandes mejoras de
+rendimiento frente a los modelos entrenados desde cero. Sin
+corrección, observamos una reducción relativa del 45 % en el área
+bajo la curva de error en CIFAR-10 y una reducción del 29 % en
+CIFAR-100. Estas mejoras superan a las del método específico de la
+tarea, el método Forward. Por ello, en el escenario sin
+datos confiables, el preentrenamiento alcanza un nuevo estado del arte
+con AUC de 15.9 % y 39.1 % en CIFAR-10 y CIFAR-100,
+respectivamente. Estos resultados son estables, ya que el preentrenamiento
+con ImageNet reducido y sin las clases relacionadas con CIFAR-10
+produce un AUC similar en CIFAR-10 de 14.5 %.
+Además, comprobamos que estas ganancias no se pueden obtener
+simplemente entrenando durante más tiempo. Como se muestra en la Figura 1, entrenar
+durante mucho tiempo con etiquetas corruptas en realidad perjudica
+el rendimiento, porque la red memoriza de forma destructiva la
+desinformación de las etiquetas incorrectas.
+También observamos ganancias complementarias al combinar el preentre-
+namiento con métodos de corrección de ruido de etiquetas propuestos previamente.
+En particular, usar preentrenamiento junto con el GLC en CIFAR-10
+con una fracción confiable del 5 % reduce a la mitad el área
+bajo la curva de error. Además, usar preentrenamiento
+con la misma cantidad de datos confiables produce mejoras de
+rendimiento mayores que duplicar la cantidad de datos confiables,
+lo que permite alcanzar un nivel de rendimiento objetivo
+con la mitad de datos confiables. Cualitativamente, la Figura 2
+muestra que el preentrenamiento suaviza la degradación del
+rendimiento a medida que aumenta la fuerza de corrupción.
+Es importante señalar que, aunque el preentrenamiento sí tiene efectos
+aditivos sustanciales sobre el rendimiento con el método Forward de
+corrección, encontramos que el preentrenamiento sin corrección
+produce un rendimiento superior. Esta observación implica que
+las futuras investigaciones sobre corrupción de etiquetas deben evaluar con
+redes preentrenadas, de lo contrario los investigadores podrían desarrollar méto-
+dos que resulten subóptimos.
+Observamos que el preentrenamiento también produce mejoras sustanciales
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+Tabla 2. Resultados experimentales en los conjuntos de datos CIFAR-10 y CIFAR-100 desbalanceados.
+Conjunto de datos Método Razón de desbalance 0.2 0.4 0.6 0.8 1.0 1.5 2.0
+Tasa de error total de prueba / error de prueba en clases minoritarias (%) CIFAR-10 Entrenamiento normal 23.7 / 26.0 21.8 / 26.5 21.1 / 25.8 20.3 / 24.7 20.0 / 24.5 18.3 / 23.1 15.8 / 20.2
+Costo sensible 22.6 / 24.9 21.8 / 26.2 21.1 / 25.7 20.2 / 24.3 20.2 / 24.6 18.1 / 22.9 16.0 / 20.1
+Sobremuestreo 21.0 / 23.1 19.4 / 23.6 19.0 / 23.2 18.2 / 22.2 18.3 / 22.4 17.3 / 22.2 15.3 / 19.8
+SMOTE 19.7 / 21.7 19.7 / 24.0 19.2 / 23.4 19.2 / 23.4 18.1 / 22.1 17.2 / 22.1 15.7 / 20.4
+Preentrenamiento 8.0 / 8.8 7.9 / 9.5 7.6 / 9.2 8.0 / 9.7 7.4 / 9.1 7.4 / 9.5 7.2 / 9.4 CIFAR-100 Entrenamiento normal 69.7 / 72.0 66.6 / 70.5 63.2 / 69.2 58.7 / 65.1 57.2 / 64.4 50.2 / 59.7 47.0 / 57.1
+Costo sensible 67.6 / 70.6 66.5 / 70.4 62.2 / 68.1 60.5 / 66.9 57.1 / 64.0 50.6 / 59.6 46.5 / 56.7
+Sobremuestreo 62.4 / 66.2 59.7 / 63.8 59.2 / 65.5 55.3 / 61.7 54.6 / 62.2 49.4 / 59.0 46.6 / 56.9
+SMOTE 57.4 / 61.0 56.2 / 60.3 54.4 / 60.2 52.8 / 59.7 51.3 / 58.4 48.5 / 57.9 45.8 / 56.3
+Preentrenamiento 37.8 / 41.8 36.9 / 41.3 36.2 / 41.7 36.4 / 42.3 34.9 / 41.5 34.0 / 41.9 33.5 / 42.2
+mejoras al cambiar la Wide ResNet por una
+All Convolutional Network (Springenberg et al., 2014). En
+el escenario Sin corrección, el área bajo las curvas de error en
+CIFAR-10 para el entrenamiento normal y el preentrenamiento son 23.7 %
+y 14.8 %, respectivamente. En CIFAR-100 son 46.5 %
+y 41.0 %, respectivamente. Además, al ajustar finamente una
+Wide ResNet con Places365 reducido de la misma forma
+que ImageNet en los experimentos anteriores, obtenemos áreas
+bajo las curvas de error de 19.3 % y 49.5 %, frente a
+28.7 % y 55.4 % con el entrenamiento normal. Estos experi-
+mentos demuestran la generalizabilidad de nuestros resultados en
+arquitecturas y conjuntos de datos usados para el preentrenamiento.
+3.2. Robustez frente al desbalance de clases
+En la mayoría de los problemas de clasificación del mundo real, algunas clases
+son más abundantes que otras, lo que naturalmente da lugar a
+desbalance de clases (Van Horn et al., 2018). Desafortunadamente,
+las redes profundas tienden a modelar las clases prevalentes a expensas de las
+clases minoritarias. No tiene por qué ser así. Las redes profundas
+son capaces de aprender tanto las clases prevalentes como las
+minoritarias, pero para lograrlo han sido necesarios enfoques específicos de la
+tarea. En esta sección mostramos
+que el preentrenamiento también puede ser útil para manejar mejor esos escenarios des-
+balanceados que los enfoques creados específicamente para esta tarea
+(Japkowicz, 2000; Chawla et al., 2002;
+Huang et al., 2016; Dong et al., 2018).
+Configuración. De manera similar a Dong et al. (2018), simulamos el desbalance de clases
+con un modelo de ley de potencias. Concretamente, fijamos
+el número de muestras de entrenamiento para una clase c de la siguiente forma,
+nc=ba=(b+ (c 1)
+))e, donde be es la función de redondeo entero,
+de redondeo, 
+representa una razón de desbalance, y a y b
+son parámetros de desplazamiento que especifican los tamaños de clase mayor y
+menor. Nuestros datos de entrenamiento adoptan una distribución de clases de ley de potencias
+a medida que la razón de desbalance 
+disminuye. Probamos
+7 grados diferentes de desbalance; específicamente, 
+2
+{0.2; 0.4; 0.6; 0.8; 1.0; 1.5; 2.0} y (a; b) se fijan para forzar
+(max_c n_c; min_c n_c) a valer (5000; 250) para CIFAR-10
+y (500; 25) para CIFAR-100. Una clase se define como clase minoritaria si su tamaño es menor que el tamaño medio de clase.
+Para la evaluación, medimos las tasas medias de error en el conjunto de prueba
+de todas las clases y las tasas de error de las clases minoritarias.
+1 2 3 4 5 6 7 8 910
+Número de clase0510152025303540Error de prueba (%)
+Tasas de error por clase
+Normal
+Costo sensible
+Sobremuestreo
+SMOTE
+Figura 3. Las tasas de error de prueba por clase son menores en todas las clases
+con preentrenamiento. Aquí el conjunto de datos desbalanceado es una modificación de CIFAR-10
+con razón de desbalance 
+= 0:2.
+Métodos. Los métodos de referencia para el desbalance de clases son
+los siguientes. El entrenamiento normal es el enfoque convencional de
+entrenar desde cero con pérdida de entropía cruzada. Sobremues-
+treo (Japkowicz, 2000) es un método de remuestreo para construir
+un conjunto de entrenamiento balanceado antes del aprendizaje, aumentando
+las muestras de las clases minoritarias mediante replicación aleatoria.
+SMOTE (Chawla et al., 2002) es un método de sobremuestreo
+que usa muestras sintéticas interpolando linealmente con
+vecinos. Costo sensible (Huang et al., 2016) introduce
+pesos adicionales en la función de pérdida para cada clase, pro-
+porcionales a la inversa de la frecuencia de clase.
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+Tabla 3. Precisiones adversariales de modelos entrenados desde cero, con entrenamiento adversarial, y con entrenamiento adversarial con preentrenamiento.
+Todos los valores son porcentajes. Los modelos preentrenados tienen una precisión limpia comparable a la de los modelos entrenados adversarialmente desde cero, como
+lo sugieren He et al. (2018), pero el preentrenamiento puede mejorar notablemente la precisión adversarial.
+CIFAR-10 CIFAR-100
+Limpio Adversarial Limpio Adversarial
+Entrenamiento normal 96.0 0.0 81.0 0.0
+Entrenamiento adversarial 87.3 45.8 59.1 24.3
+Preentrenamiento adv. y ajuste 87.1 57.4 59.2 33.5
+Aquí usamos Wide Residual Networks 40-2, SGD con momento de Nes-
+terov y un programa de tasa de aprendizaje coseno. Los
+experimentos con preentrenamiento entrenan durante 50 épocas sin
+dropout y usan una tasa de aprendizaje de 0.001, y los experi-
+mentos con otras líneas base entrenan durante 100 épocas con una
+tasa de aprendizaje de 0.1 y usan dropout con una tasa de 0.3.
+Análisis. La Tabla 2 muestra que el preentrenamiento por sí solo mejora significativamente
+las tasas de error de prueba en comparación con los
+métodos específicos de la tarea, que pueden implicar costosos ir y venir
+costos, que requieren tiempo y memoria adicionales de entrenamiento.
+Aquí cabe señalar que buena parte de la ganancia del preentrenamiento proviene
+de las bajas tasas de error de prueba en las clases minoritarias (es decir, aquellas
+con índices de clase mayores), como se muestra en la Figura 3. Ade-
+más, si ajustamos una red en CIFAR-10 que está preentrenada
+con ImageNet reducido y sin las clases relacionadas con CIFAR-10,
+la tasa total de error aumenta solo un 2.1 % en com-
+paración con el preentrenamiento en todas las clases. En cambio, la dif-
+erencia entre el preentrenamiento y SMOTE es de 12.6 %. Esto
+implica que el preentrenamiento es de hecho útil para mejorar la ro-
+bustez frente al desbalance de clases.
+3.3. Robustez frente a perturbaciones adversariales
+Configuración. Las redes profundas son notablemente inestables y menos ro-
+bustas que el sistema visual humano (Geirhos et al., 2018;
+Hendrycks & Dietterich, 2019). Por ejemplo, una red
+puede producir una predicción correcta para una imagen limpia, pero
+si la imagen se perturba con cuidado, su veredicto puede
+cambiar por completo (Szegedy et al., 2014). Esto ha llevado a los investi-
+gadores a defender las redes frente al ruido «adversarial»
+con una norma ℓp pequeña, de modo que las redes generalicen correctamente
+a imágenes con una perturbación aplicada en el peor caso.
+Casi todas las defensas adversariales han sido vulneradas (Carlini &
+Wagner, 2017), y la robustez adversarial para clasificadores de imágenes
+a gran escala sigue siendo esquiva (Engstrom et al., 2018).
+La excepción es que el entrenamiento adversarial al estilo de
+Madry et al. (2018) ha tenido un éxito parcial para defender
+clasificadores de imágenes a pequeña escala frente a perturbaciones ℓ1
+. Siguiendo su trabajo y usando su procedimiento de entrenamiento
+adversarial de vanguardia, experimentamos con imágenes CIFAR
+y suponemos que el adversario puede corromper imágenes con perturbaciones de norma ℓ1 menor o igual que 8/255.
+La tasa de aprendizaje inicial es 0.1 y la tasa de aprendizaje decae
+siguiendo un programa de tasa de aprendizaje coseno. Entrenamos de forma adversarial
+el modelo frente a un adversario de 10 pasos durante 100 épocas
+y lo evaluamos frente a adversarios sin objetivo de 20 pasos. Resultados adicionales
+con adversarios de 100 pasos y reinicios aleatorios se encuentran en
+el material suplementario. Salvo que se indique otra cosa,
+usamos Wide Residual Networks 28-10, ya que las redes de alta capacidad entrenadas
+de forma adversarial presentan mayor robustez adversarial
+(Kurakin et al., 2017; Madry et al., 2018).
+Análisis. Podría parecer razonable esperar que el preentre-
+namiento no mejorara la robustez adversarial. En primer lugar,
+casi todas las defensas adversariales fallan, e incluso algunos métodos de entrenamiento adver-
+sarial pueden fallar también (Engstrom et al., 2018).
+Las defensas adversariales actuales dan lugar a redes con grandes
+brechas de generalización, incluso cuando las distribuciones de entrenamiento y prueba son
+similares. Por ejemplo, las Wide ResNets de CIFAR-10 se hacen tan anchas que
+sus precisiones adversariales de entrenamiento son
+del 100 % pero sus precisiones adversariales de prueba son solo del 45.8 %.
+Schmidt et al. (2018) especulan con que un aumento significativo de
+datos específicos de la tarea es necesario para cerrar esta brecha. Esta brecha de gene-
+ralización se amplía con cambios leves en la configuración del problema
+(Sharma & Chen, 2018). Intentamos reducir esta
+brecha y hacer que las representaciones preentrenadas se transfieran entre
+distribuciones de datos, pero hacerlo requiere una
+decisión poco convencional. Elegir usar adversarios dirigidos o ningún adver-
+sario durante el preentrenamiento no ofrece una ro-
+bustez sustancial. En cambio, elegimos preentrenar de forma adversarial un
+modelo de ImageNet reducido frente a un adversario sin objetivo,
+a diferencia de Kurakin et al. (2017); Kannan et al. (2018);
+Xie et al. (2018).
+Encontramos que una red preentrenada de forma adversarial puede supe-
+rar al modelo de vanguardia de larga data por un margen
+considerable. Al preentrenar un ImageNet reducido
+clasificador frente a un adversario sin objetivo, y luego ajustar de forma adversarial
+en CIFAR-10 o CIFAR-100 durante 5 épocas
+con una tasa de aprendizaje de 0.001, obtenemos redes que
+mejoran la robustez adversarial en 11.6 % y 9.2 % en precisión ab-
+soluta, respectivamente.
+Como en las otras tareas que consideramos, un ImageNet reducido de
+ImageNet sin las clases relacionadas con CIFAR-10 obtiene
+El preentrenamiento puede mejorar la robustez y la incertidumbre de los modelos
+ganancias de robustez similares. Como verificación rápida, preentrenamos
+y ajustamos dos Wide ResNets 40-2, una preentrenada de forma típi-
+ca y otra preentrenada con las clases relacionadas con CIFAR-10
+excluidas de ImageNet reducido. Observamos solo
+una disminución del 1.04 % en la precisión adversarial frente a
+el modelo preentrenado de forma típica, lo que demuestra que los
+modelos preentrenados no dependen de ver imágenes relacionadas con CIFAR-10
+, y que simplemente entrenar con más imágenes naturales
+aumenta la robustez adversarial. Nótese que en la Tabla 3 la
+precisión limpia es aproximadamente la misma, mientras que la adver-
+sarial es mucho mayor. Esto indica de nuevo que el preentre-
+namiento puede tener un efecto limitado sobre la precisión en tareas tradi-
+cionales, pero tiene un efecto fuerte sobre la robustez.
+Incluso ocurre que las representaciones preentrenadas pueden
+transferirse a una nueva tarea sin ajustar de forma adversarial la red en-
+tera. De hecho, si solo ajustamos de forma adversarial
+la última capa afín de clasificación, y ningún otro parámetro, para CIFAR-10
+y CIFAR-100 obtenemos, respectivamente,
+precisiones adversariales de 46.6 % y 26.1 %. Así,
+ajustar de forma adversarial solo la última capa afín también supera
+el estado del arte previo en precisión adversarial. Esto demuestra más
+que las características adversariales pueden transferirse de forma robusta
+entre distribuciones de datos. Además de las ganancias de robus-
+tez, el preentrenamiento adversarial podría ahorrar mucho tiempo de
+cómputo real, ya que el preentrenamiento acelera la convergencia; en comparación
+con las rutinas de entrenamiento típicas, el entrenamiento adversarial requiere
+prohibitivamente al menos 10 veces la cantidad habitual de tiempo de
+entrenamiento. Al superar el estado del arte previo, hemos
+mostrado que el preentrenamiento mejora la robustez adversarial.
+4. Incertidumbre
+Para demostrar que el preentrenamiento mejora las estimaciones de incer-
+tidumbre del modelo, usamos los conjuntos CIFAR-10, CIFAR-100 y
+Tiny ImageNet (Johnson et al.). No usamos
+Tiny ImageNet en la sección de robustez, porque el entrenamiento adver-
+sarial no se sabe que funcione con imágenes de este tamaño,
+y usar Tiny ImageNet es computacionalmente prohibitivo
+para los experimentos de corrupción de etiquetas. Tiny ImageNet con-
+siste en 200 clases de ImageNet con resolución de 64×64, por lo que
+usamos una versión de 64×64 de ImageNet reducido para el pre-
+entrenamiento. También eliminamos las 200 clases de Tiny ImageNet que
+se solapan con ImageNet reducido en todos los experi-
+mentos con Tiny ImageNet.
+En todos los experimentos usamos Wide ResNets 40-2 entrenadas con
+SGD con momento de Nesterov y una tasa de aprendizaje coseno.
+Las redes preentrenadas se entrenan en ImageNet reducido durante
+100 épocas, y se ajustan durante 10 épocas para CIFAR
+y 20 para Tiny ImageNet, sin dropout y con una tasa de aprendiza-
+je de 0.001. Las redes de referencia se entrenan desde cero durante
+100 épocas con una tasa de dropout de 0.3. Al realizar
+el ajuste de temperatura en la Sección 4.2, entrenamos sin el 10 % de
+los datos de entrenamiento para estimar la temperatura óptima. Tabla 4. Rendimiento de la detección fuera de distribución con modelos
+entrenados desde cero y con modelos preentrenados. Los resultados son un
+promedio de cinco ejecuciones. Los valores son porcentajes.
+AUROC AUPR
+Normal Preentrenado Normal Preentrenado
+CIFAR-10 91.5 94.5 63.4 73.5
+CIFAR-100 69.4 83.1 29.7 52.7
+Tiny ImageNet 71.8 73.9 30.8 31.0
+4.1. Detección fuera de distribución
+Configuración. En el problema de detección fuera de distribución
+(Hendrycks & Gimpel, 2017b; Hendrycks et al., 2019; Lee
+et al., 2018a;b; Liu et al., 2018), se pide a los modelos que
+asignen puntuaciones de anomalía para indicar si una muestra está
+dentro o fuera de distribución. Hendrycks & Gimpel (2017b)
+muestran que las características discriminativas aprendidas por un clasi-
+ficador son adecuadas para esta tarea. Usan la probabilidad softmax máxima
+max_k p(y=k|x) para cada muestra
+x como forma de ordenar las muestras dentro y fuera de distribución (OOD).
+Las muestras OOD tienden a tener probabilidades softmax máximas más bajas.
+Mejorar sobre esta línea base es un reto difícil
+sin suponer conocimiento de la distribución de prueba de las anomalías
+(Chen et al., 2018). Sin suponer
+ese conocimiento, usamos las probabilidades softmax máximas para puntuar
+las anomalías y mostramos que los modelos que se
+preentrenan y luego ajustan ofrecen puntuaciones de anomalía superiores.
+Para medir la calidad de la detección fuera de distribución, usamos
+dos métricas estándar. La primera es el AUROC,
+o área bajo la curva característica operativa del receptor.
+Es la probabilidad de que un ejemplo OOD reciba
+una puntuación de anomalía mayor que un ejemplo dentro de distribución.
+Así, un AUROC más alto es mejor. Una medida similar
+es el AUPR, o área bajo la curva de precisión-exhaustividad;
+como antes, un AUPR más alto es mejor. Para los datos dentro de distribución
+usamos el conjunto de prueba. Para los datos fuera de distribución
+usamos las distintas distribuciones anómalas de Hendrycks
+et al. (2019), incluyendo ruido gaussiano, texturas, Places365
+imágenes de escenas (Zhou et al., 2017), etc. Todos los conjuntos de datos OOD
+carecen de muestras de ImageNet submuestreado. Más
+los detalles de la evaluación se encuentran en los Materiales Suplementarios.
+Análisis. Al usar el preentrenamiento, tanto el AUROC como
+el AUPR mejoran de forma consistente sobre la línea base, como se muestra
+en la Tabla 4. Obsérvese que los resultados son un promedio de los valores de AUROC
+y AUPR al detectar muestras de distintos
+conjuntos de datos OOD. Obsérvese que con el preentrenamiento, CIFAR-100
+la detección OOD mejora significativamente. En consecuencia
+el preentrenamiento puede mejorar directamente las estimaciones de incertidumbre.
+El uso del preentrenamiento puede mejorar la robustez y la incertidumbre del modelo
+Tabla 5. Errores de calibración de los modelos entrenados desde cero y
+modelos con preentrenamiento. Todos los valores son porcentajes.
+Error RMS Error MAD
+Normal Preentrenado Normal Preentrenado
+CIFAR-10 6.4 2.9 2.9 1.2
+CIFAR-100 13.3 3.6 10.3 2.5
+Tiny ImageNet 8.5 4.2 7.0 2.9
+4.2. Calibración
+Configuración. Un componente central de la estimación de incertidumbre en
+los problemas de clasificación es la calibración de la confianza. A partir de un
+sistema de clasificación que produce estimaciones probabilísticas de confianza
+estimaciones C de que sus predicciones Ŷ sean correctas,
+desearíamos estimaciones fiables. Es decir, cuando un clasificador pre-
+dice una clase con un ochenta por ciento de confianza, desearíamos
+que acertara el ochenta por ciento de las veces. Nguyen
+& O’Connor (2015); Hendrycks & Gimpel (2017b) encontraron
+que los clasificadores de redes neuronales profundas muestran una severa sobre-
+confianza en sus predicciones, y que el problema se vuelve
+peor con una mayor capacidad de representación (Guo et al.,
+2017). Integrar clasificadores no calibrados en los procesos de toma de
+decisiones podría producir evaluaciones flagrantes,
+lo que motiva la tarea de calibración de la confianza.
+Para medir la calibración de un clasificador, adoptamos
+dos medidas de la literatura. El error de calibración de la raíz del
+cuadrado medio (RMS) es la raíz cuadrada de
+la diferencia cuadrática esperada entre la confianza del clasificador
+y su exactitud en dicho nivel de confianza, q
+EC[(P(Y=bYjC=c) c)2]. El error de calibración del valor absoluto medio
+(MAD) usa la diferencia abso-
+luta esperada en lugar de la diferencia cuadrada entre las
+mismas cantidades. El error de calibración MAD tiene la misma
+forma que el error de calibración esperado usado por Guo et al.
+(2017), pero emplea una agrupación adaptativa de las confianzas para
+una estimación mejorada. En nuestros experimentos usamos un tamaño de intervalo
+de 100. Remitimos al lector a Hendrycks et al. (2019) para
+más detalles sobre estas medidas.
+Análisis. En todos los experimentos observamos grandes mejo-
+ras en la calibración al usar preentrenamiento. En la Figura 4
+y en la Tabla 5 podemos ver que el error de calibración RMS se reduce al
+menos a la mitad en todos los conjuntos de datos gracias al uso de preentrenamiento,
+siendo CIFAR-100 la mejora más grande. El
+mismo ocurre con el error MAD. De hecho, el error MAD en
+CIFAR-100 se reduce en un factor de 4.1 con el preentrenamiento,
+lo que puede interpretarse como que la confianza declarada es
+cuatro veces más cercana a la frecuencia real de ocurrencia.
+Encontramos que estas ganancias de calibración son robustas entre conjuntos de datos de pre-
+entrenamiento. Con el preentrenamiento en Places365, el error RMS er-
+ror es 3.1 en CIFAR-10, y con preentrenamiento en ImageNet
+SVHNCIFAR-10 CIFAR-100Tiny ImageNet0510152025Error de calibración RMS (%)Error de calibración con exposición a valores atípicos
+Ajuste de temperatura
++OEFigura 4. Valores del error cuadrático medio de calibración para los mod-
+elos entrenados desde cero y los modelos preentrenados. En todos los
+conjuntos de datos, el preentrenamiento reduce el error RMS en más de la mitad.
+el error RMS es 2.9; mientras tanto, el error RMS de la línea base
+es 6.4. Las ganancias también son complementarias con el método de ajuste de tem-
+peratura de Guo et al. (2017), que reduce
+aún más el error RMS de calibración de 4.15 a 3.55 para
+Tiny ImageNet cuando se combina con el preentrenamiento. Sin
+embargo, el ajuste de temperatura es computacionalmente costoso y
+requiere datos adicionales, mientras que el preentrenamiento no re-
+quiere recopilar datos adicionales y puede, de forma natural y directa,
+hacer que el modelo esté mejor calibrado.
+5. Conclusión
+Aunque He et al. (2018) afirman que el preentrenamiento no
+mejora el rendimiento en tareas tradicionales, pero en otras
+tareas esto no es así. En tareas de robustez e incertidumbre,
+el preentrenamiento da lugar a modelos que superan el
+estado del arte anterior. Para las tareas de incertidumbre, encontramos que las
+representaciones preentrenadas se traducen directamente en mejoras en las estimaciones de incertidumbre pre-
+dictivas. He et al. (2018) sostienen que
+tanto el preentrenamiento como el entrenamiento desde cero producen modelos
+de precisión similar, pero mostramos que esto solo se cumple para datos no pertur-
+bados. De hecho, el preentrenamiento con un adver-
+sario no dirigido supera al estado del arte de larga data en precisión adver-
+sarial por un margen significativo. La robustez frente a la corrupción de etiquetas
+también mejora de forma notable, de modo que
+el preentrenamiento por sí solo supera a ciertos métodos específicos de la tarea
+a veces incluso después de combinar estos métodos
+con el preentrenamiento. Esto sugiere que el trabajo futuro sobre la robustez del modelo
+debería evaluar los métodos propuestos con preentrena-
+miento para medir correctamente su utilidad, y algunos
+trabajos podrían especializar el preentrenamiento para estas
+tareas posteriores. En suma, los beneficios del preentrenamiento van más allá de
+una convergencia rápida, como se pensaba antes, ya que
+el preentrenamiento puede mejorar la robustez y la incertidumbre del modelo.
+El uso del preentrenamiento puede mejorar la robustez y la incertidumbre del modelo
+AGRADECIMIENTOS
+Esta investigación contó con el apoyo parcial del Programa de Centros de Investigación en
+Ingeniería a través de la Fundación Nacional de Investigación de
+Corea (NRF), financiada por el Gobier-
+no de Corea, MSIT (NRF-2018R1A5A1059921).
+Referencias
+Agrawal, P., Girshick, R., y Malik, J. Analyzing the per-
+formance of multilayer neural networks for object recog-
+nition. ECCV , 2014.
+Carlini, N. y Wagner, D. Adversarial examples are not
+easily detected: Bypassing ten detection methods, 2017.
+Charikar, M., Steinhardt, J., y Valiant, G. Learning from
+untrusted data. STOC , 2017.
+Chawla, N. V ., Bowyer, K. W., Hall, L. O., y
+Kegelmeyer, W. P. SMOTE: synthetic minority over-
+sampling technique. JAIR , 2002.
+Chen, W., Shen, Y ., Wang, X., y Wang, W. Enhancing
+the robustness of prior network in out-of-distribution de-
+tection. arXiv , 2018.
+Chrabaszcz, P., Loshchilov, I., y Hutter, F. A downsam-
+pled variant of ImageNet as an alternative to the CIFAR
+datasets. arXiv , 2017.
+Deng, J., Dong, W., Socher, R., jia Li, L., Li, K., y
+Fei-Fei, L. ImageNet: A large-scale hierarchical image
+database. CVPR , 2009.
+Dong, Q., Gong, S., y Zhu, X. Imbalanced deep learn-
+ing by minority class incremental rectiﬁcation. IEEE
+TPAMI , 2018.
+Engstrom, L., Ilyas, A., y Athalye, A. Evaluating and
+understanding the robustness of adversarial logit pairing.
+arXiv preprint , 2018.
+Geirhos, R., Temme, C. R. M., Rauber, J., Sch ¨utt, H. H.,
+Bethge, M., y Wichmann, F. A. Generalisation in hu-
+mans and deep neural networks. NeurIPS , 2018.
+Goldberger, J. y Ben-Reuven, E. Training deep neural-
+networks using a noise adaptation layer. En ICLR , 2017.
+Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
+Warde-Farley, D., Ozair, S., Courville, A., y Bengio,
+Y . Generative adversarial networks. En NeurIPS , 2014.
+Guo, C., Pleiss, G., Sun, Y ., y Weinberger, K. Q. On cal-
+ibration of modern neural networks. International Con-
+ference on Machine Learning , 2017.Han, B., Yao, Q., Yu, X., Niu, G., Xu, M., Hu, W., Tsang,
+I., y Sugiyama, M. Co-teaching: robust training
+deep neural networks with extremely noisy labels. En
+NeurIPS , 2018.
+He, H. y Garcia, E. A. Learning from imbalanced data.
+TKDE , 2008.
+He, K., Gkioxari, G., Dollar, P., y Girshick, R. Mask
+R-CNN. ICCV , 2017.
+He, K., Girshick, R., y Dollar, P. Rethinking ImageNet
+pre-training. arXiv , 2018.
+Hendrycks, D. y Dietterich, T. Benchmarking neural net-
+work robustness to common corruptions and perturba-
+tions. ICLR , 2019.
+Hendrycks, D. y Gimpel, K. Early methods for detecting
+adversarial images. ICLR Workshop , 2017a.
+Hendrycks, D. y Gimpel, K. A baseline for detecting
+misclassiﬁed and out-of-distribution examples in neural
+networks. ICLR , 2017b.
+Hendrycks, D., Mazeika, M., Wilson, D., y Gimpel, K.
+Using trusted data to train deep networks on labels cor-
+rupted by severe noise. NeurIPS , 2018.
+Hendrycks, D., Mazeika, M., y Dietterich, T. Deep
+anomaly detection with outlier exposure. ICLR , 2019.
+Huang, C., Li, Y ., Change Loy, C., y Tang, X. Learn-
+ing deep representation for imbalanced classification. En
+CVPR , 2016.
+Huh, M., Agrawal, P., y Efros, A. A. What makes Ima-
+geNet good for transfer learning? arXiv , 2016.
+Japkowicz, N. The class imbalance problem: Significance
+and strategies. En ICAI , 2000.
+Johnson et al. Tiny ImageNet visual recognition
+challenge. URL https://tiny-imagenet.
+herokuapp.com .
+Kannan, H., Kurakin, A., y Goodfellow, I. Adversarial
+logit pairing. NeurIPS , 2018.
+Krizhevsky, A. y Hinton, G. Learning multiple layers of
+features from tiny images. Informe técnico, University
+of Toronto , 2009.
+Krizhevsky, A., Sutskever, I., y Hinton, G. E. ImageNet
+classification with deep convolutional neural networks.
+NIPS , 2012.
+Kurakin, A., Goodfellow, I., y Bengio, S. Adversarial
+machine learning at scale. ICLR , 2017.
+Using Pre-Training Can Improve Model Robustness and Uncertainty
+Lee, K., Lee, H., Lee, K., y Shin, J. Training confidence-
+calibrated classifiers for detecting out-of-distribution
+samples. ICLR , 2018a.
+Lee, K., Lee, K., Lee, H., y Shin, J. A simple unified
+framework for detecting out-of-distribution samples and
+adversarial attacks. NeurIPS , 2018b.
+Lin, T.-Y ., Maire, M., Belongie, S., Bourdev, L., Girshick,
+R., Hays, J., Perona, P., Ramanan, D., Zitnick, C. L., y
+Dollar, P. Microsoft COCO: Common objects in context.
+ECCV , 2014.
+Liu, S., Garrepalli, R., Dietterich, T., Fern, A., y
+Hendrycks, D. Open category detection with PAC guar-
+antees. En ICML , 2018.
+Loshchilov, I. y Hutter, F. SGDR: stochastic gradient
+descent with warm restarts. ICLR , 2016.
+Ma, X., Wang, Y ., Houle, M. E., Zhou, S., Erfani,
+S. M., Xia, S.-T., Wijewickrema, S., y Bailey, J.
+Dimensionality-driven learning with noisy labels. En
+ICML , 2018.
+Madry, A., Makelov, A., Schmidt, L., Tsipras, D., y
+Vladu, A. Towards deep learning models resistant to
+adversarial attacks. ICLR , 2018.
+Metzen, J. H., Genewein, T., Fischer, V ., y Bischoff, B.
+On detecting adversarial perturbations, 2017.
+Nguyen, K. y O’Connor, B. Posterior calibration and ex-
+ploratory analysis for natural language processing mod-
+els.EMNLP , 2015.
+Patrini, G., Rozza, A., Menon, A., Nock, R., y Qu, L.
+Making deep neural networks robust to label noise: a
+loss correction approach. CVPR , 2017.
+Rebuffi, S.-A., Bilen, H., y Vedaldi, A. Learning mul-
+tiple visual domains with residual adapters. NeurIPS ,
+2017.
+Schmidt, L., Santurkar, S., Tsipras, D., Talwar, K., y
+Madry, A. Adversarially robust generalization requires
+more data. NeurIPS , 2018.
+Sharma, Y . y Chen, P.-Y . Attacking the Madry defense
+model with l1-based adversarial examples. ICLR Work-
+shop , 2018.
+Springenberg, J. T., Dosovitskiy, A., Brox, T., y Ried-
+miller, M. A. Striving for simplicity: The all convolu-
+tional net. CoRR , abs/1412.6806, 2014.
+Sukhbaatar, S., Bruna, J., Paluri, M., Bourdev, L., y Fer-
+gus, R. Training convolutional networks with noisy la-
+bels. ICLR Workshop , 2014.Sun, C., Shrivastava, A., Singh, S., y Gupta, A. Revis-
+iting unreasonable effectiveness of data in deep learning
+era.ICCV , 2017.
+Szegedy, C., Zaremba, W., Sutskever, I., Bruna, J., Erhan,
+D., Goodfellow, I., y Fergus, R. Intriguing properties
+of neural networks, 2014.
+Van Horn, G., Mac Aodha, O., Song, Y ., Cui, Y ., Sun, C.,
+Shepard, A., Adam, H., Perona, P., y Belongie, S. The
+inaturalist species classification and detection dataset. En
+CVPR , 2018.
+Xie, C., Wu, Y ., van der Maaten, L., Yuille, A., y He, K.
+Feature denoising for improving adversarial robustness.
+arXiv preprint , 2018.
+Yosinski, J., Clune, J., Bengio, Y ., y Lipson, H.
+How transferable are features in deep neural networks?
+NeurIPS , 2014.
+Zagoruyko, S. y Komodakis, N. Wide residual networks.
+BMVC , 2016.
+Zeiler, M. D. y Fergus, R. Visualizing and understanding
+convolutional networks. ECCV , 2014.
+Zhang, Z. y Sabuncu, M. Generalized cross entropy
+loss for training deep neural networks with noisy labels.
+NeurIPS , 2018.
+Zhou, B., Lapedriza, A., Khosla, A., Oliva, A., y Tor-
+ralba, A. Places: A 10 million image database for scene
+recognition. PAMI , 2017.

@@ -1,0 +1,111 @@
+Razonamiento antrópico
+Blog personal. El mejor enfoque que conozco para pensar sobre problemas antrópicos es la Teoría de la Decisión Sin Actualización (UDT) de Wei Dai. Todavía no podemos resolver todos los problemas que nos gustaría; por ejemplo, en lo que respecta a la teoría de juegos, los únicos juegos para los que tenemos alguna idea de cómo resolverlos son muy simétricos; pero para muchos problemas antrópicos, la UDT ofrece la solución evidentemente correcta. Sin embargo, la UDT está algo subespecificada, y los modelos concretos de UDT de cousin_it basados en lógica formal son bastante pesados si todo lo que se quiere es averiguar la solución de un problema antrópico sencillo. En esta entrada presento una teoría de la decisión de juguete, la Teoría de la Decisión Simple Sin Actualización o SUDT, que definitivamente no reemplaza a la UDT, pero facilita modelar formalmente y resolver el tipo de problemas antrópicos a los que normalmente aplicamos la UDT. (Y, por supuesto, da las mismas soluciones que la UDT.) Ilustraré esto con algunos ejemplos. Esta entrada es algo aburrida, porque lo único que hace es exponer con un detalle excruciante algunas matemáticas que ya usamos implícitamente todo el tiempo cuando aplicamos razonamiento sin actualización a problemas antrópicos. Si ya está versado en ese tipo de cosas, no va a aprender mucho de esta entrada. La razón por la que la publico de todos modos es que hay cosas que quiero decir sobre la antrópica sin actualización, con un poco de matemáticas simples aquí y allá, y aunque las matemáticas puedan resultar intuitivas, lo mejor a lo que puedo remitir en cuanto a detalles son las entradas sobre la UDT, que contienen muchas complicaciones irrelevantes. Así que el propósito principal de esta entrada es evitarle a la gente tener que hacer ingeniería inversa de las matemáticas simples de la SUDT a partir de las matemáticas más complejas y menos bien especificadas de la UDT. (También argumentaré que el problema no antrópico de Psy-Kosh es un tipo de atraco contrafactual; usaré el concepto de l-zombis para explicar por qué la respuesta de la UDT a este problema es correcta, y explicaré por qué este argumento sigue funcionando si no hay l-zombis.)* SUDT: una teoría de la decisión de juguete para la antrópica sin actualización. por Benya, 23 de febrero de 2014
+4
+Presentaré SUDT a partir de un primer ejemplo: el atraco contrafactual. En mi versión preferida, Omega se le aparece y le dice que ha lanzado una moneda muy sesgada, que solo tenía una probabilidad de 1/1000 de caer cara; sin embargo, en este caso la moneda ha caído cara, por lo que Omega le está hablando. Le pide que elija entre dos opciones, (H) y (T). Si elige (H), Omega creará una IA amigable; si elige (T), destruirá el mundo. Sin embargo, hay un detalle: antes de lanzar la moneda, Omega hizo una predicción sobre cuál de estas opciones elegiría usted si la moneda saliera cara (y pudo hacer una predicción muy confiable). Si la moneda hubiera caído cruz, Omega habría destruido el mundo si predijo que usted elegiría (H), y habría creado una IA amigable si predijo (T). (Por cierto, si no hubiera podido hacer una predicción confiable, simplemente habría destruido el mundo sin más.) La moneda cae cara (probabilidad = 1/1000) / La moneda cae cruz (probabilidad = 999/1000). Usted elige (H) si la moneda cae cara: explosión de inteligencia positiva; la humanidad es aniquilada. Usted elige (T) si la moneda cae cara: la humanidad es aniquilada; explosión de inteligencia positiva. En este ejemplo, estamos considerando dos mundos posibles: 
+ y 
+. Escribimos 
+ (sin juego de palabras) para el conjunto de todos los mundos posibles; así, en este caso, 
+. También tenemos una distribución de probabilidad sobre 
+, que llamamos 
+. En nuestro ejemplo, 
+ y 
+. En el atraco contrafactual, solo hay una situación en la que podría encontrarse y necesitar tomar una decisión, a saber, cuando Omega le dice que la moneda ha caído cara. En general, escribimos 
+ para el conjunto de todas las situaciones posibles en las que podría necesitar tomar una decisión; la 
+ representa la información disponible para usted, incluidos tanto los datos sensoriales como sus recuerdos. En nuestro caso, escribiremos 
+, donde 
+ es la única situación en la que necesita tomar una decisión. Para cada 
+, escribimos 
+ para el conjunto de acciones posibles que puede realizar si se encuentra en la situación 
+. En nuestro caso,
+. Una política (o «plan») es una función 
+ que asocia a cada situación 
+ una acción 
+ que tomar en esta situación. Escribimos 
+ para el conjunto de todas las políticas. En nuestro caso, 
+, donde 
+ y 
+. A continuación, hay un conjunto de resultados, 
+, que especifican todas las características de lo que ocurre en el mundo
+que marcan una diferencia para nuestros objetivos finales, y la función de resultado 
+, que para cada mundo posible 
+ y cada política 
+ especifica el resultado 
+ que resulta de ejecutar 
+ en el mundo 
+. En nuestro caso, 
+ (que representan IA amigable y DESTRUCCIÓN), y 
+ y 
+. Por último, tenemos una función de utilidad 
+. En nuestro caso, 
+ y 
+. (Los valores exactos no importan realmente, siempre que 
+, porque las funciones de utilidad no cambian su significado bajo transformaciones afines, es decir, cuando se suma una constante a todas las utilidades o se multiplican todas las utilidades por un número positivo.) Así, un problema de decisión SUDT consta de los siguientes ingredientes: los conjuntos 
+, 
+ y
+ de mundos posibles, situaciones en las que necesita tomar una decisión, y resultados; para cada 
+, el conjunto 
+ de acciones posibles en esa situación; la distribución de probabilidad 
+; y las funciones de resultado y de utilidad 
+ y 
+. SUDT dice entonces que debe elegir una política 
+ que maximice la utilidad esperada 
+, donde 
+ es la esperanza con respecto a 
+, y 
+ es el mundo verdadero. En nuestro caso, 
+ es simplemente la probabilidad del buen resultado 
+, según la distribución (a priori) 
+. Para 
+, esa probabilidad es 1/1000; para 
+, es 999/1000. Así, SUDT (como la UDT) recomienda elegir (T). Si plantea el problema en SUDT de esa manera, resulta algo oculto por qué podría pensarse que eso no es lo correcto, ya que no estamos distinguiendo las situaciones 
+ que se «experimentan realmente» en un mundo posible particular 
+; no hay nada en el formalismo que refleje el hecho de que Omega nunca nos pide nuestra elección si la moneda sale cruz. En mi entrada sobre l-zombis, he argumentado que esto tiene sentido porque, incluso si no existe ninguna versión de usted que experimente conscientemente estar en el mundo de la cara, esa versión aún existe como máquina de Turing y las elecciones que hace influyen en lo que ocurre en el mundo real. Si todas las experiencias matemáticamente posibles existen, de modo que no hay l-zombis, pero algunas experiencias se «experimentan más» (tienen más «fluido de realidad mágica») que otras, el argumento es aún más claro: aunque exista algún sentido antrópico en el que, al saberse que la moneda cayó cara, usted pueda concluir que debe asignar una probabilidad alta a estar en el mundo de la cara, la misma versión de usted sigue existiendo en el mundo de la cruz, y sus elecciones influyen en lo que pasa allí. Y si todo se experimenta en el mismo grado (sin fluido de realidad mágica), el argumento es todavía más claro.* Desde el atraco contrafactual de Vladimir Nesov, pasemos a lo que me gustaría llamar Psy-
+Kosh, el atraco probablemente contrafactual, conocido más comúnmente como el problema no antrópico de Psy-Kosh. Esta vez usted no está solo: Omega reúne a 999 999 otros racionalistas avanzados, todos versados en razonamiento antrópico y SUDT. Coloca a cada uno en una habitación separada. Luego, como antes, lanza una moneda muy sesgada, que tiene solo una probabilidad de 1/1000 de caer cara. Si la moneda cae cara, Omega pide a todos ustedes que elijan entre dos opciones, (H) y (T). Si la moneda cae cruz, en cambio, Omega elige a uno de ustedes al azar y le pide que elija entre (H) y (T). Si la moneda cae cara y todos eligen (H), Omega creará una IA amigable; lo mismo si la moneda cae cruz y la persona consultada elige (T); en caso contrario, Omega destruirá el mundo. La moneda cae cara (probabilidad = 1/1000) / La moneda cae cruz (probabilidad = 999/1000). Todos eligen (H) si se les pregunta: explosión de inteligencia positiva; la humanidad es aniquilada. Todos eligen (T) si se les pregunta: la humanidad es aniquilada; explosión de inteligencia positiva. Personas distintas eligen de manera diferente: la humanidad es aniquilada (depende de a quién se le pregunte). Supondremos que todos ustedes prefieren una explosión positiva (FOOM) a una DOOM sombría, lo que significa que todos tienen los mismos valores en lo que respecta a los resultados de este pequeño dilema: 
+, como antes, y todos ustedes tienen la misma función de utilidad, dada por 
+ y
+. Mientras eso sea así, podemos aplicar SUDT para encontrar una política sensata que todos sigan (aunque cuando hay más de una política óptima, y las distintas personas involucradas no pueden hablar entre sí, puede no estar claro cómo debe elegirse una de las políticas). Esta vez tenemos un millón de personas distintas, que en principio pueden tomar cada una una decisión independiente sobre qué responder si Omega les hace la pregunta. Así, tenemos 
+. Cada una de estas personas puede elegir entre (H) y (T), así que 
+para cada persona 
+, y una política 
+ es una función que devuelve (H) o (T) para cada 
+. Naturalmente, nos interesan especialmente las políticas 
+ y 
+ que satisfacen 
+y 
+ para todo 
+. Los mundos posibles son 
+, y sus probabilidades son 
+ y 
+. La función de resultado es la siguiente: 
+, 
+ para 
+, 
+ si 
+, y 
+ en caso contrario. ¿Qué recomienda SUDT? Como en el atraco contrafactual, 
+ es la probabilidad del buen resultado 
+, bajo la política 
+. Para 
+, el buen resultado solo puede ocurrir si la moneda cae cara: en otras palabras, con probabilidad 
+. Si 
+, entonces el buen resultado no puede ocurrir si la moneda cae cara, porque en ese caso se le pregunta a todos y al menos una persona elige (T). Así, en este caso, el buen resultado ocurrirá solo si la moneda sale cruz y la persona elegida al azar responde (T); esta probabilidad es 
+, donde 
+es el número de personas que responden (T). Claramente, esto se maximiza para 
+, donde 
+; además, en este caso obtenemos la probabilidad 
+, que es mejor que para 
+, así que SUDT recomienda el plan 
+. De nuevo, cuando se plantea el problema en SUDT, ni siquiera es obvio por qué alguien podría pensar que esta no es la respuesta correcta. La razón es que si Omega le pregunta, y usted actualiza al saber que se le ha preguntado, entonces, después de actualizar, está bastante seguro de que la moneda cayó cara: sí, su probabilidad a priori era solo de 1/1000, pero si la moneda hubiera caído cruz, la probabilidad de que le preguntaran a usted sería de solo uno entre un millón, así que las probabilidades a posteriori están a favor de cara en unos 1000:1. Así que podría razonar que lo mejor sería que todos eligieran (H); y además, todas las personas de las otras habitaciones razonarán igual que usted, así que si usted elige (H), ellas también lo harán, y esto maximiza la probabilidad de que la humanidad sobreviva. Esto depende de que los demás elijan igual que usted, pero como todos son buenos racionalistas que usan la misma teoría de la decisión, así será. Pero en los mundos donde la moneda cae cruz y Omega elige a alguien distinto de usted, la versión suya a la que se le pide su decisión sigue «existiendo»... como l-zombi. Podría pensar que lo que esta versión de usted hace o deja de hacer no influye en lo que pasa en el mundo real; pero si aceptamos el argumento del párrafo anterior de que sus decisiones están «vinculadas» a las de las otras personas del experimento, entonces siguen vinculadas aunque la versión de usted que toma la decisión sea un l-zombi: si lo vemos como una máquina de Turing que toma una decisión, esa máquina debería razonar: «Si la moneda cayó cruz y se eligió a otra persona, entonces soy un l-zombi, pero la persona que realmente es elegida razonará exactamente igual que lo que estoy haciendo ahora, y llegará a la misma decisión; por lo tanto, mi decisión influye en lo que pasa en el mundo real incluso en este caso, y no puedo actualizar y simplemente ignorar esos mundos posibles». Lo llamo «atraco probablemente contrafactual» porque en el atraco contrafactual usted hace su elección por sus beneficios en un mundo posible que queda descartado por sus observaciones, mientras que en el atraco probablemente contrafactual lo hace por sus
+beneficios en un conjunto de mundos posibles que se vuelve muy improbable por sus observaciones (porque la mayoría de los mundos de ese conjunto quedan descartados). Igual que con el atraco contrafactual, este argumento es todavía más fuerte si no hay l-zombis, porque todas las experiencias matemáticamente posibles son, de hecho, experimentadas.* Como último ejemplo, veamos lo que me gustaría llamar el atraco antrópico de Eliezer: el problema antrópico que inspiró el problema no antrópico de Psy-Kosh. Esta vez usted vuelve a estar solo, solo que hay muchos de usted: Omega está creando un millón de copias suyas. Lanza su moneda muy sesgada habitual, y si la moneda cae cara, coloca a todos ustedes en habitaciones verdes exactamente idénticas. Si la moneda cae cruz, coloca a uno de ustedes en una habitación verde y a todos los demás en habitaciones rojas. Luego pide a todas las copias en habitaciones verdes que elijan entre (H) y (T); si su elección coincide con la moneda, FOOM; si no, DOOM. La moneda cae cara (probabilidad = 1/1000) / La moneda cae cruz (probabilidad = 999/1000). Los de la habitación verde eligen (H): explosión de inteligencia positiva; la humanidad es aniquilada. Los de la habitación verde eligen (T): la humanidad es aniquilada; explosión de inteligencia positiva. Nuestros mundos posibles vuelven a ser 
+, con probabilidades 
+ y 
+. También volvemos a poder tomar una decisión en una única situación particular, a saber, cuando usted es una copia en una habitación verde: 
+. Las acciones son 
+, los resultados 
+, las utilidades 
+ y 
+, y la función de resultado está dada por 
+ y 
+. En otras palabras, desde la perspectiva de SUDT, esto es exactamente idéntico a la situación del atraco contrafactual, y por tanto la solución es la misma: una vez más, SUDT recomienda elegir (T). Por otro lado, la razón por la que alguien podría pensar que (H) es la respuesta correcta se parece más a la del atraco probablemente contrafactual de Psy-Kosh: después de despertar en una habitación verde, ¿cuál debería ser su probabilidad a posteriori de que la moneda haya caído cara? El razonamiento antrópico actualizado dice que debe estar bastante seguro de que cayó cara. Si introduce esas probabilidades en un cálculo de utilidad esperada, sale, como en el caso de Psy-Kosh, un resultado que favorece fuertemente a (H).
+Pero incluso si estas son buenas probabilidades para asignar epistémicamente (para satisfacer su curiosidad sobre cómo es probable que sea el mundo), a la luz de los argumentos del atraco contrafactual y del atraco probablemente contrafactual (donde actualizar es definitivamente lo correcto epistémicamente, pero introducir estas probabilidades en el cálculo de utilidad esperada da el resultado equivocado), no me parece extraño llegar a la conclusión de que elegir (T) también es correcto en el atraco antrópico de Eliezer. Razonamiento antrópico 2
+Blog personal Mencionado en 6 Juegos en forma extensiva de un solo jugador como modelo de la UDT

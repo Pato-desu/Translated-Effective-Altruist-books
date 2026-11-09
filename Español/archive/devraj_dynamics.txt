@@ -1,0 +1,511 @@
+La dinámica de las representaciones de ejemplares y prototipos
+Dependen de las estadísticas ambientales
+Arjun Devraj (adevraj@princeton.edu)
+Departamento de Ciencias de la Computación, Universidad de Princeton
+Qiong Zhang (qiongz@princeton.edu)
+Instituto de Neurociencia de Princeton, Universidad de Princeton
+Thomas L. Griffiths (tomg@princeton.edu)
+Departamentos de Psicología y de Ciencias de la Computación, Universidad de Princeton
+Resumen
+Cómo representan las personas las categorías, y cómo esas representa-
+ciones cambian con el tiempo, es una pregunta básica sobre la cog-
+nición. Investigaciones previas sugieren que las personas catego-
+rizan los objetos comparándolos con prototipos de categoría en las primeras
+etapas del aprendizaje, pero usan estrategias que consideran los ejemplares individ-
+uales dentro de cada categoría en etapas posteriores. Sin embargo,
+muchos experimentos de aprendizaje de categorías no reflejan con precisión
+las estadísticas ambientales del mundo real, donde la proba-
+bilidad de que encontremos un objeto cambia con el tiempo. Nuestro objetivo
+en este estudio fue introducir restricciones de memoria presen-
+tando cada estímulo en intervalos correspondientes a la ley de potencia
+de decaimiento de la memoria. Como el modelo de ejemplares depende
+de la capacidad individual para almacenar y recuperar los ejemplares vistos previamente
+de ejemplares, hipotetizamos que añadir restricciones de memoria
+que reflejen mejor los entornos reales favorecerían al modelo de ejemplares
+en las etapas iniciales en comparación con las posteriores. Confirmando nuestra hi-
+pótesis, los resultados muestran que en condiciones ambien-
+tales realistas con restricciones de memoria, la ventaja del modelo
+de ejemplares sobre el modelo de prototipos disminuye con el tiempo.
+Palabras clave: aprendizaje de categorías; modelo de prototipos; modelo de
+ejemplares; decaimiento de la memoria; estadísticas ambientales
+Introducción
+Los modelos computacionales de categorización han desempeñado un papel
+clave para comprender las representaciones que las personas usan al
+aprender categorías. Dos modelos destacados de categorización
+incluyen el modelo de prototipos, que postula que un estímulo se
+categoriza comparándolo solo con el objeto “medio”, o
+prototipo, de cada categoría (Posner y Keele, 1968; Reed,
+1972), y el modelo de ejemplares, que afirma que un estímulo
+se categoriza comparándolo con todos los objetos de cada
+categoría (Medin y Schaffer, 1978). Los hallazgos previos favorecieron
+fuertemente el modelo de ejemplares (McKinley y Nosofsky, 1996;
+Medin y Schaffer, 1978; Shin y Nosofsky, 1992), pero estos
+no consideraron la progresión del aprendizaje de categorías a
+lo largo del tiempo. Smith y Minda (1998) estudiaron los ajustes del proto-
+tipo y del modelo de ejemplares de categorización al rendimiento humano
+en una tarea de categorización de palabras a lo largo del tiempo, y hallaron que
+aunque el modelo de ejemplares domina al final, el pro-
+totipo tiene una ventaja considerable en las primeras etapas del aprendiz-
+aje, en particular con categorías de estructura no lineal separable (NLS)
+estructuras. Este resultado es coherente con la propuesta de que los indi-
+viduos categorizan usando un enfoque simple basado en reglas en las
+primeras épocas y estrategias más específicas de ejemplares en las
+épocas posteriores (Nosofsky et al., 1994).
+Mientras que la categorización basada en prototipos frente a la basada en ejemplares
+ha sido ampliamente estudiada en la literatura; se ha prestado menos atención a las restricciones de la mem-
+oria sobre la categorización; en concreto, cuánto se puede
+utilizar la categorización basada en prototipos o en ejemplares está
+limitado por cuán accesibles son estas representaciones en
+la memoria. La categorización basada en prototipos requiere re-
+cuperar el conocimiento generalizado sobre la categoría, mientras que
+la categorización basada en ejemplares requiere recuperar la memoria
+de casos específicos. Se ha demostrado que uno catego-
+riza usando conocimiento generalizado en las primeras épocas y
+cambia a un modelo basado en ejemplares en etapas posteriores (Smith y
+Minda, 1998), lo cual no parece coherente con los hallazgos
+de la literatura sobre la memoria que muestran que cada vez es más
+fácil acceder a representaciones de conocimiento general que a
+representaciones de elementos específicos a lo largo del tiempo, es decir, la memoria de
+elementos específicos decae mucho más rápido que la memoria de la idea central, o
+conocimiento general (Posner y Keele, 1970; Zeng et al., 2021).
+¿Cómo podría uno depender más de las representaciones basadas en ejemplares
+en etapas tardías de la categorización, cuando es difícil acceder a
+estos ejemplares en la memoria?
+La memoria de los elementos específicos decae rápidamente por una razón.
+Desde una perspectiva racional, no hay necesidad de retener infor-
+mación en la memoria si ya no se necesita, según lo determinen
+las estadísticas del entorno (Anderson y Schooler,
+1991). Por lo tanto, el decaimiento de la memoria obedece a una función de ley de potencia
+porque la relación entre la recencia del estímulo y la
+probabilidad de necesidad, es decir, la probabilidad de que el estímulo se requiera en el
+futuro, obedece a menudo a la ley de potencia en entornos realistas,
+según se ha examinado en fuentes ambientales como The New
+York Times, el habla parental y el correo electrónico (Schooler
+y Anderson, 1997; Figura 1a). En cambio, la categorización
+experimentos, incluido Smith y Minda (1998), suelen usar
+estímulos que aparecen con la misma frecuencia independientemente de la
+última vez que se vio el estímulo (Figura 1b). Esto ofrece
+una oportunidad de sobreaprendizaje de estímulos individuales, lo cual es
+poco realista dadas las estadísticas ambientales que se encuentran en
+el mundo real (Figura 1a). Para llenar este vacío, diseñamos un
+experimento que refleja mejor la relación de ley de potencia entre
+la recencia del estímulo y la probabilidad de necesidad (Figuras 1c, 1d).
+Hipotetizamos que configurar el experimento de categorización
+con estadísticas ambientales realistas reducirá la accesi-
+bilidad de las representaciones basadas en ejemplares en la memoria a lo
+largo del tiempo, lo que reduce o invierte la tendencia
+observada previamente a favor de la representación basada en prototipos al principio
+(a) De Schooler y Anderson (1997)
+ (b) Smith y Minda (1998)
+(c) Nuestro experimento
+ (d) Nuestro experimento, en coordenadas log-log
+Figura 1: La función de recencia ambiental, que muestra la relación entre la recencia del estímulo y sus probabilidades de necesidad, cal-
+culada como P(stim)=(1−P(stim)), donde P(stim) es la probabilidad de ver el estímulo. (a) se basa en los titulares de The New York Times
+titulares (1986 y 1987), reproducidos de la Figura 4a de Schooler y Anderson (1997). (b) se calcula a partir del diseño experi-
+mental de Smith y Minda (1998). (c) y (d) muestran datos promedio de las 60 secuencias de estímulos generadas para la
+condición experimental de nuestro experimento. En (c) y (d), P(stim) se calculó usando una ventana de 15 ensayos. La relación lineal
+log-log en (d) indica que (c) es una función de ley de potencia.
+y las representaciones basadas en ejemplares en las etapas tardías.
+Ampliamos el trabajo de Smith y Minda (1998) utilizando
+las observaciones de Anderson y Schooler (1991) sobre estructuras
+ambientales realistas y la retención de la memoria para rediseñar
+el experimento. En la condición de control, replicamos el experimento 2 de Smith
+y Minda (con las estructuras de categoría NLS)
+en el que los estímulos se presentan con frecuencia uniforme
+a lo largo del tiempo. En la condición experimental, sin embargo, restringimos
+la presentación de los estímulos para reflejar la función de ley de
+potencia, con el fin de simular mejor un entorno del mundo real
+con restricciones de memoria (Anderson y Schooler, 1991).
+Como el modelo de ejemplares requiere el almacenamiento y la recuperación de
+todos los ejemplares, los ensayos posteriores implicarían mayores
+restricciones de memoria.
+El plan del artículo es el siguiente. Primero explicamos la
+formulación de los modelos de prototipos y de ejemplares de cate-
+gorización. Después, describimos cómo construimos la pre-
+sentación de estímulos en la condición experimental para
+reflejar el modelo de ley de potencia que se encuentra en el mundo real. Fi-
+nalmente, discutimos los resultados conductuales y de modelos tanto de nuestra replicación de Smith y Minda (1998) en la condición de con-
+trol como de nuestras manipulaciones de las estadísticas ambientales
+en la condición experimental.
+Antecedentes
+Modelo de prototipos
+Existen varias versiones del modelo de prototipos (Medin y
+Schaffer, 1978; Medin y Smith, 1981; Reed, 1972); aquí usamos
+la formulación especificada por Smith y Minda (1998,
+2011). El modelo de prototipos compara el estímulo observado
+con el prototipo de cada categoría. Primero, la distancia di;Pk entre
+el estímulo i y el prototipo de la categoría k∈{1,2}, Pk,
+se calcula como
+di;Pk=m
+å
+j=1wjjij−Pk;jj; (1)
+donde ij es el valor del estímulo para la dimensión j, y Pk;j es
+el valor del prototipo de la categoría k para la dimensión
+j, y wj es el peso atencional asignado a la dimensión j.
+Cada peso atencional wj está restringido a tomar un valor
+en [0;1], y los pesos suman en conjunto 1 ( åm
+j=1wj=1).
+Una vez calculada la distancia bruta di;Pk, la
+similitud del estímulo i, hi;Pk, con el prototipo Pk de la categoría k se calcula como
+hi;Pk=e cdi;Pk; (2)
+donde c es un parámetro de sensibilidad restringido a [0;20]. El
+parámetro de sensibilidad tiene el efecto de amplificar o reducir
+el espacio psicológico (Smith y Minda, 1998). Por último, la
+probabilidad de que el estímulo i (Si) se categorice en la cate-
+goría 1 (R1) viene dada por
+P(R1jSi) =hi;P1
+hi;P1+hi;P2: (3)
+Modelo de ejemplares
+El modelo de ejemplares se ha desarrollado y generalizado
+a partir del modelo de contexto original (Medin, 1975; Nosofsky
+1984, 1986, 1987, 1988; Palmeri y Nosofsky, 1995; McKin-
+ley y Nosofsky, 1995). Esta formulación del modelo de ejemplares
+fue utilizada y descrita a fondo en Smith y Minda
+(1998). El modelo de ejemplares compara el estímulo observado
+con todos los ejemplares vistos previamente en cada categoría para
+generar una predicción de categoría para el estímulo observado
+. La distancia di;x y la medida de similitud hi;x entre
+el estímulo i y el ejemplar x se calculan de forma idéntica a como se hace en el
+modelo de prototipos. Sin embargo, el modelo de ejemplares considera todos
+los ejemplares para generar una predicción, por lo que la probabilidad
+de que el estímulo i (Si) se categorice en la categoría 1 (R1) es
+P(R1jSi) =åx2C1hi;x
+åx2C1hi;x+åx2C2hi;x; (4)
+donde C1 es el conjunto de ejemplares de la categoría 1 y C2 es el
+conjunto de ejemplares de la categoría 2.
+Mientras que Nosofsky y Zaki (2002) criticaron la falta de un
+parámetro de escalado de respuesta en el modelo de ejemplares usado en
+Smith y Minda (1998), el amplio debate en la literatura
+(Myung, Pitt y Navarro, 2007; Smith y Minda, 1998, 2002)
+nos llevó a excluir este parámetro para reducir la com-
+plejidad del modelo y permitir la comparación directa con el orig-
+inal experimento. Dado que nuestro experimento usó estímulos con
+seis dimensiones, ambos modelos tenían un total de siete parámetros:
+los seis pesos atencionales (w1,...,w6) y el parámetro de sensibilidad
+(c). Los dos modelos se ajustaron luego a los datos de los participantes
+de las condiciones de control y experimental del experi-
+mento.
+Métodos
+Nuestro experimento pretende replicar el Experimento 2 (categorías NLS
+) de Smith y Minda (1998) en la condición de control
+y realizó modificaciones para introducir restricciones de memoria en
+la condición experimental. La tarea requería que los participantes
+categorizaran repetidamente 14 estímulos en dos categorías. Los
+estímulos eran palabras sin sentido de seis letras tomadas del Ap-
+éndice A de Smith y Minda (1998). Cada estímulo puede pensarse como una cadena de seis dígitos binarios, de modo que el prototipo
+de la categoría 1 era 000000 y el prototipo de la categoría 2
+era 111111. Siete estímulos pertenecían a la categoría 1 [000000,
+100000, 010000, 001000, 000010, 000001, 111101], y los
+otros siete estímulos pertenecían a la categoría 2 [111111, 011111,
+101111, 110111, 111011, 111110, 000100]. Cada dígito y
+posición en la cadena binaria corresponde a una letra única. En
+cada ensayo, se mostraba al participante uno de los 14 estímulos y
+tenía tiempo ilimitado para elegir una respuesta de 1 para la categoría 1 y
+2 para la categoría 2. Durante exactamente un segundo después de cada ensayo, al
+participante se le mostraba Correcto o Incorrecto según correspondiera.
+Recopilamos datos de 60 participantes para cada condi-
+ción. (Como referencia, Smith y Minda (1998) tuvieron 32 par-
+ticipantes.) Los participantes se reclutaron en el rango de edad de 18 a 23 años
+y en la población angloparlante mediante Prolific. La
+hipótesis, el diseño, el tamaño de la muestra y el análisis de este experi-
+mento se preregistraron (https://aspredicted.org/
+yq984.pdf). Los scripts de los modelos de ejemplares y de prototipos
+se derivaron del código fuente abierto (https://github
+.com/jpminda/Categorization Models ).
+Condición de control
+La condición de control, similar al ex-
+perimento de Smith y Minda (1998) (la única diferencia son los 616 ensayos de nuestro experi-
+mento frente a los 560 ensayos del experimento original), consistió en
+616 ensayos divididos en 44 bloques, cada uno de 14 ensa-
+yos. Cada bloque consistió en una permutación aleatoria de los 14
+estímulos, de modo que cada estímulo se mostraba exactamente una vez por
+bloque.
+Condición experimental
+Para crear las estadísticas ambientales de la Figura 1a, desarrollamos
+un algoritmo para generar una secuencia de estímulos para
+el experimento. El patrón específico de presentación de los estímulos
+debe, a su vez, influir en las probabilidades de necesidad y, por tanto, en la par-
+ticipación en la retención de objetos en la memoria. El diseño
+experimental consistió primero en asignar a cada uno de los catorce estímulos su
+propia función de ley de potencia, definida genéricamente como
+f(x) =axk: (5)
+Añadimos varios parámetros nuevos a la función de ley de potencia
+para generar las condiciones experimentales necesarias:
+f(t) =8
+>>><
+>>>:0 t<t0
+s t =t0
+a(t t0
+r)k qt0<tt0+n
+0 t>t0+n(6)
+donde t es el número de ensayo, t0 es el ensayo inicial del estímulo
+que se introduce, r es el rango, n es el número de ensayos de los que
+debe muestrearse la función de ley de potencia del objeto, s es el
+valor inicial de la función de ley de potencia, y q es un parámetro de calibra-
+ción. Las funciones de ley de potencia de estímulos consecutivos
+se introdujeron en intervalos de 35 ensayos. Como en la condición de
+control, cada participante realizó un total de 616 ensa-
+yos. La Figura 2a muestra las funciones de ley de potencia resultantes para
+(a) Funciones teóricas de ley de potencia
+ (b) Asignaciones de estímulos tras la agrupación y el muestreo
+(c) Ejemplo de secuencia de estímulos para un solo participante
+Figura 2: (a) Cada curva corresponde a la función de ley de potencia de un estímulo concreto. (b) Como los datos están agregados, cada
+curva corresponde al i-ésimo estímulo visto en todos los participantes. Por ejemplo, la primera curva ilustra la proporción media
+de cada intervalo asignada al primer estímulo (sin importar su identidad) mostrado a los 60 participantes. (c) Cada color corresponde a
+un estímulo único i ∈{1,14}, y la figura destaca la importante agrupación temporal y el posterior decaimiento causados por nuestro
+algoritmo de generación de estímulos basado en funciones de ley de potencia. Valores de los parámetros a=1, k=−0.3, r=1000, n=350, s=10,
+y q=a∗(n
+r) k se eligieron para reflejar adecuadamente la función de ley de potencia de la Figura 1a.
+cada estímulo a lo largo de todo el experimento. El orden
+de los estímulos se asignó aleatoriamente para cada participante.
+Para asignar un estímulo a cada ensayo según las funciones continuas
+de ley de potencia, agrupamos los ensayos en intervalos discretos de 35
+ensayos, generamos una distribución de probabilidad para el intervalo basada
+en los valores relativos de las distintas funciones de ley de potencia de los estí-
+mulos a lo largo de los ensayos del intervalo, y generamos los estímulos para los
+ensayos del intervalo muestreando de esta distribución. La Figura 2b
+muestra cómo las secuencias de estímulos resultantes reflejan adecuadamente las
+funciones de ley de potencia originales. La Figura 2c muestra un
+ejemplo de secuencia de estímulos para un solo participante. Por último,
+verificamos que las secuencias de estímulos generadas por este
+método reflejaban las estadísticas ambientales de la Figura 1a.
+Ajuste del modelo
+Los ensayos se dividieron y agruparon en 11 segmentos de ensayos, cada uno con
+1/11
+avo de los ensayos de cada estímulo según el momento en que
+ocurrió el ensayo en el experimento. Conceptualmente, para el experi-
+mento en la condición experimental, el primer segmento corresponde al
+punto más temprano de todas las funciones de ley de potencia de los estímulos (mayor
+retención), y el último segmento corresponde al punto más tar-
+dío (menor retención); en la condición de control, los segmentos
+de ensayos corresponden a agrupaciones cronológicas de ensayos en
+tiempo absoluto, exactamente como en Smith y Minda (1998).
+Para la comparación de la condición de control con los resultados de Smith y
+Minda (1998), usamos la suma de errores cuadráticos
+(SSE) entre las probabilidades observadas y predichas
+como medida de ajuste, que buscamos minimizar. Ejecutamos
+el método Sequential Least Squares Programming (SLSQP) de Scipy con 10 configuraciones aleatorias iniciales para obtener los
+parámetros de mejor ajuste. El modelo se ajustó para cada participante
+que recibió la condición de control en cada segmento de ensayos, como
+en Smith y Minda (1998). Los parámetros de mejor ajuste resultantes
+se usaron para calcular el SSE que finalmente se usó como
+medida de ajuste en la Figura 4.
+Sin embargo, el mismo procedimiento de ajuste del modelo y la definición
+de ajuste no son pertinentes para la condición experimental porque
+los segmentos de ensayos no representaban agrupaciones cronológicas de
+ensayos en tiempo absoluto; por consiguiente, no pudimos usar los
+modelos para generar probabilidades predichas para segmentos de ensayos com-
+pletos, ya que estos contenían muchos ensayos distribuidos en el tiempo,
+y no las secuencias exactas vistas por el partici-
+pante. (En el caso del modelo de ejemplares, esto es especialmente problemático
+porque cada ensayo dentro de un segmento dado se vio en
+un momento distinto, lo que implica un número diferente de
+ejemplares vistos previamente. Cualquier probabilidad generada
+por el modelo para un segmento completo de ensayos no podría
+dar cuenta de estas diferencias.) Por ello, usamos el error
+cuadrático medio (MSE) dentro de un segmento de ensayos, calculado
+ensayo por ensayo (fijando automáticamente en cero las probabilidades
+predichas de los estímulos irrelevantes para el ensayo), como medida de
+ajuste, y ajustamos el modelo para cada participante a lo largo de todo el experi-
+mento (en lugar de por segmento de ensayos) mediante el método SLSQP
+con 10 configuraciones aleatorias iniciales. Nos aseguramos de que el modelo de ejem-
+plares solo considerara los ejemplares vistos hasta ese momento, ya que
+no todos los ejemplares se vieron desde el principio. El nuevo
+procedimiento de ajuste del modelo y el cálculo del ajuste MSE fueron nece-
+(a) Condición de control
+ (b) Condición experimental
+Figura 3: Precisión media de categorización por segmentos de ensayos. Las barras de error indican el error estándar de la media.
+sarios para que pudiéramos aplicar los modelos a ensayos individuales
+(ya que sería inapropiado aplicar el modelo a conjuntos no
+contiguos de ensayos que constituyen un segmento y generar
+probabilidades predichas sin sentido basadas en un conjunto de
+datos que el participante no observó realmente, parti-
+cularmente cuando distintos ensayos dentro de un segmento podrían
+implicar un conjunto distinto de ejemplares vistos previamente) y luego
+promediar los residuos cuadráticos por ensayo para obtener una métrica del
+“ajuste” para un segmento dado de ensayos. Para facilitar la comparación,
+se aplicó el mismo procedimiento de ajuste a la condición de
+control, y la comparación se muestra en la Figura 5.
+Resultados
+Resultados conductuales
+Las precisiones de categorización por segmento de ensayos en cada con-
+dición se promediaron entre todos los participantes y se graficaron en el tiempo, lo que dio lugar a la Figura 3. En la condición de control, el aprendizaje signi-
+ficativo ocurrió entre el primer (M=.62, DE=.11)
+y el último (M=.73, DE=.18) segmento de ensayos, t(59) = 5:08,
+p< :001. En la condición experimental, las restricciones de memoria
+tuvieron efectivamente el efecto de hacer disminuir la precisión de clasificación de los par-
+ticipantes desde el segundo (M=.92, DE=.08) hasta el último (M=.81,
+DE=.15) segmento de ensayos, t(59) = 7:99, p< :001. El segundo
+segmento de ensayos se comparó en la condición experimental porque este
+fue el punto que mejor reflejaba el inicio de la función de ley de potencia
+—cuando el participante ya ha visto repetidamente el estímulo y ha superado
+la etapa inicial del aprendizaje.
+Resultados del modelo
+Los resultados del modelo por segmentos de ensayos de la condición de control con-
+dición se comparan con los resultados de Smith y Minda
+(1998) en la Figura 4. Los resultados del modelo por segmentos de ensayos
+(a) Replicación
+ (b) Original
+Figura 4: Comparación de (a) los resultados de nuestra replicación aproximada en la condición de control con (b) los resultados del
+experimento original, reproducido de Smith y Minda (1998). Los modelos se ajustaron al rendimiento de cada participante en un segmento de ensayos
+y luego se promediaron entre todos los participantes de la condición, con el ajuste calculado como el SSE en un segmento de ensayos. Las barras de error
+indican el error estándar de la media.
+(a) Condición de control
+ (b) Condición experimental
+Figura 5: Comparación de los modelos de prototipos y de ejemplares en las condiciones (a) de control y (b) experimental. Los modelos se
+ajustaron al rendimiento de cada participante a lo largo de todo el experimento y luego se promediaron entre todos los participantes de la condición, con
+el ajuste calculado como el MSE de todos los residuos por ensayo en un segmento. Las barras de error indican el error estándar de la media. Mientras que
+el ajuste MSE era necesario para la condición experimental debido a que los segmentos de ensayos eran agrupaciones no contiguas de ensayos, también se
+hizo para la condición de control para facilitar la comparación.
+de la condición experimental se comparan con los re-
+sultados de la condición de control en la Figura 5. Como se muestra en
+las Figuras 4 y 5, la ventaja del modelo de ejemplares sobre
+el modelo de prototipos aumenta en la condición de control, pero
+disminuye en la condición experimental.
+Para contrastar formalmente si la diferencia en los ajustes de los modelos entre el
+modelo de prototipos y el de ejemplares cambió a lo largo del
+experimento, realizamos un ANOVA de dos vías sobre los ajustes de los
+modelos, con el segmento de ensayos (primero/segundo, último) y el tipo de modelo
+(prototipo, ejemplar) como variables intrasujeto. Para el
+análisis de la condición de control con la medida de ajuste y el
+método de ajuste del modelo derivado del experimento de Smith y Minda (1998),
+la interacción entre el tipo de modelo y el segmento de ensayos
+siguió siendo significativa, F(1;59) = 19:72, p< :001.
+La interacción entre el tipo de modelo y el segmento de ensayos fue
+también significativa al usar nuestro procedimiento de ajuste del modelo modificado y el cálculo del
+ajuste para ambas condiciones: la experimental
+F(1;59) = 80:75, p< :001, y la de control,
+F(1;59) = 21:55, p< :001.
+Discusión general
+¿Qué tan bien reflejan los modelos de prototipos y de ejemplares de cate-
+gorización el rendimiento humano en las distintas etapas
+del aprendizaje bajo estadísticas ambientales realistas? En este
+estudio replicamos el experimento de Smith y Minda (1998)
+en nuestra condición de control, en la que la frecuencia de presentación del estímulo
+se mantiene fija independientemente de la última aparición
+del estímulo. Modificamos este diseño para presentar estímulos
+según el modelo de ley de potencia del decaimiento de la memoria, con el fin de
+reflejar mejor las estadísticas ambientales realistas (Ander-
+son y Schooler, 1991) en nuestra condición experimental. Hipotetizamos
+que configurar el experimento de categorización
+con estadísticas ambientales realistas reduciría la accesibilidad de las representaciones basadas en ejemplares en la memoria
+a lo largo del tiempo, reduciendo o invirtiendo así la tendencia de los hallazgos de Smith
+y Minda (1998). Nuestros hallazgos de la condición de control
+coinciden en gran medida con los hallazgos de Smith y Minda (1998)
+de que, cuando los estímulos se presentan con una frecuencia constante, la
+ventaja del modelo de ejemplares sobre el modelo de prototipos aumenta
+con el tiempo. Los resultados de la condición experimental con-
+firman nuestra hipótesis: cuando la presentación de los estímulos refleja con más precisión
+la propiedad de ley de potencia del entorno, la
+ventaja del modelo de ejemplares sobre el modelo de prototipos generalmente se
+desvanece con el tiempo.
+La precisión media de categorización mejoró con el tiempo en la
+condición de control; este patrón es el esperado, ya que los participantes
+vieron estímulos con frecuencia igual durante todo el ex-
+perimento y por ello podían aprender de más información a
+lo largo del tiempo. En la condición experimental, sin embargo, la categoriza-
+ción disminuyó de forma constante después del segundo segmento de ensayos.
+(El primer segmento de ensayos representa la etapa inicial del aprendiz-
+aje, durante la cual se espera que la precisión sea todavía menor.)
+Por tanto, nuestro diseño experimental logró introdu-
+cir restricciones de memoria que inhibieron el rendimiento a
+lo largo del tiempo. Como los segmentos posteriores contienen ensayos más avanzados
+en la curva de decaimiento de la memoria de cada objeto, cuando el objeto se pre-
+senta con menor frecuencia, los resultados conductuales siguen las impli-
+caciones del efecto de recencia en la memoria: que las personas
+tienen más dificultad para retener objetos que no se presentaron
+tan recientemente (Anderson y Schooler, 1991).
+Nuestros hallazgos ayudan a conciliar las incongruencias entre los
+resultados de los experimentos de aprendizaje de categorías y de memoria.
+De hecho, a diferencia de los escenarios experimentales tradicionales que implican
+funciones de recencia ambiental constantes (Smith y Minda,
+1998), las restricciones de memoria que se encuentran en entornos realis-
+tas reducen la ventaja del modelo de ejemplares sobre el
+modelo de prototipos a lo largo del tiempo. Bajo tales restricciones de memoria,
+la desaparición más rápida de los ejemplares individuales en la memoria en relación con
+la desaparición del prototipo (Posner & Keele, 1970; Zeng et al.,
+2021) inhibe con más fuerza el rendimiento del modelo de ejemplares
+frente al modelo de prototipo en fases posteriores del aprendizaje.
+Agradecimientos
+Este trabajo contó con el apoyo de una beca C.V. Starr concedida
+a Q.Z.
+Referencias
+Anderson, J. R., & Schooler, L. J. (1991). Reflections of the
+environment in memory. Psychological Science, 2, 396–
+408.
+McKinley, S. C., & Nosofsky, R. M. (1995). Investigations
+of exemplar and decision bound models in large, ill-defined
+category structures. Journal of Experimental Psychology:
+Human Perception and Performance, 21, 128–148.
+McKinley, S. C., & Nosofsky, R. M. (1996). Selective atten-
+tion and the formation of linear decision boundaries. Jour-
+nal of Experimental Psychology: Human Perception and
+Performance, 22, 294–317.
+Medin, D. L. (1975). A theory of context in discrimination
+learning. En G. H. Bower (ed.), The psychology of learning
+and motivation. Academic Press.
+Medin, D. L., & Schaffer, M. M. (1978). Context theory
+of classification learning. Psychological Review, 85, 207–
+238.
+Medin, D. L., & Smith, E. E. (1981). Strategies and clas-
+sification learning. Journal of Experimental Psychology:
+Human Learning and Memory, 7, 241–253.
+Myung, J. I., Pitt, M. A., & Navarro, D. J. (2007). Does
+response scaling cause the generalized context model to
+mimic a prototype model? Psychonomic Bulletin & Re-
+view, 14, 1043—1050.
+Nosofsky, R. M. (1984). Choice, similarity, and the context
+theory of classification. Journal of Experimental Psychol-
+ogy: Learning, Memory, and Cognition, 10, 104–114.
+Nosofsky, R. M. (1986). Attention, similarity, and the
+identification-categorization relationship. Journal of Ex-
+perimental Psychology: General, 115, 39–57.
+Nosofsky, R. M. (1987). Attention and learning processes
+in the identification and categorization of integral stimuli.
+Journal of Experimental Psychology: Learning, Memory,
+and Cognition, 13, 87–109.
+Nosofsky, R. M. (1988). Exemplar-based accounts of re-
+lations between classification, recognition, and typicality.
+Journal of Experimental Psychology: Learning, Memory,
+and Cognition, 14, 700–708.
+Nosofsky, R. M., Palmeri, T. J., & McKinley, S. C. (1994).
+Rule-plus-exception model of classification learning. Psy-
+chological Review, 101, 53–79.
+Nosofsky, R. M., & Zaki, S. R. (2002). Exemplar and proto-
+type models revisited: Response strategies, selective atten-
+tion, and stimulus generalization. Journal of Experimental Psychology: Learning, Memory, and Cognition, 28, 924–
+940.
+Palmeri, T. J., & Nosofsky, R. M. (1995). Recognition mem-
+ory for exceptions to the category rule. Journal of Experi-
+mental Psychology: Learning, Memory, and Cognition, 21,
+548–568.
+Posner, M. I., & Keele, S. W. (1968). On the genesis of
+abstract ideas. Journal of Experimental Psychology, 77,
+353–363.
+Posner, M. I., & Keele, S. W. (1970). Retention of abstract
+ideas. Journal of Experimental Psychology, 83, 304–308.
+Reed, S. K. (1972). Pattern recognition and categorization.
+Cognitive Psychology, 3, 382–407.
+Schooler, L. J., & Anderson, J. R. (1997). The role of process
+in the rational analysis of memory. Cognitive Psychology,
+32, 219–250.
+Shin, H. J., & Nosofsky, R. M. (1992). Similarity-scaling
+studies of dot-pattern classification and recognition. Jour-
+nal of Experimental Psychology: General, 121, 278–304.
+Smith, J. D., & Minda, J. P. (1998). Prototypes in the mist:
+The early epochs of category learning. Journal of Experi-
+mental Psychology, 24, 1411–1436.
+Smith, J. D., & Minda, J. P. (2002). Distinguishing prototype-
+based and exemplar-based processes in dot-pattern cat-
+egory learning. Journal of Experimental Psychology:
+Learning, Memory, and Cognition, 28, 800–811.
+Smith, J. D., & Minda, J. P. (2011). Prototype models of cate-
+gorization: Basic formulation, predictions, and limitations.
+En E. M. Pothos & A. J. Wills (eds.), Formal approaches in
+categorization. Cambridge University Press.
+Zeng, T., Tompary, A., Schapiro, A. C., & Thompson-
+Schill, S. L. (2021). Tracking the relation be-
+tween gist and item memory over the course of long-
+term memory consolidation. bioRxiv, 304–308. Con-
+sultado de https://www.biorxiv.org/content/10
+.1101/2021.01.05.425378v1 (preprint)

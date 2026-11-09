@@ -1,0 +1,602 @@
+Estimación del estado consciente de los agentes en vehículos autónomos
+Shane Parr1, Ishan Khatri1, Justin Svegliato2, y Shlomo Zilberstein2
+Resumen — Los sistemas autónomos suelen operar en entornos
+en los que el comportamiento de varios agentes está coordinado por
+un estado global compartido. La estimación confiable del estado global es
+por ello crítica para operar con éxito en un entorno multiagente.
+Presentamos la estimación del estado consciente de los agentes, un marco para
+calcular estimaciones indirectas del estado a partir de observaciones del
+comportamiento de otros agentes en el entorno. También presentamos
+la estimación del estado consciente de los agentes independiente de la transición, una
+clase tratable de estimación del estado consciente de los agentes, y demostramos que permite
+que la velocidad de inferencia escale linealmente con el número de
+agentes en el entorno. Como ejemplo, modelamos la clasificación de semáforos
+en casos de pérdida total de la observación directa.
+Al tener en cuenta las observaciones del comportamiento vehicular desde
+varias direcciones de tráfico, nuestro enfoque muestra una precisión
+superior a la de los métodos HMM existentes que solo usan el semáforo
+sobre un conjunto de datos reales de vehículos autónomos, bajo diversos
+escenarios simulados de oclusión.
+I. INTRODUCCIÓN
+Los sistemas autónomos suelen operar en entornos en los que
+el comportamiento de los agentes está regido tanto por su estado local
+como por un estado global compartido que encapsula aspectos
+importantes del entorno. La estimación confiable del estado global
+es crítica para los sistemas multiagente robustos. Las señales de
+coordinación gestionadas centralmente, como los semáforos para
+vehículos autónomos [1], [2], [3], las balizas de radio para los robots aéreos au-
+tónomos [4], [5] y las señales de socorro para operaciones de búsqueda
+y rescate [6], [7], son ejemplos particularmente importantes
+de estado global compartido. Recibir o interpretar mal estas señales
+puede causar fallos catastróficos.
+Existen varios métodos para mitigar tales fallos catas-
+tróficos. 1) Los sistemas pueden optar por transferir parte del
+control a un asistente humano [8], [9]. 2) Los sistemas pueden optar
+por recopilar información adicional para reducir la incertidumbre [10]. 3)
+Los sistemas pueden optar por usar una comunicación limitada para compartir
+información crítica entre agentes para mitigar el riesgo [11]. En
+entornos de alto riesgo y parcialmente observables, donde la intervención
+humana, la recopilación de información y la colaboración están
+limitadas, estos métodos por sí solos son insuficientes. La estimación del estado
+debe ser lo bastante robusta como para recuperar un estado global cuando la
+percepción directa falla, lo que motiva el objetivo de nuestro trabajo.
+La Figura 1 muestra un escenario de ejemplo. Un vehículo autónomo azul
+, modelado como un observador externo, se aproxima a una
+Este trabajo fue financiado en parte por las becas NSF IIS-1724101, IIS-
+1813490 y DGE-1451512.
+*Ambos autores contribuyeron por igual.
+1Trabajo realizado mientras eran estudiantes en la Universidad de Massachusetts Amherst.
+Correo electrónico: shane@sparr.io, ishan@khatri.io
+2College of Information and Computer Sciences, University of
+Massachusetts Amherst, MA, EE. UU. Correo electrónico: fjsvegliato,
+shlomo g@cs.umass.edu
+Fig. 1. Al observar agentes inteligentes del entorno, un sistema autónomo
+puede recuperar señales de coordinación pese a una obstrucción total prolongada.
+intersección de tres vías con otros dos agentes: los vehículos
+rojo y blanco operados por humanos. Debido al deslumbramiento en sus sensores,
+el vehículo azul no puede observar el semáforo, un elemento crucial
+del estado global. Sin embargo, al observar cómo gira el vehículo
+rojo y cómo se detiene el blanco, el vehículo azul
+puede recuperar correctamente el estado del semáforo sin
+observación directa ni comunicación entre vehículos.
+Un enfoque sencillo para la estimación del estado es usar un modelo oculto de
+Markov (HMM) u otro modelo gráfico para
+suavizar observaciones faltantes o erróneas. Aunque los HMM
+pueden suavizar una señal en presencia de ruido, tienen dificultades
+con la obstrucción total durante largos periodos [12]. También
+tienen dificultades para incorporar información compleja porque,
+en general, el número de estados crece exponencialmente con el
+número de variables [13], [14], y por ello la mayoría de los modelos
+evitan usar información adicional para representar el
+comportamiento de otros agentes. Sin embargo, como los HMM funcionan
+bien para el suavizado temporal, se han usado ampliamente en
+escenarios multiagente, como la clasificación de semáforos [15],
+[16]. Las redes bayesianas dinámicas (DBN) son una
+generalización de los HMM y de las redes bayesianas que añaden
+una estructura interna de red bayesiana al HMM. La
+estructura de las DBN debe darse o aprenderse, y la inferencia exacta
+puede no ser viable en tiempo real [17].
+Alternativamente, la estimación del estado y la toma de decisiones pueden
+gestionarse de forma concurrente. Un proceso de decisión de Markov parcialmente
+observable (POMDP) [10] funciona manteniendo y
+actualizando una creencia sobre los estados y puede extenderse a múltiples
+agentes descentralizados como un POMDP descentralizado (Dec-
+POMDP) [18]. Los POMDP y los Dec-POMDP, respectivamente,
+siendo NP y NEXP difíciles de resolver de forma óptima [19], [20], son arXiv:2108.00366v1  [cs.RO]  1 Aug 2021
+a menudo intratables sin supuestos simplificadores y
+un modelo conjunto preciso de todas las interacciones plausibles entre agentes.
+En este trabajo proponemos un marco novedoso para la estimación del estado consciente de los
+agentes, en el que las observaciones ruidosas del estado pueden
+combinarse con observaciones directas de otros agentes mientras
+ejecutan una política. El marco de estimación del estado consciente de los agentes
+nos permite combinar las ventajas de un HMM con
+información adicional (políticas que resuelven un Dec-MDP) mediante
+una representación DBN para reconstruir la señal de coordinación global
+de forma robusta y con un enfoque de teoría de la decisión.
+Nuestras contribuciones clave incluyen formalizar un marco general
+para la estimación del estado consciente de los agentes y destacar las
+ventajas de la propiedad de independencia de la transición. Proporcionamos
+una construcción DBN (Figura 2) para la cual la inferencia es equiv-
+alente a resolver el problema de estimación del estado consciente de los agentes independiente de la transición
+y aplicamos este enfoque al problema
+de clasificación de semáforos por un vehículo autónomo cuando
+el semáforo puede estar oculto. Ofrecemos resultados sobre un conjunto de datos
+reales de escenarios de semáforos, en el que el comportamiento
+de otros vehículos desde varias direcciones de tráfico se usa
+para obtener información sobre el estado de la intersección. Nuestros
+resultados muestran que nuestro enfoque exhibe una mayor precisión
+y es más robusto que los enfoques competidores que solo usan
+datos de imagen directos del semáforo.
+II. ANTECEDENTES
+Basamos nuestra representación de un problema de estimación del estado consciente de los agentes en un
+proceso de decisión de Markov descentralizado factorizado de n agentes (Dec-MDP),
+un marco formal de toma de decisiones
+estrechamente relacionado con los Dec-POMDP. Los Dec-MDP factorizados de n-
+agentes modelan la resolución cooperativa de problemas multiagente
+en entornos estocásticos y parcialmente observables, usando
+una representación factorizada del estado, con la propiedad especial de que
+ninguna parte del entorno está oculta para cada agente [20],
+[21]. Cuando se combinan con una política conocida, estos marcos
+permiten una estimación del estado precisa y eficiente.
+Un Dec-POMDP factorizado de n agentes se define mediante una tupla
+hI;S;A;T;R;
+;Oi. I es un conjunto de n agentes. S=S0
+S1S n es un conjunto finito de estados factorizados: un espacio global
+de estados global S0 y un espacio de estados local Si>0 para cada agente
+i2I. A=A1A n es un conjunto finito de acciones conjuntas:
+un conjunto de acciones Ai para cada agente i2I. T:SAS!
+[0;1] es una función de transición que representa la probabilidad
+T(s0js;~ a) =Pr(s0js;~ a) de alcanzar el estado factorizado s02S
+tras ejecutar la acción conjunta ~ a2A en el estado factorizado s2S.
+R:SAS! R es una función de recompensa que representa la
+recompensa inmediata esperada R(s;~ a;s0) de alcanzar el
+estado factorizado s02S tras ejecutar la acción conjunta ~ a2A en el
+estado s2 S.
+ = 
+ 1 
+n es un conjunto finito de
+observaciones conjuntas: un conjunto de observaciones 
+i para cada agente i2I.
+O:AS 
+![0;1] es una función de observación que
+representa la probabilidad O(~ !j~ a;s) =Pr(~ !j~ a;s) de la observación conjunta
+~ !2
+tras tomar la acción conjunta ~ a2A y terminar
+en el estado factorizado s2S. Un Dec-MDP es una clase específica de Dec-POMDP en la que, para cada observación conjunta ~ !2
+, existe
+algún s2S tal que Pr(sj~ !) = 1 .
+Un Dec-MDP factorizado de n agentes es localmente totalmente observable
+si, para cada observación local !i2
+i y estado global s0,
+existe algún estado local si tal que Pr(si;s0j!i) =
+1. Un Dec-MDP factorizado de n agentes es independiente en transiciones
+si la función de transición T puede representarse mediante una tupla de
+probabilidades de transición (T0;T1;:::;Tn) tal que
+T(s;~ a;s0) =T0(s0
+0js0)Qn
+i=1Ti(s0
+ijsi;ai). Dec-MDP independientes en transi-
+ciones son más simples porque evitan la
+necesidad de usar modelos conjuntos complejos. Pueden aproximar
+situaciones con agentes débilmente acoplados [22].
+III. ESTIMACIÓN DE ESTADO CONSCIENTE DE AGENTES
+Informalmente, un problema de estimación de estado consciente de agentes
+(AASEP) es un problema en el que un observador externo debe
+estimar el estado a partir de observaciones de otros agentes mientras
+ejecutan una política para resolver un problema de decisión descentralizado.
+El observador externo recibe observaciones ruidosas del espacio de estados, que se
+factoriza en dos componentes: 1) el
+estado global, cuyas transiciones no se ven afectadas por los agentes
+y 2) el estado local conjunto, cuyas transiciones se basan en
+tanto en el estado global mismo como en las acciones de cada agente.
+Estos problemas, llamados problemas señalizados (Definición 1)
+poseen independencia unidireccional, ya que el estado global actúa como
+una señal de coordinación que influye en las acciones de los agentes,
+mientras que su propia transición es independiente.
+Definición 1. Dado un espacio de estados factorizado S=S0SN,
+donde S0 se refiere al espacio de estados global, y SN=S1
+S n se refiere al espacio de estados locales conjunto, un problema de decisión
+es señalizado si para cada estado s2S, acción conjunta
+~ a2A y estado sucesor s02S, la función de transición T
+puede escribirse como una tupla de probabilidades de transición (T0;TN)
+tal que T(s0js;~ a) =T0(s0
+0js0)TN(s0
+NjsN;s0;~ a).
+Describimos ahora de forma más formal el AASEP.
+Primero, las políticas que ejecutan los agentes observados son una
+solución de un Dec-MDP señalizado, sin incluir al observador externo
+en el Dec-MDP. La elección del Dec-MDP no es
+inherente a nuestro enfoque; también exploramos modelos más simples.
+Segundo, definimos una función de observación conjunta Z y el
+conjunto correspondiente de observaciones conjuntas posibles O, accesible
+solo para el observador externo y separado de las definiciones
+internas del Dec-MDP señalizado (por ejemplo, O o
+). Así, el
+observador se modela como si recibiera una secuencia de observaciones
+de cada factor de estado mientras los agentes ejecutan sus políticas individuales.
+El objetivo del observador externo (y por tanto el objetivo del
+AASEP) es estimar el estado actual dado el historial
+de observaciones ruidosas y sus políticas individuales. Una definición completa
+del AASEP se proporciona en la Definición 2.
+Definición 2. Un problema de estimación de estado consciente de agentes
+(AASEP) se define por la tupla hM;;O;Zi, donde:
+•M es un Dec-MDP señalizado: hI;S;A;T;;
+;Oi.
+• =f1;:::; ngis un conjunto de árboles de política estocásticos
+i: 
+tAi![0;1] tal que i(~h;ai) =Pr(aij~h)
+define la probabilidad de que el agente i tome la acción ai con
+historial ~h de observaciones !1;!2;:::;! t en M.
+•O=O0O 1O n es un conjunto finito de
+observaciones conjuntas: O0 son observaciones de un estado global s0
+y Oi>0 son observaciones de un estado local si hechas por
+el observador externo.
+•Z=fZ0;Z1;:::;Zngis un conjunto de funciones de observación
+Zi:SiOi![0;1] tal que Zi(si;oi) =Pr(oijsi)
+define la probabilidad de que el observador externo re-
+ciba oi2Oi del factor de estado si para cada agente i.
+En un AASEP, los agentes observados tienen el potencial
+de interacciones complejas que aportan información despreciable
+sobre el estado global. Además, para realizar inferencia exacta
+y calcular una solución, el observador externo debe formar
+una creencia sobre las posibles creencias de los agentes internos al
+Dec-MDP, que a su vez responden a historiales
+de observaciones privadas ~h. Por estas razones, abordar el
+problema del semáforo como un AASEP no estructurado es im-
+práctico, y podría conllevar una complejidad computacional
+considerable. Aunque los AASEP son bastante generales y dignos
+de estudio posterior, en el resto de este trabajo nos centramos en
+una subclase de problemas que asume observabilidad local completa
+y de independencia de transiciones entre agentes: AASEP
+independientes en transiciones (TI-AASEP).
+Al suponer 1) que distintos estados locales son independientes en transi-
+ciones entre sí, pero no del estado global, y
+2) que los agentes pueden modelarse bien con conocimiento completo del estado global
+y local, un TI-AASEP puede resolverse sin modelar
+interacciones complejas entre agentes ni estimar las creencias de otros
+agentes. Trabajamos para asegurar que estos supuestos se cumplan para todos
+los agentes incluidos, aunque la literatura previa sobre Dec-MDP sugiere
+que las violaciones menores de la independencia de transiciones se manejan
+bien en la práctica [22]. Estos supuestos nos permiten especificar
+un TI-AASEP, definido formalmente en la Definición 3.
+Definición 3. Un problema de estimación de estado consciente de agentes
+independiente de transiciones (TI-AASEP) es un AASEP hM;;O;Zi,
+donde M es independiente de transiciones y localmente totalmente ob-
+servable, y  se compone de políticas que van de
+S0SiAi![0;1] tal que i(s0;si;ai) =Pr(aijs0;si).
+Un TI-AASEP resuelve muchas de las dificultades de un
+AASEP. Al modelar a los agentes como si tuvieran observación
+local completa, podemos usar un conjunto de políticas markovianas
+(intercambiando cualquier !i o ~h con s0 y si) para aproximar
+el comportamiento de los agentes. Además, la independencia de transiciones del
+Dec-MDP permite considerar a los agentes como casi
+totalmente separados, unidos solo por un estado global compartido.
+Resolver un TI-AASEP equivale a realizar inferencia
+con una DBN tratable, es decir, con variables discretas y una
+tabla de probabilidad condicional de tamaño constante en cada nodo.
+Las observaciones externas O0 hasta On forman nodos de evidencia,
+ Estado global
+Observación
+Estado global
+Agente
+Modelo
+Estado local
+Estado local
+Observación Fig. 2. Una DBN para la estimación de estado consciente de agentes independiente de transiciones.
+y el factor de estado del espacio de estados globales S0 es nuestro objetivo
+para la inferencia. Las relaciones probabilísticas entre los
+nodos de evidencia O y el estado global S0 se caracterizan
+mediante las funciones de observación Z, las funciones de transición T,
+y las políticas estocásticas de los agentes .
+La Figura 2 muestra la representación DBN de dos cortes de
+un AASEP independiente de transiciones (TI-AASEP). Los nodos púrpuras
+representan un HMM ordinario de estimación de señales, que modela la relación
+de un estado global s0 con la observación del observador externo
+o0 ∈ O0. En azul, tenemos la tarea estándar de
+observar el estado de los agentes en nuestro entorno. En
+rojo, tenemos el modelo de agentes, o nodo de acción, que relaciona
+las dos tareas dependiendo tanto del estado local previo como del
+estado global (mediante la política del agente, i). Debido a la dependencia causal
+de todas las Oi sobre S0, podemos mejorar nuestra estimación
+de S0 con muchos más datos que si estuviéramos limitados solo a
+O0, observaciones externas directas del estado global.
+Para realizar inferencia de forma eficiente con la DBN, podemos
+convertirla en un grafo de factores y ejecutar el algoritmo de
+paso de mensajes suma-producto [23].
+Proposición 1. La inferencia sobre t pasos de tiempo usando n agentes en
+un TI-AASEP aplicando el algoritmo de paso de mensajes suma-producto
+forward-backward a la DBN tiene una complejidad temporal en el peor caso
+O(tnk2), donde cada nodo puede tomar hasta k
+valores discretos distintos.
+Esbozo de prueba. La representación en grafo de factores de nuestra DBN desplegada en t-
+pasos tiene O(tn) factores y O(tn) vari-
+ables, para cada nodo y nodo de evidencia respectivamente. Cada
+variable realiza como máximo k sumas, sobre a lo sumo una distribución k-
+dimensional, con un costo de O(k2) para resumir
+un número constante de mensajes entrantes. Como el grafo de factores
+es un árbol de ancho finito, se necesita exactamente un mensaje
+por arista y por dirección para una solución exacta.
+Por tanto, el algoritmo se ejecuta en tiempo O(tnk2), con un
+número constante de resúmenes por variable.
+La complejidad temporal en el peor caso O(tnk2) ofrece una dependencia lineal de-
+seable respecto al número de agentes, a cambio de
+de los supuestos más estrictos de un TI-AASEP. Intuitivamente,
+la complejidad temporal en el peor caso de la inferencia exacta en el
+caso general de AASEP tiene una dependencia superlineal de n.
+Así, vemos que los supuestos adicionales de agentes independientes en transi-
+ciones y de observabilidad local completa para los agentes
+mejoran la viabilidad de la inferencia en tiempo de ejecución.
+En la práctica, observamos que los agentes que claramente interactúan u ob-
+struidos pueden eliminarse de la inferencia. Esto justifica
+un Dec-MDP independiente en transiciones y localmente totalmente observable,
+a costa de no usar siempre cada observación. En el
+escenario de tráfico (Sección I), esto implica eliminar los coches ob-
+struidos en su sentido de marcha. En el límite, eliminar
+cada agente reduce nuestro modelo a un HMM sobre el
+estado global, un enfoque estándar para la estimación de señales de tráfico.
+Proposición 2. La inferencia del estado global s0 durante t pasos de tiempo
+usando cero agentes en un TI-AASEP es equivalente a la inferencia
+de s0 en un HMM, donde S0 es el conjunto de estados ocultos y
+O0 es el conjunto de observaciones.
+Esbozo de prueba. Un HMM es una tupla hS;T;O;Zi, donde S es
+un espacio de estados que transiciona según una función de transición T
+y emite observaciones de un conjunto O según la función de observación
+Z. Sin agentes, un TI-AASEP solo contiene
+factores de estado global (todos los elementos con subíndice distinto de cero
+desaparecen), y hS0;T0;O0;Z0i forma un HMM.
+La Proposición 2 establece que la inferencia realizada con un TI-AASEP
+sin agentes colapsa a un HMM sobre el estado global.
+Como resultado de la construcción de la DBN, las estimaciones del
+estado global solo pueden mejorar cuando se incorporan agentes.
+Ante violaciones menores de los supuestos del TI-AASEP, el
+TI-AASEP sigue siendo a menudo un modelo aproximado robusto
+en la práctica. Finalmente, si se cumplen menos supuestos en un dominio,
+puede ser mejor modelar el problema como un AASEP completo.
+IV. CLASIFICACIÓN DE SEMÁFOROS
+Para demostrar el uso de los TI-AASEP en la práctica, los aplicamos
+a la tarea de clasificación de semáforos tratada en la Sección I
+(Figura 1) para intersecciones de cuatro vías. Esto
+requiere especificar parcialmente un Dec-MDP, crear un TI-
+AASEP y construir la DBN correspondiente, y da como resultado
+una inferencia precisa en tiempo real en el problema de clasificación.
+Primero construimos un Dec-MDP señalizado, independiente en transiciones y lo-
+calmente totalmente observable Dec-MDP M=hI;S;A;T;;;i,
+donde cada vehículo observado y sin obstrucción en la intersección
+(excluido el nuestro) se incluye en el conjunto de agentes. El
+espacio de estados globales S0 incluye los posibles estados de semáforo
+para las direcciones de marcha paralela y perpendicular,
+es decir, fRED;YELLOW;GREENgf RED;YELLOW;GREENg.
+Las combinaciones ilegales de luces (p. ej., verde, verde) reciben probabilidad
+cero. Debido a la independencia de transiciones, cualquier agente que
+interactúa con un peatón u otra obstrucción se elimina
+de I antes de la inferencia. Cada agente i2I tiene un espacio de estados locales correspondiente
+Si, que es el producto cruzado de su posición discretizada como
+fEN INTERSECCIÓN, GIRANDO A LA IZQUIERDA, AVANZANDO RECTO,
+GIRANDO A LA DERECHAg, y la velocidad discretizada como fNINGUNA (0
+m/s), BAJA (1-5 m/s), ALTA (>5 m/s)g. Además,
+dividimos a los agentes en dos grupos, uno para los agentes que circulan
+en la misma dirección de marcha y otro para la dirección
+perpendicular de marcha. Representamos las acciones como un producto cruzado
+entre sus entradas de dirección fIZQUIERDA, RECTO, DERECHAg y
+entradas del acelerador fMENOS, CERO, MÁSg. Las
+probabilidades de transición Ti se especifican mediante un modelo físico simple aproximado
+de posición y velocidad, que tiene en cuenta
+las entradas de dirección y de acelerador de forma
+directa. Las probabilidades de transición T0 para la señal de tráfico
+se componen de una autotransición de alta probabilidad, una
+transición de baja probabilidad a la siguiente configuración de luces en una
+secuencia predefinida, y una probabilidad casi nula para cualquier cambio
+de luz fuera de secuencia (p. ej., de AMARILLO a VERDE).
+El TI-AASEP requiere un conjunto de observaciones conjuntas O
+que representen la percepción del semáforo y de otros vehículos.
+Cada Oi>0 equivale a Si>0, ya que se usó LiDAR para recons-
+truir estimaciones de posición y velocidad directamente, que
+luego se discretizaron. Como los vehículos solo pueden observar directa-
+mente el semáforo en su dirección de marcha, O0 =
+fROJO;AMARILLO;VERDEg. Con estas observaciones solas,
+no puede reconstruirse el estado global completo, ya que incluye un
+semáforo separado para cada dirección de marcha. También definimos un
+conjunto de funciones de observación Z para describir la incertidumbre
+del sensor y las oclusiones. Especificamos que Z0 tiene una precisión de 92% y
+Zi>0 de 95%. El componente final es , el conjunto de políticas
+que asignan estados locales a acciones. Cada política de agente i es
+descrita por un modelo de conductor que asume que los conductores son bastante
+estocásticos pero en gran medida obedecen las leyes de tránsito. Podemos realizar in-
+ferencia con la DBN construida, estructurada como en la Figura 2.
+V. EXPERIMENTOS
+Comparamos AASE con un HMM de referencia comparable a
+un estándar actual en la detección y clasifica-
+ción de semáforos [16]. Ambos enfoques se implementan en Python usando
+la biblioteca Pomegranate [24] para modelos probabilísticos. Cada
+modelo usa una red neuronal convolucional con una
+arquitectura YOLOv3 [25], entrenada con el conjunto de datos Bosch Small Traffic Light
+conjunto de datos [26], como el detector de visión de 30 Hz que da observaciones directas.
+observaciones directas. Todas las pruebas se ejecutan en una CPU Intel i7-6700k a
+4.0 GHz con una GPU Nvidia RTX 2070 Super.
+Todos los experimentos se ejecutaron sobre un subconjunto de Argoverse
+1.0 de seguimiento 3D [27], con semáforos, escenarios que contenían trá-
+fico. Argoverse es un conjunto de datos que incluye tanto mapas HD
+de varias ciudades y datos de sensores recogidos por un vehículo autónomo real,
+junto con las posiciones reales (ground truth) de vehículos y
+peatones como etiquetas a 10 Hz. Esta rica combinación
+de datos es utilizada por nuestro modelo multimodal, que
+usa datos de píxeles en bruto, anotaciones de vehículos y mapas HD para
+estimar las señales de los semáforos. Del conjunto de datos de Argoverse,
+elegimos 21 escenarios desafiantes que contienen intersecciones de cuatro
+Fig. 3. Escenario típico de una intersección donde el semáforo está oculto por el deslumbramiento. La transición real de rojo a verde ocurre a los 2 s, y una línea negra
+en 4 s marca la primera reacción humana. El retraso entre el humano y AASE se debe a retrasos variables de los 3 coches de la intersección.
+vías con semáforos y etiquetamos a mano la verdad de referencia (ground
+truth) de los estados de los semáforos. Proporcionamos estas etiquetas junto con
+nuestro código fuente en https://github.com/ikhatri/AASE.
+La Tabla I registra la precisión bajo varios patrones artificiales de
+oclusión. Las columnas de la tabla indican las longitudes de oclusión
+como porcentajes del tiempo en que el semáforo era visible en
+cada escenario. Para todos los patrones, 0% indica que no se descartaron observaciones
+y 100% indica que se descartaron todas las observaciones. Los
+resultados del HMM con todas las observaciones del semáforo descartadas se han omitido,
+ya que el comportamiento colapsa a predecir rojo
+sin importar el escenario. Continuous( start ) descarta el primer x%
+de las observaciones de la secuencia, modelando una oclusión continua
+al inicio del escenario. Continuous( end) descarta
+las últimas x% de observaciones, modelando una oclusión al final
+del escenario. Continuous( random ) descarta una longitud de x%
+de duración del escenario desde un punto de inicio aleatorio. Para
+cada paso de tiempo, Discontinuous( random ) descarta cada observa-
+ción de forma independiente con probabilidad x%. Para ambos patrones
+aleatorios, promediamos sobre 5 ensayos e informamos el error estándar.
+La precisión se mide a 10 Hz mediante una pérdida indicadora 0–1
+entre la verdad de referencia y la secuencia de estados más probables
+(MLE) de cada modelo, dividida entre los 3762 fotogramas LiDAR
+del conjunto de datos. Observamos que el tiempo de ejecución de AASE
+es aproximadamente (40n+)ms, donde n es el número de agentes y
+es una sobrecarga constante, verificando empíricamente la Proposición 1.
+VI. DISCUSIÓN
+Para ilustrar nuestro enfoque, analizamos un escenario de in-
+tersección real en el que el semáforo está completamente
+ocluido (Figura 3). En este escenario, el modelo YOLOv3
+no puede detectar el semáforo durante los primeros 9 segundos debido al
+deslumbramiento del sol. Si el AV solo usara estimaciones directas del
+la luz suavizadas mediante un HMM para guiar la toma de decisiones,
+nunca habría entrado en la intersección, ganado
+visibilidad del semáforo y descubierto que la luz estaba
+verde. En cambio, al observar a los otros coches, AASE mantiene
+una estimación precisa de la luz durante todo el escenario.TABLA I
+PRECISIÓN DE CLASIFICACIÓN (%) PARA TODOS LOS ESCENARIOS DE INTERSECCIÓN
+Método de oclusión 0% 20% 40% 60% 80% 100%
+Cont( start )AASE 90.2 86.4 83.0 80.0 75.4 74.0
+HMM 88.1 76.9 64.5 51.7 40.5 –
+Cont( end)AASE 90.2 88.7 86.5 83.8 81.9 74.0
+HMM 88.1 86.4 88.5 73.0 67.6 –
+Cont( rand )AASE 90.2 88.0 0.6 85.80.3 84.00.1 77.70.7 74.0
+HMM 88.1 85.40.5 79.01.6 75.60.5 62.61.6 –
+Discont( rand )AASE 90.2 89.7 0.3 88.80.2 87.50.2 84.90.4 74.0
+HMM 88.1 87.70.4 87.40.6 87.10.6 85.90.9 –
+desfasado unos pocos segundos. En la práctica, la latencia de los otros conductores
+puede añadir un retardo semejante al humano a AASE.
+La Tabla I muestra la ventaja de precisión que AASE tiene sobre
+un HMM durante los eventos de degradación de la señal. Modelamos explícitamente
+dos tipos de degradación de la señal: 1) oclusiones continuas, que
+simulan obstrucciones prolongadas del semáforo, y
+2) patrones aleatorios discontinuos, que simulan
+observaciones ruidosas de la red neuronal. A medida que la degradación
+se vuelve severa, AASE usa observaciones del comportamiento de los conductores
+para mantener una estimación aceptable del semáforo.
+Hay diferencias claras entre AASE y el HMM
+en cada patrón de degradación de la señal. En los patrones de oclu-
+sión continua, la precisión de AASE disminuye suavemente hasta el 74% a medida que la
+duración de las oclusiones temporalmente extendidas aumenta del
+20% al 100% de cada escenario. Con una oclusión del 80%, según
+la naturaleza temporal del patrón, el HMM es entre un 14% y un
+35% peor que AASE en precisión, muy por encima del margen
+de error. Además, en el caso de obstrucciones continuas
+que comienzan en un escenario, el HMM incluso cae por debajo del 50% de precisión
+y falla por completo con una oclusión del 100%.
+Una asimetría entre el desempeño del HMM en
+obstrucciones que comienzan frente a las que terminan es marcada. Esto se debe a
+que los modelos secuenciales dependen en gran medida de las observaciones más tempranas
+para inicializar con precisión el estado interno, lo cual, en el caso de
+los semáforos, cambia con bastante poca frecuencia. De hecho, en la Figura 3,
+vemos que este ejemplo real de deslumbramiento oclusivo es del
+patrón de obstrucción inicial más perjudicial, por lo que el
+HMM rinde especialmente mal, en línea con las simulaciones.
+Por último, con el patrón de ruido discontinuo, ambos modelos
+se mantienen precisos pese a un número creciente de observaciones
+descartadas de forma independiente. Esto se debe a que ambos modelos explotan una
+estructura HMM interna que conecta las observaciones directas de
+la luz con una estimación del estado de la luz. Aunque AASE usa
+un modelo DBN más complejo, el HMM interno se conserva
+y permite que sea robusto ante el ruido aleatorio discontinuo
+. AASE no sacrifica precisión entre las obstrucciones continuas
+y el ruido discontinuo; más bien, mejora o
+iguala el desempeño en un amplio espectro de escenarios.
+Observamos ventajas similares a las anteriores en los
+escenarios restantes, especialmente donde el modelo entrenado de detección de semáforos
+falla sistemáticamente. El conjunto de datos de Bosch usado
+para el entrenamiento carecía tanto de semáforos horizontales como de escenas
+nocturnas, características presentes en algunos escenarios del conjunto de datos
+de Argoverse. En estos escenarios, el modelo de detección de semáforos
+tuvo un desempeño deficiente. Esto nos ofrece perfiles de fallo
+realistas para comparar AASE y el HMM en su capacidad
+de recuperarse. Aunque un mejor conjunto de datos podría mejorar la detección, una
+flota de vehículos autónomos probablemente no podrá evitar por completo
+escenarios fuera de muestra u oclusiones [28].
+Nuestros resultados muestran las ventajas de usar AASE para aprovechar
+una gama de observaciones. Aprovecha información
+que a menudo ya se ha recopilado (p. ej., la posición y el comportamiento de
+otros vehículos), y esta información adicional a menudo puede
+recopilarse con sensores cuyos modos de fallo son independientes
+de los sensores usados para observar directamente los semáforos. Métodos
+como LiDAR y radar son robustos al deslumbramiento, el radar es robusto
+con nieve y lluvia, e incluso las cámaras tienen menos probabilidad de tener
+varios vehículos obstruidos por el deslumbramiento o la lluvia que la propia
+luz. Sin embargo, AASE no es simplemente fusión de sensores; usarla
+no requiere apuntar múltiples sensores al mismo
+objeto. Por ejemplo, usamos observaciones LiDAR de
+vehículos para actualizar una estimación del color del semáforo,
+algo que no sería posible con la fusión de sensores convencional.
+VII. CONCLUSIÓN
+Proponemos la nueva clase de problemas de estimación del estado consciente de los agentes
+(AASEP) y presentamos el marco de estimación del estado consciente de los
+agentes para resolverlos. Al modelar
+a los agentes como si resolvieran un Dec-MDP señalizado,
+nuestro marco puede estimar indirectamente el estado observando
+el comportamiento de los agentes en el Dec-MDP. Además,
+presentamos una forma restringida de AASEP que impone
+independencia de la transición (TI-AASEP), demostramos que una solución exacta
+es lineal respecto del número de agentes, y que, por construcción,
+el desempeño es superior al de un HMM que
+ignora a los agentes. Por último, aplicamos nuestro enfoque TI-AASEP
+a la clasificación de semáforos para mostrar empíricamente que nuestro
+modelo conserva una alta precisión en escenarios reales de oclusión, donde
+los HMM fallan. Nuestro enfoque combina diversas
+capacidades de sistemas autónomos, como modelos de agentes y mapas, para formar una comprensión de una intersección en tiempo
+real y mejora la estimación del estado en sistemas multiagente.
+REFERENCIAS
+[1] A. Broggi, P. Cerri, M. Felisa, M. C. Laghi, L. Mazzei, y P. P. Porta,
+“The VisLab Intercontinental Autonomous Challenge: An extensive
+test for a platoon of intelligent vehicles,” IJVAS , 2012.
+[2] J. Svegliato, K. H. Wray, S. J. Witwicki, J. Biswas, y S. Zilberstein,
+“Belief Space Metareasoning for Exception Recovery,” en IROS , 2019.
+[3] C. Basich, J. Svegliato, K. H. Wray, S. Witwicki, J. Biswas, y
+S. Zilberstein, “Learning to Optimize Autonomy in Competence-
+Aware Systems,” arXiv preprint arXiv:2003.07745 , 2020.
+[4] M. Achtelik, M. Achtelik, Y . Brunet, M. Chli, S. Chatzichristoﬁs,
+et al. , “Sﬂy: Swarm of micro ﬂying robots,” en IROS , 2012.
+[5] O. M. Cliff, R. Fitch, S. Sukkarieh, D. L. Saunders, y R. Heinsohn,
+“Online localization of radio-tagged wildlife with an autonomous
+aerial robot system,” en RSS, 2015.
+[6] M. A. Goodrich, B. S. Morse, D. Gerhardt, J. L. Cooper, M. Quigley,
+J. A. Adams, y C. Humphrey, “Supporting wilderness search and
+rescue using a camera-equipped mini UA V,” JFR, 2008.
+[7] L. Pineda, T. Takahashi, H.-T. Jung, S. Zilberstein, y R. Grupen,
+“Continual planning for search and rescue robots,” en Humanoids ,
+Seúl, Corea, 2015.
+[8] K. H. Wray, L. Pineda, y S. Zilberstein, “Hierarchical Approach to
+Transfer of Control in Semi-Autonomous Systems,” en IJCAI , 2016.
+[9] S. Zilberstein, “Building strong semi-autonomous systems,” en AAAI ,
+2015.
+[10] L. P. Kaelbling, M. L. Littman, y A. R. Cassandra, “Planning and
+acting in partially observable stochastic domains,” AIJ, 1998.
+[11] C. V . Goldman y S. Zilberstein, “Optimizing information exchange
+in cooperative multi-agent systems,” en AAMAS , 2003.
+[12] S. V . Vaseghi y B. P. Milner, “Noise compensation for hidden
+Markov model speech recognition in adverse environments,” IEEE
+Transactions on SAP , 1997.
+[13] Z. Ghahramani, “An introduction to hidden Markov models and
+Bayesian networks,” en Hidden Markov models: Applications in com-
+puter vision . World Scientiﬁc, 2001.
+[14] L. Rabiner y B. Juang, “An introduction to hidden Markov models,”
+IEEE AASP , 1986.
+[15] P. Dymarski, Hidden Markov Models: Theory and Applications . BoD
+Books on Demand, 2011.
+[16] A. Gomez, F. Alencar, P. Prado, F. Osorio, y D. Wolf, “Traffic lights
+detection and state estimation using HMMs,” en IEEE IV , 2014.
+[17] K. P. Murphy, “Dynamic bayesian networks: representation, inference
+and learning,” Tesis doctoral, 2002.
+[18] F. A. Oliehoek, C. Amato, et al. ,A concise introduction to decentral-
+ized POMDPs . Springer, 2016.
+[19] M. Mundhenk, J. Goldsmith, C. Lusena, y E. Allender, “Complexity
+of ﬁnite-horizon markov decision process problems,” Journal of the
+ACM (JACM) , vol. 47, no. 4, págs. 681–720, 2000.
+[20] D. S. Bernstein, R. Givan, N. Immerman, y S. Zilberstein, “The
+complexity of decentralized control of Markov decision processes,”
+MOR , 2002.
+[21] C. Amato, G. Chowdhary, A. Geramifard, N. K. ¨Ure, y M. J.
+Kochenderfer, “Decentralized control of partially observable Markov
+decision processes,” en CDC . IEEE, 2013.
+[22] R. Becker, S. Zilberstein, V . Lesser, y C. V . Goldman, “Solving
+Transition Independent Decentralized MDPs,” JAIR , 2004.
+[23] F. R. Kschischang, B. J. Frey, y H.-A. Loeliger, “Factor graphs and
+the sum-product algorithm,” IEEE Transactions on IT , 2001.
+[24] J. Schreiber, “Pomegranate: Fast and ﬂexible probabilistic modeling
+in Python,” JMLR , 2017.
+[25] J. Redmon y A. Farhadi, “YOLOv3: An Incremental Improvement,”
+arXiv:1804.02767, 2018.
+[26] K. Behrendt, L. Novak y R. Botros, “A deep learning approach to
+traffic lights,” en ICRA, 2017.
+[27] M.-F. Chang, J. Lambert, P. Sangkloy, J. Singh, S. Bak, A. Hartnett,
+D. Wang, P. Carr, S. Lucey, D. Ramanan y J. Hays, “Argoverse:
+3D Tracking and Forecasting With Rich Maps,” en CVPR, 2019.
+[28] N. Webb, D. Smith, C. Ludwick, T. Victor, Q. Hommes, F. Favaro,
+G. Ivanov y T. Daniel, “Waymo’s safety methodologies and safety
+readiness determinations,” 2020.

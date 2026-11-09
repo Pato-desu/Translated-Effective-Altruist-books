@@ -1,0 +1,703 @@
+Aprendizaje de árboles causales con variables latentes mediante experimentación controlada
+Prasad Tadepalli
+Oregon State University
+Corvallis, Oregon, 97331Cameron Barrie
+Oregon State University
+Corvallis, Oregon, 97331Stuart J. Russell
+University of California
+Berkeley, California, 94720
+Resumen
+El aprendizaje de conocimiento causal suele requerir experimentos de intervención
+debido a la indeterminación de la causalidad. En este
+artículo justificamos la necesidad de los experimentos desde la
+perspectiva de la tratabilidad computacional cuando existen variables latentes
+Presentamos un algoritmo de experimentación controlada de tiempo polinomial
+para aprender los parámetros de una red causal estructurada en árbol conocido
+cuando todos los nodos, salvo la raíz y
+las hojas, son latentes y solo las hojas son controlables. Nuestros resultados empíricos
+con varios conjuntos de datos sintéticos muestran la superioridad
+de la experimentación algorítmica frente a otros enfoques pasivos
+como el aprendizaje con redes neuronales.
+Introducción
+Los modelos causales estructurales (SCM) son modelos atractivos de
+causalidad, con una semántica intuitiva y rigor matemático.
+Es bien sabido que aprender la estructura de las redes causales
+suele requerir experimentos de intervención, ya que los datos obser-
+vacionales por sí solos no pueden identificar la verdadera estructura causal
+a partir de su clase de equivalencia de Markov (Pearl 2009; Spirtes,
+Glymour y Scheines 2000; Reichenbach 1991). Ha habido
+varios enfoques para aprender la estructura de las
+redes causales combinando datos observacionales e intervencio-
+nales (Cooper y Yoo 1999; Peters, B ¨uhlmann y
+Meinshausen 2016; Silander y Myllymaki 2012; Eaton
+y Murphy 2007). También hay enfoques sofisticados que diseñan
+activamente experimentos óptimos para aprender
+la estructura de la red (He y Geng 2008). En trabajos re-
+cientes se han estudiado estrategias óptimas de aprendizaje activo para identi-
+ficar estructuras de redes causales con un número mínimo de
+intervenciones en un solo nodo y en varios nodos
+(Hauser y B ¨uhlmann 2014).
+Se ha trabajado considerablemente en el aprendizaje de la estructura
+de los SCM en presencia de variables latentes, incluidos
+IC* (Pearl 2009), FCI (Spirtes, Glymour y Scheines
+2000) y RFCI (Colombo et al. 2012). Los métodos recientes
+han explorado el uso de consultas de rutas (Bello y Hono-
+rio 2017), el diseño experimental (Kocaoglu, Shanmugam y
+Bareinboim 2017) y la satisfacción de restricciones para aprender la
+estructura (Hyttinen et al. 2013). En este trabajo abordamos
+el problema complementario de aprender de manera eficiente los pa-
+Derechos de autor ©
+2019, Association for the Advancement of Artificial
+Intelligence (www.aaai.org). Todos los derechos reservados. Los parámetros de una red con estructura conocida en presencia
+de un gran número de variables latentes. Los trabajos previos sobre
+el aprendizaje de los parámetros de las redes bayesianas se basan en
+la maximización de la esperanza y el descenso del gradiente (Binder et
+al. 1997), en diversos métodos de imputación y en otros, como
+el estimador bayesiano robusto (Ramoni y Sebastiani 2001).
+Sin embargo, ninguno de estos enfoques ofrece garantías formales
+de desempeño. De hecho, parece que aprender en presencia de
+variables latentes es intratable sin experimentos,
+algo que estos métodos no consideran.
+Consideramos el problema de aprender los parámetros de un
+modelo causal estructural (SCM) a partir de observaciones y ex-
+perimentos en el marco del aprendizaje PAC de conceptos probabilísticos
+o P-conceptos (Kearns y Schapire 1994). Este
+marco supone que las entradas se generan a partir de una distribución na-
+tural, y el objetivo es aprender, con alta proba-
+bilidad, una distribución condicional aproximada de la variable ob-
+jetivo dadas las entradas. En la predicción PAC, al aprendiz
+se le permite expresar la función objetivo en cualquier representación polinomi-
+almente evaluable equivalente al concepto ob-
+jetivo. Por lo tanto, el aprendizaje PAC de un concepto es, en general, un
+problema más difícil que la predicción PAC, pues el aprendiz tiene mayor liber-
+tad para representar su objetivo. Cuando todas las variables son booleanas
+y las CPT son deterministas, un SCM es equivalente a un
+circuito booleano. Lamentablemente, la predicción PAC de circuitos
+booleanos a partir de ejemplos aleatorios es criptográficamente difícil,
+es decir, tan difícil como resolver problemas criptográficos como la factori-
+zación de enteros (Pitt y Valiant 1988). Sorprendentemente, el pro-
+blema sigue siendo difícil incluso cuando el circuito tiene estructura de árbol y
+se conoce la estructura del árbol (Pitt y Warmuth 1990).
+Dado que los SCM booleanos probabilísticos, en los que solo se observan las entradas
+y la salida final del SCM, generalizan los
+circuitos booleanos, se sigue que aprenderlos es tan difícil como
+factorizar. Igual que en los circuitos booleanos, la dificultad per-
+siste incluso cuando el SCM tiene una estructura de árbol conocida.
+Anteriormente se demostró que las funciones que corresponden
+a los nodos internos latentes de un circuito booleano determinista con estructura de árbol
+pueden aprenderse a partir de ejemplos aleatorios y
+consultas de pertenencia (Tadepalli y Russell 1998). Una con-
+sulta de pertenencia solicita la salida del circuito para una entrada
+dada. Curiosamente, tanto las consultas de pertenencia como los ejem-
+plos aleatorios son necesarios para que el aprendizaje tenga éxito. Por
+otra parte, las desviaciones de la estructura de árbol hacen que el
+problema sea criptográficamente difícil incluso cuando se permiten ambos: ejem-
+plos aleatorios y consultas de pertenencia. En este artículo,
+extendemos este trabajo previo al contexto probabilístico y
+mostramos que los árboles causales probabilísticos con raíz pueden aprenderse de forma eficiente
+a partir de datos observacionales y experimentales.
+Aunque ha habido muchos enfoques para el aprendizaje de
+redes causales que emplean una combinación de datos observacionales
+y experimentales, en muchos casos los experimentos son
+fuera de línea y predeterminados, lo que los limita a ser pocos
+en número y no adaptativos. Trabajos previos sobre aprendizaje activo
+de redes bayesianas también exploraron la idea de la experimenta-
+ción, en la que las variables relevantes sobre las que intervenir se eligen
+mediante heurísticas voraces, como la entropía de la estructura y la pér-
+dida posterior esperada sobre una distribución de consultas (Li y Leong
+2009; Tong y Koller 2001; He y Geng 2008). En con-
+traste, estudiamos el problema de la experimentación algorítmica
+con garantías demostrables, donde los experimentos son se-
+leccionados por el algoritmo automáticamente para la necesidad infor-
+mativa específica del aprendizaje. Además, a diferencia del modelo de aprendizaje
+a partir de consultas de pertenencia, donde cada consulta devuelve una etiqueta,
+cada experimento en nuestro contexto devuelve la distribución de proba-
+bilidad condicional de la salida dada la entrada.
+La raíz del árbol representa la variable objetivo cuyo
+valor nos interesa predecir, y las hojas del
+árbol representan las variables de entrada cuyos valores pueden fijarse di-
+rectamente o ser controlados por el algoritmo. La causalidad fluye
+de los nodos hoja al nodo raíz, es decir, de las varia-
+bles de entrada a la variable objetivo. Siguiendo la terminología de las redes cau-
+sales, llamamos padres a los antecedentes causales de un nodo,
+y no hijos, como se suele hacer en la literatura
+sobre árboles. Suponemos que la estructura de árbol de la red es
+conocida y que las probabilidades condicionales de cada nodo se repre-
+sentan explícitamente en forma de tablas. Aprender las tablas de proba-
+bilidad condicional (CPT) es sencillo si
+observamos todos los nodos del árbol. Lo que hace que el problema sea difí-
+cil e interesante es que solo la raíz y las hojas del
+árbol son observables y el resto de los nodos son latentes.
+Nuestro algoritmo de nivel superior es similar al de (Tadepalli y
+Russell 1998) y se inspira en la idea de la “experimentación con-
+trolada” en la ciencia. El algoritmo, llamado Control-
+Exp, crea un contexto apropiado, o entorno experimen-
+tal, que controla una variable latente y observa su efecto
+sobre otra variable. El resultado del “experimento” es una pro-
+babilidad condicional de la variable objetivo dada la entrada.
+Mientras que en el mundo real el experimento tendrá que repe-
+tirse muchas veces para estimar la probabilidad, en nuestros experimentos se
+calcula directamente a partir de modelos causales sintéticos.
+Los resultados muestran que nuestro algoritmo aprende de forma robusta y pre-
+cisa los modelos objetivo a partir de una combinación de
+ejemplos aleatorios y experimentos diseñados automáticamente.
+Las redes neuronales profundas entrenadas con los mismos datos o con los
+la misma cantidad de datos generados aleatoriamente no logra aprender
+igual de bien. Creemos que esto sugiere con fuerza la necesidad de algoritmos de aprendizaje
+que aprovechen la estructura conocida del dominio y
+diseñen y realicen de forma adaptativa sus propios experimentos.
+Planteamiento del problema
+Un modelo causal estructural (SCM) es una 4-tupla (V;D;G;P),
+donde V es un conjunto de variables aleatorias sobre el dominio D, y G
+es un grafo acíclico dirigido sobre V, y P es la distribución condicional de las variables Vi ∈ V dados los valores de sus
+padres (antecedentes causales) Pa(Vi) en G. Una red causal de estructura de árbol
+o árbol causal es un SCM en forma de
+árbol enraizado, en el que la raíz representa la única variable objetivo
+y la causalidad va desde los nodos hoja, que representan las
+variables de entrada, hacia la raíz. Recordemos que invertimos
+la convención habitual de relación padre-hijo en los árboles para
+ser coherentes con la terminología de las redes causales. En
+particular, suponemos que cada nodo tiene un único hijo y
+varios padres, que son sus antecedentes causales.
+Suponemos que solo las variables de entrada y el objetivo
+son observables. Las demás variables, llamadas nodos internos,
+son latentes. Usamos a menudo la palabra «nodo» para referirnos a la
+variable representada en ese nodo. En este trabajo suponemos
+que la estructura de árbol de un SCM, es decir, V y G, está dada y
+buscamos aprender el modelo de probabilidad P(·|Pa(·)). Nos restringimos
+a un dominio booleano para todas nuestras variables, lo que
+permite representar P mediante una tabla de probabilidad condicional
+(CPT) dada por P(Vi = 1|Pa(Vi)) para cada variable Vi.
+La CPT tiene una entrada por cada combinación posible de valores de los
+padres de Vi. El proceso generativo del SCM induce una
+distribución condicional P(objetivo = 1|entrada = x), abreviada
+como P(objetivo|x), que buscamos aprender a partir de ejemplos.
+Suponemos que las entradas x se generan a partir de una distribución natural
+D(x). Siguiendo el marco PAC de (Kearns
+y Schapire 1994), buscamos un modelo ε-aproximado
+de P, es decir, un modelo P̃ que garantiza
+que, con probabilidad alta, la diferencia entre P y P̃ es pequeña:
+Pr x∼D[|P(objetivo|x) − P̃(objetivo|x)| > ε] 
+≤ δ. El aprendizaje de algoritmos encuentra dichos modelos
+considerando un espacio de hipótesis H de modelos posibles
+y devolviendo una hipótesis h ∈ H con la menor pérdida empírica
+sobre un conjunto suficientemente grande
+de muestras etiquetadas. La teoría del aprendizaje PAC de (Kearns y
+Schapire 1994; Haussler 1992) y otros (Pollard 1984)
+define una medida combinatoria llamada pseudo-dimensión d
+para el espacio de hipótesis, donde un tamaño de muestra polinómico en
+d; 1/ε; 1/δ
+, y 1/δ es suficiente para garantizar que cualquier hipótesis
+que minimice la pérdida empírica sobre la muestra
+será una
+aproximación ε del modelo verdadero con
+probabilidad 1 − δ. La pseudo-dimensión del espacio de hipótesis
+de las redes bayesianas de una estructura dada está dada por
+la suma de los tamaños de todas sus CPT, es decir, n·2^k, donde n es
+el número de nodos y el grado k es una cota superior del
+número de padres de cualquier nodo (Dasgupta 1997). Por tanto,
+los árboles causales de grado pequeño tienen baja complejidad muestral.
+Pasando ahora a la complejidad temporal del aprendizaje, en trabajos
+previos se mostró que los parámetros de árboles causales deterministas
+con estructura conocida pueden aprenderse en tiempo polinómico
+cuando hay ejemplos aleatorios y consultas de pertenencia disponibles
+(Tadepalli y Russell 1998).
+Tanto los ejemplos aleatorios como las consultas de pertenencia son
+necesarios para un aprendizaje exitoso. Sin consultas de pertenencia,
+el problema equivale a aprender funciones booleanas arbitrarias
+a partir de ejemplos aleatorios, lo que es criptográficamente difícil
+(Pitt y Valiant 1988). Sin ejemplos aleatorios, los árboles
+pueden codificar contraseñas arbitrarias, de modo que se necesitan
+exponencialmente muchos intentos para obtener información útil en el
+peor caso.
+El objetivo de este artículo es generalizar este resultado al
+aprendizaje de
+modelos aproximados de árboles causales a partir de
+ejemplos observacionales aleatorios (x;P(objetivo|x)), donde x
+se elige según la distribución natural D, y de
+consultas experimentales EXP(x), que responden con la
+probabilidad condicional P(objetivo|x) para cualquier x. El algoritmo
+de aprendizaje funciona extrayendo una muestra suficientemente grande de
+ejemplos aleatorios y usando luego las consultas experimentales
+alrededor de estos ejemplos para hallar el árbol causal de menor pérdida
+consistente con los datos. El punto crucial es hacerlo
+de un modo que solo tome tiempo polinómico en el tamaño del árbol
+objetivo y el de la muestra aleatoria.
+Forma normal de control de los árboles causales
+En esta sección mostramos que las tablas de probabilidad condicional
+de los árboles causales con nodos internos latentes pueden
+transformarse en una forma normal especial que aprovechará
+nuestro algoritmo de aprendizaje.
+Definición 1 Un árbol causal está en forma normal de control (CNF)
+si para cada variable interna Vi ∈ V hay algunos valores d
+para sus padres tales que P(Vi=1|Pa(Vi)=d)=1 y algunos
+otros valores z para sus padres tales que P(Vi= 1|Pa(Vi) =
+z)=0:
+En un árbol causal en forma normal de control, hay entradas
+que pueden fijar de forma determinista cualquier variable interna en 0 o 1.
+Podemos encontrar estas entradas eligiendo valores apropiados para cada
+padre del nodo interno para fijarlo en 0 o 1, y recorriendo los padres para
+hacer lo mismo. Para cualquier nodo interno n
+de un árbol objetivo en CNF, sea d(n) la asignación de entrada para
+sus nodos hoja que fija de forma determinista el nodo en el valor
+1. De manera similar, sea z(n) el valor que lo fija en 0. Llamamos
+entradas duales z(n) y d(n) las entradas de control de i. Ahora
+consideramos el problema de transformar cualquier árbol causal dado
+a CNF.
+Definición 2 El promedio ponderado de S y T con respecto a w, denotado
+por A(w;S;T), es (1 − w)S + wT.
+El siguiente lema es útil para justificar el
+algoritmo de normalización.
+Lema 1 Sea 0 ≤ lo ≤ w ≤ hi ≤ 1. Entonces,
+A((w − lo)
+/(hi − lo); A(lo;S;T); A(hi;S;T)) = A(w;S;T).
+Demostración: A((w − lo)
+/(hi − lo); A(lo;S;T); A(hi;S;T))
+= (1 − (w − lo)
+/(hi − lo)) A(lo;S;T) + ((w − lo)
+/(hi − lo)) A(hi;S;T)
+= ((hi − w)
+/(hi − lo)) ((1 − lo)S + loT) + ((w − lo)
+/(hi − lo)) ((1 − hi)S + hiT)
+= ((hi − lo) − (w − lo))
+/(hi − lo) S + ((w − lo)
+/(hi − lo)) T
+= (1 − w)S + wT = A(w;S;T). La Tabla 1 describe
+el algoritmo “Normalize”, que convierte cualquier red causal enraizada
+de estructura de árbol en su forma normal. El algoritmo
+parte de las CPT de las hojas y avanza hacia la raíz. En
+el algoritmo, denotamos con P y P′ las entradas antiguas y nuevas
+de las CPT, respectivamente. En la Tabla 1 y en otros lugares,
+suponemos que Pa(n) representa los padres (causas directas) de n, ni
+es el i-ésimo padre de n, y ñi es el conjunto de todos los co-padres de ni.
+es decir, los padres de n distintos de ni. Sea z un vector de 0s y
+1s de dimensiones apropiadas. El paso 2 del algoritmo reescala lin-
+ealmente las tablas de probabilidad de ni para que la probabilidad más baja
+lo se transforme en 0 y la más alta hi en 1. Elija un nodo interno ni, que sea padre de n, donde
+todos sus padres sean hojas o ya hayan sido normalizados.
+2. Sea lo la probabilidad más pequeña en la CPT de ni, y
+hi la más alta. Reemplace las entradas de la
+CPT de ni como sigue.
+P′(ni=1|Pa(ni)=z) ← (P(ni=1|pa(ni)=z) − lo)
+/ (hi − lo).
+3. Cambie la CPT de n como sigue. Aquí y es una asignación de 0s y 1s
+a los co-padres de ni, es decir, los nodos en ñi.
+P′(n=1|ni=0; ñi=y) 
+← A(lo; P(n=1|ni=0; ñi=y); P(n=1|ni=1; ñi=y))
+P′(n=1|ni=1; ñi=y) 
+← A(hi; P(n=1|ni=0; ñi=y); P(n=1|ni=1; ñi=y))
+Tabla 1: El procedimiento Normalize ejecuta repetidamente los pasos 1-3
+eligiendo nodos de abajo hacia arriba.
+en 1. Cada otra probabilidad w se transforma en (w − lo)
+/ (hi − lo). El paso 3 compen-
+sa este cambio en el nodo n ajustando su CPT con
+respecto al nodo ni. El Lema 2 muestra que la compensación
+preserva la distribución de n para cualesquiera valores de sus hijos.
+Lema 2 Considere una red causal enraizada de estructura de árbol
+en la que Normalize se ha aplicado en el nodo ni.
+Entonces, para cualesquiera vectores x e y de dimensiones apropiadas,
+P(n= 1|Pa(ni) =x; ni=y) = P′(n= 1|Pa(ni) =x; ni=
+y)
+Demostración:
+P(n=1|Pa(ni)=x; ni=y)
+= P(ni=1|Pa(ni)=x; ni=y)
+P(n=1|ni=1; Pa(ni)=x; ni=y)
++ P(ni=0|Pa(ni)=x; ni=y)
+P(n=1|ni=0; Pa(ni)=x; ni=y)
+= P(ni=1|Pa(ni)=x) P(n=1|ni=1; ni=y)
++ (1 − P(ni=1|Pa(ni)=x)) P(n=1|ni=0; ni=y)
+= A(P(ni=1|Pa(ni)=x); P(n=1|ni=0; ni=y);
+P(n=1|ni=1; ni=y))
+= A((P(ni=1|Pa(ni)=x) − lo)
+/(hi − lo);
+A(lo; P(n=1|ni=0; ni=y);
+P(n=1|ni=1; ni=y));
+A(hi; P(n=1|ni=0; ni=y);
+P(n=1|ni=1; ni=y)))
+= A(P′(ni=1|Pa(ni)=x); P′(n=1|ni=0; ni=y);
+P′(n=1|ni=1; ni=y))
+= P′(ni=1|Pa(ni)=x) P′(n=1|ni=1; ni=y)
++ (1 − P′(ni=1|Pa(ni)=x)) P′(n=1|ni=0; ni=y)
+=P0(n= 1|Pa(ni)=x;ni=y)
+Como cada transformación en ni preserva la probabilidad
+condicional P(n|Pa(ni);ni), una secuencia de tales transforma-
+ciones en cada ni también la preserva. Repetir este argu-
+mento para cada nodo interno n, de abajo hacia arriba, muestra
+que la probabilidad del objetivo dada cualquier entrada se preserva.
+El siguiente teorema formaliza el argumento.
+Teorema 1. Sea P las probabilidades que resultan de apli-
+car la transformación anterior a todos los nodos ocultos, de aba-
+jo hacia arriba, en una red bayesiana enraizada con estructura de árbol.
+Sea z cualquier vector binario al que se fijan los nodos hoja. Entonces,
+P(target|z) = P(target|z).
+Demostración: mostramos que cada transformación preserva la
+probabilidad condicional anterior. Por inducción se sigue que
+se preserva mediante una secuencia de transformaciones.
+P(target|z) = Σ
+w P(target|n=w;z) Σ
+x;y P(n=w|Pa(ni)=x;ni=y)
+P(Pa(ni)=x|z) P(ni=y|z)
+Nótese que ninguno de los tres valores –P(target|n=w;z),
+P(Pa(ni)=x|z) y P(ni=y|z)– cambia como resultado
+de modificar las CPT de los nodos n y ni. Por el lema 2, los
+cambios en los nodos n y ni son tales que P(n=w|Pa(ni)=
+x;ni=y) se preserva para w=1 o 0. Por tanto, el valor de toda
+la expresión se preserva.
+Por ejemplo, consideremos la red causal con estructura de árbol de 4 entradas
+de la Figura 1. Suponemos que todas las variables son de valor
+booleano. Solo las variables de entrada D, E, F, G en los nodos hoja
+y el objetivo A en la raíz son observables. B y C son la-
+tentes. La figura muestra cómo se transforman las CPT de A, B y C
+para normalizar la red causal y preservar
+la distribución P(A|D;E;F;G). Por ejemplo, la notación
+0.3/0 en el nodo B indica que P(B=1|D=0;E=
+0;F=1;G=0) = 0.3 antes de la normalización y 0.0 después
+de la normalización. La probabilidad condicional del nodo C cam-
+bia de forma similar de 0.1 a 0. En cambio, la probabilidad condicional de
+A permanece igual que antes, en 0.36.
+B C
+G F E DA=1 C=0 C=1
+B=0 .4 .3
+B=t .3 .2
+B=1 E=0 E=1
+D=0 .3 .7
+D=1 .6 .9
+B=1 E=0 E=1
+D=0 0 .67
+D=1 .5 1C=1 G=0 G=1
+F=0 .2 .9
+F=1 .1 .7A=1 C=0 C=1
+B=0 .36 .28
+B=t .3 .22
+C=1 G=0 G=1
+F=0 .125 1
+F=1 0 .751 00 00.3/0 0.1/00.36
+A
+Figura 1: Normalización de las CPT. Las CPT muestran la probabi-
+lidad de que una variable = 1, dados sus padres. Tras la normalización,
+tanto B como C tienen un 0 y un 1 en sus CPT. La figura
+muestra las probabilidades de distintas variables dada una entrada
+antes y después de la normalización.
+El algoritmo de aprendizaje
+Dado que cualquier árbol causal objetivo puede expresarse en FNC, buscamos
+aprender un árbol en FNC y lo llamamos árbol objetivo. Recuerde que,
+en los árboles en FNC, cada nodo interno n tiene entradas de control
+d(n) y z(n) hacia sus hojas que lo fijan en 1 y 0, respectivamente.
+Además, si también hay un contexto de entrada, es decir, una asigna-
+ción a las variables de entrada distintas de las hojas de n, que hace que este nodo interno influya en la distribución
+de la variable objetivo, decimos que el nodo es distinguible. La dis-
+tinguibilidad nos permite inferir la distribución del nodo interno la-
+tente a partir de la distribución de la variable objetivo
+cuando el contexto del nodo se fija adecuadamente. Si un nodo no es
+distinguible, tiene poco impacto en la distribución objetivo
+para cualquier entrada y, por tanto, puede fijarse permanentemente en un valor
+constante, lo que simplifica notablemente el aprendizaje.
+Formalmente, un nodo n es
+ε-distinguible si existe una asig-
+nación c(n) a las entradas distintas de las hojas de n, llamada
+la “entrada de contexto” de n, tal que |P(target|d(n);c(n)) −
+P(target|z(n);c(n))| > 
+ ε. En este caso suponemos que
+P(target|c(n);n=1) > P(target|c(n);n=0), de modo
+que P(target|c(n);d(n)) > P(target|c(n);z(n)). Esto se hace
+sin pérdida de generalidad, ya que los nodos internos son latentes, lo que permite rede-
+finir sus valores 0 y 1.
+Describimos nuestro algoritmo en tres etapas. Primero, observar
+un nodo distinguible; segundo, rellenar la CPT de un nodo distin-
+guible cuyos padres también son distinguibles, y
+tercero, encontrar las asignaciones distinguibles. Después lo juntamos
+todo en un algoritmo recursivo de arriba hacia abajo.
+Inferir la distribución de un nodo distinguible
+Supongamos que n es un nodo distinguible con entradas de control d(n)
+y z(n) y entrada de contexto c(n). Sea y(n) alguna
+asignación a los nodos hoja (de entrada) del subárbol con raíz
+en el nodo n. Lo siguiente sugiere cómo podríamos inferir la
+distribución condicional de n dado y(n) a partir de la distribución
+condicional del objetivo dados y(n) y c(n).
+P(target|y(n);c(n)) =
+P(target|y(n);c(n);n=1) P(n=1|l(n)=y)
++ P(target|y(n);c(n);n=0) (1 − P(n=1|y(n)))
+= P(target|d(n);c(n);n=1) P(n=1|y(n))
++ P(target|z(n);c(n)) (1 − P(n=1|y(n)))
+De la última ecuación se sigue que
+P(n=1|y(n)) = P(target|y(n);c(n)) − P(target|z(n);c(n))
+P(target|d(n);c(n)) − P(target|z(n);c(n)).
+Podemos implementar esto usando el oráculo EXP, que
+devuelve la probabilidad del objetivo para distintas entradas. En
+particular, tenemos:
+P(n=1|y(n)) = EXP(y(n);c(n)) − EXP(z(n);c(n))
+EXP(d(n);c(n)) − EXP(z(n);c(n)).
+Lo anterior muestra que encontrar las entradas de contexto y de con-
+trol haría que un nodo latente fuera efectivamente observable y
+controlable. Si un nodo no es distinguible, significa que
+no tiene impacto en el objetivo y, por tanto, puede ignorarse en la práctica
+fijándolo en una función constante, por ejemplo 0.
+Rellenar la CPT de un nodo distinguible
+Suponiendo que n y sus padres son distinguibles, con
+entradas de contexto y de control conocidas, es sencillo
+rellenar la CPT de n mediante consultas experimentales apropiadas.
+Consideramos cada posible vector de asignación x a los pa-
+dres del nodo n, donde xi es el bit que queremos asignar
+al i-ésimo padre ni. Para rellenar P(n=1|Pa(n)=x), para cada
+padre ni de n, fijamos sus entradas de hoja y(ni) según d(ni) si
+Algoritmo 1 ControlExp
+1: Procedimiento LearnTree(S;n;c(n))
+2: para cada padre ni de n hacer
+3: encontrar c(ni);d(ni);z(ni) usando S
+4: hi ← EXP(d(ni);c(ni))
+5: lo ← EXP(z(ni);c(ni))
+6: fin para
+7: para cada tupla de valores x de los padres de n hacer
+8: para cada padre distinguible ni de n hacer
+9: si xi=1, fijar las entradas y(ni) ← d(ni)
+10: si no, fijar las entradas y(ni) ← z(ni)
+11: fin para
+12: w ← EXP(y(n1);...;y(nk);c(n))
+13: P(n=1|Pa(n)=x) ← w − lo
+hi − lo
+14: fin para
+15: para cada padre distinguible ni de n hacer
+16: llamar a LearnTree(S;ni;c(ni))
+17: fin para
+18: Fin de LearnTree
+Tabla 2: El algoritmo de aprendizaje encuentra recursivamente las asig-
+naciones distinguibles de cada nodo y aprende su CPT de arriba
+hacia abajo.
+xi = 1, y según z(ni) si xi = 0. Si ni no es distinguible,
+sus hojas y(ni) se fijan según z(n). Fijamos el contexto
+de n según su entrada de contexto c(n). Usamos la ecuación
+anterior para inferir la distribución P(n=1|y(n);c(n)) y
+la asignamos a la entrada de la CPT P(n=1|Pa(n)=x).
+Encontrar las entradas de control y de contexto
+Describimos ahora el paso crucial de encontrar las entradas de con-
+trol d(n) y z(n) y la entrada de contexto c(n) para cualquier nodo
+n. Es aquí donde necesitamos el conjunto de ejemplos aleatorios S, elegido se-
+gún la distribución natural D. Sin ejemplos aleatorios
+de una distribución natural, la búsqueda de entradas de control y
+de contexto tendría que ser exhaustiva e impracticable.
+Para cualquier ejemplo aleatorio x y nodo interno n, sea
+xn la parte de la entrada en las hojas del nodo n
+y xni la entrada bajo todos los padres de n distintos de
+ni. Para encontrar c(n), buscamos un x ∈ S que maximice
+la diferencia absoluta entre P(target|xn;c(n)) y
+P(target|z(n)ni;c(n);xni), donde z(n)ni es la parte de
+la entrada de control z(n) del nodo n que está bajo el
+nodo ni. Si esta diferencia es mayor que un pequeño um-
+bral ε
+, fijamos c(ni) en xni. Si no lo es, concluimos
+que el nodo ni no es distinguible. Finalmente, fijamos
+d(ni) = argmaxx∈S P(target|xni;c(ni)) y z(ni) =
+argminx∈S P(target|xni;c(ni)) para lograr la máxima dife-
+rencia entre las probabilidades del objetivo para las dos entradas
+de control y para asegurarnos de que las probabilidades estén dentro del
+rango [0;1] tras la transformación.
+Poniéndolo todo junto
+Ahora lo juntamos todo en el Algoritmo 1. Nuestro algoritmo recursivo ControlExp toma como entrada los conjuntos
+de ejemplos aleatorios, el nodo actual n y su entrada de contexto c(n) (línea 1).
+Comienza en el nodo raíz del árbol causal y avanza
+de arriba hacia abajo, encontrando entradas distinguibles y el contexto
+de los hijos del nodo actual n (línea 3). Las llamadas a
+EXP devuelven la probabilidad de que la variable objetivo sea 1 dadas
+las entradas (líneas 4-5). Luego fija sistemáticamente los valores
+de los padres en cada k-tupla x. Para fijar un padre ni en 1,
+fija las entradas bajo ese nodo a d(ni) (línea 9). Para ponerlo en
+0, fija sus entradas a z(ni) (línea 10). Establece el contexto del
+nodo actual ntoc(n) y llama a EXP (línea 12). El valor de-
+vuelto por EXP, que representa la probabilidad del objetivo,
+se usa para inferir la probabilidad del nodo actual n cuando sus
+padres se fijan según x (línea 13). Esta probabilidad servirá
+para completar la entrada CPT del nodo n y del k-tupla x. Luego
+se llama recursivamente a sí mismo sobre los padres del nodo actual y
+sus vectores de contexto (líneas 15–17).
+ControlExp realiza O(n²k) consultas experimentales, donde
+n es el número de nodos y k es el número máximo
+de padres de cualquier nodo del árbol causal. El número de
+ejemplos aleatorios está acotado por m=O(kn
+/ε log n
+/δ), lo que
+garantiza que todas las entradas CPT usadas al calcular las probabilidades condi-
+cionales de los ejemplos x de D(x)> ε se aprenden
+con una probabilidad de al menos 1−δ. La complejidad temporal del
+algoritmo es O(nm+n²k).
+Resultados experimentales
+... 128...... 128...
+Entradas (1-16) Capas ocultas 
+con ReLU 
+Activación Salidas
+Figura 2: Diagrama de la red MLP. Los nodos azules son las
+16 entradas, los 256 nodos naranjas se dividen en dos capas de igual
+tamaño de unidades ReLU, y los nodos verdes forman
+la capa de salida softmax.
+Configuración experimental
+Evaluamos nuestros resultados con datos sintéticos generados
+a partir de un árbol causal objetivo, que es un árbol binario completo de profundidad
+4 y 16 nodos hoja. En cada nodo elegimos al azar una
+CPT, en la que cada probabilidad de la tabla se elige de forma indepen-
+diente, con un 50 % de probabilidad de que la probabilidad sea cercana a 1
+o a 0, a menos de ε = 0.1. Las probabilidades extremas se
+eligen para que el problema de aprendizaje sea difícil. Mostramos
+los resultados de nuestro programa sobre 9 árboles causales, es decir, 9 conjuntos
+distintos de CPT. Comparamos nuestros resultados con una red neuronal
+de referencia, que se describe más adelante.
+Figura 3: error L1 para ControlExp y redes neuronales. Obs+Exp se basa en entrenar la red neuronal con los mismos datos observacionales y
+experimentales que ControlExp. Obs se basa en elegir la misma cantidad de datos extraídos de la distribución observacional.
+Cada evaluación consiste en 40 ejecuciones con distintos conjuntos
+de entrenamiento. Cada entrada de entrenamiento se elige de manera uniforme y aleatoria. El
+entrenamiento se realizó con lotes de tamaño creciente de ejemplos alea-
+torios, de 0 a 40 en incrementos de 4. Durante el
+entrenamiento de cada lote, el algoritmo también formula consultas experimentales,
+que se responden consultando el árbol objetivo.
+Cuando se responde una consulta, su respuesta se guarda para que
+nunca se vuelva a preguntar. Tras cada lote de entrenamiento, el árbol aprendido
+se evaluó con 100 ejemplos de prueba, elegidos
+al azar entre el conjunto de ejemplos no usados en el entrenamiento.
+La red neuronal de referencia con la que comparamos se muestra en
+la Figura 2. Específicamente, es un perceptrón multicapa (MLP)
+con dos capas ocultas, cada una con 128 nodos, que usan
+la función de activación ReLU. La salida de la red adopta
+la forma de una distribución de probabilidad de dos valores, definida
+por la función softmax sobre la última capa de dos salidas.
+El primer valor de salida indica la probabilidad aprendida de
+que la red bayesiana emita un 0, y el segundo valor
+indica la probabilidad aprendida de que emita un 1.
+La red neuronal se entrenó con descenso de gradiente esto-
+cástico para minimizar la divergencia de Kullback-Leibler entre
+la distribución de probabilidad aprendida y la distribución
+real (ground truth). Encontramos que una tasa de aprendizaje de 1.0, una
+disminución de pesos de 0.001 y un momento de 0.9 producían
+los mejores resultados. El entrenamiento de la red neuronal se hizo
+con 1000 épocas por cada lote de ejemplos. Discusión de los resultados
+Las curvas de aprendizaje muestran el error L1 promedio de la probabilidad condi-
+cional P(objetivo|x) para el ejemplo de prueba x, com-
+parado con la probabilidad real, graficado frente al número de
+experimentos únicos o ejemplos aleatorios en cada lote de
+entrenamiento. Cada subfigura se basa en un árbol objetivo distinto. La
+curva verde, etiquetada como ControlExp, muestra el rendimiento de
+nuestro algoritmo. La curva azul, etiquetada como NNets(Obs+Exp), es el
+rendimiento de nuestra red neuronal con los mismos ejemplos observados y
+experimentos que usa nuestro algoritmo. La curva roja es el
+rendimiento de la red neuronal con la misma
+cantidad de datos que las otras dos, pero elegidos con la distribución obser-
+vacional (uniformemente aleatoria). Como se ve en
+las gráficas de la Figura 3, ControlExp supera de forma contundente a
+los dos enfoques de redes neuronales en todos los casos.
+Curiosamente, en la mayoría de los casos el error L1 de la red MLP
+es menor y mucho menos ruidoso cuando se entrena solo con
+los datos observacionales que cuando se entrena con los datos obser-
+vacionales y experimentales. Esto ocurre porque la distri-
+bución de la mezcla de datos observacionales y experimentales
+es muy distinta de la del conjunto de prueba. Sin embargo,
+la distribución de prueba es idéntica a la de los datos observacionales.
+Como el aprendizaje de la red neuronal optimiza su rendimien-
+to para la distribución de entrenamiento, se deja engañar al mezclar
+los datos experimentales, y funciona mejor con los datos puramente
+observacionales.
+ControlExp logra hacerlo mejor que las redes neuronales
+porque dirige sistemáticamente sus consultas para reducir la incer-
+tidumbre. Aprovecha por completo la estructura en árbol de la
+red causal, exponiendo y controlando un nodo a la
+vez. La red neuronal, en cambio, ignora
+la estructura conocida y aprende a ciegas.
+También probamos otras arquitecturas de aprendizaje, entre ellas una
+red más dispersa y profunda que refleja la estructura del
+árbol causal verdadero, otras redes MLP más densas y profundas,
+redes convolucionales y máquinas de vectores de soporte
+(SVM). Aunque las SVM funcionaron un poco mejor que
+las demás, la precisión de las predicciones de todos estos métodos fue
+bastante similar y considerablemente peor que la red MLP
+descrita en la Figura 2. El hecho de que los mejores resultados
+se obtuvieran con una red relativamente simple y poco profunda,
+con capas completamente conectadas, sugiere que la profundidad de las
+redes no es su fortaleza clave en este dominio.
+Conclusiones
+Si bien la necesidad de experimentos para descubrir leyes causales lleva
+mucho tiempo reconocida, parecen existir más de una razón para ello.
+La razón clásica es que la direc-
+ción y la estructura de la causalidad solo pueden descubrirse
+cambiando la distribución de los datos mediante intervenciones. Si bien
+es cierto, incluso cuando se conocen la estructura y la dirección de la
+causalidad, existen otros obstáculos. En este trabajo
+argumentamos que la latencia de las variables y la consiguiente
+intratabilidad computacional son otros obstáculos evidentes, y
+mostramos que también pueden abordarse, en cierta medida, mediante
+la experimentación. Sin embargo, la experimentación debe ser deli-
+berada, dirigida y adaptativa para reflejar lo que hacen los científicos
+en su vida cotidiana. Debe ser algorítmica para superar las limitaciones
+humanas y escalar a grandes problemas del mundo real.
+Esperamos que este trabajo allane el camino para avanzar en el estudio
+de la causalidad en estas direcciones.
+Referencias
+Bello, K., y Honorio, J. 2017. Learning bayes networks
+using interventional path queries in polynomial time and
+sample complexity.
+Binder, J.; Koller, D.; Russell, S.; y Kanazawa, K. 1997.
+Adaptive probabilistic networks with hidden variables. Ma-
+chine Learning 29:213–244.
+Colombo, D.; Maathuis, M. H.; Kalisch, M.; y Richard-
+son, T. S. 2012. Learning high dimensional direct acyclic
+graphs with latent and selection variables. The Annals of
+Statistics 40(1):294–321.
+Cooper, G. F., y Yoo, C. 1999. Causal discovery from a
+mixture of experimental and observational data. En Actas de la
+decimoquinta conferencia sobre Uncertainty in artificial
+intelligence, 116–125. Morgan Kaufmann Publishers Inc.
+Dasgupta, S. 1997. The sample complexity of learning fixed
+structure bayesian networks. Machine Learning 29:165–
+180.
+Eaton, D., y Murphy, K. 2007. Exact bayesian structure
+learning from uncertain interventions. En Artificial Intelligence
+and Statistics, 107–114.
+Hauser, A., y Bühlmann, P. 2014. Two optimal strategies
+for active learning of causal models from interventional data. International Journal of Approximate Reasoning 55(4):926–
+939.
+Haussler, D. 1992. Decision theoretic generalizations of the
+PAC model for neural net and other learning applications.
+Inf. Comput. 100(1):78–150.
+He, Y.-B., y Geng, Z. 2008. Active learning of causal net-
+works with intervention experiments and optimal designs.
+JMLR 9:2523–2547.
+Hyttinen, A.; Hoyer, P. O.; Eberhardt, F.; y Järvisalo, M.
+2013. Discovering cyclic causal models with latent vari-
+ables: A general SAT-based procedure. En Actas de la
+Conference on Uncertainty in Artificial Intelligence.
+Kearns, M. J., y Schapire, R. E. 1994. Efficient
+distribution-free learning of probabilistic concepts. J. Com-
+put. Syst. Sci. 48(3):464–497.
+Kocaoglu, M.; Shanmugam, K.; y Bareinboim, E. 2017.
+Experimental design for learning causal graphs with latent
+variables. En Guyon, I.; Luxburg, U. V.; Bengio, S.; Wallach,
+H.; Fergus, R.; Vishwanathan, S.; y Garnett, R., eds., Ad-
+vances in Neural Information Processing Systems 30, 7018–
+7028. Curran Associates, Inc.
+Li, G., y Leong, T.-Y. 2009. Active learning for causal
+bayesian network structure with non-symmetrical entropy.
+En PAKDD, 290–301. Springer-Verlog.
+Pearl, J. 2009. Causality. Cambridge university press.
+Peters, J.; Bühlmann, P.; y Meinshausen, N. 2016. Causal
+inference by using invariant prediction: identification and
+confidence intervals. Journal of the Royal Statistical So-
+ciety: Series B (Statistical Methodology) 78(5):947–1012.
+Pitt, L., y Valiant, L. G. 1988. Computational limitations
+on learning from examples. J. ACM 35(4):965–984.
+Pitt, L., y Warmuth, M. K. 1990. Prediction-preserving
+reducibility. J. Comput. Syst. Sci. 41(3):430–467.
+Pollard, D. 1984. Convergence of Stochastic Processes.
+New York, Berlin: Springer Verlog.
+Ramoni, M., y Sebastiani, P. 2001. Robust learning with
+missing data. Machine Learning 45:147170.
+Reichenbach, H. 1991. The direction of time, volume 65.
+Univ of California Press.
+Silander, T., y Myllymaki, P. 2012. A simple approach
+for finding the globally optimal bayesian network structure.
+arXiv preprint arXiv:1206.6875.
+Spirtes, P.; Glymour, C.; y Scheines, R. 2000. Causation,
+prediction, and search. adaptive computation and machine
+learning.
+Tadepalli, P., y Russell, S. J. 1998. Learning from ex-
+amples and membership queries with structured determina-
+tions. Machine Learning 32(3):245–295.
+Tong, S., y Koller, D. 2001. Active learning for structure
+in Bayesian networks. En IJCAI, 863–869.
+Agradecimientos
+Agradecemos el apoyo de DARPA con el contrato
+N66001-17-2-4030 y de NSF con la subvención IIS-1619433.

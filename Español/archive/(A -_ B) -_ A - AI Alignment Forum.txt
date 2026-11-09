@@ -1,0 +1,33 @@
+Teoría de la decisiónAgencia incorporada
+IA
+Portada
+Esta publicación trata sobre la siguiente firma de tipo, a la que llamo el tipo de agencia: (A→B)→A. También puede pensarse como consecuencialismo o como hacer cosas a propósito. Esta publicación será una diatriba con un montón de ideas sueltas relacionadas con esta firma de tipo, y probablemente no tenga sentido. También será descuidada y tendrá errores de tipo, pero creo que vale la pena publicarla de todos modos.
+Primero, interprete estas flechas como flechas causales, aunque también puede pensarlas como flechas de funciones. Esto dice que la relación causal de A a B hace que A ocurra. Piense en A como una acción y en B como el objetivo. La razón por la que A ocurre es que tiene a B como consecuencia. Normalmente no hay objetos exponenciales como este en las redes bayesianas, pero creo que se puede modificar para que tenga sentido. (No estoy seguro de que esto funcione, pero se puede tener una categoría cartesiana cerrada con nodos que son los nodos de su red bayesiana, y añadir un pequeño número de morfismos desde nodos producto hacia nodos individuales, correspondientes a las funciones de la red bayesiana. La aciclicidad de la red bayesiana corresponde, a grandes rasgos, a que esta categoría sea delgada. Luego se puede considerar tener otros tipos de morfismos que mantengan delgada la categoría.)
+Si hay un juego entre dos agentes con nodos de acción A1 y A2, con utilidades U1 y U2, el juego implementa un par de funciones A1×A2→U1 y A1×A2→U2. Podemos curryficar estas funciones y pensarlas como A2→(A1→U1) y A1→(A2→U2). Al introducir la agencia (Ai→Ui)→Ai de ambos jugadores se produce un ciclo. Este ciclo no tiene sentido a menos que las flechas de agencia sean con pérdida de alguna forma, para no poder crear una contradicción.
+Afortunadamente, hay otra razón para pensar que estas flechas de agencia serán con pérdida. El teorema del punto fijo de Lawvere dice que, en una categoría cartesiana cerrada, a menos que B tenga la propiedad del punto fijo, no se puede tener una función suryectiva A→(A→B). En Set, esto dice que si B tiene más de un elemento, no se puede tener una inyección (A→B)→A. Es decir, las flechas de agencia tienen que ser con pérdida.
+Además, observe que argmax toma una función f de algún conjunto A a R y devuelve un elemento del dominio, A, así que argmax tiene tipo (A→R)→A.
+(A -> B) -> A por Scott Garrabrant, 11 sep 2018
+23
+Esto es un poco más forzado, pero si se observa el descenso de gradiente, se tiene un espacio X y una función f:X→R. El gradiente puede pensarse como una función que lleva cambios infinitesimales en X a cambios infinitesimales en f(X). El descenso de gradiente funciona convirtiendo este gradiente en un cambio en X. Es decir, el descenso de gradiente se parece algo a (∂X→∂R)→∂X.Teoría de la decisión2Agencia incorporada2
+IA2
+PortadaMencionado en5445312421Cargar más (5/9)
+3 comentarios, ordenados por puntuación más altaMrMind7
+Diffractor3
+[-]
+Es interesante notar que no hay nada de ese tipo en Hoogle (el buscador del lenguaje Haskell), así que no es el tipo de ninguna utilidad común.
+Por otro lado, aun así se puede decir bastante sobre funciones de ese tipo, recurriendo a la teoría de tipos y de conjuntos.
+Primero, nombremos una función genérica de ese tipo k: (A→B)→A. Es posible demostrar que k no puede ser paramétrica en ambos tipos. Si lo fuera, (0→0)→0 sería válido, lo cual es absurdo (¡0→0 tiene un elemento!). También es posible demostrar que si k no es paramétrica en un tipo, debe tener acceso al menos a un elemento de ese tipo (piense en (A→0)→A y (0→B)→0).
+Un simple argumento de cardinalidad también muestra que k debe ser muchos-a-uno (es decir, no inyectiva): a menos que B sea 1 (el tipo de un solo elemento), |BA|>|A|.
+Hay un operador interesante que usa k, al que llamo interleave:
+interleave:((A→B)→A)→(A→B)→B
+Trivialmente, interleave=λk,f.f(k(f))
+Es interesante porque aplicar parcialmente interleave a algún k tiene el tipo (A→B)→B, que es el tipo de las continuaciones, y sospecho que esto es lo que subyace al uso común de tales operadores.
+[-]
+Encontré un artículo sobre exactamente este tipo de cosas. Escardo y Olivia llaman a esa firma de tipo «funcional de selección», y a la firma de tipo (A→B)→B la llaman «funcional de cuantificación», y se pueden hacer con ellos varias cosas interesantes conSaving Time Threat-Resistant Bargaining Megapost: Introducing the ROSE Value What Selection Theorems Do We Expect/Want? Agency As a Natural Abstraction (A -> B) -> A in Causal DAGshace 4 años 
+hace 3 años 
+Oliver Sourbut1ellos, como combinar varios funcionales de selección en uno de un modo que recuerda a la teoría de juegos (es decir, si ϵ tiene la firma de tipo (A→C)→A, y δ tiene la firma de tipo (B→C)→B, entonces ϵ⊗δ tiene la firma de tipo ((A×B)→C)→(A×B).
+[-]
+Creo que la parte del descenso de gradiente es acertada. Eso también se parece al tipo de selección natural, con deltas no infinitesimales (pero realmente pequeños). La selección natural consume una prueba de que una δx particular (mutación) produce una δf (aptitud) para generar, propagar o multiplicar δx.
+Recientemente pensé un poco en esto y encontré una prueba de equivalencia bajo ciertas condiciones° para el caso de la selección natural y el caso del descenso de gradiente.
+En general, creo que la firma de tipo aquí puede, en efecto, ser blanda, difusa o con pérdida de información, y aun así se obtiene consecuencialismo; y cuanta más «fidelidad» haya, «mejor» será el consecuencialismo.
+Esta publicación también ha inspirado más reflexiones, conversaciones y refinamientos sobre el tipo de agencia y consecuencialismo, que espero desarrollar pronto por escrito. Un resumen sucinto con sabor a lógica intuicionista es algo como (∃A.A→B)→A, pero obviamente hay más que eso.hace 7 meses 

@@ -1,0 +1,654 @@
+Mejora de la transferibilidad de las representaciones
+mediante autosupervisión consciente de la aumentación
+Hankook Lee1Kibok Lee23Kimin Lee4Honglak Lee25Jinwoo Shin1
+1Instituto Avanzado de Ciencia y Tecnología de Corea (KAIST)
+2University of Michigan
+3Amazon Web Services
+4Universidad de California, Berkeley
+5LG AI Research
+Resumen
+Los métodos recientes de aprendizaje de representaciones no supervisado han demostrado ser eficaces en
+una variedad de tareas de visión al aprender representaciones invariantes a las aumentaciones de datos
+como el recorte aleatorio y la variación aleatoria del color. Sin embargo, tal invarianza podría ser
+perjudicial para las tareas posteriores si dependen de las características de las aumen-
+taciones de datos, p. ej., sensibles a la ubicación o al color. Esto no es un problema solo del aprendizaje no
+supervisado; encontramos que esto ocurre incluso en el aprendizaje supervisado, porque este también
+aprende a predecir la misma etiqueta para todas las muestras aumentadas de una instancia. Para
+evitar tales fallos y obtener representaciones más generalizables, proponemos
+optimizar una pérdida auxiliar autosupervisada, denominada AugSelf, que aprende la diferencia
+de los parámetros de aumentación (p. ej., posiciones de recorte, intensidades de ajuste de color)
+entre dos muestras aumentadas al azar. Nuestra intuición es que AugSelf fomen-
+ta preservar la información consciente de la aumentación en las representaciones aprendidas, lo que
+podría ser beneficioso para su transferibilidad. Además, AugSelf puede incorporarse fácilmente
+a los métodos recientes de aprendizaje de representaciones de vanguardia con un
+costo adicional de entrenamiento despreciable. Experimentos extensos demuestran que nuestra
+idea sencilla mejora de forma consistente la transferibilidad de las representaciones aprendidas por
+métodos supervisados y no supervisados en diversos escenarios de aprendizaje por transferencia. El
+código está disponible en https://github.com/hankook/AugSelf .
+1 Introducción
+El aprendizaje de representaciones no supervisado ha mostrado recientemente un éxito notable en diversos dominios,
+p. ej., visión por computadora [ 1,2,3], lenguaje natural [ 4,5], código [ 6], aprendizaje por refuerzo [ 7,8,9], y
+grafos [ 10]. Las representaciones preentrenadas con una gran cantidad de datos no etiquetados han logrado
+un rendimiento sobresaliente en diversas tareas posteriores, ya sea entrenando capas específicas de la tarea sobre
+el modelo mientras se congela, o ajustando finamente todo el modelo.
+En el dominio de la visión, los métodos recientes de vanguardia [ 1,2,11,12,13] aprenden representaciones
+invariantes a un conjunto predefinido de aumentaciones. La elección de las aumentaciones desempeña un
+papel crucial en el aprendizaje de representaciones [ 2,14,15,16]. Una elección común es una combinación de
+recorte aleatorio, volteo horizontal, variación aleatoria del color, conversión a escala de grises y desenfoque gaussiano. Con esta elección,
+las representaciones aprendidas son invariantes a la información de color y posición en las imágenes; en otras palabras,
+las representaciones pierden tal información.
+Por el contrario, también se han hecho intentos de aprender representaciones diseñando tareas de pretexto que
+conservan tal información en las aumentaciones, p. ej., prediciendo relaciones posicionales entre dos parches de
+Trabajo realizado mientras estaba en University of Michigan.
+35.ª Conferencia sobre Sistemas de Procesamiento de la Información Neural (NeurIPS 2021).
+<latexit sha1_base64="Z/kwoYnUesD5K2tc+RLZttiqEfg=">AAACpnicbVFdT8IwFO3mF84vlEdfFgkJPkg2Yvx4ICHy4pNiImLiyOxKNxrbbWk7Iy77Sf4gX/0ldjgEwZs0Ofecc+9tb72YEiEt61PTV1bX1jdKm8bW9s7uXnn/4EFECUe4hyIa8UcPCkxJiHuSSIofY44h8yjuey+dXO+/Yi5IFN7LcYwHDAYh8QmCUlFu+cNhUI48P33NXNuoSTd1IoYD6NqZUZtq75nbbAX1aTpW6fFMzdOWX59rNK/maWvWtpn9Gt8yZQuUsxh4MrUoKh6RmeAIwpzbCS5XrYY1CXMZ2AWogiK6bvnLGUYoYTiUiEIhnmwrloMUckkQxZnhJALHEL3AAD8pGEKGxSCdrDUza4oZmn7E1QmlOWHnK1LIhBgzTznzJ4lFLSf/1Ty2MFn6F4OUhHEicYh+BvsJNWVk5n9mDgnHSNKxAhBxou5uohHkEEn1s4Zair24gmXw0GzYZw3r7rTavi7WUwKH4AjUgQ3OQRtcgy7oAaRVtEvtSuvodf1G7+n9H6uuFTUV8Cf0528Cf86n</latexit>v1
+<latexit sha1_base64="f/D27ylCeQPQ444IfITyD1CLqxI=">AAACpnicbVFdT8IwFO3mF84vlEdfFgkJPkg2Yvx4ICHy4pNiImLiyOxKNxrbbWk7Iy77Sf4gX/0ldjgEwZs0Ofecc+9tb72YEiEt61PTV1bX1jdKm8bW9s7uXnn/4EFECUe4hyIa8UcPCkxJiHuSSIofY44h8yjuey+dXO+/Yi5IFN7LcYwHDAYh8QmCUlFu+cNhUI48P33N3KZRk27qRAwH0LUzozbV3pXWCurTdKzS45mapy2/Pt9oTs3T1qxtM/s1vmXKFihnMfBkalFUPCIzwRGEObcTXK5aDWsS5jKwC1AFRXTd8pczjFDCcCgRhUI82VYsBynkkiCKM8NJBI4heoEBflIwhAyLQTpZa2bWFDM0/YirE0pzws5XpJAJMWaecuZPEotaTv6reWxhsvQvBikJ40TiEP0M9hNqysjM/8wcEo6RpGMFIOJE3d1EI8ghkupnDbUUe3EFy+Ch2bDPGtbdabV9XaynBA7BEagDG5yDNrgGXdADSKtol9qV1tHr+o3e0/s/Vl0rairgT+jP3wS0zqg=</latexit>v2
+<latexit sha1_base64="+ZH5fh6KY5tjwG9YfZnxYICmCT4=">AAACpHicbVFNT8IwGO7mF+LX1KOXRaLBg2QjRr2QYLxwMFGjoInDpSvdaGi3pe2IuOwX+Yu8+kvsYIiCb9Lk+Wrf9q0XUyKkZX1q+tLyyupaab28sbm1vWPs7nVElHCE2yiiEX/2oMCUhLgtiaT4OeYYMo/iJ29wnftPQ8wFicJHOYpxl8EgJD5BUCrJNT4cBmXf89O3rHwk3dSJGA6gays2dd4zt94IqlM6UvRk5ua04f+4w79uThuzY+tZddZPxQKVLBqeTiNKivtkZjiCMOd2jI2KVbPGZS4CuwAVUNSda3w5vQglDIcSUSjEi23FsptCLgmiOCs7icAxRAMY4BcFQ8iw6KbjoWbmkVJ6ph9xtUJpjtXfO1LIhBgxTyXzJ4l5Lxf/9Tw211n6l92UhHEicYgmjf2EmjIy8x8ze4RjJOlIAYg4UXc3UR9yiKT617Iaij0/gkXQqdfs85p1f1ZptorxlMABOARVYIML0AQtcAfaAGm72oXW1K70Y/1Gf9Dbk6iuFXv2wZ/SX78Bc1bOBQ==</latexit>x<latexit sha1_base64="vxaVObrwIbtEMvZ5xAMxN3naB3Y=">AAAC0XicbVJdi9NAFJ3ErzV+VX30JVgKLWhJirgLUlnwZd9c0e4ubEqYTCbpsPMRZm4WYwiIr/5BffWXOOmmptv1wsC555w79+ZOkoIzA0Hw23Fv3b5z997efe/Bw0ePnwyePjsxqtSELojiSp8l2FDOJF0AA07PCk2xSDg9TS4+tPrpJdWGKfkFqoIuBc4lyxjBYKl48AviOlKC5jieNaNxRFIFk1fRuw0XGSaijy32RpHAsEqy+rKJZ96oLwybXvtmtXk+3qSVTSe92qbzbLx90eT6vfPtef4ZvzbWlltn1/D1xmKpYsV6oR83HgyDabAO/yYIOzBEXRzHgz9RqkgpqATCsTHnYVDAssYaGOG08aLS0AKTC5zTcwslFtQs6/ULNP7IMqmfKW2PBH/NblfUWBhTicQ6208yu1pL/ldLxE5nyA6WNZNFCVSSq8ZZyX1Qfvu8fso0JcArCzDRzM7ukxXWmID9CTy7lHB3BTfByWwavp0Gn94MD4+69eyhF+glGqMQ7aNDdISO0QIR572TOsKR7me3cr+7P66srtPVPEfXwv35F7qh32U=</latexit>t!2
+<latexit sha1_base64="hx8y7T+mo1PZ5SyOn1TO7QTkHlQ=">AAAC0XicbVJda9RAFJ2kftT4tdZHX4LLwi7okiyiQlkp+NI3K7ptoVnCZDLJDp2PMHNTTENAfPUP6qu/xMk2NdutFwbOPefceyd3khScGQiC3467c+fuvfu7D7yHjx4/eTp4tndsVKkJXRDFlT5NsKGcSboABpyeFppikXB6kpx/bPWTC6oNU/IrVAVdCpxLljGCwVLx4BfEdaQEzXEcNqNxRFIFk1fRfsfNIsNE9KnF3igSGFZJVl808cwbbRb22qXV5vn4Oq1sOunVNp1n481Gk5t9533bWfPP+K2xttw6u4Gvry2WKlasF/rrxoNhMA3W4d8GYQeGqIujePAnShUpBZVAODbmLAwKWNZYAyOcNl5UGlpgco5zemahxIKaZb1+gcYfWSb1M6XtkeCv2c2KGgtjKpFYZ/tJZltryf9qidiaDNn7Zc1kUQKV5GpwVnIflN8+r58yTQnwygJMNLN398kKa0zA/gSeXUq4vYLb4Hg2Dd9Og89vhgeH3Xp20Qv0Eo1RiN6hA3SIjtACEeeDkzrCke4Xt3K/uz+urK7T1TxHN8L9+Re4QN9k</latexit>t!1<latexit sha1_base64="i0D8SjPuKDmc22LEYitEW9S9Ke8=">AAAC1nicbVLPS+NAFJ7E3VWzP6x69BK2FFrYLUlZVkEKghdvKlgtmBIm00k6OJMJMy9iDfEmXv339rAX/xIntbW2+mDge9/3vTcvbxJlnGnwvH+WvfLp85fVtXXn67fvPzZqm1vnWuaK0B6RXKp+hDXlLKU9YMBpP1MUi4jTi+jqsNIvrqnSTKZnMM7oQOAkZTEjGAwV1v7HTgPCIpCCJjj0y0YzIEMJrV/BvtOYsYFmIjiusOEEhlEUF9dl2FksnWu3RusmzVk6NmlrrlZpN26+bdRa7Nudt+2Ur8ab0tiS+VS/ZxZDZSP20bhhre61vUm474E/BXU0jZOw9hQMJckFTYFwrPWl72UwKLACRjgtnSDXNMPkCif00sAUC6oHxeQZSrdhmKEbS2VOCu6EfVtRYKH1WETGWX2SXtYq8kMtEks3Q7w3KFia5UBT8nJxnHMXpFu9sTtkihLgYwMwUczM7pIRVpiA+RMcsxR/eQXvwXmn7f9te6d/6gdH0/WsoR30EzWRj3bRATpCJ6iHiHVoMUtZ2u7bd/a9/fBita1pzTZaCPvxGWB44Fk=</latexit>f<latexit sha1_base64="i0D8SjPuKDmc22LEYitEW9S9Ke8=">AAAC1nicbVLPS+NAFJ7E3VWzP6x69BK2FFrYLUlZVkEKghdvKlgtmBIm00k6OJMJMy9iDfEmXv339rAX/xIntbW2+mDge9/3vTcvbxJlnGnwvH+WvfLp85fVtXXn67fvPzZqm1vnWuaK0B6RXKp+hDXlLKU9YMBpP1MUi4jTi+jqsNIvrqnSTKZnMM7oQOAkZTEjGAwV1v7HTgPCIpCCJjj0y0YzIEMJrV/BvtOYsYFmIjiusOEEhlEUF9dl2FksnWu3RusmzVk6NmlrrlZpN26+bdRa7Nudt+2Ur8ab0tiS+VS/ZxZDZSP20bhhre61vUm474E/BXU0jZOw9hQMJckFTYFwrPWl72UwKLACRjgtnSDXNMPkCif00sAUC6oHxeQZSrdhmKEbS2VOCu6EfVtRYKH1WETGWX2SXtYq8kMtEks3Q7w3KFia5UBT8nJxnHMXpFu9sTtkihLgYwMwUczM7pIRVpiA+RMcsxR/eQXvwXmn7f9te6d/6gdH0/WsoR30EzWRj3bRATpCJ6iHiHVoMUtZ2u7bd/a9/fBita1pzTZaCPvxGWB44Fk=</latexit>f<latexit sha1_base64="41nrx9PYEts/1Aut/M7swR7pULw=">AAAC3HicbVJNa9tAEF0paZuqH3HTYy8ixmBDayQTmkAxBHpJTk0hTgKRK1brlbxkVyt2RyGK0C230mv/W6/pH+nKkePY7oDgzXtvZmdnFWWcafC8P5a9sfns+Yutl86r12/ebrfe7ZxpmStCR0RyqS4irClnKR0BA04vMkWxiDg9j66+1vr5NVWayfQUioyOBU5SFjOCwVBh62/idIJsypwOhGUgBU1w6FedbkAmEnofgy9GbthAMxF8q7HhBIZpFJfXVThYLl1ot0YbJt15Wpi0t1DrdBh3nzbqLfcdLtoOqkfjTWVsyWKqT3PL/B7r44atttf3ZuGuA78BbdTESdi6DyaS5IKmQDjW+tL3MhiXWAEjnFZOkGuaYXKFE3ppYIoF1eNy9hiV2zHMxI2lMl8K7ox9WlFioXUhIuOsr6RXtZr8rxaJlZMhPhiXLM1yoCl5ODjOuQvSrV/anTBFCfDCAEwUM7O7ZIoVJmD+B8csxV9dwTo4G/T9z33v+1778KhZzxb6gHZRF/loHx2iI3SCRohYx5a0bqzC/mHf2T/tXw9W22pq3qOlsH//A7Lf4mI=</latexit>g
+<latexit sha1_base64="S3KzSvcev5azS+OlTej4yO0SWgc=">AAAC2XicbVJBa9swFJa9re28tcvW4y5mIZDAGuww2kIJFAalt3awtIU4GFmRHVHJMtJzWGp86K3s2l/XW+kvqZwmS5PsgeF73/e9p6cnRxlnGjzvwbLfvH23sbn13vnwcXvnU+3zlwstc0Voj0gu1VWENeUspT1gwOlVpigWEaeX0fXPSr8cU6WZTH/DJKMDgZOUxYxgMFRYewyyEXMaEBaBFDTBoV82mgEZSmh9D46cxpwNNBPBWYUNJzCMorgYl2FnuXSh3RitmzTn6cSkrYVapd24+bpRa7lvd9G2U/4z/imNLVlMtTe3GGp6j/Vxw1rda3vTcNeBPwN1NIvzsPYUDCXJBU2BcKx13/cyGBRYASOclk6Qa5phco0T2jcwxYLqQTF9idJtGGboxlKZLwV3yr6uKLDQeiIi46yupFe1ivyvFomVkyE+HBQszXKgKXk5OM65C9KtntkdMkUJ8IkBmChmZnfJCCtMwPwMjlmKv7qCdXDRafv7be/Xj/rx6Ww9W+gr+oaayEcH6BidonPUQ8Q6sbiVW2O7b9/ad/bfF6ttzWp20VLY98/NeOGu</latexit> <latexit sha1_base64="41nrx9PYEts/1Aut/M7swR7pULw=">AAAC3HicbVJNa9tAEF0paZuqH3HTYy8ixmBDayQTmkAxBHpJTk0hTgKRK1brlbxkVyt2RyGK0C230mv/W6/pH+nKkePY7oDgzXtvZmdnFWWcafC8P5a9sfns+Yutl86r12/ebrfe7ZxpmStCR0RyqS4irClnKR0BA04vMkWxiDg9j66+1vr5NVWayfQUioyOBU5SFjOCwVBh62/idIJsypwOhGUgBU1w6FedbkAmEnofgy9GbthAMxF8q7HhBIZpFJfXVThYLl1ot0YbJt15Wpi0t1DrdBh3nzbqLfcdLtoOqkfjTWVsyWKqT3PL/B7r44atttf3ZuGuA78BbdTESdi6DyaS5IKmQDjW+tL3MhiXWAEjnFZOkGuaYXKFE3ppYIoF1eNy9hiV2zHMxI2lMl8K7ox9WlFioXUhIuOsr6RXtZr8rxaJlZMhPhiXLM1yoCl5ODjOuQvSrV/anTBFCfDCAEwUM7O7ZIoVJmD+B8csxV9dwTo4G/T9z33v+1778KhZzxb6gHZRF/loHx2iI3SCRohYx5a0bqzC/mHf2T/tXw9W22pq3qOlsH//A7Lf4mI=</latexit>g<latexit sha1_base64="rCFWywJtg9L7LkrbBo1zYe1aNFo=">AAADN3icbVJLi9RAEO7E1xpfs3r0EhwCGdAhGUQFGVjwsgfBEZzdhc0QOp1Optm86K4sOzb9b/wT/gWvevEkeBCv/gM7j3VmZyxo+Kq+quqvqjuqMibA874b5rXrN27e2rtt3bl77/6Dwf7DI1HWnNA5KbOSn0RY0IwVdA4MMnpScYrzKKPH0dmbhj8+p1ywsvgAq4oucpwWLGEEgw6F+8Y0yDEso0R+VKFvOa1HcCbfKld7SwwyKHOaYhW2FICMWZIozQG9ADnjNGYEbNVlhf6zHkwsJ9VJ1ZJZDoTyklaOG5C4hNHT4LWm+2ggWB68a3CvQOs5V02PzdI1p7VOpql76a60O1qzjTtN3M1Go6t9p+u2E/Uv8UKNOtG7o3Rz7MoNB0Nv7LVm7wK/B0PU2ywc/AziktQ5LYBkWIhT36tgITEHRjKqrKAWtMLkDKf0VMMC51QsZPvOynZ0JLaTkutTgN1GNyskzoVY5ZHObEYS21wT/C8X5Vs3Q/JqIVlR1UAL0l2c1JkNpd18IjtmnBLIVhpgwpnWbpMl5piA/mqWXoq/vYJdcDQZ+y/G3vvnw4PDfj176DF6glzko5foAB2iGZojYnwyvhhfjW/mZ/OH+cv83aWaRl/zCF0x889fVWEGHg==</latexit>z1
+<latexit sha1_base64="vkhnFTmZY5m6AebI7vcvkLJpsKk=">AAADN3icbVLNitRAEO7EvzX+zerRS3AYyIAOySAqyMCClz0IjuDsLmyG0Ol0ZprtTkJ3Zdkx9Nv4Er6CV714EjyIV9/Azs86szMWNHxVX1X1V9UdF5wp8P3vln3t+o2bt/ZuO3fu3rv/oLf/8EjlpSR0RnKey5MYK8pZRmfAgNOTQlIsYk6P47M3NX98TqViefYBVgWdC7zIWMoIBhOK9q1JKDAs47T6qKOxM2g8gnn1VnvGW2KowlzQBdZRQwFUCUtTbTigF1BNJU0YAVe3WVHwrAOm18IkFUvmDCCqLmk98EKS5DB8Gr42dBcNFRPhuxp3Coye80bPZumaq7VOFt6luzLucM3W7iT1NhsNr/adrNuO9b/ECz1sRe+O0s6xKzfq9f2R35i7C4IO9FFn06j3M0xyUgqaAeFYqdPAL2BeYQmMcKqdsFS0wOQML+ipgRkWVM2r5p21OzCRxE1zaU4GbhPdrKiwUGolYpNZj6S2uTr4Xy4WWzdD+mpesawogWakvTgtuQu5W38iN2GSEuArAzCRzGh3yRJLTMB8NccsJdhewS44Go+CFyP//fP+wWG3nj30GD1BHgrQS3SADtEUzRCxPllfrK/WN/uz/cP+Zf9uU22rq3mErpj95y9YJgYf</latexit>z2Aprendizaje supervisado, SimCLR, MoCo, BYOL, SimSiam, …
+<latexit sha1_base64="s2wG/t1cCEmvOAra4Zwh27Dvigk=">AAAD5XicdVNNi9NAGJ4mfqzxY7t69BIshRTWkhRRQQqLguxB2FXs7sJON0wmk3RovpiZrq3DHPTuTbz6u7x69U84SbOmH+tA4Hmf5/3mTVAklAvX/dUyzBs3b93euWPdvXf/wW577+EJz2cMkxHOk5ydBYiThGZkJKhIyFnBCEqDhJwG0zelfnpJGKd59lEsCjJOUZzRiGIkNOXvtf50oSBzIY/EhDD7LUMp+ZSzKVdWF6ZITDBK5DvlV1gIqety5cAJEhLmKYlRI4U0itT+kvW9pzUY9NYSOVBWVhDJz8r3LqRDezqooQZLCipf0qGnLuRrtZHB+n91iIqC5fOtHqx6yGNGQoqFra7xiLVTMaFWV/jySlZdB+IwF719+ErLNQs5TeFRievGdOeXqsyxGtpo5VTD2LkyF6pZSm0OI2c1UW8977BJO1D/HOflXuKmq9Vhqzm22/XbHbfvVs/eBl4NOqB+x377NwxzPEtJJnCCOD/33EKMJWKC4oQoC844KRCeopica5jp4+FjWV2lsruaCe0oZ/rLhF2xqxESpZwv0kB7liPxTa0kr9WCdKOyiF6OJc2KmSAZXhaOZoktcrs8eTukjGCRLDRAmFHdu40niCEs9I9h6aV4myvYBieDvve8775/1jk4rNezAx6DJ8ABHngBDsAhOAYjgI0Pxtz4Ynw1Y/Ob+d38sXQ1WnXMI7D2zJ9/AZyoRgo=</latexit>ˆ!diff⇡!1 !2Nuestro Aprendizaje consciente de la aumentación Aprendizaje invariante a la aumentación Figura 1: Ilustración del método propuesto, AugSelf, que aprende información consciente de la aumentación
+prediciendo la diferencia entre dos parámetros de aumentación !1 y !2. Aquí, x es una
+imagen original, v=t!(x) es una muestra aumentada mediante una aumentación t!, f es un extractor de características como
+ResNet [ 20], y g es un clasificador para aprendizaje supervisado o una cabeza MLP de proyección para los
+métodos recientes de aprendizaje no supervisado [1, 2, 12, 13].
+una imagen [ 17], resolver rompecabezas [ 18], o predecir información de color a partir de una imagen en escala de grises [ 19].
+Estos resultados muestran la importancia de la información específica de la aumentación para el aprendizaje de representaciones,
+y nos motivan a explorar las siguientes preguntas de investigación: ¿cuándo es perjudicial para el aprendizaje de representaciones aprender invarianza a un determinado
+conjunto de aumentaciones? ¿Y cómo prevenir la pérdida en los métodos recientes
+de aprendizaje no supervisado?
+Contribución. Primero encontramos que aprender representaciones con un objetivo invariante a la aumentación
+podría perjudicar su rendimiento en tareas posteriores que dependen de información relacionada con las aumentaciones.
+Por ejemplo, aprender invarianza frente a aumentaciones de color fuertes obliga a las representaciones a con-
+tener menos información de color (véase la Figura 2a). Por ello, degrada el rendimiento de las representaciones
+en tareas posteriores sensibles al color, como la clasificación de Flowers [21] (véase la Figura 2b).
+Para prevenir esta pérdida de información y obtener representaciones más generalizables, proponemos una
+pérdida auxiliar autosupervisada, denominada AugSelf, que aprende la diferencia de los parámetros de aumentación
+entre las dos muestras aumentadas (o vistas), como se muestra en la Figura 1. Por ejemplo, en el caso del
+recorte aleatorio, AugSelf aprende a predecir la diferencia de las posiciones de recorte de dos vistas aleatoriamente
+recortadas. Encontramos que AugSelf fomenta el aprendizaje de representaciones autosupervisado
+métodos como SimCLR [ 2] y SimSiam [ 13], para preservar información consciente de la aumentación
+(véase la Figura 2a) que podría ser útil para tareas posteriores. Además, AugSelf puede incorporarse fácilmente
+a los métodos recientes de aprendizaje de representaciones no supervisado [1,2,12,13] con un
+costo adicional de entrenamiento despreciable, que corresponde al entrenamiento de una cabeza de predicción auxiliar  en la Figura 1.
+Algo curiosamente, también descubrimos que optimizar la pérdida auxiliar, AugSelf, incluso puede mejorar
+la transferibilidad de las representaciones aprendidas bajo los escenarios estándar de aprendizaje
+supervisado de representaciones [ 22]. Esto se debe a que el aprendizaje supervisado también fuerza la invarianza, es decir, asigna la misma etiqueta,
+para todas las muestras aumentadas (de la misma instancia), y AugSelf puede ayudar a conservar información consciente de la aumentación
+en las representaciones aprendidas.
+Demostramos la eficacia de AugSelf mediante extensos experimentos de aprendizaje por transferencia: AugSelf
+mejora (a) dos métodos de aprendizaje de representaciones no supervisado, MoCo [ 1] y SimSiam [ 13], en 20
+de 22 escenarios evaluados; (b) el preentrenamiento supervisado en 9 de 11 (véase la Tabla 1). Además, descubrimos que
+AugSelf también es eficaz en configuraciones de aprendizaje con pocos ejemplos (véase la Tabla 2).
+Cabe señalar que aprender representaciones invariantes a la aumentación ha sido una práctica común en los marcos de aprendizaje de representaciones su-
+pervisados y no supervisados, mientras que la importancia de la conciencia
+de la aumentación se enfatiza menos. Esperamos que nuestro trabajo pueda inspirar a los investigadores a repensar el
+aspecto poco explorado y ofrecer un nuevo enfoque en el aprendizaje de representaciones.
+2 Preliminares: aprendizaje de representaciones invariante a la aumentación
+En esta sección repasamos los métodos recientes de aprendizaje de representaciones no supervisado [ 1,2,11,12,13]
+que aprenden representaciones optimizando objetivos invariantes a la aumentación. Formalmente, sea x una
+2
+0.25 0.5 0.75 1.0 1.5 2.0
+Intensidad de la aumentación de color (s)012345INCE(C;Z)
+SimSiam
+SimSiam+AugSelf(a) Información mutua
+0.25 0.5 0.75 1.0 1.5 2.0
+Intensidad de la aumentación de color (s)5055606570Precisión de clasificación (%)SimSiam
+SimSiam+AugSelf (b) STL10 !Flowers
+0.25 0.5 0.75 1.0 1.5 2.0
+Intensidad de la aumentación de color (s)303234363840Precisión de clasificación (%)SimSiam
+SimSiam+AugSelf (c) STL10 !Food
+Figura 2: (a) Cambios de la información mutua, es decir, INCE(C;z), entre la información de color C(x) y
+la representación z=f(x) preentrenada en STL10 [ 23] variando la intensidad s del ajuste de color. Las
+representaciones preentrenadas se evalúan en pruebas sensibles al color, (b) Flowers [ 21] y (c) Food
+[24], mediante el protocolo de evaluación lineal [25].
+imagen, t! sea una función de aumentación parametrizada por un parámetro de aumentación !, v=t!(x)
+sea la muestra aumentada (o vista) de x mediante t!, y f sea un extractor de características CNN, como ResNet [ 20].
+En términos generales, los métodos buscan que las representaciones f(v1) y f(v2) sean invariantes a las
+dos vistas aumentadas aleatoriamente v1=t!1(x) y v2=t!2(x), es decir, f(v1)f(v2) para !1;!2
+donde 
+es una distribución predefinida del parámetro de aumentación. Describimos ahora los métodos recientes
+uno por uno de forma breve. Por simplicidad, omitimos aquí la cabeza MLP de proyección g(), que se usa ampliamente
+en los métodos (véase la Figura 1).
+Los enfoques de aprendizaje contrastivo por instancias [1,2,26] minimizan la distancia entre un ancla
+f(t!1(x)) y su muestra positiva f(t!2(x)), mientras maximizan la distancia entre el ancla
+f(t!1(x)) y su muestra negativa f(t!3(x0)). Dado que el rendimiento del aprendizaje contrastivo depende de
+el número de muestras negativas, se ha utilizado un banco de memoria [ 26], un lote grande [ 2] o una red de momento con
+una cola de representaciones [1].
+Los enfoques de agrupamiento [11,27,28] fuerzan a que dos representaciones f(t!1(x)) y f(t!2(x)) sean
+asignadas al mismo clúster; en otras palabras, la distancia entre ellas se minimiza.
+Los métodos sin negativos [12,13] aprenden a predecir la representación f(v1) de una vista v1=t!1(x)
+a partir de otra vista v2=t!2(x). Por ejemplo, SimSiam [ 13] minimiza kh(f(v2))   sg(f(v1))k2
+2
+donde h es un MLP y sg es la operación de parada de gradiente. En estos métodos, si h es óptimo, entonces
+h(f(v2)) =E!1
+[f(v1)]; así que la esperanza del objetivo puede reescribirse como Var!
+(f(v)).
+Por tanto, los métodos pueden considerarse como aprendizaje de invarianza respecto de las aumentaciones.
+Los enfoques de aprendizaje supervisado [22] también aprenden representaciones invariantes a la aumentación. Dado que
+a menudo maximizan exp(c>
+yf(t(x)))=P
+y0exp(c>
+y0f(t(x))) donde cy es el vector prototipo de la etiqueta
+y, f(t(x)) se concentra en cy, es decir, cyf(t!1(x))f(t!2(x)).
+Estos enfoques hacen que las representaciones f(x) contengan información compartida (es decir, invariante a la aumentación)
+entre t!1(x) y t!2(x) y descartan otra información [ 15]. Por ejemplo, si t!
+cambia la información de color, entonces para satisfacer f(t!1(x)) = f(t!2(x)) para cualesquiera !1;!2
+,f(x) se aprenderá a
+contener ninguna (o menos) información de color. Para verificarlo, preentrenamos ResNet-18 [ 20] en STL10
+[29] usando SimSiam [ 13] variando la intensidad s del ajuste de color como aumentación. Para medir
+la información mutua entre las representaciones y la información de color, usamos la pérdida InfoNCE [ 30].
+Aquí codificamos simplemente la información de color como histogramas RGB de color de una imagen. Como se muestra en la Figura
+2a, usar aumentaciones de color más fuertes provoca una pérdida de información relevante para el color. En la clasificación de
+Flowers [ 21] y Food [ 24], que son sensibles al color, las representaciones aprendidas con menos
+información de color dan lugar a un rendimiento menor, como se muestra en las Figuras 2b y 2c, respectivamente. Esta
+observación enfatiza la importancia de aprender información consciente de la aumentación en escenarios de
+aprendizaje por transferencia.
+3 Autosupervisión auxiliar consciente de la aumentación
+En esta sección presentamos la autosupervisión auxiliar consciente de la aumentación, denominada AugSelf, que
+fomenta la conservación de información consciente de la aumentación para el aprendizaje de representaciones generalizables. Para
+3
+!crop=(ycenter,xcenter,H ,W)=( 0.4,0.3,0.6,0.4)
+<latexit sha1_base64="c2I3TbFwd7fF3l8jpvjYz2q2zxw=">AAADCHicfVFda9swFJW9r9b7SrfHvngLKckwxm7TdTBSCttDX8Y6WJpClBlZuU5FZctI8mgw/gP7NXsbfd0f2PP+zeTELVtSdkHcwzlXV8fHcc6Z0kHw27Lv3L13/8HGpvPw0eMnT1tbz06VKCSFIRVcyLOYKOAsg6FmmsNZLoGkMYdRfPGu1kdfQSomss96nsMkJbOMJYwSbaio9auDRQozEoVfcEr0udZlwlleDUKnUW54KkVeReGgG/h9L/APvGXf6zm3De4MuvPohoFMg6y8yzXm2Bv1MHZ3rrfumfO63tzrePht4213xVtw7W1diVrtwA8W5a6DsAFt1NRJtGW9wFNBi9QYopwoNQ6DXE9KIjWjHCoHFwpyQi/IDMYGZiQFNSkXyVduxzBTNxHSnEy7C/bvGyVJlZqnsZmsfapVrSZv08aFTt5MSpblhYaMLh9KCu5q4da/0Z0yCVTzuQGESma8uvScSEJNqspx8HswHyPhg1n8MQdJtJCvSkzkLCWXVdn0/42xbDlmumNCDVcjXAenu37Y9/c/9dtHh028G2gbvURdFKIDdISO0QkaImrtW2NraoH9zf5u/7CvlqO21dx5jv4p++cfYObyNw==</latexit>
+!flip=
+[vis volteada]=1
+<latexit sha1_base64="TvSRxsaMNaXoNuiBbxIk0oE3xpE=">AAAES3icfVPbbtQwEHWzLZRwa+GRF4uqVYuiKGkXWmlVVAkk+oIoEr1I9bJynMmutc5FtlN1FeUTeIWv4gP4Dt4QDzgXlZJdYcmZyZnxmTPjJMgEV9rzfixZveWVO3dX79n3Hzx89Hht/cmZSnPJ4JSlIpUXAVUgeAKnmmsBF5kEGgcCzoPpmyp+fgVS8TT5pGcZDGM6TnjEGdUGGq1baJOkMYzpZxJTPdG6CEQuS3tz65BouNaF0qFLBiFcmWcakcE7mivFaUIGGE9BJiBKTEiV77ue3SWrBdZs20QYVSEd3dSRfDzRpdPFWZpoSdWCiKILwEkO5Q4huK7huXuOkeF47kFld2pljaSRfyMqEjwrD/15sTLNypFf0fQNxb7T2L2dxZl1xdlf3ZBokKVzPYccO+e3FNaUZr+q6GuFHfJanm3mX70HQVz45WXjR8VV2dwK5gpXeRmE5bDi2Kr6ccigbXa30+zNzcxHRmsbnuvVC887futsoHadjNaXdkmYsjw27TFBlbr0vUwPCyo1ZwJKm+QKMsqmdAyXxk1oDGrYfgp40yAhjlJpdqJxjd4+UdBYqVkcmMxKp+rGKnBhzEyqU1pHB8OCJ1muIWFN5SgXWKe4+hNwyCUwLWbGoUxyIx6zCZWUmUtTtk3egulOwntT6UMGkupUvigIleOYXpdFa/+XxpMmzVjbTNnvznTeOdt1/b778mN/4+h1O+9V9Aw9R9vIR/voCB2jE3SKmDW2vlhfrW+9772fvV+9302qtdSeeYr+WcsrfwDT1GPl</latexit>
+!color=( bright, contrast, sat, hue)=( 0.3,1.0,0.8,1.0)
+<latexit sha1_base64="7ytTg6EsrRlYxiLNDN7XjAGaf20=">AAAES3icfVPbbtQwEE2zLZRwa+GRF4tqqxZFUdIutNKqqBJI9AVRJHqR6mXlOJNda52LbKfqKvIn8ApfxQfwHbwhHnA2obTZFZacGZ05njkzdsKcM6l8/8eS3VleuXN39Z5z/8HDR4/X1p+cyqwQFE5oxjNxHhIJnKVwopjicJ4LIEnI4SycvKniZ5cgJMvST2qawyAho5TFjBJloOG6bXVxlsCIfMYJUWOlypAXQjvdzQOs4EqVUkUe7kdwab5ZjPvvSCElIynuIzQBkQLXCOOKH3i+08o106edzYMtzI2miAyvqwg2GivttnGapUoQuSAiyQJwXIDexhhVJXxv1zUaXN/br+z2TFYtaBhcS4o5y/VB4LTbpiLL9TCo0vRMij23trvbi5lVw1vTf7IhVSC0ezWHHLlnM4Hdzb+pd81+VaW/qfC2vtn4KyAMkzLQF7Ufl5e6vhTEJKqIOUR60Izfd7ou7jf97rT69a8nMRcZrm34nj9baN4JGmfDatbxcH1pB0cZLRLTIeVEyovAz9WgJEIxykE7uJCQEzohI7gwbkoSkIPmLaCuQSIUZ8LsVKEZevNESRIpp0lomJVO2Y5V4MKYGVWrtIr3ByVL80JBSuvKccGRylD1J6CICaCKT41DqGBGPKJjIgg19yYdB78F052A96bShxwEUZl4UWIiRgm50mVj/0djaU0z1jFTDtoznXdOd7yg57382Ns4fN3Me9V6Zj23tqzA2rMOrSPr2DqxqD2yv9hf7W+d752fnV+d3zXVXmrOPLVureWVP3ewY+Q=</latexit>
+!blur= desv. est. del núcleo gaussiano=1.0
+<latexit sha1_base64="oc86yvF87jNFiI5wyqANY4moYgA=">AAAEVHicfVRfa9RAEE9zVduotdVHX4LHlVZCSK7VFo6TgoJ9ESvYP9A9j81mcrd0swm7m6NH2K/hq34qwe/ig5tcqO2luLCZYea3M7+Z2U2UMypVEPxesTurDx4+Wlt3Hj95uvFsc+v5mcwKQeCUZCwTFxGWwCiHU0UVg4tcAE4jBufR1fvKfz4DIWnGv6p5DqMUTzhNKMHKmMZb9jrKUpjgbyjFaqpUGbFCaGd7iBRcq1Kq2EeDGGbmmyVo8BEXUlLM0eAKBAemXYQMOPQDp7cUqOamnd72cAcxQyjG45scgk6mioOU2lv2kYwrgaVqeyRWhahpt33TAvQuQm6dLvD3PMPIC/zDSu5WHBt24/CGX8Jorodhm7fIcj0OqzD7JsSBt5B7u/cj64zzf/SBKxDau25Zjr3zWwzrkGa/rcLfZniXX4WuDVGUlqG+XOhJOdOL+bhUuhUwh1iP6ijbQzMKDw2aevtL9d7Mqe0Zb3YDP6iX21bCRulazToZb630UZyRIjUVEoalvAyDXI1KLBQlDLSDCgk5Jld4ApdG5TgFOWouhtszlthNMmE2V25tvX2ixKmU8zQyyIqnXPZVxnt9plVLqVVyOCopzwsFnCwyJwVzVeZWT8KNqQCi2NwomAhqyLtkigUmZm7ScdAHMNUJ+GQyfc7BXMFMvC4RFpMUX+uykf+DUb6AGemYLofLPW0rZ30/3PfffNnvHr1r+r1mvbReWTtWaB1YR9axdWKdWsTO7e/2D/tn51fnz6r5Syyg9kpz5oV1Z61u/AXc52a7</latexit>
+Imagen original Recorte aleatorio Variación de color Desenfoque gaussiano Volteo horizontal Figura 3: Ejemplos de las aumentaciones de uso común y sus parámetros !aug.
+Para ser específicos, añadimos una pérdida auxiliar de autosupervisión, que aprende a predecir la diferencia entre
+los parámetros de aumentación de dos vistas aumentadas aleatoriamente, dentro de los métodos existentes de aprendizaje de
+representaciones invariante a la aumentación [ 1,2,11,12,13]. Primero describimos una forma general de nuestra pérdida auxiliar,
+y luego formas específicas para diversas aumentaciones. Por concisión, sea  el conjunto de todos los
+parámetros del modelo.
+Dado que una función de aumentación t! suele ser una composición de distintos tipos de aumentaciones, el
+parámetro de aumentación ! puede escribirse como !=(!aug)aug2A, donde A es el conjunto de aumentaciones
+usadas en el preentrenamiento (por ejemplo, A={crop,flip}), y !aug es un parámetro específico de la aumentación (por ejemplo,
+!crop decide cómo recortar una imagen). Luego, dadas dos vistas aumentadas aleatoriamente v1=t!1(x) y
+v2=t!2(x), la función objetivo de AugSelf es la siguiente:
+LAugSelf(x;!1;!2;) =X
+aug2A AugSelfLaug 
+aug
+(f(v1);f(v2));!aug
+diff
+;
+donde A AugSelfA es el conjunto de aumentaciones para el aprendizaje consciente de la aumentación, !aug
+diff es la
+diferencia entre dos parámetros específicos de la aumentación !aug
+1 y !aug
+2, Laug es una pérdida de aumentación-
+específica, y aug
+ es un MLP de 3 capas para predecir !aug
+diff. Este diseño permite incorporar
+AugSelf a los métodos de aprendizaje no supervisado más recientes y de vanguardia [ 1,2,11,12,13] con un
+costo adicional de entrenamiento despreciable. Por ejemplo, el objetivo de SimSiam [ 13] con AugSelf puede
+escribirse como Ltotal(x;!1;!2;) =LSimSiam (x;!1;!2;) +LAugSelf (x;!1;!2;); donde 
+es un hiperparámetro para equilibrar las pérdidas. Observemos que la función objetivo total Ltotal fomenta la
+representación compartida f(x) para aprender características tanto invariantes como conscientes de la aumentación.
+Por ello, la representación aprendida f(x) también puede ser útil en diversas tareas posteriores (por ejemplo, tareas
+sensibles a la aumentación).2
+En este artículo, nos centramos principalmente en las aumentaciones de uso común en los métodos recientes de
+aprendizaje de representaciones no supervisado [ 1,2,11,12,13]: recorte aleatorio, volteo horizontal aleatorio,
+variación de color y desenfoque gaussiano; sin embargo, observamos que distintos tipos de aumentaciones pueden
+incorporarse a AugSelf (véase la Sección 4.2). A continuación, detallamos los aspectos de !aug
+y Laug para cada aumentación. Los ejemplos de !aug se ilustran en la Figura 3.
+Recorte aleatorio. El recorte aleatorio es la aumentación más popular en las tareas de visión. Un
+parámetro de recorte !crop contiene la posición del centro y el tamaño del recorte. Normalizamos los valores según
+la altura y el ancho de la imagen original x, es decir, !crop2[0;1]4. Luego, usamos la pérdida `2 para Lcrop y
+establecemos !crop
+diff=!crop
+1 !crop
+2.
+Volteo horizontal aleatorio. Un parámetro de volteo !flip2f0;1g indica si la imagen está volteada horizontalmente
+o no. Como es discreto, usamos la pérdida de entropía cruzada binaria para Lflip y establecemos !flip
+diff=
+1[!flip
+1=!flip
+2].
+Variación de color. La aumentación de variación de color ajusta el brillo, el contraste, la saturación y el matiz
+de una imagen de entrada en un orden aleatorio. Para cada ajuste, su intensidad se muestrea uniformemente de
+un intervalo predefinido. Normalizamos todas las intensidades en [0;1], es decir, !color2[0;1]4. De manera similar a
+el recorte, usamos la pérdida `2 para Lcolor y establecemos !color
+diff =!color
+1 !color
+2 .
+2Observamos que nuestro objetivo consciente de la aumentación, LAugSelf, no interfiere con el aprendizaje del
+objetivo invariante a la aumentación, por ejemplo, LSimSiam. Esto permite que f(x) aprenda información consciente de la aumentación con una
+pérdida despreciable de información invariante a la aumentación. En el material suplementario se ofrece una discusión detallada.
+4
+Tabla 1: Precisión de evaluación lineal (%) de ResNet-50 [ 20] y ResNet-18 preentrenados en ImageNet100
+[31, 32] y STL10 [23], respectivamente. Las entradas en negrita son las mejores de cada referencia base.
+Método CIFAR10 CIFAR100 Food MIT67 Pets Flowers Caltech101 Cars Aircraft DTD SUN397
+ResNet-50 preentrenado en ImageNet100
+SimSiam 86.89 66.33 61.48 65.75 74.69 88.06 84.13 48.20 48.63 65.11 50.60
++ AugSelf (nuestro) 88.80 70.27 65.63 67.76 76.34 90.70 85.30 47.52 49.76 67.29 52.28
+MoCo v2 84.60 61.60 59.37 61.64 70.08 82.43 77.25 33.86 41.21 64.47 46.50
++ AugSelf (nuestro) 85.26 63.90 60.78 63.36 73.46 85.70 78.93 37.35 39.47 66.22 48.52
+Supervisado 86.16 62.70 53.89 52.91 73.50 76.09 77.53 30.61 36.78 61.91 40.59
++ AugSelf (nuestro) 86.06 63.77 55.84 54.63 74.81 78.22 77.47 31.26 38.02 62.07 41.49
+ResNet-18 preentrenado en STL10
+SimSiam 82.35 54.90 33.99 39.15 44.90 59.19 66.33 16.85 26.06 42.57 29.05
++ AugSelf (nuestro) 82.76 58.65 41.58 45.67 48.42 72.18 72.75 21.17 33.17 47.02 34.14
+MoCo v2 81.18 53.75 33.69 39.01 42.34 61.01 64.15 16.09 26.63 41.20 28.50
++ AugSelf (nuestro) 82.45 57.17 36.91 41.67 43.80 66.96 66.02 17.53 28.02 45.21 30.93
+Desenfoque gaussiano. Esta operación de desenfoque se usa ampliamente en el aprendizaje de representaciones no supervisado.
+El filtro gaussiano se construye con un único parámetro, la desviación estándar =!blur. También
+normalizamos el parámetro en [0;1]. Luego, usamos la pérdida `2 para Lblur y establecemos !blur
+diff=!blur
+1 !blur
+2.
+4 Experimentos
+Configuración. Preentrenamos la ResNet-18 [ 20] estándar y ResNet-50 en STL10 [ 23] e ImageNet1003
+[31,32], respectivamente. Usamos dos métodos recientes de aprendizaje de representaciones no supervisado como líneas base
+para el preentrenamiento: un método contrastivo, MoCo v2 [ 1,14], y un método no contrastivo, SimSiam
+[13]. Para STL10 e ImageNet100, preentrenamos las redes durante 200 y 500 épocas con un tamaño de lote
+de 256, respectivamente. Para el preentrenamiento supervisado, preentrenamos ResNet-50 durante 100 épocas con un tamaño de lote
+de 128 en ImageNet100.4 Para las aumentaciones, usamos recorte aleatorio, volteo, variación de color,
+conversión a escala de grises y desenfoque gaussiano siguiendo a Chen y He [13]. En esta sección, nuestro AugSelf predice
+los parámetros de recorte aleatorio y de variación de color, es decir, Aaug Self={crop,color}, salvo que se indique
+lo contrario. Establecemos = 1:0 para STL10 y = 0:5 para ImageNet100. Los demás detalles y el análisis de sensibilidad
+al hiperparámetro  se ofrecen en el material suplementario. Para el estudio de ablación
+(Sección 4.2), solo usamos modelos preentrenados en STL10.
+4.1 Resultados principales
+Evaluación lineal en diversas tareas posteriores. Evaluamos las redes preentrenadas en tareas de clasifi-
+cación en tareas posteriores sobre 11 conjuntos de datos: CIFAR10/100 [ 29], Food [ 24], MIT67 [ 36], Pets [ 37],
+Flowers [21], Caltech101 [38], Cars [39], Aircraft [40], DTD [41] y SUN397 [42]. Contienen
+entre 1k–70k imágenes de entrenamiento. Seguimos el protocolo de evaluación lineal [25]. La información detallada sobre los conjuntos de datos y los
+ajustes experimentales se describe en el material suplementario. La Tabla
+1 muestra los resultados de aprendizaje por transferencia en las diversas tareas posteriores. Nuestro AugSelf mejora de forma consistente
+(a) los métodos recientes de aprendizaje de representaciones no supervisado, SimSiam [13] y MoCo
+[13], en 10 de 11 tareas posteriores; y (b) el preentrenamiento supervisado en 9 de 11
+tareas posteriores. Estas mejoras consistentes implican que nuestro método favorece aprender
+representaciones más generalizables.
+Clasificación con pocos ejemplos. También evaluamos las redes preentrenadas en varios puntos de referencia de aprendizaje con pocos ejemplos:
+FC100 [33], Caltech-UCSD Birds (CUB200) [43] y Plant Disease [35]. Cabe señalar que
+los puntos de referencia CUB200 y Plant Disease requieren características de bajo nivel, como la información de color de las aves y de las hojas,
+respectivamente, para detectar sus etiquetas de grano fino. Se usan ampliamente en escenarios de pocos ejemplos entre dominios
+[44,45]. Para el aprendizaje con pocos ejemplos, hacemos regresión logística usando las representaciones congeladas
+f(x) sin ajuste fino. La Tabla 2 muestra el rendimiento del aprendizaje con pocos ejemplos en tareas de 5 vías
+de 1 disparo y de 5 vías con 5 disparos. Como se muestra en la tabla, nuestro AugSelf mejora el rendimiento de
+SimSiam [13] y MoCo [1] en todos los casos, con un margen amplio. Por ejemplo, en la detección de enfermedades de las plantas
+3ImageNet100 es un subconjunto de 100 categorías de ImageNet [31]. Usamos la misma partición que Tian et al. [32].
+4No experimentamos con preentrenamiento supervisado en STL10, ya que solo tiene 5k muestras de entrenamiento etiquetadas, lo que es
+insuficiente para preentrenar una buena representación.
+5
+Tabla 2: Precisión de clasificación con pocos ejemplos (%), con intervalos de confianza del 95% promediados sobre 2000
+episodios en FC100 [33], CUB200 [34] y Plant Disease [35]. (N;K) denota tareas de N vías y K disparos.
+Las entradas en negrita son las mejores de cada grupo.
+FC100 CUB200 Plant Disease
+Método (5, 1) (5, 5) (5, 1) (5, 5) (5, 1) (5, 5)
+ResNet-50 preentrenado en ImageNet100
+SimSiam 36.19 ±0.36 50.36 ±0.38 45.56 ±0.47 62.48 ±0.48 75.72 ±0.46 89.94 ±0.31
++ AugSelf (nuestro) 39.37 ±0.40 55.27 ±0.38 48.08 ±0.47 66.27 ±0.46 77.93 ±0.46 91.52 ±0.29
+MoCo v2 31.67 ±0.33 43.88 ±0.38 41.67 ±0.47 56.92 ±0.47 65.73 ±0.49 84.98 ±0.36
++ AugSelf (nuestro) 35.02 ±0.36 48.77 ±0.39 44.17 ±0.48 57.35 ±0.48 71.80 ±0.47 87.81 ±0.33
+Supervisado 33.15 ±0.33 46.59 ±0.37 46.57 ±0.48 63.69 ±0.46 68.95 ±0.47 88.77 ±0.30
++ AugSelf (nuestro) 34.70 ±0.35 48.89 ±0.38 47.58 ±0.48 65.31 ±0.45 70.82 ±0.46 89.77 ±0.29
+ResNet-18 preentrenado en STL10
+SimSiam 36.72 ±0.35 51.49 ±0.36 37.97 ±0.43 50.61 ±0.45 58.13 ±0.50 75.98 ±0.40
++ AugSelf (nuestro) 40.68 ±0.39 56.26 ±0.38 41.60 ±0.42 56.33 ±0.44 62.85 ±0.49 81.14 ±0.37
+MoCo v2 35.69 ±0.34 49.26 ±0.36 37.62 ±0.42 50.71 ±0.44 57.87 ±0.48 75.98 ±0.40
++ AugSelf (nuestro) 39.66 ±0.39 55.58 ±0.39 38.33 ±0.41 51.93 ±0.44 60.78 ±0.50 78.76 ±0.38
+Tabla 3: Precisión de la evaluación lineal (%) con la misma configuración que Xiao et al. [16]. Los
+aumentos entre corchetes de LooC [16] indican qué información consciente de los aumentos se
+aprende. N es el número de muestras aumentadas necesarias para cada instancia, lo que refleja el tamaño efectivo del
+lote de entrenamiento. † indica que los números se reportan en [16]. Los números entre paréntesis
+muestran las ganancias de precisión respecto a cada línea base.
+Método N ImageNet100 CUB200 Flowers (5 disparos) Flowers (10 disparos)
+MoCo† [1] 2 81.0 36.7 67.9 ±0.5 77.3 ±0.1
+LooC† [16] (color) 3 81.1 (+0.1) 40.1 (+3.4) 68.2 ±0.6(+0.3) 77.6 ±0.1(+0.3)
+LooC† [16] (rotación) 3 80.2 (-0.8) 38.8 (+2.1) 70.1 ±0.4(+2.2) 79.3 ±0.1(+2.0)
+LooC† [16] (color, rotación) 4 79.2 (-1.8) 39.6 (+2.9) 70.9 ±0.3(+3.0) 80.8 ±0.2(+3.5)
+MoCo [1] 2 81.0 32.2 78.5 ±0.3 81.2 ±0.3
+MoCo [1] + AugSelf (nuestro) 2 82.4 (+1.4) 37.0 (+4.8) 81.7 ±0.2(+3.2) 84.5 ±0.2(+3.3)
+SimSiam [13] 2 81.6 38.4 83.6 ±0.3 85.9 ±0.2
+SimSiam [13] + AugSelf (nuestro) 2 82.6 (+1.0) 45.3 (+6.9) 86.4 ±0.2(+2.8) 88.3 ±0.1(+2.4)
+[35], obtenemos una ganancia de precisión de hasta 6.07% en las tareas de 5 vías y 1 disparo. Estos resultados muestran que nuestro método
+también es eficaz en estos escenarios de aprendizaje por transferencia.
+Comparación con LooC. Recientemente, Xiao et al. [16] propusieron LooC, que aprende
+representaciones conscientes de los aumentos mediante múltiples objetivos de aprendizaje contrastivo específicos de cada aumento. La Tabla 3 muestra
+comparaciones directas bajo la misma configuración de evaluación que Xiao et al. [16].5 Como
+se muestra en la tabla, AugSelf tiene dos ventajas sobre LooC: (a) AugSelf requiere el mismo número de
+muestras aumentadas que los métodos base de aprendizaje de representaciones no supervisado, mientras que
+LooC requiere más, de modo que AugSelf no aumenta el costo computacional; (b) AugSelf
+puede incorporarse a métodos no contrastivos, por ejemplo SimSiam [13], y SimSiam con AugSelf
+supera a LooC en todos los casos.
+Localización de objetos. También evaluamos las representaciones en una tarea de localización de objetos (es decir, de
+predicción de cajas delimitadoras) que requiere información posicional. Experimentamos con CUB200 [46] y resolvemos una regresión lineal
+usando representaciones preentrenadas con SimSiam [13] sin o con nuestro método. La Tabla 4
+reporta los errores ℓ2 de las predicciones de cajas delimitadoras, y la Figura 4 muestra ejemplos de las predicciones.
+Estos resultados demuestran que AugSelf es capaz de aprender información posicional.
+Recuperación. La Figura 5 muestra los resultados de recuperación con modelos preentrenados. Para este experimento,
+usamos los conjuntos de datos Flowers [21] y Cars [39] y encontramos los 4 vecinos más cercanos según la similitud coseno
+5 Como el código de LooC no está disponible públicamente, reproducimos la línea base de MoCo tal como se reporta en la
+sexta fila de la Tabla 3: obtuvimos el mismo resultado en ImageNet100, pero resultados distintos para CUB200 y Flowers.
+6
+Método Error
+SimSiam 0.00462
++ AugSelf (nuestro) 0.00335
+MoCo 0.00487
++ AugSelf (nuestro) 0.00429
+Supervisado 0.00520
++ AugSelf (nuestro) 0.00473
+Tabla 4: Errores ℓ2 de las predicciones de cajas delimitadoras
+en CUB200.
+sin SelfAug   con SelfAug
+Figura 4: Ejemplos de predicciones de cajas delimitadoras en CUB200. Azul
+y rojo son la referencia real y la predicción del modelo, respectivamente.
+Consulta / Vecinos más cercanos
+(a) SimSiam
+Consulta / Vecinos más cercanos
+ (b) SimSiam + AugSelf (nuestro)
+Figura 5: Los 4 vecinos más cercanos según la similitud coseno usando representaciones f(x) aprendidas
+por (a) SimSiam [13] o (b) SimSiam con AugSelf (nuestro).
+similitud entre representaciones f(x), donde f es el ResNet-50 preentrenado en ImageNet100. Como
+se muestra en la figura, las representaciones aprendidas por AugSelf son más sensibles al color.
+4.2 Estudio de ablación
+Efecto de las tareas de predicción de aumentos. Primero evaluamos las tareas de predicción de aumentos propuestas
+una por una, sin incorporar métodos de aprendizaje de invarianza. Más concretamente, preentrenamos
+fθ usando solo Laug para cada aug ∈ {crop; flip; color; blur}. Cabe señalar que
+los objetivos de entrenamiento son distintos, pero usamos el mismo conjunto de aumentos. La Tabla 5 muestra los resultados del aprendizaje por transferencia
+en diversas tareas posteriores. Observamos que resolver las tareas de predicción de volteo horizontal y de desenfoque gaussiano
+produce un rendimiento peor o similar al de una red inicializada aleatoriamente en diversas
+tareas posteriores, es decir, los aumentos no contienen información relevante para la tarea. Sin embargo,
+resolver las tareas de predicción de recorte aleatorio y de variación de color supera significativamente la
+inicialización aleatoria en todas las tareas posteriores. Además, sorprendentemente, la tarea de predicción de variación de color
+alcanza un rendimiento competitivo en el conjunto de datos Flowers [21] en comparación con un método reciente de vanguardia,
+SimSiam [13]. Estos resultados muestran que la información consciente de los aumentos es relevante para la tarea
+y que aprender esa información puede ser importante en las tareas posteriores.
+Con base en las observaciones anteriores, incorporamos las tareas de predicción de recorte aleatorio y de variación de color
+en SimSiam [13] durante el preentrenamiento. Más concretamente, optimizamos LSimSiam + λcrop Lcrop +
+λcolor Lcolor, donde λcrop, λcolor ∈ {0,1}. Los resultados del aprendizaje por transferencia se reportan en la Tabla 6. Como
+se muestra en la tabla, cada tarea de autosupervisión mejora SimSiam de forma consistente (y a menudo significativamente)
+en diversas tareas posteriores. Por ejemplo, la tarea de predicción de variación aleatoria de color (color jittering) mejora SimSiam en
+un 6.33% y un 11.89% en los benchmarks Food [ 24] y Flowers [ 21], respectivamente. Al incorporar
+ambas tareas simultáneamente, logramos mejoras adicionales en casi todas las tareas posteriores.
+Además, como muestra la Figura 2, nuestro AugSelf preserva la información sobre el aumento tanto como
+sea posible; por ello, la ganancia es consistente independientemente de la intensidad de la variación aleatoria de color.
+Diferentes aumentos. Confirmamos que nuestro método puede usar otros aumentos fuertes:
+rotación, que rota una imagen en 0°, 90°, 180° y 270° de forma aleatoria; y solarización, que
+invierte el valor de cada píxel cuando este es mayor que un umbral muestreado aleatoriamente. Con base en
+la configuración de aumento predeterminada, es decir, AAugSelf =fcrop;colorg, aplicamos además cada
+7
+Tabla 5: Precisión de evaluación lineal (%) de ResNet-18 [ 20] preentrenada con cada tarea de predicción de aumento
+sin otros métodos como SimSiam [ 13]. Reportamos los resultados de SimSiam [ 13] como referencia. Las entradas en negrita
+son mayores que la inicialización aleatoria.
+Objetivo de preentrenamiento STL10 CIFAR10 CIFAR100 Food MIT67 Pets Flowers
+Inicialización aleatoria 42.72 47.45 23.73 11.54 12.29 12.94 26.06
+Lcrop 68.28 70.78 43.44 22.26 26.17 27.68 38.21
+Lflip 46.45 53.80 24.89 9.69 11.99 10.71 13.04
+Lcolor 61.14 63.39 40.38 28.02 25.35 24.49 54.42
+Lblur 48.26 46.60 20.44 8.73 11.87 13.07 17.20
+SimSiam [13] 85.19 82.35 54.90 33.99 39.15 44.90 59.19
+Tabla 6: Precisión de evaluación lineal (%) de ResNet-18 [ 20] preentrenada con SimSiam [ 13] con diversas
+combinaciones de nuestras tareas de predicción de aumento. Las entradas en negrita son las mejores de cada tarea.
+AAugSelf STL10 CIFAR10 CIFAR100 Food MIT67 Pets Flowers
+; 85.19 82.35 54.90 33.99 39.15 44.90 59.19
+fcropg 85.98 82.82 55.78 35.68 43.21 47.10 62.05
+fcolorg 85.55 82.90 58.11 40.32 43.56 47.85 71.08
+fcrop;colorg 85.70 82.76 58.65 41.58 45.67 48.42 72.18
+aumento con una probabilidad de 0:5. También evaluamos la efectividad de las tareas de predicción de aumento
+para rotación y solarización. Nótese que formulamos la predicción de rotación como una tarea de 4
+clases de clasificación (es decir, !rot
+diff2f0;1;2;3g) y la predicción de solarización como una tarea de regresión (es decir,
+!sol
+diff2[−1;1]). Como muestra la Tabla 7, obtenemos ganancias consistentes en diversas tareas posteriores
+incluso cuando se aplican aumentos más fuertes. Además, en el caso de la rotación, observamos que nuestra
+tarea de predicción de aumento intenta evitar la degradación del rendimiento causada por aprender invariancia
+a las rotaciones. Por ejemplo, en CIFAR100 [ 29], la línea base pierde un 4.66% de precisión (54.90% → 50.24%)
+cuando se usan rotaciones, pero el nuestro solo pierde un 0.37% (58.65% → 58.28%). Estos resultados muestran que nuestro
+AugSelf es menos sensible a la elección de aumentos. Creemos que esta robustez sería
+útil en futuras investigaciones sobre aprendizaje de representaciones con aumentos fuertes.
+Tabla 8: Precisión de evaluación lineal
+en tareas pretexto sensibles al aumento.
+Método Rotación Color perm
+SimSiam 59.11 24.66
++ AugSelf 64.61 60.49 Resolviendo tareas pretexto geométricas y relacionadas con el color. Para validar
+que nuestro AugSelf es capaz de aprender información sensible al aumento
+intentamos resolver dos tareas pretexto que requieren dicha información:
+rotación con 4 opciones (0°, 90°, 180°, 270°) y
+permutación de canales de color con 6 opciones (RGB, RBG, ..., BGR).
+tareas de clasificación. Observamos que la línea base (SimSiam) y
+nuestro método (SimSiam+AugSelf) no observan muestras rotadas ni
+con colores permutados en la fase de preentrenamiento. Entrenamos un clasificador lineal sobre la representación preentrenada
+sin ajuste fino para cada tarea. Como se reporta en la Tabla 8, nuestro AugSelf resuelve bien las tareas pretexto
+incluso sin conocimiento previo de ellas durante el preentrenamiento; estos resultados validan que nuestro método
+aprende información sensible al aumento.
+Compatibilidad con otros métodos. Si bien nos centramos principalmente en SimSiam [ 13] y MoCo [ 1] en
+la sección anterior, nuestro AugSelf puede incorporarse a otros métodos de aprendizaje no supervisado,
+SimCLR [ 2], BYOL [ 12] y SwAV [ 11]. La Tabla 9 muestra las ganancias consistentes y significativas de
+AugSelf en todos los métodos y tareas posteriores.
+5 Trabajos relacionados
+Tareas pretexto auto-supervisadas. Para el aprendizaje de representaciones visuales sin etiquetas, se han propuesto diversas
+tareas pretexto en la literatura [ 17,18,19,47,48,49,50,51] construyendo auto-supervisión
+a partir de una imagen. Por ejemplo, Doersch et al. [17] y Noroozi y Favaro [18] dividen la imagen original x
+en 3×3 parches y luego aprenden representaciones visuales prediciendo relaciones entre las
+ubicaciones de los parches. En cambio, Zhang et al. [19] y Larsson et al. [48] construyen tareas de predicción de color convirtiendo
+imágenes en color en imágenes en escala de grises. Zhang et al. [51] proponen una tarea similar que requiere predecir un subconjunto
+de canales (p. ej., profundidad) a partir de otro (p. ej., valores RGB). Mientras tanto, Gidaris et al. [47], Qi et al.
+8
+Tabla 7: Precisión de aprendizaje por transferencia (%) de ResNet-18 [ 20] preentrenada con SimSiam [ 13], con o sin
+nuestro AugSelf usando aumentos fuertes. C, J, R y S denotan respectivamente las tareas de predicción de recorte (cropping), variación de color (color jittering), rotación y
+solarización. Las entradas en negrita son las mejores de cada aumento.
+Aumento fuerte AAugSelf STL10 CIFAR10 CIFAR100 Food MIT67 Pets Flowers
+Ninguno; 85.19 82.35 54.90 33.99 39.15 44.90 59.19
+{C;J} 85.70 82.76 58.65 41.58 45.67 48.42 72.18
+Rotación; 80.11 77.78 50.24 36.40 36.39 41.43 61.77
+{C;J} 81.85 79.93 57.27 43.04 41.32 47.30 72.52
+{C;J;R} 82.67 80.71 58.28 43.28 44.48 46.65 72.94
+Solarización; 86.32 81.08 52.50 32.59 41.29 44.76 58.79
+{C;J} 86.03 82.64 57.94 40.29 46.67 48.81 71.43
+{C;J;S} 85.91 82.63 58.18 40.17 45.57 49.02 71.43
+Tabla 9: Precisión de aprendizaje por transferencia (%) de diversos marcos de aprendizaje no supervisado con y
+sin nuestro marco AugSelf. Las entradas en negrita indican el mejor resultado para cada método base.
+Método AugSelf (nuestro) STL10 CIFAR10 CIFAR100 Food MIT67 Pets Flowers
+84.87 78.93 48.94 31.97 36.82 43.18 56.20 SimCLR [2] X 84.99 80.92 53.64 36.21 40.62 46.51 64.31
+86.73 82.66 55.94 37.30 42.78 50.21 66.89 BYOL [12] X 86.79 83.60 59.66 42.89 46.17 52.45 74.07
+82.21 81.60 52.00 29.78 36.69 37.68 53.01 SwAV [11] X 82.57 82.00 55.10 33.16 39.13 40.74 61.69
+[49], Zhang et al. [50] muestran que resolver la predicción de transformaciones afines (p. ej., rotación) puede
+aprender representaciones de alto nivel. Estos enfoques suelen requerir procedimientos de preprocesamiento específicos
+(p. ej., parches 3×3 [ 17,18] o transformaciones afines específicas [ 49,50]). En cambio, nuestro AugSelf puede
+trabajar con aumentos comunes, como el recorte aleatorio y la variación de color. Esta ventaja
+nos permite incorporar AugSelf a marcos de vanguardia recientes, como SimCLR [ 2], sin
+incrementar el costo computacional. Además, enfatizamos que nuestra contribución no es solo construir AugSelf, sino también
+destacar la importancia de aprender representaciones sensibles al aumento junto con los
+enfoques existentes invariantes al aumento.
+Aumentos para el aprendizaje de representaciones no supervisado. Chen et al. [2] y Tian et al. [15] encontraron
+que la elección de los aumentos desempeña un papel crítico en el aprendizaje contrastivo. Con base en este hallazgo,
+muchos métodos de aprendizaje no supervisado [ 1,2,11,12,13] han usado aumentos similares (p. ej., recorte
+y variación de color) y luego han logrado un rendimiento sobresaliente en ImageNet [ 31]. Tian et al. [15]
+discuten una observación similar a la nuestra: la elección óptima de aumentos depende de la tarea, pero
+se centran en encontrar la elección óptima para una tarea posterior específica. Sin embargo, en la
+fase de preentrenamiento, el conocimiento previo de las tareas posteriores podría no estar disponible. En este caso, necesitamos preservar
+la información sobre el aumento en las representaciones tanto como sea posible para tareas posteriores desconocidas.
+Recientemente, Xiao et al. [16] proponen un método contrastivo para aprender representaciones sensibles al aumento.
+Este método requiere muestras aumentadas adicionales para cada aumento; por ello,
+el costo de entrenamiento aumenta con respecto al número de aumentos. Además, el método está
+especializado solo en aprendizaje contrastivo y no resulta atractivo para usarse en métodos no contrastivos.
+como BYOL [ 12]. En cambio, nuestro AugSelf no sufre estos problemas, como se muestra en las Tablas 3 y 9.
+6 Discusión y conclusión
+Para mejorar la transferibilidad de las representaciones, proponemos AugSelf, un método auxiliar de autosupervisión
+consciente de la aumentación que anima a las representaciones a contener información consciente de la aumentación
+que podría ser útil en tareas posteriores. Nuestra idea es aprender a predecir la diferencia entre
+los parámetros de aumentación de dos vistas aumentadas al azar. Mediante experimentos extensos,
+demostramos la eficacia de AugSelf en diversos escenarios de aprendizaje por transferencia. Creemos que nuestro
+trabajo podría orientar muchas líneas de investigación sobre aprendizaje de representaciones no supervisado y
+aprendizaje por transferencia.
+9
+Limitaciones. Aunque nuestro método ofrece grandes mejoras cuando lo aplicamos a aumentaciones de datos populares
+como el recorte aleatorio, podría no ser aplicable a algunas aumentaciones de datos específicas,
+en las que no es trivial parametrizar la aumentación, como las basadas en GAN [ 52]. Por ello,
+una dirección futura interesante sería desarrollar una forma independiente de la aumentación que no requiera
+diseñar explícitamente una autosupervisión específica para cada aumentación. Incluso para esta dirección, creemos que
+nuestra idea de aprender la relación entre dos muestras aumentadas podría utilizarse, por ejemplo, para construir
+pares contrastivos entre las relaciones.
+Impactos sociales negativos. El entrenamiento autosupervisado requiere típicamente un costo de entrenamiento enorme (p. ej.,
+entrenar MoCo v2 [ 14] durante 1000 épocas requiere 11 días en 8 GPU V100), una capacidad de red grande
+(p. ej., GPT3 [ 5] requiere 175 mil millones de parámetros), por lo que plantea problemas ambientales como
+la generación de carbono [ 53]. Por ello, se requerirían métodos de entrenamiento eficientes [ 54] o destilar el conocimiento en una
+red más pequeña [55] para mitigar estos problemas ambientales.
+Agradecimientos y declaración de financiación
+Este trabajo fue apoyado principalmente por Samsung Electronics Co., Ltd (IO201211-08107-01) y, en parte,
+por una subvención del Institute of Information & Communications Technology Planning & Evaluation (IITP)
+financiada por el gobierno de Corea (MSIT) (No.2019-0-00075, Artificial Intelligence Graduate
+School Program (KAIST)).
+Referencias
+[1]Kaiming He, Haoqi Fan, Yuxin Wu, Saining Xie y Ross Girshick. Momentum contrast for
+unsupervised visual representation learning. En Actas de la IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, págs. 9729–9738, 2020.
+[2]Ting Chen, Simon Kornblith, Mohammad Norouzi y Geoffrey Hinton. A simple framework
+for contrastive learning of visual representations. En Actas de International Conference
+on Machine Learning, págs. 1597–1607. PMLR, 2020.
+[3]Tengda Han, Weidi Xie y Andrew Zisserman. Self-supervised co-training for video represen-
+tation learning. En Advances in Neural Information Processing Systems, 2020.
+[4]Jacob Devlin, Ming-Wei Chang, Kenton Lee y Kristina Toutanova. Bert: Pre-training of
+deep bidirectional transformers for language understanding. Preimpresión arXiv:1810.04805,
+2018.
+[5]Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal,
+Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are
+few-shot learners. En Advances in Neural Information Processing Systems, 2020.
+[6]Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun Shou,
+Bing Qin, Ting Liu, Daxin Jiang, et al. CodeBERT: A pre-trained model for programming
+y natural languages. En Actas de la Conference on Empirical Methods in Natural
+Language Processing: Findings, págs. 1536–1547, 2020.
+[7]Ankesh Anand, Evan Racah, Sherjil Ozair, Yoshua Bengio, Marc-Alexandre Côté y R Devon
+Hjelm. Unsupervised state representation learning in atari. En Advances in Neural Information
+Processing Systems, págs. 8769–8782, 2019.
+[8]Adam Stooke, Kimin Lee, Pieter Abbeel y Michael Laskin. Decoupling representation
+learning from reinforcement learning. En Actas de International Conference on Machine
+Learning, 2021.
+[9]Michael Laskin, Aravind Srinivas y Pieter Abbeel. CURL: Contrastive unsupervised repre-
+sentations for reinforcement learning. En Actas de International Conference on Machine
+Learning, págs. 5639–5650, 2020.
+[10] Kaveh Hassani y Amir Hosein Khasahmadi. Contrastive multi-view representation learning
+on graphs. En Actas de International Conference on Machine Learning, págs. 4116–4126,
+2020.
+10
+[11] Mathilde Caron, Ishan Misra, Julien Mairal, Priya Goyal, Piotr Bojanowski y Armand Joulin.
+Unsupervised learning of visual features by contrasting cluster assignments. En Advances in
+Neural Information Processing Systems, 2020.
+[12] Jean-Bastien Grill, Florian Strub, Florent Altché, Corentin Tallec, Pierre H Richemond, Elena
+Buchatskaya, Carl Doersch, Bernardo Avila Pires, Zhaohan Daniel Guo, Mohammad Gheshlaghi
+Azar, et al. Bootstrap Your Own Latent: A new approach to self-supervised learning. Preimpresión arXiv
+arXiv:2006.07733, 2020.
+[13] Xinlei Chen y Kaiming He. Exploring simple siamese representation learning. Preimpresión arXiv
+arXiv:2011.10566, 2020.
+[14] Xinlei Chen, Haoqi Fan, Ross Girshick y Kaiming He. Improved baselines with momentum
+contrastive learning. Preimpresión arXiv arXiv:2003.04297, 2020.
+[15] Yonglong Tian, Chen Sun, Ben Poole, Dilip Krishnan, Cordelia Schmid y Phillip Isola. What
+makes for good views for contrastive learning? En Advances in Neural Information Processing
+Systems, págs. 6827–6839, 2020.
+[16] Tete Xiao, Xiaolong Wang, Alexei A Efros y Trevor Darrell. What should not be contrastive
+in contrastive learning. En International Conference on Learning Representations, 2021.
+[17] Carl Doersch, Abhinav Gupta y Alexei A Efros. Unsupervised visual representation learning
+by context prediction. En Actas de la IEEE International Conference on Computer
+Vision, págs. 1422–1430, 2015.
+[18] Mehdi Noroozi y Paolo Favaro. Unsupervised learning of visual representations by solving
+jigsaw puzzles. En Actas de la European Conference on Computer Vision, págs. 69–84.
+Springer, 2016.
+[19] Richard Zhang, Phillip Isola y Alexei A Efros. Colorful image colorization. En Actas
+de la European Conference on Computer Vision, págs. 649–666. Springer, 2016.
+[20] Kaiming He, Xiangyu Zhang, Shaoqing Ren y Jian Sun. Deep residual learning for im-
+age recognition. En Actas de la IEEE Conference on Computer Vision and Pattern
+Recognition, págs. 770–778, 2016.
+[21] Maria-Elena Nilsback y Andrew Zisserman. Automated flower classification over a large
+number of classes. En Actas de la Indian Conference on Computer Vision, Graphics and
+Image Processing, págs. 722–729. IEEE, 2008.
+[22] Ali Sharif Razavian, Hossein Azizpour, Josephine Sullivan y Stefan Carlsson. CNN features
+off-the-shelf: an astounding baseline for recognition. En Actas de la IEEE Conference
+on Computer Vision and Pattern Recognition Workshops, págs. 806–813, 2014.
+[23] Adam Coates, Andrew Ng y Honglak Lee. An analysis of single-layer networks in unsuper-
+vised feature learning. En Actas de la International Conference on Artificial Intelligence
+and Statistics, págs. 215–223. JMLR Workshop and Conference Proceedings, 2011.
+[24] Lukas Bossard, Matthieu Guillaumin y Luc Van Gool. Food-101 – mining discriminative
+components with random forests. En Actas de la European Conference on Computer
+Vision, 2014.
+[25] Simon Kornblith, Jonathon Shlens y Quoc V Le. Do better imagenet models transfer better?
+En Actas de la IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+págs. 2661–2671, 2019.
+[26] Zhirong Wu, Yuanjun Xiong, Stella X Yu y Dahua Lin. Unsupervised feature learning via
+non-parametric instance discrimination. En Actas de la IEEE Conference on Computer
+Vision and Pattern Recognition, págs. 3733–3742, 2018.
+[27] Mathilde Caron, Piotr Bojanowski, Armand Joulin y Matthijs Douze. Deep clustering
+for unsupervised learning of visual features. En Actas de la European Conference on Computer Vision,
+Computer Vision, págs. 132–149, 2018.
+11
+[28] Yuki Markus Asano, Christian Rupprecht y Andrea Vedaldi. Self-labelling via simultaneous
+clustering and representation learning. En International Conference on Learning Representations,
+2020.
+[29] Alex Krizhevsky, Geoffrey Hinton, et al. Learning multiple layers of features from tiny images.
+Informe técnico, Universidad de Toronto, 2009.
+[30] Aaron van den Oord, Yazhe Li y Oriol Vinyals. Representation learning with contrastive
+predictive coding. Preimpresión arXiv arXiv:1807.03748, 2018.
+[31] Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng
+Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, et al. Imagenet large scale visual
+recognition challenge. International Journal of Computer Vision, 115(3):211–252, 2015.
+[32] Yonglong Tian, Dilip Krishnan y Phillip Isola. Contrastive multiview coding. Preimpresión arXiv
+arXiv:1906.05849, 2019.
+[33] Boris Oreshkin, Pau Rodríguez López y Alexandre Lacoste. Tadam: Task dependent adaptive
+metric for improved few-shot learning. En Advances in Neural Information Processing Systems,
+págs. 721–731, 2018.
+[34] C. Wah, S. Branson, P. Welinder, P. Perona y S. Belongie. The Caltech-UCSD Birds-200-2011
+Dataset. Informe técnico CNS-TR-2011-001, California Institute of Technology, 2011.
+[35] Sharada P Mohanty, David P Hughes y Marcel Salathé. Using deep learning for image-based
+plant disease detection. Frontiers in plant science, 7:1419, 2016.
+[36] Ariadna Quattoni y Antonio Torralba. Recognizing indoor scenes. En Actas de la
+IEEE Conference on Computer Vision and Pattern Recognition, págs. 413–420. IEEE, 2009.
+[37] Omkar M Parkhi, Andrea Vedaldi, Andrew Zisserman y CV Jawahar. Cats and dogs. En
+Actas de la IEEE Conference on Computer Vision and Pattern Recognition, págs.
+3498–3505. IEEE, 2012.
+[38] Li Fei-Fei, Rob Fergus y Pietro Perona. Learning generative visual models from few training
+examples: An incremental bayesian approach tested on 101 object categories. En Conference on
+Computer Vision and Pattern Recognition Workshop, págs. 178–178. IEEE, 2004.
+[39] Jonathan Krause, Michael Stark, Jia Deng y Li Fei-Fei. 3d object representations for
+fine-grained categorization. En 4th International IEEE Workshop on 3D Representation and
+Recognition (3dRR-13), Sídney, Australia, 2013.
+[40] Subhransu Maji, Esa Rahtu, Juho Kannala, Matthew Blaschko y Andrea Vedaldi. Fine-
+grained visual classification of aircraft. Preimpresión arXiv arXiv:1306.5151, 2013.
+[41] Mircea Cimpoi, Subhransu Maji, Iasonas Kokkinos, Sammy Mohamed y Andrea Vedaldi.
+Describing textures in the wild. En Actas de la IEEE Conference on Computer Vision
+and Pattern Recognition, págs. 3606–3613, 2014.
+[42] Jianxiong Xiao, James Hays, Krista A Ehinger, Aude Oliva y Antonio Torralba. SUN
+database: Large-scale scene recognition from abbey to zoo. En IEEE Computer Society Confer-
+ence on Computer Vision and Pattern Recognition, págs. 3485–3492. IEEE, 2010.
+[43] Ekin D Cubuk, Barret Zoph, Jonathon Shlens y Quoc V Le. RandAugment: Practical
+automated data augmentation with a reduced search space. En Actas de la IEEE/CVF
+Conference on Computer Vision and Pattern Recognition Workshops, págs. 702–703, 2020.
+[44] Wei-Yu Chen, Yen-Cheng Liu, Zsolt Kira, Yu-Chiang Frank Wang y Jia-Bin Huang. A closer
+look at few-shot classification. En International Conference on Learning Representations, 2019.
+[45] Yunhui Guo, Noel C Codella, Leonid Karlinsky, James V Codella, John R Smith, Kate Saenko,
+Tajana Rosing y Rogerio Feris. A broader study of cross-domain few-shot learning. En
+Actas de la European Conference on Computer Vision, 2020.
+12
+[46] Grant Van Horn, Steve Branson, Ryan Farrell, Scott Haber, Jessie Barry, Panos Ipeirotis, Pietro
+Perona y Serge Belongie. Building a bird recognition app and large scale dataset with
+citizen scientists: The fine print in fine-grained dataset collection. En Actas de la IEEE
+Conference on Computer Vision and Pattern Recognition, págs. 595–604, 2015.
+[47] Spyros Gidaris, Praveer Singh y Nikos Komodakis. Unsupervised representation learning by
+predicting image rotations. En International Conference on Learning Representations, 2018.
+[48] Gustav Larsson, Michael Maire y Gregory Shakhnarovich. Learning representations for
+automatic colorization. En Actas de la European Conference on Computer Vision, págs.
+577–593. Springer, 2016.
+[49] Guo-Jun Qi, Liheng Zhang, Chang Wen Chen y Qi Tian. AVT: Unsupervised learning of
+transformation equivariant representations by autoencoding variational transformations. En
+Actas de la IEEE/CVF International Conference on Computer Vision, págs. 8130–8139,
+2019.
+[50] Liheng Zhang, Guo-Jun Qi, Liqiang Wang y Jiebo Luo. AET vs. AED: Unsupervised
+representation learning by auto-encoding transformations rather than data. En Actas de la
+IEEE/CVF Conference on Computer Vision and Pattern Recognition, págs. 2547–2555, 2019.
+[51] Richard Zhang, Phillip Isola y Alexei A Efros. Split-brain autoencoders: Unsupervised
+learning by cross-channel prediction. En Actas de la IEEE Conference on Computer
+Vision and Pattern Recognition, págs. 1058–1067, 2017.
+[52] Veit Sandfort, Ke Yan, Perry J Pickhardt y Ronald M Summers. Data augmentation using
+generative adversarial networks (cyclegan) to improve generalizability in ct segmentation tasks.
+Scientific reports, 9(1):1–9, 2019.
+[53] Roy Schwartz, Jesse Dodge, Noah A Smith y Oren Etzioni. Green ai. Preimpresión arXiv
+arXiv:1907.10597, 2019.
+[54] Guangrun Wang, Keze Wang, Guangcong Wang, Phillip HS Torr y Liang Lin. Solving
+inefficiency of self-supervised representation learning. Preimpresión arXiv arXiv:2104.08760, 2021.
+[55] Zhiyuan Fang, Jianfeng Wang, Lijuan Wang, Lei Zhang, Yezhou Yang y Zicheng Liu. SEED:
+Self-supervised distillation for visual representation. En International Conference on Learning
+Representations, 2021.
+13

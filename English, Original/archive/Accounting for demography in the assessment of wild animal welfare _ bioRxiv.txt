@@ -1,0 +1,1753 @@
+Accounting for demography in the assessment of wild animal welfare | bioRxiv
+Skip to main content
+Home
+Submit
+FAQ
+Blog
+ALERTS / RSS
+About
+Channels
+4D Nucleome
+Advances in Genome Biology and Technology (AGBT) General Meeting 2016 #AGBT16
+Albert Einstein College of Medicine
+Aligning Science Across Parkinson's (ASAP)
+Allen Institute for Cell Science
+Babraham Institute
+BioImaging North America
+Biology of Genomes 2016 #BOG16
+Brown University
+Central Oxford Structural Microscopy and Imaging
+Centre for Microbiology and Environmental Systems Science
+Chan Zuckerberg Biohub
+Donders Institute for Brain, Cognition and Behaviour
+DREAM
+Drug Development and Clinical Therapeutics
+ENCODE
+Ernst Strüngmann Institute (ESI) for Neuroscience
+European Molecular Biology Laboratory (EMBL)
+Francis Crick Institute
+Harvard Program in Therapeutic Sciences
+Human Cell Atlas
+Human Pangenome Reference Consortium (HPRC)
+IMO Workshop
+Impact of Genomic Variation on Function (IGVF)
+International Mouse Phenotyping Consortium (IMPC)
+Iowa State University
+Mathematical Oncology
+Micron Oxford
+Michigan State University
+NCI Cancer Systems Biology Consortium
+NF Open Science Initiative
+NCI Human Tumor Atlas Network
+Neuromatch Conference
+NeurotechEU
+Rosetta Commons
+SeroNet
+Simons Foundation Autism Research Initiative (SFARI)
+Society for Molecular Biology and Evolution #SMBE2016
+Somatic Cell Genome Editing Program
+SPARC
+Stowers Institute for Medical Research
+Stockholm University
+Tel Aviv University
+The Michael J. Fox Foundation
+The Rockefeller University
+The Sainsbury Laboratory
+The Whitehead Institute
+University of Connecticut Health Center
+University of California, Berkeley
+University of California, San Francisco
+Vienna BioCenter
+Washington University in St. Louis
+Weizmann Institute of Science
+Search for this keyword
+Advanced Search
+New Results
+Follow this preprint
+Accounting for demography in the assessment of wild animal welfare
+Luke B.B.
+Hecht
+doi:
+https://doi.org/10.1101/819565
+This article is a preprint and has not been certified by peer review [
+what does this mean?
+].
+Luke B.B. Hecht
+1
+Department of Biosciences, Durham University
+, Durham,
+United Kingdom
+Find this author on Google Scholar
+Find this author on PubMed
+Search for this author on this site
+For correspondence:
+luke.b.hecht@durham.ac.uk
+0
+0
+0
+0
+0
+0
+3
+0 Comments
+0 TRiP Peer Reviews
+0 Community Reviews
+0 Automated Evaluations
+0 Blog/Media Links
+0 Videos
+3 Tweets
+Abstract
+Full Text
+Info/History
+Metrics
+Preview PDF
+Abstract
+Welfare is experienced by individual animals, but the quantity and average quality of welfare an individual is likely to experience in their lifetime is bounded by population demography; namely, age-specific survivorship and the ecological forces that shape it. In many species, a minority of the individuals who are born survive to adulthood, meaning that the lives of those we observe in nature are often unrepresentative of the typical individual born into their population. Since only living animals are capable of experiencing welfare, lifespan is effectively an upper bound on the amount of affectively positive or negative experience an animal can accrue. Life history strategies that increase the probability of a long life are therefore more permissive of good welfare; but even holding life expectancy constant, specific patterns of age-specific mortality may enable a larger proportion of individuals to live through periods characterized by above-average welfare. I formalize this association between demography and welfare through the concept of welfare expectancy, which is applied to published demographic models for >80 species to illustrate the diversity of age-specific mortality patterns and entertain hypotheses about the relationship between demography and welfare.
+1. Introduction
+The experiences of wild animals are extraordinarily diverse. Individuals of different species occupy different habitats, consume different resources, and engage in different behaviors. Even within species, animals’ fortunes differ based on their relative fitness or due to chance events, leading to differential survival or mating success. While life history strategies evolve to maximize inclusive fitness, it is crucial to recognize that fitness and welfare are not the same (
+Beausoleil et al., 2018
+). For example, a strategy which maximizes mean fitness may do so while increasing the variance in outcomes among siblings, leading to reproductive success in adulthood for a few, but short lives for most (
+Pettorelli and Durant, 2007
+). Even for a successful individual, high evolutionary fitness need not imply good welfare, as sexual competition forces trade-offs between reproduction and survival or somatic maintenance (
+Johnston et al., 2013
+).
+A key objective of the nascent fields of conservation welfare (
+Beausoleil et al., 2018
+) and welfare biology (
+Ng, 1995
+) is to evaluate the quality of lives lived by wild animals in order to identify causes of poor welfare, as well as safe and tractable interventions to improve welfare. Empirical evaluations of wild animal welfare, such as those based on stress hormone levels and other veterinary techniques, have been carried out, though few are comparable between contexts (
+Schwarzenberger, 2007
+). One of the most promising proposals to date is the use of differential rates of biological aging as an indicator of lifetime cumulative welfare under different conditions (
+Bateson and Poirier, 2019
+;
+Poirier et al., 2019
+). For example, social stress related to brood size and social rank has lifelong fitness consequences in birds that appear to be mediated by telomere attrition, a prominent biomarker of biological age (Boonekamp et al., 2014;
+Nettle et al., 2015
+). More generalized application of these methods will require hypotheses to test and a framework for prioritizing which populations to evaluate and which groups of individuals within them to potentially aid.
+A promising starting point is to reason from demographic patterns such as the distribution of individual lifespans. This approach is compatible with a wide range of assumptions about the causes and levels of wild animal welfare, since only living animals are capable of experiencing welfare. Moreover, the quality of life experienced by a typical week-old animal is likely different from that of a year-old animal due to changing levels of vulnerability to disease and predation, competition with conspecifics, self-sufficiency, and senescence.
+Demographic patterns are observed at the population level but experienced by individuals. Population models can provide examples of potential demographies, and although no firm conclusions about welfare can be drawn from interspecific comparisons given our uncertainty about the preferences and experiences of most animals, we can use their diverse population dynamics to probe the implications of different hypotheses for how welfare varies with age.
+Here, I set out a framework for incorporating demography in the evaluation of wild animal welfare based on the principle of expected value and formalize previously expressed intuitions about the relationship between life history and welfare. I also illustrate this by application to published matrix population models for 160 populations of >80 species and formulate working hypotheses about welfare to be tested by future field studies.
+2. Methods
+2.1 Matrix population models
+Matrix population models (MPMs) use matrix algebra to represent transitions between life stages in a population (
+Caswell, 2001
+). They are widely used to infer populations’ instantaneous rates of growth, as well as for estimating vital rates such as survival and fecundity, and conducting population viability analyses (
+Heppell et al., 2000
+). MPMs may be structured by age, stage, or another trait, such as size. For the analyses described here, I used exclusively age-based models to avoid any ambiguity around stage durations.
+It is possible to calculate the expected distribution of lifespans among a cohort from the age-specific mortality rates given by an MPM. Life expectancy is then calculated as the sum of the probability of each possible lifespan multiplied by its length (Caswell, 2009). Annual survival probabilities were assumed to be the product of equal daily survival probabilities, so individuals dying during a given year were assumed to have lived through half of that year.
+2.2 Welfare expectancy
+Life expectancy from birth (
+e
+0
+) represents the expected value of lifespan, with the “value” of each possible lifespan being equal to its length, each additional year of life being weighed the same. Calculations of generation time – the expected age of mothers – follow a similar formula but allow ages to differ in value as age-specific fecundity varies. Welfare may similarly vary with age, as juveniles, sub-adults, reproductive adults and senescent animals face different levels and forms of disease, competition, predation and environmental hardship. This potential for variation calls for a distinct concept of welfare expectancy.
+Welfare expectancy from birth (
+W
+0
+) is calculated by summing the age-specific welfare values experienced over the ages encompassed by each possible lifespan, and then taking the mean weighted by the probability of each lifespan:
+where
+d
+x
+= probability from birth of dying at age
+x
+;
+w
+x
+= net total welfare experienced during a lifespan of
+x
+years; ω = maximum lifespan. For example, the expected value of a 5-year life would be equal to the total amount of welfare experienced between ages 0 and 5, multiplied by the probability of a 5-year lifespan. Repeating this operation for each possible lifespan and taking the sum would yield the welfare expectancy for a typical individual born into the population in question.
+A relative welfare expectancy (RWE) index can also be calculated using values of
+w
+x
+normalized around one
+to calculate welfare expectancy (
+W
+0,R
+), and then dividing welfare expectancy by life expectancy: RWE =
+W
+0,R
+/
+e
+0
+. This index expresses the variability of lifespan in relation to periods of high or low welfare. An RWE > 1 implies that most individuals will survive to experience periods of life characterized by above-average welfare, while for RWE < 1, a population’s survivorship patterns mean that most individuals will only experience below-average periods of life. For RWE > 1, welfare can be said to be ‘outperforming’ life expectancy, as the average instantaneous welfare value during the lifetime of a typical individual would be greater than for an individual who lived out their theoretical maximum lifespan. In general, either high early-life survivorship/welfare (many individuals experiencing the best years) or extremely low late-life survivorship/welfare (few individuals experiencing the worst years) can yield a high RWE index. As life expectancy approaches the maximum lifespan of a species, RWE will tend towards 1 because the average welfare an individual experiences in their lifetime is increasingly representative of the welfare distribution over their species’ maximum lifespan.
+2.3 Welfare elasticity analysis
+An elasticity analysis was also applied to each population to see whether they differed in the age at which a proportional reduction in mortality rate would have the greatest impact on individual’s lifetime welfare expectancy. The elasticity of welfare expectancy to each age’s survival rate was scored as the product of 1) the survivorship up to that age (
+l
+x
+), 2) the mortality rate at that age (
+m
+x
+), and 3) the remaining welfare expectancy conditional on surviving that age (
+W
+x
+). The age with the highest elasticity score was considered the welfare ‘bottleneck’ age for individuals of that population.
+2.4 Illustrating the welfare expectancy approach
+To provide an initial illustration of the approach described here using as detailed and explicit a case as possible, a Leslie matrix was generated from age-specific rates of survival and welfare (life satisfaction) among the human population of the United Kingdom, using published statistics from the UK Office for National Statistics (ONS, 2016; 2019). This population was subjected to the welfare expectancy analyses described above. It is so far unique in having empirically determined age-specific welfare values, as well as vital rates calculated from known fates of thousands of individuals, permitting the clearest possible illustration of the welfare expectancy approach.
+The UK human lifespan distribution begins with a modest spike representing infant mortality. It then abruptly falls after the first year, rising again gradually from throughout senescent life before spiking at 88 (
+Figure 1
+). The life expectancy at birth was approximately 80 years. Welfare (life satisfaction) is bimodal, with peaks in the early-twenties (beginning of independent life) and mid-sixties (beginning of retirement) and troughs in the mid-forties and old age. The population’s RWE index was 1.00, as the vast majority of individuals lived to old age and experienced periods of high and low welfare in roughly equal measure (
+Figure 1
+, left). The age at which welfare expectancy was most elastic to a marginal reduction in mortality was during year 1, combating low but non-trivial infant mortality (
+Figure 1
+, right). This is to be expected given that all individuals are alive and able to benefit from interventions at this age, and individuals surviving infanthood may expect a long and happy life. Notably, age 80 has only slightly lower elasticity. This is because, although welfare expectancy from age 80 onward is much lower than welfare expectancy from birth, the population’s extremely high survival rates up to old age mean that ∼60% of individuals survive to benefit from interventions at age 80. Moreover, because the age-specific mortality rate is much higher than during infanthood, any intervention may have a proportionally greater effect.
+Download figure
+Open in new tab
+Figure 1:
+(Left) The lifespan distribution of UK humans plotted against age-specific welfare (life satisfaction). Most individuals die old enough to experience both highs and lows of welfare coinciding with important life transitions. (Right) Elasticity of welfare expectancy to marginal reduction in age-specific mortality rate.
+2.5 Modelling age-specific welfare
+The distribution of welfare with respect to age is a crucial determinant of how changes in demographic vital rates affect individual welfare expectancy, but there is yet virtually no direct evidence on the age-specific welfare of wild animals. However, to explore the implications of varying age-specific welfare, I assumed that welfare at a given age was proportional to the probability of surviving that year of life. It must be stressed that this is a working hypothesis, adopted for the purpose of illustrating the effects of age-dependent welfare under various real-life demographies. The assumption remains to be tested, but its rationale, implications and alternatives will be discussed later. Welfare expectancy specifically calculated under this assumption will be denoted as
+W
+0,S
+.
+2.6 Data obtention
+Published MPMs were obtained from the COMADRE database, which serves as a curated repository for matrix population models (
+Salguero-Gomez et al., 2016
+). A subset of 152 population matrices, representing 88 species, were selected according to the following criteria, in the form of variables defined in the COMADRE documentation: MatrixComposite == Mean & MatrixTreatment == ‘Unmanipulated’ & MatrixCaptivity == ‘W’ & MatrixSplit == Divided & ProjectionInterval == 1 & MatrixCriteriaOntogeny == ‘No’ & MatrixCriteriaSize == ‘No’ & MatrixCriteriaAge == ‘Yes’. Only the survival matrices ($matU) were used. From this subset, matrices were discarded if they had missing data (“NA” values), stage-specific transition probabilities summing to >1 or to 0 at non-terminal stages or were duplicates. All MPMs were annual Leslie or Leslie+ matrices (
+Carslake et al., 2009
+). Original credit for these matrices goes to their respective authors, as attributed in the COMADRE database.
+Four major taxonomic classes were represented among the population matrices drawn from COMADRE: Actinopterygii (ray-finned fishes), Aves (birds), Mammalia (mammals), and Reptilia (reptiles). These were represented by 16, 54, 72, and 10 populations, respectively. Maximum lifespans for each species was obtained from the AnAge database (
+De Magalhães et al., 2005
+), if available, or else imputed as the average of represented congeners or family relatives. In the case of Leslie matrices, the maximum lifespan was determined by the dimension of the matrix itself. Statistics for each of these matrices can be found in appendix
+Table A1
+.
+3. Results
+3.1 Life expectancy
+The mean life expectancy across the wild animal population models obtained from COMADRE was calculated at 4.39 years, or a median of 3.14 years. Approximately 16% of populations had life expectancies of <1 year, and 74% had life expectancies of <5 years. As a proportion of maximum lifespan, the average life expectancy was 16%, with only 5% of populations having life expectancies >33% of their maximum. Mammal populations had the highest average life expectancy (6.8 years), followed by birds (2.8 years) and reptiles (2.0 years). The ray-finned fish had the lowest average life expectancy, at 0.6 years (
+Figure 2
+).
+Download figure
+Open in new tab
+Figure 2:
+Box and whiskers plot of life expectancy by taxonomic class. Populations were used as data points.
+3.2 Welfare expectancy
+The mean RWE index was 0.87, median 0.97. Only 10% of populations had relative welfare expectancies of >1.1, while 33% scored <0.9. Mammal and bird populations had RWE values typically near 1 (
+Figure 3
+). Mammalia had a tighter distribution around 1, consistent with the longer life expectancies of mammalian populations, but with positive and negative outliers. Actinopterygii had by far the lowest mean RWE (0.20). Reptilian RWE values were intermediate, though all below 1 except for an extreme positive outlier (RWE=2.38) based on data from a population of painted turtles (
+Chrysemys picta
+) at E.S. George Reserve (
+Tinkle et al., 1981
+).
+Download figure
+Open in new tab
+Figure 3:
+Box and whiskers plot of RWE by taxonomic class, using populations as data points. The high-RWE outlier among Reptilia is a population of painted turtles (
+Chrysemys picta
+).
+The average annual survival distributions of all populations with low (first quartile) and high (third quartile) RWE were plotted and found to cover distinct value ranges only during early life. High-RWE populations sustained a relatively high survival rate from birth onwards. Meanwhile, low-RWE populations had extremely low first-year survival rates, yet many attained higher survival rates similar to those of high-RWE populations by age 6 (
+Figure 4
+).
+Download figure
+Open in new tab
+Figure 4:
+Mean age-specific annual survival rates for high-RWE populations (top 25%; blue line) and low-RWE populations (bottom 25%; red line). Lighter blue and red bands cover the interquartile ranges about each mean line. The purple area depicts overlapping age-specific survival distributions of the high- and low-RWE groups.
+3.3 Age-specific elasticity of welfare expectancy
+The elasticity analysis identified only nine populations for which an infinitesimal reduction in mortality rate after age 0 would lead to a greater increase in welfare expectancy than an equivalent reduction in first-year mortality. For five of these populations, the age of highest welfare elasticity was year 1 or 2, enabled by high survivorship over the preceding period followed by a drop (the ‘bottleneck’). The other four bottlenecked populations belong to the same species,
+Capra ibex
+, and show a distinct lifespan distribution that leads to peak welfare elasticity around age 7 or 12. In both cases, the elasticity of welfare expectancy to an age-specific reduction in mortality parallels the lifespan distribution (
+Figure 5
+).
+Download figure
+Open in new tab
+Figure 5:
+The lifespan distribution (solid black line) and corresponding age-specific welfare elasticity (dotted red line) of five ‘bottlenecked’ populations with low age 0-1 survival but higher age 1-2 and 2-3 survival (left) and four
+Capra ibex
+populations where welfare elasticity peaked around age 7 or 12 (right).
+4. Discussion
+4.1 Life expectancy
+Most of the individuals observable at any given time in many wild animal populations are the lucky ones who have survived the challenges characteristic of early life. Among the populations considered here, based on published demographic models, the typical life expectancy is merely 14% of the theoretical lifespan. While this is the median across populations, given that predominantly shorter-lived taxa, such as the ray-finned fish, may produce far more offspring per generation than longer-lived ones, the average life expectancy across individuals is likely to be much smaller. The criterion of annual periodicity used for selecting population matrices from COMADRE could further bias life expectancy upward, since an annual time-step would provide poor resolution when studying a very short-lived animal. This is particularly relevant for considering the lifespans of juveniles, which may encompass a fraction of one year.
+Not all newborns of a given population will have the same individual life expectancies, after the predictive power of parental phenotypes and circumstances of birth are taken into account. Parental age, maternal body mass, clutch size, and relative timing of birth have often been found to predict lifespan (e.g.
+Reid et al., 2010
+;
+Einum and Fleming, 2000
+;
+Tamada and Iwata, 2005
+;
+Ronget et al., 2018
+). Field research developing such predictors of individual differences could help define life expectancy more precisely for subsets of a population, helping to target interventions on the most vulnerable animals.
+4.2 Age-specific welfare
+Variation in lifespan also magnifies the relevance of differences in average quality of life with respect to age among a given population. In a comparison of two populations with the same life expectancy and theoretical lifespan, the one in which the largest proportion of individuals survive to experience the most pleasant years of life available to them will have a greater potential for net-positive welfare.
+In the present analyses, I assumed that the welfare experienced at a particular age was proportional to the probability of surviving that year of life. This is a plausible working hypothesis since the same factors that lead to mortality (e.g. disease, vulnerability to predators, competition for food) have been shown to lead to chronic stress and poor physical condition (
+Clinchy et al., 2013
+;
+Bateson et al., 2015
+). Assuming this model of age-specific welfare, and equal life expectancies, populations with a) very low mortality in early life followed by high mortality later in life would achieve higher welfare than populations with b) a constant rate of mortality, and these would in turn achieve higher welfare than c) populations with high early-life mortality but high adult survivorship. These scenarios roughly correspond to the survivorship curve typology of
+Demetrius (1978)
+.
+A number of alternative hypotheses might also describe the relationship between welfare and age. For example, welfare might peak around the same age as peak reproduction. This could occur due to hormonal factors, or simply because natural selection tends to optimize fitness around reproduction, and body condition is likely related to welfare; though this might be perturbed by intense juvenile competition or the need to provide protection for offspring, which could drive peak physical fitness earlier or later than peak fecundity. On the other hand, reproductive age might bring on poor welfare, especially in species with intense sexual competition (e.g.
+Clinton and Le Boeuf, 1993
+). Either of these reproductive age-centric hypotheses would likely still predict a correlation between survival and welfare, given the interaction of age-specific mortality and reproductive timing in directing the evolution of life history strategies (
+Charlesworth, 1980
+).
+It is also conceivable that the determinants of welfare are so complex that welfare varies irregularly over a lifetime, or average welfare might even be invariant with age in some animals. If welfare is invariant with age, welfare expectancy will scale linearly with life expectancy. However, it seems highly likely that welfare would shift in some direction concurrent with major life history transitions, like the maturation of a tadpole or caterpillar, or sexual maturation in most species, especially when this is accompanied by changes in environment, such as with the ejection of young male hyenas or female meerkats from their natal groups (
+Maag et al., 2019
+).
+Previous reviews have recognized the need to integrate welfare experienced over the lifetime of domestic animals (e.g.
+FAWC, 2009
+;
+Pickard, 2013
+). The concept of welfare expectancy developed here applies this to wild animal populations, using the principle of expected value to account for their inherent variability. Recently,
+Bateson and Poirier (2019)
+proposed that the ratio between biological and chronological age could be used as a proxy for lifetime welfare. The premise of this approach is that somatic damage and repair, which determine biological age, often result from physiological processes that are associated with affective states, such as stress or happiness. Indeed, adverse conditions such as sibling competition have been shown to lead to accelerated biological aging limited to the study period, especially when the individual is a weaker competitor (
+Gott et al., 2018
+). Surveying population-level variation or tracking individual longitudinal variation in the biological-to-chronological age ratio, through measurements such as telomere length, could be a cost-effective way to estimate relative age-specific welfare within wild populations. In the Anthropocene, a large proportion of wild animal stress may be caused by human activity, and so biomarkers such as these could provide evidence of habitat quality from the perspective of the animals themselves and serve as additional holistic evidence to present policymakers (
+Wikelski and Cooke, 2006
+).
+4.3 Welfare expectancy
+Since only living animals are capable of experiencing any level of welfare, life expectancy has profound implications for the net welfare of a population. I have defined welfare expectancy from the perspective of an individual being born into a population and facing an uncertain lifespan. Welfare expectancy revolves around age-specific variation in welfare and the implication that some lifespans will encompass a greater quality and quantity of welfare than others. Many animals die as juveniles, only experiencing the level of welfare associated with that stage of life as a member of their species; others survive to adulthood but fail to reproduce, while others live long, iteroparous lives.
+The potential for age-specific variation in average welfare suggests that welfare expectancy may ‘outperform’ life expectancy in populations where welfare is highest in early life, which most individuals will live to experience. Conversely, in populations where juvenile welfare is lower than adult welfare, welfare expectancy may ‘underperform’ life expectancy because most individuals never see their best years. This notion drives the concept of relative welfare expectancy (RWE). Assuming the correlation between age-specific survival and welfare argued above, welfare expectancy in one third of the populations considered here underperformed their life expectancy by at least 10% (RWE < 0.9), while only eight percent outperformed life expectancy to the same degree (RWE > 1.1). Importantly, this conclusion was neither inevitable nor universal. For example, in the study of
+C. ibex
+referenced earlier, not a single tagged animal was found to have died during their first year (
+Toïgo et al., 2007
+). In contrast, the chinook salmon (
+Oncorhynchus tshawytscha
+) had a first-year mortality rate of ∼94% despite a theoretical lifespan of nine years attained by a tiny proportion of individuals (
+Wilson, 2003
+). Unfortunately, this second pattern appears to be more common, and is likely to be more common in nature after taxon-related publication bias and differences in fecundity are taken into account.
+It should also be noted that RWE itself merely describes the natural state of a population. It can inform population management as a descriptive statistic for prioritizing aid to particular demographics within a population, as a low RWE indicates that something about the population’s age-specific survival pattern is out of order. However, the metric should not necessarily be maximized by any possible means; for example, higher RWE could sometimes be achieved by reducing late-life welfare as opposed to increasing early-life survival. Welfare expectancy itself, which underlies RWE, should be maximized through population management. However, the average welfare expectancy of individuals may need to be traded off against the size of a population, as increasing density has potential to reduce both survivorship and welfare.
+4.4 Welfare elasticity
+A corollary of thinking about lifetime welfare in terms of expected value is the possibility of ‘bottleneck’ ages: ages where survival rate abruptly falls, which are preceded by high survivorship and followed by positive welfare expectancy. This concept is analogous to demographic elasticity, which is analyzed to identify which life stages and vital rates exercise the most control over a population’s marginal net reproductive rate (
+Benton and Grant, 1999
+). Whereas age-specific demographic elasticity depends on the parallel dynamics of survival and fecundity, welfare elasticity depends on an age’s relation to patterns of survivorship and welfare. In general, the value of increasing survival rate at a particular age depends on the proportion of individuals in the cohort surviving to reach that age and their expectation of future welfare.
+Bottlenecks occurring relatively early in life, when a respectable proportion of individuals remain alive, may be promising objects for wildlife interventions from both a conservation perspective accounting for both biodiversity and welfare (
+Carslake et al., 2009
+). However, because of how few individuals of most species survive to adulthood, the conditions for a mid-life bottleneck period to be the most sensitive target for intervention appear to be uncommon. Thus, conservation interventions justified on holistic welfare grounds are likely to be most efficient when they target younger animals, who will generally be more numerous. Calculations of the expected value of any welfare intervention should account for the ages of individuals who would be affected by the intervention.
+A more precise understanding of these survival and welfare parameters could elaborate on welfare expectancy through related statistical concepts, such as welfare skewness and variability (c.f. Caswell 2009 for life expectancy). Variance in welfare would be particularly important to understand if we prioritize solving cases of extremely poor welfare. If intraspecific variation in welfare is structured by geography, phenology or phylogeny, it might also be appropriate to study and manage the welfare of those groups separately, similar to how demographically independent units are often managed separately for biodiversity conservation (e.g.
+Höglund et al., 2011
+).
+4.5 Death as a discrete welfare event
+Previous publications have reasoned that for an individual animal to have had a ‘life worth living’, they must have experienced enough pleasure during their life to compensate for a potentially painful death (e.g.
+FAWC, 2009
+;
+Scherer et al., 2018
+). For animals who are able to live out most of their full lifespans, this seems highly plausible; but for the vast majority of animals, who experience only a small fraction of their potential lives, far more research into the causes and their experiences of death is needed to understand the valence of their lives.
+Cause of death, and therefore the duration and pain of an animal’s experience of dying, may also vary with age similarly to welfare, though probably less systematically. In a hypothetical species, juveniles might be most likely to starve while adults are most likely to be predated, with the relative probabilities of these and other mortality factors shifting over a lifetime. If future research suggests that the pain of death is a sufficiently strong factor to negate some of the positive welfare an animal might have experienced while alive, age-specific variation in the incidence of various manners of death and their severity would also be important to account for. It is already possible to assess the welfare state of an individual - and to compare individuals within a species - using physiological and behavioral indicators. Several studies have documented consistent differences in stress hormone levels associated with different causes of death, supporting the intuitive hypothesis that some involve greater suffering than others. For example, stranded whales showed dramatically higher fecal glucocorticoid (fGC) concentrations than fishing gear-entangled whales, whose fGC concentrations were in turn dramatically higher than those of whales killed quickly by a vessel strike (
+Rolland et al., 2017
+). Similarly, deer who were shot with a rifle showed lower cortisol levels than those hunted by dogs (
+Bradshaw and Bateson, 2000
+).
+4.6 Conclusions and implications
+The consideration of age structure when evaluating the overall state of welfare in a wild animal population brings several general implications and heuristics. 1) Most individuals live only a tiny proportion of their potential lifespans, so the welfare of healthy adults, who tend to be most visible, is not representative. 2) As a consequence of this, interventions to improve welfare can normally achieve greatest impact by focusing on the youngest animals. 3) Welfare and manner of death are likely to vary with age, potentially disrupting or augmenting the focus on the youngest animals. The ideal welfare scenario - within a fixed theoretical lifespan - is for as large a proportion of animals as possible to live through the most pleasant years of life and die at the age where the typical manner of death is the quickest and least painful. 4) Since only living animals experience any welfare at all, life expectancy is a crucial factor in determining the scope for positive or negative welfare. However, if welfare varies with age, the typical individual may experience higher (or lower) net welfare than their relative life expectancy would suggest.
+At the individual level, welfare expectancy unites two distinct concepts: the day-to-day quality of welfare and quantity of welfare experienced over an individual’s lifetime. However, a similar quantity-quality distinction applies at the level of populations, with welfare expectancy addressing the quality side of the argument and quantity being determined by the population size. Management decisions should be based on the sum of welfare expectancy, but density dependence of age-specific survival rates will in many cases lead to a trade-off between the average and the sum of welfare expectancy in a population (assuming habitats do not grow), implying the existence of an optimum density (e.g.
+Cubaynes et al., 2014
+). Understanding the relative sensitivities of a specific population’s vital rates to density is therefore crucial for optimal welfare-centric management.
+Once better data on age-specific welfare become available, the welfare expectancy framework could also help wildlife managers to identity specific ages or stages to target for population control where a reduction in survival rate would lead to the smallest possible change in welfare expectancy for the largest possible reduction in net reproductive rate. Such compromises could also be identified for growth-oriented population management, ideally achieving high individual welfare among a large population.
+The field of welfare biology is at a very early stage, having received little dedicated work from the life sciences until recently. While progress is still limited by the lack of empirical studies of wild animal welfare, it is hoped that this theoretical work, drawing on some of the same published demographic data which are widely used for informing biodiversity conservation, will help establish a paradigm for prioritizing and interpreting future research in welfare biology.
+Declaration of Interest
+I have no competing interests to declare.
+Acknowledgements
+I thank Wild Animal Initiative for their support of my research. I also thank Matthew Allcock and Brian Tomasik for their valuable feedback.
+Appendix
+View this table:
+View inline
+View popup
+Table A1:
+Core numerical results for each population from COMADRE included in the analysis.
+Footnotes
+Address Luke Hecht, Department of Biosciences, Durham University, Stockton Road, Durham DH1 3LE, United Kingdom
+References
+1.
+↵
+Bateson
+,
+M.
+,
+Emmerson
+,
+M.
+,
+Ergün
+,
+G.
+,
+Monaghan
+,
+P.
+, &
+Nettle
+,
+D.
+(
+2015
+).
+Opposite effects of early-life competition and developmental telomere attrition on cognitive biases in juvenile European starlings
+.
+PLoS One
+,
+10
+(
+7
+),
+e0132602
+.
+OpenUrl
+Google Scholar
+2.
+↵
+Bateson
+,
+M.
+, &
+Poirier
+,
+C.
+(
+2019
+).
+Can biomarkers of biological age be used to assess cumulative lifetime experience?
+Animal Welfare
+,
+28
+(
+1
+),
+41
+–
+56
+.
+OpenUrl
+Google Scholar
+3.
+↵
+Beausoleil
+,
+N. J.
+,
+Mellor
+,
+D. J.
+,
+Baker
+,
+L.
+,
+Baker
+,
+S. E.
+,
+Bellio
+,
+M.
+,
+Clarke
+,
+A. S.
+, … &
+Pitcher
+,
+B. J.
+(
+2018
+).
+‘Feelings and Fitness’ not ‘Feelings or Fitness’–the raison d’être of Conservation Welfare, which aligns conservation and animal welfare objectives
+.
+Frontiers in Veterinary Science
+,
+5
+,
+296
+.
+OpenUrl
+Google Scholar
+4.
+↵
+Benton
+,
+T. G.
+, &
+Grant
+,
+A.
+(
+1999
+).
+Elasticity analysis as an important tool in evolutionary and population ecology
+.
+Trends in Ecology & Evolution
+,
+14
+(
+12
+),
+467
+–
+471
+.
+OpenUrl
+Google Scholar
+5.
+↵
+Bradshaw
+,
+E. L.
+, &
+Bateson
+,
+P.
+(
+2000
+).
+Welfare implications of culling red deer (
+Cervus elaphus
+)
+.
+Animal Welfare
+,
+9
+(
+1
+),
+3
+–
+24
+.
+OpenUrl
+Google Scholar
+6.
+Carey
+,
+J. R.
+(
+2001
+).
+Insect biodemography
+.
+Annual Review of Entomology
+,
+46
+(
+1
+),
+79
+–
+110
+.
+OpenUrl
+CrossRef
+PubMed
+Web of Science
+Google Scholar
+7.
+↵
+Caswell
+,
+H.
+(
+2001
+).
+Matrix Population Models: Construction, Analysis, and Interpretation
+. 2nd edn
+Sinauer Associates. Inc
+.,
+Sunderland, MA
+.
+Google Scholar
+8.
+↵
+Carslake
+,
+D.
+,
+Townley
+,
+S.
+, &
+Hodgson
+,
+D. J.
+(
+2009
+).
+Patterns and rules for sensitivity and elasticity in population projection matrices
+.
+Ecology
+,
+90
+(
+11
+),
+3258
+–
+3267
+.
+OpenUrl
+PubMed
+Google Scholar
+9.
+↵
+Charlesworth
+,
+B.
+1980
+.
+Evolution in age structured populations
+.
+Cambridge University Press
+,
+Cambridge, UK
+.
+Google Scholar
+10.
+↵
+Clinchy
+,
+M.
+,
+Sheriff
+,
+M. J.
+, &
+Zanette
+,
+L. Y.
+(
+2013
+).
+Predator-induced stress and the ecology of fear
+.
+Functional Ecology
+,
+27
+(
+1
+),
+56
+–
+65
+.
+OpenUrl
+CrossRef
+Google Scholar
+11.
+↵
+Clinton
+,
+W. L.
+, &
+Le Boeuf
+,
+B. J.
+(
+1993
+).
+Sexual selection’s effects on male life history and the pattern of male mortality
+.
+Ecology
+,
+74
+(
+6
+),
+1884
+–
+1892
+.
+OpenUrl
+CrossRef
+Web of Science
+Google Scholar
+12.
+↵
+Cubaynes
+,
+S.
+,
+MacNulty
+,
+D. R.
+,
+Stahler
+,
+D. R.
+,
+Quimby
+,
+K. A.
+,
+Smith
+,
+D. W.
+, &
+Coulson
+,
+T.
+(
+2014
+).
+Density-dependent intraspecific aggression regulates survival in northern Yellowstone wolves (Canis lupus)
+.
+Journal of Animal Ecology
+,
+83
+(
+6
+),
+1344
+–
+1356
+.
+OpenUrl
+Google Scholar
+13.
+↵
+De Magalhães
+,
+J. P.
+,
+Costa
+,
+J.
+, &
+Toussaint
+,
+O.
+(
+2005
+).
+HAGR: the human ageing genomic resources
+.
+Nucleic Acids Research
+,
+33
+,
+D537
+-
+D543
+.
+OpenUrl
+CrossRef
+PubMed
+Web of Science
+Google Scholar
+14.
+↵
+Demetrius
+,
+L.
+(
+1978
+).
+Adaptive value, entropy and survivorship curves
+.
+Nature
+,
+275
+(
+5677
+),
+213
+.
+OpenUrl
+CrossRef
+PubMed
+Web of Science
+Google Scholar
+15.
+Dillon
+,
+K. G.
+, &
+Conway
+,
+C. J.
+(
+2018
+).
+Nest predation risk explains variation in avian clutch size
+.
+Behavioral Ecology
+,
+29
+(
+2
+),
+301
+–
+311
+.
+OpenUrl
+Google Scholar
+16.
+↵
+Einum
+,
+S.
+, &
+Fleming
+,
+I. A.
+(
+2000
+).
+Highly fecund mothers sacrifice offspring survival to maximize fitness
+.
+Nature
+,
+405
+(
+6786
+),
+565
+.
+OpenUrl
+CrossRef
+PubMed
+Web of Science
+Google Scholar
+17.
+↵
+Farm Animal Welfare Council (FAWC)
+2009
+Farm Animal Welfare in Great Britain: Past, Present and Future
+.
+FAWC
+:
+London, UK
+Google Scholar
+18.
+Gadgil
+,
+M.
+, &
+Bossert
+,
+W. H.
+(
+1970
+).
+Life historical consequences of natural selection
+.
+The American Naturalist
+,
+104
+(
+935
+),
+1
+–
+24
+.
+OpenUrl
+CrossRef
+Google Scholar
+19.
+↵
+Gott
+,
+A.
+,
+Andrews
+,
+C.
+,
+Hormigos
+,
+M. L.
+,
+Spencer
+,
+K.
+,
+Bateson
+,
+M.
+, &
+Nettle
+,
+D.
+(
+2018
+).
+Chronological age, biological age, and individual variation in the stress response in the European starling: a follow-up study
+.
+PeerJ
+,
+6
+,
+e5842
+.
+OpenUrl
+Google Scholar
+20.
+↵
+Heppell
+,
+S. S.
+,
+Caswell
+,
+H.
+, &
+Crowder
+,
+L. B.
+(
+2000
+).
+Life histories and elasticity patterns: perturbation analysis for species with minimal demographic data
+.
+Ecology
+,
+81
+(
+3
+),
+654
+–
+665
+.
+OpenUrl
+CrossRef
+Web of Science
+Google Scholar
+21.
+↵
+Höglund
+,
+J.
+,
+Larsson
+,
+J. K.
+,
+Corrales
+,
+C.
+,
+Santafé
+,
+G.
+,
+Baines
+,
+D.
+, &
+Segelbacher
+,
+G.
+(
+2011
+).
+Genetic structure among black grouse in Britain: implications for designing conservation units
+.
+Animal Conservation
+,
+14
+(
+4
+),
+400
+–
+408
+.
+OpenUrl
+Google Scholar
+22.
+↵
+Johnston
+,
+S. E.
+,
+Gratten
+,
+J.
+,
+Berenos
+,
+C.
+,
+Pilkington
+,
+J. G.
+,
+Clutton-Brock
+,
+T. H.
+,
+Pemberton
+,
+J. M.
+, &
+Slate
+,
+J.
+(
+2013
+).
+Life history trade-offs at a single locus maintain sexually selected genetic variation
+.
+Nature
+,
+502
+(
+7469
+),
+93
+.
+OpenUrl
+CrossRef
+PubMed
+Web of Science
+Google Scholar
+23.
+↵
+Maag
+,
+N.
+,
+Cozzi
+,
+G.
+,
+Bateman
+,
+A.
+,
+Heistermann
+,
+M.
+,
+Ganswindt
+,
+A.
+,
+Manser
+,
+M.
+, … &
+Ozgul
+,
+A.
+(
+2019
+).
+Cost of dispersal in a social mammal: body mass loss and increased stress
+.
+Proceedings of the Royal Society B
+,
+286
+(
+1896
+),
+20190033
+.
+OpenUrl
+Google Scholar
+24.
+↵
+Ng
+,
+Y. K.
+(
+1995
+).
+Towards welfare biology: Evolutionary economics of animal consciousness and suffering
+.
+Biology and Philosophy
+,
+10
+(
+3
+),
+255
+–
+285
+.
+OpenUrl
+Google Scholar
+25.
+Office for National Statistics
+. (
+2019
+).
+National Life Tables, UK: 2016 to 2018
+. Retrieved from
+https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/bulletins/nationallifetablesunitedkingdom/2016to2018
+.
+Google Scholar
+26.
+Office for National Statistics
+. (
+2016
+).
+Headline estimates of personal well-being from the Annual Population Survey (APS): by selected geographies and personal characteristics
+,
+April
+2015 to March 2016. Retrieved from
+https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/wellbeing/datasets/headlineestimatesofpersonalwellbeing/april2015tomarch2016selectedgeographiesandpersonalcharacteristics/headlineestimatesofpersonalwellbeing2015to201621.xls
+.
+Google Scholar
+27.
+↵
+Pettorelli
+,
+N.
+, &
+Durant
+,
+S. M.
+(
+2007
+).
+Family effects on early survival and variance in long-term reproductive success of female cheetahs
+.
+Journal of Animal Ecology
+,
+76
+(
+5
+),
+908
+–
+914
+.
+OpenUrl
+PubMed
+Google Scholar
+28.
+↵
+Pickard
+,
+J.
+,
+Buchanan-Smith
+,
+H. M.
+,
+Dennis
+,
+M.
+,
+Flecknell
+,
+P.
+,
+Joannides
+,
+A.
+,
+Lemon
+,
+R.
+, … &
+Schultz
+,
+W.
+(
+2013
+).
+Review of the assessment of cumulative severity and lifetime experience in non-human primates used in neuroscience research
+.
+London
+:
+Animal Procedures Committee
+.
+Google Scholar
+29.
+↵
+Reid
+,
+J. M.
+,
+Bignal
+,
+E. M.
+,
+Bignal
+,
+S.
+,
+McCracken
+,
+D. I.
+,
+Bogdanova
+,
+M. I.
+, &
+Monaghan
+,
+P.
+(
+2010
+).
+Parent age, lifespan and offspring survival: structured variation in life history in a wild population
+.
+Journal of Animal Ecology
+,
+79
+(
+4
+),
+851
+–
+862
+.
+OpenUrl
+Google Scholar
+30.
+↵
+Rolland
+,
+R. M.
+,
+McLellan
+,
+W. A.
+,
+Moore
+,
+M. J.
+,
+Harms
+,
+C. A.
+,
+Burgess
+,
+E. A.
+, &
+Hunt
+,
+K. E.
+(
+2017
+).
+Fecal glucocorticoids and anthropogenic injury and mortality in North Atlantic right whales
+Eubalaena glacialis
+.
+Endangered Species Research
+,
+34
+,
+417
+–
+429
+.
+OpenUrl
+Google Scholar
+31.
+↵
+Ronget
+,
+V.
+,
+Gaillard
+,
+J. M.
+,
+Coulson
+,
+T.
+,
+Garratt
+,
+M.
+,
+Gueyffier
+,
+F.
+,
+Lega
+,
+J. C.
+, &
+Lemaître
+,
+J. F.
+(
+2018
+).
+Causes and consequences of variation in offspring body mass: meta-analyses in birds and mammals
+.
+Biological Reviews
+,
+93
+(
+1
+),
+1
+–
+27
+.
+OpenUrl
+CrossRef
+Google Scholar
+32.
+↵
+Salguero-Gómez
+,
+R.
+,
+Jones
+,
+O. R.
+,
+Archer
+,
+C. R.
+,
+Bein
+,
+C.
+,
+de Buhr
+,
+H.
+,
+Farack
+,
+C.
+, … &
+Römer
+,
+G.
+(
+2016
+).
+COMADRE: a global data base of animal demography
+.
+Journal of Animal Ecology
+,
+85
+(
+2
+),
+371
+–
+384
+.
+OpenUrl
+CrossRef
+Google Scholar
+33.
+↵
+Scherer
+,
+L.
+,
+Tomasik
+,
+B.
+,
+Rueda
+,
+O.
+, &
+Pfister
+,
+S.
+(
+2018
+).
+Framework for integrating animal welfare into life cycle sustainability assessment
+.
+The International Journal of Life Cycle Assessment
+,
+23
+(
+7
+),
+1476
+–
+1490
+.
+OpenUrl
+Google Scholar
+34.
+↵
+Schwarzenberger
+,
+F.
+(
+2007
+).
+The many uses of non-invasive faecal steroid monitoring in zoo and wildlife species
+.
+International Zoo Yearbook
+,
+41
+(
+1
+),
+52
+–
+74
+.
+OpenUrl
+CrossRef
+Google Scholar
+35.
+Sol
+,
+D.
+,
+Maspons
+,
+J.
+,
+Gonzalez-Voyer
+,
+A.
+,
+Morales-Castilla
+,
+I.
+,
+Garamszegi
+,
+L. Z.
+, &
+Møller
+,
+A. P.
+(
+2018
+).
+Risk-taking behavior, urbanization and the pace of life in birds
+.
+Behavioral Ecology and Sociobiology
+,
+72
+(
+3
+),
+59
+.
+OpenUrl
+Google Scholar
+36.
+↵
+Tamada
+,
+K.
+, &
+Iwata
+,
+K.
+(
+2005
+).
+Intra-specific variations of egg size, clutch size and larval survival related to maternal size in amphidromous
+Rhinogobius goby
+.
+Environmental Biology of Fishes
+,
+73
+(
+4
+),
+379
+–
+389
+.
+OpenUrl
+Google Scholar
+37.
+↵
+Tinkle
+,
+D. W.
+,
+Congdon
+,
+J. D.
+, &
+Rosen
+,
+P. C.
+(
+1981
+).
+Nesting frequency and success: implications for the demography of painted turtles
+.
+Ecology
+,
+62
+(
+6
+),
+1426
+–
+1432
+.
+OpenUrl
+CrossRef
+Google Scholar
+38.
+↵
+Toïgo
+,
+C.
+,
+Gaillard
+,
+J. M.
+,
+Festa-Bianchet
+,
+M
+,
+Largo
+,
+E.
+,
+Michallet
+,
+J.
+, &
+Maillard
+,
+D.
+(
+2007
+).
+Sex- and age-specific survival of the highly dimorphic Alpine ibex: evidence for a conservative life-history tactic
+.
+Journal of Animal Ecology
+,
+76
+(
+4
+),
+679
+–
+686
+.
+OpenUrl
+CrossRef
+PubMed
+Google Scholar
+39.
+↵
+Wikelski
+,
+M.
+, &
+Cooke
+,
+S. J.
+(
+2006
+).
+Conservation physiology
+.
+Trends in Ecology & Evolution
+,
+21
+(
+1
+),
+38
+–
+46
+.
+OpenUrl
+Google Scholar
+40.
+↵
+Wilson
+,
+P. H.
+(
+2003
+).
+Using population projection matrices to evaluate recovery strategies for Snake River spring and summer Chinook salmon
+.
+Conservation Biology
+,
+17
+(
+3
+),
+782
+–
+794
+.
+OpenUrl
+Google Scholar
+Back to top
+Previous
+Next
+Posted October 28, 2019.
+Download PDF
+Print/Save Options
+Download PDF
+Full Text & In-line Figures
+XML
+More Info
+Email
+Share
+Accounting for demography in the assessment of wild animal welfare
+Luke B.B.
+Hecht
+bioRxiv
+819565;
+doi:
+https://doi.org/10.1101/819565
+This article is a preprint and has not been certified by peer review [
+what does this mean?
+].
+Share This Article:
+Copy
+Citation Tools
+COVID-19 SARS-CoV-2 preprints from medRxiv and bioRxiv
+Subject Area
+Ecology
+Subject Areas
+All Articles
+Animal Behavior and Cognition
+(4447)
+Biochemistry
+(9770)
+Bioengineering
+(7224)
+Bioinformatics
+(25185)
+Biophysics
+(12816)
+Cancer Biology
+(10115)
+Cell Biology
+(14592)
+Clinical Trials*
+(138)
+Developmental Biology
+(8092)
+Ecology
+(12267)
+Epidemiology*
+(2067)
+Evolutionary Biology
+(16160)
+Genetics
+(11047)
+Genomics
+(14911)
+Immunology
+(10007)
+Microbiology
+(24012)
+Molecular Biology
+(9632)
+Neuroscience
+(51613)
+Paleontology
+(373)
+Pathology
+(1575)
+Pharmacology and Toxicology
+(2724)
+Physiology
+(4095)
+Plant Biology
+(8790)
+Scientific Communication and Education
+(1523)
+Synthetic Biology
+(2438)
+Systems Biology
+(6516)
+Zoology
+(1367)
+* The Clinical Trials and Epidemiology subject categories are now closed to new submissions following the completion of bioRxiv's clinical research pilot project and launch of the dedicated health sciences server medRxiv
+(submit.medrxiv.org)
+.  New papers that report results of Clinical Trials must now be submitted to medRxiv. Most new Epidemiology papers also should be submitted to medRxiv, but if a paper contains no health-related information, authors may choose to submit it to another bioRxiv subject category (e.g., Genetics or Microbiology).
+Evaluation/discussion of this paper
+x
+Comments
+0
+TRiP
+0
+Community
+0
+Automated
+0
+Blogs/Media
+0
+Video
+0
+Tweets
+3
+Comments
+bioRxiv aims to provide a venue for anyone to comment on a bioRxiv preprint. Comments are moderated for offensive or irrelevant content (this can take ~24 h). Please avoid duplicate submissions and read our
+Comment Policy
+before commenting. The content of a comment is not endorsed by bioRxiv.
+Share this comments tab (click to copy link)
+Copied!
+TRiP
+bioRxiv partners with journals and review services to enable posting of peer reviews and editorial decisions related to preprints they are evaluating. Reviews are posted with the consent of the authors.
+TRiP reviews are part of a peer review pilot project in which participating organizations post peer reviews of manuscripts they are evaluating
+There is no TRiP material for this paper.
+Community Reviews
+bioRxiv aims to inform readers about online discussion of this preprint occurring elsewhere. The content at the links below is not endorsed by either bioRxiv or the preprint's authors.
+Community reviews for this article:
+There are no community reviews for this paper.
+Automated Evaluations
+Certain services provide automated analysis of preprints. Analyses invited by the authors are displayed at the top of this tab. Those done independently of authors are shown underneath . None of these analyses is endorsed by bioRxiv.
+Automated Evaluations:
+There are no automated evaluations for this paper.
+Blog/Media Links
+bioRxiv aims to inform readers about online discussion of this preprint occurring elsewhere. The content at the links below is not endorsed by either bioRxiv or the preprint's authors.
+Video
+bioRxiv partners with conferences and institutions to display recordings of talks and seminars related to preprints. These are posted with the consent of the authors.
+Video:
+There are no videos for this paper.
+Tweets
+bioRxiv aims to inform readers about online discussion of this preprint occurring elsewhere. Recent twitter mentions are provided below. The content of these tweets is not endorsed by either bioRxiv or the preprint's authors.
+Powered by
+Powered by
+Follow this preprint
+X
+You can now receive automatic notifications when a preprint is revised, withdrawn, commented on, peer reviewed, or published in a journal. Select the events you would like to follow below and click "Submit". To see all of the preprints you are currently following, please go to the
+bioRxiv Alerts Page
+.
+Sign In to Follow this Preprint
+Email
+*
+Email this Article
+close
+Thank you for your interest in spreading the word about bioRxiv.
+NOTE: Your email address is requested solely to identify you as the sender of this article.
+Your Email
+*
+Your Name
+*
+Send To
+*
+Enter multiple addresses on separate lines or separate them with commas.
+You are going to email the following
+Accounting for demography in the assessment of wild animal welfare
+Message Subject
+(Your Name) has forwarded a page to you from bioRxiv
+Message Body
+(Your Name) thought you would like to see this page from the bioRxiv website.
+Your Personal Message
+CAPTCHA
+This question is for testing whether or not you are a human visitor and to prevent automated spam submissions.
+Citation Tools
+close
+Accounting for demography in the assessment of wild animal welfare
+Luke B.B.
+Hecht
+bioRxiv
+819565;
+doi:
+https://doi.org/10.1101/819565
+This article is a preprint and has not been certified by peer review [
+what does this mean?
+].
+Citation Manager Formats
+BibTeX
+Bookends
+EasyBib
+EndNote (tagged)
+EndNote 8 (xml)
+Medlars
+Mendeley
+Papers
+RefWorks Tagged
+Ref Manager
+RIS
+Zotero
+We use cookies on this site to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies.
+Continue
+Find out more

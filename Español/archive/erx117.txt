@@ -1,0 +1,817 @@
+Journal of Experimental Botany, vol. 68, n.º 8, pp. 1941–1953, 2017
+doi:10.1093/jxb/erx117 Publicación anticipada en línea: 17 de abril de 2017
+Este artículo está disponible en línea sin cargos de acceso (véase http://jxb.oxfordjournals.org/open_access.html para más detalles)
+ARTÍCULO DE INVESTIGACIÓN
+Enhancing faba bean (Vicia faba L.) genome resources
+James W. Cooper1, Michael H. Wilson1, Martijn F. L. Derks2,3, Sandra Smit2, Karl J. Kunert4, Christopher Cullis5 
+y Christine H. Foyer1,*
+1 Centro de Ciencias Vegetales, Facultad de Biología, Universidad de Leeds, Leeds LS2 9JT, Reino Unido
+2 Grupo de Bioinformática, Universidad de Wageningen, Droevendaalsesteeg 1, 6708PB Wageningen, Países Bajos
+3 Grupo de Cría Animal y Genómica, Universidad de Wageningen, Droevendaalsesteeg 1, 6708PB Wageningen, Países Bajos
+4 Instituto de Biotecnología Forestal y Agrícola, Departamento de Ciencia Vegetal, Universidad de Pretoria, Hillcrest, Pretoria 0002, Sudáfrica
+5 Departamento de Biología, Case Western Reserve University, Cleveland, OH 44106-7080, EE. UU.
+* Correspondencia: c.foyer@leeds.ac.uk
+Recibido el 6 de febrero de 2017; decisión editorial el 17 de marzo de 2017; aceptado el 20 de marzo de 2017
+Editor: Christine Raines, Universidad de Essex
+Resumen
+La mejora de las leguminosas de grano está actualmente obstaculizada por la falta de recursos genómicos. La escasez de información genómica 
+del haba puede atribuirse a las dificultades intrínsecas para ensamblar y anotar su gigantesco genoma (~13 Gb). Para 
+abordar este reto, se realizó un análisis de secuenciación de ARN en hojas del haba (cv. Wizard). La alineación de las lecturas 
+con el transcriptoma de referencia del haba identificó 16 300 unigenes de alta calidad. Además, se utilizó la secuenciación paired-end de Illumina 
+para establecer una línea base de la información genómica. Las lecturas genómicas se ensamblaron de novo 
+en contigs con un tamaño de 50–5000 pb. Más del 85 % de las secuencias no se alinearon con genes conocidos, de las cuales 
+~10 % pudieron alinearse con elementos genéticos repetitivos conocidos. Más de 26 000 de los unigenes del transcriptoma de referencia 
+pudieron alinearse con lecturas de secuenciación de ADN (DNA-seq) con alta confianza. Además, esta comparación identificó 56 
+668 posibles sitios de empalme en todos los unigenes identificados. Los datos de longitud de secuencia se ampliaron en 461 loci putativos mediante 
+alineación de contigs de DNA-seq con secuencias de marcadores de ligamiento de longitud completa, de acceso público. Las lecturas también produjeron cobertura de
+3466× y 650× para los genomas del cloroplasto y de la mitocondria, respectivamente. Las comparaciones entre especies e intraespecies de genomas de organelos 
+establecieron conjuntos básicos de genes de organelos de leguminosas, y revelaron regiones polimórficas de los 
+genomas de organelos del haba.
+Palabras clave: secuenciación Illumina, leguminosas, genoma mitocondrial, plastoma, seguridad de las proteínas, análisis de RNA-seq.
+Introducción
+Las leguminosas de grano (legumbres), como la soja, solo son superadas 
+por los cereales en términos de valor económico y nutricional (O’Rourke 
+et al., 2014). Cada vez se reconoce más que 
+las leguminosas de grano tienen ventajas sobre los cereales, tanto en la agricultura como en la dieta humana
+(Foyer et al., 2016). Las legumbres son ricas 
+en proteínas, almidón, fibra y otros nutrientes esenciales necesarios 
+para la dieta humana, y también son valiosas en la producción de alimentos
+y piensos para animales. El contenido proteico de las legumbres supera con creces al de los cereales, y su composición de aminoácidos es complementaria 
+(Boye et al., 2010; Roy et al., 
+2010). La fijación del nitrógeno atmosférico en las leguminosas 
+plantas (Leguminosae), que se produce mediante la unión simbiótica 
+con bacterias del suelo (Barton et al., 2014; Lassaletta et al., 
+2014), se utiliza como fertilización natural de nitrógeno del suelo
+en muchas partes del mundo. El creciente mercado orgánico, en el que los agricultores
+dependen de las leguminosas para aportar gran parte del 
+Este es un artículo de acceso abierto distribuido bajo los términos de la Creative Commons Attribution License (http://creativecommons.org/licenses/by/4.0/), que 
+permite el uso, la distribución y la reproducción sin restricciones en cualquier medio, siempre que se cite debidamente el trabajo original. © The Author 2017. Publicado por Oxford University Press en nombre de la Society for Experimental Biology.
+1942 | Cooper et al.
+nitrógeno necesario para sostener otros cultivos, favorecería la intensificación de la agricultura basada en leguminosas.
+Aunque la demanda mundial 
+de leguminosas para la producción de bioenergía, así como de alimentos 
+y piensos, está aumentando (Foyer et al., 2016), los rendimientos de muchas 
+leguminosas son actualmente inestables (Cernay et al., 2015). De manera crucial, 
+la mejora genética fundamental de muchas 
+leguminosas potencialmente importantes, como las habas (Vicia faba), 
+está actualmente limitada por la falta de recursos genéticos. A pesar 
+de algunos avances, el desarrollo de recursos basados en genes en 
+leguminosas como el haba no ha seguido el ritmo de los cereales 
+(O’Rourke et al., 2014; Foyer et al., 2016).
+Según FAOSTAT (2016), las habas, también llamadas 
+habas anchas, son la cuarta leguminosa de estación fría más cultivada en el mundo 
+después del guisante (Pisum sativum), el garbanzo (Cicer arietinum), 
+y la lenteja (Lens culinaris). Tienen un contenido proteico que 
+es mayor que el de muchas otras leguminosas alimenticias comunes 
+(Griffiths and Lawes, 1978; Burstin et al., 2011). Además, 
+el rendimiento total de grano del haba no se sacrifica en favor 
+de un alto contenido proteico en la semilla. En climas fríos, las habas 
+tienen ventajas sobre leguminosas como la soja porque 
+están adaptadas al crecimiento a bajas temperaturas. Por ello, 
+son muy adecuadas para prácticas agrícolas sostenibles, sobre todo 
+en países en desarrollo que sufren con frecuencia temperaturas frías 
+(Temesgen et al., 2015). Sin embargo, el rendimiento del haba 
+sigue siendo inestable, como ocurre con muchas otras leguminosas 
+importantes (Cernay et al., 2015).
+Las características de herencia mendeliana del haba se describieron por primera vez 
+en la década de 1930 (Erith, 1930); sin embargo, la genética del haba 
+recibió solo un interés intermitente en los años siguientes 
+(O’Sullivan y Angra, 2016). En la década de 1970 se identificaron mutantes asinápticos, 
+a partir de los cuales se desarrolló y analizó una serie de líneas trisómicas
+(Sjodin, 1970, 1971). Posteriormente, los marcadores genéticos 
+pudieron asignarse a cromosomas físicos (vaz Patto 
+et al., 1999). Además, se identificaron genes que controlan la simbiosis rizobial
+y la composición de pigmentos (Duc y Picard, 
+1986; Duc et al., 1999), con líneas endogámicas recombinantes 
+(RIL) que se utilizaron para determinar la herencia mendeliana
+de un gen de latencia de la semilla (Ramsay, 1997). Los recursos
+de germoplasma parental de las primeras investigaciones con haba siguen disponibles 
+(O’Sullivan y Angra, 2016).
+El uso de RIL y marcadores moleculares ha permitido la producción
+de mapas de ligamiento de alta resolución y la identificación
+de loci de rasgos cuantitativos (QTL) (Torres et al., 2010; 
+O’Sullivan y Angra, 2016). Las secuencias basadas en ligamiento de alta resolución
+se han utilizado para producir mapas sintéticos con otras leguminosas
+(Webb et al., 2016). Por ejemplo, en 
+un mapa de 687 marcadores SNP de ligamiento de V. faba,
+cada uno se emparejó con un ortólogo de 
+Medicago truncatula y se le asignó un grupo de ligamiento, análogo 
+a uno de los seis cromosomas del haba, lo que permitió un alineamiento 
+putativo de regiones genómicas y secuencias de M. truncatula 
+con los cromosomas correspondientes de V. faba (Webb et al., 2016).
+Aunque los datos de transcriptoma del haba han aumentado en 
+los últimos años, sorprendentemente hay pocos datos de secuencias de ADN disponibles
+en bases de datos públicas (Ray y Georges, 2010; Kaur et al., 
+2012; Arun-Chinnappa y McCurdy, 2015; Zhang et al., 
+2015; O’Sullivan y Angra, 2016). El único conjunto de datos públicos de 
+secuencias de ADN genómico fue reportado por Yang et al. (2012), quienes realizaron secuenciación 454 del ADN genómico agrupado 
+de 247 accesiones para identificar marcadores de repeticiones simples de secuencia 
+(SSR). La actual falta de datos de secuencias genómicas disponibles públicamente 
+para el haba puede atribuirse a las dificultades intrínsecas 
+para ensamblar y anotar el gigantesco genoma (~13 Gb). 
+Sin embargo, el genoma mitocondrial del haba, que 
+fue anotado mediante bibliotecas de plásmidos/fósmidos, muestra un contenido extenso
+de secuencias repetitivas y un bajo grado de homología con otros 
+genomas mitocondriales secuenciados (Negruck, 2013). Un estudio 
+sobre el clado de leguminosas que carece de repeticiones invertidas mostró que 
+L. culinaris y V. faba tienen plastomas de menor tamaño 
+que otros genomas de cloroplasto, pero presentan niveles similares 
+(6.7%) de ADN repetitivo (Sabir et al., 2014). Sin embargo, un 
+análisis blastn de todas las regiones espaciadoras intergénicas (IGS) de los 
+plastomas secuenciados no logró producir ningún resultado para la secuencia de V. faba  
+en la base de datos de nucleótidos de GenBank (Sabir et al., 
+2014). En el siguiente análisis, se realizaron la secuenciación genómica y la del transcriptoma 
+de haba, lo que proporcionó datos básicos esenciales 
+que pueden usarse para mejorar 
+la identificación de genes, requisito previo para futuros estudios 
+sobre la mejora de rasgos clave de importancia agronómica.
+Materiales y métodos
+Las semillas de haba (V. faba, cultivar Wizard) utilizadas en los
+siguientes estudios fueron suministradas por Wherry and Sons Ltd, Rippingale, 
+Lincolnshire, Reino Unido. Las semillas se sembraron y las plantas se autopolinizaron en 
+las instalaciones de invernadero de la Universidad de Leeds para producir semillas endogámicas de primera
+generación, que se usaron en todos los experimentos siguientes.
+Identificación de cromosomas
+Las semillas de haba se hidrataron durante 3 d hasta la germinación. Las semillas germinadas 
+se almacenaron a 4 ºC durante un período de 24 h para permitir la sincronización 
+de la metafase inducida por frío. A continuación, se extirpó el ápice de la raíz, se fijó, 
+y se tiñó para detectar ADN; después se obtuvieron imágenes de los cromosomas 
+con un microscopio óptico.
+Extracción de ADN, secuenciación y ensamblaje
+Las semillas de haba se hidrataron durante 48 h en agua destilada y se extirparon los 
+ejes embrionarios. El ADN se extrajo de los embriones extirpados 
+usando el kit para plantas DNeasy mini de Qiagen (Qiagen Ltd, 
+Manchester, Reino Unido). El ADN extraído se cuantificó con nanodrop, 
+y la secuenciación se realizó en el Leeds Institute of Molecular 
+Medicine (Universidad de Leeds, Reino Unido). Se utilizó una plataforma Illumina HiSeq2500
+(Illumina, 2014) con una biblioteca paired-end única ejecutada 
+en dos carriles de celda de flujo. El análisis FastQC (Arun-Chinnappa y 
+McCurdy, 2015) se realizó sobre las lecturas secuenciadas sin procesar, y ‘Trim 
+Galore!’ (http://www.bioinformatics.babraham.ac.uk/projects/
+trim_galore/, último acceso el 4 de abril de 2017) se usó para eliminar secuencias de
+adaptadores con una puntuación media de calidad Phred de 30. Las lecturas recortadas 
+se alinearon con la base de datos transcriptómica de Cool Season Food Legume V. faba  
+(CSFL; Humann et al., 2016) y con el transcriptoma de referencia de M. 
+truncatula (Benedito et al., 2008). Se usó ABySS 
+(Simpson et al., 2009) para el ensamblaje de novo de lecturas paired-end 
+con un tamaño de k-mer determinado empíricamente de 32. La alineación 
+contra contigs de longitud completa, correspondientes a los usados por Webb et 
+al. (2016) (BioProject PRJNA225873), se realizó después usando 
+NCBI BLAST+ (v2.5; Camacho et al., 2009). Las lecturas de ADN de 
+el cultivar Wizard están disponibles en el Sequence Read Archive 
+(SRA; https://www.ncbi.nlm.nih.gov/sra, último acceso el 4 de abril de 2017) 
+con los números de acceso SRR5015739 y SRR5015740.
+Recursos genómicos de la haba | 1943
+Extracción de ARN, secuenciación y ensamblaje
+Las plantas de haba (cultivar Wizard) se cultivaron durante 24 d en una cámara de ambiente controlado
+con un ciclo de 12 h de día/noche y una irradiancia de 
+200–250 μmol m–2 s–1 y temperaturas diurna/nocturna de 25 °C/20 °C, 
+respectivamente. Se tomaron discos foliares (2 cm) de las hojas maduras más jóvenes de 
+nueve plantas. Los discos de tres réplicas biológicas se combinaron y se realizó una única extracción.
+En total se obtuvieron tres muestras de ARN 
+(que representan nueve plantas individuales). Las muestras de ARNm 
+se secuenciaron en el Leeds Institute of Molecular 
+Medicine usando una plataforma Illumina HiSeq 3000 que produjo lecturas
+paired-end de 150 pb. El análisis FastQC (Andrews, 2010) se realizó 
+sobre las lecturas secuenciadas sin procesar, y ‘Trim Galore!’ se usó para eliminar las secuencias
+adaptadoras con una puntuación media de calidad Phred de 30. Las lecturas de ARNm recortadas 
+se alinearon con la base de datos CSFL (Humann et al., 
+2016) usando Bowtie 2.3 (Langmead y Salzberg, 2012). Las secuencias alineadas 
+se analizaron con bedtools 2.26.0 (Quinlan y Hall, 
+2010). Las lecturas de secuencia recortadas están disponibles en el NCBI SRA 
+(https://www.ncbi.nlm.nih.gov/sra, último acceso el 4 de abril de 2017) bajo 
+el número de acceso BioProject PRJNA369531. Las variantes de nucleótido único 
+(SNV) se identificaron entre los alineamientos de ARN y la referencia 
+usando una canalización basada en samtools (Li, 2011) mpileup.
+Verificación de unigenes
+Los archivos de alineamiento de la secuenciación de ARN (RNA-seq) frente a 
+CSFL y de la secuenciación de ADN (DNA-seq) (contigs de novo de >1 
+kbp) se procesaron con una canalización basada en bedtools para identificar regiones
+contiguas de cobertura dentro de los unigenes CSFL. Los alineamientos de DNA-seq
+se procesaron después por separado para identificar 
+posibles empalmes o roturas en el alineamiento de las lecturas de DNA-seq sin empalmar 
+frente a la referencia de ARN empalmado, según indican los picos de 
+softclips de bowtie dentro de una ventana de 2 pb.
+Genomas de contigs con enlaces mejorados
+Las secuencias marcadoras de enlace se obtuvieron del BioProject asociado
+al trabajo de Webb et al. (2016), con las secuencias marcadoras identificadas 
+según el trabajo de Khazaei et al. (2014) y Ellwood et al.  
+(2008). Las secuencias de longitud completa correspondientes a estos marcadores de enlace 
+se buscaron con los contigs de secuencia de novo usando NCBI BLAST+.
+Comparaciones de genomas organelares
+Las secuencias de referencia de cloroplasto y mitocondria de V. faba y 
+otras especies se descargaron de NCBI. Las lecturas de DNA-seq se 
+alinearon con los genomas de referencia pertinentes para cloroplastos y mitocondrias
+usando Bowtie2 (Langmead y Salzberg, 2012). Estas se usaron para alinear las lecturas de DNA-seq y 
+el genoma de referencia pertinente para cloroplastos y mitocondrias. Samtools mpileup se usó para 
+identificar SNV. Se alineó por BLAST un conjunto básico de genes de cloroplasto y mitocondria 
+entre pares de especies, cuando uno o más genes estaban 
+presentes en las secuencias de referencia anotadas de todas las especies. Las SNV 
+en las lecturas de DNA-seq se visualizaron con el Integrative Genomics Viewer 
+(Thorvaldsdóttir et al., 2013). El efecto de las SNV sobre los cambios en la secuencia codificante 
+se determinó usando provean (Choi et al., 2012).
+Resultados
+Imagen genómica y ensamblaje de lecturas
+El análisis citogenético mostró que el número cromosómico del haba 
+era 2n=12 (Fig. 1A). El par de cromosomas más grande 
+(I) y el par más pequeño (VI) se identificaron 
+(Fig. 1B), con el cromosoma I aparentemente considerablemente 
+más grande que los demás cromosomas.
+El ADN se secuenció en una plataforma Illumina HiSeq 2500 
+usando lecturas paired-end de 100 pb de una única biblioteca en dos 
+carriles. Tras el recorte de calidad, las lecturas sin procesar se alinearon 
+con las secuencias de referencia de cloroplasto y mitocondria 
+(Tabla 1). Casi un 13% de las lecturas se alinearon con la secuencia de ADN codificante (CDS) 
+de referencia CSFL establecida de V. faba, con una profundidad total de 
+30×. Un pequeño porcentaje (0.95%) de las lecturas 
+se alineó con el genoma de referencia de cloroplasto con una cobertura 
+de 3466× (Sabir et al., 2014). Del mismo modo, el 1.07% de las lecturas se alineó 
+con el genoma de referencia mitocondrial con una cobertura de 
+650× (Negruk, 2013). Sin embargo, el 85.1% de las lecturas no pudo 
+alinearse ni con los genomas de referencia organelares ni con la 
+base de datos de leguminosas alimenticias de estación fría (Tabla 1; Humann et al., 2016). 
+De las lecturas que no pudieron alinearse, solo cerca de un ~10% se identificó
+en una base de datos de elementos repetitivos (Bao et al., 2015). El 
+tipo Gypsy de retrotransposones de repeticiones terminales largas (LTR) 
+constituyó la mayoría de los elementos repetitivos, con un 3.61% 
+del total de lecturas. Los elementos VicSatellite, LTR (no caracterizados) y de la clase Copia
+representaron el 2.49, 2.09 
+y 0.99% de las lecturas del genoma, respectivamente (Tabla 2).
+Verificación del modelo de unigenes
+Para mejorar los unigenes del transcriptoma de referencia CSFL, 
+se generaron datos de RNA-seq alineados (96.2 millones de lecturas, 
+Fig. 1. Imagen de microscopio óptico (aumento ×40) de cromosomas de Vicia faba en metafase. (A) Tinción de Feulgen para ADN contra una tinción 
+de citoplasma FastGreen; (B) las etiquetas de cromosomas con números romanos indican los pares más grandes (I) y más pequeños (VI). Barras de escala = 5 µm.
+1944 | Cooper et al.
+14.4 Gbp), y se alinearon y analizaron en cuanto a amplitud y profundidad de 
+cobertura (Tabla 3). Las lecturas de RNA-seq mostraron un gran número de 
+patrones de alineamiento; sin embargo, identificamos un conjunto básico de 16 
+300 unigenes que mostraron un único pico de alineamientos sobre 
+el 95% del unigen, la mayoría de los cuales mostró una cobertura media de al menos
+10 lecturas por base. Observamos también un número similar con menor amplitud, 
+un número similar con menor amplitud, pero con una consiguiente 
+disminución de la profundidad de cobertura, así como cantidades decrecientes 
+de unigenes que muestran picos de alineamiento. Además, para identificar la estructura genómica potencial y los posibles puntos de
+empalme, alineamos las lecturas de DNA-seq con los unigenes CSFL, 
+y buscamos en los archivos de alineamiento indicios de 
+roturas localizadas en el alineamiento de lecturas de DNA-seq (véase la 
+Tabla S1 suplementaria en línea de JXB). Esto reveló 25 535 unigenes con 
+al menos un posible sitio de empalme (total 56 668).
+Ensamblaje de novo y alineamiento con el mapa de enlaces
+El ensamblaje ABySS de lecturas cortas dio lugar a la generación de 
+>361 millones de contigs, que variaban en longitud entre 50 pb 
+y 5 kb (Fig. 2A, B). La abundancia de contigs generados 
+dependió en gran medida del tamaño de k-mer (Fig. 2A), con 
+k-mers de 32 pb que mostraron un rango más amplio de tamaños de contigs, junto con 
+un mayor número de contigs en comparación con los producidos
+usando un tamaño de k-mer de 64 pb (Fig. 2B). Los contigs 
+mostrados en la Fig. 2 se filtraron a un subconjunto de 14 682 con un 
+tamaño de ≥1 kbp y se alinearon con los contigs crudos usados en 
+el mapa de enlaces de SNP basado en sintenia producido por Webb et al.  
+(2016). Usando un criterio de >95% de identidad de secuencia sobre 
+>95% de un contig, este alineamiento confirmó la secuencia ensamblada 
+de 94 de los contigs de novo, que eran más pequeños 
+que los de Webb et al. (2016). El alineamiento con la Tabla 2. Datos de lecturas genómicas con recorte de calidad alineadas contra 
+bases de datos de elementos repetitivos, que muestran las identidades de los elementos repetitivos, 
+el número de lecturas pareadas mapeadas a estas 
+secuencias repetitivas, y el número total de lecturas expresado como 
+porcentaje
+Elemento repetitivo N.º de lecturas pareadas Lecturas totales  
+contabilizadas (%)
+LTR/Gypsy 29 358 977 3.615225
+VicSatellite 20 274 464 2.496570
+LTR (no caracterizado) 16 974 274 2.090189
+LTR/Copia 8 090 787 0.996289
+rRNA 1 986 302 0.244591
+Ogre 1 708 252 0.210352
+Otros/simples 1 199 173 0.147665
+No caracterizado 1 054 668 0.129870
+Elemento móvil 411 832 0.050712
+DNA/En-Spm 332 062 0.040890
+Retroelemento 92 278 0.011363
+No LTR 53 835 0.006629
+Otros 45 904 0.005653
+ADN 40 982 0.005046
+DNA/MuDR 36 393 0.004481
+DNA/hAT 34 576 0.004258
+LINE 21 923 0.002700
+Satélite 9917 0.001221
+DNA/Harbinger 8519 0.001049
+tRNA 7049 0.000868
+DNA/TcMar 6118 0.000753
+DNA/Mite 3643 0.000449
+RC/Helitron 1874 0.000231
+SINE 883 0.000109
+DNA/hAT-Ac 815 0.000100
+DNA/Stowaway 344 0.000042
+DNA/Tourist 55 0.000007
+Otros/centroméricos 52 0.000006
+DNA/TcMar-Pogo 6 0.000001
+Total de elementos repetitivos 81 755 957 10.07
+Genoma no caracterizado 609 297 428 75.03 Tabla 1. Datos de lecturas genómicas con recorte de calidad del ADN extraído de Vicia faba (cv. Wizard), con el número de lecturas y la cobertura, y 
+profundidad y cobertura sobre los transcriptomas de referencia de haba (CSFL) y Medicago v4
+N.º de lecturas pareadas Lecturas contabilizadas (%) Cobertura
+Número total de lecturas 812 092 660 100.00 6×
+Lecturas alineadas con cloroplasto 7 712 928 0.95 3466×
+Lecturas alineadas con mitocondrias 8 657 582 1.07 650×
+Lecturas alineadas con la base de datos transcriptómica de haba 104 668 765 12.89 30×
+Lecturas no alineadas 691 053 385 85.10 <6×
+Tabla 3. Alineamiento de las lecturas de RNA-seq del cultivar Wizard frente a 
+la base de datos del transcriptoma de haba CSFL
+Los picos muestran agrupamiento independiente de lecturas. La amplitud muestra el porcentaje 
+del modelo de unigen cubierto, y la cobertura muestra el número 
+de transcritos para los que se obtuvieron coberturas de <10, 10–100 y >100. 
+Total indica el número total de unigenes presentes.
+N.º de picos Amplitud Cobertura Total
+<10 10–100 >100
+1 >95% 3067 9169 4064 16 300
+50–95% 9677 5338 1094 16 109
+<50% 4280 47 2 4329
+2–3 >95% 326 1515 271 2112
+50–95% 4339 2976 268 7583
+<50% 1198 18 2 1218
+4–10 >95% 14 70 5 89
+50–95% 1176 429 17 1622
+<50% 282 8 0 290
+0% 0
+>10 >95% 1 0 0 1
+50–95% 15 1 0 16
+<50% 3 0 0 3
+Recursos genómicos de la haba | 1945
+el alineamiento con los contigs existentes también produjo un aumento en la longitud 
+de otros 461 de estos contigs de loci crudos. Una lista completa de 
+los contigs marcadores sinténicos relacionados y los contigs de novo  
+alineados puede encontrarse en la Tabla S2 suplementaria. 
+Los contigs de loci existentes aumentaron en promedio 874 pb 
+(en un rango de 55–2995 pb).
+Polimorfismos de nucleótido único en el genoma organelar de 
+Vicia faba
+La variación a nivel de especie dentro de los genomas organelares de V. faba  
+se investigó mediante el mapeo de lecturas crudas de secuenciación de ADN frente a 
+las secuencias de referencia de cloroplasto y mitocondria 
+(Negruk, 2013; Sabir et al., 2014). Las ubicaciones de las variaciones basadas en genes 
+dentro del genoma de cloroplasto de V. faba (Fig. 3) se obtuvieron 
+alineando las lecturas crudas de ADN con la secuencia publicada de cloroplasto de haba
+(Sabir et al., 2014). Si bien se encontró una alta homología entre la secuencia de referencia
+publicada y el genoma de cloroplasto aquí informado, se 
+identificó un número de SNP (Tabla 4). Cuatro genes que codifican
+la cadena β de la ARN polimerasa, la subunidad I de ATPasa, tRNA Q, 
+y la proteína ribosómica S3 tuvieron un único polimorfismo (Tabla 4). 
+El gen que codifica la subunidad de la acetil-CoA carboxilasa (accD) 
+mostró tres SNP. Los datos de la Tabla 4 muestran si los 
+SNP son sinónimos o no sinónimos.
+Un mapa de referencia del genoma mitocondrial de haba (Fig. 4) 
+basado en el alineamiento de lecturas genómicas se construyó con respecto 
+al cultivar Broad Windsor (Negruk, 2013). Si bien se encontró un alto nivel 
+de homología entre el espacio génico publicado por 
+Negruk (2013) y el ensamblado a partir de lecturas genómicas crudas 
+del cultivar Wizard, se encontró que siete genes presentaban polimorfismos
+(Tabla 5). El análisis de la variación intraespecífica del 
+genoma mitocondrial (Fig. 5) reveló un alto número de 
+SNP en las regiones codificantes de genes e intergénicas. El número de 
+Fig. 2. (A) El logaritmo en base 10 de la abundancia de contigs en un rango de tamaños de contigs, producido a partir de k-mers de 32 pb; (B) el logaritmo en base 10 de la abundancia de contigs en un rango de tamaños de contigs, 
+producido a partir de k-mers de 64 pb.
+1946 | Cooper et al.
+los polimorfismos presentes variaron entre genes, y los genes 
+que codifican el 26S rRNA, el 18S rRNA y la NADH deshidrogenasa 
+subunidad 4 presentan un SNP, y los genes que codifican la maturasa R 
+y la NADH deshidrogenasa subunidad 6 presentan dos SNP. Los 
+genes que codifican la proteína ribosómica S14 y la citocromo c oxi-
+dasa subunidad II presentan seis SNP. Comprobamos si los SNP 
+encontrados en los genomas de cloroplasto y mitocondria provocarán 
+un cambio de aminoácido (es decir, SNP no sinónimos). Los datos de las Tablas 4 y 5 muestran que varios de los SNP observados 
+cambiarán el aminoácido y, por tanto, tienen el potencial de 
+tener un efecto sobre el funcionamiento de la proteína.
+Comparación de secuencias de genomas organelares de leguminosas
+Las regiones codificantes de los genomas de cloroplasto y mitocondria de haba
+obtenidos de los recursos proporcionados por Tabla 4. Polimorfismos de nucleótido único en el genoma de cloroplasto de Vicia faba, comparando el cultivar Wizard con la secuencia de referencia 
+publicada por Sabir et al. (2014)
+Se indica el cambio de aminoácido para las mutaciones no sinónimas, incluido el efecto predicho sobre la proteína calculado con Provean. SYN es 
+un efecto sinónimo.
+Identificador del mapa Identidad del gen Posición del SNP Base de referencia Base secuenciada Efecto Puntuación Provean
+rpoC1 Cadena β de la ARN polimerasa 67 132 A C M→L –1.687
+atpF Subunidad I de ATPasa 76 393 C A – –
+trnQ-UUG tRNA 82 093 G A – –
+accD Subunidad de la acetil-CoA carboxilasa 82 977 A C Y→S 0.775
+accD Subunidad de la acetil-CoA carboxilasa 83 041 A C L→F –0.77
+accD Subunidad de la acetil-CoA carboxilasa 83 677 G T SYN –
+rps3 Proteína ribosómica S3 108 099 T G K→T –2.802
+Fig. 3. Mapa del genoma de cloroplasto de Vicia faba. El círculo más externo muestra las identidades de los genes y la dirección de lectura, con los genes orientados hacia fuera en 
+la dirección positiva y los genes orientados hacia dentro en la dirección negativa. Los SNP se indican con triángulos grises, con la ubicación y la naturaleza del 
+polimorfismo detalladas. La profundidad de lectura se muestra para las lecturas directas (anillo azul) y las inversas (anillo rojo). El contenido de GC (%) se muestra en el 
+círculo gris más interno, con el 50% indicado por la línea gris oscura. El mapeo y la anotación de genes se realizaron con OGDRAW.
+Recursos genómicos de la haba | 1947
+Tabla 5. Polimorfismos de nucleótido único en el genoma mitocondrial de Vicia faba, comparando el cultivar Wizard con la 
+secuencia de referencia publicada por Negruk (2013)
+Se indica el cambio de aminoácido para las mutaciones no sinónimas, incluido el efecto predicho sobre la proteína calculado con Provean. SYN es 
+un efecto sinónimo.
+Identificador del mapa Identidad del gen Posición del SNP Base de referencia Base secuenciada Efecto Puntuación Provean
+rrn26.r01 26S rRNA 167 803 T A – –
+rrn18.r01 18S rRNA 321 111 T G – –
+rps14 Proteína ribosómica S14 36 460 T G SYN –
+rps14 Proteína ribosómica S14 36 461 C G G→A –0.404
+rps14 Proteína ribosómica S14 36 462 C A G→STOP –
+rps14 Proteína ribosómica S14 36 463 A T SYN –
+rps14 Proteína ribosómica S14 36 490 G T F→L –1.059
+rps14 Proteína ribosómica S14 36 616 A G SYN –
+nad6 Subunidad 6 de NADH deshidrogenasa 101 407 A T SYN –
+nad6 Subunidad 6 de NADH deshidrogenasa 101 508 G T L→I –0.026
+nad4.CDS.3 Subunidad 4 de NADH deshidrogenasa 361 807 T G F→L 4.0
+matR Maturasa R 90 908 G T L→F 1.622
+matR Maturasa R 92 082 A C K→Q –0.223
+ORF106 Proteína hipotética 25 588 C A H→N –7.0
+ORF295 Probable succinato deshidrogenasa 25 760 C A H→N 0.6
+ORF295 Probable succinato deshidrogenasa 25 862 T A F→I 0.044
+ORF295 Probable succinato deshidrogenasa 25 863 T A F→Y –0.103
+Fig. 4. Mapa del genoma mitocondrial de Vicia faba. El círculo más externo muestra las identidades de los genes y la dirección de lectura, con los genes orientados hacia fuera en la 
+dirección positiva y los genes orientados hacia dentro en la dirección negativa. Los SNP se indican con barras grises en el segundo círculo concéntrico. La posición de los pares de bases 
+se detalla en el tercer círculo. El contenido de GC (%) se muestra en el círculo gris más interno, con el 50% indicado por la línea gris oscura. La clave 
+proporciona detalles de las familias de genes mitocondriales. El mapeo y la anotación de genes se realizaron con OGDRAW.
+1948 | Cooper et al.
+Sabir et al. (2014) y Negruk (2013) se compararon con 
+los de otros genomas organelares de leguminosas disponibles en 
+la base de datos de NCBI (Benson et al., 2013). La alineación de secuencias genómicas 
+de 11 secuencias de referencia de cloroplasto disponibles 
+para leguminosas (Glycine max, Vicia faba, Lotus japonicus, Vigna 
+unguiculata, L. culinaris, C. arietinum, Vigna radiata, P. sati-
+vum; M. truncatula; Arachis hypogaea y Phaseolus vulgaris) 
+permitió identificar un conjunto básico de genes de cloroplasto 
+conservados en todas las leguminosas (Fig. 5). Las secuencias de cloroplasto 
+estaban bien conservadas (>80% para la mayoría de los genes que codifican
+proteínas de transporte de electrones fotosintético). Sin embargo, el 
+porcentaje de homología fue menor en los genes que codifican proteínas 
+ribosómicas. Entre los genomas de plastidios, las mayores variaciones de secuencia 
+se encontraron en clpP, ndhA y rps12, que mostraron 
+<60% de homología. Los genes menos variables fueron psbE, psbF, 
+y psbD, todos los cuales tenían una homología >95%. Los genes psb 
+codifican proteínas que forman parte del PSII y, por tanto, pueden estar 
+fuertemente conservados entre especies.
+La variación del genoma de cloroplasto se analizó además en 
+mapas de homología de forma pareada para cada gen y especie.
+Mientras que psbA muestra una homología muy alta en todas las especies, 
+los genes clpP muestran mucha más variación interespecífica, con grandes 
+regiones ausentes de las secuencias codificantes de L. culinaris,
+M. truncatula y P. sativum (Fig. 6). Las comparaciones de todos los genes pueden encontrarse en la Tabla S3 suplementaria. Sin embargo, 
+por simplicidad, se muestran ejemplos representativos en la Fig. 7 para 
+los genes psbA y clpP. 
+Se dispuso de genomas mitocondriales de referencia para seis 
+especies de leguminosas en la base de datos de NCBI (Benson et al., 2013). 
+Estas secuencias se compararon para definir un conjunto básico de genes
+mitocondriales conservados. Las secuencias del genoma mitocondrial 
+están bien conservadas (Fig. 7), y todos los genes asociados al citocromo
+tienen una homología promedio de secuencia >90%. 
+Sin embargo, los genes que codifican proteínas ribosómicas y el complejo 
+NADH deshidrogenasa tenían una homología promedio de secuencia menor
+(Fig. 7). Los genes más variables de los genomas mitocondriales fueron nad5,
+nad1 y nad2, que mostraron <60% 
+de homología entre las secuencias de leguminosas analizadas. Los genes menos 
+variables fueron nad4L, cox1 y cox3, todos los cuales tenían una 
+homología >95%. Ejemplos de los genes más variables (nad2) y menos
+variables (cox3) se muestran en la Fig. 8.
+Discusión
+Aunque la mayoría de las especies vegetales tienen genomas pequeños (Kelly y 
+Leitch, 2011), los datos presentados aquí confirman que el haba pertenece a los linajes que tienen 
+el haba pertenece a esos linajes que tienen ‘genomas gigantes’. 
+Esto es bastante sorprendente, dado que el haba es diploide 
+Fig. 5. Porcentaje de identidad de secuencia para los genes codificados en el cloroplasto, que muestra los datos promedio para un alineamiento de 55 vías de genes individuales de cloroplasto 
+de 11 especies. Las identidades de los genes se indican en el círculo más externo. La escala muestra el porcentaje de homología (0–100%). Las comparaciones entre especies se 
+realizaron para Glycine max (G.m), Lotus japonicus (L.j), Vigna unguiculata (V.u), Lens culinaris (L.c), Cicer arietinum (C.a), Vigna radiata (V.r), Pisum sativum  
+(P.s), Medicago truncatula (M.t), Arachis hypogaea (A.h), Phaseolus vulgaris (P.v), y Vicia faba (V.f).
+Recursos genómicos de la haba | 1949
+(2n=12 cromosomas). La fusión de cromosomas se ha producido 
+durante la evolución del haba (Fuchs et al., 
+1998). Al igual que en otros genomas grandes, la expansión del tamaño del genoma 
+puede explicarse por secuencias de ADN repetitivo que constan de
+distintos tipos de elementos transponibles. En los datos 
+aquí presentados, solo el 9.64% de las lecturas pudo identificarse en una 
+base de datos de elementos repetitivos (Bao et al., 2015). Sin embargo, muchos 
+de los elementos repetitivos del genoma del haba aún deben anotarse 
+y todavía no tienen un homólogo en esta base de
+datos. Los genomas nucleares de plantas grandes, como el del maíz, 
+pueden contener un 85% de ADN repetitivo formado por retrotransposones intactos y simple-
+mente organizados (RT; Schnable et al., 2009). 
+Muchos RT que utilizan ARNm codificados por el elemento como intermediarios de transposi-
+ción pueden proliferar rápidamente en número de copias, 
+lo que da lugar a grandes diferencias en el tamaño del genoma entre especies 
+relacionadas. La acción de estos elementos móviles puede reestructurar 
+el genoma, lo que da lugar a un alto nivel de variabilidad genética. 
+Además, estas mutaciones inducidas por RT suelen ser estables 
+y pueden utilizarse como herramientas moleculares para estudiar el etiquetado génico 
+y el análisis funcional (Bennetzen, 2000). Los RT de tipo Gypsy y Copia pertenecen a la familia LTR y se denominan 
+elementos Metaviridae y Pseudoviridae, respectivamente 
+(Grandbastien, 2015). La replicación de LTR mediante una plantilla de ARN 
+recuerda a la proliferación retroviral y, es interesante, 
+estos son los RT predominantes en las plantas. La fluidez del genoma 
+derivada de la actividad de estos elementos móviles se ha reconocido desde hace mucho 
+como una oportunidad para que el genoma evolucione 
+en respuesta a desafíos ambientales (Lisch, 2002; Wicker 
+et al., 2007). La expresión de los RT LTR es importante para la 
+plasticidad funcional del hospedador, y su regulación se coordina 
+en respuesta a una amplia variedad de estreses externos (Reichmann 
+et al., 2012; Grandbastien, 2015; Giordani et al., 2016).
+Los datos de RNA-seq se usaron en el presente estudio para identificar un 
+conjunto de unigenes de alta confianza mediante alineamiento con el 
+transcriptoma de referencia CSFL del haba. Este análisis produjo 
+un total de 16 300 unigenes con cobertura de profundidad completa identificados
+en CSFL. Este subconjunto tuvo más probabilidad de alinearse con
+genes conocidos que el conjunto completo de unigenes (71.2% 
+frente a 53.2%), pero el alineamiento no tuvo más probabilidad de ser 
+más largo (21.5 pb frente a 21.0 pb) ni de tener una identidad mayor 
+Fig. 6. Ejemplos representativos de mapas de identidad de secuencias trazados para el gen psbA altamente homólogo y el gen clpP con baja homología. Los mapas 
+se construyeron a partir de una comparación de homología multivía entre 11 especies de leguminosas: Glycine max (G.m), Lotus japonicus (L.j), Vigna unguiculata (V.u), 
+Lens culinaris (L.c), Cicer arietinum (C.a), Vigna radiata (V.r), Pisum sativum (P.s), Medicago truncatula (M.t), Arachis hypogaea (A.h), Phaseolus vulgaris  
+(P .v), y Vicia faba  (V.f). Los altos grados de homología entre las especies comparadas se muestran en rojo oscuro, mientras que la falta de coincidencias detectables se muestra en 
+blanco. La cuantificación se indica en la barra de escala. La homología se determinó a lo largo de un marco de 10 pb (es decir, un solo polimorfismo daría una homología del 90%).
+1950 | Cooper et al.
+(82.2% frente a 79.6%). Los datos también tuvieron más probabilidades de arrojar 
+menos fragmentos alineados de lecturas de ADN-seq, indicativos de roturas en el ensamblaje del transcrip-
+toma en comparación con la arquitec-
+tura genómica de la que provienen. Al combinar los datos de secuencia genómica 
+presentados aquí con los datos de marcadores de ligamiento sin recortar 
+producidos por Webb et al. (2016), los datos de longitud de secuencia 
+se incrementaron en 461 loci cromosómicos, ampliando los datos de secuencia de CDS ac-
+tuales al espacio genómico.
+Aunque la caracterización actual del genoma nuclear 
+es difícil dada la longitud y la cobertura de las lecturas genómicas, el mapeo de los genomas organelares 
+fue mucho más informativo. Al comparar el plastoma 
+de secuencia aquí reportada con las secuencias disponibles públicamente 
+(Sabir et al., 2014), identificamos relativamente pocas variantes en 
+las regiones codificantes. Sin embargo, se identificaron SNP en el 
+genes que codifican la subunidad C1 de la ARN polimerasa ( rpoC1 ), 
+la subunidad β de la ATPasa ( atpF ), el ARNt de glutamina ( trnQ-UUG ), 
+y la subunidad β-carboxil transferasa de la acetil-coenzima A car-
+boxilasa ( accD ). Entre estos, accD tuvo la mayor 
+cantidad de SNP, con tres polimorfismos detectables. Mientras que el 
+Fig. 7. Porcentaje de identidad de secuencia de los genes codificados en el genoma mitocondrial. Datos promedio de genes mitocondriales individuales de seis 
+especies se sometieron a un alineamiento de 15 vías. Las identidades génicas se indican en el círculo más externo. La escala muestra el porcentaje de identidad de secuencia 
+(0–100%). Se realizaron comparaciones entre especies para Medicago truncatula (M.t), Lotus japonicus (L.j), Glycine max (G.m), Vigna angularis (V.a), Vigna 
+radiata (V.r), y Vicia faba (V.f).
+Fig. 8. Mapas de porcentaje de homología para cox3 y nad2. Los mapas se construyeron a partir de una comparación de homología múltiple de seis especies de leguminosas: Medicago 
+truncatula (M.t), Lotus japonicus (L.j), Glycine max (G.m), Vigna angularis (V.a), Vigna radiata (V.r) y Vicia faba (V.f). Los altos grados de homología se 
+muestran en rojo oscuro, y la falta de coincidencias detectables, en blanco, con la cuantificación indicada en la barra de escala.
+Recursos genómicos de la haba | 1951
+los mutantes knockout de accD en tabaco son letales ( Kode et al., 
+2005 ), se demostró que el gen accD es altamente variable 
+en 24 ecotipos de M. truncatula ( Csanad y Pal, 2014 ). 
+Las secuencias del gen accD específicas de ecotipo, de entre 650 y 
+796 aminoácidos de longitud, según se informó ( Csanad y Pal, 
+2014 ). A pesar de esta variabilidad, siempre estuvo presente un 
+dominio carboxilasa conservado, y la expansión y 
+contracción de la longitud del gen se atribuyó a la integra-
+ción de secuencias repetitivas en regiones intrónicas ( Csanad y Pal, 2014 ). El gen accD  
+se ha perdido durante la evolución en varias especies 
+(Rousseau-Gueutin et al., 2013), pero en tales situaciones ha 
+sido reemplazado funcionalmente por un análogo codificado en el núcleo 
+(Rousseau-Gueutin et al., 2013).
+Las comparaciones intraespecíficas de los cloroplastos de la haba 
+genes aquí reportados pueden servir de base para la futura 
+genotipificación de cultivares. Hubo poca variación en las secuencias génicas del plastoma 
+se encontró entre las 11 leguminosas analizadas en el presente 
+estudio. Hubo, sin embargo, excepciones notables, en particular 
+en los genes rps2, rpl32, rps19, rps7, accD, rpl2, rpl23, clpP, ndhB, 
+ndhA y rps12, que mostraron homologías de secuencia 
+de solo entre 60% y 79%. Estos hallazgos son consist-
+entes con la visión de la literatura de que la mayoría de los genes relacionados con la fotosíntesis 
+están más conservados que los genes ribosómicos, 
+con los genomas de cloroplasto que muestran grados de conser-
+vación mucho mayores que los genomas nucleares y mitocondriales ( Xu 
+et al., 2015 ). A pesar del alto nivel de variación en el gen rps12  
+gen; la pérdida de la función de rps12 podría predecirse que conduce a 
+una traducción alterada en el cloroplasto ( Ramundo et al., 2013 ).
+El número de polimorfismos en el genoma mitocondrial 
+fue mayor que el detectado en el plastoma, con 
+seis genes que mostraron mutaciones de un solo par de bases en comparación con 
+la secuencia de referencia ( Negruk, 2013 ). Se iden-
+tificaron dos SNP en la NADH deshidrogenasa subunidad 6 y la maturasa R, 
+con la proteína ribosómica S14 y la citocromo c oxidasa subuni-
+dad II con seis SNP. En comparación con los cloroplastos, 
+se encontró que las mitocondrias eran más propensas a la acu-
+mulación de SNP, aunque esto se restringió a los espacios inter-
+génicos. Los genomas mitocondriales de las plantas se caracterizan 
+por su tamaño muy grande, que va de 200 kb a 2500 kb, con 
+muchos intrones y elementos repetidos ( Kitazaki et al., 2010 ). 
+La recombinación del genoma mitocondrial es clave para la variación dentro y 
+entre especies ( Galtier, 2011 ). Sin embargo, la tasa 
+de sustitución de nucleótidos es baja; la vari-
+ación dentro de las especies deriva de la rotura de dsDNA 
+y reparación mediante una recombinación altamente eficiente de secuencias 
+asimétricas ( Davila et al., 2011 ).
+En conclusión, los nuevos datos de secuencia aquí presentados 
+proporcionan una base esencial para la generación de un borrador 
+de la secuencia del genoma nuclear y para el análisis posterior de los 
+genomas organelares. La referencia del transcriptoma de la haba en la 
+base de datos CSFL está compuesta por datos de múltiples cultiva-
+res. Los datos aquí reportados para Wizard coinciden con este recurso genómico 
+pero tienen ventajas sobre el recurso CSFL existente de la 
+haba, porque ofrecen una mayor precisión 
+(Tabla 3). Dados los rápidos avances en las tecnolo-
+gías de secuenciación, es factible que se produzca una referencia de genoma de haba de alta calidad 
+en el futuro cercano mediante una intensa secuenciación de lectura
+larga, acompañada de enfoques bioinformáticos innovadores. Desentrañar los genomas nucleares y organelares 
+de la haba, su plasticidad y su regulación en respuesta a 
+los desafíos ambientales no solo aumentarán nuestro entendi-
+miento sobre cómo se regula la tolerancia al estrés, sino que también 
+acelerarán el avance del mejoramiento. Estos datos también ofrecen un 
+recurso fundamental necesario para la mejora genética 
+de la haba, una importante legu-
+minosa de estación fría, que abre el camino para aprovechar en el futuro su considerable 
+potencial de mejora.
+Datos suplementarios
+Los datos suplementarios están disponibles en línea en JXB.
+Tabla S1. Lista de posibles puntos de corte (splicing) identificados mediante alinea-
+ción de lecturas de ADN-seq con la CSFL.
+Tabla S2. Lista de marcadores de longitud completa en los que se basó la pu-
+blicación de Webb et al. (2016), con contigs de ADN alineados y 
+datos de extensión de secuencia.
+Tabla S3. Alineamientos por pares de secuencias de los genes 
+identificados en los genomas del cloroplasto y de la mitocondria.
+Agradecimientos
+Este trabajo fue financiado por una beca BBSRC CASE (BB/K501839/1) 
+en asociación con Wherry and Sons Ltd, The Old School, High Street, 
+Rippingale, Lincolnshire PE10 0SR, Reino Unido. Estamos en deuda con A. Cuming 
+y Y. Kamisugi por su orientación en la producción de la Fig. 1. Agradecemos a I. 
+Carr y a su grupo del Leeds Institute of Molecular Medicine, University 
+of Leeds, Reino Unido, por la secuenciación de muestras de ADN y ARN. Este trabajo se 
+realizó en MARC1, parte de las instalaciones de computación de alto rendimiento 
+de la Universidad de Leeds, Reino Unido.
+Referencias
+Andrews S. 2010. FastQC: a quality control tool for high throughput 
+sequence data. http://www.bioinformatics.babraham.ac.uk/projects/
+fastqc. Consultado el 4 de abril de 2017.
+Arun-Chinnappa KS, McCurdy DW. 2015. De novo assembly of 
+a genome-wide transcriptome map of Vicia faba (L.) for transfer cell 
+research. Frontiers in Plant Science 6, 217.
+Bao W, Kojima KK, Kohany O. 2015. Repbase Update, a database of 
+repetitive elements in eukaryotic genomes. Mobile DNA 6, 11.
+Barton L, Thamo T, Engelbrecht D, Biswas WK. 2014. Does growing 
+grain legumes or applying lime cost effectively lower greenhouse gas 
+emissions from wheat production in a semi-arid climate? Journal of 
+Cleaner Production 83, 194–203.
+Benedito VA, Torres-Jerez I, Murray JD, et al. 2008. A gene 
+expression atlas of the model legume Medicago truncatula. The Plant 
+Journal 55, 504–513.
+Bennetzen JL. 2000. Transposable element contributions to plant gene 
+and genome evolution. Plant Molecular Biology 42, 251–269.
+Benson DA, Cavanaugh M, Clark K, Karsch-Mizrachi I, Lipman 
+DJ, Ostell J, Sayers EW. 2013. GenBank. Nucleic Acids Research 41, 
+D36–D42.
+Boye J, Zare F, Pletch A. 2010. Pulse proteins: processing, 
+characterization, functional properties and applications in food and feed. 
+Food Research International 43, 414–431.
+Burstin J, Gallardo K, Mir RR, Varshney RK, Duc G. 2011. Improving 
+protein content and nutrition quality. En: Pratap A, Kumar J, eds. Biology 
+and breeding of food legumes. Wallingford, Reino Unido, CAB International, 
+314–328.
+Camacho C, Coulouris G, Avagyan V, Ma N, Papadopoulos J, Bealer 
+K, Madden TL. 2009. BLAST+: architecture and applications. BMC 
+Bioinformatics 10, 421.
+1952 | Cooper et al.
+Cernay C, Ben-Ari T, Pelzer E, Meynard JM, Makowski D. 2015. 
+Estimating variability in grain legume yields across Europe and the 
+Americas. Scientific Reports 5, 11171.
+Choi Y, Sims GE, Murphy S, Miller JR, Chan AP. 2012. Predicting 
+the functional effect of amino acid substitutions and indels. PLoS One 7, 
+e46688.
+Csanad G, Pal M. 2014. Two distinct plastid genome configurations and 
+unprecedented intraspecies length variation in the accD coding region in 
+Medicago truncatula. DNA Research 21, 417–427.
+Davila JI, Arrieta-Montiel MP, Wamboldt Y, Cao J, Hagmann J, 
+Shedge V, Xu YZ, Weigel D, Mackenzie SA. 2011. Double-strand 
+break repair processes drive evolution of the mitochondrial genome in 
+Arabidopsis. BMC Biology 9, 64.
+Duc G, Moussy F, Zong X, Ding G. 1999. Single gene mutation for 
+green cotyledons as a marker for the embryonic genotype in faba bean, 
+Vicia faba. Plant Breeding 118, 577–578.
+Duc G, Picard J. 1986. Note on the presence of the sym-1 gene in Vicia 
+faba hampering its symbiosis with Rhizobium leguminosarum. Euphytica 
+35, 61–64.
+Ellwood SR, Phan HT, Jordan M, Hane J, Torres AM, Avila CM, 
+Cruz-Izquierdo S, Oliver RP. 2008. Construction of a comparative 
+genetic map in faba bean ( Vicia faba L.); conservation of genome structure 
+with Lens culinaris. BMC Genomics 9, 380.
+Erith AG. 1930. The inheritance of colour, size and form of seeds, and of 
+flower colour in Vicia faba L. Genetica 12, 477–510.
+FAOSTAT. 2016. Organización de las Naciones Unidas para la Alimentación y la Agricultura 
+Sitio web. http://www.fao.org/faostat/en/. Consultado el 4 de abril de 2017.
+Foyer CH, Lam HM, Nguyen HT, et al. 2016. Neglecting legumes has 
+compromised human health and sustainable food production. Nature 
+Plants 2, 16112.
+Fuchs J, Strehl S, Brandes A, Schweizer D, Schubert I. 1998. 
+Molecular–cytogenetic characterization of the Vicia faba genome—
+heterochromatin differentiation, replication patterns and sequence 
+localization. Chromosome Research 6, 219–230.
+Galtier N. 2011. The intriguing evolutionary dynamics of plant 
+mitochondrial DNA. BMC Biology 9, 61.
+Giordani T, Cossu RM, Mascagni F, Marroni F, Morgante M, Cavallini 
+A, Natali L. 2016. Genome-wide analysis of LTR-retrotransposon 
+expression in leaves of Populus × canadensis water-deprived plants. Tree 
+Genetics and Genomes 12, 75.
+Grandbastien MA. 2015. LTR retrotransposons, handy hitchhikers of 
+plant regulation and stress response. Biochimica et Biophysica Acta 1849, 
+403–416.
+Griffiths DW, Lawes DA. 1978. Variation in the crude protein content of 
+field beans (Vicia faba L.) in relation to the possible improvement of the 
+protein content of the crop. Euphytica 27, 487–495.
+Humann JL, Jung S, Zheng P, et al. 2016. Cool season food legume 
+genome database: an up-to-date resource enabling genetics, genomics 
+and breeding research in pea, lentil, faba bean and chickpea. Proceedings 
+of the International Plant and Animal Genome Conference. San Diego, CA, 
+USA.
+Illumina. 2014. Sequencing methods review. A review of publications 
+featuring Illumina Technology. Illumina Protocols 199, 27.
+Kaur S, Pembleton LW, Cogan NO, Savin KW, Leonforte T, Paull J, 
+Materne M, Forster JW. 2012. Transcriptome sequencing of field pea 
+and faba bean for discovery and validation of SSR genetic markers. BMC 
+Genomics 13, 104.
+Kelly LJ, Leitch IJ. 2011. Exploring giant plant genomes with next-
+generation sequencing characterization of the Vicia faba genome. 
+Heterochromatin differentiation, replication patterns and sequence 
+localization. Chromosome Research 6, 219–230.
+Khazaei H, O’Sullivan DM, Sillanpää MJ, Stoddard FL. 2014. Use of 
+synteny to identify candidate genes underlying QTL controlling stomatal 
+traits in faba bean ( Vicia faba L.). Theoretical and Applied Genetics 127, 
+2371–2385.
+Kitazaki K, Kubo T, Kitazaki K, Kubo T. 2010. Cost of having 
+the largest mitochondrial genome: evolutionary mechanism of plant 
+mitochondrial genome. Journal of Botany 2010, 1–12. Kode V, Mudd EA, Iamtham S, Day A. 2005. The tobacco plastid accD 
+gene is essential and is required for leaf development. The Plant Journal 
+44, 237–244.
+Langmead B, Salzberg SL. 2012. Fast gapped-read alignment with 
+Bowtie 2. Nature Methods 9, 357–359.
+Lassaletta L, Billen G, Grizzetti B, Anglade J, Garnier J. 2014. 
+50 year trends in nitrogen use efficiency of world cropping systems: the 
+relationship between yield and nitrogen input to cropland. Environmental 
+Research Letters 9, 105011.
+Li H. 2011. A statistical framework for SNP calling, mutation discovery, 
+association mapping and population genetical parameter estimation from 
+sequencing data. Bioinformatics 27, 2987–2993.
+Lisch D. 2002. Mutator transposons. Trends in Plant Science 7, 498–504.
+Negruk V. 2013. Mitochondrial genome sequence of the legume Vicia 
+faba. Frontiers in Plant Science 4, 128.
+O’Rourke JA, Bolon YT, Bucciarelli B, Vance CP. 2014. Legume 
+genomics: understanding biology through DNA and RNA sequencing. 
+Annals of Botany 113, 1107–1120.
+O’Sullivan DM, Angra D. 2016. Advances in Faba bean genetics and 
+genomics. Frontiers in Genetics 7, 150.
+Quinlan AR, Hall IM. 2010. BEDTools: a flexible suite of utilities for 
+comparing genomic features. Bioinformatics 26, 841–842.
+Ramsay G. 1997. Inheritance and linkage of a gene for testa-imposed 
+seed dormancy in faba bean (Vicia faba L.). Plant Breeding 116, 
+287–289.
+Ramundo S, Rahire M, Schaad O, Rochaix JD. 2013. Repression of 
+essential chloroplast genes reveals new signaling pathways and regulatory 
+feedback loops in Chlamydomonas. The Plant Cell 25, 167–186.
+Ray H, Georges F. 2010. A genomic approach to nutritional, 
+pharmacological and genetic issues of faba bean (Vicia faba): prospects 
+for genetic modifications. GM Crops 1, 99–106.
+Rousseau-Gueutin M, Huang X, Higginson E, Ayliffe M, Day A, 
+Timmis JN. 2013. Potential functional replacement of the plastidic acetyl-
+CoA carboxylase subunit (accD) gene by recent transfers to the nucleus in 
+some angiosperm lineages. Plant Physiology 161, 1918–1929.
+Reichmann J, Crichton JH, Madej MJ, Taggart M, Gautier P, 
+Garcia-Perez JL, Meehab RR, Adams IR. 2012. Microarray analysis 
+of LTR retrotransposon silencing identifies Hdac1 as a regulator of 
+retrotransposon expression in mouse embryonic stem cells. PLoS 
+Computational Biology 8, e1002486.
+Roy F, Boye JI, Simpson BK. 2010. Bioactive proteins and peptides in 
+pulse crops: pea, chickpea and lentil. Food Research International 43, 
+432–442.
+Sabir J, Schwarz E, Ellison N, Zhang J, Baeshen NA, Mutwakil M, 
+Jansen R, Ruhlman T. 2014. Evolutionary and biotechnology implications 
+of plastid genome variation in the inverted-repeat-lacking clade of 
+legumes. Plant Biotechnology Journal 12, 743–754.
+Schnable PS, Ware D, Fulton RS, et al. 2009. The B73 maize genome: 
+complexity, diversity, and dynamics. Science 326, 1112–1115.
+Simpson JT, Wong K, Jackman SD, Schein JE, Jones SJ, Birol I.  
+2009. ABySS: a parallel assembler for short read sequence data. Genome 
+Research 19, 1117–1123.
+Sjodin J. 1970. Induced asynaptic mutants in Vicia faba L. Hereditas 66, 
+215–232.
+Sjodin J. 1971. Induced morphological variation in Vicia faba L. Hereditas 
+67, 155–180.
+Temesgen T, Keneni G, Sefera T, Jarso M. 2015. Yield stability and 
+relationships among stability parameters in faba bean (Vicia faba L.) 
+genotypes. Crop Journal 3, 258–268.
+Thorvaldsdóttir H, Robinson JT, Mesirov JP. 2013. Integrative 
+genomics viewer (IGV): high-performance genomics data visualization and 
+exploration. Briefings in Bioinformatics 14, 178–192.
+Torres AM, Avila CM, Gutierrez N, Palomino C, Moreno MT, Cubero 
+JI. 2010. Marker-assisted selection in faba bean (Vicia faba L.). Field Crops 
+Research 115, 243–252.
+vaz Patto MC, Torres AM, Koblizkova A, Macas J, Cubero JI. 1999. 
+Development of a genetic composite map of Vicia faba using F2 populations 
+derived from trisomic plants. Theoretical and Applied Genetics 98, 736–743.
+Recursos genómicos de la haba | 1953
+Webb A, Cottage A, Wood T, et al. 2016. A SNP-based consensus 
+genetic map for synteny-based trait targeting in faba bean (Vicia faba L.). 
+Plant Biotechnology Journal 14, 177–185.
+Wicker T, Sabot F, Hua-Van A, et al. 2007. A unified classification system 
+for eukaryotic transposable elements. Nature Reviews. Genetics 8, 973–982.
+Xu JH, Liu Q, Hu W, Wang T, Xue Q, Messing J. 2015. Dynamics of 
+chloroplast genomes in green plants. Genomics 106, 221–231. Yang T, Bao SY, Ford R, et al. 2012. High-throughput novel 
+microsatellite marker of faba bean via next generation sequencing. BMC 
+Genomics 13, 602.
+Zhang HM, Wheeler S, Xia X, Radchuk R, Weber H, Offler CE, 
+Patrick JW. 2015. Differential transcriptional networks associated with 
+key phases of ingrowth wall construction in trans-differentiating epidermal 
+transfer cells of Vicia faba cotyledons. BMC Plant Biology 15, 103.

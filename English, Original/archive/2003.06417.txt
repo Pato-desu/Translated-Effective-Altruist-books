@@ -1,0 +1,855 @@
+Sparse Graphical Memory for Robust Planning
+Scott Emmons*
+Berkeley AI ResearchAjay Jain*
+Berkeley AI ResearchMichael Laskin*
+Berkeley AI Research
+Thanard Kurutach
+Berkeley AI ResearchPieter Abbeel
+Berkeley AI ResearchDeepak Pathak
+Carnegie Mellon University
+Abstract
+To operate effectively in the real world, agents should be able to act from high-
+dimensional raw sensory input such as images and achieve diverse goals across long
+time-horizons. Current deep reinforcement and imitation learning methods can
+learn directly from high-dimensional inputs but do not scale well to long-horizon
+tasks. In contrast, classical graphical methods like A* search are able to solve
+long-horizon tasks, but assume that the state space is abstracted away from raw
+sensory input. Recent works have attempted to combine the strengths of deep
+learning and classical planning; however, dominant methods in this domain are
+still quite brittle and scale poorly with the size of the environment. We introduce
+Sparse Graphical Memory (SGM), a new data structure that stores states and
+feasible transitions in a sparse memory. SGM aggregates states according to a
+novel two-way consistency objective, adapting classic state aggregation criteria
+to goal-conditioned RL: two states are redundant when they are interchangeable
+both as goals and as starting states. Theoretically, we prove that merging nodes
+according to two-way consistency leads to an increase in shortest path lengths that
+scales only linearly with the merging threshold. Experimentally, we show that SGM
+signiﬁcantly outperforms current state of the art methods on long horizon, sparse-
+reward visual navigation tasks. Project video and code are available at https:
+//mishalaskin.github.io/sgm/ .
+1 Introduction
+Figure 1: Illustration of Sparse Graphical Memory
+(SGM). New states are either merged with existing
+graph nodes according to our two-way consistency
+criterion, or a new node is generated. After graph
+construction, incorrect edges representing infeasi-
+ble transitions are corrected.Learning-driven approaches to control, like imi-
+tation learning and reinforcement learning, have
+been quite successful in both training agents to
+act from raw, high-dimensional input [ 34] as
+well as to reach multiple goals by condition-
+ing on them [ 1,35]. However, this success has
+been limited to short horizon scenarios, and scal-
+ing these methods to distant goals remains ex-
+tremely challenging. On the other hand, clas-
+sical planning algorithms have enjoyed great
+success in long-horizon tasks with distant goals
+by reduction to graph search [ 18,25]. For in-
+stance, A* was successfully used to control
+Shakey the robot for real-world navigation over
+ﬁve decades ago [ 7]. Unfortunately, the graph
+nodes on which these search algorithms operate
+*Equal contribution. Author order determined randomly. {emmons, ajayj, mlaskin}@berkeley.edu
+34th Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver, Canada.arXiv:2003.06417v3  [cs.LG]  12 Nov 2020
+A B C
+Original graph: New image 
+A B C
+ Modified graph :(a) Node merging example
+A B C
+Original graph: New image 
+A B C
+ Modified graph : D (b) Node creation example
+Figure 2: Examples where two-way consistency (TWC) merges nodes (left) and creates a new node
+(right). Consider a directed graph with three nodes connected as A$B!C. Given a new image
+in the dashed yellow box, should it be merged into an existing node or a new node be created? (a) On
+the left, we can merge the new image with node A safely. (b) On the right, the new image D contains
+a bottle which is about to fall off the table edge. While B is perceptually similar to the new image,
+the agent cannot move the bottle from D to A, but it can move from B to A. As we cannot transition
+to neighbors in the same manner, our TWC criterion is not satisﬁed and a new node is created.
+is abstracted away from raw sensory data via domain-speciﬁc priors, and planning over these nodes
+assumes access to well-deﬁned edges as well as a perfect controller to move between nodes. Hence,
+these planning methods struggle when applied to agents operating directly from high-dimensional,
+raw-sensory images [32].
+How can we have best of both worlds, i.e., combine the long-horizon ability of classic graph-based
+planning with the ﬂexibility of modern, parametric, learning-driven control? One way is to build a
+graph out of an agent’s experience in the environment by constructing a node for every state and use a
+learning-based controller (whether RL or imitation) to move between those nodes. Some recent work
+has investigated this combination in the context of navigation [ 9,41]; however, these graphs grow
+quadratically in terms of edges and quickly become unscalable beyond small mazes [ 9]. This strategy
+either leads to extremely brittle plans because such large graphs contain many errors (infeasible
+transitions represented by edges), or relies on human demonstrations for bootstrapping [41].
+In this work, we propose to address challenges in combining the classical and modern paradigms by
+dynamically sparsifying the graph as the agent collects more experience in the environment to build
+what we call Sparse Graphical Memory (SGM), illustrated in Figure 1. In fact, building a sparse
+memory of key events has long been argued by neuroscientists to be fundamental to animal cognition.
+The idea of building cognitive topological maps was ﬁrst demonstrated in rats by seminal work of [ 47].
+The key aspect that makes building and reasoning over these maps feasible in the ever-changing,
+dynamic real world is the sparse structure enforced by landmark-based embedding [ 12,14,48]. Yet,
+in artiﬁcial agents, automatic discovery of sparse landmark nodes remains a key challenge.
+One way to discover a sparse graph structure is to dynamically merge similar nodes. But how does one
+obtain a similarity measure? This is a subtle but central piece of the puzzle. States that look similar
+in the observation space may be far apart in the action space, and vice-versa. Consider the example
+in Figure 2, where the graph already contains 3 nodes fA;B;Cg. In 2a, similar looking nodes can
+be merged safely. While in 2b, although the new node Dis visually similar to B, but merging with
+Bwould imply that the bottle can be saved from breaking. Therefore, a purely visual comparison
+of the scenes cannot serve as a viable metric. We propose to use an asymmetric distance function
+between nodes and employ two-way consistency (TWC) as the similarity measure for merging nodes
+dynamically. The basic idea is that two nodes are similar if they both can be reached with a similar
+number of steps from all their neighbors as well as if all their neighbors can be reached from both
+of them with similar effort. For our conceptual example, it is not possible to go back from the
+falling-bottle to the standing-bottle, and hence the two-way consistency does not align for scene B
+and the new state. Despite similar visual appearance, they will not be merged. We derive two-way
+consistency as an extension of prior Q-function based aggregation criteria to goal-conditioned tasks,
+and we prove that the sparse graphs that result from TWC preserve (up to an error factor that scales
+linearly with the merging threshold) the quality of the original dense graphs.
+We evaluate the success of our method, SGM, in a variety of navigation environments. First, we
+observe in Table 1 that SGM has a signiﬁcantly higher success rate than previous methods, on average
+increasing the success rate by 2.1x across the environments tested. As our ablation experiments
+demonstrate, SGM’s success is due in large part to its sparse structure that enables efﬁcient correction
+2
+of distance metric errors. In addition, we see that the performance gains of SGM hold across a range
+of environment difﬁculties from a simple point maze to complex visual environments like ViZDoom
+and SafetyGym. Finally, compared to prior methods, planning with our proposed sparse memory can
+lead to nearly an order of magnitude increase in speed (see Appendix E).
+2 Related work
+Planning is a classic problem in artiﬁcial intelligence. In the context of robotics, RRTs [ 25] use
+sampling to construct a tree for path planning in conﬁguration space, and SLAM jointly localizes the
+agent and learns a map of the environment for navigation [ 2,8]. Given an abstract, graphical repre-
+sentation of an environment, Dijkstra’s Algorithm [ 6] generalizes breadth-ﬁrst search to efﬁciently
+ﬁnd shortest paths in weighted graphs, and the use of a heuristic function to estimate distances, as
+done in A* [18], can improve computational efﬁciency.
+Beyond graph-based planning, there are various parametric approaches to planning. Perhaps the
+most popular planning framework is model predictive control (MPC) [ 13]. In MPC, a dynamics
+model, either learned or known, is used to search for paths over future time steps. To search for paths,
+planners solve an optimization problem that aims to minimize cost or, equivalently, maximize reward.
+Many such optimization methods exist, including forward shooting, cross-entropy, collocation, and
+policy methods [ 17,40]. The resulting agent can either be open-loop and just follow its initial plan,
+or it can be closed-loop and replan at each step.
+Aside from MPC, a variety of reinforcement learning algorithms, such as policy optimization and
+Q-learning, learn a policy without an explicit dynamics model [ 27,33,43,44]. In addition to learning
+a single policy for a ﬁxed goal, some methods aim to learn hierarchical policies to decompose complex
+tasks [ 22,36,42], and other methods aim to learn goal-conditioned policies able to reaching arbitrary
+goals. Parametric in nature, these model-free approaches are highly ﬂexible, but, as does MPC with a
+learned dynamics model, they struggle to plan over long time horizons due to accumulation of error.
+Recent work combines these graph-based and parametric planning approaches by using past observa-
+tions for graph nodes and a learned distance metric for graph edges. Variations of this approach include
+Search on the Replay Buffer [ 9], which makes no attempt to sparsify graph nodes; Semi-Parametric
+Topological Memory [ 41], which assumes a demonstration to bootstrap the graph; Mapping State
+Space Using Landmarks for Universal Goal Reaching [ 20], which subsamples the policy’s past
+training observations to choose graph nodes; and Composable Planning with Attributes [ 50], which
+stores abstracted attributes on each node in the graph. Hallucinative Topological Memory (HTM) [ 28]
+uses a contrastive energy model to construct more accurate edges, and [ 45] use dynamic programming
+for planning with a learned graph.
+In contrast to the methods listed above, the deﬁning feature of our work is a two-way consistency
+check to induce sparsity. Previous work either stores the entire replay buffer in a graph, limiting
+scalability as the graph grows quadratically in the number of nodes, or it subsamples the replay buffer
+without considering graph structure. Moreover, Neural Topological SLAM [ 4] assumes access to
+a 360camera and a pose sensor whereas we do not. In [ 5], the nodes in the graph are manually
+speciﬁed by humans whereas we automatically abstract nodes from the data. In contrast to our
+method, the work in [ 31] has no theoretical guarantees, requires trajectories rather than unordered
+observations, and uses human demonstrations.
+Prior work has proposed MDP state aggregation criteria such as bisimulation metrics that compare the
+dynamics at pairs of states [ 11,15] and Utile distiction [ 30] that compares value functions. Because
+bisimulation is a strict criterion [ 26] that would not result in meaningful sparsity in the memory,
+our proposed two-way consistency criteria adapts approximate value function irrelevance [ 21] to
+goal-conditioned settings and high-dimensional observations.
+3 Preliminaries
+We consider long-horizon, goal-conditioned tasks. At test time, an agent is provided with its starting
+statesstartand a goal state sgoal, and the agent seeks to reach the goal state via a sequential decision
+making process. Many visual tasks can be deﬁned by a goal state such as an image of a goal location
+3
+Figure 3: Execution using a graphical memory. In localization, the agent ﬁnds the closest node using
+discrepancies in the asymmetric distance function. In planning, the agent uses Dijkstra’s algorithm to
+ﬁnd the shortest path. (For simplicity, this illustration omits the direction of edges.) In path following,
+the agent may divergence from the waypoints or experience a transition failure. The agent then needs
+to correct the memory, relocalize, and replan.
+for navigation. Our task is an instance of undiscounted ﬁnite-horizon goal-conditioned RL in which
+the agent receives a -1 living reward until it reaches a given goal.
+To reach distant goals, we use a semi-parametric, hierarchical agent that models feasible transitions
+with a nonparametric graph ( i.e.graphical memory) to guide a parametric low-level controller.
+Nodes in the graphical memory are prior states encountered by the agent, connected through a learned
+distance metric. Once the graphical memory is constructed, the agent can plan using a graph search
+method such as Dijkstra’s algorithm [ 6] and execute plans with a low-level controller learned with
+reinforcement learning or imitation learning [ 9,41]; see Figure 3. Therefore, given a ﬁnal goal, the
+high-level planner acts as a policy that provides waypoints, nodes along the shortest path, to the
+low-level controller, and updates the plan as the low-level agent moves between waypoints:
+hlusesQhl(s;a=!jg)to select a graph waypoint !to reach the ﬁnal goal g
+llusesQll(s;aj!)to take an environment step ato reach the waypoint !:
+As the agent receives an undiscounted -1 living reward, the optimal low-level value function measures
+the number of steps to reach a waypoint, i.e.the distance d(s;!) = maxaQll(s;aj!).
+The main challenge with the above semi-parametric formalism is the detrimental effect of errors in
+the graphical memory. Since nodes are connected by an approximate metric, the number of errors in
+the graph grows as O(jVj2)wherejVjis the number of graph nodes. Moreover, in order for graphical
+memory methods to scale to larger environments, it is infeasible to store every state encountered in
+the graph as done in prior work [ 9,41]. For the above reasons, node sparsity is a desirable feature
+for any graphical memory method. In this work, we seek to answer the following research question:
+given a dense graphical memory, what is the optimal algorithm for transforming it into a sparse one?
+4 Sparse Graphical Memory
+The number of errors in graphical memory can be minimized by removing redundant states, as each
+state in the memory can introduce several infeasible transitions through its incident edges. Any
+aggregation algorithm must answer a key question: when can we aggregate states?
+Sparse Graphical Memory is constructed from a buffer of exploration trajectories by retaining the
+minimal set of states that fail our two-way consistency aggregation criterion. In Sec. 4.1, we introduce
+this two-way consistency criterion, which extends prior work to the goal-conditioned RL setting. We
+then prove that as long as a sparsiﬁed graph satisﬁes two-way consistency, plans in the sparsiﬁed
+graph are close to the optimal plan in the original graph. In Sec. 4.2, we design an online algorithm
+for checking two-way consistency by selecting the approximate minimal set from the replay buffer.
+Finally, in Sec. 4.3, we outline a cleanup procedure for removing remaining infeasible transitions.
+4
+4.1 State aggregation via two-way consistency
+Figure 4: SGM uses a two-way consis-
+tency criterion to ﬁnd redundant pairs of
+states in the replay buffer.As a state aggregation criterion, prior work argues for
+value irrelevance by aggregating states with similar Q-
+functions [ 21,26,30]. If the optimal Q-functions are
+the same at two states, the optimal policy will select the
+same action at either state.
+However, in the goal-conditioned setting, we face a chal-
+lenge: the states in the memory deﬁne the action space
+of the high-level policy, i.e.the waypoints selected by
+the graph planner. Aggregating states changes the action
+space by removing possible waypoints.
+In order to extend value irrelevance to the goal-
+conditioned setting, we propose two-way consistency (TWC). Under two-way consistency, two
+states are redundant if they are both interchangeable as goals and interchangeable as starting states
+according to the goal-conditioned value function.
+The graph planner acts as a nonparametric high-level policy, selecting a waypoint !for the low-level
+controller as an intermediate goal. Then, the action space is given by candidate waypoints. Formally,
+using the optimal value function of the high-level policy, states s1ands2are interchangeable as
+starting states if
+max
+!Qhl(s1;a=!jg) Qhl(s2;a=!jg)a: (1)
+Then, asa!0, the high-level policy will behave the same in both states. Equation (1)can be seen
+as verifying that the sparsiﬁcation is a a-approximate Q-irrelevant abstraction [ 21] given a ﬁxed set
+of waypoints as actions. Further, we say that states s1ands2are interchangeable as waypoints for
+the purposes of planning if
+max
+s0Qhl(s0;a=s1jg) Qhl(s0;a=s2jg)a: (2)
+As a consequence, eliminating s2from the memory and thus from the action space will not incur a
+loss in value at any starting state as the policy can select s1instead. Together, (1)and(2)form the
+two directions of our two-way consistency criterion in the high-level value space.
+While we have motivated two-way consistency in terms of Qhlasa!0, it furthermore holds that
+two-way consistency gives a meaningful error bound for any asymmetric distance function d(;)
+satisfyingCout(s1;s2)aandCin(s1;s2)afor any ﬁnite awhere
+Cout(s1;s2) := max
+!jd(s1;!) d(s2;!)jandCin(s1;s2) := max
+s0jd(s0;s1) d(s0;s2)j:(3)
+The following theorem shows that aggregating states according to two-way consistency of d(;)
+incurs a bounded increase in path length that scales linearly with a. Furthermore, given an error
+bound on the distance function d(;), it provides an error bound on distances in the sparsiﬁed graph.
+Theorem 1. LetGBbe a graph with all states from a replay buffer Band weights from a distance
+functiond(;). SupposeGTWC is a graph formed by aggregating nodes in GBaccording to two-way
+consistencyCoutandCin. For any shortest path PTWC inGTWC , consider the corresponding
+shortest path PBinGBthat connects the same start and goal nodes. Suppose PBhaskedges. Then:
+(i)The weighted path length of PTWC minus the weighted path length of PBis no more than 2k.
+(ii)Furthermore, if d(;)has error at most , the weighted path length of PTWC is withink+2k
+the true weighted distance along PB.
+Theorem 1 is proved in Appendix D. We emphasize that it makes no assumptions on the distance
+function, but relies on both directions of our criterion. This distance can be derived from the value
+function by negation or learned in a supervised manner, depending on the application. According
+to Theorem 1, we can aggregate pairs of states that satisfy two-way consistency without leading to
+signiﬁcantly longer plans (only a constant increase). Since two-way consistency is approximate, at
+the same time, it also leads to more sparsity than restrictive criteria like bisimilarity.
+In contrast to two-way consistency, a naïve strategy like random subsampling of the replay buffer
+does not provide a guarantee without further assumptions on the exploration data such as an even
+5
+Algorithm 1 BuildSparseGraph
+1:Input: replay bufferB, distance function d
+2:Output: sparse graphG= (V;E;W)
+3:Initialize empty vertex set V=;
+4:for^s2B, each state in the replay buffer, do
+5: ifstate is novel according to TWC, i.e.Cin(s;^s)a;Cout(s;^s)a8s2Vthen
+6: add the state ^sto the graphG:
+7:V=V[f ^sg
+8:E=E[f (s;^s) :s2V;d(s;^s)MAXDISTg[f (^s;s) :s2V;d(^s;s)MAXDISTg
+9: end if
+10:end for
+11:assign weightsW(si;sj) =d(si;sj)8(si;sj)2E
+12:ﬁlter transition set Etoknearest neighbors
+13:returnG= (V;E;W)
+coverage of the state space. For example, when randomly subsampling the buffer, a rarely visited
+bottleneck state will be dropped with the same probability as states in frequently visited regions. As
+multiple states can be covered by the same state, two-way consistency is a prioritized sparsiﬁcation
+of the replay buffer that seeks to cover the environment regardless of sampling density.
+4.2 Constructing the graph from a replay buffer
+State aggregation can be seen as an instance of set cover, a classic subset selection problem. In our
+instantiation, we select a subset of the states in the replay buffer to store in the agent’s memory so that
+all states in the replay buffer are “covered”. Coverage is determined according to the state aggregation
+criterion, two-way consistency (3). Unfortunately, set cover is a combinatorial optimization problem
+that is NP-hard to solve exactly, or even to approximate to a constant factor [10, 29, 39].
+Motivated by the difﬁculty of the set cover problem, we propose an online, greedy algorithm for
+replay buffer subset selection. The graphical memory is built via a single pass through a replay buffer
+of experience according to Algorithm 1, which requires quadratically many evaluations of the TWC
+criterion. In particular, a state is only recorded if it is novel according to the two-way consistency
+criterion. Once a state is added to the graph, we create incoming and outgoing edges, and set the edge
+weight to the distance.
+4.3 Graphical memory cleanup
+Although TWC produces a compact graph with substantially fewer errors than the original graphical
+memory, faulty edges may still remain. If even one infeasible transition between distant states remains
+as an edge in the graph, the planner will exploit it, and the agent will not be able to carry out the
+plan [9]. Therefore, eliminating faulty edges is key for robustness.
+We bound the number of errors in the memory by ﬁltering edges, limiting nodes to their knearest
+successors. After ﬁltration, the worst-case number of untraversable edges grows only linearly
+in the sparsiﬁed node count, not quadratically. This is a simple, inexpensive procedure that we
+experimentally found removes many of the infeasible transitions.
+Finally, we propose a novel self-supervised error removal technique – cleanup . During test-time
+execution, a random goal gis sampled and the planner provides a set of waypoints wfor the low-level
+agent. When the low-level agent is unable to reach a consecutive waypoint wi!wi+1, it removes the
+edge between (wi;wi+1)and re-plans its trajectory. This procedure is efﬁcient for a TWC sparsiﬁed
+graph sincejGTWCjjGBj.
+5 Experimental Setup
+We evaluate SGM under two high-level learning frameworks: reinforcement learning (RL), and
+self-supervised learning (SSL). As a general data structure, SGM can be paired with any learned
+6
+Figure 5: The three environments used for testing SGM. PointEnv is a small maze with coordinate
+observations. We increase its difﬁculty by thinning the walls. ViZDoom is a large environment,
+which can take up to 5 minutes and 5k steps to traverse entirely. ViZDoom actions are discrete and
+observations are ﬁrst-person camera views. SafetyGym is another large environment with ﬁrst-person
+view observations, and supports continuous actions.
+TECHNIQUE SUCCESS RATE CLEANUP STEPS OBSERVATION ENV
+SORB 28.0 6.3% 400 K PROPRIO POINT ENV
+SORB + SGM 100.0.1% 400 K PROPRIO POINT ENV
+SPTM 39.3 4.0% - V ISUAL VIZDOOM
+SPTM + SGM 60.74.0% 114 K VISUAL VIZDOOM
+CONSPTM 68.2 4.1% 1M V ISUAL SAFETY GYM
+CONSPTM + SGM 92.91.4% 1M V ISUAL SAFETY GYM
+Table 1: SGM boosts performance of all existing state-of-the-art semi-parametric graphical methods.
+image features, asymmetric distance metric, or low-level controller. Below, we describe our training
+procedure in detail.
+We benchmark against the two available environments used by the SoRB and SPTM baselines, and
+an additional visual navigation environment. These range in complexity and are shown in Figure 5.
+The environment descriptions are as follows: PointEnv [9] continuous control of a point-mass in a
+maze used in SoRB. Observations and goals are positional (x;y)coordinates. ViZDoom [49] discrete
+control of an agent in a visual maze environment used in SPTM. Observations and goals are images.
+SafetyGym [38] continuous control of an agent in a visual maze environment. Observations and
+goals are images, though odometry data is available for observations but not for goals.
+We utilize the PointEnv maze for RL experiments, where SGM is constructed using undiscounted
+Q-functions with a sparse reward of 0(goal-reached) and  1(goal not reached). We increase the
+difﬁculty of this environment by thinning the walls in the maze, which exposes errors in the distance
+metric since two nearby coordinates may be on either side of a maze wall. SoRB also ran visual
+experiments on the SUNCG houses data set [46], but these environments are no longer public.
+To evaluate SGM in image-based environments, we use the ViZDoom navigation environment and
+pretrained networks from SPTM. In addition, we evaluate navigation in the OpenAI SafetyGym
+[37]. In both environments, the graph is constructed over visual ﬁrst-person view observations in a
+large space with obstacles, reused textures, and walls. Such observations pose a real challenge for
+learning distance metrics, since they are both high-dimensional and perceptually aliased: there are
+many visually similar images that are temporally far apart. We also implemented state-of-the-art
+RL algorithms without the graphical planner, such as DDPG [ 27] and SAC [ 16] with Hindsight
+Experience Replay [ 1], but found that these methods achieved near-zero percent success rates on all
+three environments, and were only able to reach nearby goals. For this reason, we did not include
+these baselines in our ﬁgures.
+6 Results
+SGM increases robustness of plans: We compare how SGM performs relative to prior neural
+topological methods in Table 1. SGM sets a new state-of-the-art in terms of success rate on all
+three environments tested and, on average, outperforms prior methods by 2.1x . In fact, thinning the
+walls in the PointEnv maze breaks the policy from the SoRB baseline because it introduces faulty edges
+through the walls. SoRB is not robust to these faulty edges and achieves a 28% score even after 400k
+steps of self-supervised cleanup. SGM, on the other hand, is able to remove faulty edges by merging
+according to two-way consistency and performing cleanup, robustly achieving a 100% success rate.
+7
+TECHNIQUEEASY MEDIUM HARDOVERALL200 M400 M600 M
+RANDOM ACTIONS 58.0% 21.5% 12.0% 30.5%
+VISUAL CONTROLLER 75.0% 34.5% 18.5% 42.7%
+SPTM, SUBSAMPLED OBSERVATIONS 70.0% 34.0% 14.0% 39.3%
+SPTM + SGM + 54K CLEANUP STEPS 88.0% 52.0% 26.0% 55.3%
+SPTM + SGM + 114K CLEANUP STEPS 92.0% 64.0% 26.0% 60.7%
+Table 2: SGM improves graph-based success rates across goal difﬁculties in ViZDoom. More cleanup
+steps yield better performance because more infeasible transitions are removed from the graph.
+Similarly, in visual environments, the sparse graph induced by SGM produces signiﬁcantly more
+robust plans than the SPTM baselines. While SGM solves the SafetyGym environment with a 96.6%
+success rate, it navigates to only 60.7% of goals in ViZDoom. Note that this VizDoom success rate is
+lower than in [ 41] because [ 41] uses human demonstrations whereas we do not. We found that the
+primary source of error in VizDoom was due to perceptual aliasing where two perceptually similar
+observations are actually far apart. For further details, see Appendix B.
+Figure 6: Success rate as a function of cleanup
+steps in PointEnv (FourRooms maze) and Safe-
+tyGym. SGM is rapidly corrected while SoRB,
+because of errors in its dense graph, is infeasible
+to clean. SPTM can be cleaned, but only slowly.
+CRITERION W /OCLEANUP W / CLEANUP
+UNIFORM 31.23.8% 64.63.4%
+PERCEPTUAL 31.83.6% 77.02.5%
+INCOMING 33.63.1% 84.12.0%
+OUTGOING 28.73.2% 86.82.9%
+TWO WAY 38.23.8% 92.91.2%
+Table 3: Comparing node subsampling strategies
+in SafetyGym. Two-way consistency improves
+success rate relative to other criteria.We examine SGM performance with and with-
+out cleanup. Figure 6 shows that success rapidly
+increases as the sparse graph is corrected. How-
+ever, without sparsity, the number of errors is
+too large to quickly correct. Success rates in
+Table 3 show that sparsity-enabled cleanup is
+essential for robust planning and that cleanup
+improves mean performance by 2.4x .
+We also study success as a function of goal dif-
+ﬁculty in Table 2, where difﬁculty is determined
+by the ground-truth distance between the ini-
+tial agent’s position and its goal. Even with
+cleanup, performance degrades with goal dif-
+ﬁculty, which is likely the result of perceptual
+aliasing causing faulty edges (Appendix B).
+Two-way consistency is the preferred sub-
+sampling strategy: We ablate different sub-
+sampling strategies to examine the source of our
+performance gains. We compare SGM with two-
+way consistency with variants of SGM with one-
+way consistency, where connectivity between
+two nodes is determined by only checking either
+incoming or outgoing distance function values,
+as well as a simple random subsampling strategy
+where a subset of nodes and edges are uniformly
+removed from the dense graph. Table 3 shows
+success rates for a SafetyGym navigation task before cleanup and after 1M steps of cleanup. Before
+cleanup, all plans perform poorly with a maximum 38.2% success rate achieved by two-way SGM.
+After cleanup the SGM variants signiﬁcantly outperform a naive uniform subsampling strategy, and
+subsampling with two-way consistency achieves the highest success rate before and after cleanup.
+Investigation of two-way consistent graph quality: We further investigate how individual com-
+ponents of two-way consistent SGM affect ﬁnal graph and plan quality. In Figure 7 (left), we display
+the total edge count for various edge lengths in the ViZDoom graphical memory after different steps
+of the SGM algorithm. Since nodes should only be connected locally, long edges are most likely to be
+faulty, representing infeasible transitions. Although the different components of the SGM algorithm
+all help reduce errors, two-way consistency removes the most incorrect edges from the original
+dense graph while preserving the most correct edges.
+Finally, in Figure 7 (right) we display the average number of steps required for different agents to
+reach their goal in ViZDoom. The average is only taken over successful paths, and the dotted line
+8
+Figure 7: (Left) Overlayed histograms of edge lengths for graphical memories in ViZDoom, where
+long edges are incorrect. Graph quality signiﬁcantly improves with SGM, which reduces the frequency
+of long edges. (Right) SGM reaches goals using the fewest environment steps (shortest path length).
+shows the maximum number of steps allowed. We show that, on average, agents equipped with
+sparse graphical memory take the fewest steps to reach their goals compared to other methods. This
+suggests that shorter paths are another reason for improved success relative to other methods.
+7 Conclusion
+In this work, we proposed a new data structure: an efﬁcient, sparse graphical memory that allows
+an agent to consolidate many environment states, model its capability to traverse between states,
+and correct errors. In a range of difﬁcult visual and coordinate-based navigation environments,
+we demonstrate signiﬁcantly higher success rates, shorter rollouts, and faster execution over dense
+graph baselines and learned controllers. We showed that our novel two-way consistency aggregation
+criterion is critical to this success, both theoretically and empirically. We hope that this direction
+of combining classic search-based planning with modern learning techniques will enable efﬁcient
+approaches to long-horizon sensorimotor control tasks. In particular, we see scaling sparse graphical
+memory to challenging manipulation tasks as a key outstanding challenge for future work.
+Broader impact
+Interpretability To build trust in deep RL systems, users would, ideally, be able to interrogate
+the system: “What is the deep RL system going to do? Why?” With state-of-the-art model-free
+approaches such as proximal policy optimization [ 44], it is not possible to answer these questions –
+the policy network is a black box. The explicit graphical plans produced by SGM, in contrast, can
+provide a partial answer to these questions. The future nodes in a plan given by SGM indicate what it
+is attempting to do, and errors in an overall plan can be debugged by tracing them to individual faulty
+edges in the graph. For this reason, we see graphical planning methods such as SGM as advantageous
+for the trust and interpretability of deep RL systems relative to model-free methods.
+Safety SGM assumes that the agent’s only reward signal is an indication of whether or not the
+current state satisﬁes the goal. This problem formulation ignores potential damage that could be
+caused during the intermediate steps taken to reach the goal, which, depending on the application,
+could be signiﬁcant. Designing an RL agent that can safely explore and reach goals in its environment
+is a fundamental challenge for the entire ﬁeld.
+Real-world applications While methods for long-horizon RL are highly general, such as the
+method we present in this paper, the most immediate potential applications of our method are in
+robotics. Completely solving the problem formulation in this paper, long-horizon control from high-
+dimensional input with sparse reward, would have wide-sweeping impact across robotic applications.
+Acknowledgments
+This work was supported in part by Berkeley Deep Drive (BDD), ONR PECASE N000141612723,
+Open Philanthropy Foundation, NSF CISE Expeditions Award CCF-1730628, DARPA through the
+LwLL program, the DOE CSGF under grant number DE-SC0020347, the NSF GRFP under grant
+number DGE-1752814, and Komatsu. DP is supported by Google FRA.
+9
+References
+[1]M. Andrychowicz, F. Wolski, A. Ray, J. Schneider, R. Fong, P. Welinder, B. McGrew, J. Tobin,
+O. P. Abbeel, and W. Zaremba. Hindsight experience replay. In NIPS , 2017. 1, 7
+[2]T. Bailey and H. Durrant-Whyte. Simultaneous localization and mapping (slam): Part ii. IEEE
+robotics & automation magazine , 13(3):108–117, 2006. 3
+[3]G. Barth-Maron, M. W. Hoffman, D. Budden, W. Dabney, D. Horgan, D. Tb, A. Muldal,
+N. Heess, and T. Lillicrap. Distributed distributional deterministic policy gradients. arXiv
+preprint arXiv:1804.08617 , 2018. 13
+[4]D. S. Chaplot, R. Salakhutdinov, A. Gupta, and S. Gupta. Neural topological slam for visual
+navigation. In CVPR , 2020. 3
+[5]K. Chen, J. P. de Vicente, G. Sepulveda, F. Xia, A. Soto, M. Vázquez, and S. Savarese. A
+behavioral approach to visual navigation with graph localization networks. Robotics: Science
+and Systems , 2019. 3
+[6]E. W. Dijkstra. A note on two problems in connexion with graphs. Numerische Mathematik , 1
+(1):269–271, 1959. 3, 4
+[7]J. E. Doran and D. Michie. Experiments with the graph traverser program. Proceedings of the
+Royal Society of London. Series A. Mathematical and Physical Sciences , 1966. 1
+[8]H. Durrant-Whyte and T. Bailey. Simultaneous localization and mapping: part i. IEEE robotics
+& automation magazine , 13(2):99–110, 2006. 3
+[9]B. Eysenbach, R. R. Salakhutdinov, and S. Levine. Search on the replay buffer: Bridging
+planning and reinforcement learning. In NeurIPS , 2019. 2, 3, 4, 6, 7, 13
+[10] U. Feige. A threshold of ln n for approximating set cover. Journal of the ACM (JACM) , 45(4):
+634–652, 1998. 6
+[11] N. Ferns, P. Panangaden, and D. Precup. Metrics for ﬁnite markov decision processes. In UAI,
+2004. 3
+[12] P. Foo, W. H. Warren, A. Duchon, and M. J. Tarr. Do humans integrate routes into a cognitive
+map? map-versus landmark-based navigation of novel shortcuts. Journal of Experimental
+Psychology: Learning, Memory, and Cognition , 2005. 2
+[13] C. E. Garcia, D. M. Prett, and M. Morari. Model predictive control: theory and practice—a
+survey. Automatica , 1989. 3
+[14] S. Gillner and H. A. Mallot. Navigation and acquisition of spatial knowledge in a virtual maze.
+Journal of cognitive neuroscience , 1998. 2
+[15] R. Givan, T. Dean, and M. Greig. Equivalence notions and model minimization in markov
+decision processes. Artiﬁcial Intelligence , 147(1-2):163–223, 2003. 3
+[16] T. Haarnoja, A. Zhou, K. Hartikainen, G. Tucker, S. Ha, J. Tan, V . Kumar, H. Zhu, A. Gupta,
+P. Abbeel, et al. Soft actor-critic algorithms and applications. arXiv preprint arXiv:1812.05905 ,
+2018. 7
+[17] C. R. Hargraves and S. W. Paris. Direct trajectory optimization using nonlinear programming
+and collocation. Journal of guidance, control, and dynamics , 10(4):338–342, 1987. 3
+[18] P. E. Hart, N. J. Nilsson, and B. Raphael. A formal basis for the heuristic determination of
+minimum cost paths. IEEE transactions on Systems Science and Cybernetics , 4(2):100–107,
+1968. 1, 3
+[19] I. Higgins, L. Matthey, A. Pal, C. Burgess, X. Glorot, M. Botvinick, S. Mohamed, and A. Lerch-
+ner. beta-vae: Learning basic visual concepts with a constrained variational framework. ICLR ,
+2017. 13
+10
+[20] Z. Huang, F. Liu, and H. Su. Mapping state space using landmarks for universal goal reaching.
+InNeurIPS , 2019. 3
+[21] N. Jiang. Notes on state abstractions, 2018. 3, 5
+[22] L. P. Kaelbling. Learning to achieve goals. In International Joint Conference on Artiﬁcial
+Intelligence , page 1094–1099. Citeseer, 1993. 3
+[23] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. In Y . Bengio and
+Y . LeCun, editors, ICLR , 2015. 13, 14, 15
+[24] D. P. Kingma and M. Welling. Auto-encoding variational bayes. In Y . Bengio and Y . LeCun,
+editors, ICLR , 2014. 13
+[25] S. M. LaValle. Rapidly-exploring random trees: A new tool for path planning, 1998. 1, 3
+[26] L. Li, T. J. Walsh, and M. L. Littman. Towards a uniﬁed theory of state abstraction for mdps. In
+ISAIM , 2006. 3, 5
+[27] T. P. Lillicrap, J. J. Hunt, A. Pritzel, N. Heess, T. Erez, Y . Tassa, D. Silver, and D. Wierstra.
+Continuous control with deep reinforcement learning. ICLR , 2016. 3, 7, 13
+[28] K. Liu, T. Kurutach, C. Tung, P. Abbeel, and A. Tamar. Hallucinative topological memory for
+zero-shot visual planning. arXiv preprint arXiv:2002.12336 , 2020. 3
+[29] C. Lund and M. Yannakakis. On the hardness of approximating minimization problems. Journal
+of the ACM (JACM) , 41(5):960–981, 1994. 6
+[30] A. McCallum. Overcoming incomplete perception with util distinction memory. In Proceedings
+of the Tenth International Conference on International Conference on Machine Learning , pages
+190–196, 1993. 3, 5
+[31] X. Meng, N. Ratliff, Y . Xiang, and D. Fox. Scaling local control to large-scale topological
+navigation. In 2020 IEEE International Conference on Robotics and Automation (ICRA) , pages
+672–678. IEEE, 2020. 3
+[32] D. Mishkin, A. Dosovitskiy, and V . Koltun. Benchmarking classic and learned navigation in
+complex 3d environments. arXiv preprint arXiv:1901.10915 , 2019. 2
+[33] V . Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller.
+Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602 , 2013. 3
+[34] V . Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. G. Bellemare, A. Graves,
+M. Riedmiller, A. K. Fidjeland, G. Ostrovski, et al. Human-level control through deep rein-
+forcement learning. Nature , 518(7540):529–533, 2015. 1
+[35] A. V . Nair, V . Pong, M. Dalal, S. Bahl, S. Lin, and S. Levine. Visual reinforcement learning
+with imagined goals. In NeurIPS , 2018. 1
+[36] V . Pong, S. Gu, M. Dalal, and S. Levine. Temporal difference models: Model-free deep RL for
+model-based control. In ICLR , 2018. 3
+[37] A. Ray, J. Achiam, and D. Amodei. Benchmarking safe exploration in deep reinforcement
+learning, 2019. 7
+[38] A. Ray, J. Achiam, and D. Amodei. Benchmarking safe exploration in deep reinforcement
+learning. arXiv preprint arXiv:1910.01708 , 2019. 7
+[39] R. Raz and S. Safra. A sub-constant error-probability low-degree test, and a sub-constant
+error-probability pcp characterization of np. In Proceedings of the twenty-ninth annual ACM
+symposium on Theory of computing , pages 475–484, 1997. 6
+[40] R. Rubinstein. The cross-entropy method for combinatorial and continuous optimization.
+Methodology and computing in applied probability , 1(2):127–190, 1999. 3
+11
+[41] N. Savinov, A. Dosovitskiy, and V . Koltun. Semi-parametric Topological Memory for Naviga-
+tion. ICLR , 2019. 2, 3, 4, 8, 13, 14
+[42] T. Schaul, D. Horgan, K. Gregor, and D. Silver. Universal value function approximators. In
+ICML , 2015. 3
+[43] J. Schulman, S. Levine, P. Abbeel, M. Jordan, and P. Moritz. Trust region policy optimization.
+InICML , 2015. 3
+[44] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization
+algorithms. arXiv preprint arXiv:1707.06347 , 2017. 3, 9
+[45] W. Shang, A. Trott, S. Zheng, C. Xiong, and R. Socher. Learning World Graphs to Accelerate
+Hierarchical Reinforcement Learning. arXiv e-prints , art. arXiv:1907.00664, Jul 2019. 3
+[46] S. Song, F. Yu, A. Zeng, A. X. Chang, M. Savva, and T. Funkhouser. Semantic scene completion
+from a single depth image. In CVPR , 2017. 7
+[47] E. C. Tolman. Cognitive maps in rats and men. Psychological review , 1948. 2
+[48] R. F. Wang and E. S. Spelke. Human spatial representation: Insights from animals. Trends in
+cognitive sciences , 2002. 2
+[49] M. Wydmuch, M. Kempka, and W. Ja ´skowski. Vizdoom competitions: Playing doom from
+pixels. IEEE Transactions on Games , 2018. 7
+[50] A. Zhang, A. Lerer, S. Sukhbaatar, R. Fergus, and A. Szlam. Composable planning with
+attributes. ICML , 2018. 3
+12
+Appendix
+A Environments & Hyperparameters
+A.1 Perceptual consistency baseline and fast-path
+Two-way consistency (1-2) involves a maximization over the replay buffer, which can be costly. We
+use a pairwise, symmetric perceptual consistency criterion as a fast test of similarity in latent space to
+accelerate graph construction. A new state ^sis only added to the memory if it fails both perceptual
+and two-way consistency with each state already in the memory, in which case we consider it novel
+and useful to retain for planning. This allows us to skip the TWC check for substantially different
+states.
+We say that ^sis perceptually consistent with a previously recorded state s2V if
+jj(s) (^s)jj2p; (4)
+wherejj(s) (^s)jj2measures the visual similarity of states that the agent encounters through
+thel2distance between embeddings of each state. In proprioceptive tasks, the identity function is
+used for the embedding (). However, in visual navigation, nearby locations can correspond to
+images that are signiﬁcantly different in pixel space, such as when an agent rotates [ 41]. To mitigate
+this problem, for high-dimensional images, ()is a learned embedding network such as a -V AE
+[19, 24] for SafetyGym or a subnetwork of the distance function for ViZDoom.
+Table 3 shows that two-way consistency signiﬁcantly outperforms perceptual consistency on its own,
+so the TWC criterion is still important. Theorem 1 still holds when combining the strategies as (4)
+can only make aggregation more conservative.
+A.2 Low-level Controller
+For the RL experiments, we use actor-critic methods to train a low-level controller (the actor) and
+corresponding distance metric (the critic) simultaneously. In particular, we use distributional RL
+and D3PG, a variant of deep deterministic policy gradient [ 3,27]. For experiments on SafetyGym,
+we use a proprioceptive state-based controller for both SGM and the dense baseline. For the SSL
+experiments in ViZDoom, we use the trained, behavior cloned visual controller from SPTM. The
+controller is trained to predict actions from a dataset of random rollouts, where goals are given by
+achieved visual states.
+A.3 Environments
+In our experiments, we tune SGM hyperparameters to maintain graph connectivity and achieve a
+desired sparsity level. Thresholds are environment-speciﬁc due to different scaling of the distance
+function. Success rate is only evaluated after selecting parameters.
+PointEnv: PointEnv is maze environment introduced in [ 9] where the observation space is propri-
+oceptive. We run all SoRB experiments in this environment. The episodic return is undiscounted
+= 1, and the reward is an indicator function: r= 0 if the agent reaches its goal and r= 1
+otherwise. The distance to goals can thus be approximated as d=jQ(s;a)j. We approximate a
+distributional Qfunction, which serves as a critic, with a neural network that ﬁrst processes the
+observation with a 256-unit, fully-connected layer, that then merges this processed observation
+with the action, and that then passes the observation-action combination through another 256-unit,
+fully-connected layer. For an actor, we use a fully-connected network that has two layers of 256 units
+each. Throughout, we use ReLU activations and train with an Adam optimizer [ 23] with a step size
+of0:0003 . To evaluate distances, we use an ensemble of three such distributional Qfunctions, and
+we pessimistically aggregate across the ensemble. For SGM, we set MAXDIST= 10 ,p= 0:05,
+a= 5,k= 5,MAXSTEPS = 30 , and ACTING CUTOFF = 1 for the localization threshold. For
+SoRB, we set M AXDIST= 6,k= 5and M AXSTEPS = 18 due to a higher density of states.
+ViZDoom: For our ViZDoom visual maze navigation experiments, we use the large training maze
+environment of [ 41]. Following [ 41], the distance metric is a binary classifer trained with a Siamese
+network using a ResNet-18 architecture. The convolutional encoder embeds image observations
+into a 512 dimensional latent vector. Two image embeddings are then concatenated and passed
+13
+Figure 8: Observations passing perceptual (feature difference threshold) and two-way consistency
+criteria for SafetyGym using a -V AE for perceptual features and a contrastive distance for two-way
+consistency. The two-way consistent observations are, unsurprisingly, more diverse in orientation
+than perceptually nearby ones. Although the majority of two-way consistent observations are correct
+i.e.nearby in space, there is one false positive (blue ﬂoor).
+After k-NN ﬁltration|V| = 2087, |E| = 9183Sparsiﬁed graph on observations|V| = 2087, |E| = 22398After 114K cleanup steps|V| = 2087, |E| = 6922Original exploration sequencesTop: all 20,100 states. Bottom: histogram
+Figure 9: Construction of Sparse Graphical Memory in the ViZDoom environment. We add nodes
+from a source replay buffer that unevenly covers the environment (left), creating a sparsiﬁed memory.
+k-nearest neighbor edge ﬁltration limits the number of errors, which are further corrected via cleanup.
+The image memory in SGM much more evenly covers the environment, even though no coordinate
+information is used during graph construction.
+through a 4 layer dense network with ReLU activations, 512 hidden units, and a binary cross entropy
+objective where y= 1if the two embeddings are temporally close and y= 0otherwise. An Adam
+optimizer [ 23] with a step size of 0:0001 is used for gradient updates to ﬁnetune the pretrained
+network of [41]. For the controller, we use the pretrained network of [41] with no ﬁnetuning.
+For graph creation, we collect a replay buffer of 100 episodes of random actions, each consisting
+of 200 steps ( i.e.20,100 total images) and add each image sequentially to SGM to simulate an
+online data collection process. For both SPTM and SPTM with SGM, we set MAXDIST= 2,k= 5,
+ACTING CUTOFF = 5:75, and MAXSTEPS = 10 . For SGM, p= 20 anda= 2. To make the
+SPTM baseline tractable, we randomly subsample the replay buffer to 2,087 states (the same size as
+our sparsiﬁed vertex set), as edge creation is O(jVj2)and start/goal node localization is O(jVj). The
+baseline graph has 2;087nodes and 18;921edges. While we can evaluate the baseline with a graph
+consisting of all 20;100states, this is a dense oracle that has 20;100nodes and 1;734;524edges and
+takes hours to construct. The oracle achieves 75%;55%;and35% success rates at easy, medium and
+hard goal difﬁculties ( 55:0%6:4%overall).
+To increase the robustness of edge creation under perceptual aliasing, we aggregate the distance over
+temporal windows in the random exploration sequence. For states s(i)
+tin episodeiands(j)
+t0in episode
+j, we set the distance to the maximum pairwise distance between states s(i)
+t 2;s(i)
+t 1;s(i)
+t;s(i)
+t+1;s(i)
+t+2and
+14
+L2 coordinate dist ∈ (100, ∞](negatives)
+L2 coordinatedist ∈ [0, 100](positives)TPFP
+Acting (temporal) distanceNumber ofobservationpairs
+Number ofobservationpairsObservation distance frequency
+Agent observationFigure 10: A visualization of the ﬁne-tuned SPTM distance metric in the ViZDoom. The agent sees
+the reference image on left. The second image shows the acting distance between the reference
+image and states previously seen throughout the maze according to d(sagent;). A coordinate is
+colored yellow if the associated state is close to the reference in acting distance, while green and blue
+coordinates are distant with respect to the reference state. Aggregating the distance pessimistically
+across temporal windows (third image) reduces false positives that are distant in coordinate space but
+close in acting distance space. In the fourth image, we threshold the aggregated distance according
+toa. While most states passing the threshold are near the agent, some are distant. These are false
+positives. In the rightmost ﬁgure, we show histograms of the aggregated acting distance for negative,
+distant pairs of states (top) and close, positive pairs (bottom), totaling 404 Mpairs.
+statess(j)
+t0 2;s(j)
+t0 1;s(j)
+t0;s(j)
+t0+1;s(j)
+t0+2, aggregating over up to 25 pairs. In contrast, SPTM aggregated with
+the median and compared only 5 pairs. Our aggregation is more pessimistic as our replay buffer is
+created with random exploration that suffers from extensive perceptual aliasing rather than a human
+demonstrator that mostly stays in the center of hallways. Figure 9 shows the graph construction
+process.
+SafetyGym: In the SafetyGym environment we employ a contrastive objective to discriminate
+between observations from the same window of a rollout and random samples from the replay
+buffer. The contrastive objective is a multiclass cross entropy over logits deﬁned by a bilinear inner
+product of the form f(zt;zt0) =zT
+tWzt0, whereWis a parameter matrix, and the distance scores
+are probabilities d= exp( f(zt;zt0)). To embed the observations, which are 6464rgb images,
+we use a 3 layer convolutional network with ReLU activations with a dense layer followed by a
+LayerNorm to ﬂatten the output to a latent dimension of 50 units. We then train the square matrix W
+to optimize the ccontrastive energy function. As before, we use Adam [ 23] with a step size of 0:0001
+for optimization.
+The-V AE maximum likelihood generative model for perceptual features has an identical architecture
+to the distance metric but without the square matrix W. Each image is transformed into an embedding,
+which is stored in the node of the graph. When a new image is seen, to isolate visually similar
+neighbors, we compute the L2 distance between the latent embedding of the image and all other
+nodes in the graph. Since computing the L2 distance is a simple vector operation, it is much more
+computationally efﬁcient than querying the distance function, which requires a forward pass through
+a neural network, O(jVj)times at each timestep.
+Perceptually consistent and two-way consistent observations relative to an agent’s current observation
+are shown in Figure 8. For constructing both dense and sparse graphs, we use MAXSTEPS = 9,
+k= 6,p= 6, anda= 5.
+B Perceptual Aliasing with Learned Distance
+A common issue with learning distances from images is perceptual aliasing, which occurs when two
+images are visually similar but were collected far apart in the environment. We examine a heatmap
+of learned distances in ViZDoom in Figure 10. Although most observations with small distance are
+correctly clustered around the agent’s location, there are several clusters of false positive observations
+throughout the map due to perceptual aliasing between parts of the maze. Perceptual aliasing results
+in wormhole connections throughout the graph where two distant nodes are connected by an edge,
+which creates an attractor for path planning. We show an example path planned by an agent that is
+corrupted by perceptual aliasing in Figure 11. In its plan, the agent draws a connection between two
+visually identical but distant walls, which corrupts its entire plan to reach the goal.
+15
+StartGoalPerceptuallyaliasedwalls
+Plan without cleanup orpessimistic distance aggregationFigure 11: Failure mode in ViZDoom planning when cleanup and pessimistic distance aggregation
+are not used. While waypoints in the plan between start and goal states are closely grouped for much
+of the path, the planner exploits the perceptual aliasing of walls in the environment as a shortcut
+through the environment. Pessimistic aggregation of the distance metric can help with the issue, but
+does not fully resolve the problem. By stepping through the environment during cleanup, we can
+remove the remaining untraversable edges.
+False positives can be reduced further by aggregating the distance pessimistically across consecutively
+collected observations. However, doing so does not eliminate them altogether. The presence of
+false positives further supports the argument for sparsity. With sparsity and cleanup, it is possible to
+remove the majority of incorrect edges to yield robust plans.
+C Re-planning with a Sparse Graph
+Figure 12 shows an example of an evaluation rollout, which includes a cleanup step when the agent
+encounters an unreachable waypoint. The agent creates an initial plan and moves along the proposed
+waypoints until it encounters an obstacle. Unable to pass the wall (represented by the blue blocks),
+the agent removes the edge between two nodes across the wall and re-plans. Its second plan has no
+obstacles and it is therefore able to reach its goal.
+D Proof Bounding the Cost Gap of Two-way Consistency
+Theorem 1. LetGBbe a graph with all states from a replay buffer Band weights from a distance
+functiond(;). SupposeGTWC is a graph formed by aggregating nodes in GBaccording to two-way
+consistencyCoutandCin. For any shortest path PTWC inGTWC , consider the corresponding
+shortest path PBinGBthat connects the same start and goal nodes. Suppose PBhaskedges. Then:
+(i)The weighted path length of PTWC minus the weighted path length of PBis no more than 2k.
+16
+Figure 12: Evaluation of SGM in SafetyGym. This ﬁgure is a top-down view abstraction of the
+SafetyGym environment made to cleanly represent the sparse graph. The actual environment is more
+visually complex and the agent sees ﬁrst-person view images.
+(ii)Furthermore, if d(;)has error at most , the weighted path length of PTWC is withink+2k
+the true weighted distance along PB.
+Proof. Before proceeding with the proof, we establish more formal notation about the statement of
+the theorem.
+We denote the replay buffer graph GB= (VB;EB;WB). Aggregating nodes according to TWC
+leads to the subgraph GTWC = (VTWC;ETWC;WTWC )where allVBnVTWC satisfy two-way
+consistency at threshold awith some node in VTWC .
+For any start and goal node s1;sk+12VTWC , consider the shortest path that connects them in
+GB:PB= (s1;s2;:::;sk+1). Suppose the edge weights of PBare(w1;w2;:::;wk), given by the
+distance function according to w1=d(s1;s2), etc.
+Proof of (i): We will show that there exists a corresponding shortest path in GTWC given byPTWC =
+(s1;s0
+2;:::;s0
+k;sk+1)with edge weights (distances) (w0
+1;w0
+2;:::;w0
+k)where the total weight of P0
+is no more than 2kathe total weight of PB,i.e.,P
+iw0
+i2ka+P
+iwi.
+We proceed by construction by ﬁrst specifying s0
+ifori2f2;3;:::;kg. Ifsi2VTWC , lets0
+i=si.
+Otherwise, let s0
+ibe any node inVTWC satisfying two-way consistency with si.
+Given this choice of PTWC , we will show for arbitrary j2f1;2;:::;kgthat
+w0
+j=d(s0
+j;s0
+j+1)2a+d(sj;sj+1) = 2a+wj:
+By outgoing two-way consistency between sjands0
+j(or becausesj=s0
+j), we have
+jd(sj;sj+1) d(s0
+j;sj+1)ja:
+Similarly, by incoming two-way consistency between sj+1ands0
+j+1(or becausesj+1=s0
+j+1),
+jd(s0
+j;sj+1) d(s0
+j;s0
+j+1)ja:
+By the triangle inequality, jd(sj;sj+1) d(s0
+j;s0
+j+1)j2a,i.e.,w0
+jwj+ 2a. Finally, we note
+that the result (i) follows by summing the bound w0
+j2a+wjover all indices j.
+17
+Proof of (ii): Furthermore, assume that the edge weights of PBgiven by (w1;w2;:::;wk)all have
+error at most . That is to say, if (w
+1;w
+2;:::;w
+k)denote the true distances along the path PB,
+assumejwi w
+ijfor alli2f1;2;:::;kg. We will show that the shortest weighted path length
+in the aggregated graph GTWC differs from the true weighted length of the shortest path in GBby at
+mostk+ 2k,i.e.,jP
+iw0
+i P
+iw
+ijk+ 2k.
+In the proof of (i), we showedP
+iw0
+i2ka+P
+iwi. By the additional assumption of part (ii),
+we havewiw
+i+for alli2f1;2;:::;kg. Chaining these two inequalities yieldsP
+iw0
+i
+k+ 2ka+P
+iw
+i.
+Similarly, the proof of (i) shows jd(sj;sj+1) d(s0
+j;s0
+j+1)j2afor arbitrary j2f1;2;:::;kg.
+Hence,wjw0
+j+ 2. Rearranging and summing this bound yields  2k+P
+jwjP
+jw0
+j.
+Moreover, as for part (ii) we assume jwi w
+ijfor alli2f1;2;:::;kg, we also have w
+j wj.
+Summing and chaining inequalities yields  k 2k+P
+iw
+iP
+iw0
+i.
+Together, the results of the previous two paragraphs yield what is desired: jP
+iw0
+i P
+iw
+ij
+k+ 2k.
+E Planning speed of SGM
+Table 4 shows the time required to take a single action including graph planning on a dense graph
+constructed using SoRB and with a sparse graph in the PointEnv environment. Sparse Graphical
+Memory signiﬁcantly accelerates action selection.
+METHOD TIME TO TAKE ACTION (S)
+SORB 0.550 0.220
+SGM ( OURS ) 0.0770.004
+Table 4: The average and standard-deviation wall-clock time for taking an action with SGM (our
+method) and SoRB (previous state-of-the-art) in PointEnv.
+F Reproducibility checklist
+Models & Algorithms Section 5 and Section A describe our model architectures, which follow
+past work in the two previously studied planning environments (PointEnv and ViZDoom). We
+analyze the complexity of graph construction with our online approximation in Section 4.2 and of
+edge creation and agent localization in Section A.3.
+Theoretical Claims We state and prove Theorem 1, which (i) bounds the increase in plan cost
+when aggregating states via two-way consistency and (ii) given an existing error bound on the distance
+function, bounds the additional error induced by aggregating states via two-way consistency. The
+theorem is stated informally in the main paper and precisely with a proof in Section D.
+Datasets Environments and experience collection are described in Section A.
+Code Code and documentation are included on the project website: https://mishalaskin.
+github.io/sgm/ .
+Experimental Results We describe the setup of our experiments in Section 5 and Section A,
+including hyperparameter selection and speciﬁcation. Runtimes are described, including in Section E.
+18

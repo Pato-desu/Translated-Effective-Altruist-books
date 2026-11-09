@@ -1,0 +1,762 @@
+plants
+Comunicación
+Determinación automatizada preliminar de la comestibilidad de
+alimentos alternativos: cribado no dirigido de toxinas
+en concentrado de hojas de arce rojo
+Joshua M. Pearce1,2,*
+, Maryam Khaksari3
+y David Denkenberger4,5
+1Departamento de Ciencia e Ingeniería de Materiales y Departamento de Ingeniería Eléctrica e Informática,
+Michigan Technological University, Houghton, MI 49931, EE. UU.
+2Departamento de Electrónica y Nanoingeniería, Escuela de Ingeniería Eléctrica, Aalto University,
+FI-00076 Espoo, Finlandia
+3Laboratorio de Métodos Avanzados de Resolución Química, Michigan Technological University, Houghton,
+MI 49931, EE. UU.; mkhaksar@mtu.edu
+4Alliance to Feed the Earth in Disasters (ALLFED), Fairbanks, AK 99775, EE. UU.; david@allfed.info o
+ddenkenberger@alaska.edu
+5University of Alaska Fairbanks, Fairbanks, AK 99775, EE. UU.
+*Correspondencia: pearce@mtu.edu o joshua.pearce@aalto.fi; Tel.: +01-906-487-1466
+Recibido: 27 de marzo de 2019; Aceptado: 22 de abril de 2019; Publicado: 26 de abril de 2019
+/gid00030/gid00035/gid00032/gid00030/gid00038/gid00001/gid00033/gid00042/gid00045 /gid00001
+/gid00048/gid00043/gid00031/gid00028/gid00047/gid00032/gid00046
+Resumen: Los suministros de alimentos alternativos podrían mantener a la humanidad pese a los riesgos catastróficos globales que bloquean el sol
+(RCG) que eliminan la agricultura convencional. Un alimento alternativo prometedor es elaborar
+concentrado. Sin embargo, la comestibilidad de las hojas de los árboles es en gran medida incierta. Para superar este desafío,
+este estudio presenta los métodos para obtener un cribado rápido de toxinas en concentrados de hojas comunes.
+La investigación comienza con un enfoque no dirigido que emplea un espectrómetro de masas híbrido
+de trampa de iones de órbitra con ionización por electrospray (ESI), acoplado a un sistema de cromatografía
+líquida bidimensional de ultra alta presión sobre la hoja norteamericana más común: el arce rojo
+Las sustancias químicas identificadas con este enfoque no dirigido se cruzan después con la
+base de datos OpenFoodTox para identificar sustancias tóxicas. Las toxinas identificadas se someten luego a un cribado de
+validación de fórmulas y se evalúa su riesgo como alimento. Los resultados del cribado muestran que el concentrado de hojas de arce rojo
+contiene al menos ocho sustancias tóxicas que, tras el análisis, no presentan riesgos sustanciales
+salvo que se consuman en gran cantidad. Esto indica que la hoja de arce rojo sigue siendo un posible alimento alternativo
+alimento. Los resultados se discuten en el contexto de ampliar el análisis con ciencia abierta y usar
+extractos de hojas de otras plantas que no se usan tradicionalmente como alimento, para compensar el hambre mundial actual
+desafíos, y avanzar hacia un sistema alimentario más sostenible, preparándose al mismo tiempo para los RCG.
+Palabras clave: alimento alternativo; hojas comestibles; plantas comestibles; riesgo existencial; riesgo catastrófico global; hoja;
+concentrado de hojas; proteína de hoja; cribado no dirigido; salud pública; sistemas alimentarios sostenibles; toxinas
+1. Introducción
+Varias catástrofes globales de probabilidad baja (aunque no nula) podrían bloquear parcialmente el sol y
+dejar la agricultura convencional incapaz de prevenir la hambruna masiva [ 1]. De estos riesgos, el
+escenario más probable de oscurecimiento solar es la guerra nuclear con la quema de ciudades (invierno nuclear) [ 2,3].
+Dos modelos cuantitativos indican que la probabilidad de una guerra nuclear a gran escala es de aproximadamente
+1% anual [ 4,5]. Sin embargo, la mayoría de las potencias nucleares posee más del límite pragmático de
+armas nucleares [ 6]. El límite pragmático se fija en el punto en que las consecuencias físicas negativas directas
+del uso de armas nucleares son contrarias a los intereses nacionales. Tanto un uso unilateral relativamente menor de
+armas sobre centros de población objetivo [ 6] como una pequeña guerra nuclear regional [ 7,8] podrían convertir un
+Plants 2019 ,8, 110; doi:10.3390 /plants8050110 www.mdpi.com /journal /plants
+Plants 2019 ,8, 110 2 de 15
+“otoño nuclear”, que dejaría sin alimento a millones [ 6–10]. De forma similar, un impacto de asteroide o cometa [ 11],
+así como una supererupción volcánica o flujos de basalto continental podrían inducir la misma privación prolongada de luz
+solar y hambruna masiva al fallar la agricultura convencional [ 12–14]. Además, varios
+riesgos menos graves para el sistema agrícola podrían agravar el acceso a los alimentos a nivel mundial, entre ellos:
+(i) cambio climático abrupto [ 15]; (ii) erradicación de patógenos de cultivos [ 16]; (iii) supermalezas [ 17]; (iv) superplagas de cultivos
+[ 18]; (v) superbacterias [ 19]; (vi) fenómenos climáticos extremos coincidentes, que provocan múltiples fallos en las zonas
+productoras de cereales [ 20]; (vii) cambio climático lento y extremo (>~5C) [21]; o (viii) pérdida de polinizadores [ 22]. Otras
+catástrofes no afectarían directamente a la producción de alimentos, pero aun así podrían tener efectos similares en la
+nutrición humana. Algunas de ellas incluyen una pandemia o una guerra mundial no nuclear que interrumpa el comercio
+mundial de alimentos, y la hambruna resultante en países importadores de alimentos [ 23–25]. Aunque algunas de estas
+catástrofes afectan a otras necesidades, como el agua y la energía, el problema históricamente más difícil es
+el suministro de alimentos. Evitar esos riesgos catastróficos globales (RCG) redundaría en el mejor interés de todos los
+habitantes del planeta; sin embargo, incluso en el caso del RCG sobre el que la humanidad tiene control total (la guerra nuclear),
+parece poco probable que se reduzca a corto plazo, y hasta la fecha de este trabajo no existen medios probados y fiables
+para evitar los demás RCG, y se necesita considerable investigación adicional en este campo [ 26–29].
+Estos RCG agrícolas se encuentran entre los más altos de la lista de RCG en cuanto a impacto y probabilidad [ 30]. En
+resumen, un sistema alimentario sostenible exige prepararse para los RCG.
+Por ello, es racional disponer de alguna forma de fuente de alimentos de respaldo. La más obvia sería
+almacenar alimentos con antelación, pero esto llevaría años, aumentaría el precio, agravaría
+la malnutrición actual y sería muy costoso [ 31]. Trabajos previos han determinado que los suministros alternativos de alimentos
+podrían ser viables en RCG que eliminan toda la agricultura convencional [ 32]. En concreto,
+toda la población humana podría mantenerse con base en la ingesta calórica, incluso en las catástrofes globales extremas
+que bloquean la luz solar durante cinco años, convirtiendo combustibles fósiles, árboles muertos (madera) y hojas
+en alimentos comestibles para humanos [ 1,32]. Cálculos preliminares muestran incluso que, comiendo una variedad de estos
+alimentos alternativos, es posible obtener una dieta equilibrada de macronutrientes [ 32] y micronutrientes [ 33]
+para mantener una salud humana razonable [ 34]. Prepararse para la producción de alimentos alternativos es una forma muy
+rentable de salvar vidas esperadas, tanto a nivel mundial [ 35] como desde la perspectiva de solo
+Estados Unidos [ 36]. Estos cálculos se basan todos en la viabilidad técnica, y se requiere una considerable investigación futura
+para escenarios más extremos [ 37,38], en particular teniendo en cuenta la transición de
+alimentos convencionales a alternativos y la capacidad de pagar los alimentos sin subsidios [ 39]. Es fundamental
+contar con un sistema alimentario mundial resiliente [ 40] que sea continuo (por ejemplo, capaz de mantener la ingesta calórica
+de forma constante). El mayor desafío de esta transición está entre el momento en que se agotan los alimentos almacenados
+a nivel mundial tras una catástrofe global que bloquea el sol (unos seis meses) [ 1,32] y el momento en que muchos
+alimentos alternativos alcanzan la producción plena (aproximadamente un año) [ 1,32]. La mejor solución teórica
+para este problema de transición es usar las hojas muertas por la catástrofe (en lugar de hojas que están
+agotadas de nutrientes y se desprenden de forma natural (hojarasca)), sobre todo porque el precio en comparación con muchos
+alimentos alternativos es razonable [ 39]. Sin embargo, los alimentos a base de hojas presentan varios desafíos [ 32]. En primer lugar, una
+pequeña fracción de las calorías puede extraerse. Por ejemplo, con el té negro, solo alrededor del 20% de las calorías totales
+de las proteínas, carbohidratos y lípidos pasa al líquido [ 41]. Consumir tés a base de hojas de árboles
+también es poco común (aunque muchas personas ya beben té de agujas de pino [ 42]). Además, es
+posible moler y prensar las hojas, y luego coagular el líquido resultante como concentrado de hojas,
+que contiene ~8% de la materia seca de las hojas originales [ 43]. El líquido restante contiene gran parte de
+las toxinas, y se ha considerado no apto para el consumo humano [ 44]. El rendimiento del concentrado de hojas
+es menor con técnicas no industriales, que serían más accesibles [ 44]. Desafortunadamente,
+existe una clara falta de conocimiento sobre las toxinas y sus cantidades presentes en los árboles más comunes
+hojas y sobre la capacidad de los humanos para consumir extracto de hojas de los tipos de hojas de árboles comunes.
+Por ello, este estudio intenta ofrecer los pasos preliminares para obtener un
+proceso de cribado rápido de toxinas en concentrados de hojas comunes para su uso en alimentos alternativos. La combinación
+de espectrometría de masas de alta resolución (HRMS) y de técnicas de cromatografía ha abierto un nuevo
+camino para la detección e identificación de compuestos desconocidos en mezclas complejas [ 45]. El
+Plants 2019 ,8, 110 3 de 15
+enfoque tradicional para detectar compuestos en una solución consiste en hacer un cribado dirigido, comprando
+los correspondientes estándares de referencia para la identificación [ 45]. En el cribado dirigido, la información
+sobre la masa, la estructura, el patrón isotópico y el tiempo de retención se conoce y se usa para la detección
+y la cuantificación. Para los posibles compuestos tóxicos en materiales vegetales, esto presenta a la vez
+un proceso excesivamente lento y costoso, ya que existen más de 1500 fitotoxinas ya
+identificadas en la base de datos Toxic Plants–Phytotoxin (TPPT) [ 46]. En los últimos años, la evolución de la espectrometría de
+masas exacta ha permitido cribados no dirigidos, en los que no hay información previa disponible para
+la identificación de desconocidos en una muestra [ 45]. En el cribado no dirigido, la evidencia de la medición
+de datos es necesaria para confirmar la identificación mediante un algoritmo adecuado. Esta evidencia incluye la masa exacta
+(dentro de una tolerancia de error aceptable), el patrón isotópico, la presencia de aductos adicionales y el tiempo de retención
+información de fragmentación y otra evidencia experimental. La cantidad de evidencia disponible
+para la identificación da lugar a distintos niveles de confianza en la identificación de compuestos [ 47,48], lo cual
+se ha analizado en detalle [ 45]. La investigación comienza con un enfoque no dirigido que emplea un
+espectrómetro de masas híbrido de trampa de iones orbitrap de ultra alta resolución (MS) acoplado a un sistema de
+cromatografía líquida bidimensional de ultra alta presión (LC) sobre la hoja más común de Norteamérica. De
+las más de 800 especies de árboles diferentes en los EE. UU. [ 49], el arce rojo ( acer rubrum ) es el más común [ 50].
+Por ello, en EE. UU. aporta la mayor cantidad de calorías alimentarias alternativas potenciales de cualquier especie de árbol.
+El concentrado de hojas de arce rojo se fabrica con equipos de procesamiento a pequeña escala, que son muy
+accesibles, y se analiza con el método de cribado de compuestos no deseados de Thermo Fisher Scientific
+en alimentos [ 51]. Estas sustancias químicas identificadas con este enfoque no dirigido se cruzan luego
+con varias bases de datos para identificar sustancias químicas tóxicas y cualquier otro efecto nocivo potencial (por ejemplo, si
+son mutagénicas, teratogénicas, cancerígenas, etc.). Los resultados sobre hojas de arce rojo se presentan y
+los datos se comparten mediante un método de ciencia abierta para hacer posible un análisis adicional del conjunto de datos. El
+sustancias químicas tóxicas identificadas se someten luego a un cribado de riesgo para los humanos. Los resultados se discuten y el trabajo futuro se define
+en el contexto de los datos abiertos y del uso de extracto de hojas para compensar el hambre mundial actual
+desafíos y los sistemas alimentarios sostenibles, preparándose al mismo tiempo para los RCG.
+2. Materiales y métodos
+2.1. Materiales
+2.1.1. Selección de hojas
+Las hojas de arce amarillo se han comido como bocadillo en forma de tempura en Japón, conocido como “momiji” [ 52]
+por lo que existe la posibilidad de que esta hoja tan común sea una fuente de alimento alternativo. Sin embargo,
+la literatura veterinaria advierte que el arce rojo es tóxico para los caballos [ 53]. Por ello, es necesario cribarla
+en busca de posible toxicidad para los humanos. El color rojo de las hojas de arce puede usarse para distinguirla de otras
+especies de arce. Los arces rojos son caducifolios y sus hojas, que suelen medir entre 5–10 cm de largo y
+de ancho, con 3–5 lóbulos palmeados de margen aserrado, se disponen en oposición en la rama. La
+cara superior de la hoja del arce rojo es verde claro y la cara inferior es blanquecina, y puede ser glauca o
+pilosa. Los pecíolos suelen ser rojos y miden hasta 10 cm de largo, y las hojas suelen tornarse de un rojo intenso
+en otoño. Los arces rojos se identificaron en Houghton, MI, y se recolectaron para su procesamiento.
+2.1.2. Sustancias químicas de procesamiento
+El control fue agua del grifo de Houghton, MI. Se usó agua del grifo para reproducir más de cerca las
+condiciones de procesamiento del concentrado de hojas en una situación de catástrofe global. El acetonitrilo de grado LC /MS
+y agua se compraron a Fisher Scientific (Waltham, MA, EE. UU.) y HoneyWell (Morris Plains,
+NJ, EE. UU.), respectivamente. El ácido fórmico de grado LC /MS se compró a Sigma Aldrich (St. Louis, MO,
+EE. UU.).
+Plants 2019 ,8, 110 4 de 15
+2.2. Procesamiento del material
+2.2.1. Concentrado de hojas
+Las hojas de arce rojo se procesaron por lotes. Primero, las hojas se licuaron y envolvieron en un
+paño de muselina. Luego el material se colocó en agua en ebullición rápida durante cinco minutos. Los fragmentos de hoja
+se retiraron con un tamiz de acero inoxidable mientras se prensaba la muselina. El concentrado espumado
+se recogió luego en un recipiente de vidrio limpio y después se analizó.
+2.2.2. Preparación de la muestra
+Para el análisis de cromatografía líquida /espectrometría de masas (LC /MS), el extracto de hojas de arce rojo se
+diluyó 12 veces en agua–acetonitrilo 80:20 (v:v) y se filtró a través de un filtro de cuarzo de 0.2 m.
+2.3. Instrumentación LC /MS
+Se usó el sistema estándar Thermo Scientific Dionex Ultimate 3000 como sistema de cromatografía
+líquida de alta presión (HPLC). La columna analítica fue una Phenomenex de fase inversa Kinetex
+XB-C18, 150 2.1 mm, 100.
+A, con tamaño de partícula de 1.7 m. La fase móvil A fue ácido fórmico al 0.1% en 100%
+agua de grado LC/MS y la fase móvil B fue ácido fórmico al 0.1% en acetonitrilo–agua de grado LC /MS 95:5
+(v:v). Se usó un caudal constante de 0.2 mL /min (0.2 mL /min se usó por el pequeño tamaño de partícula
+de la columna (1.7 um), que aumenta la contrapresión), el gradiente de la fase móvil fue: 0 min;
+5%B, 5 min; 5%B, 65 min; 90%B, 70 min; 90%B. La columna se equilibró con la fase móvil A durante 15 min
+antes de la siguiente inyección. El horno de la columna se ajustó a 35C, y el volumen de inyección del bucle completo se ajustó
+a 5L.
+El instrumento de espectrometría de masas fue un Thermo Scientific Orbitrap Elite equipado con
+ionización por electrospray (ESI). El poder de resolución para la medición de masa exacta durante el
+análisis LC /MS fue de 120 K definido en m /z400. El extracto de hojas de arce rojo se analizó con ESI positivo y negativo
+en dos análisis LC /MS separados. El instrumento se calibró externamente con la solución de calibración Thermo Pierce
+antes de los análisis LC /MS. Todas las masas en el rango de 100–600 m /z se registraron con
+modo de barrido completo. Además del barrido completo, también se registró la fragmentación MS /MS dependiente de datos
+para los 5 picos más altos de cada barrido espectral, con una energía de colisión de 25 (unidad arbitraria). Esto se hizo
+para ayudar a identificar compuestos coeluyentes.
+2.4. Análisis de datos
+Los resultados LC /MS se analizaron luego con el software Thermo Scientific Compound Discoverer para
+la identificación de compuestos desconocidos. Compound Discoverer permite evaluar los datos de espectros de masas
+, predice la composición elemental y busca en bases de datos las posibles identidades de los
+compuestos candidatos. Se creó un flujo de trabajo automatizado en Compound Discoverer conectando nodos
+que contienen parámetros ajustados para obtener resultados óptimos de identificación. La tolerancia de masa
+determinada para la identificación química se fijó en 3 ppm y la intensidad mínima en 20,000. Las
+composiciones elementales consideradas en los rangos de C 1–90H1–190 O0–18N0–5S0–1, bajo las condiciones
+de 0.1 H/C3.5, 0 equivalente de doble enlace (DBE) 40. Se usó la base de datos ChemSpider para
+búsquedas de masa precursora y composición elemental. Las bases de datos ChemSpider elegidas para el experimento
+fueron: ActoR, aggregated computation, DrugBank, EPA DSSTOX (Distributed Structure-Searchable
+Toxicity (DSSTox) Database – desarrollada por la Agencia de Protección Ambiental de EE. UU.), EU-Open
+Screen, FDA-Unit-NLM (Unidad de la Biblioteca Nacional de Medicina de la Administración de Alimentos y Medicamentos), Organización de las Naciones Unidas para la
+Alimentación y la Agricultura, FooDB (mantenida en Canadá, es el recurso más grande y más
+completo sobre constituyentes de alimentos), LeadScope, Lhasa Limited, Pesticide Common Names,
+y Wikipedia. Luego, Compound Discoverer usa el reconocimiento de patrones isotópicos, fragmentos y
+distribución isotópica para generar la confirmación de identidad. Los resultados MS /MS dependientes de datos se usaron para
+búsquedas espectrales en los entornos mzCloud y Thermo Scientific mzVault para confirmar los compuestos
+Plants 2019 ,8, 110 5 de 15
+estructuras. La generación de la composición elemental usa isótopos, masa exacta y fragmentos para
+generar puntuaciones de coincidencia [ 49]. Si la puntuación de coincidencia es alta, la identificación del compuesto se hace con un alto
+nivel de confianza, como se explicó anteriormente.
+Estas sustancias químicas se cruzaron luego en la base de datos de la Autoridad Europea de Seguridad Alimentaria (EFSA)
+OpenFoodTox de peligros químicos [ 54] (licencia internacional Creative Commons Atribución 4.0)
+para la toxicidad y cualquier otro efecto nocivo potencial (por ejemplo, mutagénico, teratogénico, cancerígeno, etc.).
+La lista resultante de compuestos tóxicos se envió luego para validación de fórmulas con los siguientes pasos:
+1. Se comprobó que el compuesto esté presente solo en la muestra y no en el blanco (véase
+el cromatograma de iones extraídos en la parte superior izquierda del Apéndice A).
+2. Se comprobó que el pico cromatográfico esté por encima del nivel de ruido. Se usó una relación señal/ruido (S /N)
+de 3 en el software y un área mínima de pico de 1000 para validar los
+picos cromatográficos frente al ruido.
+3. Se comprobó que la forma del pico cromatográfico sea buena. Esto se hace observando el cromatograma de iones extraídos
+generado por el software Compound Discoverer para cada compuesto, a fin de asegurar
+que la forma del pico cromatográfico sea confiable.
+4. Se comprobó el patrón isotópico. Después de que Compound Discoverer asigna una fórmula química a las
+masas medidas, genera patrones isotópicos codificados por color en el espectro de masas de cada
+compuesto (véase el ejemplo de espectro de masas asociado al ácido L-aspártico en la parte superior derecha de
+la Figura A1 del Apéndice A).
+5. El software Compound Discoverer buscó en las bases de datos ChemSpider posibles estructuras químicas
+para cada fórmula asignada. Se registra el número de estructuras químicas encontradas en ChemSpider que coinciden
+con la masa medida dentro del error de masa en ppm definido (3 ppm).
+6. Compound Discoverer también buscó en una lista de masas desarrollada por Thermo Scientific para compuestos lixiviables
+y extraíbles.
+7. Por último, se determina la coincidencia MS /MS con mzCloud. En el análisis LC /MS, en lugar del modo de barrido completo
+, se recogió la fragmentación MS /MS dependiente de datos de los 5 picos más altos de los espectros.
+Compound Discoverer usa esta información para comparar el patrón de fragmentación con la base de datos
+mzCloud. Esto añade otro nivel de confianza para la identificación de compuestos desconocidos.
+Por último, los compuestos tóxicos identificados positivamente se evaluaron además de forma independiente, usando
+la base de datos abierta de química PubChem, alojada por los NIH, para determinar sus posibles riesgos si el concentrado de hojas de arce rojo
+se usara como alimento en una catástrofe.
+3. Resultados
+Como era de esperar en una hoja (debido al análisis del té verde, relativamente bien documentado [ 55,56]), hay
+miles de compuestos detectados con cada modo de ionización: el ESI positivo contenía 4380 masas
+y el ESI negativo 1267 masas. Algunas de ellas son comunes a ambas polaridades y algunas de
+ellas son exclusivas de cada una. El cromatograma de los concentrados de hojas de arce rojo para el ESI positivo se muestra
+en la Figura 1 y para el ESI negativo se muestra en la Figura 2. Todos los datos brutos están disponibles en Open
+Science Framework [ 57]. Los resultados LC /MS de ESI positivo y negativo se analizaron luego con Compound
+Discoverer para extraer los picos cromatográficos y asignar la fórmula química.
+Plants 2019 ,8, 110 6 de 15
+Plants 2019 , 8, x REVISIÓN POR PARES 6 de 16 
+  
+Figura 1. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC/MS, ESI positivo, columna C 18, 
+con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el cromatograma 
+se cortó a los 30 min. 
+ 
+Figura 2. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC/MS, ESI negativo, C 18 
+columna, con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el 
+cromatograma se cortó a los 30 min. 
+Usando las bases de datos ChemSpider mencionadas arriba (bibliotecas de sustancias tóxicas), se identificaron 31 sustancias químicas con 
+un alto nivel de confianza en el ESI positivo y siete en el ESI negativo, y tres aparecen 
+en ambos (ácido gálico, ácido L-glutámico y ácido salicílico). Este número se redujo aún más tras la validación de fórmulas mostrada en la Tabla 1 y la Tabla 2 para el ESI positivo y negativo, respectivamente. Como 
+se observa en la Tabla 1, el ESI positivo reveló cinco sustancias químicas en las que había un alto grado de 
+confianza en que son tóxicas y están presentes en la hoja de arce rojo, entre ellas: (1) 3-metoxibenzaldehído, 
+(2) 4-metoxibenzaldehído, (3) cumarina, (4) ácido L-glutámico y (5) L-fenilalanina.RT:0.00 - 30.00
+0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+Tiempo (min)05101520253035404550556065707580859095100Abundancia relativa1.54
+1.76
+1.88
+19.92
+21.97
+17.09 17.20
+17.29
+14.1625.57
+7.71 7.59 7.81 15.26 20.544.886.902.19 6.74 4.8223.90 13.15
+4.09 5.09 4.0019.63 22.7812.63 27.79 25.08 15.75
+27.95 10.93 9.91 5.56 8.800.56NL: 1.92E8
+TIC F: FTMS + p ESI 
+Full ms [100.00-650.00]  MS 20180913_Pos_RedMaple_dl12X_filtered
+RT:0.00 - 30.00
+0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+Tiempo (min)05101520253035404550556065707580859095100Abundancia relativa1.86
+1.90
+17.12
+17.16
+21.94 25.83
+14.14 25.55
+20.187.72
+6.80 19.89 17.36
+25.91 2.1915.2920.51
+17.40 6.7020.55 3.78 4.603.717.81 4.8621.0517.47 1.522.29 5.01
+5.21 3.63 13.13 7.87 23.90 17.6015.4019.62 12.60 26.05 22.76 7.9615.7827.42 27.76 16.20 9.99 9.87 25.08 5.44 12.4610.039.78
+10.8527.97 29.34
+1.25NL: 2.67E7
+TIC F: FTMS - p ESI 
+Full ms [100.00-650.00]  MS 20180912_Neg_RedMaple_dl12X_filtered
+Figura 1. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC /MS, ESI positivo, columna C 18
+con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el cromatograma
+se cortó a los 30 min.
+Plants 2019 , 8, x REVISIÓN POR PARES 6 de 16 
+  
+Figura 1. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC/MS, ESI positivo, columna C 18, 
+con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el cromatograma 
+se cortó a los 30 min. 
+ 
+Figura 2. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC/MS, ESI negativo, C 18 
+columna, con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el 
+cromatograma se cortó a los 30 min. 
+Usando las bases de datos ChemSpider mencionadas arriba (bibliotecas de sustancias tóxicas), se identificaron 31 sustancias químicas con 
+un alto nivel de confianza en el ESI positivo y siete en el ESI negativo, y tres aparecen 
+en ambos (ácido gálico, ácido L-glutámico y ácido salicílico). Este número se redujo aún más tras la validación de fórmulas mostrada en la Tabla 1 y la Tabla 2 para el ESI positivo y negativo, respectivamente. Como 
+se observa en la Tabla 1, el ESI positivo reveló cinco sustancias químicas en las que había un alto grado de 
+confianza en que son tóxicas y están presentes en la hoja de arce rojo, entre ellas: (1) 3-metoxibenzaldehído, 
+(2) 4-metoxibenzaldehído, (3) cumarina, (4) ácido L-glutámico y (5) L-fenilalanina.RT:0.00 - 30.00
+0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+Tiempo (min)05101520253035404550556065707580859095100Abundancia relativa1.54
+1.76
+1.88
+19.92
+21.97
+17.09 17.20
+17.29
+14.1625.57
+7.71 7.59 7.81 15.26 20.544.886.902.19 6.74 4.8223.90 13.15
+4.09 5.09 4.0019.63 22.7812.63 27.79 25.08 15.75
+27.95 10.93 9.91 5.56 8.800.56NL: 1.92E8
+TIC F: FTMS + p ESI 
+Full ms [100.00-650.00]  MS 20180913_Pos_RedMaple_dl12X_filtered
+RT:0.00 - 30.00
+0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30
+Tiempo (min)05101520253035404550556065707580859095100Abundancia relativa1.86
+1.90
+17.12
+17.16
+21.94 25.83
+14.14 25.55
+20.187.72
+6.80 19.89 17.36
+25.91 2.1915.2920.51
+17.40 6.7020.55 3.78 4.603.717.81 4.8621.0517.47 1.522.29 5.01
+5.21 3.63 13.13 7.87 23.90 17.6015.4019.62 12.60 26.05 22.76 7.9615.7827.42 27.76 16.20 9.99 9.87 25.08 5.44 12.4610.039.78
+10.8527.97 29.34
+1.25NL: 2.67E7
+TIC F: FTMS - p ESI 
+Full ms [100.00-650.00]  MS 20180912_Neg_RedMaple_dl12X_filtered
+Figura 2. Cromatograma de iones totales del concentrado de hojas de arce rojo con LC/MS, ESI negativo, C 18
+con gradiente ACN-H 2O (acetonitrilo-agua). No se detectó ningún pico tras 30 min, por lo que el cromatograma
+se cortó a los 30 min.
+Usando las bases de datos ChemSpider mencionadas arriba (bibliotecas tóxicas), se identificaron 31 sustancias químicas con un
+alto nivel de confianza en el ESI positivo y siete en el ESI negativo, y tres aparecen
+en ambos (ácido gálico, ácido L-glutámico y ácido salicílico). Este número se redujo aún más después de
+la validación de fórmulas mostrada en las Tablas 1 y 2 para el ESI positivo y negativo, respectivamente. Como
+se observa en la Tabla 1, el ESI positivo reveló cinco sustancias químicas en las que había un alto grado de
+confianza en que son tóxicas y están en la hoja de arce rojo, entre ellas: (1) 3-metoxibenzaldehído,
+(2) 4-metoxibenzaldehído, (3) cumarina, (4) ácido L-glutámico y (5) L-fenilalanina.
+Plants 2019 ,8, 110 7 de 15
+Tabla 1. Validación de fórmulas del ESI positivo.
+NombreRetención
+TiempoNo en el
+BlancoPor encima
+RuidoPico bueno
+FormaPatrón isotópico MS MS Chem
+Coincidencia Spider lixiviables y extraíbles
+Lista de masas Coincidencia MS /MS mzCloud
+2,3,6-Trimetilfenol 16.70 4 4 4 [M+H H2O] coincidencia 50 5 sin coincidencia
+3-Metoxibenzaldehído 11.49 4 4 4 [M+H] coincidencia 50 5 3 o 4 metoxibenzaldehído, 82%
+4-Metoxibenzaldehído 12.99 4 4 4 [M+H] coincidencia 50 5 3 o 4 metoxibenzaldehído, 82%
+8-Hidroxiquinolina 7.95 4 4 4 [M+H] coincidencia 4 1 sin MS /MS
+Bensulfurón-metil 1.70 4 4 4 [M+H] coincidencia 50 1 sin MS /MS
+benzaldehído 23.12 4 4 4 [M+H] coincidencia 9 1 sin MS /MS
+Cinamaldehído 13.97 4 4 4 [M+H] coincidencia 50 Sin coincidencia sin MS /MS
+Cumarina 17.63 4 4 4 [M+H] coincidencia 32 Sin coincidencia 80%
+Ácido eritórbico 2.10 4 4 4 [M+H] coincidencia 27 Sin coincidencia sin MS /MS
+Difenilamina 42.50 6 4 4 [M+H] coincidencia 50 2 sin MS /MS
+Benzoato de etilo 19.65 4 4 4 [M+H] coincidencia 50 1 sin MS /MS
+Cinamato de etilo 21.71 4 4 4 [M+H] coincidencia 50 Sin coincidencia Metacrilato de bencilo, 61%
+Ácido gálico 13.15 4 4 4 [M+H H2O] coincidencia 16 Sin coincidencia sin MS /MS
+Indol 7.95 4 4 4 [M+H] coincidencia 42 Sin coincidencia sin MS /MS
+Ácido L-glutámico 1.74 4 4 4 [M+H] coincidencia 50 Sin coincidencia 99.40%
+L-Histidina 1.59 4 4 4 [M+H] coincidencia 49 1 sin MS /MS
+L-Isoleucina 2.56 4 4 4 [M+H] coincidencia 50 2 sin MS /MS
+L-Metionina 1.75 4 4 4 [M+H] coincidencia 40 1 sin coincidencia
+L-Fenilalanina 4.02 4 4 4 [M+H] coincidencia 50 1 99.60%
+L-Prolina 1.80 4 4 4 [M+H] coincidencia 50 Sin coincidencia sin MS /MS
+L-Tirosina 13.37 4 4 4 [M+H] coincidencia 50 1 sin MS /MS
+Naringina dihidrochalcona 22.78 4 4 4 [M+Na] coincidencia 0 Sin coincidencia sin coincidencia
+Nicotinamida 2.12 4 4 4 [M+H] coincidencia 49 Sin coincidencia sin MS /MS
+Galato de propilo 8.56 4 4 4 [M+H] coincidencia 49 1 sin MS /MS
+ácido salicílico 15.77 4 4 4 [M+H] coincidencia 39 1 sin MS /MS
+Tentoxina 19.06 4 4 4 6 6 Sin coincidencia sin coincidencia
+Ácido tereftálico 9.71 4 4 4 [M+H] coincidencia 40 3 sin MS /MS
+Óxido de trifenilfosfina 34.86 6 4 4 [M+H] coincidencia 10 1 sin MS /MS
+Tidiazurón 1.92 4 4 4 [M+H] coincidencia 31 1 sin MS /MS
+Triclorfón 1.51 4 4 4 [M+H] coincidencia 2 1 sin MS /MS
+Vainillina 16.17 4 4 4 [M+H] coincidencia 50 2 sin MS /MS
+Plants 2019 ,8, 110 8 de 15
+Tabla 2. Validación de fórmulas del ESI negativo.
+NombreRetención
+TiempoNo en blancoPor encima
+RuidoPico bueno
+FormaPatrón isotópico MS Chem
+Coincidencia Spider lixiviables y extraíbles
+Lista de masas Coincidencia MS /MS mzCloud
+Ácido cítrico 2.46 4 4 6 [M H] coincidencia 12 2 89.4%%
+Ácido gálico 3.72 4 4 4 [M H] coincidencia 16 sin coincidencia sin coincidencia
+Ácido L-aspártico 1.73 4 4 4 [M H] coincidencia 21 sin coincidencia 96.8
+Ácido L-glutámico 1.73 4 4 4 [M H] coincidencia 50 sin coincidencia 99.50%
+Naringina 22.93 4 4 4 [M H] coincidencia 12 sin coincidencia 80.30%
+Ácido salicílico 21.71 6 4 4 [M H] coincidencia 40 1 sin MS /MS
+Ácido succínico 2.77 4 4 4 [M H] coincidencia 16 1 sin MS /MS
+Plants 2019 ,8, 110 9 de 15
+Como se observa en la Tabla 2, el ESI negativo reveló cuatro sustancias químicas en las que había un alto
+grado de confianza en que son tóxicas y están en la hoja de arce rojo, entre ellas: (1) ácido cítrico, (2)
+ácido L-aspártico, (3) ácido L-glutámico y (4) naringina. El ácido L-glutámico se encontró tanto en el ESI positivo como en el
+negativo, por lo que hay un total de ocho compuestos tóxicos que podrían impedir el uso del concentrado de hojas de arce rojo
+como fuente de alimento.
+4. Discusión
+4.1. ¿Impiden los compuestos tóxicos el uso del concentrado de hojas de arce como alimento?
+Los resultados de este análisis han mostrado que hay al menos ocho sustancias químicas tóxicas en el
+concentrado de hojas de arce rojo, entre ellas: (1) 3-metoxibenzaldehído, (2) 4-metoxibenzaldehído, (3)
+cumarina, (4) ácido L-glutámico, (5) L-fenilalanina, (6) ácido cítrico, (7) ácido L-aspártico y (8) naringina.
+Sin embargo, incluso con un análisis somero de las sustancias, la mayoría de las ocho no impide el
+uso de la hoja de arce rojo como posible alimento alternativo. El 3- y el 4-metoxibenzaldehído es un
+compuesto común en perfumes y puede causar irritación de las vías respiratorias [58]. El ácido L-glutámico es uno
+de los 20 aminoácidos proteinogénicos y una molécula clave en el metabolismo celular [ 59]. En humanos, en
+cantidades razonables se digiere fácilmente [ 60]. Aunque la ingestión de glutamato monosódico (MSG)
+puede causar síntomas clínicos transitorios parecidos a los del “síndrome del restaurante chino” y hay
+cierta evidencia de que una minoría puede reaccionar a dosis relativamente pequeñas [ 59], no es un riesgo
+significativo. De forma similar, el ácido L-aspártico es otro aminoácido no esencial que se encuentra en animales y plantas,
+especialmente en la caña de azúcar y la remolacha azucarera [ 61]. Debe consumirse en gran cantidad para que sea un problema [ 61].
+La L-fenilalanina es un aminoácido esencial en humanos, que se obtiene al comer alimentos y se consideraría
+un activo macronutricional, salvo para una pequeña minoría que sufre de fenilcetonuria y
+algunas personas con esquizofrenia [ 62]. El ácido cítrico es un ácido débil común en los cítricos y no
+presenta peligro salvo que se consuma en gran cantidad o se inhale [ 63]. De forma similar, la naringina es el
+principal glucósido de flavonoide del pomelo y da al jugo de pomelo su sabor amargo. Se metaboliza en humanos
+y presenta riesgo solo en gran cantidad o por inhalación [64].
+Aunque la mayoría de las sustancias químicas tóxicas no es un problema importante al usar el concentrado de hojas de arce rojo
+como fuente de alimento, la cumarina preocupa más porque se considera un veneno,
+aunque se encuentra en muchas plantas que se usan como fuente de alimento [ 65]. El uso de la cumarina como aditivo
+alimentario fue prohibido por la FDA de EE. UU. en 1954 con base en informes de hepatotoxicidad en ratas y debido a
+los efectos hepatotóxicos en humanos, la Comisión Europea (CE) restringió la cumarina de los productos naturales
+como aditivo alimentario directo a 2 mg /kg de alimento /día. Sin embargo, el Reglamento europeo n.º 1334 /2008
+la CE concedió excepciones para niveles más altos en bebidas alcohólicas, caramelo, chicle y ciertos
+“alimentos tradicionales”, que incluían 50 mg /kg en productos de panadería tradicionales y/o de temporada que contienen una
+referencia a la canela en el etiquetado, 20 mg /kg en cereales de desayuno, incluido el muesli, 15 mg /kg en productos de
+panadería finos, con la excepción de los productos de panadería tradicionales y/o de temporada que contienen una referencia a la
+canela en el etiquetado, y 5 mg /kg en postres. Un estudio reciente encontró que los productos de panadería finos analizados
+superan el límite europeo (15 mg /kg) en casi el 50% de los casos y que el té puede ser una fuente significativa
+de la ingesta total de cumarina [ 66]. Se necesita trabajo futuro para cuantificar la cantidad de cumarina
+en el concentrado de hojas de arce rojo para determinar qué tan seria sería como posible fuente de toxicidad en una
+catástrofe global.
+4.2. Limitaciones y necesidad de colaboración de código abierto
+Este estudio tiene varias limitaciones en el contexto de demostrar que el extracto de hojas de arce rojo es seguro para comer,
+y, como tal, se esperaría que este método tuviera las mismas limitaciones al extenderse a otros tipos
+de hojas que se usen como alimento alternativo. En primer lugar, es posible que este concentrado de hojas o uno de los
+otros tenga una sustancia química tóxica que no se ha estudiado en el pasado y; por lo tanto, el método
+no demuestra que sea un alimento seguro. Sin embargo, incluso para las sustancias químicas tóxicas determinadas previamente,
+este método podría pasarlas por alto debido al tipo de extracción que se usó para preparar el
+Plants 2019 ,8, 110 10 de 15
+concentrado. Algunos de los compuestos menos polares podrían necesitar extraerse con disolventes orgánicos, mientras que
+aquí se usó la técnica de extracción con agua. Además, las sustancias químicas tienen varios nombres y por ello
+si la base de datos OpenFoodTox usa otros nombres, podrían pasarse por alto en el algoritmo de comparación.
+Compound Discoverer está conectado a más de 300 bibliotecas a través del nodo ChemSpider. Las bibliotecas
+elegidas para este estudio fueron las sugeridas por Thermo Scientific [ 67] y que se sospecha que incluyen
+compuestos tóxicos. Podría hacerse más trabajo para probar otras bibliotecas en busca de otros posibles compuestos nocivos.
+Además, el software disponible actualmente para la identificación de fórmulas químicas puede manejar sobre todo
+compuestos CHNOS para asignaciones fiables. Diseñar un algoritmo más apropiado para incluir
+más composición elemental con asignación fiable de fórmulas es la tarea que puede hacerse en el futuro.
+Además, se empleó un sistema de cromatografía líquida bidimensional de ultra alta presión,
+pero el análisis aquí presentado correspondió a un método LC-MS monodimensional. En el futuro, la investigación puede usar
+otra dimensión para resolver más picos y quizá identificar más compuestos. El otro enfoque
+podría ser usar otras técnicas de ionización en MS, como la ionización química a presión atmosférica
+(APCI) [ 68] y la fotoionización a presión atmosférica (APPI) [ 69] para detectar tóxicos menos polares
+compuestos. El ESI usado en este trabajo es la técnica de ionización más utilizada, que cubre un amplio
+rango de pesos moleculares y polaridades; sin embargo, algunos compuestos no polares podrían no ser detectables
+con ESI y requerir otras técnicas de ionización. La otra limitación de este trabajo es la falta de información MS /MS
+en las bibliotecas para la validación de las estructuras químicas, lo que pone de relieve la necesidad de
+colaboraciones de código abierto.
+Determinar la toxicidad de un alimento alternativo potencial tan complejo es un desafío. Compound
+Discoverer tiene diferentes flujos de trabajo que pueden elegirse para la identificación de compuestos. Este estudio
+inicialmente probó dos flujos de trabajo diferentes. Uno de ellos encontró 20 compuestos con la fórmula química predicha
+dentro de 3 ppm, que además tiene una alta puntuación de coincidencia para MS /MS dependiente de datos.
+Esto significa que se puede tener mucha confianza en que están asignados correctamente. Con el otro flujo de trabajo,
+solo se encontraron dos compuestos con buenas puntuaciones de coincidencia. Esto significa que los distintos flujos de trabajo pueden
+encontrar compuestos distintos. Por ello, a diferencia de muchos estudios en este campo, aquí el conjunto de datos completo se pone a
+disposición como código abierto [ 57]. Con base en trabajos previos que han indicado que la ciencia puede
+acelerarse promoviendo una cultura de investigación abierta [ 70–73] y aplicando un enfoque de código abierto al
+software [ 74–76] y al hardware [ 77–81]. Si este método se convierte en un estándar, otros investigadores
+podrán construir sobre la caracterización inicial realizada por cualquier grupo para obtener una mejor comprensión de la
+composición química de un posible alimento alternativo.
+Por último, hay muchos otros compuestos que no tienen fragmentación MS /MS dependiente de datos
+porque no fueron los cinco picos más altos de los espectros. Por ello, pueden realizarse más experimentos
+para obtener fragmentación MS /MS en más picos (por ejemplo, MS /MS dependiente de datos en los segundos cinco picos más altos
+, y así sucesivamente). También puede realizarse un cribado de sospechosos para generar información MS /MS sobre una lista
+de masas conocidas de las bibliotecas tóxicas [45].
+Una alternativa a identificar las toxinas individualmente y evaluar su riesgo es usar la idea de
+“equivalencia sustancial” [ 82], utilizada por los reguladores (como la FDA de EE. UU.) para aprobar alimentos integrales nuevos.
+Esto implicaría, en primer lugar, realizar un análisis composicional y pruebas toxicológicas in vitro sobre una hoja
+(idealmente de hojas de árboles relacionados, como el arce amarillo) que los humanos han comido históricamente, y
+luego sobre el árbol en cuestión (por ejemplo, el arce rojo). Si las composiciones y los resultados toxicológicos son similares, entonces
+la hoja podría considerarse relativamente segura para su ingestión (incluso si hay compuestos tóxicos conocidos, o
+si no todos los compuestos pueden identificarse).
+4.3. Alimento alternativo en el contexto actual sin desastre
+El concepto de alimentos alternativos se desarrolló originalmente para proporcionar alimento a las personas durante
+una catástrofe global que eliminara por completo la producción agrícola convencional. Existen un
+número de otros escenarios posibles en los que el alimento alternativo podría ser relevante. El primero es el
+déficit agrícola global del 10% que podría aumentar drásticamente los precios de los alimentos. El segundo son los desastres locales
+como terremotos y huracanes que podrían cortar el suministro externo de alimentos. Por último, está el escenario
+Plants 2019 ,8, 110 11 de 15
+de funcionamiento normal de los sistemas. Incluso cuando nuestro sistema agrícola funciona a pleno, hay
+seis millones de muertes evitables al año en niños menores de cinco años causadas por la malnutrición y
+enfermedades relacionadas con el hambre [ 83]. Por ello, los alimentos alternativos, como las hojas, podrían extraerse de árboles vivos
+ahora en cantidades adecuadas, para proporcionar un sistema alimentario más sostenible, a la vez que compensan
+parte de la malnutrición. Hay más de 820 millones de personas subnutridas que enfrentan una privación crónica de
+alimentos en todo el mundo [ 84]. Este hambre, sufrimiento y muerte innecesarios se deben a un
+reparto inadecuado de los recursos de la Tierra, ya que hay más que suficientes calorías generadas por
+la agricultura convencional mundial para alimentar fácilmente a todos en el planeta. Esto hace que el hambre mundial sea más
+un problema que involucra la incapacidad de los pobres para adquirir alimentos a un costo aceptablemente bajo. Los alimentos alternativos
+ofrecen el potencial de nutrición para los pobres a bajo costo, y se necesita trabajo futuro en varias áreas para
+explorar ese potencial. En primer lugar, se necesita investigación para extender la metodología de este estudio a todos los
+principales tipos de hojas del mundo, a fin de dar los primeros pasos hacia la garantía de que estas
+fuentes de alimento no sean tóxicas. En segundo lugar, se necesita investigación para evaluar la viabilidad técnica de usar
+concentrado de hojas en escenarios sin catástrofe. Por último, se necesita un estudio económico para evaluar los
+costos del concentrado de hojas usado como fuente de alimento humano según la ubicación geográfica, el tipo de hoja y la
+tecnología de extracción.
+5. Conclusiones
+Este estudio dio los primeros pasos de un enfoque novedoso para obtener un cribado rápido de toxinas
+en concentrados de hojas comunes para su uso en alimentos alternativos. Este enfoque no dirigido es
+mucho más rápido y menos costoso que los métodos convencionales. Los resultados al aplicar este enfoque a
+el tipo de árbol más común en Norteamérica muestran que el concentrado de hojas de arce rojo contiene al menos
+ocho sustancias químicas tóxicas. Sin embargo, al analizar los datos de toxicidad de estas sustancias en PubChem,
+queda claro que no presentan riesgos sustanciales salvo que se consuman en gran cantidad. Esto indica que el arce rojo
+sigue siendo un posible alimento alternativo, aunque se necesita más investigación sobre la concentración
+y los impactos de obtener una fracción significativa de las calorías a partir del concentrado de hojas. Existe una clara
+necesidad de ampliar este análisis con ciencia abierta a otros tipos de extractos de hojas, para ayudar a compensar el
+hambre mundial actual, para avanzar hacia un sistema alimentario sostenible, así como para
+preparar a la humanidad y la civilización para sobrevivir a un RCG de baja probabilidad y alto impacto.
+Contribuciones de los autores: Conceptualización, J.M.P .; análisis formal, J.M.P . y M.K.; obtención de financiación, J.M.P .;
+investigación, J.M.P . y D.D.; metodología, J.M.P . y M.K.; recursos, J.M.P .; software, J.M.P .; validación, M.K.;
+redacción del borrador original, J.M.P ., M.K. y D.D.; redacción, revisión y edición, J.M.P ., M.K. y D.D.
+Financiación: Esta investigación fue financiada por la Richard Witte Endowment y una beca semilla del Laboratorio de
+Métodos de Resolución Química Avanzada (ChARM).
+Agradecimientos: Los autores desean agradecer a Finan Adamson, Hannah Reish, Gavin Taylor y Lynn
+Mazzoleni por su apoyo técnico y debates útiles.
+Conflictos de intereses: Los autores declaran no tener conflictos de intereses.
+Apéndice A
+El cromatograma de la parte superior izquierda (Figura A1) se relaciona con el ácido L-aspártico elegido de la tabla de resultados
+de la parte inferior. El blanco se muestra en color naranja y la muestra en azul. El
+pico solo está presente en la muestra y no en el blanco. El software también ha validado el patrón isotópico
+del ácido L-aspártico en el espectro de masas de la parte superior izquierda. El pico monoisotópico se indica
+en color lavanda, y los picos isotópicos se indican en verde; si están presentes y tienen
+intensidades correctas.
+Plants 2019 ,8, 110 12 de 15
+Plants 2019 , 8, x REVISIÓN POR PARES 4 de 16 
+  
+Figura A1. Ejemplo de cromatograma LC/MS, espectro de masas y tabla de resultados de Compound 
+Discoverer en el concentrado de hojas de arce rojo. 
+Referencias 
+1. Denkenberger, D.C.; Pearce, J.M. Feeding everyone: Solving the food crisis in event of global catastrophes 
+that kill crops or obscure the sun. Futures 2015, 72, 57–68. doi:10.1016/j.futures.2014.11.008. 
+2. Robock, A.; Oman, L.; Stenchikov, G.L. Nuclear winter revisited with a modern climate model and current 
+nuclear arsenals: Still catastrophic consequences. J. Geophys. Res. 2007, 112. doi:10.1029/2006JD008235. 
+3. Baum, S.D. Confronting the threat of nuclear winter. Futures  2015 , 72, 69–79. 
+doi:10.1016/j.futures.2015.03.004. 
+4. Hellman, M.E. Risk Analysis of Nuclear Deterrence. Bent Tau Beta Pi 2008, 99, 14. 
+5. Barrett, A.M.; Seth, D.; Baum, S.D.; Hostetler, K. Analyzing and reducing the risks of inadvertent nuclear 
+war between the United States and Russia. Sci. Glob. Secur.  2013 , 21, 106–133. 
+6. Pearce, J.M.; Denkenberger, D.C. A National Pragmatic Safety Limit for Nuclear Weapon Quantities. Safety  
+2018, 4, 25. doi:10.3390/safety4020025. 
+7. Robock, A.; Toon, O.B. Local Nuclear War, Global Suffering. Sci. Am. 2010, 302, 74–81. 
+doi:10.1038/scientificamerican0110-74. 
+8. Mills, M.J.; Toon, O.B.; Turco, R.P.; Kinnison, D.E.; Garcia, R.R. Massive global ozone loss predicted 
+following regional nuclear conflict. Proc. Natl. Acad. Sci. USA 2008, 105, 5307–5312. 
+doi:10.1073/pnas.0710058105. 
+9. Robock, A.; Toon, O.B. Self-assured destruction: The climate impacts of nuclear war. Bull. Atomic Sci. 2012, 
+68, 66–74. doi:10.1177/0096340212459127. 
+10. Toon, O.B.; Robock, A.; Turco, R.P. Environmental consequences of nuclear war. AIP Conf. Proc. 2014, 1596, 
+65–73. doi:10.1063/1.4876320. 
+11. Baum, S.D. Uncertain human consequences in asteroid risk analysis and the global catastrophe threshold. 
+Nat. Hazards 2018, 94, 759–775. doi:10.1007/s11069-018-3419-4. 
+12. Newhall, C.; Self, S.; Robock, A. Anticipating future Volcanic Explosivity Index (VEI) 7 eruptions and their 
+chilling impacts. Geosphere 2018, 14, 572–603. doi:10.1130/GES01513.1. 
+13. Donovan, A.; Oppenheimer, C. Imagining the Unimaginable: Communicating Extreme Volcanic Risk. En 
+Observing the Volcano World: Volcano Crisis Communication; Fearnley, C.J., Bird, D.K., Haynes, K., McGuire, 
+W.J., Jolly, G., Eds.; Advances in Volcanology; Springer International Publishing: Cham, Switzerland, 2018; 
+pp. 149–163. ISBN 978-3-319-44097-2. 
+14. Bostrom, N.; Cirkovic, M.M. Global Catastrophic Risks; Oxford University Press: New York, NY, USA, 2008. 
+15. Valdes, P. Built for stability. Nat. Geosci. 2011, 4, 414–416. 
+16. Dudley, J.P.; Woodford, M.H. Bioweapons, Biodiversity, and Ecocide: Potential Effects of Biological 
+Weapons on Biological Diversity. Los brotes de enfermedades causadas por armas biológicas podrían provocar la extinción de especies silvestres en peligro 
+de extinción, la erosión de la diversidad genética de plantas y animales domesticados, la destrucción de 
+los medios de vida tradicionales y la extirpación de culturas indígenas. BioScience 2002, 52, 583–592. 
+doi:10.1641/0006-3568(2002)052[0583:BBAEPE]2.0.CO;2. 
+Figura A1. Ejemplo de cromatograma LC/MS, espectro de masas y tabla de resultados de Compound
+Discover, hallazgos en concentrado de hoja de arce rojo.
+Referencias
+1. Denkenberger, D.C.; Pearce, J.M. Feeding everyone: Solving the food crisis in event of global catastrophes
+that kill crops or obscure the sun. Futures 2015 ,72, 57–68. [CrossRef]
+2. Robock, A.; Oman, L.; Stenchikov, G.L. Nuclear winter revisited with a modern climate model and current
+nuclear arsenals: Still catastrophic consequences. J. Geophys. Res. 2007, 112. [CrossRef]
+3. Baum, S.D. Confronting the threat of nuclear winter. Futures 2015, 72, 69–79. [CrossRef]
+4. Hellman, M.E. Risk Analysis of Nuclear Deterrence. Bent Tau Beta Pi 2008, 99, 14.
+5. Barrett, A.M.; Seth, D.; Baum, S.D.; Hostetler, K. Analyzing and reducing the risks of inadvertent nuclear
+war between the United States and Russia. Sci. Glob. Secur. 2013, 21, 106–133. [CrossRef]
+6. Pearce, J.M.; Denkenberger, D.C. A National Pragmatic Safety Limit for Nuclear Weapon Quantities. Safety
+2018, 4, 25. [CrossRef]
+7. Robock, A.; Toon, O.B. Local Nuclear War, Global Suffering. Sci. Am. 2010, 302, 74–81. [CrossRef]
+8. Mills, M.J.; Toon, O.B.; Turco, R.P.; Kinnison, D.E.; Garcia, R.R. Massive global ozone loss predicted following
+regional nuclear conflict. Proc. Natl. Acad. Sci. USA 2008, 105, 5307–5312. [CrossRef]
+9. Robock, A.; Toon, O.B. Self-assured destruction: The climate impacts of nuclear war. Bull. Atomic Sci. 2012,
+68, 66–74. [CrossRef]
+10. Toon, O.B.; Robock, A.; Turco, R.P. Environmental consequences of nuclear war. AIP Conf. Proc. 2014, 1596,
+65–73. [CrossRef]
+11. Baum, S.D. Uncertain human consequences in asteroid risk analysis and the global catastrophe threshold.
+Nat. Hazards 2018, 94, 759–775. [CrossRef]
+12. Newhall, C.; Self, S.; Robock, A. Anticipating future Volcanic Explosivity Index (VEI) 7 eruptions and their
+chilling impacts. Geosphere 2018, 14, 572–603. [CrossRef]
+13. Donovan, A.; Oppenheimer, C. Imagining the Unimaginable: Communicating Extreme Volcanic Risk. En
+Observing the Volcano World: Volcano Crisis Communication; Fearnley, C.J., Bird, D.K., Haynes, K., McGuire, W.J.,
+Jolly, G., Eds.; Advances in Volcanology; Springer International Publishing: Cham, Switzerland, 2018;
+pp. 149–163. ISBN 978-3-319-44097-2.
+14. Bostrom, N.; Cirkovic, M.M. Global Catastrophic Risks; Oxford University Press: New York, NY, USA, 2008.
+15. Valdes, P. Built for stability. Nat. Geosci. 2011, 4, 414–416. [CrossRef]
+16. Dudley, J.P.; Woodford, M.H. Bioweapons, Biodiversity, and Ecocide: Potential Effects of Biological Weapons
+on Biological Diversity. Los brotes de enfermedades causadas por armas biológicas podrían provocar la extinción de especies silvestres
+amenazadas, la erosión de la diversidad genética de plantas y animales domesticados, la destrucción de los medios de vida tradicionales
+y la extirpación de culturas indígenas. BioScience 2002, 52, 583–592. [CrossRef]
+17. Mann, C.C. Genetic Engineers Aim to Soup up Crop Photosynthesis. Science 1999, 283, 314–316. [CrossRef]
+18. Saigo, H. Agricultural Biotechnology and the Negotiation of the Biosafety Protocol. Geo. Int’l Envtl. L. Rev.
+1999 ,12, 779.
+19. Church, G. Safeguarding biology. Seed 2009, 20, 84–86.
+Plants 2019, 8, 110 13 of 15
+20. Bailey, R.; Benton, T.G.; Challinor, A.; Elliott, J.; Gustafson, D.; Hiller, B.; Jones, A.; Kent, A.; Lewis, K.;
+Meacham, T.; et al. Extreme Weather and Resilience of the Global Food System: Final Project Report from the UK-US
+Taskforce on Extreme Weather and Global Food System Resilience; The Global Food Security Programme; Foreign
+& Commonwealth Office: London, UK, 2015.
+21. Dietz, S. High impact, low probability? An empirical analysis of risk in the economics of climate change.
+Clim. Change 2011, 108, 519–541. [CrossRef]
+22. Aizen, M.A.; Garibaldi, L.A.; Cunningham, S.A.; Klein, A.M. How much does agriculture depend on
+pollinators? Lessons from long-term trends in crop production. Ann. Bot. 2009, 103, 1579–1588. [CrossRef]
+23. Keller, E.J. Drought, War, and the Politics of Famine in Ethiopia and Eritrea. J. Mod. Afr. Stud. 1992 ,30,
+609–624. [CrossRef]
+24. Waldman, R.J. Public Health in Times of War and Famine: What Can Be Done? What Should Be Done?
+JAMA 2001, 286, 588–590. [CrossRef]
+25. Goodhand, J. Enduring Disorder and Persistent Poverty: A Review of the Linkages between War and Chronic
+Poverty. World Dev. 2003, 31, 629–646. [CrossRef]
+26. Avin, S.; Wintle, B.C.; Weitzdörfer, J.; ÓhÉigeartaigh, S.S.; Sutherland, W.J.; Rees, M.J. Classifying global
+catastrophic risks. Futures 2018, 102, 20–26. [CrossRef]
+27. Turchin, A. Approaches to the Prevention of Global Catastrophic Risks. Hum. Prospect 2018 ,7, 52–65.
+28. Denkenberger, D.C.; Blair, R.W. Interventions that may prevent or mollify supervolcanic eruptions. Futures
+2018, 102, 51–62. [CrossRef]
+29. Sandberg, A. Human Extinction from Natural Hazard Events. Oxf. Res. Encycl. Nat. Hazard Sci. 2018.
+[CrossRef]
+30. Turchin, A.; Denkenberger, D. Escala de comunicación de riesgos catastróficos globales y riesgos existenciales. Futures 2018,
+102, 27–38. [CrossRef]
+31. Baum, S.; Denkenberger, D.; Pearce, J.M. Alternative Foods as a Solution to Global Food Supply Catastrophes.
+Solutions 2016, 7, 31–35. Disponible en línea: https://www.thesolutionsjournal.com/article/alternative-foods-
+solution-global-food-supply-catastrophes (consultado el 29 de noviembre de 2018).
+32. Denkenberger, D.; Pearce, J.M. Feeding Everyone No Matter What: Managing Food Security After Global
+Catastrophe; Academic Press: Cambridge, MA, USA, 2014; ISBN 978-0-12-802358-7.
+33. Denkenberger, D.; Pearce, J. Micronutrient Availability in Alternative Foods during Agricultural Catastrophes.
+Agriculture 2018, 8, 169. [CrossRef]
+34. Shenkin, A. Micronutrients in health and disease. Postgrad. Med. J. 2006, 82, 559–567. [CrossRef]
+35. Denkenberger, D.C.; Pearce, J.M. Cost-Effectiveness of Interventions for Alternate Food to Address
+Agricultural Catastrophes Globally. Int. J. Disaster Risk Sci. 2016, 7, 205–215. [CrossRef]
+36. Denkenberger, D.C.; Pearce, J.M. Cost-effectiveness of interventions for alternate food in the United States to
+address agricultural catastrophes. Int. J. Disaster Risk Reduct. 2018, 27, 278–289. [CrossRef]
+37. Baum, S.D.; Denkenberger, D.C.; Pearce, J.M.; Robock, A.; Winkler, R. Resilience to global food supply
+catastrophes. Environ. Syst. Decis. 2015, 35, 301–313. [CrossRef]
+38. Denkenberger, D.C.; Cole, D.D.; Abdelkhaliq, M.; Griswold, M.; Hundley, A.B.; Pearce, J.M. Feeding everyone
+if the sun is obscured and industry is disabled. Int. J. Disaster Risk Reduct. 2017 ,21, 284–290. [CrossRef]
+39. Denkenberger, D.; Pearce, J.; Taylor, A.R.; Black, R. Food without sun: Price and life-saving potential.
+Foresight 2018, 21, 118–129. [CrossRef]
+40. Seekell, D.; Carr, J.; Dell’Angelo, J.; D’Odorico, P.; Fader, M.; Gephart, J.; Matti, K.; Magliocca, N.; Porkka, M.;
+Puma, M.; et al. Resilience in the global food system. Environ. Res. Lett. 2017, 12, 025010. [CrossRef]
+41. Belitz, H.D.; Grosch, W.; Schieberle, P. 2009 Food Chemistry; Springer: Berlin, Germany, 2009.
+42. Kim, K.-Y.; Chung, H.-J. Flavor Compounds of Pine Sprout Tea and Pine Needle Tea. J. Agric. Food Chem.
+2000, 48, 1269–1272. [CrossRef]
+43. Leaf for Life. Industrial Leaf Concentrate Process (France). Disponible en línea: https://www.leaforlife.org/
+PAGES/INDUSTRI.HTM (consultado el 28 de noviembre de 2018).
+44. Kennedy, D. Leaf Concentrate: A Field Guide for Small Scale Programs; Leaf for Life: Interlachen, FL, USA, 1993.
+45. Schymanski, E.L.; Singer, H.P.; Slobodnik, J.; Ipolyi, I.M.; Oswald, P.; Krauss, M.; Schulze, T.; Haglund, P.;
+Letzel, T.; Grosse, S.; et al. Non-target screening with high-resolution mass spectrometry: Critical review
+using a collaborative trial on water analysis. Anal. Bioanal. Chem. 2015, 407, 6237–6255. [CrossRef]
+Plants 2019, 8, 110 14 of 15
+46. Agroscope Toxic Plants-Phytotoxin (TPPT) Database. Disponible en línea: https://www.agroscope.admin.ch/
+agroscope/en/home/publikationen/apps/tppt.html (consultado el 3 de diciembre de 2018).
+47. Schymanski, E.L.; Jeon, J.; Gulde, R.; Fenner, K.; Ruff, M.; Singer, H.P.; Hollender, J. Identifying Small
+Molecules via High Resolution Mass Spectrometry: Communicating Confidence. Environ. Sci. Technol. 2014,
+48, 2097–2098. [CrossRef]
+48. Sumner, L.W.; Amberg, A.; Barrett, D.; Beale, M.H.; Beger, R.; Daykin, C.A.; Fan, T.W.-M.; Fiehn, O.;
+Goodacre, R.; Griffin, J.L.; et al. Proposed minimum reporting standards for chemical analysis. Metabol. 2007,
+3, 211–221. [CrossRef]
+49. United States. Forest Service Check List of Native and Naturalized Trees of The
+United States Including Alaska. 1953. Disponible en línea: https://archive.org/details/
+CheckListOfNativeAndNaturalizedTreesOfTheUnitedStatesIncludingAlaska (consultado el 28 de noviembre de 2018).
+2018).
+50. Forest Inventory and Analysis National Program-National Assessment-RPA. Disponible en línea: https:
+//www.fia.fs.fed.us/program-features/rpa/index.php (consultado el 28 de noviembre de 2018).
+51. Johansson, M.; Ekroth, S.; Scheibner, O.; Bromirski, M. How to screen and identify unexpected
+and unwanted compounds in food, Thermo Scientific: APPLICATION NOTE 65144. Disponible en
+en línea: https: //assets.thermoﬁsher.com /TFS-Assets /CMD /Application-Notes /an-65144-lc-ms-unexpected-
+unwanted-compounds-food-an65144-en.pdf (consultado el 28 de noviembre de 2018).
+52. Great Big Story. 2018. When in Japan, Deep-Fry Some Maple Leaves. Disponible en línea: https://youtu.be/
+9Pwy-cAf09I (consultado el 8 de enero de 2019).
+53. Alward, A.; Corriher, C.A.; Barton, M.H.; Sellon, D.C.; Blikslager, A.T.; Jones, S.L. Red Maple (Acer rubrum)
+Leaf Toxicosis in Horses: A Retrospective Study of 32 Cases. J. Vet. Intern. Med. 2006, 20, 1197–1201.
+[CrossRef] [PubMed]
+54. Bassan, A.; Ceriani, L.; Richardson, J.; Livaniou, A.; Ciacci, A.; Baldin, R.; Kovarich, S.; Fioravanzo, E.;
+Pavan, M.; Gibin, D.; et al. OpenFoodTox: EFSA’s Chemical Hazards Database 2018. Disponible en línea:
+https://zenodo.org/record/1252752#.W8Yc-2epWUn (consultado el 4 de diciembre de 2018).
+55. Katsuno, T.; Kasuga, H.; Kusano, Y.; Yaguchi, Y.; Tomomura, M.; Cui, J.; Yang, Z.; Baldermann, S.;
+Nakamura, Y.; Ohnishi, T.; et al. Characterisation of odorant compounds and their biochemical formation in
+green tea with a low temperature storage process. Food Chem. 2014, 148, 388–395. [CrossRef] [PubMed]
+56. Yang, Z.; Kobayashi, E.; Katsuno, T.; Asanuma, T.; Fujimori, T.; Ishikawa, T.; Tomomura, M.; Mochizuki, K.;
+Watase, T.; Nakamura, Y.; et al. Characterisation of volatile and non-volatile metabolites in etiolated leaves
+of tea (Camellia sinensis) plants in the dark. Food Chem. 2012, 135, 2268–2276. [CrossRef]
+57. Red Maple Leaf Concentrate Chemical Analysis. 2018. Disponible en línea: https://osf.io/h4zr3/ (consultado el 5 de
+diciembre de 2018).
+58. Pubchem 3-Methoxybenzaldehyde. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/11569
+(consultado el 4 de diciembre de 2018).
+59. Pubchem Glutamic Acid. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/33032 (consultado el
+4 de diciembre de 2018).
+60. Reeds, P.J.; Burrin, D.G.; Stoll, B.; Jahoor, F. Intestinal Glutamate Metabolism. J. Nutr. 2000, 130, 978S–982S.
+[CrossRef]
+61. Pubchem Aspartic Acid. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/5960 (consultado el 4
+de diciembre de 2018).
+62. Pubchem Phenylalanine. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/6140 (consultado el
+4 de diciembre de 2018).
+63. Pubchem Citric Acid. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/311 (consultado el 4
+de diciembre de 2018).
+64. Pubchem Naringin. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/442428 (consultado el 4
+de diciembre de 2018).
+65. Pubchem Coumarin. Disponible en línea: https://pubchem.ncbi.nlm.nih.gov/compound/323 (consultado el 4
+de diciembre de 2018).
+66. Ballin, N.Z.; Sørensen, A.T. Coumarin content in cinnamon containing food products on the Danish market.
+Food Control 2014, 38, 198–203. [CrossRef]
+Plants 2019, 8, 110 15 of 15
+67. Compound Discoverer 2.1 ChemSpider Search Node. Disponible en línea: https://mycompounddiscoverer.files.
+wordpress.com/2018/02/chemspider-datasources-cd2-1-update.pdf (consultado el 5 de diciembre de 2018).
+68. Beyer, J.; Peters, F.T.; Kraemer, T.; Maurer, H.H. Detection and validated quantification of toxic alkaloids in
+human blood plasma—Comparison of LC-APCI-MS with LC-ESI-MS/MS. J. Mass Spectrom. 2007, 42, 621–633.
+[CrossRef]
+69. Capriotti, A.L.; Foglia, P.; Gubbiotti, R.; Roccia, C.; Samperi, R.; Laganà, A. Development and validation of a
+liquid chromatography/atmospheric pressure photoionization-tandem mass spectrometric method for the
+analysis of mycotoxins subjected to commission regulation (EC) No. 1881/2006 in cereals. J. Chromatogr. A
+2010, 1217, 6044–6051. [CrossRef] [PubMed]
+70. Nosek, B.A.; Alter, G.; Banks, G.C.; Borsboom, D.; Bowman, S.D.; Breckler, S.J.; Buck, S.; Chambers, C.D.;
+Chin, G.; Christensen, G.; et al. Promoting an open research culture. Science 2015, 348, 1422–1425. [CrossRef]
+71. Willinsky, J. The unacknowledged convergence of open source, open access, and open science. First Monday
+2005, 10. [CrossRef]
+72. Ross, J.S.; Krumholz, H.M. Ushering in a New Era of Open Science Through Data Sharing: The Wall Must
+Come Down. JAMA 2013, 309, 1355–1356. [CrossRef]
+73. Woelfle, M.; Olliaro, P.; Todd, M.H. Open science is a research accelerator. Nat. Chem. 2011, 3, 745–748.
+[CrossRef] [PubMed]
+74. Feller, J.; Fitzgerald, B. Understanding Open Source Software Development; Addison-Wesley: London, UK, 2002;
+pp. 143–159.
+75. Lakhani, K.R.; Wolf, R.G. Why hackers do what they do: Understanding motivation and e ort in free /open
+source software projects. Perspect. Free Open Sour. Softw. Proj. 2005, 1, 3–22. [CrossRef]
+76. Hippel, E.V.; Krogh, G.V. Open source software and the “private-collective” innovation model: Issues for
+organization science. Organ. Sci. 2003, 14, 209–223. [CrossRef]
+77. Pearce, J.M. Building Research Equipment with Free, Open-Source Hardware. Science 2012, 337, 1303–1304.
+[CrossRef] [PubMed]
+78. Pearce, J. Open-Source Lab: How to Build Your Own Hardware and Reduce Research Cost , 1st ed.; Elsevier:
+Waltham, MA, USA, 2014.
+79. Pearce, J.M. Impacts of Open Source Hardware in Science and Engineering. Bridge 2017, 47, 24–31.
+80. Oberloier, S.; Pearce, J.M. General Design Procedure for Free and Open-Source Hardware for Scientific
+Equipment. Designs 2018, 2, 2. [CrossRef]
+81. Dryden, M.D.; Fobel, R.; Fobel, C.; Wheeler, A.R. Upon the Shoulders of Giants: Open-Source Hardware and
+Software in Analytical Chemistry. Anal. Chem. 2017, 89, 4330–4338. [CrossRef] [PubMed]
+82. Dybing, E.; Doe, J.; Groten, J.; Kleiner, J.; O’Brien, J.; Renwick, A.G.; Schlatter, J.; Steinberg, P.; Tritscher, A.;
+Walker, R.; et al. Hazard characterisation of chemicals in food and diet. Dose response, mechanisms and
+extrapolation issues. Food Chem. Toxicol. 2002, 40, 237–282. [CrossRef]
+83. UNICEF. The State of the World’s Children 2006: Excluded and Invisible ; UNICEF: Hong Kong, China, 2005;
+ISBN 978-92-806-3916-2.
+84. Fao.org SOFI 2018—The State of Food Security and Nutrition in the World. Disponible en línea: http:
+//www.fao.org/state-of-food-security-nutrition/en/ (consultado el 5 de diciembre de 2018).
+©2019 by the authors. Licensee MDPI, Basel, Suiza. Este artículo es de acceso abierto
+distribuido bajo los términos y condiciones de la licencia Creative Commons Atribución
+licencia (CC BY) (http: //creativecommons.org /licenses /by/4.0/).

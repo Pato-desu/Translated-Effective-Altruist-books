@@ -1,0 +1,590 @@
+La estructura de los sistemas de metas predice el rendimiento humano
+David D. Bourgin1a(ddbourgin@berkeley.edu)
+Falk Lieder1a(falk.lieder@berkeley.edu)
+Daniel Reichman1a(daniel.reichman@gmail.com)
+Nimrod Talmon1b(nimrodtalmon77@gmail.com)
+Thomas L. Griffithsa(tom griffiths@berkeley.edu)
+aDepartamento de Psicología
+University of California Berkeley
+Berkeley, CA 94720 USA
+bDepartamento de Ciencias de la Computación y Matemática Aplicada
+Weizmann Institute of Science
+Rehovot, Israel
+1Estos autores contribuyeron por igual.
+Resumen
+La mayoría de las teorías psicológicas atribuyen el fracaso de las personas para
+alcanzar sus metas exclusivamente a una motivación insuficiente o
+a la falta de habilidad. Aquí ofrecemos una explicación complementaria que
+pone énfasis en la complejidad inherente de los problemas computa-
+cionales que surgen de la estructura de los sistemas de metas de las personas.
+Concretamente, planteamos la hipótesis de que la capacidad de las personas para alcanzar
+sus metas puede predecirse a partir de parámetros combinatorios de
+la estructura de la red que conecta sus metas con los medios
+disponibles para perseguirlas. Para probar esta hipótesis, expresamos
+la relación entre metas y medios como un grafo bipartito
+en el que las aristas entre medios y metas indican qué medios
+pueden usarse para alcanzar qué metas. Esto nos permitió trazar
+dos desafíos computacionales que surgen en el logro de metas
+en dos problemas clásicos NP-difíciles: Set Cover y Maximum
+Coverage. La conexión entre la búsqueda de metas y los problemas NP-difíciles
+nos llevó a predecir que las personas deberían desempeñarse mejor
+con sistemas de metas de forma arbórea. Tres experimentos conductuales
+confirmaron esta predicción. Nuestros resultados implican que
+los parámetros de red que son útiles para el diseño de algoritmos
+también podrían serlo para entender cuándo y por qué las personas
+tienen dificultades en la búsqueda de sus metas.
+Palabras clave: toma de decisiones; metas; análisis racional; teoría de grafos;
+complejidad computacional
+Introducción
+La capacidad de fijar y alcanzar metas de alto nivel, como redactar
+un artículo de CogSci, es un rasgo crítico de la inteligencia humana
+y un desafío clave para los sistemas de inteligencia artificial (Newell
+& Simon, 1972). De manera crítica, la resolución cotidiana de problemas re-
+quiere que las personas manejen múltiples metas en paralelo (Atkinson &
+Birch, 1970; Miller, Galanter, & Pribram, 1960). Concretamente,
+cuando se da a las personas diez minutos para enumerar sus actividades actuales
+reportan en promedio unas 15 metas, y cada una de ellas
+suele implicar múltiples submetas en varios niveles de
+abstracción (Little & Gee, 2007).
+Generalmente se acepta que hay muchas situaciones en
+las que las personas no logran actuar según sus metas (Baumeister, Heather-
+ton, & Tice, 1994). Las explicaciones predominantes de tales
+fracasos son la falta de motivación, la falta de planificación (Gollwitzer,
+1999), la incapacidad de postergar la gratificación (Mischel, Shoda, & Ro-
+driguez, 1989), o el agotamiento de la capacidad de auto-
+control (Muraven & Slessareva, 2003). Aquí exploramos una
+explicación alternativa para el fracaso de las personas en alcanzar sus metas: la complejidad inherente del problema computa-
+cional subyacente.
+La relación entre medios y metas puede for-
+malizarse en un grafo bipartito cuyos vértices se dividen en
+un conjunto de medios M = {m1, …, mk} y un conjunto de metas G =
+{g1, …, gl}. En este grafo, un medio m está conectado con una meta g
+si y solo si elegir m logra la meta g. Estas redes
+se llaman sistemas de metas en la literatura psicológica
+(Kruglanski et al., 2002). Por ejemplo, los vértices en la parte superior
+del sistema de metas ilustrado en la Figura 1 podrían corresponder a
+sus metas de llegar a ser un científico prolífico (g1), ser una pareja maravi-
+llosa (g2), llegar a ser un gran padre o madre (g3), estar en buena forma
+física (g4) y disfrutar la vida al máximo (g5).
+Encontrar la mejor configuración de medios para alcanzar un conjunto
+de metas puede implicar desafíos computacionales considerables.
+Se ha sugerido que los hallazgos de la informática teórica
+pueden arrojar luz sobre cómo las personas afrontan problemas com-
+putacionales difíciles (Van Rooij, 2008). Por ejemplo, Van
+Rooij (2008) abogó por aplicar la teoría de la param-
+etrización fija para la tratabilidad y estudiar cómo las personas afrontan problemas com-
+putacionales difíciles. Sin embargo, mientras que la investigación previa
+sobre resolución de problemas ha estudiado qué estrategias usan las personas para resolver
+problemas NP-difíciles (MacGregor & Ormerod, 1996; MacGre-
+gor, Ormerod, & Chronicle, 2000), esta literatura se ha centrado
+en el problema del viajante y en otros problemas que
+son estructuralmente distintos de los que surgen en la búsqueda de metas.1
+Aquí cubriremos esta brecha analizando el logro de metas
+desde la perspectiva de la teoría de la complejidad computacional.
+En la informática teórica es bien sabido que el
+desempeño de muchos algoritmos de optimización combinatoria
+depende de forma crítica de ciertas propiedades de la teoría de grafos de las
+redes a las que se aplican (Kleinberg & Tardos, 2006). Por
+ejemplo, un fenómeno bien documentado en el diseño de algo-
+ritmos, la inteligencia artificial y la investigación operativa es que
+los problemas de optimización NP-difíciles a menudo se vuelven más fáciles en árboles
+y grafos de tipo arbóreo. De hecho, cuando se restringen a árboles, muchos
+1Una excepción es el trabajo de Carruthers, Masson y Stege
+(2012), quienes hallaron que la planaridad de los grafos no tiene efecto en
+el desempeño humano en el problema de Vertex Cover.
+Figura 1: Ejemplo de sistema de metas: los medios aparecen en la parte infe-
+rior, marcados con m1…m4. Las metas aparecen arriba, marcadas con
+g1…g5. Una meta puede alcanzarse si al menos un medio con-
+ectado a ella es elegido. El conjunto {m1, m3} es un conjunto mínimo de
+medios que cubre todas las metas
+Los problemas NP-difíciles pueden resolverse mediante algoritmos eficientes de tiempo
+polinomial, como los métodos de divide y vencerás y los algoritmos
+voraces. Aquí mostramos que el desempeño humano en dos tareas de
+gestión de metas también está bien predicho por medidas de teoría de gra-
+fos sobre el carácter arbóreo del sistema de metas subyacente.
+Nuestros resultados ofrecen una nueva perspectiva computacional
+sobre por qué las personas no logran alcanzar sus metas. Nuestros experimentos
+concuerdan bien con el conocimiento teórico de la informática
+y destacan que los hallazgos de la com-
+plejidad computacional son relevantes para la psicología cognitiva.
+El plan del artículo es el siguiente. Comenzamos por formali-
+zando dos desafíos comunes del logro de metas en términos
+de dos problemas clásicos NP-difíciles: Set Cover y Maximum
+Coverage. Luego derivamos nuestra predicción teórica argumentando
+que el desempeño de las personas en estos problemas debería au-
+mentar con métricas de teoría de grafos sobre qué tan arbórea es el
+sistema de metas. Luego probamos esta predicción en tres experi-
+mentos conductuales y concluimos con un resumen de nuestros hallazgos y
+direcciones para trabajos futuros.
+Análisis formal y predicciones
+Aquí formalizamos, como problemas NP-difíciles bien definidos, dos
+desafíos computacionales que surgen en problemas de selección de me-
+dios, donde se busca elegir un conjunto de medios que sean instru-
+mentales para los fines que se intentan alcanzar.
+El primer problema que consideramos es intentar alcanzar tantas
+metas como sea posible con un presupuesto fijo que limita el número de
+actividades que se pueden realizar. Formalizamos este desafío
+en términos del problema de Maximum Coverage (MC). En él,
+se nos da un grafo bipartito H = (C, D, F), donde C y D son los
+lados de la bipartición, y F es el conjunto de aristas que conectan
+vértices de C con vértices de D. También se nos da un entero no negativo
+k ≤ |C|. Buscamos un conjunto C′ ⊆ C, de cardinalidad
+como máximo k, que maximice el número de vértices en D cubiertos
+por vértices en C′ (un vértice b ∈ D está cubierto por un vértice a ∈ C
+si (a, b) ∈ F). Como sistema de metas, el conjunto C corresponde a
+los medios, el conjunto D corresponde a las metas, y F representa las
+interconexiones entre metas y medios. Obsérvese que asumimos
+que una vez que una meta es cubierta por un solo medio, entonces
+será alcanzada. Este supuesto se hace para sim-
+plificar la tarea experimental, lo que permite una descripción simple y limpia.
+El segundo problema que estudiamos es intentar alcanzar un
+conjunto dado de metas de la manera más eficiente posible, seleccionando el
+número mínimo de medios que logren todas las metas. Formalizamos
+este desafío en términos del problema de Set Cover
+(SC). En el problema de Set Cover, se nos da un grafo bipartito
+G = (A, B, E), donde A y B son los lados de la bipartición y
+E es el conjunto de aristas que conectan vértices de A con vértices de B.
+Como sistema de metas, el conjunto A corresponde a medios, el conjunto B
+corresponde a metas, y el conjunto E corresponde a las interco-
+nexiones entre metas y medios. En el problema SC, nuestro
+objetivo es cubrir todos los vértices de B mediante un conjunto A′ ⊆ A de mínima
+cardinalidad. Tanto MC como SC son NP-difíciles no solo de resolver
+exactamente sino también de aproximar (Feige, 1998).
+Estos dos problemas computacionales (MC y SC) capturan
+aspectos esenciales de los problemas de selección de medios que se han
+estudiado en la literatura psicológica.
+Por ejemplo, en general se acepta que las personas intentan ele-
+gir medios para maximizar el número de metas alcanzadas
+(Kruglanski et al., 2002; Zhang, Fishbach, & Kruglanski,
+2007). Además, representar las metas como grafos y suponer
+que están interconectadas aparece, ya sea explícita o implícitamente,
+en varios artículos (Kruglanski et al., 2002; Tha-
+gard & Millgram, 1995).
+Usaremos las dos medidas de desempeño siguientes para
+cuantificar qué tan bien lo hacen las personas en MC y SC. Nuestra primera me-
+dida cuantifica simplemente la capacidad de encontrar la solución óptima.
+Es una medida binaria que vale 1 si la persona encuentra la
+solución óptima y 0 en caso contrario. Dado un algoritmo A para
+MC o SC, la segunda medida, denominada calidad de la solución,
+va de 0 (peor) a 1 (mejor). Para la tarea MC,
+la calidad de la solución es el número de metas alcanzadas por A
+dividido entre el número máximo de metas que podrían alcanzarse
+con k medios. Para la tarea SC, la calidad de la solución es el
+número mínimo de medios que logra todas las metas dividido entre
+el número de medios seleccionados por A. La calidad de la solución (que
+también se llama razón de aproximación de A) se usa ampliamente
+para cuantificar la calidad de los algoritmos de aproximación
+para problemas NP-difíciles (Vazirani, 2013).
+La dificultad de MC y SC ofrece una primera indicación de
+por qué las personas podrían encontrar difícil manejar varias metas
+a la vez. Sin embargo, no todas las instancias de estos problemas
+son igual de difíciles. A continuación presentamos medidas de teoría de grafos
+que podrían ser útiles para distinguir las instancias más difíciles
+de las más fáciles.
+Características y predicciones
+Un árbol es un grafo conexo sin ciclos. Muchos problemas NP-difíciles
+en grafos de ancho de árbol pequeño (Robertson y Sey-
+mour, 1986, véase abajo) admiten algoritmos exactos o aproxima-
+dos significativamente mejores que lo que se sabe que es
+alcanzable en instancias del peor caso.
+La idea de que los grafos parecidos a árboles podrían ser más fáciles para las personas
+guio nuestra búsqueda de características que cuantifican qué tan
+parecida es una red dada a un árbol. A continuación se presentan
+cuatro características de este tipo.
+Ancho de árbol. El ancho de árbol (tw) es un parámetro combinatorio
+asociado a un grafo.2 Un ancho de árbol bajo implica
+que los nodos y las aristas de la red pueden organizarse de
+una manera que se asemeja a un árbol (p. ej., Kloks, 1994; Robertson
+& Seymour, 1986). Para una definición precisa del ancho de árbol
+véase Kloks (1994).
+Expansión combinatoria. Dado un grafo G = (V, E) y un
+subconjunto no vacío S ⊆ V, sea ∂(S) el conjunto de aristas que cruzan
+el corte (S, V∖S) y sea N(S) el conjunto de todos los vértices de V∖S
+que tienen un vecino en S. La expansión de vértices de G se define como
+define como mín_{S⊆V, 0<|S|≤|V|/2} |N(S)|
+/|S|. La expansión de aristas de
+G es mín_{S⊆V, 0<|S|≤|V|/2} |∂(S)|
+/|S|. Los árboles de grado acotado tienen
+expansión O(1/|V|), por lo que una gran expansión sugiere que
+el grafo no se parece a un árbol. Calculamos tanto la expansión de vértices
+como la de aristas resolviendo programas lineales enteros
+(ILP) con el software CPLEX de IBM.
+Expansión espectral. Las matrices de adyacencia de los grafos
+que consideramos son simétricas, por lo que tienen n autovalores reales
+λ1 ≥ λ2 ≥ … ≥ λn. La desigualdad de Cheeger (discreta)
+clásica (p. ej., Alon y Milman, 1985) implica que cuanto
+mayor sea d − λ2, mayor será la expansión de aristas del grafo.3
+Se sabe que las instancias de MC y SC con ancho de árbol bajo tienen
+algoritmos exactos que se ejecutan en tiempo O(2^w n) (Alber y
+Niedermeier, 2002), por lo que las instancias con ancho de árbol bajo
+probablemente sean más fáciles de manejar algorítmicamente. Los al-
+goritmos actuales que calculan descomposiciones en árbol son bastante com-
+plicados, por lo que parece poco probable que las personas los usen
+para resolver problemas de SC y MC. Sin embargo, el ancho de árbol
+podría afectar el desempeño de las heurísticas de las personas: la se-
+mejanza entre los grafos de ancho de árbol bajo y los árboles podría hacer
+mucho más efectivos los tipos de algoritmos que las personas podrían usar, como los voraces
+y los de divide y vencerás. Por el contrario,
+como las instancias del peor caso de MC y SC son difíciles incluso
+de aproximar, y como las instancias difíciles suelen tener gran
+ancho de árbol y expansión (Clementi y Trevisan, 1999), es
+probable que sea difícil no solo resolverlas exactamente, sino también
+encontrar soluciones aproximadas para instancias de ancho de árbol grande.
+Un razonamiento similar se aplica a nuestras medidas de expansión.
+Por ello planteamos la hipótesis de que el ancho de árbol, la expansión de vértices, la
+expansión de aristas y la brecha espectral de G están correlacionados negativamente
+con la calidad de la solución de las personas a los problemas de SC y MC
+y con la frecuencia con la que encuentran una solución óptima.
+Predictores adicionales
+Un conjunto de vértices de retroalimentación (FVS) es un subconjunto de vértices cuya
+eliminación de un grafo dado produce un bosque. El tamaño
+de un conjunto mínimo de vértices de retroalimentación es una medida alternativa
+de la similitud de un grafo con un árbol. Por ello usamos también esta característica.
+2Aquí consideraremos solo grafos no dirigidos.
+3Incluimos la brecha espectral porque admite un algoritmo polinomial eficiente
+a diferencia de los otros tres predictores, que son NP-
+difíciles. Como tal, puede resultar un predictor práctico del desempeño. Calculamos el FVS con la implementa-
+ción basada en (Iwata, 2016; Wahlström, 2014), disponible en
+https://github.com/wata-orz/fvs.
+Modelos empíricos de dificultad previos han encontrado útiles otras
+características de los grafos: el diámetro, la excentri-
+cidad promedio y la longitud promedio de los caminos (Leyton-Brown, Nudelman y
+Shoham, 2009). Por ello incluimos estas características. El diá-
+metro de un grafo es la distancia más larga entre dos vértices
+del grafo (donde la distancia dist(u, v) es el número de
+aristas en un camino más corto que conecta u y v; todos los grafos
+considerados son conexos). La excentricidad e(v) de un vértice v en
+un grafo no dirigido G = (V, E) es la distancia máxima de un
+vértice de V∖{v} a v. La excentricidad promedio (AvgEcc) es
+1
+(1/n) Σ_{v∈V} e(v) (n es el número de vértices). La longitud promedio de los caminos
+(AvgPath) es
+2/(n(n−1)) Σ dist(u, v), donde la suma se toma
+sobre todos los pares de vértices distintos.
+Experimentos conductuales
+Para probar cómo se relacionan nuestros predictores con el desempeño humano en
+MC y SC, realizamos tres experimentos conductuales de
+crowdsourcing. Usamos un diseño entre sujetos en el que cada
+participante fue asignado al azar a uno de veinte grafos
+con anchos de árbol de 4 a 13. En el primer experimento,
+se pidió a los participantes resolver el problema SC, y en el
+segundo experimento se les pidió resolver el problema MC.
+En cada caso, el problema se representaba gráficamen-
+te como un grafo bipartito con 48 vértices. Los 24 vértices
+de abajo representan los medios disponibles (actividades A-Z)
+y los 24 vértices de arriba representan las metas. Cada arista desde
+un vértice de medio hasta un vértice de meta implica que completar esa
+actividad basta para lograr la meta. En la tarea SC, se pidió a los par-
+ticipantes seleccionar un número mínimo de actividades
+para lograr todas las metas. En la tarea MC, se pidió a los participantes
+elegir cinco actividades que logren tantas metas como
+sea posible. El tercer y último experimento pidió a los participantes
+resolver un problema SC en el que las metas tienen contenido semántico
+y valores reales, y se usa una visualización distinta para eliminar
+posibles efectos de visualización. En cada experimento restringimos
+nuestros análisis a sistemas de metas en los que cada meta y
+cada vértice de medio tenía exactamente 4 vecinos (es decir, cada grafo era
+4-regular). Esta restricción significaba que cada grafo requería
+la misma cantidad de memoria para su procesamiento, lo que garantiza
+que ninguna diferencia entre condiciones pueda explicarse
+por limitaciones de la memoria de trabajo.
+Experimento 1: desempeño humano en Set Cover
+Métodos. Reclutamos 655 participantes en Amazon Me-
+chanical Turk. Se pagó a los participantes $1.25 y podían ganar
+una bonificación dependiente del desempeño de hasta $2. Cada participante
+fue asignado al azar a una de 20 condiciones que diferían
+solo en la estructura del grafo del problema SC que los participantes
+debían resolver. Tras aceptar participar, los participantes leyeron una
+historia sobre una persona que intenta elegir qué conjunto de actividades
+(p. ej., ofrecerse como voluntaria para mejorar el sitio web de la empresa
+y hacer ejercicio en el gimnasio) debe realizar para
+alcanzar todas sus metas (p. ej., ganar más dinero, mejorar
+Figura 2: Interfaz e instrucciones del Experimento 1.
+la relación con su jefe, ponerse en forma, etc.) con la menor cantidad posible de
+actividades, porque su tiempo es limitado. La historia destacaba
+que algunas actividades permiten alcanzar varias metas al mismo tiempo.
+A continuación, los participantes completaron una prueba de práctica simple con
+solo dos medios y dos metas. Una vez resuelta esta tarea con éxito,
+los participantes pasaron al problema Set Cover que tenían asignado. Cuando
+los participantes pasaban el cursor sobre una actividad, la interfaz
+resaltaba las metas que esta alcanzaría
+y las aristas correspondientes del grafo en verde.
+Las metas ya alcanzadas y las actividades ya seleccionadas
+se marcaban con marcas de verificación, y
+la cantidad de actividades seleccionadas se mostraba en la parte inferior de
+la pantalla. Se pidió a los participantes que ayudaran a una persona a alcanzar
+sus 24 metas con la menor cantidad posible de actividades, y se les
+motivó con la posibilidad de ganar una bonificación económica de $2
+por alcanzar todas las metas de la forma más eficiente posible. Tras enviar
+su solución, los participantes completaron un cuestionario final
+que les pedía información demográfica básica (edad,
+género e idioma principal) y cuatro escalas Likert de 9 puntos
+(anclas: “para nada”, “algo” y “extremadamente”) que miden
+la dificultad percibida de la tarea, la motivación para alcanzar
+todas las metas, la motivación para encontrar la solución óptima y
+la motivación para terminar la tarea lo más rápido posible. Excluimos a
+30 participantes (4 :6%) porque sus respuestas no
+alcanzaban todas las metas, lo que sugiere que no siguieron las
+instrucciones.
+Resultados. Encontramos que el ancho de árbol por sí solo explicaba el 44 :90%
+de la varianza en la frecuencia con que las personas encontraban la
+solución óptima entre los 20 grafos ( F(1;18) =14:20;p=
+0:0012): al aumentar el ancho de árbol del grafo, el porcentaje de
+participantes que descubrían la solución óptima disminuía
+significativamente ( r= 0:59;p=0:0058), desde más
+de 90% en el grafo con ancho de árbol 5 a solo cerca de 30%
+en el grafo con ancho de árbol 14. Encontramos que la calidad promedio de la solución estaba negativamente correlacionada con el ancho de árbol
+( r= 0:44;p=0:0525), lo que sugiere que nuestros participantes
+alcanzaban menos metas en sistemas de metas con mayor ancho de árbol.
+El ancho de árbol explicaba el 17 :59% de la varianza en el tiempo mediano de re-
+spuesta entre problemas ( F(1;18) =3:86;p=0:0650):
+el tiempo mediano que las personas tardaban en resolver los problemas
+tendía a aumentar con el ancho de árbol ( r=0:3426), pero este efecto
+no era estadísticamente significativo ( p=0:1393), y cuando restringimos
+este análisis a soluciones correctas, la correlación era
+r=0:3825 ( p=0:1297). La dificultad percibida también tendía a
+aumentar con el ancho de árbol ( r=0:37), pero esta correlación no era
+estadísticamente significativa ( p=0:1062). Nuestros participantes
+estaban muy motivados a encontrar la solución óptima (calificación promedio
+de 7 :910:06 sobre 9). Por ello parece improbable que
+su motivación fuera un cuello de botella para su desempeño. Además,
+la motivación no pareció verse afectada por el ancho de árbol
+( r= 0:23;p=0:34). Por tanto, las diferencias observadas en el
+desempeño parecen deberse a las dificultades inherentes de los
+problemas de selección de medios que plantean los distintos sistemas de metas.
+De los predictores adicionales evaluados, encontramos que el diámetro
+del grafo, el camino más corto promedio y la excentricidad promedio del
+grafo estaban todos correlacionados positivamente de forma significativa con la fre-
+cuencia de las soluciones óptimas identificadas por nuestros participantes
+(diámetro del grafo: r=0:5691 ;p=0:0088, camino más corto prom.:
+r=0:6516 ;p=0:0019, excentricidad prom.: r=0:6265 ;p=
+0:0031). Además, la expansión espectral (medida como
+d l2) y el tamaño de las expansiones de vértices y de aristas del grafo
+mostraron correlaciones negativas significativas con la frecuencia
+de soluciones óptimas (expansión de vértices: r= 0:5836 ;p=
+0:0069, expansión de aristas: r= 0:4552 ;p=0:0437, espectral
+expansión: r= 0:6280 ;p=0:0030). También encontramos que
+el camino más corto promedio, la excentricidad promedio del grafo, la expansión espectral
+y el tamaño de las expansiones de vértices se correlacionaban
+significativamente con las calidades promedio de solución de los participantes
+(camino más corto prom.: r=0:4505 ;p=0:0462, excen-
+tricidad prom.: r=0:4316 ;p=0:0574, expansión espectral: r=
+ 0:4496 ;p=0:0467, expansión de vértices: r= 0:4636 ;p=
+0:0395). Por último, solo la cardinalidad de las expansiones de aristas del
+grafo mostró una correlación significativa con el tiempo de respuesta mediano
+en la tarea SC ( r=0:4538 ;p=0:0445).
+Experimento 2: desempeño humano en Maximum
+Coverage
+Métodos. El Experimento 2 fue idéntico al Experimento 1, excepto por
+la tarea: se pidió a los participantes que alcanzaran
+tantas metas como fuera posible, con la restricción de que el
+tiempo limitado de la persona no les permitía completar más de
+cinco actividades. Los 20 grafos y los incentivos económicos
+eran los mismos que en el Experimento 1. La interfaz del Experi-
+mento 1 se modificó para impedir que los participantes seleccionaran
+más de cinco actividades a la vez. Cuando un participante intentaba
+añadir una sexta actividad se le advertía que primero tendría que
+quitar una o más de las actividades que ya había seleccionado.
+La historia de presentación y la encuesta se modificaron ligeramente
+para ajustarse al cambio en la tarea. Reclutamos 545 participantes
+en Amazon Mechanical Turk. Los participantes recibieron $1 :25
+y podían ganar una bonificación de hasta $2. El formulario de consentimiento especi-
+ficaba que los participantes no podían haber participado en la versión
+anterior de este experimento. Excluimos a 23 participantes
+(4:2%) porque habían seleccionado menos de cinco medios.
+Resultados. La frecuencia con que las personas hallaban la solución ópti-
+ma disminuyó significativamente con el ancho de árbol ( r=
+ 0:4828 ;p=0:0311). Encontramos que el ancho de árbol por sí solo
+explicaba el 20 :41% de la varianza en la frecuencia con que
+las personas hallaban la solución óptima entre los 20
+grafos ( F(1;18) = 4:62;p=0:0455). Encontramos que el
+ancho de árbol explicaba el 25 :25% de la varianza en la calidad de
+la solución (F(1;18) =6:08;p=0:0240), que se deterioraba significativamente
+al aumentar el ancho de árbol ( r= 0:4972 ;p=0:0257). El
+tiempo mediano que las personas tardaban en resolver los problemas no
+aumentó significativamente con el ancho de árbol ( r=0:25;p=0:28)
+y el ancho de árbol explicaba solo el 0 :6% de los tiempos de re-
+spuesta medianos de nuestros participantes ( F(1;18) =0:10;p=0:76). Cuando
+restringimos el análisis al tiempo empleado en soluciones ópti-
+mas, la relación seguía sin ser estadísticamente significativa
+( r=0:2994 ;p=0:1998; F(1;18) =0:10;p=0:76). Fi-
+nalmente, el ancho de árbol explicaba solo el 8 :8% de la varianza en la
+dificultad percibida del problema entre los 20 grafos ( F(1;18) =
+1:74;p=0:20), y la correlación entre el ancho de árbol y la
+dificultad percibida no fue estadísticamente significativa ( r=
+0:26;p=0:26). Nuestros participantes estaban muy motivados a
+encontrar la solución óptima (calificación promedio de 8 :110:06 sobre
+9). Por ello parece improbable que su motivación fuera un cuello de bo-
+tella para su desempeño. Además, la motivación no parecía
+verse afectada por el ancho de árbol ( r= 0:03;p=0:91). Por tanto, las
+diferencias observadas en el desempeño parecen deberse a las
+dificultades inherentes de los problemas de selección de medios que plantean
+los distintos sistemas de metas.
+Además, encontramos que tanto el tamaño de la expansión de aristas del grafo
+como la expansión espectral del grafo (medida
+de nuevo como d l2) se correlacionaban negativamente de forma significativa con
+la frecuencia de soluciones óptimas (expansión de aristas: r=
+ 0:4802 ;p=0:0321, expansión espectral: r= 0:4782 ;p=
+0:0330), mientras que el camino más corto promedio y la excentricidad promedio del
+grafo mostraban una relación positiva significativa (prom.
+camino más corto: r=0:4912 ;p=0:0279, excentricidad prom.:
+r=0:4391 ;p=0:0528). En cambio, solo el tamaño de las
+expansiones de vértices y de aristas del grafo mostró una correla-
+ción significativa con la calidad promedio de la solución (expansión de vértices:
+r = 0.4431; p = 0.0504; expansión de aristas: r = 0.4832; p =
+0.0309), lo que sugiere que, en general, el ancho de árbol y las expansiones com-
+binatorias pueden ser predictores más robustos del desempeño humano
+en el problema MC. Ninguna de las métricas analizadas se correlacionó
+significativamente con los tiempos de respuesta medianos de los
+participantes.
+Experimento 3: una tarea de Set Cover más realista
+Aunque los Experimentos 1 y 2 capturan algunos de los desafíos computa-
+cionales del logro de metas, las tareas eran relativa-
+mente abstractas. El Experimento 3 aborda esta limitación asignando etiquetas semánticas a las 24 metas. Estas etiquetas eran
+propósitos comunes de año nuevo, como “ponerse en forma” y
+“ganar más dinero”. Se usaron metas semánticas similares en inves-
+tigaciones previas de la teoría de sistemas de metas (Zhang et al., 2007). También
+usamos una interfaz distinta para evitar posibles efectos de visualización
+que surgen de los dibujos de grafos en los dos primeros experi-
+mentos.
+Métodos. Reclutamos 600 participantes en Amazon Me-
+chanical Turk. Se pagó a los participantes $0.38 por unos 5 min
+de trabajo más una bonificación dependiente del desempeño de $0.50 si
+encontraban una solución óptima. Cada participante fue asignado al azar
+a una de las veinte estructuras de grafo usadas en los Experi-
+mentos 1 y 2. En cada grafo, el orden en que se listaban los medios
+y el orden en que se listaban las metas se aleatorizó
+entre participantes. La tarea de los participantes consistía
+en lograr todas las metas con la menor cantidad posible de medios. La interfaz gráfica
+de la tarea se cambió para reducir el desorden visual.
+En lugar de dibujar aristas entre medios y metas, las metas
+logradas por cada medio se listaban junto a él (véase la Figura 3).
+La historia de cobertura era similar a la usada en el experimento
+1, pero el ensayo de entrenamiento usaba la nueva interfaz de la tarea que se muestra en
+la Figura 3. El formulario de consentimiento exigía que los participantes
+no hubieran participado en ninguno de nuestros experimentos previos de gestión de
+metas. Todos los participantes se incluyeron en los
+análisis posteriores.
+Resultados. En una escala de 1 a 9, los participantes calificaron su mo-
+tivación para encontrar una solución que logre todas las metas con el
+mínimo de medios en 7.38, su motivación para termi-
+nar la tarea lo más rápido posible y seguir adelante en 4.35, y
+la dificultad de la tarea en 5.67. Encontramos que el ancho de árbol,
+la magnitud de la expansión espectral del grafo, las cardinalidades
+de las expansiones de aristas y de vértices del grafo, la excentricidad promedio,
+el camino más corto promedio y el diámetro del grafo estaban todos signi-
+ficativamente correlacionados con la frecuencia con la que los participantes humanos
+identificaron la solución óptima (ancho de árbol: r =
+−0.756; p = 0.0001; excentricidad prom.: r = 0.583; p = 0.007;
+camino más corto prom.: r = 0.651; p = 0.002; diámetro del grafo: r =
+0.525; p = 0.017; expansión espectral: r: −0.708; p = 0.0005;
+expansión de aristas: r = −0.7; p = 0.0006; expansión de vértices:
+r = −0.7303; p = 0.0003). Del mismo modo, el ancho de árbol, la mag-
+nitud de la expansión espectral del grafo, las cardinalidades de las
+expansiones de aristas y de vértices del grafo, la excentricidad promedio y
+el camino más corto promedio estaban todos significativamente correlacionados con
+la calidad promedio de la solución de las respuestas humanas (ancho de árbol:
+r = −0.60; p = 0.005; excentricidad prom.: r = 0.4872; p =
+0.0293; camino más corto prom.: r = 0.5243; p = 0.0176; expansión espectral
+r = −0.5308; p = 0.0160; expansión de aristas: r =
+−0.5670; p = 0.0091; expansión de vértices: r = −0.6047; p =
+0.0047). Ninguna de las características se correlacionó significativamente
+con los tiempos de respuesta medianos de los participantes.
+Figura 3: Interfaz gráfica del experimento 3.
+Conclusiones
+Demostramos que el desempeño de las personas en Maximum
+Coverage y Set Cover puede predecirse de forma confiable a partir de
+medidas de teoría de grafos de qué tan arbóreo es el sistema de metas,
+como el ancho de árbol y la expansión. Nuestros datos respaldan la con-
+clusión de que los sistemas de metas de tipo arbóreo son más fáciles de
+manejar para las personas. En términos más generales, nuestros resultados implican que los parámetros
+que se usan en la informática teórica para diferenciar
+entre instancias difíciles y fáciles pueden aprovecharse para predecir
+el desempeño humano en tareas NP-difíciles.
+Una limitación de nuestros experimentos es que su representación completa y
+explícita de las metas, los medios y las conexiones
+entre ellos es una idealización simplificadora. En la vida real, las personas
+a menudo desconocen algunas de sus metas y medios, así como
+algunas de las conexiones entre metas y medios. Por
+ejemplo, mantener sistemas de metas de tamaño moderado en la memoria de tra-
+bajo al resolver problemas de selección de medios probablemente
+no es trivial. Por ello, las representaciones de metas de la vida real
+probablemente harán que los problemas de selección de medios como los aquí discutidos
+sean todavía más difíciles de resolver. Aunque tales problemas de memoria
+no están directamente relacionados con qué tan arbóreo es el sistema de metas,
+son, no obstante, consistentes con nuestra hipótesis
+de que la dificultad cognitiva de la selección de medios es un factor
+limitante importante de la capacidad de las personas para alcanzar sus metas.
+En conclusión, nuestros resultados sugieren que incluso las personas muy moti-
+vadas probablemente no logren alcanzar todas sus metas
+cuando tienen que considerar muchas metas y medios en parale-
+lo. Nuestros análisis ofrecen un enfoque novedoso para predecir qué tan
+probable es que las personas tengan éxito en estos contextos, con implica-
+ciones para el diseño de sistemas de metas que facilitan a las
+personas cumplir sus objetivos.
+Referencias
+Alber, J., & Niedermeier, R. (2002). Improved tree decomposition
+based algorithms for domination-like problems. En Latin american
+symposium on theoretical informatics (pp. 613–627).
+Atkinson, J. W., & Birch, D. (1970). The dynamics of action . Ox-
+ford: John Wiley. Baumeister, R. F., Heatherton, T. F., & Tice, D. M. (1994). Losing
+control: How and why people fail at self-regulation. San Diego:
+Academic Press.
+Carruthers, S., Masson, M. E., & Stege, U. (2012). Human perfor-
+mance on hard non-euclidean graph problems: vertex cover. The
+Journal of Problem Solving ,5(1), 5.
+Clementi, A. E., & Trevisan, L. (1999). Improved non-
+approximability results for minimum vertex cover with density
+constraints. Theoretical Computer Science ,225(1), 113–128.
+Feige, U. (1998). A threshold of ln n for approximating set cover.
+Journal of the ACM ,45(4), 634–652.
+Gollwitzer, P. M. (1999). Implementation intentions: strong effects
+of simple plans. American Psychologist ,54(7), 493–503.
+Iwata, Y . (2016). Linear-time kernelization for feedback vertex set.
+arXiv preprint arXiv:1608.01463 .
+Kleinberg, J., & Tardos, É. (2006). Algorithm design . Pearson
+Education India.
+Kloks, T. (1994). Treewidth: computations and approximations
+(Vol. 842). Springer Science & Business Media.
+Kruglanski, A. W., Shah, J. Y ., Fishbach, A., Friedman, R., Chun,
+W. Y ., & Sleeth-Keppler, D. (2002). A theory of goal systems.
+Advances in Experimental Social Psychology ,34, 331–378.
+Leyton-Brown, K., Nudelman, E., & Shoham, Y . (2009). Empirical
+hardness models: Methodology and a case study on combinatorial
+auctions. Journal of the ACM ,56(4), 22.
+Little, B. R., & Gee, T. (2007). The methodology of personal
+projects analysis: Four modules and a funnel. En B. R. Little,
+K. Salmela-Aro, & S. D. Philipps (Eds.), Personal project pur-
+suit: Goals, action, and human flourishing. New York: Psychol-
+ogy Press.
+MacGregor, J. N., & Ormerod, T. (1996). Human performance
+on the traveling salesman problem. Perception & Psychophysics ,
+58(4), 527–539.
+MacGregor, J. N., Ormerod, T. C., & Chronicle, E. (2000). A
+model of human performance on the traveling salesperson prob-
+lem. Memory & Cognition ,28(7), 1183–1190.
+Miller, G. A., Galanter, E., & Pribram, K. H. (1960). Plans and the
+structure of behavior . New York: Adams Bannister Cox.
+Mischel, W., Shoda, Y ., & Rodriguez, M. L. (1989). Delay of grati-
+fication in children. Science ,244(4907), 933–938.
+Muraven, M., & Slessareva, E. (2003). Mechanisms of self-control
+failure: Motivation and limited resources. Personality and Social
+Psychology Bulletin ,29(7), 894–906.
+Newell, A., & Simon, H. A. (1972). Human problem solving . En-
+glewood Cliffs: Prentice-Hall.
+Robertson, N., & Seymour, P. D. (1986). Graph minors. ii. algorith-
+mic aspects of tree-width. Journal of algorithms ,7(3), 309–322.
+Thagard, P., & Millgram, E. (1995). Inference to the best plan: A
+coherence theory of decision. En A. Ram & D. B. Leake (Eds.),
+Goal driven learning (pp. 439–454). MIT Press.
+Van Rooij, I. (2008). The tractable cognition thesis. Cognitive
+Science ,32(6), 939–984.
+Vazirani, V. V . (2013). Approximation algorithms . Springer Science
+& Business Media.
+Wahlström, M. (2014). Half-integrality, LP-branching and FPT
+algorithms. En Proceedings of the twenty-fifth annual acm-siam
+symposium on discrete algorithms (pp. 1762–1781).
+Zhang, Y ., Fishbach, A., & Kruglanski, A. W. (2007). The dilution
+model: how additional goals undermine the perceived instrumen-
+tality of a shared path. Journal of Personality and Social Psychol-
+ogy,92(3), 389–401.

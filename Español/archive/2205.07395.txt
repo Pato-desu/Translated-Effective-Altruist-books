@@ -1,0 +1,1030 @@
+Especificación sociotécnica de los impactos más amplios de los
+vehículos autónomos
+Thomas Krendl Gilbert1, Aaron J. Snoswell2, Michael Dennis3, Rowan McAllister3 y Cathy Wu4
+Resumen — Los vehículos autónomos (VA) tendrán un impacto trans-
+formador en la sociedad. Más allá de la seguridad local y la
+eficiencia de cada vehículo, estos efectos también cambiarán
+la forma en que las personas interactúan con todo el sistema de transporte. Esto
+generará una amplia gama de efectos grandes y previsibles sobre
+los resultados sociales, así como sobre la forma en que se distribuyen.
+Sin embargo, la capacidad de controlar tanto el comportamiento individual de
+los VA como el flujo general del tráfico también ofrece nuevas posibilidades
+que permiten a los VA controlar estos efectos. Esto plantea un
+problema de especificación sociotécnica: la necesidad de distinguir
+qué rasgos esenciales del sistema de transporte están dentro o
+fuera del alcance del desarrollo de VA. Presentamos este espacio problemático
+en términos de problemas técnicos, sociotécnicos y sociales, e
+ilustramos ejemplos de cada uno para los componentes del sistema de transporte
+de movilidad social, infraestructura pública e impactos
+ambientales. La metodología de investigación resultante traza un camino
+para que los desarrolladores incorporen y evalúen más características del transporte
+dentro de los componentes del sistema VA a lo largo del tiempo.
+I. INTRODUCCIÓN
+A medida que las flotas de VA crecen en tamaño y área de servicio, comprenderán
+plataformas de enrutamiento con potencial para controlar
+el tráfico en las vías públicas. Esta acción coordinada pero distribuida
+no tendrá precedentes en escala y traerá consigo innumerables
+nuevos desafíos de movilidad, como el desgaste de la infraes-
+tructura por el enrutamiento concentrado [1] y los atascos de tráfico de autonomía mixta con com-
+plejas dinámicas [2]. También habrá nuevas oportunidades
+para abordar desafíos existentes, como los desiertos alimentarios [3] y
+el equilibrio equitativo de la carga de movilidad [4]. Además, la creciente
+automatización traerá cambios concomitantes a medida que otras
+instituciones sociales se adapten; por ejemplo, nuevas opciones de movilidad y
+mercados reemplazarán a los anteriores, cambiando la accesibilidad
+relativa de las ubicaciones, lo que a su vez afectará los mercados inmobiliarios
+y el costo de vida. Para abordar estas tendencias dinámicas, los diseñadores
+deben lidiar con los bucles de retroalimentación generados y exacerbados
+por los esfuerzos de optimización coordinada [5]. Debido a que los VA
+*Esta investigación contó en parte con el apoyo del Consejo Australiano de Investiga-
+ción, Centro de Excelencia en Toma de Decisiones Automatizada y Sociedad
+(CE200100005)
+1Digital Life Initiative, Cornell Tech, Nueva York, NY, EE. UU.
+tg299@cornell.edu.au
+2Centro para la Toma Automatizada de Decisiones y la Sociedad,
+Universidad Tecnológica de Queensland, Brisbane, QLD, Australia
+a.snoswell@qut.edu.au
+3Universidad de California, Berkeley, CA, EE. UU.
+[michael dennis|rmcallister]@berkeley.edu
+4Laboratorio de Información y Sistemas de Decisión; el Instituto para los
+Datos, Sistemas y Sociedad; y el Departamento de Ingeniería Civil y
+Ambiental, Instituto Tecnológico de Massachusetts, Cambridge, MA, EE. UU.
+cathywu@mit.edu
+Artículo aceptado para presentación en el taller ICRA’22 “Fresh Perspectives
+on the Future of Autonomous Driving” inevitablemente transformará el sistema de transporte; nuestra visión es
+que estos cambios deben diseñarse de forma intencionada.
+En lugar de automatizar simplemente los viajes, un enfo-
+que más útil quizá sea que los VA automaticen componentes centrales de
+el sistema de transporte en sí. Las personas harán más viajes y
+distintos, y cada aspecto de la sociedad que interactúa con
+el sistema de transporte se coadaptará para aprovechar
+sus fortalezas y compensar sus debilidades. Como
+partes interesadas en esta transición, los diseñadores deben ayudar a garantizar
+que los sistemas de transporte automatizados del futuro cercano
+sirvan como medios intencionales y activos para remodelar las
+instituciones sociales. Las propuestas recientes de desarrollar modelos del mundo muestran
+el potencial de entrenar políticas basadas en características extraídas
+de la simulación en lugar de la forma en que conducen los humanos [6].
+Mientras tanto, los resultados con el conjunto de herramientas Project Flow han
+demostrado el potencial del control distribuido sobre el tráfico de autonomía mixta,
+usando métodos y modelos de simulación y optimización existentes
+[7], [8], [9]. Estos ejemplos ilustran
+el potencial incipiente de aplicar métodos contemporáneos de IA y robótica
+para construir VA que apoyen los sistemas de transporte automa-
+tizados que queremos. Sin embargo, hacer plenamente realidad
+esta visión requerirá un nuevo marco conceptual del
+conjunto de herramientas computacionales de los investigadores contemporáneos de VA. En
+este artículo, proponemos el marco de la especifica-
+ción sociotécnica como una forma de comprender los impactos más amplios de los VA en
+los sistemas de transporte, y damos ejemplos de formas en que los
+diseñadores de VA podrían empezar a abordar estos problemas.
+El resto de este artículo está estructurado de la siguiente manera.
+En la Sección II, motivamos nuestro enfoque de este problema,
+describiendo el espacio de problemas que definen qué puede
+estar dentro o fuera del alcance de los desarrolladores de VA. Este enfoque
+puede desglosarse en problemas de naturaleza “técnica”,
+“sociotécnica” y “social”. En la Sección III, damos
+ejemplos de componentes del sistema de transporte y
+características asociadas que caen dentro de estas categorías, las cuales se
+elaboran más en el Apéndice. La Sección IV concluye.
+II. ESPECIFICACIÓN SOCIOTÉCNICA EN EL
+DISEÑO DE ‘TRANSPORTE’
+La investigación reciente con herramientas de simulación emergentes, como
+Project Flow, muestra que los principales obstáculos para la
+especificación de problemas dinámicos, como el tráfico de autonomía mixta,
+quizá ya no sean estrictamente técnicos [10]. En cambio, existe
+una necesidad creciente de relacionar las características de un sistema de transporte
+(es decir, sus atributos sobresalientes o propiedades integrales,
+como el acceso multimodal) con los componentes de una flota de VA
+(es decir, las capacidades técnicas necesarias para un desempeño óptimo, como
+el enrutamiento o la detección). Esto sugiere una nueva agenda de investigación arXiv:2205.07395v1  [cs.CY]  15 May 2022
+orientada al rediseño de características clave del sistema de transporte,
+en lugar de replicar las limitaciones de los sistemas actuales.
+Sostenemos aquí que traducir características de los sistemas de transporte
+en componentes técnicos constituye un problema
+de especificación sociotécnica: la necesidad de que los diseñadores
+distingan qué características están dentro o fuera del alcance de los VA
+en su desarrollo. Sostenemos que muchos problemas no resueltos pero abordables
+relacionados con la dinámica del tráfico se derivan naturalmente de
+este cambio de enfoque. En particular, la especificación sociotécnica
+comprende tres elementos. Primero, una variedad mucho mayor
+de características puede situarse ‘dentro del alcance’ para el desarrollo de VA
+y la optimización del desempeño. Esto va más allá del control local
+de la percepción y la planificación de rutas, e incluye tanto
+características infraestructurales del sistema de transporte como las
+de sistemas adyacentes (por ejemplo, ambientales, económicos,
+o municipales). Segundo, el diseño de VA exige reflexionar sobre
+cuáles de estas características inciden en un componente de VA dado.
+Deben considerarse aspectos particulares sobre el horizonte de planificación, los sensores del vehículo
+la optimización de rutas y los incentivos de los consumidores deben
+formalizarse con referencia al propósito previsto del
+sistema de transporte y al papel que cumplen los VA dentro de él.
+Tercero, se necesitarán definiciones más claras de características para
+medios eficaces de control sobre aquellas que carecen de suficiente
+documentación por parte de científicos sociales o de expertos en derecho y política pública.
+En los casos en que las características son objeto de intervención
+de un componente de VA dado, los diseñadores deben identificar criterios
+para sus medios de control a partir de los sistemas afectados o de
+los expertos que los supervisan.
+Este planteamiento del problema es sociotécnico porque reconoce la posibilidad de tras-
+ladar características entre niveles de abstracción
+y sistemas sociales hacia elementos del diseño de VA.
+Así, los tres elementos de la especificación sociotécnica
+descritos arriba sugieren tres etapas problemáticas correspondientes:
+1) Los problemas técnicos necesitan una “pala”: ya están
+más o menos definidos en la literatura académica,
+hay datos disponibles y suficientemente precisos,
+las métricas son claras y medibles. El problema
+puede traducirse fácilmente en metodologías técnicas
+y analizarse y optimizarse. Pueden quedar desafíos
+pendientes, p. ej., escasez de recompensas, dinámicas multiagente,
+no estacionariedad, escalabilidad, horizontes largos, etc., pero son
+de naturaleza técnica.
+2) Los problemas sociotécnicos necesitan elaboración:
+tienen una especificación técnica parcial, pero faltan algunas
+piezas. Los datos pueden no estar disponibles, las métricas
+pueden ser poco claras, los modelos pueden no ser suficientemente precisos,
+etc. En esta “etapa”, para refinar el problema hasta convertirlo en uno
+que pueda analizarse con rigor, hace falta
+un ir y venir entre investigadores técnicos y de dominio /
+de ciencias sociales. Esto puede servir para llevar a cabo
+una “selección de características”, en la que las facetas del problema pueden
+priorizarse según las limitaciones técnicas (p. ej.,
+disponibilidad de datos) y la cuestión de dominio.
+3) Los problemas sociales necesitan una mayor definición: com-
+prender la(s) característica(s) en sí mismas es el principal desafío, ya que la indeterminación debe resolverse antes de
+que pueda evaluarse cualquier medio de control. Esto ocurre en la etapa de
+definir métricas, posiblemente sin una consideración estricta de
+las herramientas y limitaciones técnicas. Hace falta más
+investigación social básica, que incluya consultas comunitarias,
+orientación de agencias reguladoras o investigación
+de científicos sociales / expertos del dominio, en lugar de
+investigadores de VA.
+Los modos, estándares y métodos de evaluación de los sistemas de trans-
+porte se han desarrollado a lo largo de siglos. Nuevos modos
+de transporte carretero, ferroviario, aéreo, aeroespacial y marítimo han
+sumado variedad a los medios de viaje. Más allá de la seguridad, los trans-
+portes han acumulado estándares de capacidad y
+respeto ambiental. Además, el desempeño de
+sistemas de transporte concretos se evalúa hoy de forma rutinaria
+en cuanto a confiabilidad, resiliencia y apoyo a una mayor calidad de vida
+en lugar de medidas estrictas de eficiencia [11].
+Como nueva tecnología de transporte de gran alcance, las flotas de VA
+están en posición de redefinir las características de los componentes de los sistemas de transporte,
+incluidos los modos que los componen, los valores en juego en
+su especificación y los medios de evaluación. En particular,
+los VA difuminan la distinción entre características infraestructurales, vehiculares
+e intermodales del entorno vial. Mientras que las características locales
+pueden controlarse mejor, las características globales
+se prestan más a la observación y la predicción. Asimismo,
+los controladores de rutas pueden implementarse a nivel micro
+(p. ej., cruces de cuatro vías), a nivel meso (enlaces de autopistas), o
+a nivel macro (cuadrículas urbanas, autopistas interestatales), lo cual
+exigirá consideraciones de valor distintas en cada caso.
+En este artículo nos centramos en tres características componentes de
+un sistema de transporte, cada una de las cuales está llamada a ser signi-
+ficativamente transformada por las operaciones de flotas de VA. Figura 1. Estas
+son: (1) movilidad social, (2) infraestructura pública y (3)
+impactos ambientales. En cada caso, damos un ejemplo
+de problema técnico, incluido un ejemplo de métrica indirecta,
+así como características que conforman los problemas sociotécnicos
+y sociales. La identificación y el etiquetado de
+los componentes del sistema de transporte es en sí misma una actividad política;
+sin embargo, hemos elegido estos componentes porque son
+los más claramente representativos de la reflexión que subyace a
+la especificación sociotécnica. La discusión que sigue pretende
+ilustrar esta reflexión y ofrecer vías para futuros
+refinamientos y elaboraciones. Esperamos que la investigación futura
+se base en estos puntos de partida, desarrollando aún más métricas
+matemáticas sólidas que sirvan para destacar y
+controlar los impactos más amplios y salientes de los VA.
+III. EJEMPLOS DE CARACTERÍSTICAS DEL SISTEMA DE
+TRANSPORTE Y SUS COMPONENTES
+A. Movilidad social
+Problema técnico: desiertos alimentarios. Los VA afectarán
+el acceso a recursos para el bienestar individual, como alimentos,
+empleos, escuelas y entretenimiento. Como los algoritmos de enrutamiento de VA
+configuran de manera desigual la facilidad para llegar de un lugar
+a otro, tienen la capacidad de conectar —o aislar aún más—
+a las personas de los recursos que necesitan para vivir
+una vida sana y plena.
+…Pública 
+Infraestructura
+Comunidad local 
+Necesidades
+Ambiental 
+Impactos
+Económica 
+Actividad
+Social 
+Movilidad
+Transporte 
+Sistema
+Fig. 1. Los sistemas de transporte interactúan con numerosas características componentes,
+algunas de las cuales se ilustran aquí. En este artículo nos centramos en (a) movilidad social,
+(b) impactos ambientales y (c) infraestructura pública (que se
+destacan con ).
+Un ejemplo de problema concreto que puede medirse
+con métricas indirectas, podemos considerar el problema de los desiertos alimentarios
+[12]. Supongamos que tenemos una población que vive en
+viviendas distribuidas geográficamente según ~H. Hay
+opciones de alimentos ‘buenos’ distribuidas por ~FG y malas opciones alimentarias
+distribuidas por ~FB. Para un algoritmo de enrutamiento o de control de VA
+algoritmoAdefinimos el tiempo para ir de una ubicación de vivienda
+hto a una opción de alimento fastpAqph;fqPodemos entonces construir
+un modelo simplista de elección del consumidor en el que un consumidor
+en la ubicación de vivienda hvisitará una opción de alimento de alta calidad
+ifminpfG;fBqP~FG~FBttpAqph;fGqtpAqph;fBqu k;para
+alguna constante positiva k. En otras palabras, el consumidor
+elegirá una opción de alimento de alta calidad si el costo adicional frente a la
+opción de baja calidad más fácil es menor que k. Si definimos
+CpAqphq1si un consumidor en la ubicación helegiría la
+opción de alta calidad bajo el algoritmo Ay 0 en caso contrario, obtenemos
+una métrica indirecta de la salud nutricional de la población consumidora
+salud:pAqp~HqEh~H
+CpAqphq
+:
+Obsérvese que este es un modelo claramente simplificado de elección del
+consumidor, así como del impacto diferencial de los alimentos en la
+salud del consumidor. No obstante, este sencillo ejemplo ilustra
+el hecho de que un diseñador de VA podría, en teoría, empezar a investi-
+gar hoy los impactos de las decisiones algorítmicas y de modelización
+sobre este importante asunto social. Los datos necesarios para
+alimentar este modelo (es decir, las distribuciones de vivienda y de opciones alimentarias)
+podrían obtenerse con facilidad, aunque sea en forma aproximada, y
+las herramientas de simulación existentes podrían entonces emplearse para
+analizar cómo las decisiones dentro del ámbito del operador o diseñador de VA
+median el problema de los desiertos alimentarios y la
+salud nutricional del consumidor.
+Problema sociotécnico: mercados de vivienda. A largo plazo,
+los servicios de VA no pueden dar por sentado dónde viven las personas
+En consecuencia, las personas se reubicarán, ya sea comprando nuevas
+viviendas, alquilando alojamientos temporales o cambiando de otro modo
+su lugar de residencia. Dónde deciden vivir las personas depende
+de diversas consideraciones, como la distancia al trabajo,
+la ubicación de la familia, los servicios de cuidado infantil o el estilo de vida personal,TABLA I
+EJEMPLOS DE CARACTERÍSTICAS Y COMPONENTES DEL SISTEMA DE TRANSPORTE
+Técnico Sociotécnico Social
+Movilidad social Desiertos alimentarios Mercados de vivienda Calidad de vida
+Infraestructura pública Desgaste de vías Leyes de tránsito Privatización de
+carreteras
+Ambiental
+impactosCalidad del aire Demanda inducida Extracción de cobalto
+sin embargo, un denominador común es la capacidad del sistema de transporte
+para acomodar el uso habitual por parte de los residentes locales.
+De ello surgen preguntas naturales: ¿cuáles son los
+efectos agregados del servicio de VA en la dinámica del mercado de vivienda?
+¿Y cómo podrían los diseñadores garantizar que estos efectos sean justos o
+equitativos?
+Si bien esta pregunta no puede reducirse fácilmente a un modelo econo-
+métrico, tampoco es del todo nueva. Del mismo modo que los automóviles
+facilitaron el crecimiento de la expansión urbana y la suburbanización
+[13], los servicios regulares de VA probablemente remodelarán tanto las características
+de los vecindarios como el cálculo de cómo las personas aprovechan
+la movilidad que estos permiten. Incluso una vez que la confianza pública en la seguridad de los VA
+esté garantizada, estos efectos dependerán en gran medida de
+sus algoritmos de enrutamiento, que determinarán la facilidad con la que
+se llega de un lugar a otro y modificarán el valor del
+tiempo de estar en tránsito.
+Los criterios para especificar los parámetros de aprendizaje de estos
+algoritmos ya son temas de investigación activos en literaturas adyacentes
+como los Estudios Urbanos y la Economía Financiera.
+Sin embargo, diversos medios para traducir estos temas en
+criterios de optimización podrían respaldar estrategias de diseño distintas
+para el enrutamiento de VA. Una es escalar la infraestructura de VA con iniciativas centradas en la equidad
+para que el despliegue no provoque accidentalmente
+gentrificación o deterioro urbano en regiones donde la oferta de servicios
+no coincide con las necesidades de movilidad locales [14].
+Puede haber consecuencias interregionales de esta
+estrategia, ya que la expansión urbana que vemos hoy no es solo el resultado
+de personas que se mudan a los suburbios, sino de que la oferta de vivienda se adapte
+a esa demanda.
+Dado que el uso del transporte público, la bicicleta y la movilidad peatonal
+aumentan mucho en entornos densos, los V A reque-
+rirán capacidades de enrutamiento que escalen con diversas medidas ambientales
+e infraestructurales de densidad. Entre ellas se cuentan la densidad residencial y
+laboral orientada al transporte, la escala del desarrollo,
+el gradiente de densidad, la centralidad de población y empleo,
+el gradiente de densidad de población, la densidad a la distancia mediana,
+la densidad de edificación, el porcentaje de viviendas a menos de una milla de
+una escuela primaria, el aumento porcentual de la densidad residencial,
+la densidad residencial bruta y/o neta, la razón de cobertura de edificación,
+el tamaño promedio de las escuelas y la intensidad no residencial.
+Problema social – Calidad de vida: El “éxito” o
+el “fracaso” de la adopción de los V A puede entenderse en términos
+generales como un cambio en la calidad de vida global: el nivel de
+salud, comodidad y felicidad o florecimiento que se genera
+para un grupo específico de personas y que este experimenta. Este
+concepto, aunque esquivo, puede en realidad evaluarse de forma indirecta
+mediante el seguimiento de propiedades del transporte y de sistemas adyacentes
+que aún no han recibido un estudio sistemático por parte de un
+campo de investigación organizado.
+Aunque existen muchas medidas de calidad de vida disponibles
+en el campo de la economía del desarrollo, la dinámica sin precedentes
+inducida por el despliegue de los V A exige un nuevo en-
+foque. Estas dinámicas suelen reflejar problemas estructurales más profun-
+dos en la intersección de la movilidad física y la económica.
+Por ejemplo, el acceso al centro de la ciudad sigue siendo una preocupación central
+de la planificación urbana y la infraestructura de transporte
+[15], pues sirve como indicador del acceso a los mercados laborales y
+de la movilidad de personas de bajos ingresos [16]. Mediciones recientes de desiertos
+alimentarios [12], de exposición a riesgos de salud al viajar [17] y de valoraciones subjetivas
+de las rutas de viaje cotidianas [18] indican las dificultades
+de rastrear las externalidades imprevistas de los patrones comunes de
+desplazamiento.
+Un obstáculo para contar con modelos eficaces en este ámbito es la necesidad
+de identificar métricas que capten tanto las decisiones individuales del día a día
+como los efectos longitudinales del tráfico, de modo que las agencias públicas
+puedan evaluarlos como buenos o malos. Afortunadamente, existen
+muchas métricas canónicas del uso de la red vial que
+además son fáciles de comunicar al público, lo que significa que los nuevos
+modelos pueden actualizarse en respuesta a los comentarios de las partes interesadas.
+Otra estrategia es integrar el uso de los V A con consideraciones de movilidad de primera y última
+milla, tanto para mejorar el servicio en zonas de baja
+densidad [19] como para reforzar las conexiones del transporte público, de modo
+que se reduzca el costo de cambiar entre modos de transporte
+para los usuarios multimodales [20]. Las métricas tradicionales de
+accesibilidad a los destinos también deberían resultar útiles.
+Por último, traducir las prioridades de las comunidades locales en módulos de percepción
+y enrutamiento puede apoyarse en medidas canónicas
+de diversidad en la infraestructura y el entorno. Sugerimos
+métricas de ejemplo para estas consideraciones en el Apéndice.
+B. Infraestructura pública
+Problema técnico – desgaste de las vías: Durante su operación, los V A
+interactúan con la infraestructura de tránsito existente, incluidas las
+señales, las marcas de carril y las propias vías. Las operaciones coordinadas
+de V A a gran escala podrían influir en el deterioro de
+las calzadas. La distribución del deterioro de las vías quedará
+controlada, en la práctica, por los operadores y fabricantes de V A
+mediante la centralización a nivel macro del enrutamiento de los V A y
+la duplicación a nivel micro de los esquemas de control. Ilustramos
+aquí cómo puede construirse una métrica indicadora para captar y
+optimizar los efectos de primer orden de las operaciones de los V A en
+el deterioro de las vías.
+SeaSel grafo de tramos de vía que componen una determinada
+red vial donde operan los V A. Suponemos que cada arista
+sPStiene una calificación de calidad asociada qpsqque cuantifica la
+condición de la vía en ese tramo. Para captar
+el efecto de las operaciones de los V A en el deterioro de las vías, un modelo sencillo
+podría consistir en que la calidad de un tramo se reduce
+en una pequeña proporción cada vez que se recorre. Si la
+calidad de un tramo alcanza cierto límite inferior, ya no
+puede recorrerse y debe repararse (presumiblemente, a
+costa del contribuyente). Con fines demostrativos, podríamos
+investigar el efecto de que un algoritmo de enrutamiento considere
+un costo de navegación por tramo proporcional a la calidad,que sirva como métrica indicadora del deterioro de las vías por las operaciones de los V A
+:pj;rq°
+sPrjqpsq;para una ruta rdada y
+alguna constante positiva j.
+Incluso este enfoque simplista puede ilustrar comportamientos
+importantes. Por ejemplo, si un algoritmo de enrutamiento minimiza de forma voraz
+el costo de navegación por desgaste vial viaje por viaje,
+los V A optarán siempre por la vía de mayor calidad
+en un momento dado, lo que distribuirá, en lugar de
+concentrar, el desgaste vial. Este modelo podría fácilmente
+ampliarse para incorporar modelos más sofisticados del
+deterioro de las vías, así como para tener en cuenta las variaciones del desgaste
+según el tipo y la carga del vehículo.
+Problema sociotécnico – leyes de tránsito: Como las normas de tránsito
+podrían evolucionar con el tiempo para favorecer el desempeño óptimo de los V A,
+el cabildeo organizado podría empezar a presionar a los reguladores para
+que cambien las leyes de tránsito de modo que prioricen consideraciones
+específicas de diseño de los V A. Si bien esto bien podría facilitar el
+trabajo de los fabricantes, también supondría un cambio mayor: los V A
+estarían alterando el propósito o la estructura más amplios del
+sistema de tránsito en lugar de simplemente automatizar ciertas partes.
+Por ello, es razonable que los métodos consideren posi-
+bles cambios o actualizaciones de las leyes de tránsito existentes como enfoque para
+controlar los efectos de los V A. Las nuevas regulaciones podrían respaldar
+la adición de carriles de circulación, puntos de ascenso y descenso, y
+zonas donde los peatones tengan derechos distintos. Cada una de estas
+intervenciones permitiría la coordinación entre las personas
+y los V A y, por tanto, constituye una importante palanca de control,
+junto con el control local, el enrutamiento y el control de los semáforos.
+Los criterios para estas consideraciones pueden extraerse de los
+campos de los Estudios de Transporte y las Políticas Públicas, y
+damos ejemplos de algunas posibilidades en el Apéndice.
+Problema social – privatización de las vías: A medida que el
+pelotón de larga distancia sea más factible, los V A afectarán a
+autopistas enteras y a regiones de países de maneras que tras-
+cienden la jurisdicción de cualquier autoridad de tránsito individual. Entre
+muchos otros efectos, existe el riesgo de que las vías de larga distancia
+terminen privatizadas en la práctica para el uso de las operaciones de carga
+corporativas, ya que otros conductores humanos se verán desincentivados
+a compartir la vía con decenas de camiones automatizados. Este
+resultado sería injusto e insostenible, pues los costos de
+reparar las vías se trasladarían de forma ad hoc a un público
+que rara vez las usa.
+Los diseñadores pueden mitigar estos riesgos preparando módulos de V A
+para la percepción, la localización y el enrutamiento que sean sensibles
+al carácter público de las vías. Esto significa que serían
+sensibles a las características de las vías que incluyen ampliamente
+a las partes interesadas multimodales, y que además circularían por ellas
+de maneras que perturben lo menos posible el flujo del tráfico. Aunque
+estas características infraestructurales y técnicas de modelado siguen
+en desarrollo, prepararse para ese futuro permitirá a los
+diseñadores integrar los comentarios de partes interesadas particulares
+tan pronto como el pelotón y el enrutamiento masivos de V A sean habituales.
+Con respecto al enrutamiento, es posible medir y
+minimizar la pérdida de eficiencia de combustible de los V A o el tiempo promedio
+hasta el destino al evitar baches, con el fin de preservar la
+vía sin perturbar el tráfico. Esto es análogo a otros
+contextos en los que el software de los V A compensa las limi-
+taciones del hardware, salvo que aquí la propia vía también se modela como
+“hardware” en lugar de relegarse al entorno externo.
+Esto se cuantifica mediante referencia a modelos existentes de
+mantenimiento de carreteras [21], evaluación de daños prioritarios [22]
+y evaluaciones de pavimento inteligente [23]. Este trabajo podría ayudar a la
+satisfacción de restricciones al incluir factores que corroboren
+los estándares públicos existentes de mantenimiento vial, en lugar de
+modelar el movimiento del vehículo de forma aislada.
+Entretanto, los cambios externos en las señales y las marcas de carril
+podrían modelarse como controles de los efectos a gran escala
+de los VA. Una implicación natural de esto sería incorporar
+medidas que reflejen distintas escalas de diseño para preocupaciones multimodales
+en un espectro de efectos locales frente a globales. En
+el extremo inferior de la escala, actualizar la percepción para ajustarse
+a diversas medidas de diseño puntuales ayudará a los VA a modificar su
+velocidad y comportamiento en tiempo real para ajustarse a las expectativas
+y prioridades de los interesados. Por ejemplo, los barrios residenciales
+de Estados Unidos suelen acomodar a grupos con necesidades especiales
+mediante señalización específica: avisos sobre
+perros y gatos de compañía, “niños jugando”, y protección para las
+personas con discapacidad (p. ej., señales sonoras para cruzar). Pueden encontrarse otros ejemplos
+en el apéndice.
+Cada una de estas consideraciones, y otros detalles de las costumbres locales
+que aún no hemos considerado, deben incor-
+porarse al procedimiento de control local para que puedan
+personalizarse de modo que sean adecuadas al contexto. Por ejemplo,
+además de características del vehículo como el acceso para sillas de ruedas, los VA
+deberán incorporar ajustes de rutas para que el tiempo empleado en
+estas zonas se reduzca al mínimo. En particular, hace falta
+medidas de diseño regionales adaptadas para captar la
+integridad de los sistemas de transporte regionales. Mientras tanto,
+algunas comunidades requieren formas únicas de movilidad vial,
+como residencias de jubilados y campos de golf que tienen sus
+propios medios de transporte especializados y que han adoptado
+pautas especiales para los carritos de golf que interactúan con los
+vehículos de tráfico normal [24]. Y a una escala más amplia, los efectos a nivel de red
+también deberían reflejarse en métricas de conectividad
+y de franqueza de rutas a nivel de barrio. Ejemplos de
+todas estas características pueden encontrarse en el apéndice.
+C. Impactos ambientales
+Problema técnico – calidad del aire: Un problema creciente
+en muchas ciudades urbanas es la contribución de la contaminación relacionada con el tránsito
+al deterioro de la calidad del aire. Los vehículos emiten
+diversas formas de contaminación que son dañinas para los residentes
+de zonas de tráfico intenso, y existe un amplio cuerpo de
+investigación que cuantifica tanto la cantidad como los efectos sobre la salud
+de la contaminación en los residentes locales [25], [26], [27], [28], [29].
+Los efectos de esta contaminación dependerán del tipo de
+vehículo, incluida la fuente de energía (gasolina / híbrido / eléctrico,
+etc.), la densidad del tráfico, las condiciones meteorológicas, el tipo de
+barrio por el que se circula, la proximidad física de los usuarios de la vía
+y muchas otras complejidades.
+Como modelo simple de estos efectos, podemos estimar
+la distribución espacial de las personas presentes en una región de operación del VA
+y suponer una pequeña penalización por segundo por cada
+persona, inversamente proporcional al cuadrado de la distancia de esa persona al vehículo. Formalmente, si tenemos una distribución espacial de
+población de personas p~P y v es la ubicación del VA,
+podemos definir una métrica indirecta para el impacto de la contaminación como
+pv;~PqEp~P}pv}2
+2:
+Un VA que intente minimizar este coste estaría
+más inclinado a rodear las comunidades locales en dirección a zonas menos
+ocupadas, distribuyendo la contaminación allí donde tenga menos
+efectos adversos. Además, incluso a lo largo de una ruta fija, los VA
+diseñadores podrían aprovechar el control detallado
+de que disponen los VA para optimizar los efectos de la contaminación según
+las características de la población, el motor del vehículo y
+las condiciones de tráfico.
+Los datos de población para alimentar este modelo podrían obtenerse de
+diversas fuentes, como los registros de vivienda residencial y de zonificación
+de condado o municipio, o aproximarse, p. ej., según
+los datos de tamaño de parcela de bases de datos de mapas de código abierto. Este modelo simple
+podría mejorarse de varias maneras. Por ejemplo,
+la distribución ~P podría ampliarse para cubrir
+las fluctuaciones temporales de la densidad de población, o mejores modelos de
+efectos sobre la salud podrían incorporarse.
+Problema sociotécnico – demanda inducida: En el
+largo plazo, los VA tendrán efectos inciertos sobre la contaminación agregada
+derivada del tráfico. Los impactos de la flota de VA en sí
+podrían modelarse sin incorporar consideraciones sobre el
+tipo de vehículo y la densidad del tráfico. Sin embargo, es importante
+considerar los efectos de la demanda inducida [30]. Por ejemplo,
+los resultados de simulaciones muestran que el despliegue generalizado de VA
+podría reducir el consumo energético de EE. UU. hasta en un 40%
+debido a una mayor eficiencia de conducción; alternativamente, podría
+duplicar el consumo energético de EE. UU. debido a la mayor disponibilidad
+de opciones de transporte baratas [31].
+Incluso estos resultados no incorporan diferencias en las
+condiciones de la vía, modelos de vehículo, fluctuaciones de la demanda, tráfico
+condiciones, ni interacciones entre vehículos que circulan por rutas. Aun así,
+este trabajo respalda las políticas de precio del carbono o de tarifas dinámicas
+a medida que los VA se adopten más ampliamente. Ampliar esto para
+incorporar más trabajo sobre la cuantificación de las emisiones de CO 2 [29],
+[32], [33] y la demanda inducida [34], [35] son líneas claras de investigación
+futuras. Así, los esfuerzos por indagar y modelar
+la demanda de tránsito inducida por VA constituyen un subcampo emergente
+en la intersección de la ingeniería ambiental, la economía del comportamiento
+y la modelización del tráfico.
+Para ilustrar aún más este problema, podemos considerar los
+diversos efectos de la contaminación más allá de los gases de escape individuales de los automóviles o de las
+emisiones agregadas de CO 2 inducidas por los VA. Estos van desde
+la contaminación acústica [36] hasta los factores ecológicos, fiscales y sociales más amplios
+asociados a la sostenibilidad ambiental de los VA.
+Las métricas ecológicas están bien documentadas en la litera-
+tura. Los cambios en ellas probablemente generarán efectos sobre
+las métricas fiscales relacionadas con el nivel de actividad. Y los cambios en las métricas fiscales
+a su vez, pueden tener impactos sociales a nivel comunitario
+cuya medición es vital pero algo más especulativa
+en cuanto al nivel de actividad y la cuota modal. Ejemplos de los tres
+tipos de métricas pueden encontrarse en el apéndice.
+Incorporar estos factores tendría varios beneficios para la modelización.
+Proporcionaría estimaciones más sólidas de la demanda que
+ayudaría a alinear el control de emisiones con objetivos sociales más amplios
+de acceso equitativo a las vías. También ayudaría a integrar la política de VA
+con la investigación en curso sobre actualizaciones de
+los materiales de pavimento y las prácticas de construcción de autopistas de peaje
+[37], lo que podría llevar a nuevas mejoras en sostenibilidad.
+Y podría aprovechar la recopilación de datos a nivel de vehículo para controlar
+las características espaciales y temporales detalladas de la contaminación del aire
+que se han medido recientemente a escalas micro sin precedentes
+[38], [39], asegurando que los beneficios de la reducción de emisiones
+sean equitativos tanto a nivel local como global. El despliegue de
+VA a distintas escalas de la infraestructura vial (núcleo urbano,
+rutas de cercanías, autopistas interestatales) también podría ayudar en la
+evaluación de enfoques de medición alternativos que equilibran
+precisión frente a eficiencia, una cuestión de investigación abierta en
+la ingeniería ambiental [40].
+Problema social – extracción de cobalto: Como todos los medios de
+transporte, las flotas de VA serán el punto final terminado de una
+cadena de suministro mucho mayor. Y como todos los coches eléctricos, los VA
+dependerán en gran medida de la extracción de tierras raras de
+yacimientos del lecho marino y de regiones del mundo en desarrollo. Por
+ejemplo, la demanda mundial de cobalto se ha disparado debido
+a su importancia en las baterías de los coches eléctricos, y países
+como la República Democrática del Congo se han convertido en objetivo
+de grandes inversiones internacionales [41]. Más allá de los gases de efecto invernadero,
+las flotas de VA llevarán la geopolítica de los mercados minerales
+al centro de la atención en su desarrollo, de forma análoga a cómo
+las tendencias del siglo XXI en la producción en el extranjero y la creciente
+conciencia de los consumidores han obligado a las empresas de cara al público
+a auditar sus propias cadenas de suministro en materia ambiental, de sostenibi-
+lidad y de derechos humanos.
+La extracción de metales de tierras raras exige considerar
+el desarrollo económico a largo plazo, la seguridad nacional y los
+derechos humanos. Por ejemplo, las investigaciones han revelado que
+el trabajo infantil se utiliza habitualmente en la extracción de cobalto, que
+a menudo implica excavar el mineral a mano [42]. Este
+cobalto suele refinarse y prepararse para su fabricación por
+empresas extranjeras y luego se usa para alimentar teléfonos inteligentes
+diseñados y vendidos por empresas tecnológicas de los países occidentales post-
+industriales. Sin embargo, ninguna ley de EE. UU. intenta verificar
+la prevención de abusos de derechos humanos en la extracción de cobalto
+[43]. Y las baterías de los vehículos eléctricos suelen incluir cientos
+veces la cantidad de cobalto que una computadora portátil [44].
+Los problemas éticos de escalar flotas de AV que dependen de estas
+cadenas de suministro son graves, y los ingenieros deben priorizar
+el diseño experimental de los AV basado en minerales alternativos
+cuya extracción y uso no respalden prácticas laborales inhumanas
+[45]. Cuando el uso de tales minerales sea inevitable,
+los fabricantes de AV deberán evaluar cómo el crecimiento de una
+plataforma podría dejar su cadena de suministro dependiente de
+estas prácticas, y cómo esa dependencia podría mitigarse
+a lo largo del tiempo.
+Más allá de la ética, hay otras razones para evitar depender de
+la extracción de tierras raras. En primer lugar, expone
+los servicios de AV a fuerzas geopolíticas que escapan
+al control de su empresa matriz. Por ejemplo, la corrupción local
+entre funcionarios del gobierno o grupos laborales podría provocar
+interrupciones del suministro que hagan prohibitivo crecer o sostener
+la flota de AV sin elevar drásticamente los costos [46]. Otros actores geopolíticos enfrascados en un conflicto militar con el
+país de extracción podrían interferir en las líneas de suministro o
+saquear los recursos minerales en beneficio propio.
+En un sentido más amplio, estas cadenas de suministro introducen incertidumbres
+y riesgos estructurales que hacen imposible prever a largo plazo el
+desarrollo de los AV. Como las fuentes de extracción carecen
+de la transparencia y de la documentación de las condiciones laborales
+protegidas, es difícil evaluar con exactitud
+dónde y cuánto material mineral se extraerá
+a lo largo del tiempo [47]. Consideremos también la posibilidad de sanciones
+internacionales contra ciertas formas de extracción mineral, o
+boicots de los consumidores a los servicios tecnológicos por su dependencia de
+esos minerales [48]. Organismos internacionales de vigilancia y grupos de derechos humanos pueden
+exponer prácticas laborales tan reprochables que las empresas de AV
+podrían enfrentar responsabilidad por abusos contra los derechos humanos o
+una condena internacional.
+Estas consideraciones apuntan a una verdad incómoda:
+sin importar lo seguros, eficientes y amigables con el consumidor
+que lleguen a ser los AV, su producción sigue dependiendo de
+las contradicciones, ambigüedades y trampas políticas del capitalismo
+del siglo XXI. El desarrollo de los AV debe seguir siendo sensible
+a estos problemas de las cadenas de suministro a medida que avanza su despliegue.
+IV. CONCLUSIÓN
+La especificación sociotécnica sigue siendo un desafío latente
+para el rendimiento de las flotas de AV. Si bien la prioridad a corto plazo
+es construir AV que cumplan con éxito las reglas de tránsito vigentes,
+a largo plazo los AV son cada vez más propensos a marcar
+por sí mismos el ritmo del tráfico.
+Además, a medida que los AV se despliegan ampliamente, sus efectos
+y su impacto en la infraestructura pública pueden ser desiguales,
+aun cuando sus términos sean difíciles de especificar. Sin embargo, una atención sostenida
+a los problemas técnicos (incluidas las métricas indirectas),
+a los problemas sociotécnicos (incluida la literatura afín), y
+a los problemas sociales (incluidas las preguntas de investigación pendientes)
+preparará a los diseñadores para incorporar las necesidades y
+solicitudes de las partes interesadas a medida que surjan con el tiempo.
+AGRADECIMIENTOS
+Los iconos de la Figura 1 tienen licencia CC:BY y provienen de NounPro-
+ject.com: Highway de Georgiana Ionescu, Crowd de Adrien
+Coquet, Environment de Shmidt Sergey, Shop de revo250,
+y Improvement de Cuputo.
+APÉNDICE A
+La especificación sociotécnica es directamente relevante para los temas
+de investigación pendientes en el diseño de la conducción autónoma. Este
+apéndice destaca espacios de problemas análogos y las herramientas
+correspondientes, conjuntos de datos y métodos de evaluación ya
+establecidos en la literatura interdisciplinaria. Algunos de estos
+estándares pueden aplicarse directamente a técnicas existentes,
+mientras que otros pueden requerir iteración o refinamiento. Los presentamos
+aquí como ejemplos destacados de trabajo técnico que
+podrían emprender de inmediato los diseñadores de AV.
+A. Enfoques que tienen en cuenta las interacciones entre los subcomponentes
+tradicionales (localización, percepción, planificación,
+enrutamiento)
+
+Nuevas normas de tránsito: aunque los diseñadores de AV se ocupan de inmediato de optimizar el rendimiento de los AV en lugar de decidir qué significa necesariamente un rendimiento «bueno», sería razonable que los métodos consideraran posibles cambios o actualizaciones de las normas de tránsito vigentes como un enfoque para controlar los impactos de los AV. Por ejemplo, nuevas regulaciones podrían respaldar la adición de carriles de tránsito, puntos de recogida y descenso de pasajeros, y zonas en las que los peatones tengan derechos distintos. Cada una de estas intervenciones permitiría la coordinación entre personas y AV y, como tal, serviría como una interfaz importante entre el control local, el enrutamiento y la coordinación con la infraestructura vial externa (p. ej., el control de los semáforos). La atención a estas interfaces probablemente será un punto clave de la atención regulatoria en las próximas décadas. Una fuente de inspiración son las herramientas analíticas del Highway Safety Manual (HSM) [49], que podrían aplicarse a un rango más amplio de entornos urbanos más allá de las autopistas. Aunque se centra en mitigar la frecuencia de los choques, el Highway Safety Manual busca coordinar las preocupaciones de seguridad y económicas de una manera que aproxima bien la interpretación desde los factores humanos de la seguridad como un problema de atención limitada y capacidades humanas [50]. El HSM podría ayudar a actualizar el trabajo actual de simulación de AV para prepararlo para futuras normas de tránsito, incorporando la planificación del sistema dentro de la ingeniería, la construcción y el mantenimiento como parte de un proceso de desarrollo integrado. Esta perspectiva prepararía a los diseñadores de AV para los entornos regulatorios federales y estatales una vez que hayan dejado atrás los estándares propietarios para la simulación y el control. B. La recopilación, curaduría y muestreo de conjuntos de datos para enfoques de toma de decisiones de extremo a extremo o basados en aprendizaje.
+
+Ingeniería de sistemas de transporte: el HSM analizado arriba también señala tres fuentes de datos desatendidas (datos de características del sitio, datos de volumen de tráfico, datos de choques) y las incorpora como parte de la predicción de seguridad. Esto ayudaría a los diseñadores de AV a ir más allá de la «ingeniería de recetario» al configurar los parámetros de simulación, e incorporar en cambio los conceptos básicos de la ingeniería de sistemas (funciones, requisitos y contexto) que garantizarán que las simulaciones acomoden las múltiples interfaces necesarias para una navegación de AV urbana justa e inclusiva. C. Métodos para validar o evaluar el rendimiento de los enfoques de extremo a extremo o basados en aprendizaje en simulación.
+
+Capacidad vial: un obstáculo importante para el uso de los modelos de eficiencia del tráfico es la necesidad de métricas de tiempo de viaje más sofisticadas para vecindarios muy localizados, subregiones urbanas y corredores particulares. Una vía a seguir es incorporar el Highway Capacity Software en apoyo del highway capacity manual [51]. Esto ayudará a permitir la elección de herramientas de modelado avanzadas en el contexto de los intereses de las partes interesadas y de grupos focales específicos [52]. También hace posibles métricas particulares orientadas al automóvil sobre la demanda y el uso del sistema.
+
+Peajes: será necesario contar con normas de tráfico completamente nuevas,
+reglas de tránsito, ya que la maduración de la optimización de los AV
+interactúa con las formas heredadas de control del tráfico. Los diseñadores
+necesitarán, por tanto, herramientas y métodos para acomodar
+esta probabilidad. Una buena fuente de inspiración es el trabajo
+sobre estándares, métricas y parámetros de simulación de la
+Asociación Internacional de Puentes, Túneles y Autopistas de Peaje
+(IBTTA). La IBTTA ha respaldado y hecho posibles
+estudios sobre los impactos de tecnologías innovadoras en los
+operadores de autopistas [53], así como el impacto de las asociaciones público-
+privadas en el financiamiento de la infraestructura vial
+en economías en desarrollo [54]. La IBTTA también ha desarrollado
+herramientas especializadas para modelar diversos entornos de peaje.
+Por ejemplo, IBTTA Tollminer es una
+herramienta de visualización que incluye mapas de instalaciones de peaje,
+una lista de proyectos de carriles gestionados en operación en todo el país,
+una interfaz de usuario optimizable y datos anuales sobre los ingresos públicos
+y privados por peaje, entre otras funciones. Aunque
+está orientada a modelar y comparar los efectos relativos
+de los carriles de alta ocupación y de los carriles de peaje
+[55], este trabajo podría adaptarse fácilmente para probar nuevos
+parámetros de simulación para los AV que incorporen regulaciones especu-
+especulativas para un acceso equitativo a la movilidad.
+APÉNDICE B
+La Tabla II muestra otras métricas manejables que
+puede ser relevante para cuantificar los impactos de los vehículos autónomos
+en los sistemas de transporte público.
+REFERENCIAS
+[1] R. B. Collier, V . B. Dubal, y C. L. Carter, “Disrupting regulation,
+regulating disruption: The politics of uber in the united states,”
+Perspectives on Politics , vol. 16, n.º 4, pp. 919–937, 2018.
+[2] C. Wu, A. Kreidieh, E. Vinitsky, y A. M. Bayen, “Emergent behav-
+iors in mixed-autonomy traffic,” en Conference on Robot Learning ,
+2017, pp. 398–407.
+[3] R. E. Walker, C. R. Keane, y J. G. Burke, “Disparities and access to
+healthy food in the united states: A review of food deserts literature,”
+Health & place , vol. 16, n.º 5, pp. 876–884, 2010.
+[4] J. Kleinberg, Y . Rabani, y ´E. Tardos, “Fairness in routing and load
+balancing,” en 40th Annual Symposium on Foundations of Computer
+Science (Cat. No. 99CB37039) . IEEE, 1999, pp. 568–578.
+[5] T. K. Gilbert, S. Dean, T. Zick, y N. Lambert, “Choices, risks,
+and reward reports: Charting public policy for reinforcement learning
+systems,” preimpresión arXiv:2202.05716 , 2022.
+[6] D. Ha y J. Schmidhuber, “World models,” preimpresión
+arXiv:1803.10122 , 2018.
+[7] C. Wu, A. Kreidieh, K. Parvate, E. Vinitsky, y A. M. Bayen, “Flow:
+Architecture and benchmarking for reinforcement learning in traffic
+control,” preimpresión arXiv:1710.05465 , p. 10, 2017.
+[8] C. Wu, A. M. Bayen, y A. Mehta, “Stabilizing traffic with
+autonomous vehicles,” en 2018 IEEE International Conference on
+Robotics and Automation (ICRA) . IEEE, 2018, pp. 1–7.
+[9] C. Wu, A. R. Kreidieh, K. Parvate, E. Vinitsky, y A. M. Bayen,
+“Flow: A modular learning framework for mixed autonomy traffic,”
+IEEE Transactions on Robotics , 2021.
+[10] D. A. Abbink, P. Hao, J. Laval, S. Shalev-Shwartz, C. Wu, T. Yang,
+S. Hamdar, D. Chen, Y . Xie, X. Li et al. , “Artificial intelligence
+for automated vehicle control and traffic operations: Challenges and
+opportunities,” en Automated Vehicles Symposium . Springer, 2020,
+pp. 60–72.
+TABLA II
+TIPOS DE VARIABLES MANEJABLES Y MÉTRICAS DE EJEMPLO QUE INTERACTÚAN CON EL SISTEMA DE TRANSPORTE . LOS TÉRMINOS SE TOMAN DE [56] SALVO
+CUANDO SE INDIQUE LO CONTRARIO .
+Infraestructura pública Movilidad social Impactos ambientales
+Privatización de carreteras
+
+Percepción de la señalización por parte del vehículo
+–información de orientación (wayfinding)
+–calidad, anchura y sombra de las aceras
+–calles arboladas o sombreadas
+–calles transitables a pie
+–instrumento sistemático de exploración ambiental para peatones y ciclistas
+–servicios comerciales en el lugar para apoyar modos alternativos
+–disponibilidad de instalaciones para bicicletas en el lugar
+–iluminación a escala peatonal
+–relación entre el ancho de la calle y la altura de los edificios
+–apantallamiento de estacionamientos
+–uso del programa de pases de autobús
+–sombra de estacionamientos
+
+Componentes del sistema de transporte regional
+–instalaciones para transportar bicicletas en el vehículo
+–estacionamientos park-and-ride con servicio exprés
+–plazas de estacionamiento reservadas para carpools o vanpools
+–pases de transporte
+–celdas de tráfico
+–porcentaje de millas con acomodaciones para bicicletas y/o peatones
+–millas de rutas de transporte fijo exprés o carriles exclusivos de autobús
+–densidad vial
+–millas de carril per cápita
+–porcentaje de la red que es «efectiva»
+–equilibrio de la red vial
+
+Conectividad de rutas locales
+–metros cuadrados de senderos y aceras
+–separación entre cruces peatonales
+–número de cruces seguros por milla
+–estacionamiento de bicicletas en paradas y estaciones
+–huella de estacionamiento
+–longitud de manzana
+–ubicación de estacionamientos
+–estado de la ciclovía
+–trayecto directo de la ruta peatonal o ciclista
+–zonas de amortiguamiento de uso del suelo
+–entorno peatonal
+–estaciones de mantenimiento de bicicletas
+–conectividad peatonal y ciclista
+–índices de conectividad [57]
+–proximidad del proyecto a la red existente
+–comunidad conectada y abierta
+–aceras y senderos conectados
+–calles conectadas
+–acceso transversalCalidad de vida
+
+Uso de la red vial
+–ocupación de vehículos por uso del suelo
+–nivel de servicio (LOS) o calidad de servicio (QOS) de todo el distrito
+–desvío de tráfico local
+–porcentaje del sistema con congestión intensa
+–relación v/C
+–densidad vehicular
+–relación demanda/capacidad
+–volumen de servicio máximo
+–LOS en hora punta
+–porcentaje de capacidad consumida
+
+Última milla
+–longitud media del viaje por viajero
+–retraso por viajero
+–tiempo de viaje de puerta a puerta
+–LOS de bicicleta según el HCM
+–proporción de las millas-persona totales recorridas (PMT) en vehículos de ocupación no individual (SOV)
+
+Optimización del uso del suelo
+–proximidad a la residencia
+–proximidad al empleo
+–accesibilidad al trabajo
+–número de destinos clave accesibles mediante un sistema peatonal conectado
+–proximidad a zonas industriales o almacenes
+–conveniencia del transporte o accesibilidad a paradas
+–cobertura geográfica del servicio
+–cobertura de servicio a la población
+–porcentaje en proximidad
+–accesibilidad al transporte
+
+Optimización del modo de transporte
+–accesibilidad para bicicletas y peatones
+–accesibilidad a destinos
+–accesibilidad residencial
+–distancia media a pie entre pares de usos del suelo
+–separación entre centros de pueblo
+–múltiples opciones de ruta
+
+Diversidad ambiental
+–índice de crecimiento inteligente
+–usos del suelo significativos
+–proporciones de uso del suelo
+–equilibrio de uso del suelo
+–variación de la agricultura en campos verdes
+–consumo de suelo
+–uso del suelo en el núcleo
+–separación de usos del suelo
+–modelo Transportation-Efficient Land Use Mapping Index (TELUMI)
+–umbrales mínimos de intensidad de uso del suelo
+–activos de vecindarios cercanos
+–índices distintos de dispersión urbana [58], [59]
+–uso del suelo dentro del centro del pueblo
+–uso del suelo dentro del área de apoyo al transporte
+–equilibrio empleo y vivienda, demanda inducida
+
+Métricas ecológicas
+–cumplimiento de las normas de calidad del aire ambiental
+–emisiones diarias de CO2
+–emisiones diarias de NOx/CO/compuestos orgánicos volátiles (COV)
+–contaminación acústica
+–impacto en el hábitat de la fauna silvestre
+–escorrentía de agua
+
+Costos fiscales
+–impuesto adicional al combustible
+–tarifa de utilidad del transporte (TUF)
+–tarifa de impacto basada en las millas recorridas por vehículo (VMT)
+–tarifa de movilidad basada en el consumo
+–tarifa de movilidad basada en mejoras
+–recuperación de costos de fuentes alternativas
+–tarifas variables según el LOS
+–relación beneficio-costo
+–precio del estacionamiento
+–financiamiento per cápita para bicicletas y peatones
+
+Impactos a nivel comunitario
+–distribución del beneficio por
+grupo de ingreso
+–asequibilidad del transporte
+–distribución equitativa de la accesibil-
+idad
+–costo del viaje al trabajo
+–valores del transporte público
+–tarifa cobrada por estacionamiento para empleados
+plazas
+–eficacia de la gestión de la demanda de viajes
+(TDM) basada en el
+modelo TRIMMS
+–costos de viaje por grupo de ingreso
+y/o raza
+–VMT por grupo de ingreso y/o raza
+–participación modal por grupo de ingreso
+y/o raza
+–caminar hasta el transporte por grupo de ingreso
+y/o raza
+[11] S. Kaewunruen, J. M. Sussman, y A. Matsumoto, “Grand challenges
+in transportation and transit systems,” Frontiers in built environment ,
+vol. 2, p. 4, 2016.
+[12] J. Beaulac, E. Kristjansson, y S. Cummins, “Peer reviewed: A
+systematic review of food deserts, 1966-2007,” Preventing chronic
+disease , vol. 6, no. 3, 2009.
+[13] P. D. Norton, Fighting traffic: the dawn of the motor age in the
+American city . Mit Press, 2011.
+[14] B. O’Donnell, E. Corey, y M. Podowski, “2017 drive clean seattle
+implementation strategy,” 2017.
+[15] Q. Shen, “Location characteristics of inner-city neighborhoods and
+employment accessibility of low-wage workers,” Environment and
+planning B: Planning and Design , vol. 25, no. 3, pp. 345–365, 1998.
+[16] W. D. Montgomery, R. Mudge, E. L. Groshen, S. Helper, J. P.
+MacDuffie, y C. Carson, “America’s workforce and the self-driving
+future: Realizing productivity gains and spurring economic growth,”
+2018.
+[17] L. D. Knibbs, T. Cole-Hunter, y L. Morawska, “A review of
+commuter exposure to ultrafine particles and its health effects,” At-
+mospheric Environment , vol. 45, no. 16, pp. 2611–2622, 2011.
+[18] B. Gatersleben y D. Uzzell, “Affective appraisals of the daily
+commute: Comparing perceptions of drivers, cyclists, walkers, and
+users of public transport,” Environment and behavior , vol. 39, no. 3,
+pp. 416–431, 2007.
+[19] M. Ohnemus y A. Perl, “Shared autonomous vehicles: Catalyst of
+new mobility for the last mile?” Built Environment , vol. 42, no. 4, pp.
+589–602, 2016.
+[20] S. Shaheen y N. Chan, “Mobility and the sharing economy: Potential
+to facilitate the first-and last-mile public transit connections,” Built
+Environment , vol. 42, no. 4, pp. 573–588, 2016.
+[21] P. E. Theberge, “Development of mathematical models to assess
+highway maintenance needs and establish rehabilitation threshold
+levels,” Transportation Research Record , vol. 1109, pp. 27–35, 1987.
+[22] M. Snaith y J. Burrow, “Priority assessment,” Transportation Re-
+search Record , vol. 951, pp. 87–95, 1984.
+[23] R. E. Asbahan, J. K. McCracken y J. M. Vandenbossche, “Evalu-
+ating the cracking predicted by the mepdg using results from the sr
+22 smart pavement study,” 2008.
+[24] L. Head, S. Shladover y A. Wilkey, “Multi-modal intelligent traffic
+signal system,” University of Arizona , pp. 32–36, 2012.
+[25] G. Fisher, K. Rolfe, T. Kjellstrom, A. Woodward, S. Hales, A. Stur-
+man, S. Kingham, J. Petersen, R. Shrestha y D. King, “Health
+effects due to motor vehicle air pollution in new zealand,” Wellington:
+Ministry of Transport , 2002.
+[26] M. Krzyzanowski, B. Kuna-Dibbert y J. Schneider, Health effects
+of transport-related air pollution . WHO Regional Office Europe,
+2005.
+[27] F. Lipfert, R. Wyzga, J. Baty y J. Miller, “Traffic density as
+a surrogate measure of environmental exposures in studies of air
+pollution health effects: long-term mortality in a cohort of us veterans,”
+Atmospheric Environment , vol. 40, no. 1, pp. 154–169, 2006.
+[28] K. Zhang y S. Batterman, “Air pollution and health risks due to
+vehicle traffic,” Science of the total Environment , vol. 450, pp. 307–
+316, 2013.
+[29] S. E. West, “Distributional effects of alternative vehicle pollution
+control policies,” Journal of public Economics , vol. 88, no. 3-4, pp.
+735–757, 2004.
+[30] D. B. Lee Jr, L. A. Klein y G. Camus, “Induced traffic and induced
+demand,” Transportation Research Record , vol. 1659, no. 1, pp. 68–
+75, 1999.
+[31] Z. Wadud, D. MacKenzie y P. Leiby, “Help or hindrance? the
+travel, energy and carbon impacts of highly automated vehicles,”
+Transportation Research Part A: Policy and Practice , vol. 86, pp. 1–
+18, 2016.
+[32] S. Sgouridis, P. A. Bonnefoy y R. J. Hansman, “Air transportation
+in a carbon constrained world: Long-term dynamics of policies and
+strategies for mitigating the carbon footprint of commercial aviation,”
+Transportation Research Part A: Policy and Practice , vol. 45, no. 10,
+pp. 1077–1091, 2011.
+[33] R. B. Noland y M. A. Quddus, “Flow improvements and vehicle
+emissions: effects of trip generation and emission control technology,”
+Transportation Research Part D: Transport and Environment , vol. 11,
+no. 1, pp. 1–14, 2006.
+[34] K. Hymel, “If you build it, they will drive: Measuring induced demand for vehicle travel in urban areas,” Transport policy , vol. 76, pp. 57–66,
+2019.
+[35] G. Omstedt, B. Bringfelt y C. Johansson, “A model for vehicle-
+induced non-tailpipe emissions of particles along swedish roads,”
+Atmospheric Environment , vol. 39, no. 33, pp. 6088–6097, 2005.
+[36] H. Campello-Vicente, R. Peral-Orts, N. Campillo-Davo y
+E. Velasco-Sanchez, “The effect of electric vehicles on urban noise
+maps,” Applied Acoustics , vol. 116, pp. 59–64, 2017.
+[37] I. L. Al-Qadi, R. Yang, S. Kang, H. Ozer, E. Ferrebee, J. R. Roesler,
+A. Salinas, J. Meijer, W. R. Vavrik y S. L. Gillen, “Scenarios
+developed for improved sustainability of illinois tollway: Life-cycle
+assessment approach,” Transportation Research Record , vol. 2523,
+no. 1, pp. 11–18, 2015.
+[38] J. S. Apte, K. P. Messier, S. Gani, M. Brauer, T. W. Kirchstetter,
+M. M. Lunden, J. D. Marshall, C. J. Portier, R. C. Vermeulen y S. P.
+Hamburg, “High-resolution air pollution mapping with google street
+view cars: exploiting big data,” Environmental science & technology ,
+vol. 51, no. 12, pp. 6999–7008, 2017.
+[39] J. J. Caubel, T. E. Cados, C. V. Preble y T. W. Kirchstetter, “A
+distributed network of 100 black carbon sensors for 100 days of air
+quality monitoring in west oakland, california,” Environmental science
+& technology , vol. 53, no. 13, pp. 7564–7573, 2019.
+[40] K. P. Messier, S. E. Chambliss, S. Gani, R. Alvarez, M. Brauer,
+J. J. Choi, S. P. Hamburg, J. Kerckhoffs, B. LaFranchi, M. M.
+Lunden et al. , “Mapping air pollution with google street view cars:
+Efficient approaches with mobile monitoring and land use regression,”
+Environmental science & technology , vol. 52, no. 21, pp. 12 563–
+12 572, 2018.
+[41] F. Calvão, C. E. A. Mcdonald y M. Bolay, “Cobalt mining and the
+corporate outsourcing of responsibility in the democratic republic of
+congo,” The Extractive Industries and Society , vol. 8, no. 4, p. 100884,
+2021.
+[42] B. K. Sovacool, “When subterranean slavery supports sustainability
+transitions? power, patriarchy, and child labor in artisanal congolese
+cobalt mining,” The Extractive Industries and Society , vol. 8, no. 1,
+pp. 271–293, 2021.
+[43] A. Kelly, “Apple and google named in us lawsuit over congolese child
+cobalt mining deaths,” The Guardian , vol. 16, 2019.
+[44] G. A. Campbell, “The cobalt market revisited,” Mineral Economics ,
+vol. 33, no. 1, pp. 21–28, 2020.
+[45] H.-H. Ryu, H. H. Sun, S.-T. Myung, C. S. Yoon y Y.-K. Sun,
+“Reducing cobalt from lithium-ion batteries for the electric vehicle
+era,” Energy & Environmental Science , vol. 14, no. 2, pp. 844–852,
+2021.
+[46] A. Callaway, “Powering down corruption,” The Enough Project , pp.
+1–28, 2018.
+[47] T. C. Frankel, M. R. Chavez y J. Ribas, “The cobalt pipeline. tracing
+the path from deadly hand-dug mines in congo to consumers’ phones
+and laptops,” The Washington Post , vol. 30, 2016.
+[48] B. White, “Globalization and the child labor problem,” Journal of
+International Development: The Journal of the Development Studies
+Association , vol. 8, no. 6, pp. 829–839, 1996.
+[49] D. Part, “Highway safety manual,” 2010.
+[50] M. Banihashemi, “Highway safety manual, new model parameters
+vs. calibration of crash prediction models,” en Moving Toward Zero.
+2011 ITE Technical Conference and Exhibit Institute of Transportation
+Engineers (ITE) , 2011.
+[51] H. C. Manual, “Highway capacity manual,” Washington, DC , vol. 2,
+p. 1, 2000.
+[52] A. Flannery, A. Anderson y A. Martin, “Highway capacity manual
+and highway capacity software 2000 and advanced transportation
+modeling tools: Focus group findings,” Transportation research record ,
+vol. 1883, no. 1, pp. 176–184, 2004.
+[53] M. Azmat, S. Kummer, L. Moura Trigueiro, F. Gennaro Di y
+R. Moser, “Impact of innovative technologies on highway operators:
+Tolling organizations’ perspective,” 2018.
+[54] C. Queiroz, N. Vajdic y G. Mladenovic, “Public–private partner-
+ships in roads and government support: trends in transition and devel-
+oping economies,” Transportation Planning and Technology , vol. 36,
+no. 3, pp. 231–243, 2013.
+[55] R. Poole, “The impact of HOV and HOT lanes on congestion in the
+united states,” 2020.
+[56] L. Elefteriadou et al. , “Expanded transportation performance measures
+to supplement level of service (los) for growth management and
+transportation impact analysis,” 2012.
+[57] S. Mishra, T. F. Welch y M. K. Jha, “Performance indicators for
+public transit connectivity in multi-modal transportation networks,”
+Transportation Research Part A: Policy and Practice , vol. 46, no. 7,
+pp. 1066–1085, 2012.
+[58] R. Ewing, R. A. Schieber y C. V. Zegeer, “Urban sprawl as a risk
+factor in motor vehicle occupant and pedestrian fatalities,” American
+journal of public health , vol. 93, no. 9, pp. 1541–1545, 2003.
+[59] G. Galster, R. Hanson, M. R. Ratcliffe, H. Wolman, S. Coleman y
+J. Freihage, “Wrestling sprawl to the ground: defining and measuring
+an elusive concept,” Housing policy debate , vol. 12, no. 4, pp. 681–
+717, 2001.

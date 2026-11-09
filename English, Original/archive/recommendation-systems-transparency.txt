@@ -1,0 +1,224 @@
+Show me the algorithm: Transparency in recommendation systems — Schwartz Reisman Institute
+Back to Top
+0
+Skip to Content
+What's Happening
+News
+Events
+Videos
+Who We Are
+About Us
+Founding Donors
+Institute Leadership
+Advisory Board
+People
+What We Do
+Research
+Solutions
+Get Involved
+Contact
+Search
+Open Menu
+Close Menu
+What's Happening
+News
+Events
+Videos
+Who We Are
+About Us
+Founding Donors
+Institute Leadership
+Advisory Board
+People
+What We Do
+Research
+Solutions
+Get Involved
+Contact
+Search
+Open Menu
+Close Menu
+Folder:
+What's Happening
+Back
+News
+Events
+Videos
+Folder:
+Who We Are
+Back
+About Us
+Founding Donors
+Institute Leadership
+Advisory Board
+People
+Folder:
+What We Do
+Back
+Research
+Solutions
+Get Involved
+Contact
+Search
+Show me the algorithm: Transparency in recommendation systems
+Commentary
+Aug 25
+Written By
+Jonathan Stray
+Transparency has become a central concern around the uses and impact of recommendation algorithms, but what might this principle look like if implemented? In the 10th installment of SRI’s
+series of posts
+on the features, implications, and controversies surrounding privacy in an increasingly digital and data-rich context, guest contributor
+Jonathan Stray
+explores notions of algorithmic transparency, and explains some of the shortcomings around current conceptualizations of “explainable AI.”
+Everyone from users to scholars to regulators has demanded greater transparency around recommender algorithms—for example, the kinds that recommend particular music or movies on your streaming platforms or determine what you see on your social media feeds.
+Would publishing the recommender source code be useful? Do we need aggregated user interaction data instead? Or perhaps metrics for various types of content or outcomes? I'm not sure we know yet what "transparency" is, so I asked participants in a workshop of industry, academic, and civil society participants to tell me what they’d want to know in their wildest dreams, freed from privacy and secrecy issues.
+There is increasing pressure for algorithmic transparency of some sort. As Facebook Oversight Board member Alan Rusbridger
+recently said in The Guardian
+, “At some point we’re going to ask to see the algorithm, I feel sure.” But his next sentence gets to the heart of the issue: “Whether we’ll understand when we see it is a different matter.”
+In some sense, there is nothing mysterious about the algorithms that platform recommender systems use. YouTube has published detailed papers (e.g.,
+“Recommending What Video to Watch Next: A Multitask Ranking System”
+and
+“Latent Cross: Making Use of Context in Recurrent Recommender Systems”
+), Facebook has written technical blog posts (e.g.,
+“How Does News Feed Predict What You Want to See?”
+and
+“Recommending items to more than a billion people”
+), and there are many descriptions of other systems such as
+Google News
+or the
+The New York Times
+’ personalization system.
+While there is much in these disclosures that is clever, there is little that is exotic when compared to public research. Recommender systems are largely an open technology, albeit a fast changing one.
+One could still demand to see platform code. It’s not quite clear where to draw the line on what counts as “the algorithm,” and the sheer quantity of code—perhaps tens of millions of lines—will make interpretation difficult. In any case, the code itself might not prove very insightful without the data it runs on and the interactions that result. Scale is a problem there too. Even if we could magically solve all of the very intense privacy issues around access to mass user data, one group participant pointed out that “YouTube and probably Facebook are far too vast for any one person to understand what the algorithm is doing.”
+The code itself might not prove very insightful without the data it runs on and the interactions that result.
+And indeed, one active algorithmic auditor reported that “no one I know is seriously calling for transparency of the actual algorithm.” Instead, “we need transparency around outcomes of importance, or antecedents to those outcomes.”
+Platforms already publish transparency reports (see, for example,
+Twitter’s
+and
+Google’s
+transparency reports), and the number of reported metrics has steadily increased over the years—not just content moderation and ranking, but everything from law enforcement requests to copyright takedowns. It is not at all straightforward to interpret these numbers. For example, what’s a “good” value for the number of items removed for any particular policy violation? Or for the percentage of users who viewed a certain type of content? Recent
+research on Twitter
+compares the chronological and algorithmic feeds, but chronological presentation is
+not a reasonable baseline
+for platforms like Facebook where users don’t curate their connections to the same extent, or platforms like YouTube which could recommend any item at any time.
+It’s also not clear if the right numbers are being reported. It is complicated, time-consuming, and politically fraught for platforms to develop metrics. It’s also not necessarily in their interest to go looking for problems. Much better would be for someone external to define what is measured. One way to do this would be to provide definitions, but external auditors could make better decisions about what to measure if they were given access to internal data. In fact, the forthcoming EU Digital Services Act includes a
+requirement for independent auditing
+.
+What’s a “good” value for the number of items removed for any particular policy violation? Or for the percentage of users who viewed a certain type of content?
+Because not everyone can be an auditor, platforms could also provide transparency APIs— standardized, automatable ways to query what is being shared and clicked on. These would allow aggregated queries of specific kinds, perhaps protected using
+differential privacy
+, but what external researchers would really like is the ability to perform experiments. Privacy and expense mean this opportunity will remain limited to a small number of people, but there is an interesting option: add some amount of noise to item rankings. With the right query tools, this effectively tests all counterfactual recommendation policies at once, at least if you can record enough data on what users did when presented with these slightly tweaked options. This is the ultimate generalization of A/B testing, and has been most fully developed in
+bandit algorithms for offline evaluation
+. It’s a very promising idea, but note that it will not allow counterfactual evaluation of effects like virality or changes in user behaviour.
+However, even this level of access might not mean much to users. There is a difference between “scrutability”—the possibility of investigation and understanding—and “
+transparency
+,” or disclosures for a specific purpose such as control, recourse, or accountability. Users want to know why they are seeing what they see, and content creators want to know why they get the distribution they do (or don’t). Information about the policies that guide recommendations might be far more useful to them.
+Users want to know why they are seeing what they see, and content creators want to know why they get the distribution they do (or don’t).
+Along this line, one of the most interesting suggestions came from a platform participant in the workshop. “I think the most useful thing would be essentially court proceedings of the things we do,” they said. “Document what were we looking at, document what we were doing when we made decisions.” This idea is motivated by existing internal change logs and modeled on the way that courts cannot simply decide an outcome, but must carefully justify their decision. Of course, nothing is perfect: this sort of transparency will incentivize making certain decisions elsewhere.
+Want to learn more?
+Read SRI Director Gillian Hadfield’s analysis of
+why we need “justifiable,” not explainable, AI
+.
+Explore other entries in
+SRI’s blog series on privacy
+.
+Learn more about the
+“four conversations”
+that guide SRI’s research.
+Join an
+SRI discussion group
+.
+Jonathan Stray
+is a visiting scholar at the
+Berkeley Center for Human-Compatible AI (CHAI)
+, working on recommender systems—the algorithms that select and rank content across social media, news apps, and online shopping—and how their operation affects well-being and polarization. He also teaches computer science and journalism at Columbia Journalism School. Stray led the development of
+Workbench
+, a visual programming system for data journalism, and built
+Overview
+, an open-source document set analysis system for investigative journalists. He has also worked as an editor at the Associated Press, a writer for the New York Times, Foreign Policy, ProPublica,
+MIT Tech Review
+, and Wired, and a computer graphics developer at Adobe Systems.
+Browse stories by tag:
+AI
+Data
+Economics
+Education
+Engineering
+Ethics
+Governance
+Health
+Human Rights
+In the Media
+Jobs
+Law
+Normativity
+Privacy
+Privacy Series
+Psychology
+Public Policy
+Recommenders
+Reports
+Workshops
+Related Posts
+Featured
+Jun 23, 2023
+Commentary
+Why Geoffrey Hinton is worried about the future of AI
+Jun 23, 2023
+Commentary
+Jun 23, 2023
+Commentary
+May 24, 2023
+Commentary
+AI regulation in Canada is moving forward. Here’s what needs to come next.
+May 24, 2023
+Commentary
+May 24, 2023
+Commentary
+May 16, 2023
+Commentary
+Risk and uncertainty: What should we do about AI?
+May 16, 2023
+Commentary
+May 16, 2023
+Commentary
+Apr 10, 2023
+Commentary
+Buyer beware of the generative AI bandwagon
+Apr 10, 2023
+Commentary
+Apr 10, 2023
+Commentary
+Mar 23, 2023
+Commentary
+Digital literacy will be key in a world transformed by AI
+Mar 23, 2023
+Commentary
+Mar 23, 2023
+Commentary
+Mar 21, 2023
+Commentary
+Academic papers written by AI get a solid B—but is it cheating?
+Mar 21, 2023
+Commentary
+Mar 21, 2023
+Commentary
+Governance
+Privacy Series
+Privacy
+Data
+AI
+Recommenders
+Jonathan Stray
+Jonathan Stray is a visiting scholar at the Berkeley Center for Human-Compatible AI (CHAI), working on recommender systems—the algorithms that select and rank content across social media, news apps, and online shopping—and how their operation affects well-being and polarization. He also teaches computer science and journalism at Columbia Journalism School. Stray led the development of Workbench, a visual programming system for data journalism, and built Overview, an open-source document set analysis system for investigative journalists. He has also worked as an editor at the Associated Press, a writer for the New York Times, Foreign Policy, ProPublica, MIT Tech Review, and Wired, and a computer graphics developer at Adobe Systems.
+http://jonathanstray.com/me
+Previous
+Previous
+SRI Research Lead Wendy H. Wong named to Royal Society of Canada’s College of New Scholars
+Next
+Next
+Schwartz Reisman Institute releases 2021–24 strategic plan
+Contact
+U of T
+U of T Privacy
+© 2023 Schwartz Reisman Institute for Technology and Society. All rights reserved.

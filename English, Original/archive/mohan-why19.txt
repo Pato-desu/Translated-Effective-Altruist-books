@@ -1,0 +1,407 @@
+On Handling Self-masking and Other Hard Missing Data Problems
+Karthika Mohan
+Computer Science Department
+University of California, Berkeley
+karthika@berkeley.edu
+Abstract
+This paper tackles hard incomplete (missing) data problems
+such as those in which missingness in a variable is caused
+by itself. To address these problems we develop a new tech-
+nique that jointly harnesses model and data as opposed to
+existing methods that exploit properties of the model alone.
+We present necessary and sufﬁcient conditions under which
+consistent estimates of target quantities can be computed. In
+sharp contrast to other techniques used for dealing with simi-
+lar problems, we do not make any parametric assumptions.
+Introduction
+Analysing and drawing inferences from missing data can be
+extremely challenging when the dataset contains variables
+that are themselves causes of their missingness; this type
+of missingness known as self-masking missingness, is be-
+lieved to be the most commonly encountered type in prac-
+tice [Osborne, 2012; Sverdlov, 2015; Adams, 2007; Mohan
+et al. , 2018]. Examples include smokers not answering ques-
+tions pertaining to their smoking behavior in insurance ap-
+plications, people with very high and very low income not
+disclosing their income and people of certain age groups not
+revealing their age.
+Recent years have witnessed a growing interest in han-
+dling missing data using graphical models that encode
+assumptions about the underlying missingness process.
+[Daniel et al. , 2012; Mohan et al. , 2013; Shpitser et al. ,
+2015; Mohan and Pearl, 2018]. Given a target quantity Q
+and a graph G,Qisrecoverable from Gif there exists an
+algorithm that can consistently estimate Qfor all data gener-
+ated by G, elseQisnon-recoverable . Such non-recoverable
+(Q; G )pairs which we call hard missing data problems (or
+hard problems) are the focus of this paper. Examples include
+Q=P(Ojdo(t))and the self-masking model shown in ﬁg-
+ure 1 and Q=P(X)and the self-masking model shown in
+ﬁgure 2 (b). While previous work treated recoverability as
+a property of graph alone, in this paper we develop general
+techniques to solve hard missing data problems by harness-
+ing the properties of both graph and data .
+In the following section we review missingness graphs i.e.
+graphical models for handling missing data [Mohan et al. ,
+2013].
+Copyright c2018, Association for the Advancement of Artiﬁcial
+T O Ro
+O∗treatment outcomemissingness
+mechanism
+proxy variable
+for outcomeFigure 1: Missingness Graph in which outcome causes its
+own missingness
+Missingness Graphs
+LetG(V; E)be the causal DAG where Vis the set of nodes
+andEis the set of edges. Nodes in the graph correspond to
+variables in the data set and are partitioned into ﬁve cate-
+gories, i.e. V=Vo[Vm[U[V[R.
+Vois the set of variables that are observed in all records in
+the population and Vmis the set of variables that are miss-
+ing in at least one record. Variable Xis termed as fully ob-
+served ifX2Voandpartially observed ifX2Vm.Rvi
+andV
+iare two variables associated with every partially ob-
+served variable, where V
+iis a proxy variable that is actually
+observed, and Rvirepresents the status of the causal mech-
+anism responsible for the missingness of V
+i; formally,
+v
+i=f(rvi; vi) =
+vi ifrvi= 0
+m ifrvi= 1(1)
+Vis the set of all proxy variables and Ris the set of
+all causal mechanisms that are responsible for missingness.
+Unless stated otherwise it is assumed that no variable in
+Vo[Vm[Uis a child of an Rvariable. Uis the set of
+unobserved nodes, also called latent variables. Two nodes
+XandYcan be connected by a directed edge i.e. X!Y,
+indicating that Xis a cause of Y, or by a bi-directed edge
+XL9999K Ydenoting the existence of a Uvariable that
+is a parent of both XandY. This graphical representation
+is called a Missingness Graph (orm-graph) [Mohan et al. ,
+2013]. P(V; Vo; R)is called the observed data distribution.
+Proxy variables may not always be explicitly shown in
+m-graphs in order to keep the ﬁgures simple and clear. Con-
+Intelligence (www.aaai.org). All rights reserved.
+X Rx
+X∗(a)
+X Rx
+X∗ (b)
+Figure 2: m-graphs in which (a) P(X)is recoverable, (b)
+P(X)is non-recoverable.
+ditional Independencies are read off the graph using the d-
+separation criterion Pearl [2009]. For any binary variable X,
+x0andxdenote X= 0andX= 1respectively.
+Example 1. In the m-graph in ﬁgure 1, Tdenotes the treat-
+ment administered to patients and Odenotes the outcome.
+While Tis observed for all patients, Ois observed only for
+some of them. The edge from OtoRoindicates that the miss-
+ingness is of self-masking type. Vo=fTg,Vm=fOg,
+V=fOg,U=;andR=fRog.
+Missingness Mechanisms
+Based on Rubin [1976], missing data problems can be classi-
+ﬁed into Missing Completely At Random (MCAR) , Missing
+At Random (MAR) and Missing Not At Random (MNAR).
+In this paper we use the graph based deﬁnition of these
+mechanisms [Mohan et al. , 2013].
+An m-graph Gdepicts an MCAR problem if
+(Vm; Vo)? ?Rholds in G, an MAR problem if Vm? ?RjVo
+holds in Gand an MNAR problem otherwise. For example,
+ﬁgure 2 (a) depicts MCAR, ﬁgure 3 (c) depicts MAR and
+ﬁgure 1 depicts MNAR missingness problems. Among
+these, joint distribution ( Q=P(Vo; Vm)) is always con-
+sistently estimable (i.e. recoverable) when missingness is
+either MCAR or MAR (Mohan et al. [2013]). However this
+is not true for MNAR missingness. As such all hard missing
+data problems discussed in this paper belong to the MNAR
+category.
+Recoverability as a property of m-graph
+In this section we exemplify the notions of recoverability
+and non-recoverability as a property of the m-graph.
+XRxP(X; Rx)
+0 0 0.3
+1 0 0.2
+m 1 0.5
+Table 1: Observed Data Distribution
+Suppose Xis a binary variable corrupted by missing val-
+ues. The dataset with missing values is shown in table 1.
+Figures 2 (a) & (b) depict two distinct (but statistically indis-
+tinguishable1) processes that could have generated this data.
+1Although d-separations are testable implications of a graphi-
+cal model, under missingness not all d-separations are testable. InIn ﬁgure 2 (a) missingness is generated by a purely random
+process while ﬁgure 2 (b) depicts self-masking missingness.
+Recoverability: Consider the problem of recovering
+P(X)given the m-graph Gin ﬁgure 2 (a).
+Since X? ?RxinGwe have,
+P(X) =P(XjRx= 0)
+Using equation 1 we can rewrite the above as,
+P(X) =P(XjRx= 0)
+By showing that P(X)is a quantity that can be computed
+from the observed data distribution, we have established its
+recoverability. To do this we used the assumption X? ?Rx
+embedded in the m-graph. Hence in this case recoverability
+is a property of the m-graph alone. The recovered distribu-
+tionP(X)is shown in table 2.
+XP(X)
+0 3/5
+1 2/5
+Table 2: Recovered Distribution
+Non-recoverability: Now consider the problem of recov-
+ering P(X)given the m-graph in ﬁgure 2 (b). Rxis depen-
+dent on Xand we have no additional information regarding
+this dependence. It could be that Xis missing only when its
+value is 1 or it could be that Xis missing only when its value
+is 0. In the former case P(x0) = 0 :3where as in the latter
+caseP(x0) = 0:8. Using the available information in Git is
+not possible to ﬁnd the (true) value of P(X)even if we are
+given inﬁnitely many samples i.e. P(X)is non-recoverable.
+In fact, non-recoverability of P(X)would persist even if G
+had more variables in it (formally proved in [Mohan et al. ,
+2013; Mohan and Pearl, 2014a]).
+Inability to handle hard problems such as self-masking
+missingness is a major deﬁciency in the ﬁeld of missing
+data. Recent papers such as Shpitser [2016] and Mohan et al.
+[2013], and missing data text books such as Enders [2010]
+have called attention to the problem of recoverability in self-
+masking models. Standard Bayesian network textbooks such
+as Darwiche [2009] (chapter 17) and Koller and Friedman
+[2009] (chapter 19) discuss models similar to that in ﬁgure
+1 and have shown that none of the existing methods such
+as the EM algorithm can recover parameters in self-masking
+m-graphs. In the following section we develop techniques
+to recover queries in hard problems and thus eliminate this
+deﬁciency in the ﬁeld.
+particular no statement of independence between a variable and its
+missingness mechanism ( X? ?Rx) is testable [Mohan and Pearl,
+2014b].
+Recoverability as a property of both m-graph
+and missing data
+We exemplify below a procedure that exploits the properties
+of both graph and data to recover the joint distribution in a
+self masking model.
+Example 2. Consider the problem of recovering P(O; T )
+given the m-graph Gin ﬁgure 1 and the missing data distri-
+bution, P(T; O; Ro). Let both TandObe binary variables.
+We will ﬁrst recover P(TjO)and then use it for recovering
+P(O).
+Using T? ?RojOand eq 1, P(TjO)can be recovered as,
+P(TjO) =P(TjO; R o= 0) = P(TjO; Ro= 0)
+Since the variables are binary, P(T) =P
+OP(TjO)P(O)
+yields the following equations:
+P(t0) =P(t0jo0)P(o0) +P(t0jo)P(o)
+P(t) =P(tjo0)P(o0) +P(tjo)P(o)
+On substituting P(TjO)in the equations above with its re-
+covered estimand we get,
+P(t0) =P(t0jO= 0; r0
+o)P(o0) +P(t0jO= 1; r0
+o)P(o)
+P(t) =P(tjO= 0; r0
+o)P(o0) +P(tjO= 1; r0
+o)P(o)
+The two preceding equations constitute a system of equa-
+tions in two unknowns: P(o0)andP(o). If the solution is
+unique then P(O)is recoverable and is given by,
+P(o0) =P(t0) P(t0jO= 1; Ro= 0)
+P(t0jO= 0; r0o) P(t0jO= 1; r0o)
+P(o) = 1 P(t0) P(t0jO= 1; Ro= 0)
+P(t0jO= 0; r0o) P(t0jO= 1; r0o)
+P(T; O )can now be recovered as: P(TjO)P(O).
+However, if the system of equations has inﬁnitely many
+solutions then P(O)is non-recoverable. This can happen
+when T? ?O. In this case Tprovides no information about
+Oand hence, cannot be leveraged to recover P(O). This
+is to be expected since we do not insist on faithfulness and
+hence it is possible that an independence relation exist be-
+tween two variable even when they are connected by an
+edge.
+We further note that it is impossible for the system to
+have no solutions since it contradicts our assumption that
+the graph and data are compatible (i.e. there exist param-
+eterization(s) of the graph that generated the data as per
+compatibility assumption).
+Finally we note that as a result of recovering P(O; T ),
+we can also recover another hard problem: P(Ojdo(t)), the
+causal effect of treatment on outcome. Since Gis Markovian,
+P(Ojdo(t)) = P(Ojt). Recoverability of P(Ojdo(t))thus
+implicitly follows from that of P(O; T ).
+Necessary and Sufﬁcient Conditions for
+Recoverability in Hard Missing Data Problems
+Notations 
+MZjW;MZ&Aug (MZjW;MW)
+MZjW=P(ZjW)denotes ajZjjWjmatrix in which the
+columns sum to one. For example if ZandWare binary,
+X Y Rx(a)
+X Y Rx
+Z (b)
+X Y Rx
+Z
+(c)
+Figure 3: (a) P(X; Y )is not recoverable, (b) P(X; Y )may
+be recoverable using graph and data, (c) P(X; Y )is recov-
+erable.
+then MZjW=
+P(z0jw0)P(z0jw)
+P(zjw0)P(zjw)
+.MZ=P(Z)
+denotes ajZj  1column matrix. Aug (MZjW; MW)
+denotes ajZj(jWj+ 1) augmented matrix obtained by
+appending the columns of matrices MZjWandMW.
+The following theorem states the necessary and sufﬁcient
+conditions for recoverability in hard missing data problems.
+Theorem 1. Let m-graph Gand query P(W)be such that
+the pair ( P(W); G) constitutes a hard missing data prob-
+lem. Let P(V; VO; R)denote the distribution over missing
+data and ZfVm; Vo; Rg fW; R wg.
+Given GandP(V; VO; R),P(W)is recoverable if
+and only if P(ZjW)andP(Z)are recoverable and
+rank(MZjW) = rank( Aug (MZjW; MW)) =jWj.
+Proof: See Appendix.
+The theorem makes no assumptions about the structure of
+m-graph G. It is applicable to all hard MNAR problems and
+not just to self-masking models. For example P(X; Y )and
+the m-graph in ﬁgure 3 (a) and P(X; Y )and the m-graph
+in ﬁgure 3 (b) constitute hard MNAR problems [Mohan and
+Pearl, 2014a]. However in the case of the latter, theorem 1
+can be used to recover P(X; Y )by leveraging Z.
+Sufﬁcient Conditions for Recoverability in Any
+Missing Data Problem
+The following corollary states sufﬁcient conditions for re-
+covering anygiven query P(W)using both graph and data.
+Corollary 1. Given m-graph Gand missing data distribu-
+tionP(V; Vo; R),P(W)is recoverable if for any Z
+fVm; Vo; Rg f W; R wg,P(ZjW)andP(Z)are recover-
+able and rank( MZjW) = rank( Aug (MZjW; MW)) =jWj.
+P(X)and the m-graph in ﬁgure 3(c) do not constitute
+a hard missing data problem. In fact, the query is recover-
+able:P(X) =P
+YP(XjY; R x= 0)P(Y)[Mohan et al. ,
+2013]. However, P(X)can still be recovered using the pre-
+ceding corollary by leveraging Z.XandZbeing binary
+andYhaving a high cardinality, say jYj= 50 is an in-
+stance where applying the corollary is more convenient from
+a computational standpoint.
+Remark 1. Although theorem 1 and corollary 1 aim to re-
+cover P(W), they can also be used to recover P(Z; W )
+since P(ZjW)is already known to be recoverable.
+Scope of Results: Given a query graph pair ( Q; G ), ifQ
+is not recoverable using Gthen theorem 1 presents neces-
+sary and sufﬁcient conditions for its recoverability. If Qis
+not recoverable using theorem 1 then we deem it as non-
+recoverable. Corollary 1 shows that the recoverability tech-
+nique in theorem 1 is applicable to simple missing data
+problems such as MAR that are known to be recoverable
+using graphs. However, there exists problems that cannot
+be recovered using corollary 1 but can be recovered using
+graphs. For example P(X; Y )cannot be recovered from
+G:X Y!RXusing corollary 1 since X? ?Y. How-
+everP(X; Y )is still recoverable as, P(XjRX= 0)P(Y)
+[Mohan et al. , 2013].
+The preceding recoverability procedures are inspired by
+similar results in epidemiology (Rothman et al. [2008]), re-
+gression analysis (Carroll et al. [2006]) and causal inference
+(Pearl [2012]; Kuroki and Pearl [2014]). In contrast to Pearl
+[2012] that relied on external studies to compute causal ef-
+fect in the presence of an unmeasured confounder, Kuroki
+and Pearl [2014] showed how the same could be effected
+without external studies. In missing data settings we have
+access to partial information that allows us to compute con-
+ditional distributions. This allows us to adapt the procedure
+in Pearl [2012] to compute consistent estimates as detailed
+above. We further note that to the best of our knowledge pre-
+vious work on self-masking models relied on parametric as-
+sumptions (Mohan et al. [2018]; ?];?). In sharp contrast we
+present a complete and non-parametric solution to handle all
+hard problems.
+Conclusions
+In this work we eliminated a major deﬁciency in the ﬁeld
+of missing data. We developed a sound, complete and non-
+parametric technique to handle hard missing data problems.
+Furthermore we showed that this technique is also applicable
+to queries that are known to be recoverable using graphs.
+Appendix
+Proof of theorem 1.
+Proof of theorem 1 relies on the following lemma that states
+the conditions under which a system of linear equations is
+consistent. [Cramer, 1750; Strang, 1993].
+Lemma 1. The system of equations Ax =bwithmequa-
+tions and nunknowns has (i) a unique solution if and only
+ifrank (A) =rank (Aug (A; b)) = nand (ii) inﬁnite so-
+lutions if and only if rank (A) =rank (Aug (A; b))< n.
+(Proof of sufﬁciency) When the conditions in the theorem
+are met the constraint P(Z) =P
+WP(ZjW)P(W)yields
+a unique solution as per lemma 1, thus establishing the re-
+coverability of P(W).
+(Proof of necessity) We need to show that for every ele-
+mentZiin the power set of fVm; Vo; Rg fW; R wg,P(W)is non-recoverable using Gand data if any of the follow-
+ing hold: (i) P(Zi)is non-recoverable, (ii) P(ZijW)is non-
+recoverable, (iii) rank( MZijW) = rank( Aug (MZijW; MW))
+=jWjdoes not hold. Non-recoverability of P(Zi)implies
+that its value is not unique i.e there exists at least two dis-
+tinct distributions P1(Zi)andP2(Zi). For each of them we
+can construct distinct distributions of P(W)using P(Zi) =P
+WP(ZijW)P(W), thereby proving that P(W)is non-
+recoverable. Similarly, we can show that P(W)is non-
+recoverable when P(ZijW)is non-recoverable. In the case
+of condition (iii) non-recoverability of P(W)follows from
+lemma 1.
+References
+J Adams. Researching complementary and alternative
+medicine . Routledge, 2007.
+R J Carroll, D Ruppert, L A Stefanski, and C M Crainiceanu.
+Measurement error in nonlinear models: a modern per-
+spective . CRC press, 2006.
+G Cramer. Introduction a l’analyse des lignes courbes alge-
+briques par Gabriel Cramer... chez les freres Cramer &
+Cl. Philibert, 1750.
+R M Daniel, M G Kenward, S N Cousens, and B L
+De Stavola. Using causal diagrams to guide analysis in
+missing data problems. Statistical Methods in Medical
+Research , 21(3):243–256, 2012.
+A Darwiche. Modeling and reasoning with Bayesian net-
+works . Cambridge University Press, 2009.
+C.K. Enders. Applied Missing Data Analysis . Guilford
+Press, 2010.
+D Koller and N Friedman. Probabilistic graphical models:
+principles and techniques . 2009.
+M Kuroki and J Pearl. Measurement bias and effect restora-
+tion in causal inference. Biometrika , 101(2):423–437,
+2014.
+K Mohan and J Pearl. Graphical models for recovering prob-
+abilistic and causal queries from missing data. In Ad-
+vances in NIPS 27 , pages 1520–1528. 2014.
+K Mohan and J Pearl. On the testability of models with
+missing data. Proceedings of AISTAT , 2014.
+K Mohan and J Pearl. Graphical models for processing miss-
+ing data. Technical report, Department of Computer Sci-
+ence, University of California, Los Angeles, CA, 2018.
+K Mohan, J Pearl, and J Tian. Graphical models for infer-
+ence with missing data. In Advances in NIPS 26 , pages
+1277–1285. 2013.
+K Mohan, F Thoemmes, and J Pearl. Estimation with incom-
+plete data: The linear case. In Proceedings of IJCAI-2018 ,
+pages 5082–5088, 2018.
+J W Osborne. Best practices in data cleaning: A complete
+guide to everything you need to do before and after col-
+lecting your data . Sage Publications, 2012.
+J Pearl. Causality: models, reasoning and inference . Cam-
+bridge Univ Press, New York, 2009.
+J Pearl. On measurement bias in causal inference. arXiv
+preprint arXiv:1203.3504 , 2012.
+K J Rothman, S Greenland, and T L Lash. Modern epidemi-
+ology . Lippincott Williams & Wilkins, 2008.
+D.B. Rubin. Inference and missing data. Biometrika ,
+63:581–592, 1976.
+I Shpitser, K Mohan, and J Pearl. Missing data as a causal
+and probabilistic problem. In Proceedings of UAI , 2015.
+I Shpitser. Consistent estimation of functions of data missing
+non-monotonically and not at random. In Advances in
+NIPS , pages 3144–3152, 2016.
+G Strang. Introduction to linear algebra , volume 3.
+Wellesley-Cambridge Press Wellesley, MA, 1993.
+O Sverdlov. Modern adaptive randomized clinical trials:
+statistical and practical aspects . Chapman and Hall/CRC,
+2015.

@@ -1,0 +1,66 @@
+Updateless Decision Theory Teoría de la decisión
+Portada Es comúnmente reconocido aquí que las teorías de la decisión actuales tienen deficiencias que aparecen en forma de diversas paradojas. Como parece haber poca esperanza de que Eliezer publique pronto su Timeless Decision Theory, decidí intentar sintetizar algunas de las ideas discutidas en este foro, junto con algunas propias, en una alternativa coherente que, con suerte, no sea tan propensa a paradojas. Comenzaré con una forma de plantear la pregunta. Ponte en el lugar de una IA, o más específicamente, del algoritmo de decisión de una IA. Tienes acceso a tu propio código fuente S, además de una cadena de bits X que representa todos tus recuerdos y datos sensoriales. Tienes que elegir una cadena de salida Y. Esa es la decisión. La pregunta es: ¿cómo? (La respuesta no es «ejecutar S», porque lo que queremos saber es qué debería ser S en primer lugar.) Towards a New Decision Theory por Wei Dai, 13 de agosto de 2009
+Towards a New Decision Theory Ejemplo 1: Chantaje contrafactual Ejemplo 2: Return of Bayes Ejemplo 3: Level IV Multiverse Sin comentarios 15
+Procedamos preguntando: «¿Cuáles son las consecuencias de que S, con entrada X, devuelva Y como salida en lugar de Z?» Para empezar, consideremos solo las consecuencias de esa elección en el ámbito de las computaciones abstractas (es decir, computaciones consideradas como objetos matemáticos en lugar de implementadas en sistemas físicos). La consecuencia más inmediata es que cualquier programa que llame a S como subrutina con X como entrada recibirá Y como salida, en lugar de Z. Lo que sucede después es un poco más difícil de determinar, pero, suponiendo que sabes algo sobre un programa P que llama a S como subrutina, puedes deducir además los efectos de elegir Y frente a Z siguiendo la diferencia entre las dos opciones en la ejecución posterior de P. Podríamos llamar a estas las consecuencias computacionales de Y. Si tienes preferencias sobre la ejecución de un conjunto de programas, algunos de los cuales llaman a S como subrutina, entonces puedes satisfacer tus preferencias directamente eligiendo la salida de S de modo que esos programas se ejecuten como más prefieras. Una clase más general de consecuencias podría llamarse consecuencias lógicas. Considera un programa P' que no llama a S, sino a una subrutina distinta S' que es lógicamente equivalente a S. En otras palabras, S' siempre produce la misma salida que S cuando recibe la misma entrada. Debido
+a la relación lógica entre S y S', tu elección de salida para S también debe afectar la ejecución posterior de P'. Otro ejemplo de relación lógica es un S' que siempre devuelve el primer bit de la salida de S cuando recibe la misma entrada, o uno que devuelve la misma salida que S en algún subconjunto de entradas. En general, no puedes estar seguro de las consecuencias de una elección, porque no eres lógicamente omnisciente. Cómo manejar la incertidumbre lógica o matemática es un problema abierto, así que por ahora supondremos que tienes acceso a una «subrutina de intuición matemática» que de alguna manera te permite formar creencias sobre las consecuencias probables de tus elecciones. En este punto, podrías preguntar: «Está bien, pero ¿qué pasa si mis preferencias se extienden más allá de las computaciones abstractas? ¿Qué pasa con las consecuencias en el universo físico?». La respuesta es que podemos ver el universo físico como un programa que ejecuta S como subrutina, o, de forma más general, como un objeto matemático que tiene S incrustado dentro de él. (De ahora en adelante hablaré simplemente de programas por simplicidad, entendiendo que la discusión posterior puede generalizarse a universos no computables.) Tus preferencias sobre el universo físico pueden traducirse en preferencias sobre tal programa P, y programarse en la IA. La IA,
+y programarse en la IA. La IA, al recibir una entrada X, examinará P, determinará todas las instancias en las que llama a S con entrada X, y elegirá la salida que optimice sus preferencias sobre la ejecución de P. Si las preferencias se tradujeron fielmente, la decisión de la IA también debería optimizar tus preferencias sobre el universo físico. Esta traducción fiel es un segundo problema abierto importante. ¿Qué pasa si tienes cierta incertidumbre sobre a qué programa corresponde nuestro universo? En ese caso, tenemos que especificar preferencias para el conjunto completo de programas con los que nuestro universo podría corresponder. Si tus preferencias sobre lo que ocurre en uno de esos programas son independientes de lo que ocurre en otro, entonces podemos representarlas mediante una distribución de probabilidad sobre el conjunto de programas, más una función de utilidad sobre la ejecución de cada programa individual. De forma más general, siempre podemos representar tus preferencias como una función de utilidad sobre vectores de la forma <E1,E2,E3,…>, donde E1 es una historia de ejecución de P1, E2 es una historia de ejecución de P2, y así sucesivamente. Estas consideraciones conducen al siguiente diseño para el algoritmo de decisión S. S está codificado con un vector <P1, P2, P3, ...> de programas que le importan, y una función de utilidad sobre vectores de la forma <E1, E2, E3, …> que define sus preferencias sobre cómo
+define sus preferencias sobre cómo deben ejecutarse esos programas. Cuando recibe una entrada X, mira dentro de los programas P1, P2, P3, ..., y usa su «intuición matemática» para formar una distribución de probabilidad P_Y sobre el conjunto de vectores <E1, E2, E3, …> para cada elección de cadena de salida Y. Finalmente, genera una cadena Y* que maximiza la utilidad esperada Suma P_Y(<E1, E2, E3,…>) U(<E1, E2, E3, …>). (Esto supone específicamente que la maximización de la utilidad esperada es la forma correcta de tratar la incertidumbre matemática. Considérala un marcador temporal hasta que se resuelva ese problema. Además, describo el algoritmo como una búsqueda por fuerza bruta por simplicidad. En realidad, probablemente querrías que hiciera algo más inteligente para encontrar el Y* óptimo más rápidamente.) Ejemplo 1: Chantaje contrafactual Ten en cuenta que la actualización bayesiana no se hace explícitamente en esta teoría de la decisión. Cuando el algoritmo de decisión recibe la entrada X, puede determinar que un subconjunto de programas por los que tiene preferencias nunca lo llama con X y además son lógicamente independientes de su salida, de modo que puede ignorarlos al calcular las consecuencias de una elección. No hay necesidad de poner las probabilidades de esos programas en 0 y renormalizar. Así que, con eso en mente, podemos modelar
+el chantaje contrafactual mediante el siguiente programa de Python:
+
+def P(coin):    AI_balance = 100    if coin == "heads":        if S("heads") == "give $100":            AI_balance -= 100    if coin == "tails":        if Omega_Predict(S, "heads")== "give $100":            AI_balance += 10000
+
+El objetivo de la IA es maximizar la utilidad esperada = .5 * U(AI_balance después de P(“heads”)) + .5 * U(AI_balance después de P(“tails”)). Suponiendo que U(AI_balance) = AI_balance, es fácil determinar U(AI_balance después de P(“heads”)) como función de la salida de S. Es igual a 0 si S(“heads”) == “give $100”, y 100 en caso contrario. Para calcular U(AI_balance después de P(“tails”)), la IA necesita mirar dentro de la función Omega_Predict (no se muestra aquí) e intentar determinar qué tan precisa es. Suponiendo que el módulo de intuición matemática dice que elegir “give $100” como salida de S(“heads”) hace más probable (por un margen suficientemente grande) que Omega_Predict(S, "heads") devuelva “give $100”, entonces esa elección maximiza la utilidad esperada. Ejemplo 2: Return of Bayes Este ejemplo se basa en el caso 1 del post de Eliezer Priors as Mathematical
+La entrada de Eliezer “Priors as MathematicalObjects”. Una urna contiene 5 bolas rojas y 5 bolas blancas. Se le pide a la IA que prediga la probabilidad de que cada bola sea roja, a medida que se extrae de la urna, y su objetivo es maximizar la puntuación logarítmica esperada de sus predicciones. El punto principal de este ejemplo es que esta teoría de la decisión puede reproducir el efecto del razonamiento bayesiano cuando la situación lo requiere. Podemos modelar el escenario usando preferencias sobre el siguiente programa de Python:
+def P(n):
+    urn = ['red', 'red', 'red', 'red', 'red', 'white', 'white', 'white', 'white', 'white']
+    history = []
+    score = 0
+    while urn:
+        i = n%len(urn)
+        n = n/len(urn)
+        ball = urn[i]
+        urn[i:i+1] = []
+        prediction = S(history)
+        if ball == 'red':
+            score += math.log(prediction, 2)
+        else:
+            score += math.log(1-prediction, 2)
+        print (score, ball, prediction)
+        history.append(ball)
+
+A continuación se muestra una impresión de una ejecución de muestra, usando n=1222222:
+-1.0 red 0.5
+-1.0 red 0.5
+-2.16992500144 red 0.444444444444
+-2.84799690655 white 0.375
+-3.65535182861 white 0.428571428571
+-4.65535182861 red 0.5
+-5.9772799235 red 0.4
+-7.9772799235 red 0.25
+-7.9772799235 white 0.0
+-7.9772799235 white 0.0
+-7.9772799235 white 0.0
+
+S debería usar razonamiento deductivo para concluir que devolver (número de bolas rojas restantes / total de bolas restantes) maximiza la puntuación media en el rango de entradas posibles de P, desde n=1 hasta 10! (que representan los posibles órdenes en que se extraen las bolas), y hacerlo.
+
+Alternativamente, S puede aproximar las predicciones correctas mediante fuerza bruta: generar una función aleatoria de historias a predicciones, y calcular cuál sería la puntuación media si implementara esa función. Repetir esto un gran número de veces probablemente encontrará una función que devuelva valores cercanos a las predicciones óptimas.
+
+Ejemplo 3: Multiverso de nivel IV
+
+En el Multiverso de Nivel 4 de Tegmark, todas las estructuras que existen matemáticamente también existen físicamente. En este caso, tendríamos que programar a la IA con preferencias sobre todas las
+preferencias sobre todas las estructuras matemáticas, quizá representadas mediante un orden o una función de utilidad sobre conjunciones de oraciones bien formadas en una teoría de conjuntos formal. La IA procederá entonces a “optimizar” toda la matemática, o al menos las partes de la matemática que (A) dependen lógicamente de sus decisiones y (B) puede razonar o formarse intuiciones sobre ellas.
+
+Sugiero que el Multiverso de Nivel 4 debería considerarse la configuración predeterminada para una teoría general de la decisión, ya que no podemos descartar la posibilidad de que todas las estructuras matemáticas existan efectivamente en el plano físico, o de que tengamos preferencias directas sobre estructuras matemáticas (en cuyo caso no hay necesidad de que existan “físicamente”).
+
+Es evidente que la aplicación de la teoría de la decisión al Multiverso de Nivel 4 requiere que los problemas abiertos mencionados antes se resuelvan en sus formas más generales: cómo manejar la incertidumbre lógica en cualquier dominio matemático, y cómo transformar las preferencias humanas difusas en preferencias bien definidas sobre las estructuras de los objetos matemáticos.
+
+Añadido: para más información y publicaciones adicionales sobre esta idea de teoría de la decisión, que llegó a llamarse “Teoría de la Decisión sin Actualización” (Updateless Decision Theory), consulte su entrada en la wiki de LessWrong.
+
+Updateless Decision Theory 7
+Decision Theory 6
+Portada
+Portada
+Mencionado en 38185
+Embedded Agency (versión de texto completo)
+Comparación de teorías de la decisión (con énfasis en teorías de la decisión contrafactuales lógicas)
+Agradecimientos y referencias

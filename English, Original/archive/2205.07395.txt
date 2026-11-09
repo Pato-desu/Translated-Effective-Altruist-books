@@ -1,0 +1,1081 @@
+Sociotechnical Speciﬁcation for the Broader Impacts of Autonomous
+Vehicles
+Thomas Krendl Gilbert1, Aaron J. Snoswell2, Michael Dennis3, Rowan McAllister3, and Cathy Wu4
+Abstract — Autonomous Vehicles (A Vs) will have a trans-
+formative impact on society. Beyond the local safety and
+efﬁciency of individual vehicles, these effects will also change
+how people interact with the entire transportation system. This
+will generate a diverse range of large and foreseeable effects on
+social outcomes, as well as how those outcomes are distributed.
+However, the ability to control both the individual behavior of
+A Vs and the overall ﬂow of trafﬁc also provides new affordances
+that permit A Vs to control these effects. This comprises a
+problem of sociotechnical speciﬁcation : the need to distinguish
+which essential features of the transportation system are in or
+out of scope for A V development. We present this problem space
+in terms of technical, sociotechnical, and social problems, and
+illustrate examples of each for the transport system components
+of social mobility, public infrastructure, and environmental
+impacts. The resulting research methodology sketches a path
+for developers to incorporate and evaluate more transportation
+system features within A V system components over time.
+I. INTRODUCTION
+As A V ﬂeets grow in size and area of service, they will
+comprise routing platforms with the potential to control
+trafﬁc on public roads. Such coordinated but distributed
+action will be unprecedented in scale, and will bring myriad
+new mobility challenges such as routing-consolidated infras-
+tructure wear [1] and mixed-autonomy trafﬁc jams with com-
+plicated dynamics [2]. There will also be new opportunities
+to address existing challenges such as food deserts [3] and
+equitable mobility load-balancing [4]. Moreover, growing
+automation will see concomitant changes as other societal
+institutions adapt – for instance, new mobility options and
+markets will supplant previous ones, changing the relative
+accessibility of locations, in turn impacting property markets
+and cost of living. To address these dynamic trends, designers
+must contend with the feedback loops generated and exacer-
+bated by coordinated optimization efforts [5]. Because A Vs
+*This research was partly supported by the Australian Research Coun-
+cil Centre of Excellence for Automated Decision-Making and Society
+(CE200100005)
+1Digital Life Initiative, Cornell Tech, New York, NY , USA
+tg299@cornell.edu.au
+2Centre for Automated Decision-Making and Society,
+Queensland University of Technology, Brisbane, QLD, Australia
+a.snoswell@qut.edu.au
+3University of California, Berkeley, CA, USA
+[michael dennis|rmcallister]@berkeley.edu
+4The Laboratory for Information & Decision Systems; the Institute for
+Data, Systems, and Society; and the Department of Civil and Environmental
+Engineering, Massachusetts Institute of Technology, Cambridge, MA, USA
+cathywu@mit.edu
+Paper accepted for presentation at ICRA’22 workshop “Fresh Perspectives
+on the Future of Autonomous Driving”will inevitably remake the transportation system, our view is
+that these changes ought to be intentionally designed.
+Rather than simply automating trips, a more helpful fram-
+ing may be that A Vs will automate core components of
+the transportation system itself. People will take more and
+different trips, and every aspect of society that interacts with
+the transportation system will co-adapt to take advantage
+of its strengths and compensate for its weaknesses. As
+stakeholders in this transition, designers must help ensure
+that the automated transportation systems of the near future
+serve as intentional and active means of reshaping societal
+institutions. Recent proposals to develop world models show
+the potential for training policies based on features extracted
+from simulation rather than from how humans drive [6].
+Meanwhile, results using the Project Flow toolkit have
+demonstrated the potential for distributed control over mixed
+autonomy trafﬁc, using existing simulation and optimization
+methods and models [7], [8], [9]. These examples illustrate
+the nascent potential of applying contemporary AI & robotics
+methods to build A Vs which support the automated trans-
+portation systems we want to exist. However, fully realising
+this vision will require a novel conceptual framing of the
+computational toolkit of contemporary A V researchers. In
+this paper, we propose the frame of sociotechnical speciﬁca-
+tion as a way to understand the broader impacts of A Vs on
+transportation systems, and give examples of ways that A V
+designers might begin to contend with these issues.
+The remainder of this paper is structured as follows.
+In Section II, we motivate our framing of this problem,
+describing the space of problems that deﬁne what is able
+to be in- or out-of-scope for A V developers. This framing
+can be broken down into problems that are “technical”,
+“sociotechnical”, and “social” in nature. In Section III, we
+then give examples of transportation system components and
+associated features that fall into these categories, which are
+further elaborated in the Appendix. Section IV concludes.
+II. SOCIOTECHNICAL SPECIFICATION IN THE
+DESIGN OF ‘TRANSPORTATION’
+Recent research with emerging simulation toolkits such
+as Project Flow illustrate that the main roadblocks to the
+speciﬁcation of dynamic problems like mixed-autonomy
+trafﬁc may no longer be strictly technical [10]. Instead, there
+is a growing need to interrelate a transportation system’s
+features (i.e. its outstanding attributes or integral properties,
+like multi-modal access) with an A V ﬂeet’s components (i.e.
+the technical capacities needed for optimal performance, like
+routing or sensing). This suggests a new research agendaarXiv:2205.07395v1  [cs.CY]  15 May 2022
+concerned with redesigning key features of the transportation
+system, rather than replicating current systems’ limitations.
+We argue here that translating features of transportation
+systems into technical components constitutes a problem
+ofsociotechnical speciﬁcation : the need for designers to
+differentiate which features lie in or out of scope for A V
+development. We argue that many unresolved but tractable
+problems related to trafﬁc dynamics naturally follow from
+this shift in frame. In particular, sociotechnical speciﬁcation
+comprises three elements. First, a much greater variety
+of features may be placed ‘in-scope’ for A V development
+and performance optimization. This moves beyond local
+control, perception, and route planning and includes both
+infrastructural features of the transportation system and those
+of adjacent systems (for instance environmental, economic,
+or municipal). Second, A V design requires reﬂection about
+which of these features bear on a given A V component.
+Particular considerations about the planning horizon, vehicle
+sensors, route optimization, and consumer incentives must
+be formalized with reference to the intended purpose of
+the transportation system and the role of A Vs within it.
+Third, more clear deﬁnitions of features will be needed for
+effective means of control over those that lack sufﬁcient
+documentation by social scientists or law and public policy
+experts. In cases where features are objects of intervention
+by a given A V component, designers must identify criteria
+for their means of control from affected systems or those
+experts who oversee them.
+This problem framing is sociotechnical because it recog-
+nizes the possibility of translating features across abstraction
+scales and societal systems into elements of A V design.
+As such, the three elements of sociotechnical speciﬁcation
+outlined above suggest three corresponding problem stages:
+1)Technical problems are in need of a “shovel”: they
+are more or less deﬁned already in the academic
+literature, data is available and sufﬁciently accurate,
+and metrics are clear and measurable. The problem
+can readily be translated into technical methodologies
+and analyzed/optimized. There may be remaining
+challenges, e.g. reward sparsity, multi-agent dynamics,
+nonstationarity, scalability, long horizons, etc., but they
+are technical in nature.
+2)Sociotechnical problems are in need of elaboration:
+they have a partial technical speciﬁcation, but some
+pieces are missing. Data may be unavailable, metrics
+may be unclear, models may be insufﬁciently accurate,
+etc. At this “stage”, to reﬁne the problem into one
+that can be rigorously analyzed, there needs to be
+some back-and-forth between technical and domain /
+social science researchers. This can serve to conduct
+”feature selection,” in which facets of the problem can
+be prioritized according to technical limitations (e.g.
+data availability) and the domain question.
+3)Social problems are in need of further deﬁnition: under-
+standing the feature(s) themselves is the primary chal-lenge, as indeterminacy must be resolved before any
+means of control can be evaluated. This is at the stage of
+deﬁning metrics, possibly without tight consideration of
+technical tools and limitations. There is a need for more
+basic social investigation, including community consul-
+tation, guidance from regulatory agencies, or research
+by social scientists / domain experts, rather than A V
+researchers.
+The modes, standards, and evaluation methods of trans-
+portation systems have developed over centuries. New modes
+of road, rail, aviation, aerospace, and maritime transport have
+added to the variety of means of travel. Beyond safety, trans-
+portation paths have accrued standards for throughput and
+environmental friendliness. In addition, the performance of
+particular transportation systems are now routinely evaluated
+for reliability, resilience, and support for higher quality of life
+rather than strict measures of efﬁciency [11].
+As a major new transportation technology, A V ﬂeets stand
+to redeﬁne the component features of transportation systems,
+including the modes they comprise, the values at stake in
+their speciﬁcation, and means of evaluation. In particular,
+A Vs blur the distinction between infrastructural, vehicular,
+and intermodal features of the road environment. While local
+features are able to be better controlled, global features
+become more suited to observation and prediction. Likewise,
+route controllers can be implemented at the micro-level
+(e.g. four-way stops), meso-level (highway interchanges), or
+macro-level (city grids, interstate expressways), which will
+each require distinct value considerations.
+In this paper we focus on three component features of
+a transportation system, each of which stand to be signiﬁ-
+cantly transformed by A V ﬂeet operations Figure 1. These
+are: (1) social mobility, (2) public infrastructure, and (3)
+environmental impacts. In each setting, we give an example
+of a technical problem, including an example proxy metric,
+as well as outlining features that comprise sociotechnical
+and social problems. The identiﬁcation and labelling of
+transport system components is itself a political activity,
+however we have chosen these components because they are
+most clearly representative of the reﬂection that underlies
+sociotechnical speciﬁcation. The discussion that follows is
+intended illustrate this reﬂection and offer avenues for future
+reﬁnement and elaboration. Our hope is that future research
+will build on these starting points, further developing sound
+mathematical metrics that can serve as to highlight and
+control for the salient broader impacts of A Vs.
+III. EXAMPLES OF TRANSPORTATION SYSTEM
+FEATURES AND COMPONENTS
+A. Social Mobility
+Technical problem – food deserts: A Vs will affect
+access to resources for individual well-being such as food,
+jobs, schools, and entertainment. As A V routing algorithms
+unevenly shape how easy it is to get from one location
+to another, they have the ability to connect —or further
+isolate— individuals from the resources they need to live
+a healthy and fulﬁlling life.
+…Public 
+Infrastructure
+Local Community 
+Needs
+Environmental 
+Impacts
+Economic 
+Activity
+Social 
+Mobility
+Transportation 
+System
+Fig. 1. Transportation systems interact with numerous component features,
+some of which are illustrated here. In this article, we focus on (a) social
+mobility, (b) environmental impacts, and (c) public infrastructure (which are
+highlighted with ).
+An example of a concrete problem that can be measured
+with proxy metrics, we can consider the problem of food
+deserts [12]. Suppose we have some population living in
+housing geographically distributed according to ~H. There
+are ‘good’ food options distributed by ~FGand bad food
+options distributed by ~FB. For a routing or A V control
+algorithmAwe deﬁne the time to go from a housing location
+hto a food option fastpAqph;fqWe can then construct
+a simplistic consumer choice model in which a consumer
+at housing location hwill visit a high quality food option
+ifminpfG;fBqP~FG~FBttpAqph;fGqtpAqph;fBqu k;for
+some positive constant k. In other words, the consumer will
+choose a high-quality food option if the added cost over the
+easiest low-quality food option is less than k. If we deﬁne
+CpAqphq1if a consumer at location hwould choose the
+high quality option under algorithm Aand 0 otherwise, we
+obtain a proxy metric for consumer population nutritional
+health:pAqp~HqEh~H
+CpAqphq
+:
+Note that this is a clearly simpliﬁed model for consumer
+choice, as well as the differential impact of foods on con-
+sumer health. Nevertheless, this simple example illustrates
+the fact that an A V designer could in theory begin inves-
+tigating the impacts of algorithmic and modeling choices
+on this important societal issue today. The requisite data to
+inform this model ( i.e.housing and food option distributions)
+could be readily procured, even if in approximate forms, and
+existing simulation tools could then be brought to bear to
+analyze how choices within the remit of the A V operator
+or designer mediate the issue of food deserts and consumer
+nutritional health.
+Sociotechnical problem – housing markets: Over the
+long-term, A V services cannot take where people happen
+to live as a given. People will relocate, either buying new
+homes or renting temporary housing or otherwise changing
+their place of residence. Where people decide to live depends
+on a variety of considerations such as distance from work,
+location of family, childcare services, or personal lifestyle,TABLE I
+EXAMPLES OF TRANSPORTATION SYSTEM FEATURES AND COMPONENTS
+Technical Sociotechnical Social
+Social mobility Food deserts Housing markets Quality of life
+Public infrastructure Road wear Trafﬁc laws Privatization of
+roads
+Environmental
+impactsAir quality Induced demand Cobalt extraction
+however a common denominator is the transport system’s
+capacity to accommodate regular use by local residents.
+Natural questions arise from this: what are the aggregate
+effects of A V service on the dynamics of the housing market?
+And how might designers ensure these effects are fair or
+equitable?
+While this question cannot be easily reduced to an econo-
+metric model, it is also not entirely new. Much as cars
+facilitated the growth of urban sprawl and suburbanization
+[13], regular A V services will likely reshape both the features
+of neighborhoods and the calculus of how people make use of
+the mobility they permit. Even once public trust in A V safety
+performance is assured, these effects will depend heavily on
+their routing algorithms, which will determine how easy it
+is to get from place to place and will modify the value of
+time of being in transit.
+The criteria for specifying the learning parameters of these
+algorithms are already active research topics in adjacent
+literatures such as Urban Studies and Financial Economics.
+However, various means of translating these topics into
+optimization criteria could support distinct design strategies
+for A V routing. One is to scale A V infrastructure with equity-
+focused initiatives so that deployment does not accidentally
+cause gentriﬁcation or urban decay in regions where service
+offerings are mismatched with local mobility needs [14].
+There may well be cross-regional consequences of this
+strategy, as the urban sprawl we see now is not only a result
+of people moving to suburbs, but the housing supply adapting
+to that demand.
+Because use of public transit, bicycles, and pedestrian
+mobility increase sharply in dense environments, A Vs will re-
+quire routing capacities that scale with various environmental
+and infrastructural measures of density. These include transit-
+oriented employment and residential density, development
+scale, density gradient, population and employment central-
+ity, population density gradient, density at median distance,
+density of development, percent of houses within one mile of
+an elementary school, percentage increase in residential den-
+sity, gross and/or net residential density, building coverage
+ratio, average school size, and non-residential intensity.
+Social problem – Quality of Life: The ‘success’ or
+‘failure’ of A V adoption can be broadly understood in
+terms of change in overall quality of life – the standard of
+health, comfort, and happiness or ﬂourishing that is induced
+for and experienced by a speciﬁc group of people. This
+concept, while elusive, can actually be evaluated indirectly
+by monitoring properties of transit and adjacent systems
+that have yet to receive systematic study from an organized
+research ﬁeld.
+While there are many measures of quality of life available
+from the ﬁeld of development economics, the unprecedented
+dynamics induced by A V deployment require a new ap-
+proach. These dynamics often reﬂect deeper structural prob-
+lems at the intersection of physical and economic mobility.
+For example, access to the city center remains a central
+concern of urban planning and transportation infrastructure
+[15], serving as a proxy for access to labor markets and
+low-income mobility [16]. Recent measurements of food
+deserts [12], commuter health exposure [17], and subjective
+appraisals of daily travel routes [18] indicate the difﬁculties
+of tracking unanticipated externalities of common travel
+patterns.
+A barrier to effective models in this domain is the need
+to identify metrics that capture both individual day-to-day
+decisions and longitudinal trafﬁc effects in ways that public
+agencies can evaluate as good or bad. Fortunately, there
+are many canonical metrics for road network usage that are
+also easy to communicate to the public, meaning that new
+models can be updated in response to stakeholder feedback.
+Another strategy is to integrate A V usage with ﬁrst- and last-
+mile mobility considerations, both to improve service in low-
+density areas [19] and augment public transit connections so
+that the cost of switching between transportation modes is
+reduced for multi-modal road users [20]. Legacy metrics per-
+taining to destination accessibility should also prove useful.
+Finally, translating local community priorities into perception
+and routing modules can draw from canonical measures
+of diversity in infrastructure and environment. We suggest
+example metrics for these considerations in the Appendix.
+B. Public Infrastructure
+Technical problem – road wear: During operation, A Vs
+interact with the existing transit infrastructure, including the
+signage, lane markings, and roads themselves. Coordinated
+A V operations at scale could impact the deterioration of
+roadways. The distribution of road deterioration will ef-
+fectively be controlled by A V operators and manufacturers
+through the macro-level centralization of A V routing and
+the micro-level duplication of control schemes. We illustrate
+here how a proxy metric can be constructed to capture and
+optimize against the ﬁrst-order effects of A V operations on
+road deterioration.
+LetSbe the graph of road segments making up a given
+road network where A Vs operate. We assume that each edge
+sPShas an associated quality rating qpsqthat quantiﬁes the
+condition of the road along that road segment. To capture
+the effect of A V operations on road deterioration, a simple
+model could be that the quality of a segment is reduced
+by some small proportion whenever it is traversed. If the
+quality of a segment reaches some lower bound, then it can
+no longer be traversed, and must be repaired (presumably, at
+cost to the tax-payer). For demonstration purposes, we could
+investigate the impact of having a routing algorithm account
+for a per-segment navigation cost proportional to the quality,serving as a proxy metric for road deterioration due to A V
+operations:pj;rq°
+sPrjqpsq;for a given route rand
+some positive constant j.
+Even this simplistic approach can illustrate important
+behaviors. For instance, if a routing algorithm greedily
+minimizes the road wear navigation cost on a trip-by-trip
+basis, A Vs will always opt to take the highest quality
+roadway at a given point in time, which will distribute, rather
+than concentrate road wear. This model could readily be
+extended to incorporate more sophisticated models of road
+deterioration, as well as to account for variations in wear
+based on the type and loading of the vehicle.
+Sociotechnical problem – trafﬁc laws: As trafﬁc norms
+may evolve over time to favor optimal A V performance,
+organized lobbying may begin to pressure regulators to
+change trafﬁc laws in ways that prioritize speciﬁc A V design
+considerations. While this may well make manufacturers’
+jobs easier, it would also comprise a major shift – A Vs would
+be disrupting the wider purpose or structure of the transit
+system rather than simply automating select parts.
+As a result, it is reasonable for methods to consider possi-
+ble changes or updates to existing trafﬁc laws as an approach
+to control the impacts of A Vs. New regulations could support
+the addition of trafﬁc lanes, pick-up/drop-off points, and
+zones where pedestrians have different rights. Each of these
+interventions would allow for coordination between people
+and A Vs, and thus it serves as an important lever of control,
+alongside local control, routing, and controlling stop lights.
+Criteria for these considerations may be drawn from the
+ﬁelds of Transportation Studies and Public Policy - and we
+give examples of some possibilities in the Appendix.
+Social problem – privatization of roads: As long-
+distance platooning becomes more feasible, A Vs will affect
+entire interstates and regions of countries in ways that tran-
+scend the jurisdiction of any single trafﬁc authority. Among
+many other effects, there is a risk that long-distance roadways
+will effectively be privatized for use by corporate freight
+operations, as other human drivers will be disincentivized
+from sharing the road with scores of automated trucks. This
+outcome would be both unfair and unsustainable, as the costs
+of repairing roads would be outsourced ad hoc to a public
+that rarely uses them.
+Designers can mitigate these risks by preparing A V mod-
+ules for perception, localization, and routing that are sensitive
+to the public nature of roads. This means that they would
+be sensitive to features of roads that are broadly inclusive
+of multi-modal stakeholders, and also route through them
+in ways that are minimally disruptive of trafﬁc ﬂow. While
+these infrastructural features and modeling techniques remain
+works-in-progress, preparing for such a future will empower
+designers to integrate feedback from particular stakeholders
+as soon as mass A V platooning and routing is common.
+With respect to routing, it is possible to measure and
+minimize loss in A V fuel efﬁciency or average time to
+destination from avoiding potholes, aiming to preserve the
+road without disrupting trafﬁc. This is analogous to other
+settings where A V software compensates for hardware lim-
+itations, except here the road itself is also modeled as
+“hardware” rather than relegated to the external environment.
+This is quantiﬁed through reference to existing models for
+highway maintenance [21], priority damage assessment [22],
+and smart pavement evaluations [23]. This work could aid
+constraint satisfaction by including factors that corroborate
+existing public standards for road maintenance, rather than
+modeling vehicle motion in isolation.
+Meanwhile, external changes to signage and lane markings
+could be modeled as controls on the large-scale effects
+of A Vs. A natural implication of this would incorporate
+measures that reﬂect different design scales for multi-modal
+concerns on a spectrum of local versus global effects. On
+the former end of the scale, updating perception to conform
+to various point design measures will help A Vs modify their
+speed and behavior in real time to conform to stakeholder
+expectations and priorities. For example, residential neigh-
+borhoods in the United States often accommodate special
+needs groups through distinct signage: warning signs about
+pet dogs and cats, “children at play”, and protection for the
+disabled ( e.g.audible walk signs). Additional examples may
+be found in the Appendix.
+Each of these considerations, and other details of local
+customs which we have yet to consider, need to be incor-
+porated into the local control procedure so that they can
+be customized to be contextually appropriate. For example,
+beyond vehicle features such as wheelchair access, A Vs will
+need to incorporate routing adjustments so that time spent in
+these zoned areas is minimized. In particular, there is a need
+for regional design measures that are tailored to capture the
+completeness of regional transportation systems. Meanwhile,
+some communities require unique forms of road mobility,
+such as retirement facilities and golf courses that have their
+own specialized modes of transport and which have adopted
+special guidelines for golf carts interacting with normal
+trafﬁc vehicles [24]. And on a wider scale, network-level
+effects should also be reﬂected in metrics for connectivity
+and route directness at the neighborhood level. Examples of
+all these features may be found in the Appendix.
+C. Environmental Impacts
+Technical problem – air quality: A growing problem
+in many urban cities is the contribution of transit-related
+pollution to the deterioration of air quality. Vehicles release
+various forms of pollution which are harmful to the residents
+of high trafﬁc areas, and there has been a large body of
+research in quantifying both the amount and the health effects
+of pollution on local residents [25], [26], [27], [28], [29].
+The effects of this pollution will depend on the type of
+vehicle, including the power source (gas / hybrid / electric,
+etc.), the density of trafﬁc, weather conditions, the type of
+neighborhood being traversed, physical proximity of road
+users, and many other complexities.
+As a simple model for these effects, we can estimate
+the spatial distribution of people present in a region of A V
+operations and assume a small penalty per second for every
+person, inversely proportional to the square of the distanceof that person to the vehicle. Formally, if we have a spatial
+population of people p~Pandvis the location of the A V ,
+we can deﬁne a proxy metric for the impact of pollution as
+pv;~PqEp~P}pv}2
+2:
+An A V that is trying to minimize this cost would be
+more likely to route around local communities towards less
+occupied areas, distributing pollution where it has fewer
+adverse effects. Additionally, even along a ﬁxed route, A V
+designers could take advantage of the ﬁne-grained control
+available to A Vs, to optimize for pollution effects based on
+the characteristics of the population, the vehicle engine, and
+trafﬁc conditions.
+Population data to inform this model could be drawn from
+a number of sources such as county or council residential
+housing and zoning records, or approximated e.g.according
+to lot size data from open-source map databases. This simple
+model could be improved in a number of ways. For example,
+the distribution ~Pcould be extended to cover temporal
+ﬂuctuations in population density, or better models of health
+effects could be incorporated.
+Sociotechnical problem – induced demand: In the
+longer term, A Vs will have uncertain effects on aggregate
+pollution arising from trafﬁc. Impacts of the A V ﬂeet itself
+could be modeled without incorporating considerations of
+vehicle type and trafﬁc density. However, it is important to
+consider the effects of induced demand [30]. For example,
+simulated results show that widespread deployment of A Vs
+could slash U.S. energy consumption by as much as 40%
+due to improved driving efﬁciency; alternatively, it could
+double U.S. energy consumption due to increased availability
+of cheap transport options [31].
+Even these results do not incorporate differences in road
+conditions, models of vehicle, ﬂuctuations in demand, trafﬁc
+conditions, or interactions between routing vehicles. Still,
+this work lends support to carbon-pricing or surge pricing
+policies as A Vs are more widely adopted. Extending this to
+incorporate more work on quantifying CO 2emissions [29],
+[32], [33] and induced demand [34], [35] are clear future
+research directions. As such, efforts to inquire into and model
+A V-induced transit demand comprises an emerging subﬁeld
+at the intersection of Environmental Engineering, Behavioral
+Economics, and Trafﬁc Modeling.
+To further illustrate this problem, we can consider the
+various pollution effects beyond individual car exhaust or
+aggregate CO 2emissions induced by A Vs. These range from
+noise pollution [36] to the wider ecological, ﬁscal, and social
+factors associated with A Vs’ environmental sustainability.
+Ecological metrics have been well documented in the lit-
+erature. Changes to them will likely generate effects on
+ﬁscal metrics related to activity level. And changes to ﬁscal
+metrics, in turn, may have community-level social impacts
+whose measurement is vital but somewhat more speculative
+for activity level and modal share. Examples of all three
+metric types may be found in the Appendix.
+Incorporating these factors would have several modeling
+beneﬁts. It would provide stronger estimates for demand that
+would help align emissions control with wider societal aims
+for equitable road access. It would also help integrate A V
+policy development with ongoing research on updates to
+pavement materials and construction practices of tollways
+[37], leading to possible new improvements in sustainability.
+And it could leverage vehicle-level data collection to control
+for the granular spatial and temporal features of air pollution
+that have recently been measured at unprecedented micro
+scales [38], [39], ensuring the beneﬁts of emissions reduction
+are both locally and globally equitable. The deployment of
+A Vs at distinct scales of road infrastructure (urban core,
+commuter routes, interstate highways) could also aid in the
+evaluation of alternative measurement approaches that trade-
+off precision against efﬁciency, an open research question in
+environmental engineering [40].
+Social problem – cobalt extraction: Like all modes of
+transit, A V ﬂeets will comprise the ﬁnished endpoint of a
+much larger supply chain. And like all electric cars, A Vs will
+depend heavily on the extraction of rare earth minerals from
+seaﬂoor deposits and regions of the developing world. For
+example, worldwide demand for cobalt has skyrocketed due
+to its importance in batteries of electric cars, with countries
+such as the Democratic Republic of Congo becoming targets
+of major international investment [41]. Beyond greenhouse
+gas emissions, A V ﬂeets will bring the geopolitics of mineral
+markets into scope for development – analogous to how
+21st century trends in offshore production and increasing
+consumer awareness have forced consumer-facing businesses
+to audit their own supply chains for environmental, sustain-
+ability, and human rights concerns.
+The extraction of rare earth metals requires consideration
+of long-term economic development, national security, and
+human rights. For example, investigations have revealed that
+child labor is commonly used in cobalt extraction, which
+often involves digging for the mineral by hand [42]. This
+cobalt is often reﬁned and prepared for manufacture by
+foreign companies and then used to power smartphones
+designed and sold by tech companies in Western post-
+industrial countries. However, no U.S. laws attempt to verify
+the prevention of human rights abuses in cobalt’s extraction
+[43]. And electric vehicle batteries typically include hundreds
+of times the amount of cobalt as a laptop [44].
+The ethical problems with scaling A V ﬂeets that rely on
+these supply chains are stark, and engineers must prioritize
+the experimental design of A Vs based on alternative minerals
+whose extraction and use do not support inhumane work
+practices [45]. Where use of such minerals is inevitable,
+A V manufacturers will need to evaluate how growth of a
+given platform could leave its supply chain dependent on
+these practices, and how this dependency might otherwise
+be mitigated over time.
+Beyond ethics, there are other reasons why reliance on
+the extraction of rare earth metals should be avoided. For
+one, it exposes A V services to geopolitical forces beyond
+the control of their parent ﬁrm. For example, local corruption
+among government ofﬁcials or labor groups could result in
+supply disruptions that make it prohibitive to grow or sustain
+the A V ﬂeet without drastically raising costs [46]. Othergeopolitical actors enmeshed in a military conﬂict with the
+country of extraction could interfere with supply lines or
+plunder mineral resources for themselves.
+In a broader sense, these supply chains introduce un-
+certainties and structural risks that make long-term fore-
+casting of A V development impossible. Because sources of
+extraction lack the transparency and documentation of labor-
+protected working conditions, it is difﬁcult to evaluate ex-
+actly where and how much mineral material will be extracted
+over time [47]. Consider also the prospect of international
+sanctions against certain forms of mineral extraction, or
+consumer boycotts of tech services for their reliance on them
+[48]. International watchdogs and human rights groups may
+expose work practices so reprehensible that A V companies
+could be exposed to liability for human rights abuses or
+international condemnation.
+These considerations point to an uncomfortable truth:
+no matter how safe and efﬁcient and consumer-friendly
+A Vs may become, their production remains dependent on
+the contradictions, ambiguities, and political traps of 21st
+century capitalism. A V development must remain sensitive
+to these supply chain issues as their deployment continues.
+IV. CONCLUSION
+Sociotechnical speciﬁcation remains a looming challenge
+for A V ﬂeet performance. While the short-term priority
+is building A Vs that successfully conform to the existing
+rules of the road, over the long term A Vs are more and
+more likely to set the pace of trafﬁc in their own right.
+Moreover, as A Vs become widely deployed, their effects
+and impact on public infrastructure may be unequal even
+as their terms are hard to specify. Nevertheless, sustained
+attention to technical problems (including proxy metrics),
+sociotechnical problems (including adjacent literatures), and
+social problems (including outstanding research questions)
+will prepare designers to incorporate stakeholder needs and
+requests as they arise over time.
+ACKNOWLEDGMENT
+Icons in Figure 1 are CC:BY licensed from NounPro-
+ject.com: Highway by Georgiana Ionescu, Crowd by Adrien
+Coquet, Environment by Shmidt Sergey, Shop by revo250,
+andImprovement by Cuputo.
+APPENDIX A
+Sociotechnical speciﬁcation is directly relevant to out-
+standing research topics in autonomous driving design. This
+appendix highlights analogous problem spaces and corre-
+sponding tools, datasets, and evaluation methods already
+established in interdisciplinary literatures. Some of these
+standards may be directly applicable to existing techniques,
+while others may require iteration or reﬁnement. We place
+them here as outstanding examples of technical work that
+could be immediately undertaken by A V designers.
+A. Approaches that account for interactions between tra-
+ditional subcomponents (localization, perception, planning,
+routing)
+New trafﬁc laws : While A V designers are immediately
+concerned with optimizing A V performance rather than
+deciding what “good” performance necessarily means, it
+would be reasonable for methods to consider possible
+changes or updates to existing trafﬁc laws as an ap-
+proach to control the impacts of A Vs. For instance, new
+regulations could support the addition of trafﬁc lanes,
+pick-up/drop-off points, and zones where pedestrians
+have different rights. Each of these interventions would
+allow for coordination between people and A Vs, and as
+such it would serve as an important interface between
+means of local control, routing, and coordination with
+external road infrastructure (e.g. controlling stop lights).
+Attention to such interfaces is likely going to be a key
+nexus of regulatory attention in the coming decades.
+One source of inspiration is analytical tools from the
+Highway Safety Manual (HSM) [49], which could be
+applied to a wider range of urban settings beyond
+highways. While focused on mitigating crash frequency,
+the Highway Safety Manual aims to coordinate safety
+and economic concerns in a way that well-approximates
+the human factors interpretation of safety as a problem
+of limited attention and human capabilities [50]. The
+HSM could help update current A V simulation work to
+prepare it for future trafﬁc laws by embedding system
+planning within engineering, construction, and mainte-
+nance as part of an integrated development process. This
+perspective would prepare A V designers for federal and
+state regulatory environments once they have moved
+past proprietary standards for simulation and control.
+B. The collection, curation, and sampling of datasets for
+end-to-end or learned decision making approaches
+Transit systems engineering : The HSM discussed
+above also pinpoints three neglected sources of data
+(site characteristics data, trafﬁc volume data, crash data)
+and incorporates them as part of safety prediction. This
+would help A V designers move beyond “cookbook en-
+gineering” when setting up simulation parameters, and
+instead incorporate the basic concepts of systems engi-
+neering (functions, requirements, and context) that will
+ensure simulations accommodate the multiple interfaces
+necessary for fair and inclusive urban A V navigation.
+C. Methods for validating / evaluating the performance of
+end-to-end / learned approaches in simulation
+Highway capacity : A major stumbling-block for the
+use of trafﬁc efﬁciency models is the need for more
+sophisticated travel time metrics for highly-localized
+neighborhoods, urban sub-regions, and particular cor-
+ridors. One path forward is to incorporate Highway
+Capacity Software in support of the highway capacity
+manual [51]. This will help permit a choice of advanced
+modeling tools in the context of stakeholder interestsand targeted focus groups [52]. It also makes possible
+particular auto-oriented metrics of demand and system
+utilization.
+Tolling : There will be a need for entirely new trafﬁc
+regulations, as the maturation of A V optimization in-
+teracts with legacy forms of trafﬁc control. Designers
+will therefore need tools and methods to accommodate
+this likelihood. A good source of inspiration is the work
+on standards, metrics, and simulation parameters by the
+International Bridge, Tunnel and Turnpike Association
+(IBTTA). IBTTA has supported and made possible
+studies of the impacts of innovative technologies on
+highway operators [53], as well as the impact of public-
+private partnerships on ﬁnancing road infrastructure
+in developing economies [54]. IBTTA has also de-
+veloped specialized tools for modeling various tolling
+environments. For example, the IBTTA Tollminer is a
+visualization tool that includes maps of toll facilities, a
+list of managed lane projects in operation nationwide,
+an optimizable user interface, and annual data on public
+and private toll revenues, among other features. While it
+is geared towards modeling and comparing the relative
+effects of high-occupancy vehicle lanes and toll lanes
+[55], this work could be readily translated to test new
+simulation parameters for A Vs that incorporate specu-
+lative regulations for equitable mobility access.
+APPENDIX B
+Table II shows lists a number of other tractable metrics that
+may be relevant for quantifying the impacts of Autonomous
+Vehicles on Transit Systems.
+REFERENCES
+[1] R. B. Collier, V . B. Dubal, and C. L. Carter, “Disrupting regulation,
+regulating disruption: The politics of uber in the united states,”
+Perspectives on Politics , vol. 16, no. 4, pp. 919–937, 2018.
+[2] C. Wu, A. Kreidieh, E. Vinitsky, and A. M. Bayen, “Emergent behav-
+iors in mixed-autonomy trafﬁc,” in Conference on Robot Learning ,
+2017, pp. 398–407.
+[3] R. E. Walker, C. R. Keane, and J. G. Burke, “Disparities and access to
+healthy food in the united states: A review of food deserts literature,”
+Health & place , vol. 16, no. 5, pp. 876–884, 2010.
+[4] J. Kleinberg, Y . Rabani, and ´E. Tardos, “Fairness in routing and load
+balancing,” in 40th Annual Symposium on Foundations of Computer
+Science (Cat. No. 99CB37039) . IEEE, 1999, pp. 568–578.
+[5] T. K. Gilbert, S. Dean, T. Zick, and N. Lambert, “Choices, risks,
+and reward reports: Charting public policy for reinforcement learning
+systems,” arXiv preprint arXiv:2202.05716 , 2022.
+[6] D. Ha and J. Schmidhuber, “World models,” arXiv preprint
+arXiv:1803.10122 , 2018.
+[7] C. Wu, A. Kreidieh, K. Parvate, E. Vinitsky, and A. M. Bayen, “Flow:
+Architecture and benchmarking for reinforcement learning in trafﬁc
+control,” arXiv preprint arXiv:1710.05465 , p. 10, 2017.
+[8] C. Wu, A. M. Bayen, and A. Mehta, “Stabilizing trafﬁc with
+autonomous vehicles,” in 2018 IEEE International Conference on
+Robotics and Automation (ICRA) . IEEE, 2018, pp. 1–7.
+[9] C. Wu, A. R. Kreidieh, K. Parvate, E. Vinitsky, and A. M. Bayen,
+“Flow: A modular learning framework for mixed autonomy trafﬁc,”
+IEEE Transactions on Robotics , 2021.
+[10] D. A. Abbink, P. Hao, J. Laval, S. Shalev-Shwartz, C. Wu, T. Yang,
+S. Hamdar, D. Chen, Y . Xie, X. Li et al. , “Artiﬁcial intelligence
+for automated vehicle control and trafﬁc operations: Challenges and
+opportunities,” in Automated Vehicles Symposium . Springer, 2020,
+pp. 60–72.
+TABLE II
+TRACTABLE FEATURE TYPES AND EXAMPLE METRICS THAT INTERACT WITH THE TRANSPORTATION SYSTEM . TERMS ARE TAKEN FROM [56] UNLESS
+OTHERWISE NOTED .
+Public Infrastructure Social Mobility Environment Impacts
+Privatization of roads
+Vehicle perception of signage
+–wayﬁnding information
+–sidewalk quality/width/shade
+–treelined/shaded streets
+–walkable streets
+–systematic pedestrian and cycling envi-
+ronmental scan instrument
+–commercial onsite amenities to support
+alternative modes
+–availability of on-site bicycle amenities
+–pedestrian scaled lighting
+–ratio of street width to building height
+–parking screening
+–bus pass program utilization
+–parking shading
+Regional transit system components
+–on-vehicle bicycle-carrying facilities
+–parkand-rides with express service
+–parking spaces designated for carpools
+or vanpools
+–transit passes
+–trafﬁc cells
+–percent miles bicycle and/or pedestrian
+accommodations
+–miles of express ﬁxed-transit
+route/dedicated bus lanes
+–road density
+–lane miles per capita
+–percent of network that is “effective”
+–roadway network balance
+Local route connectivity
+–square feet of pathways/sidewalks
+–crosswalk spacing
+–number of safe crossings per mile
+–bicycle parking at stops and stations
+–parking footprint
+–block length
+–parking location
+–bicycle path condition
+–pedestrian/bicycle route directness
+–land use buffers
+–walking environment
+–bicycle maintenance stations
+–bicycle/pedestrian connectivity
+–connectivity indexes [57]
+–project adjacency to existing network
+–connected and open community
+–connected sidewalks/paths
+–connected streets
+–cross accessQuality of Life
+Road network usage
+–vehicle occupancy by land use
+–district-wide Level of Service
+(LOS)/Quality of Service (QOS)
+–local trafﬁc diversion
+–percent of system heavily congested
+–v/C ratio
+–vehicle density
+–demand/capacity ratio
+–Maximum Service V olume
+–Peak Hour LOS
+–Percent of Capacity Consumed
+Last mile
+–average trip length per traveler
+–delay per traveler
+–door to door travel time
+–HCM-based bicycle LOS
+–proportion of total person miles traveled
+(PMT) for nonsingle occupancy vehicles
+(SOVs)
+Land use optimization
+–residence proximity
+–employment proximity
+–work accessibility
+–number of key destinations accessible via a
+connected pedestrian system
+–industrial/warehouse proximity
+–transit convenience/stop accessibility
+–geographic service coverage
+–population service coverage
+–percent in proximity
+–transit accessibility
+Transit mode optimization
+–bike/pedestrian accessibility
+–destination accessibility
+–residential accessibility
+–average walking distance between land use
+pairs
+–spacing between village centers
+–multiple route choices
+Environmental diversity
+–Smart Growth Index
+–signiﬁcant land uses
+–land use ratios
+–land use balance
+–variation of agriculture of green ﬁelds
+–land consumption
+–core land use
+–land use separation
+–Transportation-Efﬁcient Land Use Mapping
+Index (TELUMI) model
+–minimum thresholds of land use intensity
+–nearby neighborhood assets
+–distinct indexes for sprawl [58], [59]
+–land use within village center
+–land use within transit supportive area
+–jobs/housing balanceInduced demand
+Ecological metrics
+–attainment of ambient air quality
+standards
+–daily CO2 emissions
+–daily NOx/CO/V olative organic
+compound (VOC) emissions
+–noise pollution
+–impact on wildlife habitat
+–water runoff
+Fiscal costs
+–additional fuel tax
+–transportation utility fee (TUF)
+–vehicle miles traveled (VMT)-
+based impact fee
+–consumption-based mobility fee
+–improvements-based mobility fee
+–cost recovery from alternate
+sources
+–variable fees based on LOS
+–beneﬁt cost ratio
+–parking pricing
+–capita funding for bike/pedestrians
+Community-level impacts
+–distribution of beneﬁt by income
+group
+–transportation affordability
+–equitable distribution of accessibil-
+ity
+–commute cost
+–transit values
+–fee charged for employee parking
+spaces
+–travel demand management
+(TDM) effectiveness based on
+TRIMMS model
+–travel costs by income group
+and/or race
+–VMT by income group and/or race
+–mode share by income group
+and/or race
+–walk to transit by income group
+and/or race
+[11] S. Kaewunruen, J. M. Sussman, and A. Matsumoto, “Grand challenges
+in transportation and transit systems,” Frontiers in built environment ,
+vol. 2, p. 4, 2016.
+[12] J. Beaulac, E. Kristjansson, and S. Cummins, “Peer reviewed: A
+systematic review of food deserts, 1966-2007,” Preventing chronic
+disease , vol. 6, no. 3, 2009.
+[13] P. D. Norton, Fighting trafﬁc: the dawn of the motor age in the
+American city . Mit Press, 2011.
+[14] B. O’Donnell, E. Corey, and M. Podowski, “2017 drive clean seattle
+implementation strategy,” 2017.
+[15] Q. Shen, “Location characteristics of inner-city neighborhoods and
+employment accessibility of low-wage workers,” Environment and
+planning B: Planning and Design , vol. 25, no. 3, pp. 345–365, 1998.
+[16] W. D. Montgomery, R. Mudge, E. L. Groshen, S. Helper, J. P.
+MacDufﬁe, and C. Carson, “America’s workforce and the self-driving
+future: Realizing productivity gains and spurring economic growth,”
+2018.
+[17] L. D. Knibbs, T. Cole-Hunter, and L. Morawska, “A review of
+commuter exposure to ultraﬁne particles and its health effects,” At-
+mospheric Environment , vol. 45, no. 16, pp. 2611–2622, 2011.
+[18] B. Gatersleben and D. Uzzell, “Affective appraisals of the daily
+commute: Comparing perceptions of drivers, cyclists, walkers, and
+users of public transport,” Environment and behavior , vol. 39, no. 3,
+pp. 416–431, 2007.
+[19] M. Ohnemus and A. Perl, “Shared autonomous vehicles: Catalyst of
+new mobility for the last mile?” Built Environment , vol. 42, no. 4, pp.
+589–602, 2016.
+[20] S. Shaheen and N. Chan, “Mobility and the sharing economy: Potential
+to facilitate the ﬁrst-and last-mile public transit connections,” Built
+Environment , vol. 42, no. 4, pp. 573–588, 2016.
+[21] P. E. Theberge, “Development of mathematical models to assess
+highway maintenance needs and establish rehabilitation threshold
+levels,” Transportation Research Record , vol. 1109, pp. 27–35, 1987.
+[22] M. Snaith and J. Burrow, “Priority assessment,” Transportation Re-
+search Record , vol. 951, pp. 87–95, 1984.
+[23] R. E. Asbahan, J. K. McCracken, and J. M. Vandenbossche, “Evalu-
+ating the cracking predicted by the mepdg using results from the sr
+22 smart pavement study,” 2008.
+[24] L. Head, S. Shladover, and A. Wilkey, “Multi-modal intelligent trafﬁc
+signal system,” University of Arizona , pp. 32–36, 2012.
+[25] G. Fisher, K. Rolfe, T. Kjellstrom, A. Woodward, S. Hales, A. Stur-
+man, S. Kingham, J. Petersen, R. Shrestha, and D. King, “Health
+effects due to motor vehicle air pollution in new zealand,” Wellington:
+Ministry of Transport , 2002.
+[26] M. Krzyzanowski, B. Kuna-Dibbert, and J. Schneider, Health effects
+of transport-related air pollution . WHO Regional Ofﬁce Europe,
+2005.
+[27] F. Lipfert, R. Wyzga, J. Baty, and J. Miller, “Trafﬁc density as
+a surrogate measure of environmental exposures in studies of air
+pollution health effects: long-term mortality in a cohort of us veterans,”
+Atmospheric Environment , vol. 40, no. 1, pp. 154–169, 2006.
+[28] K. Zhang and S. Batterman, “Air pollution and health risks due to
+vehicle trafﬁc,” Science of the total Environment , vol. 450, pp. 307–
+316, 2013.
+[29] S. E. West, “Distributional effects of alternative vehicle pollution
+control policies,” Journal of public Economics , vol. 88, no. 3-4, pp.
+735–757, 2004.
+[30] D. B. Lee Jr, L. A. Klein, and G. Camus, “Induced trafﬁc and induced
+demand,” Transportation Research Record , vol. 1659, no. 1, pp. 68–
+75, 1999.
+[31] Z. Wadud, D. MacKenzie, and P. Leiby, “Help or hindrance? the
+travel, energy and carbon impacts of highly automated vehicles,”
+Transportation Research Part A: Policy and Practice , vol. 86, pp. 1–
+18, 2016.
+[32] S. Sgouridis, P. A. Bonnefoy, and R. J. Hansman, “Air transportation
+in a carbon constrained world: Long-term dynamics of policies and
+strategies for mitigating the carbon footprint of commercial aviation,”
+Transportation Research Part A: Policy and Practice , vol. 45, no. 10,
+pp. 1077–1091, 2011.
+[33] R. B. Noland and M. A. Quddus, “Flow improvements and vehicle
+emissions: effects of trip generation and emission control technology,”
+Transportation Research Part D: Transport and Environment , vol. 11,
+no. 1, pp. 1–14, 2006.
+[34] K. Hymel, “If you build it, they will drive: Measuring induced demandfor vehicle travel in urban areas,” Transport policy , vol. 76, pp. 57–66,
+2019.
+[35] G. Omstedt, B. Bringfelt, and C. Johansson, “A model for vehicle-
+induced non-tailpipe emissions of particles along swedish roads,”
+Atmospheric Environment , vol. 39, no. 33, pp. 6088–6097, 2005.
+[36] H. Campello-Vicente, R. Peral-Orts, N. Campillo-Davo, and
+E. Velasco-Sanchez, “The effect of electric vehicles on urban noise
+maps,” Applied Acoustics , vol. 116, pp. 59–64, 2017.
+[37] I. L. Al-Qadi, R. Yang, S. Kang, H. Ozer, E. Ferrebee, J. R. Roesler,
+A. Salinas, J. Meijer, W. R. Vavrik, and S. L. Gillen, “Scenarios
+developed for improved sustainability of illinois tollway: Life-cycle
+assessment approach,” Transportation Research Record , vol. 2523,
+no. 1, pp. 11–18, 2015.
+[38] J. S. Apte, K. P. Messier, S. Gani, M. Brauer, T. W. Kirchstetter,
+M. M. Lunden, J. D. Marshall, C. J. Portier, R. C. Vermeulen, and S. P.
+Hamburg, “High-resolution air pollution mapping with google street
+view cars: exploiting big data,” Environmental science & technology ,
+vol. 51, no. 12, pp. 6999–7008, 2017.
+[39] J. J. Caubel, T. E. Cados, C. V . Preble, and T. W. Kirchstetter, “A
+distributed network of 100 black carbon sensors for 100 days of air
+quality monitoring in west oakland, california,” Environmental science
+& technology , vol. 53, no. 13, pp. 7564–7573, 2019.
+[40] K. P. Messier, S. E. Chambliss, S. Gani, R. Alvarez, M. Brauer,
+J. J. Choi, S. P. Hamburg, J. Kerckhoffs, B. LaFranchi, M. M.
+Lunden et al. , “Mapping air pollution with google street view cars:
+Efﬁcient approaches with mobile monitoring and land use regression,”
+Environmental science & technology , vol. 52, no. 21, pp. 12 563–
+12 572, 2018.
+[41] F. Calv ˜ao, C. E. A. Mcdonald, and M. Bolay, “Cobalt mining and the
+corporate outsourcing of responsibility in the democratic republic of
+congo,” The Extractive Industries and Society , vol. 8, no. 4, p. 100884,
+2021.
+[42] B. K. Sovacool, “When subterranean slavery supports sustainability
+transitions? power, patriarchy, and child labor in artisanal congolese
+cobalt mining,” The Extractive Industries and Society , vol. 8, no. 1,
+pp. 271–293, 2021.
+[43] A. Kelly, “Apple and google named in us lawsuit over congolese child
+cobalt mining deaths,” The Guardian , vol. 16, 2019.
+[44] G. A. Campbell, “The cobalt market revisited,” Mineral Economics ,
+vol. 33, no. 1, pp. 21–28, 2020.
+[45] H.-H. Ryu, H. H. Sun, S.-T. Myung, C. S. Yoon, and Y .-K. Sun,
+“Reducing cobalt from lithium-ion batteries for the electric vehicle
+era,” Energy & Environmental Science , vol. 14, no. 2, pp. 844–852,
+2021.
+[46] A. Callaway, “Powering down corruption,” The Enough Project , pp.
+1–28, 2018.
+[47] T. C. Frankel, M. R. Chavez, and J. Ribas, “The cobalt pipeline. tracing
+the path from deadly hand-dug mines in congo to consumers’ phones
+and laptops,” The Washington Post , vol. 30, 2016.
+[48] B. White, “Globalization and the child labor problem,” Journal of
+International Development: The Journal of the Development Studies
+Association , vol. 8, no. 6, pp. 829–839, 1996.
+[49] D. Part, “Highway safety manual,” 2010.
+[50] M. Banihashemi, “Highway safety manual, new model parameters
+vs. calibration of crash prediction models,” in Moving Toward Zero.
+2011 ITE Technical Conference and ExhibitInstitute of Transportation
+Engineers (ITE) , 2011.
+[51] H. C. Manual, “Highway capacity manual,” Washington, DC , vol. 2,
+p. 1, 2000.
+[52] A. Flannery, A. Anderson, and A. Martin, “Highway capacity manual
+and highway capacity software 2000 and advanced transportation
+modeling tools: Focus group ﬁndings,” Transportation research record ,
+vol. 1883, no. 1, pp. 176–184, 2004.
+[53] M. Azmat, S. Kummer, L. Moura Trigueiro, F. Gennaro Di, and
+R. Moser, “Impact of innovative technologies on highway operators:
+Tolling organizations’ perspective,” 2018.
+[54] C. Queiroz, N. Vajdic, and G. Mladenovic, “Public–private partner-
+ships in roads and government support: trends in transition and devel-
+oping economies,” Transportation Planning and Technology , vol. 36,
+no. 3, pp. 231–243, 2013.
+[55] R. Poole, “The impact of HOV and HOT lanes on congestion in the
+united states,” 2020.
+[56] L. Elefteriadou et al. , “Expanded transportation performance measures
+to supplement level of service (los) for growth management and
+transportation impact analysis,” 2012.
+[57] S. Mishra, T. F. Welch, and M. K. Jha, “Performance indicators for
+public transit connectivity in multi-modal transportation networks,”
+Transportation Research Part A: Policy and Practice , vol. 46, no. 7,
+pp. 1066–1085, 2012.
+[58] R. Ewing, R. A. Schieber, and C. V . Zegeer, “Urban sprawl as a risk
+factor in motor vehicle occupant and pedestrian fatalities,” American
+journal of public health , vol. 93, no. 9, pp. 1541–1545, 2003.
+[59] G. Galster, R. Hanson, M. R. Ratcliffe, H. Wolman, S. Coleman, and
+J. Freihage, “Wrestling sprawl to the ground: deﬁning and measuring
+an elusive concept,” Housing policy debate , vol. 12, no. 4, pp. 681–
+717, 2001.

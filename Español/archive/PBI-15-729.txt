@@ -1,0 +1,684 @@
+Selective gene dosage by CRISPR-Cas9 genome editing in
+hexaploid Camelina sativa
+Céline Morineau, Yannick Bellec, Frédérique Tellier, Lionel Gissot, Zsolt Kelemen, Fabien Nogué and
+Jean-Denis Faure*
+Institut Jean-Pierre Bourgin (IJPB), INRA, AgroParisTech, CNRS, Saclay Plant Sciences (SPS), Université Paris-Saclay, Versailles, Francia
+Recibido el 25 de agosto de 2016;
+revisado el 20 de noviembre de 2016;
+aceptado el 21 de noviembre de 2016.
+*Correspondencia (tel. +33130833797;
+fax +33130833319;
+correo electrónico: jean-denis.faure@inra.fr)
+Palabras clave: CRISPR-Cas9, ácido oleico,
+Camelina, FAD2. Resumen
+En muchas especies vegetales, la dosis génica es una causa importante de variación fenotípica. La ingeniería
+de la dosis génica, en particular en genomas poliploides, proporcionaría una herramienta eficiente para el
+mejoramiento vegetal. La oleaginosa hexaploide Camelina sativa, que tiene tres subgenomas
+expresados y muy relacionados, es una especie ideal para investigar la posibilidad de crear una gran colección
+de mutantes combinatorios. La mutagénesis selectiva y dirigida de los tres genes de la delta-12-desaturasa
+(FAD2) se logró mediante edición génica CRISPR-Cas9, lo que redujo los niveles de
+ácidos grasos poliinsaturados y aumentó la acumulación de ácido oleico en el aceite. El análisis de
+mutaciones a lo largo de cuatro generaciones demostró la presencia de gran variedad de mutaciones
+heredables en los tres genes CsFAD2 isólogos. Las distintas combinaciones de mutantes simples, dobles
+y triples en la generación T3 se aislaron, y los mutantes con pérdida completa de función
+revelaron la importancia de la delta-12-desaturación para el desarrollo de Camelina.
+La combinación de distintos alelos de los tres loci FAD2 proporcionó una gran diversidad
+de líneas de Camelina con distintos perfiles lipídicos, con acumulación de ácido oleico de entre 10% y 62%
+en el aceite. Las distintas combinaciones alélicas permitieron un análisis no sesgado de la dosis génica y
+de la función en esta especie hexaploide, pero también proporcionaron una fuente única de variabilidad genética para
+el mejoramiento vegetal.
+Introducción
+El mejoramiento vegetal se basa en la recombinación de una diversidad de
+alelos para seleccionar las combinaciones óptimas de un rasgo definido.
+El mejoramiento clásico depende de la disponibilidad de alelos en accesiones
+naturales, pero también en los distintos subgenomas en el caso de
+cultivos poliploides. Estas limitaciones podrían superarse mediante
+modificaciones genéticas que permitan la expresión dominante de un
+transgén que porta el rasgo o alelo deseado, o alternativamente la
+regulación negativa dominante de genes endógenos mediante silenciamiento.
+Las estrategias de regulación negativa, aunque eficientes, pueden plantear problemas a
+largo plazo, ya que los genes endógenos siguen expresándose,
+lo que puede causar inestabilidad del rasgo deseado tras varias
+generaciones (Rajeevkumar et al., 2015). Recientemente, el desarrollo de
+estrategias de edición génica permitió la mutagénesis selectiva dirigida al sitio
+incluso en genomas poliploides grandes, lo que ofrece un enfoque muy
+atractivo para crear nuevos alelos estables en cultivos.
+La edición génica se basa en la creación de una o más roturas
+en el ADN genómico en una localización específica. Las roturas de doble
+cadena se reparan por unión de extremos no homólogos (NHEJ), propensa a errores, o por
+recombinación homóloga de alta fidelidad, que
+requiere la presencia de una plantilla, normalmente proporcionada por la otra
+cadena cromosómica. La reparación imperfecta de la rotura del ADN conduce, con
+una frecuencia variable, a la adición o deleción de nucleótidos, lo que crea
+una mutación estable. La creación de roturas específicas en el ADN
+puede lograrse mediante la expresión de nucleasas como las de dedos de zinc
+(ZFN), las nucleasas efectoras tipo activador de la transcripción
+(TALEN) y, más recientemente, la proteína Cas9 asociada a
+repeticiones palindrómicas cortas agrupadas y regularmente interespaciadas de tipo II
+(CRISPR) (Hsu et al., 2014). CRISPR-Cas9 depende de la presencia de un ARN guía de 20 nucleótidos (sgRNA) que dirige específicamente la
+nucleasa Cas9 a la secuencia genómica complementaria (Jinek
+et al., 2012). El sgRNA contiene el llamado “motivo adyacente al protoespaciador”
+(PAM), cuya secuencia de consenso, NGG,
+está adyacente al extremo 3′ del objetivo de 20 pb. La especificidad del
+sistema depende de la coincidencia perfecta de 8–12 nucleótidos del extremo 5′
+del objetivo, mientras que algunos desapareamientos se toleran en el extremo 3′
+(Cong et al., 2013). Este sistema ofrece un método simple, rápido y
+flexible para inducir mutaciones simples o incluso múltiples en el
+genoma, definidas por la especificidad del sgRNA seleccionado
+secuencia.
+El sistema CRISPR-Cas9 se validó por primera vez mediante expresión transitoria
+en varias especies, entre ellas Arabidopsis, arroz, tabaco
+(Nicotiana benthamiana), sorgo y naranja dulce (Feng
+et al., 2013; Jia y Nian, 2014; Jiang et al., 2013; Li et al.,
+2013; Liang et al., 2014; Mao et al., 2013; Miao et al., 2013;
+Nekrasov et al., 2013; Shan et al., 2013; Xie y Yang, 2013).
+La mutagénesis altamente eficiente y estable se demostró después
+en Arabidopsis, así como en varios cultivos: arroz, trigo,
+cebada, Brassica oleracea, papa, maíz y soja (Brooks
+et al., 2014; Butler et al., 2015; Čermák et al., 2015; Fauser
+et al., 2014; Feng et al., 2014; Ito et al., 2015; Jiang et al., 2014;
+Lawrenson et al., 2015; Li et al., 2015; Svitashev et al., 2015;
+Wang et al., 2014; Zhang et al., 2014; Zhou et al., 2014). El
+sistema CRISPR-Cas9 puede usarse para lograr mutagénesis múltiple
+mediante la expresión de varios sgRNA que apuntan a distintos genes
+(Lowder et al., 2015; Ma et al., 2015). La versatilidad y
+la eficiencia del sistema CRISPR-Cas9 también mejoraron gracias a vectores Golden
+Braid y vectores basados en Gateway (Ma et al., 2015; Vazquez-Vilar
+et al., 2016) y a la expresión de Cas9 específica de la línea germinal (Mao et al.,
+©2016 Los autores. Plant Biotechnology Journal, publicado por Society for Experimental Biology and The Association of Applied Biologists and John Wiley & Sons Ltd.
+Este es un artículo de acceso abierto bajo los términos de la licencia Creative Commons Attribution License, que permite el uso,
+distribución y reproducción en cualquier medio, siempre que la obra original sea citada correctamente. 729 Plant Biotechnology Journal (2017) 15, pp. 729–739 doi: 10.1111/pbi.12671
+2016). Un gran desafío es la capacidad de CRISPR-Cas9 para
+inducir mutaciones en genomas poliploides, en particular en los que tienen subgenomas estrechamente relacionados. CRISPR-Cas9 fue eficaz en papa diploide y tetraploide, tabaco tetraploide y trigo hexaploide
+(Butler et al., 2015; Gao et al., 2014; Wang et al., 2014). La
+presencia de mutaciones en los distintos genes homeólogos solo se evaluó en trigo, pero el bajo número de mutantes regenerados
+impidió estimar con exactitud el tipo de alelos
+obtenidos ni su frecuencia (Wang et al., 2014).
+Para investigar el uso de CRISPR-Cas9 para generar una gran
+diversidad de combinaciones alélicas en una especie poliploide, usamos
+Camelina sativa, también conocida como falso lino, una oleaginosa de la
+familia Brassicaceae estrechamente relacionada con Arabidopsis thaliana
+(Al-Shehbaz et al., 2006; Haslam et al., 2016). El genoma de Camelina
+está compuesto por tres subgenomas, dos de los cuales son extremadamente similares entre sí y pueden derivar de un evento de autopoliploidía, mientras que el tercero es algo más divergente
+(Kagale et al., 2014). Los estudios transcriptómicos específicos de subgenoma
+mostraron un grado notablemente bajo de pérdida génica y de diferenciación funcional de los genes entre los tres subgenomas (Kagale
+et al., 2014, 2016; Mudalkar et al., 2014; Nguyen et al., 2013).
+Los distintos genes homeólogos se expresaron con mayor frecuencia, con un nivel de expresión levemente mayor para los genes del más
+divergente subgenoma (Kagale et al., 2014, 2016). Por ello, obtener
+mutantes recesivos en Camelina está limitado por la alta redundancia genética. Por ello, la mutagénesis con CRISPR-Cas9 sería de gran interés
+para aumentar la diversidad genética al obtener
+múltiples alelos en genes específicos, y también para evaluar los efectos de la dosis génica en rasgos específicos. Una ventaja añadida de Camelina es la facilidad de su transformación por inmersión floral, como en Arabidopsis,
+con lo que se limita la aparición de mutaciones somaclonales causadas por
+el cultivo in vitro y la regeneración (Lu y Kang, 2008). La Camelina
+tiene un alto nivel de ácidos grasos poliinsaturados en su aceite, y
+se han empleado ya varias estrategias para desarrollar líneas monoinsaturadas
+ricas en ácido oleico (Kang et al., 2011; Nguyen et al.,
+2013). El ácido oleico (cis-9-octadecenoico, C18:1) se desatura
+a ácido linoleico (cis-9,12-octadecadienoico, C18:2) mediante la
+oleato desaturasa microsomal o delta-12 desaturasa FAD2 (EC1.3.1.35). La poliploidía del genoma de Camelina ha limitado la identificación de mutantes fad2, y solo la supresión antisentido o por ARNi
+de la expresión de fad2 resultó eficiente para aumentar la
+acumulación de ácido oleico (Kang et al., 2011; Nguyen et al.,
+2013).
+Aquí informamos mutaciones inducidas por CRISPR-Cas9 en la Camelina hexaploide
+mediante el aislamiento de nuevos alelos de la delta-12 desaturasa FAD2 del ácido oleico
+alelos. La acumulación de mutaciones se monitoreó a lo largo de tres
+generaciones de expresión de CRISPR-Cas9, para aislar finalmente todas las
+combinaciones posibles de alelos nulos en los tres loci FAD2 homeólogos
+y una amplia gama de líneas que acumulan ácido oleico en distintos
+niveles. La pérdida completa de función de FAD2 causó defectos importantes en el
+desarrollo, lo que revela la importancia de los ácidos grasos poliinsaturados en las plantas.
+Resultados
+La expresión de dos sgRNA dirigidos a las tres secuencias FAD2
+generó un número y tipo de mutaciones variables
+Inicialmente se diseñaron dos sgRNA a partir de la secuencia FAD2 de Arabidopsis
+mediante la predicción del sitio web TEFOR, y comparando con
+las secuencias de los tres genes FAD2 homeólogos de
+Camelina sativa var. Céline, CsFAD2-1, CsFAD2-2 y CsFAD2-3, lo que mostró que también debían ser dirigidos (Hutcheon et al., 2010;
+Kang et al., 2011). Las secuencias sgRNA se eligieron según
+los siguientes criterios: (i) la puntuación de especificidad de TEFOR, (ii) la ausencia de sitios fuera de objetivo predichos, con hasta 4 desapareamientos (incluso
+cerca del PAM), (iii) su presencia en la primera mitad de la secuencia codificante
+y (iv) la conservación estricta de la secuencia entre los tres genes CsFAD2 (Figuras S1A-B y S2). El sgRNA#1 y el
+sgRNA#2 se clonaron río abajo de los promotores U3 y U6 de Camelina,
+respectivamente, en una versión modificada del vector pDE-Cas9 (Fauser et al., 2014), que expresa un casete DsRed adecuado
+para seleccionar transformantes de Camelina (Nguyen et al., 2013)
+(Figura S1C). Se seleccionaron más de 118 transformantes, y se recolectó ADN de hoja de las líneas T1 en la etapa temprana de floración
+y se usó para secuenciar los genes FAD2 con cebadores no específicos, para
+evaluar la presencia de mutaciones (Tabla 1).
+Sorprendentemente, mientras que 5 de 19 (26%) de las líneas T1 transformadas
+con la construcción sgRNA2 ya mostraban la presencia de al menos
+una mutación entre las 6 copias homeólogas de
+CsFAD2, ninguna de las 99 líneas T1 transformadas con sgRNA1
+mostró modificación alguna de la secuencia CsFAD2 (Tabla 1). Luego
+seleccionamos 5 líneas sgRNA2 mutadas y 6 líneas sgRNA1 elegidas al azar
+para amplificación, con unas 10 plantas por cada línea T1 (Figura S3A). El ADN foliar de un total de 97 líneas T2 se
+secuenció luego con cebadores específicos para detectar la presencia de
+mutaciones entre los tres genes CsFAD2. Los distintos
+polimorfismos encontrados entre las tres secuencias homeólogas FAD2
+(Figura S1B) se usaron para diseñar cebadores específicos de alelo
+para una PCR simple de discriminación de alelos (Tabla S1 y Figura S2). Se identificaron mutaciones en 20/53 (37.7%) y 36/44 (81.8%) de las líneas T2 de sgRNA1 y sgRNA2, respectivamente
+(Tabla 1). Finalmente, la descendencia de 5 líneas T2 de sgRNA2 se
+amplificó para dar 133 líneas T3 individuales (Figura 1A), y su ADN foliar se secuenció individualmente para cada copia de FAD2
+(Tabla S2). Se identificaron en total 21 alelos mutantes distintos,
+que van desde inserciones o deleciones de uno a pocos nucleótidos hasta deleciones mayores que, según las predicciones, afectan de forma distinta la
+estructura de la proteína FAD2 (Tabla 3). Varias mutaciones tuvieron una deleción de
+3 o múltiplos de 3 nucleótidos (6, 18 o 33 nucleótidos), lo que llevó a la deleción de 1 a 11 aminoácidos en la proteína, pero la mayoría de
+los cambios de secuencia observados fueron mutaciones de cambio de marco o
+deleciones o inserciones grandes que provocan una modificación importante de la proteína,
+a menudo con codones de parada prematuros (Tabla 3). Algunas mutaciones se encontraron en los tres homeólogos CsFAD2, mientras que
+otras eran específicas de uno o dos genes (Tabla 2). Las distintas
+combinaciones de alelos encontradas en la generación T3 en los tres loci CsFAD2 se resumen en la Tabla S2.
+Las mutaciones en los genes FAD2 modificaron la desaturación de C18
+en el perfil de las plantas de Camelina
+Para obtener una estimación rápida de la actividad de FAD2 en las distintas
+líneas mutadas, se analizaron primero los niveles de ácidos grasos de 18 carbonos en semillas T3 agrupadas de progenies T2 individuales (Figura S3A). Un índice de ácido oleico (OAI), que corresponde a los niveles relativos de
+ácido oleico monoinsaturado (18:1) entre los ácidos grasos saturados de 18 carbonos
+y poliinsaturados (18:0, 18:1, 18:2 y 18:3), se usó para comparar rápidamente las distintas líneas en cuanto a la actividad de FAD2. El análisis de
+ácidos grasos de semillas agrupadas de plantas T2 con o sin
+mutaciones en los genes CsFAD2 mostró diferencias significativas en
+varias líneas. Mientras que el OAI del tipo silvestre varió entre 14% y
+18%, la descendencia de varias líneas T2 mostró un OAI entre
+25% y 31%, y una línea alcanzó 41% (Figura S3A). El aumento de 18:1 se asoció principalmente con una reducción de 18:2.
+©2016 Los autores. Plant Biotechnology Journal, publicado por Society for Experimental Biology and The Association of Applied Biologists and John Wiley & Sons Ltd., 15, 729–739 Céline Morineau et al. 730
+Se cultivaron varias semillas de cada progenie T2, y el OAI se
+determinó en hojas de cada planta T3. El fenotipado lipídico individual de las plantas T3 permitió un cribado rápido de las distintas
+líneas y confirmó la magnitud del aumento de 18:1 acoplado a la reducción de 18:2
+y 18:3 (Figuras 1A y S3B). Como se esperaba, mientras que el OAI en hojas de tipo silvestre era de alrededor de 8%, 96 líneas CRISPR de 176
+mostraron un OAI al menos dos veces mayor (>16%), con tres líneas
+que superaron el 35% de ácido oleico del contenido de ácidos grasos de 18 carbonos (Figura 1A). El aumento del OAI se correlacionó con el número de
+alelos fad2 mutados (Figura 1A). Las tres líneas con el
+OAI más alto fueron las únicas plantas que mostraron defectos de desarrollo drásticos, con crecimiento lento, hojas retorcidas y floración retrasada
+y que portaban mutaciones en todos los genes CsFAD2 (Figura 1B y C).
+Por el contrario, los dobles mutantes homocigotos para cualesquiera
+combinaciones de 2 genes CsFAD2 no mostraron ninguna modificación del desarrollo
+(Figura 1D).
+Las demás líneas mostraron combinaciones de alelos con combinaciones homocigotas,
+heterocigotas o bialélicas para los distintos loci homeólogos
+CsFAD2 (Figura 1A y Tabla S2). El OAI
+aumentó proporcionalmente con la aparición de mutaciones fad2 en los 6 alelos homeólogos posibles,
+con una correlación entre el número de alelos mutados y los niveles de 18:1
+Tabla 1 Número de mutaciones fad2 en las generaciones T1, T2 y T3 de las líneas CRISPR de Camelina. El # indica el número de plantas usadas para generar
+la siguiente generación
+ARN guía T1 T1 Mutación (%) #plantas T1 T2 T2 Mutación (%) #plantas T2 T3 T3 Mutación (%)
+sgRNA1 99 0 6 * 53 37.7 (20/53) –– –
+sgRNA2 19 26 (5/19) 5 44 81.8 (36/44) 5 133 98.4 (131/133)
+El asterisco (*) indica las 6 líneas elegidas al azar.
+Figura 1. Actividad de Cas9 guiada por ARN sobre los genes CsFAD2 de Camelina, que modificó el contenido de ácido oleico y el crecimiento de la planta. (A) Ocurrencia de mutaciones en los loci CsFAD2-1,
+CsFAD2-2 y CsFAD2-3 en líneas T3 individuales (abajo) y el efecto resultante sobre el contenido de ácido oleico, medido como índice de ácido oleico (OAI) de las hojas T3
+(arriba). Las mutaciones que provocan un cambio de marco de lectura se indican en rojo, mientras que las que solo se asocian a deleción o inserción sin cambio de marco se indican en morado.
+En verde se indican dos Camelina de tipo silvestre. Un ejemplo de dos líneas que portan en el locus CsFAD2-1 una deleción –TGG580
+que lleva a W194Δ, o una inserción –G579 (cambio de marco), se indica con una flecha continua o discontinua, respectivamente. (B) Fenotipo de dos meses de
+mutantes triples csfad2 homocigotos (2B4-19, 2B4-9, 2A6-17), comparados con el tipo silvestre (WT). (C) OAI de hojas del tipo silvestre (gris) y de mutantes triples csfad2
+(azul). Los datos son la media (± EE) de los tres mutantes triples csfad2. (D) Fenotipo de mutantes dobles homocigotos csfad2 de dos meses comparados con
+tipo silvestre (WT). Los alelos silvestres CsFAD2-1, CsFAD2-2 y CsFAD2-3 se indican, respectivamente, como 1, 2 y 3, y el alelo mutado (Δ).
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Mutantes fad2 de Camelina mediante edición con CRISPR-Cas9 731
+Tabla 2 Secuencias de FAD2 de tipo silvestre y de líneas CRISPR de FAD2. Las mutaciones en los genes FAD2 causadas por cada sgRNA se compararon con las tres secuencias homeólogas de FAD2. La tabla enumera la
+secuencia de los distintos alelos de FAD2, el tipo de mutaciones (+, inserción; Δ, deleción), el homeólogo de FAD2 implicado (1 para FAD2-1, 2 para FAD2-2 y 3 para FAD2-3), el número de mutaciones en
+estados heterocigoto (Ht) y homocigoto (Hm) en las generaciones T2 y T3, y si las mutaciones estaban presentes en la generación T2 o T3 (T2, T3), presentes en T2 y encontradas en todas las líneas T3 (T2 –>T3) o
+presentes en todas las líneas T3 pero no detectadas en T2, muy probablemente porque las mutaciones inducidas por Cas9 ocurrieron después del genotipado de T2 (T2 -->T3). La mutación que lleva a la deleción de W194 está resaltada en rojo
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Céline Morineau et al. 732
+Tabla 3 Efecto predicho de las mutaciones de sgRNA sobre las proteínas FAD2. La tabla muestra, para cada alelo, la secuencia proteica predicha entre los residuos 171 y 280; la deleción correspondiente, si procede;
+la longitud final de la proteína, si la mutación produjo un desplazamiento del marco de lectura con una secuencia fuera de fase (out). Una deleción simple de aminoácidos en fase con la secuencia proteica original está
+indicada por (in), y W194 está resaltada en rojo
+La presencia de un codón de parada prematuro se indica con *. Las deleciones en marco o los codones de parada prematuros se indican, respectivamente, en morado y rojo.
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Mutantes fad2 de Camelina mediante edición con CRISPR-Cas9 733
+(Figura 1A). El OAI podría ser el resultado del número de
+alelos fad2 mutados, sino también del tipo de alelo. Las
+secuencias proteicas predichas de los distintos alelos fad2 sugirieron
+alelos mutados potencialmente débiles o fuertes correspondientes a
+deleción o inserción con o sin desplazamiento del marco de lectura, respectivamente (Tabla 3). De los 21 mutantes recuperados en las poblaciones T3CRISPR, dos alelos resultaron en la deleción de un solo
+aminoácido, glicina 193 o triptófano 194, lo que potencialmente conduce a
+el fenotipo más débil (Tabla 3). La deleción del triptófano 194 (W
+194Δ) se analizó con más detalle, ya que este residuo estaba siempre
+incluido en varias deleciones que implicaban 2, 3, 6 u 11 aminoácidos
+(Tabla 3). Las distintas líneas que portaban la deleción W194Δ mostraron
+un OAI idéntico al de líneas que portaban alelos con desplazamiento del marco de lectura que conducen a
+proteínas truncadas (Figura 1A). Por ejemplo, las líneas 2F4.29
+(flecha continua) y 2A6.6 (flecha discontinua) portaban 5 alelos
+fad2 mutados. Mientras que 2F4.29 portaba un –G579 (desplazamiento del marco) en 5 de las 6
+posiciones posibles de CsFAD2, 2A6.6 mostró las siguientes deleciones
+para, respectivamente, CsFAD2-1, CsFAD2-2 y CsFAD2-3: TGG580
+(W194Δ), –GTGGCC583 (WP195Δ) y una de 40 pb (−23 a +17
+alrededor del PAM). La línea 2F4.29 portaba 5 mutaciones con desplazamiento del marco de lectura
+que conducen a desaturasas FAD2 potencialmente inactivas, mientras que 2A6.6
+portaba 1 mutación con desplazamiento del marco para CsFAD2-3 y 4 deleciones de aminoácidos en marco que involucran W194, lo que conduce a una desaturasa FAD2
+potencialmente todavía activa. Sin embargo, ambas líneas mostraron OAI muy similares. 2F4.29 mostró un OAI más bajo en semillas T4 en comparación con 2A6.6
+(52.9% y 59.8%, respectivamente), pero más alto en hojas T3 (33.7%
+y 31%) (Tabla S2). Los otros alelos de deleción implicaban 2 o más aminoácidos, siempre incluyendo W194. Estos resultados indicaron que W194 es probablemente esencial para la actividad de FAD2 y que el ácido oleico
+acumulación en las distintas líneas resultó principalmente de la
+distribución combinatoria de alelos fuertes equivalentes, más que del efecto de alelos específicos.
+Efecto de la dosis génica sobre el perfil de ácido oleico de Camelina
+semilla y aceite
+Se cosechó la descendencia de líneas T3 individuales, y el OAI de
+las semillas T4 agrupadas se determinó para evaluar el efecto de las distintas combinaciones de alelos fad2 sobre el perfil lipídico de semilla y aceite
+(Figuras 2A y S3C). Las semillas T4 también se evaluaron por
+fluorescencia de DsRed, lo que indica la segregación del
+transgén en varias líneas y la posibilidad de recuperar líneas sin construcciones Cas9/sgRNA (Tabla S2). Como se esperaba, el OAI
+observado en semillas T4 fue más alto que el observado en hojas T3,
+con un índice que va desde 14% para el tipo silvestre hasta 91% para el
+Figura 2 Las combinaciones de alelos csfad2 cambian el perfil lipídico de la semilla. (A) Distribución de las combinaciones de alelos csfad2 en los loci CsFAD2-1, CsFAD2-2 y CsFAD2-3
+en líneas T3 individuales (abajo) y el efecto resultante sobre el OAI de la descendencia de semillas T4 (arriba). Los números indican las líneas seleccionadas para el análisis de aceite (nombres de líneas
+se indican en C). Las mutaciones que conducen a un desplazamiento del marco de lectura se indican en rojo, mientras que las asociadas solo con deleción o inserción sin desplazamiento del marco
+se indican en morado. (B) OAI en mutantes csfad2 homocigotos simples, dobles y triples. Mayúscula, alelo WT. Minúscula azul, alelo mutado. El
+número de líneas usadas para cada combinación genética se indica (n). (C) Perfil relativo de ácidos grasos de semillas T4 de 7 líneas CRISPR csfad2 seleccionadas en (A).
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Céline Morineau et al. 734
+mutantes triples (Figura 2A). Cabe señalar que solo dos de los
+tres líneas fad2 triples homocigotos (2A6-17 y 2B4-19) se
+incluyeron en el análisis, ya que la tercera línea produjo casi ninguna semilla (2B4-9). El contenido oleico fue proporcional al número de
+alelos CsFAD2 mutados, y una combinación de 5–6 alelos mutados
+se requirió para alcanzar el OAI más alto (Figuras 2B y S3C y S4). Curiosamente, la combinación de alelos fad2 asociada
+con el OAI más alto en semillas T4 fue diferente de las observadas
+en hojas T3 (Figuras 1A y 2A). En semillas, la presencia de mutaciones homocigotas csfad2-2 siempre se asoció con un
+OAI alto en combinaciones de dobles mutantes, mientras que en hojas, las mutaciones en
+los tres genes CsFAD2 contribuyeron por igual a la acumu-
+lación de ácido oleico (Figura 2B). El efecto de la mutación csfad2-2 sobre el OAI podía
+incluso observarse en estado heterocigoto, lo que indica la
+importancia de la dosis alélica para la actividad de FAD2 (Figura S4). Se ha informado que el subgenoma 3 de Camelina (CsG3) se expresaba globalmente más que los otros dos subgenomas (Kagale et al., 2016).
+CsFAD2-2 pertenece a CsG3, y, en efecto, su expresión es mayor en
+semillas en maduración en comparación con los otros dos genes homeólogos (Figura S5). Los niveles de expresión de los tres genes CsFAD2 fueron
+similares en hojas, lo que explica la igual importancia de los distintos
+alelos CsFAD2 mutados en el OAI de hojas (Figuras 2B y S4).
+Luego seleccionamos 7 líneas CRISPR con un OAI de semilla que va desde
+8% (Céline de tipo silvestre) hasta 91% (mutante triple) para determinar el
+perfil total de ácidos grasos en semillas (Figura 2A, líneas numeradas 1–7).
+Estas líneas correspondían a 5 mutantes dobles y 2 triples, con
+los siguientes fondos genéticos: #1: Δ/Δ, 2/2, Δ/Δ; #2: 1/1,
+Δ/Δ,Δ/Δ; #3: 1/1, Δ/Δ,Δ/Δ; #4: Δ/Δ,Δ/Δ, 3/3; #5: Δ/Δ,Δ/Δ,
+3/3; #6: Δ/Δ,Δ/Δ,Δ/Δ y #7: Δ/Δ,Δ/Δ
+,Δ/Δ. Ácido oleico total
+contenido osciló entre 9.8% (Céline) y 62.5% (2B4-19, línea #7)
+y se asoció con un ligero aumento del ácido eicosenoico (20:1),
+pero con una disminución del ácido erúcico (22:1) (Figura 2C). Como se esperaba, los niveles de ácidos grasos poliinsaturados de 18:2 y 18:3, y también de
+20:2, 20:3 y 22:3, se redujeron en la misma medida que el
+aumento del ácido oleico (Figura 2C). Curiosamente, los ácidos grasos saturados como 16:0, 20:0, 22:0 y 24:0 también mostraron una ligera
+disminución proporcional al aumento del ácido oleico. El contenido total de ácidos grasos
+en semillas varió entre las distintas líneas, pero no se correlacionó con los niveles relativos de ácido oleico (Figura S6A). Finalmente, las semillas se prensaron mecánicamente para extraer el aceite. La
+fracción de aceite y la torta residual de semilla mostraron un perfil similar
+en comparación con las semillas, con un máximo de 61.4% de ácido oleico en el aceite (Figuras S6B y S6C).
+Discusión
+La mutagénesis selectiva de los genes CsFAD2 mediante CRISPR-Cas9 fue
+altamente efectiva en Camelina. Mostramos una recuperación eficiente de mutantes en los tres genes CsFAD2, lo que permitió una gran diversidad
+de combinaciones genéticas con mutantes simples, dobles y triples
+que se obtuvieron en solo 3 generaciones (lo que representa un total de 1 año para Camelina). Incluso con una gran colección de accesiones naturales que representan los distintos alelos usados en este estudio,
+la mejora clásica no habría logrado el mismo resultado tan
+rápida y fácilmente. Nuestros resultados mostraron que la mutagénesis fue variable entre generaciones, con mutaciones detectadas por
+ejemplo en hojas y no presentes en la descendencia de semillas, lo que indica
+la existencia de mutaciones somáticas. Las mutaciones que ocurren más tarde en el desarrollo tienen más probabilidades de transmitirse a la siguiente
+generación si ocurren en tejidos germinales. Casos en los que
+una mutación podía detectarse en T2 pero no en T1, ya se han reportado en Arabidopsis en estudios previos (véase, p. ej., Feng et al., 2014), especialmente al usar promotores específicos (Mao et al.,
+2016). Se podrían proponer dos hipótesis para explicar el hecho de que las mutaciones no se detectaron en la generación T1 usando sgRNA#1. Primero, la ausencia de mutación detectada en T1 podría deberse a una
+actividad débil de este sgRNA particular en comparación con sgRNA#2. En
+este caso, debido al límite de detección de mutaciones en tejidos foliares quiméricos, no podríamos detectar los eventos raros de
+mutaciones somáticas debidas a sgRNA#1. La eficiencia de la mutagénesis fue
+efectivamente variable, según la naturaleza del sgRNA y el tiempo (número de generaciones) durante el cual estuvo presente CRISPR-Cas9.
+La eficiencia de la mutagénesis varió entre 0% y 26% en T1 para los
+dos sgRNA, 37% y 81.8% en T2 y alcanzó 98.4% en T3 para sgRNA2. La mayor eficiencia de sgRNA2 en comparación con
+sgRNA1 podría explicarse por la diferencia en la
+secuencia blanco. La composición de nucleótidos del sgRNA puede influir en la eficiencia de la mutagénesis, como muestra el programa CRISPOR, que evalúa la actividad de la guía mediante algoritmos de predicción
+frente a siete conjuntos de datos disponibles (Haeussler et al., 2016). sgRNA2
+podría considerarse más eficiente que sgRNA1 en 5 de los 7 algoritmos usados. Además, sgRNA2 presentaba 5 G o C en las últimas
+6 pb del sgRNA, lo que se ha demostrado que facilita la escisión
+(Ren et al., 2014). Otra posibilidad podría ser un perfil específico de
+expresión para sgRNA#1, que está bajo el control de un
+promotor U3 de Camelina (sgRNA#2 está bajo el control de un
+promotor U6 de Camelina). En este caso, sgRNA#1 se expresaría de forma más predominante en tejidos específicos (tejidos florales, por
+ejemplo) y por lo tanto no estaría presente en el tejido foliar. En
+Arabidopsis, el promotor AtU3 tenía una actividad relativamente más débil que AtU6 (Zhang et al., 2016). Si esta característica se conserva en
+Camelina, cabría esperar que CsU3 también tuviera una
+actividad relativamente más débil que el promotor CsU6, lo que explicaría la
+menor eficiencia de sgRNA1 en comparación con sgRNA2.
+La naturaleza de las mutaciones inducidas por los dos sgRNA también parece
+diferir. sgRNA1 indujo esencialmente inserciones de 1 pb y una
+deleción, mientras que sgRNA2 produjo esencialmente un rango más amplio de deleciones, algunas inserciones y pocas sustituciones. Estas diferencias
+entre sgRNA ya se han observado en plantas y pueden explicarse
+por la diferencia en la vía de reparación del ADN que usa la célula para resolver la rotura de doble cadena (DSB) (Collonnier et al.,
+2016). De hecho, existen dos vías de reparación que pueden resolver la DSB
+en ausencia de una matriz de recombinación: las vías C-NHEJ y
+de unión alternativa de extremos (alt-EJ) (Sfeir and Symington, 2015). La reparación mediada por C-NHEJ puede ser precisa o estar asociada con
+pequeñas inserciones o deleciones en el sitio de corte. La reparación alt-EJ implica
+el alineamiento de secuencias microhomólogas internas a los extremos rotos antes de la unión, y se asocia con deleciones que flanquean la
+DSB original. Así, la diferencia en el tipo de mutaciones que
+observamos entre sgRNA1 y sgRNA2 podría explicarse por la respectiva abundancia de microhomologías en la vecindad de
+la DSB generada por los dos sgRNA. En cuanto a sgRNA2, un
+gran número de las deleciones observadas podría explicarse por la reparación alt-EJ (p. ej., -T en la posición 15, posiblemente debido a las repeticiones GG; -33 en la posición 11, posiblemente debido a las repeticiones GTC). Para sgRNA1, la
+posibilidad de reparación mediada por microhomología parece más limitada
+y la DSB probablemente se resuelve más por C-NHEJ. Esto podría explicar por qué solo se observan inserciones simples de A o T con
+sgRNA1. Además, dado que alt-EJ se considera más mutagénica
+que C-NHEJ, este contenido diferencial de microhomologías entre los dos sgRNA también podría contribuir a la mayor
+capacidad mutagénica de sgRNA2. El análisis de un mayor número de
+mutaciones mediadas por sgRNA es, sin embargo, necesario para confirmar estas hipótesis.
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Mutantes fad2 de Camelina mediante edición con CRISPR-Cas9 735
+En Arabidopsis, transformada con un método similar al
+usado para Camelina, el análisis exhaustivo de varios cientos de líneas en 12 genes diana diferentes demostró que la tasa de mutación en T1 fue en promedio de 71% (47%–92%) (Feng
+et al., 2014). La tasa de mutagénesis observada en Camelina estuvo en
+el rango de la diana multigénica en Arabidopsis. Sin embargo, deberían probarse más sgRNA para evaluar a fondo la eficiencia de
+esta técnica en Camelina. Dado que la eficiencia aumentó rápidamente con
+el tiempo de generación, la autofecundación y el análisis de la siguiente generación proporcionan una forma simple y eficiente de lograr la identifi-
+cación y recuperación de mutantes. CRISPR-Cas9 también se usó en trigo hexaploide
+para inactivar los tres genes homeólogos Ta-MLO, confiriendo resistencia al oídio (Wang et al., 2014).
+A diferencia de Arabidopsis y Camelina, se usó la transformación de protoplastos
+y, entre las 72 plantas transgénicas de trigo regeneradas, solo 4 (5.6%) portaban mutaciones en un homeólogo Ta-MLO-A1. En el mismo estudio, el bombardeo de partículas de embriones inmaduros
+con una construcción TALEN produjo una eficiencia de mutagénesis similar
+(6%). Sin embargo, la mayor población de plantas examinadas con las construcciones TALEN permitió la identificación de
+mutaciones en los tres genes homeólogos Ta-MLO. En conclu-
+sión, la transformación de Camelina mediada por Agrobacterium con inmersión floral de CRISPR/Cas9 podría proporcionar una forma eficiente de
+mutagenizar especies de cultivo poliploides.
+A diferencia del trigo, Camelina tiene tres subgenomas similares que se
+expresan en general, lo que indica la existencia de una importante
+redundancia funcional de genes (Kagale et al., 2014, 2016). Nuestro
+trabajo muestra que CRISPR-Cas9 podría sortear eficientemente esta limitación al aislar rápidamente mutantes triples homocigotos. La otra ventaja de CRISPR/Cas9 en una planta poliploide que tiene
+tres subgenomas similares es la posibilidad de crear una gran
+colección de alelos combinatorios en los distintos genes homeólogos. Esta gran diversidad específica de mutantes podría entonces usarse
+para ajustar genéticamente con precisión el fenotipo esperado seleccionando la
+combinación alélica apropiada. En particular, la desaturación de ácidos grasos pareció ser muy sensible a la dosis génica, y se
+podía incluso detectar el efecto de una única mutación fad2 heterocigota
+entre la población mutada. Una gran colección de mutantes proporciona herramientas para investigar la implicación cuantitativa de los distintos genes homeólogos en el
+fenotipo asociado. La distribución combinatoria de los alelos a través de los tres
+la combinación de homeólogos de CsFAD2 para un perfil de ácido oleico dado fue distinta en hojas y semillas, lo que indica una contribución diferente de los genes CsFAD2
+en distintos órganos. En particular, se encontró que CsFAD2-2
+tiene una contribución más importante en la desaturación del ácido oleico en semillas en comparación con CsFAD2-1 y CsFAD2-3 en combinaciones de dobles
+mutantes, mientras que los tres genes parecen tener una contribución
+similar en hojas. Esta diversidad genética podría ampliarse aún más buscando mutaciones en distintas regiones de los
+genes o seleccionando alelos débiles conocidos. Recuperamos principalmente
+mutaciones nulas con nuestros sgRNA, pero podríamos haber obtenido mutaciones más débiles dirigiendo el sgRNA al extremo 3
+′ del gen
+o introduciendo mutaciones específicas mediante la inducción de
+recombinación génica por CRISPR-Cas9.
+Entre la población de líneas fad2 mutadas, las tres líneas triples
+homocigotas mostraron un marcado fenoti-
+po de desarrollo. Ya se han obtenido líneas de Camelina de alto oleico con
+antisentido o supresión por ARNi de FAD2 específica de semilla, lo que conduce a
+50% de 18:1 en semillas (Kang et al., 2011; Nguyen et al., 2013).
+La inactivación simultánea de fad2 y fae1 mediante ARNi en la semilla
+podría aumentar la acumulación de 18:1 hasta 70% de los ácidos grasos totales de la semilla, y también sin ningún fenotipo somático (Nguyen et al., 2013). Un mutante fad2 de Camelina se aisló de una población de Camelina
+mutagenizada con EMS, pero, dado que solo un
+homeólogo de FAD2 fue inactivado, los niveles de 18:1 alcanzaron solo 27% de los ácidos grasos totales de la semilla (Kang et al., 2011). En Arabidopsis, varias líneas fad2-
+deficientes han sido aisladas mediante mutagénesis química
+(James and Dooner, 1990, 1991; Lemieux et al., 1990; Song
+et al., 2010), inserciones de ADN-T (Okuley et al., 1994; Zhang et al.,
+2012) o hpRNA (Stoutjesdijk et al., 2002). La mayoría de las líneas
+mostraron niveles de ácido oleico de alrededor de 20%–26% en hojas y 50%–
+57% en semillas, y no mostraron fenotipos fuertes cuando crecieron
+en condiciones normales (Lemieux et al., 1990; Miquel et al.,
+1993; Okuley et al., 1994; Song et al., 2010; Stoutjesdijk et al.,
+2002; Zhang et al., 2012). El hecho de que en Camelina la
+inactivación completa de FAD2 se asociara con un fuerte fenotipo
+planteó la cuestión del papel de los ácidos grasos poliinsaturados en el desarrollo de la planta. Una explicación poco probable es la presencia de mutaciones no relacionadas fuera de objetivo inducidas por CRISPR/Cas9, ya que
+se seleccionaron varias líneas independientes. Otra posibilidad es
+que los niveles más altos de ácidos grasos poliinsaturados en las membranas de Camelina, en comparación con Arabidopsis, aumenten su sensibilidad a
+las condiciones ambientales. De hecho, los mutantes fad2 de Arabidopsis
+se asociaron con sensibilidad al frío y a la sal (Miquel et al.,
+1993; Zhang et al., 2012). Se observó un fenotipo de crecimiento atrofiado y arbustivo
+no obstante, en uno de los mutantes fad2 más extremos
+que acumulaba 66.4% de ácido oleico en semillas, y el fenotipo se amplificó en el doble mutante fae1fad2, que acumulaba
+86.9% de 18:1 (James and Dooner, 1990, 1991), lo que indica que
+incluso en Arabidopsis, los ácidos grasos poliinsaturados son importantes para el crecimiento de la planta.
+En conclusión, CRISPR-Cas9 genera una gran diversidad genética dirigida
+que ayuda a comprender la función génica en especies
+poliploides, sino que también proporciona un recurso genético excepcional para la mejora (Nogué et al., 2016). En particular, ofrece un método muy
+eficiente para seleccionar un ideotipo (perfil de aceite), minimizando
+los efectos negativos (compromiso de crecimiento), seleccionando la naturaleza de los alelos y sus combinaciones genéticas más eficientes. En el caso
+de cultivos antiguos que han sufrido poca mejo-
+ramiento, como Camelina, la edición del genoma mediante CRISPR-Cas9 ofrece una gran palanca genética para mejorar su potencial agronómico y biotecnológico (Faure and Tepfer, 2016).
+Materiales y métodos
+Síntesis y clonación de sgRNA
+Se diseñaron dos ARN guía diferentes siguiendo la arquitectura de ARN guía (20nt-NGG). La búsqueda del ARN guía se
+basó en la secuencia del genoma de Arabidopsis usando el
+sitio web TEFOR (http://crispor.tefor.net). Las dos secuencias de sgRNA se seleccionaron finalmente por su secuencia de consenso con los tres
+genes FAD2 de Camelina (Figura S1). La secuencia genómica de
+Camelina sativa cv. Céline. Cs FAD2-1, CsFAD2-2 y CsFAD2-3 se
+nombró de acuerdo con el trabajo previo (Kang et al., 2011) y se
+relacionó respectivamente con las accesiones Csa19 g016350,
+Csa01 g013220 y Csa15 g016000 (Kagale et al., 2016) y
+CsFAD2A, CsFAD2B y CsFAD2C (Hutcheon et al., 2010).
+La especificidad del sgRNA para los genes FAD2 se
+verificó finalmente mediante búsqueda BLAST de los dos ARN guía contra Camelina
+genoma en NCBI. El ARN guía 1 (5
+0atgtcaaggctgtgtcctaac30)
+y el ARN guía 2 (50gccaagtacaagggccacccg30) se sintetizaron,
+respectivamente, con las secuencias de los promotores de Camelina U3 y U6
+flanqueadas por los sitios de recombinación Gateway (Thermofisher Lifetech) attb1 y attb2. Los promotores de Camelina U3 y U6
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Céline Morineau et al. 736
+promotores usados en este estudio (Figura S7) se identificaron mediante Basic
+Local Alignment Search Tool (http://www.phytozome.net/physcomitrella_er.php), usando como consultas las secuencias snRNA U6-26 y U3B de Arabidopsis (X52528 y X52629, respectivamente).
+Estos casetes fueron sintetizados por GenScript y clonados
+individualmente en pDONR207 (Life Technologies) mediante recombinación Gateway, lo que dio lugar a un conjunto de vectores pDONR207-sgRNA en
+los que los casetes de ARN guía podían recombinarse posteriormente en
+pDE-Cas9 (Fauser et al., 2014) usando la clonasa Gateway LR.
+El vector pDE-Cas9 (cortesía de Holger Puchta, Karlsruhe
+Institute of Technology) se modificó intercambiando el casete de resistencia a Basta
+(SpeI y PmeI) por un casete DsRed (AvrII
+y HpaI).
+Transformación de Camelina y selección de transformantes
+Camelina Céline (cultivar) se transformó siguiendo un
+método mejorado del método tradicional de inmersión floral de Arabidopsis
+(Clough and Bent, 1998). Las flores de Camelina se sumergieron en una
+solución de Agrobacterium suplementada con sacarosa (73 mM),
+MgCl2 (12.6 mM) y acetosiringona (100 µM) en vacío
+a baja presión (50 mbar). Las líneas transgénicas se seleccionaron mediante
+la detección de la fluorescencia del marcador DsRed en semillas (Julié-
+Galau et al., 2014).
+Detección y análisis de mutaciones
+El ADN se extrajo de hojas de Camelina usando el DNeasy® Plant
+Mini Kit (Qiagen) según las instrucciones del fabricante. La
+presencia de mutaciones se detectó primero mediante secuenciación de amplicones de PCR
+usando cebadores consenso para los tres genes FAD2
+(CDSFAD2_For145-CsFAD2-FN-Rev). Para determinar la naturaleza
+(secuencia del alelo, gen FAD2), cada gen FAD2 se amplificó en
+los sitios de sgRNA1 o sgRNA2 mediante la PCR simple discriminante de alelos (SAP) (Biu and Liu, 2016). Se usó al menos un cebador específico en
+dirección directa (directa FAD2-2: CsFad2b_SNP_F; directa FAD2-3:
+CsFad2c_SNP_F) o en dirección inversa (inversa FAD2-1: CsFa-d2a_SNP_R2; inversa FAD2-2: CsFad2b_SNP_R; inversa FAD2-3:
+CsFad2c_SNP_R), junto con un cebador inverso (CsFAD2_Enz_Rev) o
+directo (CsFAD2_Enz_For) comunes a las tres copias. La secuenciación se realizó con los cebadores CDSFAD2_For145/CsFA-D2_553_Rev para ARNg1 y CsFAD2_396_For/CDSFA-
+D2_Rev812 para ARNg2. Todos los cebadores usados se describen en
+la Tabla S1 y la Figura S2. Se usó el programa Mixed Sequences Reader (http://msr.cs.nthu.edu.tw/) para analizar las secuencias mixtas causadas
+por mutaciones heterocigotas.
+Análisis de lípidos
+Las hojas de Camelina se congelaron inmediatamente tras el muestreo a
+−80°C y luego se liofilizaron. Para la cuantificación de los
+ésteres metílicos de ácidos grasos (FAME), se usaron alrededor de 2 mg de hojas secas o 20 semillas
+y la extracción de FAME seguida del análisis por GC-MS se
+realizó según Li et al. (2006). La relación de 18 : 1/
+(18 : 0 +18 : 1 +18 : 2 +18 : 3) *100 se calculó para definir
+el índice de ácido oleico (OAI). El aceite se extrajo mediante un dispositivo
+casero de micro-prensado basado en centrifugación, que puede sepa-
+rar eficientemente la fracción de aceite de la torta residual de semilla (Faure and Tepfer, 2016).
+Agradecimientos
+C. M. fue financiado por el programa Carnot 3BCar CamelinOil2
+(contrato 75000058). F. N. contó con el apoyo de la Agence National
+de la Recherche (programa ANR-11-BTBR-0001-GENIUS). Agradecemos a Martine Miquel, Bertrand Dubreucq y Mark Tepfer por sus consejos y su cuidadosa lectura del manuscrito. Los autores
+declaran no tener conflictos de interés.
+Referencias
+Al-Shehbaz, I.A., Beilstein, M.A. y Kellogg, E.A. (2006) Systematics and
+phylogeny of the Brassicaceae (Cruciferae): an overview. Plant Syst. Evol. 259,
+89–120.
+Brooks, C., Nekrasov, V., Lippman, Z.B. y Van Eck, J. (2014) Efficient gene
+editing in tomato in the first generation using the clustered regularly interspaced short palindromic repeats/CRISPR-Associated9 system. Plant
+Physiol. 166, 1292–1297.
+Bui, M. y Liu, Z. (2009) Simple allele-discriminating PCR for cost-effective and
+rapid genotyping and mapping. Plant Methods 5, 1.
+Butler, N.M., Atkins, P.A., Voytas, D.F. y Douches, D.S. (2015) Generation
+and inheritance of targeted mutations in potato (Solanum tuberosum L.) using the CRISPR/Cas system. PLoS ONE, 10, e0144591.
+Čermák, T., Baltes, N.J., Čegan, R., Zhang, Y. y Voytas, D.F. (2015) High-
+frequency, precise modification of the tomato genome. Genome Biol. 16, 232.
+Clough, S.J. y Bent, A.F. (1998) Floral dip: a simplified method for
+Agrobacterium-mediated transformation of Arabidopsis thaliana. Plant J 16,
+735–743.
+Collonnier, C., Epert, A., Mara, K., Maclot, F., Guyon-Debast, A., Charlot, F.,
+White, C. et ál. (2016) CRISPR-Cas9 mediated efficient directed mutagenesis
+and RAD51-dependent and -independent gene targeting in the moss Physcomitrella patens. Plant Biotechnol. J. doi:10.1111/pbi.12596.
+Cong, L., Ran, F.A., Cox, D., Lin, S., Barretto, R., Habib, N., Hsu, P.D. et ál.
+(2013) Multiplex genome engineering using CRISPR/Cas systems. Science,
+339, 819 –823.
+Faure, J. y Tepfer, M. (2016) Camelina, a Swiss knife for plant lipid
+biotechnology. Oilseeds Fats Crops Lipids, 23, 5. doi:10.1051/ocl/2016023.
+Fauser, F., Schiml, S. y Puchta, H. (2014) Both CRISPR/Cas-based nucleases
+and nickases can be used efficiently for genome engineering in Arabidopsis
+thaliana. Plant J. 79, 348–359.
+Feng, Z., Zhang, B., Ding, W., Liu, X., Yang, D.-L., Wei, P., Cao, F. et ál. (2013)
+Efficient genome editing in plants using a CRISPR/Cas system. Cell Res. 23,
+1229 –1232.
+Feng, Z., Mao, Y., Xu, N., Zhang, B., Wei, P., Yang, D.-L., Wang, Z. et ál. (2014)
+Multigeneration analysis reveals the inheritance, specificity, and patterns of CRISPR/Cas-induced gene modifications in Arabidopsis. Proc. Natl. Acad. Sci.
+USA, 111, 4632–4637.
+Gao, J., Wang, G., Ma, S., Xie, X., Wu, X., Zhang, X., Wu, Y. et ál. (2014)
+CRISPR/Cas9-mediated targeted mutagenesis in Nicotiana tabacum.
+Plant
+Mol. Biol. 87, 99–110.
+Haeussler, M., Schönig, K., Eckert, H., Eschstruth, A., Mianné, J., Renaud, J.-B.,
+Schneider-Maunoury, S. et ál. (2016) Evaluation of off-target and on-target
+scoring algorithms and integration into the guide RNA selection tool CRISPOR. Genome Biol. 17, 148.
+Haslam, R.P., Sayanova, O., Kim, H.J., Cahoon, E.B. y Napier, J.A. (2016)
+Synthetic redesign of plant lipid metabolism. Plant J. 87, 1, 76–86. doi:10.
+1111/tpj.13172.
+Hsu, P.D., Lander, E.S. y Zhang, F. (2014) Development and applications of
+CRISPR-Cas9 for genome engineering. Cell, 157, 1262–1278.
+Hutcheon, C., Ditt, R.F., Beilstein, M., Comai, L., Schroeder, J., Goldstein, E.,
+Shewmaker, C.K. et ál. (2010) Polyploid genome of Camelina sativa revealed
+by isolation of fatty acid synthesis genes. BMC Plant Biol. 10, 233.
+Ito, Y., Nishizawa-Yokoi, A., Endo, M., Mikami, M. y Toki, S. (2015) CRISPR/
+Cas9-mediated mutagenesis of the RIN locus that regulates tomato fruit ripening. Biochem. Biophys. Res. Commun. 467, 76–82.
+James, D. y Dooner, H. (1990) Isolation of EMS-induced mutants in Arabidopsis
+altered in seed fatty-acid composition. Theor. Appl. Genet. 80, 241–245.
+James, D.W. y Dooner, H.K. (1991) Novel seed lipid phenotypes in
+combinations of mutants altered in fatty acid biosynthesis in Arabidopsis.
+Theor. Appl. Genet. 82, 409–412.
+Jia, H. y Nian, W. (2014) Targeted genome editing of sweet orange using Cas9/
+sgRNA. PLoS ONE, 9, 4. doi:10.1371/journal.pone.0093806.
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Camelina fad2 mutants by CRISPR-Cas9 editing 737
+Jiang, W., Zhou, H., Bi, H., Fromm, M., Yang, B. y Weeks, D.P. (2013)
+Demonstration of CRISPR/Cas9/sgRNA-mediated targeted gene modification
+in Arabidopsis, tobacco, sorghum and rice. Nucleic Acids Res. 41, 20, e188.
+doi:10.1093/nar/gkt780.
+Jiang, W., Yang, B. y Weeks, D.P. (2014) Efficient CRISPR/Cas9-mediated
+gene editing in Arabidopsis thaliana and inheritance of modified genes in the
+T2 and T3 generations. PLoS ONE, 9, 2, 1–26.
+Jinek, M., Chylinski, K., Fonfara, I., Hauer, M., Doudna, J.A. y Charpentier, E.
+(2012) A programmable dual-RNA–guided DNA endonuclease in adaptive
+bacterial immunity. Science (80-.), 337, 816–822.
+Julié-Galau, S., Bellec, Y., Faure, J.-D. y Tepfer, M. (2014) Evaluation of the
+potential for interspecific hybridization between Camelina sativa and related
+wild Brassicaceae in anticipation of field trials of GM camelina. Transgenic Res
+23,6 7–74.
+Kagale, S., Koh, C., Nixon, J., Bollina, V., Clarke, W.E., Tuteja, R., Spillane, C.
+et ál. (2014) The emerging biofuel crop Camelina sativa retains a highly
+undifferentiated hexaploid genome structure. Nat. Commun. 5, 3706.
+Kagale, S., Nixon, J., Khedikar, Y., Pasha, A., Provart, N.J., Clarke, W.E., Bollina,
+V. et ál. (2016) The developmental transcriptome atlas of the biofuel crop
+Camelina sativa. Plant J. doi:10.1111/tpj.13302.
+Kang, J., Snapp, A.R. y Lu, C. (2011) Identification of three genes encoding
+microsomal oleate desaturases (FAD2) from the oilseed crop Camelina sativa. Plant Physiol. Biochem. 49, 223–229.
+Lawrenson, T., Shorinola, O., Stacey, N., Li, C., Østergaard, L., Patron, N.,
+Uauy, C. et ál. (2015) Induction of targeted, heritable mutations in barley
+and Brassica oleracea using RNA-guided Cas9 nuclease. Genome Biol. 16,
+258.
+Lemieux, B., Miquel, M., Sommerville, C. y Browse, J. (1990) Mutants of
+Arabidopsis with alterations in seed lipid fatty-acid composition. Theor. Appl.
+Genet. 80, 234–240.
+Li, Y., Beisson, F., Pollard, M. y Ohlrogge, J. (2006) Oil content of Arabidopsis
+seeds: the influence of seed anatomy, light and plant-to-plant variation.
+Phytochemistry 67, 904–915.
+Li, J.-F., Norville, J.E., Aach, J., McCormack, M., Zhang, D., Bush, J., Church,
+G.M. et ál. (2013) Multiplex and homologous recombination-mediated
+genome editing in Arabidopsis and Nicotiana benthamiana using guideRNA and Cas9. Nat. Biotechnol. 31, 688–691.
+Li, Z., Liu, Z.-B., Xing, A., Moon, B.P., Koellhoffer, J.P., Huang, L., Ward, R.T.
+et ál. (2015) Cas9-guide RNA directed genome editing in soybean. Plant
+Physiol. 169, 2, 960–
+970 00783.2015. doi: 10.1104/pp.15.00783.
+Liang, Z., Zhang, K., Chen, K. y Gao, C. (2014) Targeted mutagenesis in Zea
+mays using TALENs and the CRISPR/Cas system. J. Genet. Genomics, 41, 63–
+68.
+Lowder, L.G., Zhang, D., Baltes, N.J., Paul, J.W., Tang, X., Zheng, X., Voytas,
+D.F. et ál. (2015) A CRISPR/Cas9 toolbox for multiplexed plant genome
+editing and transcriptional regulation. Plant Physiol. 169, 971–985.
+Lu, C. y Kang, J. (2008) Generation of transgenic plants of a potential oilseed
+crop Camelina sativa by Agrobacterium-mediated transformation. Plant Cell
+Rep. 27, 273–278.
+Ma, X., Zhang, Q., Zhu, Q., Liu, W., Chen, Y., Qiu, R., Wang, B. et ál. (2015) A
+robust CRISPR/Cas9 system for convenient, high-efficiency multiplex genome editing in monocot and dicot plants. Mol. Plant, 8, 1274–1284.
+Mao, Y., Zhang, H., Xu, N., Zhang, B., Gou, F. y Zhu, J.K. (2013) Application
+of the CRISPR-Cas system for efficient genome engineering in plants. Mol.
+Plant, 6, 2008–2011.
+Mao, Y., Zhang, Z., Feng, Z., Wei, P., Zhang, H., Botella, J.R. y Zhu, J.K.
+(2016) Development of germ-line-specific CRISPR-Cas9 systems to improve
+the production of heritable gene modifications in Arabidopsis. Plant
+Biotechnol. J. 14, 2, 519–532.
+Miao, J., Guo, D., Zhang, J., Huang, Q., Qin, G., Zhang, X., Wan, J. et ál. (2013)
+Targeted mutagenesis in rice using CRISPR-Cas system. Cell Res. 23, 1233–1236.
+Miquel, M., James, D., Dooner, H. y Browse, J. (1993) Arabidopsis requires
+polyunsaturated lipids for low-temperature survival. Proc. Natl Acad. Sci. 90,
+6208 –6212.
+Mudalkar, S., Golla, R., Ghatty, S. y Reddy, A.R. (2014) De novo
+transcriptome analysis of an imminent biofuel crop, Camelina sativa L. using Illumina GAIIX sequencing platform and identification of SSR markers. Plant Mol. Biol. 84, 159–171. Nekrasov, V., Staskawicz, B., Weigel, D., Jones, J.D.G. y Kamoun, S. (2013)
+Targeted mutagenesis in the model plant Nicotiana benthamiana using Cas9
+RNA-guided endonuclease. Nat. Biotechnol. 31, 691–693.
+Nguyen, H.T., Silva, J.E., Podicheti, R., Macrander, J., Yang, W., Nazarenus,
+T.J., Nam, J.W. et ál. (2013) Camelina seed transcriptome: a tool for meal
+and oil improvement and translational research. Plant Biotechnol. J. 11,
+759–769.
+Nogué, F., Mara, K., Collonnier, C. y Casacuberta, J.M. (2016) Genome
+engineering and plant breeding: impact on trait discovery and development.
+Plant Cell Rep. 35, 1475–1486. doi:10.1007/s00299-016-1993-z.
+Okuley, J., Lightner, J., Feldmann, K., Yadav, N., Lark, E. y Browse, J. (1994)
+Arabidopsis FAD2 gene encodes the enzyme that is essential for
+polyunsaturated lipid synthesis. Plant Cell, 6, 147–158.
+Rajeevkumar, S., Anunanthini, P. y Sathishkumar, R. (2015) Epigenetic
+silencing in transgenic plants. Front. Plant Sci. 6, 693.
+Ren, X., Yang, Z., Xu, J., Sun, J., Mao, D., Hu, Y., Yang, S.-J. et ál. (2014)
+Enhanced specificity and efficiency of the CRISPR/Cas9 system with optimized
+sgRNA parameters in Drosophila. Cell Rep. 9, 1151–1162.
+Sfeir, A. y Symington, L.S. (2015) Microhomology-mediated end joining: a
+back-up survival mechanism or dedicated pathway? Trends Biochem. Sci.,
+40, 11, 701–714. doi:10.1016/j.tibs.2015.08.006.
+Shan, Q., Wang, Y., Li, J., Zhang, Y., Chen, K., Liang, Z., Zhang, K. et ál. (2013)
+Targeted genome modification of crop plants using a CRISPR-Cas system.
+Nat. Biotechnol. 31, 686–688.
+Song, W., Maeda, H. y Dellapenna, D. (2010) Mutations of the ER to plastid
+lipid transporters TGD1, 2, 3 and 4 and the ER oleate desaturase FAD2 suppress the low temperature-induced phenotype of Arabidopsis tocopherol-
+deficient mutant vte2. Plant J. 62, 1004–1018.
+Stoutjesdijk, P.A., Singh, S.P., Liu, Q., Hurlstone, C.J., Waterhouse, P.A. y
+Green, A.G. (2002) hpRNA-mediated targeting of the arabidopsis FAD2 gene gives highly efficient and stable silencing. Plant Physiol. 129, 1723–
+1731.
+Svitashev, S., Young, J.K., Schwartz, C., Gao, H., Falco, S.C. y Cigan, A.M.
+(2015) Targeted mutagenesis, precise gene editing, and site-specific
+gene insertion in maize using Cas9 and guide RNA. Plant Physiol. 169,
+931–945.
+Vazquez-Vilar, M., Bernabé-Orts, J.M., Fernandez-del-Carmen, A., Ziarsolo, P.,
+Blanca, J., Granell, A. y Orzaez, D. (2016) A modular toolbox for gRNA–
+Cas9 genome engineering in plants based on the GoldenBraid standard. Plant
+Methods, 12, 10.
+Wang, Y., Cheng, X., Shan, Q., Zhang, Y., Liu, J., Gao, C. y Qiu, J.-L. (2014)
+Simultaneous editing of three homoeoalleles in hexaploid bread wheat confers
+heritable resistance to powdery mildew. Nat. Biotechnol. 32, 1–6.
+Xie, K. y Yang, Y. (2013) RNA-Guided genome editing in plants using a
+CRISPR-Cas system. Mol. Plant, 6, 1975–1983.
+Zhang, J., Liu, H., Sun, J., Li, B., Zhu, Q., Chen, S. y Zhang, H. (2012)
+Arabidopsis fatty acid desaturase FAD2 is required for salt tolerance during seed germination and early seedling growth. PLoS ONE
+, 7, 1 doi: 10.1371/
+journal.pone.0030355.
+Zhang, H., Zhang, J., Wei, P., Zhang, B., Gou, F., Feng, Z., Mao, Y. et ál. (2014)
+The CRISPR/Cas9 system produces specific and homozygous targeted gene editing in rice in one generation. Plant Biotechnol. J. 12, 797–807.
+Zhang, Z., Mao, Y., Ha, S., Liu, W., Botella, J.R. y Zhu, J.-K. (2016) A
+multiplex CRISPR/Cas9 platform for fast and efficient editing of multiple
+genes in Arabidopsis. Plant Cell Rep. 35, 1519–1533.
+Zhou, H., Liu, B., Weeks, D.P., Spalding, M.H. y Yang, B. (2014) Large
+chromosomal deletions and heritable small genetic changes induced by
+CRISPR/Cas9 in rice. Nucleic Acids Res. 42, 10903–10914.
+Información complementaria
+Información de apoyo adicional puede encontrarse en línea en la
+pestaña de información de apoyo de este artículo:
+Figura S1. Estructura de los genes FAD2 de Camelina y Arabidopsis.
+Figura S2. Secuencias codificantes de CsFAD2 de Camelina y los diferentes
+cebadores usados en el estudio.
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Céline Morineau et ál. 738
+Figura S3. Alelos fad2 combinados asociados con el contenido de C18
+en las líneas CRISPR CsFAD2 T2 y T3.
+Figura S4. OAI para las diferentes combinaciones alélicas en los tres
+loci CsFAD2.
+Figura S5. Niveles de expresión de los genes CsFAD2.
+Figura S6. Contenido de ácidos grasos de las fracciones de aceite y torta de las líneas CsFAD2 CRISPR seleccionadas analizadas en la Figura 2A y C.
+Figura S7. Promotores U3 y U6 de Camelina usados en este estudio.
+Tabla S1. Secuencias de cebadores usados para la amplificación y la secuen-
+ciación.
+Tabla S2. Resumen de los distintos genotipos de las líneas CsFAD2 CRISPR
+T2 y T3.
+©2016 The Authors. Plant Biotechnology Journal publicado por Society for Experimental Biology y The Association of Applied Biologists y John Wiley & Sons Ltd., 15, 729–739 Camelina fad2 mutants by CRISPR-Cas9 editing 739

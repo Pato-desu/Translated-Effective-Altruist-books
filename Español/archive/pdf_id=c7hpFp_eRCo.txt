@@ -1,0 +1,896 @@
+Ajuste de los hiperparámetros de la planificación anytime:
+un enfoque de aprendizaje por refuerzo profundo
+Abhinav Bhatia, Justin Svegliato, Shlomo Zilberstein
+Facultad de Ciencias de la Información y de la Computación
+Universidad de Massachusetts Amherst
+fabhinavbhati, jsvegliato, shlomo g@cs.umass.edu
+Resumen
+Muchos algoritmos anytime tienen hiperparámetros ajustables
+que afectan su velocidad y precisión. Sin embargo, mientras que los trabajos
+existentes sobre metarrazonamiento se han centrado en decidir cuándo inte-
+rrumpir un algoritmo anytime y actuar con la solución actual,
+no se ha trabajado mucho en ajustar los hiperparámetros
+de un algoritmo anytime en tiempo de ejecución. Este artículo presenta un
+enfoque de metarrazonamiento teórico-decisional que puede optimizar
+tanto los hiperparámetros como el punto de detención de algoritmos
+ajustables con aprendizaje por refuerzo profundo. Primero, pro-
+ponemos una generalización de un algoritmo anytime llamada algoritmo ajus-
+table, que tiene hiperparámetros que pueden ajustarse
+en tiempo de ejecución. Luego, ofrecemos una técnica de control a metanivel que
+supervisa y controla un algoritmo ajustable mediante aprendizaje
+por refuerzo profundo. Por último, demostramos que una aplica-
+ción de nuestro enfoque a A* ponderado anytime es eficaz
+en una variedad de problemas de referencia comunes.
+Introducción
+Los algoritmos anytime suelen tener hiperparámetros que pueden
+ajustarse para optimizar su rendimiento en un escenario especíﬁco:
+dados una instancia de problema y una restricción de tiempo determinadas. En pocas
+palabras, un algoritmo anytime es un algoritmo que mejora gradualmen-
+te su solución en tiempo de ejecución y al que se le puede interrumpir para obtener su
+solución en cualquier momento (Zilberstein 1996). Esto ofrece un equili-
+brio entre la calidad y el tiempo de cómputo de una solución
+que ha demostrado ser útil en muchos problemas de toma de decisiones
+en tiempo real, como la planiﬁcación de movimientos (Karaman et al.
+2011), la búsqueda heurística (Burns, Ruml y Do 2013; Cserna,
+Ruml y Frank 2017), la detección de objetos (Karayev, Fritz
+y Darrell 2014), la planiﬁcación en el espacio de creencias (Pineau, Gordon
+y Thrun 2003; Spaan y Vlassis 2005) y la inferencia probabilís-
+tica (Ramos y Cozman 2005). Los trabajos existentes sobre
+metarrazonamiento que gestionan este equilibrio se centran en decidir cuán-
+do interrumpir un algoritmo anytime y actuar con la
+solución actual. Sin embargo, el alcance del metarrazonamiento puede
+ampliarse para ajustar los hiperparámetros de un algoritmo anytime
+en tiempo de ejecución con el fin de optimizar su rendimiento.
+Ha habido un trabajo sustancial en el desarrollo de técnicas de metarra-
+zonamiento para determinar cuándo interrumpir un
+algoritmo anytime y actuar con la solución actual. En gene-
+ral, estas técnicas supervisan y controlan un algoritmo anytime
+para seguir su rendimiento y calcular su
+punto de detención en tiempo de ejecución. Por ejemplo, una técnica tempranamodela la detención óptima como un problema de decisión secuencial
+y deriva una política de control a metanivel mediante programa-
+ción dinámica (Hansen y Zilberstein 2001), mientras que una técnica más re-
+ciente estima el punto de detención óptimo mediante
+predicción de rendimiento en línea (Svegliato, Wray y Zilber-
+stein 2018). Sin embargo, estas técnicas no pueden ajustar los hi-
+perparámetros del algoritmo anytime en tiempo de ejecución.
+Las técnicas de metarrazonamiento para ajustar los hiperparámetros
+de un algoritmo anytime en tiempo de ejecución se han diseña-
+do típicamente para algoritmos anytime especíﬁcos. Por ejemplo,
+se ha trabajado en ajustar el peso de un algoritmo de búsqueda heurís-
+tica anytime llamado A* ponderado anytime, eligiendo
+el mejor peso para un problema (Hansen y Zhou 2007),
+escogiendo el mejor peso para una instancia de un problema (Sun,
+Druzdzel y Yuan 2007) y modiﬁcando el peso heurís-
+ticamente (Thayer y Ruml 2009). También se ha trabajado
+en ajustar el factor de crecimiento de un algoritmo de planiﬁcación de movimientos
+anytime llamado RRT* (Urmson y Simmons 2003). Sin em-
+bargo, estas técnicas a menudo tienen varios inconvenientes por-
+que no pueden determinar el punto de detención óptimo, re-
+quieren experiencia en la implementación del algoritmo anytime
+y carecen de generalidad o de análisis formal.
+Por lo tanto, proponemos un enfoque de metarrazonamiento teórico-decisional
+para la detención óptima y el ajuste de hiperparámetros
+dealgoritmos ajustables . Este enfoque modela la supervisión
+y el control de algoritmos ajustables como un proceso de de-
+cisión de Markov con cuatro atributos principales. Los estados reﬂejan
+la calidad y el tiempo de cómputo de la solución actual y
+cualquier otra característica necesaria para resumir el estado interno
+del algoritmo ajustable, la instancia del problema
+y el rendimiento del sistema. Las acciones reﬂejan bien
+interrumpir o bien ejecutar el algoritmo ajustable durante
+otro paso de tiempo mientras se ajustan sus hiperparámetros internos.
+Sin embargo, aunque la función de recompensa puede determinarse fá-
+cilmente, la función de transición se desconoce dada la considera-
+ble complejidad e incertidumbre sobre los estados y las acciones.
+En respuesta, usamos aprendizaje por refuerzo profundo, que es
+un enfoque sin modelo, para aprender cuándo detenerse y cómo
+ajustar los hiperparámetros del algoritmo anytime en línea
+aprendiendo a lo largo de una serie de episodios que utilizan cada uno el
+algoritmo ajustable para resolver una instancia de un problema en
+el sistema. En general, el aprendizaje por refuerzo es un enfoque
+sólido del metarrazonamiento para algoritmos ajustables dada la
+abundancia de datos que pueden generarse mediante simulación.
+Nuestras principales contribuciones en este artículo son: (1) una gene-
+ralización de un algoritmo anytime llamada algoritmo ajusta-
+ble, (2) una técnica de control a metanivel que supervisa y
+controla un algoritmo ajustable basada en aprendizaje por refuerzo
+profundo, (3) una aplicación de nuestro enfoque a A* ponderado
+anytime y (4) una demostración de que la aplicación de
+nuestro enfoque a A* ponderado anytime es eficaz en una variedad
+de problemas de referencia comunes.
+Trabajos relacionados
+Los enfoques para el ajuste automático de hiperparámetros de algoritmos
+generales se dividen en dos categorías principales. Por un lado,
+los enfoques basados en modelos suelen alternar el ajuste de un modelo
+con la selección de hiperparámetros basada en ese modelo. En par-
+ticular, a partir de trabajos anteriores en optimización secuencial basada en modelos
+(Bartz-Beielstein, Lasarczyk y Preuss 2005;
+Hutter et al. 2009a, 2010), SMAC selecciona los hiperparámetros
+de un algoritmo mediante un modelo representado como un bosque alea-
+torio (Hutter, Hoos y Leyton-Brown 2011). Por otro
+lado, aunque los enfoques sin modelo no ajustan ningún tipo
+de modelo, se ha demostrado que son eﬁcaces en
+una variedad de dominios. Limitado a hiperparámetros numéricos,
+CALIBRA usa diseños experimentales para encontrar hiperparámetros iniciales
+seguidos de una búsqueda local para mejorar esos hiper-
+parámetros (Adenso-Diaz y Laguna 2006), mientras que F-Race
+aprovecha algoritmos de carreras del aprendizaje automático (Birat-
+tari et al. 2002, 2010) para seleccionar los hiperparámetros de
+un algoritmo. Ampliando este trabajo a hiperparámetros categóricos,
+GGA emplea algoritmos genéticos paralelos basados en el género
+(Ans ´otegui, Sellmann y Tierney 2009), mientras que
+ParamILS realiza una búsqueda local iterada (Hutter, Hoos y
+St¨utzle 2007; Hutter et al. 2009b) para seleccionar los hiperparámetros
+de un algoritmo.
+Sin embargo, aunque todos estos métodos se han diseñado en su mayoría
+para algoritmos generales, a menudo no aprovechan las
+ventajas de los algoritmos anytime. Al usar aprendizaje por refuerzo
+profundo para supervisar y controlar algoritmos anytime en particular,
+nuestro enfoque de metarrazonamiento evita muchos inconvenientes de trabajos anteriores.
+Primero, mientras que algunos métodos existentes
+se limitan a hiperparámetros numéricos y algoritmos deter-
+minísticos, nuestro enfoque puede admitir tanto hiperparámetros cate-
+góricos como algoritmos estocásticos.
+Segundo, a diferencia de los métodos existentes que solo optimizan los hi-
+perparámetros para una única instancia de problema, nuestro enfoque
+puede optimizar los hiperparámetros para múltiples ins-
+tancias de problemas. De hecho, nuestro enfoque no solo puede seleccionar los hiper-
+parámetros de un algoritmo anytime para una instancia
+especíﬁca de un problema, sino que también ajusta los hiperparámetros de un algoritmo anytime
+mientras este se ejecuta. Por último, aunque algunos métodos existentes
+no pueden terminar un ensayo anticipadamente, nuestro enfoque puede terminar de forma natural
+los ensayos anticipadamente mediante aprendizaje por refuerzo profundo.
+También ha habido una línea de investigación ortogonal sobre el uso
+portafolios de algoritmos para resolver diferentes instancias de
+problemas computacionales difíciles. De hecho, se ha reconocido
+que distintos algoritmos tienden a dominarse unos a otros en dife-
+rentes instancias de un problema porque a menudo no existe un único
+mejor algoritmo (Leyton-Brown et al. 2003). Esto ha dado como resultado
+métodos que pueden usar portafolios de algoritmos para la satisfacibilidad (Gomes y Selman 2001; Xu et al. 2008), métodos de con-
+junto en aprendizaje automático (Dietterich 2000; Fern
+y Givan 2003), y múltiples métodos en la resolución de problemas
+en tiempo real (Wagner, Garvey y Lesser 1998; Zilberstein y
+Mouaddib 2000). Más recientemente, SATzilla (Xu et al. 2008),
+un solucionador eficiente que usa un portafolio de algoritmos para resolver
+problemas de satisfacibilidad difíciles, ha ganado múltiples competen-
+cias y sigue dominando el campo.
+La parada óptima para algoritmos de cualquier momento, pero no el ajuste de hiper-
+parámetros, también ha sido bien estudiada. El enfoque más temprano
+es la asignación fija, que ejecuta el algoritmo de cualquier momento
+hasta un punto de parada determinado antes del tiempo de ejecución (Horvitz
+1987; Boddy y Dean 1994). Aunque la asignación fija es efi-
+caz con una incertidumbre despreciable en el rendimiento del
+algoritmo de cualquier momento, a menudo hay una considerable incer-
+tidumbre en problemas de planificación en tiempo real (Paul et al. 1991). En
+respuesta, un enfoque más sofisticado, el monitoreo y
+el control, sigue el rendimiento del algoritmo de cualquier momento y
+estima un punto de parada en tiempo de ejecución periódicamente (Horvitz
+1990; Zilberstein y Russell 1995; Hansen y Zilberstein
+2001; Lin et al. 2015; Svegliato, Wray y Zilberstein 2018;
+Svegliato, Sharma y Zilberstein 2020). Cabe señalar que nuestro
+enfoque no solo determina el punto de parada de un algoritmo de cualquier
+momento, sino que también ajusta sus hiperparámetros.
+Con respecto a la búsqueda heurística, hay algunos trabajos recientes
+sobre la selección dinámica de la función heurística mediante aprendizaje profundo
+por refuerzo (Speck et al. 2021) y el ajuste dinámico
+de la estrategia de búsqueda más amplia en la planificación clásica
+mediante estrategias evolutivas (Gomoluch et al. 2020). Sin
+embargo, nuestro trabajo no es específico de la búsqueda heurística y se centra
+en algoritmos de cualquier momento.
+Problema de control de metanivel
+Comenzamos revisando el problema estándar de control de metanivel para
+algoritmos de cualquier momento. Esto requiere una función que de-
+scribe la utilidad de una solución calculada por un algoritmo de cualquier
+momento en términos de su calidad y tiempo de cómputo (Horvitz
+y Rutledge 1991). Definimos esta función a continuación.
+Definición 1. Una función de utilidad dependiente del tiempo U: 
+	!R representa la utilidad U(q;t) de una solución de calidad
+q2 en el paso de tiempo t2	.
+Una función de utilidad dependiente del tiempo a menudo puede expresarse
+como la diferencia entre una función de valor intrínseco y un
+costo del tiempo (Horvitz 1988; Hansen y Zilberstein 2001).
+Una función de valor intrínseco representa la utilidad de una solución
+dada su calidad, pero no su tiempo de cómputo, mientras que un costo de
+tiempo representa la utilidad de una solución dado su tiempo de
+cómputo, pero no su calidad. Definimos esta propiedad a continuación.
+Definición 2. Una función de utilidad dependiente del tiempo U: 
+	!R es separable en el tiempo si la utilidad U(q;t) de una solución
+de calidad q2 en el paso de tiempo t2	 puede expresarse como la
+diferencia entre dos funciones U(q;t) =UI(q) UC(t)
+donde UI: !R+ es la función de valor intrínseco y
+UC: 	!R+ es el costo del tiempo .
+El problema estándar de control de metanivel para algoritmos de cualquier
+momento consiste en que un sistema inteligente debe
+determinar el punto en el que interrumpir un algoritmo de cualquier
+momento y actuar sobre la solución actual (Horvitz 1990; Zilber-
+stein 1996). Idealmente, el algoritmo de cualquier momento debe ser inte-
+rrumpido en el punto de parada óptimo, ya que es el óptimo
+de la función de utilidad dependiente del tiempo. Sin embargo, el punto de parada ópti-
+mo a menudo es difícil de determinar debido a
+una incertidumbre considerable sobre el rendimiento del algoritmo de cualquier
+momento y la urgencia de la solución.
+Algoritmos ajustables
+Proponemos un algoritmo ajustable, una generalización de un
+algoritmo de cualquier momento, con un estado interno que puede monitorearse
+y hiperparámetros internos que pueden controlarse para
+interrumpir o ejecutar el algoritmo durante otro paso de tiempo y
+ajustar el funcionamiento interno del algoritmo. Esto resulta en
+un nuevo problema de control de metanivel que involucra la parada óptima
+y el ajuste óptimo de hiperparámetros del algoritmo ajustable.
+En general, nuestro enfoque monitorea y controla
+un algoritmo ajustable expresando este nuevo problema de
+control de metanivel como un problema de aprendizaje por refuerzo profundo.
+Por lo tanto, un algoritmo ajustable se define como sigue.
+Definición 3. Un algoritmo ajustable ,, tiene un estado interno
+que puede monitorearse e hiperparámetros internos
+f0;1;:::; Ng que pueden controlarse de modo que el hiper-
+parámetro interno 0=fSTOP;CONTINUEg interrumpe o ejecuta
+el algoritmo durante otro paso de tiempo y
+los hiperparámetros internos f1;:::; Ng ajustan el
+funcionamiento interno del algoritmo.
+A* ponderado de cualquier momento, un algoritmo popular de cualquier momento
+que extiende la conocida búsqueda heurística A* al-
+goritmo (Hansen, Zilberstein y Danilchenko 1997;
+Likhachev, Gordon y Thrun 2004; Aine, Chakrabarti y
+Kumar 2007; Hansen y Zhou 2007; Thayer y Ruml
+2010), es un ejemplo de algoritmo ajustable. Describimos
+el A* ponderado de cualquier momento en detalle para ilustrar nuestro enfoque.
+El A* ponderado de cualquier momento (1) usa una heurística no admisible para
+encontrar rápidamente soluciones subóptimas, (2) continúa la búsqueda
+después de encontrar cada solución, (3) proporciona una cota de error
+para cada solución subóptima, y (4) garantiza una solución óptima
+una vez terminado. En particular, la función de evaluación estándar
+función f(n) =g(n) +h(n) usada para seleccionar el siguiente nodo
+para expandir desde la lista abierta se reemplaza por una
+función de evaluación ponderada fw(n) =g(n) +wh(n), donde la
+costo del camino g(n) es el costo del camino desde el nodo inicial
+hasta un nodo n y la heurística h(n) es el costo estimado
+desde un nodo n hasta el nodo objetivo. Dado un peso w>1, la
+heurística ponderada se vuelve potencialmente no admisible y el
+algoritmo prioriza expandir un nodo que parece más cercano a
+un nodo objetivo al ponderar más la heurística h(n)
+que el componente de costo del camino g(n). Esto hace que el
+algoritmo acelere el tiempo de cómputo a costa de
+calidad de la solución, que es inversamente proporcional al costo.
+La Figura 1 muestra curvas de rendimiento típicas para dos eje-
+cuciones del A* ponderado de cualquier momento que resuelven una instancia de un
+problema con pesos diferentes. Esta figura ilustra dos
+casos. Con plazos límite, un peso de 2:0 lleva a una mejor calidad
+en el Contrato 1, mientras que un peso de 1:5 da como resultado una mejor cali-
+dad en el Contrato 2. Sin plazos límite, un peso de 2:0 lleva
+Figura 1: Un ejemplo de dos ejecuciones de A* de cualquier momento.
+a una mejor calidad a corto plazo pero peor calidad a
+largo plazo, mientras que un peso de 1:5 da como resultado peor calidad a
+corto plazo pero mejor calidad a largo plazo. Esto plantea
+dos preguntas importantes: (1) ¿Cómo puede el metarrazonamiento ajustar dinámi-
+camente los hiperparámetros de un algoritmo ajustable
+en tiempo de ejecución para optimizar el equilibrio entre la solu-
+ción, calidad y tiempo de cómputo, con o sin plazos límite?
+(2) ¿Puede desarrollarse un enfoque general para aprender a realizar
+esta optimización automáticamente? Respondemos estas preguntas
+ofreciendo un enfoque de metarrazonamiento disciplinado y de propósito general
+para la parada óptima y el ajuste óptimo de hiperparámetros de algo-
+ritmos ajustables en este artículo.
+Nuestro enfoque para monitorear y controlar algoritmos ajustables
+usa aprendizaje por refuerzo profundo para expresar el
+problema de control de metanivel como un proceso de decisión de Markov
+(MDP) (Bellman 1966). Un MDP es un modelo formal de toma de
+decisiones para razonar en entornos totalmente observables y estocásticos
+que pueden definirse mediante una tupla hS;A;T;R;s 0i,
+donde S es un conjunto finito de estados, A es un conjunto finito de ac-
+ciones, T:SAS![0;1] representa la probabil-
+idad de alcanzar un estado s02S después de realizar una acción
+a2A en un estado s2S, R:SAS!R representa
+la recompensa inmediata esperada de alcanzar un estado s02S
+después de realizar una acción a2A en un estado s2S, y
+s02S es un estado inicial. Una solución de un MDP es una política
+:S!A que indica que una acción (s)2A debe ser
+realizada en un estado s2S. Una política induce una función de va-
+lor V:S!R que representa la recompensa descontada acu-
+mulada V(s)2R para cada estado s2S dado un
+factor de descuento 0
+ < 1. Una política óptima  maxi-
+miza la recompensa descontada acumulada esperada para cada
+estado s2S, satisfaciendo la ecuación de optimalidad de Bellman
+V(s) = maxa2AP
+s02ST(s;a;s0)[R(s;a;s0)+
+V(s0)].
+Expresamos el problema de control de metanivel para el monitoreo
+y control de algoritmos ajustables como un MDP con dos
+atributos principales. Primero, el conjunto de estados tiene factores de estado
+que reflejan la calidad y el tiempo de cómputo de la solución
+actual, pero también puede tener factores de estado que representen el
+estado interno del algoritmo, la instancia del problema,
+o el rendimiento del sistema. Segundo, el conjunto de acciones
+tiene un factor de acción que refleja el hiperparámetro interno
+que interrumpe o ejecuta el algoritmo durante otro
+paso de tiempo, pero también puede tener factores de acción que representen los
+hiperparámetros internos que ajustan el funcionamiento interno del
+algoritmo. Presentamos una descripción de este MDP a continuación.
+Definición 4. El problema de control de metanivel para el monitoreo
+y control de un algoritmo ajustable, , se repre-
+senta mediante un MDP h;	;F;S;A;T;R;s 0i dada una función de
+utilidad dependiente del tiempo U: 	!R:
+• =fq0;q1;:::;qNg es un conjunto de calidades.
+•	 =ft0;t1;:::;tN	g es un conjunto de pasos de tiempo.
+•F=F0F1FNF es un conjunto de características que resu-
+men el estado interno del algoritmo, la instancia de
+el problema o el rendimiento del sistema.
+•S= 	F es un conjunto de estados de cómputo: cada
+estado s2S indica que el algoritmo tiene una solución de
+calidad q2 en el paso de tiempo t2	 con una característica f2F.
+•A=  01 N es un conjunto de acciones
+de cómputo: el hiperparámetro interno 0=
+fSTOP;CONTINUEg interrumpe o ejecuta el al-
+goritmo durante otro paso de tiempo, mientras que los hiper-
+parámetros internos 1;:::; N ajustan el funcionamiento interno del
+algoritmo.
+•T:SAS![0;1] es una función de transición desconocida (posiblemente no esta-
+cionaria) que representa la probabilidad
+de alcanzar un estado s0= (q0;t0;f0)2S después de realizar
+una acción a2A en un estado s= (q;t;f )2S.
+•R:SAS!R es una función de recompensa que representa
+la recompensa inmediata esperada, R(s;a;s0) =U(q0;t0) 
+U(q;t), de alcanzar un estado s0= (q0;t0;f0)2S después de
+realizar una acción a2A en un estado s= (q;t;f )2S.
+•s02S es un estado inicial s0= (q0;t0;f0)2S que indica
+que el algoritmo tiene una solución de calidad q02 en el
+paso de tiempo t02	 con una característica f02F.
+Nótese que la función de recompensa es consistente con el objetivo
+de optimizar la función de utilidad dependiente del tiempo: ejecutar
+el algoritmo ajustable hasta obtener una solución de calidad q2 en el
+paso de tiempo t2	 con una característica f2F da una recompensa
+acumulada igual a la utilidad dependiente del tiempo U(q;t).
+Muchos enfoques de control de metanivel de algoritmos de cualquier
+momento usan la calidad de la solución y el tiempo de cómputo para el
+estado de cómputo (Zilberstein y Russell 1995). Tal
+estado de cómputo, sin embargo, podría no satisfacer la propiedad de Markov.
+Por ello, podría beneficiarse de características que resu-
+men el estado interno del algoritmo, la instancia del
+problema o el rendimiento del sistema. Por ejemplo, en
+un dominio donde el A* ponderado de cualquier momento resuelve una instancia de
+un TSP, podría haber características para la media y la desviación estándar de
+los valores g y h en los nodos de la lista abierta del
+A* ponderado de cualquier momento, el número de ciudades en la ins-
+tancia del TSP (Hutter et al. 2014), o el uso del procesador
+o la presión de memoria del sistema. Nuestro enfoque de metarrazonamiento
+para algoritmos ajustables puede emplear una representación más sofis-
+ticada y rica para el estado de cómputo
+gracias al aprendizaje por refuerzo profundo.
+Mostramos que una política óptima del problema de control de metanivel
+produce control de metanivel óptimo de un algoritmo ajus-
+table bajo ciertas condiciones que se indican a continuación.
+Observación 1. Si el cambio en la solución actual del algoritmo ajus-
+table dado un estado de cómputo s2S y Algoritmo 1 Nuestra técnica que usa DQN para aprender el punto de parada ópti-
+mo y los hiperparámetros.
+Requiere: Un algoritmo de cualquier momento , una red de valor de acción N, un
+tamaño de paso 1, un tamaño de paso de la red de valor de acción objetivo 2, una ex-
+ploración E, una capacidad de búfer de experiencia `1, un nú-
+mero de episodios `2, un periodo de inicialización `3, un tamaño de minilote
+`4, y una duración 
+1:B BÚFER DE EXPERIENCIA (`1)
+2:Q RED NEURONAL (N)
+3:^Q Q
+4:para i= 1;2;:::;` 2 hacer
+5:P MUESTREAR DISTRIBUCIÓN DE PROBLEMAS ()
+6: :SETUP (P)
+7:t 0
+8:st (q0;t0;:GETF())
+9:at Q
+E(st)
+10: :START(at:1;:::;a t:`)
+11: SLEEP()
+12: mientras :RUNNING ()hacer
+13:t0 t+ 
+14:st0 (:GET();:GET	();:GETF())
+15:rt R(st;at;st0)
+16:B:APPEND ((st;at;rt;st0))
+17: siB:SIZE()`3entonces
+18: M B:MUESTREAR MINILOTE (`4)
+19: ^L(r;s0):=r+
+max a02A^Q(s0;a0)
+20:L(s;a;r;s0):= [^L(r;s0) Q(s;a)]2
+21: Q:RETROPROPAGAR (M;L;1)
+22: ^Q (1 2)^Q+2Q
+23:t t0
+24:at Q
+E(st)
+25: siat:0=STOPentonces
+26: :STOP()
+27: romper
+28: :CONTINUE (at:1;:::;a t:`)
+29: SLEEP()
+30: devolverQ
+si una acción de cómputo a2A satisface la propiedad de Mar-
+kov, la política óptima :S!A da como resultado la parada óptima
+y el ajuste óptimo de hiperparámetros.
+Esbozo de demostración. Esto se sigue directamente de la propiedad de Mar-
+kov: una transición a un estado de cómputo sucesor s02S
+depende solo del estado de cómputo actual s2S y
+de la acción de cómputo actual a2A. Nótese que, aunque
+usar solo la calidad y el tiempo para el estado de cómputo es
+poco probable que satisfaga la propiedad de Markov, esta representación más rica repre-
+senta permite una mejor aproximación.
+Técnica de control de metanivel
+Nuestra técnica de control de metanivel monitorea y controla algoritmos ajus-
+tables realizando episodios que usan cada uno el
+algoritmo ajustable para resolver una instancia de un problema específico
+en un sistema dado mediante aprendizaje por refuerzo profundo.
+El aprendizaje por refuerzo profundo ha sido eficaz en
+una amplia gama de aplicaciones, incluidos Atari (Mnih et al.
+2015), ajedrez (Silver et al. 2018) y StarCraft (Vinyals
+et al. 2019). Un agente de aprendizaje por refuerzo profundo aprende una
+Estado interno
+Sistema de problemas
+Parámetros internos A* ponderado de cualquier momento
+Proceso de nivel objeto Proceso de metanivel
+Estado Acción 
+control monitoreoFigura 2: La arquitectura de metarrazonamiento que tiene un proceso de meta-
+nivel y un proceso de nivel objeto.
+función de valor o una política expresada como una red neuronal
+tomando acciones y observando recompensas en su entorno.
+Esto la convierte en un enfoque natural para algoritmos ajustables
+por tres razones (Sutton y Barto 1998). Primero, al equilibrar
+la explotación con la exploración, puede aprender una política
+que ajusta los hiperparámetros internos de un algo-
+ritmo ajustable sin conocer la función de transición. A continuación, al
+ignorar grandes regiones del espacio de estados que no se alcanzan en la prác-
+tica, puede reducir la carga de aprender una política que ajusta
+los hiperparámetros internos de un algoritmo ajustable. Fi-
+nalmente, al usar una red neuronal que puede aprender patrones com-
+plejos entre espacios masivos de entrada y salida, puede aprender
+el efecto de los hiperparámetros internos sobre el
+estado interno de un algoritmo ajustable.
+El Algoritmo 1 muestra nuestra técnica de metarrazonamiento para moni-
+torear y controlar algoritmos ajustables usando DQN,
+Q profundo (Mnih et al. 2015), como se describe a continuación.
+Bucle de episodios de aprendizaje por refuerzo. La experiencia
+búfer se inicializa a una capacidad (línea 1). La función de valor de
+acción actual se inicializa con la red de valor de acción y
+la función de valor de acción objetivo se inicializa con la
+función de valor de acción actual (líneas 2-3). Un bucle itera sobre cada
+episodio (línea 4). Para cada episodio, se realizan las siguientes fases
+para la preparación (líneas 5-11), monitoreo (líneas 12-15), actua-
+lización (líneas 16-22) y control (líneas 23-29). La función de valor de
+acción se devuelve (línea 30).
+Fase de preparación del episodio. Se muestrea una instancia del problema de la
+distribución de problemas y el algoritmo de cualquier momento
+se configura para resolver la instancia (líneas 5-6). El tiempo
+actual se inicializa a cero (línea 7). El estado actual se ini-
+cializa con la calidad y el tiempo de cómputo de la solución ini-
+cial junto con cualquier característica adicional, mientras que la acción actual
+se inicializa con la política calculada a partir de la función de
+valor de acción actual y una estrategia de exploración en el estado actual
+(líneas 8-9). El algoritmo comienza a resolver el problema con una in-
+insert() insert() insert()
+delete()*Figura 3: Una implementación modificada de A* ponderado
+de cualquier momento que mantiene múltiples listas abiertas.
+tancia con hiperparámetros establecidos según la acción ini-
+cial (líneas 10-11).
+Fase de monitoreo del episodio. Un bucle se ejecuta hasta que el algoritmo
+se interrumpe antes de tiempo o termina de forma natural (línea 12). El
+estado sucesor se establece con la calidad y el tiempo de cómputo de
+la nueva solución y cualquier característica adicional, mientras que la recompensa se
+calcula a partir del estado actual, la acción actual y el
+estado sucesor (líneas 13-15). El búfer de experiencia se ane-
+xa con el estado actual, la acción actual, la recompensa,
+y el estado sucesor (línea 16).
+Fase de actualización del episodio. La fase se produce si el tamaño del
+búfer de experiencia es mayor que un periodo de inicializa-
+ción (línea 17). Se muestrea un minilote del búfer de experiencia
+(línea 18). La función de pérdida se define como el cuadrado
+del error de diferencia temporal (líneas 19-20). La
+función de valor de acción actual, representada como una red neuronal, se actua-
+liza mediante retropropagación a partir del minilote y de la
+función de pérdida (línea 21). La función de valor de acción objetivo se establece
+igual a la función de valor de acción actual (línea 22).
+Fase de control del episodio. El tiempo actual se incrementa
+y la nueva acción actual se establece como la política calculada a partir de
+la función de valor de acción actual y una estrategia de exploración
+en el nuevo estado actual (líneas 23-24). Si la acción indica
+detener el algoritmo, este se interrumpe y el
+bucle pasa al siguiente episodio (líneas 25-27). De lo contrario, la
+ejecución del algoritmo continúa tras ajustar sus hiper-
+parámetros internos (líneas 28-29).
+A* ponderado de cualquier momento
+Ahora aplicamos nuestro enfoque al A* ponderado de cualquier momento. Trabajos
+recientes sobre el algoritmo se centran en seleccionar el mejor peso
+estático para un problema (Hansen y Zhou 2007), elegir
+el peso para una instancia de un problema (Sun, Druzdzel y
+Yuan 2007), y modificar el peso en tiempo de ejecución de forma heurís-
+tica (Thayer y Ruml 2009). El algoritmo también puede
+mejorarse reiniciándose cuando se encuentra una solución (Richter,
+Thayer y Ruml 2010). Incluso ha habido trabajos que ana-
+lizan las condiciones de fallo del algoritmo (Wilt y Ruml
+2012). En general, ajustar el peso del A* ponderado de cualquier momento en
+tiempo de ejecución ha demostrado ser consistentemente un reto.
+El problema de control de metanivel para el A* ponderado de cualquier momento,
+, es un MDP h;	;F;S;A;T;R;s 0i. = [0;1] es un conjunto de
+calidades de la solución actual. 	 = [0;] es un conjunto de pasos de
+tiempo con un plazo límite .F=WR9[ 1;1]K[0;1]
+es un conjunto de características tal que la característica w2W es el peso
+actual, las características g2R y h2R son la media de los
+valores g y h en la lista abierta, las características g2R y
+h2R son la desviación estándar de los valores g y h en
+la lista abierta, las características g2R y h2R son los míni-
+mos valores g y h en la lista abierta, la característica 2R es
+el valor log(n) para el número de nodos n en la lista abierta,
+la característica q2R es el valor h del estado inicial dividido
+por el valor f mínimo en la lista abierta, la característica h0 es
+el valor h del estado inicial, la característica g;h2[ 1;1] es
+la correlación entre los valores g y h en la lista abierta,
+la característica 2K es un conjunto de configuraciones para la instancia del
+problema, y la característica 2[0;1] es el uso del procesador
+del sistema. A=  01 es un conjunto de acciones tal que
+el hiperparámetro interno, 02fSTOP;CONTINUEg, que in-
+terrumpe o ejecuta el algoritmo durante otro paso de tiempo y
+el hiperparámetro interno, 1=f;	g, ajusta el peso
+w2W en un valor2f  1; 1
+4;1
+4;1g dentro de los límites
+1w5. Nótese que S, A, T, R y s0 se derivan del
+problema de control de metanivel para algoritmos ajustables.
+La arquitectura de metarrazonamiento para el A* ponderado de cualquier momento
+en la Figura 2 tiene un proceso de metanivel que monitorea y con-
+trola un proceso de nivel objeto que ejecuta el algoritmo.
+El A* ponderado de cualquier momento implica una modificación sencilla para
+permitir que su peso se ajuste en tiempo de ejecución. En lugar de insertar-
+/eliminar un nodo en/de una única lista abierta para un peso
+estático, el algoritmo inserta/elimina este nodo en/de jWj
+listas abiertas, cada una ordenada por el valor fw de un peso w2W
+como se ilustra en la Figura 3. En consecuencia, cada lista abierta tiene
+un orden diferente del mismo conjunto de nodos. Nótese que la
+complejidad temporal de insertar/eliminar un nodo en todas las listas abiertas
+de tamaño n secuencialmente es O(jWjlogn).
+Experimentos
+En esta sección, comparamos nuestro enfoque para monitorear y
+controlar el A* ponderado de cualquier momento con un enfoque estándar que
+usa un rango de pesos estáticos de 1, 1:5, 2, 3, 4 y 5.
+Configuración experimental. Cada enfoque se evalúa usando la
+calidad media de la solución en un conjunto idéntico de 500 instan-
+cias aleatorias tras entrenarse durante 12000 episodios en cada
+problema de referencia. Nótese que el entrenamiento usa semillas de aleatorización
+distintas de las semillas usadas para
+la evaluación, y tarda aproximadamente un día para cada problema de refe-
+rencia en nuestro sistema. Intuitivamente, una calidad de solución
+q= 0 representa ninguna solución, mientras que una calidad de solución q= 1
+representa una solución óptima. Formalmente, definimos la calidad
+de la solución como la razón de aproximación, q=c=c, donde c y
+c son el costo de la solución óptima y de la solu-
+ción actual. Sin embargo, como es inviable calcular el costo de
+la solución óptima, estimamos la calidad de la solución como la apro-
+ximación q=h(s0)=c, donde h(s0) y c son el
+valor heurístico del estado inicial y el costo de la solución actual
+como en trabajos anteriores (Hansen y Zilberstein 2001).
+Un problema de control de metanivel tiene una función de utili-
+dad dependiente del tiempo. Sin embargo, aunque es posible usar cualquier función de utilidad
+dependiente del tiempo, consideramos un escenario de contrato en el que
+el algoritmo ajustable debe terminar antes de una duración desec para evitar una penalización de utilidad significativa . Esto
+es común en robótica, donde un sistema tiene una duración fija
+para planificar antes de la ejecución. Formalmente, dada una solución de
+calidad q2 en el paso de tiempo t2	, la función de utilidad
+dependiente del tiempo es U(q;t) = [t]UI(q) [t >  ], donde
+UI(q) =q es la utilidad de una solución de calidad q2 para
+un multiplicador de valor intrínseco .
+Nuestra técnica de control de metanivel en el Algoritmo 1 tiene los
+hiperparámetros siguientes. La red de valor de acción N es una
+red neuronal totalmente conectada con dos capas ocultas de 64
+y 32 nodos con activación ReLU y una capa de salida lineal
+de 5 nodos. Las últimas 5 observaciones se apilan y se proporcionan
+a la capa de entrada de la red neuronal para observar 1 seg de
+tiempo de ejecución. El tamaño de paso 1 es 0:0001 . La red de valor de acción
+objetivo, con tamaño de paso 2, es 0:001. La estrategia de exploración E es
+selección de acción -voraz con una probabilidad de exploración 
+que se reduce de 1 a 0:1 en 1000 episodios. El búfer de expe-
+riencia tiene una capacidad `1 de 1. El número de episodios `2 es
+12000 . El periodo de inicialización `3 es 10000 . El tamaño de minilote
+`4 es 64. La duración  es 0:2 seg.
+Cada enfoque debe resolver problemas de referencia que re-
+flejan dominios que requieren diferentes pesos estáticos y para
+los cuales trabajos recientes reportaron un comportamiento contraintuitivo del
+A* ponderado de cualquier momento (Wilt y Ruml 2012). Sus configuraciones
+se eligen para evitar trivializar el problema, ya sea permitiendo
+muy poco tiempo, de modo que ningún enfoque encuentre una solución, o demasiado
+tiempo, de modo que todos los enfoques encuentren la solución óptima.
+Problema del viajante disperso. Una instancia de S TSP
+tiene un conjunto de J ciudades que deben visitarse a lo largo de una ruta
+óptima dado un costo para cada arista entre un par de ciudades
+donde un porcentaje de aristas tiene un costo infinito. La to-
+tal de un árbol de expansión mínima sobre las ciudades no visitadas
+se usa como una función heurística admisible y consistente. La
+cantidad de ciudades J se elige aleatoriamente entre
+15 y 25. El porcentaje de aristas con costo infinito se
+elige aleatoriamente entre 0% y 30%. El costo entre
+cada par de ciudades se elige aleatoriamente. El MDP tiene un conjunto
+de características K=12 que representan el número de ciudades
+12N+ y el porcentaje de aristas con costo infinito
+22[0;1].
+Problema de navegación urbana. Una instancia de C NP simula la nav-
+navegar entre dos ubicaciones en diferentes ciudades (Wilt y
+Ruml 2012). Hay un conjunto de J ciudades dispersas aleatoriamente en
+un cuadrado j×j, de modo que cada ciudad esté conectada mediante un
+recorrido aleatorio y a un conjunto de sus nJ ciudades más cercanas. Cada ciudad contiene
+un conjunto de I ubicaciones dispersas aleatoriamente por toda la ciudad
+que es un cuadrado i×i, de modo que cada ubicación de la ciudad esté
+conectada mediante un recorrido aleatorio y a sus nI ubicaciones más cercanas.
+El arco entre un par de ciudades cuesta la distancia euclidiana más
+un desplazamiento ϕ1. El arco entre un par de ubicaciones
+dentro de una ciudad cuesta la distancia euclidiana multiplicada por un
+número aleatorio muestreado entre 1 y un máximo ϕ2. El objetivo es
+encontrar un camino óptimo desde una ubicación seleccionada aleatoriamente en
+una ciudad hasta una ubicación seleccionada aleatoriamente en otra ciudad. La
+distancia euclidiana desde la ubicación actual hasta la ubicación objetivo
+se usa como heurística admisible y consistente. Los
+ajustes se eligen de modo que J = 150, j = 100, nJ = 3,
+I = 150, i = 1, nI = 3, α = 2, y ϕ = 1:1. El MDP
+Figura 4: Los diagramas de caja y bigotes de las calidades finales de la solución de cada enfoque sobre todas las instancias de SP, ISP, STSP y
+CNP (de izquierda a derecha). Las cruces indican la media y los puntos indican los valores atípicos. La mediana y los cuartiles superiores son incluso
+cero para algunos enfoques.
+Figura 5: Gráficos de análisis para SP, de izquierda a derecha: (a) un gráfico de líneas que muestra cómo cambian con el tiempo de cómputo la calidad de la solución, la cota superior de la calidad de la solución
+y el peso (trazado en el eje y secundario) para una instancia seleccionada. La línea difuminada y
+la región sombreada indican el peso medio y su desviación estándar sobre todas las instancias. (b) Un gráfico de líneas que muestra cómo cambian la calidad final de la solución
+y el peso medio (en el eje y secundario) de un episodio con los episodios de entrenamiento. (c) Un histograma que muestra
+la distribución de todas las instancias según el error de calidad de la solución para nuestro enfoque. El error de calidad de la solución es la diferencia normalizada
+entre la calidad final de la solución de nuestro enfoque y la calidad final de la solución del mejor enfoque. (d) Un gráfico de barras que muestra
+la importancia porcentual de las 10 características principales aprendidas por nuestro enfoque. La importancia es el peso absoluto medio de
+una característica en la capa de entrada de la red neuronal.
+no incluye ninguna característica específica de la instancia para este problema.
+Puzle deslizante. Una instancia de SP tiene un conjunto de J = j²−1
+fichas, cada ficha i etiquetada de 1 a J en una cuadrícula j×j, que
+debe moverse desde una posición inicial hasta una posición deseada
+con un costo unitario c(i) = 1 por mover una ficha i. La suma de las
+distancias de Manhattan desde la posición actual de cada ficha
+hasta una posición deseada se usa como una
+heurística admisible y consistente. El número de fichas es 15. La dificultad
+de la posición inicial, medida con la función heurística,
+se elige al azar entre 35 y 45, y se incluye en el
+espacio de características del MDP.
+Puzle deslizante inverso. Una instancia de ISP es igual a una instancia de
+SP, excepto que existe un costo inverso c(i) = 1/i por
+mover una ficha i. Esto significa que la suma de las distancias de Manhattan
+desde la posición actual de cada ficha hasta la posición deseada,
+ponderadas por el costo de mover cada ficha, se usa
+como heurística admisible y consistente.
+La duración τ es de 10 s para SP e ISP, 5 s para STSP,
+y 4 s para CNP, correspondientes a 6000, 3000 y 2400
+expansiones de nodos en un procesador AMD Ryzen 3900X con
+32 GB de memoria de 3200 MHz. Cada enfoque se ejecuta hasta el
+límite de expansiones de nodos en lugar de la duración, para garantizar la consistencia
+experimental y la reproducibilidad.
+Resultados experimentales. Nuestro enfoque resuelve más instancias del problema
+y produce una calidad media de solución más alta
+en comparación con el enfoque estándar con cualquier peso estático. La Figura 4 muestra los resultados para SP, ISP, STSP y CNP.
+Nuestro enfoque supera al enfoque estándar con el mejor
+peso estático: tiene una calidad media de solución sustancialmente más alta
+en SP para w = 4 y en ISP para w = 1:5, una calidad media comparable
+en STSP para w = 2, y bastante
+una calidad media de solución mayor en CNP para w = 2.
+La Figura 5 muestra cuatro análisis para SP. En la Figura 5(a), nuestro
+enfoque ajusta el peso según la calidad de la solución y
+las demás características no listadas. En general, el peso medio
+aumenta a medida que crece el tiempo de cómputo para
+asegurar la generación de al menos una solución. En la Figura 5(b), nuestro
+enfoque mejora su calidad final de la solución con cada
+episodio de entrenamiento al aprender gradualmente. De hecho, el peso medio
+aumenta al inicio, pero luego disminuye para generar soluciones de mayor
+calidad. En la Figura 5(c), nuestro enfoque presenta un error de calidad
+de la solución de 0 en más de 350 instancias. Mientras que unas
+50 instancias tienen un error de calidad de la solución de 1, esto sigue
+siendo mejor que el enfoque estándar. La Figura 5(d) muestra que
+nuestro enfoque aprovecha las demás características, como
+el peso actual, la cota superior de la calidad de la solución y
+el valor heurístico inicial, además de la calidad de la solución y
+el tiempo de cómputo.
+Nuestra biblioteca de código abierto1 ofrece un entorno de OpenAI Gym para
+monitorear y controlar algoritmos ajustables
+mediante aprendizaje por refuerzo profundo.
+1https://github.com/bhatiaabhinav/model-free-metareasoning
+Conclusión
+Este artículo presenta un enfoque de metarrazonamiento no miope, basado en la teoría de la decisión y
+de propósito general, que optimiza los
+hiperparámetros y el punto de parada de algoritmos ajustables.
+Primero, proponemos una generalización de un algoritmo anytime
+llamado algoritmo ajustable. Luego ofrecemos una
+técnica de control de nivel meta que monitorea y controla un
+algoritmo ajustable mediante aprendizaje por refuerzo profundo.
+Finalmente, aplicamos nuestro enfoque a A* ponderado anytime y
+demostramos que es efectivo en una variedad de problemas. Los trabajos futuros
+explorarán cómo aplicar nuestro enfoque a otros
+algoritmos comunes de planificación de tareas y movimiento, como ajustar el
+factor de crecimiento del algoritmo de planificación de movimiento RRT*.
+Agradecimientos
+Este trabajo fue apoyado en parte por la beca NSF Graduate
+Research Fellowship DGE-1451512, y por las subvenciones NSF IIS-
+1813490 y IIS-1954782.
+Referencias
+Adenso-Diaz, B.; y Laguna, M. 2006. Ajuste fino de
+algoritmos mediante diseños experimentales fraccionales y búsqueda
+local. Operations Research 54(1): 99–114.
+Aine, S.; Chakrabarti, P.; y Kumar, R. 2007. AWA*: Un
+algoritmo de búsqueda heurística anytime con ventana restringida. En
+Actas de la Vigésima Conferencia Conjunta Internacional
+sobre Inteligencia Artificial, 2250–2255.
+Ansótegui, C.; Sellmann, M.; y Tierney, K. 2009. Un
+algoritmo genético basado en género para la configura-
+ción automática de algoritmos. En Actas de la Decimoquinta Interna-
+cional sobre Principios y Práctica de la Programación con
+Restricciones, 142–157. Springer.
+Bartz-Beielstein, T.; Lasarczyk, C. W.; y Preuss, M. 2005.
+Optimización secuencial de parámetros. En Actas del
+Congreso IEEE de Computación Evolutiva, volumen 1,
+773–780. IEEE.
+Bellman, R. 1966. Programación dinámica. En Science.
+Asociación Estadounidense para el Avance de la Ciencia.
+Birattari, M.; Stützle, T.; Paquete, L.; y Varrentrapp, K.
+2002. Un algoritmo de carreras para configurar metaheurísticas. En
+Actas de la Cuarta Conferencia sobre Computación
+Genética y Evolutiva, volumen 2.
+Birattari, M.; Yuan, Z.; Balaprakash, P.; y Stützle, T. 2010.
+F-Race y F-Race iterado: una visión general. Métodos
+experimentales para el análisis de algoritmos de optimización 311–
+336.
+Boddy, M.; y Dean, T. L. 1994. Planificación de la deliberación
+para la resolución de problemas en entornos con restricción de tiempo. Ar-
+tificial Intelligence 67(2): 245–285.
+Burns, E.; Ruml, W.; y Do, M. B. 2013. Búsqueda heurística
+cuando el tiempo importa. Revista de Investigación en Inteligencia
+Artificial 47: 697–740.
+Cserna, B.; Ruml, W.; y Frank, J. 2017. Tiempo de planificación
+para pensar: metarrazonamiento para planificación en línea con acciones durativas. En Actas de la Vigésima Séptima Conferencia Internacional
+sobre Planificación y Calendarización Automatizadas.
+Dietterich, T. G. 2000. Métodos de ensamble en aprendizaje
+automático. En Actas del Primer Taller Internacional sobre
+Sistemas de Clasificadores Múltiples, 1–15.
+Fern, A.; y Givan, R. 2003. Aprendizaje de ensamble en línea: un
+empirical study. Machine Learning 53(1-2): 71–109. ISSN
+0885-6125. doi:10.1023/A:1025619426553. URL https://
+doi.org/10.1023/A:1025619426553.
+Gomes, C. P.; y Selman, B. 2001. Algorithm portfolios.
+Artiﬁcial Intelligence 126(1-2): 43–62.
+Gomoluch, P.; Alrajeh, D.; Russo, A.; y Bucchiarone, A.
+2020. Learning neural search policies for classical plan-
+ning. En Proceedings of the International Conference on
+Automated Planning and Scheduling , volumen 30, 522–530.
+Hansen, E. A.; y Zhou, R. 2007. Anytime heuristic search.
+Journal of Artiﬁcial Intelligence Research 28: 267–297.
+Hansen, E. A.; y Zilberstein, S. 2001. Monitoring and
+control of anytime algorithms: A dynamic programming ap-
+proach. Artiﬁcial Intelligence 126(1-2): 139–157.
+Hansen, E. A.; Zilberstein, S.; y Danilchenko, V . A. 1997.
+Anytime heuristic search: First results. Informe técnico
+97-50, Departamento de Ciencias de la Computación, University of Mas-
+sachussetts Amherst.
+Horvitz, E. 1988. Reasoning under varying and uncertain
+resource constraints. En Proceedings of the Seventh AAAI
+National Conference on Artiﬁcial Intelligence , 111–116.
+Horvitz, E.; y Rutledge, G. 1991. Time-dependent utility
+and action under uncertainty. In Proceedings of the Seventh
+Conference on Uncertainty in Artiﬁcial Intelligence , 151–
+158.
+Horvitz, E. J. 1987. Reasoning about beliefs and actions
+under computational resource constraints. En Proceedings of
+Third Workshop on Uncertainty in Artiﬁcial Intelligence .
+Horvitz, E. J. 1990. Computation and action under bounded
+resources . Tesis doctoral, Stanford University, CA.
+Hutter, F.; Hoos, H. H.; y Leyton-Brown, K. 2011. Se-
+quential model-based optimization for general algorithm
+conﬁguration. En Proceedings of the Fifth International Con-
+ference on Learning and Intelligent Optimization , 507–523.
+Springer.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; y Murphy,
+K. 2010. Time-bounded sequential parameter optimization.
+En Proceedings of the Fourth International Conference on
+Learning and Intelligent Optimization , 281–298. Springer.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; y Murphy,
+K. P. 2009a. An experimental investigation of model-based
+parameter optimisation: SPO and beyond. In Proceedings of
+the Eleventh Annual Conference on Genetic and Evolution-
+ary Computation , 271–278.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; y St ¨utzle, T.
+2009b. ParamILS: An automatic algorithm conﬁguration
+framework. Journal of Artiﬁcial Intelligence Research 36:
+267–306.
+Hutter, F.; Hoos, H. H.; y St ¨utzle, T. 2007. Automatic al-
+gorithm conﬁguration based on local search. In Proceedings
+of the Twenty-Second AAAI Conference on Artiﬁcial Intelli-
+gence , volumen 7, 1152–1157.
+Hutter, F.; Xu, L.; Hoos, H. H.; y Leyton-Brown, K. 2014.
+Algorithm runtime prediction: Methods & evaluation. Arti-
+ﬁcial Intelligence 206: 79–111.
+Karaman, S.; Walter, M. R.; Perez, A.; Frazzoli, E.; y
+Teller, S. 2011. Anytime motion planning using the RRT*.
+En Proceedings of the IEEE International Conference on
+Robotics and Automation , 1478–1483.
+Karayev, S.; Fritz, M.; y Darrell, T. 2014. Anytime recog-
+nition of objects and scenes. En Proceedings of the IEEE
+Conference on Computer Vision and Pattern Recognition ,
+572–579.
+Leyton-Brown, K.; Nudelman, E.; Andrew, G.; McFadden,
+J.; y Shoham, Y . 2003. Boosting as a metaphor for al-
+gorithm design. En Proceedings of the Ninth International
+Conference on Principles and Practice of Constraint Pro-
+gramming , 899–903.
+Likhachev, M.; Gordon, G.; y Thrun, S. 2004. ARA*:
+Anytime A* with provable bounds on sub-optimality. In
+Neural Information Processing Systems .
+Lin, C. H.; Kolobov, A.; Kamar, E.; y Horvitz, E. 2015.
+Metareasoning for planning under uncertainty. In Proceed-
+ings of the Twenty-Fourth International Joint Conference on
+Artiﬁcial Intelligence .
+Mnih, V .; Kavukcuoglu, K.; Silver, D.; Rusu, A. A.; Ve-
+ness, J.; Bellemare, M. G.; Graves, A.; Riedmiller, M.; Fid-
+jeland, A. K.; Ostrovski, G.; et al. 2015. Human-level con-
+trol through deep reinforcement learning. Nature 518(7540):
+529–533.
+Paul, C. J.; Acharya, A.; Black, B.; y Strosnider, J. K.
+1991. Reducing problem-solving variance to improve pre-
+dictability. Communications of the ACM 34(8): 80–93.
+Pineau, J.; Gordon, G.; y Thrun, S. 2003. Point-based
+value iteration: An anytime algorithm for POMDPs. In Pro-
+ceedings of the Eighteenth International Joint Conference
+on Artiﬁcial Intelligence , 1025–1032.
+Ramos, F. T.; y Cozman, F. G. 2005. Anytime anyspace
+probabilistic inference. International Journal of Approxi-
+mate Reasoning 38(1): 53–80.
+Richter, S.; Thayer, J. T.; y Ruml, W. 2010. The joy of
+forgetting: Faster anytime search via restarting. In Pro-
+ceedings of the Twentieth International Conference on Au-
+tomated Planning and Scheduling , 137–144.
+Silver, D.; Hubert, T.; Schrittwieser, J.; Antonoglou, I.; Lai,
+M.; Guez, A.; Lanctot, M.; Sifre, L.; Kumaran, D.; Graepel,
+T.; et al. 2018. A general reinforcement learning algorithm
+that masters chess, shogi, and Go through self-play. Science
+362(6419): 1140–1144.
+Spaan, M. T.; y Vlassis, N. 2005. Perseus: Randomized
+point-based value iteration for POMDPs. Journal of Artiﬁ-
+cial Intelligence Research 24: 195–220.Speck, D.; Biedenkapp, A.; Hutter, F.; Mattm ¨uller, R.; y
+Lindauer, M. 2021. Learning heuristic selection with dy-
+namic algorithm conﬁguration. In Proceedings of the Inter-
+national Conference on Automated Planning and Schedul-
+ing, volumen 31, 597–605.
+Sun, X.; Druzdzel, M. J.; y Yuan, C. 2007. Dynamic
+weighting A* search-based MAP algorithm for bayesianas
+redes. En Proceedings of the Twentieth International
+Joint Conference on Artiﬁcial Intelligence , 2385–2390.
+Sutton, R. S.; y Barto, A. G. 1998. Reinforcement Learn-
+ing: An Introduction . MIT Press.
+Svegliato, J.; Sharma, P.; y Zilberstein, S. 2020. A model-
+free approach to meta-level control of anytime algorithms.
+En IEEE International Conference on Robotics and Automa-
+tion. Paris, France.
+Svegliato, J.; Wray, K. H.; y Zilberstein, S. 2018. Meta-
+level control of anytime algorithms with online performance
+prediction. In Proceedings of the Twenty-Seventh Interna-
+tional Joint Conference on Artiﬁcial Intelligence .
+Thayer, J.; y Ruml, W. 2009. Using distance estimates in
+heuristic search. In Proceedings of the Nineteenth Interna-
+tional Conference on Automated Planning and Scheduling .
+Thayer, J.; y Ruml, W. 2010. Anytime heuristic search:
+Frameworks and algorithms. In Proceedings of the Third
+Annual Symposium on Combinatorial Search , 121–128.
+Urmson, C.; y Simmons, R. 2003. Approaches for heuris-
+tically biasing RRT growth. In Proceedings of the IEEE/RSJ
+International Conference on Intelligent Robots and Systems ,
+volumen 2, 1178–1183. IEEE.
+Vinyals, O.; Babuschkin, I.; Czarnecki, W. M.; Mathieu, M.;
+Dudzik, A.; Chung, J.; Choi, D. H.; Powell, R.; Ewalds,
+T.; Georgiev, P.; et al. 2019. Grandmaster level in Star-
+Craft II using multi-agent reinforcement learning. Nature
+575(7782): 350–354.
+Wagner, T.; Garvey, A.; y Lesser, V . R. 1998. Criteria-
+directed task scheduling. International Journal of Approxi-
+mate Reasoning 19(1-2): 91–118.
+Wilt, C.; y Ruml, W. 2012. When does weighted A* fail?
+En Proceedings of the Fifth Annual Symposium on Combina-
+torial Search , 137–144.
+Xu, L.; Hutter, F.; Hoos, H. H.; y Leyton-Brown, K. 2008.
+SATzilla: Portfolio-based algorithm selection for SAT. Jour-
+nal of Artiﬁcial Intelligence Research 32: 565–606.
+Zilberstein, S. 1996. Using anytime algorithms in intelligent
+systems. AI Magazine 17(3): 73.
+Zilberstein, S.; y Mouaddib, A.-I. 2000. Optimal schedul-
+ing of progressive processing tasks. International Journal of
+Approximate Reasoning 25(3): 169–186.
+Zilberstein, S.; y Russell, S. J. 1995. Approximate rea-
+soning using anytime algorithms. En Natarajan, S., ed., Im-
+precise and Approximate Computation , 43–62. Springer.

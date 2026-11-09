@@ -1,0 +1,798 @@
+Solving Hard AI Planning Instances Using Curriculum-Driven Deep
+Reinforcement Learning
+Dieqiao Feng, Carla P. Gomes y Bart Selman
+Departamento de Ciencias de la Computación
+Cornell University
+fdqfeng, gomes, selman g@cs.cornell.edu
+Resumen
+A pesar del progreso significativo en la planificación general
+de IA, ciertos dominios siguen fuera del alcance
+de los sistemas actuales de planificación de IA. Sokoban
+es una tarea de planificación PSPACE-completa que representa uno
+de los dominios más difíciles para los planificadores
+de IA actuales. Incluso los métodos de búsqueda
+especializados por dominio fallan rápidamente debido a la complejidad
+exponencial de la búsqueda en instancias difíciles. Nuestro enfoque,
+basado en aprendizaje por refuerzo profundo aumentado con un
+método dirigido por currículo, es el primero en
+resolver instancias difíciles en un día de entrenamiento, mientras que
+otros solucionadores modernos no pueden resolver estas instancias
+dentro de ningún límite de tiempo razonable. A diferencia
+de trabajos previos, que usan técnicas de poda
+cuidadosamente diseñadas a mano, nuestro enfoque descubre automáticamente la
+estructura del dominio. Nuestros resultados revelan que el RL
+profundo ofrece un marco prometedor para resolver problemas de
+planificación de IA previamente no resueltos, siempre que
+se pueda diseñar un currículo de entrenamiento adecuado.
+1 Introducción
+La planificación determinista y totalmente observable es un dominio clave
+para la inteligencia artificial. En toda su generalidad, la planificación de
+IA abarca la demostración general de teoremas, donde las demostraciones
+pueden verse como planes que van de un conjunto de
+axiomas básicos a los teoremas por demostrar. La planificación
+es un problema computacional muy difícil: encontrar demostraciones dentro
+de una teoría matemática de primer orden fuerte que codifica la
+aritmética básica es indecidible [Gödel, 1931], y la existencia de
+un plan es PSPACE-completa para la planificación STRIPS proposicional
+[Bylander, 1994]. Los planificadores independientes del dominio, como BLACKBOX
+[Kautz y Selman, 1998], IPP [Koehler et al., 1997] y
+FF [Hoffmann, 2001], entre muchos otros, fueron creados para resolver
+tareas de planificación generales dadas por un estado inicial, un
+estado meta y un conjunto de operadores de plan [Vallati et
+al., 2015]. Aunque estos planificadores han ampliado mucho el conjunto de
+tareas factibles, una limitación importante es que pueden funcionar bien
+en un dominio de problemas y mal en otro,
+lo que ha impedido un uso más amplio de los
+sistemas de planificación de IA. Esta situación contrasta con el desarrollo
+de los solucionadores SAT/SMT, que también abordan una tarea
+de búsqueda combinatoria, pero que han encontrado amplia aplicación en, por ejemplo, la verificación de hardware y de software [Järvisalo et
+al., 2012]. Un enfoque alternativo a la planificación general de IA
+es desarrollar solucionadores especializados por dominio, como los solucionadores para
+problemas de planificación de Sokoban, que se analizan más abajo.
+Los solucionadores especializados usan conocimiento del dominio elaborado a mano
+para podar el espacio de búsqueda. Claramente, es preferible
+un enfoque efectivo e independiente del dominio. Nuestro marco de
+aprendizaje presentado aquí ofrece un camino hacia esa independencia del
+dominio. En particular, usaremos un marco de aprendizaje automático para
+descubrir automáticamente la estructura específica del problema durante el proceso
+de solución. Los avances recientes de la comunidad del
+aprendizaje profundo inspiraron métodos para aumentar la búsqueda con redes
+neuronales profundas que usan aprendizaje por refuerzo profundo (RL). En
+el dominio de los juegos, AlphaGo [Silver et al., 2016]
+fue el primer programa de Go en vencer a jugadores
+profesionales en 2016, y su versión más general y reciente, AlphaZero
+[Silver et al., 2017], logró una puntuación Elo más alta
+y dominó al programa de ajedrez Stockfish, el estado del
+arte. Una pregunta clave sobre el éxito del RL profundo
+en estos dominios combinatorios (lógicos) es si el entorno de
+juego es un componente necesario para el éxito. El RL requiere
+una señal de recompensa. En un juego, esta señal proviene
+del resultado final de victoria o derrota de la partida. Para
+un juego podemos entrenar las redes profundas con un enfoque
+de autojuego. En tal enfoque, la red profunda inicial empieza jugando
+a un nivel muy bajo (esencialmente al azar). Pero en el
+autojuego contra un jugador igualmente débil (una copia de la
+red entrenada), el sistema verá una mezcla de victorias y derrotas,
+y así obtiene una señal de recompensa útil sobre la
+utilidad de los estados. El sistema puede entonces mejorar poco
+a poco
+su nivel de juego mediante rondas repetidas de autojuego. El
+desafío central en un entorno de un solo agente, como
+la planificación de IA, donde queremos resolver instancias de problemas no
+resueltos, es: ¿cómo obtenemos alguna señal de recompensa positiva durante
+el entrenamiento? Esto se debe a que una señal de
+retroalimentación positiva requeriría un plan válido hasta la meta, y eso
+es justo lo que buscamos. De hecho, las instancias que
+resolveremos aquí requieren cadenas muy sutiles de varias decenas, o
+incluso cientos, de pasos. Una exploración aleatoria nunca se topará «accidentalmente»
+con una cadena exitosa. Nuestra solución es diseñar una serie de
+instancias de entrenamiento (un «currículo») que avance poco a poco
+hasta la instancia completa del problema, no resuelta antes. Veremos
+más adelante cómo este enfoque es general y sorprendentemente efectivo. El entrenamiento basado en currículos fue propuesto
+antes arXiv:2006.02689v1 [cs.AI] 4 Jun 2020 por [Bengio et al., 2009] como
+estrategia para dividir los datos de entrenamiento en un entrenamiento
+incremental de conceptos difíciles. Un aspecto novedoso de nuestro entorno es
+que, en cada nivel del entrenamiento con currículo, usamos lo aprendido
+en el nivel anterior para obtener
+nuevos datos de entrenamiento y alcanzar el siguiente nivel. Dada
+la PSPACE-completitud de muchas tareas de planificación interesantes, se asume
+ampliamente (a menos que P = PSPACE) que desarrollar un solucionador
+capaz de resolver eficazmente cualquier instancia arbitraria es inviable. Además, por
+la sobrecarga significativa del entrenamiento de redes neuronales profundas, no
+pretendemos competir en tiempo de ejecución con solucionadores especializados bien
+ajustados en instancias pequeñas. En este trabajo, por tanto, nos centramos
+en instancias de planificación que están justo fuera del alcance
+de los solucionadores especializados actuales de vanguardia. Mostraremos por primera vez
+cómo estas instancias pueden resolverse con éxito dentro de un marco
+de RL profundo. Específicamente, mostraremos instancias de planificación de
+IA en las que nuestra estrategia de aprendizaje profundo supera
+a los mejores métodos de búsqueda combinatoria previos. También aportaremos ideas
+sobre qué estructura del problema capturan las redes profundas durante
+el proceso de aprendizaje. Elegimos la
+planificación de Sokoban como nuestra tarea de planificación de
+IA porque es extremadamente difícil para los planificadores de IA [Fern
+et al., 2011] [Lipovetzky, 2013]. Además, las instancias de Sokoban
+tienen una forma de entrada 2-D regular, adecuada para redes neuronales
+convolucionales. Esta estructura 2-D también puede encontrarse en muchas otras
+tareas de planificación de IA que implican problemas de programación
+y de tipo transporte. Sin embargo, Sokoban es mucho
+más desafiante en términos computacionales. Sokoban es un juego de
+un solo jugador, creado en 1981, en el que, dado un
+conjunto de cajas y un número igual de ubicaciones meta,
+el jugador debe empujar todas las cajas a casillas meta sin
+cruzar muros ni cajas. La Figura 1 muestra una
+instancia típica. El jugador solo puede moverse horizontal o verticalmente
+hacia casillas vacías. A pesar de su aparente sencillez conceptual, pronto
+quedó claro que se podían crear instancias muy difíciles, con soluciones
+muy intrincadas y largas (si es que son resolubles). Analizar
+la complejidad computacional de Sokoban no es trivial, pero la
+cuestión fue finalmente resuelta por Culberson en 1997, quien demostró
+que el problema es PSPACE-completo [Culberson, 1997] [Hearn y
+Demaine, 2005]. Mostraremos más adelante que las instancias más difíciles
+de Sokoban quedan muy lejos de los planificadores de IA generales,
+pero también quedan rápidamente fuera del alcance de los solucionadores
+especializados de Sokoban. Todos los solucionadores modernos de vanguardia se
+basan en un marco de búsqueda combinatoria aumentado con reglas de
+poda elaboradas a mano y técnicas de detección
+de callejones sin salida. Nuestro marco aprende y resuelve
+una sola instancia difícil de Sokoban a la vez. Esta
+es una elección importante en nuestro entorno. Queremos que la
+red profunda descubra la estructura subyacente del espacio combinatorio que es
+directamente relevante para la instancia difícil, no resuelta previamente,
+que se considera. Este enfoque imita el aprendizaje de cláusulas
+dirigido por conflictos (CDCL) [Marques-Silva y Sakallah, 1999] para resolver
+resolver el problema booleano de satisfacibilidad (SAT). En la resolución de
+SAT, las cláusulas se aprenden durante el procesamiento de una sola
+instancia. En este entorno, las cláusulas aprendidas son óptimamente relevantes para
+la instancia del problema en cuestión. Otra ventaja potencial de
+nuestro marco es que todos los parámetros de la red neuronal
+profunda se concentran en la disposición de la instancia de entrada
+dada y en su espacio de búsqueda correspondiente. Aunque cierto conocimiento general sobre Sokoban, p. ej., que empujar una caja
+hacia una esquina lleva a un estado sin salida, puede aprenderse
+a partir de una instancia y generalizarse a otras, mostramos que
+nuestra configuración de entrenamiento también puede descubrir este tipo de conocimiento
+de manera eficiente y generalizar bien en todo su espacio de
+búsqueda. Además, el marco de aprendizaje profundo ahora puede descubrir
+estructuras del problema muy especializadas que ayudan a adaptar la búsqueda de
+la solución a la instancia específica del problema en cuestión.
+Ejemplos de tal estructura pueden ser cierta disposición de un
+subconjunto de cajas desde la cual no puede alcanzarse el
+estado meta. El mecanismo de búsqueda ahora puede eliminar cualquier secuencia
+de acciones de exploración que conduzca a tal disposición. Esto
+es análogo a la poda que proporcionan las cláusulas aprendidas en
+los solucionadores SAT. Las cláusulas aprendidas son específicas
+de la instancia SAT en cuestión. Como discutimos antes, necesitamos
+diseñar una forma de obtener una señal de entrenamiento adecuada
+para resolver problemas de planificación de IA. Dado que la instancia
+de entrada puede ser extremadamente difícil y, por tanto, no puede
+proporcionar directamente ninguna señal de recompensa positiva, incorporamos la idea
+del aprendizaje por currículo y construimos subcasos más simples derivados del
+problema desafiante original. En nuestro dominio de Sokoban, una opción
+natural es seleccionar aleatoriamente subconjuntos más pequeños de cajas iniciales y
+casillas meta, dejando todos los muros sin cambios. En particular, nuestro
+procedimiento de aprendizaje comienza explorando subcasos de 2 cajas y aumenta
+gradualmente el número de cajas cuando la tasa de éxito en
+encontrar una solución alcanza cierto umbral. Mostramos que el conocimiento
+aprendido de subcasos con menos cajas puede generalizarse con éxito
+a subcasos con más cajas. Resolver la tarea de planificación
+de Sokoban
+es un problema de búsqueda combinatoria, y utilizaremos búsqueda
+de árboles de Monte Carlo al estilo de AlphaZero en
+aprendizaje por refuerzo para explorar el espacio de búsqueda de forma
+más eficiente. El único conocimiento del dominio que usamos durante
+el aprendizaje es calcular los empujes válidos desde un estado y
+construir la tabla de transiciones de estados, y la entrada
+de la red neuronal es el estado actual del tablero bidimensional
+en bruto. No se usan técnicas intrincadas elaboradas a mano,
+como la detección de
+callejones sin salida de los solucionadores modernos. Nuestros experimentos revelan
+que nuestro marco de aprendizaje por refuerzo profundo guiado por currículo
+puede superar a los solucionadores especializados tradicionales en un amplio
+conjunto de instancias de conjuntos de benchmark como XSokoban y Sasquatch.
+La red profunda ayuda a la búsqueda de árboles de
+Monte Carlo a explorar el espacio de búsqueda de manera más
+eficaz y ofrece una generalización significativa a estados no vistos.
+Además, el crecimiento del tiempo de ejecución cuando aumenta la complejidad
+de las instancias del currículo es casi
+polinomial en lugar de exponencial. También aportaremos otras ideas
+sobre el proceso de aprendizaje. De particular interés es la observación de
+que, al entrenar la red profunda con tareas más difíciles del
+currículo, su rendimiento en las instancias más fáciles se degrada.
+Esta forma de “olvido catastrófico” hace que las redes más fuertes
+sean menos robustas, incluso cuando son mejores resolviendo las instancias más
+difíciles. Sería una dirección de investigación interesante diseñar un enfoque guiado
+por currículo que no muestre degradación en las tareas más fáciles
+y que aún alcance la máxima efectividad en el problema original.
+2 Trabajos relacionados
+La búsqueda en dominios combinatorios se ha estudiado ampliamente en
+IA, en áreas como la planificación, la toma de decisiones y
+el razonamiento. Para las tareas NP-completas, se han construido solucionadores
+SAT exitosos como WalkSAT [Selman et al., 1992] y el
+marco CDCL [Marques-Silva y Sakallah, 1999], que descubren eficientemente la
+estructura del problema de entrada y muestran un escalado casi
+polinomial en muchos dominios industriales de SAT. La clave de su
+éxito es la capacidad del algoritmo para aprender invariantes del problema
+y reconfigurar el espacio de búsqueda evitando entrar en subárboles
+que no contienen una solución. La mayoría de las tareas de
+planificación son más difíciles que SAT y suelen ser al
+menos PSPACE-completas. Graphplan [Blum y Furst, 1997] y FF son
+planificadores generales que aceptan lenguajes formales como PDDL [Fox y
+Long, 2003]. Sin embargo, como se reporta en [Welle, 2003], una
+limitación importante de estos planificadores generales es que pueden funcionar bien
+en un dominio de problemas y mal en otro. La
+mejora de la planificación
+con aprendizaje [Fern et al., 2011] se ha investigado extensamente
+en el pasado. Guiados por el objetivo actual, [Abel et al.,
+2015] podan las acciones irrelevantes. En cada estado, [Rosman y Ramamoorthy, 2012]
+explotan la utilidad de cada acción aprendiendo prioridades de acción.
+Para la resolución especializada de Sokoban, los solucionadores modernos utilizan técnicas
+intrincadas dependientes del dominio, como la detección sutil de callejones sin
+salida, la poda de posiciones duplicadas, el cálculo de cotas inferiores
+y la detección de movimientos sin influencia [Junghanns y Schaeffer,
+2001]. Aunque todas estas técnicas ofrecen mejoras de eficiencia frente a
+la planificación general para Sokoban, las buenas representaciones de estados, las
+funciones heurísticas ajustadas y los métodos de detección de callejones
+sin salida se elaboran a mano, lo que exige una inspección cuidadosa
+de la estructura del dominio y un uso intensivo del conocimiento
+del dominio. En los últimos años, las redes neuronales profundas han
+logrado resultados prometedores
+en muchos dominios. El resultado más destacado en el
+dominio combinatorio es AlphaZero, que utiliza aprendizaje por refuerzo profundo
+para descubrir automáticamente la estructura del dominio de juegos de dos
+jugadores como el ajedrez y el go. La clave de
+su éxito es la estrategia de aprendizaje por autojuego, que
+empieza con dos jugadores débiles y recolecta gradualmente señales de aprendizaje útiles
+mediante el autojuego, mejorando poco a poco la habilidad de
+los jugadores. Anteriormente, no estaba claro cómo desarrollar tal estrategia “guiada
+por currículo” en el dominio de la planificación. Esto se
+debe a que, a diferencia del dominio de los juegos, donde
+hay señales de aprendizaje (victorias y derrotas) para cualquier par
+de jugadores de fuerzas aproximadamente iguales, incluidos jugadores muy débiles y
+aleatorios, en el dominio de la planificación el agente fracasará al
+principio en alcanzar el estado meta en cada intento y, por
+tanto, no puede arrancar su proceso de aprendizaje. Las redes neuronales
+profundas también se
+han usado para ayudar a abordar los problemas de Sokoban.
+[Weber et al., 2017] aumentan el aprendizaje por refuerzo profundo
+con un componente de imaginación, y [Groshev et al., 2018]
+usan aprendizaje por imitación para aprender de partidas exitosas de Sokoban
+y generalizar políticas reactivas a instancias no vistas. Sin embargo, su
+rendimiento no se acerca en absoluto a los solucionadores especializados
+de Sokoban de vanguardia. Nuestro enfoque ofrece dos ventajas principales
+frente a los enfoques previos: (1) nuestro enfoque resuelve
+instancias de benchmark difíciles que están fuera del alcance de los
+solucionadores especializados de Sokoban; (2) no se necesita conocimiento específico del dominio
+durante el aprendizaje y no se requieren datos extra, por ejemplo,
+soluciones proporcionadas manualmente. Nuestra idea de entrenar con subcasos similares pero más fáciles
+derivados de la instancia original puede adaptarse a otros dominios de
+planificación. Figura 1: La instancia XSokoban 29 (panel izquierdo)
+y uno de sus subcasos de 3 cajas (panel derecho).
+El círculo azul es la ubicación del jugador (o “empujador”), los
+círculos rojos son las cajas, y las casillas con fondo
+oscuro son las casillas meta. Los cuadrados de color claro forman
+los muros. El jugador debe empujar las cajas hacia las casillas
+meta.
+3 Marco formal
+3.1 Modelo
+Dada una instancia de Sokoban I, la fase de preprocesamiento calcula
+el conjunto de todos los empujes posibles A. Una red neuronal profunda (p;v)
+= f(s) con parámetros toma el estado del tablero s como
+entrada y produce un vector de probabilidades de acción p, con componentes
+p_a = Pr(a|s) para cada acción de empuje a ∈ A, y
+un valor escalar v que indica el número estimado de pasos restantes
+hasta la meta desde el estado s. La figura izquierda de la
+Figura 1 muestra la instancia original XSokoban 29 del conjunto de
+benchmark XSokoban. La entrada de la red es un 6HWim-
+pila de imágenes formada por 6 planos de características, mientras que HandWare
+la altura y el ancho de la instancia de Sokoban correspondiente.
+Los planos de características representan muros, casillas meta vacías, cajas sobre
+casillas vacías, cajas sobre casillas meta, celdas alcanzables por el jugador,
+y celdas alcanzables por el jugador sobre casillas meta, respectivamente.
+El esfuerzo de resolver una instancia de Sokoban puede dividirse
+en dos partes:
+1. El jugador se mueve a la posición correcta junto a una
+caja para empujarla.
+2. El jugador empuja la caja.
+En nuestro experimento, usamos el conjunto de empujes válidos en lugar de
+movimientos válidos como conjunto de acciones, ya que el número de empujes en una
+solución es significativamente menor que el número de movimientos.
+(Un movimiento es desplazar al jugador una casilla (el
+empujador).) En otras palabras, la longitud del plan es, por lo general, mucho
+menor en número de empujes que en número de movimientos.
+Modelar el conjunto de empujes válidos en cada estado requiere llevar el
+registro de las celdas alcanzables que están junto a bloques para el
+jugador. Los empujes ilegales se enmascaran fijando sus proba-
+bilidades en cero y renormalizando las probabilidades de los
+movimientos restantes.
+Para cada instancia I, fijamos un número máximo permitido de empujes
+o “pasos” I_max durante la fase de aprendizaje. I_max indica
+el número máximo de pasos de un único plan que el algo-
+ritmo puede explorar durante el aprendizaje. El modelo se
+verá obligado a detenerse tras I_max empujes. Fijar este umbral
+ayuda a evitar bucles infinitos sin sentido al explorar.
+El estimador de pasos restantes v también se normaliza al
+intervalo [0;1] para encajar mejor en el marco de la red neuronal.
+Nótese que si I_max se fija por debajo de la longitud del plan
+más corto, el modelo nunca encontrará ninguna solución.
+En nuestros experimentos, empezamos con I_max = 500 y lo duplicamos
+cada vez que el aprendizaje falla tras una ejecución larga.
+El marco de aprendizaje consta de múltiples iteraciones, y
+cada iteración contiene tres partes:
+1. Fase de generación de tableros iniciales: generamos aleatoriamente
+500 tableros iniciales según nuestra estrategia guiada por el currículo
+descrita en la subsección 3.2.
+2. Fase de exploración: el modelo busca soluciones
+(planes) para estos tableros mediante búsqueda en árbol de Monte Carlo
+(MCTS) guiada por la red de política/valor entrenada hasta
+ahora. Para más detalles, véase la subsección 3.3.
+3. Fase de entrenamiento: entrenamos la red neuronal con las señales de
+aprendizaje recogidas en la fase de exploración. Esta parte
+se ilustra con más detalle en la subsección 3.4.
+3.2 Estrategia guiada por el currículo
+En instancias difíciles de Sokoban, la configuración de RL profundo puede no
+encontrar ninguna solución y, por tanto, no recibe ninguna señal de entrenamiento útil. Nuestra
+estrategia de currículo se basa en dos ideas: (1) construir
+subcasos más simples, con más probabilidades de ser resueltos por el
+modelo entrenado actual; (2) los subcasos construidos deben compartir
+información de estructura similar con la instancia original para
+favorecer la generalización del conocimiento desde una serie de subcasos hasta
+la instancia original del problema.
+El aprendizaje comienza eligiendo un pequeño subconjunto de cajas iniciales
+y de casillas meta para formar un subcaso para la exploración y el entrena-
+miento, dejando sin cambios la ubicación de los muros. La figura 1 (derecha)
+muestra un ejemplo de ello. Se seleccionan aleatoriamente tres cajas y
+casillas meta de entre las iniciales. El subcaso resultante
+requiere un plan mucho más simple. Concretamente, supongamos que la
+instancia de entrada de Sokoban tiene n cajas y n casillas meta; en cada
+iteración seleccionamos aleatoriamente m ≤ n cajas y casillas meta
+y aumentamos gradualmente m tras alcanzar cierto nivel de rendimiento
+en cada nivel. En comparación con el problema origi-
+nal, las soluciones de los subcasos serán más cortas y,
+lo que es más importante, más fáciles de encontrar con MCTS y la red profunda
+entrenada hasta ahora. Al resolver una colección de subcasos de m cajas
+para cada valor de m, entrenamos efectivamente una función de distancia
+y un modelo de acciones capaz de manejar subproblemas de m cajas para un
+rango de colocaciones iniciales y de metas. Este nivel de generalidad
+es importante porque no sabemos de antemano en qué
+casilla meta terminará cada caja concreta del estado inicial.
+Además, como empezamos con un subcaso de 2 cajas, MCTS
+con una red profunda inicializada aleatoriamente todavía puede encontrar una solución
+y, por tanto, una señal de recompensa positiva. Al aumentar poco a poco
+el tamaño (y la dificultad) de los subcasos, el RL profundo puede seguir
+obteniendo una señal de recompensa positiva y mejorar gradualmente
+la red entrenada para manejar escenarios cada vez más complejos, hasta
+llegar finalmente a una solución de la instancia original, cuando
+m=n.
+En la sección de experimentos mostraremos que es necesario
+que el modelo aprenda hasta cierta tasa de acierto en subcasos de m cajas
+Figura 2: Un ejemplo que muestra que los subcasos no necesariamente
+son resolubles aunque la instancia original tenga solución.
+subcasos antes de pasar a subcasos de (m+1) cajas. Concretamente,
+si el modelo pasa a escenarios de (m+1) cajas antes de
+alcanzar una alta tasa de éxito en escenarios de m cajas, un peligro
+potencial es que el rendimiento del aprendizaje caiga bruscamente y
+el modelo deje de ser capaz de encontrar cualquier
+solución para subcasos de (m+1) cajas.
+Para decidir cuándo aumentar m, una posible medida sería
+usar la tasa de soluciones alcanzada en ese nivel. Sin embargo,
+de forma algo contraintuitiva, aunque el problema original sea
+resoluble, ciertos subcasos pueden no tener solución.
+Esto se debe a una complejidad oculta del dominio de Sokoban:
+sabemos que las cajas necesitan llegar a las casillas meta, pero
+no sabemos exactamente qué caja debe ir a qué casilla
+meta. Así, aunque nuestros subproblemas usan un subconjunto estricto
+de las cajas y casillas meta, podemos generar por accidente
+un subproblema irresoluble. La figura 2 muestra un ejemplo. En este
+caso, la probabilidad de generar un subcaso resoluble de 2 cajas es
+solo 1
+2, ya que hay que garantizar que el número de cajas
+y de casillas meta sea el mismo en cada habitación. En general, es
+difícil calcular la probabilidad de que un subcaso aleatorio sea
+resoluble. Por tanto, usar la tasa de éxito en un nivel dado
+no es un criterio robusto. Usamos una forma alternativa de decidir
+cuándo incrementar m. Concretamente, incrementamos m cuando
+la tasa de éxito al encontrar una solución no ha mejorado durante un
+cierto número de iteraciones. Usamos 5 iteraciones en nuestros experi-
+mentos. Nuestros experimentos muestran que esta estrategia funciona bien
+en la práctica.
+3.3 Búsqueda en árbol de Monte Carlo
+Buscamos soluciones (planes) para los subcasos de Sokoban con m cajas
+(m ≤ n) mediante búsqueda en árbol de Monte Carlo al estilo AlphaZero
+(MTCS) guiada por la red profunda entrenada hasta ahora. Como veremos,
+MTCS funciona bien, pero otras técnicas de búsqueda podrían
+también merecer la pena explorarlas en trabajos futuros. En MTCS, en cada
+estado calculamos (p;v) = f_θ(s) y creamos un nodo raíz R
+que contiene el estado s. Se realizarán múltiples rondas de Monte Carlo
+desde R para calcular el mejor movimiento en s. Cada
+ronda consta de tres componentes:
+• Selección: partimos del nodo raíz R, que contiene el estado s, y
+seleccionamos nodos hijos sucesivos que maximizan
+una función de utilidad hasta llegar a un nodo hoja L, a la meta o a
+un callejón sin salida. Un nodo hoja es cualquier nodo que nunca haya sido
+evaluado antes por la red neuronal. Si
+se alcanza la meta o un callejón sin salida, pasamos a la
+fase de retropropagación; en otro caso, a la fase de expansión.
+• Expansión: calculamos el conjunto de todos los empujes válidos A desde
+los estados L del nodo L. A diferencia del MCTS tradicional
+seguido de un despliegue que simula varias partidas aleatorias,
+evaluamos (p;v) = f_θ(s_L) con la red neuronal y usamos v como la
+evaluación estimada para la fase de
+retropropagación.
+• Retropropagación: usamos v de s_L para actualizar la información de
+los nodos del camino de R a L. Fijamos v en 0 si s_L es
+el estado meta, o en 1 si s_L es un callejón sin salida. Suponiendo que la
+trayectoria estado-observación-acción de R a L es s = s_0 a_1 →
+s_1 a_2 → ··· a_l → s_l = s_L, donde l es la longitud de la
+trayectoria, actualizamos Q_new(s_i, a_{i+1}) a
+Q(s_i, a_{i+1}) · N(s_i, a_{i+1}) + min(v + l − i,
+I_max − 1)
+N(s_i, a_{i+1}) + 1;
+donde Q(s, a) es el valor de acción medio promediado en rondas anteriores
+y N(s, a) es el número de visitas.
+Para seleccionar nodos hijos, elegimos a_t = argmax_a Q(s_{t−1}, a) +
+U(s_{t−1}, a), usando una variante del algoritmo PUCT en la que
+U(s, a) = c_puct · √
+1 + Σ
+_b N(s, b)
+1 + N(s, a) · p_a;
+y c_puct es una constante que equilibra exploración y explotación.
+Tras realizar 1600 rondas, elegimos un movimiento
+ya sea de forma voraz o proporcional al número de visitas
+en el estado raíz s. Este procedimiento continúa hasta un callejón
+sin salida o hasta alcanzar la meta, o hasta realizar el máximo permitido de empujes
+I_max. Nótese que no utilizamos ningún algoritmo avanzado de detección de callejones
+sin salida de los solucionadores modernos anteriores.
+En su lugar, solo detectamos callejones sin salida cuando no hay
+empujes válidos disponibles desde el estado, por ejemplo, cuando todas las cajas están empujadas
+contra las esquinas y ya no pueden moverse.
+Para construir las señales de aprendizaje de la fase de entrenamiento,
+recogemos todos los estados de los caminos explorados por la búsqueda en árbol de
+Monte Carlo, y usamos la probabilidad proporcional al número de visitas
+como distribución de probabilidad mejorada para el entrenamiento. Para
+la predicción del valor, si el nodo hoja es el estado meta, usamos
+la distancia al nodo hoja como nueva etiqueta u. En otro caso,
+se alcanza un bucle o un callejón sin salida y fijamos u en 1 para todos
+los nodos del camino.
+3.4 Entrenamiento
+Usamos 5 GPU para entrenar la red, y cada iteración contiene
+1000 épocas con un mini-lote de 160 en total. A diferencia de [Mnih
+et al., 2013] y [Silver et al., 2017], que mantienen un
+depósito de memoria adicional para guardar los episodios de entrenamiento, entrenamos
+directamente con los datos recogidos en la iteración actual. Concretamente, los
+parámetros de la red se ajustan mediante descenso de gradiente sobre la
+función de pérdida, que suma un error cuadrático medio y una pérdida
+de entropía cruzada
+l = (u − v)² − log(p) + c‖θ‖²;
+donde c es la constante que controla el impacto de la penalización por pesos.
+Tras la fase de entrenamiento, los nuevos parámetros de la red se
+usan para guiar la búsqueda en árbol de Monte Carlo en la siguiente iteración.
+En este trabajo no realizamos un estudio detallado de hiperparámetros
+para elegir la mejor estructura de red para nuestro problema.
+Usamos una ResNet estándar [He et al., 2016] con
+8 bloques residuales como configuración de red en todos los experimentos. Instancia de Sokoban · Nuestro método · Sokolution · FF
+XSokoban 29 9,1 h Fallido Fallido
+Sasquatch 29 Fallido Fallido Fallido
+Sasquatch 30 Fallido Fallido Fallido
+Sasquatch3 18 14,9 h Fallido Fallido
+Sasquatch7 48 23,4 h 1,0 h Fallido
+Grigr2001 2 22,1 h Fallido Fallido
+Tabla 1: Comparación de rendimiento. Las instancias de Sokoban se seleccionan
+de conjuntos de datos estándar y se marcan como “no resueltas por ninguno”. El tiempo
+límite para todos los solucionadores se amplía a 24 horas si la opción está disponible.
+Todos los solucionadores se ejecutan en los mismos núcleos de CPU, mientras que nuestro método utiliza
+5 GPU adicionales. La conversión de Sokoban al formato STRIPS
+se muestra en [Welle, 2003].
+Esto indica lo prometedor que es nuestro marco general,
+ya que ya obtuvimos buenos resultados con una ResNet estándar.
+El rendimiento general probablemente pueda mejorarse aún más con
+un ajuste cuidadoso de hiperparámetros.
+4 Experimentos
+Aquí presentamos nuestros experimentos con XSokoban, el conjunto de pruebas de facto
+estándar en la literatura académica sobre programación de solucionadores de Sokoban,
+así como con otros grandes conjuntos de pruebas 1. Elegimos
+instancias marcadas como “no resueltas por ninguno de los cuatro
+solucionadores modernos”. El límite de tiempo para las estadísticas de
+referencias anteriores suele ser de 10 minutos. Ampliamos el límite de tiempo
+a 24 horas si la opción está disponible y repetimos las pruebas de todos los solucionadores en
+estas instancias difíciles. Probamos nuestro método, el solucionador especializado
+en Sokoban más avanzado Sokolution, y el planificador general
+independiente del dominio FF. La tabla 1 muestra el rendimiento
+de cada solucionador en las instancias seleccionadas.
+4.1 Comparación de escalabilidad
+Dado que nuestro marco utiliza recursos adicionales de GPU, para obtener
+más información sobre la diferencia entre la forma en que
+nuestro marco y los algoritmos tradicionales basados en búsqueda manejan
+las instancias difíciles, evaluamos el rendimiento de escalado de
+cada solucionador en subcasos de dificultad creciente gradualmente.
+Usamos XSokoban 29, que contiene 16 cajas, con fines ilustrativos,
+como se muestra en la figura 3. El tiempo de ejecución de
+FF y Sokolution muestran claramente un crecimiento exponencial, y FF
+ya no puede resolver ningún subcaso de m cajas para m ≥ 8. Sokolution
+supera significativamente a nuestro método en subcasos con pocas cajas.
+Creemos que esto se debe principalmente a la gran sobrecarga del
+entrenamiento de las redes neuronales. A medida que aumenta el tamaño de los subcasos,
+nuestro método destaca tanto en tiempo de ejecución como en escalabilidad.
+Cabe señalar que nuestro método apenas necesita tiempo adicional al pasar
+de subcasos de 15 cajas a la instancia original de 16 cajas.
+Esto se debe a que la predicción de la red aprendida con subcasos de 15 cajas
+es muy precisa en la instancia de 16 cajas,
+y el modelo ya es capaz de resolver el
+problema original.
+1 Conjuntos de datos de Sokoban disponibles en http://sokobano.de/wiki/index.
+php?title=Solver Statistics
+Tiempo de ejecución (log) FF
+Sokolution
+Nuestro método
+2345678
+Número de cajas · Tiempo de ejecución
+246810121416
+Número de cajas
+Número de cajas. Figura 3: Comparación del rendimiento de escalado entre FF, Sokolution
+y nuestro método en la instancia XSokoban 29. Para los subcasos de m cajas,
+generamos aleatoriamente 19 subcasos para FF y Sokolution, y graficamos
+su diagrama de caja según el tiempo de ejecución. El tiempo de ejecución en los
+tres gráficos superiores está en escala logarítmica, mientras que los tres inferiores están en
+escala lineal. Para nuestro método, graficamos el tiempo total necesario para que el
+algoritmo alcance una tasa de éxito del 95 % para cada m.
+4.2 Eficiencia de la exploración
+Mostramos ahora que la red puede extraer conocimiento de forma eficiente
+durante la exploración y generalizar a estados no vistos. Para la
+misma instancia XSokoban 29, graficamos la eficiencia de los estados comparando
+el número de estados vistos durante la fase de exploración
+con el número total de estados posibles en la figura 4. En
+la figura de la izquierda, para cada m, el número total de estados iniciales
+es 16
+sobre m². El número de estados explorados se mantiene casi
+en el mismo orden de magnitud a medida que m aumenta. Esto implica la capacidad
+de la red neuronal para extraer eficientemente la información estructural
+del espacio de búsqueda combinatorio y generalizar su
+conocimiento a espacios de búsqueda no vistos. La figura de la derecha muestra
+la comparación entre el total de estados posibles del tablero y los
+explorados por la búsqueda en árbol de Monte Carlo.
+Obsérvese también que, en subcasos con m ≤ 3, el modelo necesita
+ver casi todos los estados posibles del tablero antes de pasar a la siguiente
+etapa. Esto implica que la generalización no empieza en subcasos con pocas
+cajas, y que el modelo necesita explorar cada posible
+combinación de estados del tablero para entender la estructura
+subyacente. A medida que m aumenta y el espacio combinatorio crece,
+la generalización empieza a destacar y ayuda a que la búsqueda en árbol de
+Monte Carlo se mantenga alrededor del espacio de búsqueda más prometedor.
+4.3 Olvido durante el aprendizaje por currículo
+Un fenómeno sorprendente del aprendizaje guiado por currículo es
+que las redes pueden empezar a olvidar la estructura aprendida previamente
+a medida que avanza el aprendizaje. Como se ve en la figura 5, a medida que
+aumenta el número de cajas, la tasa de éxito de los subcasos con pocas
+cajas disminuye gradualmente. Concretamente, vemos que las curvas
+entrenadas con más cajas caen hacia la izquierda, es decir,
+el rendimiento en casos con menos cajas empeora.
+Por otro lado, la capacidad de resolver casos cada vez más difíciles
+2 4 6 810 12 14 16
+Número de cajas · Número de estados iniciales (log)
+Total
+Explorados
+2 4 6 810 12 14 16
+Número de cajas · Número de estados (log)
+Total
+Visitados
+Únicamente visitados. Figura 4: Estadísticas de estados durante el aprendizaje. La figura de la izquierda muestra
+el número total de estados iniciales y el número de estados iniciales explorados
+por la búsqueda en árbol de Monte Carlo. La figura de la derecha muestra el
+número total de estados posibles, todos los estados y los estados únicos explorados
+por la búsqueda en árbol de Monte Carlo. El eje y de ambas figuras está
+representado en escala logarítmica.
+2 3 4 5 6 7 8 910 11 12 13 14 15 16
+Número de cajas · Tasa de éxito
+Figura 5: Tasa de éxito de distintos modelos en distintos subcasos. Para
+cada n ∈ [2; 16], extrajimos el modelo N_n cuando el algoritmo
+alcanzó por primera vez una tasa de éxito del 95 % en subcasos de n cajas. Cada
+curva representa un modelo N, y para cada curva hay un círculo correspondiente
+cuya coordenada x n indica el modelo N_n.
+El eje x representa cada subcaso de m cajas, y para cada modelo N_n
+generamos aleatoriamente 500 subcasos de m cajas y probamos su tasa de éxito
+en estos subcasos.
+(más cajas) mediante el entrenamiento guiado por currículo muestra
+que el conocimiento aprendido de subcasos de m cajas puede ser útil
+para encontrar soluciones de subcasos de m' cajas, donde m' > m. La
+la curva muestra que el modelo aprendido a partir de subcasos de 13 cajas
+ya es capaz de resolver la instancia original con 16
+cajas. Esto implica que un conjunto de conocimiento proveniente de
+subcasos con cajas pequeñas puede trabajar en conjunto para ofrecer suficiente
+orientación para hallar una solución de la instancia original, todavía no resuelta, del prob-
+lema.
+Nótese que el olvido catastrófico ya ha sido previamente ob-
+servado en el contexto del entrenamiento de redes neuronales profundas.
+Específicamente, las redes profundas pueden olvidar gradual o abruptamente el pre-
+viamente aprendido conocimiento tras aprender nueva información.
+Esto es un tema importante a considerar porque los humanos típi-
+camente no muestran tal olvido catastrófico al aumentar
+su competencia en una tarea. Por ejemplo, un jugador de ajedrez
+que alcanza nivel de gran maestro no empezará de repente a perder contra un
+jugador principiante. Un desafío de investigación interesante es desa-
+rrollar currículos de entrenamiento que eviten el olvido catastrófico
+en el RL profundo.
+4.4 Extracción de conocimiento de la red
+Ahora mostramos qué tan precisas son tanto la predicción del valor como la de prob-
+abilidad, en comparación con la verdad de referencia proporcionada
+−20 0 20 40
+Diferencia entre predicción y verdad de referencia0.0000.0250.0500.0750.1000.1250.150Proporción8 en el inicio
+8 en aleatorio
+16 en el inicio
+16 en aleatorio
+0 20 40 60 80 100
+Probabilidad de predecir la verdad de referencia0.000.010.020.030.040.050.06 8 en el inicio
+8 en aleatorio
+16 en el inicio
+16 en aleatorio. Figura 6: Precisión de la predicción de la red comparada con la verdad de
+referencia. La figura de la izquierda muestra la diferencia entre la predic-
+ción del valor, que indica los pasos restantes hasta la meta, y la verdad de
+referencia. Las figuras de la derecha muestran la confianza de la red sobre
+la acción de referencia. Probamos ambas en N8 y N16, entrenadas
+tras subcasos de 8 cajas y el problema original.
+por solucionadores óptimos de Sokoban. También queremos probar si
+la red puede generalizar a estados del tablero completamente no vistos
+o solo aprende bien en estados visitados con frecuencia por la
+búsqueda en árbol de Monte Carlo. Para este experimento, probamos con subcasos de m-
+cajas de XSokoban 29, donde m = 8. Seleccionamos aleatoriamente
+500 subcasos iniciales de 8 cajas y hacemos algunos empujes aleatorios
+sobre ellos para generar el conjunto de estados iniciales que se supone son
+vistos con frecuencia por la búsqueda en árbol de Monte Carlo.
+También generamos 500 estados del tablero cuyas cajas son selec-
+cionadas al azar entre todas las posiciones posibles del tablero. Estos
+estados se supone que apenas han sido explorados. Todos los estados de prueba son
+garantizados como resolubles y libres de callejones sin salida.
+Como se muestra en la figura 6, vemos que la función de utilidad cap-
+tura sorprendentemente bien la distancia a la meta para los subcasos de 8 cajas
+en los estados donde las 8 cajas están cerca de la configuración inicial de 16 cajas.
+Cuando consideramos subcasos con las 8 cajas colocadas
+inicialmente al azar, vemos que la función de utilidad se degrada. Así, el
+aprendizaje se centra en estados cercanos a los que pueden ocu-
+rrir como estados intermedios legales que son muy explorados
+y explotados por el aprendizaje por refuerzo.
+Cuando consideramos la red aprendida de 16 cajas, vemos un
+fenómeno análogo, pero en general menos preciso en cuanto a
+utilidad y política que en los escenarios de 8 cajas. De hecho,
+la política para subcasos de 8 cajas con cajas colocadas al azar
+empeora, aunque sigue siendo mucho mejor que una política aleatoria.
+Esto significa que la búsqueda en árbol de Monte Carlo ya no está lo suficientemente enfo-
+cada para encontrar el estado meta en escenarios de 8 cajas. Esto
+explica la curva de olvido, como se discutió antes.
+5 Conclusión
+Presentamos un marco basado en RL profundo para resolver problemas
+de planificación combinatoria difíciles en el dominio de Sokoban.
+Un desafío clave en la aplicación de RL profundo en un entorno de agente sin-
+gular es la falta de una señal de refuerzo positiva, ya que nuestro objetivo es
+resolver instancias previamente no resueltas
+que están fuera del alcance de los métodos de búsqueda combinatoria existentes. Mostramos
+cómo un enfoque de RL profundo guiado por currículo puede abor-
+dar con éxito este desafío. Al diseñar una secuencia de
+subproblemas cada vez más complejos, cada uno derivado de la
+instancia original, podemos aprender de forma incremental una aproximación de la
+función de distancia a la meta que puede guiar a MCTS para resolver la
+instancia original del problema. Mostramos la eficacia de nuestra estrategia de planifi-
+cación basada en aprendizaje al resolver instancias difíciles de Sokoban que están
+fuera del alcance de las técnicas de solución basadas en búsqueda previas, in-
+cluidos métodos especializados para Sokoban. Pudimos descubrir
+planes con más de doscientas acciones, en los que casi cualquier desvío
+del plan llevaría a un estado irrecuperable. Dado que
+Sokoban es uno de los dominios de desafío más difíciles para los
+planificadores de IA actuales, este trabajo muestra el potencial de RL profundo basado en
+currículo para resolver tareas difíciles de planificación en IA. En trabajos futuros
+esperamos extender estas técnicas para potenciar los sistemas de demostración
+automática de teoremas para hallar pruebas matemáticas intrincadas que con-
+sten de largas secuencias de pasos de inferencia para ayudar al descubrimiento mate-
+mático.
+Agradecimientos
+Agradecemos a los revisores anónimos por sus valiosos comen-
+tarios. Este trabajo contó con el apoyo del Center for Human-
+Compatible AI, un premio NSF Expeditions in Computing
+(CCF-1522054), un premio AFSOR (FA9550-17-1-0292), y
+un premio ARO DURIP (W911NF-17-1-0187) para el clúster de cóm-
+puto utilizado en nuestro trabajo experimental.
+Referencias
+[Abel et al., 2015] David Abel, David Ellis Hershkowitz,
+Gabriel Barth-Maron, Stephen Brawner, Kevin O’Farrell,
+James MacGlashan, y Stefanie Tellex. Goal-based ac-
+tion priors. En Twenty-Fifth International Conference on
+Automated Planning and Scheduling, 2015.
+[Bengio et al., 2009] Yoshua Bengio, Jérôme Louradour,
+Ronan Collobert, y Jason Weston. Curriculum learn-
+ing. En Actas de la 26.ª conferencia anual internacional con-
+ferencia sobre machine learning, págs. 41–48, 2009.
+[Blum and Furst, 1997] Avrim L Blum y Merrick L Furst.
+Fast planning through planning graph analysis. Artificial
+intelligence, 90(1-2):281–300, 1997.
+[Bylander, 1994] Tom Bylander. The computational com-
+plexity of propositional strips planning. Artificial Intel-
+ligence, 69(1-2):165–204, 1994.
+[Culberson, 1997] Joseph Culberson. Sokoban is pspace-
+complete. University of Alberta, Technical Report, TRID-
+ID TR97-02, 1997.
+[Fern et al., 2011] Alan Fern, Roni Khardon, y Prasad
+Tadepalli. The first learning track of the international plan-
+ning competition. Machine Learning, 84(1-2):81–107,
+2011.
+[Fox and Long, 2003] Maria Fox y Derek Long. Pddl2.1:
+An extension to pddl for expressing temporal planning do-
+mains. Journal of artificial intelligence research, 20:61–
+124, 2003.
+[Gödel, 1931] Kurt Gödel. Über formal unentscheidbare
+Sätze der Principia Mathematica und verwandter Systeme
+I. Monatshefte für Mathematik und Physik, 38(1):173–198,
+1931.
+[Groshev et al., 2018] Edward Groshev, Aviv Tamar,
+Maxwell Goldstein, Siddharth Srivastava, y Pieter
+Abbeel. Learning generalized reactive policies using deep
+neural networks. En 2018 AAAI Spring Symposium Series,
+2018.
+[He et al., 2016] Kaiming He, Xiangyu Zhang, Shaoqing
+Ren, y Jian Sun. Deep residual learning for image recog-
+nition. En Actas de la conferencia IEEE sobre computer
+vision and pattern recognition, págs. 770–778, 2016.
+[Hearn and Demaine, 2005] Robert A Hearn y Erik D De-
+maine. Pspace-completeness of sliding-block puzzles and
+other problems through the nondeterministic constraint
+logic model of computation. Theoretical Computer Sci-
+ence, 343(1-2):72–96, 2005.
+[Hoffmann, 2001] Jörg Hoffmann. Ff: The fast-forward
+planning system. AI magazine, 22(3):57–57, 2001.
+[Järvisalo et al., 2012] Matti Järvisalo, Daniel Le Berre,
+Olivier Roussel, y Laurent Simon. The international sat
+solver competitions. Ai Magazine, 33(1):89–92, 2012.
+[Junghanns and Schaeffer, 2001] Andreas Junghanns y
+Jonathan Schaeffer. Sokoban: Improving the search with
+relevance cuts. Theoretical Computer Science, 252(1-
+2):151–175, 2001.
+[Kautz and Selman, 1998] Henry Kautz y Bart Selman.
+Blackbox: A new approach to the application of theorem
+proving to problem solving. En AIPS98 Workshop on Plan-
+ning as Combinatorial Search, volume 58260, págs. 58–
+60, 1998.
+[Koehler et al., 1997] Jana Koehler, Bernhard Nebel, Jörg
+Hoffmann, y Yannis Dimopoulos. Extending planning
+graphs to an adl subset. En European Conference on Plan-
+ning, págs. 273–285. Springer, 1997.
+[Lipovetzky, 2013 ]Nir Lipovetzky. Structure and inference
+en classical planning . Tesis doctoral, Universitat Pompeu
+Fabra, 2013.
+[Marques-Silva y Sakallah, 1999 ]Joao P Marques-Silva
+y Karem A Sakallah. Grasp: A search algorithm for
+propositional satisfiability. IEEE Transactions on Com-
+puters , 48(5):506–521, 1999.
+[Mnih et al. , 2013 ]V olodymyr Mnih, Koray Kavukcuoglu,
+David Silver, Alex Graves, Ioannis Antonoglou, Daan
+Wierstra, and Martin Riedmiller. Playing atari with deep
+reinforcement learning. arXiv preprint arXiv:1312.5602 ,
+2013.
+[Rosman y Ramamoorthy, 2012 ]Benjamin Rosman y
+Subramanian Ramamoorthy. What good are actions?
+accelerating learning using learned action priors. En
+2012 IEEE International Conference on Development and
+Learning and Epigenetic Robotics (ICDL) , págs. 1–6.
+IEEE, 2012.
+[Selman et al. , 1992 ]Bart Selman, Hector J Levesque,
+David G Mitchell, et al. A new method for solving hard
+satisfiability problems. En Aaai , vol. 92, págs. 440–
+446. Citeseer, 1992.
+[Silver et al. , 2016 ]David Silver, Aja Huang, Chris J Maddi-
+son, Arthur Guez, Laurent Sifre, George Van Den Driess-che, Julian Schrittwieser, Ioannis Antonoglou, Veda Pan-
+neershelvam, Marc Lanctot, et al. Mastering the game
+of go with deep neural networks and tree search. nature ,
+529(7587):484, 2016.
+[Silver et al. , 2017 ]David Silver, Thomas Hubert, Julian
+Schrittwieser, Ioannis Antonoglou, Matthew Lai, Arthur
+Guez, Marc Lanctot, Laurent Sifre, Dharshan Kumaran,
+Thore Graepel, et al. Mastering chess and shogi by
+self-play with a general reinforcement learning algorithm.
+arXiv preprint arXiv:1712.01815 , 2017.
+[Vallati et al. , 2015 ]Mauro Vallati, Lukas Chrpa, Marek
+Grze ´s, Thomas Leo McCluskey, Mark Roberts, Scott San-
+ner, et al. The 2014 international planning competition:
+Progress and trends. Ai Magazine , 36(3):90–98, 2015.
+[Weber et al. , 2017 ]Th´eophane Weber, S ´ebastien
+Racani `ere, David P Reichert, Lars Buesing, Arthur
+Guez, Danilo Jimenez Rezende, Adria Puigdomenech
+Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, et al.
+Imagination-augmented agents for deep reinforcement
+learning. arXiv preprint arXiv:1707.06203 , 2017.
+[Welle, 2003 ]James Welle. A comparison of parallelism in
+current ai planning systems. 2003.

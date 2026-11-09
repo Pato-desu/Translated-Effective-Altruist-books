@@ -1,0 +1,682 @@
+Citation: Mottaghi, M.; Meyer, T.K.;
+Tieman, R.J.; Denkenberger, D.;
+Pearce, J.M. Yield and Toxin Analysis
+of Leaf Protein Concentrate from
+Common North American
+Coniferous Trees. Biomass 2023 ,3,
+163–187. https://doi.org/10.3390/
+biomass3020011
+Academic Editors: Awadhesh
+Kumar Rai and Lasse Rosendahl
+Received: 13 January 2023
+Revised: 4 April 2023
+Accepted: 15 May 2023
+Published: 27 May 2023
+Copyright: © 2023 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+Article
+Yield and Toxin Analysis of Leaf Protein Concentrate from
+Common North American Coniferous Trees
+Maryam Mottaghi1, Theresa K. Meyer2
+, Ross John Tieman3, David Denkenberger3,4
+and Joshua M. Pearce5,*
+1Department of Mechanical and Materials Engineering, Western University, London, ON N6A 5B9, Canada
+2Department of Civil and Environmental Engineering, Michigan Technological University,
+Houghton, MI 49931, USA
+3Alliance to Feed the Earth in Disasters (ALLFED), Lafayette, CO 80026, USA
+4Department of Mechanical Engineering, University of Canterbury,
+Christchurch 8041, Canterbury, New Zealand
+5Department of Electrical & Computer Engineering and Ivey Business School, Western University,
+London, ON N6A 5B9, Canada
+*Correspondence: joshua.pearce@uwo.ca
+Abstract: In the event of an abrupt sunlight reduction scenario, there is a time window that occurs
+between when food stores would likely run out for many countries (~6 months or less) and ~1 year
+when resilient foods are scaled up. A promising temporary resilient food is leaf protein concentrate
+(LPC). Although it is possible to extract LPC from tree biomass (e.g., leaves and needles), neither the
+yields nor the toxicity of the protein concentrates for humans from the most common tree species
+has been widely investigated. To help ﬁll this knowledge gap, this study uses high-resolution mass
+spectrometry and an open-source toolchain for non-targeted screening of toxins on ﬁve common
+North American coniferous species: Western Cedar, Douglas Fir, Ponderosa Pine, Western Hemlock,
+and Lodgepole Pine. The yields for LPC extraction from the conifers ranged from 1% to 7.5%. The
+toxicity screenings conﬁrm that these trees may contain toxins that can be consumed in small amounts,
+and additional studies including measuring the quantity of each toxin are needed. The results indicate
+that LPC is a promising candidate to be used as resilient food, but future work is needed before LPCs
+from conifers can be used as a wide-scale human food.
+Keywords: alternative food; resilient food; distributed production; edible plants; existential risk;
+food security; global catastrophic risk; leaf concentrate; leaf protein; non-target screening; resilience;
+sustainable food systems; toxins
+1. Introduction
+In the event of a naturally occurring abrupt sunlight reduction scenario (ASRS), such as
+super volcanic eruption and asteroid or comet impact [ 1], or an anthropogenic cause, such
+as large-scale nuclear winter [ 2], numerical simulations indicate an anticipated reduction
+in crop-produced food calories of 90% [ 3]. If this occurs, there is likely to be widespread
+human starvation unless appropriate actions are taken [ 4]. This could negatively affect
+the long-run trajectory of humanity [ 5]. Planned responses from The Alliance to Feed the
+Earth in Disasters (ALLFED) and other groups include a rapid deployment of resilient
+or alternative foods, [ 6] such as natural gas consuming single celled protein (SCP) [ 7],
+conversion of ﬁber (plant material that humans cannot digest) via industrial methods
+such as cellulosic sugar [ 8], macroalgae production, a two-step process involving partial
+decomposition from bacteria or fungi fed to animals and greenhouses to expand the
+potentially acceptable growing conditions [ 9] could feasibly address a large portion of this
+food deﬁcit [ 10], providing a cost-effective means to save lives [ 4]. Additional resilient foods
+Biomass 2023 ,3, 163–187. https://doi.org/10.3390/biomass3020011 https://www.mdpi.com/journal/biomass
+Biomass 2023 ,3 164
+include wild edible plants [ 11], hydrogen single-cell protein [ 12], electroactive bacteria-
+produced vinegar [ 13], chemically synthesized glycerine [ 14], rabbits [ 15], and petroleum
+wax transformed into edible fat [16].
+Unfortunately, there is a difﬁcult-to-overcome time window that occurs between when
+food stores would be likely to run out in many countries (~6 months or less depending
+on when the ASRS occurred) and ~1 year when the resilient foods are scaled up. In this
+gap of time, leaf protein concentrate (LPC) has been proposed as a solution [ 6]. The low-
+tech nature of LPC production and the potential for large amounts of tree-based biomass
+to be immediately available depending on the time of year at which the ASRS occurred
+indicates LPC could provide a source of calories to meet short-term deﬁcits until resilient
+food systems are further developed. The vitamins of LPC would be a valuable addition
+to a resilient food diet [ 17]. In summation, LPC from trees would complement existing
+resilient foods for an ASRS response by providing critical nutrients and access to a short-
+term food source during a high vulnerability period after the start of ASRS. Furthermore,
+since low-tech methods can sufﬁce, LPC could be valuable in scenarios where there is
+loss of electricity/industry [ 18]. Although there are several species, the predominant type
+of tree that would have non-wood biomass during all of the year outside the tropics is
+conifers. They are the dominant plants over large areas of land in the taiga of the Northern
+Hemisphere, but also in similar cool climates in mountains further south. Boreal conifers
+have adapted to survive in winter by shedding snow due to their shape and limb hanging
+angles. They also alter their biochemistry to make them more resistant to freezing. The
+immense conifer forests of the world represent the largest terrestrial carbon sink and thus
+the largest potential source of LPC.
+Although it is possible to extract leaf protein concentrate (LPC) from tree biomass
+(e.g., leaves and needles), neither the yields nor the toxicity of the protein concentrates for
+humans from the most common tree species has been widely investigated. To help ﬁll this
+knowledge gap, the aim of this study is to use high-resolution mass spectrometry and an
+open-source toolchain for non-targeted screening of toxins of ﬁve common North American
+coniferous, including: (1) Western Cedar (WC), (2) Douglas Fir (DF), (3) Ponderosa Pine (PP),
+(4) Western Hemlock (WHL), and (5) Lodgepole Pine (LPP). The yields for LPC extraction
+from the conifers are quantiﬁed, and the LPCs are screened for toxins. This analysis is
+novel and is the ﬁrst original comprehensive investigation of conifer LPC toxicity. The
+objective of this work is to lay the technical foundation for treating conifer LPCs as resilient
+foods. The results are presented and discussed in terms of the potential for coniferous
+trees to provide resilient food in a disaster and during normal times to reduce hunger and
+starvation. Future work is outlined for what needs to occur before LPCs from conifers can
+be used as a human food.
+2. Materials and Methods
+2.1. Materials
+Raw materials were acquired from the ﬁve common North American conifer trees [ 19]:
+(1) Western Cedar (WC) is a native tree in North America [ 10]. This tree is widespread
+from northern California to southeastern Alaska, and from McGregor River to western
+Montana and northern Idaho [ 20]. Western cedar represented about 750 million cubic
+meters stock in British Columbia, 5 million seedlings were planted, and 1 percent of
+the stock was harvested annually in 2003 [21].
+(2) Douglas Fir (DF) is a native tree in temperate regions of western North America and
+is non-native but widely planted in Europe [ 22,23]. This tree covered 2–3% of forests
+in several European countries in 2008 [24] and is found in British Columbia [25].
+(3) Ponderosa Pine (PP) trees grow in the driest and warmest zones and are food for a
+wide range of animals that consume the tree seeds [ 26]. They are one of the native
+widely distributed pine trees in North America [27].
+(4) Western Hemlock (WH) is a large evergreen native tree in North America and dis-
+tributed in temperate rainforests [ 28]. This tree is commercially famous because of its
+Biomass 2023 ,3 165
+timber quality. It is used for construction and pulp, and represented 34% of the log
+harvest volume in 2015 [20].
+(5) Lodgepole Pine (LPP) is one of the native trees in North America [ 29]. About
+75 million lodgepole trees were planted in British Columbia in 2002 [ 30]. Native
+people used to consume the sweet succulent bark freshly or stored it. Also, the pitch
+was used in many medicines in the past [31].
+2.2. Material Processing
+The following procedure was followed for all of the ﬁve conifer species. Needles were
+cut into shorter lengths and either blended in a food processor with room-temperature
+water for 3 min (Lodgepole pine, Ponderosa pine, Western Red Cedar run 1, Western
+Hemlock) or passed through a meat grinder (Douglas Fir, Western Red Cedar run 2).
+Processed residue, and liquid and ﬂushing water were retained. Liquid from processed
+samples was separated from the mixture by passing through a woven polyester bag to
+yield a green liquid. The liquid was boiled for 3 min until a curd formed on the surface.
+The majority of coagulated leaf protein was collected with a spoon. Smaller amounts of
+LPC remained in suspension and were left to sediment for 30–60 min before liquid was
+decanted. Sedimented LPC was combined with skimmed LPC and dried using a Crawford
+Kitchen-Professional Dehydrator (Alternative methods for drying could be used, including
+a conventional oven, food dehydrator or open source vacuum drier [ 32]). The curd was
+skimmed off and put into a dehydrator set at 66C (152F) for 16 h to yield a green solid.
+The following equation was used to calculate the yield (Y):
+Y = M c/M l (1)
+In this equation M cis the mass of dried concentrate (g), and M lis the mass of dried
+leaves (g).
+2.3. LC/MS Instrumentation
+An ultra-high-resolution hybrid ion trap orbitrap mass spectrometer (MS) instrument
+(Thermo Scientiﬁc Orbitrap Elite equipped with electrospray ionization (ESI)) coupled with
+an ultra-high-pressure two-dimensional liquid chromatograph (HPLC) system (Thermo
+Scientiﬁc Dionex Ultimate 3000 standard system) was used for the non-targeted toxic
+screening approach.
+The HPLC was calibrated with Thermo Pierce calibration solution followed by dilut-
+ing the LPC in water acetonitrile 80:20 ( v:v) and ﬁltering with a 0.2 m quartz ﬁlter for
+LC/MS analysis. The analytical column was Phenomenex reversed-phase Kinetex XB-C18,
+“1502.1” mm, 100 Å, with 1.7 m particle size [33].
+Mobile phase A and mobile phase B were 0.1% formic acid in 100% LC/MS grade water,
+and 0.1% formic acid in LC/MS grade acetonitrile–water 95:5 ( v:v) solution respectively.
+The ﬂow rate was constant, equal to 0.2 mL/min and the mobile phase gradient was 0 min;
+5%B, 5 min; 5%B, 65 min; 90%B, 70 min; 90%B. Mobile phase A was used to calibrate the
+column for 15 min. The column oven temperature was 35C and the full loop injection
+volume was 5 L. The resolving power was set at 120 K at mass to charge ratio ( m/z) 400.
+Positive and negative electrospray ionization modes (ESI+ and ESI  ) were used for two
+separate LC/MS runs for samples. Full screen mode was used for recording the masses
+in 100–600 m/zranges. Also, to identify co-eluting compounds, data-dependent MS/MS
+fragmentation was also recorded for the 5 tallest peaks on each spectral scan with a collision
+energy of 25 (arbitrary unit).
+2.4. Data Analysis
+An open-source software toolchain was used to analyze the samples. The software
+included mass spectrometry analysis with MZmine 2, formula assignment with MFAssignR,
+and data ﬁltering with ToxAssign, which has been previously described in detail in [ 34].
+Biomass 2023 ,3 166
+ToxAssign worked by comparing the existing database of the OpenFoodTox Chemical
+Hazards achieved by the European Food Safety Authority [35].
+Based on the toxicity of toxic components, four classes are deﬁned by the U.S. EPA.
+These classes include oral and dermal LD50 (lethal dose in 50% of test animals), inhalation
+LC50 (lethal air concentration in 50% of test animals), and the level of eye or skin irritation
+after contact [ 36]. In Appendix B, the class of characteristics for pesticides and other agents
+is shown. Agents in Category I are highly toxic and harmful by exposure [ 36]. Those in
+category II are moderately toxic and harmful in the case of consuming or absorbing by the
+body [ 36]. Those in category III are slightly toxic and could be harmful if exposed to a large
+quantity. Also, substrates in category IV have very low toxicity and are not harmful when
+not consumed in large quantities [ 36]. Since Category I and II are more dangerous and
+toxic, the focus in this study is on these categories.
+The toxicity tests were run for all ﬁve tree samples twice. In addition, for Western
+Cedar both the LPC and the viscous liquid were also tested. Finally, to start to gauge the
+repeatability of LPC extraction, it was repeated for the Ponderosa Pine samples. Differing
+mass spectra for the sample (shown in Appendix A) generally resulted from small changes
+in sensitivity parameters. Assuming the distinct peaks (those with listed values) are the
+same across samples, high conﬁdence can be had in the initial mass spectrometry analysis.
+3. Results
+The results for each of ﬁve trees for both yield and toxic analysis are detailed be-
+low. The total ion chromatograms are available in Appendix A for all LPC analyzed in
+Figures A1–A22 for both the positive and negative ionization. There are also two runs
+of tests for each tree. Analysis of each tree and differences for each run are explained in
+separated sections in the following.
+3.1. Western Cedar
+The parameters considered for cedar are shown in Table 1. The dry yield is 2.07% of
+the original dry mass.
+Table 1. Yield and sample preparation data for WC #1.
+Sample WC #1
+Wet weight of leaf (g wet biomass) 50.01
+LPC drying paper weight (g) 2.33
+Fiber Mass drying paper weight (g) 1.79
+Drying time (hours) 16
+Heating time (minutes) 3.0
+Blending time (minutes) 3.0
+Paper + Fiber Mass (g dry) 23.59
+Fiber Mass (g dry) 21.8
+Fiber Mass yield (% dry ﬁber mass to dry leaf weight) 81.89%
+Paper + LPC (g dry) 2.88
+LPC (g dry) 0.55
+LPC yield % (dry LPC to dry leaf weight) 2.07%
+The ﬁrst run was performed using a food processor type blender. When separating
+the liquid from the ﬁber mass, the liquid obtained appeared more viscous, having a slightly
+gelatinous/syrupy consistency. When boiled, the ability for the protein to coagulate into
+a layer was signiﬁcantly reduced, yielding little to no LPC. Attempts to isolate protein
+through cooling and resting to induce sedimentation were also ineffective, resulting in
+minimal isolated protein. A meat grinder type processor was used in the second run. The
+second run also failed to show coagulation of leaf protein. A combination of partially
+sedimented large portion of protein and liquid was dried to yield a crystalline solid. This
+crystalline solid likely contained protein and water-soluble solids and rheology-altering
+compounds.
+Biomass 2023 ,3 167
+Cedar returned multiple toxins in class 1 and 2 seen in Table 2 for the ﬁrst run and the
+second run.
+Table 2. Toxic compound screening results for WC #1 samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+WC #1Toxic Class 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (  ) X X
+HT-2 toxin (  ) X X
+T-2 Toxin tetraol (  ) X -
+Toxic Class 2 Deoxynivalenol 3-glucoside (  ) X X
+Alternariol monomethyl ether found in the results is a mycotoxin which is known to be
+mutagenic and genotoxic, but it is not very acutely toxic [ 37]. Mycotoxins can cause a range
+of symptoms based on the dosage, exposure, and other conditions [ 38]. 4-Vinylphenol is a
+natural product driven from hydride of a styrene [ 39] and has a potent cytotoxicity [ 40].
+This chemical is found in wine and because of that, it is assumed that it is not harmful for
+humans when consumed in small amounts [ 41], but needs to be quantiﬁed. Moreover, T-2
+Toxin tetraol and HT-2 are mycotoxins and are byproducts of naturally occurring fungi
+in soil and on plants. The concentration of HT-2 toxin is two-thirds the sum of T-2 toxin
+tetraol and HT-2 toxin concentration [ 42]. These two chemicals are potentially harmful for
+humans if they are orally consumed, inhaled, and dermally exposed [ 42]. They, however,
+unavoidably exist in human foods, including wheat, rye, and cereals, and the permitted
+content of these toxins in human food are determined in some countries [ 43]. In this
+regard, the daily exposure, E, level to T-2 and HT-2 toxins are calculated as shown in
+Equation (2) [43]:
+E(kg/bw/day ) =cd
+w(2)
+where c is the toxin concentration in samples ( g/kg), d is the daily consumption of the
+sample (g/day/person), and w is the mean body weight of the person (kg/person).
+Deoxynivalenol 3-glucoside, a toxin from class 2, is a masked mycotoxin that has a
+drastically decreased toxicity in the intestines [44,45].
+Western Cedar and Viscose Liquid (WC #2 LPC (+))
+The parameters used for Western Cedar and viscose liquid are shown in Table 3.
+As can be seen by comparing Tables 3 and 4, there are far more toxic compounds
+found in the viscose liquid than in the LPC.
+3.2. Douglas Fir (DF)
+Douglas Fir LPC parameters can be seen in Table 4. The LPC yield is 1.06%.
+The toxic compounds are shown in Table 5.
+Except HT-2 toxin and Deoxynivalenol 3-glucoside, the Douglas Fir has the same
+toxins as Western Cedar along with 15-Acetyldeoxynivalenol and Dimethyl dicarbonate.
+15-Acetyldeoxynivalenol is a mycotoxin related to a deoxynivalenol with acute toxicity [ 46]
+Dimethyl dicarbonate is an acute toxin chemical which is a organooxygen compound. This
+compound is used for sterilizing soft drinks and wines [47].
+Biomass 2023 ,3 168
+Table 3. Toxic compound screening results for WC #2 samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+WC #2 LPC (+)Toxic Class 14-Vinylphenol (+,  ) X X
+Alternariol monomethyl ether (+,  ) X X
+Aﬂatoxin M1 (  ) X X
+HT-2 toxin (+) X X
+T-2 Toxin tetraol (  ) X -
+Altenuene (+) X -
+Neosolaniol (+) - X
+Toxic Class 2Deoxynivalenol 3-glucoside (+,  ) X X
+Aﬂatoxin G1 (  ) X X
+15-Acetyldeoxynivalenol (  ) X X
+Glutaraldehyde (+) X X
+Carbofuran (+) X X
+2-Acetylfuran (+) X -
+Anguidine (  ) - X
+Nivalenol (+) - X
+Table 4. Yield and sample preparation data for DF.
+Sample DF
+Wet weight of leaf (g wet biomass) 50.2
+LPC drying paper weight (g) 1.27
+Fiber Mass drying paper weight (g) 1.55
+Drying time (hours) 16
+Heating time (minutes) 3.0
+Blending time (minutes) 3.0
+Paper + Fiber Mass (g dry) 19.6
+Fiber Mass (g dry) 18.05
+Fiber Mass yield (% dry ﬁber mass to dry leaf
+weight)61.65%
+Paper + LPC (g dry) 1.58
+LPC (g dry) 0.31
+LPC yield % (dry LPC to dry leaf weight) 1.06%
+Table 5. Toxic compound screening results for DF samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+DFToxic Class
+1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (+,  ) X X
+Toxic Class
+2T-2 Toxin tetraol (  ) - X
+15-Acetyldeoxynivalenol (  ) X X
+Dimethyl dicarbonate (  ) X -
+3.3. Ponderosa Pine (PP)
+The Ponderosa Pine LPC parameters are shown in Table 6 and the average of LPC
+yield is calculated as 3.05%. The LPC yield is shown to have a large variation in values
+indicating that future work should consider a high number of experiments under various
+conditions and tool sets to get a reliable estimate for the average LPC yield that could be
+expected globally during a disaster.
+Biomass 2023 ,3 169
+Table 6. Yield and sample preparation data for PP .
+Sample #1 #2 Average
+Wet weight of leaf (g wet biomass) 50 50 50
+LPC drying paper weight (g) 2.1 1.9 2.0
+Fiber Mass drying paper weight (g) 2.12 2.60 2.36
+Drying time (hours) 14 14 14
+Heating time (minutes) 3.0 3.0 3.0
+Blending time (minutes) 3.0 3.0 3.0
+Fiber Mass (g dry) 20.58 20.58 20.58
+Fiber Mass yield (% dry ﬁber mass to dry
+leaf weight)78.12% 78.12% 78.12%
+Paper + LPC (g dry) 3.01 2.59 2.85
+LPC (g dry) 0.91 0.7 0.80
+LPC yield % (dry LPC to dry leaf weight) 3.45% 2.66% 3.05%
+Ponderosa Pine returned multiple toxic compounds in class 1 and class 2 which are
+shown in Table 7.
+Table 7. Toxic compound screening results for PP samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+PPToxic Class 14-Vinylphenol (+,  ) X -
+Alternariol monomethyl ether (  ) X X
+Altenuene (  ) - X
+Toxic Class 2T-2 Toxin tetraol (+) - X
+Deoxynivalenol 3-glucoside (  ) X X
+Dimethyl dicarbonate (  ) - X
+Except H-2 Toxin tetraol, the same toxins found in Western Cedar were found in
+Ponderosa Pine along with Altenuene and Dimethyl dicarbonate. Altenuene, a metabolite
+of alternariol, is a mycotoxin and is not very acutely toxic [37].
+3.4. Western Hemlock (WHL)
+The LPC parameters for Western Hemlock samples are shown in Table 8. The LPC
+yield was 7.29%.
+Table 8. Yield and sample preparation data for WHL.
+Sample WHL
+Wet weight of leaf (g wet biomass) 42.7
+LPC drying paper weight (g) 0.97
+Fiber Mass drying paper weight (g) 2.52
+Drying time (hours) 16
+Heating time (minutes) 3.0
+Blending time (minutes) 3.0
+Paper + Fiber Mass (g dry) 18.4
+Fiber Mass (g dry) 15.88
+Fiber Mass yield (% dry ﬁber mass to dry leaf weight) 74.71%
+Paper + LPC (g dry) 2.52
+LPC (g dry) 1.55
+LPC yield % (dry LPC to dry leaf weight) 7.29%
+Table 9 represents the toxic compounds in Western Hemlock.
+Biomass 2023 ,3 170
+Table 9. Toxic compound screening results for PP samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+Western
+HemlockToxic Class 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (+,  ) X X
+Toxic Class 2Carbofuran (+) X
+Aﬂatoxin B2 (  ) - X
+Deoxynivalenol 3-glucoside (  ) - X
+Dimethyl dicarbonate (  ) - X
+Except T-2 Toxin and Altenuene, Western Hemlock has the same toxin as Ponderosa
+Pine along with Carbofuran and Aﬂatoxin B2. All of aﬂatoxins are mycotoxins. One
+of the most common aﬂatoxins, Aﬂatoxin B2, is considered to be much less toxic than
+Aﬂatoxin B1 [ 48]. Generally, aﬂatoxins are unsafe only for people who are exposed to
+this chemical continuously, including agricultural workers [ 49]. Carbofuran is a common
+pesticide and one of the most toxic pesticides of its class. It is “fairly persistent in soil and
+water ecosystems” [50].
+3.5. LodgePole Pine (LPP)
+The parameters used for Lodgepole Pine are shown in Table 10 with an LPC yield of
+2.55%.
+Table 10. Yield and sample preparation data for LPP .
+Sample LPP
+Wet weight of leaf (g wet biomass) 50.27
+LPC drying paper weight (g) 1.26
+Fiber Mass drying paper weight (g) 2.07
+Drying time (hours) 16
+Heating time (minutes) 3.0
+Blending time (minutes) 3.0
+Paper + Fiber Mass (g dry) 22.1
+Fiber Mass (g dry) 20.03
+Fiber Mass yield (% dry ﬁber mass to dry leaf weight) 23%
+Paper + LPC (g dry) 2
+LPC (g dry) 0.74
+LPC yield % (dry LPC to dry leaf weight) 2.55%
+The toxic compound results for LPP are shown in Table 11.
+Table 11. Toxic compound screening results for LPP samples.
+Material Class Toxin (In ESI+ or ESI  ) Run 1 Run 2
+LPPToxic Class 1Alternariol monomethyl ether (+,  ) X X
+4-Vinylphenol (  ) X X
+Aﬂatoxin M1 (  ) - X
+Toxic Class 2Dimethyl dicarbonate (  ) X X
+Deoxynivalenol 3-glucoside (+) X X
+Aﬂatoxin G1 (  ) - X
+2-Acetylfuran (+) X -
+Biomass 2023 ,3 171
+Except Altenuene and T-2 Toxin found in Ponderosa Pine, the same toxins are found
+in LodgePole Pine along with Aﬂatoxin M1, Aﬂatoxin G1, and 2-Acetylfuran. Aﬂatoxin
+G1, which is one of the most common aﬂatoxins is considered to be much less toxic than
+Aﬂatoxin B1. Also, Aﬂatoxin M1, which is a common metabolite, is even less toxic than
+Aﬂatoxin G1 [ 48]. 2-Acetylfuran, which is returned in the second run and is a toxic class 2,
+is toxic if consumed [51].
+4. Discussion
+All of the yields for LPCs are summarized in Table 12, where values ranged from
+1% to 7%. These are somewhat low as compared to agriculture residue LPC and other
+LPCs. In one study of agricultural residue LPC, yield values ranged from 7 to 14.5% [ 52].
+Additional studies of various agricultural products and other common tropical, subtropical,
+and temperate vegetation showed yield values ranging from 2% to 9% [ 53]. Overall, needles
+(ﬁr, ponderosa, lodgepole) were extremely difﬁcult to blend using a food processor, because
+of the length and cylindrical nature of the needles as well as the extreme toughness and
+ﬁbrousness of the needle ﬁbers. This often resulted in needles bouncing off the yield blades,
+rendering them non-processible with the meat grinder. The cedar was comparatively easy
+to blend, but has some compounds with rheological modifying properties because they
+formed a soapy, gelatinous type texture that was difﬁcult to separate. The consistency of the
+liquid ended up making it difﬁcult to isolate the protein, which appeared to be suspended
+as very small coagulate chunks in the liquid. The hemlock’s small leaves were much more
+like ‘crop’ leaves in terms of toughness and texture, though they had to be stripped from
+small branches, which was time intensive.
+Table 12. Summary of residues yields and average yields.
+Tree Yield % (Dry LPC/Dry Leaf Weight)
+Western Cedar 2.07
+Douglas Fir 1.06
+Ponderosa Pine 3.05 (2.66–3.45)
+Western Hemlock 7.29
+Lodgepole Pine 2.55
+Western Cedar contains several toxins. Many of these chemicals are not considered as
+acutely toxic if consumed in low concentrations. HT-2 toxin along with T-2 toxin tetraol,
+however, are of greater concern and they could be harmful for human consumption. It
+should be noted that they are found in many foods which are already used. Thus, the
+dosage of these chemicals should be considered and the LPC could be consumed only if the
+dosage does not exceed that which can be measured from Equation (1) [ 43]. Similarly, toxins
+in Douglas Fir and Ponderosa Pine are mostly mycotoxins, which can already be found in
+many foods, and they can be consumed if their dosage is less than speciﬁc levels. Conifer
+pine needles are already eaten regularly [ 53] in a number of recipes, in pine needle tea,
+which is high in vitamin C, and they are available commercially [ 54]. The majority of the
+substances found in Western Hemlock and Lodgepole Pine do not preclude the use of these
+trees as a candidate for food. However, they do contain Aﬂatoxins. The amount of this toxin
+should be measured since large amounts can be dangerous, but again it should be noted
+small dosages of them are not harmful and they already exist in many cereals and grains.
+These trees may, however, require signiﬁcant decontamination before human consumption
+if they contain high concentrations of aﬂatoxins [ 35]. As the results show, potential toxins
+were found in all leaves. These are only potential toxins and future work is necessary
+to quantify them to determine if consuming large quantities of conifer LPC represents
+a danger. This can be done by running the identiﬁed potential toxins through the same
+system with calibration standards and repeating the measurements. In addition, animal
+studies can be run on the LPCs eaten in high volumes to help ensure no toxicity to obtain
+FDA approval. As some of these species are already commercially available for food (e.g.,
+Biomass 2023 ,3 172
+pine needle tea) [ 55], work can already be done to determine the potential cost effectiveness
+of using conifer LPCs as a resilient food and compare it to other approaches [56–58].
+5. Conclusions
+The average yield ranging from 1% to 7% is investigated for ﬁve coniferous LPCs.
+While this range is lower than that found in other LPC analyses (e.g., agricultural waste),
+coniferous LPC provides a viable option for protein in forested areas in the event of extreme
+food shortage. Moreover, this study provided the ﬁrst original high-resolution mass
+spectrometry of coniferous LPC samples and ran them through an open-source toolchain
+for non-targeted screening of ﬁve tree residues. The results conﬁrm that these trees may
+contain toxins that can be consumed in small amounts, and additional studies including
+measuring the quantity of each toxin and determining the conditions that enable these
+toxins to grow are required (e.g., were some of them caused by the environment in which
+they were found?) Generally, the objectives of this study was met, and LPC was shown
+to be a promising candidate to be used as a resilient food; however, this ﬁeld requires a
+wider range of studies to screen the LPC based on different conditions in which they are
+harvested, handled and stored.
+Author Contributions: Conceptualization, D.D. and J.M.P .; methodology, R.J.T., T.K.M.; software,
+T.K.M.; validation, M.M., T.K.M. and J.M.P .; formal analysis, M.M., T.K.M. and J.M.P .; investigation,
+M.M., T.K.M. and R.J.T.; resources, D.D. and J.M.P .; data curation, M.M., T.K.M. and R.J.T.; writing—
+original draft preparation, M.M. and J.M.P .; writing—review and editing, M.M., T.K.M., R.J.T., D.D.
+and J.M.P .; visualization, T.K.M.; supervision, D.D. and J.M.P .; funding acquisition, D.D. and J.M.P .
+All authors have read and agreed to the published version of the manuscript.
+Funding: This project was supported by the Thompson Endowment, the Natural Sciences and
+Engineering Research Council of Canada, ALLFED, and via the Future Fund Regranting Program.
+Institutional Review Board Statement: Not applicable.
+Informed Consent Statement: Not applicable.
+Data Availability Statement: All data for the project are available upon request.
+Acknowledgments: The authors would like to thank Simeon K. Shum and Sam Breuer for technical
+support.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+Appendix A
+Total ion chromatograms are shown for all needles analyzed in Figures A1–A24 for
+both the positive and negative ionization.
+Biomass 2023 ,3 173
+Biomass  2023 , 3 173 
+ 
+Appendix A  
+Total ion chromatograms are shown for all needles analyzed in Figures A1 –A24 for 
+both the positive and negative ionization.  
+ 
+Figure A 1. First run WC #1 negative . 
+ 
+Figure A2. Second run WC #1 negative . 
+Figure A1. First run WC #1 negative.
+Figure A2. Second run WC #1 negative.
+Biomass 2023 ,3 174
+Figure A3. First run WC #2 LPC(+) negative.
+Figure A4. Second run WC #2 LPC (+) negative.
+Biomass 2023 ,3 175
+Figure A5. First run DF negative.
+Figure A6. Second run DF negative.
+Biomass 2023 ,3 176
+Figure A7. First run PP negative.
+Figure A8. Second run DP negative.
+Biomass 2023 ,3 177
+Figure A9. First run WHL negative.
+Figure A10. Second run WHL negative.
+Biomass 2023 ,3 178
+Figure A11. First run LPP negative.
+Figure A12. Second run LPP negative.
+Biomass 2023 ,3 179
+Figure A13. First run WC #1 positive.
+Figure A14. Second run WC #1 positive.
+Biomass 2023 ,3 180
+Figure A15. First run DF positive.
+Figure A16. Second run DF positive.
+Biomass 2023 ,3 181
+Figure A17. First run PP positive.
+Figure A18. Second run PP positive.
+Biomass 2023 ,3 182
+Figure A19. First run WHL positive.
+Figure A20. Second run WHL positive.
+Biomass 2023 ,3 183
+Figure A21. First run LPP positive.
+Figure A22. Second run LPP positive.
+Biomass 2023 ,3 184
+Figure A23. First run WC #2 LPC (+) positive.
+Figure A24. Second run WC #2 LPC (+) positive.
+Biomass 2023 ,3 185
+Appendix B
+Table A1. Acute Toxicity Categories for Pesticide Products [36].
+Hazard Indicators I II III IV
+Oral LD50Up to and including
+50 mg/kg>50 thru 500 mg/kg >500 thru 5000 mg/kg >5000 mg/kg
+Dermal LD50Up to and including
+200 mg/kg>200 thru 2000 mg/kg>2000
+thru 20,000 mg/kg>20,000 mg/kg
+Inhalation LC50Up to and including
+0.2 mg/L>0.2 thru 2 mg/L >2 thru 20 mg/L >20 mg/L
+Eye irritationCorrosive; corneal
+opacity not reversible
+within 7 daysCorneal opacity
+reversible within
+7 days; irritation
+persisting for 7 daysNo corneal opacity;
+irritation reversible
+within 7 daysNo irritation
+Skin irritation Corrosive Severe irritation at 72 hModerate irritation
+at 72 hMild or slight irritation
+at 72 h
+References
+1. Bostrom, N.; Cirkovic, M.M. (Eds.) Global Catastrophic Risks ; Oxford University Press: Oxford, UK; New York, NY, USA, 2011.
+2. Robock, A.; Oman, L.; Stenchikov, G.L. Nuclear winter revisited with a modern climate model and current nuclear arsenals: Still
+catastrophic consequences. J. Geophys. Res. 2007 ,112, D13. [CrossRef]
+3. Xia, L.; Robock, A.; Scherrer, K.; Harrison, C.S.; Bodirsky, B.L.; Weindl, I.; Jägermeyr, J.; Bardeen, C.G.; Toon, O.B.; Heneghan, R.
+Global food insecurity and famine from reduced crop, marine ﬁshery and livestock production due to climate disruption from
+nuclear war soot injection. Nat. Food 2022 ,3, 586–596. [CrossRef] [PubMed]
+4. Denkenberger, D.C.; Pearce, J.M. Feeding everyone: Solving the food crisis in event of global catastrophes that kill crops or
+obscure the sun. Futures 2015 ,72, 57–68. [CrossRef]
+5. Denkenberger, D.; Sandberg, A.; Tieman, R.J.; Pearce, J.M. Long term cost-effectiveness of resilient foods for global catastrophes
+compared to artiﬁcial general intelligence safety. Int. J. Disaster Risk Reduct. 2022 ,73, 102798. [CrossRef]
+6. Denkenberger, D.; Pearce, J. Feeding Everyone No Matter What: Managing Food Security after Global Catastrophe ; Academic Press:
+Cambridge, MA, USA, 2014.
+7. Garc ía Mart ínez, J.B.; Pearce, J.M.; Throup, J.; Cates, J.; Lackner, M.; Denkenberger, D.C. Methane Single Cell Protein: Potential to
+Secure a Global Protein Supply Against Catastrophic Food Shocks. Front. Bioeng. Biotechnol. 2022 ,10, 1125. [CrossRef]
+8. Throup, J.; Garc ía Mart ínez, J.B.; Bals, B.; Cates, J.; Pearce, J.M.; Denkenberger, D.C. Rapid repurposing of pulp and paper mills,
+bioreﬁneries, and breweries for lignocellulosic sugar production in global food catastrophes. Food Bioprod. Process. 2022 ,131,
+22–39. [CrossRef]
+9. Alvarado, K.A.; Mill, A.; Pearce, J.M.; Vocaet, A.; Denkenberger, D. Scaling of greenhouse crop production in low sunlight
+scenarios. Sci. Total Environ. 2020 ,707, 136012. [CrossRef]
+10. Stewart, H. Cedar: Tree of Life to the Northwest Coast Indians ; Douglas & McIntyre: Vancouver, BC, Canada, 1984.
+11. Winstead, D.J.; Jacobson, M.G. Food resilience in a dark catastrophe: A new way of looking at tropical wild edible plants. Ambio
+2022 ,51, 1949–1962. [CrossRef]
+12. Garc ía Mart ínez, J.B.; Egbejimba, J.; Throup, J.; Matassa, S.; Pearce, J.M.; Denkenberger, D.C. Potential of microbial protein from
+hydrogen for preventing mass starvation in catastrophic scenarios. Sustain. Prod. Consum. 2021 ,25, 234–247. [CrossRef]
+13. Garc ía Mart ínez, J.B.; Brown, M.M.; Christodoulou, X.; Alvarado, K.A.; Denkenberger, D.C. Potential of microbial electrosynthesis
+for contributing to food production using CO 2during global agriculture-inhibiting disasters. Clean. Eng. Technol. 2021 ,4, 100139.
+[CrossRef]
+14. Garc ía Mart ínez, J.B.; Alvarado, K.A.; Christodoulou, X.; Denkenberger, D.C. Chemical synthesis of food from CO2 for space
+missions and food resilience. J. CO2 Util. 2021 ,53, 101726. [CrossRef]
+15. Meyer, T.K.; Pascaris, A.; Denkenberger, D.; Pearce, J.M.U.S. Potential of Sustainable Backyard Distributed Animal and Plant
+Protein Production during and after Pandemics. Sustainability 2021 ,13, 5067. [CrossRef]
+16. Garc ía Mart ínez, J.B.; Alvarado, K.A.; Denkenberger, D.C. Synthetic fat from petroleum as a resilient food for global catastrophes:
+Preliminary techno-economic assessment and technology roadmap. Chem. Eng. Res. Des. 2022 ,177, 255–272. [CrossRef]
+17. Denkenberger, D.; Pearce, J. Micronutrient Availability in Alternative Foods During Agricultural Catastrophes. Agriculture 2018 ,
+8, 169. [CrossRef]
+18. Denkenberger, D.C.; Cole, D.D.; Abdelkhaliq, M.; Griswold, M.; Hundley, A.B.; Pearce, J.M. Feeding everyone if the sun is
+obscured and industry is disabled. Int. J. Disaster Risk Reduct. 2017 ,21, 284–290. [CrossRef]
+Biomass 2023 ,3 186
+19. Fist, T.; Adesanya, A.A.; Denkenberger, D.; Pearce, J.M. Global distribution of forest classes and leaf biomass for use as alternative
+foods to minimize malnutrition. World Food Policy 2021 ,7, 128–146. [CrossRef]
+20. Addo-Danso, S.D. Responses of Western Hemlock, Western Redcedar, and Amabilis Fir to Fertilization: A Synthesis ; Province of British
+Columbia: Victoria, BC, Canada, 2019.
+21. BC Market Outreach Network. BC Forest Information. Managing B.C. Cedar for the Future ; BC Market Outreach Network: Vancouver,
+BC, Canada, 2003.
+22. McArdle, R.E.; Meyer, W.H.; Bruce, D. The Yield of Douglas Fir in the Paciﬁc Northwest ; IDEAS Working Paper Series from RePEc;
+US Department of Agriculture: Washington, DC, USA, 1930.
+23. Gazol, A.; Valeriano, C.; Cantero, A.; Vergarechea, M.; Camarero, J.J. Douglas Fir Growth Is Constrained by Drought: Delineating
+the Climatic Limits of Timber Species under Seasonally Dry Conditions. Forests 2022 ,13, 1796. [CrossRef]
+24. Schmid, M.; Pautasso, M.; Holdenrieder, O. Ecological consequences of Douglas ﬁr ( Pseudotsuga menziesii ) cultivation in Europe.
+Eur. J. For. Res. 2014 ,133, 13–29. [CrossRef]
+25. Nuszdorfer, F.C. Old and Large Douglas-Fir and Western Redcedar in the Squamish Forest District, British Columbia, Canada [Microform] ;
+Vancouver Forest Region: Nanaimo, BC, Canada, 2000.
+26. Alldritt, M.J. The Ecology of the Ponderosa Pine Zone ; British Columbia Ministry of Forests: Govt Victoria, BC, Canada, 1998.
+27. Safford, H.D.; Stevens, J.T. Natural Range of Variation for Yellow Pine and Mixed-Conifer Forests in the Sierra Nevada, Southern Cascades,
+and Modoc and Inyo National Forests, California, USA ; General Technical Report; Paciﬁc Southwest Research Station, USDA Forest
+Service: Washington, DC, USA, 2017.
+28. Arno, S. Northwest Trees: Identifying and Understanding the Region’s Native Trees ; Mountaineers Books: Seattle, WA, USA, 2020.
+29. Schuler, J.L. National Wildlife Federation Field Guide to Trees of North America. J. Environ. Qual. 2009 ,38, 1330. [CrossRef]
+30. Final Report of the Lodgepole Pine Seed Set Task Group, Interior Technical Advisory Committee, Forest Genetics Council of British Columbia ;
+Forest Genetics Council of British Columbia: Victoria, BC, Canada, 2002.
+31. Lodgepole Pine 2022. Available online: https://www.for.gov.bc.ca/hfd/library/documents/treebook/lodgepolepine.htm
+(accessed on 18 November 2022).
+32. Hubbard, B.R.; Putman, L.I.; Techtmann, S.; Pearce, J.M. Open Source Vacuum Oven Design for Low-Temperature Drying:
+Performance Evaluation for Recycled PET and Biomass. J. Manuf. Mater. Process. 2021 ,5, 52. [CrossRef]
+33. Pearce, J.M.; Khaksari, M.; Denkenberger, D. Preliminary Automated Determination of Edibility of Alternative Foods: Non-
+Targeted Screening for Toxins in Red Maple Leaf Concentrate. Plants 2019 ,8, 110. [CrossRef] [PubMed]
+34. Breuer, S.W.; Toppen, L.; Schum, S.K.; Pearce, J.M. Open source software toolchain for automated non-targeted screening for
+toxins in alternative foods. MethodsX 2021 ,8, 101551. [CrossRef] [PubMed]
+35. Dorne, J.L.C.M.; Richardson, J.; Livaniou, A.; Carnesecchi, E.; Ceriani, L.; Baldin, R.; Kovarich, S.; Pavan, M.; Saouter, E.; Biganzoli,
+F.; et al. EFSA’s OpenFoodTox: An open source toxicological database on chemicals in food and feed and its future developments.
+Environ. Int. 2021 ,146, 106293. [CrossRef]
+36. Code of Federal Regulation 2022. Available online: https://www.ecfr.gov/current/title-40/chapter-I/subchapter-E/part-156/
+subpart-D/section-156.62 (accessed on 18 November 2022).
+37. Ostry, V . Alternaria mycotoxins: An overview of chemical characterization, producers, toxicity, analysis and occurrence in
+foodstuffs. World Mycotoxin J. 2008 ,1, 175–188. [CrossRef]
+38. Case Deﬁnition: Trichothecene Mycotoxin 2018. Available online: https://emergency.cdc.gov/agent/trichothecene/casedef.asp
+(accessed on 25 November 2022).
+39. Dionisio, K.L.; Phillips, K.; Price, P .S.; Grulke, C.M.; Williams, A.; Biryol, D.; Hong, T.; Isaacs, K.K. The Chemical and Products
+Database, a resource for exposure-relevant data on chemicals in consumer products. Sci. Data 2018 ,5, 180125. [CrossRef]
+[PubMed]
+40. Watabe, T.; Hiratsuka, A.; Aizawa, T.; Sawahata, T.; Ozawa, N.; Isobe, M.; Takabatake, E. Studies on metabolism and toxicity of
+styrene IV . 1-Vinylbenzene 3,4-oxide, a potent mutagen formed as a possible intermediate in the metabolism in vivo of styrene to
+4-vinylphenol. Mutat. Res./Fundam. Mol. Mech. Mutagen. 1982 ,93, 45–55. [CrossRef] [PubMed]
+41. Chatonnet, P .; Dubourdie, D.; Boidron, J.; Pons, M. The origin of ethylphenols in wines. J. Sci. Food Agric. 1992 ,60, 165–178.
+[CrossRef]
+42. Haschek, W.M.; Voss, K.A. Mycotoxins. Haschek and Rousseaux’s Handbook of Toxicologic Pathology ; Elsevier: Amsterdam, The
+Netherlands, 2013; pp. 1187–1258. [CrossRef]
+43. Adhikari, M.; Negi, B.; Kaushik, N.; Adhikari, A.; Al-Khedhairy, A.A.; Kaushik, N.K.; Choi, E.H. T-2 mycotoxin: Toxicological
+effects and decontamination strategies. Oncotarget 2017 ,8, 33933–33952. [CrossRef]
+44. Berthiller, F.; Crews, C.; Dall’Asta, C.; Saeger, S.D.; Haesaert, G.; Karlovsky, P .; Oswald, I.P .; Seefelder, W.; Speijers, G.; Stroka, J.
+Masked mycotoxins: A review. Mol. Nutr. Food Res. 2013 ,57, 165–186. [CrossRef]
+45. Pierron, A.; Mimoun, S.; Murate, L.S.; Loiseau, N.; Lippi, Y.; Bracarense, A.-P .F.L.; Liaubet, L.; Schatzmayr, G.; Berthiller, F.;
+Moll, W.D.; et al. Intestinal toxicity of the masked mycotoxin deoxynivalenol-3- -d-glucoside. Arch. Toxicol. 2016 ,90, 2037–2046.
+[CrossRef]
+46. Rutz, A.; Sorokina, M.; Galgonek, J.; Mietchen, D.; Willighagen, E.; Gaudry, A.; Graham, J.G.; Stephan, R.; Page, R.; Vondr ášek, J.;
+et al. The LOTUS Initiative for Open Knowledge Management in Natural Products Research. eLife 2022 ,11, e70780. [CrossRef]
+[PubMed]
+Biomass 2023 ,3 187
+47. PubChem. Dimethyl Dicarbonate 2022. Available online: https://pubchem.ncbi.nlm.nih.gov/compound/3086 (accessed on 25
+November 2022).
+48. Yu, J.; Proctor, R.H.; Brown, D.W.; Abe, K.; Gomi, K.; Machida, M.; Hasegawa, F.; Nierman, W.C.; Bhatnagar, D.; Cleveland, T.E.
+Genomics of Economically Signiﬁcant Aspergillus and Fusarium Species. Appl. Mycol. Biotechnol. 2004 ,4, 249–283. [CrossRef]
+49. Boonen, J.; Malysheva, S.V .; Taevernier, L.; Di Mavungu, J.D.; De Saeger, S.; De Spiegeleer, B. Human skin penetration of selected
+model mycotoxins. Toxicology 2012 ,301, 21–32. [CrossRef]
+50. Mishra, S.; Zhang, W.; Lin, Z.; Pang, S.; Huang, Y.; Bhatt, P .; Chen, S. Carbofuran toxicity and its microbial degradation in
+contaminated environments. Chemosphere 2020 ,259, 127419. [CrossRef] [PubMed]
+51. Substance Information—ECHA 2022. Available online: https://echa.europa.eu/substance-information/-/substanceinfo/100.013.
+416 (accessed on 18 November 2022).
+52. Meyar, T.K.; Tieman, R.J.; Breuer, S.W.; Denkenberger, D.; Joshua, M.P . Yield and Toxic Analysis of Leaf Protein Concentrate of
+Common Agricultural Residues. submitted.
+53. Kennedy, D. Leaf for Life. Leaf Concentrate: A Field Guide for Small Scale Programs. Available online: https://www.leafforlife.
+org/gen/leaf_concentrate.html (accessed on 9 January 2023).
+54. Can You Eat Pine Needles? 2022. Available online: https://www.primalsurvivor.net/can-you-eat-pine-needles/ (accessed on 25
+November 2022).
+55. Amazon.ca: Pine Needle Tea 2022. Available online: https://www.amazon.ca/s (accessed on 25 November 2022).
+56. Denkenberger, D.; Pearce, J.; Taylor, A.R.; Black, R. Food without sun: Price and life-saving potential. Foresight 2019 ,21, 118–129.
+[CrossRef]
+57. Denkenberger, D.C.; Pearce, J.M. Cost-effectiveness of interventions for alternate food in the United States to address agricultural
+catastrophes. Int. J. Disaster Risk Reduct. 2018 ,27, 278–289. [CrossRef]
+58. Denkenberger, D.C.; Pearce, J.M. Cost-Effectiveness of Interventions for Alternate Food to Address Agricultural Catastrophes
+Globally. Int. J. Disaster Risk Sci. 2016 ,7, 205–215. [CrossRef]
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

@@ -1,0 +1,1006 @@
+Memoria relacional bayesiana para la navegación visual semántica
+Yi Wu† ¶Yuxin Wu‡Aviv Tamar§Stuart Russell†Georgia Gkioxari‡Yuandong Tian‡
+†UC Berkeley‡Facebook AI Research§Technion¶OpenAI
+†fjxwuyi,russell g@cs.berkeley.edu‡fyuxinwu,gkioxari,yuandong g@fb.com§avivt@technion.ac.il
+Resumen
+Presentamos una nueva arquitectura de memoria bayesiana, la Memoria Re-
+lacional Bayesiana (BRM), para mejorar la capacidad de generaliza-
+ción de los agentes de navegación visual semántica en entor-
+nos no vistos, donde se le da al agente una meta semántica hacia la cual na-
+vegar. BRM adopta la forma de un grafo de rela-
+ciones probabilístico sobre entidades semánticas (p. ej., tipos de habitación), lo cual
+permite (1) capturar el prior de la disposición a partir de los entor-
+nos de entrenamiento, es decir, el conocimiento previo , (2) estimar la disposición posterior
+en tiempo de prueba, es decir, la actualización de la memoria , y (3) planificar de forma eficiente
+la navegación, todo a la vez. Desarrollamos un agente BRM compuesto
+por un módulo BRM para producir submetas y un módulo de locomoción
+condicionado por la meta para el control. Al probarlo
+en entornos no vistos, el agente BRM supera a las líneas
+base que no utilizan de forma explícita la estructura de memoria relacional
+probabilística.
+1. Introducción
+La memoria es un componente crucial para que los agentes inteligentes
+adquieran amplias capacidades de razonamiento en un horizonte largo.
+Uno de esos desafíos es la navegación visual, donde un agente es
+colocado en un entorno con disposición y conectividad de habitaciones desconocidas,
+actúa según la señal visual percibida de su entor-
+no, explora y alcanza una posición meta de forma eficiente.
+Debido a la observabilidad parcial, el agente debe memorizar
+sus experiencias pasadas y reaccionar en consecuencia. Por ello, los modelos de aprendizaje profun-
+do (DL) para la navegación visual suelen codificar estructuras de memo-
+ria en su diseño. Al principio se usó LSTM como
+memoria implícita de propósito general [36, 35, 10]. Más recientemente, para
+mejorar el rendimiento, se usan memorias explícitas y específicas para la navegación
+de tipo estructural [42, 24, 46, 25].
+Existen dos categorías de memoria específica para la navegación:
+la memoria espacial [42, 24] y la memoria topológica [25,
+46]. La idea central de la memoria espacial es extender la
+memoria unidimensional de LSTM a una ma-
+triz bidimensional que representa la estructura espacial del entorno,
+donde una entrada particular de la matriz corresponde a una ubicación o región 2D
+en el entorno. Debido a su estructura regu-
+lar, la iteración de valores [50] puede aplicarse directamente para una planificación eficaz
+sobre la matriz de memoria.Sin embargo, planificar sobre dicha memoria espacial puede ser com-
+putacionalmente costoso para entornos con habitaciones grandes.
+Para navegar, la localización precisa de un agente a menudo no es
+innecesaria. Abundantes evidencias psicológicas [46] también
+muestran que los animales no dependen en gran medida de representacio-
+nes métricas [54, 22]. En cambio, los humanos dependen principalmente de
+una estrategia de navegación basada en puntos de referencia, que puede ser respal-
+dada por conocimiento topológico cualitativo del entor-
+no [22]. Por lo tanto, es razonable representar la memo-
+ria como un grafo topológico donde los vértices son puntos de referencia
+del entorno y las aristas denotan la alcanzabilidad a corto plazo
+entre puntos de referencia. Durante la navegación, se entrena una red de localización
+para identificar la posición del agente y
+de la meta respecto a los puntos de referencia en la memoria, y una búsqueda eficiente
+en el grafo puede usarse para la planificación a largo plazo.
+Sin embargo, la navegación humana aún muestra un rendimiento de gene-
+ralización superior que no puede explicarse ni por la
+memoria espacial ni por la topológica. Por ejemplo, los visitantes que llegan por primera vez
+a una casa se mueven naturalmente hacia la cocina (en lugar
+del exterior o el baño) para tomar un plato; de la cocina al dormi-
+torio, saben que la sala de estar puede ser un punto de paso interme-
+dio. Aunque visualmente diferentes, tal conocimiento semántico
+, es decir, las relaciones de “cercanía” entre enti-
+dades semánticas, se comparten naturalmente entre entornos y pueden ser
+aprendidas de la experiencia previa para guiar la navega-
+ción futura. En comparación, los enfoques existentes de memoria
+topológica suponen experiencias de preexploración del entor-
+no antes de que comience la navegación [25, 46], no ofrecen operaciones de actualización de la me-
+moria y no pueden incorporar el conocimiento previo
+de las disposiciones y configuraciones de las escenas a partir de entornos vis-
+tos anteriormente.
+En este trabajo, proponemos un nuevo diseño de memoria para la navegación
+visual, la Memoria Relacional Bayesiana (BRM), que (1)
+captura el conocimiento previo de las disposiciones de las escenas a partir de los entornos
+de entrenamiento y (2) permite tanto una planificación eficiente como la actuali-
+zación durante la exploración en tiempo de prueba. BRM puede verse
+como una versión probabilística de una memoria topológica con abstraccio-
+nes semánticas: cada nodo de BRM denota un concepto semántico
+(p. ej., categoría de objeto, tipo de habitación, etc.), que puede
+detectarse mediante un detector neuronal, y cada arista denota la
+relación entre dos conceptos. En cada entorno, una única
+relación puede estar presente o no. Para cada relación (arista),
+podemos promediar sus existencias en todos los entornos de entrenamiento
+Submeta: 
+“sala de estar ”
+Meta: “ cocina ”
+submeta: 
+“sala de estar ”memoria relacional 
+(planificar) cocina
+exteriorsala de estardesayunador
+memoria actualizada
+(escribir y replanificar)cocina
+exteriorsala de estardesayunador
+Éxitosubmeta: 
+“desayunador ”…Figura 1. Una demostración de nuestra tarea y método. El agente percibe señales visuales y necesita encontrar la cocina, que no puede verse
+desde el exterior (extremo izquierdo). Por ello, el agente planifica en su memoria y concluye que primero puede encontrar un probable punto de paso intermedio, es decir, la sala de
+estar. Luego el agente actualiza repetidamente su creencia sobre la disposición del entorno, replanifica en consecuencia y finalmente llega a la cocina.
+y aprender una probabilidad de existencia para denotar el conocimiento previo
+entre dos conceptos semánticos. Durante la exploración
+en tiempo de prueba, podemos observar de forma incremental las existencias
+de relaciones dentro de ese entorno de prueba particular. Por lo
+tanto, podemos usar estas observaciones específicas del entorno
+para actualizar la probabilidad de esas relaciones en la memoria
+mediante la regla de Bayes para obtener el conocimiento posterior . Ade-
+más, entrenamos una política de locomo-
+ción LSTM condicionada por la meta semántica para el control mediante aprendizaje por refuerzo profundo
+(DRL) y, al planificar sobre el grafo de relaciones con probabilidades posteriores,
+el agente elige la siguiente submeta semántica hacia la cual
+navegar.
+Evaluamos nuestro método BRM en una tarea de navegación visual semántica
+sobre el entorno House3D [58, 10],
+que ofrece un conjunto diverso de objetos, texturas y escenas interiores diseñadas
+por humanos. Las escenas y entidades semánticas
+en House3D están completamente etiquetadas (con ruido), lo cual resulta natu-
+ral para nuestro modelo BRM. En la tarea de navegación, el agente
+observa señales visuales en primera persona y necesita navegar
+hacia un tipo de habitación particular. Utilizamos los tipos de habitación
+como los conceptos semánticos (nodos) en BRM y las relaciones de ”cerca-
+nía” como las aristas. Evaluamos en entornos no vis-
+tos con ubicaciones iniciales aleatorias y comparamos nuestro
+modelo aprendido con otros enfoques basados en DRL sin
+la representación BRM. Los resultados experimentales muestran que
+el agente equipado con BRM puede alcanzar la meta semántica
+con mayores tasas de éxito y menos pasos de navegación.
+Nuestras contribuciones son las siguientes: (1) propusimos una
+nueva representación de memoria, la Memoria Relacional Bayesiana
+(BRM), en forma de grafos de relaciones probabilísticos sobre
+conceptos semánticos; (2) BRM es capaz de codificar el conocimiento
+previo sobre los entornos de entrenamiento, así como la planificación eficiente
+y la actualización en tiempo de prueba; (3) al integrar BRM
+en una política de locomoción DRL, mostramos que el rendimiento de generali-
+zación puede mejorar significativamente.
+2. Trabajos relacionados
+La navegación es uno de los problemas más fundamentales de la
+robótica móvil. Los enfoques tradicionales (como SLAM) construyenmapas métricos mediante señales sensoriales, que posteriormente se
+usan para la planificación [17, 4, 51, 16]. Más recientemente, gracias a
+los avances del aprendizaje profundo, se han aplicado enfoques de extremo a extremo
+para abordar la navegación en diversos dominios, como
+laberintos [36, 27], escenas interiores [63, 5, 48, 37, 30], conducción au-
+tónoma [7, 59, 13] y Google street view [35].
+También hay buenos resúmenes de los avances recientes [2, 37].
+Nos centramos en el escenario de navegación en interiores con el entorno House3D
+[58], que contiene relaciones consistentes con el mundo real
+entre entidades semánticas y proporciona etiquetas de verdad terreno de objetos
+y escenas. También existen
+trabajos que estudian la navegación visual guiada por lenguaje
+natural, incluido el seguimiento de instrucciones [6, 39, 23, 55,
+3] y la respuesta a preguntas [11, 10, 1]. Estas tareas
+exigen que el agente entienda el lenguaje natural y razone en
+consecuencia en un entorno interactivo. En nuestra tarea de navegación semántica,
+la instrucción de objetivo se simplifica a un único concepto semántico,
+por lo que nos centramos más en la capacidad de
+razonamiento de los agentes de navegación. En nuestro trabajo,
+el razonamiento se realiza sobre las relaciones entre conceptos semánticos
+a partir de señales visuales. Ideas similares de usar conocimiento semántico
+para mejorar el razonamiento se han aplicado a la
+clasificación de imágenes [34, 56], la segmentación [52, 64], el
+reconocimiento de situaciones [33], la respuesta visual a preguntas [57, 9, 53,
+28, 26], la recuperación de imágenes [29] y la detección de
+relaciones [62]. Savinov et al. [47] y Kuang et al. [18]
+también consideran extraer conceptos visuales de forma dinámica, tratando cada fotograma
+recibido como un concepto individual y almacenándolo en la memoria.
+El trabajo más cercano al nuestro es uno concurrente de Wei
+et al. [60], que considera la navegación visual hacia una categoría
+de objeto y utiliza un grafo de conocimiento como conocimiento
+previo. Wei et al. [60] usan un grafo fijo para
+extraer características del objetivo como entrada adicional de la locomoción, sin
+actualización del grafo ni planificación. En cambio, en nuestro trabajo el
+grafo de relaciones se usa de forma bayesiana como representación de
+la memoria, que integra el uso de conocimiento previo, la
+actualización y la planificación. Desde la perspectiva del aprendizaje por
+refuerzo, nuestro trabajo está relacionado con los enfoques basados en
+modelos [14, 45, 61, 44, 32], en el sentido de que
+modelamos la disposición del entorno mediante un grafo de 𝑠𝑠𝑡𝑡 «cocina»𝑇𝑇acción
+𝑎𝑎𝑡𝑡
+CNN clasificador semántico
+grafo
+de
+relaciones𝑔𝑔𝑡𝑡reproducción 
+búfer actualizaciones periódicas subobjetivoPolítica de locomoción 
+Política
+LSTM ℎ𝑡𝑡 ℎ𝑡𝑡−1BRM
+«cocina» «exterior» «sala
+de
+estar» «comedor»
+0,7poco
+probable
+probable grafo
+de relaciones probabilístico. Figura 2. Arquitectura
+0.010.9
+0.05
+general de nuestro
+agente de navegación 
+equipado con la memoria relacional bayesiana (BRM). relaciones y planificar sobre él. Nuestro trabajo también se relaciona con el aprendizaje por refuerzo jerárquico [49,
+12, 31], donde el controlador (BRM) produce un subobjetivo de alto nivel
+para que la subpolítica (locomoción) lo persiga. Además, la BRM aprende
+a partir del entrenamiento multitarea, y su operación de actualización
+adapta rápidamente las relaciones previas al entorno de prueba, lo
+que también puede verse como una forma de metaaprendizaje [19, 15,
+38]. 3. Método 3.1. Planteamiento de la tarea Consideramos el problema
+de navegación visual semántica, en el que un agente
+interactúa
+con un entorno
+con pasos temporales discretos y navega hacia un objetivo
+semántico. En House3D, las entidades semánticas de interés son los
+tipos de habitación y asumimos un número fijo de K categorías.
+Al inicio de un episodio, se le da al agente
+un objetivo semántico T = {T1, ..., TK} hacia el
+que navegar para tener éxito. En cada paso temporal t, el
+agente recibe una observación visual s_t y produce una
+acción a_t en función de s_t y T. Queremos aprender un
+agente neuronal que pueda generalizar a entornos no vistos.
+Por ello, lo entrenamos con un conjunto de entrenamiento E_train, donde
+se supone conocido el etiquetado de verdad terreno, y lo
+validamos en E_valid. La evaluación se realiza en otro conjunto separado
+de entornos E_test. En el momento de la prueba, el
+agente solo accede a la señal visual s_t, sin ninguna experiencia
+de exploración previa del entorno de prueba. 3.2. Visión general del
+método La arquitectura general de un
+agente BRM se muestra
+en la Fig. 2, que tiene dos módulos: la
+memoria relacional bayesiana (BRM) y una política de locomoción LSTM
+para el control (Fig. 2 izquierda). En particular, el componente
+clave de un agente BRM es un grafo de relaciones
+probabilístico (Fig. 2 derecha), donde cada nodo corresponde a un objetivo
+semántico concreto T_i. Para los objetivos semánticos T_i y T_j, la
+arista entre ellos denota la relación «están cerca» y la
+probabilidad de esa arista indica con qué probabilidad T_i y T_j
+están cerca el uno del otro en el entorno actual.
+En términos generales, la
+locomoción es una política condicionada por el objetivo semántico que recibe tanto la entrada visual s_t como el subobjetivo g
+∈ T producido por el módulo BRM, para producir
+acciones hacia g. El módulo BRM toma la observación visual
+s_t en cada paso temporal, extrae la información semántica mediante un
+detector CNN y la almacena en un búfer de reproducción. Actualizamos
+periódicamente la probabilidad posterior de cada arista del grafo de relaciones
+y replanificamos para producir un nuevo subobjetivo. En nuestro trabajo,
+el grafo se actualiza cada número fijo de N pasos.
+Cabe señalar que no suponemos la existencia de todos los
+conceptos: en caso de que falte un concepto en un entorno
+concreto, la probabilidad posterior de sus aristas asociadas tenderá a
+cero a medida que se adquieran más experiencias en el
+episodio. 3.3. Memoria relacional bayesiana El
+módulo BRM consta de dos partes: un clasificador semántico y
+el componente más importante, un grafo de relaciones probabilístico sobre conceptos
+semánticos, en forma de modelo gráfico probabilístico que permite una planificación
+eficiente y actualizaciones posteriores. De forma intuitiva, en cada paso
+temporal el agente
+detecta el tipo de habitación en el que se encuentra
+y mantiene la probabilidad de si dos tipos de habitación
+T_i y T_j están «cerca» el uno del otro en
+el entorno actual. Si el agente parte de la
+habitación T_i y llega a otra habitación T_j en pocos
+pasos, la probabilidad de la relación «cerca» entre T_i y
+T_j debe aumentar¹; en caso contrario, debe disminuir. Periódicamente, el
+grafo se actualiza y el agente encuentra el camino más probable
+desde la habitación actual hacia el objetivo, como guía de navegación.
+Presentamos estos dos componentes
+con detalle, así como la forma de actualizar y planificar
+con la BRM, a continuación. Clasificador semántico: El
+clasificador semántico detecta la etiqueta de tipo de habitación
+c_t de la región que rodea al agente. Puede entrenarse mediante
+aprendizaje supervisado sobre E_train. Obsérvese que, para una clasificación robusta del
+tipo de habitación, solo con la imagen en primera persona puede
+no bastar. Por ejemplo, el agente en un dormitorio puede
+estar mirando hacia una pared, donde la imagen en primera
+persona no aporta nada al clasificador, pero una cama podría estar
+justo detrás. Por eso tomamos la vista panorámica como la
+¹ En una configuración perfecta sin ruido, la relación debe tener probabilidad 1.
+𝑠𝑠𝑡𝑡 «cocina»
+𝑇𝑇
+clasificador 
+semántico semántico etiqueta 𝑐𝑐 
+𝑡𝑡 «sala de estar»
+posterior grafo 
+de relaciones subobjetivo 𝑔𝑔𝑡𝑡 CNN
+0,7
+0,4 grafo posterior actual búfer de reproducción
+𝑐𝑐𝑡𝑡𝑐𝑐𝑡𝑡+1𝑐𝑐𝑡𝑡+2𝑐𝑐𝑡𝑡+𝑁𝑁Figura 3. Visión general de la planificación (izquierda) y de la operación de actualización (derecha) con la BRM. entrada del
+clasificador, que consta de 4 imágenes, s¹_t ...
+s⁴_t con
+distintos
+ángulos de visión. Usamos una CNN de 10 capas con
+normalización por lotes para extraer características f(s^i_t)
+para cada
+s^i_t
+y calcular los pesos de atención sobre estas características visuales mediante
+l_i
+=
+f(s^i_o)
+W_1ᵀ
+W_2 f(s¹_o),
+...,
+f(s⁴_o), a_i =
+softmax(l_i), con parámetros W_1, W_2. Después, el promedio ponderado de
+estas cuatro
+características,
+Σ_i a_i f(s^i_t), se usa para las
+predicciones finales sigmoides para cada concepto semántico T_i². Esto da
+como resultado un vector binario K-dimensional c_t ∈
+{0,1}^K en el instante t. Grafo de relaciones probabilístico: Representamos el
+grafo probabilístico en forma de modelo gráfico P(z, y; θ)
+con variable latente z, variable de observación y y parámetro
+θ. Como tenemos K conceptos semánticos, hay K nodos y
+K(K−1)/2 relaciones (aristas) en el grafo. Cada relación es
+probabilística (es decir, puede existir o no con cierta probabilidad), y antes
+de entrar en un entorno concreto solo tenemos una creencia
+previa sobre esa relación. Formalmente, para la relación entre T_i y T_j,
+adoptamos una variable de Bernoulli z_{i,j} definida por z_{i,j} ~
+Bernoulli(θ^prior_{i,j}), donde el parámetro θ^prior_{i,j}
+denota la creencia previa de
+que
+z_{i,j} exista. Durante la exploración, el agente puede observar z_{i,j} con
+ruido y usar las observaciones ruidosas para estimar el valor verdadero
+de z_{i,j}. Definimos el modelo de observación ruidosa P(y_{i,j} | z_{i,j})
+mediante y_{i,j} ~ Bernoulli(θ^obs_{i,j}; 0)
+si z_{i,j} = 0
+Bernoulli(1 − θ^obs_{i,j};
+1) si z_{i,j}
+= 1, (1) donde
+θ^obs es otro parámetro a aprender. En cada paso temporal,
+el agente mantiene una creencia posterior global P(z | Y) sobre
+las existencias de relaciones dentro del entorno actual, basada en sus
+experiencias Y, es decir, las muestras de la
+variable y. Actualización posterior y planificación: Una visualización de la
+procedimientos se muestra en la Fig. 3. Suponemos que el
+agente explora el entorno actual durante un horizonte corto de
+N pasos y almacena las señales semánticas recientes c_t, ..., c_{t+N}
+en el búfer de reproducción. Después calculamos la operación OR bit
+a bit sobre estos vectores binarios B =
+c_t OR ... OR c_{t+N}. B representa todas las regiones visitadas durante
+un periodo corto de exploración de N pasos. Cuando dos
+objetivos aparecen a la vez en una trayectoria corta, se supone
+que están «cerca». Para T_i y T_j con
+B(T_i) = B(T_j) = 1, T_i y T_j deben ²Es un problema de clasificación
+multietiqueta. Imagínese una cocina abierta con instalaciones para cocinar y mesas para
+comer, que podría tener dos etiquetas. ³De hecho, tenemos K+1 nodos. Por
+claridad, aquí usamos K y explicamos el nodo extra más
+adelante, en
+la 
+Sec.
+3.5. cocina comedor Entorno 1
+Entorno 
+2 Entorno 3… promedio 0,9 entornos de
+entrenamiento conocimiento previo probabilidad existe existe N/A Figura 4. Aprendizaje de la probabilidad previa de una
+relación concreta, analizando la existencia de esa relación en cada entorno de
+entrenamiento y resumiendo las estadísticas globales. estar cerca en el
+entorno actual, es decir, una muestra de y_{i,j} = 1;
+en caso contrario, para B(T_i) ≠ B(T_j), obtenemos una muestra
+de y_{i,j} = 0. Con todas las muestras históricas de y,
+como Y, podemos realizar la inferencia posterior, es decir, calcular la
+distribución de Bernoulli posterior P(z_{i,j} | Y_{i,j}) para cada z_{i,j} mediante
+la regla de Bayes. Sea ẑ_{i,j} = P(z_{i,j} | Y_{i,j})
+la probabilidad posterior de la relación entre T_i y T_j. Dadas
+las creencias actuales ẑ, la señal semántica c_t y el objetivo
+T, buscamos un plan óptimo π = {0, 1,
+..., m−1, m} sobre el grafo, donde i ∈
+{1, ..., K} denota el índice de un concepto, de modo que
+la creencia conjunta a lo largo del camino
+desde una
+posición actual hasta el objetivo se maximice: π* = arg max_{c_t(T_0)}
+Π_{i=1}^{m} ẑ_{i−1,i}.
+Tras obtener π*, ejecutamos la política de locomoción
+para el subobjetivo g_t = T_{π*_1}, y después actualizamos
+periódicamente el grafo, vaciamos el búfer de reproducción y replanificamos
+cada N pasos. Aprendizaje del grafo probabilístico: El parámetro θ
+tiene dos partes:
+θ^prior para el prior de z y θ^obs para la
+observación ruidosa y. Para el parámetro previo θ^prior, aprendemos a partir
+de E_train con las etiquetas de verdad terreno. En la
+Fig. 4 se muestra una visualización. Para cada par de tipos
+de habitación T_i y T_j, enumeramos todos los entornos de
+entrenamiento y hacemos exploraciones aleatorias desde alguna ubicación del
+tipo de habitación T_i. Si finalmente el agente llega a
+algún lugar del tipo de habitación T_j, consideramos que T_i
+y T_j están cerca y, por tanto, una muestra positiva
+z_{i,j} = 1; en caso contrario, una muestra negativa z_{i,j}
+= 0. Sea Z todas las muestras que obtuvimos para z.
+Calculamos la estimación de máxima verosimilitud de θ^prior maximizando L_MLE(θ^prior) =
+P(Z | θ^prior). Podemos elegir cualquier estrategia de exploración tal
+que, para cualesquiera objetivos «cerca» entre sí, aparezcan juntos en
+una trayectoria corta con más frecuencia. La exploración aleatoria es
+la opción más ligera de todas. El parámetro de observación ruidosa θ^obs está relacionado con el Figura 5. El prior aprendido de las relaciones, incluidas las
+habitaciones más probables (rojo) y menos probables (azul) como cercanas al comedor (izquierda), al dormitorio (centro) y al exterior (derecha), con
+números que indican θ^prior, es decir, la probabilidad previa de que
+dos tipos de habitación estén cerca. rendimiento de la política de
+locomoción (θ): si θ tiene una tasa de éxito de
+navegación más alta, θ^obs debe ser menor (es decir, nivel de ruido
+bajo); cuando θ es malo, θ^obs debe ser mayor (cf.
+Ec. (1)). Por desgracia, no hay supervisión directa para θ^obs. Sin
+embargo, podemos evaluar lo «bueno» que es un valor concreto de
+θ^obs evaluando la tasa de éxito del agente BRM completo
+en E_valid. Por tanto, basta con
+hacer una búsqueda en rejilla para obtener el mejor
+parámetro. 3.4. La política condicionada por el objetivo Aprendemos una política
+de locomoción LSTM π(s_t, g; θ) parametrizada por θ, que
+se condiciona por la observación s_t y navega hacia el objetivo
+g. Siguiendo a Wu et al. [58], aprendemos π(s_t, g;
+θ) formulando la tarea como un problema de aprendizaje por refuerzo
+con recompensa moldeada: cuando el agente se mueve hacia la habitación
+objetivo g, recibe una recompensa positiva proporcional a la disminución de la
+distancia; si el agente se aleja o choca con un obstáculo,
+se le impone una penalización. También se asignan una recompensa de
+éxito de 10 y una penalización por tiempo de 0,1. Optimizamos
+la política en E_train mediante el método actor-crítico [40] con un
+paradigma de aprendizaje curricular, aumentando periódicamente la distancia máxima de
+aparición respecto del objetivo g. Además, gracias a un conjunto limitado
+de K objetivos, adoptamos un enfoque de comportamiento [8] para
+mejorar el rendimiento: entrenamos una política separada π_i(s_t; θ_i) para cada
+objetivo semántico T_i y, cuando recibimos el subobjetivo g del
+módulo BRM, ejecutamos directamente la red de comportamiento correspondiente. Observamos empíricamente que
+funciona mejor que la política original de atención con compuertas
+de Wu et al. [58]. Esta arquitectura también es una técnica
+habitual en
+otros ámbitos, como el RL
+[41, 20] y la robótica [21]. 3.5. Detalles de implementación
+Presentamos a continuación los detalles
+cruciales y dejamos el resto para el apéndice. Nodos del
+grafo de relaciones: En el contenido anterior, supusimos K conceptos
+semánticos preseleccionados como nodos del grafo. Sin embargo, no es raro llegar
+a una situación que no puede clasificarse en ninguna categoría semántica
+existente. En la práctica, tratamos c_t = 0 como un concepto
+especial «desconocido». Por tanto, el módulo BRM contiene en
+realidad K+1 nodos. Esto es conceptualmente similar al procesamiento del lenguaje natural:
+un concepto semántico es una palabra; el conjunto de todos los
+conceptos puede verse como el diccionario; y c_t = 0 corresponde al token especial
+«fuera de vocabulario». Clasificación temporal suave: Aunque el clasificador semántico
+logra una alta precisión en los datos de validación, las predicciones
+pueden no ser temporalmente consistentes, lo que añade ruido extra al módulo
+BRM. Para una predicción temporalmente suave en el momento de
+la prueba, fijamos un umbral restringido sobre la salida sigmoide y
+aplicamos un proceso de filtrado: la etiqueta de predicción real para
+el tipo de habitación T_i será 1 solo si la salida sigmoide
+mantiene una confianza de al menos 0,9 durante 3 pasos temporales
+consecutivos. Aprendizaje del grafo: Para
+aprender θ^prior, realizamos una exploración aleatoria de 300 pasos y
+recogemos 50 muestras para cada z_{i,j} por entorno de entrenamiento. Además,
+el aprendizaje de θ^prior no depende de la locomoción π(s_t, g;
+θ) y puede reutilizarse incluso con políticas de control diferentes. θ^obs
+depende de la locomoción, así que debe aprenderse después de obtener
+π(s_t, g; θ*). 4. Experimentos Experimentamos en el entorno House3D
+y tratamos de
+responder a dos preguntas: (1) ¿captura el agente BRM
+las relaciones semánticas subyacentes y se comporta como esperamos? (2)
+¿generaliza mejor el agente BRM en los entornos de prueba que
+los métodos de referencia? Primero presentamos los preliminares de evaluación
+y los métodos de referencia en las Secs. 4.1 y
+4.2. Después respondemos a la primera pregunta de forma cualitativa en
+la Sec. 4.3. En las Secs. 4.4 y 4.6 mostramos
+cuantitativamente que nuestros agentes BRM logran en general mayores tasas de éxito
+en prueba (es decir, mejor generalización) y necesitan menos pasos
+para alcanzar los objetivos (es decir, más eficiencia) que todas las
+referencias. Elegimos un N = 10 fijo para todos los agentes BRM.
+El estudio de ablación sobre las decisiones de diseño
+de la BRM se presenta en la Sec. 4.5. Más detalles
+pueden encontrarse en el apéndice. 4.1. Preliminares Consideramos la tarea RoomNav
+en el entorno
+House3D [58], donde se seleccionan K = 8 tipos
+de habitación como objetivos semánticos, entre ellos «cocina», «sala de estar»,
+«comedor», «dormitorio», «baño», «oficina», «garaje» y «exterior». El entorno House3D
+ofrece una comprobación de éxito que indica si el agente ha
+llegado o no a un objetivo de habitación concreto, aunque
+también experimentamos con el escenario en el que el agente
+decide por sí mismo cuándo terminar (Sec. 4.6). House3D proporciona
+un conjunto de entrenamiento de 200 casas, un conjunto de prueba
+de 50 casas y un conjunto de validación de 20 casas.
+Durante el entrenamiento Figura 6. Comparación cualitativa entre la BRM (morado),
+una política DRL básica (azul) y una política aleatoria (rojo) con
+horizonte H = 1000 (Sec. 4.3). El eje Y es la tasa
+de éxito en prueba y el eje X es la distancia en
+metros al objetivo. Cuando los objetivos están más lejos del punto de
+partida, la tasa de éxito de la BRM se mantiene alta, mientras
+que la política DRL básica degenera rápidamente hasta comportarse como una política
+aleatoria. todos los enfoques adoptan la información semántica de verdad terreno
+etiquetas con independencia del clasificador semántico. Evaluamos el
+rendimiento de generalización de distintos enfoques con dos métricas, la
+tasa de éxito y el éxito ponderado por la longitud del
+camino (SPL), bajo distintos horizontes. El SPL, propuesto por Anderson et
+al. [2], es una función tanto de la tasa de
+éxito como de la longitud del episodio, definida como (1/C) Σ_i
+1
+S_i
+·
+L_i / max(L_i, P_i), donde C es el
+número total de episodios evaluados, S_i indica si el episodio es
+un éxito o no, L_i es la distancia de camino más
+corto de verdad terreno en el episodio y P_i es el
+número de pasos que el agente realmente dio. El SPL está
+acotado superiormente por la tasa de éxito
+y otorga más crédito
+a los agentes que cumplen sus tareas más rápido. 4.2.
+Métodos de referencia Política aleatoria:
+el agente muestra una acción aleatoria en cada paso,
+denotado como «aleatoria». Agente DRL puro: este agente LSTM no
+tiene el módulo BRM y ejecuta directamente la política π(s_t, T; θ)
+durante todo el episodio, denotado como «π(s, θ) pura». En
+realidad, es solo el módulo de locomoción. Como se analizó en
+la Sec. 3.4, esta es también una
+versión mejorada de la política original propuesta por Wu
+et al. [58]. Agente con aumento semántico: en comparación con el agente
+DRL puro, nuestros agentes BRM utilizan además las señales semánticas c_t
+que proporciona el clasificador semántico, junto con las entradas visuales s_t.
+Por eso consideramos una referencia de locomoción consciente de la
+semántica, S(s), que es otro agente LSTM DRL que recibe
+como entrada tanto s_t como c_t (denotado como «aum.
+S(s)»). Agente HRL con un controlador RNN: desde la perspectiva del
+DRL, nuestro agente BRM es un agente de aprendizaje por refuerzo
+jerárquico (HRL), con el módulo BRM como controlador de alto nivel
+que produce subobjetivos y el módulo de locomoción como política de
+bajo nivel para el control. Obsérvese que la actualización y la
+planificación sobre la BRM dependen solo de (1) la señal semántica actual
+c_t, (2) el objetivo T y (3) la característica acumulada de
+OR bit a bit B (véase la Sec. 3.3). Por tanto, adoptamos la misma locomoción π(s_t, g; θ) que usa nuestro agente
+BRM, y entrenamos un controlador LSTM con 50 unidades ocultas en
+E_train que recibe toda la información semántica necesaria y produce
+también un subobjetivo cada N pasos. La única diferencia entre nuestro
+agente BRM y este agente HRL es la representación del
+módulo controlador (memoria). El controlador LSTM tiene acceso exactamente a la
+misma información semántica que la BRM y usa un modelo neuronal
+mucho más complejo y genérico en lugar de un grafo de
+relaciones. Por tanto, esperamos que sea una referencia fuerte
+y que rinda de forma competitiva frente
+a nuestro agente BRM. 4.3. Análisis cualitativo y estudio de caso
+En esta sección ilustramos cualitativamente que nuestro agente BRM es capaz de
+aprender relaciones semánticas razonables y de
+comportarse de manera interpretable. Conocimiento previo: la Fig. 5 visualiza
+P(z | θ^prior), la probabilidad previa aprendida de las relaciones,
+para 3 tipos de habitación con sus habitaciones más y menos probables
+cercanas (conectadas). Un rojo más oscuro indica más probabilidad, mientras que
+un azul más oscuro implica menos probabilidad. El conocimiento capturado es,
+en efecto, razonable: es probable que el baño se conecte con un
+dormitorio; la cocina suele estar cerca de un comedor,
+mientras que el garaje suele estar al exterior. Eficacia de
+la planificación: el agente BRM puede descomponer eficazmente un objetivo a
+largo plazo en una secuencia de subobjetivos más sencillos mediante la planificación
+sobre el grafo. La Fig. 6 visualiza las tasas de éxito
+en prueba del agente BRM (BRM), de la política aleatoria («aleatoria»)
+y de la política de locomoción pura («π(s, θ) pura») para
+objetivos cada vez más lejanos, sobre un conjunto fijo de 5689
+tareas de prueba generadas al azar. El eje X es la
+distancia más corta al objetivo en metros⁴. Como era de esperar,
+cuando el objetivo se aleja más, todos los métodos tienen
+tasas de éxito más bajas. Sin embargo, a diferencia de la política
+de locomoción pura, que degenera rápidamente hasta comportarse como una política
+aleatoria a medida que aumenta la distancia, el agente BRM
+mantiene en general una tasa de éxito mucho mayor. Estudio de caso:
+la Fig. 7 muestra una trayectoria exitosa del agente BRM, cuyo
+objetivo final es salir de la casa. Visualizamos la evolución del
+episodio, describimos los planes y mostramos el grafo actualizado durante la exploración.
+)
+Obsérvese que el objetivo final es inicialmente invisible para el agente
+(fotograma 1), pero el agente es capaz de planificar, explorar eficazmente
+la casa (por ejemplo, sin entrar nunca en
+la región del comedor de la esquina inferior derecha)
+y, finalmente, alcanzar el objetivo. 4.4. Rendimiento cuantitativo de generalización Evaluamos
+el rendimiento de generalización de distintos enfoques en E_test
+con horizontes H = 300 y H = 1000. Fijamos N
+= 10, es decir, la memoria se actualiza cada 10 pasos.
+La Tab. 1 informa tanto de las tasas de éxito (%) como
+de los valores de SPL (‰) sobre 5689 tareas de prueba fijas.
+Además del rendimiento global, también informamos de los resultados según distintas
+distancias de planificación, es decir, la secuencia más corta de subobjetivos
+en el grafo de relaciones de verdad terreno. Para una medición precisa,
+nos aseguramos de que haya
+al menos 500 tareas de prueba para cada distancia de planificación. ⁴Normalmente,
+un metro 
+de distancia más corta
+requiere de
+3 a 4
+acciones.
+0.76
+0.28
+0.380.73
+exterior (objetivo) sala
+de estar
+birth
+0.99
+birth exterior
+garaje sala
+de
+0.01
+estar
+0,12
+birth exterior garaje sala de estar birth exterior garaje sala de estar 0,08 ①② ②③ ③① Figura 7. Ejemplo de una trayectoria exitosa. El agente aparece
+dentro de la casa y tiene como objetivo el «exterior». Izquierda: el mapa 2D desde arriba con trayectorias condicionadas por el objetivo («exterior», naranja; «garaje», azul;
+«sala de estar», verde). Derecha, 1.ª fila: imagen visual RGB; Derecha, 2.ª fila: la probabilidad posterior del grafo semántico y los subobjetivos propuestos (flecha roja). Al principio,
+el agente empieza ejecutando la locomoción hacia «exterior» y después hacia «garaje» según el conocimiento previo (1.er grafo), pero ambos fallan (trayectorias naranja y azul superiores en
+el mapa). Tras actualizar su creencia de que el garaje y el exterior no están cerca (aristas grises en el 2.º grafo), ejecuta entonces la locomoción
+hacia la «sala de estar» con éxito (flecha roja en el 2.º grafo, trayectoria verde). Finalmente, vuelve a ejecutar la subpolítica para el «exterior», explora la sala
+de estar y alcanza el objetivo (3.er grafo, trayectoria naranja inferior). Nuestro
+agente BRM tiene las tasas de éxito medias más altas y
+los mejores valores de SPL en todos los casos. Obsérvese que
+el margen en SPL es mucho más significativo que el
+de la tasa de éxito pura. Más importante aún, a medida
+que aumenta el horizonte, es decir, el mayor número de cálculos
+de planificación H/N permitidos, el margen de rendimiento global (columna de
+la derecha) de la BRM sobre la mejor referencia restante aumenta
+de forma estricta, gracias a la eficacia de
+la planificación. 4.5.
+Estudio de ablación En esta sección mostramos la necesidad de
+todos los componentes de la BRM y la dirección para
+futuras mejoras. Beneficios del prior aprendido: en la BRM, el prior
+P(z | θ^prior) se aprende de las casas de entrenamiento. La
+Tab. 2 evalúa la BRM con un prior no
+informativo («unif.»), es
+decir, θ^prior_{i,j} = 0,5. En general, el prior aprendido conduce a
+mejores tasas de éxito y valores de SPL. Obsérvese que, cuando
+el horizonte se hace más largo, la diferencia se vuelve mucho
+menor, ya que el grafo converge a la
+posterior verdadera con más actualizaciones de memoria. Fuente de error:
+nuestro enfoque tiene dos módulos, un módulo BRM para la planificación
+y un módulo de locomoción para el control. Estudiamos los errores
+que causa cada uno de estos componentes introduciendo (1) una locomoción
+oráculo diseñada a mano (imperfecta), que se acerca automáticamente a los
+objetivos cercanos, y (2) un planificador óptimo que usa las etiquetas
+de House3D. Los resultados de la evaluación se muestran en la Tab.
+3: la locomoción oráculo mejora drásticamente los resultados, mientras que
+el rendimiento de la BRM está cerca del planificador óptimo. Esto indica
+que el error procede principalmente de la locomoción: es extremadamente difícil
+aprender un único navegador neuronal, lo que motiva nuestro trabajo de descomponer
+una tarea a largo plazo en subtareas. Elección
+de N: los pasos oráculo para alcanzar un objetivo cercano, es
+decir, de 1 paso de plan, son alrededor de 12,27 (parte superior de la Tab. 1), por lo que elegimos un valor
+algo menor, N = 10, como tamaño de paso de
+replanificación. Investigamos otras elecciones de N en la Tab. 4.
+Un N mayor provoca caídas de rendimiento más significativas. Obsérvese
+que nuestro agente BRM supera de forma constante
+al controlador RNN con distintos valores de parámetros.
+4.6. Evaluación con acción de terminación En los estudios anteriores,
+el éxito de un episodio lo determina automáticamente el entorno House3D.
+Anderson et al. [2] sugieren que un agente del mundo real
+debe ser consciente de su meta y determinar si detenerse
+por sí mismo. En esta sección, evaluamos al agente BRM y a
+todas las líneas base previas en este escenario: un éxito se
+contará solo si el agente termina el episodio correctamente en
+una habitación objetivo por su cuenta.
+Hay dos maneras de incluir la acción de terminar: (1)
+ampliar el espacio de acciones con una acción adicional de detenerse; (2) entrenar
+un verificador de terminación aparte. Observamos que (2) conduce a
+un rendimiento práctico mucho mejor, como también lo informan
+Pathak et al. [43]. En nuestros experimentos, simplemente usamos
+el clasificador semántico como nuestro verificador de terminación.
+Los resultados se resumen en la Tab. 5, donde usamos un
+horizonte largo H= 1000 para permitir que los agentes tengan suficiente
+tiempo para terminar por sí mismos. Del mismo modo, BRM logra el mejor
+rendimiento tanto en la tasa de éxito como en la métrica SPL.
+4.7. Discusión
+Tasa de éxito y SPL: En la Tab. 1, los valores de SPL son por lo
+general mucho menores que las tasas de éxito, es decir, BRM
+usa muchos más pasos que el camino más corto de referencia. Esto
+no sorprende debido a la fuerte observabilidad parcial en
+la tarea RoomNav. Como ejemplo concreto en la Fig. 7, el
+camino óptimo desde el lugar de origen (cerca de 1
+) hasta el exterior (cerca de
+pasos de plan ópt. 1 2 3 4 5 total
+pasos prom. del oráculo 12.27 42.53 61.09 72.47 63.74 46.86
+Horizonte H= 300
+aleatorio 20.5 / 15.9 6.9 / 16.7 3.8 / 10.7 1.6 / 4.2 3.0 / 8.8 7.2 / 13.6
+pure() 49.4 / 47.6 11.8 / 27.6 2.0 / 4.8 2.6 / 10.8 4.2 / 13.2 13.1 / 22.9
+aug.S() 47.8 / 45.3 11.4 / 23.1 3.0 / 7.8 3.4 / 8.1 4.4 / 11.2 13.0 / 20.5
+control RNN 55.0 / 49.8 20.0 / 40.8 8.0 / 20.1 5.2 / 15.2 11.0 / 25.2 19.9 / 34.2
+BRM 57.8 /65.4 24.4 /54.3 10.5 /28.3 5.8/18.6 11.2 /29.8 23.1 /45.3
+Horizonte H= 1000
+dist. de plan 1 2 3 4 5 prom.
+aleatorio 24.3 / 17.6 13.5 / 20.3 9.1 / 14.3 8.0 / 9.3 7.0 / 11.5 13.0 / 17.0
+pure() 60.8 / 47.6 23.3 / 27.6 7.6 / 4.8 8.2 / 10.8 11.0 / 13.2 22.5 / 22.9
+aug.S() 61.3 / 50.1 23.0 / 26.2 9.4 / 12.0 5.8 / 9.6 9.0 / 13.6 22.4 / 23.8
+control RNN 71.0 / 58.0 39.6 / 51.3 24.1 / 32.7 16.6 / 25.6 23.2 / 39.6 37.0 / 45.2
+BRM 73.7 /74.9 43.6 /66.0 29.2 /44.9 20.4 /27.1 28.4 /42.5 41.1 /57.5
+Tabla 1. Métricas de tasa de éxito (%) / SPL (‰, por mil) que evalúan el rendimiento de generalización de BRM y de todos los enfoques base
+(Sec. 4.4). Aquí N= 10 . “pasos de plan ” denota la distancia de planificación más corta en el grafo de relaciones real. “pasos del oráculo”
+denota los pasos mínimos de referencia necesarios para alcanzar la meta. Nuestros agentes BRM tienen las tasas de éxito más altas y los mejores valores de SPL en
+todos los casos. Más importante aún, a medida que aumenta el horizonte, lo que permite más planificación, BRM supera más a las líneas base.
+BRM ( H=300) unif. (H=300) BRM ( H=1k) unif. (H=1k)
+23.1 /45.3 20.9 / 39.4 41.1 /57.5 40.4 / 56.6
+Tabla 2. Tasa de éxito (%) / SPL (‰) : rendimiento de BRM con un
+prior aprendido y uno no informativo. N= 10 ,H= 300;1000 (“1k”).
+Fuente del error LSTM locomoción oráculo de locomoción
+BRM 41.1 / 57.5 88.6 / N.D.
+plan ópt. 46.3 / 62.5 96.7 / N.D.
+Tabla 3. Tasa de éxito (%) / SPL (‰) : rendimiento con un planificador ópti-
+mo y una locomoción diseñada a mano. H=1000,N=10.
+Elección de NN= 10N= 30N= 50
+BRM 41.1 /57.5 29.7 / 35.2 27.4 / 32.2
+control RNN 37.0 / 45.2 28.2 / 27.7 26.5 / 26.7
+Tabla 4. Tasa de éxito (%) / SPL (‰) : rendimiento con distintas
+elecciones de N con horizonte H= 1000 .
+Horizonte H= 1000 con acción de terminar
+aleatorio pure()aug.S(s)control RNN BRM
+1.8/1.2 8.6/9.0 8.2/8.8 14.5/16.3 17.3/23.0
+Tabla 5. Tasa de éxito (%) / SPL (‰) con acción de terminar que evalúa
+el rendimiento de generalización de BRM y de los agentes base
+con horizonte H= 1000 y N= 10 . Nuestro agente BRM logra
+el mejor rendimiento bajo ambas métricas.
+3
+) es extremadamente corto si conocemos de antemano la vista cenital. Sin
+embargo, la región exterior está fuera de la vista del agente
+(fotograma 1
+) y el agente debe explorar las regiones cercanas antes de
+ver la puerta hacia el exterior (fotograma 3
+).
+La planificación y las actualizaciones en BRM ayudan a guiar al agente a explo-
+rar la casa desconocida con mayor eficacia, lo que contribuye
+a valores de SPL más altos. Pero, en general, el agente aún padece
+el desafío fundamental de la observabilidad parcial.Conceptos preseleccionados: En este trabajo, nos centramos en la memo-
+ria de representación y simplemente suponemos que conocemos de antemano todos los
+conceptos semánticos. También es posible generalizar
+a conceptos no vistos aprovechando la incrustación de palabras y el
+grafo de conocimiento de la comunidad de PLN [60]. También es fac-
+tible descubrir directamente conceptos semánticos generales a partir de
+Etrainmediante aprendizaje no supervisado, aprovechando la rica se-
+mántica de la información (p. ej., categorías de objetos, tipos de habitación, etc.)
+dentro de la entrada visual. Dejamos esto para nuestro trabajo futuro.
+5. Conclusión
+En este trabajo, propusimos un diseño novedoso de ar-
+quitectura de memoria, Memoria Relacional Bayesiana (BRM), para la
+tarea de navegación semántica. BRM usa un clasificador semántico para
+extraer etiquetas semánticas de la entrada visual y construye un grafo proba-
+bilístico de relaciones sobre los conceptos semánticos, lo cual per-
+mite representar el conocimiento previo de alcanzabilidad mediante los priors de las aristas,
+una adaptación rápida en tiempo de prueba mediante los posteriors de las aristas y una planifi-
+cación eficiente mediante búsqueda en grafos. Nuestro agente de navegación BRM
+usa BRM para producir una submeta que la política de locomoción
+debe alcanzar. Los resultados experimentales muestran que la representa-
+ción BRM es eficaz y crucial para que un agente de navegación visual
+generalice mejor en entornos no vistos.
+En un nivel general, nuestro enfoque es general y puede apli-
+carse a otras tareas con información de contexto semántico o
+abstracciones de estado disponibles para construir un grafo, como
+las manipulaciones robóticas, donde los conceptos semánticos pueden ser es-
+tados abstractos de los brazos del robot y ubicaciones de objetos, o los videojuegos
+donde podemos planificar sobre señales semánticas como el
+estado del juego o los recursos actuales. En trabajo futuro, también vale
+la pena investigar cómo extraer relaciones y con-
+ceptos directamente de los entornos de entrenamiento de forma automática.
+Referencias
+[1] Ankesh Anand, Eugene Belilovsky, Kyle Kastner, Hugo
+Larochelle y Aaron Courville. Blindfold baselines for em-
+bodied QA. Preimpresión de arXiv arXiv:1811.05013 , 2018.
+[2] Peter Anderson, Angel Chang, Devendra Singh Chaplot,
+Alexey Dosovitskiy, Saurabh Gupta, Vladlen Koltun, Jana
+Kosecka, Jitendra Malik, Roozbeh Mottaghi, Manolis Savva,
+y otros. On evaluation of embodied navigation agents. Preimpresión
+de arXiv arXiv:1807.06757 , 2018.
+[3] Peter Anderson, Qi Wu, Damien Teney, Jake Bruce, Mark
+Johnson, Niko S ¨underhauf, Ian Reid, Stephen Gould y
+Anton van den Hengel. Navegación visual y de lenguaje: In-
+terpreting visually-grounded navigation instructions in real
+environments. En Actas de la Conferencia IEEE
+sobre Visión por Computadora y Reconocimiento de Patrones , páginas 3674–
+3683, 2018.
+[4] Francisco Bonin-Font, Alberto Ortiz y Gabriel Oliver. Vi-
+sual navigation for mobile robots: A survey. Revista de sistemas in-
+teligentes y robóticos , 53(3):263–296, 2008.
+[5] Angel Chang, Angela Dai, Thomas Funkhouser, Maciej Hal-
+ber, Matthias Niessner, Manolis Savva, Shuran Song, Andy
+Zeng y Yinda Zhang. Matterport3D: Learning from RGB-
+D data in indoor environments. Conferencia Internacional sobre
+Visión 3D (3DV) , 2017.
+[6] Devendra Singh Chaplot, Kanthashree Mysore Sathyendra,
+Rama Kumar Pasumarthi, Dheeraj Rajagopal y Rus-
+lan Salakhutdinov. Gated-attention architectures for task-
+oriented language grounding. En la Trigésima Segunda Con-
+ferencia de AAAI sobre Inteligencia Artificial , 2018.
+[7] Chenyi Chen, Ari Seff, Alain Kornhauser y Jianxiong
+Xiao. Deepdriving: Learning affordance for direct percep-
+tion in autonomous driving. En la Conferencia Internacional
+IEEE sobre Visión por Computadora (ICCV) , diciembre de 2015.
+[8] Kevin Chen, Juan Pablo de Vicente, Gabriel Sepulveda, Fei
+Xia, Alvaro Soto, Marynel Vazquez y Silvio Savarese. A
+enfoque conductual de navegación visual con graph local-
+ization networks. Preimpresión de arXiv arXiv:1903.00445 , 2019.
+[9] Xinlei Chen, Li-Jia Li, Li Fei-Fei y Abhinav Gupta. It-
+erative visual reasoning beyond convolutions. En Proceed-
+ings de la Conferencia IEEE sobre Visión por Computadora y Reconocimiento de Patrones
+, páginas 7239–7248, 2018.
+[10] Abhishek Das, Samyak Datta, Georgia Gkioxari, Stefan Lee,
+Devi Parikh y Dhruv Batra. Embodied Question Answer-
+ing. Actas de la Conferencia IEEE sobre Visión por Computadora y
+sión and Pattern Recognition (CVPR), 2018.
+[11] Abhishek Das, Georgia Gkioxari, Stefan Lee, Devi Parikh,
+y Dhruv Batra. Neural modular control for embodied
+question answering. En Conference on Robot Learning, pp.
+53–62, 2018.
+[12] Peter Dayan y Geoffrey E Hinton. Feudal reinforcement
+learning. En Advances in neural information processing sys-
+tems, pp. 271–278, 1993.
+[13] Alexey Dosovitskiy, German Ros, Felipe Codevilla, Antonio
+Lopez, y Vladlen Koltun. CARLA: An open urban driving
+simulator. En Proceedings of the 1st Annual Conference on
+Robot Learning, pp. 1–16, 2017.
+[14] Kenji Doya, Kazuyuki Samejima, Ken-ichi Katagiri, y
+Mitsuo Kawato. Multiple model-based reinforcement learn-
+ing. Neural computation, 14(6):1347–1369, 2002. [15] Yan Duan, John Schulman, Xi Chen, Peter L Bartlett, Ilya
+Sutskever, y Pieter Abbeel. RL2: Fast reinforcement
+learning via slow reinforcement learning. arXiv preprint
+arXiv:1611.02779, 2016.
+[16] Hugh Durrant-Whyte y Tim Bailey. Simultaneous local-
+ization and mapping: part i. IEEE robotics & automation
+magazine, 13(2):99–110, 2006.
+[17] Alberto Elfes. Sonar-based real-world mapping and naviga-
+tion. IEEE Journal on Robotics and Automation, 3(3):249–
+265, 1987.
+[18] Kuan Fang, Alexander Toshev, Li Fei-Fei, y Silvio
+Savarese. Scene memory transformer for embodied agents
+in long-horizon tasks. IEEE Conference on Computer Vision
+and Pattern Recognition (CVPR), 2019.
+[19] Chelsea Finn, Pieter Abbeel, y Sergey Levine. Model-
+agnostic meta-learning for fast adaptation of deep networks.
+International Conference on Machine Learning, 2017.
+[20] Chelsea Finn, Ian Goodfellow, y Sergey Levine. Unsuper-
+vised learning for physical interaction through video predic-
+tion. En Advances in neural information processing systems,
+pp. 64–72, 2016.
+[21] Chelsea Finn y Sergey Levine. Deep visual foresight for
+planning robot motion. En International Conference on on
+Robotics and Automation, pp. 2786–2793. IEEE, 2017.
+[22] Patrick Foo, William H Warren, Andrew Duchon, y
+Michael J Tarr. Do humans integrate routes into a cogni-
+tive map? map-versus landmark-based navigation of novel
+shortcuts. Journal of Experimental Psychology: Learning,
+Memory, and Cognition, 31(2):195, 2005.
+[23] Daniel Fried, Ronghang Hu, Volkan Cirik, Anna Rohrbach,
+Jacob Andreas, Louis-Philippe Morency, Taylor Berg-
+Kirkpatrick, Kate Saenko, Dan Klein, y Trevor Darrell.
+Speaker-follower models for vision-and-language naviga-
+tion. En Advances in Neural Information Processing Systems,
+pp. 3318–3329, 2018.
+[24] Saurabh Gupta, James Davidson, Sergey Levine, Rahul Suk-
+thankar, y Jitendra Malik. Cognitive mapping and plan-
+ning for visual navigation. IEEE Conference on Computer
+Vision and Pattern Recognition, 2017.
+[25] Saurabh Gupta, David Fouhey, Sergey Levine, y Jitendra
+Malik. Unifying map and landmark based representations for
+visual navigation. arXiv preprint arXiv:1712.08125, 2017.
+[26] Ronghang Hu, Marcus Rohrbach, Jacob Andreas, Trevor
+Darrell, y Kate Saenko. Modeling relationships in ref-
+erential expressions with compositional modular networks.
+En Proceedings of the IEEE Conference on Computer Vision
+and Pattern Recognition, pp. 1115–1124, 2017.
+[27] Max Jaderberg, Volodymyr Mnih, Wojciech Marian Czar-
+necki, Tom Schaul, Joel Z Leibo, David Silver, y Koray
+Kavukcuoglu. Reinforcement learning with unsupervised
+auxiliary tasks. International Conference on Learning Rep-
+resentation, 2017.
+[28] Justin Johnson, Bharath Hariharan, Laurens van der Maaten,
+Li Fei-Fei, C Lawrence Zitnick, y Ross Girshick. CLEVR:
+A diagnostic dataset for compositional language and elemen-
+tary visual reasoning. En Proceedings of the IEEE Confer-
+ence on Computer Vision and Pattern Recognition, pp.
+2901–2910, 2017.
+[29] Justin Johnson, Ranjay Krishna, Michael Stark, Li-Jia Li,
+David Shamma, Michael Bernstein, y Li Fei-Fei. Image
+retrieval using scene graphs. En Proceedings of the IEEE con-
+ference on computer vision and pattern recognition, pp.
+3668–3678, 2015.
+[30] Eric Kolve, Roozbeh Mottaghi, Daniel Gordon, Yuke Zhu,
+Abhinav Gupta, y Ali Farhadi. AI2-THOR: An in-
+teractive 3D environment for visual AI. arXiv preprint
+arXiv:1712.05474, 2017.
+[31] Tejas D Kulkarni, Karthik Narasimhan, Ardavan Saeedi, y
+Josh Tenenbaum. Hierarchical deep reinforcement learning:
+Integrating temporal abstraction and intrinsic motivation. En
+Advances in neural information processing systems, pp.
+3675–3683, 2016.
+[32] Thanard Kurutach, Aviv Tamar, Ge Yang, Stuart J Russell,
+y Pieter Abbeel. Learning plannable representations with
+causal infogan. En Advances in Neural Information Process-
+ing Systems, pp. 8747–8758, 2018.
+[33] Ruiyu Li, Makarand Tapaswi, Renjie Liao, Jiaya Jia, Raquel
+Urtasun, y Sanja Fidler. Situation recognition with graph
+neural networks. En Proceedings of the IEEE International
+Conference on Computer Vision, pp. 4173–4182, 2017.
+[34] Kenneth Marino, Ruslan Salakhutdinov, y Abhinav Gupta.
+The more you know: Using knowledge graphs for image
+classification. IEEE Conference on Computer Vision and
+Pattern Recognition, 2017.
+[35] Piotr Mirowski, Matt Grimes, Mateusz Malinowski,
+Karl Moritz Hermann, Keith Anderson, Denis Teplyashin,
+Karen Simonyan, Andrew Zisserman, Raia Hadsell, et al.
+Learning to navigate in cities without a map. Advances in
+Neural Information Processing Systems, pp. 2419–2430,
+2018.
+[36] Piotr Mirowski, Razvan Pascanu, Fabio Viola, Hubert Soyer,
+Andy Ballard, Andrea Banino, Misha Denil, Ross Goroshin,
+Laurent Sifre, Koray Kavukcuoglu, et al. Learning to navi-
+gate in complex environments. International Conference on
+Learning Representation, 2017.
+[37] Dmytro Mishkin, Alexey Dosovitskiy, y Vladlen Koltun.
+Benchmarking classic and learned navigation in complex 3D
+environments. arXiv preprint arXiv:1901.10915, 2019.
+[38] Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, y Pieter
+Abbeel. A simple neural attentive meta-learner. Interna-
+tional Conference on Learning Representation, 2018.
+[39] Dipendra Misra, John Langford, y Yoav Artzi. Map-
+ping instructions and visual observations to actions with re-
+inforcement learning. En Proceedings of the 2017 Confer-
+ence on Empirical Methods in Natural Language Processing,
+pp. 1004–1015, 2017.
+[40] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza,
+Alex Graves, Timothy Lillicrap, Tim Harley, David Silver,
+y Koray Kavukcuoglu. Asynchronous methods for deep
+reinforcement learning. En International Conference on Ma-
+chine Learning, pp. 1928–1937, 2016.
+[41] Junhyuk Oh, Xiaoxiao Guo, Honglak Lee, Richard L Lewis,
+y Satinder Singh. Action-conditional video prediction us-
+ing deep networks in atari games. En Advances in Neural
+Information Processing Systems, pp. 2863–2871, 2015.
+[42] Emilio Parisotto y Ruslan Salakhutdinov. Neural map:
+Structured memory for deep reinforcement learning. Inter-
+national Conference on Learning Representation, 2018. [43] Deepak Pathak, Parsa Mahmoudieh, Guanghao Luo, Pulkit
+Agrawal, Dian Chen, Yide Shentu, Evan Shelhamer, Jiten-
+dra Malik, Alexei A. Efros, y Trevor Darrell. Zero-shot
+visual imitation. En International Conference on Learning
+Representation, 2018.
+[44] Martin Riedmiller, Roland Hafner, Thomas Lampe, Michael
+Neunert, Jonas Degrave, Tom Van de Wiele, Volodymyr
+Mnih, Nicolas Heess, y Jost Tobias Springenberg. Learn-
+ing by playing-solving sparse reward tasks from scratch. In-
+ternational Conference on Machine Learning, 2018.
+[45] Stéphane Ross y Joelle Pineau. Model-based bayesian re-
+inforcement learning in large structured domains. En Un-
+certainty in artificial intelligence: proceedings of the... con-
+ference. Conference on Uncertainty in Artificial Intelligence,
+volume 2008, page 476. NIH Public Access, 2008.
+[46] Nikolay Savinov, Alexey Dosovitskiy, y Vladlen Koltun.
+Semi-parametric topological memory for navigation. Inter-
+national Conference on Learning Representation, 2018.
+[47] Nikolay Savinov, Anton Raichuk, Damien Vincent, Raphael
+Marinier, Marc Pollefeys, Timothy Lillicrap, y Sylvain
+Gelly. Episodic curiosity through reachability. En Interna-
+tional Conference on Learning Representations , 2019.
+[48] Manolis Savva, Angel X Chang, Alexey Dosovitskiy,
+Thomas Funkhouser, y Vladlen Koltun. Minos: Multi-
+modal indoor simulator for navigation in complex environ-
+ments. arXiv preprint arXiv:1712.03931 , 2017.
+[49] Richard S Sutton, Doina Precup, y Satinder Singh. Be-
+tween mdps and semi-mdps: A framework for temporal ab-
+straction in reinforcement learning. Artiﬁcial intelligence ,
+112(1-2):181–211, 1999.
+[50] Aviv Tamar, Yi Wu, Garrett Thomas, Sergey Levine, y
+Pieter Abbeel. Value iteration networks. En Advances in
+Neural Information Processing Systems , páginas 2154–2162,
+2016.
+[51] Sebastian Thrun, Wolfram Burgard, y Dieter Fox. Proba-
+bilistic robotics . MIT press, 2005.
+[52] Antonio Torralba, Kevin P Murphy, William T Freeman, y
+Mark A Rubin. Context-based vision system for place and
+object recognition. En Actas de la Novena IEEE In-
+ternational Conference on Computer Vision-Volume 2 , página
+273. IEEE Computer Society, 2003.
+[53] Ramakrishna Vedantam, Karan Desai, Stefan Lee, Marcus
+Rohrbach, Dhruv Batra, y Devi Parikh. Probabilistic
+neural-symbolic models for interpretable visual question an-
+swering. En International Conference on Machine Learning ,
+2019.
+[54] Ranxiao Frances Wang y Elizabeth S Spelke. Human spa-
+tial representation: Insights from animals. Trends in cogni-
+tive sciences , 6(9):376–382, 2002.
+[55] Xin Wang, Wenhan Xiong, Hongmin Wang, y William
+Yang Wang. Look before you leap: Bridging model-free
+and model-based reinforcement learning for planned-ahead
+vision-and-language navigation. En Actas de la Euro-
+pean Conference on Computer Vision (ECCV) , páginas 37–53,
+2018.
+[56] Xiaolong Wang, Yufei Ye, y Abhinav Gupta. Zero-shot
+recognition via semantic embeddings and knowledge graphs.
+En Actas de la IEEE Conference on Computer Vision
+and Pattern Recognition , páginas 6857–6866, 2018.
+[57] Qi Wu, Peng Wang, Chunhua Shen, Anthony Dick, y
+Anton van den Hengel. Ask me anything: Free-form vi-
+sual question answering based on knowledge from external
+sources. En Actas de la IEEE Conference on Com-
+puter Vision and Pattern Recognition , páginas 4622–4630,
+2016.
+[58] Yi Wu, Yuxin Wu, Georgia Gkioxari, y Yuandong Tian.
+Building generalizable agents with a realistic and rich 3D
+environment. arXiv preprint arXiv:1801.02209 , 2018.
+[59] Huazhe Xu, Yang Gao, Fisher Yu, y Trevor Darrell. End-
+to-end learning of driving models from large-scale video
+datasets. En Actas de la IEEE conference on computer
+vision and pattern recognition , páginas 2174–2182, 2017.
+[60] Wei Yang, Xiaolong Wang, Ali Farhadi, Abhinav Gupta, y
+Roozbeh Mottaghi. Visual semantic navigation using scene
+priors. En International Conference on Learning Represen-
+tation , 2019.
+[61] Amy Zhang, Adam Lerer, Sainbayar Sukhbaatar, Rob Fer-
+gus, y Arthur Szlam. Composable planning with attributes.
+En International Conference on Machine Learning , 2018.
+[62] Hanwang Zhang, Zawlin Kyaw, Shih-Fu Chang, y Tat-
+Seng Chua. Visual translation embedding network for visual
+relation detection. En Actas de la IEEE conference on
+computer vision and pattern recognition , páginas 5532–5540,
+2017.
+[63] Yuke Zhu, Roozbeh Mottaghi, Eric Kolve, Joseph J Lim, Ab-
+hinav Gupta, Li Fei-Fei, y Ali Farhadi. Target-driven vi-
+sual navigation in indoor scenes using deep reinforcement
+learning. En Robotics and Automation (ICRA), 2017 IEEE
+International Conference on , páginas 3357–3364. IEEE, 2017.
+[64] Yukun Zhu, Raquel Urtasun, Ruslan Salakhutdinov, y
+Sanja Fidler. segdeepm: Exploiting segmentation and con-
+text in deep neural networks for object detection. En Ac-
+tas de la IEEE Conference on Computer Vision and
+Pattern Recognition , páginas 4703–4711, 2015.

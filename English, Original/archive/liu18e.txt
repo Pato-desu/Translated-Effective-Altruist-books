@@ -1,0 +1,812 @@
+Open Category Detection with PAC Guarantees
+Si Liu* 1Risheek Garrepalli* 2Thomas G. Dietterich2Alan Fern2Dan Hendrycks3
+Abstract
+Open category detection is the problem of detect-
+ing “alien” test instances that belong to categories
+or classes that were not present in the training
+data. In many applications, reliably detecting
+such aliens is central to ensuring the safety and
+accuracy of test set predictions. Unfortunately,
+there are no algorithms that provide theoretical
+guarantees on their ability to detect aliens under
+general assumptions. Further, while there are al-
+gorithms for open category detection, there are
+few empirical results that directly report alien de-
+tection rates. Thus, there are signiﬁcant theoret-
+ical and empirical gaps in our understanding of
+open category detection. In this paper, we take
+a step toward addressing this gap by studying a
+simple, but practically-relevant variant of open
+category detection. In our setting, we are pro-
+vided with a “clean” training set that contains
+only the target categories of interest and an un-
+labeled “contaminated” training set that contains
+a fractionof alien examples. Under the as-
+sumption that we know an upper bound on , we
+develop an algorithm with PAC-style guarantees
+on the alien detection rate, while aiming to mini-
+mize false alarms. Empirical results on synthetic
+and standard benchmark datasets demonstrate the
+regimes in which the algorithm can be effective
+and provide a baseline for further advancements.
+1. Introduction
+Most machine learning systems implicitly or explicitly as-
+sume that their training experience is representative of their
+test experience. This assumption is rarely true in real-world
+deployments of machine learning, where “unknown un-
+knowns”, or “alien” data, can arise without warning. Ig-
+*Equal contribution1Department of Statistics, Oregon State
+University, Oregon, USA2School of EECS, Oregon State Univer-
+sity, Oregon, USA3University of California, Berkeley, California,
+USA. Correspondence to: Si Liu <lius2@oregonstate.edu >.
+Proceedings of the 35thInternational Conference on Machine
+Learning , Stockholm, Sweden, PMLR 80, 2018. Copyright 2018
+by the author(s).noring the potential for such aliens can lead to serious safety
+concerns in many applications and signiﬁcantly degrade
+the accuracy of test set predictions in others. For exam-
+ple, consider a scientiﬁc application where a classiﬁer is
+trained to recognize speciﬁc categories of insects in fresh-
+water samples in order to detect important environmental
+changes (Lytle et al., 2010). Test samples will typically
+contain some fraction of specimens belonging to species
+not represented in the training data. A classiﬁer that is un-
+aware of these new species will misclassify the specimens
+as belonging to existing species. This will produce incorrect
+scientiﬁc conclusions.
+The problem of open category detection is to detect such
+alien examples at test time. An ideal algorithm for this prob-
+lem would guarantee a user-speciﬁed alien-detection rate
+(e.g., 95%), while attempting to minimize the false alarm
+rate. Unfortunately, no existing algorithm provides such
+guarantees under general conditions. In addition, empir-
+ical evaluations of existing algorithms for open category
+detection typically do not directly evaluate alien detection
+rates, which are perhaps the most relevant for safety-critical
+applications. Overall, our current theoretical and practical
+understanding of open category detection is lacking from a
+safety and accuracy perspective.
+Is it possible to achieve open category detection with guar-
+antees? In this paper, we take a step toward answering
+this question by studying a simpliﬁed, but practically rel-
+evant, problem setting. To motivate our setting, consider
+the above insect identiﬁcation problem. At training time it
+is reasonable to expect that a clean training set is available
+that contains only the insect categories of interest. At test
+time, a new sample will include insects from the training
+categories along with some percentage of insects from new
+alien categories. Further, scientists may have reasonable
+estimates for this percentage based on their scientiﬁc knowl-
+edge and practical experience. We would like to guarantee
+that the system is able to raise an alarm for, say, 95% of the
+insects from alien classes, with each alarm being examined
+by a scientist. At the same time, we would like to avoid as
+many “false alarms” as possible, since each alarm requires
+scientist effort.
+To formalize the example, our setting assumes two training
+sets: a clean training dataset involving a ﬁnite set of cate-
+Open Category Detection with PAC Guarantees
+gories and a contaminated dataset that contains a fraction 
+of aliens. Our ﬁrst contribution is to show that, in this setting,
+theoretical guarantees are possible given knowledge of an
+upper bound on . In particular, we give an algorithm that
+uses this knowledge to provide Probably Approximately
+Correct (PAC) guarantees for achieving a user-speciﬁed
+alien detection rate. While knowledge of a non-trivial upper
+bound onmay not always be possible, in many situations
+it will be possible to select a reasonable value based on
+domain knowledge, prior data, or by inspecting a sample of
+the test data.
+The key idea behind our algorithm is to leverage modern
+anomaly detectors, which are trained on the clean data. Our
+algorithm combines the anomaly-score distributions over
+the clean and contaminated training data in order to derive
+an alarm threshold that achieves the desired guarantee on
+the alien detection rate on new test queries. In theory the
+detection rate guarantee will be met regardless of the quality
+of the anomaly detector. The quality of the detector, how-
+ever, has a signiﬁcant impact on the false alarm rate, with
+better detectors leading to fewer false alarms.
+We carry out experiments1on synthetic and benchmark
+datasets using a state-of-the-art anomaly detector, the Iso-
+lation Forest (Liu et al., 2008). We vary the amount of
+training data, the fraction of alien data points, along with
+the accuracy of the upper bound on provided to our algo-
+rithm. The results indicate that our algorithm can achieve
+the guaranteed performance when enough data is available,
+as predicted by the theory. The results also show that for
+the considered benchmarks, the Isolation Forest anomaly
+detector is able to support non-trivial false positive rates
+given enough data. The results also illustrate the inherent
+difﬁculty of the problem for small datasets and/or small
+values of. Overall, our results provide a useful baseline
+for driving future work on open category detection with
+guarantees.
+2. Related Work
+Open category detection is related to the problem of one-
+class classiﬁcation, which aims to detect outliers relative
+to a single training class. One-class SVMs (OCSVMs)
+(Sch ¨olkopf et al., 2001) are popular for this problem. How-
+ever, they have been found to perform poorly for open
+category detection due to poor generalization (Zhou &
+Huang, 2003), which has been partly addressed by later
+work (Manevitz & Yousef, 2002; Wu & Ye, 2009; Jin et al.,
+2004; Cevikalp & Triggs, 2012). OCSVMs have been em-
+ployed in a multi-class setting similar to open category de-
+tection (Heﬂin et al., 2012; Pritsos & Stamatatos, 2013).
+1Code for reproducing our experiments can be found at
+https://github.com/liusi2019/ocd.However, there are no direct mechanisms to control the alien
+detection rate of these methods, which is a key requirement
+for our problem setting.
+Work on classiﬁcation with rejection/abstaining options
+(Chow, 1970; Wegkamp, 2007; Tax & Duin, 2008;
+Pietraszek, 2005; Geifman & El-Yaniv, 2017) allows classi-
+ﬁers to abstain from making predictions when they are not
+conﬁdent. While loosely related to open category detection,
+these approaches do not directly consider the possibility of
+novel categories, but rather focus on assessing conﬁdence
+with respect to the known categories. Due to their closed-
+world discriminative nature, it is easy to construct scenarios
+where such methods are incorrectly conﬁdent about the class
+of an alien and do not abstain.
+A variety of prior work has addressed variants of open cat-
+egory detection. This includes work on formalizing the
+concept of “open space” to characterize the region of the fea-
+ture space outside of the support of the training set (Scheirer
+et al., 2013). Variants of SVMs have also been developed,
+such as the One-vs-Set Machine (Scheirer et al., 2013) and
+the Weibull-calibrated SVM (Scheirer et al., 2014). Ad-
+ditional work has addressed open category detection by
+tuning the decision boundary based on unlabeled data which
+contains data from novel categories (Da et al., 2014). Ap-
+proaches based on nearest neighbor methods have also been
+proposed (Mendes J ´unior et al., 2017). None of these meth-
+ods, however, allow for the direct control of alien detection
+rates, nor do they provide theoretical guarantees.
+There is also recent interest in open category detection for
+deep neural networks applied to vision and text classiﬁcation
+(Bendale & Boult, 2016; Shu et al., 2017). These methods
+usually train a neural network in a standard closed-world
+setting, but then analyze various activations in the network
+in order to detect aliens. Another related line of work is
+detection of out-of-distribution instances, which is similar
+to open category detection but assumes that the test data
+come from a completely different distribution compared to
+the training distribution (Hendrycks & Gimpel, 2017; Liang
+et al., 2018). All of this work is quite specialized to deep
+neural networks and does not provide direct control of alien
+detection rates or theoretical guarantees.
+3. Problem Setup
+We consider open category detection where there is an un-
+known nominal data distribution D0over labeled examples
+from a known set of category labels. We receive as input
+a “clean” nominal training set S0containingki.i.d. draws
+fromD0. In practice, S0will correspond to some curated
+labeled data that contains only known categories of interest.
+We also receive as input an unlabeled “mixture” dataset
+Smthat contains npoints drawn i.i.d. from a mixture dis-
+Open Category Detection with PAC Guarantees
+tributionDm. Speciﬁcally, the mixture distribution Dmis
+a combination of the nominal distribution D0and an un-
+known alien distribution Da, which is a distribution over
+novel categories (alien data points). We assume that Dais
+stationary, so that all alien points that appear as future test
+queries will also be drawn from Da.
+At training time, we assume that Dmis a mixture distribu-
+tion, with probability of generating an alien data point
+fromDaand probability of 1 of generating a nominal
+point. Our results hold even if the test queries come from a
+mixture with a different value of as long as the alien test
+points are drawn from Da.
+Given these datasets, our problem is to label test instances
+fromDmas either “alien” or “nominal”. In particular, we
+wish to achieve a speciﬁed alien detection rate , which is
+the fraction of alien data points in Dmthat are classiﬁed as
+“alien” (e.g., 95%). At the same time we would like the false
+positive rate to be small, which is the fraction of nominal
+data points incorrectly classiﬁed as aliens.
+Our approach to this problem assumes the availability of an
+anomaly detector that is trained on S0and assigns anomaly
+scores to all data points in both S0andSm. Intuitively, the
+anomaly scores order the test examples according to how
+anomalous they appear relative to the nominal data (higher
+scores being more anomalous). An ideal detector would
+rank all alien data points higher than all nominals, though
+in practice, the ordering will not be so clean. Our approach
+labels data in Smby selecting a threshold on the anomaly
+scores and labeling all data points with scores above the
+threshold as aliens and the remaining points as nominals.
+Our key challenge is to select a threshold that provides a
+guarantee on the alien detection rate.
+4. Algorithms for Open Category Detection
+In order to obtain theoretical guarantees, our algorithm as-
+sumes knowledge of the alien mixture probability that
+generates the mixture data Sm. Later, we will show that
+knowing an upper bound on is sufﬁcient to obtain a guar-
+antee.
+Our approach is based on considering the cumulative dis-
+tribution functions (CDFs) over anomaly scores of a ﬁxed
+anomaly detector. Let F0;Fa, andFmbe the CDFs of
+anomaly scores for the nominal data distribution D0, alien
+distribution Da, and mixture distribution Dmrespectively.
+SinceDmis a simple mixture of D0andDa, we can write
+Fmas
+Fm(x) = (1 )F0(x) +Fa(x):
+From this we can derive the CDF for Fain terms ofFmand
+F0:
+Fa(x) =Fm(x) (1 )F0(x)
+:Given the ability to derive Fa, it is straightforward to achieve
+an alien detection rate of 1 q(e.g. 95%) by selecting an
+anomaly score threshold qthat is theqquantile ofFaand
+raising an alarm on all test queries whose anomaly score is
+greater than q.
+In reality, we do not have access to FmorF0and hence
+cannot exactly determine Fa. Rather, we have samples
+SmandS0. Thus, our algorithm works with the empirical
+CDFs ^F0and ^Fm, which are simple step-wise constant
+approximations, and estimates an empirical CDF over aliens:
+^Fa(x) =^Fm(x) (1 )^F0(x)
+: (1)
+Our algorithm computes the above estimate of ^Faand uses
+it to select a threshold ^qto be the largest threshold such
+that^Fa(^q)q, where 1 qis the target alien detection
+rate. This choice will minimize the number of false alarms.
+The steps of this algorithm are as follows.
+Algorithm 1
+1:Get anomaly scores for all points in S0andSm, denoted
+x1;x2;:::;xkandy1;y2;:::;ynrespectively.
+2:Compute empirical CDFs ^F0and^Fm.
+3:Calculate ^Fausing equation 1.
+4:Output detection threshold
+^q= maxfu2S:^Fa(u)qg;
+whereS=fx1;x2;:::;xk;y1;y2;:::;yng.
+Although ^Fmand^F0are both legal CDFs, the estimate
+for^Fafrom step 3 may not be a legal CDF, because it is
+the difference of two noisy estimates—it may not increase
+monotonically and it may even be negative. A good tech-
+nique for dealing with this problem is to employ isotoniza-
+tion (Barlow & Brunk, 1972) and clipping. Isotonization
+ﬁnds the monotonically increasing function ^F
+aclosest to
+^Fain squared error. To convert ^Fainto a legal CDF, deﬁne
+Fa= minfmaxf^F
+a;0g;1g, where the min and max opera-
+tors are applied pointwise to their arguments. We performed
+experiments (shown in the supplementary materials) to test
+whether using Fain Step 4 would improve the performance
+of the overall algorithm. We found that it did not.
+5. Finite Sample Guarantee
+In the limit of inﬁnite data (both nominal and mixture) and
+perfect knowledge of ,^Fawill converge to the true alien
+CDF, and our algorithm will achieve the desired alien de-
+tection rate. In this section, we consider the ﬁnite data case
+wherejS0j=jSmj=n. We derive a value for the sample
+sizenthat guarantees with high probability over random
+Open Category Detection with PAC Guarantees
+draws ofS0andSm, that fraction 1 q of the alien
+test points will be detected, where is an additional error
+incurred because of the ﬁnite sample size n.
+Our key theoretical tool is a ﬁnite sample result on the
+uniform convergence of empirical CDF functions (Massart,
+1990). To use this result, we make the reasonable technical
+assumption that the nominal and alien CDFs, F0andFa,
+are continuous. In the following, let be the target alien
+detection rate, qbe the input to Algorithm 1, ^qbe the
+estimatedq-quantile of the alien CDF (step 4 of Alg. 1),
+andbe an error parameter. The following theorem gives
+the sample complexity for guaranteeing that 1 of the
+alien examples will be detected using threshold ^q.
+Theorem 1. LetS0andSmbe nominal and mixture
+datasets containing ni.i.d. samples from the nominal and
+mixture data distributions respectively. For any 2(0;1 q)
+and2(0;1), if
+n>1
+2ln2
+1 p
+1 1
+22 
+2
+;
+then with probability at least 1 , Algorithm 1 will return
+a threshold ^qthat achieves an alien detection rate of at
+least 1 , where=q+.
+The proof is in the Appendix. Note that ngrows as
+O(1
+22log1
+). Hence, this guarantee is polynomial in all
+relevant parameters, which we believe is the ﬁrst such guar-
+antee for open category detection. The result can be gener-
+alized to the case where n0< nm; in practice, the larger
+the mixture sample Smis, the easier it is to estimate q,
+because this provides more alien points for estimating the
+q-th quantile of Fa.
+The theorem gives us ﬂexibility in setting andq(the algo-
+rithm input) to achieve a guarantee of 1 . Theparameter
+controls a trade-off between sample size and false alarm rate.
+To minimize the false alarm rate, we want to make qlarge
+(to obtain a larger threshold), so we want to set qclose to.
+But, asq!,!0, andn!1 . To minimize the sample
+sizen, we want to make qas small as possible, because that
+allowsto be larger and hence nbecomes smaller. The
+optimal setting of depends on how the false alarm rate
+grows withq, which in turn depends on the relative shape
+ofF0andFa. In a real safety application, we can estimate
+these fromS0andSmand choose an appropriate qvalue.
+What if we don’t know the exact value of ? If our algorithm
+uses an upper bound 0on the trueto compute ^Fa, we
+can still provide a guarantee. In this case, in addition to the
+assumptions in Theorem 1, we need a concept of an anomaly
+detector being admissible . We say that an anomaly detector
+isadmissible for a problem, if the anomaly score CDFs
+satisfyF0(x)Fm(x)for allx2R. Most reasonable
+anomaly detectors will be admissible in this sense, sincethe alien CDF will typically concentrate more mass toward
+larger anomaly score values compared to F0. Indeed, if this
+is not the case, there is little hope since there is effectively
+no signal to distinguish between aliens and nominals.
+Corollary 1. Consider running Algorithm 1 using an upper
+bound0on the true. Under the same assumptions as
+Theorem 1, if the anomaly detector is admissible and
+n>1
+2ln2
+1 p
+1 1
+22 0
+02
+;
+then with probability at least 1 , Algorithm 1 will return
+a threshold ^qthat achieves an alien detection rate of at
+least 1 , where=q+.
+The proof is in the Appendix. While we can achieve a guar-
+antee using an upper bound on 0, the returned threshold
+will be more conservative (smaller) than if we had used the
+true. This will result in higher false alarm rates, since
+more nominal points will be above the threshold. Thus it is
+desirable to use a value of 0that is as close to as possible.
+6. Experiments
+We performed experiments to answer four questions. Ques-
+tion Q1: how accurate is our estimate of ^qas a function of
+nand? Question Q2: how loose are the bounds from The-
+orem 1? Question Q3: what are typical values of the false
+alarm rates for various settings of nandon real datasets?
+Question Q4: how do these observed values change if we
+employ an overestimate 0>?
+All of our experiments employ the Isolation Forest anomaly
+detector (Liu et al., 2008), which has been demonstrated
+to be a state-of-the-art detector in recent empirical studies
+(Emmott et al., 2013). In the Supplementary Materials
+we show similar results with the LODA anomaly detector
+(Pevn ´y, 2015).
+To address Q1 and Q2, we run controlled experiments
+on synthetic data. The data points are generated from 9-
+dimensional normal distributions. The dimensions of the
+nominal distribution D0are independently distributed as
+N(0;1). The alien distribution is similar, but with probabil-
+ity 0.4, 3 of the 9 dimensions (chosen uniformly at random)
+are distributed as N(3;1)and with probability 0.6, 4 of the
+9 dimensions (chosen uniformly at random) follow N(3;1).
+This ensures that the anomalies are not highly similar to
+each other and models the situation in which there are many
+different kinds of alien objects, not just a single alien class
+forming a tight cluster.
+In each experiment, the nominal dataset and the mixture
+dataset are of the same size n, and the mixture dataset
+contains a proportion of anomaly points. We ﬁxed
+the target quantile to be q= 0:05. The experiments are
+Open Category Detection with PAC Guarantees
+0.650.70.750.80.850.90.951Recall
+5!=0.01100⋯10000100⋯10000!=0.05100⋯10000!=0.10100⋯10000!=0.20!=0.50)=100⋯10000
+Figure 1. Comparison of recall achieved by ^qcompared to oracle
+recall of 0.95. Error bars are 95% conﬁdence intervals. Settings
+ofnandincrease from left to right starting with = 0:01and
+n2f100;500;1K;5K;10Kgup to= 0:5andn= 10 K.
+carried out for n2 f100;500;1K;5K;10Kgand2
+f0:01;0:05;0:10;0:20;0:50g. For testing, we create two
+large datasets G0andGa, withG0being a pure nominal
+dataset,Gabeing a pure alien dataset, and jG0j=jGaj=
+20K. The Isolation Forest algorithm computes 1000 full
+depth isolation trees on the nominal data. Each tree is grown
+on a randomly-selected 20% subsample of the clean data
+points. We compute anomaly scores for the nominal points
+via out-of-bag estimates and anomaly scores for the mix-
+ture points,G0, andGausing the full isolation forest. For
+each combination of nand, we repeat the experiment
+100times. We measure the fraction of aliens detected (the
+“recall”) and the fraction of nominal points declared to be
+alien (the “false positive rate”) by applying the ^qestimate
+to threshold the anomaly scores in G0andGa.
+To assess the accuracy of our ^qestimates (Q1), we could
+compare them to the true values. However, this comparison
+is hard to interpret, because is expressed on the scale
+of anomaly scores, which are somewhat arbitrary. Instead,
+Figure 1 plots the recall achieved by ^q. If^qhad been
+estimated perfectly, the recall would always be 1 q= 0:95.
+However, we see that the recall is often less than 0.95, which
+indicates that ^qis over-estimated, especially when nand
+are small. This behavior is predicted by our theory, where
+we see that the sample size requirements grow inversely
+with2. For largerandn, the recall guarantee is generally
+achieved. Figure 2 compares the false positive rate of the
+true oracleqto the false positive rate of the estimate ^q. For
+each combination of andn, we have 100 replications of
+the experiment and therefore 100 estimates ^aand 100 FPR
+rates. For each of these, the true FPR is computed using G0.
+2!=0.01100⋯10000100⋯10000!=0.05100⋯10000!=0.10100⋯10000!=0.20!=0.50)=100⋯1000000.020.040.060.080.10.12FPRFigure 2. Comparison of oracle FPR to the FPR achieved by ^q.
+Error bars span from the 25th to 75th percentile with the blue dot
+marking the median of the 100 trials. Orange markers indicate the
+oracle FPR. Settings of nandincrease from left to right starting
+with= 0:01andn2f100;500;1K;5K;10Kgup to= 0:5
+andn= 10 K.
+The error bars summarize the resulting 100 FPR values by
+the median and inter-quartile range. We see that for small n
+and, the FPR can be quite different from the oracle rate,
+but for larger nand, the estimates are very good.
+To assess the looseness of the bounds (Q2), for each combi-
+nation ofnand, we ﬁx= 0:05and compute the value
+ofsuch that 95 of the 100 runs achieved a recall of at least
+1 (thusempirially achieves the 1 guarantee). We
+then compute = qand the corresponding required
+sample size naccording to Theorem 1. Figure 3 shows a
+Figure 3. The log sample size nrequired by Theorem 1 in order
+to guarantee the actual observed recall versus the log actual sample
+sizen.
+Open Category Detection with PAC Guarantees
+plot ofnversus the actual n. The distance of these points
+from then=ndiagonal line show that the theory is fairly
+loose, although it becomes tighter as ngets large.
+00.050.10.150.20.250.30.35
+00.10.20.30.40.5FPR
+αLandsatpagebOCRLetter recogShuttleCovertype
+Figure 4. False positive rates on six UCI datasets as a function of
+(q= 0:05,= 0:05).
+Benchmark Data Experiments. To address our third and
+fourth questions, we performed experiments on six UCI
+multiclass datasets: Landsat, Opt.digits, pageb, Shuttle,
+Covertype and MNIST. In addition to these, we provide
+results for the Tiny ImageNet dataset. In each multiclass
+dataset, we split the classes into two groups: nominal and
+alien. For Tiny ImageNet, we train a deep neural network
+classiﬁer on 200 nominal classes and treat the remaining
+800 as aliens. The nominal classes for UCI datasets are
+MNIST(1,3,7), Landsat(1,7), OCR(1,3,4,5,7), pageb(1,5),
+Letter recognition(1,3), and Shuttle(1,4). We generated
+0.860.880.90.920.940.960.98
+00.10.20.30.40.5Recall!LandsatpagebOCRLetter recogShuttleCovertype
+Figure 5. Recall rates on six UCI datasets as a function of (q=
+0:05,= 0:05)
+0.30.350.40.450.50.550.60.650.7
+0.050.150.250.350.45FPR!MNISTTiny ImagenetFigure 6. False positive rates on two image datasets as a function
+of(q= 0:05;= 0:05).
+nominal and mixture datasets for various values of . The
+value ofnfor each dataset is 1532 for Landsat,788 for Letter
+recognition, 568 for OCR, 4912 for pageb, 5000 for Shuttle,
+13,624 for Covertype, 11,154 for MNIST, and 10,000 for
+Tiny ImageNet. Because we cannot create datasets with
+largen, we cannot measure the true value of q.
+After computing the anomaly scores for both nominal and
+mixture datasets, we applied Algorithm 1 within a 10-fold
+cross validation. We divide the mixture data points at ran-
+dom into 10 groups. For each fold, we estimate ^Faand^a
+from 9 of the 10 groups and then score the mixture points in
+the held-out fold according to ^a. In all other respects, the
+experimental protocol is the same as for the synthetic data.
+For Tiny ImageNet, the anomaly scores are obtained by
+applying a baseline method (Hendrycks & Gimpel, 2017).
+To answer Q3, Figures 4 and 6 plot the false positive rate as
+a function of for the UCI and vision datasets, respectively.
+We see that the FPR ranges from 3.6% to 26.9% on UCI
+depending on the dataset and the level of . The vision
+datasets have higher FPR, especially MNIST, which has a
+large number of alien classes that are not distinguished well
+by the anomaly detector. The FPR depends primarily on
+the domain, because the key issue is how well the anomaly
+detector distinguishes between nominal and alien examples.
+The false alarm rate generally improves as increases. In
+some applications, it may be possible to enrich Smso that
+is larger on the training set to take advantage of this
+phenomenon. It is interesting to note that once ^ahas been
+computed, it can be applied to test datasets having different
+(or unknown) values of .
+Figures 5 and 7 plot the recall rate as a function of for
+the UCI and vision datasets. We set q= 0:05in these
+experiments. Theorem 1 only guarantees a recall of 1 q ,
+Open Category Detection with PAC Guarantees
+0.880.890.90.910.920.930.940.950.960.970.98
+0.050.150.250.350.45Recall
+!MNISTTiny Imagenet
+Figure 7. Recall rates on two image datasets as a function of 
+(q= 0:05;= 0:05).
+00.050.10.150.20.250.30.350.4
+00.0020.0040.0060.0080.01α'	-αrecall'	-recallfpr'	-fpr
+Figure 8. Change in recall and false positive rate as a function of
+0 for six UCI datasets; 2f0:1;0:2;0:4g
+wheredepends on n. Hence, it is nice to see that for
+three of the domains (Shuttle, Covertype, and Landsat) in
+UCI and for both vision datasets, the recall is very close to
+1 q= 0:95. These are the domains with the largest values
+ofn. The value of has a bigger impact on recall than it
+does on FPR. This is because the effective number of alien
+training examples is n, which can be very small for some
+datasets when = 0:1. This shows that in applications such
+as fraud detection, where may be very small, the mixture
+datasetSmneeds to be very large.
+To answer Q4 regarding the impact of using an incorrect
+value0> , we repeated these experiments with 0=
++, for2f0:002;0:004;0:006;0:008;0:010g. Figure 8
+plots the change in false positive rate and recall as a functionof0 . Two points are plotted for each combination
+of0and dataset, the change in Recall and the change in
+FPR. We observe that the recall increases slightly (in the
+range from 0.01 to 0.05). However, the false positive rate
+increases by much larger amounts (from 0.01 to 0.336). This
+demonstrates that it is very important to determine the value
+ofaccurately.
+7. Summary
+We have taken a step toward open category detection with
+guarantees by providing a PAC-style guarantee on the prob-
+ability of detecting 1 of the aliens on the test data. This
+is the ﬁrst such guarantee under any similarly general con-
+ditions. We have shown that this guarantee is satisﬁed in
+our experiments, although the guarantee is somewhat loose,
+especially on small training sets. Obtaining a guarantee re-
+quires more data than standard PAC guarantees on expected
+prediction accuracy. This is because we must estimate the
+qquantile of the alien anomaly score distribution, where
+qis typically quite small. Nonetheless, our experiments
+show that our algorithm gives good recall performance and
+non-trivial false alarm rates on datasets of reasonable size.
+It is important to note that the very formulation of a PAC-
+style guarantee on the probability of detecting aliens re-
+quires assuming that the aliens are drawn from a well-
+deﬁned distribution Da. While this is appropriate in some
+applications, such as the insect survey application described
+in the introduction, it is not appropriate for adversarial set-
+tings. In such settings, a PAC-style guarantee does not make
+sense, and some other form of safety guarantee needs to be
+formulated.
+To obtain the guarantee, we employ two training datasets:
+a clean dataset that contains no aliens and an (unlabeled)
+contaminated dataset that contains a known fraction of
+aliens. An important theoretical problem for future research
+is to develop a method that can estimate a tight upper bound
+on^> . We believe this is possible, but we have not yet
+found a method that guarantees that ^> .
+Our guarantee requires more data as becomes small. For-
+tunately, when is small, it may be possible in some appli-
+cations to afford lower recall rates, since the frequency of
+aliens will be smaller. However, in safety-critical applica-
+tions where a single undetected alien poses a serious threat,
+there is little recourse other than to collect more data or
+allow for higher false positive rates.
+Acknowledgements
+This research was supported by a gift from Huawei, Inc.,
+and grants from the Future of Life Institute and the NSF
+Grant 1514550. Any opinions, ﬁndings, and conclusions
+Open Category Detection with PAC Guarantees
+or recommendations expressed in this material are those of
+the author(s) and do not necessarily reﬂect the views of the
+sponsors.
+A. Proof for Theorem 1
+Suppose there are nrandom variables which are i.i.d. from
+the distribution with CDF Fand let ^Fnbe the empirical
+CDF calculated from this sample. Then Massart (1990)
+shows that
+P(pnsup
+xj^Fn(x) F(x)j>)2 exp( 22)(2)
+holds without any restriction on . Making use of this,
+and assuming we use the same sample size nfor both the
+mixture dataset and the clean data set, for any 2(0;1 q),
+we seek to determine how large nneeds to be in order to
+guarantee that with probability at least 1 our quantile
+estimate ^qsatisﬁesFa(^q)q+. To achieve this, we
+want to have
+P(sup
+xj^Fa(x) Fa(x)j>):
+We have
+P(sup
+xj^Fa(x) Fa(x)j>)
+=P(sup
+xj^Fm(x) (1 )^F0(x)
+ 
+Fm(x) (1 )F0(x)
+j>)
+=P(sup
+xj1
+(^Fm(x) Fm(x)) 
+1 
+(^F0(x) F0(x))j>)
+P((1
+sup
+xj^Fm(x) Fm(x)j+
+1 
+sup
+xj^F0(x) F0(x)j)>)
+P(f1
+sup
+xj^Fm(x) Fm(x)j>1
+2 g
+[f1 
+sup
+xj^F0(x) F0(x)j>1 
+2 g)
+=P(fsup
+xj^Fm(x) Fm(x)j>
+2 g
+[fsup
+xj^F0(x) F0(x)j>
+2 g):
+Making use of (2), when
+n>1
+2ln2
+1 p
+1 (1
+)2(2 
+)2;we will have
+P(sup
+xj^Fm(x) Fm(x)j>
+2 )1 p
+1 ;
+P(sup
+xj^F0(x) F0(x)j>
+2 )1 p
+1 :
+In this case we will have
+P(sup
+xj^Fa(x) Fa(x)j>)
+1 P(fsup
+xj^Fm(x) Fm(x)j
+2 g
+\fsup
+xj^F0(x) F0(x)j
+2 g)
+1 (1 1 +p
+1 )2
+=:
+Now we have with probability at least 1 ,
+j^Fa(x) Fa(x)j;8x2R:
+If this inequality holds, then for any value ^qsuch that
+^Fa(^q)q, we have
+Fa(^q)^Fa(^q) +q+:
+So we have with probability at least 1 , any ^qsatisfying
+^Fa(^q)qwill satisfyFa(^q)q+. 
+B. Proof for Corollary 1
+If0, and if we write
+F0
+a(x) =Fm(x) (1 0)F0(x)
+0;
+thenF0
+ais still a legal CDF, because
+F0
+a( 1) = 0; F0
+a(1) = 1;
+and it is easy to show that F0
+ais monotonically nondecreas-
+ing.
+But
+F0
+a(x) Fa(x) =( 0)(Fm(x) F0(x))
+00;8x2R;
+and because of this, if we let ^0
+qdenote the threshold we
+get from using 0, we will have Fa(^0
+q)F0
+a(^0
+q). By
+the proof of previous theorem, we know that when n >
+1
+2ln2
+1 p1 (1
+)2(2 0
+0)2, we have with probability at least
+1 ,F0
+a(^0
+q)q+, and thus we have Fa(^0
+q)q+.
+References
+Barlow, RE and Brunk, HD. The isotonic regression prob-
+lem and its dual. Journal of the American Statistical
+Association , 67(337):140–147, 1972.
+Open Category Detection with PAC Guarantees
+Bendale, A. and Boult, T. E. Towards open set deep net-
+works. In 2016 IEEE Conference on Computer Vision
+and Pattern Recognition (CVPR) , pp. 1563–1572, June
+2016.
+Cevikalp, H. and Triggs, B. Efﬁcient object detection using
+cascades of nearest convex model classiﬁers. In 2012
+IEEE Conference on Computer Vision and Pattern Recog-
+nition , pp. 3138–3145, June 2012.
+Chow, C. On optimum recognition error and reject tradeoff.
+IEEE Transactions on Information Theory , 16(1):41–46,
+Jan 1970. ISSN 0018-9448.
+Da, Qing, Yu, Yang, and Zhou, Zhi-Hua. Learning with
+augmented class by exploiting unlabeled data. In Pro-
+ceedings of the Twenty-Eighth AAAI Conference on Artiﬁ-
+cial Intelligence , AAAI’14, pp. 1760–1766. AAAI Press,
+2014.
+Emmott, Andrew F, Das, Shubhomoy, Dietterich, Thomas,
+Fern, Alan, and Wong, Weng-Keen. Systematic construc-
+tion of anomaly detection benchmarks from real data. In
+Proceedings of the ACM SIGKDD workshop on outlier
+detection and description , pp. 16–21. ACM, 2013.
+Geifman, Yonatan and El-Yaniv, Ran. Selective classiﬁca-
+tion for deep neural networks. In Guyon, I., Luxburg,
+U. V ., Bengio, S., Wallach, H., Fergus, R., Vishwanathan,
+S., and Garnett, R. (eds.), Advances in Neural Informa-
+tion Processing Systems 30 , pp. 4885–4894. Curran As-
+sociates, Inc., 2017.
+Heﬂin, B., Scheirer, W., and Boult, T. E. Detecting and
+classifying scars, marks, and tattoos found in the wild. In
+2012 IEEE Fifth International Conference on Biometrics:
+Theory, Applications and Systems (BTAS) , pp. 31–38,
+Sept 2012.
+Hendrycks, Dan and Gimpel, Kevin. A baseline for de-
+tecting misclassiﬁed and out-of-distribution examples in
+neural networks. In Proceedings of International Confer-
+ence on Learning Representations , 2017.
+Jin, Hongliang, Liu, Qingshan, and Lu, Hanqing. Face
+detection using one-class-based support vectors. In Sixth
+IEEE International Conference on Automatic Face and
+Gesture Recognition, 2004. Proceedings. , pp. 457–462,
+May 2004.
+Liang, Shiyu, Li, Yixuan, and Srikant, R. Enhancing the
+reliability of out-of-distribution image detection in neural
+networks. International Conference on Learning Repre-
+sentations , 2018.
+Liu, Fei Tony, Ting, Kai Ming, and Zhou, Zhi-Hua. Isolation
+forest. In Data Mining, 2008. ICDM’08. Eighth IEEE
+International Conference on , pp. 413–422. IEEE, 2008.Lytle, David A, Mart ´ınez-Mu ˜noz, Gonzalo, Zhang, Wei,
+Larios, Natalia, Shapiro, Linda, Paasch, Robert, Mold-
+enke, Andrew, Mortensen, Eric N, Todorovic, Sinisa, and
+Dietterich, Thomas G. Automated processing and identi-
+ﬁcation of benthic invertebrate samples. Journal of the
+North American Benthological Society , 29(3):867–874,
+2010.
+Manevitz, Larry M. and Yousef, Malik. One-class svms for
+document classiﬁcation. J. Mach. Learn. Res. , 2:139–154,
+March 2002. ISSN 1532-4435.
+Massart, P. The tight constant in the dvoretzky-kiefer-
+wolfowitz inequality. The Annals of Probability , 18(3):
+1269–1283, 1990. ISSN 00911798.
+Mendes J ´unior, Pedro R., de Souza, Roberto M., Werneck,
+Rafael de O., Stein, Bernardo V ., Pazinato, Daniel V .,
+de Almeida, Waldir R., Penatti, Ot ´avio A. B., Torres,
+Ricardo da S., and Rocha, Anderson. Nearest neighbors
+distance ratio open-set classiﬁer. Machine Learning , 106
+(3):359–386, Mar 2017. ISSN 1573-0565.
+Pevn ´y, Tom ´aˇs. Loda: Lightweight on-line detector of
+anomalies. Machine Learning , (November 2014), 2015.
+Pietraszek, Tadeusz. Optimizing abstaining classiﬁers using
+roc analysis. In Proceedings of the 22Nd International
+Conference on Machine Learning , ICML ’05, pp. 665–
+672, New York, NY , USA, 2005. ACM. ISBN 1-59593-
+180-5.
+Pritsos, Dimitrios A. and Stamatatos, Efstathios. Open-
+Set Classiﬁcation for Automated Genre Identiﬁcation , pp.
+207–217. Springer Berlin Heidelberg, Berlin, Heidelberg,
+2013. ISBN 978-3-642-36973-5.
+Scheirer, W. J., de Rezende Rocha, A., Sapkota, A., and
+Boult, T. E. Toward open set recognition. IEEE Transac-
+tions on Pattern Analysis and Machine Intelligence , 35
+(7):1757–1772, July 2013. ISSN 0162-8828.
+Scheirer, W. J., Jain, L. P., and Boult, T. E. Probability
+models for open set recognition. IEEE Transactions on
+Pattern Analysis and Machine Intelligence , 36(11):2317–
+2324, Nov 2014. ISSN 0162-8828.
+Sch¨olkopf, Bernhard, Platt, John C., Shawe-Taylor, John C.,
+Smola, Alex J., and Williamson, Robert C. Estimating
+the support of a high-dimensional distribution. Neural
+Comput. , 13(7):1443–1471, July 2001. ISSN 0899-7667.
+Shu, Lei, Xu, Hu, and Liu, Bing. DOC: deep open classiﬁ-
+cation of text documents. CoRR , abs/1709.08716, 2017.
+Tax, D.M.J. and Duin, R.P.W. Growing a multi-class classi-
+ﬁer with a reject option. Pattern Recognition Letters , 29
+(10):1565 – 1570, 2008. ISSN 0167-8655.
+Open Category Detection with PAC Guarantees
+Wegkamp, Marten H. Lasso type classiﬁers with a reject
+option. 2007.
+Wu, M. and Ye, J. A small sphere and large margin ap-
+proach for novelty detection using training data with out-
+liers. IEEE Transactions on Pattern Analysis and Ma-
+chine Intelligence , 31(11):2088–2092, Nov 2009. ISSN
+0162-8828.
+Zhou, Xiang Sean and Huang, Thomas S. Relevance feed-
+back in image retrieval: A comprehensive review. Mul-
+timedia Systems , 8(6):536–544, Apr 2003. ISSN 1432-
+1882.

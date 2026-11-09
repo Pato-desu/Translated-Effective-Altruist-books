@@ -1,0 +1,483 @@
+RESEARCH ARTICLE
+Global distribution of forest classes and leaf
+biomass for use as alternative foods to
+minimize malnutrition
+Tim Fist1| Adewale A. Adesanya2| David Denkenberger1,3|
+Joshua M. Pearce4
+1Alliance to Feed the Earth in Disasters
+(ALLFED), Fairbanks, Alaska, USA
+2Environmental and Energy Program,
+Social Science Department, MichiganTechnological University, Houghton,Michigan, USA
+3Department of Mechanical Engineering,
+University of Alaska Fairbanks,Fairbanks, Alaska, USA
+4Department of Electrical and Computer
+Engineering, Western University,London, Ontario, Canada
+Correspondence
+Joshua M. Pearce, Department ofElectrical and Computer Engineering,Western University, 1151 RichmondSt N, London, Ontario N6A 3K7, Canada.Email: joshua.pearce@uwo.ca
+Funding information
+Centre for Effective Altruism; John andMelinda Thompson Endowment Fund inVision NeurosciencesAbstract
+Due to the ready availability of tree leaves in many
+geographies, the alternative food of leaf concentrate
+currently has the potential to alleviate hunger in over
+800 million people. It is therefore potentially highly
+impactful to determine the edibility of leaf concen-trates, which are in the same regions as the world ’s
+most undernourished populations. Unfortunately, the
+toxicity of leaf concentrate for most common tree leaf
+types has not been screened and the cost of doing so
+demands a prioritization. This preliminary studyexplores this potential solution to world hunger by
+finding the forest classes most likely to offer proximate
+access to the world ’s hungry, thus providing the basis
+for a prioritized list of leaf types to screen for toxicity.
+Specifically, this study describes a novel methodologyfor mapping available green leaf biomass and
+corresponding forest classes (e.g., tropical moist decidu-
+ous forest), and their spatial relationship to the global
+distribution of people who are underweight. These
+results will be useful for developing a targeted list of
+tree species to conduct leaf toxicity analysis on, in the
+interest of developing leaves as an alternative foodsource for both current malnutrition problems and
+global catastrophic scenarios.Received: 12 October 2020 Revised: 18 January 2021 Accepted: 9 August 2021
+DOI: 10.1002/wfp2.12030
+World Food Policy. 2021;1 –19. wileyonlinelibrary.com/journal/wfp2 © 2021 Policy Studies Organization 1
+KEYWORDS
+agriculture, edible leaves, forests, GIS, global catastrophic risk,
+hunger
+1|INTRODUCTION
+More than 820 million people are currently undernourished and face chronic food deprivation
+throughout the world (Food and Agriculture Organization of the United Nations [FAO], 2018).
+Children under the age of 5 are the hardest hit (Bhutta et al., 2017; McDonald et al., 2013;United Nations Children ’s Fund [UNICEF], 2005). According to the Global Nutrition Report
+(GNR), 150.8 million are stunted (impaired growth and development that children experience
+from chronic poor nutrition) and 50.5 million children under 5 are wasted (acute malnutrition)(GNR, 2018). Overall, 20 million babies are born of low birth weight each year and a third of
+reproductive-age women are anemic (GNR, 2018). This is unnecessary, as previous research has
+shown that alternative food supplies could support the entire human population even in themost extreme disaster that eliminates all conventional agriculture (Denkenberger &Pearce, 2014, 2015). In such a disaster, humanity ’s food intake could actually be improved over
+the current nonuniform distribution and all lives could be maintained on the basis of caloric
+intake by converting carbon sources like dead trees (wood) and leaves to human-edible food(Denkenberger & Pearce, 2016, 2018a). Even more surprisingly, preliminary calculations show
+that a modest diversity of alternative foods could supply a balanced diet of macronutrients and
+micronutrients (Denkenberger & Pearce, 2018b) to maintain reasonable human health(Shenkin, 2006). Some alternative foods, including extracting calories from leaves, would be
+helpful in a different class of catastrophes, those that disrupt electricity such as an extreme solar
+storm (Cole et al., 2016), or even a combination of catastrophes (Denkenberger et al., 2017).Even without any extreme events, it is important that a resilient global food system is continu-
+ous (i.e., it is able to maintain caloric intake consistently so that people do not starve or suffer
+from the detrimental effects of hunger intermittently) (Seekell et al., 2017). In the most extremecircumstances of a sun-blocking global catastrophe, the largest challenge to feeding the globalpopulation lies in between the time that stored food is consumed (about 6 months) and the
+transition to alternative foods following the catastrophe (about 1 year) (Denkenberger &
+Pearce, 2014, 2015). Of the alternative food solutions that could be ramped up in this timeperiod, the best theoretical solution is to use leaves killed by the catastrophe (as opposed to
+leaves that are depleted of nutrients and shed naturally called leaf litter), because of their wide
+availability and reasonable price in comparison with other alternative foods (Denkenbergeret al., 2018). It is possible to grind and press leaves, boil the fluid, and then coagulate the resul-
+tant liquid as leaf concentrate into food, which contains /C248% of the dry matter of the original
+leaves (Leaf for Life, 2019). The remaining unused liquid contains much of the toxins and hasbeen considered unfit for human consumption (Kennedy, 1993). Although yields of leaf concen-
+trate made at the household scale are lower with nonindustrial techniques (Kennedy, 1993),
+conducting this process in households would be more widely accessible and could contribute tohunger alleviation now. However, making humanly consumable food at a global level from treeleaves in this manner or in teas is challenging because (a) only a small fraction of the leaves ’
+calories can be extracted (e.g., in black tea, /C2420% of the total calories of the proteins, carbohy-
+drates, and lipids make it into the liquid [Belitz et al., 2009]); (b) eating tree leaf-based teas is2 FIST ET AL .
+
+uncommon, although in some parts of the world, pine needle tea is already consumed (Kim &
+Chung, 2000); (c) more information is needed on the percentage of existing tree leaves that
+could be harvested sustainably from the many types of trees; and (d) there have not been
+enough studies to gauge the human toxicity leaf extract from common tree leaf types.
+To overcome this last challenge (d), a recent study (Pearce et al., 2019) provided a new
+methodology for obtaining rapid toxics screening of common leaf concentrates using a non-
+targeted approach with an ultrahigh-resolution hybrid ion trap orbitrap mass spectrometer withelectrospray ionization (ESI) coupled to an ultrahigh-pressure two-dimensional liquid chroma-tography system. Identified chemicals by the nontargeted approach are then cross-referenced
+with the OpenFoodTox database (Bassan et al., 2018) to identify toxic chemicals. Identified
+toxins are then screened for formula validation and evaluated for risk as a food, and furtheranalysis is needed with standards to rule out toxicity. Although this initial screening is faster
+and less expensive than past methods, it still presents prohibitive costs for running against all of
+the world ’s tree species. Therefore, the objective of this study is to provide a means of prioritiza-
+tion to identify the leaf types that should be screened first. Given that leaf concentrate as an
+alternative food has the potential to alleviate hunger in over 800 million people today
+(FAO, 2018), it appears appropriate to target leaf types where the most malnourished peoplelive. With limited resources for leaf toxicity studies, which types of forests (forest classes) andthe trees within them should have their leaves targeted first for toxilogical analysis? This is pri-
+marily an applied geography problem, and this preliminary study seeks to solve that problem
+by determining these priorities. This study describes a methodology for mapping available greenleaf biomass and forest classes, and their spatial relationship to the distribution of global malnu-
+trition. It builds on methods described by Center for International Earth Science Information
+Network —CIESIN —Columbia University (2005), Doxsey-Whitfield et al. (2015), and Ruesch
+and Gibbs (2008). The output of this new methodology will be useful for developing more
+detailed tree species studies, which will form the basis for leaf toxicity screenings, in the interest
+of developing leaves as an alternative food source for both current malnutrition problems andcatastrophic scenarios.
+2|METHODS
+2.1 |Data
+Data were selected on the basis of being open accessible and the most recent high-quality avail-
+able and are detailed below. Datasets have been chosen from the years 2000 –2002, a date range
+with the most complete corresponding global data available for both leaf biomass and malnutri-tion. The data developed as part of this project are available open access in tabular format
+(Fist, 2019), and users can look in detail at regions on an interactive map format housed at
+http://bit.ly/allfed-leaf-map.
+2.1.1 | Global malnutrition
+In order to estimate the global spatial data on malnutrition at a subnational level, the global
+subnational prevalence of child malnutrition in 2002 developed by the National Aeronautics
+and Space Administration (NASA) Socioeconomic Data and Applications Center (SEDAC) isFIST ET AL . 3
+
+used here (Center for International Earth Science Information Network —CIESIN —Columbia
+University, 2005). The total global population for 2000 broken down by region was also from
+SEDAC (2019).
+2.1.2 | Leaf biomass
+The Intergovernmental Panel on Climate Change (IPCC) provides a high-resolution map of liv-
+ing biomass of carbon for the year 2000 (Ruesch & Gibbs, 2008).
+2.2 |Calculating total number of people suffering from malnutrition
+for each region
+It is assumed that the SEDAC underweightness data within a region (which describes levels of
+underweightness in children under 5) are a good proxy for rates of malnutrition in general in
+that region. This is because children depend on adults for their care and they are not fed if thereis no enough food in the region (LaFollette & May, 1996). It is also assumed that most of theregions with no SEDAC data or a poor subnational data breakdown do not currently have sig-
+nificant malnutrition problems. For example, two such regions are the United States and
+Canada, which are both experiencing an epidemic of obesity (Pozza & Isidori, 2018; Upadhyayet al., 2018), and globally, 38.9% of adults are overweight or obese (GNR, 2018).
+To convert the general data into the total number of people suffering from malnutrition for
+each region, the total population in each region is multiplied by the fraction given by propor-tion of underweight children under 5. This assumes that if levels of childhood malnutrition are
+roughly similar to levels of adult malnutrition in each area, then this product will provide a rea-
+sonable first-order approximation for the total number of people suffering from malnutrition ina given region. Next, the SEDAC population data (a 30-arc second raster grid) are mapped onto
+the SEDAC malnutrition regions (a polygon vector dataset) in order to sum population in those
+regions to establish absolute levels of malnutrition.
+The resulting dataset can be analyzed at both global and regional levels. Here, the regions of
+Uttar Pradesh in India and North East Nigeria are used as examples, being two regions with
+high levels of malnutrition. They also represent areas where this approach would be most viable
+as poor people live within or near forests.
+2.3 |Estimating the spatial distribution of tree species and leaf
+biomass
+The total biomass of carbon from Lawrence Berkeley National Laboratory (Ruesch &
+Gibbs, 2008) needs to be translated into a reasonably accurate estimate leaf biomass, broken
+down by forest type. First, the amount of this carbon, which is above ground in trees, is deter-
+mined. Second, the proportion of a tree ’s biomass that is carbon is found. Finally, the propor-
+tion of a tree ’s biomass, which is made up of leaves, is applied to determine the total leaf
+biomass available in each region.
+The majority of the biomass determined by Ruesch and Gibbs (2008) is contained in trees,
+rather than grasses, crops, and so forth. To determine the specific amount of tree biomass in the4 FIST ET AL .
+
+dataset, the global spatial distribution of trees is required, for which the European Space
+Agency (ESA, 2019) global land cover dataset was used. The relevant land classes for tree cover
+are mapped noting that the following classes have been excluded: mountain systems, polar
+regions, desert regions, steppes, shrubland, and water. These classes were excluded due to theirgeographic isolation, hostility, and difficulty of leaf harvesting (e.g., it would be impractical to
+assume widespread leaf harvesting). The proportion of a tree ’s dry biomass that is carbon is
+assumed to be 47% (Lamlom & Savidge, 2006), whereas the percentage of a tree ’s biomass,
+which is made up of leaves, is assumed to be 1% (Poorter et al., 2012). It should be pointed outthat for the purposes of this study, the rapid ramp rates of leaf concentrate make the 1% leaf
+biomass of most interest, but that remaining wood could be used for alternative foods by, for
+example, feeding it to beetles and mushrooms and the remaining material to rats.
+These values are combined to generate a map of leaf biomass across different forest
+classifications.
+2.4 |Combining malnutrition density and leaf biomass to determine
+forest zones to evaluate
+First, forest types, which are most common in regions with high levels of malnutrition, are
+determined by taking the earlier generated regional underweightness data and referencing it
+against forest zone data (ESA, 2019). These data can be closely examined to understand whichforest classifications are most prevalent in the areas suffering most from malnutrition. Again,
+regions in India and Nigeria are used as examples. Next, the most common forest class by popu-
+lation region area is mapped on the basis of (a) total forest area and (b) total leaf biomass. Thisanalysis can provide a priority list for both global and regional forest types to concentrate alter-
+native food research upon, on the basis of potential lives saved. However, to determine if there
+are actually enough leaves to be useful, a final analysis is made to derive the total leaf biomassavailable in each region across all forest classes, per individual suffering from malnutrition.
+These data are available in tabular format (Fist, 2019), and users can look in detail at
+regions on an interactive map format housed at http://bit.ly/allfed-leaf-map.
+3|RESULTS
+Following the methods outlined above, the proportion of children who are both under 5 years
+old and underweight is mapped in Figure 1a, and the proportion of the total population who
+are under 5 years old is shown in Figure 1b. The proxy for general malnutrition in a region isdescribed by the black-outlined boundaries in Figure 1. The results, being derived from SEDAC
+region boundaries, have a higher resolution in areas with a larger malnutrition problem, such
+as sub-Saharan Africa. As Figure 1 shows, these boundaries do not give a particularly good ideaof how malnutrition levels break down within certain regions, such as Russia. In addition, these
+results do not provide any information for countries where no malnutrition data are present,
+which covers North America, Western Europe, Australia/New Zealand, and several others.
+The global population for 2000 is shown in Figure 2. The population data are mapped onto
+the malnutrition regions shown in Figures 1a,b and 3a,b. The maps in Figure 3 emphasize the
+large number of children suffering from malnutrition in South and Southeast Asia, in particular
+India and Indonesia.FIST ET AL . 5
+
+With this dataset, individual regions can be analyzed. This is shown in Figure 4 for the state
+of Uttar Pradesh in India and in Figure 5 for North East Nigeria.
+In Uttar Pradesh alone (Figure 4a), there are over 10 million underweight children under
+5, composing a shocking 51% of the total number of children under 5. Using the methodology
+described above, the inferred total underweight population in this region is 89 million, in a total
+population of 173 million.
+Figure 4b shows the same set of data for North East Nigeria, where the total population is
+22 million, the percent of children under 5 who are underweight is 38%, and the subsequent
+inferred underweight population under 5 and in general is 1.4 million and 8.3 million,
+respectively.
+FIGURE 1 (a) Proportion of children who are both under 5 years old and underweight and (b) proportion
+of the total population who are under 5 years old6 FIST ET AL .
+
+FIGURE 2 The global population in 2000. Note that the legend values for each color are on a log scaleFIST ET AL . 7
+
+FIGURE 3 (a) Total population who are both under 5 years old and underweight. (b) Total population who
+are underweight, assuming that the percent of children who are underweight can be extrapolated to the total
+population. Regions with no data available are shown in black8 FIST ET AL .
+
+FIGURE 4 (a) Details of the output from the calculations for Uttar Pradesh. (b) Details of the output from
+the calculations for North East NigeriaFIST ET AL . 9
+
+FIGURE 5 (a) Tonnes of living biomass of carbon per hectare in 2000. (b) The regions in the globe covered
+with forests and broken down by type of forest zone. (c) Leaf biomass across different forest classifications
+shown in (b)10 FIST ET AL .
+
+The next step is to supplement the analysis of the global distribution of hunger with infor-
+mation available for leaf biomass in each of these regions.
+From these data, it is clear that the majority of global living biomass is in the equatorial
+region with a typical factor of /C242/C2higher biomass per hectare than even the most biomass-
+dense northern or southern regions.
+Using the ESA (2019) global land cover data, the forested regions of the world broken
+down by broad class are shown in Figure 5b. These data were cross-validated against datasetsfrom the Global Forest Watch (2000) Tree Cover and NASA MODIS Land Cover (2019). Ofthe forest classes excluded as per the methodology described above, mountain systems are
+the classes with the most forest cover based on biomass. However, for this analysis, the
+mountain regions were still excluded due to the relative difficulty of harvesting leaves insuch environments.
+Combining the data shown in Figure 5a,b, by using the carbon proportion of a tree ’s bio-
+mass together with the proportion of a tree ’s biomass, which is made up of leaves, gives us the
+data shown in Figure 5c: a map of leaf biomass in tonnes/ha across different forest
+classifications.
+The population underweight data are overlaid with regions of available forest and shown in
+Figure 6a.
+Figure 6b zooms in on the forest class and malnutrition data in India. There are three pri-
+mary forest classifications for India: tropical dry forests, tropical moist deciduous forests, and
+tropical rainforests. Figure 6b indicates that concentrating on leaves of trees common to tropicaldry forests would provide the most malnutrition reduction potential in this region, as this forest
+class has the most local coverage and total leaf biomass. These data can also be found in tabular
+format (Fist, 2019). In addition, as can be seen in Figure 6b, leaf extract could not be used toreduce malnutrition in all regions in India (most notably in the west) unless leaf biomass is
+transported as there are regions that are suffering from malnutrition issues (shown in red) with
+no forests available.
+Nigeria shares the same types of forests with India. Similarly, not all of the parts of Nigeria
+suffering from malnutrition have access to forests (see Figure 6c). Transportation would be nec-
+essary to use leaf extract to control malnutrition within Nigeria. This is complicated by the sub-regional distribution of linguistic groups (Hansford et al., 1976). Figure 6c indicates that treeswith tropical moist deciduous forests should be evaluated first to use leaf extract as an alterna-
+tive food in Nigeria. Other countries can use the datasets provided with this study to evaluate
+priority lists for their own regions.
+The most common forest class by region is shown in Figure 7a,b, by area and by total bio-
+mass, respectively. Note the priorities for some regions like Argentina.
+Finally, the total leaf biomass available in each region across all forest classes per individual
+suffering from malnutrition is shown in Figure 8.
+Over the entire Earth, the forest classifications that could provide alternative food with leaf
+extract to people suffering from malnutrition are shown in Table 1. As can be seen in Table 1,the forest types, which should be more closely evaluated to end acute hunger with leaf extract,
+are all tropical: moist deciduous forests, dry forests, and rainforests account for the vast majority
+of underweight global population.
+Table 2 shows the total available amount of dry leaf biomass across each of the forest classes
+considered in this study. These data are especially relevant for sun-obscuring global catastrophe
+scenarios, where a large amount of alternative food would be required to feed the world ’s
+population.FIST ET AL . 11
+
+FIGURE 6 (a) Population underweight data (white !red; black where no data) overlaid with regions of
+available forest (green). (b) Population underweight data (white !red; black where no data) versus forest
+classifications (dots), India. (c) Population underweight data (white !red; black where no data) versus forest
+classifications in Nigeria12 FIST ET AL .
+
+4|DISCUSSION
+The analysis presented in this study has several limitations. First, it is limited by the timeliness
+of datasets, with all datasets having reference years within 2000 –2002, which affect the results
+as all inputs have changed. Global population, number of malnourished individuals, and tree
+cover would all reasonably be expected to have changed in the intervening time period. How-ever, this was the best available complete data and provides good semiquantitative indicatorsfor both research and policy action. Future work is recommended that would utilize remote
+sensing (Djomo & Chimi, 2017; Drake et al., 2003; Halme et al., 2019; Heiskanen, 2006; Zheng
+et al., 2007) and normalized hotspot-signature vegetation index (NHVI), leaf area index (LAI),
+FIGURE 7 The most prevalent forest classification by population region based on (a) total forested area
+and (b) total leaf biomass availableFIST ET AL . 13
+
+FIGURE 8 Leaf dry biomass per underweight individual in tonnes/person shown in the population
+regions. Note that the categories in the legend are on a log scale
+TABLE 1 Forest classifications that could provide alternative food with leaf extract to the most number of
+people suffering from malnutrition
+Forest classificationGlobal underweight population in region
+where forest classification is the most prevalent
+Tropical moist deciduous forest 348,514,567
+Tropical dry forest 309,536,295
+Tropical rainforest 226,873,692Subtropical humid forest 37,503,126
+Temperate continental forest 17,900,192
+Subtropical dry forest 12,574,476
+Boreal coniferous forest 4,988,328
+Temperate oceanic forest 117,119
+Total 958,007,79514 FIST ET AL .
+
+normalized difference vegetation index (NDVI), and bidirectional reflectance distribution func-
+tion (BRDF) techniques to estimate leaf biomass (Cunliffe et al., 2020; Hasegawa et al., 2010;
+Sader et al., 1989; Zhu & Liu, 2015).
+In addition, not all areas had data available (black regions in figures). With global climate
+change accelerating (Bevis et al., 2019; Edenhofer, 2015; Houghton, 1996; Schuur et al., 2015;
+Turetsky et al., 2019), the coverage of forest area dataset (forest classes) would also be expected
+to change into the future (Gatti et al., 2019). The methodology to calculate leaf biomass fromthe global carbon stock data has several sources of assumption that could be further refined
+when detailed mass ratio analyses of leaves for trees in specific regions have been conducted.
+Additionally, in this study, mountain regions were excluded, but if technically viable meanswas found to harvest leaves in those regions, they should be included in future analysis. Fur-
+thermore, other types of leaves could be evaluated (e.g., on shrubs) that may alter the
+priority list.
+The results of this study are useful as they give a strong indication of the types of forests that
+should be concentrated on for future research surrounding using leaves as alternative foods to
+help reduce malnutrition in the short term. There are also clear areas where future spatial work
+is desired to make further use of this study. The suggested next step in this analysis is to breakdown the forest classes in this study into individual tree species in different regions and/or
+develop a global dataset showing tree species distribution. The overall technical viability of this
+approach to solving current hunger issues needs considerably more study as current hunger isprimarily a social construction (Maurer & Sobal, 1995) due to poor governance (Birner, 2007) or
+war (Toole & Waldman, 1993), even short distances for transport can be technically or economi-
+cally prohibitive for the world ’s poor. This analysis could thus be enhanced by considering the
+impact of both property (e.g., who owns the forests) and shipping across regions internally in a
+country as well as international shipping and the impact of regional versus distributed
+processing. In addition, the methods of leaf harvesting and processing to make leaf protein con-centrate (LPC) need considerably more technical investigation to find the most efficient andsustainable methods to determine viability particularly for acute hunger. For example, what
+percent of leaves can be easily harvested from specific tree species in specific regions without
+leading to tree death and deforestation for current hunger? It can be noted that after a majorTABLE 2 The total dry leaf biomass in tonnes as a function of forest classification
+Forest classification Total dry leaf biomass (tonnes)
+Tropical rainforest 4,383,160,948
+Tropical moist deciduous forest 1,545,050,205
+Tropical dry forest 621,972,869
+Subtropical humid forest 521,891,853
+Boreal coniferous forest 432,035,896
+Temperate continental forest 186,085,629
+Boreal tundra woodland 112,470,103
+Temperate oceanic forest 120,400,200Subtropical dry forest 95,440,491
+Total 8,018,508,194FIST ET AL . 15
+
+GCR event, the trees would be dead anyway. Future work is also necessary to evaluate the
+impact of unintended consequences (e.g., deforestation and carbon emissions as a result of
+widespread LPC extraction using felling methods). Future work could also update the input
+data used in this analysis. For example, malnutrition data are now available from the FoodSecurity Portal (2019).
+In addition, these same methods as used in this study could be used for priority determina-
+tion of forest types to study for the viability of leaf concentrate as an alternative food in sun-obscuring global catastrophic risk (GCR) scenarios. In these cases, a more global view of leafbiomass availability would be important, rather than one specifically targeted towards more
+malnourished regions.
+Finally, additional work is needed to be able to determine how many people could be fed
+on the existing leaf biomass in a region, harvested to address acute malnutrition sustainably
+(e.g., harvesting some percentage of leaves by pulling them off the tree) as well as using
+more extreme methods for sun-obscuring GCR scenarios (e.g., cut the trees down and harvestall leaves, as trees will die regardless in such an event). For the former, the percentage of
+leaves that can be sustainably harvested from the relevant different tree species is needed.
+For both scenarios, the percentage of dry weight of leaves that can be extracted as ediblefood for different tree species would also need to be experimentally determined. These tech-niques would need to be weighed against other solutions previously discussed in a partial
+sun-obscuring disaster as well as new solutions such as scaling up greenhouse crop produc-
+tion (Alvarado et al., 2020), microbial protein production from hydrogen conversion(Martínez et al., 2021), or biorefinery repurposing for sugar production (Throup et al., 2020).
+Finally, it may be possible that a lower caloric intake than the World Health Organization
+(WHO, 2012) recommendations is possible, so more clarity is required in the caloric inputnecessary to sustain human life to calculate the mass of leaf biomass that needs to be avail-
+able in all scenarios.
+5|CONCLUSIONS
+This study successfully applied a new approach for mapping available green leaf biomass and
+corresponding forest classes, and their spatial relationship to the global distribution of under-
+weight people. It was able to find the forest classes most likely to offer proximate access to the
+world ’s hungry to use for alternative food from leaf concentrate. These forest classes are moist
+deciduous tropical forests, dry tropical forests, and tropical rainforests. These results will be use-
+ful for developing a targeted list of tree species to conduct leaf toxicity analysis on in future
+studies, in order to develop leaves as an alternative food source for both current malnutritionand severe catastrophic scenarios.
+FUNDING INFORMATION
+This work was supported by the Thompson Endowment and the Centre for Effective Altruism.
+CONFLICT OF INTERESTS
+The authors declare that there is no conflict of interest.
+ORCID
+Joshua M. Pearce
+https://orcid.org/0000-0001-9802-305616 FIST ET AL .
+
+REFERENCES
+Alvarado, K. A., Mill, A., Pearce, J. M., Vocaet, A., & Denkenberger, D. (2020). Scaling of greenhouse crop
+production in low sunlight scenarios. Science of the Total Environment ,707, 136012. https://doi.org/10.
+1016/j.scitotenv.2019.136012
+Bassan, A., Ceriani, L., Richardson, J., Livaniou, A., Ciacci, A., Baldin, R., Kovarich, S., Fioravanzo, E.,
+Pavan, M., Gibin, D., Di Piazza, G., Pasinato, L., Cappé, S., Verhagen, H., Robinson, T., & Dorne, J. L.(2018). OpenFoodTox: EFSA ’s chemical hazards database. https://doi.org/10.5281/zenodo.1252752
+Belitz, H. D., Grosch, W., & Schieberle, P. (2009). 2009 food chemistry . Berlin, Germany: Springer.
+Bevis, M., Harig, C., Khan, S. A., Brown, A., Simons, F. J., Willis, M., Fettweis, X., Van Den Broeke, M. R.,
+Madsen, F. B., Kendrick, E., & Caccamise, D. J. (2019). Accelerating changes in ice mass within Greenland,
+and the ice sheet ’s sensitivity to atmospheric forcing. Proceedings of the National Academy of Sciences ,
+116(6), 1934 –1939. https://doi.org/10.1073/pnas.1806562116
+Bhutta, Z. A., Berkley, J. A., Bandsma, R. H. J., Kerac, M., Trehan, I., & Briend, A. (2017). Severe childhood
+malnutrition. Nature Reviews Disease Primers ,3, 17067. https://doi.org/10.1038/nrdp.2017.67
+Birner, R. (2007). Improving governance to eradicate hunger and poverty. Twenty twenty (2020) focus brief on
+the world ’s poor and hungry people/International Food Policy Research Institute (IFPRI).
+Center for International Earth Science Information Network —CIESIN —Columbia University. (2005).
+Poverty mapping project: Global subnational prevalence of child malnutrition. https://doi.org/10.7927/h4k64g12
+Cole, D., Denkenberger, D., Griswold, M., Abdelkhaliq, M., & Pearce, J. (2016). Feeding everyone if industry is
+disabled. Proceedings of the 6th International Disaster and Risk Conference, Davos, Switzerland.
+Cunliffe, A. M., Assmann, J. J., Daskalova, G. N., Kerby, J. T., & Myers-Smith, I. H. (2020). Aboveground biomass
+corresponds strongly with drone-derived canopy height but weakly with greenness (NDVI) in a shrubtundra landscape. Environmental Research Letters ,15(12), 125004.
+Denkenberger, D., & Pearce, J. (2018b). Micronutrient availability in alternative foods during agricultural
+catastrophes. Agriculture ,8, 169. https://doi.org/10.3390/agriculture8110169
+Denkenberger, D., Pearce, J., Taylor, A. R., & Black, R. (2018). Food without sun: Price and life-saving potential.
+Foresight ,21, 118–129. https://doi.org/10.1108/FS-04-2018-0041
+Denkenberger, D., & Pearce, J. M. (2014). Feeding everyone no matter what: Managing food security after global
+catastrophe . Academic Press.
+Denkenberger, D. C., Cole, D. D., Abdelkhaliq, M., Griswold, M., Hundley, A. B., & Pearce, J. M. (2017). Feeding
+everyone if the sun is obscured and industry is disabled. International Journal of Disaster Risk Reduction ,21,
+284–290. https://doi.org/10.1016/j.ijdrr.2016.12.018
+Denkenberger, D. C., & Pearce, J. M. (2015). Feeding everyone: Solving the food crisis in event of global
+catastrophes that kill crops or obscure the sun. Futures, Confronting Future Catastrophic Threats to
+Humanity ,72,5 7–68. https://doi.org/10.1016/j.futures.2014.11.008
+Denkenberger, D. C., & Pearce, J. M. (2016). Cost-effectiveness of interventions for alternate food to address
+agricultural catastrophes globally. International Journal of Disaster Risk Science ,7(3), 205 –215. https://doi.
+org/10.1007/s13753-016-0097-2
+Denkenberger, D. C., & Pearce, J. M. (2018a). Cost-effectiveness of interventions for alternate food in the
+United States to address agricultural catastrophes. International Journal of Disaster Risk Reduction ,27,
+278–
+289. https://doi.org/10.1016/j.ijdrr.2017.10.014
+Djomo, A. N., & Chimi, C. D. (2017). Tree allometric equations for estimation of above, below and total biomass
+in a tropical moist forest: Case study with application to remote sensing. Forest Ecology and Management ,
+391, 184–193. https://doi.org/10.1016/j.foreco.2017.02.022
+Doxsey-Whitfield, E., MacManus, K., Adamo, S. B., Pistolesi, L., Squires, J., Borkovska, O., & Baptista, S. R.
+(2015). Taking advantage of the improved availability of census data: A first look at the Gridded Population
+of the World, Version 4 (GPWv4). Papers in Applied Geography ,1(3), 226 –234. https://doi.org/10.1080/
+23754931.2015.1014272
+Drake, J. B., Knox, R. G., Dubayah, R. O., Clark, D. B., Condit, R., Blair, J. B., & Hofton, M. (2003).
+Above-ground biomass estimation in closed canopy neotropical forests using lidar remote sensing: Factorsaffecting the generality of relationships. Global Ecology and Biogeography ,12(2), 147 –159.FIST ET AL . 17
+
+Edenhofer, O. (Ed.) (2015). Climate change 2014: Mitigation of climate change (Vol. 3). Cambridge University
+Press.
+European Space Agency. (2019). ESA data user element [WWW Document]. Retrieved from http://dup.esrin.esa.
+int/page_globcover.php (accessed 7.8.19).
+Fist, T. (2019). Mapping leaf biomass and forest classes against global malnutrition [WWW Document]. Google
+Docs. Retrieved from bit.ly/allfed-leaf-table (accessed 7.8.19).
+Food and Agriculture Organization of the United Nations. (2018). Fao.org SOFI 2018 —The State of Food Secu-
+rity and Nutrition in the World. Retrieved from http://www.fao.org/state-of-food-security-nutrition/en/
+(accessed 7.8.19).
+Food Security Portal. (2019). Prevalence of undernourishment (%). Retrieved from http://www.
+foodsecurityportal.org/api/countries/fao-population-under (accessed 7.8.19).
+Gatti, R. C., Callaghan, T., Velichevskaya, A., Dudko, A., Fabbio, L., Battipaglia, G., & Liang, J. (2019). Accelerat-
+ing upward treeline shift in the Altai Mountains under last-century climate change. Scientific Reports ,9(1),
+7678.
+Global Forest Watch. (2000). Tree cover (2000) Retrieved from https://beta-gfw.opendata.arcgis.com/datasets/
+7876b225f8034a0ebba79fad4afb80ad (accessed 7.8.19).
+Global Nutrition Report. (2018). 2018 Global Nutrition Report [WWW Document], 09:58:49.202407 +00:00.
+Global Nutrition Report. Retrieved from https://globalnutritionreport.org/reports/global-nutrition-report-2018/ (accessed 7.8.19).
+Halme, E., Pellikka, P., & Mõttus, M. (2019). Utility of hyperspectral compared to multispectral remote sensing
+data in estimating forest biomass and structure variables in Finnish boreal forest. International Journal of
+Applied Earth Observation and Geoinformation ,83, 101942. https://doi.org/10.1016/j.jag.2019.101942
+Hansford, K., Bendor-Samuel, J., & Stanford, R. (1976). A provisional language map of Nigeria. Savanna: A
+Journal of the Environmental and Social Sciences ,5(2), 115 –124.
+Hasegawa, K., Matsuyama, H., Tsuzuki, H., & Sweda, T. (2010). Improving the estimation of leaf area index by
+using remotely sensed NDVI with BRDF signatures. Remote Sensing of Environment ,114(3), 514 –519.
+https://doi.org/10.1016/j.rse.2009.10.005
+Heiskanen, J. (2006). Estimating aboveground tree biomass and leaf area index in a mountain birch forest using
+ASTER satellite data. International Journal of Remote Sensing ,27(6), 1135 –1158. https://doi.org/10.1080/
+01431160500353858
+Houghton, E. (1996). Climate change 1995: The science of climate change: Contribution of working group I to the
+second assessment report of the Intergovernmental Panel on Climate Change (Vol. 2). Cambridge University
+Press.
+Kennedy, D. (1993). Leaf concentrate: A field guide for small scale programs . FL, USA: Leaf for Life: Interlachen.
+Kim, K.-Y., & Chung, H.-J. (2000). Flavor compounds of pine sprout tea and pine needle tea. Journal of
+Agricultural and Food Chemistry ,48, 1269 –1272. https://doi.org/10.1021/jf9900229
+LaFollette, H., & May, L. (1996). Suffer the little children. In World hunger and morality (pp. 70 –84). Upper
+Saddle River, NJ: Prentice Hall.
+Lamlom, S. H., & Savidge, R. A. (2006). Carbon content variation in boles of mature sugar maple and giant
+sequoia. Tree Physiology ,26(4), 459 –468. https://doi.org/10.1093/treephys/26.4.459
+Leaf for Life. (2019) Industrial leaf concentrate process. Available online: https://www.leafforlife.org/PAGES/
+INDUSTRI.HTM (accessed 7.8.19).
+Martínez, J. B. G., Egbejimba, J., Throup, J., Matassa, S., Pearce, J. M., & Denkenberger, D. C. (2021). Potential
+of microbial protein from hydrogen for preventing mass starvation in catastrophic scenarios. Sustainable
+Production and Consumption ,25, 234–
+247. https://doi.org/10.1016/j.spc.2020.08.011
+Maurer, D., & Sobal, J. (Eds.) (1995). Eating agendas: Food and nutrition as social problems . Transaction
+Publishers.
+McDonald, C. M., Olofin, I., Flaxman, S., Fawzi, W. W., Spiegelman, D., Caulfield, L. E., Black, R. E.,
+Ezzati, M., & Danaei, G. (2013). The effect of multiple anthropometric deficits on child mortality:Meta-analysis of individual data in 10 prospective studies from developing countries. The American Journal
+of Clinical Nutrition ,97, 896–901. https://doi.org/10.3945/ajcn.112.047639
+NASA MODIS Land Cover. (2019). Land cover & phenology. Retrieved from https://ladsweb.modaps.eosdis.
+nasa.gov/missions-and-measurements/science-domain/land-cover-and-phenology (accessed 7.8.19).18 FIST ET AL .
+
+Pearce, J. M., Khaksari, M., & Denkenberger, D. (2019). Preliminary automated determination of edibility of
+alternative foods: Non-targeted screening for toxins in red maple leaf concentrate. Plants ,8, 110. https://
+doi.org/10.3390/plants8050110
+Poorter, H., Niklas, K. J., Reich, P. B., Oleksyn, J., Poot, P., & Mommer, L. (2012). Biomass allocation to leaves,
+stems and roots: Meta-analyses of interspecific variation and environmental control. New Phytologist ,193,
+30–50. https://doi.org/10.1111/j.1469-8137.2011.03952.x
+Pozza, C., & Isidori, A. M. (2018). What ’s behind the obesity epidemic. In Imaging in bariatric surgery (pp. 1 –8).
+Springer, Cham.
+Ruesch, A., & Gibbs, H. K. (2008). New IPCC tier-1 global biomass carbon map for the year 2000. Available
+online from the Carbon Dioxide Information Analysis Center [http://cdiac.ess-dive.lbl.gov], Oak RidgeNational Laboratory, Oak Ridge, Tennessee.
+Sader, S. A., Waide, R. B., Lawrence, W. T., & Joyce, A. T. (1989). Tropical forest biomass and successional age
+class relationships to a vegetation index derived from Landsat TM data. Remote Sensing of Environment ,28,
+143–198. https://doi.org/10.1016/0034-4257(89)90112-0
+Schuur, E. A., McGuire, A. D., Schädel, C., Grosse, G., Harden, J. W., Hayes, D. J., Hugelius, G., Koven, C. D.,
+Kuhry, P., Lawrence, D. M., & Natali, S. M. (2015). Climate change and the permafrost carbon feedback.Nature ,520(7546), 171.
+Seekell, D., Carr, J., Dell ’Angelo, J., D ’Odorico, P., Fader, M., Gephart, J., Kummu, M., Magliocca, N.,
+Porkka, M., Puma, M., Ratajczak, Z., Rulli, M. C., Suweis, S., & Tavoni, A. (2017). Resilience in the globalfood system. Environmental Research Letters ,12, 025010. https://doi.org/10.1088/1748-9326/aa5730
+Shenkin, A. (2006). Micronutrients in health and disease. Postgraduate Medical Journal ,82, 559–567. https://doi.
+org/10.1136/pgmj.2006.047670
+Socioeconomic Data and Applications Center. (2019). Gridded population of the world (GPW), v4 jSEDAC
+[WWW Document]. URL https://sedac.ciesin.columbia.edu/data/collection/gpw-v4 (accessed 7.8.19).
+Throup, J., Bals, B., Cates, J., García Martínez, J. B., Pearce, J. M., & Denkenberger, D. (2020). Rapid repurposing
+of biorefinery, pulp & paper and breweries for lignocellulosic sugar production in global food shortages.
+https://doi.org/10.31219/osf.io/jns2e
+Toole, M. J., & Waldman, R. J. (1993). Refugees and displaced persons: War, hunger, and public health. JAMA ,
+270(5), 600 –605. https://doi.org/10.1001/jama.1993.03510050066029
+Turetsky, M. R., Abbott, B. W., Jones, M. C., Anthony, K. W., Olefeldt, D., Schuur, E. A., Koven, C.,
+McGuire, A. D., Grosse, G., Kuhry, P., & Hugelius, G. (2019). Permafrost collapse is accelerating carbonrelease. Nature ,569,3 2–34. https://doi.org/10.1038/d41586-019-01313-4
+United Nations Children ’s Fund. (2005). The state of the world ’s children 2006: Excluded and invisible . Hong
+Kong, China: UNICEF. ISBN 978-92-806-3916-2
+Upadhyay, J., Farr, O., Perakakis, N., Ghaly, W., & Mantzoros, C. (2018). Obesity as a disease. Medical Clinics ,
+102(1), 13 –33. https://doi.org/10.1016/j.mcna.2017.08.004
+World Health Organization. (2012). Online at http://www.wfp.org/hunger/what-is (accessed on 04/2012).Zheng, G., Chen, J. M., Tian, Q. J., Ju, W. M., & Xia, X. Q. (2007). Combining remote sensing imagery and forest
+age inventory for biomass mapping. Journal of Environmental Management ,85(3), 616
+–623. https://doi.org/
+10.1016/j.jenvman.2006.07.015
+Zhu, X., & Liu, D. (2015). Improving forest aboveground biomass estimation using seasonal Landsat NDVI
+time-series. ISPRS Journal of Photogrammetry and Remote Sensing ,102, 222–231. https://doi.org/10.1016/
+j.isprsjprs.2014.08.014
+How to cite this article: Fist, T., Adesanya, A. A., Denkenberger, D., & Pearce, J. M.
+(2021). Global distribution of forest classes and leaf biomass for use as alternative foods to
+minimize malnutrition. World Food Policy ,1–19.https://doi.org/10.1002/wfp2.12030FIST ET AL . 19
+

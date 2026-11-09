@@ -1,0 +1,619 @@
+RS #161: Tom Griffiths y Brian Christian sobre “Algoritmos para vivir”
+Julia: Bienvenidos a Rationally Speaking, el podcast donde exploramos las fronteras 
+entre la razón y el sinsentido.  
+Soy su anfitriona, Julia Galef, y hoy nos acompañan dos invitados, Tom Griffiths, y 
+Brian Christian. Tom es un invitado que vuelve a Rationally Speaking. Nos acompañó hace unos 
+meses para hablar sobre si el cerebro es secretamente racional, y cuando no está 
+en Rationally Speaking, se le puede encontrar como profesor de Psicología 
+y Ciencia Cognitiva en UC Berkeley, donde además dirige el Laboratorio 
+de Ciencia Cognitiva Computacional. 
+Brian es autor y escribe sobre ciencias de la computación, ciencia cognitiva y otros 
+temas afines para publicaciones como The Atlantic, Wired y The New Yorker. Es 
+también autor del libro best seller The Most Human Human, que es bastante 
+interesante y también vale la pena revisarlo.
+Más recientemente, Tom y Brian publicaron juntos un libro llamado  Algoritmos para 
+vivir . Trata sobre algunos de los algoritmos más cruciales e integrales que se usan en 
+ciencias de la computación, y cómo esos algoritmos realmente se aplican o pueden aplicarse a 
+mejorar nuestra toma de decisiones humana en la vida cotidiana. Decisiones como "¿Cómo 
+debo planificar mi día?" o "¿Debo renunciar a mi trabajo?" Ese tipo de cosas. 
+Eso es de lo que vamos a hablar hoy. Brian, bienvenido al programa, y Tom, 
+bienvenido de nuevo.
+Brian: Muchas gracias.
+Tom: Gracias.
+Julia: Es un tema en el que llevo pensando años. De hecho, hace poco di una 
+entrevista a la revista Vice hace unos meses en la que hablé de mucho material 
+similar, en realidad, aunque todavía no había leído su libro en ese momento. 
+Hablaba de cómo algoritmos como la regla de Bayes o la comprensión del equilibrio 
+entre explorar y explotar pueden ayudar a guiar nuestra toma de decisiones y a mejorar 
+la. Creí que estaba siendo muy matizada e inteligente, y luego salió el artículo 
+y el titular decía algo así como "Julia Galef quiere que los humanos sean más como 
+¡robots!" 
+Así que he encontrado que es un tema difícil de comunicar públicamente. Me 
+pregunto si ustedes han tenido alguna reacción así con su libro.
+Brian: Sí, esto es una de las cosas que tratamos de prevenir en la introducción del libro, 
+tenemos una sección en la que nos salimos del marco. Una vez que hemos planteado la idea de que 
+hay algo que aprender a nivel humano cotidiano al pensar en los 
+problemas que enfrentamos en términos de ciencias de la computación, de inmediato retrocedemos y decimos 
+"Por si a estas alturas es escéptico y piensa que estamos tratando de defender que 
+todos nos convertimos en estos seres robóticos, parecidos a los vulcanos, no, de hecho no es lo que 
+buscamos aquí." 
+Página 2 de 17Creo que uno de los temas más interesantes del libro es que, de hecho, se puede construir un 
+argumento bastante poderoso basado en la ciencia de la computación, que defiende cosas que 
+se parecen mucho más a la intuición humana, a no sobrepensar las cosas y a ser un poco 
+desordenados a veces y a confiar en nuestros instintos. Hay una oportunidad poderosa de 
+reafirmar algunas cosas que damos por sentadas, o que a veces tienen mala 
+fama sobre el lado humano del razonamiento. Los dos no son tan divergentes como creo 
+que la gente piensa.
+Julia: La idea también es, supongo, que familiarizarse con estos algoritmos ‐‐ o 
+contrastarlos con su toma de decisiones intuitiva y notar diferencias ‐‐ 
+ese proceso no le devuelve simplemente a las estrategias intuitivas por defecto que 
+estaba usando, ¿verdad? ¿Hay alguna diferencia?
+Tom: Creo que una forma de caracterizarlo es que muchos de estos algoritmos son cosas que 
+funcionan muy bien en situaciones muy precisas. Si uno está en una situación que cumple exactamente 
+las suposiciones en las que se basa el algoritmo, entonces esa es exactamente la 
+cosa correcta, y es lo que uno debería poder hacer. Hay casos en que 
+las personas se encuentran en esas situaciones, y entonces lo que hacen no es lo correcto. 
+Un ejemplo, con el que de verdad empezamos el libro, es la regla del 37 por ciento. 
+Es una estrategia que se puede usar en cualquier situación en la que básicamente se enfrenta a 
+una secuencia de opciones ‐‐ por ejemplo, si uno está buscando un apartamento. Podría 
+estar visitando casas abiertas, y hay que tomar una decisión en el acto si uno está en el 
+Área de la Bahía sobre si va a entregarle un cheque al propietario y hacer una 
+oferta por ese lugar. Básicamente, si uno sale de la casa abierta sin haberlo hecho, 
+lo va a perder.
+Uno tiene una secuencia de opciones. Tiene la posibilidad de hacer una oferta. Si no 
+hace una oferta, la pierde. Lo que realmente hay que hacer es ir construyendo una 
+idea de ... ¿qué tan buenas son las opciones aquí? ¿Cuáles son las opciones? Al mismo tiempo 
+que se lidia con el costo de perder algunas de esas opciones mientras se reúne esa 
+información. 
+Lo correcto en esa situación es tomar el 37 por ciento del conjunto de opciones, 
+o el 37 por ciento del tiempo que se va a dedicar a buscar. Si uno está, digamos, buscando 
+un apartamento durante 30 días, son 11 días; se pasa ese tiempo solo reuniendo 
+información. Uno deja la chequera en casa. Solo se está calibrando. Luego 
+después de eso, hace una oferta por el primer lugar que vea que sea mejor que cualquier lugar 
+que haya visto hasta ahora.
+Si uno está en esa situación precisa, eso es exactamente lo correcto.
+Julia: Antes de que hablen de cómo adaptar el algoritmo a sus situaciones reales de la vida, 
+¿pueden dar alguna intuición de por qué el 37 por ciento? Ese número parece extrañamente ... Me 
+imagino que ese número debe parecerles muy específico a quienes no han leído la 
+explicación. O aleatorio.
+Tom: Es incluso más extrañamente específico que eso.
+Página 3 de 17En realidad, es 1 sobre e. Donde e es la constante de Euler, la que aparece cuando 
+se hacen cosas como calcular el interés compuesto. Eso simplemente sale básicamente 
+de las matemáticas, pero una forma de tener intuición al respecto es que ... lo que se hace es tratar 
+de encontrar el equilibrio justo entre tener información que pueda informar su acción, 
+y tener suficiente margen para tomar una acción significativa. Una forma de entender esto es, 
+se puede pensar en un caso en el que, digamos, solo va a visitar 3 casas abiertas. Uno 
+trata de encontrar el mejor lugar con base en eso. Una cosa que podría hacer es simplemente 
+decir "Haré una oferta por el primer lugar. Elegiré uno al azar 
+básicamente, y haré la oferta por ese lugar." La probabilidad de conseguir el 
+mejor lugar es 1 entre 3.
+Resulta que se puede hacer mejor que 1 entre 3. Si uno va y mira el primer lugar y 
+no hace una oferta, y luego hace una oferta por el segundo lugar si es mejor que 
+el primero, y si no, por el tercero. Esa es en realidad la estrategia 
+que maximiza la probabilidad de conseguir el mejor lugar, y eso aumenta esa 
+probabilidad al 50 por ciento.
+Julia: Claro.
+Tom: Si uno sigue haciendo las cuentas, diciendo "Ahora calculemos qué pasa 
+con 4 lugares, y 5 lugares, y 6 lugares, y 7 lugares, y 8 lugares, y así sucesivamente ... donde 
+se ubica ese umbral entre mirar y lanzarse. A medida que los números crecen hasta el infinito, 
+ese umbral converge a 1 sobre e.
+Julia: Genial. Iban a explicar: "¿Cómo se sostiene esto en situaciones del mundo real? 
+¿Cuáles son los supuestos que podrían no ser ciertos en el mundo real?"
+Tom: Una forma en la que nosotros ... lo que pasa si se pone a seres humanos en esta situación y 
+se les pide que tomen una decisión es que tendemos a pasar a la acción demasiado pronto. Nosotros 
+no dedicamos suficiente tiempo a calibrarnos. Vemos un buen lugar y pensamos 
+"Bueno, es este, voy por él." 
+Eso ha resultado algo desconcertante para quienes intentan entender 
+qué están haciendo las personas aquí. Una forma de entenderlo es que, al mirar 
+los supuestos de este modelo, se asume que en realidad no hay ningún 
+costo por dedicar tiempo a mirar, ¿verdad?
+Julia: Claro, claro.
+Tom: Mientras que, en realidad, cuando los seres humanos enfrentan este tipo de problema, sí hay un costo. Uno 
+quiere resolver cuanto antes dónde va a vivir. O si 
+usted está en un experimento de psicología y quiere salir de ese experimento lo antes 
+posible, en lugar de más tarde.
+Cuando se tiene en cuenta un costo muy pequeño, en realidad hacer ese cambio alrededor del 31 
+por ciento, que es lo que hace la gente, creo que corresponde a un costo de alrededor del 1 
+por ciento del valor de llegar finalmente al mejor lugar, y la gente está dispuesta 
+a hacer esa compensación. 
+Página 4 de 17Eso es algo en lo que lo que hace la gente se aparta del modelo racional. Si 
+usted está realmente en exactamente la situación a la que corresponde ese modelo, entonces 
+debería hacer algo distinto. 
+Sabiendo que debería hacer algo distinto, si está exactamente en esa situación, 
+eso es lo que le proporcionamos en cuanto a hablarle de estos distintos tipos de 
+algoritmos. En el libro hablamos de todas las variantes de esto. Si usted no tiene 
+una probabilidad del 100 por ciento de no poder volver a un lugar después de haberlo 
+dejado atrás, o si hay alguna otra probabilidad, o si existe la posibilidad de que sus ofertas 
+sean rechazadas. Hay toda una constelación de variaciones distintas sobre esto para las cuales 
+podemos dar soluciones óptimas.
+Julia: Sí, lo que he encontrado en mi experiencia es que incluso solo ser consciente de cuáles son los 
+parámetros, aunque no conozca el valor de esos parámetros ‐‐ Parámetros 
+como "¿Cuánto tiempo estoy dispuesto a dedicar? ¿O el número de opciones que 
+creo que hay? ¿Qué espero que sea en promedio o ... potencialmente la opción de mejor calidad 
+podría ser aproximadamente? ¿Cuál es el costo aproximado de cambiar?"
+  … Incluso antes de asignarles un valor a esas variables, solo ser consciente de ellas 
+creo que hace mi intuición algo mejor para resolver el problema de forma óptima.
+Brian: Sí, creo que en el caso de la parada óptima, los géneros más grandes de problemas de parada óptima 
+son los llamados juegos sin información, y los juegos de información completa. 
+En un juego sin información, que es el ejemplo que dio Tom con los apartamentos 
+donde se llega a la clásica regla del 37 por ciento. Eso se basa en el supuesto de que usted 
+se encuentra con sus opciones en un orden aleatorio. Pero, yendo más al grano, cuando usted 
+se encuentra con una opción en particular, no puede decir cuánto mejor que otras opciones 
+es. Solo puede decir en términos relativos cuál es el rango relativo de esta. Podría decir, 
+esta es la segunda mejor cosa que he visto hasta ahora, pero no puede decir si está más cerca de la 
+primera o más cerca de la tercera. A esto se le llama un juego sin información.
+En contraste, la otra rama principal de estos problemas se llama juegos de 
+información completa, en los que se tiene cierta idea de la distribución de la que 
+se extraen estas opciones. Si fuera a contratar a un mecanógrafo, por ejemplo, y 
+supiera con certeza que es un mecanógrafo del percentil 95 según alguna puntuación de mecanografía, bueno, 
+entonces se encuentra en un juego de información completa. 
+Resulta que las reglas de parada para los juegos de información completa son bastante distintas. En 
+realidad, no hace falta un período inicial de observación antes de estar listo para saltar. Sí hace falta 
+saber cuántos candidatos hay en el grupo para hacer una suposición fundamentada 
+sobre si queda todavía algún candidato mejor. La estrategia óptima en 
+este caso simplemente tiene una estructura fundamentalmente distinta. Esto se relaciona con su punto 
+sobre desarrollar una intuición de cómo es el panorama de soluciones, y preguntarse 
+a sí mismo al entrar en un problema: "¿Siento que tengo información completa, o siento que no 
+tengo información?"
+Julia: Claro, claro.
+Página 5 de 17Brian: La decisión de si hay que establecer esta ventana inicial de observación va a depender 
+de eso.
+Julia: Genial. Veamos otro ejemplo de un algoritmo de su libro. ¿Alguno de los dos tiene 
+un favorito entre sus capítulos?
+Tom: Otro buen ejemplo, creo, uno del que hablamos que tiene implicaciones tanto 
+a nivel nacional como científico son los algoritmos para resolver el problema de 
+la caché. Básicamente, en Ciencias de la Computación‐
+Julia: Se escribe "caching", ¿verdad?
+Tom: Así es, sí. En Ciencias de la Computación estos algoritmos se usan para administrar la 
+memoria de las computadoras. 
+Puede pensar en la memoria como un recurso limitado. Solo hay una cierta 
+cantidad de memoria muy rápida en su computadora, y luego una cantidad mayor de memoria más lenta, 
+solo porque la memoria rápida es cara. Lo que la computadora tiene que hacer es 
+decidir qué va a guardar en esa memoria rápida para aumentar la 
+probabilidad de que las cosas que realmente está buscando estén ahí. Así 
+que su computadora pueda ser lo más rápida posible, quiere lograr que la mayor parte del 
+tiempo, cuando busca un fragmento de información, esa información esté almacenada en la 
+forma más accesible de memoria.
+Ese es un problema al que también se enfrentan los seres humanos, lo llamamos organizar nuestro armario. 
+Puede hacerse la misma clase de pregunta sobre... si tiene cosas que podría 
+guardar en distintos lugares de su casa, en su armario, en el sótano, o quizás 
+en un contenedor de almacenamiento o algo así. Tiene que tomar una decisión sobre 
+cuáles son las cosas que quiere mantener en los lugares de almacenamiento más accesibles. 
+Ese es un contexto en el que echar un vistazo a los tipos de algoritmos que se usan en 
+Ciencias de la Computación, y por qué funcionan, es algo relevante.
+Julia: Excelente. Me tienta, en lugar de hablar de algoritmos y luego discutir 
+a qué situaciones de la vida real podrían aplicarse, darles un 
+par de situaciones reales que yo he vivido, o que han vivido mis clientes, 
+y ver si alguno de los algoritmos sobre los que han escrito les parece que podría 
+ser útil. 
+¿Les parece bien?
+Brian: Claro, con gusto.
+Julia: Genial, perfecto. Una situación común... muchos de mis clientes son jóvenes. Acaban de 
+salir de la universidad, o tienen veintitantos o finales de los veinte, y una de las cosas más 
+comunes y recurrentes con las que luchan es organizar su carrera, básicamente. Averiguar qué 
+quieren especializarse y, más inmediatamente, a qué trabajo deberían postularse 
+ahora, que es una cuestión algo separada de cómo quieren que sea su carrera 
+dentro de 20 años, etcétera. 
+Página 6 de 17He estado tratando de averiguar, con el tiempo, si hay buenos algoritmos aproximados que puedan usar 
+para decidir qué tipo de trabajo aceptar, o si hay maneras de decidir qué 
+características de un trabajo priorizar sobre otras. ¿Un trabajo que paga bien ahora, frente a un 
+trabajo que les permitirá desarrollar sus habilidades, frente a un trabajo que les dará mucha información 
+sobre el campo, etcétera. 
+Me pregunto si alguno de sus algoritmos parece tener cosas útiles que decir a 
+alguien que no está seguro de qué decisiones laborales de corto plazo tomar para maximizar 
+su carrera a largo plazo.
+Brian: Para mí, esto se parece mucho a una situación de explorar/explotar. 
+En ciencias de la computación, el equilibrio entre explorar y explotar es la idea de "¿Cómo se 
+equilibra entre dedicar su tiempo y energía a obtener información, y usar 
+su tiempo y energía, aprovechando la información que tiene para obtener algún buen 
+resultado o alguna recompensa?” 
+Creo que eso es relevante en un contexto profesional, en una trayectoria de vida, porque usted 
+tiene que dedicar cierta cantidad de tiempo a probar cosas y aprender qué disfruta, 
+en qué es bueno, y así sucesivamente. El concepto clave que surge cuando se observan 
+estos problemas de explorar/explotar es que todo depende realmente de cuánto 
+tiempo tiene y de dónde se percibe a sí mismo dentro de algún intervalo relevante 
+de tiempo. Si está al principio de un proceso, debería ser mucho más 
+exploratorio. Si está al final de un proceso, debería dedicar mucho más de su 
+tiempo y energía a explotar el conocimiento que ha adquirido hasta ahora.
+En términos humanos concretos, es como si usted se mudara primero a una ciudad: debería pasar el 
+primer mes o más probando cosas nuevas sin descanso. El primer restaurante al que vaya 
+cuando se mude a Berkeley es literalmente garantizado que será el mejor restaurante 
+que haya visitado jamás en Berkeley. El segundo lugar que pruebe tiene una probabilidad del 50/50 de 
+ser el mejor lugar que haya visitado en Berkeley. La probabilidad de hacer un gran 
+descubrimiento es mayor al principio. Además, el valor de hacer un 
+descubrimiento es mayor cuando se tiene más tiempo para disfrutarlo.
+Julia: Claro.
+Brian: Encontrar un nuevo restaurante asombroso la última noche en la ciudad es algo trágico 
+porque uno piensa: "Ojalá lo hubiera conocido hace años." Por ambas 
+razones, deberíamos seguir esta trayectoria de la exploración a la explotación. 
+Dado que el grupo de personas del que usted habla acaba de salir de la universidad, 
+buscan sus primeros trabajos, etcétera. Creo que tiene sentido abordarlo 
+desde la perspectiva de que tienen mucho tiempo por delante. Vale la pena dedicar 
+tiempo a probar cosas, incluso si tienen una baja probabilidad de ser buenas, porque si 
+lo son, tienen toda su vida y toda su carrera para cosechar los 
+frutos de eso.
+Julia: Sí, hay algo, solo para desviarme un momento, hay algo 
+contraintuitivo en la idea de probar un montón de cosas porque algunas de ellas 
+Página 7 de 17funcionarán, y luego puede explotarlas durante mucho tiempo después. 
+Suena intuitivo cuando lo digo, supongo, pero de alguna manera no coincide con nuestra intuición 
+cuando nos enfrentamos a situaciones reales. Creo que si un amigo mío me dijera 
+"Oye, Julia, ¿quieres probar el trapecio o algo así?", mi primera intuición podría ser 
+"Probablemente es algo que no me va a gustar, así que no lo haré." El 
+algoritmo implícito que mi cerebro parece usar en estos casos es: si parece probable 
+que funcione, entonces lo haré; si parece probable que no funcione, entonces no lo haré. 
+Creo que mi cerebro no está tomando en cuenta el hecho de que solo un pequeño subconjunto de 
+las cosas que pruebo tiene que funcionar para que el conjunto total de cosas que probé 
+haya valido la pena en conjunto.
+Brian: Sí, creo que la idea clave en los problemas de explorar/explotar, o en el problema 
+del bandido multibrazo, que es el canónico, es que si algo falla, solo falla 
+una vez, porque simplemente no lo vuelve a hacer. Si tiene éxito, entonces puede seguir 
+volviendo a ello una y otra vez. 
+Si lo piensa desde la perspectiva de empezar un nuevo pasatiempo o un nuevo deporte 
+o algo así, la métrica de cuál es la noche con más probabilidades de ser la más divertida 
+probablemente no sea la métrica adecuada, porque incluso si solo hay una probabilidad de 1 en 20 de que 
+disfrute hacer trapecio, si descubre que sí lo disfruta, puede 
+hacerlo 50 veces durante el próximo año. Eso lo pone bien adelante en esa situación.
+Julia: Claro, claro.
+Tom: El algoritmo del que hablamos y que creo que tiene que ver con esto se llama límite superior 
+de confianza, que es una clase de algoritmos para resolver problemas de 
+explorar/explotar. 
+Lo que eso dice es que la evaluación que debería hacer no es su valor esperado, 
+no qué tan probable cree que sea que esto sea bueno. Más bien, debería calcular 
+el límite superior de ese valor esperado. Es algo parecido a pensar en un intervalo de confianza 
+alrededor del valor esperado, y luego tomar el límite superior de ese 
+intervalo de confianza. 
+Es algo así como "¿Qué tan buena podría ser esto, bajo mi mejor suposición del mejor 
+escenario posible?" ... y luego comparando eso con las distintas actividades que podría 
+hacer. Creo que es una especie de actitud optimista, una que favorece las cosas sobre las que 
+se tiene muy poca información.
+Julia: ¿Qué piensa de la estrategia ... no sé si esto realmente cuenta como un 
+algoritmo, pero una estrategia de elecciones que lo ponen a favor del viento? Es un concepto, no recuerdo 
+dónde lo leí, que trata de hacer cosas que preservan su valor de opción en el 
+futuro. Como aceptar trabajos que lo presenten a muchos otros trabajos. O aceptar trabajos 
+que, después de haber tenido ese primer trabajo, serán respetados por la mayor variedad posible 
+de otros posibles empleadores futuros en muchos campos distintos, ese tipo de cosas.
+Tom: Sí, creo que suena como una estrategia sensata. No es algo de lo que hablemos en 
+Página 8 de 17términos de los algoritmos que consideramos. Creo que lo bueno es que deja claro que 
+no necesariamente está tomando una decisión para toda la vida, o algo así, sino más bien 
+tomando una decisión que es una primera decisión. 
+Creo que eso tiene que ver con otro tipo de consideración aquí, 
+que creo que es muy relevante para tomar este tipo de decisiones, y es algo 
+de lo que hablamos en el contexto del sobreajuste en el libro. Creo que cuando queremos 
+tomar una decisión importante, hay una tendencia a tratar de reunir toda la 
+información que podamos, y tratar de optimizar realmente esa decisión con respecto a todos 
+los criterios que podamos identificar.
+Una cosa contraintuitiva, algo que han descubierto los investigadores de aprendizaje automático y 
+los estadísticos, es que eso puede en realidad ser contra‐
+productivo. La analogía es: si intenta hacer una predicción, digamos que intenta 
+predecir el mercado de valores a futuro o algo por el estilo. Entonces, cuanto más 
+complejo haga su modelo, menos preciso resulta ser. Hay cierto 
+nivel de complejidad que necesita para captar la señal que está en los datos, pero 
+una vez que supera ese nivel de complejidad, termina haciendo que su modelo sea peor.
+Se llama sobreajuste. Básicamente, hace su modelo tan complejo que no solo 
+puede ajustarse a la señal de los datos, también puede ajustarse al ruido, y por eso hace 
+predicciones peores, porque le da peso a muchos factores que en realidad solo son útiles 
+para predecir la variación que hay en los datos debido al ruido. Cuando obtiene datos nuevos, 
+tiene lo que podría medir del pasado, pero lo que realmente importa es lo que va a 
+pasar en el futuro. La brecha entre esas cosas es 
+algo que luego significa que un modelo optimizado para las cosas que 
+puede medir puede terminar haciendo un peor trabajo al predecir las cosas que importan.
+Julia: ¿Un ejemplo de eso sería "Mi relación fracasó y mi lección de esa 
+experiencia es que debería evitar tener relaciones con personas que tengan 
+el pelo castaño de esta longitud exacta y que conocí un jueves?"
+Tom: Eso quizá es un tipo de sobreajuste. Creo que somos más propensos a hacerlo en general. 
+Creo que una forma en que esto se manifiesta... siento que se ha manifestado en mi vida, es 
+no reconocer que su función de utilidad ahora no va a ser la misma que 
+su función de utilidad dentro de 5 años o dentro de 10. Si realmente optimiza la decisión para 
+donde está ahora mismo, entonces puede que esa no sea en realidad la mejor 
+opción para usted a futuro, ¿verdad?
+Julia: Claro.
+Tom: Si encuentra lo que es la pareja perfecta para el momento actual, entonces 
+potencialmente pierde algo de ajuste a lo bueno que eso podría ser para usted en el futuro. 
+Todas sus idiosincrasias actuales son cosas que contribuyen a esa decisión actual. 
+Y está poniendo tanto esfuerzo en optimizarla que, a medida que las idiosincrasias se desvanecen, 
+y quizás desarrolla otras, terminará siendo un peor ajuste 
+que si hubiera elegido algo quizá un poco más genérico, y 
+menos perfectamente optimizado para su situación actual.
+Página 9 de 17Brian: Sí, y Tom y yo hemos hablado de esto desde la perspectiva de comprar una casa, 
+donde en cierto sentido uno intenta optimizar la felicidad de su yo futuro de dentro de 5
+años, que es algo incognoscible. 
+Me encontré con lo mismo recientemente cuando compré un esmoquin. Es gracioso comprar 
+algo que siente que se pondrá 1 o 2 veces al año durante los próximos 7 años.
+¿Cómo se optimiza algo que va a lucir bien cuando lo lleve a una 
+boda dentro de 5 años?
+  Solo para usar este ejemplo banal de la moda masculina. Los pantalones de hombre son mucho más ajustados que 
+hace 10 años, actualmente. Cuando miro los jeans que usaba a mediados de 
+los 2000, tenían como el doble de tela, o algo así.
+Si compro jeans, que es algo para lo que el uso típico de los jeans es ponérselos 
+casi todos los días durante unos 18 meses y luego se les hacen agujeros y simplemente 
+tirarlos o algo así. Si quería comprar jeans, debía comprar jeans ajustados 
+porque ese es el estilo de mediados de los 2010. 
+Pero si quiero comprar un esmoquin, entonces debería elegir deliberadamente algo más holgado 
+en la pierna, porque simplemente supongo que la moda masculina sigue un paseo aleatorio. Yo 
+no quiero acertar en la tendencia actual justo en el blanco, porque sé que 
+va a desviarse de ella más adelante.
+Julia: Claro, claro, claro. 
+Tengo una petición egoísta, y es que espero que ustedes me ayuden a pensar 
+sobre mi problema de vida actual… Tengo un montón de proyectos que siento que debería 
+hacer, como mejoras en la casa o poner en orden mis finanzas, empezar un 
+presupuesto, etcétera. Todas las cosas que llevo años diciéndome que debería hacer. 
+Ir al gimnasio con regularidad, todas estas cosas. 
+Obviamente no tengo la atención ni la energía para abordarlas todas a la vez. En 
+la práctica, siento que elijo casi al azar un proyecto para empezar en un momento dado, en lugar de 
+otro; quizá lo que elijo es lo más manejable o lo más agradable para mí en un 
+momento dado. Siento que debe haber una mejor estrategia para decidir qué priorizar y cuándo. 
+¿Me pueden dar algún consejo?
+Tom: Podemos darles una variedad desconcertantemente amplia de consejos.
+Julia: Excelente.
+Brian: Abordamos estas preguntas sobre la gestión del tiempo en nuestro capítulo sobre teoría de la planificación. 
+Una de las conclusiones de la planificación es que existe una estrategia óptima para cada 
+medida concebible de cómo uno quiere medir qué significa una buena gestión del tiempo 
+para uno. Si uno quiere asegurarse de que ninguna tarea se pase mucho de su 
+fecha límite, entonces hay una estrategia llamada Fecha de Vencimiento Más Temprana, que conviene seguir. Si 
+uno quiere minimizar la longitud de su lista de pendientes en cualquier momento, entonces hay 
+otra estrategia llamada Tiempo de Procesamiento Más Corto.
+Página 10 de 17Julia: Entonces sería como abordar primero los proyectos más cortos, los que puedo 
+terminar rápido, y entonces dentro de una semana habré terminado 3 proyectos y me sentiré muy 
+bien.
+Brian: Sí, exactamente, exactamente. El supuesto que hace ese algoritmo en particular es que 
+todas las tareas tienen igual importancia, y que la cantidad de tiempo que una tarea específica permanece en 
+la lista no es tan importante como simplemente reducir la cantidad de cosas en la lista. La 
+estrategia óptima en este caso es simplemente hacer primero las cosas más fáciles. 
+Suena muy bien, pero quizá esos no sean los supuestos correctos para su 
+caso. Creo que una de las cosas clave que sale en nuestro capítulo sobre planificación es 
+que, antes de poder saber qué debería hacer, primero hay que 
+articular exactamente qué problema se quiere resolver.
+Julia: Sí.
+Brian: Ese no es un paso que aparezca en la mayoría de los libros de autoayuda sobre gestión del tiempo.
+Julia: Sí, creo que a menudo tienen un supuesto sobre cuál es la correcta optimización 
+función, y luego simplemente dan consejos basados en ese supuesto sin 
+haber hecho explícito ese supuesto.
+Tom: Sí, creo que eso es bastante correcto. Creo que de esto salen heurísticas interesantes 
+en general, sin embargo. Creo que hay versiones de estas métricas que quizá 
+se aproximen a las métricas humanas. 
+En lugar de decir que el Tiempo de Procesamiento Más Corto supone que cada tarea está ponderada 
+por igual, pero obviamente eso no es así: algunas cosas son más importantes que 
+otras. 
+Entonces se llega a lo que se llama Tiempo de Procesamiento Más Corto Ponderado. Básicamente la 
+forma en que funciona es tomar la razón entre cuán importante es algo y cuánto 
+tiempo va a tomar hacerlo, y luego se priorizan las tareas según esa razón. Creo que eso da 
+una heurística razonablemente buena, que es algo así como: "Solo conviene tomar el doble de 
+tiempo en hacer algo si es el doble de importante."
+Julia: Claro, claro.
+Tom: Correcto, y de eso sale un algoritmo de gestión del tiempo bastante general, que es 
+Tiempo Esperado de Procesamiento Más Corto Ponderado, con interrupciones. 
+Toda esta literatura se vuelve muy complicada. Hay todas estas modificaciones que se pueden 
+hacer, pero si se supone que uno está en una situación en la que puede dejar una tarea 
+sin tener que quedarse pegado a ella todo el tiempo; esa es la parte de la interrupción. Uno tiene 
+pesos y le importa minimizar el tiempo de procesamiento más corto ponderado 
+en general. 
+Entonces, la estrategia óptima en una situación en la que no se sabe exactamente cuánto 
+van a tomar las cosas y no se sabe exactamente qué tareas van a surgir, 
+Página 11 de 17es trabajar en la tarea que tiene la mayor razón entre importancia y tiempo restante para 
+completarla. 
+Luego, si llega una nueva tarea, uno evalúa de inmediato: "¿Cuál es la razón entre 
+importancia y cuánto va a tomar completarla, comparada con la actual, 
+tarea, donde se toma en cuenta el tiempo que ya he invertido en ella, así que es el 
+tiempo restante para completarla." Luego se toma una decisión sobre lo que se va a 
+hacer con base en eso.
+Creo que es una heurística bastante buena. No toma en cuenta el hecho de que la vida humana 
+tiene ciclos. Podría ser bueno hacer ejercicio algunas veces a la semana, o algo así 
+y tampoco toma en cuenta que la importancia de las cosas podría ser 
+variable en el tiempo, o que la capacidad de ejecutar tareas también podría variar con el tiempo.
+  Esas son complejidades adicionales que se pueden incorporar.
+Julia: Claro.
+Tom: Creo que usar ese cálculo heurístico y ajustarlo según el momento concreto del día 
+en que uno se encuentre en realidad no es un mal plan.
+Julia: Hay algo que subrayé, creo que fue en este capítulo, que de verdad 
+me impactó. Fue algo que dijo sobre la procrastinación, un problema con el que he 
+luchado muchísimo a lo largo de los años. Dijo básicamente que podría ser la estrategia correcta 
+pero para el problema equivocado. ¿Podría elaborar sobre eso?
+Brian: Sí, esto remite a la idea de que incluso estrategias como la versión directa del 
+Tiempo de Procesamiento Más Corto — es una estrategia perfectamente viable. De hecho, es la óptima 
+estrategia para un tipo específico de problema. Nos da una forma de recaracterizar 
+algo como la procrastinación, es decir, no es una estrategia defectuosa para el 
+problema, sino la estrategia óptima para el problema equivocado. 
+Ha habido muchos estudios muy interesantes en la literatura de psicología 
+sobre la realización intuitiva de tareas por parte de las personas, y uno de mis favoritos involucra un 
+pasillo largo donde hay dos cubetas de agua, dos cubetas grandes y pesadas. 
+Una está en medio del pasillo y la otra al final, donde se encuentra el participante 
+de pie. 
+El experimentador, desde el otro lado del pasillo, dice: "¿Podría traerme una de 
+esas cubetas de agua, por favor?" Lo que pasa en la mayoría de los casos es que la persona 
+toma de inmediato la cubeta que está justo al lado de donde está parada, y la arrastra todo el 
+camino por el pasillo, pasando junto a la otra que pudo haber tomado y 
+habría recorrido solo la mitad de la distancia.
+  Los autores de este estudio acuñaron el término "precrastinación" para referirse a este proceso 
+por el cual las personas hacen el doble de trabajo del que realmente necesitaban. Creo que 
+destaca el hecho de que... mi interpretación es que inconscientemente están aplicando esta 
+métrica del Tiempo de Procesamiento Más Corto, y diciéndose: "Hay dos elementos en la lista de pendientes 
+que me han pedido hacer ahora. Uno es tomar una cubeta, y el otro es llevar la 
+Página 12 de 17cubeta al hombre." Y es como: "Oh, puedo cumplir la mitad de mi lista de pendientes ahora mismo—
+"
+Julia: Claro, claro.
+Brian: "Tomando la cubeta que está aquí mismo." No es que ese sea el enfoque equivocado 
+para el problema; es la caracterización equivocada del problema.
+Julia: ¿Cómo caracterizaría mejor el problema? ¿Cuál sería la definición correcta 
+de lo que está intentando hacer ahí?
+Brian: No sé, en términos de la teoría de la planificación, cuál es la forma exacta de describir el—
+Julia: ¿Algo como minimizar el trabajo total?
+Brian: Sí, Tom, ¿tiene alguna intuición sobre cuál es la formalización relevante del 
+problema de la cubeta de agua? Solo estoy tratando de pensar…
+Tom: Sí, creo que eso es correcto: minimizar la cantidad total de tiempo invertido en 
+completar tareas.
+  Esto en sí mismo es, creo, un punto realmente profundo: que la cantidad total de 
+tiempo necesario para completar todas las tareas se llama makespan. En un problema de planificación de una sola máquina 
+en el que uno hace todo el trabajo personalmente, no se puede delegar 
+ni subcontratar, y hay que hacer todas las tareas; entonces existe este curioso 
+antirresultado que dice: "El makespan total de hacer todo el trabajo personalmente es el mismo 
+sin importar el orden en que se haga." 
+Ahora bien, el problema de la cubeta de agua viola ese supuesto, porque simplemente resulta 
+más difícil caminar cuando uno lleva una cubeta enorme de agua.
+Julia: Claro.
+Tom: En la mayoría de las situaciones... esto en sí mismo es una buena heurística: si uno tiene que 
+hacer todo el trabajo personalmente, y hay que hacerlo todo, entonces el tiempo total que tomará 
+hacer todo el trabajo es el mismo sin importar el orden en que se haga. Este es un caso 
+en el que incluso dedicar tiempo a priorizar podría resultar contraproducente. 
+Bien podría uno simplemente trabajar en orden aleatorio.
+Julia: Claro. Hay un estudio que no deja de venirme a la mente, no solo en esta conversación 
+sino en general cuando intento dar consejos formalizados a la gente para tomar decisiones. Yo 
+no recuerdo a los autores del estudio, pero la idea central es que tuvieron un grupo 
+de personas que tomaba decisiones de tamaño mediano a grande solo con su instinto; podría 
+haber sido comprar un auto o comprar una casa, y luego el otro grupo de 
+personas recibió la instrucción de usar un... no sé si cuenta como algoritmo, yo 
+supongo que en un sentido amplio sí. Era una lista de pros y contras. Quizá les indicaron 
+asignar pesos a distintos factores, como la velocidad del auto, la seguridad, el precio, y 
+etcétera, y luego tomar su decisión con base en el resultado de ese proceso, de ese 
+algoritmo.
+Página 13 de 17Cuando los experimentadores hicieron seguimiento a los dos grupos de personas, el grupo que 
+había decidido guiado por su instinto en realidad estaba más contento con su elección en comparación con el 
+grupo que usó el algoritmo. Creo que la conclusión, la explicación de los experimentadores, 
+fue que había algunos factores realmente importantes que el grupo del proceso formal 
+estaba descuidando, porque no parecían encajar en su proceso formal. 
+Por ejemplo: "¿Cuánto disfruto este auto en particular?" Algo que quizá no tenga 
+nada que ver directamente con su kilometraje o su precio, etcétera. Podría ser simplemente la 
+apariencia y la sensación del auto.
+Creo que los resultados de eso, y de otros experimentos similares, deberían darnos que pensar, y con 
+“nosotros” me refiero a quienes damos consejos formales para tomar decisiones. No creo que 
+sea un golpe fatal para la idea de que podemos dar consejos formales que mejoren los 
+procesos humanos de toma de decisiones por defecto; simplemente creo que la conclusión es más matizada: que... 
+hay que prestar atención a los factores emocionales subjetivos que 
+también importan en la satisfacción general o en las preferencias de uno. 
+Me pregunto cómo piensa usted sobre ese riesgo, ¿hay un riesgo negativo al usar estos 
+algoritmos, y cómo intenta tenerlo en cuenta?
+Tom: No creo que eso sea un argumento contra los algoritmos. Creo que es un argumento contra 
+los malos algoritmos.
+Julia: Sí, de hecho me recuerda a la gente que señala la mala ciencia y luego concluye 
+a partir de eso: "Por lo tanto, no podemos confiar en la ciencia o no deberíamos intentar hacer ciencia en absoluto."
+Tom: Claro. Para mí eso vuelve a este punto sobre el sobreajuste. Cuando hablaba 
+sobre el sobreajuste dije que una de las cosas clave es que no conviene incluir demasiadas 
+variables en el modelo, porque entonces uno se enfoca demasiado en 
+cosas que en realidad no importan mucho en cuanto a lo que uno realmente le importa, 
+que en este caso es predecir la satisfacción futura, ¿verdad? 
+Creo que ese procedimiento de decisión es justamente uno que alienta a la gente a sobreajustar, a 
+pensar de más en el problema, a incluir más factores de los que debería, y a dar más 
+peso a esos factores solo porque están en su lista. 
+En cambio, el hecho de que quizá les haya costado trabajo pensar en esas cosas 
+... quizá les haya tomado un rato hacerlo… Es algo que indica que tal vez 
+no son tan importantes para tomar esa decisión. 
+Cuando hablamos de sobreajuste, en realidad lo hablamos en el contexto de ser una forma 
+de justificar el uso de ciertos tipos de estrategias heurísticas. Dice que habrá 
+casos en los que lo más simple es mejor, en los que tener menos razones es mejor, 
+en los que actuar antes que pensar más es mejor. Habrá esas 
+situaciones en las que la brecha entre lo que podemos medir y lo que importa es mayor.
+Si lo que uno puede medir es exactamente lo que de verdad importa, entonces hay que poner 
+todo el esfuerzo en ello. Hay que pensar en tantos factores como se pueda. 
+En el otro extremo, si uno estuviera presentando una propuesta de financiamiento a un comité, y 
+Página 14 de 17lo que ese comité iba a hacer era tomar todas las propuestas que recibiera, 
+lanzarlas al aire y luego elegir la que cayera encima, uno debería 
+no invertir esfuerzo en lo que se pone en ella, porque el proceso de decisión es completamente 
+aleatorio y lo que uno puede medir sobre su sentido de la calidad de la propuesta 
+en realidad está completamente desligado de lo que importa para que sea 
+financiada.
+La mayoría de las cosas están en algún punto intermedio entre tener toda la información relevante 
+y ser un proceso completamente estocástico. En la mayoría de las cosas hay algún elemento de 
+estocasticidad y algún elemento de predictibilidad. A medida que la predictibilidad baja 
+, la cantidad de esfuerzo que conviene poner en tomar esa decisión y el 
+esfuerzo que conviene poner en encontrar razones u otras cosas de ese tipo 
+deberían disminuir. Creo que hay muchas decisiones en las que tenemos malos 
+indicadores sustitutos de lo que realmente importa, como nuestra satisfacción futura. Al sobre 
+pensarlas, tomamos peores decisiones.
+Julia: Claro. Hay otro punto motivacional importante con el que quiero cerrar, que 
+es que a menudo me encuentro con personas que se castigan porque usaron algún 
+algoritmo y no les salió bien. Quizá el algoritmo sea: "Debería 
+experimentar con mostrarme más abierto con la gente". La razón por la que uno elige esa 
+política o ese algoritmo es que cree que, en general y a largo plazo, va a ser 
+mejor para esa persona. Va a mejorar en mostrarse abiertamente. Va a calibrar 
+sus expectativas sobre cuánta apertura es aceptable. 
+Pero lo intenta y a la segunda o tercera vez que lo intenta, la persona reacciona muy mal 
+a su apertura, y entonces piensa: "Maldición, nunca debí haber hecho esto. Esto 
+fue un error enorme." Se siente horrible.
+Siempre quiero decirle a la gente: "¿Considera usted que esta es una buena política o no? ¿Tuvo 
+mala suerte, o la política era realmente mala en expectativa, y no solo después de 
+que las cosas salieran mal?"  
+Brian: Absolutamente.
+Julia: Sí, su libro hace un punto realmente importante sobre prestar atención a la 
+calidad del algoritmo y no al resultado.
+Brian: Sí, estoy totalmente de acuerdo. Creo que otra de las cosas es prestar atención a qué tan 
+difícil es el problema que uno intenta resolver. Creo que una de las cosas que 
+las ciencias de la computación hacen realmente bien es dar una forma de articular qué tan difíciles 
+son los problemas. Hay clases enormes de problemas que simplemente se consideran intratables. No 
+deberíamos esperar poder obtener de forma confiable la solución correcta de manera eficiente y 
+repetible. 
+Incluso algunos de los algoritmos que hemos comentado hoy, la regla del 37 por ciento y el 
+problema de la parada óptima, si se lee la letra chica, la regla del 37 por ciento solo funciona 
+el 37 por ciento de las veces. Resulta que la parada óptima en el caso sin 
+información es un problema difícil, e incluso cuando se sigue el algoritmo 
+óptimo, uno sigue fallando el 63 por ciento de las veces.
+Página 15 de 17Julia: Claro.
+Brian: Entonces aquí hay un caso en el que tener la estrategia óptima no solo no garantiza que 
+uno vaya a tener éxito siempre; ni siquiera garantiza que uno tenga éxito la mayoría de las 
+veces.
+  Simplemente resulta que eso es lo mejor que se puede hacer. De manera similar, en el caso de explorar/explotar, el 
+valor esperado de explorar es necesariamente menor que el valor esperado de 
+explotar, así que cuando uno prueba un restaurante y no es bueno, eso no significa que 
+haya hecho lo incorrecto; eso es solo parte del problema. Porque si es bueno, 
+entonces uno puede multiplicar eso por todas las veces que vuelve.
+  Creo que este es en realidad un tema muy importante del libro, que, como usted dice, 
+tendemos a, si no obtenemos el resultado que queremos, cuestionar de inmediato 
+el proceso que usamos para llegar a ese resultado.
+  Creo que tener una base en las ciencias de la computación... entender cómo es el 
+panorama de estos problemas, entender cómo son las soluciones, 
+nos da una manera de estar tranquilos incluso en esos casos en que no obtenemos lo que queremos, 
+sabiendo que seguimos una estrategia sensata.
+Julia: Claro. Un truco motivacional que usan algunos de mis amigos es recordarse 
+el multiverso, y tener en cuenta que en realidad esa estrategia produjo el mejor 
+resultado, si se mira a todas las copias de mí en todos los mundos distintos, ¿verdad? Quizá 
+yo esté en el mundo en que no salió bien, pero en general, todas las versiones de mí 
+están mejor porque usé la estrategia, definitivamente, no solo “podría haber pasado 
+así”.
+Tom: Siempre que pueda manejar sus celos cuánticos, ¿verdad?
+Julia: Claro. “Trucos motivacionales para nerds, y sus riesgos”, en el próximo episodio. 
+Bien, genial, pues voy a cerrar esta sección del podcast y pondremos un enlace al 
+excelente libro  Algorithms to Live By  en nuestro sitio web del podcast. Animo a todos a 
+leerlo.
+Pero por ahora pasemos a las selecciones de Rationally Speaking.  
+[intermedio]
+Julia: Bienvenidos de nuevo. En cada episodio de Rationally Speaking invitamos a nuestro invitado, o invitados 
+en este caso, a dar una selección de Rationally Speaking del episodio. Es un libro, o un 
+sitio web, o una película, o algo que influyó de alguna manera en su forma de pensar. Brian, 
+empecemos con usted: ¿cuál es su selección para el episodio?
+Brian: Mi selección es un libro pequeño y muy extraño llamado  Finite and Infinite Games  de James 
+Carse. Salió en los años ochenta y acaba de reeditarse. Es un libro que 
+pude leer en unas 3 horas o algo así, pero pienso en él 
+Página 16 de 17literalmente todos los días. 
+La premisa básica del libro es que se puede trazar esta distinción de... toda la actividad 
+humana cae en una de dos categorías: un juego finito o un juego infinito.
+Un juego finito es algo en lo que uno participa para llevarlo a un final de alguna 
+forma deseada. Un combate de boxeo es un gran ejemplo: cada boxeador lanza cada 
+golpe con la intención de llevar el combate a su fin. 
+En cambio, un juego infinito es algo en lo que participamos para prolongarlo o 
+extenderlo. La conversación, la improvisación musical o la de comedia son ejemplos 
+de cosas que... participamos en ellas para evitar que lleguen a un 
+fin. 
+Carse, tras crear esta distinción, la aplica a todo tipo de cosas: desde el derecho 
+hasta el sexo, la medicina y la ética, y es simplemente una exploración realmente fascinante de 
+la motivación humana, y es una dicotomía que me ha acompañado a lo largo de la vida.
+Julia: Interesante. Bueno, no le voy a preguntar si el sexo es un juego finito o infinito para 
+usted. Lo dejaremos como ejercicio para el lector, o el oyente. 
+Tom, ¿cuál es su selección para el episodio?
+Tom: Mi selección también es un libro. Se llama  Do The Right Thing  de Stuart Russell y 
+Eric Wefald. Es un libro bastante técnico, pero realmente hace un punto muy importante, 
+y es un punto que, creo, es una de las premisas implícitas de nuestro libro. 
+El argumento de este libro es que en realidad la forma en que pensamos sobre la racionalidad 
+debería tomar en cuenta el hecho de que, como agentes, tenemos recursos computacionales 
+limitados. Luego toma esa premisa, trabaja a partir de ella y llega 
+a una nueva forma de ver la racionalidad, a la que llaman optimalidad acotada. 
+Básicamente, la idea es que ser un agente racional no consiste en tomar las decisiones correctas, 
+sino en usar los programas correctos. Eso concuerda mucho 
+con la idea de nuestro libro, que es que la racionalidad es en realidad una cuestión de seguir 
+buenos algoritmos.
+Julia: Sí, hombre, la racionalidad realmente necesita un agente de relaciones públicas de tiempo completo o algo así. Me pregunto si el 
+puesto está abierto. Voy a revisar. 
+Genial, bueno, muchas gracias por venir al programa. Disfruté mucho su 
+libro y lo recomendaré a otros.
+Brian: Muchas gracias. Gracias por invitarnos.
+Tom: Sí, genial, gracias.
+Julia: Bueno, con esto concluye otro episodio de Rationally Speaking. Acompáñenos la próxima vez para 
+más exploraciones en las fronteras entre la razón y el absurdo.  
+Página 17 de 17

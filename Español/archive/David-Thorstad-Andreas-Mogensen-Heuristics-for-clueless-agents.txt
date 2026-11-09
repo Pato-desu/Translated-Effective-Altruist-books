@@ -1,0 +1,777 @@
+ 
+ 
+Heurísticas para agentes desorientados: cómo salirse con la suya ignorando lo que más importa en la toma de decisiones cotidianas
+
+David Thorstad y Andreas Mogensen
+
+Global Priorities Institute | junio de 2020
+
+Documento de trabajo GPI 2-2020
+ 
+ 
+ 
+
+1
+Heurísticas para agentes desorientados: cómo salirse con la suya ignorando lo que más importa en la toma de decisiones cotidianas  
+ 
+David A. Thorstad y Andreas L. Mogensen  
+ 
+Resumen: Incluso nuestras decisiones más mundanas pueden tener un impacto significativo en el futuro a largo plazo, pero a menudo estamos desorientados sobre cuál puede ser ese impacto. En este artículo buscamos caracterizar y resolver dos problemas planteados por discusiones recientes sobre la desorientación, a los que llamamos el problema de la parálisis decisoria y el problema de la exigencia en la toma de decisiones. Tras revisar y rechazar las soluciones existentes a ambos problemas, sostenemos que el camino a seguir se encuentra en la distinción entre racionalidad procedimental y racionalidad sustantiva. Los agentes desorientados disponen de una variedad de procedimientos heurísticos de toma de decisiones que suelen ser respuestas racionales a los problemas de decisión a los que se enfrentan. Al simplificar, o incluso ignorar, la información sobre posibles impactos a largo plazo, las heurísticas producen decisiones efectivas sin exigir demasiado a los tomadores de decisiones ordinarios. Esbozamos dos clases de rasgos de los problemas que inciden en la racionalidad de los procedimientos de decisión para agentes desorientados, y mostramos cómo pueden usarse estos rasgos para arrojar luz sobre nuestros problemas de partida.    
+ 
+1. Introducción  
+ 
+Recientes hallazgos en la cueva de Jebel Irhoud, en Marruecos, indican que el Homo sapiens ha habitado 
+la Tierra durante al menos 300,000 años (Hublin et ál. 2017). Si jugamos bien nuestras cartas, podríamos 
+seguir aquí durante muchos más. Este planeta seguirá siendo habitable para la vida compleja 
+durante unos mil millones de años más, momento en que el Sol, cada vez más brillante, provocará 
+un efecto invernadero catastrófico y descontrolado. Si tenemos suerte, la humanidad sobrevivirá durante todo ese tiempo 
+y se expandirá a otros mundos, lo que nos dará 100 billones de años antes de que 
+se apaguen las últimas estrellas (Adams 2008). Podrían vivirse innumerables vidas, llenas de 
+2 
+ florecimiento, sufrimiento, libertad y opresión a una escala sin precedentes en la historia 
+humana.  
+Supongamos que hubiera algo que pudiera hacer para influir significativamente en el 
+futuro a largo plazo de la humanidad. Quizá podría reducir la probabilidad de una catástrofe existencial 
+trabajando contra riesgos como la proliferación nuclear, que amenazan con llevar nuestro 
+futuro a un final prematuro. Hay tantas personas aún por vivir que cualquier cosa que 
+mejore sus posibilidades de llevar vidas prósperas parece tener una enorme relevancia moral. 
+El valor esperado asociado a acciones de este tipo parece eclipsar 
+el valor esperado de casi cualquier otra cosa que pudiera hacer (Beckstead 2013; Bostrom 
+2003, 2013; Greaves y MacAskill, ms.). Suponiendo una axiología utilitarista total, 
+Bostrom (2013: 18–19) sostiene que una proyección conservadora de la población futura total 
+arroja una estimación del valor moral esperado de reducir el riesgo de extinción 
+en una millonésima de punto porcentual que equivale al menos al valor de cien millones 
+de vidas humanas. Si se asigna solo un uno por ciento de credibilidad a estimaciones menos conservadoras que 
+tengan en cuenta la posibilidad de que la (post)humanidad se expanda por las estrellas y de que 
+las mentes futuras se implementen en hardware computacional, Bostrom calcula que el 
+valor esperado de reducir el riesgo de extinción en apenas una milmillonésima de 
+milmillonésima de punto porcentual equivale a cien mil millones de veces el valor de mil millones 
+de vidas humanas.  
+Observe, sin embargo, que la mayoría de sus acciones tienen alguna probabilidad de influir 
+en el futuro a largo plazo. Levantarse tarde o temprano hoy determina lo que 
+comerá, con quién interactuará y qué logrará hoy, todo lo cual tiene 
+innumerables efectos sobre otros que se extienden lejos en el futuro. Si se levanta temprano, 
+podría ser más productivo. Podría leer y escribir más. Existe 
+una probabilidad muy remota de que ese aumento de productividad dé lugar a una obra de 
+filosofía que estudiarán lectores futuros durante tanto tiempo como se ha estudiado La República de Platón 
+hasta hoy. Como mínimo, podría influir en el pensamiento de estudiantes que algún día 
+ocuparán posiciones de poder político y cuyas decisiones afectarán 
+a generaciones venideras.   
+3 
+ Algunos teóricos recientes han deducido de esto que los valores esperados de la mayoría de 
+las opciones disponibles para nosotros están dominados por sus posibles impactos a largo plazo (Beckstead 
+2013; Bostrom 2003, 2013; Greaves y MacAskill, ms.):  
+ 
+Largoplacismo axiológico ex ante (EAAL): en la mayoría de los casos, la gran mayoría del valor ex ante (esperado) de una opción está determinada por sus efectos sobre el futuro a largo plazo.  
+ 
+Aunque el EAAL tiene consecuencias plausibles para la toma de decisiones en contextos que intuitivamente consideramos de alto riesgo, plantea un par de enigmas para la toma de decisiones en contextos más mundanos. A menudo estamos desorientados sobre los efectos a largo plazo de nuestras acciones. No sabemos si cambiaremos el futuro para bien al levantarnos temprano en lugar de quedarnos en la cama. La parálisis decisoria amenaza. No está claro si los agentes racionales pueden llegar a justificar la acción, ni de qué manera. Peor aún, la toma de decisiones largoplacista puede ser muy exigente. Para evaluar correctamente los efectos a largo plazo de nuestras acciones debemos considerar un número enorme de contingencias futuras. Quizá al levantarnos temprano e ir al trabajo aceleremos el ritmo del progreso tecnológico, acelerando la expansión interestelar de la humanidad en el siglo 24. Pero en la mayoría de los contextos de toma de decisiones no podemos dedicar tiempo ni recursos cognitivos suficientes para considerar siquiera un puñado de las contingencias futuras pertinentes. ¿Significa esto que a menudo estamos condenados a elegir irracionalmente?
+
+En este artículo buscamos afinar y resolver estos desafíos. En la sección 2 presentamos enunciados precisos de cada desafío. En las secciones 3 y 4 revisamos soluciones aparentes que, en última instancia, no funcionan. En la sección 5 introducimos una serie de restricciones sobre una solución exitosa. En la sección 6 sugerimos que los problemas pueden resolverse pasando de la racionalidad sustantiva a la procedimental. En las secciones 7 y 8 desarrollamos una solución procedimental para ambos problemas.   
+ 
+4
+2. Dos problemas para el largoplacismo axiológico ex ante (EAAL)  
+ 
+El primer asunto es afinar los desafíos que enfrenta el EAAL. A lo largo de esta sección asumimos una forma ex ante de consecuencialismo: la acción correcta es la mejor acción ex ante, considerada de manera imparcial. Se podrían plantear desafíos similares usando varias teorías no consecuencialistas, ya que la mayoría de los no consecuencialistas, como Rawls (1999), aceptan que las consecuencias de nuestras acciones importan y que el descuento puro del tiempo es moralmente inaceptable.
+
+El primer problema comienza con la observación de que típicamente estamos desorientados sobre los efectos a largo plazo de nuestras acciones (Lenman 2000). En primera instancia, usamos “desorientación” como una etiqueta opaca para el sentido de profunda incertidumbre que experimentamos característicamente al reflexionar sobre el impacto a largo plazo de nuestras acciones. Dejamos sin especificar su naturaleza exacta, al menos por ahora. Sin embargo, para fijar ideas, observamos que una condición necesaria para la desorientación es que no sabemos cuáles serán los impactos a largo plazo de lo que elegimos hoy, ni las probabilidades pertinentes. Así, no sabemos si levantarnos más temprano o más tarde cambiará el futuro a largo plazo para bien o para mal, ni cuán fuertes serán esos efectos. Además, para cualquier contingencia relevante asociada con el futuro a largo plazo de la humanidad, como la aparición de una pandemia de origen biotecnológico que mate al menos al 50% de todas las personas vivas, no sabemos si levantarnos más temprano o más tarde aumenta o reduce la probabilidad de ese resultado, o al menos no sabemos con un grado de precisión adecuado en cuánto aumentan o disminuyen esas probabilidades. Hay demasiadas contingencias que considerar y tenemos muy poca evidencia para avanzar. Si la desorientación implica algo más que esto es una cuestión que, por ahora, dejamos sin resolver.
+
+Resumimos estas ideas así:  
+ 
+Desorientación sobre los efectos a largo plazo: los tomadores de decisiones suelen estar desorientados sobre la dirección y la magnitud de los efectos a largo plazo de las opciones a su alcance.
+
+5 
+  
+No siempre estamos desorientados sobre los efectos a largo plazo de nuestras acciones. Por ejemplo, aunque estamos desorientados sobre los efectos a largo plazo de levantarnos de la cama esta mañana, podemos estar razonablemente seguros de que el desarme nuclear cambiará el futuro para bien. Pero en la mayoría de los contextos estamos perdidos.
+
+Dado el EAAL, parece seguirse de la desorientación sobre los efectos a largo plazo que estamos desorientados sobre los valores de la mayoría de las opciones que enfrentamos.  
+ 
+Desorientación sobre el valor ex ante: los tomadores de decisiones suelen estar desorientados sobre la dirección y la magnitud de los valores ex ante (esperados) de las opciones que enfrentan.   
+ 
+En otras palabras, parece ser un rasgo de la profunda incertidumbre propia de la desorientación que no conocemos los valores esperados de las opciones a nuestro alcance, ni podemos acotarlos con un grado de precisión adecuado. Bajo el consecuencialismo, esto significa que no sabemos lo más básico sobre lo que deberíamos hacer. La parálisis decisoria amenaza.  
+ 
+Problema de la parálisis decisoria: en las situaciones típicas de elección, no está claro si un tomador de decisiones racional debe actuar y, en tal caso, cómo.  
+ 
+La parálisis decisoria sería una consecuencia preocupante del EAAL. En decisiones vitales importantes o en intervenciones a gran escala destinadas a influir en el futuro a largo plazo, cierto grado de parálisis decisoria puede ser apropiado. Quien tuviera facilidad para tomar esas decisiones sería sospechoso de simplificar demasiado las cosas. Pero en la mayoría de los contextos ordinarios de toma de decisiones, los tomadores de decisiones racionales no quedan paralizados por la indecisión.
+
+6
+
+Además del problema de la parálisis decisoria, existe para el EAAL un problema aparte. Este problema se basa en la dificultad de evaluar las consecuencias a largo plazo. Lo resumimos así:  
+ 
+Dificultad evaluativa a largo plazo: para determinar correctamente la dirección y la magnitud de todos los efectos potenciales a largo plazo pertinentes, los agentes deben considerar un gran número de contingencias futuras.   
+ 
+Imagine solo el modelado detallado que se necesitaría para evaluar con precisión el impacto esperado de quedarse en la cama o de levantarse temprano sobre el futuro a largo plazo de la civilización de origen terrestre. Cuando por fin terminara su modelo, llegaría varios años tarde al trabajo. Esto genera un segundo problema para el EAAL.  
+ 
+Problema de la exigencia en la toma de decisiones: en las situaciones típicas de elección, los tomadores de decisiones deben invertir una gran cantidad de tiempo y esfuerzo para elegir racionalmente.  
+ 
+Como antes, el problema de la exigencia en la toma de decisiones no siempre es un problema. La toma de decisiones a gran escala sobre el futuro a largo plazo debe ser difícil y exigente. Pero la toma de decisiones ordinarias, sobre asuntos como a qué hora poner la alarma, no debería ser especialmente exigente.
+
+Hemos visto que, pese a la plausibilidad del EAAL, este genera un par de enigmas: la toma de decisiones largoplacista amenaza con ser indebidamente exigente, y a menudo parece hacer completamente imposible saber cómo debe actuar un tomador de decisiones largoplacista racional. ¿Qué puede responderse a estos enigmas?  
+ 
+ 
+ 
+7
+3. Lo que no funciona  
+ 
+En esta sección consideramos y rechazamos cuatro soluciones rápidas al problema de la parálisis decisoria 
+y al problema de la exigencia en la toma de decisiones. Luego, en la sección 4, consideramos 
+una solución bayesiana imprecisa, antes de proponer nuestra propia respuesta a estos 
+problemas.  
+Como primer intento, podríamos aceptar la parálisis decisoria y sostener que los tomadores de decisiones 
+desorientados no deberían actuar, al menos no en el sentido convencional. En cambio, deberían 
+reunir evidencia para reducir su desorientación. Solo entonces deberían actuar.   
+No nos oponemos en principio a reunir evidencia como estrategia para 
+resolver la desorientación. Sin embargo, esta estrategia no basta como solución general para ninguno de los dos 
+problemas. Obsérvese, en primer lugar, que reunir evidencia solo empeora el problema de la exigencia en la toma
+de decisiones. Si siguiéramos este enfoque, estaríamos obligados a 
+hacer un gran esfuerzo para mejorar nuestra situación probatoria en la toma de decisiones cotidiana. 
+Eso es demasiado pedir. No solemos pensar que los agentes estén obligados a reunir mucha evidencia, si es que alguna, 
+antes de decidir si se levantan de la cama 
+por la mañana.   
+Tampoco reunir evidencia resolverá el problema de la parálisis decisoria. En el sentido pertinente, 
+reunir evidencia es una acción, y estamos tan desorientados sobre sus efectos 
+como lo estamos sobre los efectos de la mayoría de las demás acciones. Así que 
+reunir evidencia por sí sola no resolverá los problemas del largoplacista.  
+Como segundo intento, podríamos negar la desorientación sobre el valor ex ante. Esta 
+estrategia concede que estamos gravemente inciertos sobre el futuro a largo plazo, pero sostiene que 
+nuestra incertidumbre es bastante manejable. Difiere solo en grado, no en tipo, de los casos típicos de 
+incertidumbre. Ya disponemos de una buena teoría de la toma de decisiones racional bajo
+incertidumbre, a saber, el bayesianismo preciso: los tomadores de decisiones racionales 
+deben asignar probabilidades y utilidades precisas a los estados y resultados 
+considerados, y actuar de modo que maximicen la utilidad esperada dadas esas asignaciones.  
+8 
+ No creemos que el enfoque bayesiano preciso resuelva ninguno de los dos problemas. Obsérvese 
+en primer lugar que el bayesianismo preciso no ofrece esperanza alguna de resolver el problema de la
+exigencia en la toma de decisiones. Construir y evaluar modelos probabilísticos detallados de 
+los efectos a largo plazo de nuestras acciones es extremadamente difícil y consume mucho tiempo.   
+Además, es natural sentir que el enfoque bayesiano preciso no 
+hace justicia a la gravedad de nuestra incertidumbre sobre el futuro a largo plazo. No estamos 
+simplemente inciertos sobre el futuro a largo plazo, sino desorientados. En la jerga de Knight 
+(1921), parecemos tratar no con riesgo, sino con incertidumbre: una ignorancia tan profunda 
+que nuestra evidencia no justifica asignar probabilidades precisas a todas las contingencias 
+pertinentes.   
+Algunos podrían insistir en que, aun así, deberíamos razonar de acuerdo con el bayesianismo preciso 
+en condiciones de incertidumbre knightiana. Broome (2012) nos aconseja: 
+“Quédate con la teoría del valor esperado, ya que está muy bien fundamentada, y haz tu mejor esfuerzo con 
+las probabilidades y los valores.” (129) Sin embargo, dado EAAL, esto hace que la toma de
+decisiones racionales sea muy sensible a pequeñas variaciones racionalmente arbitrarias en las 
+asignaciones de probabilidad. Si levantarse temprano tiene asignada una probabilidad de 10-16 de evitar alguna futura 
+catástrofe existencial, entonces eso es presumiblemente lo que debemos hacer, a menos que levantarse 
+tarde prevenga una catástrofe similar con probabilidad 10-14. Los seres humanos están mal equipados 
+para registrar diferencias tan minúsculas entre probabilidades. El enfoque bayesiano preciso 
+dejaría así la toma de decisiones racionales a merced del capricho de quienes deciden, 
+que operan muy por encima de su capacidad discriminatoria.   
+Un tercer intento es negar EAAL. Esto resolvería ambos problemas. Pero ¿cómo podría 
+motivarse esta negación? Podría afirmarse que, en casos mundanos, las opciones 
+que tenemos a nuestro alcance son casi siempre tales que, para cualquier consecuencia importante a futuro lejano 
+que pudiera resultar de elegir una opción en lugar de otra, no tenemos más 
+razón para esperar que esta consecuencia surja de elegir una opción en lugar de 
+la otra. Por ejemplo, aunque ayudar a una anciana a cruzar la calle podría 
+perturbar el tráfico local y, con ello, alterar diversos eventos de concepción de modo que nazca un futuro 
+dictador genocida que de otro modo no habría llegado al poder, no tenemos 
+9 
+ más razón para creer que ayudar a la mujer a cruzar la calle tendrá ese efecto 
+que para creer que perturbará el tráfico local y, con ello, alterará diversos eventos de concepción 
+nunca se conciba un futuro dictador genocida. Si esto es cierto en general, entonces 
+los efectos a largo plazo de la mayoría de las acciones pueden considerarse que se cancelan en la valoración ex ante, 
+y el orden de los actos disponibles según su valor ex ante estará normalmente 
+determinado por completo por sus efectos previsibles en el futuro a corto plazo (Lenman 
+2000; Greaves 2016).  
+  Sin embargo, hay buenas razones para dudar de que esta tesis de simetría se sostenga con 
+suficiente generalidad. Obsérvese primero que la conclusión del argumento de simetría es demasiado 
+fuerte. Afirma que, en casos típicos, los efectos a largo plazo de nuestras acciones son por completo 
+irrelevantes para su valor ex ante. Aunque podría haber cierta plausibilidad en la tesis 
+de que los efectos a largo plazo típicamente no dominan el valor ex ante, no es plausible que 
+los efectos a largo plazo sean típicamente irrelevantes para la evaluación ex ante.   
+El problema mayor es que una simetría generalizada respecto de los efectos esperados 
+a largo plazo sería una extraña coincidencia que no tenemos motivos para esperar 
+y buenas razones para no esperar. Podemos motivar fácilmente la tesis de simetría para agentes que 
+carecen de evidencia de ningún tipo sobre los efectos a largo plazo de sus acciones, como en el caso 
+de ayudar a una anciana a cruzar la calle. Sin embargo, esa no es la situación en la que 
+se encuentran la mayoría de quienes toman decisiones la mayor parte del tiempo. El problema no es que no podamos decir 
+nada sobre los posibles efectos futuros de nuestras acciones. Todo lo contrario. Hay 
+con frecuencia demasiado que podemos decir. Incluso el más sencillo de nosotros puede enumerar un gran 
+número de posibles efectos futuros de nuestras acciones y formular algunas consideraciones 
+sobre su probabilidad, como en el caso de decidir si levantarnos más temprano o 
+más tarde, donde tenemos buenas razones para sospechar que lo primero nos permitirá ser más 
+productivos, y alguna razón para pensar que una mayor productividad de nuestra parte podría 
+influir en el largo plazo de diversas maneras. Sería sumamente sorprendente que la simetría perfecta 
+fuera un hecho frecuente.  
+Algunos lectores podrían sospechar que con esto nos oponemos a 
+una discusión reciente sobre la desorientación debida a Greaves (2016). Sería un error.   
+10 
+ Greaves distingue entre casos de desorientación simple, ejemplificados por el 
+caso de ayudar a una anciana a cruzar la calle, y desorientación compleja, 
+ejemplificada en su discusión por la elección de financiar o no la distribución 
+de mosquiteros tratados con insecticida de larga duración contra la malaria, teniendo en cuenta los 
+posibles efectos indirectos sobre la dinámica poblacional. Los casos de desorientación simple se 
+caracterizan por la simetría evidencial, mientras que los casos de desorientación compleja se 
+caracterizan por evidencia en conflicto que no sabemos cómo sopesar. Greaves 
+sostiene que, en los casos de desorientación simple, podemos apoyarnos en alguna restricción adecuada 
+del clásico principio de indiferencia, de modo que las diferencias en los valores esperados entre 
+nuestras acciones dependen por completo de sus consecuencias previsibles a corto plazo.   
+En la discusión, algunas personas nos han sugerido que los casos mundanos del tipo 
+que nos ocupan quedan cubiertos por la discusión de Greaves sobre la desorientación simple. Sin embargo, 
+esto es un error. La desorientación mundana no es desorientación simple. La propia Greaves 
+lo señala: sostiene que la desorientación compleja también surge en casos mundanos, como 
+“cuánto gastar en ropa” y “si dejar o no la cafeína” (25). En 
+general, no parece haber razón para esperar que los casos de toma de decisiones mundanas 
+deban implicar desorientación simple, aunque bien puede ser cierto que todos los casos de desorientación simple 
+se refieran a decisiones mundanas.   
+Aquí está la cuarta y última respuesta que consideraremos en esta sección. Algunos podrían 
+pensar que la mejor manera de abordar los problemas que hemos planteado es adoptar lo que Monton 
+(2019) llama «descuento nicolausiano». Esto implica descontar hasta cero 
+las probabilidades suficientemente pequeñas a efectos de la toma de decisiones.   
+Una motivación para el descuento nicolausiano es que los maximizadores de utilidad esperada 
+son vulnerables a dejarse seducir por apuestas que ofrecen pequeñas probabilidades de un valor astronómico. 
+Para usar uno de los ejemplos de Monton, una variación de la paradoja de San Petersburgo 
+(Bernoulli 1738): supongamos que actualmente se espera que usted muera en lo que llamaremos «la 
+Fecha Crítica», fijada para dentro de 1,000 días. Se le ofrece la siguiente apuesta. Se lanza 
+una moneda equilibrada hasta que salga cara tras n lanzamientos. Extenderemos su vida 
+más allá de la Fecha Crítica en 2n días. Si la moneda no ha salido cara tras 1,000 lanzamientos, 
+11 
+ nos detenemos y su vida se extiende 21,000 días más allá de la Fecha Crítica. Para jugar 
+el juego, debe estar dispuesto a adelantar la Fecha Crítica x días. Si valora los días 
+de vida linealmente y maximiza la utilidad esperada, debería estar dispuesto a adelantar la 
+Fecha Crítica x = 999 días para jugar este juego. Pero esto parece 
+extremadamente temerario, dado que le deja con una probabilidad de 7/8 de vivir menos de 10 
+días más.  
+En respuesta, algunos dicen que estamos autorizados, o incluso obligados, a tratar como 
+imposibles, a efectos de la toma de decisiones, los resultados posibles cuyas probabilidades son lo bastante pequeñas 
+(Buffon 1777, Smith 2014, Monton 2019; compárese 
+con Buchak 2013: 73-4). Esto podría permitirnos evitar los problemas tratados 
+en la sección 2, ya que esos problemas también pueden rastrearse hasta probabilidades muy pequeñas de 
+cantidades muy grandes de valor. Las decisiones mundanas, como cuándo levantarse, tienen alguna 
+probabilidad de afectar de forma significativa la configuración general del futuro a largo plazo. La 
+probabilidad es muy pequeña, pero, como hay tanto valor en juego a lo largo del 
+muy largo plazo, parece que debemos intentar elegir la opción que da la mayor 
+probabilidad al mejor resultado a largo plazo, en la medida en que nuestro objetivo es maximizar el 
+valor moral esperado. Si adoptamos el descuento nicolausiano, podemos ignorar las 
+probabilidades suficientemente pequeñas de valor astronómico. ¿No resuelve esto el problema?   
+No lo creemos. Dejamos de lado las dudas generales sobre la racionalidad del 
+descuento nicolausiano (Hájek 2014, Isaacs 2016). Nuestra discusión se centrará solo en 
+si el descuento nicolausiano puede resolver los problemas destacados en la sección 2. No 
+creemos que pueda.  
+Para ver por qué, supongamos que el descuento nicolausiano es racional: existe un umbral 
+por debajo del cual las probabilidades deben descontarse hasta cero a efectos de la toma de 
+decisiones. ¿Dónde está el umbral? No puede estar demasiado alto. Ninguna persona racional trata como 
+imposibles todos los estados del mundo con una probabilidad menor de 1 en 1,000, por 
+ejemplo. Presumiblemente, nadie sabe exactamente en qué nivel deja de ser irracional 
+tratar como imposible lo muy improbable a efectos de la toma de decisiones. Incluso si lo 
+supiéramos, no tendríamos un buen control sobre si las probabilidades asociadas a los 
+12 
+ posibles impactos a largo plazo de levantarse temprano o dormir hasta tarde quedan por encima o 
+por debajo de ese umbral. No podemos hacer distinciones tan finas de forma fiable entre probabilidades astronómicamente 
+pequeñas. Al igual que el enfoque bayesiano preciso, el descuento nicolausiano 
+deja la toma de decisiones racional a merced del capricho de quienes deciden, que operan muy 
+más allá de sus capacidades de discriminación.   
+Observamos también que las justificaciones, por lo demás plausibles, del descuento nicolausiano 
+pueden no tener aplicación en casos de desorientación cotidiana. Monton (2019) sostiene que 
+el descuento nicolausiano está justificado porque nos permite evitar verse obligados o 
+autorizados a elegir opciones que dan una alta probabilidad de que nuestras vidas vayan muy 
+mal. Si se maximiza la utilidad esperada y se adelanta la Fecha Crítica 999 
+días para apostar por vivir 2n días después de la Fecha Crítica, esto hace muy probable 
+que uno muera en un plazo de quince días. Esto, presumiblemente, es la razón por la que tomar la apuesta parece tan 
+temerario. Monton escribe: “Como uno solo vive una vez, tiene buenas razones para evitar 
+elegir una acción en la que tiene una alta probabilidad de que su vida vaya mal, 
+independientemente de si la acción maximiza o no la utilidad esperada.” (14) Hay que notar, 
+sin embargo, que las decisiones cotidianas en las que nos centramos no son casos en los que se 
+ofrece una opción con una probabilidad muy pequeña de producir un valor astronómico, pero que 
+casi con seguridad terminará costándole a usted o a otras personas un precio muy alto. Nos ocupamos 
+de elecciones como levantarse temprano o dormir hasta tarde. Ninguna de las dos hace probable 
+que las cosas vayan muy mal.   
+En esta sección hemos considerado y rechazado cuatro soluciones al Problema 
+de la Exigencia de la Toma de Decisiones y al Problema de la Parálisis de Decisión: reunir 
+evidencia, negar la desorientación, negar EAAL y el descuento nicolausiano. En la 
+siguiente sección consideramos y rechazamos una quinta posible solución.  
+ 
+4. Bayesianismo impreciso  
+Las últimas décadas han visto un interés creciente en lo que llamamos 
+bayesianismo impreciso (Elga 2010; Joyce 2005, 2010; Rinard 2015; Schoenfield 2012; 
+White 2010). Los bayesianos imprecisos representan las creencias de un agente mediante un conjunto credal o 
+13 
+ representante: es decir, un conjunto de funciones de probabilidad, en lugar de una única 
+función de probabilidad subjetiva. Una motivación clave del bayesianismo impreciso es la afirmación de que 
+bajo una incertidumbre severa, los agentes racionales no deberían ser tan opinantes como 
+lo exigen los modelos bayesianos precisos.   
+Algunos autores han sugerido que los estados de creencia de los agentes desorientados podrían representarse mejor 
+mediante un conjunto credal (Greaves 2016; Mogensen ms). Dada la profundidad de la 
+incertidumbre de los agentes desorientados, sus estados de creencia deben ser compatibles con una amplia 
+variedad de asignaciones de probabilidad a posibles resultados a largo plazo. Por 
+ejemplo, deberíamos incluir algunas funciones de probabilidad según las cuales levantarse temprano hoy es más probable que 
+dormir hasta tarde para reducir el riesgo de extinción, y otras funciones según las cuales lo 
+contrario es cierto.  
+Una objeción inmediata a esta solución es que no resolverá el Problema de la 
+Exigencia de la Toma de Decisiones. A primera vista, desarrollar modelos probabilísticos imprecisos de los 
+efectos a largo plazo de nuestras acciones y tomar decisiones con base en 
+estos modelos no requiere menos tiempo que la toma de decisiones bayesiana precisa.   
+Sin embargo, nuestra objeción principal a la solución bayesiana imprecisa es que es 
+extremadamente difícil encontrar una teoría de la decisión aceptable para agentes desorientados cuyas 
+creencias sobre el impacto a largo plazo de sus opciones se representan mediante un conjunto de 
+funciones de probabilidad.   
+Más concretamente, creemos que todas las reglas de decisión propuestas para 
+agentes bayesianos imprecisos adolecen de uno de cuatro problemas. La fuerza de estos problemas 
+aumenta a medida que el valor esperado que asigna el representante del agente se dispersa más. 
+Para agentes cuyas utilidades esperadas de opciones están tan restringidas por su representante, estos 
+problemas pueden no ser devastadores. Pero los agentes desorientados representan su 
+incertidumbre adoptando un rango disperso de probabilidades sobre los efectos a largo plazo de sus 
+acciones. Una vez que toda la extensión de la incertidumbre de un agente desorientado se incluye en 
+su representante, es difícil decir algo específico y plausible sobre lo que la racionalidad le 
+exige.   
+14 
+ Algunas reglas de decisión imprecisas padecen de liberalismo cínico: afirman que casi 
+cualquier acción es permisible. Por ejemplo, considérese la regla de decisión Liberal según la cual una 
+acción es permisible si y solo si maximiza la utilidad esperada según alguna función de probabilidad del 
+representante del agente. Para los agentes desorientados, la regla Liberal hace 
+casi cualquier acción permisible. Algunas funciones de su representante consideran que dormir hasta tarde es 
+lo mejor; otras recomiendan levantarse temprano. Algunas recomiendan ir al trabajo; otras 
+recomiendan en cambio pasar el día envenenando palomas en el parque. Intuitivamente, esto 
+no es lo que debería decirse. Aunque la elección entre levantarse temprano o dormir hasta tarde 
+podría dejarse al capricho de quien decide, la elección entre ir al trabajo en lugar de 
+envenenar palomas no debería dejarse a ese capricho.   
+Otras reglas de decisión imprecisas padecen el defecto opuesto. Generan 
+dilemas racionales generalizados: en la mayoría de las situaciones de elección, ninguna acción es permisible. Por 
+ejemplo, considérese la regla de decisión Conservadora según la cual una acción es permisible 
+si y solo si maximiza la utilidad esperada según todas las funciones de probabilidad del 
+representante del agente. Para los agentes desorientados, ni dormir hasta tarde ni levantarse temprano 
+serán permisibles, ya que cada acción es mejor que la otra según alguna función de probabilidad. 
+Conclusiones similares se sostienen en la mayoría de los contextos de decisión. Sin embargo, la mayoría de 
+los problemas ordinarios de decisión no plantean dilemas racionales.  
+Los supervaloracionistas se sitúan a medio camino entre las reglas liberal y conservadora 
+conservando sus veredictos más plausibles y dejando el resto como silencio (Rinard 2015). 
+Por ejemplo, podríamos decir que una opción es determinadamente permisible si y solo si 
+maximiza la utilidad esperada según todas las funciones de probabilidad del representante del agente, 
+determinadamente impermisible si y solo si no maximiza la utilidad esperada según 
+ninguna de las funciones de probabilidad del representante del agente, y tiene un estatus racional indeterminado 
+en cualquier otro caso. El supervaloracionismo es una forma de quietismo. Evita el liberalismo 
+cínico y no postula dilemas racionales generalizados. Pero el supervaloracionismo 
+logra esto solo al negarse a decir cualquier cosa sobre lo que exige la racionalidad en la 
+mayoría de las circunstancias. Levantarse temprano tiene un estatus racional indeterminado, igual que 
+levantarse tarde. Lo mismo ocurre con ir al trabajo o con envenenar palomas en el parque.   
+15 
+ Una última clase de reglas de decisión devuelve veredictos específicos pero inverosímiles. Por 
+ejemplo, el criterio de Hurwicz puntúa las opciones mediante una suma ponderada de sus utilidades esperadas 
+mínima y máxima en el representante del agente, donde los pesos relativos quedan 
+a los gustos del agente. Las opciones son permisibles si y solo si maximizan esta 
+suma ponderada. El problema del criterio de Hurwicz es que es 
+totalmente insensible a cualquier cosa que no sean las utilidades esperadas del mejor y del peor caso. Para 
+agentes desorientados que reflexionan sobre el futuro a largo plazo, las utilidades esperadas del mejor y del peor caso 
+serán muy extravagantes. En la mayoría de los casos, la utilidad esperada del peor caso  
+implica asignar una masa de probabilidad significativa a futuros llenos de sufrimiento astronómico, 
+mientras que la estimación de utilidad esperada del mejor caso implica asignar una masa de probabilidad significativa a 
+resultados que implican una prosperidad a escala galáctica. El 
+criterio de Hurwicz se centra solo en estos extremos e ignora todo lo que hay entre ellos. 
+Y eso es inverosímil.  
+En resumen, el bayesianismo impreciso no pretende ser una solución al Problema 
+de la Exigencia de la Toma de Decisiones, y tampoco puede resolver el Problema de la Parálisis de Decisión. Las reglas de decisión 
+bayesianas imprecisas para agentes desorientados son o bien 
+cínicamente liberales, generan dilemas racionales generalizados, caen en el quietismo, o bien 
+devuelven veredictos inverosímiles. Pero si el bayesianismo impreciso no puede ayudarnos, ¿qué podrá hacerlo?  
+ 
+5. Restricciones sobre las soluciones aceptables  
+ 
+Para entender cómo deben tomar decisiones los tomadores de decisiones racionales con 
+potencial de afectar al futuro a largo plazo, conviene examinar algunos casos. Creemos 
+que en cada caso es relativamente claro cómo deberían proceder los tomadores de decisiones racionales. 
+Al examinar estos tres casos podemos señalar el camino hacia una solución para ambos 
+problemas.  
+Supongamos primero que le dan mil millones de dólares que puede donar a cualquier 
+causa. En este caso, la primera solución rápida no estaba del todo equivocada: debería reunir 
+evidencia sustancial para reducir su desorientación. Debería comparar una amplia variedad de 
+16 
+ opciones. Algunas serán intervenciones largoplacistas dirigidas a atender los 
+riesgos existenciales, promover la prosperidad y aliviar el sufrimiento a escala de largo plazo. Debería 
+evaluar estas opciones con un modelo detallado de sus consecuencias a largo plazo, 
+y posiblemente también considerando sus efectos en el futuro a corto y mediano plazo. 
+Debería considerar también una variedad de intervenciones de referencia dirigidas a abordar 
+desafíos de corto y mediano alcance, como la salud global y la pobreza. Estas intervenciones 
+deberían evaluarse con modelos detallados de sus consecuencias a corto y mediano plazo, 
+aunque no está claro si se ganaría mucho modelando el 
+impacto de las intervenciones de referencia más allá de una escala de varios cientos de años.   
+Segundo, supongamos que le dan quinientos dólares que puede donar a cualquier causa 
+que desee. Aquí creemos que debería, si es posible, ceder la decisión, entregando el control 
+de su decisión a una organización más grande con más recursos para decidir. 
+Si no es posible, debería tratar este caso como una versión apresurada del 
+primero. Debería reunir algo de evidencia para aliviar la desorientación, pero menos que en el 
+primer caso. Debería comparar un abanico de opciones que incluya algunas largoplacistas y 
+de referencia. Debería evaluar las intervenciones largoplacistas con base en 
+un modelo esquemático de sus posibles consecuencias a largo plazo, y evaluar las 
+intervenciones de referencia con base en un modelo esquemático de sus consecuencias a corto 
+y mediano plazo.  
+Por último, supongamos que debe decidir si levantarse de la cama por la mañana o 
+dormir hasta tarde. Aquí creemos que no debería reunir evidencia. Debería elegir 
+rápidamente, con base en un modelo esquemático de las consecuencias a corto plazo de su elección.   
+Supongamos que estos veredictos intuitivos son correctos. Aunque las intervenciones 
+largoplacistas de alto riesgo deberían evaluarse mediante un examen detallado de sus 
+efectos a largo plazo, a medida que las apuestas disminuyen y las opciones se dirigen 
+menos explícitamente a afectar el futuro a largo plazo, estos efectos se vuelven cada vez menos 
+importantes para la toma de decisiones racional. ¿Cómo se concilia esto con EAAL? Si la gran 
+mayoría del valor ex ante está determinada por los efectos a largo plazo de una opción, ¿cómo puede 
+17 
+ ser racional reducir o eliminar nuestra dependencia de las consideraciones a largo plazo en la 
+toma de decisiones? Abordamos esta pregunta en la siguiente sección.  
+ 
+6. De la racionalidad sustantiva a la procedimental  
+ 
+Las preguntas sobre la elección racional pueden plantearse en dos niveles (Simon 1976). En el nivel de 
+la racionalidad sustantiva, hacemos preguntas normativas sobre las opciones de primer orden que enfrenta 
+un agente, que en este caso son acciones básicas como dormir hasta tarde o donar dinero 
+a una organización benéfica específica. Las preguntas sobre la racionalidad sustantiva se refieren a qué hacer. En el 
+nivel de la racionalidad procedimental, planteamos preguntas normativas sobre el proceso de 
+toma de decisiones. Por ejemplo, preguntamos cómo deben los agentes decidirse 
+si levantarse de la cama o a qué organización benéfica donar. Las preguntas sobre 
+la racionalidad procedimental se refieren a cómo decidir qué hacer.  
+La racionalidad sustantiva y la procedimental se distinguen por los objetos que 
+consideran, a diferencia de las preguntas que se plantean sobre esos objetos. En cada nivel podemos 
+preguntar cuál sería la mejor opción o el mejor procedimiento de decisión, en sentido evaluativo. Podemos 
+preguntar cuál es la opción o el procedimiento que los agentes deben seguir, en sentido deóntico. Podemos 
+preguntar qué opciones o procedimientos de decisión pueden hacer que los agentes sean culpables de 
+adoptarlos, en sentido culpatorio. Y podemos preguntar qué opciones o procedimientos de decisión usaría 
+un agente virtuoso, en sentido aretaico.   
+Tomamos las secciones 3-4 para sugerir que las preguntas deónticas sobre la racionalidad 
+sustantiva a menudo son intratables en condiciones de desorientación. Pero las preguntas deónticas 
+sobre la racionalidad procedimental pueden prestarse más a estudio. La lección de 
+la sección 5 es que a menudo tenemos un control razonablemente bueno de los procedimientos que 
+los agentes racionales deberían usar para tomar decisiones del tipo que nos interesa. Además, 
+creemos que ambos problemas que nos motivan se entienden mejor, en última instancia, como planteados 
+en el nivel procedimental. La preocupación planteada por el Problema de la Exigencia de la Toma de 
+Decisiones es que los agentes aparentemente deben usar procedimientos de decisión 
+que son muy exigentes. La preocupación planteada por el Problema de la Parálisis de Decisión 
+18 
+ es que a menudo no hay procedimientos claros con los que los agentes deban tomar 
+una decisión.   
+Algunos lectores probablemente dudarán de que podamos avanzar pensando 
+en términos de racionalidad procedimental, en contraste con la racionalidad sustantiva. Negarán 
+que aquí haya realmente un tema de estudio separado. Puede parecer natural pensar, ya sea (i) 
+que un proceso de decisión (de token) es procedimentalmente racional si y solo si la 
+decisión (de token) que produce es sustantivamente racional, o bien (ii) que un proceso de decisión (de token) 
+es procedimentalmente racional si y solo si la decisión (de token) de deliberar mediante 
+la implementación de ese proceso de decisión (de token) sería sustantivamente racional. 
+Si (i) o (ii) es correcto y las condiciones de desorientación inducen ignorancia sobre el 
+criterio de racionalidad sustantiva, entonces claramente no puede avanzarse pensando 
+en criterios de racionalidad procedimental (compárese con Lenman 2001: 360-1).  
+Sin embargo, creemos que hay buenas razones para rechazar tanto (i) como (ii). En 
+general, creemos que las preguntas sobre la racionalidad procedimental no son simplemente preguntas 
+sobre la racionalidad sustantiva bajo cierto disfraz.   
+Contra (i), observamos que una decisión puede ser sustantivamente racional pero 
+procedimentalmente irracional. Por ejemplo, supongamos que Frank dispone de un abanico de 
+oportunidades de inversión. A la luz de sus pruebas, comprar acciones de Acme Corp 
+maximiza la utilidad esperada de Frank. Frank invierte en Acme Corp. Sin embargo, su 
+decisión no se toma sopesando cuidadosamente la evidencia de la que es consciente. En cambio, 
+se deja guiar por las misteriosas voces de su cabeza. Frank eligió la opción racional, pero 
+eligió de manera irracional. Su decisión es sustantivamente racional, pero 
+procedimentalmente irracional.  
+Contra (ii), observamos que hay casos posibles en los que sería racional 
+decidir recurrir a un proceso de decisión irracional. Parfit (1984: 12-13) describe un caso bien
+conocido de este tipo: la respuesta de Schelling al robo a mano armada. Imagine que un hombre irrumpe 
+en su casa y le ordena abrir la caja fuerte donde guarda su oro, amenazando 
+con matar a sus hijos de no hacerlo. Como señala Parfit, si estuviera a su alcance, sería racional 
+que usted se volviera incapaz de responder racionalmente 
+19 
+ a las amenazas del hombre y a todo lo demás que ocurre en esta 
+situación. En ese estado de locura, sería imposible que el hombre lo obligara 
+a abrir la caja fuerte. Además, él podría contar con que usted no anotaría el número 
+del coche en el que se va, y por tanto no tiene incentivo para matarle con el fin de cubrir 
+sus huellas.  
+Por lo tanto, tanto (i) como (ii) deben rechazarse. Conjeturamos que otros intentos 
+de ofrecer una explicación reductiva de la racionalidad procedimental en términos de 
+la racionalidad sustantiva también fracasan. A la inversa, ignorar el criterio de la racionalidad sustantiva 
+no implica necesariamente que ignoremos los requisitos de la racionalidad procedimental. 
+Aquí hay un territorio completamente nuevo, a la espera de ser explorado. Creemos que vale la pena 
+explorarlo.   
+ 
+7. Heurísticas para la toma de decisiones 
+ 
+Muchos de quienes estudian la racionalidad procedimental piensan que los agentes deberían decidir a menudo mediante 
+heurísticas (Gigerenzer et al. 1999, Gigerenzer y Gaissmaier 2011). Las heurísticas se 
+distinguen de los procedimientos de decisión bayesianos al menos en dos aspectos: procesan 
+solo un subconjunto de la información disponible y procesan esa información 
+según reglas de decisión simples. Por ejemplo, suponga que le piden predecir al 
+ganador de un partido de tenis. Un agente bayesiano incorpora todo su conocimiento pertinente 
+sobre cada jugador y las condiciones del partido para predecir al ganador. Pero suponga que 
+usted solo reconoce a uno de los jugadores. Entonces le irá bastante bien si aplica la 
+heurística del reconocimiento y predice que el jugador reconocido es el ganador (Serwe y 
+Frings 2006; Scheibehenne y Bröder 2007). La heurística del reconocimiento usa solo un 
+único dato, a saber, si se reconoce o no a un jugador, y procesa dicha 
+información según una regla de decisión simple.  
+Ambos rasgos distintivos de la toma de decisiones heurística se reflejan en los 
+ejemplos de la Sección 5. Quienes toman decisiones deberían a veces ignorar parcial o totalmente la 
+información relativa a los impactos a largo plazo de sus acciones. Y quienes deciden 
+20 
+ deberían considerar menos opciones, usando modelos más escasos de sus efectos relevantes a medida que 
+disminuyen los riesgos en juego. Esto sugiere que las justificaciones habituales de la toma de
+decisiones heurística arrojarán luz sobre la justificación de los procedimientos de decisión de los largoplacistas.  
+Hay tres justificaciones habituales de la toma de decisiones heurística. La primera 
+invoca las capacidades cognitivas: los agentes no siempre son capaces de usar métodos 
+bayesianos más complicados. En este artículo nos ocuparemos sobre todo de otros dos 
+argumentos. El segundo invoca las compensaciones entre precisión y esfuerzo: procesar una mayor cantidad de 
+información de forma más completa suele aumentar la calidad de la decisión a expensas del 
+esfuerzo cognitivo y físico (Johnson y Payne 1985). Las heurísticas suelen lograr el 
+mejor equilibrio entre la calidad de la decisión y sus costos. El tercer argumento invoca 
+los efectos de menos es más: a veces procesar más información con mayor profundidad disminuye 
+de manera predecible la calidad de la decisión (Gigerenzer y Brighton 2009, Wheeler, de próxima publicación).  
+Los efectos de menos es más pueden ser bastante sorprendentes. Casi parece una verdad de Perogrullo que más 
+información siempre es mejor. ¿Cómo puede incorporar más información hacer que nuestras 
+decisiones empeoren? En el resto de esta sección caracterizamos y explicamos las 
+condiciones en las que cabe esperar efectos de menos es más. Luego, en la Sección 8, 
+usamos los efectos de menos es más y las compensaciones entre precisión y esfuerzo para caracterizar siete factores 
+relativos a la toma de decisiones largoplacista racional y aplicamos esos factores para resolver los dos 
+problemas que nos motivan.   
+Suponga que intenta predecir la longevidad de los automóviles, medida en el número de 
+millas recorridas durante la vida útil del automóvil. Su objetivo es predecirla mediante regresión 
+lineal, es decir, construyendo el mejor modelo lineal que relacione la longevidad con las 
+características observables de un automóvil. Su modelo debería incluir características muy relevantes como la marca, 
+el modelo y las características de diseño. Pero ¿qué ocurriría si incluyera otras 
+variables solo tangencialmente relevantes, como el peso del conductor?  
+Podría parecer que su modelo se volvería más preciso. Más información 
+siempre es mejor, ¿verdad? Falso. El método de añadir datos de entrada tangencialmente relevantes para 
+mejorar el ajuste de la regresión suele parodiarse como regresión de fregadero de cocina. La regresión 
+21 
+ de fregadero de cocina no es una buena idea. Incorporar datos de entrada tangencialmente relevantes en 
+los modelos de regresión tiende a disminuir la precisión predictiva de dichos modelos.   
+¿Cómo puede ser esto? La cantidad de interés es el error predictivo esperado de un 
+modelo estadístico. Este mide la imprecisión esperada de las predicciones del modelo en 
+un dato nuevo extraído al azar de la población. En nuestro ejemplo, queremos 
+evaluar la imprecisión esperada de las predicciones del modelo sobre la vida útil de un nuevo 
+automóvil. El hecho estadístico pertinente queda ilustrado por la descomposición sesgo-varianza del 
+error predictivo esperado:   
+ 
+Error predictivo esperado = error irreducible + sesgo2 + varianza.   
+ 
+Aquí vemos que el error predictivo esperado depende de tres factores. El error 
+irreducible es función del ruido presente en los datos y no puede controlarse. El sesgo de un modelo 
+mide la tendencia del modelo a devolver sistemáticamente respuestas que son demasiado 
+altas o demasiado bajas. La varianza del modelo mide la tendencia del modelo a 
+devolver predicciones diferentes cuando se vuelve a ajustar a un conjunto de datos nuevo.   
+La descomposición sesgo-varianza da lugar a un dilema sesgo-varianza (Geman et 
+al 1992). Aumentar la complejidad de un modelo tiende a aumentar su varianza y a 
+disminuir su sesgo. Los modelos más complejos tienen menos sesgo porque son más capaces 
+de captar las regularidades estadísticas relevantes. Pero los modelos más complejos tienden a tener 
+mayor varianza porque están en mejor posición de sobreajustarse a regularidades 
+estadísticas espurias de los datos observados.   
+Podemos aumentar la complejidad de un modelo cambiando la forma funcional del 
+modelo, como al pasar de un modelo lineal a uno polinómico. Pero también podemos aumentar la 
+complejidad del modelo permitiendo que use todas las variables de entrada disponibles, y no solo algunas de 
+ellas. Este era el problema de la regresión de fregadero de cocina. Al añadir 
+variables adicionales como el peso del conductor aumenta la varianza del modelo, y este aumento 
+no se compensa lo suficiente con la reducción del sesgo. Esto se debe a que la información sobre el 
+peso del conductor no es suficientemente informativa, dada la otra información disponible, para 
+22 
+ reducir de manera significativa el sesgo del modelo. Por consiguiente, la regresión de fregadero de cocina tiende a 
+aumentar el error predictivo esperado de un modelo al aumentar su varianza.  
+De manera más general, el dilema sesgo-varianza explica los efectos de menos es más. En 
+algunos entornos, reglas simples como la heurística del reconocimiento superan de forma fiable 
+a modelos más complicados como la regresión lineal, y en ocasiones 
+incluso superan a los métodos bayesianos (Gigerenzer y Brighton 2009). Esto no es 
+porque las reglas simples exijan menos esfuerzo, sino porque controlan eficazmente 
+la varianza del modelo sin sesgarlo indebidamente. La tesis no es que las reglas simples 
+sean siempre mejores que las complejas, ni que una regla simple en particular funcione bien 
+en todos los entornos. El proyecto consiste más bien en estudiar los entornos de problemas y 
+las reglas estadísticas de predicción y de decisión para entender cuándo y por qué 
+una regla determinada es apropiada (Gigerenzer y Todd 2012). En muchos casos, como 
+la toma de decisiones basada en el reconocimiento, podemos dar caracterizaciones matemáticas detalladas (Davis-Stober 
+et al 2010, Hogarth y Karelaia 2005, Katsikopoulos 2010) y empíricas (Goldstein 
+y Gigerenzer 2002, Pachur et al 2011) de tales condiciones.   
+En resumen, quienes toman decisiones pueden a veces hacer mejores predicciones y 
+tomar mejores decisiones empleando reglas de decisión simples debido al dilema sesgo-varianza. 
+Las reglas más simples evitan el sobreajuste al mantener la varianza manejable y así reducen 
+el error predictivo. En la siguiente sección, combinamos esta idea con la compensación entre precisión y
+esfuerzo para arrojar luz sobre la toma de decisiones largoplacista procedimentalmente racional
+y resolver nuestros problemas motivadores.  
+ 
+8. Aplicación a la toma de decisiones largoplacista  
+ 
+En la Sección 4 dimos tres ejemplos de procedimientos racionales para la toma de decisiones largoplacista.
+En cada ejemplo, afirmamos, resulta relativamente claro qué procedimientos 
+deberían usar quienes toman decisiones largoplacistas. Pero ¿por qué deberían los largoplacistas usar estos 
+procedimientos? De manera más general, ¿qué factores inciden en la racionalidad procedimental de 
+la toma de decisiones largoplacista?  
+23 
+ Ya estamos en condiciones de ver que dos tipos de factores inciden en la racionalidad procedimental 
+de la toma de decisiones largoplacista. El primer conjunto de factores se relaciona principalmente con 
+las compensaciones entre precisión y esfuerzo. A menudo podemos mejorar la calidad de nuestras decisiones si tomamos 
+plenamente en cuenta sus efectos a largo plazo, pero pasado cierto punto el aumento en la calidad de la decisión 
+es superado por los costos de decidir. Estos factores incluyen los costos de decisión de emplear un 
+procedimiento de decisión particular, medidos en costos físicos como el dinero y la energía, 
+así como en costos de oportunidad por el tiempo perdido. También incluyen la previsibilidad de los efectos a largo
+plazo. A menudo no podemos hacer predicciones o decisiones sustancialmente mejores  
+porque no estamos en buena posición de predecir los efectos a largo plazo de, por ejemplo, 
+levantarse temprano de la cama. También son relevantes lo que está en juego en la toma de decisiones: ¿cuán 
+importante es tomar una decisión de alta calidad? Si bien es bastante importante aprovechar 
+al máximo una dotación benéfica de mil millones de dólares, es menos importante 
+asegurarse de que quinientos dólares se usen lo mejor posible. En conjunto, estos factores 
+favorecen procesos que restan énfasis a los efectos a largo plazo con el fin de reducir los costos de 
+la toma de decisiones.  
+Otro conjunto de factores se relaciona principalmente con el dilema sesgo-varianza. Se trata de 
+razones, independientes de los costos de decisión, para restar énfasis a los efectos a largo plazo en la toma de
+decisiones. Estos factores incluyen el número de variables de un modelo predictivo. Para 
+predecir con precisión el futuro a largo plazo, quienes toman decisiones deben recurrir a un conjunto de información mucho mayor 
+que al predecir el futuro a corto y mediano plazo. La complejidad del 
+modelo aumenta a medida que se incorporan nuevas variables de entrada. Otro factor es el 
+número de supuestos auxiliares que deben adoptarse. Por ejemplo, podríamos restringir la 
+forma funcional del modelo adoptando supuestos empíricos sustantivos sobre los 
+efectos a largo plazo de parámetros físicos. Quizá estimemos el valor de los riesgos de extinción 
+estimando el tamaño de la población futura, y esas estimaciones podrían incorporar una 
+relación funcional específica entre la velocidad de los viajes espaciales futuros, la densidad 
+de planetas cercanos y la población humana futura. Estos supuestos auxiliares 
+introducen grados de libertad adicionales en el modelo en la medida en que no se adoptan sobre 
+24 
+ la base de datos sustanciales y no están plenamente restringidos por los argumentos disponibles 
+incluso para quienes toman decisiones con el mayor cuidado.  
+Otro factor que plantea este ejemplo es el sesgo de estimación. A menudo los insumos de nuestro 
+modelo, como la velocidad de los futuros vuelos espaciales, no se observan sino que se estiman, y 
+estas estimaciones son una fuente de sesgo sustancial. Por último, debemos preocuparnos 
+por la verificabilidad del modelo. El sesgo y la varianza pueden medirse y controlarse con herramientas estándar 
+como la validación cruzada (Arlot y Celisse 2010). Pero estas herramientas requieren observaciones reales 
+de las cantidades que se quiere predecir. Nunca hemos observado los efectos a largo plazo 
+de levantarse temprano, ni hemos observado nada similar que pudiera usarse para 
+poner a prueba nuestros modelos. Problemas similares afectan a los supuestos auxiliares y al sesgo de estimación al 
+estimar los parámetros del modelo. En conjunto, estos factores sugieren que, aun si los efectos a largo
+plazo de las opciones suelen dominar sus valores ex ante, quienes toman decisiones largoplacistas
+quizá no siempre mejoren sustancialmente la calidad de sus decisiones al tomar en consideración 
+los efectos a largo plazo.  
+Los ejemplos de la sección 5 sugieren que estos dos conjuntos de factores se combinan para 
+determinar la racionalidad procedimental de la toma de decisiones largoplacista. No somos tan 
+pesimistas como para suponer que menos siempre es más. Pensamos que quienes toman decisiones largoplacistas
+y disponen de recursos sustanciales probablemente pueden hacerlo mejor 
+construyendo modelos detallados de los efectos a largo plazo de las intervenciones largoplacistas. 
+Sin embargo, pensamos que, a medida que disminuye lo que está en juego en la toma de decisiones, las compensaciones entre precisión 
+y esfuerzo se vuelven más apremiantes. Aun si los mejores modelos de largo plazo superan de manera confiable 
+a los modelos más simples de corto y mediano plazo, quienes toman decisiones racionales 
+a menudo deberían usar modelos más simples, y no hay razón para sospechar que estos modelos 
+mejorarán si se toman atajos rápidos y descuidados para tener en cuenta los efectos a largo plazo. 
+También sospechamos que, incluso en contextos de alto riesgo, puede ser inapropiado modelar 
+las consecuencias a largo plazo de intervenciones de referencia cuyos efectos a largo plazo 
+pueden ser menos predecibles y menos intensos.   
+Estas observaciones nos colocan en buena posición para abordar nuestros problemas motivadores. 
+No existe un Problema procedimental de la Exigencia en la Toma de Decisiones. Los costos de decisión 
+25 
+ son directamente relevantes para los procedimientos que quienes toman decisiones racionales deben 
+usar. Si a veces se exige a quienes toman decisiones racionales que utilicen reglas de 
+decisión exigentes, es porque en ocasiones tomamos decisiones importantes en las que unos costos de 
+decisión elevados se ven compensados por una mayor calidad de la decisión.   
+También hemos avanzado de manera sustancial en el Problema procedimental de la 
+Parálisis de Decisión. Como ilustra el análisis de la sección 4, a menudo está bastante claro qué 
+procedimientos deberían usar quienes toman decisiones largoplacistas racionales. En las secciones 5 a 7, 
+logramos un avance analítico en el problema de la Parálisis de Decisión al enumerar dos tipos de 
+factores que inciden en la racionalidad procedimental de los largoplacistas. Si bien hace falta más trabajo 
+para aclarar las exigencias precisas que pesan sobre la toma de decisiones largoplacista procedimentalmente racional, 
+esperamos haber fundamentado nuestra tesis de que está mucho más claro cómo deben decidirse quienes toman decisiones largoplacistas
+responsables de tomar decisiones deberían formarse una opinión que sobre cómo deberían actuar.    
+Las soluciones procedimentales a nuestros problemas motivadores transmiten un par de 
+lecciones normativas. Primero, la exigencia y la parálisis no son objeciones decisivas contra 
+EAAL. La fuerza de estas objeciones es sobre todo procedimental, pero en el plano procedimental 
+ambas objeciones pueden responderse. Segundo, el giro de la racionalidad sustantiva a la procedimental 
+es una maniobra normativa descuidada y generalizable. Los teóricos normativos 
+han comenzado a volver su atención de la racionalidad sustantiva a la procedimental 
+(Friedman, de próxima publicación). Pensamos que una distinción cuidadosa entre cuestiones procedimentales y 
+sustantivas es un recurso útil para resolver problemas normativos difíciles.  
+ 
+Referencias  
+Adams, Fred C., ``Long-term astrophysical processes,'' en Bostrom y Cirkovic (eds.), 
+Global catastrophic risks (Oxford: Oxford, 2008)  
+ 
+Arlot, Sylvain y Alain Celisse, ``A survey of cross-validation procedures for model 
+selection,'' Statistics Surveys 4.1 (2010): 40-79. 
+ 
+26 
+ Beckstead, Nick, On the overwhelming importance of shaping the far future (2013), tesis doctoral, 
+Departamento de Filosofía, Universidad Rutgers.  
+ 
+Bernoulli, Daniel, ``Specimen theoriae novae de mensura sortis,’’ Comentarii Academiae 
+Scientarum Imperialis Petropolitanae 5 (1738): 175-92. 
+ 
+Bostrom, Nick, ``Astronomical waste: the opportunity cost of delayed technological 
+development,'' Utilitas 15 (2003): 308-14. 
+ 
+Bostrom, Nick, ``Existential risk prevention as a global priority,'' Global Policy 4 (2013): 
+15-31. 
+ 
+Broome, John, Climate matters: ethics in a warming world (Nueva York: Norton, 2012).  
+ 
+Buchak, Lara, Risk and rationality (Oxford: Oxford, 2013).  
+ 
+Buffon, Georges-Louis, ``Essai d’Arithmétique morale,’’ Supplement a l’Histoire Naturelle 
+4 (1777): 46-123. 
+ 
+Davis-Stober, Clintin, Jason Dana y David Budescu, ``Why recognition is rational: 
+optimality results on single-variable decision rules,’’ Judgment and Decision Making 5.4 
+(2010): 216-29. 
+ 
+Elga, Adam, ``Subjective probabilities should be sharp,’’ Philosophers’ Imprint 10.5 
+(2010): 1-11. 
+ 
+Friedman, Jane, ``Teleological epistemology,'' de próxima publicación en Philosophical Studies. 
+27 
+  
+Geman, Stuart, Ellie Bienenstock y René Doursat, ``Neural networks and the 
+bias/variance dilemma,’’ Neural Computation 4.1 (1992): 1-58. 
+ 
+Gigerenzer, Gerd y Henry Brighton, “Homo heuristicus: why biased minds make better inferences,” Topics in ciencia cognitiva 1.1 (2009): 107-43. 
+ 
+Gigerenzer, Gerd y Wolfgang Gaissmaier, “Heuristic decision making,” Annual Review of Psychology 62.1 (2011): 451-82. 
+ 
+Gigerenzer, Gerd, Peter Todd y el ABC Research Group, Simple heuristics that make us smart (Oxford: Oxford, 1999).  
+ 
+Goldstein, Daniel y Gerd Gigerenzer, “Models of ecological rationality: the recognition heuristic,” Psychological Review 109.1 (2002): 75-90. 
+ 
+Greaves, Hilary, “Cluelessness,” Proceedings of the Aristotelian Society 116.3 (2016): 311-39. 
+ 
+Greaves, Hilary y William Macaskill, “The case for long-termism,” manuscrito.  
+ 
+Hájek, Alan, “Unexpected expectations,” Mind 123.490 (2014): 533-67. 
+ 
+Hogarth, Robin y Natalia Karelaia, “Ignoring information in binary choice with continuous variables: when is less ‘more’?,” Journal of Mathematical Psychology 49.2 (2005): 115-24.
+28 
+ 
+Hublin, Jean-Jacques et al., “New fossils from the Jebel Irhoud, Morocco and the pan-African origin of Homo sapiens,” Nature 546.7657 (2017): 289-92. 
+ 
+Isaacs, Yoaav, “Probabilities cannot be rationally neglected,” Mind 125.499 (2016): 759-62. 
+ 
+Johnson, Eric y John Payne, “Effort and accuracy in choice,” Management Science 31.4 (1985): 395-414. 
+ 
+Joyce, James, “A defense of imprecise credences in inference and decision making,” Philosophical Perspectives 24.1 (2010): 281-323. 
+ 
+Joyce, James, “How probabilities reflect evidence,” Philosophical Perspectives 19.1 (2005): 153-78. 
+ 
+Katsikopoulos, Konstantinos, “The less-is-more effect: predictions and tests,” Judgment and Decision Making 5.4 (2010): 244-57. 
+ 
+Knight, Frank, Risk, uncertainty, and profit (Boston: Houghton-Mifflin, 1921).  
+ 
+Lenman, James, “Consecuencialismo y cluelessness,” Philosophy and Public Affairs 29.4 (2000): 342-70. 
+ 
+Mogensen, Andreas, “Maximal cluelessness,” manuscrito.  
+ 
+Monton, Bradley, “How to avoid maximizing expected utility,” Philosophers’ Imprint 19.18 (2019): 1-25.
+29 
+  
+Pachur, Thorsten, Peter Todd, Gerd Gigerenzer, Lael Schooler y Daniel Goldstein, “The recognition heuristic: a review of theory and tests,” Frontiers in Psychology 2.1 (2011): 1-14. 
+ 
+Parfit, Derek, Reasons and persons (Oxford: Oxford, 1984).  
+ 
+Rawls, John, A theory of justice (Cambridge: Harvard, 1999).  
+ 
+Rinard, Susanna, “A decision theory for imprecise probabilities,” Philosophers’ Imprint 15.7 (2015): 1-16. 
+ 
+Scheibehenne, Benjamin y Arndt Bröder, “Predicting Wimbledon 2005 tennis results by mere player name recognition,” International Journal of Forecasting 23.3 (2007): 415-26. 
+ 
+Schoenfield, Miriam, “Relajarse con la racionalidad epistémica: una defensa of imprecise credences (and other imprecise doxastic attitudes),” Philosophical Studies 158.2 (2012): 197-219. 
+ 
+Serwe, Sascha y Christian Frings, “Who will win Wimbledon? The recognition heuristic in predicting sports events,” Behavioral Decision Making 19.4 (2006): 321-32. 
+ 
+Smith, Nicholas, “Is evaluative compositionality a requirement of rationality?,” Mind 123.490 (2014): 457-502. 
+ 
+Wheeler, Gregory, “Less is more para bayesianos, también,” de próxima aparición en Viale (ed.), Routledge Handbook of Bounded Rationality.
+30 
+  
+White, Roger, “Evidential symmetry and mushy credence,” en Szabo Gendler y Hawthorne (eds.), Oxford Studies in Epistemology, vol. 3 (Oxford: Oxford, 2010).  
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 

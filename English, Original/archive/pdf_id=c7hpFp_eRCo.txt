@@ -1,0 +1,893 @@
+Tuning the Hyperparameters of Anytime Planning:
+A Deep Reinforcement Learning Approach
+Abhinav Bhatia, Justin Svegliato, Shlomo Zilberstein
+College of Information and Computer Sciences
+University of Massachusetts Amherst
+fabhinavbhati, jsvegliato, shlomo g@cs.umass.edu
+Abstract
+Many anytime algorithms have adjustable hyperparameters
+that affect their speed and accuracy. However, while existing
+work on metareasoning has focused on deciding when to in-
+terrupt an anytime algorithm and act on the current solution,
+there has not been much work on tuning the hyperparameters
+of an anytime algorithm at runtime. This paper introduces a
+decision-theoretic metareasoning approach that can optimize
+both the hyperparameters and the stopping point of adjustable
+algorithms with deep reinforcement learning. First, we pro-
+pose a generalization of an anytime algorithm called an ad-
+justable algorithm that has hyperparameters that can be tuned
+at runtime. Next, we offer a meta-level control technique that
+monitors and controls an adjustable algorithm by using deep
+reinforcement learning. Finally, we demonstrate that an ap-
+plication of our approach to anytime weighted A* is effective
+on a range of common benchmark problems.
+Introduction
+Anytime algorithms often have hyperparameters that can be
+tuned to optimize their performance in a speciﬁc scenario—
+given a certain problem instance and time constraint. Simply
+put, an anytime algorithm is an algorithm that gradually im-
+proves its solution at runtime and can be interrupted for its
+solution at any time (Zilberstein 1996). This offers a trade-
+off between the quality and computation time of a solution
+that has proven to be useful in many real-time decision-
+making problems, such as motion planning (Karaman et al.
+2011), heuristic search (Burns, Ruml, and Do 2013; Cserna,
+Ruml, and Frank 2017), object detection (Karayev, Fritz,
+and Darrell 2014), belief space planning (Pineau, Gordon,
+and Thrun 2003; Spaan and Vlassis 2005), and probabilis-
+tic inference (Ramos and Cozman 2005). Existing work on
+metareasoning that manages this trade-off focuses on decid-
+ing when to interrupt an anytime algorithm and act on the
+current solution. However, the scope of metareasoning can
+be extended to tune the hyperparameters of an anytime algo-
+rithm at runtime in order to optimize its performance.
+There has been substantial work on developing metar-
+easoning techniques for determining when to interrupt an
+anytime algorithm and act on the current solution. Gener-
+ally, these techniques monitor and control an anytime al-
+gorithm in order to track its performance and calculate its
+stopping point at runtime. For example, an early techniquemodels optimal stopping as a sequential decision problem
+and derives a meta-level control policy using dynamic pro-
+gramming (Hansen and Zilberstein 2001) while a more re-
+cent technique estimates the optimal stopping point using
+online performance prediction (Svegliato, Wray, and Zilber-
+stein 2018). These techniques, however, cannot tune the hy-
+perparameters of the anytime algorithm at runtime.
+Metareasoning techniques for tuning the hyperparameters
+of an anytime algorithm at runtime have typically been de-
+signed for speciﬁc anytime algorithms. For instance, there
+has been work on tuning the weight of an anytime heuris-
+tic search algorithm called anytime weighted A* by select-
+ing the best weight for a problem (Hansen and Zhou 2007),
+choosing the best weight for an instance of a problem (Sun,
+Druzdzel, and Yuan 2007), and modifying the weight heuris-
+tically (Thayer and Ruml 2009). There has also been work
+on tuning the growth factor of an anytime motion planning
+algorithm called RRT* (Urmson and Simmons 2003). Nev-
+ertheless, these techniques often have several drawbacks be-
+cause they cannot determine the optimal stopping point, re-
+quire expertise in the implementation of the anytime algo-
+rithm, and lack generality or formal analysis.
+We therefore propose a decision-theoretic metareasoning
+approach for optimal stopping and hyperparameter tuning
+ofadjustable algorithms . This approach models monitor-
+ing and controlling adjustable algorithms as a Markov de-
+cision process with four main attributes. The states reﬂect
+the quality and computation time of the current solution and
+any other features needed to summarize the internal state
+of the adjustable algorithm, the instance of the problem,
+and the performance of the system. The actions reﬂect ei-
+ther interrupting or executing the adjustable algorithm for
+another time step while tuning its internal hyperparameters.
+However, while the reward function can be determined eas-
+ily, the transition function is unknown given the consider-
+able complexity and uncertainty over the states and actions.
+In response, we use deep reinforcement learning, which is
+a model-free approach, to learn when to stop and how to
+tune the hyperparameters of the anytime algorithm online
+by learning through a series of episodes that each use the
+adjustable algorithm to solve an instance of a problem on
+the system. Generally, reinforcement learning is a robust ap-
+proach to metareasoning for adjustable algorithms given the
+abundance of data that can be generated through simulation.
+Our primary contributions in this paper are: (1) a gener-
+alization of an anytime algorithm called an adjustable algo-
+rithm, (2) a meta-level control technique that monitors and
+controls an adjustable algorithm based on deep reinforce-
+ment learning, (3) an application of our approach to anytime
+weighted A*, and (4) a demonstration that the application of
+our approach to anytime weighted A* is effective on a range
+of common benchmark problems.
+Related Work
+Approaches to automatic hyperparameter tuning for general
+algorithms fall into two main categories. On the one hand,
+model-based approaches typically interleave ﬁtting a model
+with selecting hyperparameters based on that model. No-
+tably, building on earlier work in sequential model-based
+optimization (Bartz-Beielstein, Lasarczyk, and Preuss 2005;
+Hutter et al. 2009a, 2010), SMAC selects the hyperparam-
+eters of an algorithm using a model represented as a ran-
+dom forest (Hutter, Hoos, and Leyton-Brown 2011). On the
+other hand, while model-free approaches do not ﬁt any kind
+of model, they have still been shown to be effective across
+a range of domains. Limited to numerical hyperparameters,
+CALIBRA uses experimental designs to ﬁnd initial hyperpa-
+rameters followed by local search to improve those hyper-
+parameters (Adenso-Diaz and Laguna 2006) while F-Race
+leverages racing algorithms from machine learning (Birat-
+tari et al. 2002, 2010) to select the hyperparameters of
+an algorithm. Extending this work to categorical hyperpa-
+rameters, GGA employs parallel gender-based genetic al-
+gorithms (Ans ´otegui, Sellmann, and Tierney 2009) while
+ParamILS performs iterated local search (Hutter, Hoos, and
+St¨utzle 2007; Hutter et al. 2009b) to select the hyperparam-
+eters of an algorithm.
+However, while all of these methods have mostly been de-
+signed for general algorithms, they often do not take advan-
+tage of the beneﬁts of anytime algorithms. By using deep
+reinforcement learning to monitor and control anytime al-
+gorithms in particular, our metareasoning approach avoids
+many drawbacks of earlier work. First, while some existing
+methods are limited to numerical hyperparameters and de-
+terministic algorithms, our approach can support both cate-
+gorical hyperparameters and stochastic algorithms as well.
+Next, unlike existing methods that only optimize the hy-
+perparameters for a single problem instance, our approach
+can optimize the hyperparameters for multiple problem in-
+stances. In fact, our approach can not only select the hyper-
+parameters of an anytime algorithm for a speciﬁc problem
+instance but also adjusts the hyperparameters of an anytime
+algorithm as it runs. Finally, though some existing methods
+cannot terminate a trial early, our approach can naturally ter-
+minate trials early by using deep reinforcement learning.
+There has also been an orthogonal line of research on us-
+ing a portfolio of algorithms to solve different instances of
+hard computational problems. In fact, it has been recognized
+that different algorithms tend to dominate each other on dif-
+ferent instances of a problem because there is often no sin-
+gle best algorithm (Leyton-Brown et al. 2003). This has re-
+sulted in methods that can use portfolios of algorithms forsatisﬁability (Gomes and Selman 2001; Xu et al. 2008), en-
+semble methods in machine learning (Dietterich 2000; Fern
+and Givan 2003), and multiple methods in real-time problem
+solving (Wagner, Garvey, and Lesser 1998; Zilberstein and
+Mouaddib 2000). More recently, SATzilla (Xu et al. 2008),
+an efﬁcient solver that uses a portfolio of algorithms to solve
+difﬁcult satisfaction problems, has won multiple competi-
+tions and continues to dominate the ﬁeld.
+Optimal stopping for anytime algorithms but not hyper-
+parameter tuning has been well-studied as well. The earliest
+approach, ﬁxed allocation , executes the anytime algorithm
+until a stopping point determined prior to runtime (Horvitz
+1987; Boddy and Dean 1994). While ﬁxed allocation is ef-
+fective given negligible uncertainty in the performance of
+the anytime algorithm, there is often considerable uncer-
+tainty in real-time planning problems (Paul et al. 1991). In
+response, a more sophisticated approach, monitoring and
+control , tracks the performance of the anytime algorithm and
+estimates a stopping point at runtime periodically (Horvitz
+1990; Zilberstein and Russell 1995; Hansen and Zilberstein
+2001; Lin et al. 2015; Svegliato, Wray, and Zilberstein 2018;
+Svegliato, Sharma, and Zilberstein 2020). We note that our
+approach not only determines the stopping point of an any-
+time algorithm but also tunes its hyperparameters.
+With respect to heuristic search, there is some recent work
+on dynamically selecting the heuristic function using deep
+reinforcement learning (Speck et al. 2021) and dynamically
+adjusting the broader search strategy in classical planning
+using evolutionary strategies (Gomoluch et al. 2020). How-
+ever, our work is not speciﬁc to heuristic search and focuses
+on anytime algorithms.
+Meta-Level Control Problem
+We begin by reviewing the standard meta-level control prob-
+lem for anytime algorithms. This requires a function that de-
+scribes the utility of a solution computed by an anytime algo-
+rithm in terms of its quality and computation time (Horvitz
+and Rutledge 1991). We deﬁne this function below.
+Deﬁnition 1. Atime-dependent utility function U: 
+	!Rrepresents the utility U(q;t)of a solution of quality
+q2at time stept2	.
+A time-dependent utility function can often be expressed
+as the difference between an intrinsic value function and a
+cost of time (Horvitz 1988; Hansen and Zilberstein 2001).
+An intrinsic value function represents the utility of a solution
+given its quality but not its computation time while a cost of
+time represents the utility of a solution given its computation
+time but not its quality. We deﬁne this property below.
+Deﬁnition 2. A time-dependent utility function U: 
+	!Ristime-separable if the utility U(q;t)of a solution
+of qualityq2at time step t2	can be expressed as the
+difference between two functions U(q;t) =UI(q) UC(t)
+whereUI: !R+is the intrinsic value function and
+UC: 	!R+is the cost of time .
+The standard meta-level control problem for anytime al-
+gorithms is the problem in which an intelligent system must
+determine the point at which to interrupt an anytime algo-
+rithm and act on the current solution (Horvitz 1990; Zilber-
+stein 1996). The anytime algorithm should ideally be inter-
+rupted at the optimal stopping point since it is the optimum
+of the time-dependent utility function. However, the opti-
+mal stopping point is often challenging to determine due to
+substantial uncertainty over the performance of the anytime
+algorithm and urgency for the solution.
+Adjustable Algorithms
+We propose an adjustable algorithm , a generalization of an
+anytime algorithm, with internal state that can be monitored
+andinternal hyperparameters that can be controlled to either
+interrupt or execute the algorithm for another time step and
+adjust the internal operation of the algorithm. This results in
+a new meta-level control problem that involves optimal stop-
+ping and optimal hyperparameter tuning of the adjustable
+algorithm. Generally, our approach monitors and controls
+an adjustable algorithm by expressing this novel meta-level
+control problem as a deep reinforcement learning problem.
+Hence, an adjustable algorithm is deﬁned as follows.
+Deﬁnition 3. Anadjustable algorithm ,, has internal
+state that can be monitored and internal hyperparameters
+f0;1;:::; Ngthat can be controlled such that the in-
+ternal hyperparameter 0=fSTOP;CONTINUEgeither in-
+terrupts or executes the algorithm for another time step and
+the internal hyperparameters f1;:::; Ngadjust the in-
+ternal operation of the algorithm.
+Anytime weighted A* , a popular anytime algorithm
+that extends the well-known A* heuristic search al-
+gorithm (Hansen, Zilberstein, and Danilchenko 1997;
+Likhachev, Gordon, and Thrun 2004; Aine, Chakrabarti, and
+Kumar 2007; Hansen and Zhou 2007; Thayer and Ruml
+2010), is an example of an adjustable algorithm. We describe
+anytime weighted A* in detail to illustrate our approach.
+Anytime weighted A* (1) uses an inadmissible heuristic to
+quickly ﬁnd suboptimal solutions, (2) continues the search
+after each solution is found, (3) provides an error bound
+on each suboptimal solution, and (4) guarantees an optimal
+solution once terminated. Notably, the standard evaluation
+functionf(n) =g(n) +h(n)used to select the next node
+for expansion from the open list is replaced with a weighted
+evaluation function fw(n) =g(n) +wh(n), where the
+path costg(n)is the cost of the path from the start node
+to a nodenand the heuristic h(n)is the estimated cost
+from a node nto the goal node. Given a weight w>1, the
+weighted heuristic becomes potentially inadmissible and the
+algorithm prioritizes expanding a node that appears closer to
+a goal node by weighting the heuristic component h(n)more
+heavily than the path cost component g(n). This causes the
+algorithm to speed up computation time at the expense of
+solution quality, which is inversely proportional to cost.
+Figure 1 shows typical performance curves for two exe-
+cutions of anytime weighted A* that solve an instance of a
+problem with different weights. This ﬁgure illustrates two
+cases. With deadlines , a weight of 2:0leads to better quality
+atContract 1 while a weight of 1:5results in better qual-
+ity at Contract 2 . Without deadlines , a weight of 2:0leads
+Figure 1: An example of two executions of anytime A*.
+to better quality in the short term but worse quality in the
+long term while a weight of 1:5results in worse quality in
+the short term but better quality in the long term. This raises
+two important question: (1) How can metareasoning dynam-
+ically tune the hyperparameters of an adjustable algorithm
+at runtime in order to optimize the trade-off between solu-
+tion quality and computation time with orwithout deadlines?
+(2) Can a general approach be developed to learn to perform
+this optimization automatically? We answer these questions
+by offering a disciplined general-purpose metareasoning ap-
+proach to optimal stopping and optimal hyperparameter tun-
+ing of adjustable algorithms in this paper.
+Our approach to monitoring and controlling adjustable al-
+gorithms uses deep reinforcement learning to express the
+meta-level control problem as a Markov decision process
+(MDP) (Bellman 1966). An MDP is a formal decision-
+making model for reasoning in fully observable, stochastic
+environments that can be deﬁned by a tuple hS;A;T;R;s 0i,
+whereSis a ﬁnite set of states, Ais a ﬁnite set of ac-
+tions,T:SAS![0;1]represents the probabil-
+ity of reaching a state s02Safter performing an action
+a2Ain a states2S,R:SAS!Rrepresents
+the expected immediate reward of reaching a state s02S
+after performing an action a2Ain a states2S, and
+s02Sis a start state. A solution to an MDP is a policy
+:S!Aindicating that an action (s)2Ashould be
+performed in a state s2S. A policyinduces a value func-
+tionV:S!Rrepresenting the expected discounted cu-
+mulative reward V(s)2Rfor each state s2Sgiven a
+discount factor 0 < 1. An optimal policy maxi-
+mizes the expected discounted cumulative reward for every
+states2Sby satisfying the Bellman optimality equation
+V(s) = maxa2AP
+s02ST(s;a;s0)[R(s;a;s0)+V(s0)].
+We express the meta-level control problem for monitoring
+and controlling adjustable algorithms as an MDP with two
+primary attributes. First, the set of states hasstate factors
+that reﬂect the quality and computation time of the current
+solution but can also have state factors that represent the
+internal state of the algorithm, the instance of the problem,
+or the performance of the system. Second, the set of actions
+has an action factor that reﬂects the internal hyperparameter
+that either interrupts or executes the algorithm for another
+time step but can also have action factors that represent the
+internal hyperparameters that adjust the internal operation of
+the algorithm. We present a description of this MDP below.
+Deﬁnition 4. Themeta-level control problem for monitor-
+ing and controlling an adjustable algorithm, , is repre-
+sented by an MDP h;	;F;S;A;T;R;s 0igiven a time-
+dependent utility function U: 	!R:
+• =fq0;q1;:::;qNgis a set of qualities.
+•	 =ft0;t1;:::;tN	gis a set of time steps.
+•F=F0F1FNFis a set of features that sum-
+marize the internal state of the algorithm, the instance of
+the problem, or the performance of the system.
+•S= 	Fis a set of states of computation: each
+states2Sindicates that the algorithm has a solution of
+qualityq2at time stept2	with a feature f2F.
+•A=  01 Nis a set of actions
+of computation: the internal hyperparameter 0=
+fSTOP;CONTINUEgeither interrupts or executes the al-
+gorithm for another time step while the internal hyper-
+parameters 1;:::; Nadjust the internal operation of
+the algorithm.
+•T:SAS![0;1]is an unknown (possibly nonsta-
+tionary) transition function that represents the probability
+of reaching a state s0= (q0;t0;f0)2Safter performing
+an actiona2Ain a states= (q;t;f )2S.
+•R:SAS!Ris a reward function that represents
+the expected immediate reward, R(s;a;s0) =U(q0;t0) 
+U(q;t), of reaching a state s0= (q0;t0;f0)2Safter
+performing an action a2Ain a states= (q;t;f )2S.
+•s02Sis a start state s0= (q0;t0;f0)2Sthat indicates
+that the algorithm has a solution of quality q02at time
+stept02	with a feature f02F.
+Note that the reward function is consistent with the objective
+of optimizing the time-dependent utility function: executing
+the adjustable algorithm until a solution of quality q2at
+time stept2	with a feature f2Fgives a cumulative
+reward that is equal to the time-dependent utility U(q;t).
+Many approaches to meta-level control of anytime algo-
+rithms use solution quality and computation time for the
+state of computation (Zilberstein and Russell 1995). Such
+a state of computation, however, may not satisfy the Markov
+property. It could therefore beneﬁt from features that sum-
+marize the internal state of algorithm, the instance of the
+problem, or the performance of the system. For example, in
+a domain where anytime weighted A* solves an instance of
+a TSP, there could be features for the mean and standard de-
+viation of the g- andh-values across the nodes on the open
+list of anytime weighted A*, the number of cities in the in-
+stance of the TSP (Hutter et al. 2014), or the processor usage
+or memory pressure of the system. Our metareasoning ap-
+proach for adjustable algorithms can employ a more sophis-
+ticated and rich representation for the state of computation
+thanks to deep reinforcement learning.
+We show that an optimal policy of the meta-level con-
+trol problem produces optimal meta-level control of an ad-
+justable algorithm under certain conditions below.
+Remark 1. If the change in the current solution of the ad-
+justable algorithm given a state of computation s2SandAlgorithm 1 Our technique that uses DQN to learn the op-
+timal stopping point and hyperparameters.
+Require: An anytime algorithm , an action-value network N, a
+step size1, a target action-value network step size 2, an ex-
+ploration strategyE, an experience buffer capacity `1, a num-
+ber of episodes `2, an initialization period `3, a minibatch size
+`4, and a duration 
+1:B EXPERIENCE BUFFER (`1)
+2:Q NEURAL NETWORK (N)
+3:^Q Q
+4:fori= 1;2;:::;` 2do
+5:P SAMPLE PROBLEM DISTRIBUTION ()
+6: :SETUP (P)
+7:t 0
+8:st (q0;t0;:GETF())
+9:at Q
+E(st)
+10: :START(at:1;:::;a t:`)
+11: SLEEP()
+12: while :RUNNING ()do
+13:t0 t+ 
+14:st0 (:GET();:GET	();:GETF())
+15:rt R(st;at;st0)
+16:B:APPEND ((st;at;rt;st0))
+17: ifB:SIZE()`3then
+18: M B:SAMPLE MINIBATCH (`4)
+19: ^L(r;s0):=r+max a02A^Q(s0;a0)
+20:L(s;a;r;s0):= [^L(r;s0) Q(s;a)]2
+21: Q:BACKPROPAGATE (M;L;1)
+22: ^Q (1 2)^Q+2Q
+23:t t0
+24:at Q
+E(st)
+25: ifat:0=STOPthen
+26: :STOP()
+27: break
+28: :CONTINUE (at:1;:::;a t:`)
+29: SLEEP()
+30: returnQ
+an action of computation a2Asatisﬁes the Markov prop-
+erty, the optimal policy :S!Aresults in optimal stop-
+ping and optimal hyperparameter tuning.
+Proof Sketch. This follows directly from the Markov prop-
+erty: a transition to a successor state of computation s02S
+only depends on the current state of computation s2Sand
+the current action of computation a2A. Note that while
+using only quality and time for the state of computation is
+unlikely to satisfy the Markov property, this richer represen-
+tation allows for a better approximation.
+Meta-Level Control Technique
+Our meta-level control technique monitors and controls ad-
+justable algorithms by performing episodes that each use the
+adjustable algorithm to solve an instance of a speciﬁc prob-
+lem on a given system with deep reinforcement learning.
+Deep reinforcement learning has been effective across
+a wide range of applications, including Atari (Mnih et al.
+2015), chess (Silver et al. 2018), and StarCraft (Vinyals
+et al. 2019). A deep reinforcement learning agent learns a
+Internal State
+Problem System
+Internal Parameters Anytime W eighted A*
+Object-Level ProcessMeta-Level Process
+State Action 
+control monitorFigure 2: The metareasoning architecture that has a meta-
+level process and an object-level process.
+value function or a policy expressed as a neural network
+by taking actions and observing rewards in its environment.
+This makes it a natural approach to adjustable algorithms
+for three reasons (Sutton and Barto 1998). First, by bal-
+ancing exploitation with exploration, it can learn a policy
+that tunes the internal hyperparameters of an adjustable al-
+gorithm without knowing the transition function. Next, by
+ignoring large regions of the state space not reached in prac-
+tice, it can reduce the overhead of learning a policy that tunes
+the internal hyperparameters of an adjustable algorithm. Fi-
+nally, by using a neural network that can learn complex pat-
+terns between massive input and output spaces, it can learn
+the effect of the internal hyperparameters on the internal
+state of an adjustable algorithm.
+Algorithm 1 shows our metareasoning technique for mon-
+itoring and controlling adjustable algorithms using DQN,
+deep Q-learning (Mnih et al. 2015), as described below.
+Reinforcement Learning Episode Loop The experience
+buffer is initialized to a capacity (Line 1). The current action-
+value function is initialized to the action-value network and
+the target action-value function is initialized to the current
+action-value function (Lines 2-3). A loop iterates over each
+episode (Line 4). For each episode, the following phases are
+performed for setup (Lines 5-11), monitor (Lines 12-15), up-
+date (Lines 16-22), and control (Lines 23-29). The action-
+value function is returned (Line 30).
+Episode Setup Phase An instance of the problem is sam-
+pled from the problem distribution and the anytime algo-
+rithm is setup to solve the instance (Line 5-6). The current
+time is initialized to zero (Line 7). The current state is ini-
+tialized to the quality and computation time of the initial so-
+lution along with any extra features while the current action
+is initialized to the policy calculated from the current action-
+value function and an exploration strategy at the current state
+(Lines 8-9). The algorithm starts to solve the problem in-
+insert() insert() insert()
+delete()*Figure 3: A modiﬁed implementation of anytime weighted
+A* that maintains multiple open lists.
+stance with hyperparameters set according to the initial ac-
+tion (Lines 10-11).
+Episode Monitor Phase A loop runs until the algorithm
+is interrupted early or terminated naturally (Line 12). The
+successor state is set to the quality and computation time of
+the new solution and any extra features while the reward is
+calculated from the current state, the current action, and the
+successor state (Line 13-15). The experience buffer is ap-
+pended with the current state, the current action, the reward,
+and the successor state (Line 16).
+Episode Update Phase The phase occurs if the size of
+the experience buffer is greater than an initialization pe-
+riod (Line 17). A minibatch is sampled from the experience
+buffer (Line 18). The loss function is deﬁned as the square
+of the temporal-difference error (Line 19-20). The current
+action-value function represented as a neural network is up-
+dated via backpropagation from the minibatch and the loss
+function (Lines 21). The target action-value function is set
+to the current action-value function (Lines 22).
+Episode Control Phase The current time is incremented
+and the new current action is set to the policy calculated from
+the current action-value function and an exploration strategy
+at the new current state (Line 23-24). If the action indicates
+to stop the algorithm, the algorithm is interrupted and the
+loop goes to the next episode (Lines 25-27). Otherwise, the
+algorithm execution continues after tuning its internal hy-
+perparameters (Line 28-29).
+Anytime Weighted A*
+We now apply our approach to anytime weighted A*. Recent
+work on the algorithm focuses on selecting the best static
+weight for a problem (Hansen and Zhou 2007), choosing
+the weight for an instance of a problem (Sun, Druzdzel, and
+Yuan 2007), and modifying the weight at runtime heuristi-
+cally (Thayer and Ruml 2009). The algorithm can also be
+improved via restarting when a solution is found (Richter,
+Thayer, and Ruml 2010). There has even been work that an-
+alyzes the failure conditions of the algorithm (Wilt and Ruml
+2012). Overall, tuning the weight of anytime weighted A* at
+runtime has consistently proven to be challenging.
+The meta-level control problem for anytime weighted A*,
+, is an MDPh;	;F;S;A;T;R;s 0i. = [0;1]is a set of
+qualities of the current solution. 	 = [0;]is a set of time
+steps with a deadline .F=WR9[ 1;1]K[0;1]
+is a set of features such that the feature w2Wis the current
+weight, the features g2Randh2Rare the mean of the
+g- andh-values on the open list, the features g2Rand
+h2Rare the standard deviation of the g- andh-values on
+the open list, the features g2Randh2Rare the mini-
+mumg- andh-values on the open list, the feature 2Ris
+the value log(n)for the number of nodes non the open list,
+the feature q2Ris theh-value of the initial state divided
+by the minimum f-value on the open list, the feature h0is
+theh-value of the initial state, the feature g;h2[ 1;1]is
+the correlation between the g- andh-values on the open list,
+the feature2Kis a set of settings for the instance of the
+problem, and the feature 2[0;1]is the processor usage
+of the system. A=  01is a set of actions such that
+the internal hyperparameter, 02fSTOP;CONTINUEg, in-
+terrupts or executes the algorithm for another time step and
+the internal hyperparameter, 1=f;	g, tunes the weight
+w2Wby a value2f  1; 1
+4;1
+4;1gwithin the bounds
+1w5. Note thatS,A,T,R, ands0follow from the
+meta-level control problem for adjustable algorithms.
+The metareasoning architecture for anytime weighted A*
+in Figure 2 has a meta-level process that monitors and con-
+trols an object-level process that executes the algorithm.
+Anytime weighted A* involves a simple modiﬁcation to
+allow its weight to be adjusted at runtime. Instead of insert-
+ing/deleting a node into/from a single open list for a static
+weight, the algorithm inserts/deletes this node into/from jWj
+open lists each ordered by the fw-value of a weight w2W
+as illustrated in Figure 3. Consequently, each open list has
+a different ordering of the same set of nodes. Note that the
+time complexity of inserting/deleting a node across all open
+lists of sizensequentially isO(jWjlogn).
+Experiments
+In this section, we compare our approach for monitoring and
+controlling anytime weighted A* to a standard approach that
+uses a range of static weights of 1,1:5,2,3,4, and 5.
+Experimental Setup Each approach is evaluated using the
+mean solution quality on an identical set of 500random in-
+stances after being trained for 12000 episodes across each
+benchmark problem. Note that training uses randomization
+seeds that are different than the randomization seeds used for
+evaluation and takes approximately one day for each bench-
+mark problem on our system. Intuitively, a solution quality
+q= 0represents no solution while a solution quality q= 1
+represents an optimal solution. Formally, we deﬁne solution
+quality as the approximation ratio, q=c=c, wherecand
+cis the cost of the optimal solution and the current solu-
+tion. However, since it is infeasible to calculate the cost of
+the optimal solution, we estimate solution quality as the ap-
+proximation ratio, q=h(s0)=c, whereh(s0)andcis the
+heuristic value of the initial state and the cost of the current
+solution, like earlier work (Hansen and Zilberstein 2001).
+A meta-level control problem has a time-dependent util-
+ity function. However, while it is possible to use any time-
+dependent utility function, we consider a contract setting in
+which the adjustable algorithm must terminate before a du-ration ofsec to avoid a signiﬁcant utility penalty . This
+is common in robotics where a system has a ﬁxed duration
+for planning before execution. Formally, given a solution of
+qualityq2at time step t2	, the time-dependent utility
+function isU(q;t) = [t]UI(q) [t >  ], where
+UI(q) =qis the utility of a solution of quality q2for
+an intrinsic value multiplier .
+Our meta-level control technique in Algorithm 1 has the
+hyperparameters below. The action-value network Nis a
+fully connected neural network with two hidden layers of 64
+and32nodes with ReLU activation and a linear output layer
+of5nodes. The last 5observations are stacked and provided
+to the input layer of the neural network to observe 1sec of
+runtime. The step size 1is0:0001 . The target action-value
+network step size 2is0:001. The exploration strategy Eis
+-greedy action selection with an exploration probability 
+that is annealed from 1to0:1over1000 episodes. The expe-
+rience buffer capacity `1is1. The number of episodes `2is
+12000 . The initialization period `3is10000 . The minibatch
+size`4is64. The duration is0:2sec.
+Each approach must solve benchmark problems that re-
+ﬂect domains that require different static weights and for
+which recent work reported counterintuitive behavior of
+anytime weighted A* (Wilt and Ruml 2012). Their settings
+are chosen to avoid trivializing the problem by either allow-
+ing too little time so that no approach ﬁnds a solution or too
+much time so that every approach ﬁnds the optimal solution.
+Sparse Traveling Salesman Problem An S TSP instance
+has a set of Jcities that must be visited along an optimal
+route given a cost for each edge between a pair of cities
+where a percentage of edges have an inﬁnite cost. The to-
+tal distance of a minimum spanning tree across the unvisited
+cities is used as an admissible and consistent heuristic func-
+tion. The number of cities Jis chosen randomly between
+15and25. The percentage of edges with an inﬁnite cost is
+chosen randomly between 0%and30%. The cost between
+each pair of cities is chosen randomly. The MDP has a set
+of featuresK=12that represent the number of cities
+12N+and the percentage of edges with an inﬁnite cost
+22[0;1].
+City Navigation Problem A C NPinstance simulates nav-
+igating between two locations in different cities (Wilt and
+Ruml 2012). There is a set of Jcities scattered randomly on
+ajjsquare such that each city is connected by a random
+tour and to a set of its nearest nJcities. Each city contains
+a set ofIlocations scattered randomly throughout the city
+that is aniisquare such that each location in the city is
+connected by a random tour and to its nearest nIlocations.
+The edge between a pair of cities costs the Euclidean dis-
+tance plus an offset 1. The edge between a pair of locations
+within a city costs the Euclidean distance scaled by a random
+number sampled between 1and a maximum 2. The goal is
+to ﬁnd an optimal path from a randomly selected location in
+one city to randomly selected location in another city. The
+Euclidean distance from the current location to the target lo-
+cation is used as an admissible and consistent heuristic. The
+settings are chosen such that J= 150 ,j= 100 ,nJ= 3,
+I= 150 ,i= 1,nI= 3,= 2, and= 1:1. The MDP does
+Figure 4: The box and whisker plots for the ﬁnal solution qualities of each approach over all instances of S P, ISP, STSP, and
+CNP(lefttoright ) The crosses denote the mean and the bullets denote the outliers. The median and the upper quartiles are even
+zero for some approaches.
+Figure 5: The analysis charts for S Pfrom lefttoright : (a) A line chart showing how the solution quality, solution quality
+upper bound, and weight (plotted on secondary y-axis) change with computation time for a select instance. The faded line and
+shaded region indicate the mean weight and its standard deviation over all instances. (b) A line chart showing how the ﬁnal
+solution quality and mean weight (on secondary y-axis) of an episode change with training episodes. (c) A histogram showing
+the distribution of all instances over solution quality error for our approach. Solution quality error is the normalized difference
+between the ﬁnal solution quality of our approach and the ﬁnal solution quality of the best approach. (d) A bar chart showing
+the percentage importance of the top 10features that are learned by our approach. Importance is the mean absolute weight on
+a feature in the input layer of the neural network.
+not include any instance speciﬁc features for this problem.
+Sliding Puzzle An S Pinstance has a set of J=j2 1
+tiles with each tile ilabeled from 1toJin ajjgrid that
+must be moved from an initial position to a desired position
+given a unitcostc(i) = 1 for moving a tile i. The sum of the
+Manhattan distances from the current position of each tile
+to a desired position is used as an admissible and consistent
+heuristic function. The number of tiles is 15. The difﬁculty
+of the initial position, as measured by the heuristic function
+is chosen randomly between 35and45, and included in the
+feature space of the MDP.
+Inverse Sliding Puzzle An I SPinstance is the same as an
+SPinstance except that there is an inverse costc(i) = 1=ifor
+moving a tile i. This means that the sum of the Manhattan
+distances from the current position of each tile to the desired
+position, weighted by the cost for moving each tile, is used
+as an admissible and consistent heuristic function.
+The duration is10sec for S Pand I SP,5sec for S TSP,
+and4sec for C NPcorresponding to 6000 ,3000 , and 2400
+node expansions on an AMD Ryzen 3900X processor with
+32GB of 3200 MHz memory. Each approach runs until the
+node expansion limit instead of the duration for experimen-
+tal consistency and reproducibility.
+Experimental Results Our approach solves more prob-
+lem instances and produces higher average solution quality
+compared to the standard approach with any static weight.Figure 4 shows the results for S P, ISP, STSP, and C NP.
+Our approach beats the standard approach with the best
+static weight: it has a substantially higher mean solution
+quality in SP for w= 4 and I SPforw= 1:5, a compa-
+rable mean solution quality in S TSPforw= 2, and fairly
+higher mean solution quality in C NPforw= 2.
+Figure 5 shows four analyses for SP. In Figure 5(a), our
+approach adjusts the weight based on solution quality and
+the other features that are not listed. Generally, the mean
+weight increases as the computation time increases to en-
+sure generating at least one solution. In Figure 5(b), our ap-
+proach improves its ﬁnal solution quality with each training
+episode by learning gradually. In fact, the average weight
+initially increases but then decreases to generate higher qual-
+ity solutions. In Figure 5(c), our approach exhibits a solu-
+tion quality error of 0for over 350instances. While roughly
+50instances have a solution quality error of 1, this is still
+better than the standard approach. Figure 5(d) shows that
+our approach takes advantage of the other features, such as
+the current weight, the upper bound on solution quality, and
+the initial heuristic value, in addition to solution quality and
+computation time.
+Our open source library1provides an OpenAI Gym en-
+vironment for monitoring and controlling adjustable algo-
+rithms using deep reinforcement learning.
+1https://github.com/bhatiaabhinav/model-free-metareasoning
+Conclusion
+This paper introduces a nonmyopic ,decision-theoretic , and
+general-purpose metareasoning approach that optimizes the
+hyperparameters and stopping point of adjustable algo-
+rithms. First, we propose a generalization of an anytime
+algorithm called an adjustable algorithm. We then offer a
+meta-level control technique that monitors and controls an
+adjustable algorithm by using deep reinforcement learning.
+Finally, we apply our approach to anytime weighted A* and
+show that it is effective on a range of problems. Future work
+will explore how to apply our approach to other common
+task and motion planning algorithms, such as tuning the
+growth factor of the motion planning algorithm RRT*.
+Acknowledgments
+This work was supported in part by the NSF Graduate
+Research Fellowship DGE-1451512, and NSF grants IIS-
+1813490 and IIS-1954782.
+References
+Adenso-Diaz, B.; and Laguna, M. 2006. Fine-tuning of
+algorithms using fractional experimental designs and local
+search. Operations Research 54(1): 99–114.
+Aine, S.; Chakrabarti, P.; and Kumar, R. 2007. AWA*: A
+window constrained anytime heuristic search algorithm. In
+Proceedings of the Twentieth International Joint Conference
+on Artiﬁcial Intelligence , 2250–2255.
+Ans´otegui, C.; Sellmann, M.; and Tierney, K. 2009. A
+gender-based genetic algorithm for the automatic conﬁgura-
+tion of algorithms. In Proceedings of the Fifteenth Interna-
+tional Conference on Principles and Practice of Constraint
+Programming , 142–157. Springer.
+Bartz-Beielstein, T.; Lasarczyk, C. W.; and Preuss, M. 2005.
+Sequential parameter optimization. In Proceedings of the
+IEEE Congress on Evolutionary Computation , volume 1,
+773–780. IEEE.
+Bellman, R. 1966. Dynamic programming. In Science .
+American Association for the Advancement of Science.
+Birattari, M.; St ¨utzle, T.; Paquete, L.; and Varrentrapp, K.
+2002. A racing algorithm for conﬁguring metaheuristics. In
+Proceedings of the Fourth Genetic and Evolutionary Com-
+putation Conference , volume 2.
+Birattari, M.; Yuan, Z.; Balaprakash, P.; and St ¨utzle, T. 2010.
+F-Race and iterated F-Race: An overview. Experimental
+Methods for the Analysis of Optimization Algorithms 311–
+336.
+Boddy, M.; and Dean, T. L. 1994. Deliberation scheduling
+for problem solving in time-constrained environments. Ar-
+tiﬁcial Intelligence 67(2): 245–285.
+Burns, E.; Ruml, W.; and Do, M. B. 2013. Heuristic search
+when time matters. Journal of Artiﬁcial Intelligence Re-
+search 47: 697–740.
+Cserna, B.; Ruml, W.; and Frank, J. 2017. Planning time
+to think: Metareasoning for on-line planning with durativeactions. In Proceedings of the Twenty-Seventh International
+Conference on Automated Planning and Scheduling .
+Dietterich, T. G. 2000. Ensemble methods in machine learn-
+ing. In Proceedings of the First International Workshop on
+Multiple Classiﬁer Systems , 1–15.
+Fern, A.; and Givan, R. 2003. Online ensemble learning: An
+empirical study. Machine Learning 53(1-2): 71–109. ISSN
+0885-6125. doi:10.1023/A:1025619426553. URL https://
+doi.org/10.1023/A:1025619426553.
+Gomes, C. P.; and Selman, B. 2001. Algorithm portfolios.
+Artiﬁcial Intelligence 126(1-2): 43–62.
+Gomoluch, P.; Alrajeh, D.; Russo, A.; and Bucchiarone, A.
+2020. Learning neural search policies for classical plan-
+ning. In Proceedings of the International Conference on
+Automated Planning and Scheduling , volume 30, 522–530.
+Hansen, E. A.; and Zhou, R. 2007. Anytime heuristic search.
+Journal of Artiﬁcial Intelligence Research 28: 267–297.
+Hansen, E. A.; and Zilberstein, S. 2001. Monitoring and
+control of anytime algorithms: A dynamic programming ap-
+proach. Artiﬁcial Intelligence 126(1-2): 139–157.
+Hansen, E. A.; Zilberstein, S.; and Danilchenko, V . A. 1997.
+Anytime heuristic search: First results. Technical Report
+97-50, Computer Science Department, University of Mas-
+sachussetts Amherst.
+Horvitz, E. 1988. Reasoning under varying and uncertain
+resource constraints. In Proceedings of the Seventh AAAI
+National Conference on Artiﬁcial Intelligence , 111–116.
+Horvitz, E.; and Rutledge, G. 1991. Time-dependent utility
+and action under uncertainty. In Proceedings of the Seventh
+Conference on Uncertainty in Artiﬁcial Intelligence , 151–
+158.
+Horvitz, E. J. 1987. Reasoning about beliefs and actions
+under computational resource constraints. In Proceedings of
+Third Workshop on Uncertainty in Artiﬁcial Intelligence .
+Horvitz, E. J. 1990. Computation and action under bounded
+resources . Ph.D. thesis, Stanford University, CA.
+Hutter, F.; Hoos, H. H.; and Leyton-Brown, K. 2011. Se-
+quential model-based optimization for general algorithm
+conﬁguration. In Proceedings of the Fifth International Con-
+ference on Learning and Intelligent Optimization , 507–523.
+Springer.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; and Murphy,
+K. 2010. Time-bounded sequential parameter optimization.
+InProceedings of the Fourth International Conference on
+Learning and Intelligent Optimization , 281–298. Springer.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; and Murphy,
+K. P. 2009a. An experimental investigation of model-based
+parameter optimisation: SPO and beyond. In Proceedings of
+the Eleventh Annual Conference on Genetic and Evolution-
+ary Computation , 271–278.
+Hutter, F.; Hoos, H. H.; Leyton-Brown, K.; and St ¨utzle, T.
+2009b. ParamILS: An automatic algorithm conﬁguration
+framework. Journal of Artiﬁcial Intelligence Research 36:
+267–306.
+Hutter, F.; Hoos, H. H.; and St ¨utzle, T. 2007. Automatic al-
+gorithm conﬁguration based on local search. In Proceedings
+of the Twenty-Second AAAI Conference on Artiﬁcial Intelli-
+gence , volume 7, 1152–1157.
+Hutter, F.; Xu, L.; Hoos, H. H.; and Leyton-Brown, K. 2014.
+Algorithm runtime prediction: Methods & evaluation. Arti-
+ﬁcial Intelligence 206: 79–111.
+Karaman, S.; Walter, M. R.; Perez, A.; Frazzoli, E.; and
+Teller, S. 2011. Anytime motion planning using the RRT*.
+InProceedings of the IEEE International Conference on
+Robotics and Automation , 1478–1483.
+Karayev, S.; Fritz, M.; and Darrell, T. 2014. Anytime recog-
+nition of objects and scenes. In Proceedings of the IEEE
+Conference on Computer Vision and Pattern Recognition ,
+572–579.
+Leyton-Brown, K.; Nudelman, E.; Andrew, G.; McFadden,
+J.; and Shoham, Y . 2003. Boosting as a metaphor for al-
+gorithm design. In Proceedings of the Ninth International
+Conference on Principles and Practice of Constraint Pro-
+gramming , 899–903.
+Likhachev, M.; Gordon, G.; and Thrun, S. 2004. ARA*:
+Anytime A* with provable bounds on sub-optimality. In
+Neural Information Processing Systems .
+Lin, C. H.; Kolobov, A.; Kamar, E.; and Horvitz, E. 2015.
+Metareasoning for planning under uncertainty. In Proceed-
+ings of the Twenty-Fourth International Joint Conference on
+Artiﬁcial Intelligence .
+Mnih, V .; Kavukcuoglu, K.; Silver, D.; Rusu, A. A.; Ve-
+ness, J.; Bellemare, M. G.; Graves, A.; Riedmiller, M.; Fid-
+jeland, A. K.; Ostrovski, G.; et al. 2015. Human-level con-
+trol through deep reinforcement learning. Nature 518(7540):
+529–533.
+Paul, C. J.; Acharya, A.; Black, B.; and Strosnider, J. K.
+1991. Reducing problem-solving variance to improve pre-
+dictability. Communications of the ACM 34(8): 80–93.
+Pineau, J.; Gordon, G.; and Thrun, S. 2003. Point-based
+value iteration: An anytime algorithm for POMDPs. In Pro-
+ceedings of the Eighteenth International Joint Conference
+on Artiﬁcial Intelligence , 1025–1032.
+Ramos, F. T.; and Cozman, F. G. 2005. Anytime anyspace
+probabilistic inference. International Journal of Approxi-
+mate Reasoning 38(1): 53–80.
+Richter, S.; Thayer, J. T.; and Ruml, W. 2010. The joy of
+forgetting: Faster anytime search via restarting. In Pro-
+ceedings of the Twentieth International Conference on Au-
+tomated Planning and Scheduling , 137–144.
+Silver, D.; Hubert, T.; Schrittwieser, J.; Antonoglou, I.; Lai,
+M.; Guez, A.; Lanctot, M.; Sifre, L.; Kumaran, D.; Graepel,
+T.; et al. 2018. A general reinforcement learning algorithm
+that masters chess, shogi, and Go through self-play. Science
+362(6419): 1140–1144.
+Spaan, M. T.; and Vlassis, N. 2005. Perseus: Randomized
+point-based value iteration for POMDPs. Journal of Artiﬁ-
+cial Intelligence Research 24: 195–220.Speck, D.; Biedenkapp, A.; Hutter, F.; Mattm ¨uller, R.; and
+Lindauer, M. 2021. Learning heuristic selection with dy-
+namic algorithm conﬁguration. In Proceedings of the Inter-
+national Conference on Automated Planning and Schedul-
+ing, volume 31, 597–605.
+Sun, X.; Druzdzel, M. J.; and Yuan, C. 2007. Dynamic
+weighting A* search-based MAP algorithm for Bayesian
+networks. In Proceedings of the Twentieth International
+Joint Conference on Artiﬁcial Intelligence , 2385–2390.
+Sutton, R. S.; and Barto, A. G. 1998. Reinforcement Learn-
+ing: An Introduction . MIT Press.
+Svegliato, J.; Sharma, P.; and Zilberstein, S. 2020. A model-
+free approach to meta-level control of anytime algorithms.
+InIEEE International Conference on Robotics and Automa-
+tion. Paris, France.
+Svegliato, J.; Wray, K. H.; and Zilberstein, S. 2018. Meta-
+level control of anytime algorithms with online performance
+prediction. In Proceedings of the Twenty-Seventh Interna-
+tional Joint Conference on Artiﬁcial Intelligence .
+Thayer, J.; and Ruml, W. 2009. Using distance estimates in
+heuristic search. In Proceedings of the Nineteenth Interna-
+tional Conference on Automated Planning and Scheduling .
+Thayer, J.; and Ruml, W. 2010. Anytime heuristic search:
+Frameworks and algorithms. In Proceedings of the Third
+Annual Symposium on Combinatorial Search , 121–128.
+Urmson, C.; and Simmons, R. 2003. Approaches for heuris-
+tically biasing RRT growth. In Proceedings of the IEEE/RSJ
+International Conference on Intelligent Robots and Systems ,
+volume 2, 1178–1183. IEEE.
+Vinyals, O.; Babuschkin, I.; Czarnecki, W. M.; Mathieu, M.;
+Dudzik, A.; Chung, J.; Choi, D. H.; Powell, R.; Ewalds,
+T.; Georgiev, P.; et al. 2019. Grandmaster level in Star-
+Craft II using multi-agent reinforcement learning. Nature
+575(7782): 350–354.
+Wagner, T.; Garvey, A.; and Lesser, V . R. 1998. Criteria-
+directed task scheduling. International Journal of Approxi-
+mate Reasoning 19(1-2): 91–118.
+Wilt, C.; and Ruml, W. 2012. When does weighted A* fail?
+InProceedings of the Fifth Annual Symposium on Combina-
+torial Search , 137–144.
+Xu, L.; Hutter, F.; Hoos, H. H.; and Leyton-Brown, K. 2008.
+SATzilla: Portfolio-based algorithm selection for SAT. Jour-
+nal of Artiﬁcial Intelligence Research 32: 565–606.
+Zilberstein, S. 1996. Using anytime algorithms in intelligent
+systems. AI Magazine 17(3): 73.
+Zilberstein, S.; and Mouaddib, A.-I. 2000. Optimal schedul-
+ing of progressive processing tasks. International Journal of
+Approximate Reasoning 25(3): 169–186.
+Zilberstein, S.; and Russell, S. J. 1995. Approximate rea-
+soning using anytime algorithms. In Natarajan, S., ed., Im-
+precise and Approximate Computation , 43–62. Springer.

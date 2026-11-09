@@ -1,0 +1,739 @@
+ARTÍCULO DE INVESTIGACIÓN · CIENCIAS PSICOLÓGICAS Y COGNITIVAS · ACCESO ABIERTO
+Modelos profundos de juicios superficiales sobre rostros
+Joshua C. Peterson a,1, Stefan Uddenberg b, Thomas L. Griffiths a,c, Alexander Todorov b y Jordan W. Suchow d
+Editado por Winrich Freiwald, The Rockefeller University, Nueva York, NY; recibido el 17 de agosto de 2021; aceptado el 7 de marzo de 2022, por un miembro del Consejo Editorial
+Charles D. Gilbert
+La diversidad de los rostros humanos y los contextos en que aparecen da lugar a un
+espacio de estímulos amplio sobre el que las personas infieren rasgos psicológicos (p. ej., la confiabilidad o
+la alerta) y otros atributos (p. ej., la edad o la adiposidad). Los métodos de aprendizaje automático, en particular las redes neuronales profundas, proporcionan representaciones expresivas
+de los estímulos faciales, pero la correspondencia entre estas representaciones y diversas
+inferencias humanas de atributos es difícil de determinar, porque las primeras son vectores de alta dimensionalidad producidos mediante algoritmos de optimización de caja negra. Aquí combinamos
+modelos generativos profundos de imágenes con más de un millón de juicios para modelar las inferencias de
+más de 30 atributos sobre un espacio latente facial completo. La precisión predictiva de nuestro modelo se aproxima a la confiabilidad entre evaluadores humanos, lo que las simulaciones sugieren que
+no habría sido posible con menos rostros, menos juicios ni representaciones de menor dimensión.
+Nuestro modelo puede utilizarse para predecir y manipular inferencias sobre fotografías faciales arbitrarias, o para generar estímulos faciales sintéticos fotorrealistas
+que evoquen impresiones moduladas a lo largo de los atributos modelados.
+percepción facial | rasgos sociales | modelos computacionales
+Los rostros están entre los estímulos más importantes que encuentran las personas: los bebés los reconocen
+mucho antes que otros objetos de su entorno (1), reclutan circuitos especializados en
+el cerebro (2) y son fundamentales para la interacción social (3). Central para nuestra experiencia con
+los rostros son los atributos que les asignamos, a menudo de forma implícita. Estos incluyen atributos que se leen directamente, que describen en gran medida propiedades objetivas de los rostros (p. ej., edad y adiposidad), y
+aquellos que se leen en ellos, como qué tan confiable es una persona (4). Aunque las inferencias
+de estos últimos atributos son más subjetivos y, en general, inexactos, son igualmente consistentes psicológicamente entre personas (4–6) en todo el mundo (7–9) y tienen consecuencias importantes
+(10), que van desde el éxito electoral (11, 12) hasta las decisiones de sentencia (13,
+14). Como cualquier rostro puede juzgarse en relación con tales atributos, estas dimensiones psicológicas son universales, en el sentido de que están definidas implícitamente sobre el espacio de casi todos
+los rostros posibles, contextos y condiciones de observación. Estos factores se combinan para formar
+un paisaje diverso de estímulos que dificulta capturar en su totalidad el contenido psicológico correspondiente. Ese contenido es la base de los modelos científicos de
+la percepción facial y define el alcance de aplicaciones posteriores, como entrenar a personas
+para superar estereotipos (15).
+La importancia de las inferencias sobre atributos faciales ha dado lugar a la proliferación de técnicas
+para el modelado científico de rostros, que pueden organizarse en términos generales en dos enfoques. El
+primero extrapola a partir de fotografías faciales, a menudo relacionadas mediante anotaciones de puntos de referencia (16, 17). El segundo genera rostros artificiales con mallas faciales tridimensionales paramétricas (18).
+Las fotografías ofrecen mayor realismo, pero se limitan a los conjuntos de datos disponibles de estímulos faciales que
+sirven de base para la interpolación y para los propios algoritmos de interpolación, que
+a menudo requieren anotaciones de puntos de referencia de alta calidad, inalcanzables sin un costoso trabajo manual
+(19). Los rostros generados artificialmente no están sujetos a estas limitaciones, pero carecen de diversidad y realismo. Ninguno de los dos enfoques ofrece modelos viables que expresen toda la riqueza y
+diversidad de los rostros humanos.
+Los métodos de aprendizaje automático, en particular las redes neuronales profundas como las redes generativas antagónicas (GAN),
+pueden aprender a modelar rostros a partir de colecciones masivas de fotografías
+extraídas de sitios web de intercambio de imágenes (20–23). Estos métodos presentan una tercera opción
+para desarrollar modelos científicos de rostros, pues proporcionan representaciones expresivas de rasgos para imágenes faciales realistas arbitrarias. Sin embargo, relacionar estas representaciones con la
+percepción humana es difícil, porque son vectores de alta dimensionalidad producidos mediante
+algoritmos de optimización de caja negra (24).
+Mostramos que las claves para desbloquear el potencial científico de estos modelos y de sus
+aplicaciones posteriores son los conjuntos de datos a gran escala sobre el comportamiento humano, inalcanzables mediante
+experimentos de laboratorio tradicionales. En particular, dichos conjuntos proporcionan evidencia suficiente para determinar una asignación robusta entre representaciones expresivas de alta dimensionalidad
+de los modelos de aprendizaje automático y las representaciones mentales humanas de los rostros. Significado
+Formamos de manera rápida e irresistible
+impresiones sobre lo que otras personas
+son, basadas únicamente en cómo
+lucen sus rostros. Estas impresiones
+tienen consecuencias reales, que van desde decisiones de contratación
+hasta decisiones de sentencia. Modelamos
+y visualizamos las bases perceptuales de las impresiones faciales de la forma más
+completa hasta la fecha,
+produciendo modelos fotorrealistas de 34 atributos percibidos, sociales y
+físicos (p. ej.,
+confiabilidad y edad). Estos modelos aprovechan y demuestran
+la utilidad del aprendizaje profundo en la
+evaluación facial, lo que permite 1) generar un número infinito
+de rostros que varían a lo largo de
+estos atributos percibidos
+dimensiones,
+2) manipular cualquier fotografía facial a lo largo de estas
+dimensiones, y 3) predecir
+las impresiones que cualquier imagen facial puede evocar en la
+población general (en su mayoría blanca, norteamericana)
+.
+Contribuciones de los autores: J.C.P., S.U., T.L.G., A.T. y J.W.S.
+diseñaron la investigación; J.C.P. y S.U. realizaron la investigación;
+J.C.P., S.U., T.L.G., A.T. y J.W.S. aportaron nuevos
+reactivos/herramientas analíticas; J.C.P., S.U. y J.W.S. analizaron los
+datos; y J.C.P., S.U., T.L.G., A.T. y J.W.S. redactaron el
+artículo.
+Declaración de intereses en competencia: Todos los autores figuran como
+inventores de una patente relacionada (patente de EE. UU. n.º 11,250,245,
+“Codificación de rasgos faciales sociales fotorrealistas basada en datos,
+predicción y manipulación mediante redes neuronales
+profundas”).
+Este artículo es una presentación directa de PNAS. W.F. es un editor invitado
+por el Consejo Editorial.
+Copyright © 2022 los Autores. Publicado por PNAS.
+Este artículo de acceso abierto se distribuye bajo una licencia Creative
+Commons Atribución-NoComercial-SinDerivadas
+4.0 Internacional (CC BY-NC-ND).
+1 A quien debe dirigirse la correspondencia. Correo electrónico:
+joshuacp@princeton.edu.
+Este artículo contiene información complementaria en línea en
+https://www.pnas.org/lookup/suppl/doi:10.1073/pnas.
+2115228119/-/DCSupplemental.
+Publicado el 21 de abril de 2022.
+PNAS 2022 Vol. 119 No. 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 1 de 9
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+Fig. 1. Matriz de correlación de 34 calificaciones promedio de atributos para cada uno de los 1000 rostros. Las filas y columnas se ordenan según un agrupamiento jerárquico de los
+valores de correlación.
+Cuantificamos una cota superior de la robustez de la asignación
+en términos de la confiabilidad de las inferencias de atributos subyacentes
+y determinamos cómo escala esa robustez en función del
+número de rostros evaluados, el número de calificaciones por rostro y la dimensionalidad del espacio de rasgos profundos. Luego usamos esta
+asignación para predecir y manipular inferencias sobre rostros arbitrarios
+imágenes, lo que nos permite, por ejemplo, ajustar una fotografía para aumentar o disminuir la confiabilidad percibida de su sujeto para
+igualar una calificación objetivo.
+Esa asignación puede calcularse para cualquier inferencia de atributo
+psicológicamente significativa. Nos centramos en tres clases de
+inferencias. Primero, hay inferencias definidas por impresiones subjetivas
+de propiedades relativamente objetivas (p. ej., edad y adiposidad). Estas propiedades más objetivas, que también incluyen el peinado,
+la presencia de accesorios (p. ej., gafas), la mirada y la expresión facial,
+se estudian comúnmente en visión por computadora, donde se denominan “atributos” (25) o “biometría blanda” (26). Luego, hay
+inferencias de atributos subjetivos y construidos socialmente, como
+ser confiable y masculino/femenino, los objetivos convencionales
+del estudio científico social (4). Finalmente, hay inferencias de atributos plenamente
+subjetivos, como familiar, donde el observador es el
+único árbitro de la verdad (27). Por claridad de exposición, nos referimos a
+las inferencias de las tres clases como “inferencias de atributos” y el
+atributos subyacentes como “atributos”, distinguiendo entre las clases en el texto cuando sea necesario. Tenga en cuenta que estas inferencias de atributos
+en especial las de los atributos más subjetivos o construidos socialmente,
+no tienen correspondencia necesaria con las identidades, actitudes o competencias reales de las personas a las que las imágenes
+se parecen o representan (por ejemplo, una persona confiable puede ser juzgada erróneamente
+como no confiable a partir de su apariencia). Más bien, estas inferencias, y a su vez nuestras mediciones, reflejan
+sesgos y estereotipos sistemáticos sobre atributos compartidos por la población de
+evaluadores. No obstante, estas inferencias están impulsadas por (combinaciones de) indicios físicos presentes en los propios rostros; por ejemplo,
+los rostros juzgados como más confiables pueden tener rasgos más neoténicos
+(p. ej., ojos grandes) o labios curvados hacia arriba, como en una sonrisa (4). Usamos crowdsourcing en línea para obtener calificaciones de inferencias de atributos
+para algo más de 1000 estímulos faciales sintéticos (aunque muy naturalistas),
+para 34 atributos, con calificaciones de al menos 30 participantes únicos por cada par atributo-estímulo,
+para un total de 1 020 000 juicios humanos (Materiales y métodos). Llamamos a
+esta colección de estímulos faciales y los datos conductuales correspondientes
+el conjunto de datos One Million Impressions. Un resumen detallado de estas calificaciones y de las relaciones entre atributos puede consultarse en el Apéndice SI.
+Resultados
+La estructura de las inferencias de atributos. Para explorar la estructura
+de las inferencias de atributos, primero calculamos la correlación entre
+las calificaciones promedio de los rostros para cada par de atributos (Fig. 1). Muchos atributos estaban muy correlacionados, entre ellos feliz–sociable (r =
+0,93) y dominante–confiable (r = −0,81), mientras que otros
+estaban en gran medida no relacionados, entre ellos inteligente–atractivo (r = 0,01), inteligente–
+confiable (r = 0,02), liberal/conservador–cree en Dios (r =
+0,08) y electable–atractivo (r = 0,05).
+Aunque algunas de estas correlaciones son coherentes con hallazgos previos
+(8), otras no lo son. Primero, aunque trabajos anteriores han hallado
+que los juicios de confiabilidad y dominancia suelen estar negativamente correlacionados, y la correlación suele ser pequeña (del
+orden de −0,2), mientras que la correlación observada aquí (−0,81)
+fue mucho más fuerte (4, 28). Segundo, se ha encontrado que los juicios de inteligencia o competencia están muy correlacionados de forma positiva
+con los juicios de atractivo y confiabilidad (con valores
+de hasta ≈0,8), mientras que aquí solo encontramos correlaciones marginales
+entre esas inferencias de atributos (8). Una explicación de estas
+discrepancias es que los estímulos faciales usados aquí son más diversos
+que en los estudios comparados, especialmente en cuanto a la edad; el presente estudio incluye rostros de niños (simulados). Esta explica-
+ción es plausible, dado que la estructura correlacional de los juicios
+sobre rostros de niños es diferente de la de los juicios sobre rostros de adultos (29). Para examinar esta hipótesis, recalculamos
+las correlaciones entre atributos en subconjuntos de los datos con rangos de edad restringidos
+2 de 9 https://doi.org/10.1073/pnas.2115228119 pnas.org
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+(SI Apéndice, Fig. S9). Encontramos que la inclusión de los
+rostros de niños explica en parte algunas discrepancias (p. ej., inteligente–
+atractivo) y no explica otras (confiable–dominante).
+Tercero, los rostros memorables eran más atractivos, como se observa en la
+correlación positiva entre las calificaciones respectivas (Fig. 1). Este
+hallazgo es incoherente con trabajos que muestran que la memorabilidad real de los rostros está negativamente correlacionada con el atractivo, en la medida en que
+las predicciones de memorabilidad sean veraces (30). Por último, los rostros familiares
+se percibieron como más atractivos y de aspecto promedio, en coherencia
+con el hallazgo de que los rostros promedio tienden a percibirse como más atractivos (ref. 31; pero véase ref. 32).
+El atributo exterior (si la foto parecía tomada
+al aire libre o en interiores) se incluyó para evaluar posibles variables de confusión al usar fotografías faciales naturalistas. Resultó ser el menos
+correlacionado con otros atributos, con la menor correlación absoluta máxima por atributo
+(exterior–electable, r = 0,20). En comparación,
+el atributo con el siguiente máximo más bajo fue
+delgado/gordo (delgado/gordo–atractivo, r = 0,43), que, pese a tener
+el doble de magnitud, fue uno de los atributos más fáciles de predecir
+(Fig. 2). Además, que exterior tuviera la menor correlación absoluta media
+con todos los demás atributos (r = 0,08) indica una contribución mínima
+de los efectos contextuales debidos a los fondos naturalistas
+y a la iluminación.
+Predicción de las inferencias de atributos. Para modelar un atributo, partimos
+de los vectores de representación de alta dimensionalidad zi =
+{z1,…, zd} asignados a cada rostro sintético i de nuestro conjunto de estímulos,
+mediante un GAN de última generación preentrenado (21, 22, 33). El GAN
+ha aprendido una correspondencia de cada uno de estos vectores a una imagen mediante
+un entrenamiento extenso sobre una gran base de datos de fotografías faciales reales, no sintéticas (Métodos y materiales). Luego modelamos cada
+atributo psicológico, medido mediante calificaciones promedio yi,
+como
+una combinación lineal de rasgos: yi = w0 + w1z1 + … + wdzd.
+El vector de pesos wk = {w1,…, wd} representa el atributo
+como una dimensión lineal que atraviesa el espacio de representación
+y se ajusta mediante regresión lineal regularizada L2 con validación cruzada.
+Un diagrama que resume el proceso de modelado para predecir
+las inferencias de atributos se incluye en el Apéndice SI, Fig. S1.
+El rendimiento promedio validado cruzadamente (es decir, fuera de muestra) del modelo
+para cada atributo se presenta en la Fig. 2. La predicción para la mayoría de los
+atributos fue razonablemente exitosa, con valores de R² que en su mayoría van desde
+por encima de 0,5 hasta casi 0,8; los atributos típico, familiar y
+gay son las excepciones.
+Como los participantes discrepan en parte en sus valoraciones (34),
+la predicción perfecta es imposible. Para comprender mejor el límite de predicción
+impuesto por la confiabilidad interevaluador limitada, calculamos
+la confiabilidad por mitades de cada atributo, promediando los coeficientes de correlación al cuadrado entre los promedios de 100 divisiones aleatorias
+de las calificaciones de cada imagen. Estos límites de predicción varían entre
+atributos y se representan en la Fig. 2 junto con las brechas del modelo que implican. (Véase Factores que influyen en el rendimiento de la predicción
+para una caracterización detallada.)
+Curiosamente, los modelos de familiar y parece-a-ti mostraron
+las menores brechas entre rendimiento y confiabilidad, lo que indica
+que su impredecibilidad no se debe a una calidad deficiente del modelo ni
+a la falta de rasgos útiles de entrada. Más bien, es probable que familiar
+más que otros atributos, se base tanto en un concepto compartido
+o experiencia compartidos como en un concepto o experiencia personal mucho mayor;
+solo lo primero puede predecirse para los participantes en conjunto. Esto se corrobora con un efecto similar para el atributo parece-a-ti,
+que solo puede predecirse a nivel agregado en la medida en que
+nuestro grupo de participantes comparta una representación de sus respectivos rasgos faciales, lo que puede ser un subproducto del grupo de participantes
+con menos diversidad de apariencia que el conjunto de estímulos. Fig. 2. Rendimiento promedio del modelo validado cruzadamente (barras negras) comparado
+con la confiabilidad intersujetos (marcadores rojos).
+Los atributos correspondientes a algunas categorías sociales raciales o étnicas, como
+“negro”, presentaron una brecha mayor entre confiabilidad
+y rendimiento del modelo que otros atributos. Una
+posible razón de esta brecha es un sesgo de muestreo en el generador de estímulos. De hecho, los gráficos de violín de la distribución de calificaciones indican,
+por ejemplo, que los rostros negros estaban subrepresentados
+(SI Apéndice, Fig. S3). Una segunda posible razón de la brecha es que
+el grado de subrepresentación de participantes que se identifican como miembros de un grupo racial o étnico minorizado
+podría correlacionarse con el contenido de las inferencias agregadas de atributos.
+Sin embargo, no observamos tal correlación: el segundo autoidentificador más común entre los participantes fue
+negro, que tuvo una de las mayores brechas entre confiabilidad y rendimiento del modelo,
+mientras que los atributos correspondientes a categorías raciales y étnicas aún menos reportadas tuvieron una brecha menor.
+Una tercera posible razón es que el grupo de participantes, predominantemente blanco,
+podría tener estereotipos similares sobre todos los grupos raciales o étnicos minorizados, lo que conduce a
+una predictibilidad comparable entre los atributos relevantes.
+Sin embargo, esta explicación es incoherente con la falta de correlaciones fuertes observada entre esos atributos (Fig. 1). En conjunto, esto
+sugiere que la selección de estímulos contribuye más
+PNAS 2022 Vol. 119 No. 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 3 de 9
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+0.8
+0.6
+0.00.20.4
+Rendimiento del modelo R²
+Número de calificaciones por rostro 5 30
+Número de dimensiones de rasgos 0 1 2 150,8
+0.6
+0.00.20.4
+0.8
+0.6
+0,0 0,2 0,4 gay negro privilegiado asiático electable edad feliz liberal/conservador alerta presumido medio oriente familiar memorable típico cree en Dios inteligente color de piel color de cabello exterior confiable bien arreglado atractivo isleño del Pacífico delgado/gordo dominante blanco femenino/masculino sociable cabello largo nativo americano torpe hispano parece-a-ti
+Número de rostros 1000 0,8
+0.6
+0.00.20.4
+0.8
+0.6
+0.00.20.4
+0.8
+0.6
+0.00.20.4100
+Fig. 3. Rendimiento del modelo (R²) para cada atributo en función del número de ejemplos de rostros (arriba), del número de calificaciones de participantes por cada rostro de ejemplo
+(en medio), y del número de dimensiones de rasgos de imagen (abajo). Los atributos están ordenados según el rendimiento máximo del modelo observado en la parte superior.
+a la brecha observada que la composición del grupo de participantes.
+Aun así, no puede extraerse una conclusión firme, porque no podemos descartar limitaciones en la capacidad representacional de las
+características de la red neuronal.
+Factores que influyen en el rendimiento de la predicción. Para caracterizar los
+factores que influyen en el rendimiento de la predicción, primero investigamos
+el efecto del número de rostros evaluados sobre el rendimiento predictivo
+(Fig. 3, arriba). Las curvas de rendimiento se generaron ajustando modelos
+para cada una de 30 muestras aleatorias de imágenes con tamaños que van
+de 100 a 1000. La mayoría de los atributos se benefician de aumentos en el
+número de rostros evaluados, con variación significativa entre ellos en cuanto a cómo escala el rendimiento con el número de rostros únicos
+evaluados. Curiosamente, se necesitaron menos imágenes para saturar
+el rendimiento del modelo para el atributo femenino/masculino que para
+la mayoría de los demás atributos. Para todos los demás atributos, agregar imágenes adicionales
+mejoró el rendimiento en todo el rango.
+A continuación, investigamos la relación entre el número de
+calificaciones de participantes únicos obtenidas para cada estímulo facial y el
+rendimiento predictivo (Fig. 3, medio). Las curvas de rendimiento se generaron
+ajustando modelos a conjuntos de datos submuestreados con tamaños de 5 a 30 calificaciones únicas por imagen, con 30 conjuntos
+muestreados por tamaño. Dejando de lado los atributos femenino/masculino y edad,
+que generan menos desacuerdo, el rendimiento aumenta considerablemente
+a medida que aumenta el número de calificaciones para todos los atributos. Las ganancias debidas al
+número de calificaciones disminuyen a medida que aumenta el número de calificaciones únicas, pero a un ritmo más lento que las ganancias debidas al número de rostros
+(Fig. 3, arriba). Falta ver en qué medida el escalado del número de rostros calificados y del número de calificaciones por rostro, más allá del rango explorado aquí, explica la brecha
+entre el rendimiento del modelo y el límite impuesto por la confiabilidad interevaluador.
+entre el rendimiento del modelo y el límite impuesto por la
+confiabilidad interevaluador.
+Por último, investigamos la relación entre el número
+de rasgos de imagen (512 en total) y el rendimiento predictivo (Fig. 3,
+abajo). Las curvas de rendimiento se generaron ajustando modelos
+usando conjuntos reducidos de rasgos obtenidos mediante análisis de componentes principales
+variando la dimensionalidad entre 10 y 512. En todos
+los casos, el rendimiento se satura rápidamente, pero mejora marginalmente con un mayor número de dimensiones en algunos casos. Los distintos
+perfiles de saturación indican que tan solo 10 dimensiones de este
+espacio de rasgos latentes pueden bastar para explicar la mayor parte de la varianza en las inferencias de atributos, mientras que un subconjunto de atributos se beneficia
+considerablemente de representaciones de rasgos de mayor dimensionalidad. Es posible que la calidad de la representación aprendida a partir de
+la red neuronal profunda que empleamos haya sido un factor limitante del rendimiento predictivo. Factores distintos del rendimiento predictivo (en concreto, la capacidad de generar imágenes además de representarlas) guiaron la selección de la red en el presente estudio. Otras arquitecturas con otras formas de supervisión podrían ofrecer
+una mejora del rendimiento predictivo. Por ejemplo, hay
+evidencia de que los modelos supervisados por identidad proporcionan representaciones altamente predictivas de información diversa sobre atributos (26, 35, 36).
+Manipulación de las inferencias de atributos. Como los vectores de atributos aprendidos
+corresponden a dimensiones lineales, podemos manipular un rostro arbitrario representado por los rasgos z
+i con
+respecto al atributo k mediante aritmética vectorial: zi + βwk, donde
+β es un escalar que controla la modulación positiva o negativa de
+los atributos. Aplicamos un rango simétrico de β alrededor de 0 a cada
+vector de atributo para manipular una serie de representaciones de rostros base en las direcciones negativa y positiva, y decodificamos los resultados para su visualización con el mismo componente decodificador/generador de
+la red neuronal que se usó para obtener las representaciones (véase
+el Apéndice SI para más detalles).
+Los resultados de estas transformaciones para seis inferencias de atributos de muestra
+se muestran en la Fig. 4. Las manipulaciones son notablemente suaves y eficaces a lo largo de cada dimensión de atributo. Por ejemplo, modular la confiabilidad aumenta los rasgos asociados
+con las percepciones de confiabilidad, como la dirección de la mirada, el grado de sonrisa, la forma del rostro y la feminidad facial (4, 37). Las manipulaciones de inferencias de atributos pueden afectar a más de una dimensión de la apariencia. Por ejemplo, aumentar la inteligencia puede añadir gafas o
+cambiar la expresión facial. Aumentar la sociabilidad puede incrementar
+la sonrisa, como era de esperar, pero también dar a las gafas un aspecto más redondeado y caricaturesco. Otras dimensiones permiten niveles mayores de extrapolación. Por ejemplo, los rostros pueden hacerse considerablemente más delgados o más gordos que cualquier ejemplo del conjunto de datos, y aun así
+mantener una apariencia realista. Los rostros con la felicidad fuertemente manipulada también se parecen a caricaturas convincentes.
+Es posible manipular una dimensión s (p. ej., la inteligencia)
+mientras se controla otra t (p. ej., la confiabilidad) creando
+un vector ortogonal, restando la componente proyectada de la
+dimensión que se quiere controlar:
+s − (s·t)/
+||t||² · t. [1]
+4 de 9 https://doi.org/10.1073/pnas.2115228119 pnas.org
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+B A
+Fig. 4. (A) Los rostros juzgados en promedio como los de calificación más alta y más baja a lo largo de seis dimensiones de atributos percibidos de muestra. (B) Manipulaciones basadas en el modelo
+de dos rostros base de muestra a lo largo de las dimensiones de muestra, que demuestran manipulaciones suaves y eficaces a lo largo de cada atributo.
+Un ejemplo de tales transformaciones, que controlan la confia-
+bilidad sobre un rostro ejemplar dado, puede verse en el Apéndice SI,
+Fig. S11.
+Nótese que las manipulaciones de inferencias de atributos pueden afectar a
+ambos, los rasgos faciales internos y los externos. Cuando solo se alteran los rasgos internos
+no es porque el GAN manipule solo rasgos internos, sino porque los rasgos externos son ortogonales o irrelevantes para esa inferencia de atributo en la región del
+rostro manipulado.
+Validación de los modelos de inferencias de atributos. ¿Los modelos de atributos generados arriba cambian de manera confiable las impresiones de los participantes
+sobre los rostros transformados con ellos?
+Para responder esta pregunta, realizamos
+una serie de 20 experimentos preregistrados con más de 1000 participantes para verificar que nuestros modelos pueden, en efecto, manipular impresiones de atributos en los observadores. Cada uno de los experimentos combinó
+uno de dos tipos de imagen de rostro (artificial o real) con una de
+10 dimensiones de atributos diferentes, elegidas para representar un amplio rango de rendimientos de modelo distintos y niveles de objetividad/subjetividad
+(edad, femenino/masculino, delgado/gordo, confiable,
+atractivo, dominante, inteligente, sociable, memorable y familiar).
+Como en los experimentos de modelado de atributos, para los experimentos con rostros artificiales generamos 50 rostros sintéticos únicos al azar usando StyleGAN2 (21, 22), una arquitectura GAN de última generación
+(SG2). Sin embargo, para los experimentos con rostros reales, codificamos en nuestro modelo 50 fotografías faciales únicas, elegidas de una base de datos de rostros reales de uso común en la literatura psicológica (38).
+En cada ensayo, se mostró a los participantes un único rostro y se les pidió
+para calificarla. Fundamentalmente, cada imagen facial fue transformada mediante un modelo de atributo percibido (asignado experimentalmente) para evocar uno de tres niveles de esa impresión; los rostros podían fijarse en la media
+del valor observado del atributo percibido o en ±0.5 DE respecto a
+esa media. Cada rostro se mostró en cada nivel del atributo asignado (50 identidades × 3 niveles de transformación = 150
+rostros únicos), y una vez más el 20% de los ensayos se repitió para medir la fiabilidad test–retest
+(para excluir a los sujetos con una fiabilidad negativa
+de ese tipo) para un total de 180 ensayos. Si las transformaciones del modelo de atributos efectivamente cambian las impresiones de los participantes sobre los
+rostros, entonces deberíamos observar que las calificaciones de los participantes sobre los rostros
+aumentan con niveles crecientes de la manipulación. Y eso es justamente lo que encontramos: los ANOVA de medidas repetidas revelaron que todas las manipulaciones produjeron resultados altamente significativos [todos los F(2, 98)s>
+14.13, todos los valores de P<0.000005, todos los valores de η
+2>0.223].
+Lo más importante es que los datos de todos los experimentos mostraron una tendencia lineal positiva fuertemente significativa [todos los valores de t(98)>2.69, todos los valores de
+P≤0.008, con la excepción de los rostros reales manipulados a lo largo de
+PNAS 2022 Vol. 119 N.º 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 5 de 9
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+la dimensión de atributo familiar, t(98) =−1.60, P= 0.112; ver
+el Apéndice SI, Fig. S12, para un diagrama de enjambre de todos los datos].*
+Discusión general
+Nos propusimos desarrollar un modelo integral de la percep-
+ción de atributos que pueda predecir las inferencias humanas de atributos a partir de imágenes faciales
+y manipularlas a lo largo de dimen-
+siones psicológicamente significativas. Sin extracción explícita de características ni algoritmo de interpolación, el modelo lo logra de forma totalmente basada en datos y con
+una precisión y una generalización relativamente altas. Se necesitan conjuntos de datos grandes (con
+respecto tanto al número de estímulos faciales como al número de calificaciones por rostro) para lograr esto. Los resultados cualitativos y
+los experimentos de validación demuestran que las manipulaciones psicológicas de atributos
+de fotos realistas de rostros pueden lograrse mediante aritmética vectorial simple. Además, nuestro flujo de trabajo proporciona una fórmula gen-
+eral para modelar las inferencias sobre cualquier atributo que pueda
+medirse mediante anotaciones de imágenes. Como los modelos de atributos se expresan en el mismo espacio multidimensional, su similitud
+es inmediatamente evidente, lo que permite probar hipótesis específicas sobre
+la relación entre atributos psicológicos, predecir atributos nuevos a partir de sus relaciones con modelos de atributos existentes
+atributos, y controlar la varianza compartida entre atributos.
+El modelo caracteriza en líneas generales las inferencias sobre rostros diversos
+en sus contextos cotidianos y condiciones de visualización. Por ejem-
+plo, en cualquier imagen particular, generalmente se puede discernir si
+la fotografía es espontánea o preparada, las condiciones del entorno (por ejemplo, al aire libre bajo el sol directo cerca de vegetación, frente a dentro de
+un edificio con iluminación cálida), la pose y la mirada del sujeto,
+sus hábitos de arreglo personal e incluso indicios de su cultura o sus gustos a partir de la ropa parcialmente visible, los escotes, los tocados, las joyas, las gafas,
+etc. Otros factores de variación incluyen el ángulo de visión, la pose de la cabeza,
+la calidad de la foto, la distancia focal y la profundidad de campo, entre otros. Aunque capturar el comportamiento de forma que generalice a través de estas
+variaciones (e incluya sus efectos) es el objetivo principal, pero
+tiene la desventaja considerable de dificultar la interpretación
+difícil. Considérese, por ejemplo, cuando un rostro se infiere
+como más confiable que otro. ¿Se debe a las cejas fruncidas y a una mandíbula ancha, o a un sombrero muy atípico y a una iluminación oscura?
+Aunque nuestros estímulos son sintéticos, no están muy controlados
+y son más comparables a fotografías muestreadas al azar y poco curadas. Por ello, comprender las bases de las inferencias de atributos
+requerirá anotaciones adicionales significativas de atributos de nivel inferior
+(por ejemplo, el color del cabello). La Fig. 1, por ejemplo, sugiere que delgado/gordo, cabello largo y color del cabello (oscuridad del cabello) no son partic-
+ularmente explicativos de las inferencias de atributos, con algunas excepciones
+(por ejemplo, delgado/gordo–atractivo). La inspección cualitativa reveló que
+las transformaciones no parecieron alterar con frecuencia ni de forma significativa
+los rasgos no faciales (con la notable excepción de que aparecen gafas
+al aumentar la inteligencia aparente).
+Otra consideración importante al interpretar el trabajo actual
+es que la diversidad de los rostros utilizados en el experimento
+casi con certeza influirá e incluso podría oscurecer el significado de algunos atributos. Por ejemplo, la semántica del atributo
+atractivo puede cambiar al calificar imágenes de niños frente a adultos.
+No basta con analizar subconjuntos de rostros de los datos, porque el contexto del experimento puede inducir efectos de orden
+o dependencia serial (39) que influye en las calificaciones de los participantes sobre
+todos los rostros. También es difícil manipular el contexto del experimento, porque son posibles muchísimos contextos diferentes.
+*El hecho de que familiar tuviera un desempeño tan pobre no es inesperado, ya que esta dimensión fue
+elegida específicamente para representar un modelo de atributo de bajo rendimiento de los modelos de
+generación de modelos. Futuros trabajos podrían considerar dos posibles soluciones. La primera es
+aprovechar el hecho de que nuestro experimento muestreó rostros y su
+orden, y por tanto sus contextos, de forma aleatoria y relativamente densa.
+Como algunos de estos contextos se agruparán en, por ejemplo, grupos de muchos niños/pocos niños, esto ofrece una posible vía
+para investigar efectos relevantes. La segunda es modelar los atributos
+como multimodales, en los que los atributos no son factores lineales únicos (combinaciones lineales de características), sino muchos factores potencialmente correlacionados
+pero no del todo colineales que se agrupan en diferentes regiones del
+espacio de representación subyacente del modelo de atributo. Esto también puede explicar en parte la brecha actual entre nuestros modelos predictivos
+y las cotas superiores estimadas correspondientes basadas en
+la fiabilidad entre sujetos.
+Por último, no está claro si los estímulos sintéticos generados por arqui-
+tecturas como SG2, a pesar de ser en general convincentemente realistas,
+son en realidad diferentes de los rostros reales de maneras que podrían sesgar
+las conclusiones que los utilizan. Por esta razón, los investigadores
+que utilicen estos estímulos para extraer conclusiones sobre la percepción humana deberían cuidarse de validar los hallazgos derivados de ellos
+usando fotos de rostros reales según corresponda.
+Implicaciones éticas. Es importante señalar que, si bien el objetivo principal de este
+trabajo es apoyar el modelado científico, el marco desarrollado aquí añade de forma significativa a las preocupaciones éticas que ya en-
+sombrecen el software de manipulación de imágenes. A diferencia de la edición tradicional de fotos
+que puede estar limitada en su eficacia por las intuiciones de un artista particular, el método actual puede ser más
+preciso y, como mínimo, es más rápido y eficiente gracias a su
+automatización. Además, a diferencia de otros métodos que usan redes neuronales profundas, como DeepFakes (40), que pueden afectar la
+percepción social de una persona al colocarla en un contexto no deseado
+o comprometedor (por ejemplo, superpuesta sobre un cuerpo en una imagen objetivo arbitraria), nuestro modelo puede inducir cambios (percibidos) en el propio rostro de la persona
+y puede ser difícil de detectar
+cuando se aplica con la suficiente sutileza. Sostenemos que tales métodos (así como sus implementaciones y los datos de respaldo) deberían
+hacerse transparentes desde el principio, de modo que la comunidad pueda
+desarrollar protocolos robustos de detección y defensa que acompañen a la tecnología, como ha hecho, por ejemplo, al desarrollar
+técnicas muy precisas de análisis forense de imágenes para detectar rostros sintéticos
+generados por SG2 (41, 42). De forma más general, en la medida en que el uso indebido de las técnicas de manipulación de imágenes descritas
+aquí no esté cubierto por la legislación vigente en materia de difamación (43, 44), es
+apropiado considerar formas de limitar el uso de estas tecnologías
+mediante los marcos regulatorios propuestos en el contexto más amplio
+de las tecnologías de reconocimiento facial (45,46).
+También existe el riesgo de que nuestros datos y modelos perpetúen
+los sesgos que miden, que son primeras impresiones de la pobla-
+ción en estudio y no tienen correspondencia necesaria con las identidades, actitudes o competencias reales de las personas a las que se parecen las imágenes o
+representan. Si bien el sesgo en nuestra muestra de calificadores
+viene de la misma población que la mayoría de los estudios de crowdsourcing, puede ser especialmente importante entender el contexto
+de la percepción de atributos sociales, dado que consiste principalmente en
+participantes blancos de Estados Unidos. Además, descubrimos que el modelo generativo que sintetizó nuestros estímulos, aunque
+es muy diverso, aun así submuestrea rostros de personas negras
+y de otros grupos minorizados. Las aplicaciones del modelo producirán, por tanto, imágenes de rostros más alineadas con
+este sesgo que los insumos originales. Cuantificamos parte de este
+sesgo más allá de la demografía de los participantes, principalmente con los atributos
+«blanco», «familiar», «se parece a ti», todos los cuales están moderadamente
+correlacionados (Fig. 1).
+6 de 9 https://doi.org/10.1073/pnas.2115228119 pnas.org
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+Conclusión. Los métodos modernos basados en datos del aprendizaje automático
+proporcionan nuevas herramientas para representar y manipular estímulos complejos
+y naturalistas, pero no están diseñados explícitamente para modelar o
+explicar las representaciones mentales humanas. Sin embargo, aplicar la misma filosofía de «big data» a los experimentos de comportamiento nos permite
+alinear estos modelos potentes con la percepción humana. Los modelos profundos
+de juicios superficiales sobre rostros que exploramos en este artículo pueden, a su vez, usarse para ampliar el rango de datos de comportamiento
+que podemos recoger, porque definen un conjunto infinito de estímulos realistas
+y psicológicamente controlados para una nueva generación de experimentos de comportamiento.
+Materiales y métodos
+Estímulos. Nuestros experimentos usan 1,004 imágenes sintéticas pero fotorrealistas
+de rostros generados con SG2. El componente generador de SG2 modela la distribución de imágenes de rostros condicionada a un vector latente de 512 dimensiones, de varianza unitaria y distribución normal multivariante. Cuando se muestrea un vector de esta distri-
+bución y se pasa por la red, se asigna a una segunda representación intermedia
+de 512 dimensiones (cuya distribución se desconoce), que a su vez pasa por múltiples capas y finalmente se asigna a una imagen de salida
+que se parece a las del conjunto de datos con el que se entrenó el modelo. Así, cualquiera
+de las dos representaciones de 512 dimensiones puede usarse para nuestras aplicaciones de modelado, cada una asociando un vector de características completamente descriptivo (latente) con cada rostro.
+Usamos la última representación en todo el trabajo porque produjo mejores resultados en todos los análisis.
+En concreto, usamos estas representaciones de un modelo preentrenado que se entrenó con el conjunto de datos Flickr-Faces-HQ (21), que contiene 70,000
+imágenes de alta calidad con una resolución de 1,024 × 1,024 píxeles. Las imágenes generadas
+por este modelo se renderizan con la misma resolución.
+Los rostros sintéticos generados por SG2 son diversos y convincentemente realistas
+en la mayoría de los casos, pero ocasionalmente pueden contener artefactos visuales que parecen extraños o
+incluso chocantes. Minimizamos estos artefactos en nuestro conjunto de datos con dos estrategias.
+Primero, SG2 emplea un parámetro ψ para la generación de imágenes posterior al entrenamiento que acota
+la norma de cada muestra de entrada multivariante y, como resultado, establece un equilibrio entre
+la diversidad y la calidad de las muestras. Fijamos ψ en 0,75, valor que, según la inspección,
+parecía maximizar conjuntamente los criterios para nuestros fines. Segundo, inspeccionamos manualmente y filtramos las imágenes generadas, eliminando todas las instancias que
+contenían rostros obviamente distorsionados, múltiples rostros, manos, manchas localizadas de color,
+tocados de cabeza no plausibles, o cualquier artefacto visual especialmente notable. Concretamente, muestreamos ∼10,000 vectores normales de 512 dimensiones, los pasamos por la
+red generadora de SG2 para obtener 10,000 rostros candidatos como estímulos para nuestro conjunto de datos,
+y tomamos los primeros ≈1,000 que cumplieron los criterios de calidad. Ejemplos aleatorios
+del conjunto de estímulos se proporcionan en el SI Appendix.
+Para los estudios de validación del modelo, se generaron 50 identidades faciales reales mediante
+la codificación de 50 rostros de la Chicago Face Database (CFD) (38). Los rostros de la CFD
+usados en estos experimentos con rostros reales estaban aproximadamente equilibrados en cuanto a las cuatro razas y los dos géneros disponibles en el conjunto principal de estímulos. El conjunto final incluyó
+12 rostros del este de Asia, 14 negros, 12 latinoamericanos y 12 blancos (con igual
+número de rostros masculinos y femeninos en cada grupo racial). Los 50 rostros usados en los experimentos de rostros artificiales se eligieron mediante el mismo procedimiento que en los
+estudios previos de modelado de atributos. Cada identidad facial única se transformó luego a lo largo de
+una de 10 dimensiones perceptuales de atributo (edad, femenino/masculino, delgado/gordo,
+confiable, atractivo, dominante, inteligente, extrovertido, memorable y familiar) a tres
+niveles del atributo (–0,5 DE, 0 DE y +0,5 DE respecto de la media de las calificaciones
+observadas en los estudios de modelado de atributos). Esto produjo 150 imágenes únicas por estudio de validación del modelo y, por tanto, 3,000 imágenes únicas en total.
+Participantes. Para los estudios de modelado de atributos usamos Amazon Mechanical Turk
+para reclutar un total de 4,157 participantes en 10,974 sesiones, de los cuales 10,633 (≈97%) cumplieron nuestros criterios de inclusión (SI Appendix, Calidad de datos). Los participantes
+se identificaron como mujeres (2,065) u hombres (2,053), prefirieron no decirlo
+(21), o no tenían su género listado como opción (18). La edad media fue de
+∼39 años. Los participantes se identificaron con raza/etnia como blancos (2,935),
+negros/afroamericanos (458), latinx/a/o o hispanos (158), del este de Asia (174),
+del sureste asiático (71), del sur de Asia (70), nativos americanos/indios americanos (31),
+de Oriente Medio (12), nativos de Hawái u otras islas del Pacífico (3), o alguna combinación de dos o más razas/etnias (215). Los participantes restantes prefirieron no decirlo (22) o no tenían su raza/etnia listada como
+opción (8).
+Para los estudios de validación del modelo, reclutamos un total de 1,022 trabajadores de
+Amazon Mechanical Turk a través de CloudResearch (47), de los cuales 1,000 (∼98%) cumplieron
+nuestros criterios de inclusión. De ellos, 18 participantes fueron excluidos por baja fiabilidad test–retest,
+uno fue excluido por participar en el experimento dos veces, y
+tres fueron reclutados en exceso respecto de nuestro tamaño objetivo de muestra de 1,000. Los participantes se identificaron por género como mujeres (530) u hombres (484), prefirieron no decirlo (3), o no tenían su género listado como opción (5). La edad media fue de ∼42 años.
+Los participantes se identificaron con raza/etnia como blancos (781), negros/afroamericanos
+(77), latinx/a/o o hispanos (37), del este de Asia (37), del sureste asiático (11), del sur de Asia (12), nativos de Hawái u otras islas del Pacífico (3), o
+alguna combinación de dos o más razas/etnias (57). Los participantes restantes
+prefirieron no decirlo (3) o no tenían su raza/etnia listada como opción (4).
+La Junta de Revisión Institucional de la Universidad de Princeton aprobó ambos conjuntos de
+estudios. Los participantes dieron su consentimiento informado antes de comenzar el estudio.
+Procedimiento. Para los estudios de modelado de atributos usamos un diseño entre sujetos
+en el que los participantes evaluaron los rostros respecto de cada atributo. Los participantes primero
+dieron su consentimiento. Luego completaron un acuerdo previo a las instrucciones para responder preguntas abiertas al final del estudio. En las instrucciones, a los participantes se les
+dieron 25 ejemplos de imágenes de rostros para dar una idea de la diversidad que encontrarían
+durante el experimento. A los participantes se les indicó que calificaran una serie de rostros en una escala continua de deslizador, donde los extremos eran descriptores bipolares
+como «confiable» y «no confiable». No proporcionamos definiciones de
+cada atributo a los participantes y, en cambio, nos basamos en sus nociones intuitivas de cada uno.
+Luego, cada participante completó 120 ensayos con el atributo único al que
+fue asignado. Cien de estos ensayos mostraban imágenes seleccionadas al azar (sin reemplazo) del conjunto completo; los 20 ensayos restantes eran repeticiones de ensayos anteriores, seleccionadas al azar de los 100 ensayos únicos, que usamos para evaluar la fiabilidad intra-calificador.
+Cada estímulo del conjunto completo fue juzgado por al menos
+30 participantes únicos.
+Al final del experimento, se entregó a los participantes una encuesta que preguntaba
+qué creían los participantes que estábamos evaluando, y pedía una autoevaluación de
+su desempeño y retroalimentación sobre posibles puntos de confusión, así como información demográfica como edad, raza y género. Los participantes tenían
+30 minutos para completar todo el experimento, pero la mayoría lo completó en menos de 20
+min. A cada participante se le pagó $1.50.
+Los estudios de validación del modelo siguieron un procedimiento idéntico al de los
+estudios de modelado de atributos descritos arriba, salvo cuando se indica a continuación.
+Cada participante completó uno de 20 experimentos preregistrados que implicaban un
+par de uno de dos tipos de imágenes de rostro (artificiales vs. reales) con manipulaciones
+a lo largo de una de 10 dimensiones de atributo (edad, femenino/masculino,
+delgado/robusto, digno de confianza, atractivo, dominante, inteligente, sociable, memorable y
+familiar). En cada experimento, los observadores calificaron 150 imágenes únicas (con 30
+repeticiones) según la dimensión de atributo percibido asignada. Cada participante recibió
+$2.00 por la mayor duración del experimento.
+Modelo de atributos faciales. Para captar de forma amplia la percepción de atributos faciales,
+un modelo debe reproducir con precisión los juicios humanos sobre los atributos de rostros
+naturales. Más formalmente, buscamos una función φ(·)PE (a la que llamamos un “codificador psicológico”)
+que asigne a cualquier posible estímulo facial xi={x1,...xm}
+(es decir, un vector m-dimensional de intensidades de píxeles sin procesar) a un atributo psicológico
+dado, la inferencia de atributo (juicio promedio para el rostro xi):
+φ(xi)PE=yi. [2]
+Definimos además φ(·)PE como una descomposición de funciones:
+φ(x)PE=φ(φ(x)F)S, [3]
+donde φ(xi)F=zi={z1,...zd} es una representación rica en características del estímulo facial
+xi, y φ(·)S asigna estas características a las dimensiones psicológicas de interés.
+Esta formulación nos permite aprovechar las redes neuronales de última generación para caracterizar imágenes faciales arbitrarias y complejas.
+PNAS 2022 Vol. 119 No. 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 7 de 9
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+Luego relacionamos estas características zi con características psicológicas suponiendo que
+φ(·)S es una función lineal, lo que implica que cada atributo es un vector de 512 dimensiones
+(potencialmente disperso) en el espacio de características global. La función
+φ(·)S se aprende a partir de datos de juicios humanos sobre atributos. En particular, dadas
+valoraciones de atributos en escala continua (es decir, grado de confiabilidad en una escala
+del 1 al 100), usamos regresión lineal para asignar vectores de características de 512 dimensiones
+zi a calificaciones promedio de atributos yi:
+yi=φ(zi)S=w0+w1z1+...+wdzd. [4]
+En ambos casos, el vector de pesos wk={w1,...wd} representa un único atributo k
+como un factor lineal. Por tanto, en el centro de nuestro modelo hay una matriz W∈IRk×d,
+un conjunto de factores lineales de d dimensiones para cada uno de los k atributos, cada uno obtenido
+ajustando un modelo lineal separado.
+Los componentes anteriores del modelo permiten predecir atributos
+para estímulos faciales arbitrarios. Además, deseamos tener la flexibilidad de manipular
+estos atributos para un rostro dado. Como representamos cada atributo como un vector wk
+en el espacio de representación de características, podemos manipular cada rostro en este espacio
+(es decir, representado por zi) mediante suma vectorial:
+z′
+i=zi+βwk, [5]
+donde z′
+i es la nueva cara transformada y β es un parámetro escalar que controla la
+intensidad de la transformación, que puede ser positiva o negativa. Cuando β=0,
+z′
+i=zi, y no se produce ninguna transformación. En otras palabras, β escala el atributo
+vector que se suma a la representación facial dada. Finalmente, para generar
+un nuevo estímulo correspondiente a nuestra transformación, se emplea el featurizador inverso (es decir,
+la red decodificadora/generadora de SG2) φ−1(·)F para asignar características
+zi de vuelta a un estímulo facial xi, de modo que la manipulación de imágenes faciales pueda describirse por completo
+mediante
+x′
+i=φ−1(z′
+i)F=φ−1(zi+βwk)=φ−1(φ(xi)F+βwk), [6]
+donde x′
+i es la versión de la cara de entrada xi transformada por el atributo.
+El éxito de la formulación anterior (es decir, buena predicción de los juicios humanos de atri-
+butos para rostros arbitrarios) depende en gran medida de la elección del
+codificador de características φ(·)F, que abstrae los píxeles sin procesar y proporciona la base
+para modelar los atributos. Si las características no son suficientemente expresivas, el modelo
+no logrará hacer buenas predicciones de los juicios humanos de atributos. Asimismo, la
+capacidad de la función inversa φ−1(·)F para generar estímulos faciales dadas sus
+representaciones de características determina si los estímulos faciales transformados por atributos evitarán con éxito el efecto valle inquietante. Hay muchas redes neuronales modernas
+que podrían ser una buena elección de featurizador φ(·)
+F. Por ejemplo,
+las redes neuronales convolucionales, que aprenden jerarquías de características invariantes a la traslación, pueden entrenarse para clasificar rostros con un alto nivel de precisión, y sus
+representaciones ocultas pueden tomarse como una representación de características z. Sin embargo, este
+método no produce una función inversa de las características de vuelta a los estímulos, y los intentos de invertir modelos a posteriori suelen introducir artefactos (48).
+En cambio, seleccionamos un modelo orientado principalmente a resolver el problema inverso
+por sí solo. Las GAN son una forma de modelo profundo de variables latentes que aprende a modelar una distribución de imágenes mediante dos componentes: una red generadora que genera
+imágenes asignando ruido gaussiano a imágenes (sintéticas), y una red discriminadora que distingue entre datos reales y generados. Cuando se entrena
+adecuadamente de modo que equilibre los dos componentes, la red discriminadora
+obliga al generador a producir imágenes realistas, y el discriminador ya no puede
+distinguir entre imágenes reales y generadas. SG2, descrita antes, es una de las aplicaciones más exitosas de esta estructura de modelo y paradigma de entrenamiento
+; incluye varias mejoras clave que producen resultados muy convincentes
+(véanse ejemplos de rostros en el Apéndice SI).
+SG2 produce solo la función inversa φ(x
+i)−1
+F, una función generadora o decodificadora convolucional aprendida,
+que asigna características a imágenes. Para aplicar nuestro modelo a imágenes faciales
+arbitrarias fuera de nuestro conjunto de 1,004, invertir esta función
+es necesario. Aunque los autores de SG2 ofrecen su propia solución a este problema, encontramos que no es lo bastante precisa para nuestros fines. En cambio, definimos un
+codificador y featurizador φ(x
+i)F como un proceso de optimización que busca
+mediante descenso de gradiente el vector de entrada a SG2 que produce una imagen de salida con buena semejanza a la que queremos caracterizar. Esta semejanza se define como
+la distancia euclídea en el espacio de características de otra red convolucional externa
+preentrenada para reconocer rostros (20). Además, como este proceso es lento, inicializamos el vector de codificación de imagen usando una aproximación de primera pasada de otra
+red neuronal convolucional que entrenamos para regresar miles de muestras de imágenes SG2 a los
+vectores de salida que las generaron. Este codificador es mucho menos preciso, pero mucho más rápido, y acelera drásticamente la convergencia del proceso de decodificación más lento y preciso descrito arriba.
+Un diagrama resumen de nuestro flujo de modelado se proporciona en el Apéndice SI,
+Fig. S1.
+Ajuste y generalización del modelo. Todos los modelos de regresión lineal se ajustaron usando
+el algoritmo de mínimos cuadrados. Como las representaciones de características de imágenes (es decir, vectores
+de predictores en la matriz de diseño) son de alta dimensión, existe un riesgo significativo de sobreajuste, que podría resultar en soluciones de modelo subóptimas o sin sentido.
+soluciones. Para abordarlo, usamos regresión de cresta (ridge), que penaliza las soluciones w
+k
+que tienen una distancia euclídea grande al vector 0. La intensidad de esta penalización
+y su influencia en la solución resultante se controlan mediante un parámetro libre λ.
+Buscamos el valor óptimo de este parámetro en función de la capacidad de generalización
+del modelo, específicamente usando validación cruzada de 10 pliegues. Todas las puntuaciones
+de modelo reportadas son promedios de las obtenidas en cada uno de los 10 pliegues, de modo que nunca reportamos el rendimiento sobre datos que se usaron para ajustar nuestros modelos.
+Disponibilidad de datos. El conjunto de datos One Million Impressions y todos los juicios
+conductuales e imágenes sintetizadas se han depositado en un repositorio de GitHub (https://github.com/jcpeterson/omi) (49).
+AGRADECIMIENTOS. A.T. contó con el apoyo de la Richard N. Rosett Faculty
+Fellowship de la Universidad de Chicago, Booth School of Business. La recolección de datos fue financiada por el Innovation Fund for New Ideas in the Natural Sciences de
+la oficina del decano de investigación de la Universidad de Princeton.
+Afiliaciones de los autores: aDepartamento de Ciencias de la Computación, Universidad de Princeton, Princeton, NJ
+08540; bBooth School of Business, Universidad de Chicago, Chicago, IL 60637; cDepartamento
+de Psicología, Universidad de Princeton, Princeton, NJ 08540; y dSchool of Business, Stevens
+Institute of Technology, Hoboken, NJ 07030
+1. F. Farzin, C. Hou, A. M. Norcia, Piecing it together: Infants’ neural responses to face and object
+structure. J. Vis. 12, 6–6 (2012).
+2. N. Kanwisher, J. McDermott, M. M. Chun, The fusiform face area: A module in human extrastriate
+cortex specialized for face perception. J. Neurosci. 17, 4302–4311 (1997).
+3. C. Frith, Role of facial expressions in social interactions. Philos. Trans. R. Soc. Lond. B Biol. Sci. 364,
+3453–3458(2009).
+4. N. N. Oosterhof, A. Todorov, The functional basis of face evaluation. Proc. Natl. Acad. Sci. U.S.A. 105,
+11087–11092(2008).
+5. C. A. Sutherland et al., Social inferences from faces: Ambient images generate a three-dimensional
+model. Cognition 127, 105–118 (2013).
+6. L. A. Zebrowitz, First impressions from faces. Curr. Dir. Psychol. Sci. 26, 237–242 (2017).
+7. B. C. Jones et al., To which world regions does the valence-dominance model of social perception
+apply? Nat. Hum. Behav. 5, 159–169 (2021).
+8. A. Todorov, D. Oh, The structure and perceptual basis of social judgments from faces. Adv. Exp. Soc.
+Psychol. 63, 189–245 (2021).
+9. C. A. M. Sutherland et al., Facial first impressions across culture: Data-driven modeling of Chinese and
+British perceivers’ unconstrained facial impressions. Pers. Soc. Psychol. Bull. 44, 521–537 (2018).
+10. A. Todorov, C. Y. Olivola, R. Dotsch, P. Mende-Siedlecki, Social attributions from faces: Determinants,
+consequences, accuracy, and functional significance. Annu. Rev. Psychol. 66, 519–545 (2015). 11. A. Todorov, A. N. Mandisodza, A. Goren, C. C. Hall, Inferences of competence from faces predict
+election outcomes. Science 308, 1623–1626 (2005).
+12. A. C. Little, R. P. Burriss, B. C. Jones, S. C. Roberts, Facial appearance affects voting decisions. Evol. Hum.
+Behav. 28, 18–27 (2007).
+13. I. V. Blair, C. M. Judd, K. M. Chapleau, The influence of Afrocentric facial features in criminal
+sentencing. Psychol. Sci. 15, 674–679 (2004).
+14. J. L. Eberhardt, P. G. Davies, V. J. Purdie-Vaughns, S. L. Johnson, Looking deathworthy: Perceived
+stereotypicality of Black defendants predicts capital-sentencing outcomes. Psychol. Sci. 17, 383–386
+(2006).
+15. C. J. Bohil, H. M. Kleider-Offutt, C. Killingsworth, A. M. Meacham, Training away face-type bias:
+Perception and decisions about emotional expression in stereotypically black faces. Psychol. Res. 85,
+2727–2741(2021).
+16. M. Turk, A. Pentland, Eigenfaces for recognition. J. Cogn. Neurosci. 3, 71–86 (1991).
+17. B. Tiddeman, M. Stirrat, D. Perrett, Towards realism in facial prototyping: Results of a wavelet MRF
+method. Proc. Theory Pract Comp. Graph. 1, 20–30 (2006).
+18. V. Blanz, T. Vetter, “A morphable model for the synthesis of 3D faces” en Actas de la 26.ª
+Conferencia Anual sobre Computer Graphics and Interactive Techniques, A. Rockwood, ed. (ACM
+Press/Addison-Wesley Publishing Co., 1999), págs. 187–194.
+19. C. A. Sutherland, G. Rhodes, A. W. Young, Facial image manipulation: A tool for investigating social
+perception. Soc. Psychol. Personal. Sci. 8, 538–551 (2017).
+8 de 9 https://doi.org/10.1073/pnas.2115228119 pnas.org
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+
+20. O. M. Parkhi, A. Vedaldi, A. Zisserman, “Deep face recognition” en Proceedings of the British Machine
+Vision Conference (BMVC), X. Xi, M. W. Jones, G. K. L. Tam, eds. (BMVA Press, 2015), pp. 41.1–41.12.
+21. T. Karras, S. Laine, T. Aila, “A style-based generator architecture for generative adversarial networks” en
+CVF Conference on Computer Vision and Pattern Recognition (CVPR) (IEEE, 2018), pp. 4396–4405.
+22. T. Karras et al., “Analyzing and improving the image quality of StyleGAN” en Actas de la
+Conferencia IEEE/CVF sobre Computer Vision and Pattern Recognition (IEEE, 2020), págs. 8110–8119.
+23. Y. Choi et al., “StarGAN: Unified generative adversarial networks for multi-domain image-to-image
+translation” en Actas de la Conferencia IEEE sobre Computer Vision and Pattern Recognition (IEEE,
+2018), págs. 8789–8797.
+24. A. J. O’Toole, C. D. Castillo, C. J. Parde, M. Q. Hill, R. Chellappa, Face space representations in deep
+convolutional neural networks. Trends Cogn. Sci. 22, 794–809 (2018).
+25. Z. He, W. Zuo, M. Kan, S. Shan, X. Chen, AttGAN: Facial attribute editing by only changing what you
+want. IEEE Trans. Image Process. 28, 5464–5478 (2019).
+26. P. Terhörst, D. Fährmann, N. Damer, F. Kirchbuchner, A. Kuijper, “Beyond identity: What information is
+stored in biometric face templates?” en 2020 IEEE International Joint Conference on Biometrics (IJCB)
+(IEEE, 2020), pp. 1–10.
+27. V. Bruce, A. Young, Understanding face recognition. Br. J. Psychol. 77, 305–327 (1986).
+28. D. Oh, R. Dotsch, J. Porter, A. Todorov, Gender biases in impressions from faces: Empirical studies and
+computational models. J. Exp. Psychol. Gen. 149, 323–342 (2020).
+29. J. R. Collova, C. A. M. Sutherland, G. Rhodes, Testing the functional basis of first impressions:
+Dimensions for children’s faces are not the same as for adults’ faces. J. Pers. Soc. Psychol. 117,
+900–924(2019).
+30. W. A. Bainbridge, P. Isola, A. Oliva, The intrinsic memorability of face photographs. J. Exp. Psychol. Gen.
+142,1323–1334(2013).
+31. G. Rhodes, The evolutionary psychology of facial beauty. Annu. Rev. Psychol. 57, 199–226 (2006).
+32. C. P. Said, A. Todorov, A statistical model of facial attractiveness. Psychol. Sci. 22, 1183–1190 (2011).
+33. I. J. Goodfellow et al., “Generative adversarial networks.” en Advances in Neural Information Processing
+Systems, Z. Ghahramani, M. Welling, C. Cortes, N. Lawrence, K. Q. Weinberger, eds. (Curran Associates,
+Inc., 2014), vol. 27.
+34. J. E. Martinez, F. Funk, A. Todorov, Quantifying idiosyncratic and shared contributions to judgment.
+Behav. Res. Methods 52, 1428–1444 (2020).
+35. A. Song, L. Linjie, C. Atalla, G. Cottrell, “Learning to see people like people: Predicting social
+impressions of faces.” en la 39.ª Reunión Anual de la Sociedad de Ciencias Cognitivas (CogSci, 2017). 36. C. J. Parde, Y. Hu, C. Castillo, S. Sankaranarayanan, A. J. O’Toole, Social trait information in deep
+convolutional neural networks trained for face identification. Cogn. Sci. 43, e12729 (2019).
+37. M. L. Willis, R. Palermo, D. Burke, Social judgments are influenced by both facial expression and
+direction of eye gaze. Soc. Cogn. 29, 415–429 (2011).
+38. D. S. Ma, J. Correll, B. Wittenbrink, The Chicago face database: A free stimulus set of faces and
+norming data. Behav. Res. Methods 47, 1122–1135 (2015).
+39. A. Kiyonaga, J. M. Scimeca, D. P. Bliss, D. Whitney, Serial dependence across perception, attention, and
+memory. Trends Cogn. Sci. 21, 493–497 (2017).
+40. P. Korshunov, S. Marcel, Deepfakes: A new threat to face recognition? Assessment and detection. arXiv
+[Preprint] (2018). https://arxiv.org/abs/1812.08685 (consultado 20 diciembre 2018).
+41. D. Gragnaniello, D. Cozzolino, F. Marra, G. Poggi, L. Verdoliva, “Are GAN generated images easy to
+detect? A critical analysis of the state-of-the-art” en Conferencia Internacional IEEE de 2021 sobre Multimedia
+y Expo (ICME) (IEEE, 2021), págs. 1–6.
+42. G. Tang et al., Detection of GAN-synthesized image based on discrete wavelet transform. Secur.
+Commun. Netw. 2021, 5511435 (2021).
+43. R. Winick, Intellectual property, defamation and the digital alteration of visual images. Columbia VLA
+J. Law Arts 21, 143 (1996).
+44. L. B. A. Potter, Altered realities: The effect of digital imaging technology on libel and right of privacy.
+Hast. Comm. Ent. LJ 17, 495 (1994).
+45. D. Almeida, K. Shmarko, E. Lomas, The ethics of facial recognition technologies, surveillance, and
+accountability in an age of artificial intelligence: A comparative analysis of US, EU, and UK regulatory frameworks. AI Ethics, 10.1007/s43681-021-00077-w (2021).
+46. E. Learned-Miller, V. Ordóñez, J. Morgenstern, J. Buolamwini, Facial recognition technologies in the
+wild: A call for a federal office (2020). https://www.ajl.org/federal-office-call. Consultado 6 abril 2022.
+47. L. Litman, J. Robinson, T. Abberbock, TurkPrime.com: A versatile crowdsourcing data acquisition
+platform for the behavioral sciences. Behav. Res. Methods 49, 433–442 (2017).
+48. A. Dosovitskiy, T. Brox, “Generating images with perceptual similarity metrics based on deep
+networks” en Advances in Neural Information Processing Systems, D. Lee, M. Sugiyama, U. Luxburg,
+I. Guyon, R. Garnett, eds. (Curran Associates, Inc., 2016), pp. 658–666.
+49. J. C. Peterson, S. Uddenberg, J. W. Suchow, One Million Impressions (OMI) Dataset. GitHub.
+https://github.com/jcpeterson/omi. Depositado 14 marzo 2022.
+PNAS 2022 Vol. 119 No. 17 e2115228119 https://doi.org/10.1073/pnas.2115228119 9 de 9
+Descargado de https://www.pnas.org por 38.39.170.102 el 27 de julio de 2022 desde la dirección IP 38.39.170.102.
+

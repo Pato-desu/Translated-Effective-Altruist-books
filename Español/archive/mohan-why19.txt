@@ -1,0 +1,408 @@
+Sobre el manejo de la autocensura y otros problemas difíciles de datos faltantes
+Karthika Mohan
+Departamento de Ciencias de la Computación
+Universidad de California, Berkeley
+karthika@berkeley.edu
+Resumen
+Este artículo aborda problemas difíciles de datos incompletos (faltantes)
+como aquellos en los que la falta de datos de una variable es causada
+por ella misma. Para resolver estos problemas desarrollamos una nueva téc-
+nica que aprovecha conjuntamente el modelo y los datos, a diferencia de
+los métodos existentes, que explotan solo las propiedades del modelo.
+Presentamos condiciones necesarias y suficientes bajo las cuales
+pueden calcularse estimaciones consistentes de las cantidades de interés. En
+marcado contraste con otras técnicas empleadas para tratar proble-
+mas similares, no hacemos ningún supuesto paramétrico.
+Introducción
+Analizar datos faltantes y extraer inferencias de ellos puede ser
+extremadamente difícil cuando el conjunto de datos contiene variables
+que son ellas mismas causas de su falta de datos; este tipo
+de falta de datos, conocido como falta de datos por autocensura, se cree que es
+el tipo que se encuentra con mayor frecuencia en la prác-
+tica [Osborne, 2012; Sverdlov, 2015; Adams, 2007; Mohan
+et al. , 2018]. Algunos ejemplos son fumadores que no responden pre-
+guntas relativas a su hábito de fumar en solicitudes de se-
+guros, personas con ingresos muy altos y muy bajos que no
+revelan sus ingresos y personas de ciertos grupos de edad que no
+revelan su edad.
+En los últimos años ha crecido el interés por el ma-
+nejo de datos faltantes mediante modelos gráficos que codifican
+supuestos sobre el proceso subyacente de falta de datos.
+[Daniel et al. , 2012; Mohan et al. , 2013; Shpitser et al. ,
+2015; Mohan y Pearl, 2018]. Dada una cantidad objetivo Q
+y un grafo G, Q es recuperable a partir de G si existe un
+algoritmo que puede estimar Q de forma consistente para todos los datos genera-
+dos por G; de lo contrario, Q es no recuperable . Tales
+pares (Q; G ) no recuperables, a los que llamamos problemas difíciles de datos faltantes (o
+problemas difíciles), son el foco de este artículo. Algunos ejemplos son
+Q=P(Ojdo(t)) y el modelo de autocensura mostrado en la fi-
+gura 1, y Q=P(X) y el modelo de autocensura mostrado en la
+figura 2 (b). Mientras que los trabajos previos trataban la recuperabilidad como
+una propiedad del grafo por sí solo, en este artículo desarrollamos
+técnicas generales para resolver problemas difíciles de datos faltantes aprovechan-
+do las propiedades tanto del grafo como de los datos .
+En la sección siguiente repasamos los grafos de falta de datos, es decir,
+modelos gráficos para el manejo de datos faltantes [Mohan et al. ,
+2013].
+Derechos de autor c
+2018, Association for the Advancement of Artiﬁcial
+T O Ro
+O∗tratamiento resultadofalta de datos
+mecanismo
+variable proxy
+del resultadoFigura 1: Grafo de falta de datos en el que el resultado causa su
+propia falta de datos
+Grafos de falta de datos
+Sea G(V; E) el DAG causal, donde V es el conjunto de nodos
+y E es el conjunto de aristas. Los nodos del grafo corresponden a
+las variables del conjunto de datos y se dividen en cinco cate-
+gorías, es decir, V=Vo[Vm[U[V\x03[R.
+Vo es el conjunto de variables que se observan en todos los registros de
+la población y Vm es el conjunto de variables que faltan
+en al menos un registro. Se dice que la variable X está totalmente ob-
+servada si X2Vo y parcialmente observada si X2Vm. Rvi
+y V\x03
+i son dos variables asociadas a cada variable parcialmente ob-
+servada, donde V\x03
+i es una variable proxy que efectivamente se
+observa, y Rvi representa el estado del mecanismo causal
+responsable de la falta de datos de V\x03
+i; formalmente,
+v\x03
+i=f(rvi; vi) =\x1a
+vi si rvi= 0
+m si rvi= 1(1)
+V\x03 es el conjunto de todas las variables proxy y R es el conjunto de
+todos los mecanismos causales responsables de la falta de datos.
+Salvo que se indique lo contrario, se supone que ninguna variable en
+Vo[Vm[U es hija de una variable R. U es el conjunto de
+nodos no observados, también llamados variables latentes. Dos nodos
+X y Y pueden conectarse mediante una arista dirigida, es decir, X!Y,
+que indica que X es causa de Y, o mediante una arista bidireccional
+XL9999K Y, que denota la existencia de una variable U que
+es padre tanto de X como de Y. Esta representación gráfica
+se denomina grafo de falta de datos (o m-grafo) [Mohan et al. ,
+2013]. P(V\x03; Vo; R) se denomina distribución de los datos observados.
+Las variables proxy no siempre se muestran explícitamente en
+los m-grafos para mantener las figuras simples y claras. Con-
+Intelligence (www.aaai.org). Todos los derechos reservados.
+X Rx
+X∗(a)
+X Rx
+X∗ (b)
+Figura 2: m-grafos en los que (a) P(X) es recuperable, (b)
+P(X) es no recuperable.
+Las independencias condicionales se leen en el grafo mediante el criterio de d-
+separación de Pearl [2009]. Para cualquier variable binaria X,
+x0 y x denotan X= 0 y X= 1, respectivamente.
+Ejemplo 1. En el m-grafo de la figura 1, T denota el trata-
+miento administrado a los pacientes y O denota el resultado.
+Mientras que T se observa en todos los pacientes, O se observa solo en
+algunos de ellos. La arista de O a Ro indica que la falta de dato-
+s es de tipo autocensura. Vo=fTg, Vm=fOg,
+V\x03=fO\x03g, U=; y R=fRog.
+Mecanismos de falta de datos
+Con base en Rubin [1976], los problemas de datos faltantes pueden cla-
+sificarse en Faltantes Completamente al Azar (MCAR) , Faltantes
+al Azar (MAR) y Faltantes No al Azar (MNAR).
+En este artículo usamos la definición basada en grafos de estos
+mecanismos [Mohan et al. , 2013].
+Un m-grafo G describe un problema MCAR si
+(Vm; Vo)? ?R se cumple en G, un problema MAR si Vm? ?RjVo
+se cumple en G, y un problema MNAR en caso contrario. Por ejemplo,
+la figura 2 (a) describe un problema MCAR, la figura 3 (c) uno MAR y
+la figura 1 describe problemas de falta de datos MNAR. Entre
+estos, la distribución conjunta ( Q=P(Vo; Vm)) siempre es estimable de for-
+ma consistente (es decir, recuperable) cuando la falta de datos es
+MCAR o MAR (Mohan et al. [2013]). Sin embargo, esto
+no es cierto para la falta de datos MNAR. Por ello, todos los problemas difíciles de datos
+faltantes tratados en este artículo pertenecen a la
+categoría MNAR.
+Recuperabilidad como propiedad del m-grafo
+En esta sección ilustramos las nociones de recuperabilidad
+y no recuperabilidad como propiedad del m-grafo.
+XRxP(X\x03; Rx)
+0 0 0.3
+1 0 0.2
+m 1 0.5
+Tabla 1: Distribución de datos observados
+Supongamos que X es una variable binaria afectada por valores faltan-
+tes. El conjunto de datos con valores faltantes se muestra en la tabla 1.
+Las figuras 2 (a) y (b) describen dos procesos distintos (pero estadística-
+mente indistinguibles1) que podrían haber generado estos datos.
+1Aunque las d-separaciones son implicaciones comprobables de un modelo gráfi-
+co, bajo falta de datos no todas las d-separaciones son comprobables. En la figura 2 (a) la falta de datos es generada por un
+proceso puramente aleatorio, mientras que la figura 2 (b) describe falta de datos por autocensura.
+Recuperabilidad: Consideremos el problema de recuperar
+P(X) dado el m-grafo G de la figura 2 (a).
+Dado que X? ?Rx en G, tenemos
+P(X) =P(XjRx= 0)
+Usando la ecuación 1 podemos reescribir lo anterior como
+P(X) =P(X\x03jRx= 0)
+Al mostrar que P(X) es una cantidad que puede calcularse
+a partir de la distribución de datos observados, hemos establecido su
+recuperabilidad. Para ello usamos el supuesto X? ?Rx
+incorporado en el m-grafo. Por lo tanto, en este caso la recuperabilidad
+es una propiedad del m-grafo por sí solo. La distribución recuperada
+P(X) se muestra en la tabla 2.
+XP(X)
+0 3/5
+1 2/5
+Tabla 2: Distribución recuperada
+No recuperabilidad: Consideremos ahora el problema de recu-
+perar P(X) dado el m-grafo de la figura 2 (b). Rx depen-
+de de X y no tenemos información adicional sobre
+esta dependencia. Podría ser que X falte solo cuando su
+valor es 1, o podría ser que X falte solo cuando su valor
+es 0. En el primer caso P(x0) = 0 :3, mientras que en el segundo
+caso P(x0) = 0:8. Con la información disponible en G no es
+posible hallar el valor (verdadero) de P(X) aunque se nos
+den infinitas muestras, es decir, P(X) es no recuperable.
+De hecho, la no recuperabilidad de P(X) persistiría aunque G
+tuviera más variables (demostrado formalmente en [Mohan et al. ,
+2013; Mohan y Pearl, 2014a]).
+La incapacidad de manejar problemas difíciles como la falta de datos
+por autocensura es una deficiencia importante en el campo de los
+datos faltantes. Artículos recientes como Shpitser [2016] y Mohan et al.
+[2013], y libros de texto sobre datos faltantes como Enders [2010]
+han llamado la atención sobre el problema de la recuperabilidad en los modelos de autocen-
+sura. Libros de texto estándar sobre redes bayesianas como
+Darwiche [2009] (capítulo 17) y Koller y Friedman
+[2009] (capítulo 19) analizan modelos similares al de la figura
+1 y han demostrado que ninguno de los métodos existentes, como
+el algoritmo EM, puede recuperar parámetros en m-grafos de
+autocensura. En la sección siguiente desarrollamos técnicas
+para recuperar consultas en problemas difíciles y así eliminar esta
+deficiencia del campo.
+particular, ninguna afirmación de independencia entre una variable y su
+mecanismo de falta de datos ( X? ?Rx) es comprobable [Mohan y Pearl,
+2014b].
+Recuperabilidad como propiedad tanto del m-grafo
+como de los datos faltantes
+A continuación ilustramos un procedimiento que aprovecha las propiedades
+tanto del grafo como de los datos para recuperar la distribución conjunta en un
+modelo de autocensura.
+Ejemplo 2. Consideremos el problema de recuperar P(O; T )
+dados el m-grafo G de la figura 1 y la distribución de datos faltan-
+tes P(T; O; Ro). Sean T y O variables binarias.
+Primero recuperaremos P(TjO) y luego la usaremos para recuperar
+P(O).
+Usando T? ?RojO y la ecuación 1, P(TjO) puede recuperarse como,
+P(TjO) =P(TjO; R o= 0) = P(TjO; Ro= 0)
+Dado que las variables son binarias, P(T) =P
+OP(TjO)P(O)
+produce las siguientes ecuaciones:
+P(t0) =P(t0jo0)P(o0) +P(t0jo)P(o)
+P(t) =P(tjo0)P(o0) +P(tjo)P(o)
+Al sustituir P(TjO) en las ecuaciones anteriores por su es-
+timando recuperado obtenemos,
+P(t0) =P(t0jO= 0; r0
+o)P(o0) +P(t0jO= 1; r0
+o)P(o)
+P(t) =P(tjO= 0; r0
+o)P(o0) +P(tjO= 1; r0
+o)P(o)
+Las dos ecuaciones anteriores constituyen un sistema de ecua-
+ciones con dos incógnitas: P(o0) y P(o). Si la solución es
+única, entonces P(O) es recuperable y está dada por,
+P(o0) =P(t0) P(t0jO= 1; Ro= 0)
+P(t0jO= 0; r0o) P(t0jO= 1; r0o)
+P(o) = 1 P(t0) P(t0jO= 1; Ro= 0)
+P(t0jO= 0; r0o) P(t0jO= 1; r0o)
+Ahora P(T; O ) puede recuperarse como: P(TjO)P(O).
+Sin embargo, si el sistema de ecuaciones tiene infinitas
+soluciones, entonces P(O) es no recuperable. Esto puede ocurrir
+cuando T? ?O. En este caso T no proporciona información sobre
+O y, por lo tanto, no puede aprovecharse para recuperar P(O). Esto
+es de esperarse, ya que no exigimos fidelidad (faithfulness) y
+por lo tanto es posible que exista una relación de independencia en-
+tre dos variables incluso cuando están conectadas por una
+arista.
+Observamos además que es imposible que el sistema
+no tenga soluciones, pues contradiría nuestro supuesto de que
+el grafo y los datos son compatibles (es decir, existen paráme-
+tros del grafo que generaron los datos según el supuesto de
+compatibilidad).
+Por último, observamos que, como resultado de recuperar P(O; T ),
+también podemos recuperar otro problema difícil: P(Ojdo(t)), el
+efecto causal del tratamiento sobre el resultado. Dado que G es markoviano,
+P(Ojdo(t)) = P(Ojt). La recuperabilidad de P(Ojdo(t)) se
+sigue así implícitamente de la de P(O; T ).
+Condiciones necesarias y suficientes para
+la recuperabilidad en problemas difíciles de datos faltantes
+Notación 
+MZjW;MZ&Aug (MZjW;MW)
+MZjW=P(ZjW) denota una matriz de jZjjWj en la que las
+columnas suman uno. Por ejemplo, si Z y W son binarias,
+X Y Rx(a)
+X Y Rx
+Z (b)
+X Y Rx
+Z
+(c)
+Figura 3: (a) P(X; Y ) no es recuperable, (b) P(X; Y ) podría
+ser recuperable usando el grafo y los datos, (c) P(X; Y ) es recupe-
+rable.
+entonces MZjW=
+P(z0jw0)P(z0jw)
+P(zjw0)P(zjw)
+.MZ=P(Z)
+denota una matriz columna de jZj  1. Aug (MZjW; MW)
+denota una matriz aumentada de jZj(jWj+ 1) obtenida
+al anexar las columnas de las matrices MZjW y MW.
+El siguiente teorema establece las condiciones necesarias y suficientes
+para la recuperabilidad en problemas difíciles de datos faltantes.
+Teorema 1. Sean el m-grafo G y la consulta P(W) tales que
+el par ( P(W); G) constituye un problema difícil de datos faltan-
+tes. Sea P(V; VO; R) la distribución sobre los datos
+faltantes y ZfVm; Vo; Rg fW; R wg.
+Dados G y P(V; VO; R), P(W) es recuperable si
+y solo si P(ZjW) y P(Z) son recuperables y
+rank(MZjW) = rank( Aug (MZjW; MW)) =jWj.
+Demostración: véase el Apéndice.
+El teorema no hace supuestos sobre la estructura del
+m-grafo G. Es aplicable a todos los problemas difíciles MNAR y
+no solo a los modelos de autocensura. Por ejemplo, P(X; Y ) y
+el m-grafo de la figura 3 (a) y P(X; Y ) y el m-grafo
+de la figura 3 (b) constituyen problemas difíciles MNAR [Mohan y
+Pearl, 2014a]. Sin embargo, en el caso de este último, el teorema 1
+puede usarse para recuperar P(X; Y ) aprovechando Z.
+Condiciones suficientes para la recuperabilidad en cualquier
+problema de datos faltantes
+El siguiente corolario establece condiciones suficientes para re-
+cuperar cualquier consulta P(W) dada usando tanto el grafo como los datos.
+Corolario 1. Dados el m-grafo G y la distribución de datos faltan-
+tes P(V; Vo; R), P(W) es recuperable si para cualquier Z
+fVm; Vo; Rg f W; R wg, P(ZjW) y P(Z) son recupera-
+bles y rank( MZjW) = rank( Aug (MZjW; MW)) =jWj.
+P(X) y el m-grafo de la figura 3(c) no constituyen
+un problema difícil de datos faltantes. De hecho, la consulta es recupera-
+ble: P(X) =P
+YP(XjY; R x= 0)P(Y) [Mohan et al. ,
+2013]. Sin embargo, P(X) aún puede recuperarse usando el
+corolario anterior aprovechando Z. Que X y Z sean binarias
+y que Y tenga una cardinalidad alta, digamos jYj= 50, es un
+caso en el que aplicar el corolario resulta más conveniente desde
+el punto de vista computacional.
+Observación 1. Aunque el teorema 1 y el corolario 1 apuntan a recu-
+perar P(W), también pueden usarse para recuperar P(Z; W )
+puesto que ya se sabe que P(ZjW) es recuperable.
+Alcance de los resultados: Dado un par consulta-grafo ( Q; G ), si Q
+no es recuperable usando G, entonces el teorema 1 presenta condiciones necesa-
+rias y suficientes para su recuperabilidad. Si Q no es
+recuperable usando el teorema 1, la consideramos no
+recuperable. El corolario 1 muestra que la técnica de recuperabilidad
+del teorema 1 es aplicable a problemas simples de datos faltantes
+como MAR, que se sabe que son recuperables
+usando grafos. Sin embargo, existen problemas que no pueden
+recuperarse usando el corolario 1 pero sí usando
+grafos. Por ejemplo, P(X; Y ) no puede recuperarse a partir de
+G:X Y!RX usando el corolario 1 porque X? ?Y. Sin embargo,
+P(X; Y ) aún es recuperable como P(XjRX= 0)P(Y)
+[Mohan et al. , 2013].
+Los procedimientos de recuperabilidad anteriores están inspirados en
+resultados similares en epidemiología (Rothman et al. [2008]), en el análisis de re-
+gresión (Carroll et al. [2006]) y en la inferencia causal
+(Pearl [2012]; Kuroki y Pearl [2014]). A diferencia de Pearl
+[2012], que se apoyaba en estudios externos para calcular el efecto cau-
+sal en presencia de un factor de confusión no medido, Kuroki
+y Pearl [2014] mostraron cómo lograr lo mismo
+sin estudios externos. En contextos de datos faltantes tenemos
+acceso a información parcial que nos permite calcular distribu-
+ciones condicionales. Esto nos permite adaptar el procedimiento
+de Pearl [2012] para calcular estimaciones consistentes, como se detalló
+arriba. Observamos además que, hasta donde sabemos, los tra-
+bajos previos sobre modelos de autocensura se basaban en supuestos paramétri-
+cos (Mohan et al. [2018]; ?];?). En marcado contraste,
+presentamos una solución completa y no paramétrica para manejar todos los
+problemas difíciles.
+Conclusiones
+En este trabajo eliminamos una deficiencia importante en el campo
+de los datos faltantes. Desarrollamos una técnica sólida, completa y no
+paramétrica para manejar problemas difíciles de datos faltantes.
+Además, mostramos que esta técnica también es aplicable
+a consultas que se sabe que son recuperables usando grafos.
+Apéndice
+Demostración del teorema 1.
+La demostración del teorema 1 se basa en el siguiente lema, que establece
+las condiciones bajo las cuales un sistema de ecuaciones lineales es
+consistente. [Cramer, 1750; Strang, 1993].
+Lema 1. El sistema de ecuaciones Ax =b con m ecua-
+ciones y n incógnitas tiene (i) una solución única si y solo
+si rank (A) =rank (Aug (A; b)) = n y (ii) infinitas solu-
+ciones si y solo si rank (A) =rank (Aug (A; b))< n.
+(Demostración de suficiencia) Cuando se cumplen las condiciones del teorema
+la restricción P(Z) =P
+WP(ZjW)P(W) produce
+una solución única según el lema 1, lo que establece la recu-
+perabilidad de P(W).
+(Demostración de necesidad) Debemos mostrar que para todo elemen-
+to Zi del conjunto potencia de fVm; Vo; Rg fW; R wg, P(W) es no recuperable usando G y los datos si se cumple alguna de las siguien-
+tes condiciones: (i) P(Zi) es no recuperable, (ii) P(ZijW) es no
+recuperable, (iii) rank( MZijW) = rank( Aug (MZijW; MW))
+=jWj no se cumple. La no recuperabilidad de P(Zi) implica
+que su valor no es único, es decir, existen al menos dos dis-
+tribuciones distintas P1(Zi) y P2(Zi). Para cada una de ellas podemos
+construir distribuciones distintas de P(W) usando P(Zi) =P
+WP(ZijW)P(W), lo que prueba que P(W) es no
+recuperable. De manera similar, podemos mostrar que P(W) es no
+recuperable cuando P(ZijW) es no recuperable. En el caso
+de la condición (iii), la no recuperabilidad de P(W) se sigue del
+lema 1.
+Referencias
+J Adams. Researching complementary and alternative
+medicine . Routledge, 2007.
+R J Carroll, D Ruppert, L A Stefanski, y C M Crainiceanu.
+Measurement error in nonlinear models: a modern per-
+spective . CRC press, 2006.
+G. Cramer. Introduction à l'analyse des lignes courbes
+algébriques par Gabriel Cramer... chez les frères Cramer &
+Cl. Philibert, 1750.
+R. M. Daniel, M. G. Kenward, S. N. Cousens y B. L.
+De Stavola. Using causal diagrams to guide analysis in
+missing data problems. Statistical Methods in Medical
+Research, 21(3):243–256, 2012.
+A. Darwiche. Modeling and reasoning with Bayesian net-
+works. Cambridge University Press, 2009.
+C. K. Enders. Applied Missing Data Analysis. Guilford
+Press, 2010.
+D. Koller y N. Friedman. Probabilistic graphical models:
+principles and techniques. 2009.
+M. Kuroki y J. Pearl. Measurement bias and effect restora-
+tion in causal inference. Biometrika, 101(2):423–437,
+2014.
+K. Mohan y J. Pearl. Graphical models for recovering prob-
+abilistic and causal queries from missing data. En Ad-
+vances in NIPS 27, págs. 1520–1528. 2014.
+K. Mohan y J. Pearl. On the testability of models with
+missing data. Proceedings of AISTAT, 2014.
+K. Mohan y J. Pearl. Graphical models for processing miss-
+ing data. Informe técnico, Departamento de Ciencias de la Computación,
+Universidad de California, Los Ángeles, CA, 2018.
+K. Mohan, J. Pearl y J. Tian. Graphical models for infer-
+ence with missing data. En Advances in NIPS 26, págs.
+1277–1285. 2013.
+K. Mohan, F. Thoemmes y J. Pearl. Estimation with incom-
+plete data: The linear case. En Actas de IJCAI-2018,
+págs. 5082–5088, 2018.
+J. W. Osborne. Best practices in data cleaning: A complete
+guide to everything you need to do before and after col-
+lecting your data. Sage Publications, 2012.
+J. Pearl. Causality: models, reasoning and inference. Cam-
+bridge Univ Press, Nueva York, 2009.
+J. Pearl. On measurement bias in causal inference. arXiv
+preprint arXiv:1203.3504, 2012.
+K. J. Rothman, S. Greenland y T. L. Lash. Modern epidemi-
+ology. Lippincott Williams & Wilkins, 2008.
+D. B. Rubin. Inference and missing data. Biometrika,
+63:581–592, 1976.
+I. Shpitser, K. Mohan y J. Pearl. Missing data as a causal
+and probabilistic problem. En Actas de UAI, 2015.
+I. Shpitser. Consistent estimation of functions of data missing
+non-monotonically and not at random. En Advances in
+NIPS, págs. 3144–3152, 2016.
+G. Strang. Introduction to linear algebra, volumen 3.
+Wellesley-Cambridge Press Wellesley, MA, 1993.
+O. Sverdlov. Modern adaptive randomized clinical trials:
+statistical and practical aspects. Chapman and Hall/CRC,
+2015.

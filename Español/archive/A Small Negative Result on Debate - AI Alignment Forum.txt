@@ -1,0 +1,43 @@
+Debate (técnica de seguridad de la IA)
+IA
+Portada. Algo de contexto para este nuevo artículo de arXiv de mi grupo en NYU: estamos trabajando en experimentos de sandwiching° con nuestro conjunto de datos QuALITY de QA sobre documentos largos, usando el tiempo de lectura como la variable de experiencia. En términos generales: ¿hay alguna forma de conseguir que los humanos respondan de forma fiable preguntas difíciles de comprensión lectora sobre un texto de unas 5000 palabras, sin que los participantes ni ningún otro anotador tengan que dedicar los unos 20 minutos que requeriría leer el texto? Esta es una redacción temprana de algunos resultados negativos. Es antes en el proyecto de lo que normalmente escribiría algo así, pero algunos autores tenían restricciones que lo hacían valioso, así que comparto lo que tenemos. Aquí intentamos averiguar si el debate de un solo turno lleva a una respuesta fiable a preguntas: si damos a las personas argumentos de alta calidad a favor y en contra de cada opción de respuesta (de opción múltiple), respaldados por referencias a citas clave del texto fuente, ¿pueden responder las preguntas de forma fiable dentro de un límite de tiempo? Hicimos este experimento inicial en un entorno de oráculo: pedimos a humanos (bien incentivados y capacitados) que escribieran los argumentos, en lugar de un LM. Dados los límites de los LM actuales con textos largos, esperamos que esto nos dé más información sobre si esta línea de investigación va a alguna parte. No funcionó realmente: nuestros anotadores humanos respondieron con la misma precisión baja con y sin los argumentos. Los punteros seleccionados a citas clave sí ayudaron un poco. Planeamos seguir con la estrategia general, con debate de varios turnos (en el que los debatientes pueden refutar los argumentos y la evidencia del otro) como siguiente paso inmediato. En conjunto, lo tomo como una actualización muy leve en la dirección de que el debate es difícil de usar en la práctica como estrategia de alineación. Lo bastante leve como para que probablemente no debería cambiar su opinión sobre el debate, a menos que, por alguna razón, le interesara esta aplicación concreta, restringida y trivial. Un pequeño resultado negativo sobre el debate, por Sam Bowman, 12 abr 2022
+28
+Debate (técnica de seguridad de la IA) 2
+IA 2
+Portada. Mencionado en 28
+10 comentarios, ordenados por puntuación más alta. Sam Bowman 5
+Beth Barnes 5
+[-]
+Actualización: hicimos un rápido estudio de seguimiento que añade contraargumentos, convirtiendo esto de debate de un solo turno en debate de dos turnos, como una forma rápida de sondear si experimentos más extensos de debate con transcripción completa funcionarían en esta tarea. Los resultados del seguimiento fueron negativos. Hilo de tuits aquí: https://twitter.com/sleepinyourhat/status/1585759654478422016 Enlace directo al artículo: https://arxiv.org/abs/2210.10860 (Aparecerá en el taller de ML Safety de NeurIPS). Seguimos siendo en general optimistas sobre el debate, pero no en esta tarea, ni en este entorno de tiempo y discusión limitados, y estamos haciendo una búsqueda más amplia, de tipo fallo rápido, en otros entornos. Estén atentos a más métodos y conjuntos de datos.
+[-]
+Publicación cruzada de mis comentarios del hilo de Slack: aquí hay algunos árboles de debate de experimentos que hice sobre QA de textos largos con este cuento corto de ejemplo: Árbol. Vista del debatiente 1. Vista del debatiente 2. Nuestra conclusión fue que no esperamos que el debate funcione de forma robusta en estos casos. En nuestro caso, esto se debió sobre todo a que, en casos como «¿hay un subtexto implícito A?», los debatientes humanos realmente no saben por qué creen que un texto tiene o no tiene cierta implicación. Tienen una mezcla de priors sobre lo que el texto podría estar diciendo (que no pueden justificar realmente con el debate) y diversas actualizaciones de esos priors según el estilo, la elección de palabras, etc., sin que los humanos tengan necesariamente acceso introspectivo a lo que exactamente del texto los llevó a la conclusión. Mi suposición es que esa no es la limitación con la que se topan aquí; esperaría que simplemente fuera la profundidad. Hay otros problemas con los debates sobre textos, como cuando la evidencia está distribuida en muchas citas que cada una aporta solo una pequeña cantidad de evidencia: en ese caso, el debatiente honesto necesita tener estimaciones razonables de cuánta evidencia aporta cada cita, para poder dividir su argumento en algo como «hay 10 citas que apoyan débilmente la posición A»; «la evidencia que aportan estas citas es aditiva y no redundante». [editado para corregir enlaces]
+Sam Bowman 2
+[-]
+Sí. (Gracias por volver a publicarlo.) Estamos bastante resignados a la conclusión de que el debate no llega a una conclusión correcta en Empleos: ayude a ampliar la investigación de alineación de LM en NYU hace 2 meses 
+hace 9 meses 
+hace 9 meses 
+Paul Christiano 4
+Alex Gray 1
+TLW 1
+al menos algunos casos no triviales: nos interesa sobre todo averiguar (i) si hay dominios o familias de preguntas importantes para los que a menudo llegará a una conclusión, y (ii) si tiende a fallar con elegancia (es decir, que cada resultado sea correcto o un empate).
+[-]
+Creo que una de las dificultades clave de la investigación sobre debate es contar con buenas tareas que requieran protocolos más sofisticados. Creo que este conjunto de datos es ideal para ese propósito, y que haber establecido un resultado negativo para el debate de un turno parece una buena base para trabajos posteriores que exploren protocolos más sofisticados. (Es una lástima que la gente normalmente no publique resultados tempranos y negativos.) En comparación con otros conjuntos de datos (por ejemplo, los resultados negativos que describe Beth), QuALITY parece identificar fallos bastante claros y está al alcance de los ML modernos. No he mirado el conjunto de datos más allá de las muestras del artículo, pero, de forma provisional, me entusiasma bastante que más personas trabajen en él (¡y tengo ganas de ver trabajos futuros de su grupo!). Sospecho firmemente que los debates de varios turnos podrían manejar estas preguntas, y si no pudieran, sería una actualización bastante significativa sobre el debate, la naturaleza del razonamiento humano, etc. Creo que es posible que esos debates tengan que volverse bastante complicados, y también es bastante plausible que resulte más fácil que funcione otra cosa. En cualquier caso, siento que el problema es una coincidencia lo bastante cercana con lo que nos interesa, así que hacer «lo que haga falta» probablemente será en general bastante interesante.
+[-]
+¿Tiene sugerencias de dominios en los que espera que el debate de un turno funcione bien, ahora que tiene estos resultados?
+Sam Bowman 1
+[-]
+No tengo ninguna razón para ser especialmente optimista dados estos resultados, pero supongo que podría haber algunas preguntas bastante simples para las que sea posible enumerar un argumento completo de forma que los fallos sean claramente visibles. En general, parece que el debate de un solo turno tendría que depender de un juez extremadamente cuidadoso, que no tenemos del todo, dada la limitación de tiempo. Los debates de varios turnos parecen más indulgentes, sobre todo si el juez tiene alguna influencia sobre el curso del debate.
+[-]
+Si hay argumentos de alta calidad para varias respuestas, ¿eso no significa «simplemente» que la pregunta de opción múltiple es en sí de baja calidad?
+Sam Bowman 1
+[-]
+Uno de los argumentos es bastante engañoso en la mayoría de los casos, así que probablemente no sea de alta calidad según las definiciones habituales. Por desgracia, con el límite de tiempo, nuestros lectores no pueden determinar de forma fiable cuál es el engañoso. Sin argumentos y sin límite de tiempo, los anotadores responden correctamente con una precisión de ~90%: https://arxiv.org/abs/2112.08608
+TLW 0
+[-]
+¿Su descripción a los participantes indicaba que los argumentos eran de alta calidad? hace 9 meses 
+hace 9 meses hace 9 meses 
+hace 9 meses hace 9 meses 
+hace 9 meses 
+Sam Bowman 1
+[-]
+Puedo buscar la redacción exacta si es útil, pero supongo que queda claro por la configuración básica que al menos uno de los argumentos tiene que ser engañoso. hace 9 meses 

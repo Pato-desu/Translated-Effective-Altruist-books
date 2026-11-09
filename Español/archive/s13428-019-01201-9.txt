@@ -1,0 +1,1126 @@
+Identifying category representations for complex stimuli using discrete Markov chain Monte Carlo with people | SpringerLink
+Saltar al contenido principal
+Publicidad
+Iniciar sesión
+Menú
+Buscar una revista
+Publique con nosotros
+Buscar
+Carrito
+Inicio
+Behavior Research Methods
+Artículo
+Identifying category representations for complex stimuli using discrete Markov chain Monte Carlo with people
+Descargar PDF
+Descargar PDF
+Acceso abierto
+Publicado:
+13 de febrero de 2019
+Identifying category representations for complex stimuli using discrete Markov chain Monte Carlo with people
+Anne S. Hsu
+1
+,
+Jay B. Martin
+2
+,
+Adam N. Sanborn
+3
+&
+…
+Thomas L. Griffiths
+4
+Mostrar autores
+Behavior Research Methods
+volumen
+51
+,
+páginas
+1706–1716 (
+2019
+)
+Citar este artículo
+2604
+Accesos
+2
+Citas
+8
+Altmetric
+Métricas
+detalles
+Resumen
+Con la explosión de los “macrodatos”, los repositorios digitales de textos e imágenes crecen con rapidez. Estos conjuntos de datos presentan nuevas oportunidades para la investigación psicológica, pero requieren metodologías nuevas antes de que los investigadores puedan usarlos para obtener información sobre la cognición humana. Presentamos un método nuevo que permite a los investigadores en psicología aprovechar las bases de datos de textos e imágenes: un procedimiento para medir las representaciones categoriales humanas sobre grandes conjuntos de elementos, como palabras o imágenes arbitrarias. Llamamos a este método
+cadena de Markov Monte Carlo discreta con personas
+(d-MCMCP). Ilustramos nuestro método evaluando las siguientes categorías sobre conjuntos de datos: emociones representadas por imágenes de rostros, conceptos morales representados por palabras relevantes y estaciones del año representadas por imágenes tomadas de grandes bases de datos en línea. Tres experimentos demuestran que d-MCMCP es lo bastante potente y flexible como para trabajar con estímulos complejos y naturalistas extraídos de grandes bases de datos en línea.
+¿Trabajando en un manuscrito?
+Evite los errores comunes
+Los macrodatos están transformando la sociedad y ofrecen una oportunidad significativa para la investigación en psicología: las grandes bases de datos de textos e imágenes son recursos potencialmente ricos para comprender la cognición humana. Sin embargo, la utilidad actual de los macrodatos en psicología es limitada, en parte por su tamaño: construir tareas psicológicas que trabajen con grandes conjuntos de datos es un desafío. Las etiquetas para imágenes y otros tipos de datos pueden recopilarse mediante experimentos en línea y crowdsourcing (Carvalho, Lease, & Yilmaz,
+2011
+; Greengard,
+2011
+; Howe,
+2006
+; Kittur, Chi, & Suh,
+2008
+; Kleemann, Vob, & Rieder,
+2008
+), pero todavía se necesitan métodos que puedan extraer el contenido psicológico de grandes bases de datos de forma más eficiente y significativa. En particular, la relevancia de un dato (por ejemplo, un texto, una imagen o un sonido) para un concepto psicológico dado se representa a menudo mejor como un juicio probabilístico subjetivo que como una etiqueta binaria. Comprender las representaciones distribucionales de las categorías mentales de las personas es relevante tanto para automatizar tareas que simulan procesos cognitivos, como en las aplicaciones de inteligencia artificial, como para comprender los principios de la psicología humana. Por ejemplo, si alguien construyera un detector de emociones para agentes conversacionales automatizados, necesitaría una estimación de qué tan probable sería que distintas combinaciones de rasgos de estímulos hablados (combinaciones de palabras y tono) indicaran la categoría de enojo. Otro ejemplo es obtener información sobre los sesgos que alimentan nuestros prejuicios sociales, al entender qué tan probable es que distintas combinaciones de rasgos de perfilado se asocien con el concepto de “socialmente amenazante” y compararlo con estadísticas reales de perfiles criminales. Capturar las etiquetas que corresponden a estos juicios subjetivos resulta prohibitivamente costoso en tiempo para conjuntos de datos grandes y discretos. Este artículo presenta un método nuevo para inferir de forma eficiente la estructura de las categorías psicológicas definidas sobre conjuntos de datos de tamaño arbitrario, como textos e imágenes.
+Al considerar que las categorías suelen concebirse como distribuciones de probabilidad subjetivas sobre los estímulos (Ashby & Alfonso-Reese,
+1995
+), las representaciones categoriales pueden revelarse pidiendo a las personas que juzguen qué tan relevante es un estímulo para una categoría. De manera similar, las representaciones categoriales pueden revelarse a partir de un conjunto de estímulos en el que cada muestra está etiquetada con una calificación de probabilidad subjetiva que indica qué tan relevante es esa muestra para la categoría. Sin embargo, es difícil obtener eficientemente tales juicios sobre conjuntos grandes de estímulos. Una solución a este problema surge de la idea clave de que, si un experimentador puede extraer muestras de esta distribución subjetiva, las muestras se concentrarán en los estímulos relevantes, y los estímulos irrelevantes serán ignorados. Partiendo de esta idea, Sanborn, Griffiths y Shiffrin (
+2010
+) adaptaron el conocido algoritmo de cadena de Markov Monte Carlo (MCMC), de las ciencias de la computación, para muestrear distribuciones de probabilidad subjetivas, método al que llamaron
+cadena de Markov Monte Carlo con personas
+(MCMCP). MCMCP se ha utilizado para estimar la estructura de categorías definidas sobre estímulos continuos y fácilmente parametrizables, como animales de figuras de palo y formas básicas de frutas (Sanborn et al.,
+2010
+) o rostros generados por computadora (Martin, Griffiths, & Sanborn,
+2012
+; McDuff,
+2010
+).
+Aunque la introducción de MCMCP ha facilitado la exploración de representaciones complejas y de alta dimensionalidad, requiere estímulos parametrizados y, por tanto, no es adecuado para bases de datos de elementos discretos. Para permitir la exploración de representaciones sobre grandes conjuntos de elementos discretos presentamos un método nuevo llamado
+cadena de Markov Monte Carlo discreta con personas
+(d-MCMCP). Este método permite estimar distribuciones de probabilidad subjetivas sobre conjuntos de datos arbitrarios, como imágenes o fragmentos de texto. Las distribuciones resultantes pueden usarse para identificar la estructura de las representaciones psicológicas de las personas en estos dominios.
+El esquema de este artículo es el siguiente. La siguiente sección presenta las ideas clave detrás de MCMCP. Luego presentamos nuestro método nuevo, d-MCMCP, para conjuntos discretos de estímulos. El resto del artículo se centra en tres experimentos que muestran una variedad de aplicaciones de d-MCMCP. El primer experimento explora las categorías de
+caras felices
+y
+tristes
+usando imágenes fotográficas reales, lo que permite comparar con resultados previos obtenidos con el algoritmo MCMCP (Martin et al.,
+2012
+). El segundo experimento aplica d-MCMCP a textos, explorando las palabras que las personas con afiliaciones políticas liberales y conservadoras perciben como representativas del concepto de moralidad (Graham, Haidt, & Nosek,
+2009
+). El tercer experimento demuestra cómo puede aplicarse d-MCMCP a grandes bases de datos de imágenes, investigando cómo las personas representan las estaciones del año.
+Cadena de Markov Monte Carlo con personas
+Un enfoque habitual para medir las categorías humanas consiste en pedir a las personas que califiquen qué tan probable es que un estímulo pertenezca a una categoría dada. Sin embargo, este enfoque tiene dos limitaciones serias. En primer lugar, cuando los conjuntos de datos son demasiado grandes, recopilar calificaciones individuales resulta impráctico. En segundo lugar, preguntas como “¿Qué tan buen ejemplo es esto de un
+rostro feliz
+?” pueden ser difíciles de responder. Una pregunta mejor definida es pedir juicios por pares; por ejemplo, “¿Cuál es un mejor ejemplo de un
+rostro feliz
+?”, pero recopilar todos los juicios por pares posibles requiere aún más ensayos, del orden de
+n
+2
+por
+n
+elementos.
+Para abordar estos problemas, introdujimos una clase de algoritmos de las ciencias de la computación y la estadística llamados MCMC. Aunque existen algoritmos para muestrear distribuciones con formas matemáticas bien definidas, por ejemplo, una distribución normal o binomial, suele ser difícil generar muestras directamente de distribuciones de probabilidad arbitrarias, sobre todo de aquellas que no pueden describirse fácilmente con una fórmula matemática, como las representaciones categoriales subjetivas sobre estímulos arbitrarios. Los algoritmos MCMC resuelven el problema de generar muestras de distribuciones de probabilidad arbitrariamente complejas mediante un método estadístico. Estos algoritmos funcionan extrayendo muestras de una distribución más simple (de la que sí es posible obtener muestras directas; por ejemplo, una distribución gaussiana o binomial) y conservando o descartando esas muestras según una función de la diferencia entre la distribución simple y la distribución objetivo. Las muestras que se conservan forman una cadena, y cuando el número de secuencias de la cadena es suficientemente grande, las frecuencias representadas en la cadena se vuelven equivalentes a las de muestras de la verdadera distribución subyacente,
+p
+(
+x
+) (Gilks, Richardson, & Spiegelhalter,
+1996
+).
+Un método popular para construir cadenas de Markov es el algoritmo de Metropolis–Hastings (Metropolis, Rosenbluth, Rosenbluth, & Teller,
+2012
+). La secuencia de estados de la cadena se inicializa en un valor arbitrario,
+x
+. El siguiente valor de la secuencia se genera mediante un proceso de dos pasos. Primero, se elige un candidato para el siguiente valor,
+x'
+, mediante un muestreo de una distribución propuesta condicionada a
+x
+,
+q
+(
+x'
+;
+x
+)—por ejemplo, una distribución normal con media
+x
+. Segundo, se decide si el valor propuesto se acepta, mediante una función de aceptación que evalúa la probabilidad relativa de
+x
+frente a
+x'
+bajo la distribución objetivo
+p
+(
+x
+). Por ejemplo, se podría comparar el valor de
+p
+(
+x
+) con el valor de una distribución normal con media
+x
+evaluada en
+x'
+. Si la propuesta se acepta, el estado de la cadena pasa a
+x'
+, o si no, permanece en
+x
+. Este proceso continúa hasta que la cadena converge a su distribución estacionaria.
+Una variante de la función de aceptación de Metropolis–Hastings está en el corazón de MCMCP. En una tarea de categorización estándar, las personas toman una serie de decisiones por pares, eligiendo al mejor miembro de la categoría entre dos estímulos propuestos. Los estímulos de cada par corresponden en realidad a los valores
+x
+y
+x'
+en el algoritmo de Metropolis–Hastings. Las elecciones de las personas determinan qué propuestas se aceptan. Si ofrecemos a las personas elegir entre
+x
+y
+x'
+y eligen
+x'
+con probabilidad
+$$ {P}_{choice}\left({x}^{\prime };x|c\right)=\frac{p\left({x}^{\prime }|c\right)}{p\left({x}^{\prime }|c\right)+p\left(x|c\right)}, $$
+(2)
+donde
+p
+(
+x
+|
+c
+) indica el grado en que el estímulo
+x
+se percibe como miembro de la categoría
+c
+, entonces su juicio equivale a la función de aceptación de Barker (Barker,
+1965
+). Una cadena de Markov basada en esta función de aceptación convergerá a
+p
+(
+x
+|
+c
+). Afortunadamente, la Ec.
+2
+es un modelo bien conocido de las probabilidades de elección humanas, conocido como
+regla de elección de Luce
+o
+regla de razón
+(Luce,
+1963
+; Shepard,
+1987
+). Esta regla ha ajustado bien a datos de personas que eligen entre dos estímulos con base en una propiedad particular (Bradley,
+1954
+; Clarke,
+1957
+; Hopkins,
+1954
+), y también es la regla de decisión usada en muchos modelos de cognición (Ashby,
+1992
+; McClelland & Elman,
+1986
+; Nosofsky,
+1986
+,
+1987
+). Con suficientes de estas decisiones, MCMCP converge a la distribución de probabilidad asociada con esa categoría, y los estímulos individuales se encontrarán con probabilidad
+p
+(
+x
+|
+c
+). Con base en esta correspondencia, el método MCMCP implementa Metropolis–Hastings usando las elecciones de las personas para determinar qué propuestas se aceptan (Sanborn et al.,
+2010
+). Además, diversos supuestos sobre cómo responden los participantes en proporción a probabilidades bayesianas dan lugar a la misma regla de decisión. Por ejemplo, los participantes motivados pueden producir un comportamiento más determinista que el emparejamiento de probabilidades. Este tipo de comportamiento suele modelarse mediante una regla de elección de Luce exponenciada, en la que cada término del lado derecho de la Ec.
+2
+está elevado a un exponente
+γ
+(Ashby & Maddox,
+1993
+). Trabajos previos (Sanborn et al.,
+2010
+) han mostrado que si las elecciones se hacen según la regla de elección de Luce exponenciada, entonces MCMCP (y, por tanto, también d-MCMCP) convergerá a la distribución
+p
+(
+x
+)
+γ
+. Así, si
+γ
+es desconocido, solo podemos estimar
+p
+(
+x
+) salvo una constante exponencial, lo que significa que las probabilidades relativas no pueden evaluarse directamente, pero las probabilidades de distintos objetos conservarán el mismo orden. La eficiencia del algoritmo d-MCMCP dependerá de la distribución objetivo, y por tanto también de
+γ
+también.
+Aunque MCMCP puede abordar grandes conjuntos de datos haciendo a las personas preguntas bien definidas, plantea un problema nuevo: MCMCP requiere una distribución de propuestas simétrica
+q
+(
+x'
+;
+x
+), lo que significa que la probabilidad de elegir una propuesta dado el estado actual sería la misma si la propuesta y el estado actual se invirtieran. Cuando los estímulos se describen mediante un conjunto fijo de parámetros, esto es fácil: pueden usarse distribuciones gaussianas o uniformes para generar propuestas de parámetros continuos, y distribuciones multinomiales para rasgos discretos. Sin embargo, los conjuntos de datos formados por imágenes y texto no están compuestos de elementos fácilmente parametrizables. En el resto de esta sección presentamos un esquema para hacer propuestas razonables con el fin de explorar estímulos que no son fácilmente parametrizables. Llamamos a este método d-MCMCP.
+El método d-MCMCP requiere tres pasos adicionales. El primer paso es obtener una base de datos de estímulos. El segundo paso es calcular una matriz de similitud simétrica,
+S
+, como una medida aproximada de la similitud entre todos los pares posibles de elementos. La métrica de similitud se elige según sea apropiado para el dominio y solo necesita ofrecer una guía aproximada de la similitud percibida por los participantes humanos. Por ejemplo, la similitud entre histogramas de color puede usarse para cuantificar la similitud de imágenes en color. El tercer paso es construir un grafo de los estímulos con base en estas similitudes. La distribución de propuestas de d-MCMCP se define entonces mediante un paseo aleatorio sobre este grafo. Qué tan bien corresponden estas similitudes supuestas a las de los participantes humanos no afecta al algoritmo a largo plazo: siempre que el grafo resultante sea totalmente conexo, no tenga ciclos cerrados y sea aperiódico, se garantiza la convergencia a la distribución estacionaria con el tiempo. Solo la calidad de la correspondencia entre el grafo y las personas debería afectar la eficiencia del algoritmo, y de hecho la eficiencia de d-MCMCP se degrada cuando la diferencia entre las similitudes supuestas y las reales es grande. Véase el
+material suplementario
+para resultados de simulación sobre los efectos del ruido en la medida de similitud empleada.
+Para producir propuestas simétricas mediante un paseo aleatorio en un grafo, las aristas deben ser simétricas (es decir, el paseo puede recorrer una arista en cada dirección), y cada nodo del grafo debe tener el mismo grado (es decir, cada nodo debe tener el mismo número de vecinos). No basta con elegir los
+b
+vecinos más similares de cada nodo, porque aunque el nodo
+i
+podría ser uno de
+b
+vecinos más cercanos del nodo
+j
+, la inversa no necesariamente es cierta, y los nodos podrían tener grados distintos.
+Para resolver este problema, construimos el grafo que maximiza la similitud a lo largo de las aristas manteniendo constante el grado de cada nodo. Formalmente, queremos encontrar
+$$ \arg {\max}_G{\sum}_{ij}{G}_{ij}{S}_{ij}\;\mathrm{such}\kern0.17em \mathrm{that}\;{\sum}_{ij}{G}_{ij}=b;{G}_{ii}=0;{G}_{ij}={G}_{ji}, $$
+donde
+G
+es la matriz de adyacencia del grafo, con
+G
+ij
+= 1 si hay una arista de
+i
+a
+j
+, y
+G
+ij
+= 0 en caso contrario. Este es un caso del
+problema de emparejamiento b de peso máximo
+(Papadimitriou & Steiglitz,
+1998
+). Existen algoritmos exactos para resolver este problema, como el algoritmo
+blossom
+(Edmonds,
+1965
+), pero estos son impracticables para aplicaciones a gran escala. En consecuencia, usamos un algoritmo aproximado basado en paso de mensajes max-product para encontrar un
+b
+-emparejamiento (Jebara & Shchogolev,
+2006
+).
+Dado este grafo de similitud, las propuestas del algoritmo d-MCMCP pueden hacerse de muchas maneras. La más directa es elegir una propuesta de manera uniforme entre todos los
+b
+vecinos, donde el valor de
+b
+se elige a criterio del experimentador. Alternativamente, puede elegirse una propuesta geométrica iterativa de longitud de paso
+n
+geom
+puede elegirse. Aquí, la propuesta se genera de forma iterativa usando un número de pasos,
+n
+geom
+, que se elige a partir de una distribución geométrica con un parámetro fijo. Luego se realiza un paseo aleatorio de longitud
+n
+geom
+eligiendo el siguiente nodo de manera uniforme entre los
+b
+vecinos del más reciente, y la propuesta es el nodo al final del paseo aleatorio. Las propuestas geométricas permiten una búsqueda más amplia en el espacio de estímulos que la propuesta uniforme. Además, conviene reservar una pequeña probabilidad de elegir de manera uniforme entre todos los elementos posibles del estímulo, para que el algoritmo pueda moverse entre máximos locales. Véase la
+1
+.
+Fig. 1
+Pasos para medir las representaciones categoriales con d-MCMCP. (
+a
+) Reunir la base de datos de elementos que son candidatos a miembros de la categoría. (
+b
+) Cuantificar la similitud (usando una métrica elegida adecuadamente) para todos los pares de elementos de la base de datos. (
+c
+) Introducir la matriz de similitud en un algoritmo de
+b
+-emparejamiento para obtener un grafo en el que cada elemento esté conectado con sus
+N
+vecinos. (
+d
+) Ejecutar d-MCMCP usando los vecinos como propuestas cercanas
+Imagen a tamaño completo
+d-MCMCP amplía las posibilidades iniciales del método MCMCP para medir representaciones mentales distribucionales sobre conjuntos de datos discretos reales. Como comentamos antes, nuestra representación de la estructura del mundo es probabilística, por lo que la comprensión más completa de nuestras representaciones mentales de las estructuras del mundo proviene de una representación distribucional. Además, las distribuciones que subyacen a muchas de nuestras representaciones son complejas y pueden ser bimodales o tener interacciones no lineales en el espacio de rasgos. Por ejemplo, una voz excepcionalmente silenciosa y una excepcionalmente fuerte podrían ser ambas indicios de emociones de malestar. Como otro ejemplo, los envases más grandes pueden preferirse para los aceites de oliva más baratos, mientras que los más pequeños se prefieren para las variedades de alta gama. d-MCMCP ofrece la capacidad de revelar de manera eficiente una comprensión más rica y precisa de las distribuciones que subyacen a nuestras representaciones categoriales.
+Experimento 1: caras felices y tristes
+Como primera prueba de d-MCMCP, examinamos las categorías de
+caras felices
+y
+tristes
+usando imágenes de rostros reales. Trabajos previos aplicaron el método MCMCP para estimar estas categorías con estímulos faciales parametrizados, en los que un espacio continuo se derivaba de eigencaras calculadas a partir de un conjunto de imágenes (Martin et al.,
+2012
+). Usamos la misma base de datos de imágenes para comparar directamente los resultados de d-MCMCP y MCMCP con un conjunto de estímulos equivalente. El código de ejemplo y las imágenes de los estímulos faciales pueden encontrarse en
+https://osf.io/u5sz4
+/.
+Método
+Participantes
+Participaron en total 60 estudiantes universitarios a cambio de créditos de curso. Los tamaños de muestra se seleccionaron con base en experiencias previas con este paradigma experimental.
+Estímulos
+Se armó una base de datos de 1,271 imágenes de rostros a partir de la base California Facial Expression (CAFE), una colección de 1,280 retratos normalizados de 40 × 64 píxeles en escala de grises de 64 personas (Dailey, Cottrell, & Reilly,
+2001
+). Estas imágenes expresan aproximadamente ocho emociones distintas “correctas según FACS”, clasificadas según la taxonomía del Sistema de Codificación de Acciones Faciales (Ekman & Friesen,
+1978
+). Los detalles de cómo se construyó el grafo están disponibles en el
+material suplementario en línea
+.
+Procedimiento
+Las imágenes de rostros se convolucionaron con filtros de Gabor en ocho escalas y cinco orientaciones. Luego se aplicó análisis de componentes principales (PCA) a todo el conjunto de imágenes convolucionadas, y la distancia euclidiana entre los 50 componentes superiores se usó como métrica de similitud para definir la matriz
+S
+. Se produjeron dos grafos
+G
+usando el algoritmo aproximado de
+b
+-emparejamiento de Jebara y Shchogolev (
+2006
+), uno con
+b
+= 6 y otro con
+b
+= 16. Este algoritmo ofrece una solución aproximada del problema de
+b
+-emparejamiento, por lo que aún hubo cierta variación menor en el grado de los nodos individuales. Nuestra evaluación empírica del desempeño del procedimiento d-MCMCP también ayudará a indicar si esta variación residual afecta los resultados. No hay garantía de que un
+b
+-emparejamiento máximo sea conexo, por lo que usamos el mayor componente conexo como base del procedimiento d-MCMCP. Los mayores componentes conexos contenían 1,216 imágenes con
+b
+= 6, y las 1,271 imágenes con
+b
+= 16.
+Comparamos tres métodos distintos para definir las distribuciones de propuesta, ejecutados como tres condiciones separadas. Para los tres métodos de propuesta permitimos una probabilidad de 10% de proponer un salto a un nodo elegido al azar de manera uniforme. Los tres métodos para elegir las propuestas restantes fueron: paseo aleatorio uniforme sobre el grafo con
+b
+= 6 (U6), paseo aleatorio uniforme sobre el grafo con
+b
+= 16 (U16), y la propuesta geométrica con
+n
+geom
+= .5 sobre el grafo con
+b
+= 6 (G6).
+Los participantes se asignaron al azar a las condiciones. Los ensayos se presentaron en tres computadoras diferentes, una para cada tipo de propuesta. Siguiendo trabajos previos, cada participante completó ensayos correspondientes a distintas cadenas de d-MCMCP (Martin et al.,
+2012
+; Ramlee, Sanborn, & Tang,
+2017
+). Hubo cuatro cadenas: dos para caras
+felices
+y dos para caras
+tristes
+caras. Hubo 100 ensayos para cada una de las cuatro cadenas. En cada ensayo, el participante decidía cuál de un par de caras era
+más feliz
+o más
+triste
+. Doce ensayos de práctica iniciales no se incluyeron en el análisis. Se presentaron cuarenta ensayos de control con pares de caras en los que la cara más
+feliz
+o
+triste
+era claramente evidente (en este caso, usamos las designaciones de emoción de la base CAFE para seleccionar caras que debían ser claramente felices o tristes). Así, cada participante respondió 100 × 4 + 12 + 40 = 452 ensayos, lo que tomó aproximadamente 25 minutos. Las respuestas se encadenaron en grupos de diez participantes: el último ensayo de cada una de las cuatro cadenas se transmitió al siguiente participante como su primer ensayo no práctico, para formar una cadena enlazada de 1,000 ensayos. Los participantes que no respondieron correctamente al menos 27 de los ensayos de control (
+p
+< .01 bajo adivinación aleatoria) no se incluyeron en los resultados ni se agregaron a una cadena. Recolectamos dos cadenas de diez participantes para cada tipo de propuesta, correspondientes a cuatro cadenas de caras
+felices
+y
+tristes
+con 1,000 ensayos en cada cadena.
+Resultados
+El método MCMCP utilizado previamente tomaba muestras generadas en un espacio continuo de eigencaras, por lo que no producía calificaciones aplicadas directamente a las imágenes discretas del conjunto de datos. Trabajos previos mostraron, promediando las imágenes generadas en la cadena, que las muestras de MCMCP convergían más rápidamente a ser representativas de las representaciones mentales de las personas para cada categoría que los métodos alternativos (es decir, correlación inversa; Martin et al.,
+2012
+. Aquí, para comparar directamente el MCMCP previo con los resultados actuales de d-MCMCP, las imágenes seleccionadas en cada ensayo de d-MCMCP se promediaron para producir las caras promedio que se muestran en la Fig.
+2
+. Los tres métodos de propuesta produjeron caras medias que parecían razonablemente consistentes con las emociones objetivo. También se incluyen en la Fig.
+2
+Se incluyen también los resultados reportados en Martin et al. (
+2012
+), usando MCMCP en un espacio parametrizado basado en las eigencaras derivadas de la base de imágenes que usamos para d-MCMCP. Cualitativamente, los resultados de d-MCMCP son al menos tan buenos como, y quizá mejores que, los producidos con eigencaras.
+Fig. 2
+Caras promedio para MCMCP (eigencaras) y para cada tipo de propuesta de d-MCMCP. Los promedios se obtienen a partir de todos los ensayos y de las cuatro cadenas correspondientes a caras
+felices
+y
+tristes
+Imagen a tamaño completo
+Para cuantificar el desempeño de las distintas variantes del algoritmo, realizamos un experimento de seguimiento en el que un grupo de 40 participantes reclutados a través de Amazon Mechanical Turk calificó las emociones que mostraban las caras derivadas de nuestras cadenas. Para cada tipo de propuesta (y para las cadenas basadas en eigencaras usadas en Martin et al.,
+2012
+), se calcularon promedios acumulados de caras para cada uno de los 40 números de ensayos espaciados de forma logarítmica, promediando sobre las cuatro cadenas correspondientes a cada emoción. Los números de ensayos mayores que 50 imágenes se promediaron solo sobre los 50 ensayos más recientes, de modo que no más de 200 caras contribuyeron a una misma imagen. Los participantes calificaron la emoción que mostraba cada una de estas caras promedio en una escala del 1 al 9, donde 1 indica
+muy triste
+y 9 indica
+muy feliz
+. Todos los participantes calificaron todas las caras y recibieron $1 de compensación por su tiempo. No se excluyeron datos de ningún participante.
+Los resultados de nuestro experimento de seguimiento se muestran en la Fig.
+3
+. El método d-MCMCP produce calificaciones estadísticamente significativamente más altas para las caras derivadas de las cadenas
+felices
+, independientemente del tipo de propuesta, quizá como consecuencia de poder explorar un espacio de caras más amplio que el del método de eigencaras. Al observar los intervalos de confianza del 95% de las diferencias en las calificaciones promedio de todos los ensayos (es decir, las calificaciones de cada participante en todos los ensayos se promedian en una sola calificación), una cara de d-MCMCP tiene significativamente más probabilidades de percibirse como feliz para todos los tipos de propuesta (los valores positivos son calificaciones “mejores” para caras felices):
+IC
+= [1.18, 1.68],
+d
+= 1.43 para U6;
+IC
+= [1.36, 1.82],
+d
+= 1.59 para U16;
+IC
+= [0.95, 1.40],
+d
+= 1.17 para G6. Los resultados para cadenas
+tristes
+son más comparables con el método de eigencaras (los valores negativos indican calificaciones “mejores” para caras tristes): U6 fue significativamente mejor,
+IC
+= [– 0.64, – 0.11],
+d
+=
+–
+0.37; U16 fue significativamente peor,
+IC
+= [ 0.023, 0.52],
+d
+= 0.27 ; y G6 no fue significativamente diferente,
+IC
+= [– 0.35, 0.17],
+d
+=
+–
+0.092. Tanto en las cadenas
+felices
+como en las
+tristes
+, hay cierta variación en las calificaciones de emoción de las caras promedio a lo largo del tiempo, consistente con que MCMCP explore la distribución de caras asociada con la categoría (y posiblemente se desplace entre modos de esa distribución) en lugar de encontrar la instancia más extrema de esa categoría.
+Fig. 3
+Comparación de MCMCP y d-MCMCP: MCMCP usando eigencaras frente a d-MCMCP con diversos métodos de propuesta, ejecutados sobre el mismo conjunto de estímulos faciales. Se muestran las calificaciones de felicidad de las caras promedio para los tres tipos de propuestas de d-MCMCP, así como para el método MCMCP original, en función del número de ensayos (las barras de error muestran intervalos de confianza del 95%). Los promedios se toman sobre los 50 ensayos más recientes (o desde el primer ensayo, para números de ensayos menores que 50) y sobre las cuatro cadenas correspondientes a la misma emoción,
+felices
+o
+tristes
+. También se incluyen las calificaciones de caras de un experimento previo de MCMCP que usó eigencaras derivadas de la misma base de datos de imágenes (Martin et al.,
+2012
+).
+Imagen a tamaño completo
+Experimento 2: fundamentos morales
+Nuestro segundo experimento aplicó d-MCMCP a conceptos en texto. Aquí usamos d-MCMCP para examinar y respaldar aún más una teoría de la psicología social según la cual conservadores y liberales tienen conceptos distintos de moralidad. En particular, se ha afirmado que las intuiciones morales de los conservadores reflejan valores en cinco “fundamentos morales”: daño/cuidado, equidad/reciprocidad, endogrupo/lealtad, autoridad/respeto y pureza/santidad, mientras que los liberales respaldan principalmente solo los dos primeros principios (Graham et al.,
+2009
+). Esta diferencia se ha observado previamente en evaluaciones abstractas de juicios morales sobre enunciados y escenarios, en reacciones ante compensaciones tabú, y en el uso de palabras relacionadas con los fundamentos en los textos morales de sermones en iglesias liberales frente a conservadoras. Aquí examinamos las diferencias en el concepto de moralidad entre liberales y conservadores mediante d-MCMCP sobre un conjunto de palabras.
+Método
+Participantes
+Se reclutaron en total 251 participantes con residencia en Estados Unidos mediante Amazon Mechanical Turk, a quienes se pagó $1 cada uno por su tiempo. Los tamaños de muestra se seleccionaron con base en experiencias previas con este paradigma experimental.
+Estímulos
+En Graham et al. (
+2009
+), se armó un diccionario de palabras estrechamente relacionadas con cada uno de los fundamentos morales. Elegimos 32 de estas palabras de cada uno de los cinco fundamentos, para un total de 160 palabras.
+Procedimiento
+Las similitudes entre todos los pares de palabras posibles se midieron usando resultados de análisis semántico latente disponibles en línea en
+http://lsa.colorado.edu/cgi-bin/LSA-matrix.html
+(Landauer & Dumais,
+1997
+). La similitud entre todos los pares se representó como una matriz de similitud que se introdujo en el algoritmo de
+b
+-emparejamiento. Se encontró un grafo usando
+b
+= 10, que estaba aproximadamente entre los valores usados en el Experimento
+1
+. Usamos una distribución de propuestas correspondiente a un paseo aleatorio uniforme sobre este grafo. Además, como en el Experimento
+1
+, permitimos una probabilidad de 10% de proponer un salto a un nodo elegido al azar de manera uniforme. Cada participante completó ensayos correspondientes a cuatro cadenas de d-MCMCP, todas las cuales exploraban el concepto único de “moralidad”. En cada ensayo, a los participantes se les dio a elegir entre dos palabras y respondieron a la pregunta: “¿Cuál de estas dos palabras es más relevante para la moralidad?” Usamos una distribución de propuestas correspondiente a un paseo aleatorio uniforme sobre este grafo, pero con una probabilidad de 10% de proponer un salto a un nodo elegido al azar de manera uniforme. Hubo 100 ensayos para cada una de las cuatro cadenas. Doce ensayos al inicio se ofrecieron como práctica y no se incluyeron en el análisis. Así, cada participante respondió 100 × 4 + 12 = 412 ensayos, lo que tomó aproximadamente 25 min. Las respuestas no se vincularon entre participantes (como sí se había hecho en el Exp.
+1
+). Al final del experimento, siguiendo a Graham et al. (
+2009
+), se preguntó también a los participantes “¿Cuál describe mejor su identificación política?” y se les dieron las opciones (1)
+extremadamente liberal
+, (2)
+algo liberal
+, (3)
+intermedio
+, (4)
+algo conservador
+, (5)
+extremadamente conservador
+, y (6)
+ninguna de estas
+.
+Resultados
+Como nos interesaba contrastar las respuestas entre personas que se identificaban como conservadoras o liberales, solo analizamos las respuestas de los participantes que respondieron
+extremadamente liberal
+y
+algo liberal
+(clasificados como liberales,
+N
+= 131) o
+algo conservador
+o
+extremadamente conservador
+(clasificados como conservadores,
+N
+= 52) a la pregunta de identificación política. Para cada uno de estos participantes calculamos la frecuencia con la que se seleccionaron palabras correspondientes a los cinco fundamentos. La Figura
+4
+muestra las frecuencias normalizadas para conservadores (arriba) y liberales (abajo). Las frecuencias normalizadas de las 160 palabras, junto con las 20 palabras más relevantes moralmente para conservadores y liberales, se muestran en las Figs. suplementarias
+2
+y
+3
+. Bajo el supuesto estadísticamente conservador de que cada participante contaba como una sola muestra, la diferencia entre los histogramas normalizados de las dos condiciones fue significativa según la prueba
+χ
+2
+de Pearson [
+χ
+2
+(4) = 9.76,
+p
+< .05]. Un análisis de varianza (ANOVA) de dos vías sobre los fundamentos morales y la identificación política mostró un efecto principal de los fundamentos [
+F
+(4, 905) = 24.24,
+MSE
+= .95,
+p
+< .00001,
+η
+p
+2
+= .097], así como una interacción [
+F
+(4, 905) = 15.87,
+MSE
+= .62,
+p
+< .0001,
+η
+p
+2
+= .066], lo que respalda la idea de que conservadores y liberales encuentran distintos grados de relevancia en los cinco fundamentos morales. Un ANOVA sobre los fundamentos para participantes conservadores mostró un efecto principal de los fundamentos [
+F
+(4, 255) = 17.41,
+MSE
+= .74,
+p
+< .00001,
+η
+p
+2
+= .79], siendo el fundamento de la pureza (
+M
+= .41,
+DE
+= .31) significativamente más relevante (con corrección de Bonferroni) que los otros cuatro fundamentos: daño (
+M
+= .15,
+DE
+= .15),
+t
+(51) = 4.67,
+p
+< .0001,
+d
+= 1.08,
+IC
+= [.15, .37]; equidad (
+M
+= .19,
+DE
+= .21),
+t
+(51) = 3.45,
+p
+=
+.
+0011,
+d
+= 0.82,
+IC
+= [.091, .34]; endogrupo
+M
+= .10,
+DE
+= .14),
+t
+(51) = 5.57,
+p
+< .0001,
+d
+= 1.27,
+IC
+= [.19, .41]; y autoridad (.15,
+DE
+= .18),
+t
+(51) = 4.60,
+p
+< .0001,
+d
+= 1.015,
+IC
+= [.14, .36]. Un ANOVA sobre los fundamentos para participantes liberales también mostró un efecto principal de los fundamentos [
+F
+(4, 650) = 23.36,
+MSE
+= .88,
+p
+< .00001,
+η
+p
+2
+= .87]. El análisis post hoc muestra que el fundamento de la pureza (
+M
+= .21,
+DE
+= .22) es más relevante (con significancia ajustada por Bonferroni) que el endogrupo (
+M
+= .10,
+DE
+= .12),
+t
+(130) = 4.36,
+p
+< .0001,
+d
+= .57,
+IC
+= [.055, .15], y la autoridad (
+M
+= .13,
+DE
+= .13),
+t
+(130) = 3.15,
+p
+=
+.
+0020,
+d
+= 0.41,
+IC
+= [.03, .12]. También hubo una tendencia (no significativa tras el ajuste de Bonferroni) a que la pureza fuera menos relevante que el daño (
+M
+= .27,
+DE
+= .24),
+t
+(130) = – 2.03,
+p
+=
+.
+045,
+d
+=
+–
+0.30,
+IC
+= [– .13, – .0017], y la equidad (
+M
+= .29,
+DE
+= .23),
+t
+(130) = – 2.43,
+p
+=
+.
+016,
+d
+=
+–
+0.36,
+IC
+= [– .14, – .015]. El daño y la equidad fueron ambos significativamente más relevantes que los otros tres fundamentos. El fundamento del daño fue significativamente más relevante (con ajuste de Bonferroni) que el endogrupo,
+t
+(130) = 6.91,
+p
+< 1e-09,
+d
+= .91,
+IC
+= [.12, .22], y la autoridad,
+t
+(130) = 5.30,
+p
+< e-06,
+d
+= .75,
+IC
+= [.090, .20]. El daño también tuvo una tendencia (no significativa con el ajuste de Bonferroni) a ser más relevante que la pureza,
+t
+(130) = 2.0,
+p
+=
+.
+045,
+d
+= 0.30,
+IC
+= [.0017, .13]. De manera similar, el fundamento de la equidad fue significativamente más relevante (con ajuste de Bonferroni) que el endogrupo,
+t
+(130) = 7.38,
+p
+< 1e-10,
+d
+= 1.0,
+IC
+= [.13, .23] y la autoridad,
+t
+(130) = 6.44,
+p
+< 1e-08,
+d
+= .84,
+IC
+= [.11, .20]. La equidad también tuvo una tendencia (no significativa con el ajuste de Bonferroni) a ser más relevante que la pureza,
+t
+(130) = 2.43,
+p
+=
+.
+016404,
+d
+= 0.35613,
+IC
+= [.015, .14].
+Fig. 4
+Relevancia de los fundamentos morales para conservadores frente a liberales: resultados de d-MCMCP sobre palabras asociadas con los cinco fundamentos morales propuestos por Graham et al. (
+2009
+) para participantes que se identificaron como conservadores (arriba) frente a liberales (abajo). Los valores
+p
+(relevancia | moralidad) son recuentos normalizados, es decir, las proporciones de veces que las palabras asociadas con el fundamento moral dado fueron elegidas como más relevantes para el concepto de moralidad.
+Imagen a tamaño completo
+Estos resultados son consistentes con los de Graham et al. (
+2009
+), quienes encontraron que los conservadores creían que los cinco fundamentos morales eran relevantes para la moralidad, mientras que los liberales tendían a valorar sobre todo los fundamentos del daño y la equidad. Sin embargo, la importancia relativa de la pureza frente a todos los demás fundamentos para los conservadores, y frente al endogrupo y la autoridad, no se observó en Graham et al., para quienes la importancia relativa de los distintos fundamentos variaba entre experimentos, lo que sugiere una dirección interesante para futuras investigaciones.
+Experimento 3: estaciones del año
+En nuestro tercer experimento usamos d-MCMCP para explorar categorías definidas sobre imágenes de una gran base de datos en línea. En concreto, exploramos las categorías asociadas con las estaciones primavera, verano, otoño e invierno, usando 4,000 imágenes obtenidas de bases de datos de imágenes en línea. Al aplicar el procedimiento d-MCMCP a estos estímulos, pudimos identificar imágenes de alta probabilidad y calcular estadísticas agregadas informativas para cada categoría, como determinar la distribución de colores asociada con cada estación.
+Método
+Participantes
+Se reclutaron en total 90 participantes mediante Amazon Mechanical Turk. A cada participante se le pagó $1 por completar el experimento de 25 min. El tamaño de la muestra se seleccionó con base en la experiencia previa con este paradigma experimental.
+Estímulos
+Se reunió un conjunto de 4,000 imágenes en color relacionadas con las estaciones buscando imágenes web de dominio público con las frases “spring season”, “summer season”, “autumn season” y “winter season” en Google Image Search y en
+Flickr.com
+. Se descargaron los 500 primeros resultados de las búsquedas en Google y Flickr para cada estación. Todas las imágenes se redimensionaron de modo que la dimensión máxima fuera de 250 píxeles, conservando la proporción original entre altura y anchura.
+Procedimiento
+La similitud entre todos los pares posibles de imágenes (7,998,000 pares para 4,000 imágenes) se cuantificó usando tanto el descriptor de histograma básico de color (BCH) (Griffin,
+2006
+) como la transformada de características invariante a la escala (SIFT; Lowe,
+1999
+). BCH clasifica y cuenta los píxeles como pertenecientes a uno de 11 colores básicos (negro, blanco, gris, rojo, naranja, amarillo, verde, azul, morado, rosa y marrón). SIFT aplica filtros locales para transformar las imágenes en colecciones de vectores de características locales que son invariantes al escalado, la rotación y la traslación de la imagen. Los resultados de similitud sobre todos los pares de imágenes para ambos métodos se normalizaron para tener varianza unitaria y luego se sumaron, obteniendo así una medida de similitud que combinaba los resultados de BCH y SIFT. La similitud entre todos los pares se representó como una matriz de similitud que se introdujo en el algoritmo de
+b
+-emparejamiento. Se encontró un grafo usando
+b
+= 5, que fue el valor más pequeño tal que las 4,000 imágenes permanecieron totalmente conexas. Usamos una distribución de propuestas correspondiente a un paseo aleatorio uniforme sobre este grafo.
+Cada participante hizo elecciones por pares entre imágenes respondiendo preguntas como “¿Cuál imagen es más representativa de la primavera?” Usamos una distribución de propuestas correspondiente a un paseo aleatorio uniforme sobre este grafo. Hubo 100 ensayos para cada una de las cuatro cadenas, una para cada estación. También hubo 12 ensayos de práctica, así como 40 ensayos de control en los que una imagen del par correspondía obviamente a una estación particular (según el juicio del experimentador). Así, cada participante completó 452 ensayos. Incluimos ensayos de control con la intención de excluir de las cadenas y de los análisis posteriores a los participantes que no acertaran al menos 27 de los ensayos de control (lo que corresponde a una probabilidad de menos de 1% de que las respuestas fueran adivinanzas completamente aleatorias). Todos los participantes cumplieron nuestros criterios y se incluyeron en el análisis. Recopilamos los datos vinculando tres grupos de diez participantes, formando tres cadenas de 1,000 ensayos para cada una de las cuatro estaciones.
+Resultados
+Las diez imágenes que se eligieron con más frecuencia en las tres cadenas para cada estación se muestran en la Fig.
+5
+. Claramente, las imágenes son muy indicativas de cada estación. La Figura
+6
+a muestra, en función del número de ensayos, la distancia L1 entre histogramas de color de 11 bins calculados para las imágenes acumuladas, tanto entre cadenas de la misma estación como entre cadenas de estaciones distintas. La distancia dentro de la cadena disminuye con el tiempo y suele ser menor que la similitud entre cadenas, lo que respalda la idea de que las cadenas convergen hacia distintas partes del espacio de imágenes. La Figura
+6
+b muestra un ejemplo sencillo del tipo de análisis estadístico que puede hacerse con las muestras resultantes. Los histogramas de color para las distintas estaciones son bastante distintos entre sí y corresponden a paletas que coinciden intuitivamente con las estaciones.
+Fig. 5
+Imágenes estacionales: las diez imágenes más populares en todas las cadenas para cada estación, de mayor a menor popularidad de izquierda a derecha.
+Imagen a tamaño completo
+Fig. 6
+Histogramas de color de las imágenes estacionales. Se calcularon histogramas de color de 11 bins para todas las imágenes acumuladas en las tres cadenas en función del número de ensayos. (
+a
+) Distancia L1 promedio entre los histogramas acumulados de una cadena y los de las otras dos cadenas que corresponden a la misma estación (línea continua), o de otras tres cadenas que corresponden a una estación distinta (una línea punteada por cada una de las otras estaciones). (
+b
+) Histogramas de color de todas las imágenes, promediados sobre todas las cadenas de cada estación.
+Imagen a tamaño completo
+Conclusión
+Hemos introducido un método nuevo que puede aplicarse a conjuntos arbitrarios de elementos, lo que permite medir las representaciones de las personas sobre categorías definidas en esos elementos. Por supuesto, pueden aplicarse muchos métodos para obtener categorías de las personas. Nuestro método d-MCMCP superó a MCMCP al obtener las categorías de caras felices. Trabajos previos han mostrado que MCMCP supera tanto a la regresión compleja como predice mejor las preferencias de categoría de un individuo que las de otros individuos (Huszár, Noppeney, & Lengyel,
+2010
+). Por tanto, parece probable que d-MCMCP muestre una ventaja similar frente a estos otros enfoques. En trabajos futuros sería útil verificarlo comparando directamente d-MCMCP con estos métodos, así como compararlo con enfoques como el aprendizaje activo (Myung & Pitt,
+2009
+) y la tomografía cognitiva (Houlsby et al.,
+2013
+). D-MCMCP en general hace supuestos más débiles sobre el proceso de toma de decisiones que estos otros métodos, por lo que puede resultar más ventajoso con tareas y estímulos del mundo real, un contexto en el que es menos probable que los supuestos que hacen los otros métodos sobre los procesos cognitivos sean correctos. Aunque nuestro ejemplo textual usó solo palabras, el método podría extenderse fácilmente a la evaluación de líneas de texto, párrafos y documentos. Además, d-MCMCP también puede usarse para etiquetar clips de vídeo y otros tipos de datos. Como ocurre con la mayoría de los modelos basados en datos, la calidad y la generalizabilidad de los resultados de d-MCMCP están influidas por los sesgos presentes en el conjunto de datos utilizado. Por ejemplo, si se quisiera comparar rostros representativos de hombres y de mujeres, y los datos tuvieran más ejemplos de rostros jóvenes de mujeres y de rostros mayores de hombres, las representaciones categóricas finales podrían estar dominadas por rasgos dependientes de la edad en lugar de del género. Por tanto, las limitaciones y los sesgos presentes en el conjunto de datos utilizado deben tenerse en cuenta al sacar conclusiones sobre las representaciones mentales. Es probable que nuestro método sea valioso para los científicos de datos, así como para los investigadores de aprendizaje automático y de visión por computadora interesados en entrenar sistemas que automaticen la categorización de imágenes y otros estímulos complejos. Nuestro método puede usarse para obtener juicios humanos sobre conceptos en una amplia variedad de dominios, incluidos los juicios estereotipados a partir de características individuales, las preferencias de los consumidores en función de variaciones en la oferta de productos, o el estado de ánimo o la intención conversacional a partir de patrones de uso de palabras. Para los psicólogos, realizar experimentos con d-MCMCP a gran escala nos permitirá construir un catálogo de representaciones humanas de categorías, lo que supone un paso hacia la comprensión de cómo se forman esas categorías.
+Referencias
+Ashby, F. G. (1992).
+Multidimensional models of perception and cognition
+. Hillsdale, NJ: Erlbaum.
+Google Scholar
+Ashby, F. G., & Alfonso-Reese, L. A. (1995). Categorization as probability density estimation.
+Journal of Mathematical Psychology
+,
+39
+, 216–233.
+Artículo
+Google Scholar
+Ashby, F. G., & Maddox, W. T. (1993). Relations between prototype, exemplar, and decision bound models of categorization.
+Journal of Mathematical Psychology
+,
+37
+, 372–400.
+https://doi.org/10.1006/jmps.1993.1023
+Artículo
+Google Scholar
+Barker, A. A. (1965). Monte Carlo calculations of the radial distribution functions for a proton-electron plasma.
+Australian Journal of Physics
+,
+18
+, 119–133.
+Artículo
+Google Scholar
+Bradley, R. A. (1954). Incomplete block rank analysis: On the appropriateness of the model of a method of paired comparisons.
+Biometrics
+,
+10
+, 375–390.
+Artículo
+Google Scholar
+Carvalho, V. R., Lease, M., & Yilmaz, E. (2011). Crowdsourcing for search evaluation.
+En ACM Sigir forum 44
+(2), 17-22.
+Clarke, F. R. (1957). Constant-ratio rule for confusion matrices in speech communication.
+Acoustical Society of America
+,
+29
+, 715–720.
+Artículo
+Google Scholar
+Dailey, M., Cottrell, G. W., & Reilly, J. (2001). California facial expressions (CAFE) (Unpublished digital images). University of California, San Diego
+Edmonds, J. (1965). Paths, trees and flowers.
+Canadian Journal of Mathematics
+,
+17
+, 449–467.
+Artículo
+Google Scholar
+Ekman, P., & Friesen, W. (1978).
+Facial action coding system: A technique for the measurement of facial movement
+. Palo Alto, CA: Consulting Psychologists Press.
+Google Scholar
+F. Kleemann, G. Vob y K. Rieder (2008). Under paid Innovators:
+The Commercial Utilization of Consumer Work through Crowdsourcing, Science Technology and Innovation Studies, 4
+,5–26.
+Gilks, W. R., Richardson, S., & Spiegelhalter, D. J. (1996).
+Markov chain Monte Carlo in practice
+. Boca Raton, FL: Chapman & Hall.
+Google Scholar
+Graham, J., Haidt, J., & Nosek, B. (2009). Liberals and conservatives use different sets of moral foundations.
+Journal of Personality and Social Psychology
+,
+96
+, 1029–1046.
+Artículo
+PubMed
+Google Scholar
+Greengard, S. (2011). Following the crowd.
+Communications of the ACM, 54
+(2), 20-22
+Griffin, L. D. (2006). The basic colour categories are optimal for classification.
+Journal of the Royal Society Interface
+,
+3
+, 71–85.
+Artículo
+PubMed
+Google Scholar
+Hopkins, J. W. (1954). Incomplete block rank analysis: Some taste test results.
+Biometrics
+,
+10
+, 391–399.
+Artículo
+Google Scholar
+Howe, J. (2006). The rise of crowdsourcing.
+Wired magazine, 14
+(6), 1-4.
+Houlsby, N. M. T., Huszár, F., Ghassemi, M. M., Orbán, G., Wolpert, D. M., & Lengyel, M. (2013). Cognitive tomography reveals complex, task-independent mental representations.
+Current Biology
+,
+23
+, 2169–2175.
+https://doi.org/10.1016/j.cub.2013.09.012
+Artículo
+PubMed
+PubMed Central
+Google Scholar
+Huszár, F., Noppeney, U., & Lengyel, M. (2010). Lectura de la mente mediante aprendizaje automático: un método doblemente bayesiano para inferir representaciones mentales. En S. Ohlsson & R. Catrambone (Eds.),
+Cognition in flux: Proceedings of the 32nd Annual Meeting of the Cognitive Science Society
+(pp. 2810–2815). Austin, TX: Cognitive Science Society.
+Google Scholar
+Jebara, T., & Shchogolev, V. (2006). B-matching for spectral clustering. En J. Fürnkranz, T. Scheffer, & M. Spiliopoulou (Eds.),
+Proceedings of the 17th European Conference on Machine Learning
+(pp. 679–686). Berlin, Germany: Springer.
+Google Scholar
+Kittur, A., Chi, E. H., & Suh, B. (2008). Crowdsourcing user studies with Mechanical Turk. En
+Proceedings of the SIGCHI conference on human factors in computing systems
+(pp. 453–456). ACM.
+Landauer, T. K., & Dumais, S. T. (1997). A solution to Plato’s problem: The Latent Semantic Analysis theory of the acquisition, induction, and representation of knowledge.
+Psychological Review
+,
+104
+, 211–240.
+https://doi.org/10.1037/0033-295X.104.2.211
+Artículo
+Google Scholar
+Lowe, D. G. (1999). Object recognition from local scale-invariant features. En
+Proceedings of the Seventh IEEE International Conference on Computer Vision
+(Vol. 2, pp. 1150–1157). New York, NY: IEEE Press.
+https://doi.org/10.1109/ICCV.1999.790410
+Capítulo
+Google Scholar
+Luce, R. D. (1963). Detection and recognition. En R. D. Luce, R. R. Bush, & E. Galanter (Eds.),
+Handbook of mathematical psychology
+(pp. 103–190). New York, NY: Wiley.
+Google Scholar
+Martin, J. B., Griffiths, T. L., & Sanborn, A. N. (2012). Testing the efficiency of Markov chain Monte Carlo with people using facial affect categories.
+Cognitive Science
+,
+36
+, 150–162.
+Artículo
+PubMed
+Google Scholar
+McClelland, J. L., & Elman, J. L. (1986). The TRACE model of speech perception.
+Cognitive Psychology
+,
+18
+, 1–86.
+https://doi.org/10.1016/0010-0285(86)90015-0
+Artículo
+PubMed
+Google Scholar
+McDuff, D. (2010). A human–Markov chain Monte Carlo method for investigating facial expression categorization. En D. D. Salvucci & G. Gunzelmann (Eds.),
+Proceedings of the 10th International Conference on Cognitive Modeling
+(pp. 151–156). Philadelphia, PA: Drexel University.
+Google Scholar
+Metropolis, A. W., Rosenbluth, A. W., Rosenbluth, M. N., & Teller, A. H. (2012). Equations of state calculations by fast computing machines.
+Journal of Chemical Physics
+,
+21
+, 1087–1097.
+Artículo
+Google Scholar
+Myung, J. I., & Pitt, M. A. (2009). Optimal experimental design for model discrimination.
+Psychological Review
+,
+116
+, 499–518.
+https://doi.org/10.1037/a0016104
+Artículo
+PubMed
+PubMed Central
+Google Scholar
+Nosofsky, R. M. (1986). Attention, similarity, and the identification–categorization relationship.
+Journal of Experimental Psychology: General
+,
+115
+, 39–57.
+https://doi.org/10.1037/0096-3445.115.1.39
+Artículo
+Google Scholar
+Nosofsky, R. M. (1987). Attention and learning processes in the identification and categorization of integral stimuli.
+Journal of Experimental Psychology: Learning, Memory, and Cognition
+,
+13
+, 87–108.
+https://doi.org/10.1037/0278-7393.13.1.87
+Artículo
+PubMed
+Google Scholar
+Papadimitriou, C., & Steiglitz, K. (1998).
+Combinatorial optimization: Algorithms and complexity.
+New York, NY: Dover.
+Google Scholar
+Ramlee, F., Sanborn, A. N., & Tang, N. K. Y. (2017). What sways people’s judgement of sleep quality? A quantitative choice-making study with good and poor sleepers.
+Sleep
+,
+40
+, 1–13.
+Artículo
+Google Scholar
+Sanborn, A. N., Griffiths, T. L., & Shiffrin, R. (2010). Uncovering mental representations with Markov chain Monte Carlo.
+Cognitive Psychology
+,
+60
+, 63–106.
+https://doi.org/10.1016/j.cogpsych.2009.07.001
+Artículo
+PubMed
+Google Scholar
+Shepard, R. N. (1987). Toward a universal law of generalization for psychological science.
+Science
+,
+237
+, 1317–1323.
+https://doi.org/10.1126/science.3629243
+Artículo
+PubMed
+Google Scholar
+Descargar referencias
+Nota de los autores
+Todos los autores contribuyeron al desarrollo del concepto del estudio. T.L.G. y J.B.M. contribuyeron al diseño del Experimento
+1
+, todos los autores contribuyeron al diseño del Experimento
+2
+, y A.S.H. y T.L.G. contribuyeron al diseño del Experimento
+3
+. A.S.H. programó y realizó los estudios experimentales y analizó los resultados. A.S.H. redactó el manuscrito, T.L.G. y J.B.M. aportaron revisiones críticas, y todos los autores aprobaron la versión final para su envío. Parte de este trabajo se publicó en las actas de una conferencia de la Cognitive Science Society (Hsu et al., 2012). Este trabajo contó con el apoyo de la subvención n.º IIS-0845410 de la National Science Foundation y de la subvención n.º ERC-2013-AdG339182-BAYES_KNOWLEDGE del European Research Council.
+Información de los autores
+Autores y afiliaciones
+School of Electronic Engineering and Computer Science, Queen Mary University of London, London, UK
+Anne S. Hsu
+Departamento de Psicología, New York University, New York, NY, EE. UU.
+Jay B. Martin
+Departamento de Psicología, University of Warwick, Coventry, Reino Unido
+Adam N. Sanborn
+Departamento de Psicología, University of California, Berkeley, Berkeley, CA, EE. UU.
+Thomas L. Griffiths
+Autores
+Anne S. Hsu
+Ver publicaciones del autor
+También puede buscar a este autor en
+PubMed
+Google Scholar
+Jay B. Martin
+Ver publicaciones del autor
+También puede buscar a este autor en
+PubMed
+Google Scholar
+Adam N. Sanborn
+Ver publicaciones del autor
+También puede buscar a este autor en
+PubMed
+Google Scholar
+Thomas L. Griffiths
+Ver publicaciones del autor
+También puede buscar a este autor en
+PubMed
+Google Scholar
+Autor de correspondencia
+Correspondencia a
+Anne S. Hsu
+.
+Información adicional
+Nota del editor
+Springer Nature se mantiene neutral con respecto a las reclamaciones jurisdiccionales en mapas publicados y afiliaciones institucionales.
+Material electrónico complementario
+ESM 1
+(DOCX 3402 kb)
+Derechos y permisos
+Acceso abierto
+Este artículo se distribuye según los términos de la Licencia Internacional Creative Commons Atribución 4.0 (http://creativecommons.org/licenses/by/4.0/), que permite el uso, la distribución y la reproducción sin restricciones en cualquier medio, siempre que se dé el crédito apropiado al autor o autores originales y a la fuente, se proporcione un enlace a la licencia Creative Commons y se indique si se han realizado cambios.
+Reimpresiones y permisos
+Acerca de este artículo
+Citar este artículo
+Hsu, A.S., Martin, J.B., Sanborn, A.N.
+et al.
+Identifying category representations for complex stimuli using discrete Markov chain Monte Carlo with people.
+Behav Res
+51
+, 1706–1716 (2019). https://doi.org/10.3758/s13428-019-01201-9
+Descargar cita
+Publicado
+:
+13 de febrero de 2019
+Fecha del número
+:
+15 de agosto de 2019
+DOI
+:
+https://doi.org/10.3758/s13428-019-01201-9
+Compartir este artículo
+Cualquier persona con quien comparta el siguiente enlace podrá leer este contenido:
+Obtener enlace para compartir
+Lo sentimos, actualmente no hay ningún enlace para compartir disponible para este artículo.
+Copiar al portapapeles
+Proporcionado por la iniciativa de compartición de contenido SharedIt de Springer Nature
+Palabras clave
+Representación de categorías
+Cadenas de Markov Monte Carlo
+Representaciones de palabras
+Bases de datos de imágenes
+Descargar PDF
+¿Trabaja en un manuscrito?
+Evite los errores comunes
+Publicidad
+Buscar
+Buscar por palabra clave o autor
+Buscar
+Navegación
+Encontrar una revista
+Publique con nosotros
+Descubrir contenido
+Revistas A-Z
+Libros A-Z
+Publique con nosotros
+Publique su investigación
+Publicación de acceso abierto
+Productos y servicios
+Nuestros productos
+Bibliotecarios
+Sociedades
+Socios y anunciantes
+Nuestros sellos
+Springer
+Nature Portfolio
+BMC
+Palgrave Macmillan
+Apress
+Sus opciones de privacidad/Gestionar cookies
+Sus derechos de privacidad en el estado de EE. UU.
+Declaración de accesibilidad
+Términos y condiciones
+Política de privacidad
+Ayuda y soporte
+71.114.19.237
+No afiliado
+© 2023 Springer Nature

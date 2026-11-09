@@ -1,0 +1,24 @@
+Humans Consulting HCH
+Personal BlogA half-baked idea that came out of a conversation with Jessica, Ryan, and Tsvi:We'd like to have a straightforward way to deﬁne "manipulation", so that we could instruct anAI not to manipulate its developers, or construct a low-impact measure that takes manipulationas a particularly important impact.We could initially deﬁne manipulation in terms of a human's expected actions, or morerobustly, in terms of e'ects on a human's policy distribution across a wide array of plausibleenvironments. However, we'd like to have our AI still be able to tell us information (in a non-manipulative manner) instead of hiding from us in an e'ort to avoid all inﬂuence!The title of course spoils the next idea: if the AI can reason about some suitable model of HCH,then we can deﬁne the notion of "action a has very low inﬂuence on a human, as compared tothe null action, apart from conveying information x": that over a distribution of questions q,where HCH is deﬁned relative to that human; we're conditioning the distribution on whetherthe AI takes action a or the null action; and x,q is the input consisting of statement x followed byquestion q.This of course does not exclude the use of manipulative statements x, but it at least could allowus to reduce forms of manipulation to those that would happen with the text input to HCH.I'd prefer to have the AI reason about HCH rather than just (e.g.) the human's actions in a one-hour simulation, because HCH can in principle capture a human's long-term and extrapolatedpreferences, and these are the ones I most want to ensure don't get manipulated.Is there an obvious failure of this approach, an obvious improvement to it, or somethingsimpler that it reduces to?HCH as a measure of manipulationby orthonormal10th Mar 2017
+HCH(q)|a≈HCH(x,q)|null1
+Mentioned in2
+6 comments, sorted by top scoringRyan Carey1
+orthonormal0
+[-]
+I can think of two problems:1. Let's generously suppose that q is some ﬁxed distribution of questions that we want the AI system to ask humans.Some manipulative action may only change the answers on q by a little bit but may yet change the consequences ofacting on those responses by a lot.2. Consider an AI system that optimizes a utility function that includes this kind of term for regularizing againstmanipulation. The actions that best fulﬁll this utility function may be ones that manipulate humans a lot (andrepurposes their resources for some other function) and coerces them into answering questions in a "natural way".i.e. maybe impact is more like distance traveled (i.e. a path integral) than displacement.
+orthonormal0orthonormal0
+[-]
+Re #2, I think this is an important objection to low-impact-via-regularization-penalty in general.
+[-]
+Re #1, an obvious set of questions to include in q are questions of approval for various aspects of the AI's policy. (Inparticular, if we want the AI to later calculate a human's HCH and ask it for guidance, then we would like to be sure thatHCH's answer to that question is not manipulated.)
+[-]
+There's the additional objection of "if you're doing this, why not just have the AI ask HCH what to do?"Overall, I'm hoping that it could be easier for an AI to robustly conclude that a certain plan only changes a human's HCH viacertain informational content, than for the AI to reliably calculate the human's HCH. But I don't have strong arguments forthis intuition.
+Jessica Taylor1
+[-]
+"Having a well-calibrated estimate of HCH" is the condition you want, not "being able to reliably calculate HCH".
+orthonormal1
+[-]
+I should have said "reliably estimate HCH"; I'd also want quite a lot of precision in addition to calibration before I trust it.Comparing AI Alignment Approaches to Minimize False Positive Risk6y 
+6y 6y 
+6y 
+6y 6y 

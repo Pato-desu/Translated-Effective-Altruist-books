@@ -1,0 +1,987 @@
+Evaluación diferencial de agentes de IA de caja negra
+Rashmeet Kaur Nayyar*, Pulkit Verma*, y Siddharth Srivastava
+Laboratorio de Agentes Autónomos y Robots Inteligentes,
+Escuela de Computación e Inteligencia Aumentada, Universidad Estatal de Arizona, AZ, EE. UU.
+{rmnayyar, verma.pulkit, siddharths }@asu.edu
+Resumen
+Gran parte de la investigación sobre el aprendizaje de modelos simbólicos de agentes de IA
+se centra en agentes con modelos estacionarios. Este su-
+puesto no se cumple en entornos donde las capacidades del agente
+pueden cambiar como resultado del aprendizaje, la adaptación u
+otras modificaciones posteriores al despliegue. La evaluación eficiente de
+agentes en tales entornos es crítica para aprender las verdaderas capaci-
+dades de un sistema de IA y para garantizar su uso seguro. En este
+trabajo, proponemos un enfoque novedoso para evaluar de forma diferencial
+agentes de IA de caja negra que se han desviado de sus modelos
+conocidos previamente. Como punto de partida, consideramos el caso totalmente
+observable y determinista. Aprovechamos observaciones dispersas del
+comportamiento actual del agente desviado y el conocimiento de su modelo
+inicial a fin de generar una política de consultas activas que
+consulta de forma selectiva al agente y calcula un modelo actualizado
+de su funcionalidad. La evaluación empírica muestra
+que nuestro enfoque es mucho más eficiente que volver a aprender el
+modelo del agente desde cero. También mostramos que el costo de la eva-
+luación diferencial con nuestro método es proporcional a la
+cantidad de desviación en la funcionalidad del agente.
+1 Introducción
+Con una autonomía cada vez mayor de los sistemas de IA en los últimos
+años, persiste un problema importante que en gran medida ha pasado
+inadvertido: ¿cómo predecimos con precisión el comportamiento de un
+agente de IA de caja negra que evoluciona y se adapta a los cambios
+del entorno en el que opera? ¿Y cómo garantizamos
+su uso confiable y seguro? Numerosos factores pueden causar
+cambios impredecibles en el comportamiento de los agentes: los sensores y actua-
+dores pueden fallar por daño físico, el agente puede adaptarse
+a un entorno dinámico, los usuarios pueden cambiar el despliegue
+y los escenarios de uso, etc. La mayor parte de los trabajos previos sobre el tema
+supone que las funcionalidades y capacidades de los agentes de IA
+son estáticas, mientras que algunos trabajos parten de una tabula rasa
+y aprenden todo el modelo desde cero. Sin embargo, en muchos
+escenarios del mundo real, el modelo del agente es transitorio y solo
+partes de su funcionalidad cambian a la vez.
+Bryce, Benton y Boldt (2016) abordan un problema rela-
+cionado en el que el sistema aprende el modelo mental actualizado de un
+usuario mediante filtrado de partículas, dado un conocimiento previo del
+modelo mental del usuario. Sin embargo, suponen que la entidad
+*Igual contribución. Orden alfabético.
+Derechos de autor © 2022, Asociación para el Avance de la Inteligencia Artificial
+(www.aaai.org). Todos los derechos reservados.
+Actualización del agente 
+Aprendizaje del modelo desde cero 
+(costoso)
+Modelo inicialmente conocido de   
+ Observaciones dispersas  
+(recolectadas una vez) Consulta Respuesta 
+Modelo aprendido de  
+ Aprendizaje del modelo desde cero 
+innecesario
+Evaluación diferencial de 
+eventos del sistema de IA (DAAISy) 
+XFigura 1: La evaluación diferencial del sistema de IA
+(DAAISy) toma como entrada el modelo conocido inicialmente del
+agente antes de la desviación del modelo, las observaciones disponibles del comportamiento
+actualizado del agente, y realiza un diálogo selectivo con
+el agente de caja negra para producir su modelo actualizado mediante
+aprendizaje eficiente del modelo.
+la entidad modelada puede informar al sistema de aprendizaje sobre fallas en
+el modelo aprendido si es necesario. Este supuesto no se cumple
+en entornos donde la entidad modelada es un sistema de caja negra
+de IA: la mayoría de estos sistemas se implementan con
+representaciones inescrutables o de otro modo carecen de la capacidad de
+generar automáticamente un modelo de su funcionalidad (qué
+pueden hacer y cuándo) en términos que el usuario pueda entender.
+El problema de evaluar de forma eficiente, en términos interpretables por humanos,
+la funcionalidad de un sistema de IA no estacionario de este tipo
+ha recibido poca atención en la investigación.
+La contribución principal de este artículo es un algoritmo para la
+evaluación diferencial de sistemas de IA de caja negra (Fig. 1).
+Este algoritmo utiliza un modelo interpretable conocido inicialmente
+del agente tal como era en el pasado, y un pequeño conjunto de
+observaciones de la ejecución del agente. Usa estas observaciones para
+desarrollar una estrategia de consultas incremental que evita el costo completo
+de la evaluación desde cero y produce un modelo revisado
+de la nueva funcionalidad del agente. Uno de los desafíos al
+aprender modelos de agentes a partir de datos observacionales es que las reduc-
+ciones en la funcionalidad del agente a menudo no corresponden a evidencia
+específica en las observaciones de comportamiento, ya que el agente puede
+no visitar estados en los que ciertas acciones útiles ya no son
+aplicables. Nuestro análisis muestra que si el agente puede colocarse
+en un modo de planificación “óptimo”, la evaluación diferencial sí puede
+usarse para consultar al agente y recuperar información
+sobre la reducción de funcionalidad. Este modo de planificación “óptimo”
+no es necesario para aprender sobre un aumento en la
+funcionalidad. Las evaluaciones empíricas en un conjunto de problemas
+demuestran claramente que nuestro método es mucho más eficiente
+que volver a aprender el modelo del agente desde cero. También
+presentan la propiedad deseable de que el costo computacional de la
+evaluación diferencial es proporcional a la cantidad de desviación
+en la funcionalidad del agente.
+Ejemplo ilustrativo. Considere un rover con batería
+de capacidad de almacenamiento limitada que recolecta muestras de suelo y toma
+fotografías. Suponga que su modelo de planificación es similar al
+dominio Rovers de IPC (Long y Fox 2003). Tiene una acción que
+recolecta una muestra de roca en un punto de paso y la almacena en un al-
+macén si y solo si le queda al menos la mitad de la capacidad de batería.
+Suponga que hubo una actualización del sistema del rover y, como
+resultado de esta, el rover ahora puede recolectar la muestra de roca
+solo cuando su batería está llena, a diferencia de la batería con al menos
+media carga que necesitaba antes. Los planificadores de misión
+familiarizados con el sistema anterior y que desconocen las actua-
+lizaciones exactas en la funcionalidad del rover tendrían dificultades
+para recolectar suficientes muestras. Esto podría poner en riesgo múltiples
+misiones si no se detecta a tiempo.
+Este ejemplo ilustra cómo nuestro sistema podría ser valioso
+al detectar de forma diferencial una desviación así en la funcionalidad de
+un sistema de IA de caja negra y deducir su funcionalidad real.
+El resto de este artículo se organiza así: la siguiente
+sección presenta la terminología básica. A continuación sigue
+una formalización del problema de evaluación diferencial de mode-
+los en la Sección 3. La Sección 4 presenta nuestro enfoque de evalua-
+ción diferencial, identificando primero aspectos de la funciona-
+lidad del agente que pueden verse afectados (Sección 4.1), seguido
+del proceso de consulta selectiva al agente mediante un conjunto primi-
+tivo de consultas. Presentamos la evaluación empírica de la efi-
+ciencia de nuestro enfoque en dominios de planificación de prueba generados
+al azar en la Sección 5. Por último, analizamos el
+trabajo relacionado en la Sección 6 y concluimos en la Sección 7.
+2 Preliminares
+Consideramos modelos que expresan las funcionalidades de un agente en
+forma de modelos de planificación tipo STRIPS (Fikes y Nilsson
+1971; McDermott et al. 1998; Fox y Long 2003), tal como se definen
+a continuación.
+Definición 1. Un modelo de dominio de planificación es una tupla M =
+⟨P, A⟩, donde P={pr1
+1, . . . , prnn} es un conjunto finito de predicados de
+aridades ri, i∈[1, n]; y A={a1, . . . , ak} es un conjunto finito de acciones relacionales parametrizadas. Cada acción ai∈
+A se representa como una tupla ⟨header(ai), pre(ai), eff(ai)⟩,
+donde header(ai) representa el encabezado de la acción, que consiste
+en el nombre y los parámetros de la acción ai, pre(ai) repre-
+senta la conjunción de literales positivos o negativos que
+deben ser verdaderos en un estado donde la acción ai es aplicable, y
+eff(ai) es la conjunción de literales positivos o negativos que
+se vuelven verdaderos como resultado de la ejecución de la acción ai.
+En el resto del artículo, usamos el término “modelo” para referirnos
+a modelos de dominio de planificación y usamos el supuesto de mundo cerrado,
+tal como se usa en el Lenguaje de Definición de Dominios de Planificación
+(PDDL) (McDermott et al. 1998). Dado un modelo M y un
+conjunto de objetos O, sea SM,O el espacio de todos los estados definidos
+como conjuntos máximamente consistentes de literales sobre el predicado
+vocabulario de M con O como conjunto de objetos. Omitimos el
+subíndice cuando quede claro por el contexto. Una acción a∈A es
+aplicable en un estado s∈S si s|=pre(a). El resultado de eje-
+cutar a es un estado a(s) = s′∈S tal que s′|=eff(a), y
+todos los átomos que no están en eff(a) tienen formas literales como en s.
+Un literal correspondiente a un predicado p∈P puede apa-
+recer en pre(a) o eff(a) de una acción a∈A si y solo si
+puede instanciarse usando un subconjunto de parámetros de a. Por ejemplo,
+consideremos una acción navigate (?rover ?src ?dest) y un predi-
+cado (can traverse ?rover ?x ?y) en el dominio Rovers comen-
+tado antes. Supongamos que un literal correspondiente al predicado
+(can traverse ?rover ?x ?y) puede aparecer en la precondición
+y/o en el efecto de la acción navigate (?rover ?src ?dest). Su-
+poniendo que conocemos ?x y ?y en can traverse, y ?src y
+?dest en navigate son del mismo tipo waypoint, las posi-
+bles instanciaciones elevadas del predicado can traverse compatibles
+con la acción navigate son (can traverse ?rover ?src ?dest),
+(puede atravesar ?rover ?dest ?src) ,(puede atravesar ?rover ?src
+?src), y (can traverse ?rover ?dest ?dest). El número de
+parámetros en un predicado p∈P que es relevante para una acción
+a∈A, es decir, instanciado usando un subconjunto de parámetros de la
+acción a, está acotado por la aridad máxima de la acción a.
+Formalizamos esta noción de instanciaciones elevadas de un predi-
+cado con una acción de la siguiente manera:
+Definición 2. Dado un conjunto finito de predicados P=
+{pr1
+1, . . . , prnn} con aridades ri, i∈[1, n]; y un conjunto finito
+de acciones relacionales parametrizadas A={aψ1
+1, . . . , aψk
+k}
+con aridades ψj y parámetros par(aψj
+j) =⟨α1, . . . , α ψj⟩,
+j∈[1, k], el conjunto de instanciaciones elevadas de predicados P∗
+se define como la colección {pi(σ(x1), . . . , σ (xri))|pi∈
+P, a∈A, σ:{x1, . . . , x ri} → par(a)}.
+2.1 Representación de modelos
+Representamos un modelo M mediante el conjunto de todas las posibles tuplas pal-
+tuplas ΓM de la forma γ = ⟨p, a, ℓ⟩, donde a es una cabecera de acción parametri-
+zada para una acción en A, p∈P∗ es una posible
+instanciación elevada de un predicado en P, y ℓ ∈ {pre,eff}
+denota una ubicación en a, precondición o efecto, donde p puede apa-
+recer. Un modelo M es así una función μM: ΓM → {+,−,∅} que
+asigna a cada elemento de ΓM un modo del conjunto {+,−,∅}.
+El modo asignado a una tupla pal γ ∈ ΓM indica si
+p está presente como literal positivo (+), como literal negativo (−),
+o ausente (∅) en la precondición (ℓ=pre) o el efecto (ℓ=eff)
+de la cabecera de acción a.
+Esta formulación de los modelos como tuplas pal permite ver
+los modos de cualquier predicado en la precondición y
+el efecto de una acción de forma independiente. Sin embargo, a veces es útil consi-
+derar un modelo a un nivel de granularidad de la relación entre un predi-
+cado y una acción. Lo abordamos representando un modelo
+M como un conjunto de tuplas pa ΛM de la forma ⟨p, a⟩, donde a es una
+cabecera de acción parametrizada para una acción en A, y p ∈ P∗
+es una posible instanciación elevada de un predicado en P. Cada
+tupla pa puede tomar un valor de la forma ⟨mpre, meff⟩, donde
+mpre y meff representan el modo en el que p aparece en la
+precondición y el efecto de a, respectivamente. Como un predicado
+no puede aparecer como literal positivo (o negativo) tanto en la
+precondición como en el efecto de una acción, ⟨+,+⟩ y ⟨−,−⟩ no
+están en el rango de valores que pueden tomar las tuplas pa. Por
+ello, en adelante, en el contexto de una tupla pal o apa, nos referimos a
+a como una acción en lugar de una cabecera de acción.
+Medida de diferencia entre modelos. Dados dos modelos M1 =
+⟨P, A1⟩ y M2 = ⟨P, A2⟩, definidos sobre los mismos conjuntos
+de predicados P y cabeceras de acción A, la diferencia en-
+tre los dos modelos ∆(M1, M2) se define como el núm-
+ero de tuplas pal que difieren en sus modos en M1 y M2,
+es decir, ∆(M1, M2) = |{γ ∈ P × A × {+,−,∅} | μM1(γ) ̸=
+µM2(γ)}|.
+2.2 Abstracción de modelos
+Varios autores han explorado el uso de la abstracción en
+planificación (Sacerdoti 1974; Giunchiglia y Walsh 1992;
+Helmert, Haslum, y Hoffmann 2007; B ¨ackstr ¨om y Jon-
+sson 2013; Srivastava, Russell, y Pinto 2016). Definimos
+un modelo abstracto como un modelo que no tiene un modo asig-
+nado para al menos una de las tuplas pal. Sea ΓM el conjunto
+de todas las tuplas pal posibles, y ?⃝ un valor adicional posible
+que puede tomar una tupla pal. Asignar el modo ?⃝ a una pal-
+tupla indica que su modo es desconocido. Un modelo abstracto
+M es así una función μM: ΓM → {+,−,∅,?⃝} que asigna
+a cada elemento de ΓM un modo del conjunto {+,−,∅,?⃝}. Sea
+U el conjunto de todos los modelos abstractos y concretos que pue-
+den expresarse asignando modos en {+,−,∅,?⃝} a
+cada tupla pal γ ∈ ΓM. Definimos ahora formalmente la abs-
+tracción de modelos de la siguiente manera:
+Definición 3. Dados los modelos M1 y M2, M2 es una ab-
+stracción de M1 sobre el conjunto de todas las tuplas pal posibles Γ si y solo si
+∃Γ2 ⊆ Γ tal que ∀γ ∈ Γ2, μM2(γ) = ?⃝ y ∀γ ∈ Γ\Γ2,
+µM2(γ) =µM1(γ).
+2.3 Trazas de observación del agente
+Suponemos acceso limitado a un conjunto de trazas de observación O,
+recopiladas del agente, como se define a continuación.
+Definición 4. Una traza de observación o es una secuencia de estados
+y acciones de la forma ⟨s0, a1, s1, a2, . . . , sn−1, an, sn⟩
+tal que ∀i∈[1, n]ai(si−1) =si.
+Estas trazas de observación pueden dividirse en múltiples
+tripletas de acción, como se define a continuación.
+Definición 5. Dada una traza de observación o =
+⟨s0, a1, s1, a2, . . . , sn−1, an, sn⟩, una tripleta de acción es una
+subsecuencia de 3 tuplas de o de la forma ⟨si−1, ai, si⟩, donde
+i∈[1, n] y aplicar una acción ai en el estado si−1 resulta en
+el estado si, es decir, ai(si−1) = si. Los estados si−1 y si se llaman
+estados previo y posterior de la acción ai, respectivamente.
+Una tripleta de acción ⟨si−1, ai, si⟩ se dice óptima si no
+existe una secuencia de acciones (de longitud ≥1) que lleve
+al agente del estado si−1 a si con un costo total de acción menor que
+el de la acción ai, donde cada acción ai tiene costo unitario.
+2.4 Consultas
+Usamos consultas para obtener activamente información sobre la fun-
+cionalidad de un agente para aprender su modelo actualizado. Suponemos que el agente puede responder a una consulta usando un simulador.
+La disponibilidad de tales agentes con simuladores es un supuesto com-
+ún, ya que la mayoría de los sistemas de IA ya usan simuladores para el dise-
+ño, la prueba y la verificación.
+Usamos una noción de consultas similar a la de Verma, Marpally,
+y Srivastava (2021), para mantener un diálogo con un agen-
+te autónomo. Estas consultas usan un agente para deter-
+minar qué ocurre si ejecuta una secuencia de acciones
+en un estado inicial dado. Por ejemplo, en el dominio de rovers, se
+podría preguntar al rover: qué ocurre cuando se ejecuta la acción sam-
+plerock(rover1 storage1 waypoint1) en un estado ini-
+cial {(equipped rock analysis rover1), (battery half
+rover1), (at rover1 waypoint1) }?
+Formalmente, una consulta es una función que asocia un agente a una
+respuesta, que definimos como:
+Definición 6. Dado un conjunto de predicados P, un conjunto de acciones
+A, y un conjunto de objetos O, una consulta Q⟨s, π⟩: A → N × S
+está parametrizada por un estado inicial sI ∈ S y un plan π =
+⟨a1, . . . , aN⟩, donde S es el espacio de estados sobre P y O, y
+{a1, . . . , aN} es un subconjunto del espacio de acciones sobre A y O. Esta
+asocia agentes con respuestas θ = ⟨nF, sF⟩, tal que nF es la
+longitud del prefijo más largo de π que A puede eje-
+cutar con éxito, y sF ∈ S es el resultado de esa ejecución.
+Las respuestas a estas consultas pueden usarse para obtener infor-
+mación útil sobre la deriva del modelo. Por ejemplo, considérese un
+agente con un modelo interno MA
+drift como se muestra en la Tab. 1.
+Si se plantea una consulta preguntando qué ocurre cuando la ac-
+ción sample rock(rover1 storage1 waypoint1) se ejecuta
+en un estado inicial {(equipped rock analysis rover1), (bat-
+tery half rover1), (at rover1 waypoint1) }, el agente respondería
+⟨0,{(equipped rock analysis rover1), (battery half
+rover1), (at rover1 waypoint1) }⟩, lo que representa que no pudo
+ejecutar el plan, y el estado resultante fue
+{(equipped rock analysis rover1), (battery half rover1), (at
+rover1 waypoint1) } (igual al estado inicial en este caso).
+Obsérvese que esta respuesta es inconsistente con el modelo MA
+init,
+y puede ayudar a identificar que la precondición de la acción
+sample rock(?r ?s ?w) ha cambiado.
+3 Marco formal
+Nuestro objetivo es abordar el problema de la evaluación diferencial de
+agentes de IA de caja negra cuya funcionalidad puede haber
+cambiado desde el último modelo conocido. Sin pérdida de gene-
+ralidad, consideramos situaciones en las que el conjunto de cabeceras de acción
+es el mismo, porque el problema de la evaluación diferencial
+con cabeceras de acción cambiantes puede reducirse al caso con
+encabezados de acción uniformes. Esto se debe a que si el conjunto de acciones
+ha aumentado, se pueden añadir nuevas acciones con precondiciones
+y efectos vacíos a MA
+init, y si ha disminuido, MA
+init puede
+reducirse de forma similar. Asumimos que el vocabulario de predicados
+usado en los dos modelos es el mismo; la extensión a situa-
+ciones en las que el vocabulario cambia puede usarse para modelar
+escenarios de mundo abierto. Sin embargo, esa extensión queda fuera del
+alcance de este artículo.
+Suponga que la funcionalidad de un agente A se conocía como un modelo
+MA
+init=⟨P,Ainit⟩, y deseamos evaluar su funcionalidad actual
+como el modelo MA
+drift=⟨P,Adrift⟩. La desviación en la
+funcionalidad del agente puede medirse por los cambios en las
+Modelo Precondición Efecto
+MA
+init (equipped rock analysis?r)
+(battery half ?r)
+(at ?r ?w)→(rock sample taken?r)
+(store full ?r ?s)
+¬(battery half ?r)
+(battery reserve ?r)
+MA
+drift (equipped rock analysis?r)
+(battery full ?r)
+(at ?r ?w)→(rock sample taken ?r)
+(store full ?r ?s)
+¬(battery full ?r)
+(battery half ?r)
+Tabla 1: acción sample rock (?r ?s ?w) del agente A en
+MA
+init y un posible modelo desviado MA
+drift.
+precondiciones y/o efectos de todas las acciones en Ainit. La
+magnitud de la desviación entre MA
+init y MA
+drift se representa como
+la diferencia de modelos ∆(MA
+init, MA
+drift).
+Definimos formalmente el problema de la evaluación diferencial
+de un agente de IA a continuación.
+Definición 7. Dado un agente A con un modelo de funcionalidad
+MA
+init, y un conjunto de observaciones O recogidas usando su versión actual
+de Adrift con funcionalidad desconocida MA
+drift, el pro-
+blema de evaluación diferencial de modelos ⟨MA
+init, MA
+drift, O, A⟩ es
+definido como el problema de inferir A en forma de MA
+drift usando
+las entradas MA
+init, O y A.
+Deseamos desarrollar soluciones al problema de la evaluación diferen-
+cial de agentes de IA que sean más eficientes que
+la reevaluación desde cero.
+3.1 Corrección del modelo evaluado
+Ahora analizamos las propiedades que debe cumplir un modelo, que es una so-
+lución al problema de evaluación diferencial de modelos, debe
+cumplir. Una propiedad crítica de tales modelos es que deben
+ser consistentes con las trazas de observación. Definimos formalmente
+la consistencia de un modelo respecto de una traza de observación de la siguiente manera:
+Definición 8. Sea o una traza de observación
+⟨s0, a1, s1, a2, . . . , sn−1, an, sn⟩. Un modelo M=⟨P, A⟩
+es consistente con la traza de observación o si y solo si
+∀i∈{1, .., n} ∃a∈A y ai es una instanciación de la ac-
+ción a tal que si−1|=pre(ai) ∧ ∀l∈eff(ai) si|=l.
+Además de ser consistente con las trazas de observación, un
+modelo también debe ser consistente con las consultas que se
+plantean y con las respuestas que se reciben mientras se infiere activamente
+el modelo de la nueva funcionalidad del agente. Formalizamos
+la consistencia de un modelo respecto de una consulta
+y una respuesta de la siguiente manera:
+Definición 9. Sea M=⟨P, A⟩ un modelo; O un conjunto de ob-
+jetos; Q=⟨sI, π=⟨a1, . . . an⟩⟩ una consulta definida usando
+P, A y O, y sea θ=⟨nF, sF⟩, (nF≤n) una respuesta
+a Q. M es consistente con el par consulta-respuesta ⟨Q, θ⟩ si y solo si
+existe una traza de observación ⟨sI, a1, s1, . . . , anF, snF⟩
+que es consistente con M y snF ̸|=pre(anF+1), donde
+pre(anF+1) es la precondición de anF+1 en M.
+Ahora analizamos nuestra metodología para resolver el problema
+de la evaluación diferencial de sistemas de IA. 4 Evaluación diferencial de sistemas de IA
+Evaluación diferencial de sistemas de IA (Alg. 1) -- DAAISy
+-- toma como entrada un agente A cuya funcionalidad se ha desviado,
+el modelo MA
+init=⟨P, A⟩ que representa la funcionalidad conocida previamente
+de A, un conjunto de trazas de observación arbitrarias O,
+y un conjunto de estados aleatorios S ⊆ S. El Alg. 1 devuelve un conjunto de
+modelos actualizados MA
+drift, donde cada modelo MA
+drift∈ MA
+drift
+representa la funcionalidad actualizada de A y es consistente con
+todas las trazas de observación o∈O.
+Una contribución importante de este trabajo es introducir un enfo-
+que para inferir no solo la funcionalidad ampliada
+de un agente, sino también su funcionalidad reducida, usando un
+conjunto limitado de trazas de observación. Las situaciones en que el alcance
+de aplicabilidad de una acción se reduce, es decir, el agente ya no puede
+usar una acción a para llegar del estado s al estado s′ mientras
+podía antes (por ejemplo, por la adición de un literal de precondición
+), son particularmente difíciles de identificar porque observar
+su comportamiento no revela fácilmente lo que no puede hacer en un
+estado dado. La mayoría de los aprendices de modelos de acción basados en observación,
+incluso cuando parten de un modelo incompleto,
+no logran inferir la funcionalidad reducida. DAAISy
+usa dos principios para identificar tal reducción de la funcionali-
+dad. Primero, usa consultas activas para que el agente pueda
+revelar fallos de alcanzabilidad; y segundo, mostramos
+que si el agente puede colocarse en modo de planificación óptima,
+las diferencias en la longitud de los planes pueden usarse para inferir una reducción en
+la funcionalidad.
+DAAISy realiza dos funciones principales: primero identifica un
+conjunto relevante de pal-tuplas cuyos modos probablemente se vieron afectados
+(línea 1 del Alg. 1), y luego infiere el modo de tales pal-
+tuplas afectadas con precisión mediante un diálogo enfocado con el
+agente (desde la línea 2 del Alg. 1). En la Sec. 4.1 presentamos
+nuestro método para identificar un conjunto relevante de pal-tuplas potencialmente afec-
+tadas que contribuyen a la ampliación de la
+funcionalidad del agente mediante inferencia a partir de las
+observaciones arbitrarias disponibles. Luego analizamos el problema de identifi-
+cación de pal-tuplas que contribuyen a la reducción de
+la funcionalidad del agente y argumentamos que no puede realizarse
+usando ejecuciones exitosas en observaciones de comportamiento
+satisfactorio. Mostramos que las pal-tuplas correspondientes a
+funcionalidad reducida pueden identificarse si se dispone de observaciones de
+comportamiento óptimo del agente (Sec. 4.1). Finalmente,
+presentamos cómo inferimos la naturaleza de los cambios en todas las
+pal-tuplas afectadas mediante una interacción basada en consultas con el agente
+(Sec. 4.2), basándonos en el Agent Interrogation Algo-
+rithm (AIA) (Verma, Marpally y Srivastava 2021). Identi-
+ficar las pal-tuplas afectadas ayuda a reducir el costo computacional
+de consultar, en contraste con la estrategia exhaustiva de consulta
+usada por AIA. Ahora analizamos las dos funciones principales
+del Alg. 1 en detalle.
+4.1 Identificación de pal-tuplas potencialmente afectadas
+Identificamos un conjunto reducido de pal-tuplas cuyos modos fueron
+potencialmente afectados durante la desviación del modelo, denotado por Γδ,
+usando un conjunto pequeño de trazas de observación disponibles O. Extraemos
+dos tipos de inferencias a partir de estas trazas de observación: inferen-
+cias sobre la funcionalidad ampliada e inferencias sobre
+la funcionalidad reducida. Analizamos nuestro método para inferir
+Algoritmo 1: Evaluación diferencial de sistemas de IA
+Entrada: MA
+init, O, A, S
+Salida: MA
+drift
+1: Γδ ← identificar pals afectados()
+2: Mabs ← fijar pal-tuplas en MA
+init correspondientes a Γδ a ?⃝
+3: MA
+drift ← {Mabs}
+4: para cada γ en Γδ hacer
+5: para cada Mabs en MA
+drift hacer
+6: Mabs ← Mabs × {γ+, γ−, γ∅}
+7: Msieved ← {}
+8: si la acción correspondiente a γ: γa en O entonces
+9: spre ← estados donde γa es aplicable (O, γa)
+10: Q ← ⟨spre\ {γp∪ ¬γp}, γa⟩
+11: θ ← askquery (A, Q)
+12: Msieved ← sieve models (Mabs, Q, θ)
+13: si no
+14: para cada par ⟨Mi, Mj⟩ en Mabs hacer
+15: Q ← generate query (Mi, Mj, γ, S)
+16: θ ← askquery (A, Q)
+17: Msieved ← sieve models ({Mi, Mj}, Q, θ)
+18: fin para
+19: fin si
+20: Mabs ← Mabs\ Msieved
+21: fin para
+22: MA
+drift ← Mabs
+23: fin para
+Γδ para ambos tipos de cambios en la funcionalidad, a continuación.
+Funcionalidad ampliada. Para inferir la funcionalidad ampliada
+del agente, usamos el modelo previamente conocido de la
+funcionalidad del agente e identificamos sus diferencias con los
+comportamientos posibles del agente que son consistentes con O.
+Para identificar las pal-tuplas que contribuyen directamente a una ex-
+pansión de la funcionalidad del agente, realizamos un análisis
+similar al de Stern y Juba (2017), pero en lugar de acotar
+los predicados que pueden aparecer en la precondición
+y en el efecto de cada acción, acotamos el rango de valores posibles que cada
+pa-tupla en MA
+drift puede tomar usando la Tab. 2. Para cualquier pa-tupla,
+una comparación directa entre su valor en MA
+init y los posibles
+valores inferidos en MA
+drift proporciona una indicación de si
+fue afectada.
+Para identificar los valores posibles de una pa-tupla ⟨p, a⟩, primero
+recogemos un conjunto de todas las tripletas de acción de O que contienen la
+acción a. Para un predicado p dado y un estado s, si s|=p entonces
+la presencia del predicado p se representa como pos; de forma similar,
+si s|=¬p entonces la presencia del predicado p se representa como
+neg. Usando esta representación, una tupla de presencia de predicados
+∈ {(pos,pos), (pos,neg), (neg,pos), (neg,neg)} se determina
+para la pa-tupla ⟨p, a⟩ para cada tripleta de acción ⟨s, a, s′⟩ ∈ O
+analizando la presencia del predicado p en los estados previo y
+posterior de las tripletas de acción. Los valores posibles de la pa-
+tupla que son consistentes con O se infieren directamente de
+la Tab. 2 usando las tuplas inferidas de presencia de predicados.
+Por ejemplo, para una pa-tupla, los valores ⟨+,−⟩ y ⟨∅,−⟩ son consis-
+tentes con (pos, neg), mientras que solo ⟨∅,+⟩ es consistente con ⟨mpre, meff⟩ (pos,pos) (pos,neg) (neg,pos) (neg,neg)
+⟨+,−⟩ ✗ ✓ ✗ ✗
+⟨+,∅⟩ ✓ ✗ ✗ ✗
+⟨−,+⟩ ✗ ✗ ✓ ✗
+⟨−,∅⟩ ✗ ✗ ✗ ✓
+⟨∅,+⟩ ✓ ✗ ✓ ✗
+⟨∅,−⟩ ✗ ✓ ✗ ✓
+⟨∅,∅⟩ ✓ ✗ ✗ ✓
+Tabla 2: Cada fila representa un valor posible ⟨mpre, meff⟩
+para una pa-tupla ⟨p, a⟩. Cada columna representa una tupla posible
+que representa la presencia del predicado p en los estados previo y
+posterior de una tripleta de acción ⟨si, a, si+1⟩ (analizada en la Sec. 4.1).
+Las celdas indican si un valor para la pa-tupla es consistente
+con una tripleta de acción en las trazas de observación.
+(pos, pos) y (neg, pos), tuplas de presencia de predicados que
+se infieren de O.
+Una vez inferidos todos los valores posibles para cada pa-tupla en MA
+drift
+identificamos las pa-tuplas cuyo valor previamente conocido
+en MA
+init ya no es posible debido a una inconsistencia
+con O. Las pal-tuplas correspondientes a tales pa-tuplas se
+añaden al conjunto de pal-tuplas potencialmente afectadas Γδ. Nuestro
+método también infiere los modos correctos de un subconjunto de pal-
+tuplas. Por ejemplo, considere un predicado p y dos tripletas de acción en
+O de la forma ⟨s1, a, s′
+1⟩ y ⟨s2, a, s′
+2⟩ que cumplen s1|=p
+y s2|=¬p. Tal observación indica claramente que p
+no está en la precondición de la acción a, es decir, el modo para ⟨p, a⟩
+en la precondición es ∅. Tales inferencias de modos se usan
+para actualizar la funcionalidad conocida del agente. Eliminamos
+de Γδ tales pal-tuplas, cuyos modos ya están inferidos.
+Una limitación de la inferencia directa a partir de ejecuciones exi-
+tosas en las trazas de observación disponibles es que no puede aprender
+ninguna reducción en la funcionalidad del agente, como se analizó
+al inicio de la Sec. 4. Ahora analizamos nuestro método para
+abordar esta limitación e identificar un conjunto más amplio de
+pal-tuplas potencialmente afectadas.
+Funcionalidad reducida. Conceptualizamos la reducción en
+la funcionalidad como un aumento en el costo óptimo de ir de
+un estado a otro. Más precisamente, la reducción en la funcionali-
+dad representa situaciones en las que existen estados si, sj tales
+que el costo mínimo de ir de si a sj es mayor en
+MA
+drift que en MA
+init. En este artículo, este costo se refiere al núme-
+ro de pasos entre el par de estados, ya que consideramos costos
+unitarios de acción. Esta noción abarca situaciones con reduc-
+ciones en la alcanzabilidad como caso especial. En la práctica, una reducción
+en la funcionalidad puede ocurrir si la precondición de al menos una
+acción en MA
+drift tiene nuevas pal-tuplas, o el efecto de al menos
+una de sus acciones tiene nuevas pal-tuplas que entran en conflicto con otras
+acciones necesarias para alcanzar ciertos estados.
+Nuestra noción de funcionalidad reducida captura todas las varian-
+tes de reducción de la funcionalidad. Sin embargo, por claridad,
+ilustramos un ejemplo que se centra en situaciones en las que la pre-
+condición de una acción ha aumentado. Considere el caso de la
+Tab. 1, donde el modelo de A se actualiza de MA
+init a MA
+drift.
+La aplicabilidad de la acción sample rock en MA
+drift se ha reducido
+respecto de la de MA
+init, ya que A ya no puede muestrear rocas en situ-
+aciones en las que la batería está a media carga pero necesita estar completamente
+cargada para poder ejecutar la acción. En tales escena-
+rios, en lugar de depender de las trazas de observación, nuestro método
+identifica trazas que contienen indicios de acciones que fueron
+afectadas, ya sea en su precondición o en su efecto, descubre ade-
+más pal-tuplas relevantes que fueron potencialmente afectadas, y
+las añade al conjunto de pal-tuplas potencialmente afectadas Γδ.
+Para encontrar pal-tuplas correspondientes a la funcionalidad reducida
+del agente, colocamos al agente en un modo de planificación óptimo
+y suponemos una disponibilidad limitada de trazas de observación
+O en forma de trayectorias óptimas de estado-acción con costo unitario
+⟨s0, a1, s1, a2, . . . , sn−1, an, sn⟩. Generamos pla-
+nes óptimos usando MA
+init para todos los pares de estados en O. Planteamos la hipótesis de que
+si para un par de estados, el plan generado usando
+MA
+init es más corto que el plan observado en O, entonces alguna
+funcionalidad del agente se ha reducido.
+Nuestro método realiza un análisis comparativo de la optimalidad
+de las trazas de observación frente a las soluciones óptimas genera-
+das usando MA
+init para los mismos pares de estados inicial y final. Para
+empezar, extraemos todas las subsecuencias continuas de estados
+de O de la forma ⟨s0, s1, . . . , sn⟩, denotadas por Odrift, ya que
+todas son óptimas. Luego generamos un conjunto de problemas de planificación
+P usando los estados inicial y final de las trayectorias en Odrift.
+Luego, proporcionamos los problemas en P a MA
+init para obtener un conjunto de
+trayectorias óptimas Oinit. Seleccionamos todos los pares de trayectorias óptimas
+de la forma ⟨oinit, odrift⟩ para un análisis posterior, tales que
+la longitud de oinit∈Oinit para un problema es menor que
+la longitud de odrift∈Odrift para el mismo problema. Para todos
+esos pares de trayectorias óptimas, un subconjunto de acciones en cada
+oinit∈Oinit probablemente se vio afectado por la desviación del modelo. Nos
+centramos en identificar la primera acción de cada oinit∈Oinit que
+con certeza fue afectada.
+Para identificar las acciones afectadas, recorremos cada par de
+trayectorias óptimas ⟨oinit, odrift⟩ simultáneamente desde
+los estados iniciales. Añadimos todas las pal-tuplas correspondientes a
+la primera acción distinta en oinit a Γδ. Lo hacemos porque
+solo hay dos explicaciones posibles de por qué la acción
+difiere: (i) o bien la acción en oinit era aplicable en un estado
+usando MA
+init, pero se ha vuelto inaplicable en el mismo estado
+en MA
+drift, o bien (ii) ya no puede lograr los mismos efectos en
+MA
+drift que en MA
+init. También descubrimos las primeras acciones que son apli-
+cables en los mismos estados en ambas trayectorias pero que producen
+estados distintos. El efecto de tales acciones ciertamente ha
+cambiado en MA
+drift. Añadimos todas las pal-tuplas correspondientes
+a tales acciones a Γδ. En la siguiente sección describimos nuestro
+enfoque para inferir los modos correctos de las pal-tuplas en Γδ.
+4.2 Investigación de pal-tuplas afectadas
+Esta sección explica cómo se infieren los modos correctos de las pal-tuplas en
+Γδ (desde la línea 2 del Alg. 1). El Alg. 1 crea un
+modelo abstracto en el que todas las pal-tuplas que se predice que
+fueron afectadas se fijan a ?⃝ (línea 2). Luego itera
+sobre todas las pal-tuplas con modo ?⃝ (línea 4).
+Eliminación de modelos inconsistentes. Nuestro método genera
+modelos abstractos candidatos y luego elimina los modelos abstractos que no son consistentes con el agente (líneas 7-18 del
+Alg. 1). Para cada pal-tupla γ∈Γ, el algoritmo calcula un
+conjunto de posibles modelos abstractos Mabs asignando las tres
+variantes de modo +, − y ∅ a la pal-tupla actual γ en el modelo
+Mabs (línea 6). Solo un modelo en Mabs corresponde a la
+funcionalidad actualizada del agente.
+Si la acción γa de la pal-tupla γ está presente en el conjunto
+de tripletas de acción generadas usando O, entonces el estado previo de
+esa acción spre se usa para crear un estado sI (líneas 9-10). sI se
+crea eliminando los literales correspondientes al predicado
+γp de spre. Luego creamos una consulta Q=⟨sI,⟨γa⟩⟩ (línea 10),
+y la planteamos al agente A (línea 11). Los tres modelos se
+filtran luego según la comparación de sus respuestas a la
+consulta Q con la respuesta θ de A a Q (línea 12). Usamos
+el mismo mecanismo que AIA para filtrar los modelos abstractos.
+Si la acción correspondiente a la pal-tupla γ actual
+considerada no está presente en ninguna de las tripletas de acción
+observadas, entonces para cada par de modelos abstractos en Mabs (línea
+14), generamos una consulta Q usando un problema de planificación (línea
+15). Luego planteamos la consulta Q al agente (línea 16) y
+recibimos su respuesta θ. Luego filtramos los modelos abstractos
+haciéndoles la misma consulta y descartando los modelos
+cuyas respuestas no son consistentes con la del agente
+(línea 17). El problema de planificación que se usa para generar la
+consulta y el método que verifica la consistencia de las respuestas de los
+modelos abstractos con la del agente se toman de AIA.
+Finalmente, se eliminan todos los modelos que no son consistentes con la
+funcionalidad actualizada del agente se eliminan del conjunto posible de
+modelos Mabs. Los modelos restantes se devuelven
+por el algoritmo. Empíricamente, encontramos que solo un modelo
+siempre se devuelve por el algoritmo.
+4.3 Corrección
+Ahora mostramos que el modelo desviado aprendido que representa
+la funcionalidad actualizada del agente es consistente, tal como se define en
+las Def. 8 y Def. 9. La demostración del teorema está disponible en
+la versión extendida del artículo (Nayyar, Verma y Sri-
+vastava 2022).
+Teorema 1. Dado un conjunto de trazas de observación O generadas
+por el agente desviado Adrift, un conjunto de consultas Q planteadas a Adrift
+por el Alg. 1, y el modelo MA
+init que representa la funcionalidad del agente
+anterior a la desviación, cada uno de los modelos M=⟨P, A⟩
+en MA
+drift aprendidos por el Alg. 1 son consistentes con respecto a todas
+las trazas de observación o∈O y los pares consulta-respuesta ⟨q, θ⟩ para
+todas las consultas q∈Q.
+Existe un conjunto finito de observaciones que, si se recogen,
+permitirá que el Alg. 1 alcance una corrección del 100% con cualquier
+cantidad de desviación: este conjunto corresponde a observaciones que per-
+miten a la línea 1 del Alg. 1 detectar un cambio en la funcionalidad.
+Esto incluye una tripleta de acción en una traza de observación que indica
+una funcionalidad aumentada, o un plan más corto usando el
+modelo conocido previamente que indica una funcionalidad reducida. Así,
+los modelos aprendidos por DAAISy tienen garantizado ser completamente
+correctos, independientemente de la cantidad de desviación, si dispone de un
+conjunto finito de observaciones de ese tipo. Aunque el uso de consultas reduce significa-
+tivamente el número de observaciones necesarias, las garantías asintóticas incluyen las de los
+aprendices pasivos de modelos
+y garantizan la convergencia al modelo verdadero.
+5 Evaluación empírica
+En esta sección evaluamos nuestro enfoque para evaluar un
+agente de caja negra con el fin de aprender su modelo usando información sobre
+su modelo anterior y las observaciones disponibles. Implementamos
+el algoritmo de DAAISy en Python1 y lo probamos
+en seis dominios de planificación de referencia del Concurso Internacional de
+Planificación (IPC)2. Usamos los dominios de la IPC como
+los modelos desviados desconocidos y generamos seis dominios iniciales
+de forma aleatoria para cada dominio en nuestros experimentos.
+Para evaluar el desempeño de nuestro enfoque con una desviación creciente
+, empleamos dos métodos para generar los dominios iniciales:
+(a) eliminando las pal-tuplas ya presentes, y (b)
+añadiendo nuevas pal-tuplas. En cada experimento usamos ambos
+tipos de generación de dominios. Generamos distintos modelos iniciales
+cambiando al azar los modos de pal-tuplas aleatorias
+en los dominios de la IPC. Así, en todos nuestros experimentos un dominio de la IPC
+desempeña el papel de verdad de referencia M∗
+drift, y un modelo aleatorio
+se usa como MA
+init.
+Usamos un conjunto muy pequeño de trazas de observación O (una sola
+traza de observación con 10 tripletas de acción) en todos los ex-
+perimentos de cada dominio. Para generar este conjunto, le dimos al
+agente una instancia aleatoria de problema de la IPC corres-
+pondiente al dominio usado por el agente. El agente luego
+usó Fast Downward (Helmert 2006) con la heurística LM-Cut
+(Helmert y Domshlak 2009) para producir una solución óptima
+para el problema dado. La traza de observación generada
+se proporciona a DAAISy como entrada, además de un
+MA
+init aleatorio, tal como se describe en el Alg. 1. La misma traza de observación
+se usa en todos los experimentos del mismo dominio, sin
+conocer el modelo desviado del agente, e independientemente
+de la cantidad de desviación.
+Medimos la precisión final del modelo aprendido
+MA
+drift frente al modelo de verdad de referencia M∗
+drift usando la medida de
+diferencia de modelos ∆(MA
+drift, M∗
+drift). También medimos
+el número de consultas necesarias para aprender un modelo con
+una precisión significativamente alta. Comparamos la eficiencia de
+DAAISy (nuestro enfoque) con el Agent Interrogation Algo-
+rithm (AIA) (Verma, Marpally y Srivastava 2021), ya que es
+el sistema basado en consultas más estrechamente relacionado.
+Todos nuestros experimentos se ejecutaron en CPUs Intel
+i9 de 5,0 GHz con 64 GB de RAM, con Ubuntu 18.04. Ahora
+analizamos nuestros resultados en detalle a continuación.
+5.1 Resultados
+Evaluamos el desempeño de DAAISy en 2 direc-
+ciones: el número de consultas que necesita para aprender el
+modelo MA
+drift con una cantidad creciente de desviación, y la corrección
+del modelo MA
+drift que aprende en comparación con M∗
+drift.
+Eficiencia en el número de consultas. Como se ve en la Fig. 2, el
+costo computacional de evaluar cada agente, medido en
+términos del número de consultas usadas por DAAISy, aumenta
+a medida que aumenta la cantidad de desviación en el modelo M∗
+drift. Esto es
+lo esperado, ya que la cantidad de desviación es directamente proporcional al
+1Código disponible en https://github.com/AAIR-lab/DAAISy
+2https://www.icaps-conference.org/competitions
+Precisión ganada por DAAISy Número de consultas por DAAISy Precisión del modelo inicial
+ Precisión del modelo calculado por DAAISy
+Precisión del modelo Número de consultas
+% de desviaciónFigura 2: El número de consultas usadas por DAAISy (nuestro en-
+foque) y AIA (marcado en el eje y), así como la precisión
+del modelo calculado por DAAISy con una cantidad creciente de
+desviación. La cantidad de desviación es igual a la proporción de pal-tuplas desviadas
+y el número total de pal-tuplas en los dominios (nPals).
+El número de tripletas de acción en la traza de observación usada
+para cada dominio es 10.
+número de pal-tuplas afectadas en el dominio. Esto aumenta
+el número de pal-tuplas que DAAISy identifica como afectadas
+así como el número de consultas como resultado. Como se muestra
+en los gráficos, la desviación estándar del número de consultas se
+mantiene baja incluso cuando aumentamos la cantidad de desviación, lo que muestra
+la estabilidad de DAAISy.
+Comparación con AIA. La Tab. 3 muestra el número promedio
+de consultas que AIA necesitó para alcanzar el mismo nivel de preci-
+sión que nuestro enfoque para modelos con 50% de desviación, y DAAISy
+requiere significativamente menos consultas para alcanzar los mismos niveles
+de precisión en comparación con AIA. La Fig. 2 también muestra que
+DAAISy siempre necesita menos consultas que AIA para
+alcanzar niveles razonablemente altos de precisión.
+Esto se debe a que AIA no usa información sobre el
+modelo conocido previamente del agente y, por lo tanto, termina
+consultando todas las pal-tuplas posibles. DAAISy, por otro lado,
+predice el conjunto de pal-tuplas que podrían haber cambiado
+a partir de las observaciones recogidas del agente y, por ello,
+requiere significativamente menos consultas.
+Corrección del modelo aprendido. DAAISy calcula mode-
+los con al menos 50% de precisión en los seis dominios, incluso cuando
+se han desviado por completo de su modelo inicial, es decir,
+∆(MA
+drift, M∗
+drift) = nPals. Alcanza modelos casi exactos
+para Gripper y Blocksworld hasta un 40% de desviación. Incluso en
+escenarios en los que la desviación del modelo del agente supera el 50%,
+DAAISy alcanza al menos un 70% de precisión en cinco dominios.
+Nótese que DAAISy tiene garantizado encontrar el modo correcto
+para una pal-tupla afectada identificada. La razón de que la precisión sea inferior al
+100% al usar DAAISy es que no predice
+que una pal-tupla está afectada a menos que encuentre una observa-
+Dominio #Pals AIA DAAISy
+Gripper 20 15,0 6,5
+Miconic 36 32,0 7,7
+Satellite 50 34,0 9,0
+Blocksworld 52 40,0 11,4
+Termes 134 115,0 27,0
+Rovers 402 316,0 61,0
+Tabla 3: Número promedio de consultas que AIA necesitó para
+alcanzar el mismo nivel de precisión que DAAISy (nuestro en-
+foque) para modelos con 50% de desviación.
+vación que entra en conflicto con MA
+init. Así, el modelo aprendido
+MA
+drift, aunque consistente con todas las trazas de observación,
+puede terminar siendo impreciso al compararlo con M∗
+drift.
+Discusión. AIA siempre termina aprendiendo modelos completamente exactos, pero
+como se señaló antes, esto se debe a que AIA consulta
+exhaustivamente todas las pal-tuplas del modelo. Existe una
+clara compensación entre el número de consultas que DAAISy
+necesita para aprender el modelo en comparación con AIA y la corrección
+del modelo aprendido. Como muestran los resultados, si el
+modelo no se ha desviado mucho, DAAISy puede servir como un mejor
+enfoque para aprender de forma eficiente la funcionalidad actualizada del
+agente con menos carga que AIA. Decidir la
+cantidad de desviación a partir de la cual tendría sentido cambiar
+a consultar el modelo desde cero es un análisis útil que no
+se aborda en este artículo.
+6 Trabajos relacionados
+Desviación de modelos de caja blanca. Bryce, Benton y Boldt (2016)
+abordan el problema de aprender el modelo mental actualizado
+de un usuario mediante filtrado de partículas, dado un conocimiento previo sobre
+el modelo mental del usuario. Sin embargo, asumen que la en-
+tidad modelada puede informar al sistema de aprendizaje sobre fallas
+en el modelo aprendido si es necesario. Eiter et al. (2005, 2010) proponen
+un marco para actualizar leyes de acción representadas en forma de grafos del
+espacio de estados. Asumen que los cambios solo pueden ocurrir en los efectos, y que
+el conocimiento sobre el espacio de estados
+y sobre qué podría cambiar está disponible
+de antemano. Nuestro trabajo no hace tales supuestos
+para aprender el modelo correcto de las funcionalidades del agente.
+Aprendizaje de modelos de acción. El problema
+de aprender modelos de agentes a partir
+de observaciones de su comportamiento es un área activa de
+investigación (Gil 1994; Yang, Wu y Jiang 2007; Cresswell,
+McCluskey y West 2009; Zhuo y Kambhampati 2013;
+Arora et al. 2018; Aineto, Celorrio y Onaindia 2019).
+Trabajos recientes abordan la consulta activa para aprender el
+modelo de acción de un agente (Rodrigues et al. 2011; Verma,
+Marpally y Srivastava 2021). Sin embargo, estos métodos
+no abordan el problema de reducir el costo computacional
+de la evaluación diferencial del modelo,
+que es crucial en entornos no estacionarios.
+Los enfoques de aprendizaje de modelos de acción en línea aprenden
+el modelo de un agente mientras incorporan nuevas observaciones
+de su comportamiento (Čertický 2014; Lamanna et al. 2021a,b).
+A diferencia de nuestro enfoque, no tratan los casos en que (i)
+las nuevas observaciones no son consistentes con las anteriores
+debido a cambios en el comportamiento del agente; y/o (ii) hay
+una reducción en la funcionalidad del agente. Lindsay (2021)
+resuelve el problema de aprender todos los predicados
+estáticos de un dominio. Parte de un modelo parcial
+correcto que captura con precisión la parte dinámica
+y genera ejemplos negativos suponiendo acceso a todos los posibles ejemplos
+positivos. Nuestro método es distinto porque no hace tales supuestos
+y aprovecha un pequeño conjunto de observaciones disponibles para inferir
+un aumento o una reducción de la funcionalidad del modelo del agente.
+Reconciliación de modelos. La literatura sobre reconciliación
+de modelos (Chakraborti et al. 2017; Sreedharan et al. 2019;
+Sreedharan, Chakraborti y Kambhampati 2021) trata de inferir las diferencias entre
+los modelos del usuario y del agente, y de eliminarlas mediante explicaciones. Estos
+métodos consideran modelos conocidos de caja blanca, mientras
+que nuestro enfoque trabaja con modelos de caja negra del agente.
+7 Conclusiones y trabajo futuro
+Presentamos un método novedoso para la evaluación diferencial de sistemas de IA de
+caja negra, con el fin de aprender modelos
+de la funcionalidad real de agentes que se
+han desviado de su funcionalidad conocida
+previamente. Nuestro enfoque ofrece garantías
+de corrección con respecto a las observaciones. Nuestra evaluación demuestra que
+nuestro sistema, DAAISy, aprende de manera eficiente
+un modelo muy preciso de la funcionalidad del
+agente, con un número significativamente menor de
+consultas que reaprender desde cero. En el futuro,
+planeamos extender el marco a clases más generales,
+a configuraciones y modelos estocásticos.
+Analizar y predecir los puntos de cambio a partir de consultas selectivas en DAAISy
+para reaprender desde cero sin comprometer la corrección de los modelos
+aprendidos también es una dirección prometedora para trabajo futuro.
+Agradecimientos
+Agradecemos a los revisores anónimos sus útiles comentarios
+sobre el artículo. Este trabajo fue apoyado en parte por la NSF
+bajo las subvenciones IIS 1942856, IIS 1909370 y la subvención ONR N00014-21-1-2045.
+Referencias
+Aineto, D.; Celorrio, S. J.; y Onaindia, E. 2019. Learning
+Action Models With Minimal Observability. Artificial
+Intelligence, 275: 104–137.
+Arora, A.; Fiorino, H.; Pellier, D.; Métivier, M.; y Pesty,
+S. 2018. A Review of Learning Planning Action Models.
+The Knowledge Engineering Review, 33: E20.
+Bäckström, C.; y Jonsson, P. 2013. Bridging the Gap Be-
+tween Refinement and Heuristics in Abstraction. En Proc.
+IJCAI.
+Bryce, D.; Benton, J.; y Boldt, M. W. 2016. Maintaining
+Evolving Domain Models. En Proc. IJCAI.
+Čertický, M. 2014. Real-Time Action Model Learning
+with Online Algorithm 3SG. Applied Artificial Intelligence,
+28(7): 690–711.
+Chakraborti, T.; Sreedharan, S.; Zhang, Y.; y Kambham-
+pati, S. 2017. Plan Explanations as Model Reconciliation:
+Moving Beyond Explanation as Soliloquy. En Proc. IJCAI.
+Cresswell, S.; McCluskey, T.; y West, M. 2009. Acquisi-
+tion of Object-Centred Domain Models from Planning Ex-
+amples. En Proc. ICAPS.
+Eiter, T.; Erdem, E.; Fink, M.; y Senko, J. 2005. Updating
+Action Domain Descriptions. En Proc. IJCAI.
+Eiter, T.; Erdem, E.; Fink, M.; y Senko, J. 2010. Up-
+dating Action Domain Descriptions. Artificial Intelligence,
+174(15): 1172–1221.
+Fikes, R. E.; y Nilsson, N. J. 1971. STRIPS: A New Ap-
+proach to the Application of Theorem Proving to Problem
+Solving. Artificial Intelligence, 2(3-4): 189–208.
+Fox, M.; y Long, D. 2003. PDDL2.1: An Extension to
+PDDL for Expressing Temporal Planning Domains. Journal
+of Artificial Intelligence Research, 20(1): 61–124.
+Gil, Y. 1994. Learning by Experimentation: Incremental Re-
+finement of Incomplete Planning Domains. En Proc. ICML.
+Giunchiglia, F.; y Walsh, T. 1992. A Theory of Abstrac-
+tion. Artificial Intelligence, 57(2-3): 323–389.
+Helmert, M. 2006. The Fast Downward Planning System.
+Journal of Artificial Intelligence Research, 26: 191–246.
+Helmert, M.; y Domshlak, C. 2009. Landmarks, Critical
+Paths and Abstractions: What's the Difference Anyway? En
+Proc. ICAPS.
+Helmert, M.; Haslum, P.; y Hoffmann, J. 2007. Flexible
+Abstraction Heuristics for Optimal Sequential Planning. En
+Proc. ICAPS.
+Lamanna, L.; Gerevini, A. E.; Saetti, A.; Serafini, L.; y
+Traverso, P. 2021a. On-line Learning of Planning Domains
+from Sensor Data in PAL: Scaling up to Large State Spaces.
+En Proc. AAAI.
+Lamanna, L.; Saetti, A.; Serafini, L.; Gerevini, A.; y
+Traverso, P. 2021b. Online Learning of Action Models for
+PDDL Planning. En Proc. IJCAI.
+Lindsay, A. 2021. Reuniting the LOCM Family: An Alterna-
+tive Method for Identifying Static Relationships. En ICAPS
+2021 KEPS Workshop.
+Long, D.; y Fox, M. 2003. The 3rd International Planning
+Competition: Results and Analysis. Journal of Artificial In-
+telligence Research, 20: 1–59.
+McDermott, D.; Ghallab, M.; Howe, A.; Knoblock, C.; Ram,
+A.; Veloso, M.; Weld, D. S.; y Wilkins, D. 1998. PDDL –
+The Planning Domain Definition Language. Informe técnico
+CVC TR-98-003/DCS TR-1165, Yale Center for Com-
+putational Vision and Control.
+Nayyar, R. K.; Verma, P.; y Srivastava, S. 2022. Differ-
+ential Assessment of Black-Box AI Agents. Preimpresión arXiv
+arXiv: 2203.13236.
+Rodrigues, C.; Gérard, P.; Rouveirol, C.; y Soldano, H.
+2011. Active Learning of Relational Action Models. En Proc. ILP.
+Sacerdoti, E. D. 1974. Planning in a Hierarchy of Abstraction Spaces. Artificial
+Intelligence, 5(2): 115–135. Sreedharan,
+S.; Chakraborti, T.; y Kambhampati, S. 2021.
+Foundations of Explanations as Model Reconciliation. Arti-
+ficial Intelligence, 103558.
+Sreedharan, S.; Hernandez, A. O.; Mishra, A. P.; y Kamb-
+hampati, S. 2019. Model-Free Model Reconciliation. En
+Proc. IJCAI.
+Srivastava, S.; Russell, S.; y Pinto, A. 2016. Metaphysics
+of Planning Domain Descriptions. En Proc. AAAI.
+Stern, R.; y Juba, B. 2017. Efficient, Safe, and Probably
+Approximately Complete Learning of Action Models. En Proc.
+IJCAI.
+Verma, P.; Marpally, S. R.; y Srivastava, S. 2021. Asking
+the Right Questions: Learning Interpretable Action Models
+Through Query Answering. En Proc. AAAI.
+Yang, Q.; Wu, K.; y Jiang, Y. 2007. Learning Action Models
+from Plan Examples Using Weighted MAX-SAT. Artifi-
+cial Intelligence, 171(2-3): 107–143.
+Zhuo, H. H.; y Kambhampati, S. 2013. Action-Model Ac-
+quisition from Noisy Plan Traces. En Proc. IJCAI.

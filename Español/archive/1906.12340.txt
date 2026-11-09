@@ -1,0 +1,668 @@
+El aprendizaje autosupervisado puede mejorar
+la robustez y la incertidumbre de los modelos
+Dan Hendrycks
+UC Berkeley
+hendrycks@berkeley.eduMantas Mazeika
+UIUC
+mantas3@illinois.edu
+Saurav Kadavath*
+UC Berkeley
+sauravkadavath@berkeley.eduDawn Song
+UC Berkeley
+dawnsong@berkeley.edu
+Resumen
+La autosupervisión proporciona representaciones eficaces para las tareas posteriores sin
+requerir etiquetas. Sin embargo, los enfoques existentes van por detrás del entrenamiento totalmente supervisado
+y a menudo no se consideran beneficiosos más allá de evitar o reducir la necesidad de
+anotaciones. Encontramos que la autosupervisión puede beneficiar la robustez de diversas
+maneras, incluida la robustez frente a ejemplos adversarios, la corrupción de etiquetas y las
+corrupciones comunes de entrada. Además, la autosupervisión beneficia enormemente la detección fuera de distribución
+de valores atípicos difíciles y cercanos a la distribución, hasta el punto de superar el
+rendimiento de los métodos totalmente supervisados. Estos resultados demuestran la promesa de
+la autosupervisión para mejorar la robustez y la estimación de la incertidumbre, y establecen
+estas tareas como nuevos ejes de evaluación para futuras investigaciones sobre aprendizaje autosupervisado.
+1 Introducción
+El aprendizaje autosupervisado es muy prometedor para mejorar las representaciones cuando los datos etiquetados son
+escasos. En el aprendizaje semisupervisado, los métodos recientes de autosupervisión están en el estado del arte [Gidaris
+et al., 2018, Dosovitskiy et al., 2016, Zhai et al., 2019], y la autosupervisión es esencial en tareas de vídeo
+en las que la anotación es costosa [Vondrick et al., 2016, 2018]. Hasta la fecha, sin embargo, los enfoques autosupervisados
+van por detrás del entrenamiento totalmente supervisado en las métricas estándar de precisión, y la investigación se ha centrado
+en alcanzar el rendimiento supervisado. Además, cuando se usa junto con
+el aprendizaje totalmente supervisado sobre un conjunto de datos totalmente etiquetado, la autosupervisión tiene poco impacto en la precisión.
+Esto plantea la pregunta de si los grandes conjuntos de datos etiquetados hacen innecesaria la autosupervisión.
+Mostramos que, aunque la autosupervisión no mejora sustancialmente la precisión cuando se usa en conjunto
+con el entrenamiento estándar sobre conjuntos de datos totalmente etiquetados, sí puede mejorar varios aspectos de la robustez del modelo, in-
+cluida la robustez frente a ejemplos adversarios [Madry et al., 2018], las corrupciones de etiquetas [Patrini et al., 2017,
+Zhang y Sabuncu, 2018] y las corrupciones comunes de entrada como niebla, nieve y desenfoque [Hendrycks
+y Dietterich, 2019]. Es importante señalar que estas ganancias quedan ocultas si solo se mira la precisión limpia,
+para la que el rendimiento se mantiene constante. Además, encontramos que la autosupervisión mejora enormemente
+la detección fuera de distribución para ejemplos difíciles y cercanos a la distribución, un problema de larga data y poco ex-
+plorado. De hecho, al usar técnicas de aprendizaje autosupervisado en CIFAR-10 e ImageNet para
+la detección fuera de distribución, incluso logramos superar a los métodos totalmente supervisados.
+Estos resultados demuestran que la autosupervisión no debe verse como un conjunto de técnicas
+que permiten a los modelos alcanzar la supervisión completa. Más bien, usar ambas en conjunto proporciona una fuerte
+regularización que mejora la robustez y la estimación de la incertidumbre aunque la precisión limpia no
+Contribución igual.
+33.ª Conferencia sobre Neural Information Processing Systems (NeurIPS 2019), Vancouver, Canadá. arXiv:1906.12340v2 [cs.LG] 29 Oct 2019
+cambie. Es importante señalar que estos métodos pueden mejorar la robustez y la estimación de la incertidumbre sin re-
+querir modelos más grandes ni datos adicionales [Schmidt et al., 2018, Kurakin et al., 2017]. Pueden usarse
+junto con métodos específicos de la tarea para un efecto aditivo sin supuestos adicionales. Con el aprendizaje autosupervisado
+logramos avances tangibles en robustez adversarial, corrupción de etiquetas, corrupciones comunes de entrada
+y detección fuera de distribución, lo que sugiere que los métodos futuros de aprendizaje autosupervisado
+también podrían juzgarse por su utilidad para las estimaciones de incertidumbre y la robustez del modelo. El código y nuestro
+conjunto de validación ampliado de ImageNet están disponibles en https://github.com/hendrycks/ss-ood .
+2 Trabajos relacionados
+Figura 1: Predecir la rotación requiere modelar
+la forma. La textura por sí sola no basta para determinar
+si la cebra está volteada, aunque puede bastar
+para la clasificación en condiciones ideales.
+Por tanto, entrenar con rotaciones auxiliares autosupervisadas
+puede mejorar la robustez. Aprendizaje autosupervisado. Se han propuesto varios
+métodos autosupervisados, cada uno
+explorando una tarea auxiliar distinta. Doersch et al.
+[2015] predicen la posición relativa de los parches de
+imagen y usan la representación resultante para
+mejorar la detección de objetos. Dosovitskiy et al.
+[2016] crean clases sustitutas para entrenar, mediante
+la transformación de parches semilla de imagen. De forma similar, Gi-
+daris et al. [2018] predicen rotaciones de imagen (Fi-
+gura 1). Otros enfoques incluyen usar la coloriza-
+ción como tarea sustituta [Larsson et al., 2016], métodos de
+agrupamiento profundo [Ji et al., 2018] y métodos
+que maximizan la información mutua [Hjelm et al.,
+2019] con representaciones de alto nivel [van den
+Oord et al., 2018, Hénaff et al., 2019]. Estos
+trabajos se centran en la utilidad de la autosupervisión para
+aprender sin datos etiquetados y no consideran su efecto sobre la robustez y la incertidumbre.
+Robustez. Mejorar la robustez del modelo se refiere al objetivo de garantizar que los modelos de aprendizaje automático
+sean resistentes a una variedad de condiciones imperfectas de entrenamiento y prueba. Hendrycks y Dietterich
+[2019] estudian cómo pueden manejar los modelos las corrupciones comunes de imagen del mundo real (como niebla, desenfoque y
+compresión JPEG) y proponen un conjunto completo de distorsiones para evaluar la robustez en el mundo real.
+Otro problema de robustez es el aprendizaje en presencia de etiquetas corruptas [Nettleton et al., 2010,
+Patrini et al., 2017]. Con este fin, Hendrycks et al. [2018] introducen Gold Loss Correction (GLC), un
+método que usa un pequeño conjunto de etiquetas confiables para mejorar la precisión en este escenario. Con altos grados
+de corrupción de etiquetas, los modelos empiezan a sobreajustar la desinformación de las etiquetas corruptas [Zhang y
+Sabuncu, 2018, Hendrycks et al., 2019a], lo que sugiere la necesidad de formas de complementar el entrenamiento con
+señales confiables de objetivos no supervisados. Madry et al. [2018] exploran la robustez adversarial
+y proponen el entrenamiento adversarial PGD, donde los modelos se entrenan con un objetivo de optimización robusta minimax
+. Zhang et al. [2019] mejoran este trabajo con una función de pérdida modificada y desarrollan una
+mejor comprensión del compromiso entre la precisión adversarial y la precisión natural.
+Detección fuera de distribución. La detección fuera de distribución tiene una larga historia. Los métodos tradicionales
+como las SVM de una clase [Schölkopf et al., 1999] se han revisado con representaciones profundas
+[Ruff et al., 2018], lo que ha dado mejoras en datos complejos. Una línea central de exploración reciente
+ha sido la de los detectores fuera de distribución que usan representaciones supervisadas. Hendrycks y Gimpel
+[2017] proponen usar la probabilidad softmax máxima de un clasificador para la detección fuera de distribución.
+Lee et al. [2018] amplían esto generando valores atípicos sintéticos y entrenando las representaciones para
+marcar estos ejemplos como valores atípicos. Sin embargo, Hendrycks et al. [2019b] encuentran que entrenar frente a un conjunto grande
+y diverso de valores atípicos permite una detección fuera de distribución mucho mejor sobre distribuciones no vistas.
+En estos trabajos, la detección es más difícil para los valores atípicos cercanos a la distribución, lo que sugiere la necesidad de
+nuevos métodos que obliguen al modelo a aprender más sobre la estructura de los ejemplos dentro de distribución.
+3 Robustez
+3.1 Robustez frente a perturbaciones adversariales
+Mejorar la robustez frente a entradas adversariales ha resultado difícil, y el entrenamiento adversarial es
+la única mejora de larga data [Carlini y Wagner, 2017, Athalye et al., 2018]. En esta sección, mostramos
+que la autosupervisión auxiliar en forma de predicción de rotaciones [Gidaris et al., 2018] puede
+2
+Limpio PGD de 20 pasos PGD de 100 pasos
+Entrenamiento normal 94.8 0.0 0.0
+Entrenamiento adversarial 84.2 44.8 44.8
++ Rotaciones auxiliares (nuestro) 83.5 50.4 50.4
+Tabla 1: Resultados de nuestra defensa. Todos los resultados usan ε = 8.0/255. Para adversarios de 20 pasos α = 2.0/255,
+y para adversarios de 100 pasos α = 0.3/255. Más pasos no cambian los resultados, por lo que los ataques convergen.
+La autosupervisión mediante rotaciones ofrece grandes mejoras respecto al entrenamiento adversario estándar.
+mejora el entrenamiento adversario estándar con Descenso de Gradiente Proyectado (PGD) [Madry et al., 2018].
+También observamos que la autosupervisión puede aportar mejoras cuando se combina con defensas más sólidas como
+TRADES [Zhang et al., 2019], y no se ve quebrantada por ataques sin gradiente como SPSA [Uesato
+et al., 2018].
+Configuración. El problema de defenderse de perturbaciones adversarias acotadas puede formularse de forma ex-
+presada como la búsqueda de los parámetros θ del clasificador p que minimizan el objetivo
+mín_θ E_(x,y)∼D[máx_{x'∈S} L_CE(y; p(y|x'); θ)], donde S = {x' : ‖x − x'‖ < ε} (1)
+En este artículo nos centramos en adversarios acotados por la norma ℓ1. Madry et al. [2018] proponen que PGD es “un
+adversario universal de primer orden.” Por ello, primero nos centramos en defendernos de PGD. Sea PGD(x) el
+Kthstep of PGD,
+xk+1= S 
+xk+sign(rxLCE(y;p(yjxk);))
+y x0 = x + U(−ε, ε) (2)
+donde K es un parámetro preestablecido que caracteriza el número de pasos que se dan, Π_S es el
+operador de proyección sobre la bola ℓ1 S, y L_CE(y; p(y|x0); θ) es la pérdida que queremos optimizar.
+Normalmente, esta pérdida es la entropía cruzada entre la salida softmax de clasificación del modelo para x y
+la etiqueta real y. Para evaluar la precisión robusta, usamos adversarios de 20 y de 100 pasos.
+Para el adversario de 20 pasos, fijamos el tamaño de paso α = 2/256. Para el adversario de 100 pasos, fijamos
+ε = 0.3/256, como en [Madry et al., 2018]. Durante el entrenamiento, usamos adversarios de 10 pasos con α = 2/256.
+4 5 6 7 8 9 10
+3040506070Precisión adversaria (%)
+Precisión adversaria en CIFAR-10 frente a 
+Entrenamiento adversario
++ Rotaciones auxiliares
+Figura 2: Efecto de la intensidad del ataque sobre un modelo con ε=
+8/255 entrenado adversarialmente. El ataque
+tiene intensidades ε ∈ {4/255, 5/255, ..., 10/255}.
+Dado que la brecha de precisión se amplía a medida que ε aumenta, los beneficios de la
+autosupervisión quedan ocultos al observar
+la precisión sobre datos limpios por sí sola. En todos los experimentos usamos 40-2 Wide Residual
+Networks de Zagoruyko y Komodakis [2016].
+Para el entrenamiento usamos SGD con momento de Nesterov
+de 0.9 y un tamaño de lote de 128. Usamos
+una tasa de aprendizaje inicial de 0.1 y una programación coseno de la
+tasa de aprendizaje de Loshchilov y Hutter [2016]
+y decaimiento de pesos de 5·10⁻⁴. Para el aumento de
+datos usamos recorte aleatorio y volteo horizontal.
+Los hiperparámetros se eligieron como valores
+estándar y se usan en las secciones siguientes salvo
+que se indique lo contrario.
+Método. Exploramos mejorar la representa-
+ción de la robustez más allá del entrenamiento PGD estándar
+con autosupervisión auxiliar basada en rotaciones
+al estilo de Gidaris et al. [2018]. En nuestro enfo-
+que entrenamos una red de clasificación junto con
+una cabeza auxiliar separada, que toma el
+vector de la penúltima capa de la red como entrada
+y produce una distribución softmax de 4 clases. Esta
+cabeza se entrena junto con el resto de la red para
+predecir la cantidad de rotación aplicada
+a una imagen de entrada dada (de 0°, 90°, 180° y
+270°). Nuestra pérdida total durante el entrenamiento puede descomponerse en una pérdida supervisada y una autosupervisada
+pérdida
+L(x;y;) =LCE(y;p(yjPGD(x));) +LSS(PGD(x);): (3)
+Obsérvese que el componente autosupervisado de la pérdida no requiere la etiqueta real de entrenamiento y
+como entrada. La pérdida supervisada no utiliza nuestra cabeza auxiliar, mientras que la pérdida autosupervisada
+3
+solo utiliza esta cabeza. Cuando λ = 0, nuestra pérdida total se reduce a la pérdida usada en el entrenamiento PGD.
+En nuestros experimentos usamos λ = 0.5 y la siguiente pérdida autosupervisada basada en rotaciones
+LSS(x;) =1
+42
+4X
+r2f0;90;180;270gLCE(one_hot (r);prot_head (rjRr(x));)3
+5; (4)
+donde R_r(x) es una transformación de rotación y L_CE(x; r; θ) es la entropía cruzada entre la salida de la cabeza auxiliar
+y la etiqueta real r ∈ {0°, 90°, 180°, 270°}. Para adaptar el adversario PGD
+al nuevo esquema de entrenamiento, modificamos la pérdida usada en la ecuación de actualización de PGD (2)
+para maximizar tanto la pérdida de rotación como la de clasificación. En el Apéndice C, encontramos que esta
+modificación es opcional y que la principal fuente de mejora procede de la propia pérdida de rotación.
+Aquí presentamos los resultados con la modificación, por completitud. La pérdida total que PGD intentará
+maximizar para cada imagen de entrenamiento es L_CE(y; p(y|x); θ) + L_SS(x; θ). En tiempo de prueba, la pérdida PGD no
+incluye el término L_SS, ya que queremos atacar el clasificador de imágenes y no el clasificador de rotación.
+Resultados y análisis. Logramos grandes mejoras sobre el entrenamiento PGD estándar
+añadiendo la predicción autosupervisada de rotación. La Tabla 1 contiene los resultados de nuestro modelo frente a PGD
+adversarios con K = 20 y K = 100. En ambos casos logramos una mejora absoluta de 5.6%
+sobre el entrenamiento PGD clásico. En la Figura 2 observamos que nuestro método de añadir
+rotaciones auxiliares ofrece en realidad mayores mejoras sobre el entrenamiento PGD estándar a medida que la máxima
+distancia de perturbación ε aumenta. La figura muestra también que nuestro método puede soportar perturbaciones
+hasta un 11% mayores que el entrenamiento PGD sin ninguna caída de rendimiento.
+Para demostrar que nuestro método no depende de la ofuscación del gradiente, intentamos
+atacar nuestros modelos con SPSA [Uesato et al., 2018] y no observamos ninguna degradación de rendimiento
+en comparación con el entrenamiento PGD estándar. Además, dado que nuestro método autosupervisado tiene la buena
+propiedad de adaptarse fácilmente para complementar otras defensas supervisadas distintas, también estudiamos
+el efecto de añadir rotaciones autosupervisadas a defensas más sólidas como TRADES [Zhang et al.,
+2019]. Comprobamos que la autosupervisión también ayuda en este escenario. Nuestro modelo de mejor rendimiento
+TRADES + rotaciones ofrece una mejora de 1.22% sobre TRADES estándar y de 7.79% sobre
+el entrenamiento PGD estándar en precisión robusta. Para detalles de implementación, véase el código.
+3.2 Robustez frente a corrupciones comunes
+Configuración. En aplicaciones reales de sistemas de visión por computadora, las entradas pueden corromperse de varias
+maneras que quizá no se hayan encontrado durante el entrenamiento. Mejorar la robustez frente a estas corrupciones comunes
+es especialmente importante en aplicaciones críticas para la seguridad. Hendrycks y Dietterich [2019]
+crean un conjunto de quince corrupciones de prueba y cuatro corrupciones de validación comunes para medir
+la robustez frente a corrupciones de entrada. Estas corrupciones se agrupan en las categorías de ruido, desenfoque, clima y digitales.
+Entre los ejemplos están el ruido de disparo, el desenfoque de zoom, la nieve y la compresión JPEG.
+Usamos el conjunto de validación CIFAR-10-C de Hendrycks y Dietterich [2019] y comparamos la
+robustez de clasificadores entrenados de forma normal frente a clasificadores entrenados con una pérdida auxiliar
+de predicción de rotación. Como en secciones anteriores, predecimos las cuatro rotaciones en paralelo en cada lote. Usamos 40-2 Wide
+Residual Networks y los mismos hiperparámetros de optimización que antes. No ajustamos sobre las
+corrupciones de validación, así que reportamos el rendimiento medio sobre todas las corrupciones. Los resultados están en la Figura 3.
+Resultados y análisis. La referencia del entrenamiento normal alcanza una precisión sobre datos limpios de 94.7% y
+una precisión media sobre todas las corrupciones de 72.3%. El entrenamiento con rotaciones auxiliares mantiene
+la precisión sobre datos limpios en 95.5%, pero aumenta la precisión media sobre imágenes corrompidas en 4.6%, hasta 76.9%.
+Así, los beneficios de la autosupervisión para la robustez quedan ocultos por una precisión similar en imágenes limpias.
+Las mejoras se reparten entre las corrupciones, con una pequeña pérdida de rendimiento en solo un
+tipo de corrupción, la compresión JPEG. En desenfoque de vidrio, la precisión mejora en 11.4%, y en
+ruido gaussiano mejora en 11.6%. También mejora en 8.9% con contraste y con ruido de
+disparo, y en 4.2% con escarcha, lo que indica mejoras sustanciales de robustez en una gran variedad de corrupciones.
+Estos resultados demuestran que la autosupervisión puede regularizar redes para hacerlas más robustas incluso si
+la precisión sobre datos limpios no se ve afectada.
+3.3 Robustez frente a corrupciones de etiquetas
+Configuración. Entrenar clasificadores con etiquetas corrompidas puede degradar gravemente el rendimiento. Por ello, varios
+trabajos previos han explorado el entrenamiento de redes neuronales profundas robustas al ruido en las etiquetas en el caso multiclase
+4
+Gaussiano
+Ruido
+Disparo
+Ruido
+Impulso
+Ruido
+Moteado
+Ruido
+Vidrio
+Desenfoque
+Desenfoque
+de enfoque
+Movimiento
+Desenfoque
+Zoom
+Desenfoque
+Gaussiano
+Desenfoque
+JPEG
+Compresión
+Transformación
+elástica
+Salpicadura
+Brillo
+Saturación
+Contraste
+Pixelado
+Nieve
+Niebla
+Escarcha0.30.40.50.60.70.80.91.0Precisión de prueba top-1CIFAR-10, entrenamiento normalCIFAR-10, rotaciones auxiliaresFigura 3: Comparación de la precisión del entrenamiento habitual frente al entrenamiento con rotaciones
+auxiliares. Autosupervisión sobre las diecinueve corrupciones de CIFAR-10-C. Cada barra representa un promedio sobre todas
+las cinco intensidades de corrupción para un tipo de corrupción dado.
+escenario de clasificación de Sukhbaatar et al. [2014], Patrini et al. [2017], Hendrycks et al. [2018]. Usamos
+el planteamiento de estos trabajos. Sean x, y y ỹ una entrada, la etiqueta limpia y la etiqueta potencialmente
+corrupta, respectivamente. Dado un conjunto de entrenamiento D̃ de pares (x, ỹ), la tarea es obtener una alta
+precisión de clasificación sobre un conjunto de prueba D_test de pares (x, y) con etiquetas limpias.
+Dado un conjunto de entrenamiento con etiquetas limpias D, generamos D̃ con una matriz de corrupción C, donde
+C_ij = p(ỹ = j | y = i) es la probabilidad de que una etiqueta real i sea corrompida a j. Donde K es
+el rango de la etiqueta, construimos C según C = (1 − s)I_K + s 1 1ᵀ/K. En esta ecuación, s es
+la intensidad de corrupción, que está en [0, 1]. Con una intensidad de corrupción de 0, las etiquetas no cambian,
+mientras que con una intensidad de 1 las etiquetas tienen la misma probabilidad de ser corrompidas a cualquier clase.
+Para medir el rendimiento, promediamos el rendimiento en D_test sobre intensidades de corrupción de 0 a 1 con
+incrementos de 0.1, para un total de 11 experimentos.
+Métodos. El entrenamiento sin métodos de corrección de pérdida ni autosupervisión sirve como nuestra primera referencia,
+que llamamos Sin corrección en la Tabla 2. A continuación, comparamos con el método más avanzado Gold Loss Correction
+(GLC) de Hendrycks et al. [2018]. Es un método de corrección de pérdida en dos etapas basado en Sukhbaatar et al.
+[2014] y Patrini et al. [2017]. La primera etapa del entrenamiento estima la matriz C de probabilidades
+condicionales de corrupción, que describe parcialmente el proceso de corrupción. La segunda etapa usa
+la estimación de C para entrenar un clasificador corregido que funcione bien con la distribución de etiquetas limpias.
+GLC supone acceso a un pequeño conjunto de datos de confianza con ejemplos de etiquetas limpias. Así, especificamos
+el porcentaje de datos de confianza disponibles en los experimentos como fracción del conjunto de entrenamiento.
+Este esquema también se conoce como configuración semiverificada, Charikar et al. [2017].
+Para investigar el efecto de la autosupervisión, usamos la pérdida combinada L_CE(y; p(y|x); θ) +
+L_SS(x; θ), donde el primer término es la pérdida estándar de entropía cruzada y el segundo es la pérdida auxiliar
+de rotación definida en la Sección 3.1. La llamamos Rotaciones en la Tabla 2. En todos los experimentos fijamos
+λ = 0.5. Gidaris et al. [2018] demuestran que predecir rotaciones puede producir representaciones eficaces
+para el ajuste fino posterior en tareas de clasificación objetivo. Partimos de este enfoque y preentrenamos
+solo con la pérdida auxiliar de rotación durante 100 épocas, tras lo cual hacemos ajuste fino durante 40 épocas con la
+pérdida combinada.
+Usamos 40-2 Wide Residual Networks [Zagoruyko y Komodakis, 2016]. Los hiperparámetros se mantienen
+sin cambios respecto a la Sección 3.1. Para elegir el número de épocas de ajuste fino, usamos una partición de validación de
+el conjunto de entrenamiento de CIFAR-10 con etiquetas limpias y elegimos un valor que acerque la precisión a la de
+Entrenamiento normal. Los resultados están en la Tabla 2 y las curvas de rendimiento en la Figura 4.
+Análisis. Observamos grandes mejoras de robustez gracias a la predicción auxiliar de rotación. Sin corrección
+de pérdida, reducimos el error medio en 5.6% en CIFAR-10 y en 5.2% en CIFAR-100. Esto
+equivale a una mejora relativa de 11% sobre la referencia del entrenamiento normal en CIFAR-100
+5
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción020406080100Error de prueba (%)
+CIFAR-10, Sin corrección
+Entrenamiento normal
++ Rotaciones
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción020406080100Error de prueba (%)
+CIFAR-10, GLC 5% de confianza
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción020406080100Error de prueba (%)
+CIFAR-10, GLC 10% de confianza
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción20406080100Error de prueba (%)
+CIFAR-100, Sin corrección
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción20406080100Error de prueba (%)
+CIFAR-100, GLC 5% de confianza
+0.0 0.2 0.4 0.6 0.8 1.0
+Intensidad de corrupción20406080100Error de prueba (%)
+CIFAR-100, GLC 10% de confianzaFigura 4: Curvas de error por corrupción de etiquetas, comparando el entrenamiento normal con el entrenamiento con
+autosupervisión por rotación. Las rotaciones auxiliares mejoran el rendimiento al entrenar sin corrección
+de pérdida, y son complementarias con el método de corrección de pérdida GLC.
+CIFAR-10 CIFAR-100
+Entrenamiento normal Rotaciones Entrenamiento normal Rotaciones
+Sin corrección 27.4 21.8 52.6 47.4
+GLC (5% de confianza) 14.6 10.5 48.3 43.2
+GLC (10% de confianza) 11.6 9.6 39.1 36.8
+Tabla 2: Resultados de corrupción de etiquetas que comparan el entrenamiento normal con el entrenamiento con auto-
+supervisión. Cada valor es el error medio sobre 11 intensidades de corrupción. Todos los valores son porcentajes.
+La señal de entrenamiento fiable de la autosupervisión mejora la resistencia al ruido de etiquetas.
+y una mejora relativa de 26% en CIFAR-10. De hecho, la predicción auxiliar de rotación sin corrección de pérdida
+supera al GLC con 5% de datos de confianza en CIFAR-100. Esto sorprende, dado que
+el GLC se desarrolló específicamente para combatir el ruido de etiquetas.
+También observamos efectos aditivos con el GLC. En CIFAR-10, el GLC con 5% de datos de confianza
+obtiene un error medio de 14.6%, que se reduce a 10.5% al añadir la predicción auxiliar
+de rotación. Obsérvese que duplicar la cantidad de datos de confianza hasta 10% produce un error medio de 11.6%. Así,
+usar la autosupervisión puede permitir un mejor rendimiento que duplicar la cantidad de datos de confianza
+en un escenario semisupervisado. En CIFAR-100 observamos mejoras complementarias similares gracias a
+la predicción auxiliar de rotación. Cualitativamente, en la Figura 4 vemos que la degradación del rendimiento a medida que
+aumenta la intensidad de corrupción es más suave con la predicción auxiliar de rotación.
+En CIFAR-100, el error con intensidad de corrupción de 0% es 2.3% mayor con las predicciones auxiliares de rotación.
+Esto se debe a que elegimos el número de épocas de ajuste fino en CIFAR-10 con intensidad de corrupción de 0%,
+para la cual la degradación es solo de 1.3%. Un ajuste fino más largo puede eliminar esta brecha, pero también
+lleva a sobreajustar el ruido de etiquetas [Zhang y Sabuncu, 2018]. Controlar este equilibrio entre robustez
+y rendimiento sobre datos limpios depende de cada aplicación. Sin embargo, a partir de una intensidad de corrupción de 20%,
+las predicciones auxiliares de rotación mejoran el rendimiento para todas las intensidades de corrupción y métodos probados.
+4 Detección fuera de distribución
+El aprendizaje autosupervisado con predicción de rotación permite detectar ejemplos fuera de distribución más difíciles.
+En las dos secciones siguientes mostramos que el aprendizaje autosupervisado mejora la detección de
+ejemplos fuera de distribución cuando los datos en distribución constan de varias clases o de una sola clase.
+6
+4.1 Detección fuera de distribución multiclase.
+Configuración. En el siguiente experimento, entrenamos un clasificador de CIFAR-10 y lo usamos como detector fuera de
+distribución. Dado un ejemplo x, escribimos la distribución posterior del clasificador
+sobre las diez clases como p(y|x). Hendrycks y Gimpel [2017] muestran que p(y|x) puede permitir
+la detección de ejemplos fuera de distribución. Muestran que la probabilidad softmax máxima
+máx_c p(y=c|x) tiende a ser mayor en ejemplos en distribución que en ejemplos fuera de distribución
+en una variedad de tareas, lo que permite detectar ejemplos OOD.
+Evaluamos cada detector OOD usando el área bajo la curva característica operativa del receptor
+(AUROC) [Davis y Goadrich, 2006]. Dada una imagen de entrada, un detector OOD produce una
+puntuación de anomalía. El AUROC es igual a la probabilidad de que un ejemplo fuera de distribución tenga una
+puntuación de anomalía mayor que la de un ejemplo en distribución. Así, un detector OOD con un AUROC de 50% está al nivel del azar,
+y uno con un AUROC de 100% no presenta ningún fallo de rendimiento.
+Método. Entrenamos un clasificador con una pérdida auxiliar autosupervisada de rotación. La pérdida durante
+el entrenamiento es L_CE(y; p(y|x)) + Σ
+_{r∈{0°,90°,180°,270°}} L_CE(one_hot(r); prot_head(r|R_r(x))), y
+solo con ejemplos de entrenamiento de CIFAR-10 en distribución. Tras completar el entrenamiento, puntuamos
+los ejemplos del conjunto de prueba de CIFAR-10 en distribución y los ejemplos OOD con la fórmula KL[U_k ‖ p(y|
+x)] + 1
+/4 Σ
+_{r∈{0°,90°,180°,270°}} L_CE(one_hot(r); prot_head(r|R_r(x))). Usamos la divergencia KL
+de la predicción softmax respecto a la distribución uniforme U, ya que se combina bien con la puntuación de rotación,
+y porque Hendrycks et al. [2019b] muestran que KL[U_k ‖ p(y|x)] funciona de forma similar a la referencia de probabilidad
+softmax máxima máx_c p(y=c|x).
+Método AUROC
+Referencia 91.4%
+Rotaciones (nuestro) 96.2%
+Figura 5: Rendimiento de la detección OOD de
+la referencia de probabilidad softmax máxima y
+nuestro método con autosupervisión. Los resultados
+completos están en el Apéndice A.
+La pérdida de entrenamiento es la entropía cruzada estándar con predicción auxiliar
+de rotación. La puntuación de detección es la divergencia KL
+del detector de trabajos previos con una puntuación de rotación añadida. La
+puntuación de rotación consiste en la entropía cruzada de la distribución softmax de rotación
+respecto a la distribución categórica sobre rotaciones
+con probabilidad 1 en la rotación actual y 0 en las demás.
+Esto equivale al logaritmo negativo de la probabilidad asignada a la
+rotación verdadera. Sumando las entropías cruzadas sobre las rotaciones
+se obtiene la puntuación total de rotación.
+Resultados y análisis. Evaluamos este método propuesto
+frente a la referencia de probabilidad softmax máxima [Hendrycks
+y Gimpel, 2017] sobre una gran variedad de anomalías, con CIFAR-10 como datos en distribución. Para
+las anomalías, seleccionamos imágenes Gaussianas, Rademacher, Blobs, Texturas, SVHN, Places365, LSUN y
+imágenes de CIFAR-100. Observamos mejoras de rendimiento en todos los casos e informamos los valores medios de AUROC
+en la Figura 5. En promedio, el método de rotación aumenta el AUROC en 4.8%.
+Este método no requiere datos adicionales, a diferencia de Outlier Exposure [Hendrycks et al., 2019b],
+aunque combinar ambos podría aportar beneficios adicionales. Tal como está, las mejoras de rendimiento son de
+magnitud comparable a métodos más complejos propuestos en la literatura [Xie et al., 2018]. Esto
+demuestra que la predicción auxiliar autosupervisada de rotación puede mejorar los detectores OOD basados en
+representaciones multiclase totalmente supervisadas. Descripciones más detalladas de los conjuntos de datos OOD y los
+resultados completos para cada tipo de anomalía con métricas adicionales están en el Apéndice A.
+4.2 Aprendizaje de una sola clase
+Configuración. En los siguientes experimentos, tomamos un conjunto de datos con k clases y entrenamos un modelo con
+una sola clase. Este modelo se usa como detector fuera de distribución. Como fuente de ejemplos OOD,
+usamos los ejemplos de las k−1 clases restantes no vistas. En consecuencia, para los conjuntos de datos que consideramos,
+los ejemplos OOD están cerca de los datos en distribución y plantean un reto difícil de detección OOD.
+4.2.1 CIFAR-10
+Referencias. Las SVM de una clase [Schölkopf et al., 1999] son una técnica no supervisada de detección fuera de
+distribución que modela la distribución de entrenamiento encontrando una pequeña región que contiene la mayoría de los
+ejemplos del conjunto de entrenamiento, y los puntos fuera de esta región se consideran OOD. En nuestro experimento, las OC-SVM
+operan sobre los píxeles crudos de CIFAR-10. Deep SVDD [Ruff et al., 2018] usa redes convolucionales para
+extraer características de los píxeles crudos mientras modela una sola clase, como las OC-SVM.
+7
+OC-SVM DeepSVDD Geométrico RotNet DIM IIC Supervisado (OE) Nuestro Nuestro + OE
+Avión 65.6 61.7 76.2 71.9 72.6 68.4 87.6 77.5 90.4
+Automóvil 40.9 65.9 84.8 94.5 52.3 89.4 93.9 96.9 99.3
+Pájaro 65.3 50.8 77.1 78.4 60.5 49.8 78.6 87.3 93.7
+Gato 50.1 59.1 73.2 70.0 53.9 65.3 79.9 80.9 88.1
+Ciervo 75.2 60.9 82.8 77.2 66.7 60.5 81.7 92.7 97.4
+Perro 51.2 65.7 84.8 86.6 51.0 59.1 85.6 90.2 94.3
+Rana 71.8 67.7 82.0 81.6 62.7 49.3 93.3 90.9 97.1
+Caballo 51.2 67.3 88.7 93.7 59.2 74.8 87.9 96.5 98.8
+Barco 67.9 75.9 89.5 90.7 52.8 81.8 92.6 95.2 98.7
+Camión 48.5 73.1 83.4 88.8 47.6 75.7 92.1 93.3 98.5
+Media 58.8 64.8 82.3 83.3 57.9 67.4 87.3 90.1 95.6
+Tabla 3: Valores de AUROC de distintos detectores OOD entrenados con una de las diez clases de CIFAR-10. En tiempo de prueba,
+los ejemplos fuera de distribución provienen de las nueve clases restantes de CIFAR-10. Los ejemplos en distribución
+son ejemplos de la clase de la fila. Nuestra técnica autosupervisada supera a un modelo totalmente
+supervisado. Todos los valores son porcentajes.
+RotNet [Gidaris et al., 2018] es una técnica autosupervisada exitosa que aprende sus representaciones
+prediciendo si una entrada está rotada 0°, 90°, 180° o 270°. Tras entrenar RotNet, usamos las
+probabilidades softmax para determinar si un ejemplo está en distribución o fuera de ella. Para ello,
+introducimos a la red el ejemplo original (0°) y registramos la probabilidad softmax de RotNet asignada a la clase 0°
+. Luego rotamos el ejemplo 90° y registramos la probabilidad asignada a la clase 90°. Hacemos lo
+mismo para 180° y 270°, y sumamos estas probabilidades. La suma de las probabilidades de los ejemplos en distribución
+tenderá a ser mayor que la suma para los ejemplos OOD, así que el negativo de esta suma es
+la puntuación de anomalía. A continuación, Golan y El-Yaniv [2018] (Geometric) predicen transformaciones como
+rotaciones y si una entrada está volteada horizontalmente; somos los primeros en conectar este método con
+el aprendizaje autosupervisado, y mejoramos su método. Las redes Deep InfoMax [Hjelm et al., 2019]
+aprenden representaciones con alta información mutua con la entrada; para la detección usamos las
+puntuaciones de la red discriminadora. Una técnica autosupervisada reciente es Invariant Information
+Clustering (IIC) [Ji et al., 2018], que enseña a las redes a agrupar imágenes sin etiquetas, sino
+aprendiendo representaciones invariantes a perturbaciones geométricas como rotaciones, escalado,
+e inclinación. Para nuestra referencia supervisada, usamos una red profunda que realiza regresión logística,
+y para la clase negativa usamos Outlier Exposure. En Outlier Exposure, la red se expone a
+ejemplos de un conjunto de datos real y diverso formado por ejemplos fuera de distribución. Hecho correctamente,
+este proceso enseña a la red a generalizar a anomalías no vistas. Para el conjunto de valores atípicos, usamos
+80 Million Tiny Images [Torralba et al., 2008] sin los ejemplos de CIFAR-10 y CIFAR-100.
+Clave para el éxito de la referencia supervisada es nuestra elección de función de pérdida. Para asegurar que la referencia supervisada
+aprenda de los ejemplos difíciles, usamos la Focal Loss [Lin et al., 2017].
+Método. Para nuestro detector OOD autosupervisado de una sola clase, usamos una red profunda para predecir
+transformaciones geométricas y así superar los trabajos previos y la red totalmente supervisada.
+Los ejemplos se rotan 0°, 90°, 180° o 270° y luego se trasladan 0 u 8 píxeles en vertical y horizontal.
+Estas transformaciones se componen entre sí, y la red tiene tres cabezas softmax: una para
+predecir la rotación (R), una para predecir traslaciones verticales (T_v) y una para predecir traslaciones horizontales
+(T_h). Concretamente, la puntuación de anomalía para un ejemplo x es
+X
+r2RX
+s2TvX
+t2Thprot_head (rjG(x)) +pvert_transl_head (sjG(x)) +phoriz_transl_head (tjG(x));
+donde G es la composición de las rotaciones, traslaciones verticales y horizontales especificadas
+por r, p y q, respectivamente. El conjunto R es el conjunto de rotaciones, y p_rot_head(r|·) es la distribución softmax
+asignada a la rotación r por el predictor de rotación. Igual con las traslaciones de T_v, T_h, s, t,
+p_vert_transl_head y p_horiz_transl_head. La arquitectura base es una WideResNet 16-4 [Zagoruyko
+y Komodakis, 2016] entrenada con una tasa de dropout de 0.3 [Srivastava et al., 2014]. Elegimos una
+red 16-4 porque hay menos muestras de entrenamiento. Las redes se entrenan con un programa de tasa de aprendizaje coseno
+[Loshchilov y Hutter, 2016], con una tasa de aprendizaje inicial de 0.1, momento de Nesterov
+y un tamaño de lote de 128. Los datos se aumentan con recorte y volteo estándar. Nuestra referencia RotNet y
+la referencia supervisada usan la misma arquitectura base e hiperparámetros de entrenamiento. Al entrenar
+nuestro método con Outlier Exposure, animamos a la red a tener respuestas softmax uniformes sobre
+8
+datos fuera de distribución. Para que Outlier Exposure funcione con éxito, aplicamos las transformaciones geométricas
+mencionadas a las imágenes atípicas para que los datos en distribución y las atípicas sean lo más
+parecidos posible.
+Los resultados están en la Tabla 3. Obsérvese que muchas técnicas autosupervisadas funcionan mejor que los métodos diseñados específi-
+camente para el aprendizaje de una sola clase. Obsérvese también que nuestra técnica autosupervisada supera a
+Outlier Exposure, el método totalmente supervisado más avanzado, que también requiere acceso a datos fuera de
+muestras de la distribución para entrenar. En consecuencia, un modelo entrenado con autosupervisión puede superar a un
+modelo totalmente supervisado. Combinar nuestra técnica autosupervisada con supervisión mediante Outlier
+Exposure resuelve casi por completo esta tarea de CIFAR-10.
+4.2.2 ImageNet
+Conjunto de datos. Por ello recurrimos a un conjunto de datos más difícil para probar las técnicas autosupervisadas. Para este
+experimento seleccionamos 30 clases de ImageNet Deng et al. [2009]. Véase el Apéndice B para las clases.
+Método. Como antes, demostramos que un modelo autosupervisado puede superar a un modelo que está
+totalmente supervisado. El modelo totalmente supervisado se entrena con Outlier Exposure usando valores atípicos de ImageNet-22K
+(con las imágenes de ImageNet-1K eliminadas). La arquitectura base de estos experimentos es una
+ResNet-18. Las imágenes se redimensionan de modo que el lado más corto tenga 256 píxeles, manteniendo la
+relación de aspecto. Las imágenes se recortan aleatoriamente al tamaño 2242243. Como las imágenes son más grandes que
+CIFAR-10, es posible incorporar nuevas mejoras al método autosupervisado. Por ello podemos enseñar
+a la red a predecir si esa imagen ha sido redimensionada. Además, como queremos que la red aprenda
+con mayor facilidad la forma y a comparar regiones en toda la imagen, descubrimos que la autoatención es útil para
+esta tarea [Woo et al., 2018]. Otros cambios arquitectónicos, como
+usar una Wide RevNet [Behrmann et al., 2018] en lugar de una Wide ResNet, pueden aumentar el AUROC
+del 65.3% al 77.5%. Los AUROC se muestran en la Tabla 4. Los métodos autosupervisados superan al
+modelo de referencia totalmente supervisado por un margen amplio, aunque todavía hay mucho margen de mejora en la
+detección OOD a gran escala.
+Método AUROC
+Supervisado (OE) 56.1
+RotNet 65.3
+RotNet + Traslación 77.9
+RotNet + Autoatención 81.6
+RotNet + Traslación + Autoatención 84.8
+RotNet + Traslación + Autoatención + Redimensionado (nuestro) 85.7
+Tabla 4: Valores AUROC de detectores OOD supervisados y autosupervisados. Los valores AUROC son
+un promedio de 30 AUROC correspondientes a los 30 modelos distintos, cada uno entrenado con exactamente una de las
+30 clases. Los ejemplos en distribución de cada modelo proceden de una de las 30 clases, y las muestras de prueba fuera
+de distribución proceden de las 29 clases restantes. Los métodos autosupervisados superan
+con creces al método supervisado. Todos los valores son porcentajes.
+5 Conclusión
+En este artículo aplicamos el aprendizaje autosupervisado para mejorar la robustez y la incertidumbre de los
+modelos de aprendizaje profundo más allá de lo que antes era posible con enfoques puramente supervisados. Encontramos
+mejoras considerables en la robustez frente a ejemplos adversarios, la corrupción de etiquetas y las corrupciones comunes de
+entrada. Para todos los tipos de robustez que estudiamos, observamos mejoras consistentes al complementar los métodos
+supervisados actuales con una pérdida auxiliar de rotación. También encontramos que los métodos auto-
+supervisados pueden mejorar drásticamente la detección fuera de distribución de anomalías difíciles y cercanas a la distribución,
+y que en los experimentos con CIFAR e ImageNet los métodos autosupervisados superan a los métodos totalmente
+supervisados. La autosupervisión tuvo la mayor mejora sobre las técnicas supervisadas en nuestros
+experimentos con ImageNet, donde el mayor tamaño de entrada nos permitió aplicar un objetivo autosupervisado más
+complejo. Nuestros resultados sugieren que el trabajo futuro en la construcción de modelos más robustos y de mejores
+representaciones de datos podría beneficiarse enormemente de los enfoques autosupervisados.
+9
+5.1 Agradecimientos
+Este material se basa en parte en trabajo financiado por la National Science Foundation Frontier
+Grant. Cualquier opinión, hallazgo, conclusión o recomendación expresada en este material son
+de los autores y no reflejan necesariamente las opiniones de la National Science Foundation.
+Referencias
+Anish Athalye, Nicholas Carlini y David Wagner. Obfuscated gradients give a false sense of
+security: Circumventing defenses to adversarial examples. En Actas de la 35.ª International
+Conference on Machine Learning, ICML 2018, julio de 2018.
+Jens Behrmann, Will Grathwohl, Ricky T. Q. Chen, David Duvenaud y Jörn-Henrik Jacobsen.
+Invertible residual networks. ArXiv, abs/1811.00995, 2018.
+Nicholas Carlini y David Wagner. Adversarial examples are not easily detected: Bypassing ten
+detection methods, 2017.
+Moses Charikar, Jacob Steinhardt y Gregory Valiant. Learning from untrusted data. STOC, 2017.
+Jesse Davis y Mark Goadrich. The relationship between precision-recall and ROC curves. En
+International Conference on Machine Learning, 2006.
+Jia Deng, Wei Dong, Richard Socher, Li jia Li, Kai Li y Li Fei-Fei. ImageNet: A large-scale
+hierarchical image database. CVPR, 2009.
+Carl Doersch, Abhinav Gupta y Alexei A Efros. Unsupervised visual representation learning by
+context prediction. En Actas de la IEEE International Conference on Computer Vision,
+págs. 1422–1430, 2015.
+Alexey Dosovitskiy, Philipp Fischer, Jost Tobias Springenberg, Martin Riedmiller y Thomas Brox.
+Discriminative unsupervised feature learning with exemplar convolutional neural networks. IEEE
+transactions on pattern analysis and machine intelligence, 38(9):1734–1747, 2016.
+Spyros Gidaris, Praveer Singh y Nikos Komodakis. Unsupervised representation learning by
+predicting image rotations. En International Conference on Learning Representations, 2018.
+Izhak Golan y Ran El-Yaniv. Deep anomaly detection using geometric transformations. CoRR,
+abs/1805.10917, 2018.
+Dan Hendrycks y Thomas Dietterich. Benchmarking neural network robustness to common
+corruptions and perturbations. ICLR, 2019.
+Dan Hendrycks y Kevin Gimpel. A baseline for detecting misclassified and out-of-distribution
+examples in neural networks. ICLR, 2017.
+Dan Hendrycks, Mantas Mazeika, Duncan Wilson y Kevin Gimpel. Using trusted data to train
+deep networks on labels corrupted by severe noise. NeurIPS, 2018.
+Dan Hendrycks, Kimin Lee y Mantas Mazeika. Using pre-training can improve model robustness
+and uncertainty. Actas de la International Conference on Machine Learning, 2019a.
+Dan Hendrycks, Mantas Mazeika y Thomas Dietterich. Deep anomaly detection with outlier
+exposure. En International Conference on Learning Representations, 2019b.
+R Devon Hjelm, Alex Fedorov, Samuel Lavoie-Marchildon, Karan Grewal, Phil Bachman, Adam
+Trischler y Yoshua Bengio. Learning deep representations by mutual information estimation
+and maximization. En International Conference on Learning Representations, 2019.
+Olivier J. Hénaff, Ali Razavi, Carl Doersch, S. M. Ali Eslami y Aaron van den Oord. Data-efficient
+image recognition with contrastive predictive coding, 2019.
+Xu Ji, João F. Henriques y Andrea Vedaldi. Invariant information distillation for unsupervised
+image segmentation and clustering. CoRR, abs/1807.06653, 2018.
+10
+Alexey Kurakin, Ian Goodfellow y Samy Bengio. Adversarial machine learning at scale. ICLR,
+2017.
+Gustav Larsson, Michael Maire y Gregory Shakhnarovich. Learning representations for automatic
+colorization. En European Conference on Computer Vision, págs. 577–593. Springer, 2016.
+Kimin Lee, Honglak Lee, Kibok Lee y Jinwoo Shin. Training confidence-calibrated classifiers for
+detecting out-of-distribution samples. ICLR, 2018.
+Tsung-Yi Lin, Priya Goyal, Ross B. Girshick, Kaiming He y Piotr Dollár. Focal loss for dense
+object detection. ICCV, 2017.
+Ilya Loshchilov y Frank Hutter. SGDR: stochastic gradient descent with warm restarts. ICLR,
+2016.
+Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras y Adrian Vladu.
+Towards deep learning models resistant to adversarial attacks. ICLR, 2018.
+David F Nettleton, Albert Orriols-Puig y Albert Fornells. A study of the effect of different types
+of noise on the precision of supervised learning techniques. Artif Intell Rev, 2010.
+Giorgio Patrini, Alessandro Rozza, Aditya Menon, Richard Nock y Lizhen Qu. Making deep
+neural networks robust to label noise: a loss correction approach. CVPR, 2017.
+Lukas Ruff, Robert A. Vandermeulen, Nico Görnitz, Lucas Deecke, Shoaib A. Siddiqui, Alexander
+Binder, Emmanuel Müller y Marius Kloft. Deep one-class classification. En Actas de la
+35th International Conference on Machine Learning, volumen 80, páginas 4393–4402, 2018.
+Ludwig Schmidt, Shibani Santurkar, Dimitris Tsipras, Kunal Talwar, y Aleksander Madry. Adver-
+sarially robust generalization requires more data. NeurIPS, 2018.
+Bernhard Schölkopf, Robert Williamson, Alex Smola, John Shawe-Taylor, y John Platt. Support
+vector method for novelty detection. En Proceedings of the 12th International Conference on
+Neural Information Processing Systems, NIPS’99, páginas 582–588, Cambridge, MA, USA, 1999.
+MIT Press.
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, y Ruslan Salakhutdinov.
+Dropout: A simple way to prevent neural networks from overfitting. The Journal of Machine
+Learning Research, 2014.
+Sainbayar Sukhbaatar, Joan Bruna, Manohar Paluri, Lubomir Bourdev, y Rob Fergus. Training
+convolutional networks with noisy labels. ICLR Workshop, 2014.
+Antonio Torralba, Rob Fergus, y William T Freeman. 80 million tiny images: A large data set for
+nonparametric object and scene recognition. Pattern Analysis and Machine Intelligence, 2008.
+Jonathan Uesato, Brendan O’Donoghue, Aaron van den Oord, y Pushmeet Kohli. Adversarial risk
+and the dangers of evaluating against weak attacks. arXiv preprint arXiv:1802.05666, 2018.
+Aaron van den Oord, Yazhe Li, y Oriol Vinyals. Representation learning with contrastive predictive
+coding. NeurIPS, 2018.
+Carl V ondrick, Hamed Pirsiavash, y Antonio Torralba. Anticipating visual representations from
+unlabeled video. 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
+jun 2016. doi: 10.1109/cvpr.2016.18.
+Carl V ondrick, Abhinav Shrivastava, Alireza Fathi, Sergio Guadarrama, y Kevin Murphy. Track-
+ing emerges by colorizing videos. En The European Conference on Computer Vision (ECCV),
+septiembre 2018.
+Sanghyun Woo, Jongchan Park, Joon-Young Lee, y In So Kweon. Cbam: Convolutional block
+attention module. En The European Conference on Computer Vision (ECCV), septiembre 2018.
+Cihang Xie, Yuxin Wu, Laurens van der Maaten, Alan Yuille, y Kaiming He. Feature denoising for
+improving adversarial robustness. arXiv preprint, 2018.
+11
+Fisher Yu, Yinda Zhang, Shuran Song, Ari Seff, y Jianxiong Xiao. LSUN: construction of a
+large-scale image dataset using deep learning with humans in the loop. CoRR, abs/1506.03365,
+2015.
+Sergey Zagoruyko y Nikos Komodakis. Wide residual networks. BMVC, 2016.
+Xiaohua Zhai, Avital Oliver, Alexander Kolesnikov, y Lucas Beyer. S4l: Self-supervised semi-
+supervised learning, 2019.
+Hongyang Zhang, Yaodong Yu, Jiantao Jiao, Eric P. Xing, Laurent El Ghaoui, y Michael I.
+Jordan. Theoretically principled trade-off between robustness and accuracy. arXiv preprint
+arXiv:1901.08573, 2019.
+Zhilu Zhang y Mert Sabuncu. Generalized cross entropy loss for training deep neural networks
+with noisy labels. En Advances in Neural Information Processing Systems, páginas 8778–8788, 2018.
+12
+A Aprendizaje autosupervisado para la detección OOD multiclase
+FPR95# AUROC" AUPR"
+DinDtest
+out MSP Rotation MSP Rotation MSP RotationCIFAR-10Gaussian 8.1 1.2 96.3 99.0 70.8 85.6
+Rademacher 5.9 1.1 97.5 99.1 79.4 86.3
+Blobs 13.3 2.3 94.6 98.9 68.3 86.5
+Textures 45.4 8.9 87.9 97.4 56.2 86.7
+SVHN 25.7 2.7 91.9 98.9 64.0 89.8
+Places365 46.0 38.4 87.7 92.2 57.2 71.3
+LSUN 39.5 28.7 88.5 93.2 57.2 71.0
+CIFAR-100 45.9 44.9 87.2 90.9 54.1 67.7
+Media 28.7 16.0 91.4 96.2 63.4 80.6
+Tabla 5: Resultados de detección de ejemplos fuera de distribución para la línea base de probabilidad softmax máxima (MSP)
+y de nuestro método de rotación. Todos los resultados son porcentajes y el resultado promedio de 5 ejecuciones.
+Los resultados completos de detección multiclase fuera de distribución están en la Tabla 5. La predicción auxiliar de rotación
+produce grandes mejoras en general para numerosos tipos de anomalías. En todos los casos, la predicción por rotación
+mejora el rendimiento. Esto demuestra que la predicción auxiliar de rotación no solo es
+útil para la detección de una sola clase, sino que también puede potenciar detectores basados en representaciones multiclase.
+Para las descripciones de las métricas, remitimos al lector a Hendrycks et al. [2019b].
+Conjuntos de datos OOD. Para la detección OOD multiclase, evaluamos nuestros detectores con una gran variedad de
+datos OOD, con CIFAR-10 como distribución de entrenamiento. Los datos OOD gaussianos tienen cada píxel muestreado
+de una distribución gaussiana isótropa. Las imágenes de Rademacher tienen cada píxel muestreado de forma IID de una
+distribución de Rademacher, que toma los valores 1 y −1 con igual probabilidad. Las imágenes de Blobs son
+formas amorfas generadas algorítmicamente con bordes distintos. Textures es un conjunto de datos de texturas describibles
+imágenes. SVHN es un conjunto de datos de números de casas extraídos de Google Street View. Places365
+contiene imágenes para el reconocimiento de escenas en lugar de objetos. LSUN es otro conjunto de datos de com-
+prensión de escenas con menos clases que Places365 [Yu et al., 2015]. CIFAR-100 es la contraparte de 100 clases de
+CIFAR-10. Es importante notar que las clases de CIFAR-10 y CIFAR-100 no se solapan, así que
+los datos de CIFAR-100 son OOD con CIFAR-10 como distribución de entrenamiento.
+B Conjunto de datos OOD de ImageNet
+Las clases son ‘acorn’, ‘airliner’, ‘ambulance’, ‘American alligator’, ‘banjo’, ‘barn’, ‘bikini’, ‘digital
+clock’, ‘dragonfly’, ‘dumbbell’, ‘forklift’, ‘goblet’, ‘grand piano’, ‘hotdog’, ‘hourglass’, ‘manhole
+cover’, ‘mosque’, ‘nail’, ‘parking meter’, ‘pillow’, ‘revolver’, ‘rotary dial telephone’, ‘schooner’,
+‘snowmobile’, ‘soccer ball’, ‘stingray’, ‘strawberry’, ‘tank’, ‘toaster’, y ‘volcano’. Estas clases
+se seleccionaron de modo que no hubiera solapamiento obvio, a diferencia de clases como ‘bee’ y ‘honeycomb.’
+Hay 1,300 imágenes de entrenamiento por clase y 100 imágenes de prueba por clase. Para crear un conjunto de datos
+con 100 imágenes de prueba por clase, tomamos las 50 imágenes de validación de ImageNet y recopilamos
+50 imágenes adicionales por clase para un conjunto de prueba ampliado. Los datos están disponibles para descarga en
+https://github.com/hendrycks/ss-ood.
+C Ablaciones adicionales
+No atacar la rama de rotación. Para evaluar el efecto de atacar la rama de rotación durante
+el entrenamiento de la Sección 3.1, reentrenamos el método de rotación auxiliar con el adversario atacando solo la
+rama de clasificación. Encontramos que esto funciona de forma similar a atacar tanto la rama de clasificación como la de rotación
+lo que indica que la pérdida de rotación en sí es el componente crucial.
+Comparación con el aumento por rotación. Nuestros resultados demuestran múltiples beneficios de la
+predicción por rotación, así que una línea base natural para comparar es el aumento de datos por rotación. Para ello reentrenamos
+la red de referencia de la Sección 3.2 y aumentamos el conjunto de datos con rotaciones de múltiplos de 90
+grados. Encontramos que esto reduce la exactitud promedio frente a corrupciones de 72.3% a 63.7%. En cambio,
+entrenar con predicción auxiliar de rotación mejora la exactitud promedio a 76.9%.
+13
