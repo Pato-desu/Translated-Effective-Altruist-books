@@ -1529,73 +1529,73 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Rethink Priorities / EA Survey 2018﹕ Subscribers and Identifiers — Rethink Priorities.txt · 1EcS-UdpFC037WG3gB-4IHjzHUPEsedb5 · 7 KB · txt · es done 2026-11-09 (1/1 batches, `Español/archive/EA Survey 2018﹕ Subscribers and Identifiers — Rethink Priorities.txt`)
 - [x] es · Rethink Priorities / 158.txt · 1-ecrLZvEgeKdTOj-OyqhIfdvGGu9qnBo · 8 KB · txt · es done 2026-11-09 (1/1 batches, `Español/archive/Rethink Priorities 158.txt`)
 - [x] es · Rethink Priorities / Research summary﹕ the subjective experience of time — Rethink Priorities.txt · 1kxIMQ2Ag-r8yYlVuctXx1JgFPEbbIVHL · 8 KB · txt · es done 2026-11-09 (1/1 batches, `Español/archive/Research summary﹕ the subjective experience of time — Rethink Priorities.txt`)
-- [ ] es · Rethink Priorities / 92.txt · 1s-iUtvYJnVopAAkjK7HlzpfJCXf1yCMS · 8 KB · txt
-- [ ] es · Rethink Priorities / 157.txt · 19vXNuS3yGomJjMBOGKCi2hmxr0f11FzP · 8 KB · txt
-- [ ] es · Rethink Priorities / 86.txt · 1ZKRzYxbd-WiMZc2RN2KQTDL4PSskRZj3 · 9 KB · txt
-- [ ] es · Rethink Priorities / Research summary﹕ the intensity of valenced experience across species — Rethink Priorities.txt · 1bpWhuLKRJ6ACemjcMJ_OrlvhXc-zYYIu · 9 KB · txt
-- [ ] es · Rethink Priorities / 67.txt · 15TE0akLTYaXkAxA9wLCHN1PvT8EEIH7F · 9 KB · txt
+- [x] es · Rethink Priorities / 92.txt · 1s-iUtvYJnVopAAkjK7HlzpfJCXf1yCMS · 8 KB · txt · es done 2026-11-09 (1/1 batches, `Español/archive/Rethink Priorities 92.txt`)
+- [x] es · Rethink Priorities / 157.txt · 19vXNuS3yGomJjMBOGKCi2hmxr0f11FzP · 8 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 157.txt`)
+- [x] es · Rethink Priorities / 86.txt · 1ZKRzYxbd-WiMZc2RN2KQTDL4PSskRZj3 · 9 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 86.txt`)
+- [x] es · Rethink Priorities / Research summary﹕ the intensity of valenced experience across species — Rethink Priorities.txt · 1bpWhuLKRJ6ACemjcMJ_OrlvhXc-zYYIu · 9 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Research summary﹕ the intensity of valenced experience across species — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 67.txt · 15TE0akLTYaXkAxA9wLCHN1PvT8EEIH7F · 9 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 67.txt`)
 - [ ] es · Rethink Priorities / EA Survey 2020﹕ Cause Prioritization — Rethink Priorities.txt · 1DCTIMOdvQNDYQCxaiHxTbPUzrdoDCOUR · 9 KB · txt
-- [ ] es · Rethink Priorities / 164.txt · 1Qrsuut-Y4CBGNgx-u7MvCoQo-zvJLBMV · 9 KB · txt
-- [ ] es · Rethink Priorities / 151.txt · 1NOQ-AXzYcfqiVqQGXc4dy1GFwain5R8D · 10 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2018﹕ Group Membership — Rethink Priorities.txt · 1S8TZif39P682qO-_Q9cQczeyAq4bClzj · 10 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2018﹕ Community Demographics & Characteristics — Rethink Priorities.txt · 1MVqZnaSr6hSJacUdkAfwPPjg9-PPY5fS · 11 KB · txt
-- [ ] es · Rethink Priorities / 159.txt · 1wNe5e1A6C1TOA5ATDMMxoPuXSk6IOg0_ · 11 KB · txt
-- [ ] es · Rethink Priorities / 132.txt · 1G9JlQkXO3Wg8Z9QyCiUBwgBlib8SBZHk · 12 KB · txt
-- [ ] es · Rethink Priorities / Global Health and Development — Rethink Priorities.txt · 1FOFxfYxmOgdpsELB-MnsIwVLg6l9RsYL · 12 KB · txt
-- [ ] es · Rethink Priorities / 149.txt · 19wPunZ7UI9DMheTTqfhF26u6mA4ZASAw · 12 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2018﹕ Geographic Differences in EA — Rethink Priorities.txt · 1rw3QiaeNRrDqTN1UNNWWhH9MWMI1zzpl · 12 KB · txt
-- [ ] es · Rethink Priorities / 143.txt · 1usHyW8g_HLSkMUz6VThUtk6dVJgGr64U · 12 KB · txt
-- [ ] es · Rethink Priorities / 6.txt · 1Z0sDfP1-v_f2GLk-FAll05qmmSZtBrFm · 12 KB · txt
-- [ ] es · Rethink Priorities / 53.txt · 1-OlNOFKAk5crp8d4CWV_kaHIJn1EIKSK · 12 KB · txt
-- [ ] es · Rethink Priorities / Potentially great ways forecasting can improve the longterm future — Rethink Priorities.txt · 1wKVxwfJrhXNiSdO6F6DnI3sk7gWLH31R · 13 KB · txt
-- [ ] es · Rethink Priorities / 78.txt · 1jGomMJ0Ycb2nU8oDvYZmZzDYtSBHX9TD · 13 KB · txt
-- [ ] es · Rethink Priorities / 155.txt · 1BOTi1sYnEjbYzm3QfwSYVFaDEAjAMvBY · 13 KB · txt
-- [ ] es · Rethink Priorities / 69.txt · 1DQsRI0a5wlNVtqkU86Xbgr6Jbr1E0MQT · 13 KB · txt
-- [ ] es · Rethink Priorities / An examination of Metaculus_ resolved AI predictions and their implications for AI timelines — Rethink Priorities.txt · 1weNUeYWygKjDJpvNtj3LNGuhCitCZs_9 · 13 KB · txt
-- [ ] es · Rethink Priorities / 88.txt · 1TEXkTR564IyF-D0kmI3dIzrkVIUF1vuU · 13 KB · txt
-- [ ] es · Rethink Priorities / Live-shackle slaughter vs. CAS survey — Rethink Priorities.txt · 1Cvdt0DnPnCAqSwR_1mfKCmI51mr1fFZc · 13 KB · txt
-- [ ] es · Rethink Priorities / 62.txt · 12VvghCnk18McCSAbUYgw9W575A3k3G5v · 14 KB · txt
-- [ ] es · Rethink Priorities / An analysis of Metaculus predictions of future EA resources, 2025 and 2030 — Rethink Priorities.txt · 1V3p0X1UvszBW5siTOixQTYtC1ukJXg8T · 14 KB · txt
-- [ ] es · Rethink Priorities / 80.txt · 1VNksksg2t0Cd0kQ4m_VpJ0paWCyq1YPO · 14 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2020﹕ Demographics — Rethink Priorities.txt · 1xFfQoKm4kLgKUScrgRiEurxNtnWO6hih · 14 KB · txt
-- [ ] es · Rethink Priorities / Effective animal advocacy resources — Rethink Priorities.txt · 1_nMyPokSWwaRJwrdAKu7T83XTyBdrull · 14 KB · txt
-- [ ] es · Rethink Priorities / 124.txt · 1WIwM2aHU8cmtXmLDA--7kAEmDB0HXy-N · 14 KB · txt
-- [ ] es · Rethink Priorities / 165.txt · 1iM7d-jXeRxvmQ-ucxKNpGIjQW105Rube · 14 KB · txt
-- [ ] es · Rethink Priorities / 106.txt · 1fv49n8NNif0qhXOFVdPvuM3wjrHbSGVH · 15 KB · txt
-- [ ] es · Rethink Priorities / 150.txt · 1pUvmDDLnscg9SrGFqNYsHuf9vgfnyxh0 · 15 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2019﹕ Donation Data — Rethink Priorities.txt · 1kPTRjE6JNF1zO6WFfFoJaYFWS_hWVUkN · 15 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2018﹕ Where People First Hear About EA and Influences on Involvement — Rethink Priorities.txt · 1HE1e8_VwzllIv3K0d9WbGlZDeCF-T4Si · 15 KB · txt
-- [ ] es · Rethink Priorities / 167.txt · 1qwR8q7vI1EHNnL0OEHVx_lGKqX8lpPqT · 15 KB · txt
-- [ ] es · Rethink Priorities / 60.txt · 1bpv-78TNtu5n0lhYJFuRej4BFR-6RWoZ · 15 KB · txt
-- [ ] es · Rethink Priorities / 135.txt · 1S-xNn_riMN0kRCL3OUb1A6GOqktJeh_V · 15 KB · txt
-- [ ] es · Rethink Priorities / 114.txt · 1r203kba9Dfvhr4TscNoYtlsA8Hfkd18b · 16 KB · txt
-- [ ] es · Rethink Priorities / 108.txt · 1rRMKrTnvIT6f61fq3ne4ZayKEne_t_t4 · 16 KB · txt
-- [ ] es · Rethink Priorities / 98.txt · 1JzB823fpIvB6H3zX5PdzJVxRFp8bjo8F · 16 KB · txt
-- [ ] es · Rethink Priorities / 58.txt · 1S_ugRbYeG63sKGAMyHVCReRPCZd-K6QP · 16 KB · txt
-- [ ] es · Rethink Priorities / 40.txt · 15nOaOXd4Ol9AD3xEcZ3QG9U4VYguvD42 · 16 KB · txt
+- [x] es · Rethink Priorities / 164.txt · 1Qrsuut-Y4CBGNgx-u7MvCoQo-zvJLBMV · 9 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 164.txt`)
+- [x] es · Rethink Priorities / 151.txt · 1NOQ-AXzYcfqiVqQGXc4dy1GFwain5R8D · 10 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 151.txt`)
+- [x] es · Rethink Priorities / EA Survey 2018﹕ Group Membership — Rethink Priorities.txt · 1S8TZif39P682qO-_Q9cQczeyAq4bClzj · 10 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2018﹕ Group Membership — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / EA Survey 2018﹕ Community Demographics & Characteristics — Rethink Priorities.txt · 1MVqZnaSr6hSJacUdkAfwPPjg9-PPY5fS · 11 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2018﹕ Community Demographics & Characteristics — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 159.txt · 1wNe5e1A6C1TOA5ATDMMxoPuXSk6IOg0_ · 11 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 159.txt`)
+- [x] es · Rethink Priorities / 132.txt · 1G9JlQkXO3Wg8Z9QyCiUBwgBlib8SBZHk · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 132.txt`)
+- [x] es · Rethink Priorities / Global Health and Development — Rethink Priorities.txt · 1FOFxfYxmOgdpsELB-MnsIwVLg6l9RsYL · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Global Health and Development — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 149.txt · 19wPunZ7UI9DMheTTqfhF26u6mA4ZASAw · 12 KB · txt · es done 2026-11-10 (2/2 batches, `Español/archive/Rethink Priorities 149.txt`)
+- [x] es · Rethink Priorities / EA Survey 2018﹕ Geographic Differences in EA — Rethink Priorities.txt · 1rw3QiaeNRrDqTN1UNNWWhH9MWMI1zzpl · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2018﹕ Geographic Differences in EA — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 143.txt · 1usHyW8g_HLSkMUz6VThUtk6dVJgGr64U · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 143.txt`)
+- [x] es · Rethink Priorities / 6.txt · 1Z0sDfP1-v_f2GLk-FAll05qmmSZtBrFm · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 6.txt`)
+- [x] es · Rethink Priorities / 53.txt · 1-OlNOFKAk5crp8d4CWV_kaHIJn1EIKSK · 12 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 53.txt`)
+- [x] es · Rethink Priorities / Potentially great ways forecasting can improve the longterm future — Rethink Priorities.txt · 1wKVxwfJrhXNiSdO6F6DnI3sk7gWLH31R · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Potentially great ways forecasting can improve the longterm future — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 78.txt · 1jGomMJ0Ycb2nU8oDvYZmZzDYtSBHX9TD · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 78.txt`)
+- [x] es · Rethink Priorities / 155.txt · 1BOTi1sYnEjbYzm3QfwSYVFaDEAjAMvBY · 13 KB · txt · es done 2026-11-10 (2/2 batches, `Español/archive/Rethink Priorities 155.txt`)
+- [x] es · Rethink Priorities / 69.txt · 1DQsRI0a5wlNVtqkU86Xbgr6Jbr1E0MQT · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 69.txt`)
+- [x] es · Rethink Priorities / An examination of Metaculus_ resolved AI predictions and their implications for AI timelines — Rethink Priorities.txt · 1weNUeYWygKjDJpvNtj3LNGuhCitCZs_9 · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/An examination of Metaculus_ resolved AI predictions and their implications for AI timelines — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 88.txt · 1TEXkTR564IyF-D0kmI3dIzrkVIUF1vuU · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 88.txt`)
+- [x] es · Rethink Priorities / Live-shackle slaughter vs. CAS survey — Rethink Priorities.txt · 1Cvdt0DnPnCAqSwR_1mfKCmI51mr1fFZc · 13 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Live-shackle slaughter vs. CAS survey — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 62.txt · 12VvghCnk18McCSAbUYgw9W575A3k3G5v · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 62.txt`)
+- [x] es · Rethink Priorities / An analysis of Metaculus predictions of future EA resources, 2025 and 2030 — Rethink Priorities.txt · 1V3p0X1UvszBW5siTOixQTYtC1ukJXg8T · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/An analysis of Metaculus predictions of future EA resources, 2025 and 2030 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 80.txt · 1VNksksg2t0Cd0kQ4m_VpJ0paWCyq1YPO · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 80.txt`)
+- [x] es · Rethink Priorities / EA Survey 2020﹕ Demographics — Rethink Priorities.txt · 1xFfQoKm4kLgKUScrgRiEurxNtnWO6hih · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2020﹕ Demographics — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / Effective animal advocacy resources — Rethink Priorities.txt · 1_nMyPokSWwaRJwrdAKu7T83XTyBdrull · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Effective animal advocacy resources — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 124.txt · 1WIwM2aHU8cmtXmLDA--7kAEmDB0HXy-N · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 124.txt`)
+- [x] es · Rethink Priorities / 165.txt · 1iM7d-jXeRxvmQ-ucxKNpGIjQW105Rube · 14 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 165.txt`)
+- [x] es · Rethink Priorities / 106.txt · 1fv49n8NNif0qhXOFVdPvuM3wjrHbSGVH · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 106.txt`)
+- [x] es · Rethink Priorities / 150.txt · 1pUvmDDLnscg9SrGFqNYsHuf9vgfnyxh0 · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 150.txt`)
+- [x] es · Rethink Priorities / EA Survey 2019﹕ Donation Data — Rethink Priorities.txt · 1kPTRjE6JNF1zO6WFfFoJaYFWS_hWVUkN · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2019﹕ Donation Data — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / EA Survey 2018﹕ Where People First Hear About EA and Influences on Involvement — Rethink Priorities.txt · 1HE1e8_VwzllIv3K0d9WbGlZDeCF-T4Si · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/EA Survey 2018﹕ Where People First Hear About EA and Influences on Involvement — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 167.txt · 1qwR8q7vI1EHNnL0OEHVx_lGKqX8lpPqT · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 167.txt`)
+- [x] es · Rethink Priorities / 60.txt · 1bpv-78TNtu5n0lhYJFuRej4BFR-6RWoZ · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 60.txt`)
+- [x] es · Rethink Priorities / 135.txt · 1S-xNn_riMN0kRCL3OUb1A6GOqktJeh_V · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 135.txt`)
+- [x] es · Rethink Priorities / 114.txt · 1r203kba9Dfvhr4TscNoYtlsA8Hfkd18b · 16 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 114.txt`)
+- [x] es · Rethink Priorities / 108.txt · 1rRMKrTnvIT6f61fq3ne4ZayKEne_t_t4 · 16 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/Rethink Priorities 108.txt`)
+- [x] es · Rethink Priorities / 98.txt · 1JzB823fpIvB6H3zX5PdzJVxRFp8bjo8F · 16 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 98.txt`)
+- [x] es · Rethink Priorities / 58.txt · 1S_ugRbYeG63sKGAMyHVCReRPCZd-K6QP · 16 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 58.txt`)
+- [x] es · Rethink Priorities / 40.txt · 15nOaOXd4Ol9AD3xEcZ3QG9U4VYguvD42 · 16 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 40.txt`)
 - [ ] es · Rethink Priorities / The Welfare Range Table — Rethink Priorities.txt · 1u1hPYK-QYW3vcot3WYvFcp6ZoojcIN9v · 16 KB · txt
-- [ ] es · Rethink Priorities / 14.txt · 1hKnK_3miTiS4qFTY0VSunCgRE-wzamio · 17 KB · txt
-- [ ] es · Rethink Priorities / 109.txt · 16zAuVC2uLXqxx37M-VWBCdSeXRpOaMrn · 17 KB · txt
-- [ ] es · Rethink Priorities / 147.txt · 1tcP8XRAHLhypvmV9n2pST_UUkJYTLP11 · 17 KB · txt
-- [ ] es · Rethink Priorities / 38.txt · 16EqdBSf_HRCWR5RY0PUooraEjIfqZunv · 17 KB · txt
-- [ ] es · Rethink Priorities / Theories of Welfare and Welfare Range Estimates — Rethink Priorities.txt · 1iCdiMbEfLZUxchLtxNNyojnvuD0Lzdvk · 17 KB · txt
+- [x] es · Rethink Priorities / 14.txt · 1hKnK_3miTiS4qFTY0VSunCgRE-wzamio · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 14.txt`)
+- [x] es · Rethink Priorities / 109.txt · 16zAuVC2uLXqxx37M-VWBCdSeXRpOaMrn · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 109.txt`)
+- [x] es · Rethink Priorities / 147.txt · 1tcP8XRAHLhypvmV9n2pST_UUkJYTLP11 · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 147.txt`)
+- [x] es · Rethink Priorities / 38.txt · 16EqdBSf_HRCWR5RY0PUooraEjIfqZunv · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Rethink Priorities 38.txt`)
+- [x] es · Rethink Priorities / Theories of Welfare and Welfare Range Estimates — Rethink Priorities.txt · 1iCdiMbEfLZUxchLtxNNyojnvuD0Lzdvk · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Theories of Welfare and Welfare Range Estimates — Rethink Priorities.txt`)
 - [ ] es · Rethink Priorities / 36.txt · 1XiInd7Sqsoy5cqmy3VdG8eJrS1PlmQtz · 18 KB · txt
 - [ ] es · Rethink Priorities / 79.txt · 14yzDwUUA4Aoo6EPkYdAY7zSSMej7RzW4 · 18 KB · txt
 - [ ] es · Rethink Priorities / EA groups survey 2020 — Rethink Priorities.txt · 1LzCmCLHyivg0G3WOiQr89GH1-fmmL0wK · 18 KB · txt
 - [ ] es · Rethink Priorities / 42.txt · 1oTvz5umK59Yu0D2VmhUrm2XAu4ZS8BXV · 19 KB · txt
 - [ ] es · Rethink Priorities / 161.txt · 1PDbegoRRYJb6uqr1PZM_soIBOtwUAP-1 · 19 KB · txt
-- [ ] es · Rethink Priorities / 153.txt · 1fzIoigBUjgrpKvZUgiyX7ii_rEKeFdK4 · 19 KB · txt
+- [x] es · Rethink Priorities / 153.txt · 1fzIoigBUjgrpKvZUgiyX7ii_rEKeFdK4 · 19 KB · txt · es done 2026-11-10 (3/3 batches, `Español/archive/Rethink Priorities 153.txt`)
 - [ ] es · Rethink Priorities / EA Survey 2018﹕ Cause Selection — Rethink Priorities.txt · 1HZWu-7MqWG-gmWsfy2inTOYPo0itNsl3 · 19 KB · txt
 - [ ] es · Rethink Priorities / Longtermism — Rethink Priorities.txt · 1l3PUZgacsUiH7tQtYKFX55Mot2o5Dwfp · 19 KB · txt
 - [ ] es · Rethink Priorities / 100.txt · 12v-w_HUmp8X-lHXXE92zT4x1yxUqM7RC · 20 KB · txt
-- [ ] es · Rethink Priorities / 33.txt · 1J_2soM3PefBo0awm5ZSEXqStIAb-pmOE · 21 KB · txt
+- [x] es · Rethink Priorities / 33.txt · 1J_2soM3PefBo0awm5ZSEXqStIAb-pmOE · 21 KB · txt · es done 2026-11-10 (3/3 batches, `Español/archive/Rethink Priorities 33.txt`)
 - [ ] es · Rethink Priorities / 52.txt · 1tylx8lFREHCuhrOByUT332SU7fDHXr2N · 21 KB · txt
 - [ ] es · Rethink Priorities / Surveys and EA Movement Research — Rethink Priorities.txt · 1eZhv7jj9xC6SZFQ1Rju7kSw0zntqAg6J · 21 KB · txt
 - [ ] es · Rethink Priorities / 96.txt · 1rFsh3q_NdNGGwXJoLNqtXJ8uEJS9PGl2 · 22 KB · txt
 - [ ] es · Rethink Priorities / 44.txt · 1c-kw3ePyGNgeqRRssqZqObNBdWb6Ratt · 22 KB · txt
 - [ ] es · Rethink Priorities / 152.txt · 1cAv8ouSTim1gE1b2nX6bVUctapuIk-HQ · 22 KB · txt
-- [ ] es · Rethink Priorities / 24.txt · 1jSv5laILKLlya12SSUVaR2n-EclK4oXA · 22 KB · txt
-- [ ] es · Rethink Priorities / 99.txt · 1dPxJq1T25vLWHduuedRnLrIJ3R2EV8JB · 22 KB · txt
+- [x] es · Rethink Priorities / 24.txt · 1jSv5laILKLlya12SSUVaR2n-EclK4oXA · 22 KB · txt · es done 2026-11-10 (3/3 batches, `Español/archive/Rethink Priorities 24.txt`)
+- [x] es · Rethink Priorities / 99.txt · 1dPxJq1T25vLWHduuedRnLrIJ3R2EV8JB · 22 KB · txt · es done 2026-11-10 (3/3 batches, `Español/archive/Rethink Priorities 99.txt`)
 - [ ] es · Rethink Priorities / EA Survey 2019﹕ Engagement Levels — Rethink Priorities.txt · 1kiTcLUPcvzuH53ez61vEMRDZW_WfwBbB · 22 KB · txt
 - [ ] es · Rethink Priorities / Animal Welfare — Rethink Priorities.txt · 1SJMFDy6_qVGwTmdJyJH9Pa9OgaQ6K4dO · 24 KB · txt
 - [ ] es · Rethink Priorities / 142.txt · 1A4Kgmy7lMz9RqVIILmTyApNp5RjF7Arb · 24 KB · txt
@@ -2588,7 +2588,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Alignment Forum / A Small Negative Result on Debate - AI Alignment Forum.txt · 1jaMs3-Dj4EEQQLvj4KTtOtVJuB3AJW0i · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A Small Negative Result on Debate - AI Alignment Forum.txt`)
 - [x] es · Alignment Forum / A correlated analogue of reflective oracles - AI Alignment Forum.txt · 1biffKndDDnDDkMMTJr6ZDPJm-OTrxvOW · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A correlated analogue of reflective oracles - AI Alignment Forum.txt`)
 - [x] es · Alignment Forum / A possible preference algorithm - AI Alignment Forum.txt · 10yQKGhfqqgMKr7-jJp-kk_OL4v7adHpI · 7 KB · txt · es done 2026-11-07 (1/1 batches, `Español/archive/A possible preference algorithm - AI Alignment Forum.txt`)
-- [ ] es · Alignment Forum / (A -_ B) -_ A in Causal DAGs - AI Alignment Forum.txt · 1UerBLFWkPHpn8wMFwy0VvZ9kvM3hEx6R · 8 KB · txt
+- [x] es · Alignment Forum / (A -_ B) -_ A in Causal DAGs - AI Alignment Forum.txt · 1UerBLFWkPHpn8wMFwy0VvZ9kvM3hEx6R · 8 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/Alignment Forum (A -_ B) -_ A in Causal DAGs - AI Alignment Forum.txt`)
 - [x] es · Alignment Forum / Announcing Encultured AI﹕ Building a Video Game - AI Alignment Forum.txt · 1ts_3TvxzduZoiEz9_gzsvmUw1ID--nBB · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/Announcing Encultured AI﹕ Building a Video Game - AI Alignment Forum.txt`)
 - [x] es · Alignment Forum / (Another) Using a Memory Palace to Memorize a Textbook - AI Alignment Forum.txt · 1ba7kod7dm8Q_CtckWsYMKaWV74A8mApR · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/(Another) Using a Memory Palace to Memorize a Textbook - AI Alignment Forum.txt`)
 - [x] es · Alignment Forum / A taxonomy of Oracle AIs - AI Alignment Forum.txt · 1P2lFfhf_Lsq62XwgN_gCI051h9uMMM8Z · 8 KB · txt · es done 2026-11-07 (2/2 batches, `Español/archive/A taxonomy of Oracle AIs - AI Alignment Forum.txt`)
@@ -2815,12 +2815,12 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · transcripts / rationally speaking transcripts / rs200transcript.txt · 1wSw7JLOvLBjBCUUJx968xp2JDE6k6ib7 · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs200transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs164transcript.txt · 1abY3Yl263jlgmuSRpZER3OZhk-Dslewy · 45 KB · txt · es done 2026-11-08 (6/6 batches, `Español/archive/rs164transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs135transcript.txt · 11hVf0iouOzWc0Hr8GPSSuc8xhHrxyjgg · 45 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs135transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs194transcript.txt · 1I4OanAyvQhQ12NlcaZFzxKiBq8FX2K9d · 46 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs194transcript.txt · 1I4OanAyvQhQ12NlcaZFzxKiBq8FX2K9d · 46 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs194transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs168transcript.txt · 1lz_2dXibUE4iH70N78Jb7Lr0wL4Gn_uD · 46 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/rs168transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs190transcript.txt · 1tdREgJj3KesQsOyt4iQSTRkuLkNbkXrx · 46 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs190transcript.txt · 1tdREgJj3KesQsOyt4iQSTRkuLkNbkXrx · 46 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs190transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs148transcript.txt · 1dISucBLzcoT5CE0sVK_B4nfdOHv0m992 · 47 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs148transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs214transcript.txt · 12zgNAwNdIpqznSYhKtxYf4bOjw6E3jIp · 48 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs214transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs178transcript.txt · 1viAJZ6QOyLCW5yjvzBxZfeX1avSkq5p7 · 48 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs178transcript.txt · 1viAJZ6QOyLCW5yjvzBxZfeX1avSkq5p7 · 48 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs178transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs205transcript.txt · 1LQeeYFw30XYLptScfDrxOlkVbxi4eTX2 · 48 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs205transcript.txt`)
 - [x] es · transcripts / hear this idea transcripts / 1688259787_luke.txt · 1UWVr85-cYQHhLP1OshO5aWnUZZa5FSFg · 49 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/1688259787_luke.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs208transcript.txt · 1HwR1AmVktNcR7_4HIsm3TqDBmg41T2i9 · 49 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs208transcript.txt`)
@@ -2830,7 +2830,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · transcripts / hear this idea transcripts / 1688259783_thomas.txt · 12_VSe1Oo1EFAmOsS11QDZUkIGndBXgTS · 49 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/1688259783_thomas.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs158transcript.txt · 1yXqbHr1aCLFvbQqeSNL8hxEghPrH_kw3 · 50 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs158transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs180transcript.txt · 1AtX1jR7-3_N4Cllr7_y0T-cyvpNbl4R0 · 50 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs180transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs188transcript.txt · 1JqelZQN17Apwfp1uMBi79k8oDlDGtK1a · 50 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs188transcript.txt · 1JqelZQN17Apwfp1uMBi79k8oDlDGtK1a · 50 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs188transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs197transcript.txt · 1IMQsONx6_MNXs9qxyibNQvQWsF3aenPD · 51 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs197transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs151transcript.txt · 1xyh1QOhvAIFA-N8IFZGU2RwnRXALtTaF · 51 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs151transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs146transcript.txt · 1QpTyPEGgKXhuMDNiblHxeK0nocJruLtI · 51 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs146transcript.txt`)
@@ -2845,28 +2845,28 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · transcripts / hear this idea transcripts / 1688148046_.txt · 1O_dpx5hZdzML2andVtgdH8QSsvv6kkPc · 54 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/transcripts 1688148046_.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs153transcript.txt · 1mIjFFh8gsi5D7DA3pmhL7juw1MXQQItP · 54 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs153transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs181transcript.txt · 15N9VUzB-KYGIuQKwbjUI5yeOeUmI4MMK · 54 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs181transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs210transcript.txt · 1pTX15asUH7ggMGowXc_kPLHSJSlSQKrt · 54 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs210transcript.txt · 1pTX15asUH7ggMGowXc_kPLHSJSlSQKrt · 54 KB · txt · es done 2026-11-10 (7/7 batches, `Español/archive/rs210transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs161transcript.txt · 1AlMKzFxXSSZUMNbWIeMPvnWvEcNIFHwe · 54 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs161transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs213transcript.txt · 1B61zHDIfUF52PgxswOUXOwUpMou1Oo9r · 54 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs213transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs176transcript.txt · 17NwoBRCeJI1H0qT7xK7W_dVTpdIIyiG5 · 55 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs176transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs159transcript.txt · 19tIbrVpvnZSkCsIu-9j9_9wQ7TCAuUJi · 55 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs159transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs183transcript.txt · 1_IfetpkqetUn4hrZkB9WkHPVGAY2P-p6 · 55 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs183transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs137transcript.txt · 1vQOX4tEGy7dAV9jfG8KT9emWR_sQJm77 · 55 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/rs137transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs165transcript.txt · 1G4frGVo1bYbxJRdxCclS1ro8ku4BWywa · 56 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs156transcript.txt · 1T9SZEnX5gEQ3SBmuQ0rJXh0NzBMTR3oE · 57 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs204transcript.txt · 1J9jcgzn856ukN1gDxO5x1EkRopSWgXlX · 57 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs185transcript.txt · 1XzDazVZk5Wv5wH7oqCbzRAkbySmtnQn_ · 57 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs165transcript.txt · 1G4frGVo1bYbxJRdxCclS1ro8ku4BWywa · 56 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs165transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs156transcript.txt · 1T9SZEnX5gEQ3SBmuQ0rJXh0NzBMTR3oE · 57 KB · txt · es done 2026-11-10 (6/6 batches, `Español/archive/rs156transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs204transcript.txt · 1J9jcgzn856ukN1gDxO5x1EkRopSWgXlX · 57 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs204transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs185transcript.txt · 1XzDazVZk5Wv5wH7oqCbzRAkbySmtnQn_ · 57 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs185transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs189transcript.txt · 1olS6TDy0OU-IoYshFf4e92WjrbJGVrJW · 57 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs189transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs147transcript.txt · 19By5L56u7bHbO3B4FcFqLC1i6EHgXx3M · 57 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/rs147transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs191transcript.txt · 1vPU4UYMCwYxFIppB-G8lmAjs5UCzwFhE · 58 KB · txt
-- [ ] es · transcripts / rationally speaking transcripts / rs184transcript.txt · 1rY6yfZwEBpwf7r5pX2iu-9KkfHCQxkEb · 58 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs191transcript.txt · 1vPU4UYMCwYxFIppB-G8lmAjs5UCzwFhE · 58 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs191transcript.txt`)
+- [x] es · transcripts / rationally speaking transcripts / rs184transcript.txt · 1rY6yfZwEBpwf7r5pX2iu-9KkfHCQxkEb · 58 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs184transcript.txt`)
 - [x] es · transcripts / hear this idea transcripts / 1688259764_stewart.txt · 1Tg2lsEzHd3_QeIMiEkLIdg5MlZDm5DHv · 58 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/1688259764_stewart.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs162transcript.txt · 1PRric6qQT_KirEAUZ1dsiPeh2ghu8FJO · 59 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs162transcript.txt · 1PRric6qQT_KirEAUZ1dsiPeh2ghu8FJO · 59 KB · txt · es done 2026-11-10 (7/7 batches, `Español/archive/rs162transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs196transcript.txt · 1LVXHfcpJ1V-JK2l8dqWP5TGl1kcVEUSu · 59 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs196transcript.txt`)
 - [x] es · transcripts / hear this idea transcripts / 1688259772_bird.txt · 1pwAF-LczgcadvfdH7f7yimYfbRTnmo7T · 59 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/1688259772_bird.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs182transcript.txt · 1U1DKJREudyLarI51MO8PqQqdxdP8yt3e · 59 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs182transcript.txt · 1U1DKJREudyLarI51MO8PqQqdxdP8yt3e · 59 KB · txt · es done 2026-11-09 (8/8 batches, `Español/archive/rs182transcript.txt`)
 - [x] es · transcripts / rationally speaking transcripts / rs154transcript.txt · 1EGIpNtnSgXz877M-tQ9Uo6cMdaM5Wx-P · 60 KB · txt · es done 2026-11-09 (7/7 batches, `Español/archive/rs154transcript.txt`)
-- [ ] es · transcripts / rationally speaking transcripts / rs207transcript.txt · 12FZsoFfvuybufJhEgpxGXGC6YngqLK_E · 60 KB · txt
+- [x] es · transcripts / rationally speaking transcripts / rs207transcript.txt · 12FZsoFfvuybufJhEgpxGXGC6YngqLK_E · 60 KB · txt · es done 2026-11-10 (8/8 batches, `Español/archive/rs207transcript.txt`)
 - [ ] es · transcripts / hear this idea transcripts / 1688259764_sandberg-live.txt · 1ZLczVamKiLggKK1WSkkZMk-5zARSp4Jy · 61 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs163transcript.txt · 1qNxHx6cepkiVF79zE8xNUutwjr-qv_ZW · 61 KB · txt
 - [ ] es · transcripts / rationally speaking transcripts / rs136transcript.txt · 1Jj0tTc1MJWUUoF7QX3G5jhf6F8wnHheZ · 61 KB · txt
@@ -2952,26 +2952,26 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · arxiv papers (rough) / 2112.txt · 1A4n4j71bUKtCP_EsPgYeqf8QbYYT6NOg · 9 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/arxiv papers (rough) 2112.txt`)
 - [x] es · arxiv papers (rough) / viewcontent.cgi_article=2114&context=jss.txt · 1Yl0Z_fBSErozR1-hJtmJxtHOWgz15qYE · 11 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/viewcontent.cgi_article=2114&context=jss.txt`)
 - [x] es · arxiv papers (rough) / HAWWHI-3.txt · 1-SMgi9WLoRc3W_M5GBuD0IY2W-or6odK · 11 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/HAWWHI-3.txt`)
-- [ ] es · arxiv papers (rough) / 3rd-13to18-jason-h.txt · 1E9wRdsbR6pAY5v46XGFbU_VwKSFpAn_C · 15 KB · txt
+- [x] es · arxiv papers (rough) / 3rd-13to18-jason-h.txt · 1E9wRdsbR6pAY5v46XGFbU_VwKSFpAn_C · 15 KB · txt · es done 2026-11-09 (2/2 batches, `Español/archive/3rd-13to18-jason-h.txt`)
 - [x] es · arxiv papers (rough) / Ahmed_20Zewail_20Prize_20Essay__20Lobna_20Dawoud_202018.txt · 1Uf3hLKOw5BLR2ZpwEQKEk8VJCec2ttEb · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Ahmed_20Zewail_20Prize_20Essay__20Lobna_20Dawoud_202018.txt`)
 - [x] es · arxiv papers (rough) / Barnes-Oct-2016-2.pdf_sequence=1.txt · 1MEDvA2xjcD7g4O-DxhR_N9_p_o1ffRkh · 17 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/Barnes-Oct-2016-2.pdf_sequence=1.txt`)
 - [x] es · arxiv papers (rough) / 20170530.txt · 1HPsOIW1cI_yXMLPRDQR2MM8pojyNrJfH · 21 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/arxiv papers (rough) 20170530.txt`)
 - [x] es · arxiv papers (rough) / pdf_id=-6jortffIq.txt · 1ZzIm3aQoMwsFobNzVqLMAWLsgLGvllRZ · 21 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/pdf_id=-6jortffIq.txt`)
 - [x] es · arxiv papers (rough) / IAE0716004.txt · 1IivwSD4jsIz1jjpIpNt4X011EAjt7dlD · 22 KB · txt · es done 2026-11-09 (3/3 batches, `Español/archive/IAE0716004.txt`)
-- [ ] es · arxiv papers (rough) / document_repid=rep1&type=pdf&doi=7a487c08631e50ab89c2c37ad5b8057fe0991bf0.txt · 1I3q8azF82TDcaPO9zUweyCcTI7T9S-Jn · 26 KB · txt
+- [x] es · arxiv papers (rough) / document_repid=rep1&type=pdf&doi=7a487c08631e50ab89c2c37ad5b8057fe0991bf0.txt · 1I3q8azF82TDcaPO9zUweyCcTI7T9S-Jn · 26 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/document_repid=rep1&type=pdf&doi=7a487c08631e50ab89c2c37ad5b8057fe0991bf0.txt`)
 - [x] es · arxiv papers (rough) / The-Crisis-of-the-European-Project-and-Its-Consequences-for-the-Euro-Mediterranean-Agenda.txt · 1NLuk1yOWl8yhh4HxPjZ_6FCriIQwV5iS · 27 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/The-Crisis-of-the-European-Project-and-Its-Consequences-for-the-Euro-Mediterranean-Agenda.txt`)
 - [x] es · arxiv papers (rough) / pdf_id=vtf9cgQZHcP.txt · 1UO9zFOS07NwzWZKP5crdeNCR5C4tkKW7 · 28 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/pdf_id=vtf9cgQZHcP.txt`)
-- [ ] es · arxiv papers (rough) / final_file.txt · 1EllnDcQNw2PUsRz3yKuUIDWHjM4dNyjV · 30 KB · txt
+- [x] es · arxiv papers (rough) / final_file.txt · 1EllnDcQNw2PUsRz3yKuUIDWHjM4dNyjV · 30 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/final_file.txt`)
 - [x] es · arxiv papers (rough) / 56_E2_80_9361-Shneiderman-Human-Centered-AI-Winter-2021.txt · 1_Z23S5uGdbFWUobgNlagbCFGBZjF143T · 30 KB · txt · es done 2026-11-09 (4/4 batches, `Español/archive/56_E2_80_9361-Shneiderman-Human-Centered-AI-Winter-2021.txt`)
-- [ ] es · arxiv papers (rough) / pdf_id=OE9V81spp6B.txt · 1lSpsLgzal6X2aC_DSU_p0oI6TuiS340X · 33 KB · txt
+- [x] es · arxiv papers (rough) / pdf_id=OE9V81spp6B.txt · 1lSpsLgzal6X2aC_DSU_p0oI6TuiS340X · 33 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/pdf_id=OE9V81spp6B.txt`)
 - [x] es · arxiv papers (rough) / 1153.txt · 1wn1pwcbnX1L5CfPAuUb0S3PaFbzwPKYL · 35 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/arxiv papers (rough) 1153.txt`)
 - [x] es · arxiv papers (rough) / w24352.txt · 18N31R48R91wr0ukA7ih8bE7TifimOijD · 35 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/w24352.txt`)
 - [x] es · arxiv papers (rough) / MAHINI.txt · 1KNRsgW9WLkRt5DyAwUqpA34pqbTHKMxZ · 35 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/MAHINI.txt`)
 - [x] es · arxiv papers (rough) / S-JOURNAL-ICTS.V1I1-2018-9-PDF-E.txt · 1SmtrQRsNOUVvniTA0QM_619fpfj0TWGW · 37 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/S-JOURNAL-ICTS.V1I1-2018-9-PDF-E.txt`)
 - [x] es · arxiv papers (rough) / 296_37e16.txt · 1w4FnsRTqgcZL6i1QJtZXSsP_X3pahpha · 41 KB · txt · es done 2026-11-09 (5/5 batches, `Español/archive/296_37e16.txt`)
 - [x] es · arxiv papers (rough) / DL_WP_the-state-of-artificial-intelligence.txt · 1ZpCzC6x2f_-zv4016a5TVtFPWTitdAI0 · 42 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/DL_WP_the-state-of-artificial-intelligence.txt`)
-- [ ] es · arxiv papers (rough) / 25_20T1_20P10_20ID_20226.txt · 1c3QwohHGTamwfqg_j1xPDz7Vl78hfV3w · 42 KB · txt
-- [ ] es · arxiv papers (rough) / WORRTF.txt · 14r8M62M4MQxpFrTeBW5zAVUJaduqwF5i · 42 KB · txt
+- [x] es · arxiv papers (rough) / 25_20T1_20P10_20ID_20226.txt · 1c3QwohHGTamwfqg_j1xPDz7Vl78hfV3w · 42 KB · txt · es done 2026-11-09 (6/6 batches, `Español/archive/25_20T1_20P10_20ID_20226.txt`)
+- [x] es · arxiv papers (rough) / WORRTF.txt · 14r8M62M4MQxpFrTeBW5zAVUJaduqwF5i · 42 KB · txt · es done 2026-11-10 (6/6 batches, `Español/archive/WORRTF.txt`)
 - [ ] es · arxiv papers (rough) / file_1511610457049.txt · 19RIVtQPTpOp6qtEoNI1Qx--uot2VBL-D · 43 KB · txt
 - [ ] es · arxiv papers (rough) / PETSAS-12.txt · 1kCuK2_z08eBq5tUdv7f7rmcwSr3DwFYZ · 44 KB · txt
 - [ ] es · arxiv papers (rough) / LIPIcs-AofA-2018-5.txt · 1aeb7kSraLNDJ7RcOGA7pqrl4Xs_VrpaA · 44 KB · txt
@@ -3093,52 +3093,52 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [-] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-207.txt · 1DG0Dlfo7FgXov-QfoBFa_UR9Jav071MY · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-208.txt · 1y1XUQgYBZVg_m478sZpAG9Jb1PtQi2lt · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-209.txt · 1bJkhVaomcDhKQd5HAwiDyuzSllkZb2Ep · 2 KB · txt · under 2 KB: empty page or stub
-- [ ] es · 2024 additions (may be redundant or disorganized) / acx / addendum-to-luvox-post.txt · 12IP3CqMbqKi-LI1tNWaiHPvFlV8wIb2e · 2 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / acx / addendum-to-luvox-post.txt · 12IP3CqMbqKi-LI1tNWaiHPvFlV8wIb2e · 2 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/addendum-to-luvox-post.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / macroscience-podcast-matt-clancy-e9a88c14.txt · 17cche2ClhOS8-QOIaRH8BJFSgAbDLC0e · 3 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / acx / book-review-contest-rules-2022.txt · 13VXY_CdDOvAyxrhzBhMbCp_kCMJg1HCW · 3 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / will-scaling-work-narration-2a200a83.txt · 12GsN3JsdAXCR2PnDD3FEEV6CLsAn6bbf · 3 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / volunteering-for-infection-participant-perspectives-on-a-hepatitis-c-virus-controlled-human-infection-model-32300aa6.txt · 1pJIyAU46E5ZYtZLhFCxmhrjJK_QEz2ih · 3 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / acx / book-review-contest-rules-2022.txt · 13VXY_CdDOvAyxrhzBhMbCp_kCMJg1HCW · 3 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/book-review-contest-rules-2022.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / dwarkesh / will-scaling-work-narration-2a200a83.txt · 12GsN3JsdAXCR2PnDD3FEEV6CLsAn6bbf · 3 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/will-scaling-work-narration-2a200a83.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / volunteering-for-infection-participant-perspectives-on-a-hepatitis-c-virus-controlled-human-infection-model-32300aa6.txt · 1pJIyAU46E5ZYtZLhFCxmhrjJK_QEz2ih · 3 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/volunteering-for-infection-participant-perspectives-on-a-hepatitis-c-virus-controlled-human-infection-model-32300aa6.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / lyndon-johnson-narration-df83050b.txt · 19HvRkra4djcfON4NsaS2mTiHywYFvF0b · 3 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / eu-farmed-fish-policy-reform-roadmap-brief-23dab114.txt · 1U2WxBwkSPt7FS4Nw_rC_f75R8vhit4Kj · 3 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / eradicating-rodenticides-from-us-pest-management-is-less-practical-than-we-thought-695d18a4.txt · 1G01s6f26X3nOW8S2G_-sTbtPzascT_fF · 3 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / eradicating-rodenticides-from-us-pest-management-is-less-practical-than-we-thought-695d18a4.txt · 1G01s6f26X3nOW8S2G_-sTbtPzascT_fF · 3 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/eradicating-rodenticides-from-us-pest-management-is-less-practical-than-we-thought-695d18a4.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-205.txt · 1XQX7HTwwQAMioHxuY2JTDHxv52guygtA · 3 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / joseph-carlsmith-666d0174.txt · 17ttV644-EAqkE7KASc0_n2gtidfIaLCI · 3 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / optimizing-rabies-vaccination-of-dogs-in-india-e93ad808.txt · 120rL6qdn-M5D-PGW6h94ACeI1CjCyqjv · 3 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / jimmy-soni-789870f5.txt · 17ezQrOYWx7dpXhUha2DlXLDoUHpqjUOF · 3 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / razib-khan-0d964ff5.txt · 1VDz0eaMf-CbwzC3smC6SAYCTeJvgaxuu · 3 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / dwarkesh / razib-khan-0d964ff5.txt · 1VDz0eaMf-CbwzC3smC6SAYCTeJvgaxuu · 3 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/razib-khan-0d964ff5.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / ananyo-bhattacharya-a31f4f52.txt · 1Bax1EMZkcBpivHxvjEwaCGeYrc8YMiG2 · 3 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / agustin-lebron-2454d4ad.txt · 1drWwLImUtSehH7G1_n41C6W00_ImDAoR · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / alexander-mikaberidze-57d80a58.txt · 1s2nDaRUDVH_3gwMBZPvjZTj4DG4Pev3Z · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / acx / resubmit-and-summarize-your-proposals-for.txt · 1BsLadgFrimGxfSskwDipKYpdGuxI8ibx · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / bryan-caplan-2-65b4bd3f.txt · 1NWVCeRnA0PCjpaz7ofCVOWgxV10qXUAh · 4 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / openphil / tom-davidson-on-how-quickly-ai-could-automate-the-economy-15dfd30f.txt · 18w_I3Xd4GC6bK2iPKaiY-7rJEnMAl6Sq · 4 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / openphil / tom-davidson-on-how-quickly-ai-could-automate-the-economy-15dfd30f.txt · 18w_I3Xd4GC6bK2iPKaiY-7rJEnMAl6Sq · 4 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/tom-davidson-on-how-quickly-ai-could-automate-the-economy-15dfd30f.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / stephen-grugett-b2c5be11.txt · 1GaWKZnQeraU5TD-nPHN3FDsUCLFrKZQO · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / fin-moorhouse-12e75f3b.txt · 1GnA0pLykJ74D5GIEpa3EgeVlBYP8YDdZ · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / pradyu-prasad-61ffe5a8.txt · 1zsg8Acnp5eP5qid3L_ORvOg4z7EU4NQL · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / dwarkesh / richard-hanania-eeefd90f.txt · 1J8AuBa8dF_iiIPfcio4oX2OVmqy0l93l · 4 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-210.txt · 1vfakT0JMZp-FnLpSgVvW4iY_nnnOCAID · 4 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / acx / open-thread-210.txt · 1vfakT0JMZp-FnLpSgVvW4iY_nnnOCAID · 4 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/open-thread-210.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / acx / motivated-reasoning-as-misapplied.txt · 1U2O7QuDZJPYOGjD76Q9z5WymtiGxeY3e · 4 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / acx / lewis-carroll-invented-retroactive-public-goods.txt · 1l3B5jUljtQGcjwWbtfzlvlhQffLmg1XH · 4 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / survey-on-intermediate-goals-in-ai-governance-ef585df7.txt · 1soEQOm7zJ1Essx_Sq8SX9IOhqhg5EscX · 5 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / survey-on-intermediate-goals-in-ai-governance-ef585df7.txt · 1soEQOm7zJ1Essx_Sq8SX9IOhqhg5EscX · 5 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/survey-on-intermediate-goals-in-ai-governance-ef585df7.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / ea forum scrape 10-4-24 / parse.txt · 1IIg7kgSeIqtSHNgfRtoiWa1eKrvSXsqz · 5 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / corporate-social-responsibility-bfcdf5fb.txt · 1kkKCagxiRLCFcmYd85J9Beq2S62ehmX6 · 5 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / carbon-capture-landscape-and-challenges-a16cc582.txt · 15uB2ErUEExv2jNi69NeN5bMg1zTHjPVg · 5 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / risk-alignment-in-agentic-ai-systems-10a6efb9.txt · 1YL99cEqgjzB2_7QoeHDj_EDj1ZUZkt-H · 6 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / corporate-social-responsibility-bfcdf5fb.txt · 1kkKCagxiRLCFcmYd85J9Beq2S62ehmX6 · 5 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/corporate-social-responsibility-bfcdf5fb.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / carbon-capture-landscape-and-challenges-a16cc582.txt · 15uB2ErUEExv2jNi69NeN5bMg1zTHjPVg · 5 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/carbon-capture-landscape-and-challenges-a16cc582.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / risk-alignment-in-agentic-ai-systems-10a6efb9.txt · 1YL99cEqgjzB2_7QoeHDj_EDj1ZUZkt-H · 6 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/risk-alignment-in-agentic-ai-systems-10a6efb9.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / superforecasting-ai-2159e495.txt · 1W-2nz3r7hATUpIXl6xObL8plT45JF5pE · 6 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / paths-to-reducing-rodenticide-use-in-the-us-05c4dabd.txt · 1YHU3yW9HBhM-pFoe6n_zHK8gxyYhXKFv · 6 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / clean-energy-price-trajectories-516dea15.txt · 14Z7KlYE-yc_-nfGfTUEqoI0DrP0M3ean · 6 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / openphil / development-through-economic-growth-e21459ec.txt · 1JgGoCFB2XC0lQw34NKUojDNSkwC520J3 · 6 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / how-bad-would-human-extinction-be-e4765c46.txt · 1kgyhr7qAR1XkAqBzAvrtF2z3ROzmZ0qS · 6 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / openphil / development-through-economic-growth-e21459ec.txt · 1JgGoCFB2XC0lQw34NKUojDNSkwC520J3 · 6 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/development-through-economic-growth-e21459ec.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / how-bad-would-human-extinction-be-e4765c46.txt · 1kgyhr7qAR1XkAqBzAvrtF2z3ROzmZ0qS · 6 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/how-bad-would-human-extinction-be-e4765c46.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / vitamin-a-usage-different-countries-5ab2c5a3.txt · 1xsT92UKDCWhfH3TUzCxUuuS145kXe93i · 7 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / exploring-cause-prioritization-in-the-journal-of-economic-perspectives-ee6e42ff.txt · 1u3ILfs2eObHZh5zkay_6yTTFC1QR0bPO · 7 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / climate-philanthropy-landscape-1bfe82d7.txt · 1t5bnbCjmptAsGkdRIiXVaUrzebA-xCLV · 7 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / evidence-review-family-planning-interventions-41cc4d01.txt · 1koDErd0a0OPuLhlNA_yjCmyMpi6NwTJV · 7 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / openphil / announcing-the-open-philanthropy-ai-worldviews-contest-5b8a9006.txt · 1PNZM4ImN78hsYCi-a0B8JVQQ5BB1Tu6t · 7 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / climate-philanthropy-landscape-1bfe82d7.txt · 1t5bnbCjmptAsGkdRIiXVaUrzebA-xCLV · 7 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/climate-philanthropy-landscape-1bfe82d7.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / evidence-review-family-planning-interventions-41cc4d01.txt · 1koDErd0a0OPuLhlNA_yjCmyMpi6NwTJV · 7 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/evidence-review-family-planning-interventions-41cc4d01.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / openphil / announcing-the-open-philanthropy-ai-worldviews-contest-5b8a9006.txt · 1PNZM4ImN78hsYCi-a0B8JVQQ5BB1Tu6t · 7 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/announcing-the-open-philanthropy-ai-worldviews-contest-5b8a9006.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / larval-source-management-88f6b9a9.txt · 1yKyc505dj6ggiTkqrDYxgL1Xq-9sP_m0 · 7 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / holden-karnofsky-is-leaving-open-phil-for-the-carnegie-endowment-for-international-peace-22fd3bb4.txt · 1cqkPLcYAB3IGjfJ_KM1_8LqH-cHBmt-H · 7 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / acx / grading-my-2021-predictions.txt · 1sgPApmZM5RTeymKy6wRqRZ1LCE01EenX · 8 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / rethink priorities / scientific-capacity-in-sub-saharan-africa-4062a688.txt · 11hcYeBrX4jTWkeNw8IACUSWsoAnraJUu · 8 KB · txt
-- [ ] es · 2024 additions (may be redundant or disorganized) / openphil / new-positions-on-our-cause-prioritization-team-global-health-and-wellbeing-55af1d0e.txt · 1FanfESjY0MNKqrhK2t5bntdo5-6xg2ju · 8 KB · txt
+- [x] es · 2024 additions (may be redundant or disorganized) / acx / grading-my-2021-predictions.txt · 1sgPApmZM5RTeymKy6wRqRZ1LCE01EenX · 8 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/grading-my-2021-predictions.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / rethink priorities / scientific-capacity-in-sub-saharan-africa-4062a688.txt · 11hcYeBrX4jTWkeNw8IACUSWsoAnraJUu · 8 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/scientific-capacity-in-sub-saharan-africa-4062a688.txt`)
+- [x] es · 2024 additions (may be redundant or disorganized) / openphil / new-positions-on-our-cause-prioritization-team-global-health-and-wellbeing-55af1d0e.txt · 1FanfESjY0MNKqrhK2t5bntdo5-6xg2ju · 8 KB · txt · es done 2026-11-10 (1/1 batches, `Español/archive/new-positions-on-our-cause-prioritization-team-global-health-and-wellbeing-55af1d0e.txt`)
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / new-grantmaking-program-forecasting-b2ab5f8e.txt · 1lz0G5CXdFhPQG71EAxnBugX5ca4qQw8j · 8 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / what-is-a-living-literature-review-52d5837c.txt · 1Q45cJfMsKxVPAGTZFuJh5bkYy_KJHu8A · 9 KB · txt
 - [ ] es · 2024 additions (may be redundant or disorganized) / openphil / alexander-berger-is-now-sole-ceo-of-open-philanthropy-0b65dd90.txt · 1JF7n1sIDFZpFidii-FGQIA8wroWLbgVV · 9 KB · txt

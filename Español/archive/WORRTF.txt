@@ -1,0 +1,506 @@
+arXiv:1807.09836v2  [cs.AI]  24 Aug 2019Robustness to fundamental uncertainty in AGI
+alignment
+G Gordon Worley III1
+1Phenomenological AI Safety Research Institute
+27 de agosto de 2019
+Resumen
+El problema de la alineación de la AGI tiene una distribución bimodal de resultados, con la mayoría agrupada alrededor de los polos
+de éxito total y de fracaso existencial, catastrófico. En consecuencia, los intentos de resolver la alineación de la AGI deberían, en todo lo demás
+igual, preferir los falsos negativos (ignorar los programas de investigación que habrían tenido éxito) frente a los falsos positivos (persi-
+guir programas de investigación que fracasarán inesperadamente). Por ello, proponemos adoptar una política de responder a los puntos de
+incertidumbre filosófica y práctica asociada con el problema de la alineación, limitando y eligiendo los su-
+puestos necesarios para reducir el riesgo de falsos positivos. Aquí exploramos en detalle dos puntos relevantes de incertidumbre en los que se basa la
+investigación sobre la alineación de la AGI: la incertidumbre metaética y la incertidumbre sobre los fenómenos mentales, y mostramos cómo
+reducir los falsos positivos en respuesta a ellas.
+Introducción
+El desarrollo de la inteligencia artificial (IA) hace posibles muchos avances tecno-
+lógicos y mejoras del bienestar, pero también expone a los humanos a riesgos considerables ( Brundage et al. ,
+2018 ). Entre estos riesgos destacan los riesgos existenciales asociados con la inteligencia artificial general
+o AGI ( Turchin and Denkenberger ,2018 ). En particular, es probable que el desarrollo de la super-
+inteligencia AGI cree o bien una catástrofe existencial o enormes beneficios para la humanidad, con poco
+espacio para resultados levemente malos, levemente buenos o neutros ( Bostrom ,2014 ). Esta distribución bimodal
+de resultados en la que uno de ellos es extremadamente indeseable implica que estamos mejor si
+nos concentramos más en evitar los resultados negativos y menos en lograr los positivos, incluso al
+riesgo de perder mucho valor positivo posible ( Bostrom ,2003 ). Así, suponiendo que la AGI será
+construida finalmente, podemos aumentar el valor esperado de la AGI trabajando en intervenciones que re-
+ducen la probabilidad de catástrofe existencial, y llamamos al campo que se centra en estas intervenciones
+seguridad de la IA ( Yampolskiy ,2012 ).
+En el centro de las intervenciones que abordan la seguridad de la IA está la alineación, el problema de cómo construir AGI
+1
+que esté alineada con los intereses humanos ( Soares and Fallenstein ,2017 ). El problema de la alineación es
+complejo y probablemente requiere resolver muchos problemas abiertos en matemáticas, economía, informática
+y filosofía ( Yudkowsky ,2016 ). Esto es desafortunado desde la perspectiva de aumentar
+el valor esperado de la AGI reduciendo los riesgos existenciales, porque introduce muchas oportunidades
+para que los investigadores cometan errores. Si esos errores son falsos negativos, como creer que un esquema de alineación
+no funcionará cuando sí lo haría, entonces hay una pérdida de valor comparativamente pequeña por no
+desarrollar una AGI segura lo antes posible, pero si esos errores son falsos positivos, como creer que un
+esquema de alineación funcionará cuando no lo hará, entonces hay una pérdida de valor astronómicamente grande al
+desarrollar accidentalmente una AGI insegura. Esto implica que, en todo lo demás igual, estamos mejor prefiriendo
+los falsos negativos a los falsos positivos al trabajar en alineación.
+Esta preferencia implica varias políticas de investigación y desarrollo de la AGI. Una explorada previamente
+por Yudkowsky es la idea de la mentalidad de seguridad, tomada de una idea del mismo nombre del investigador de informática
+de seguridad Bruce Schneier, que podríamos resumir como la expectativa de operar
+en un entorno adversarial que intenta activamente producir una AGI insegura ( Yudkowsky ,2017b ).
+Otro enfoque, cuyo valor demostraremos aquí, podría llamarse robustez frente a la incertidumbre fundamental, la
+incertidumbre, la idea de que podemos reducir los falsos positivos eligiendo supuestos necesarios al razonar
+sobre la alineación de modo que los supuestos elegidos minimicen el riesgo de falsos positivos
+entre el espacio de supuestos alternativos. Mostraremos cómo razonar sobre los riesgos de la incertidumbre funda-
+mental, examinando dos casos relevantes para la alineación de la IA: la incertidumbre metaética y la
+incertidumbre sobre los fenómenos mentales, y recomendamos supuestos específicos para reducir el riesgo de
+catástrofe existencial por parte de la AGI.
+Reducir el riesgo de falsos positivos
+Si queremos reducir los falsos positivos en la investigación sobre alineación de la IA, es decir, reducir la probabilidad de
+producir por accidente una AGI no alineada cuando creíamos que produciríamos una AGI alineada, podemos trabajar
+para reducir la tasa global de errores, o podemos intercambiar producir más falsos negativos frente a
+menos falsos positivos ( Neyman and Pearson ,1933 ). Lo primero es difícil de controlar, ya que
+depende en gran medida de las tasas base de error de los investigadores individuales, pero la compensación entre
+falsos negativos y falsos positivos puede ajustarse tomando medidas que favorezcan uno sobre el otro.
+Por ejemplo, para disminuir los falsos negativos y aumentar los falsos positivos, los investigadores podrían probar más
+ideas que consideran menos probables de funcionar, y viceversa para aumentar los falsos negativos y disminuir los falsos
+positivos. Lo último es el tipo de enfoque para reducir los falsos positivos que se podría adoptar en parte mediante
+la aplicación de las ideas de Yudkowsky sobre la mentalidad de seguridad.
+Otro enfoque para reducir la tasa de falsos positivos al intercambiarlos por falsos negativos es
+aplicar el principio de parsimonia (también conocido como navaja de Occam) para disminuir la probabilidad de que cualquier
+intento particular de producir una AGI alineada fracase, reduciendo el número de variables multiplicadas
+entre sí al calcular la probabilidad de éxito ( Pearl ,2000 ). Por un lado, esto sugiere la
+adopción del conocido principio de ingeniería de que los sistemas más simples son menos propensos a fallar, y
+por otro lado sugiere que podemos reducir los falsos positivos comprometiéndonos profundamente a reducir el
+2
+número de variables, especialmente las variables implícitas que a menudo se ignoran, al construir una AGI alineada
+( Billington and Allan ,1992 ). No podemos, sin embargo, eliminar todas las variables de nuestro razonamiento.
+Una causa de nuestra necesidad de razonar con variables irreducibles es computacional, porque las demostraciones completas
+pruebas deductivas no siempre pueden hallarse dentro de límites de tiempo razonables ( Leike and Hutter ,2015 ).
+La otra causa, más perniciosa, de esta necesidad es el problema de la circularidad epistémica.
+En breve, la circularidad epistémica es el problema de que nada puede conocerse de forma fiable sin
+conocer primero algo de forma fiable ( Alston ,1986 ). Ha habido numerosos intentos de resolver
+la circularidad epistémica desde que fue identificada por primera vez por los escépticos pirrónicos en la antigua Grecia mediante el
+Problema del criterio, y sigue siendo un problema clave en la epistemología actual porque probablemente no tiene
+una solución completa ( Lammenranta ,2003 ). En su lugar, nos queda adoptar la solución pragmática menos mala, conocida como particularismo, eligiendo asumir
+lución, conocida como particularismo, eligiendo suponer derechos no fiables a cierto conocimiento
+y luego razonar como si conociéramos esos hechos de forma fiable ( Chisholm ,1973 ), (Alston ,1993 ), (Alston ,
+2005 ). Esto no aborda fundamentalmente el escepticismo que implica la circularidad epistémica, pero
+sí nos permite contener nuestro escepticismo a solo unos pocos supuestos filosóficos, llamados bisagra
+proposiciones de Wittgenstein, análogas a los axiomas de las lógicas formales, y relacionadas con la aproximación
+de la a priori universal en la inducción de Solomonoff, para seguir razonando a pesar de la
+circularidad epistémica ( Talvinen ,2009 ).
+Adoptar el particularismo sigue dejándonos con el problema de elegir los supuestos específicos sobre
+los que construiremos nuestro razonamiento sobre cómo construir una AGI alineada. Dado que estas elecciones no pueden
+hacerse de forma fiable, quedan como variables “libres” en nuestro razonamiento, que debemos elegir usando criterios
+distintos de la probabilidad de ser verdaderas, ya que esa probabilidad no puede evaluarse adecuadamente. Esta necesidad
+de elegir nos ofrece, sin embargo, una oportunidad para elegir de forma que se reduzca el riesgo de falsos positivos al
+considerar la probabilidad relativa de falsos positivos dadas distintas elecciones de supuestos. Ahora
+revisaremos algunos de estos supuestos, por qué son necesarios, y evaluaremos su valor esperado
+impactos sobre la probabilidad de falsos positivos para
+concluir qué supuestos son los más seguros de adoptar.
+Supuestos necesarios. Hemos identificado al menos dos problemas, tanto filosóficos como pragmáticos,
+que actualmente exigen hacer supuestos al razonar sobre la alineación de la
+AGI: la incertidumbre metaética y la incertidumbre sobre los fenómenos mentales. Para
+cada problema, consideramos por qué es necesario hacer un supuesto y damos
+argumentos a favor y en contra de supuestos particulares, en términos de
+su impacto sobre los falsos positivos y de la probabilidad de éxito,
+con el fin de determinar el supuesto más seguro que conviene adoptar.
+Incertidumbre metaética. La alineación de la AGI suele formularse en términos de alinear la AGI
+con los intereses humanos, pero esto oculta parte de la complejidad del problema que supone determinar
+qué son los «intereses humanos». Si tomamos «intereses» como sinónimo del conjunto de conceptos que también
+3
+llamamos «valores» y «preferencias», podemos empezar a avanzar tratando la alineación como, al menos en parte,
+el problema de enseñar a la AGI a aprender los valores humanos (Soares, 2016; Arnold
+et al., 2017). Desafortunadamente, lo que constituye los valores humanos no está claro en la actualidad,
+ya que los humanos pueden no ser conscientes del alcance de sus propios valores, los valores
+humanos pueden ser parciales y los humanos pueden no sostener valores reflexivamente consistentes o racionales (Scanlon,
+2003; Pettit, 1991; Tversky, 1969). Esto crea un problema para la alineación, porque los valores de
+los individuos humanos, por no hablar de los valores combinados de la humanidad, se contradicen
+entre sí; por lo tanto, para que una AGI alinee su conducta con los valores humanos
+debe tener algún modo de resolver esos conflictos, ya que es muy probable que una AGI
+pueda modelarse como si tuviera una función de utilidad, y así la AGI debe cumplir restricciones
+de racionalidad que exigen una fuerte consistencia de preferencias (Yudkowsky, 2004). Además, parece que la AGI
+no puede aprender los valores humanos sin hacer al menos algunos supuestos normativos, como consecuencia
+de un teorema de no hay almuerzo gratis en la teoría del aprendizaje de valores, que
+exige suponer normas para poder extraer valores del comportamiento humano observado (Armstrong y Mindermann, 2017). En
+consecuencia, la alineación exige hacer supuestos normativos para resolver los conflictos de valores, y hacerlo implica
+que la alineación nos obliga a abordar el problema ético de la incertidumbre normativa (MacAskill, 2014).
+La incertidumbre normativa es un síntoma de una incertidumbre más profunda en la ética, causada por
+la incertidumbre metaética sobre la existencia de hechos morales, porque la circularidad epistémica nos impide saber con
+fiabilidad si existen hechos morales, y mucho menos qué proposiciones morales son verdaderas si existen (Chisholm,
+1982). La incertidumbre metaética nos obliga a especular sobre los hechos morales, porque el conocimiento sobre los
+hechos morales, incluso si es el conocimiento de que no existen, es necesario para fundamentar el
+razonamiento ético (Zimmerman, 2010). Por eso, para razonar sobre la alineación debemos considerar qué proposición de partida
+(«proposición bisagra») adoptar sobre la existencia de hechos morales, a fin de poder diseñar una AGI
+que se comporte de manera alineada con valores humanos en conflicto e incluso que aprenda con éxito
+los valores humanos. Las posiciones estándar sobre la existencia de hechos morales son el realismo, el
+antirrealismo y el escepticismo, que están, respectivamente, a favor, en contra e inciertos sobre su existencia, así
+que consideraremos sus efectos sobre los falsos positivos en la alineación de la AGI en ese orden.
+Realismo moral. Si suponemos el realismo, entonces podríamos construir una AGI alineada bajo el presupuesto
+de que, al menos, podría descubrir hechos morales, aun si no se especificara ningún hecho moral
+de antemano, y luego usar el conocimiento de esos hechos para resolver conflictos en los
+valores humanos y aprender los valores humanos. Ahora supongamos que este supuesto es falso y que
+los hechos morales no existen, o que, si existen, no pueden conocerse; entonces nuestra AGI
+que supone hechos morales nunca descubriría ningún hecho moral que guíe su conducta, o asumiría como
+hechos proposiciones morales arbitrarias que no producirían necesariamente resoluciones de conflictos de valores preferidas por
+los humanos ni permitirían aprender con éxito los valores humanos. Tal AGI podría alcanzar, de facto,
+una alineación con los valores humanos si adoptara proposiciones morales que creyera hechos y que
+le permitieran converger en una solución funcionalmente equivalente a la que habría usado una AGI que
+hubiera supuesto correctamente que no tiene conocimiento de hechos morales; pero, al carecer de un
+argumento que sugiera que tal AGI tendría menos probabilidad de dar falsos positivos que una AGI
+más simple que empezara sin suponer conocimiento de hechos morales, este enfoque parece estrictamente más arriesgado.
+4
+Para concretar este argumento sobre el riesgo de falsos positivos, consideremos los esfuerzos por alinear
+una AGI realista en un mundo donde no existen hechos morales. Supongamos, a efectos de
+argumentación, que la AGI cree que «haz a los demás lo que quieras que te hagan»
+o la Regla de Oro es un hecho moral, en contra de la realidad de
+este mundo. Creyendo que la Regla de Oro es verdadera, la AGI resuelve, sobre esa
+base, los conflictos entre los valores de los individuos humanos, posiblemente en contra de sus preferencias.
+Por ejemplo, Alice puede preferir que solo ella coma pastel, y Bob puede preferir que solo
+él coma tarta. Al mismo tiempo, Alice prefiere el pastel a la tarta, y Bob prefiere
+la tarta al pastel. Esto parece razonable, ya que sus preferencias combinadas deberían permitir que Alice
+coma pastel y que Bob coma tarta; pero, según la Regla de Oro, la AGI puede razonar
+que Alice no quiere comer pastel, porque prefiere que los demás no coman pastel, y que
+Bob no quiere comer tarta, porque prefiere que los demás no coman tarta. Es decir, razonando
+en general que los humanos pueden tener preferencias parciales e inconsistentes, la AGI intenta extraer sus preferencias
+completas y consistentes, haciéndolas encajar con el hecho moral de la Regla de Oro. Esto produce
+un resultado estrictamente peor para Alice y Bob que si la AGI no hubiera intentado alinearse
+con sus preferencias suponiendo este hecho moral particular, dado que viven en un mundo sin hechos morales.
+Antirrealismo moral. Si suponemos el antirrealismo, entonces debemos construir una AGI alineada que razone sobre
+conflictos en los valores humanos y aprenda valores humanos en ausencia de cualquier supuesto normativo fundado
+en hechos morales. Ahora supongamos que este supuesto es falso y que los hechos morales sí
+existen; entonces nuestra AGI que los niega resolvería los conflictos de valores y aprendería los valores
+humanos de una manera no basada en hechos morales, y no actuaría de forma que satisfaga
+plenamente las preferencias humanas. Tal AGI podría todavía alcanzar, de facto, una alineación con los valores
+humanos si adoptara mecanismos de resolución de conflictos y normas de aprendizaje de valores funcionalmente
+equivalentes a los que habría adoptado si conociera los hechos morales, y podría lograrlo porque los
+hechos morales no reconocidos afectarían a una AGI así a través de su influencia sobre los
+valores humanos. Aunque es menos eficiente que actuar directamente sobre los hechos morales, esto sugiere que
+una AGI antirrealista aún podría tener posibilidades de alinearse con base en los hechos morales, tal
+como se revelan en los valores humanos con los que se alinea en un mundo donde
+existen hechos morales, y de ser menos propensa a sufrir falsos positivos que una AGI realista.
+Para dejar clara la argumentación, como en la sección anterior, consideremos el caso en que construimos
+una AGI, aunque esta vez es antirrealista y existe en un mundo donde sí existen hechos morales.
+En concreto, a efectos de argumentación, supongamos que la Regla de Oro es un hecho moral en este mundo.
+Sin embargo, al no creer en hechos morales, la AGI busca otras fuentes de normas para resolver
+los conflictos de valores y para extraer los valores humanos a partir de las observaciones del comportamiento.
+Por ejemplo, Alice y Bob pueden tener sus preferencias como en el ejemplo anterior, y además una preferencia
+compartida por la equidad. Suponiendo que Alice y Bob son el total de los humanos de este mundo,
+la AGI aprende que todos los humanos prefieren la equidad y, por tanto, la adopta como norma (suponiendo
+que la AGI ha sido programada con una metanorma de adoptar los valores que todos los humanos expresan).
+Imaginemos un día en que Alice quiera comer tarta y Bob quiera comer pastel.
+5
+La AGI puede ahora actuar para ayudar o perjudicar a Alice y a Bob de una de dos maneras, coherentes con
+su preferencia por la equidad: o bien no se permite a ninguno comer pastel ni tarta, o bien se permite a ambos comer pastel
+y tarta.
+Si la AGI actúa para prohibir comer cualquiera de los dos, coincidentemente actuará de acuerdo con la Regla de Oro.
+Si la AGI actúa para permitir comer cualquiera de los dos, coincidentemente violará la Regla de Oro. En el primer
+caso Alice y Bob obtendrán, quizá incluso sin saberlo, más de lo que valoran,
+porque satisface el hecho moral de su mundo que es la Regla de Oro, y en el segundo caso obtendrán
+menos de lo que quieren, también posiblemente sin conocimiento explícito. Sin que lo sepa la
+AGI, y quizá sin que lo sepan Alice y Bob, la equidad es en realidad un valor sustituto de la Regla de
+Oro, pero como la AGI adopta la equidad como norma en lugar de la Regla de Oro directamente, puede,
+en el margen, en situaciones como la descrita, actuar de maneras contradictorias con la Regla de Oro,
+lo que hace que la AGI antirrealista sea menos eficiente que una AGI realista en la satisfacción de los valores humanos en este mundo
+donde existen hechos morales.
+Escepticismo moral
+Si suponemos el escepticismo, entonces debemos construir una AGI alineada sin ningún conocimiento
+de hechos morales, lo cual es similar al caso antirrealista, pero distinto en que allí suponemos que los hechos morales
+no existen, mientras que aquí seguimos abiertos a la posibilidad de que los hechos morales existan incluso
+si no los conocemos o no podemos conocerlos. Ahora supongamos que esta suposición es falsa y podemos conocer
+la existencia de hechos morales, de modo que podríamos, aunque solo en teoría, decidirnos por el realismo
+o el antirrealismo; entonces la AGI podría no reconocer ni usar ese conocimiento para tomar decisiones
+más informadas sobre la resolución de conflictos de valor y para aprender mejor los valores humanos; sin embargo, podemos
+razonablemente esperar que esto se mitigue, porque el escepticismo, a diferencia del realismo y el antirrealismo,
+no necesita asumir una afirmación metafísica fuerte, sino solo afirmar que el conocimiento perfecto
+no es posible; así, la AGI escéptica podría pasar a creer en el realismo o en el antirrealismo con alta
+credibilidad y actuar según esa creencia. Esto deja abierta la cuestión práctica de cómo una AGI escéptica
+abordaría los conflictos de valor y elegiría normas para aprender los valores humanos, pero podría razonablemente
+elegir normas de la misma manera en que lo haría una AGI antirrealista hasta aprender más, o podría
+adoptar el particularismo normativo para fundamentar sus normas en supuestos morales, al estilo del
+particularismo ético de Dancy, aun sin poder hacer afirmaciones absolutas de verdad sobre cuáles normas son
+mejores (Dancy, 1983). Sea cual sea la forma en que elija normas, al tener mayor flexibilidad de elección sobre
+hechos morales, mitiga el riesgo de falsos positivos que surge de la suposición que hace sobre su existencia.
+En este caso, nuestro ejemplo tendrá dos partes. En ambas, supongamos que construimos una AGI moralmente
+escéptica en un mundo donde los hechos morales definitivamente existen o no existen. Una vez más, consideraremos
+específicamente el caso de que exista o no el hecho moral de la Regla de Oro.
+Si nuestra AGI escéptica se encuentra en el mundo donde existen hechos morales, se enfrenta a una situación similar
+a la de la AGI antirrealista de la sección anterior. Sin embargo, a diferencia de la AGI antirrealista, como nuestra
+AGI escéptica no ha decidido en contra de los hechos morales, puede adoptar provisionalmente la creencia de que los hechos morales
+existen y buscarlos. Según el mundo en que esté, puede o no descubrir
+que la Regla de Oro es un hecho moral específico que se cumple en él, pero, sea como sea, al menos puede avanzar
+6
+en la dirección de actuar con más precisión de acuerdo con el mundo en que se encuentra. Podría
+entonces, por ejemplo, avanzar hacia la adopción de normas que aparentemente violen las preferencias observadas de
+Alice y Bob, pero que satisfagan mejor sus valores, dado que incluiría en este mundo
+el hecho moral de la Regla de Oro. En la práctica, esto podría consistir en adoptar primero la norma de equidad
+como lo hizo la AGI antirrealista, y luego aprender más y actualizarse a la Regla de Oro y aplicarla
+con más fuerza, eliminando así las pérdidas de eficiencia que la AGI antirrealista sufrió en el
+mundo realista.
+Si nuestra AGI escéptica se encuentra en un mundo donde los hechos morales no existen, está en una situación similar, pero mucho
+mejor que la de la AGI realista de la segunda sección anterior. A diferencia de la AGI realista, la
+AGI escéptica no necesita suponer el conocimiento de ningún hecho moral específico, como la Regla de Oro, ni
+creer que puede descubrir hechos morales, así que puede buscar normas en otra parte.
+En lugar de adoptar la Regla de Oro, podría adoptar una norma de equidad suponiendo que Alice y Bob
+ambos expresan esta preferencia, y podría usarla para resolver los conflictos de valor entre ellos e inferir
+valores a partir de su conducta. La adopción de esta norma seguiría siendo contingente a las observaciones,
+aunque no se consideraría un hecho, así que no correría el riesgo de actuar contra los valores humanos al creer
+que conoce los valores humanos mejor que el propio humano, en virtud del conocimiento de hechos morales inexistentes.
+Resultados
+El resultado de este análisis es que lo mejor es construir AGI asumiendo el escepticismo moral para reducir el
+riesgo de falsos positivos al construir AGI alineada. Aunque puede ser una vía mucho menos directa hacia una
+AGI alineada que asumir el realismo, si el realismo fuera verdadero, y una vía algo menos directa
+que asumir el antirrealismo, si el antirrealismo fuera verdadero, el escepticismo permite que la investigación sobre seguridad de la AGI
+evite comprometerse con una proposición pivote que aumentaría mucho el riesgo de falsos positivos, y evita
+obstaculizar innecesariamente la eficiencia de la AGI en la satisfacción de los valores humanos.
+Vale la pena señalar que no necesariamente tenemos que construir AGI alineadas con valores «verdaderos»
+o hechos morales si contradicen las preferencias humanas. Solo es necesario tratar la incertidumbre normativa
+causada por conflictos que surgen al agregar valores y por dificultades para inferir valores
+a partir de la conducta observada. Sin estas preocupaciones, no importaría qué proposiciones pivote, si las hay, se adoptaran
+respecto de la incertidumbre metaética. Asimismo, solo consideramos la división realista/antirrealista
+porque es un pivote claro del que dependen implícitamente todas las elecciones de selección de normas,
+y el análisis de otras posiciones éticas y morales más modernas, complejas y matizadas
+podría valer la pena si es necesario hacer una elección sobre ellas. Hacer un análisis similar de otras
+proposiciones pivote que exige la incertidumbre metaética es una dirección potencialmente valiosa para
+la investigación futura, como también lo es evaluar normas particulares que podría adoptar una AGI de la misma
+manera en que aquí evaluamos proposiciones pivote, para minimizar la probabilidad de falsos positivos y
+minimizar el riesgo existencial.
+Incertidumbre sobre fenómenos mentales
+Los esquemas para alinear la AGI con los valores humanos dependen de las disposiciones de la AGI, y una disposi-
+ción que tiene la AGI es la experiencia subjetiva, la conciencia y los fenómenos mentales (Adeofe, 1997),
+7
+(Nagel, 1974). Si esperamos o no que la AGI realice esta disposición importa, porque influye en
+los tipos de esquemas de alineación que pueden considerarse, ya que una AGI sin un aspecto
+mental solo puede ser influida modificando sus algoritmos y manipulando su conducta, mientras que
+una AGI con mente (y, para nuestros fines, “consciente”) puede ser influida mediante la interacción
+con sus percepciones y su comprensión del mundo (Dreyfus, 1978). Dicho de otra manera, podríamos
+decir que una AGI sin mente solo puede alinearse mediante métodos algorítmicos y conductuales, mientras que una AGI consciente
+también puede alinearse mediante métodos «filosóficos» que actúan sobre su epistemología, su ontología y
+su axiología (Brentano, 1995). No está claro qué debemos esperar de la mentalidad de las futuras AGI,
+sin embargo, porque actualmente somos inciertos sobre los fenómenos mentales en general (cf. la obra de
+Chalmers y Searle, con visiones modernas, populares y opuestas sobre el tema), así que nos vemos obligados a
+especular sobre fenómenos mentales en la AGI cuando razonamos sobre la alineación (Chalmers, 1996),
+(Searle, 1984).
+Cabe señalar, sin embargo, que esta incertidumbre quizá no sea fundamental (Dennett, 1991). Por ejemplo, si los intentos mate-
+rialistas o funcionalistas de explicar los fenómenos mentales resultan adecuados, quizá porque
+conducen al desarrollo de una AGI consciente, entonces podremos estar de acuerdo sobre qué son los fenómenos mentales
+y cómo funcionan (Oizumi et al., 2014). Si no es así, sin embargo, probablemente nos quedaremos con una incertidumbre metafísica
+sobre los fenómenos mentales que tiene su raíz en las limitaciones epistémicas de la percepción
+(Husserl, 2014). Independientemente de cómo se resuelva más adelante la incertidumbre sobre los fenómenos mentales,
+por ahora genera la necesidad de hacer supuestos de forma pragmática al respecto en nuestro razonamiento sobre la
+alineación. En particular, queremos saber si debemos o no diseñar esquemas de alineación que
+asuman una mente, incluso si esperamos que los fenómenos mentales sean reducibles a otros fenómenos. Dado
+que seguimos siendo inciertos y no podemos descartar la posibilidad de una AGI consciente, lo que decidamos
+depende de qué tan probable es que los esquemas de alineación tengan éxito y eviten falsos positivos, condicionados
+a que la AGI tenga capacidad para fenómenos mentales. La elección es, entonces, entre diseñar
+esquemas de alineación que funcionen sin referencia a la mente o que la tomen en cuenta.
+Análisis inicial de falsos positivos
+Si suponemos que las AGI no tienen mentes, ya sea porque creemos que no tienen ninguna, son inacce-
+sibles para nosotros, o no son causalmente relevantes para la alineación, entonces los esquemas de alineación solo pueden abordar los
+algoritmos y el comportamiento de la AGI. Entre estos esquemas se incluyen, entre otros, los enfoques que buscan
+codificar directamente valores en la AGI o centrarse en el aprendizaje por refuerzo inverso para descubrir valores humanos
+(Hadfield-Menell et al., 2016). Ahora bien, supongamos que este supuesto es falso y que las AGI sí tienen
+mentes; entonces, se esperaría que nuestros esquemas de alineación que trabajan solo con algoritmos y comportamiento
+siguieran funcionando, ya que operan sin tener en cuenta los fenómenos mentales de la AGI, lo que hace que las mentes de la AGI
+sean irrelevantes para la alineación. Esto sugiere que hay poco riesgo de falsos positivos al
+suponer que las AGI no tienen mentes.
+Si suponemos que las AGI sí tienen mentes, entonces los esquemas de alineación también pueden utilizar métodos filosóficos para
+abordar los valores, objetivos, modelos y comportamientos de la AGI. Es probable que tales esquemas adopten la forma
+de asegurar que las actualizaciones de la ontología y la axiología de una AGI converjan y se mantengan alineadas
+con los intereses humanos (de Blanc, 2011), (Armstrong, 2015). Ahora bien, supongamos que este supuesto es falso
+y que las AGI no tienen mentes; entonces, nuestros esquemas de alineación que empleen métodos filosóficos probablemente fracasarán
+8
+porque están intentando abordar mecanismos de acción que no están presentes en la AGI. Esto
+sugiere que existe un riesgo de falsos positivos al suponer que las AGI tienen mentes, proporcional a la
+probabilidad de que no construyamos una AGI consciente.
+De este análisis se desprende que, al diseñar esquemas de alineación, deberíamos suponer AGI sin mente para
+reducir el riesgo de falsos positivos, pero conviene señalar que no consideramos la probabilidad de éxito
+al alinear la AGI usando únicamente métodos algorítmicos y conductuales. Es decir, todo lo demás puede no ser igual
+entre estos dos supuestos, de modo que la opción con menor riesgo de falsos positivos podría no ser
+la mejor si disponemos de información adicional que nos lleve a creer que la alineación de una
+AGI consciente tiene muchas más probabilidades de éxito que la alineación de una AGI sin mente, y parece
+que disponemos de esa información en forma de la maldición de Goodhart.
+Análisis revisado a la luz de la maldición de Goodhart
+La maldición de Goodhart establece que, al optimizar para la medida de un valor objetivo, el proceso de optimización
+maximizará implícitamente la divergencia de la medida respecto del valor objetivo (Yudkowsky, 2017a).
+Esta es una observación que se sigue de la combinación de la ley de Goodhart y la maldición del optimi-
+zador.
+Tal como se formuló originalmente, la ley de Goodhart dice que «cualquier regularidad estadística observada tenderá a col-
+lapsar una vez que se ejerce presión sobre ella con fines de control» (Goodhart, 1984). Una expresión más accesible
+de la ley de Goodhart sería que, cuando una medida del éxito se convierte en el objetivo,
+deja de ser una buena medida (Strathern, 1997). Un ejemplo muy conocido de la ley de Goodhart proviene de
+un programa para exterminar ratas en la Hanói colonial francesa, Vietnam: el programa pagaba una recompensa
+por las colas de rata, bajo el supuesto de que una cola de rata representaba una rata muerta, pero los cazadores de ratas
+en cambio capturaban ratas, les cortaban la cola y liberaban a las ratas para que pudieran reproducirse y producir nuevas ratas, de modo que sus
+colas pudieran canjearse por más recompensas (Vann, 2003). Hubo un caso similar con las recompensas
+por cobras muertas en la India colonial británica, que pretendían incentivar la reducción de las poblaciones de cobras, pero que
+en cambio dieron lugar a la creación de granjas de cobras (Siebert, 2001). Abundan otros ejemplos:
+tomar como objetivo los clics fácilmente medibles en lugar de las conversiones en la publicidad en línea, optimizar
+para las ganancias en lugar de la salud de la empresa en los negocios, e incentivar sin pretenderlo el recuento de publicaciones
+por encima del progreso académico en el ámbito académico (Shraga, 2014; Jackall, 2009; Nature Publishing Group,
+2010 ).
+La maldición del optimizador observa que, al elegir entre varias posibilidades, si escogemos la
+opción que se espera que maximice el valor, nos sentiremos «decepcionados» (obtendremos menos que el valor
+esperado) con más frecuencia que el promedio (Harrison y March, 1984). Esto ocurre porque la optimización
+actúa como una fuente de sesgo a favor de la sobreestimación, incluso si el valor estimado de cada opción
+no está sesgado en sí mismo (Smith y Winkler, 2006). Por ejemplo, una empresa que intenta elegir un proyecto
+en el que invertir para obtener la mayor tasa de rendimiento obtendrá de forma sistemática menos rendimiento del previsto debido a
+la maldición del optimizador (Chen y Dyer, 2009). De forma similar, una persona que intenta elegir las mejores vacaciones
+tendrá, en promedio, unas vacaciones peores de lo esperado, porque la opción que parece mejor es
+más probable que las demás opciones parezca así debido a la sobreestimación. Además, el efecto de
+la maldición del optimizador es robusto: mitigarlo es teóricamente posible, pero requiere certeza sobre
+9
+distribuciones de probabilidad, algo imposible de obtener en la práctica; e incluso si un agente satisface
+(acepta la opción con el menor valor esperado que es mayor que el neutral) en lugar de optimizar,
+seguirá sufriendo más decepción que gratificación (Smith y Winkler, 2006; Marks,
+2008). En consecuencia, combinado con la ley de Goodhart, el efecto es que los intentos de optimizar,
+aunque sea débilmente, una medida del éxito, producen una mayor probabilidad de no alcanzar el
+objetivo deseado: la maldición de Goodhart.
+Esta tendencia de la medida y del valor objetivo a divergir bajo la optimización también se conoce como «regresional
+Goodharting» y es un caso especial de un fenómeno más general conocido simplemente como
+«Goodharting» (Manheim y Garrabrant, 2018). No necesitamos ocuparnos especialmente de estos casos más generales,
+porque la maldición de Goodhart basta para hacernos reconsiderar la
+probabilidad de alinear con éxito la AGI con el valor humano al intentar optimizar sus algo-
+ritmos y comportamientos en lugar de interactuar con sus mentes.
+Supongamos que tenemos un esquema de alineación que propone alinear una AGI con valores humanos mediante la intervención
+de humanos que manipulan su algoritmo, o mediante la observación por parte de la AGI del comportamiento humano para inferir valores humanos. En
+el caso de manipular su algoritmo, los humanos eligen preferentemente (es decir, optimizan para)
+los cambios que dan lugar a una mejor expectativa de alineación. En el caso de que la AGI observe el comportamiento
+humano, intenta determinar el mejor modelo de valores humanos que explique el comportamiento observado.
+Ambos casos crean condiciones para que la alineación de la AGI sufra la maldición de Goodhart y
+por lo tanto diverja de los valores humanos reales, al optimizar para algo distinto de los propios valores humanos,
+a saber, la apariencia de alineación según la observan los humanos y la solidez del ajuste del modelo tal como
+la mide la AGI.
+Este argumento implica que los intentos de alinear AGI sin mente vía métodos algorítmicos y conductuales
+producirán de forma confiable una AGI que diverge de los valores humanos an d, por tanto, no logra alinearse con los inter-
+eses. Esto nos lleva a concluir que, aunque suponer una AGI consciente tiene un mayor riesgo de falsos
+positivos que suponer una AGI sin mente, en igualdad de condiciones, todo lo demás no es igual: una AGI sin mente es poco probable
+que sea capaz de mantener la alineación, y por ello nos vemos obligados a asumir los riesgos asociados con
+suponer una AGI consciente al diseñar esquemas de alineación debido a la baja probabilidad de éxito
+de suponer lo contrario.
+Conclusión
+Como se argumentó, dado que el desarrollo de la AGI tiene una distribución bimodal de resultados que nos lleva
+a preferir falsos negativos a falsos positivos para evitar mejor la catástrofe, es mejor que elijamos
+proposiciones gozne epistémicamente necesarias (supuestos) que minimicen los falsos positivos, con todo lo demás
+igual. Consideramos dos casos en los que los supuestos son necesarios.
+En el primer caso, debido a que la alineación de la AGI requiere hacer supuestos sobre normas sobre los val-
+ores humanos, la alineación exige resolver cuestiones de incertidumbre metaé-tica, lo que significa, en parte,
+elegir un supuesto sobre la existencia de hechos morales. Evaluamos los posibles supuestos
+del realismo moral, el antirrealismo y el escepticismo, y encontramos que el realismo tiene el mayor riesgo de falsos
+10
+positivos y el escepticismo el menor. Por esa razón recomendamos que los investigadores de seguridad de la AGI
+supongan y diseñen la AGI para asumir el escepticismo moral.
+En el segundo caso, dado que los esquemas de alineación de la AGI pueden depender o no de que la AGI tenga mentes, consideramos
+la proposición gozne de que la AGI será consciente. Aunque resultó que, en términos
+de riesgo de falsos positivos, era más seguro suponer que la AGI será sin mente al diseñar un
+esquema de alineación, debido a la maldición de Goodhart es sustancialmente improbable que la alineación de una AGI sin mente sea
+posible. En consecuencia, recomendamos que los investigadores de AGI diseñen esquemas de alineación que supongan
+una AGI consciente.
+Estos no son necesariamente todos los supuestos que deben hacerse en la construcción de una AGI alineada
+con los valores humanos, pero son al menos dos que deben hacerse, y evidencias y argumentos adicionales
+podrían llevarnos a concluir que un conjunto distinto de supuestos son mejores respuestas a los puntos filo-
+sóficos y prácticos de incertidumbre que nos obligaron a hacer supuestos. La investigación futura
+debería considerar puntos adicionales de incertidumbre que exijan que hagamos supuestos sobre la
+alineación de la AGI para comprender mejor la distribución de esquemas de alineación que probablemente den como resultado
+resultados aceptables para la humanidad.
+11
+Referencias
+Leke Adeofe. Artiﬁcial intelligence and subjective experi ence. En Proceedings of Southcon '95 .
+IEEE, 1997.
+William P. Alston. Circularidad epistémica. Philosophy and Phenomenological Research , 47(1):1,
+sep 1986.
+William Alston. La confiabilidad de la percepción sensorial . Cornell University Press, 1993.
+William Alston. Beyond Justiﬁcation: Dimensions of Epistemic Evaluation . Cornell University
+Press, 2005.
+Stuart Armstrong y Sören Mindermann. La navaja de Occam es insuficiente para inferir las preferencias de
+irrational agents. En NeurIPS , 2017.
+Stuart Armstrong. Motivated Value Selection for Artiﬁcial Agents. En Artiﬁcial Intelligence and
+Ethics: Papers from the 2015 AAAI Workshop , 2015. Consultado el mié, 4 de julio de 2018.
+Thomas Arnold, Daniel Kasenberg, y Matthias Scheutz. Val ue Alignment or Misalignment —
+¿Qué mantendrá a los sistemas responsables? En el taller AAAI-17 sobre IA, ética y sociedad ,
+2017. Consultado el mar, 19 de junio de 2018.
+Roy Billington y Ronald A. Allan. Reliability Evaluation of Engineering Systems: Concepts
+y Techniques . Springer, 1992.
+Nick Bostrom. Desperdicio astronómico: el costo de oportunidad del desarrollo tecnológico retrasado -
+ment. Utilitas , V ol. 15, No. 3, 2003. Consultado el mié, 23 de mayo de 2018.
+Nick Bostrom. Superinteligencia: Caminos, peligros, estrategias . Oxford University Press, 2014.
+Franz Brentano. Psicología desde un punto de vista empírico . Routledge, 1995.
+Miles Brundage et al. El uso malicioso de la inteligencia artificial: pronóstico, prevención y
+Mitigation. Informe técnico, 2018.
+David Chalmers. La mente consciente: en busca de una teoría fundamental . Oxford University
+Press, 1996.
+Min Chen y James Dyer. Inevitable disappointment in proje cts selected on the basis of forecasts.
+Revista de la Sociedad de Ingenieros de Petróleo , 2009.
+Roderick M. Chisholm. El problema del criterio . Marquette University Press, 1973.
+Roderick M. Chisholm. Los fundamentos del conocer . University of Minnesota Press, 1982.
+Jonathan Dancy. Ethical Particularism and Morally Relevan t Properties. Mind , XCII(368):530–
+547, 1983.
+Peter de Blanc. Ontological Crises in Artiﬁcial Agents’ Val ue Systems. Informe técnico, 2011.
+Consultado el mié, 4 de julio de 2018.
+12
+Daniel C. Dennett. La conciencia explicada . Little, Brown and Co., 1991.
+Hubert L. Dreyfus. Lo que las computadoras no pueden hacer: los límites de la inteligencia artificial. HarperCollins,
+1978.
+Charles A. E. Goodhart. Problems of Monetary Management: Th e UK Experience. En Monetary
+Theory and Practice , páginas 91–121. Macmillan Education UK, 1984.
+Dylan Hadﬁeld-Menell, Anca D. Dragan, Pieter Abbeel, y Stuart J. Russell. Cooperative inverse
+reinforcement learning. En NIPS , 2016.
+J. Richard Harrison y James G. March. Decision making and p ostdecision surprises. Adminis-
+trative Science Quarterly , 29(1):26–42, 1984.
+Edmund Husserl. Ideas for a Pure Phenomenology and Phenomenological Philos ophy: First
+Libro: General Introduction to Pure Phenomenology . Hackett Publishing Company, Inc., 2014.
+Robert Jackall. Laberintos morales: el mundo de los gerentes corporativos . Oxford University Press, 2009.
+Markus Lammenranta. Reliabilism Circularity, y the Pyrr honian Problematic. Journal of Philo-
+sophical Research , 28:311–328, 2003.
+Jan Leike y Marcus Hutter. On the Computability of Solomon off Induction y Knowledge-
+Seeking. En Lecture Notes in Computer Science , páginas 364–378. Springer International Publish-
+ing, 2015.
+William MacAskill. Normative Uncertainty . Tesis doctoral, University of Oxford, 2014. Consultado
+el mié, 13 de junio de 2018.
+David Manheim y Scott Garrabrant. Categorizing Variants of Goodhart’s Law. Informe técnico,
+2018. Consultado el mar, 3 de julio de 2018.
+Robert E. Marks. The satisﬁcer’s curse. Informe técnico, 2 008.
+Thomas Nagel. ¿Cómo es ser un murciélago? Revista Filosófica , 83(4):435, oct. 1974.
+Nature Publishing Group. Publish or perish. Nature , 467, 2010.
+J. Neyman y E. S. Pearson. Sobre el problema de las pruebas más eficientes de hipótesis estadísticas.
+Transacciones Filosóficas de la Real Sociedad A: Ciencias matemáticas, físicas e ingeniería
+Sciences , 231(694-706):289–337, jan 1933.
+Masafumi Oizumi, Larissa Albantakis y Giulio Tononi. De la fenomenología a los meca-
+nismos de la conciencia: teoría de la información integrada 3.0. PLoS Computational Biology ,
+10(5):e1003588, may 2014.
+Judea Pearl. Causality: Models, Reasoning y Inference . Cambridge University Press, 2000.
+Consultado el mié, 23 de mayo de 2018.
+Philip Pettit. Decision theory and folk psychology. En Rules, Reasons, and Norms: Selected
+Essays , páginas 192–221. Oxford: Oxford University Press, 1991.
+13
+T. M. Scanlon. 3 Rawls on Justiﬁcation. En Samuel Richard Freeman, editor, The Cambridge
+Companion to Rawls , página 139. Cambridge University Press, 2003.
+John R. Searle. Mentes, cerebros y ciencia . Harvard University Press, 1984.
+Roman Shraga. Lo que la ley de Goodhart puede enseñarle sobre los datos de desempeño. Consultado el jue,
+8 de agosto de 2019, 2014.
+Horst Siebert. Der Kobra-Effekt. Wie man Irrwege der Wirtschaftspolitik v ermeidet . Deutsche
+Verlags-Anstalt, 2001.
+James E. Smith y Robert L. Winkler. The Optimizer’s Curse: Skepticism and Postdecision
+Surprise in Decision Analysis. Management Science , 52(3):311–322, mar 2006.
+Nate Soares y Benya Fallenstein. Agent Foundations for Al igning Machine Intelligence with
+Human Interests: A Technical Research Agenda. En Victor Callaghan, James Miller, Roman
+Yampolskiy y Stuart Armstrong, editores, The Technological Singularity, página sin especificar.
+Springer Berlin Heidelberg, 2017.
+Nate Soares. The Value Learning Problem. En Ethics for Artificial Intelligence Workshop en el 25th
+International Joint Conference on Artificial Intelligence, 2016. Consultado el vie, 1 de junio de 2018.
+Marilyn Strathern. ‘improving ratings’: audit in the British university system. European Review,
+5(3):305–321, 1997.
+Krister Talvinen. La inevitabilidad del escepticismo. Un estudio sobre el problema del criterio. Téc-
+nical report, 2009. Consultado el jue, 24 de mayo de 2018.
+Alexey Turchin y David Denkenberger. Classification of global catastrophic risks connected
+with artificial intelligence. AI & Society, mayo de 2018.
+Amos Tversky. Intransitivity of preferences. Psychological Review, 76(1):31–48, 1969.
+Michael G. Vann. Of rats, rice, and race: The great hanoi rat massacre, an episode in french
+colonial history. French Colonial History, 4:191–203, 2003.
+Roman V. Yampolskiy. Artificial Intelligence Safety Engineering: Why Machine Ethics Is a Wrong
+Approach. En Philosophy and Theory of Artificial Intelligence, SAPERE 5. Springer-Verlag,
+2012. Consultado el mié, 23 de mayo de 2018.
+Eliezer Yudkowsky. Coherent Extrapolated Volition. Informe técnico, 2004. Consultado el jue,
+7 de junio de 2018.
+Eliezer Yudkowsky. Alineación de la IA: por qué es difícil y por dónde empezar. En Symbolic Systems
+Distinguished Speaker Series, 2016. Consultado el mar, 15 de mayo de 2018.
+Eliezer Yudkowsky. Goodhart’s Curse. Consultado el mar, 3 de julio de 2018, 2017.
+Eliezer Yudkowsky. Security Mindset and Ordinary Paranoia. Informe técnico, 2017. Consultado
+el mié, 23 de mayo de 2018.
+14
+Aaron Zimmerman. Moral Epistemology. Routledge, 2010.
+15

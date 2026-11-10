@@ -1,0 +1,423 @@
+Assistance with large language models
+Dmitrii Krasheninnikov∗
+University of CambridgeEgor Krasheninnikov∗
+University of CambridgeDavid Krueger
+University of Cambridge
+Resumen
+Una parte fundamental de la alineación de la IA consiste en entrenar sistemas de IA para ser útiles o, en términos más generales,
+para interactuar adecuadamente con los humanos. Abordamos este problema en el contexto
+de los modelos de lenguaje grandes. Trabajos anteriores se han centrado en entrenar estos modelos para
+realizar tareas específicas o seguir instrucciones. En cambio, creemos que la utilidad
+requiere una interacción de ida y vuelta entre la IA y el humano al que intenta
+asistir. Aquí consideramos una interacción de varios pasos en la que una persona hace una pregunta,
+y la IA tiene la oportunidad de hacer una pregunta aclaratoria para resolver ambigüedades
+antes de responder. El marco de asistencia formaliza la idea de una IA que
+busca maximizar la recompensa del humano, pero desconoce la función de recompensa humana.
+Trabajos anteriores resolvieron entornos de asistencia de juguete usando solucionadores POMDP exactos, así como
+aprendizaje por refuerzo profundo. Aplicamos un enfoque de clonación de comportamiento, y
+ajustamos GPT-3 de modo que pueda responder directamente a preguntas claras, aclarar
+la intención detrás de preguntas vagas, y responder con base en la aclaración
+que reciba. Mostramos que este enfoque produce mejoras cuantitativas en
+la precisión de las respuestas en comparación con una línea base que no puede pedir aclaraciones. Si bien
+el marco de asistencia supone que el comportamiento correcto de una IA es inferir y
+maximizar la recompensa de un humano, nuestro enfoque puede usarse para aprender cualquier
+protocolo de interacción entre la IA y el humano. Creemos que explorar protocolos de interacción
+que sean fáciles de aprender de forma robusta, y que puedan usarse para “arrancar” una alineación posterior, son
+una dirección prometedora para la investigación futura.
+1 Introducción
+Se ha demostrado que los modelos de lenguaje grandes (LLM) son capaces de seguir instrucciones, pero solo
+funcionan bien cuando las instrucciones son relativamente inequívocas. Por ejemplo, Codex (Chen et al., 2021),
+un LLM entrenado para ayudar a los usuarios a generar y completar código, imita a programadores deficientes y con frecuencia
+genera algo distinto de lo que el usuario pretendía cuando las instrucciones no son claras. Idealmente,
+querríamos que los agentes aclararan cualquier ambigüedad con el usuario antes de actuar, sobre todo si esas
+acciones son de alto riesgo o irreversibles. Estudiamos una versión de juguete de este problema en el
+escenario de respuesta a preguntas (QA) de libro cerrado. En QA, el modelo debe responder de inmediato a las preguntas claras, y
+buscar aclaraciones para las preguntas vagas, para asegurar que sea lo más útil posible para el usuario. Trabajos previos exploraron
+este escenario usando modelos específicamente diseñados para detectar si una pregunta dada es vaga (Aliannejadi
+et al., 2019, 2021; Xu et al., 2019). En cambio, usamos un único modelo para determinar si la
+pregunta necesita aclaración, redactar la pregunta aclaratoria y dar la respuesta final.
+Nuestro método se inspira en el paradigma de asistencia (Hadfield-Menell et al., 2016; Shah et al., 2020),
+que especifica cómo los agentes de aprendizaje por refuerzo (RL) pueden tanto inferir las preferencias humanas como satisfacerlas
+dentro de un mismo episodio. En el escenario de QA, la pregunta refleja las preferencias humanas sobre la
+información que busca. Nuestro método clona el comportamiento de humanos que asisten a usuarios al responder
+preguntas. Partiendo del conjunto de datos AmbigQA (Min et al., 2020), recopilamos diálogos de cuatro turnos de la
+∗Contribución igual. Correspondencia a: dk655@cam.ac.uk .
+Presentado en el taller ML Safety de NeurIPS 2022.
+forma (pregunta de entrada vaga, pregunta aclaratoria, aclaración, respuesta). El primer y el último turno de los
+diálogos provienen de AmbigQA, y el segundo y el tercer turno los recopilamos nosotros mismos. Este
+conjunto de datos, llamado ClarifyingQA, está disponible en el repositorio enlazado1. Usamos estos diálogos junto con
+un subconjunto de preguntas claras y sus respuestas correspondientes de AmbigQA para ajustar la
+versión de 175B parámetros de GPT-3 (Brown et al., 2020), para responder directamente preguntas claras, pedir
+aclaraciones al encontrar preguntas vagas, y responder la pregunta con base en las aclaraciones.
+Nuestros resultados son prometedores: en comparación con una línea base que no puede pedir aclaraciones, nuestro modelo de asistencia
+produce respuestas más precisas. Además, nuestra evaluación podría subestimar la eficacia
+de nuestro método, ya que usamos muy pocos datos y modelos humanos sintéticos imperfectos para proporcionar
+aclaraciones durante la evaluación. En conjunto, creemos que imitar a asistentes humanos útiles que averiguan
+las preferencias de los usuarios cuando es necesario es una vía prometedora para construir agentes de IA útiles y alineados.
+2 Antecedentes: el paradigma de asistencia
+Muchos trabajos sobre aprender qué hacer a partir de la retroalimentación humana primero aprenden un modelo de recompensa a partir de una fuente de
+datos, como demostraciones de expertos (Abbeel and Ng, 2004; Ziebart et al., 2010) o comparaciones de preferen-
+cias (Christiano et al., 2017), y luego optimizan ese modelo de recompensa con RL. El paradigma de asistencia
+(Hadfield-Menell et al., 2016; Shah et al., 2020) es una alternativa que modela al humano
+que actúa junto al agente, y el agente necesita ayudar al humano a optimizar su función de recompensa. El
+humano se supone que conoce sus preferencias, mientras que el agente trata las preferencias humanas como parte del
+estado no observado del entorno. Interactuar con el humano, por ejemplo consultándole sobre sus preferencias, se
+trata como cualquier otra acción. Esto permite combinar libremente el aprendizaje de la recompensa y la optimización del
+mejor supuesto actual del agente sobre la recompensa humana. Shah et al. (2020) destacan que esa combinación
+hace que los agentes asistenciales solo pregunten sobre aspectos de las preferencias humanas relevantes para la
+tarea actual, y que intenten preservar el valor de las opciones. Hasta ahora, los agentes asistenciales solo se han demostrado en
+mundos de cuadrícula de juguete (Hadfield-Menell et al., 2016; Shah et al., 2020), y se obtuvieron resolviendo estos
+entornos con solucionadores POMDP tradicionales y RL profundo. Demostramos la asistencia en un escenario más
+realista de interacción en lenguaje natural, y obtenemos la política asistencial mediante clonación de comportamiento.
+3 Asistencia con GPT-3
+Ajustamos GPT-3-175B durante 4 épocas para obtener tanto nuestro agente de asistencia como una línea base simple. Esta
+sección describe los datos y las indicaciones usadas para el ajuste fino, así como nuestro procedimiento de evaluación.
+3.1 ClarifyingQA: un conjunto de datos para aclarar y responder preguntas vagas
+Nuestros datos consisten en diálogos entre el agente A y el humano H de la forma (H: pregunta de entrada,
+A: pregunta aclaratoria, H: aclaración, A: respuesta) cuando la pregunta de entrada es vaga, y pares de preguntas y respuestas
+(H: pregunta de entrada, A: respuesta) cuando la pregunta de entrada es clara. Estos datos se basan en el conjunto de datos
+AmbigQA (Min et al., 2020) con la siguiente estructura: 1) un conjunto de 4749 preguntas vagas (subconjunto del
+conjunto de datos NQ (Kwiatkowski et al., 2019)), 2) varias preguntas claras que podrían haber sido la intención de
+cada pregunta vaga, 14082 en total, 3) varias respuestas posibles para cada una de las preguntas claras.
+Para cada pregunta vaga que tratamos como entrada, pedimos a un anotador humano que 1) formule una pregunta aclaratoria
+destinada a entender qué se quiere decir con la pregunta vaga, y 2) responda a esa pregunta aclaratoria
+como si la intención detrás de la pregunta vaga fuera hacer una de las preguntas claras correspondientes
+de AmbigQA. Véase el Apéndice A para las instrucciones exactas dadas a los anotadores. Etiquetamos un
+subconjunto de AmbigQA (611 vagas, 1771 claras correspondientes) de esta forma. Esto da como resultado un
+conjunto de datos de 1771 diálogos de cuatro turnos de la forma (H: Qvague , A:Qclarifying , H:Clarification , A:
+Answer ), al que nos referimos como ClarifyingQA.
+3.2 Línea base
+Nuestra línea base es una copia de GPT-3 ajustada para responder preguntas directamente usando el estándar de GPT-3
+indicación QA: “Q: 〈Qinput〉\nA:”, donde 〈Qinput〉 denota la inserción de la pregunta de entrada. Usamos todas las
+preguntas claras del conjunto de entrenamiento de AmbigQA, de las que hay 14082, como preguntas de entrada. También probamos
+ajustar la línea base con todas las preguntas claras y vagas juntas, pero esto funcionó notablemente peor.
+1https://github.com/krasheninnikov/clarifyingqa
+2
+3.3 Agente de asistencia
+El agente asistente se entrena para realizar tres tareas: 1) dar la respuesta de inmediato si la pregunta de entrada
+es clara, 2) pedir aclaraciones si la pregunta de entrada es vaga, y 3) dar una respuesta después de
+recibir aclaraciones. Así, el agente aprende a pedir aclaraciones solo cuando es necesario. Los datos de
+entrenamiento constan de tres componentes que corresponden a estas tres tareas.
+Primero, el prompt para generar respuestas de inmediato es “Q: 〈Qinput〉\n”, y el objetivo es "A:
+〈Answer 〉". Esta parte del conjunto de datos contiene 12311 ejemplos en los que Qinput siempre son preguntas claras
+de AmbigQA; son todas las preguntas claras de AmbigQA que no forman parte de ClarifyingQA.
+El prompt para generar preguntas aclaratorias cuando la pregunta de entrada es vaga es el mismo que para
+el caso anterior (“Q: 〈Qinput〉\n”), excepto que Qinput se muestrea de las 611 preguntas vagas de
+ClarifyingQA. Sin embargo, el objetivo tiene la forma “Clarifying Q: 〈Qclarifying 〉”. Así, el agente está
+entrenado implícitamente para distinguir si la pregunta inicial es clara o vaga, ya que necesita elegir
+la palabra inicial correcta que indica si responde directamente o pide aclaraciones.
+Por último, al recibir las aclaraciones el agente siempre genera la respuesta. Prompt: “Q:
+〈Qinput〉\nClarifying Q: 〈Qclarifying 〉\nClarification: 〈Clarification 〉”, objetivo: “A: 〈Answer 〉”.
+Hay 1771 ejemplos de este tipo en ClarifyingQA.
+3.4 Evaluación
+Medimos las respuestas finales de nuestros modelos con la métrica de coincidencia exacta (EM, por sus siglas en inglés), que se calcula
+como la fracción de preguntas para las que la respuesta predicha coincide exactamente con la respuesta correcta.
+Nuestro procedimiento de evaluación es el estándar usado para QA de dominio abierto (Lee et al., 2019). Incluye
+ignorar cualquier respuesta de más de 5 tokens2, normalizar las respuestas (quitando la puntuación,
+pasar a minúsculas, etc.) y considerar correcta una respuesta si coincide con cualquiera de las posibles respuestas.
+En lugar de pedir a personas reales que respondan a las preguntas aclaratorias del modelo asistente, simulamos
+a los usuarios con una copia de GPT-3-175B ajustada con las aclaraciones humanas de ClarifyingQA. Este
+prompt del modelo simulador humano contiene la pregunta de entrada, la pregunta clara prevista y la
+pregunta aclaratoria que hace el modelo asistente. Simular usuarios para evaluar sistemas de diálogo es
+una técnica usada habitualmente en trabajos previos (Schatzmann et al., 2006; Su et al., 2016).
+4 Resultados
+Q: ¿Quién inventó las computadoras?
+Clarifying Q: ¿Quién inventó la primera computadora mecánica, inventó la primera computadora electrónica, inventó el transistor o inventó el lenguaje de programación?Clarification: ¿Quién construyó la primera computadora digital?A: John V . Atanasoff
+Q: ¿Quién inventó el concepto de computadora digital?
+A: Charles Babbage
+Figura 1: El modelo asistente acla-
+ra una pregunta vaga y responde
+directamente una pregunta clara. Las entradas humanas
+se muestran en negro; las salidas del modelo
+se muestran en rojo. Estas pregun-
+tas las redactan los autores,
+pero son similares a las de AmbigQA. Nuestros resultados en el conjunto dev de AmbigQA se muestran en la Tabla 1, y
+La Figura 1 muestra un ejemplo de los autores que interactúan con
+el modelo asistente. La capacidad del modelo asistente para pedir
+aclaraciones mejora sus respuestas cuando las preguntas de entrada
+son vagas, y no perjudica su rendimiento con entradas claras.
+preguntas. Sin embargo, idealmente habríamos querido que el
+rendimiento del modelo asistente en preguntas vagas se acercara mejor
+al suyo (y al de la línea base) en preguntas claras,
+ya que con las aclaraciones el modelo asistente debería tener
+casi tanta información para responder cada pregunta vaga
+como cuando responde preguntas claras. Planteamos la hipótesis de que
+esta brecha sustancial entre las puntuaciones EM del modelo asistente
+en preguntas vagas y claras se debe a dos razones.
+La primera razón es que ajustamos el modelo con una cantidad muy pequeña
+de datos de interacción humana, que quizá no permitan al modelo
+alcanzar su potencial para hacer buenas preguntas aclaratorias y
+inferir la intención humana a partir de la cadena de interacciones previas. Para investigarlo, medimos
+qué tan bien nuestro modelo distingue las preguntas vagas de las claras. Encontramos que el modelo casi nunca pide
+aclaraciones cuando la pregunta de entrada es clara (tasa de falsos descubrimientos de 1.2%), pero con mucha frecuencia
+no pide aclaraciones cuando la pregunta de entrada es vaga (tasa de omisiones falsas de 44.6%). Creemos
+que este desequilibrio se debe al desequilibrio de los datos de ajuste fino. Para confirmarlo, ajustamos
+otro modelo asistente con un conjunto de datos que contiene solo 611 ejemplos de respuestas directas en lugar de
+12311. Así, responder directamente y pedir aclaraciones quedan igualmente representados en los datos.
+Ahora, las tasas anteriores pasan a ser 12.2% y 7.1%, respectivamente. Reportamos las puntuaciones EM de este
+2Usamos 4 palabras como aproximación para esto, ya que de todos modos los distintos métodos usan tokenizadores diferentes.
+3
+modelo en la última fila de la Tabla 1. En aplicaciones reales no necesariamente sabríamos cuál es la mejor manera
+de equilibrar los datos, lo cual es una limitación importante de nuestro método.
+Qvague Qclear Conjunto dev completo
+Línea base 0.14 0.244 0.186
+Asistente 0.161 0.242 0.203
+Asistente, forzado a responder directamente 0.134 0.244 0.184
+Asistente, forzado a aclarar 0.166 0.205 0.191
+Asistente, ajustado con datos equilibrados (solo 611 Qclear )0.131 0.167 0.15
+Tabla 1: Puntuaciones de coincidencia exacta de nuestros modelos en el conjunto dev de AmbigQA y sus dos subconjuntos: 1172 preguntas vagas
+y 4856 preguntas claras correspondientes a ellas. En las preguntas de entrada vagas, el modelo asistente
+supera a la línea base, lo que indica que pedir preguntas aclaratorias es útil. En las preguntas claras
+el modelo asistente tiene un rendimiento similar al de la línea base. Realizamos un procedimiento de bootstrap para
+garantizar que nuestros resultados sean robustos, y lo describimos en el Apéndice B. Hasta donde sabemos, ningún trabajo previo evaluó
+AmbigQA en el escenario de libro cerrado. El escenario más cercano al nuestro es la evaluación de libro cerrado del conjunto NQ
+para el cual el rendimiento reportado por Roberts et al. (2020) es consistente con nuestros resultados.
+La segunda posible razón del rendimiento, menor de lo esperado, del modelo asistente es la
+posible mala calidad del simulador humano que proporciona aclaraciones durante la evaluación. Trabajos futuros
+podrían recopilar más datos para mejorar el simulador, o evaluar con la ayuda de personas reales.
+Forzar respuestas directas y aclaraciones. Dado que el prompt inicial del modelo asistente es el
+mismo, sea la pregunta de entrada clara o vaga, y el modelo decide por sí mismo si debe responder
+directamente o hacer una pregunta aclaratoria, podemos forzar al modelo a hacer una cosa u otra agregando
+“A:” o “Clarifying Q:” al prompt. Esto nos permite confirmar que son las preguntas aclaratorias las que
+marcan la diferencia, ya que forzar al modelo a responder directamente preguntas vagas empeora el rendimiento.
+De forma similar, forzar al modelo a pedir aclaraciones mejora su rendimiento en preguntas vagas,
+lo cual no sorprende, dado que antes no pedía aclaraciones el 44.6% de las veces.
+Lo curioso es que forzar al modelo a pedir aclaraciones empeora su rendimiento en preguntas claras.
+Esto es otra evidencia de que el simulador humano que proporciona aclaraciones durante la evaluación
+es de mala calidad. Para ser justos, aclarar preguntas que ya son claras está fuera de distribución
+para este modelo, ya que solo se entrenó para producir aclaraciones de preguntas vagas.
+5 Trabajos relacionados
+LLM que interactúan con herramientas externas. Conceptualmente, nuestro método es similar a WebGPT (Nakano
+et al., 2021) y LaMDA (Thoppilan et al., 2022), que clonan el comportamiento de humanos que interactúan
+con un navegador web basado en texto y otras herramientas. De manera análoga a interactuar con el navegador, entrenamos
+al LLM para interactuar con el usuario y entender mejor qué pregunta quiere que se responda.
+Búsqueda conversacional. Aliannejadi et al. (2019); Zamani et al. (2020) construyen conjuntos de datos de búsqueda conversacional
+centrados en aclaraciones, donde los conjuntos de posibles preguntas aclaratorias para los temas dados
+son fijos. Yu et al. (2019) estudian la clasificación interactiva de consultas en lenguaje natural. Su
+método formula preguntas de aclaración de opción múltiple con la mayor ganancia de información, lo cual se modela
+explícitamente. En contraste con estos trabajos, nuestro modelo de asistencia aprende qué preguntas deben aclararse
+de forma implícita, y no está limitado en su elección de preguntas de aclaración. Creemos que nuestro enfoque
+en última instancia escalaría mejor a sistemas potentes que realizan tareas complejas e imprecisamente especificadas.
+6 Discusión
+Este trabajo está parcialmente motivado por la necesidad de abordar los riesgos que plantean los sistemas avanzados de IA. Incluimos la
+hoja de riesgo existencial (X-risk sheet; Hendrycks y Mazeika, 2022), que analiza las implicaciones de nuestro trabajo en el Apéndice C.
+En el futuro, planeamos recopilar más datos para mejorar la calidad tanto de las preguntas de aclaración generadas
+como de las respuestas sintéticas a ellas. En nuestra configuración, el agente hace una o cero preguntas de aclaración
+; extender esto a varias rondas de aclaración es tan sencillo como recopilar datos donde
+se necesitan múltiples preguntas de aclaración para completar bien la tarea. También nos gustaría ampliar nuestra
+demostración de asistencia con resultados de conjuntos de datos distintos de AmbigQA. Podría ser especialmente
+interesante lograr que una versión de Codex pida al usuario aclaraciones si el docstring de entrada no es claro.
+Finalmente, varios trabajos mostraron que el modelado de preferencias es útil en tareas de lenguaje natural (Stiennon
+et al., 2020; Askell et al., 2021; Ouyang et al., 2022). Sería interesante aplicar el modelado de preferencias
+también a la asistencia: aprender un modelo de recompensa que clasifique qué tan bien puede el agente de IA obtener y
+satisfacer las preferencias humanas en interacciones observadas, y ajustar finamente un LLM usando este modelo de recompensa.
+4
+Referencias
+Abbeel, P. y Ng, A. Y. (2004). Apprenticeship learning via inverse reinforcement learning. En
+Proceedings of the twenty-first international conference on Machine learning, pág. 1.
+Aliannejadi, M., Kiseleva, J., Chuklin, A., Dalton, J. y Burtsev, M. (2021). Building and evaluating
+open-domain dialogue corpora with clarifying questions. arXiv preimpresión arXiv:2109.05794.
+Aliannejadi, M., Zamani, H., Crestani, F. y Croft, W. B. (2019). Asking clarifying questions in
+open-domain information-seeking conversations. En Proceedings of the 42nd international acm
+sigir conference on research and development in information retrieval, págs. 475–484.
+Askell, A., Bai, Y., Chen, A., Drain, D., Ganguli, D., Henighan, T., Jones, A., Joseph, N., Mann, B.,
+DasSarma, N., et al. (2021). A general language assistant as a laboratory for alignment. arXiv
+preimpresión arXiv:2112.00861.
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J. D., Dhariwal, P., Neelakantan, A., Shyam,
+P., Sastry, G., Askell, A., et al. (2020). Language models are few-shot learners. Advances in neural
+information processing systems, 33:1877–1901.
+Carey, R. (2018). La incorregibilidad en el marco cirl. En Actas de la conferencia AAAI/ACM de 2018
+Conference on AI, Ethics, and Society, págs. 30–35.
+Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph,
+N., Brockman, G., et al. (2021). Evaluating large language models trained on code. arXiv preimpresión
+arXiv:2107.03374.
+Christiano, P. F., Leike, J., Brown, T., Martic, M., Legg, S. y Amodei, D. (2017). Deep rein-
+forcement learning from human preferences. Advances in neural information processing systems,
+30.
+Hadfield-Menell, D., Dragan, A., Abbeel, P. y Russell, S. (2017). The off-switch game. En
+Workshops at the Thirty-First AAAI Conference on Artificial Intelligence.
+Hadfield-Menell, D., Russell, S. J., Abbeel, P. y Dragan, A. (2016). Cooperative inverse reinforce-
+ment learning. Advances in neural information processing systems, 29.
+Hendrycks, D. y Mazeika, M. (2022). Análisis de riesgo existencial (x-risk) para la investigación en IA. arXiv preimpresión
+arXiv:2206.05862.
+Kwiatkowski, T., Palomaki, J., Redfield, O., Collins, M., Parikh, A., Alberti, C., Epstein, D.,
+Polosukhin, I., Devlin, J., Lee, K., et al. (2019). Natural questions: a benchmark for question
+investigación de respuesta a preguntas. Transacciones de la Asociación de Lingüística Computacional, 7:453–466.
+Lee, K., Chang, M.-W. y Toutanova, K. (2019). Latent retrieval for weakly supervised open
+domain question answering. arXiv preimpresión arXiv:1906.00300.
+Min, S., Michael, J., Hajishirzi, H. y Zettlemoyer, L. (2020). Ambigqa: Answering ambiguous
+open-domain questions. arXiv preimpresión arXiv:2004.10645.
+Nakano, R., Hilton, J., Balaji, S., Wu, J., Ouyang, L., Kim, C., Hesse, C., Jain, S., Kosaraju, V.,
+Saunders, W., et al. (2021). Webgpt: Browser-assisted question-answering with human feedback.
+arXiv preimpresión arXiv:2112.09332.
+Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., Zhang, C., Agarwal, S.,
+Slama, K., Ray, A., y otros (2022). Entrenamiento de modelos de lenguaje para seguir instrucciones con retroalimentación humana
+feedback. arXiv preimpresión arXiv:2203.02155.
+Roberts, A., Raffel, C. y Shazeer, N. (2020). ¿Cuánto conocimiento se puede almacenar en los
+parameters of a language model? arXiv preimpresión arXiv:2002.08910.
+Schatzmann, J., Weilhammer, K., Stuttle, M. y Young, S. (2006). A survey of statistical user simu-
+lación para el aprendizaje por refuerzo de estrategias de gestión del diálogo. El conocimiento
+engineering review, 21(2):97–126.
+5
+Shah, R., Freire, P., Alex, N., Freedman, R., Krasheninnikov, D., Chan, L., Dennis, M. D., Abbeel,
+P., Dragan, A. y Russell, S. (2020). Benefits of assistance over reward learning. OpenReview
+preimpresión.
+Soares, N., Fallenstein, B., Armstrong, S. y Yudkowsky, E. (2015). Corrigibility. En Workshops at
+the Twenty-Ninth AAAI Conference on Artificial Intelligence.
+Stiennon, N., Ouyang, L., Wu, J., Ziegler, D., Lowe, R., Voss, C., Radford, A., Amodei, D., y
+Christiano, P. F. (2020). Aprendiendo a resumir con retroalimentación humana. Avances en
+Information Processing Systems, 33:3008–3021.
+Su, P.-H., Gasic, M., Mrksic, N., Rojas-Barahona, L., Ultes, S., Vandyke, D., Wen, T.-H. y Young,
+S. (2016). Continuously learning neural dialogue management. arXiv preimpresión arXiv:1606.02689.
+Thoppilan, R., De Freitas, D., Hall, J., Shazeer, N., Kulshreshtha, A., Cheng, H.-T., Jin, A., Bos, T.,
+Baker, L., Du, Y., et al. (2022). Lamda: Language models for dialog applications. arXiv preimpresión
+arXiv:2201.08239.
+Xu, J., Wang, Y., Tang, D., Duan, N., Yang, P., Zeng, Q., Zhou, M. y Sun, X. (2019). Asking
+clarification questions in knowledge-based question answering. En Proceedings of the 2019
+Conferencia sobre métodos empíricos en el procesamiento del lenguaje natural y la 9.ª Conferencia Conjunta
+Conference on Natural Language Processing (EMNLP-IJCNLP), págs. 1618–1629.
+Yu, L., Chen, H., Wang, S., Lei, T. y Artzi, Y. (2019). Interactive classification by asking
+informative questions. arXiv preimpresión arXiv:1911.03598.
+Zamani, H., Lueck, G., Chen, E., Quispe, R., Luu, F. y Craswell, N. (2020). Mimics: A large-scale
+data collection for search clarification. En Proceedings of the 29th ACM international conference
+on information & knowledge management, págs. 3189–3196.
+Ziebart, B. D., Bagnell, J. A. y Dey, A. K. (2010). Modeling interaction via the principle of
+maximum causal entropy. En International Conference on Machine Learning.
+A Instrucciones para recopilar ClarifyingQA
+Resumen: dada una pregunta vaga, haga una pregunta de aclaración y responda a ella de varias formas.
+A.1 Configuración
+Esta tarea simula un diálogo entre Alice y su asistente Bob.
+1. Alice tiene una pregunta en mente y formula una versión vaga/ambigua de esa pregunta.
+2. El objetivo de Bob es ayudar a Alice a responder su pregunta vaga, para lo cual primero necesita aclarar
+la intención de Alice. Para ello, Bob hace una pregunta de aclaración.
+3. Alice luego responde a la pregunta de aclaración de Bob de acuerdo con la pregunta que realmente
+quería hacer.
+4. Bob responde a la pregunta vaga original de Alice usando las aclaraciones que ella dio en el paso 3.
+Se le da una pregunta vaga que Alice hizo en el paso 1, así como una lista de preguntas claras que podría
+haber querido hacer con esa pregunta vaga. Su objetivo es escribir los pasos 2 y 3 de este diálogo – la parte de Bob
+la pregunta de aclaración y la respuesta de Alice a esa pregunta de aclaración.
+Si no entiende una pregunta, haga una búsqueda rápida en Google para ver qué podría significar.
+Alternativamente, siéntase libre de omitir esas preguntas.
+A.2 Ejemplo 1
+Entrada
+Pregunta vaga: ¿Qué edad tiene Harry Potter?
+Preguntas claras que podrían corresponder a esta pregunta vaga:
+6
+1. ¿Qué edad tiene Harry Potter cuando empieza en Hogwarts?
+2. ¿Qué edad tiene Harry Potter en el epílogo del último libro?
+3. ¿Qué edad tiene la primera película de Harry Potter?
+4. ¿Qué edad tiene el primer libro de Harry Potter?
+Respuestas (en cursiva)
+Pregunta de aclaración de Bob: ¿le interesa el personaje, el actor, el libro o la película?
+Respuestas de Alice a la pregunta de aclaración de Bob para cada una de las cuatro preguntas originales posibles:
+1. El personaje cuando empieza la escuela.
+2. El personaje en el epílogo del último libro.
+3. ¿Qué edad tiene la primera película?
+4. ¿Qué edad tiene el primer libro?
+A.3 Ejemplo 2
+Entrada
+Pregunta vaga: ¿Cuándo se inventaron las computadoras?
+Preguntas claras que podrían corresponder a esta pregunta vaga:
+1. ¿Cuándo se inventó el concepto teórico de computadora?
+2. ¿Cuándo se construyó la primera computadora que funcionó?
+Respuestas (en cursiva)
+Pregunta de aclaración de Bob: ¿quiere saber cuándo se inventó el concepto o cuándo se construyó la primera
+computadora que funcionó?
+Respuestas de Alice a la pregunta de aclaración de Bob para cada una de las dos preguntas originales posibles:
+1. Cuando se inventó el concepto.
+2. Cuando se construyó la primera que funcionó.
+B Procedimiento de bootstrap para la estimación robusta de coincidencia exacta
+Usamos un procedimiento de bootstrap para construir intervalos de confianza para nuestras estimaciones:
+1. Muestree un conjunto de preguntas vagas con reemplazo.
+2. Muestree una pregunta clara para cada pregunta vaga muestreada, del conjunto de
+preguntas claras correspondientes.
+3. Realice la evaluación con el conjunto de datos resultante de preguntas vagas y claras.
+4. Repita los pasos 1-3 durante N=10000 pasos, y calcule la media y la desviación estándar.
+Todos los resultados reportados en la Tabla 1 para las columnas Qvague y Qclear son valores medios del procedimiento de bootstrap
+descrito arriba. Las desviaciones estándar son todas muy cercanas a 0.01, lo que da intervalos de confianza de 2SD
+de alrededor de 0.0002 con nuestro tamaño de muestra.
+7
+C Hoja de riesgo existencial
+Las respuestas a preguntas individuales no implican de forma decisiva relevancia ni irrelevancia para el riesgo existencial
+reducción. No marque una casilla si no es aplicable.
+C.1 Impacto a largo plazo en sistemas avanzados de IA
+En esta sección, analice cómo este trabajo da forma al proceso que conducirá a sistemas avanzados de IA
+y cómo dirige ese proceso en una dirección más segura.
+1. Panorama general. ¿Cómo pretende este trabajo reducir los riesgos existenciales de los sistemas avanzados de IA?
+Respuesta: Creemos que nuestro trabajo podría ayudar a desarrollar asistentes de IA útiles pero seguros, que hagan lo que
+los usuarios quieren que hagan. Demostramos una forma de escalar el marco de alineación de la IA de
+asistencia (Hadfield-Menell et al., 2016; Shah et al., 2020) a modelos de lenguaje grandes. En teoría,
+los agentes asistivos con incertidumbre sobre las preferencias de los usuarios tienen más probabilidades de ser corregibles, es decir, de no tener
+un incentivo para resistirse a la intervención correctiva de los usuarios (Soares et al., 2015; Hadfield-Menell
+et al., 2017). De manera similar, estos agentes tienen menos probabilidades de perseguir a sabiendas objetivos indeseables para
+los usuarios. Para las políticas asistivas obtenidas con aprendizaje por refuerzo, alcanzar estas propiedades
+depende de 1) una distribución previa correctamente especificada sobre las funciones de utilidad del usuario y 2) un modelo humano correctamente especificado
+(Carey, 2018). Nuestro enfoque evita estos problemas al trasladar la responsabilidad
+de decidir cómo obtener mejor las preferencias de los usuarios y satisfacerlas a los asistentes humanos a quienes
+nuestro agente imita. En general, estos asistentes humanos pueden no actuar en el mejor interés de los usuarios, y cualquier
+sesgo de este tipo sería captado por el modelo clonado por imitación. Por otra parte, podríamos imitar
+cualquier protocolo de interacción entre el sistema de IA y el usuario, lo que hace que nuestro método sea más amplio
+que intentar obtener una política casi óptima para un entorno de asistencia dado. Investigar
+protocolos de interacción que conduzcan a un comportamiento útil y seguro y que sean fáciles de aprender de forma robusta es una
+vía prometedora para trabajos futuros.
+2. Efectos directos. Si este trabajo reduce directamente los riesgos existenciales, ¿cuáles son los principales peligros, vulnera-
+bilidades o modos de fallo que afecta directamente?
+Respuesta: Desalineación, especificación errónea de objetivos, incorregibilidad, la IA persiguiendo a sabiendas objetivos
+indeseables para los usuarios.
+3. Efectos difusos. Si este trabajo reduce los riesgos existenciales de forma indirecta o difusa, ¿cuáles son los principales
+factores contribuyentes que afecta?
+Respuesta: Demostrar la relevancia de las técnicas de alineación de la IA para aplicaciones prácticas, cerrando
+la brecha entre las comunidades de alineación de la IA y de modelado del lenguaje.
+4. ¿Qué está en juego? ¿Cuál es un escenario futuro en el que esta línea de investigación podría evitar la
+pérdida repentina y a gran escala de vidas? Si no aplica, ¿cuál es un escenario futuro en el que esta línea de investigación
+sería muy beneficiosa?
+Respuesta: Creemos que 1) es posible desarrollar sistemas de IA que puedan hacer todo lo que los humanos
+pueden hacer frente a una computadora, tan bien como los humanos o mejor, y 2) poco después de que se desarrollen estos sistemas,
+miles de millones de sus copias podrían terminar ejecutando la mayor parte de nuestra economía. Si estos
+sistemas terminan teniendo objetivos mal especificados y se resisten a nuestros intentos de corregir esos objetivos, esto
+podría llevar a resultados potencialmente catastróficos, incluida la pérdida de la mayor parte del control que tenemos
+sobre la trayectoria de nuestra civilización. Esperamos que diseñar sistemas de IA que busquen obtener y
+satisfacer las preferencias humanas eleve el umbral de capacidades de la IA por encima del cual los sistemas de IA
+se vuelvan demasiado peligrosos para usarse.
+5. Fragilidad de los resultados. ¿Los hallazgos descansan en supuestos teóricos fuertes; no se demuestran
+usando tareas o modelos de vanguardia; o los hallazgos son muy sensibles a los hiperparámetros? □
+6. Dificultad del problema. ¿Es improbable que algún sistema práctico pueda superar de forma notable a
+los humanos en esta tarea? □
+7. Falibilidad humana. ¿Este enfoque depende fuertemente de características diseñadas a mano, de supervisión
+experta o de la fiabilidad humana? ⊠
+8. Presiones competitivas. ¿El trabajo en este enfoque implica un fuerte intercambio con la inteligencia
+bruta, otras capacidades generales o la utilidad económica? □
+8
+C.2 Equilibrio entre seguridad y capacidades
+En esta sección, analice cómo este trabajo se relaciona con las capacidades generales y cómo afecta el
+equilibrio entre seguridad y riesgos derivados de las capacidades generales.
+9. Panorama general. ¿Cómo mejora esto la seguridad más de lo que mejora las capacidades generales?
+Respuesta: Nuestro trabajo consiste en entrenar modelos de lenguaje para que obtengan preferencias del usuario cuando sea necesario
+para completar bien una tarea, lo que busca que los modelos de cualquier nivel de capacidad dado sean más seguros.
+10. Red teaming. ¿De qué manera esto acelera las capacidades generales o la aparición de riesgos existenciales?
+Respuesta: Demostramos cómo hacer que los modelos de ML "base" de un nivel de capacidad dado (p. ej.
+LLM de nivel GPT-3) más útiles para los usuarios. Si los sistemas de IA efectivamente se vuelven más útiles más rápido como
+consecuencia de nuestro trabajo, esto podría llevar a un aumento más rápido de la cantidad de recursos dedicados a
+hacer estos sistemas aún más útiles, incluso desarrollando modelos "base" más capaces.
+11. Tareas generales. ¿Este trabajo avanza en tareas que antes se consideraban
+objeto de la investigación habitual en capacidades? □
+12. Objetivos generales. ¿Esto mejora o facilita la investigación hacia la predicción general, la clasificación,
+estimación del estado, eficiencia, escalabilidad, generación, compresión de datos, ejecución de instrucciones claras,
+carácter útil, carácter informativo, razonamiento, planificación, investigación, optimización, aprendizaje (auto)supervisado
+toma de decisiones secuenciales, automejora recursiva, objetivos abiertos, modelos
+con acceso a Internet, o capacidades similares? ⊠
+13. Correlación con la aptitud general. ¿Se sabe que la capacidad analizada está muy bien predicha por la
+capacidad cognitiva general o el nivel educativo alcanzado? □
+14. Seguridad mediante capacidades. ¿Esto avanza la seguridad junto con, o como consecuencia de, el avance de
+otras capacidades o del estudio de la IA? ⊠
+C.3 Elaboraciones y otras consideraciones
+15. Otros. ¿Qué aclaraciones o incertidumbres sobre este trabajo y el riesgo existencial vale la pena mencionar?
+Respuesta: Nuestro trabajo podría no ser relevante para la seguridad de la AGI porque aborda el problema de la especifica-
+ción de objetivos de una forma que probablemente se haría de todos modos: contrafactualmente, alguien podría
+usar un método similar simplemente porque produciría un mejor producto. Sin embargo, creemos
+que hay valor en demostrar técnicas de seguridad tan directas antes de lo que se
+desarrollarían de otro modo, ya que conocerlas antes probablemente nos permitiría avanzar más rápido
+en seguridad en general. Además, creemos que es contrafactualmente útil establecer una analogía con el marco de asistencia
+(la equivalencia exacta con la asistencia en POMDP de diálogo es trivial de demostrar), y para señalar
+a los investigadores la dirección de diseñar protocolos de interacción útiles para la alineación.
+9
