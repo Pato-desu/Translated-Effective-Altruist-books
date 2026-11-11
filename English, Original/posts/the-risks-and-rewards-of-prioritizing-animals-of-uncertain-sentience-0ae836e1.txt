@@ -1,0 +1,660 @@
+The Risks and Rewards of Prioritizing Animals of Uncertain Sentience — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Prioritizing animals of uncertain sentience
+Worldview Investigations
+Oct. 16
+Written By
+Rethink Priorities
+This post was written by Hayley Clatterbuck, a Philosophy Researcher on Rethink Priorities’ Worldview Investigations Team (WIT). It's part of WIT's
+CURVE Sequence
+: “Causes and Uncertainty: Rethinking Value in Expectation.” The aim of this sequence is twofold: first, to consider alternatives to expected value maximization for cause prioritization; second, to evaluate the claim that a commitment to expected value maximization robustly supports the conclusion that we ought to prioritize existential risk mitigation over all else.
+Read the introduction to the CURVE series
+Summary
+Expected value (EV) maximization is a common method for making decisions across different cause areas. The EV of an action is an average of the possible outcomes of that action, weighted by the probability of those outcomes occurring if the action is performed.
+When comparing actions that would benefit different species (e.g., malaria prevention for humans, cage-free campaigns for chickens, stunning operations in shrimp farms), calculating EV includes assessing the probability that the individuals it affects are sentient.
+Small invertebrates, like shrimp and insects, have relatively low probabilities of being sentient but are extremely numerous. But because these probabilities aren’t
+extremely
+low—closer to 0.1 than to 0.000000001—the number of individuals carries enormous weight. As a result, EV maximization tends to favor actions that benefit numerous animals with relatively low probabilities of sentience over actions that benefit larger animals of more certain sentience.
+Some people find this conclusion implausible (or even morally abhorrent). How could they resist it?
+Hierarchicalism
+is a philosophical view that implies, among other things, that human suffering counts more than equal amounts of nonhuman animal suffering. When we calculate EV, this view tells us to assign extra value to the suffering of humans and other large animals. However, hierarchicalism is difficult to defend: it seems to involve an unmotivated and arbitrary bias in favor of some species over others.
+Another option is to reject EV maximization itself. EV maximization has known problems, one of which is that it renders fanatical results; it instructs us to take bets that have an extremely low chance of success as long as the potential payoffs are large enough. We explore alternative decision procedures incorporating
+risk aversion.
+There are different ways to be risk averse that have different consequences for interspecies comparisons:
+Aversion to worse-case outcomes
+will favor actions to benefit numerous animals with relatively low probabilities of sentience even more strongly than EV maximization.
+Aversion to inefficacy,
+a desire that your actions make a positive difference—will favor actions to benefit species of more certain sentience.
+Aversion to acting on ambiguous or uncertain probabilities
+will either favor actions to benefit species of more certain sentience or to do more research on invertebrate sentience.
+We apply formal models of risk-adjusted expected value to a test comparison among human, chicken, and shrimp interventions.
+In a two-way comparison between humans and shrimp, risk-neutral EV and risk aversion about worse-case outcomes heavily favor helping shrimp over humans.
+Risk aversion about inefficacy favors helping humans over shrimp.
+Chickens (i.e., very numerous animals of likely sentience) are favored over both shrimp and humans on all of EV maximization, worse-case, and difference-making risk aversion.
+Our goal here is not to defend a particular attitude toward risk or to recommend any particular practical conclusion. That would require more work. Our main point is that our attitudes about risk can dramatically affect our decisions about how to prioritize human and non-human animal interventions without appealing to often-criticized philosophical assumptions about human superiority.
+1. Introduction
+A central challenge for cause prioritization in EA concerns choices between interventions to benefit one species rather than another. Can we achieve the most good by investing in malaria nets, cage-free campaigns for chickens, or to more humanely kill farmed shrimp? These choices present unique challenges when assessing cost-effectiveness, for they require that we find some way to compare interspecies measures of well-being. This is especially challenging when considering species for which we have little knowledge of whether members are sentient and how much they are able to suffer or enjoy. How, then, should we choose between helping humans versus shrimp or chickens versus mealworms?
+A typical way of evaluating relative cost-efficiency is to calculate the expected value of actions of comparable cost. For each, we consider the value of the possible outcomes of that action, weighted by the probability of those outcomes obtaining if the action is performed. In the context of interspecies comparisons, determining the expected value (EV) of an action includes assessing the probability that the individuals it affects are sentient.
+[1]
+As Sebo (
+2018
+) puts one (strong) version of the view, “we are morally required to multiply our degree of confidence that they are sentient by the amount of moral value that they would have if they were, and to treat the product of this equation as the amount of moral value that they actually have”. To simplify matters, for an action A affecting species S
+[2]
+, we will assume that:
+EV(A) = Pr(S is sentient) x V(A given that S is sentient) + Pr(S is not sentient) x V(A given that S is not sentient)
+As we will see, using EV maximization to make cross-species comparisons robustly favors actions to benefit numerous animals of dubious sentience, that we ought to reinvest (perhaps all of our) money away from malaria nets or corporate campaigns to end confinement cages in pig farming and toward improving the lives of the teeny, teeming masses. Many will find this result, which Sebo (
+2023
+) dubs “the rebugnant conclusion”, implausible at best and morally abhorrent at worst.
+One way of avoiding the problem is to continue to use EV maximization to guide our actions but to give extra value to the suffering of humans and other large animals. However, this seems to us to embody an unmotivated and arbitrary bias in favor of some species over others. Instead, we explore three alternatives to EV maximization that incorporate sensitivity to risk. While one form of risk aversion lends even more support to actions favoring numerous animals of dubious sentience, the other two forms favor actions that benefit humans and other large animals. This result is valuable in its own right, showing how there are reasonable decision procedures that avoid the result that we ought to benefit small invertebrates. It also serves as a case study in how
+EV maximization can go wrong
+and how sensitivity to risk can significantly affect our decision-making.
+2. Results of EV maximization
+It is an interesting fact about our world that animals with low probabilities of sentience tend to be more numerous than animals with high probabilities of sentience. The same holds among farmed animals, so it is easier to enact interventions that affect large numbers of the former. As a result, there is a strong negative correlation between the probability of S’s sentience and the consequences of our actions for aggregative well-being if S is sentient.
+For example, it is estimated that 300 million cows, 70 billion chickens (not including egg-laying hens), 300-620 billion
+shrimp
+, and upwards of a trillion
+insects
+are killed each year for agricultural purposes. While the probability that insects or shrimp are sentient is much lower than for other species, as we can see, the number of individuals that would be affected by our actions may be orders of magnitude larger. Likewise, even if we assume that sentient insects or shrimp would experience less suffering or enjoyment, and therefore that the value of wellbeing enhancements will be smaller than for other animals
+[3]
+, the sheer number of individuals affected threatens to overcome this difference. As a result, EV maximization seems to suggest that we should very often prioritize numerous animals of dubious sentience (the many small) over large animals of more probable sentience (the few large).
+For example
+[4]
+, consider an action that would benefit 100 million farmed shrimp. Before the intervention, each shrimp’s life contains -.01 units of value, and the action would increase this to 0. Compare this to an action of similar cost that would benefit 1000 humans and would increase each individual’s value from 10 to 50. Assume that the affected humans are certainly sentient, and the probability that shrimp are sentient is .1.
+[5]
+To calculate the expected value of these actions and of doing nothing, we add up the value of shrimp lives and the value of human lives that would result from our action if shrimp are sentient and multiply this by the probability that shrimp are sentient. We add this to the value that results if shrimp are not sentient (0 shrimp value + whatever human value results), multiplied by the probability that they are not sentient. We get the following:
+EV(Do nothing)
+=.1(-1,000,000 shrimp + 10,000 human) + .9(0 shrimp + 10,000
+human) = -90,000
+EV(Help Shrimp)
+= .1(0 + 10,000) + .9(0 + 10,000) = 10,000
+EV(Help humans)
+= .1(-1,000,000 + 50,000) + .9(0 + 50,000) = -50,000
+Thus, even if we assume that shrimp have a low probability of sentience
+[6]
+and can only experience small improvements in welfare, actions toward shrimp can have much higher EV than actions toward humans. If we choose our actions based on what maximizes EV, then we should very often prioritize helping the many small over the few large. If this conclusion is unacceptable, then either we have misjudged the values or probabilities we used as inputs to our EV calculations or there is something wrong with using EV maximization to make these decisions.
+3. Dissatisfaction with results of EV maximization
+The moral decision procedure used above makes most sense within welfare consequentialist theories
+[7]
+that (a) ground value in subjective experiences of sentient creatures, (b) require us to maximize total value, and (c) for which units of value are additive and exchangeable.
+Moral frameworks that ground value in other properties, such as rationality or relationships, will be less likely to favor benefits for the many small.
+[8]
+For example, a Kantian who places moral value on rationality (strictly interpreted) will find much less value in the lives of shrimp or insects. A contractualist that places value on certain relations among individuals will think that the human world contains significant sources of additional value.
+[9]
+Likewise for moral frameworks in which units of value are not exchangeable. For example, on Nussbaum’s (
+2022
+) capabilities approach, justice requires that all individuals achieve some threshold level of various capacities, and losses to one individual or species cannot be compensated for by benefits to another.
+Among those sympathetic to the EV maximization decision procedure, including (we suspect) many EA proponents, there is a different, perhaps quite common, response. We have assumed that interspecies expected value comparisons will be impartial, in the sense that all well-being or hedonic experience is equally valuable, regardless of who experiences it. Though a human might have suffering that is more intense, or arises from different sources, or is longer-lasting than that of a shrimp, a given amount of suffering does not matter more just because a human is experiencing it.
+In contrast, hierarchicalist views give more weight to the well-being or hedonic experiences of some species over others, even if their phenomenal experiences are identical.
+[10]
+Species weights act as a multiplier on values.
+[11]
+We will denote the weight for a species S as w
+s
+. For example, you might think that human pain matters 10x more than shrimp pain, which you can represent with a w
+shrimp
+of 1 and a w
+human
+of 10. In that case, the EVs of candidate actions become:
+EV(Help Shrimp) =
+.1[0(w
+shrimp
+)  + 10,000(w
+human
+)] + .9[0(w
+shrimp
+) + 10,000(w
+human
+)]
+= .1[0(1) + 10,000(10)] + .9[0(1) + 10,000(10)]
+= 100,000
+EV(Help humans) = .
+1[-1,000,000(w
+shrimp
+) + 50,000(w
+human
+)] + .9[0(w
+shrimp
+) +
+50,000(w
+human
+)]
+= .1[-1,000,000(1) + 50,000(10)] + .9[0(1) + 50,000(10)]
+= 400,000
+As we see, giving higher weight to humans can cause actions benefiting humans to have higher expected value than those benefiting lower animals.
+[12]
+However, we doubt that there are good justifications for hierarchicalism in general or for particular choices of weights. A first problem is that a choice of weight seems arbitrary. Even if humans matter more than shrimp, do they matter 2x more? 10x more? 100x more? It is hard to see how to answer this question in an objective way. If a choice of weights is unconstrained, different agents will be free to choose whichever weights will reproduce their own pre-theoretic judgments about cases.
+[13]
+Second, hierarchicalism holds that two identical phenomenal experiences could have different value, depending on who experiences them. If you think that value is largely grounded in the experiences of sentient creatures – the painfulness of their pain, the pleasure of their pleasure – then hierarchicalism will look like no more than an expression of bias, not something grounded in any real, morally relevant differences. By analogy, many people would likely place a much higher weight on the experiences of dogs than pigs, but it is unclear what could motivate this other than mere speciesism.
+4. Risk
+We think that there is a way to reject the conclusion that we ought to prioritize helping the many small over the fewer large that does not make questionable metaphysical assumptions about the relative value of humans and other animals. To make things as friendly as possible to the argument for the many small, we will assume that all well-being matters equally and that what we ought to do is a function of the well-being that would result.
+The change we will make is to permit some
+risk aversion
+, rather than requiring strict value maximization. Decision-makers often make choices that violate expected value (including utility) maximization because they are risk averse. That is, they are willing to accept a gamble that has a surer chance of a good outcome but lower expected value than a higher expected value bet for which good outcomes are less certain. We suggest that some reasonable risk attitudes that are sensitive to probabilities of sentience generate decision profiles that strongly resemble hierarchicalist views favoring humans and higher animals but rest on a much more justified basis.
+However, “risk aversion”, as loosely characterized, above can be realized by (at least) three distinct attitudes: a desire to avoid the worst-case outcomes; a desire to make a positive difference; and a desire to act on known over unknown probabilities. The first kind of risk aversion makes the case for helping numerous creatures of dubitable sentience even better. The second and third undermine it.
+5. Risk aversion as avoiding worst case outcomes
+5.1. Risk aversion about outcomes
+One kind of common risk aversion places more weight on the worst case outcomes and less weight on better case outcomes. For example, suppose that money does not have diminishing returns for you, such that you value every dollar equally, at least for the dollar amounts involved in the following bet.
+[14]
+I offer you a bet that pays you $200 if a fair coin lands heads and takes $100 from you if it lands tails. Since the E$V of this bet is .5(200)+.5(-100) =50 and the E$V of refusing the bet is 0, EVM recommends taking the bet. However, if you are risk averse, you might decline this bet; the chance of taking a loss of this magnitude is not compensated for by an equal chance of a greater return of that magnitude.
+In addition to the probabilities and values of various outcomes, formal accounts of risk aversion add a
+risk-weighting
+function, showing how much more decision weight is given to worst case over better case outcomes. Even if two agents agree on all of the relevant probabilities and outcome values, they may still differ with respect to how much they care about avoiding the lowest value outcomes versus obtaining higher value outcomes.
+What does this kind of risk aversion say about the choice to benefit numerous animals of dubious sentience versus benefitting fewer animals of more certain sentience? When comparing these two actions (here, actions to benefit shrimp or people), there are two states of the world that are relevant:
+shrimp are sentient and are suffering in enormous numbers
+shrimp are not sentient, and money spent on them would otherwise spare a small number of human children from premature death
+The worst-case outcome here is that shrimp are sentient and suffering in enormous numbers. If we are risk averse, in the sense proposed here, then we will put
+even more
+weight on shrimp suffering than we otherwise would.
+5.2. A formal model of risk aversion about outcomes
+We can see how incorporating risk matters by using a risk-adjusted decision theory. Different formal theories incorporate risk aversion in different ways. For example, Buchak’s (
+2013
+) Risk-Weighted Expected Utility (REU) theory ranks outcomes from worst to best and introduces risk as a function of an outcome’s probability, with better outcomes getting a lower share of the probability weight. Bottomley and Williamson’s (
+2023
+) Weighted-Linear Utility Theory introduces risk as a function of utility, with lower utility outcomes receiving more weight than higher utility outcomes.
+For ease of explication
+[15]
+, we will use REU to evaluate how risk aversion, in this sense, affects one’s decisions in light of uncertainty about sentience. Above, we calculated the EV of an action by a weighted average of the value of its outcomes:
+Equivalently, it can be calculated by assuming a baseline certainty of getting the utility of the worst case outcome (x
+1
+), plus the probability that you get the additional value of the second-worst outcome (x
+2
+) compared to the worst case, and so on. In the bet I offered you above, you have a certainty of getting at least -$100, plus a .5 chance of getting $300 more than this, for a total expected value of $50.
+Formally, take the list of outcomes of A from worst to best to be {E
+1
+, x
+1
+; …; E
+n
+, x
+n
+}, where x
+i
+is the consequence that obtains in event E
+i
+(so E
+1
+is the event of the worst case outcome obtaining, and x
+1
+is that outcome’s value). Now:
+Now that we have an ordered list from worst- to best-case outcomes, we can introduce an extra factor, r, that places more decision weight on those worst case outcomes. REU does this, in effect, by reducing the probabilities of the better outcomes (and redistributing probability toward worse outcomes). Buchak’s working example of r takes the square of p,  r = p
+2
+.
+In the bet I offered you, you had a .5 chance of getting $300 more than the worst case scenario. You put less weight on this outcome by squaring its probability, treating it as if it had a .25 chance of obtaining for the purpose of decision-making. You now have a certainty of getting at least -$100 and now a .5
+2
+chance of getting $300 more, so your risk-weighted value is -$100 + .25(+$300) = -$25. This is worse, by your lights, than refusing the bet.
+Formally, the REV of a bet A is:
+Using Buchak’s risk weighting,
+p
+2
+, and a .1 chance of shrimp sentience, the REVs of candidate actions are:
+Action
+EV
+REV
+Do nothing
+-90,000
+-180,000
+Help shrimp
+10,000
+10,000
+Help humans
+-50,000
+-140,000
+The result of using a risk-averse decision procedure that seeks to avoid the worst scenarios in place of risk-neutral expected value maximization is that shrimp are favored even more strongly over humans. Shrimp would be favored for even lower probabilities of sentience and smaller benefits for shrimp well-being. In effect, it embodies a “better safe than sorry” approach that treats shrimp sentience as more probable than it is in order to avoid scenarios with immense amounts of suffering.
+6. Risk aversion as avoiding inefficacy
+Expected value maximization dictates that we often ought to accept predictable losses if the upside is worth it.
+[16]
+Putting more weight on worst case outcomes can lead us to accept even higher probabilities of loss. However, there is another kind of risk attitude that we think is both prevalent and undertheorized, and which tells against the kind of predictable losses inherent in gambles on lower animal welfare.
+6.1. Difference-making risk aversion
+Imagine that Jane, a major player in philanthropic giving, is convinced by the expected value maximization argument. She withdraws millions of dollars of funding for programs that decrease (human) child malnutrition and redirects them toward improving conditions at insect farms. Her best estimate of the probability that the insects are sentient is .01. However, the vast number of insect lives she can affect outweighs the sure thing of helping a smaller number of humans.
+One might reasonably protest: but you are almost certain that your money is doing absolutely nothing! There is only a 1% chance that the world is better as a result of your action, and a 99% chance that you have thrown away millions of dollars. On the other hand, if you had given to child malnutrition, you could be certain that sentient creatures’ lives improved as a result of your action. That is a massively risky thing that you did!
+Here, the risk attitude in question is an aversion to
+inefficacy
+, to one’s actions coming to naught. For a
+difference-making risk averse
+agent, in this sense, the probability that her action makes a difference matters, and it matters in such a way that decreases in the probability of difference-making do not cleanly trade-off with increases in possible payoffs. In addition to caring about the overall value her actions creates, she is also concerned with avoiding making things worse or achieving nothing with her actions.
+[17]
+Thus, she seeks some balance between maximizing utility and minimizing futility.
+[18]
+6.2. The risk of wasting money on non-sentient creatures
+In the context of decision-making about species with different probabilities of sentience, an agent that is risk-averse about inefficacy will behave very similarly to a hierarchicalist who places more weight on the suffering of higher animals. However, she will do so
+not
+because she thinks that lower animals matter less, even if they are sentient, but because they have a lower probability of being sentient, and hence, a lower probability of mattering.
+Take a ranking of species from highest probability of sentience (humans), high but intermediate (chickens), low but intermediate (fish, shrimp), to lowest (nematodes). A difference-making risk aversion weight is used to penalize those species for whom interventions will have a low probability of making a difference. The result is that the well-being of probably sentient animals will matter more for the purposes of decision-making because they reduce the probability of futility.
+If this kind of risk aversion is rational, then there is a reasonable decision-making procedure that roughly recapitulates hierarchicalism without committing to dubious metaphysical or ethical assumptions about the value of suffering in different creatures. There will, though, be some significant differences in the decision profiles of the futility-averse and the hierarchicalist. First, while it is possible to replicate a given hierarchical weighting with a given futility weighting, they need not be identical. For example, it might be the case that there is no plausible futility weighting that makes, say, humans a million times more important than shrimp.
+[19]
+Second, since futility judgments will be directly influenced by the probability of sentience, risk weightings will be sensitive to new information about the probability of sentience while hierarchicalism may not be (for example, a hierarchicalist might readily accept that shrimp are sentient but still give them a very low weight).
+Lastly, someone who is concerned with minimizing the risk of futility may avoid single-shot bets with a low probability of success but accept combinations of bets that collectively make success probable. A hierarchicalist would not deem the combination of gambles to be any better than the gambles individually. For example, Shane might resist spending money on shrimp welfare because he thinks that there is a .1 chance that shrimp are sentient. However, he might accept distributing money among shrimp, honeybees, black soldier fly, mealworms, and silkworms; though he thinks each of these has a .9 chance of making no difference, he believes that the probability that the combination of bets will make a difference is .5.
+If Shane’s reasoning is correct, then risk aversion about efficacy might not avoid the conclusion that we ought to help the many small. Instead, it might tell us that we should distribute our money across different species of dubious sentience in order to optimize the combined probability of making a difference and maximizing value. However, there are reasons to doubt this. The probabilities of different gambles add up only when the outcomes of those gambles are independent of one another. Are facts about honeybee sentience independent of facts about black soldier fly sentience? That is, do the prospects of their sentience rise and fall together? If sentience has separately evolved in different lineages, then perhaps they are largely independent of one another. If you think that sentience is phylogenetically conserved and hard to evolve, then it is more likely that all invertebrates are sentient or that none of them are.
+[20]
+6.3. Is difference-making risk aversion rational?
+Difference-making risk aversion has received less attention than the kind of worst-case scenario risk aversion discussed above, and much of the existing discussion is quite negative about it. Most prominently, Greaves,
+et al.
+(
+2022
+) argue that the person who is difference-making risk averse cares that
+she
+be the cause of good things, not just that good things happen; while this might add meaning to her life, her preference is ultimately about her, not the world. Thus, if what you care about is the state of the world, then you should care about maximizing expected value, not making a difference (in the event these come apart).
+[21]
+It might be correct that some people might give to charity because they want to be the cause of value in the world; perhaps they want the praise or psychological benefits that come with making an actual difference, not just raising the probability of a good outcome. There are also moral theories that place importance on the kind of relationship between one’s actions and value. For example, if you think that there is a morally relevant difference between being the cause of something terrible and merely failing to prevent it, then there is something morally important about the difference that
+you
+make.
+We also think there is more to be said for difference-making risk aversion from an agent-neutral perspective. After all, you might object to
+Jane
+giving all of her money to help shrimp, even if you are not causally implicated in her action. Take the status quo as the baseline state and consider 1000 possible futures. The expected value maximizer maintains that even if an action makes only 1 of these possible futures better than the status quo, that is alright as long as that 1 world is sufficiently great. An inefficacy-averse reasoner maintains that the number of possible futures that are better than the status quo also matters, intrinsically. It is a good thing that the future is better than it would have been if we failed to act, and she is willing to trade off some chances of great futures for a greater chance that the future we have will be better because of our actions.
+6.4. A formal model of difference-making risk aversion
+To our knowledge, there are no comprehensive normative models of difference-making risk aversion, but we can give an idea of what one would look like by modifying the REU used above.
+[22]
+Because the risk-averse agent cares about the
+difference
+that an action makes, her decision procedure will not just include information about the outcomes of her action but will also take into account the difference between the states of affairs that resulted from her action and states of affairs that would have obtained had she not so acted.
+Take x
+i
+to be the value of a possible outcome of A and y
+i
+to be the value that would obtain in that outcome if one were to do nothing. Define the difference making value, d
+i
+, as (x
+i
+– y
+i
+). Now, take the list of outcomes of A from worst to best with respect to the difference made in state of the world E
+i
+, {E
+1
+; d
+1
+; ...; E
+n
+, d
+n
+). A risk averse agent will put more weight on states of the world with lower d
+i
+values; negative d
+i
+values are ones in which your action made things worse, d
+i
+=0 means that your action did nothing. Call this weighting factor,
+m
+.
+For example, consider the following set of bets from Greaves,
+et al.
+(2022):
+Someone who is maximizing difference-making (and hence, maximizing expected utility) will be indifferent between A and C and will prefer bet B to bets A and C:
+Expected Value Difference(A) = .5(10) + .5(10) = 10
+EVD(B) = .5(0) + .5(20+x) = 10 + .5x
+EVD(C) = .5(0) .5(20) = 10
+However, “for any DMRA [difference-making risk averse] agent, there is some (sufficiently small) value of
+x
+such that the agent strictly prefers
+A
+to
+B
+” (
+ibid.
+, 12). A risk-averse
+m
+weight will place higher weight on those outcomes for which the value of d
+is lower. Following Buchak’s example, we can choose
+m
+=
+p
+2
+. Now, the DMRA of the bets above are:
+DMRAEV(A) = 10
+DMRAEV(B) =  0 + .5
+2
+(20+x) = 5 + .25x
+DMRAEV(C) = 0 + .5
+2
+(20) = 5
+Thus, someone who cares about avoiding futility will prefer taking a bet (A) that increases the chances of making a difference, even if the expected value (and expected difference made) is lower.
+In our case of intervening to help shrimp or help people, the difference-making risk averse agent gives more weight to those outcomes in which her action resulted in an increase in value. Though helping shrimp would make more of a difference if shrimp are sentient, there is a high risk that helping shrimp would result in no increase in value whatsoever. Using a risk weighting
+m
+=
+p
+2
+, the DMRAEVs of candidate actions are as follows (with the expected difference made, DMEV, for comparison):
+Action
+DMEV
+DMRAEV
+Do nothing
+0
+0
+Help shrimp
+100,000
+10,000
+Help humans
+40,000
+40,000
+The result is that a difference-making risk averse agent should favor helping humans over helping shrimp when the probability of shrimp sentience is low.
+[23]
+Hence, there is a kind of risk aversion that yields the opposite result of EV maximization. If we care about our actions actually making a difference, then we should be leery of using resources on animals with a low probability of sentience.
+7. Risk as avoiding ambiguity
+Expected value calculations require utilities and probabilities as inputs. So far, we have treated the probability of sentience as reflecting our best estimate of the probability that species S has sentience. However, there are two kinds of uncertainty that might be packed into a probability assignment.
+For illustration, suppose that Matt and Pat both assign a .5 probability to the proposition that a particular coin will land heads on the next flip. Matt has seen this coin flipped 1000 times and has observed that it lands hands roughly 50% of the time. Pat, on the other hand, has no information whatsoever about the coin. As far as she knows, it might be fair or biased toward heads or tails (to any extent), so her credence in heads is spread out from 0 to 1. She assigns a probability of .5, the mean of this distribution, but this is an expression of pure ignorance.
+An agent who is risk averse about ambiguity or uncertainty avoids making bets where the probabilities are unknown. Suppose both Matt and Pat are ambiguity averse but otherwise risk neutral. We offer Matt and Pat a choice between the following bets:
+if the coin lands heads, you win $10, and if it lands tails, you lose $5 (EV = $2.5)
+you win a sure thing $1 (EV = $1)
+Matt will accept bet 1. Pat, depending on the extent of her aversion, may opt for bet 2. Because she is averse to acting on uncertainties, Pat will favor some bets with less ambiguous probabilities and lower EV over bets with more ambiguous probabilities and higher EV.
+The probabilities of sentience that we assign to shrimp or insects are not just low, they are also highly uncertain. While there is significant controversy about the correct way to assign probabilities of sentience, it is generally the case that we have better evidence and are more certain about assigning probabilities to the extent that a species is similar in certain respects to species that we know are sentient. The probability that humans are sentient is both extremely high and extremely certain. For animals like pigs or chickens, whose brains and behaviors are comparable to humans, we are confident in assigning a high probability of sentience. We are confident in assigning a low probability of sentience to rocks. However, for animals quite unlike us – animals like nematodes or mealworms – we are both uncertain that they are sentient and uncertain about how uncertain we should be that they are sentient.
+[24]
+Ambiguity aversion favors interventions toward humans and other higher animals over interventions for animals of dubious sentience. The problem is not just that shrimp have a low probability of sentience. It’s that given the state of our evidence, we shouldn’t be confident in any probability we assign to shrimp sentience,
+[25]
+and we should resist making bets on the basis of unknown chances.
+Typical EV maximization strategies deal with ambiguous probability intervals the same way it treats first-order uncertainty about outcomes.
+[26]
+For example, Pat takes the probability she assigns to (the coin has a 0% chance of landing heads) and multiplies this by the value of the bet if this is correct, and so on for all probability values in her interval. Therefore, uncertainty
+per se
+is not penalized.
+As Holden Karnofsky
+puts it
+, “the crucial characteristic of the EEV [Explicit Expected Value] approach is that it does not incorporate a systematic preference for better-grounded estimates over rougher estimates. It ranks charities/actions based simply on their estimated value, ignoring differences in the reliability and robustness of the estimates.”
+According to Karnofsky, ambiguity aversion is a strong reason to reject expected value maximization calculations using ambiguous probabilities. Karnofsky focuses largely on reasons for adopting ambiguity aversion as a general strategy. First, high uncertainty gambles will often have higher EV because they reserve some probability for very high value outcomes, not because there is a good reason to think they have a real objective chance of occurring but out of ignorance. Thus, EV maximization rewards investments in high variance outcomes purely because they have high variance and punishes more targeted and more certain investments. Thus, ambiguity neutrality rewards ignorance and disincentivizes grant seekers against seeking evidence that might reduce the variance in their predicted outcomes. Lastly, assigning a probability that reflects the mean of your uncertainty gives the veneer of precision. We risk forgetting the ignorance that lies at its root.
+Putting aside worries about perverse incentives, there are also reasons for avoiding making individual gambles involving unknown chances. In general, evidentialists maintain that it is irrational to act on insufficient evidence. Additionally, allowing ambiguity also makes you especially subject to
+Pascal’s mugging
+cases, in which tiny probabilities of astronomical values dominate expected value calculations. This threatens to undermine the “rebugnant conclusion” but only in favor of an even more implausible result. Suppose that you are highly uncertain about whether panpsychism (according to which all matter has some degree of consciousness) is true, so you assign a small but non-zero chance that rocks are sentient. Because the number of rocks is enormous compared to the number of animals of uncertain sentience, perhaps we ought to devote our resources to promoting rock welfare.
+[27]
+If you resist, on the basis that we have far better reasons for assigning non-zero probabilities to shrimp sentience than rock sentience, then you might be ambiguity averse to some degree.
+How should we incorporate ambiguity aversion into our formal models of decision?
+[28]
+One method would be to simply avoid decisions for which there are poor grounds for assigning probabilities (e.g. there is scant evidence or high disagreement). Another would be to develop a model that takes into account the EV of a decision and a penalty for the amount of uncertainty in its probability assignments.
+[29]
+Alternatively, one might adjust ambiguous probability assignments to reduce their variance. For example, in a
+Bayesian framework
+, the posterior expectation of some value is a function of both the prior expectation and evidence that one has for the true value. When the evidence is scant, the estimated value will revert to the prior.
+[30]
+Therefore, Bayesian posterior probability assignments tend to have less variance than the original ambiguous estimate, assigning lower probabilities to extreme payoffs.
+[31]
+What should an ambiguity-averse agent do when faced with decisions about helping numerous animals with low (and low confidence) probabilities of sentience versus less numerous animals with high (and high confidence) probabilities of sentience? One option is to eschew taking gambles on the former. We have better grounds for assessing the cost-effectiveness of interventions on humans than shrimp, so we should prefer these, despite the fact that they might have lower expected value.
+Another option is to put resources toward
+reducing our uncertainty
+about the sentience of various species. We should devote resources toward research into theories of consciousness, and the brains and behaviors of far-flung species, such as shrimp, nematodes, or black soldier flies. Here, we recommend using a
+value of information analysis
+, which allows you to determine “the price you’d pay to have perfect knowledge of the value of a parameter”. Given the enormous potential consequences of sentience among numerous animals, we suspect that the value of information about sentience is similarly very high.
+8. What about chickens?
+The expected value of an action to help a particular species will be a function of the probability that the species is sentient and the amount of welfare that would be created or suffering reduced by the intervention. The sheer number of the many small means that they will almost always have higher expected value than the few large. So far, we have been illustrating this trade-off between sentience and numerosity by selecting species with fairly extreme values of both - humans and shrimp - and showing that there are ways of rebutting the argument in favor of helping the many small even in extreme cases.
+However, given that EV is a function of sentience and numerosity, we should expect that the highest EVs will be found
+not
+in species that have high values of one feature and low values of another but rather in species that have intermediate values of both. While there might be good biological explanations for why numerosity and sentience tend to be negatively correlated, this trade-off is not set in stone. Indeed, the efficiency of Concentrated Animal Feeding Operations has made it possible to create enormous populations of animals with high probabilities of sentience, such as pigs, cows, chickens, or ducks.
+Here, we compare actions to benefit humans or shrimp with actions to benefit chickens. To recall, our hypothetical shrimp intervention would affect 100 million shrimp, raising them from a baseline value of -.01 to 0. A human intervention would affect 1000 people, raising them from a baseline of 10 to 50. Now consider an action to benefit chickens that would affect 1 million chickens, raising them from a baseline value of -1 to a value of 1.
+[32]
+While the probability that chickens are sentient is not as high as for humans, suppose that it is still quite high at .9. When calculating EVs, there are now three relevant states of the world to consider:
+[33]
+Humans, chickens, and shrimp are all sentient; probability = .1
+Humans and chickens are sentient, shrimp are not sentient; probability = .8
+Humans are sentient. Chickens and shrimp are not sentient; probability = .1
+As above, we add up the overall value for humans, shrimp, and chickens in each relevant state of the world, weighted by the probability of those states occurring. The results are as follows:
+Action
+EV
+REV
+Do nothing
+-990,000
+-1,279,900
+Help shrimp
+-890,000
+-980,000
+Help chickens
+810,000
+650,000
+Help humans
+-950,000
+-1,130,000
+As before, shrimp actions have a higher expected value than human actions. However, actions to help chickens have a
+much
+higher expected value than either. Notably, this is the case before we take any risk aversion into account. Hence, this comparison provides a risk-independent reason to reject an across-the-board preference for helping the many small. Expected value comparisons may benefit fairly numerous animals of fairly high sentience, not very numerous animals of low sentience. When we add risk aversion about the worst-case outcomes (REV), chickens are still strongly favored over shrimp; the amount of suffering that occurs if chickens are sentient is also bad enough that it will also carry a lot of weight for a risk-averse agent.
+Certainly, for some, this conclusion will be nearly as bad as the “rebugnant conclusion”, given that it strongly recommends helping non-humans over humans. In the comparison between humans and shrimp, adding difference-making risk aversion, a higher weight on those actions that are likely to make a positive difference, to our EV calculations made a difference, reversing the preference for shrimp over humans. Will a similar maneuver privilege helping humans over chickens? The answer is no.
+Action
+DMEV
+DMRAEV
+Do nothing
+0
+0
+Help shrimp
+100,000
+10,000
+Help chickens
+1,800,000
+810,000
+Help humans
+40,000
+40,000
+If you are risk-averse about making a difference (DMRAEV), you will favor humans over shrimp. However, you will also still favor chickens over humans by a significant amount, given the high probability that chicken interventions will benefit sentient creatures and the magnitude of such benefits.
+Lastly, because sentience estimates for small invertebrates are highly uncertain, someone who is ambiguity averse should either favor helping humans over helping shrimp
+or
+investing in research into small invertebrate sentience.
+[34]
+There is more uncertainty about the probability that chickens are sentient than that humans are, but there is a smaller range of uncertainty for chicken sentience than for small invertebrates. We did not provide a formal model of ambiguity avoidance, so we aren’t entirely confident here, but we doubt that the amount of ambiguity in chicken sentience will be enough to tip the scales in favor of helping humans. Likewise, there is probably more value in researching small invertebrate sentience than chicken sentience, given that resolving the smaller amount of ambiguity about the latter is unlikely to make a significant difference to overall value comparisons.
+9. Conclusions
+We have provided support for the following claims. For plausible estimates of welfare effects and probabilities of sentience:
+Risk-neutral expected value calculations favor helping extremely numerous animals of dubious sentience over humans.
+Risk-aversion that seeks to avoid bad outcomes favors them even more strongly.
+Risk-aversion about difference-making favors helping humans over helping extremely numerous animals of dubious sentience.
+Ambiguity aversion either favors helping humans or investing in research about the sentience of extremely numerous, small animals.
+Risk-neutral and both risk-adjusted (outcomes and inefficacy) expected value calculations favor very numerous animals of likely sentience (e.g. chickens) over both extremely numerous animals of dubious sentience (e.g. shrimp) and less numerous animals of certain sentience (e.g. humans).
+These conclusions are quite robust over ranges of risk weightings for the models of risk that we used. However, future research into the question of risk and species cause prioritization should investigate alternative models of risk aversion (e.g.
+WLU
+) and formal models of ambiguity aversion. Likewise, more work needs to be done to assess both the rationality of risk attitudes and particular risk weight values.
+It may also be important to extend this work to the case of digital minds. We are fast approaching (or perhaps have already arrived at) the point of having digital minds that have some probability of sentience. Digital minds will provide an even more extreme version of the kinds of trade-offs we have discussed here. If created, they will likely be
+extremely
+numerous. Determining whether AIs are sentient involves
+unique epistemic challenges
+, so the probabilities we assign will probably be even more ambiguous than those for animals. As Eric Schwitzgebel (
+2023
+) has pointed out, giving moral consideration to non-sentient AIs could have catastrophic effects (more so than simply wasting money on non-sentient shrimp). As we grapple with a new class of numerous entities of dubious sentience, it will become even more imperative to carefully think about how much risk - and what kinds of risk - we should tolerate.
+Acknowledgments
+The post was written by Hayley Clatterbuck. Thanks to the members of WIT, Clinton Castro, David Moss, Will McAuliffe, and Rob Streiffer for helpful feedback. The post is a project of
+Rethink Priorities
+,
+a global priority think-and-do tank
+, aiming to do good at scale. We research and implement pressing opportunities to make the world better. We act upon these opportunities by developing and implementing strategies, projects, and solutions to key issues. We do this work in close partnership with foundations and impact-focused non-profits or other entities. If you're interested in Rethink Priorities' work, please consider subscribing to
+our newsletter
+. You can explore our completed public work
+here
+.
+^
+A sentient creature is phenomenally conscious, with the capacity to feel pleasure or pain. For the moment, we’ll be assuming that suffering and reduction of suffering are the only relevant contributors to value.
+^
+The expected value includes both a determination of the consequences of our action and the moral worth of those consequences (e.g. that corporate campaigns will lead to a decrease in crowding at shrimp farms
+and
+that this decrease in crowding will be of hedonic value to shrimp). We will assume that the probability of our actions bringing about the envisioned consequences is 1, so that we can focus only on the probability of sentience. Further, we will assume that sentience is binary and that all members of species X have the same degree of sentience. These assumptions could be relaxed, and nothing we say strongly hinges on them.
+^
+Whether this is true, and if so, whether it is merely due to their short lifespans, is a matter of ongoing empirical
+research
+. If animals of dubious sentience have more extreme ranges of wellbeing, then the expected value calculations will tip even more their favor.
+^
+These numbers are made up for illustrative purposes. In
+Uncertainty Matters: How Risk Aversion Can Affect Cause Prioritization
+, we provide more informed estimates of the values created by actual real-world interventions. The same general conclusions hold for both.
+Throughout this piece, we make assumptions that are friendly to human interventions and unfriendly to small animal interventions. If the many small are still favored over the few large even in these conditions, then it is clear that the conclusion is robust.
+^
+This probability is on the low end of reasonable estimates. For a exploration of the limited evidence regarding decapod crustacean sentience, see Birch,
+et al.
+(
+2021
+) and Crump,
+et al.
+(
+2022
+). RP’s rough estimate of the probability of shrimp sentience has a mean of .426, with a .9 confidence interval of .2 to .7. The methodology is here, where shrimp are assumed to have the same probability of sentience as crabs:
+Welfare Range and P(Sentience) Distributions
+^
+For these values, the expected value of Help Shrimp will equal that of Help Humans when Pr(shrimp sentient) = .04.
+^
+Note that there are other moral theories that also imply that we should prioritize nonhumans over humans, such as egalitarian biocentrism or radical eco-holism.
+^
+These frameworks are not completely out of the woods. If there is some small probability that lower animals have these features – for example, if the probability that bees have some degree of rationality or significant relationships – then they might very well favor them in expected value calculations. Further, for moral frameworks that hold that there are many objective goods (e.g. that rationality matters, but happiness does too), it is possible that the enormous hedonic payoffs for lower animals could outweigh combinations of these goods in humans and higher animals.
+^
+For an exploration of what contractualism implies about actions to help animals, see
+If Contractualism, Then AMF (and Maybe Some Animal Work).
+^
+This extra weight might be conferred on species directly. Alternatively, it could be conferred on certain cognitive capacities that correlate with species membership. Another kind of hierarchicalist view might hold that all well-being is equally valuable, but that our moral decision making is responsive to more than just this value. An action to benefit humans might be more choiceworthy even if it doesn’t create more expected value, in this sense.
+^
+One possible hierarchicalist view assigns a weight of 0 to some species, in effect excluding them from moral consideration.
+^
+Here, EV(humans) > EV(shrimp) when w
+human
+is roughly 3x w
+shrimp
+.
+^
+In what follows, we will incorporate risk attitudes into expected value judgments. One might object that risk weightings will be similarly unconstrained and subjective. Justifying a particular risk weighting or constraints governing one’s attitudes about risk are beyond the scope of this paper. See Buchak (
+2013
+) for a discussion.
+^
+This assumption is highly unrealistic, as money has decreasing marginal utility. There is a worry that intuitions about risk are being driven by decreasing marginal utility here. Feel free to substitute money with whatever units of value that do not have decreasing marginal utility for you. Further, it is doubtful that all cases of risk aversion can be accounted for by diminishing marginal utilities, which
+Allais
+cases
+(arguably) demonstrate.
+^
+For a helpful explication of REU, see Buchak (
+2023
+).
+^
+For a defense of this consequence of EVM, see Carlsmith (
+2022
+).
+^
+There are open questions about the relevant sense of “difference-making” that people care about. For example, if I’m counting the differences I’ve made, do I count those times that my action significantly raised the probability of something valuable occurring but that outcome did not actually occur? Only those times that I was the actual cause of an increase in value? How about cases in which I was the actual cause of something happening, but if I hadn’t so acted, someone else would have? If I acted jointly with others, do I get credit for all of the difference made or only a part of it?
+^
+We suppose that risk averse agents will not be entirely motivated by the probability of making a difference. The magnitude of difference made will also matter. Thus, risk will modify their expected value judgments, not entirely replace them.
+^
+Though this is an open question, pending future research on which difference-making risk aversion weights are plausible (if any).
+^
+This is too quick, but it will do for our purposes.
+^
+See this
+post
+for additional arguments against difference-making risk aversion.
+^
+Here, we build on some of the work of Greaves,
+et al.
+(
+2022
+). Note that we haven’t yet worked out all of the formal properties of this suggested decision theory. That will be an area of future work.
+^
+More generally, for the values and risk function we’ve assumed here, the DMRAEV of Help Shrimp will be: Pr(shrimp sentient)
+2
+(1 million), which will equal the DMRAEV of Help Humans when Pr(shrimp sentient) = .2. Note that the mean of our estimate of shrimp sentience
+here
+is higher than .2. Therefore, a difference-making risk averse agent might still prefer helping shrimp to helping humans but will resist helping species with lower sentience estimates.
+^
+Note the wider range of sentience probability estimates for the many small:
+Welfare Range and P(Sentience) Distributions
+^
+Our evidence about invertebrate sentience is limited for two reasons. First, incontrovertible evidence of sentience is harder to obtain for creatures who are quite unlike us. Second, less research has been done on invertebrate sentience than for other creatures, though there has been increased attention to this
+area
+.
+^
+For alternative methods of dealing with ambiguity, see Buchak (
+2022
+).
+^
+For a similar argument, see this
+post
+..
+^
+For more discussion, see Buchak (
+2023
+).
+^
+A loose analogy might be the Akaike Information Criterion, an estimate of the predictive accuracy of a family of models, which takes into account both how well models can fit the data and a penalty for the complexity of the model.
+^
+What should we use as a prior for the probability that shrimp are sentient or for the cost-effectiveness of shrimp interventions? It’s unclear how we would objectively ground such priors. If we were considering a novel malaria intervention, we would consider the reference class of previous malaria interventions and use the average cost-effectiveness as a prior. However, the problem here is precisely that we do not know the cost-effectiveness of previous interventions on shrimp, since this depends on their probability of sentience, and that these interventions are not similar to interventions on other species.
+^
+For a Bayesian model of how knowledge of the effects of our actions decays over time and the implications for cause prioritization, see
+Uncertainty over time and Bayesian updating
+.
+^
+See
+Uncertainty Matters: How Risk Aversion Can Affect Cause Prioritization
+for more realistic estimates for an intervention towards a cage-free transition for battery cage hens.
+^
+We have assumed that any world in which shrimp are sentient is a world in which chickens are too.
+^
+As William McAuliffe pointed out to us, they might also prioritize a different group, like fish, which are highly numerous but have less variance in their probability of sentience. We introduced chickens as a test case, but a fuller examination would include other species that are highly numerous of intermediate probabilities of sentience.
+Read the next post in the CURVE series
+Hayley Clatterbuck
+Rethink Priorities
+Previous
+Previous
+How can risk aversion affect your cause prioritization?
+Next
+Next
+If contractualism, then AMF
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.

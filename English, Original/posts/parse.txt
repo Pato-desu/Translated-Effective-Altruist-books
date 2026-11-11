@@ -1,0 +1,126 @@
+import os
+import csv
+from bs4 import BeautifulSoup
+from dateutil import parser as date_parser
+import re
+import logging
+
+logging.basicConfig(filename='parsing_errors.log', level=logging.ERROR)
+
+def parse_html_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            soup = BeautifulSoup(file.read(), 'html.parser')
+
+        # Basic information
+        title = soup.select_one('.PostsPageTitle-root')
+        title = title.text.strip() if title else ''
+
+        author = soup.select_one('.CommentUserName-author')
+        author = author.text.strip() if author else ''
+
+        date_str = soup.select_one('.PostsPageDate-date')
+        date_str = date_str.text.strip() if date_str else ''
+
+        try:
+            date = date_parser.parse(date_str) if date_str else None
+        except ValueError:
+            date = None
+
+        content = soup.select_one('.PostsPage-postContent')
+        content = content.text.strip() if content else ''
+
+        vote_score = soup.select_one('.PostsVoteDefault-voteScore')
+        vote_score = vote_score.text.strip() if vote_score else ''
+
+        comment_count = soup.select_one('.PostsPagePostHeader-secondaryInfoLink')
+        comment_count = comment_count.text.strip() if comment_count else ''
+
+        tags = soup.select('.FooterTag-name')
+        tags = [tag.text.strip() for tag in tags] if tags else []
+
+        # Additional information
+        read_time = soup.select_one('.ReadTime-root')
+        read_time = read_time.text.strip() if read_time else ''
+
+        karma = soup.select_one('.OverallVoteAxis-voteScore')
+        karma = karma.text.strip() if karma else ''
+
+        frontpage_status = soup.select_one('.FooterTagList-frontpageOrPersonal')
+        frontpage_status = frontpage_status.text.strip() if frontpage_status else ''
+
+        user_profile_link = soup.select_one('.CommentUserName-mainWrapper')
+        user_profile_link = user_profile_link['href'] if user_profile_link and 'href' in user_profile_link.attrs else ''
+
+        post_link = soup.select_one('.PostsPageTitle-link')
+        post_link = post_link['href'] if post_link and 'href' in post_link.attrs else ''
+
+        # Extract post ID from the post link
+        post_id = re.search(r'/([^/]+)$', post_link)
+        post_id = post_id.group(1) if post_id else ''
+
+        # Check for specific user badges
+        is_sprout = bool(soup.select_one('.UserCommentMarkers-sproutIcon'))
+        is_post_author = bool(soup.select_one('.UserCommentMarkers-postAuthorIcon'))
+
+        # Count reactions
+        reaction_counts = {}
+        reaction_buttons = soup.select('.EAReactsSection-button')
+        for button in reaction_buttons:
+            emoji = button.select_one('.EAReactsSection-emojiPreview')
+            count = button.select_one('div')
+            if emoji and count:
+                emoji_name = emoji.get('alt', '') or f"emoji_{len(reaction_counts) + 1}"
+                reaction_counts[emoji_name] = count.text.strip()
+
+        return {
+            'title': title,
+            'author': author,
+            'date': date.strftime('%Y-%m-%d') if date else '',
+            'content': content,
+            'vote_score': vote_score,
+            'comment_count': comment_count,
+            'tags': ', '.join(tags),
+            'read_time': read_time,
+            'karma': karma,
+            'frontpage_status': frontpage_status,
+            'user_profile_link': user_profile_link,
+            'post_link': post_link,
+            'post_id': post_id,
+            'is_sprout': is_sprout,
+            'is_post_author': is_post_author,
+            'reaction_counts': str(reaction_counts)
+        }
+    except Exception as e:
+        logging.error(f"Error parsing file {file_path}: {str(e)}")
+        return None
+
+def main():
+    directory = 'posts'
+    output_file = 'ea_forum_posts-10-4-24.csv'
+
+    data = []
+    for filename in os.listdir(directory):
+        if filename.endswith('.html'):
+            file_path = os.path.join(directory, filename)
+            post_data = parse_html_file(file_path)
+            if post_data:
+                data.append(post_data)
+            else:
+                print(f"Failed to parse {filename}")
+
+    # Write to CSV
+    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['title', 'author', 'date', 'content', 'vote_score', 'comment_count', 'tags',
+                      'read_time', 'karma', 'frontpage_status', 'user_profile_link', 'post_link',
+                      'post_id', 'is_sprout', 'is_post_author', 'reaction_counts']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+
+    print(f"CSV file '{output_file}' has been created with {len(data)} rows.")
+
+if __name__ == "__main__":
+    main()

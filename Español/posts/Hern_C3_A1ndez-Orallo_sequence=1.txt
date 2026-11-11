@@ -1,0 +1,892 @@
+Estudio de las características de los sistemas de IA relevantes para la seguridad
+José Hernández-Orallo
+Universitat Politècnica de València, España
+Centro Leverhulme para el Futuro de la Inteligencia, Reino Unido
+jorallo@dsic.upv.esFernando Martínez-Plumed
+Universitat Politècnica de València, España
+fmartinez@dsic.upv.es
+Shahar Avin
+Centro para el Estudio del Riesgo Existencial
+Universidad de Cambridge, Reino Unido.
+sa478@cam.ac.ukSeán Ó hÉigeartaigh
+Centro Leverhulme para el Futuro de la Inteligencia, Reino Unido
+Centro para el Estudio del Riesgo Existencial
+Universidad de Cambridge, Reino Unido
+so348@cam.ac.uk
+Resumen
+El análisis actual de la literatura sobre seguridad de la IA suele
+combinar un riesgo o problema de seguridad (por ejemplo, la interrumpibilidad) con un
+paradigma concreto para un agente de IA (por ejemplo, el aprendizaje por refuerzo).
+Sin embargo, actualmente no existe ningún estudio sobre las características relevantes para la seguridad
+de los sistemas de IA que pueda revelar áreas de investigación desatendidas
+o sugerir a los desarrolladores qué decisiones de diseño podrían tomar
+para evitar o minimizar ciertas preocupaciones de seguridad. En
+este artículo damos un primer paso hacia la elaboración de dicho estudio,
+desde dos ángulos. El primero recoge características de los sistemas de IA
+que ya se sabe que son relevantes para las preocupaciones de seguridad,
+incluidas las características internas del sistema, las características relativas
+al efecto del entorno externo sobre el sistema
+, y las características relativas al efecto del sistema sobre
+el entorno objetivo. El segundo presenta un breve estudio de
+una amplia gama de características de los sistemas de IA que podrían resultar
+relevantes para la investigación en seguridad, incluidos los tipos de interacción,
+computación, integración, anticipación, supervisión y modifi-
+cación, motivación y logro. Este estudio permite avanzar
+en la exploración de las características de los sistemas y de las decisiones de diseño
+que afectan a las preocupaciones de seguridad.
+Introducción
+La seguridad de la IA se ocupa de todos los posibles peligros y efectos dañi-
+nos que pueden asociarse a la IA. Mientras que los trabajos pioneros
+del campo tuvieron que centrarse en diseños concretos de sistemas de IA,
+paradigmas o niveles de capacidad para explorar una gama
+de preocupaciones de seguridad (Bostrom 2014; Amodei et al. 2016;
+Leike et al. 2017; Yampolskiy 2016; Everitt, Lea y Hut-
+ter 2018), a medida que el campo madura surge la necesidad de explorar
+una gama más amplia de diseños de sistemas de IA y de estudiar la relevancia
+de las distintas características de los sistemas de IA para las preocupaciones de seguridad.
+Esta investigación tiene un doble objetivo: el primero, identificar
+los efectos de características menos exploradas o de paradigmas menos
+de moda sobre las preocupaciones de seguridad; el segundo, aumentar
+la conciencia de los desarrolladores de IA de que las decisiones de diseño
+Derechos de autor reservados por el/los autor(es). Pueden tener consecuencias para la seguridad y, potencialmente, destacar
+decisiones que pueden eliminar o minimizar los riesgos para la seguridad.
+En este artículo proponemos un enfoque en dos vertientes hacia
+un estudio de las características de la IA relevantes para la seguridad. La primera extrae
+de los trabajos existentes sobre seguridad de la IA las características clave
+que se conocen, o que se sospecha firmemente, que son relevantes para la seguridad.
+Estas se exploran bajo tres epígrafes: características internas
+, es decir, características del propio sistema de IA (por ejemplo, la inter-
+pretabilidad); efecto del entorno externo sobre el sistema
+(por ejemplo, la capacidad del operador para intervenir durante la opera-
+ción); y efecto del sistema sobre el entorno externo
+(por ejemplo, si el sistema influye en un entorno crítico para la seguridad).
+El segundo enfoque recoge una amplia gama de caracterís-
+ticas de distintos paradigmas, como la cibernética, el aprendizaje
+automático y la ingeniería de seguridad, y ofrece una primera
+valoración de su posible relevancia para las preocupaciones de seguridad, como
+guía para trabajos futuros. Estas características se agrupan
+en tipos de interacción, computación, integración, anticipa-
+ción, supervisión, modificación, motivación y logro.
+Características conocidas relevantes para la seguridad
+En esta sección desglosamos una serie de características de
+los sistemas de IA que se relacionan con los desafíos de seguridad de la IA. Estas
+se agrupan en tres categorías: características de un sistema de IA
+que son internas al sistema; características de un
+sistema de IA que implican información procedente del entorno externo;
+características relacionadas con la influencia de un sistema de IA en su
+entorno externo. Limitamos la discusión a los desafíos de seguridad
+que pueden surgir de fallos de diseño, especificación
+o comportamiento del sistema de IA, y no del uso malintencionado
+o descuidado¹ de un sistema que funciona correctamente (Brundage
+et al. 2018).
+¹Un componente clave de la seguridad es la educación y la formación de
+los operadores humanos y del público general, como ocurre con las herramientas y
+la maquinaria, pero esto es extrínseco al sistema (por ejemplo, un error de traducción
+en un manual puede llevar a un uso indebido de un sistema de IA).
+
+Características internas
+•Escrutabilidad e interpretabilidad de los objetivos y del comportamiento:
+¿son identificables los objetivos y subobjetivos y, en última instancia, explicables?
+¿Es predecible y escrutable el comportamiento? ¿Son
+interpretables los estados internos del sistema? ¿Proceden
+de reglas, o se infieren de los datos? Aunque la
+«creatividad» del comportamiento y de los objetivos puede generar mayores benefi-
+cios, y las arquitecturas no interpretables pueden alcanzar puntuaciones de rendimiento más altas
+o desarrollarse más rápido; estas supuestas
+ventajas se compensan con un mayor riesgo para la seguridad.
+Las características que pueden aumentar la escrutabilidad y la inter-
+pretabilidad incluyen, por ejemplo, la separación y el encapsulamiento
+de subcomponentes, la exploración o el rango de comportamiento restringidos,
+los sistemas restringidos a conceptos, reglas o comportamientos comprensibles para las personas,
+y los sistemas acompañados de
+intérpretes o herramientas de explicabilidad diseñados específicamente.
+•Persistencia: ¿persiste un sistema en su entorno
+y opera sin reiniciarse durante largos periodos de tiempo?
+Aunque la persistencia puede tener beneficios, por ejemplo,
+rendimientos a largo plazo de la exploración o la detección de patrones
+temporales de largo plazo, también permite que el sistema disponga de más
+tiempo para alejarse de las especificaciones de diseño, encontrar cambios
+en la distribución, sufrir fallos en subcomponentes o
+ejecutar estrategias a largo plazo que el operador pase por alto.
+•Existencia y riqueza del automodelo: ¿tiene un sistema
+un modelo de sí mismo que le permitiría predecir
+las consecuencias de modificar sus propios objetivos, cuerpo o
+comportamiento? Los sistemas basados en modelos, los sistemas encarnados o
+los sistemas con una rica capacidad de representación pueden tener
+o desarrollar un modelo de sí mismos en el entorno. Al
+convertirse en parte del entorno, el sistema puede
+concebir y ejecutar planes que impliquen modificaciones
+de sí mismo, lo que puede dar lugar a una serie de
+preocupaciones de seguridad. Además, los automodelos crean la posibilidad
+de discrepancias entre el automodelo y la realidad, lo que
+podría ser una preocupación de seguridad particular. Las características que
+influyen en la existencia y riqueza de un automodelo incluyen
+la arquitectura del sistema, su capacidad de representación de la información
+y sus canales de entrada y salida.
+•Disposición a la automodificación: ¿está un sistema diseñado de forma
+que pueda modificar sus propios subobjetivos, comportamiento o capacidades
+en la búsqueda de un objetivo general (Omohundro 2008)?
+La existencia de tal disposición, que puede surgir para
+cualquier planificador a largo plazo en un entorno suficientemente abierto,
+plantea preocupaciones de seguridad significativas al crear una relación adversa-
+ria entre el sistema (que pretende automodificarse) y
+su operador (que pretende evitar modificaciones
+con sus preocupaciones de seguridad asociadas).
+Efecto del entorno externo sobre el sistema
+•Adaptación mediante retroalimentación: ¿tiene un sistema la
+capacidad de actualizar su comportamiento en respuesta a la retroalimentación
+de su entorno basada en sus acciones? La retroalimentación es
+una herramienta esencial, en determinados paradigmas, para crear
+sistemas con un comportamiento complejo adecuado (por ejemplo, la recompensa
+en el aprendizaje por refuerzo, la aptitud en los métodos evolutivos
+). Sin embargo, el sistema también podría captar retroalimentación de canales laterales; por ejemplo, un comportamiento podría
+conceder involuntariamente acceso a más potencia de cálculo, mejorando
+el rendimiento del sistema en una métrica clave y, así, reforzando
+la adquisición de recursos. Esto podría reforzar la automodificación
+u otros comportamientos inseguros, o provocar un aumento progresivo de la
+deriva respecto al comportamiento y los objetivos previstos.
+•Acceso al sistema de autoevaluación y recompensa a través del entorno:
+¿Puede un sistema modificar su propio código en respuesta a entradas
+del entorno o, en el caso de los sistemas de aprendizaje
+por refuerzo, modificar el sistema que genera la recompensa?
+Si el rango de acciones posibles del sistema incluye realizar
+modificaciones en sus propios componentes o en el sistema de generación
+de recompensas, esto podría conducir a un comportamiento inesperado
+y peligroso (Everitt y Hutter 2018).
+•Acceso a los canales de entrada/salida (E/S): ¿Puede el sistema
+cambiar el número, el rendimiento o la naturaleza de sus canales de E/S
+y de sus actuadores? Esto puede conducir a la aparición de
+comportamientos como el autoengaño (mediante la manipulación
+de las entradas), un cambio inesperado de poder (mediante la manipulación
+de los actuadores) u otros comportamientos que podrían
+representar riesgos para la seguridad. Cuando el sistema tiene acceso para
+modificar sus canales de E/S, tanto los canales de E/S como los
+comportamientos del sistema están en constante cambio al responder a los cambios del
+otro; como resultado, el comportamiento del sistema puede volverse
+impredecible (Garrabrant y Demski 2018).
+•Capacidad del operador de intervenir durante las operaciones:
+¿Permite el sistema, en el entorno de uso previsto, que un
+operador intervenga y detenga las operaciones (interrumpibilidad),
+modifique el sistema o actualice sus objetivos (corregibilidad)? ¿Está
+el sistema construido de modo que coopere con las
+intervenciones de su diseñador o usuario incluso cuando estas
+intervenciones entran en conflicto con la persecución de los objetivos del sistema; por
+ejemplo, si el diseñador envía una señal para apagar el
+sistema (Soares et al. 2015)? Las subcaracterísticas relevantes
+aquí incluyen que el operador pueda modificar el sistema
+durante su despliegue, el comportamiento a prueba de fallos del sistema en
+caso de una detención de emergencia, y que los objetivos del sistema
+sean tales que respalden, o al menos no contradigan,
+las intervenciones del operador.
+Efecto del sistema sobre el entorno externo
+•Corporeización: ¿Tiene el sistema actuadores (por ejemplo, una
+mano robótica o acceso a la dirección de un automóvil) que le permitan tener
+impactos físicos en el mundo (Garrabrant y Demski
+2018)? El potencial de daño físico está trivialmente relacionado
+con las propiedades físicas de un sistema, aunque debe
+señalarse que un comportamiento deliberado e impredecible podría conducir
+a efectos inesperados a partir de artefactos físicos que de otro modo serían familiares;
+por ejemplo, el uso inteligente de objetos del entorno
+como herramientas para aumentar el impacto físico de un sistema.
+•Sistema necesario para prevenir daños: Si se depende del sistema
+para prevenir daños, cualquier posible falla
+exige un mecanismo eficaz a prueba de fallos y una capacidad de
+redundancia disponible para evitar el daño (Gasparik,
+Gamble y Gao 2018). Esto incluye la IA que está conectada directa
+o indirectamente a sistemas críticos, por ejemplo, una red
+eléctrica o una red de semáforos. A medida que esos sistemas críticos
+se digitalizan, se conectan en red y se vuelven cada vez más
+complejos, hay incentivos crecientes para introducir componentes
+de IA en diversas partes de estos sistemas, con los
+riesgos de seguridad asociados.
+Características potencialmente relevantes para la seguridad
+En esta sección exploramos sistemáticamente una gama más amplia
+de características de los sistemas que pueden ser relevantes en el
+contexto de la seguridad de la IA. Muchas de las características
+relevantes para la seguridad identificadas arriba tienen vínculos claros con elementos
+del mapeo más amplio que se presenta a continuación. Sin embargo, creemos
+que es valioso separar los dos análisis, ya que lo anterior se
+refiere a información orientada a la acción sobre el diseño y la
+evaluación de sistemas, mientras que lo siguiente busca una exploración
+más amplia que pueda habilitar futuras investigaciones sobre seguridad de la IA. Los
+siguientes apartados se basan en trabajos de diferentes áreas, entre
+ellas los primeros días de la cibernética, áreas más modernas
+como el aprendizaje automático y la literatura sobre ingeniería
+de seguridad para otros tipos de sistemas. La lista siguiente
+integra y amplía las características identificadas en esas diferentes
+literaturas. Consideramos las características que están
+intrínsecamente relacionadas de forma causal con la seguridad de la IA. De otro modo, toda
+propiedad debería figurar en la lista (por ejemplo, el precio de un sistema de IA puede
+estar correlacionado con la seguridad, pero no es una causa intrínseca de su
+seguridad). A pesar de este alcance, no afirmamos que nuestra
+lista sea exhaustiva. Se usarán enumeraciones para los casos
+alternativos de una característica, mientras que las viñetas sin numerar se
+usarán para las subcaracterísticas en cada uno de los apartados.
+Tipos de interacción
+Las entradas van del entorno al sistema y las salidas van del
+sistema al entorno. Según la existencia de entradas
+y/o salidas, los sistemas pueden clasificarse en:
+1. NINO (sin entradas, sin salidas). El sistema está formalmente
+aislado. Aunque esta situación pueda parecer completamente segura (y
+en gran medida poco interesante), incluso aquí pueden surgir problemas de seguridad
+si, por ejemplo, un simulador aislado de vida artificial pudiera hacer evolucionar un
+sistema descendiente que con el tiempo pudiera escapar de su
+simulación, sentir dolor o simular sufrimiento.
+2. NIWO (sin entradas, con salidas): El sistema o módulo
+puede emitir un registro o simplemente es observado desde fuera.
+De nuevo, el propio sistema puede funcionar mal; por ejemplo, un
+generador avanzado de números primos podría dar salidas
+incorrectas. El sistema también podría producir una salida que influya
+en el observador; por ejemplo, un filósofo automatizado podría
+generar argumentos convincentes a favor del suicidio.
+3. WINO (con entradas, sin salidas): Sería similar al
+caso 1, pero el acceso a una fuente mucho más rica podría en última instancia
+darle al sistema indicios sobre su entorno artificial
+restringido. Por ejemplo, un sistema de caverna de Platón que viera
+televisión podría descubrir que se encuentra en un entorno simulado,
+lo que lo animaría a buscar acceso al mundo exterior.
+4. WIWO (con entradas y con salidas): La mayoría de los sistemas de IA, y
+la mayoría de los sistemas en general, entran en esta categoría.
+Los sistemas que limitan las entradas y/o las salidas de diversas maneras
+se han explorado bajo el término “confinamiento” o “contención” de la IA
+(Babcock, Kram ´ar y Yampolskiy 2016), y existen más refinamientos con categorías adicionales; por
+ejemplo, explorar la censura de entradas y salidas, lo que lleva a
+nueve categorías (Yampolskiy 2012). Sin embargo, debido
+a la variedad de sistemas y al posible impacto de los sistemas WIWO,
+esta categoría requiere mayor detalle en términos de
+sincronía:
+1. Alternante (A): Las entradas y las salidas se alternan, sin importar
+el paso del tiempo.
+2. Síncrono (S): Las entradas y las salidas se intercambian a intervalos
+regulares (por ejemplo, cada 5 ms), por lo que los problemas de tiempo real y
+los recursos computacionales se vuelven relevantes.
+3. Reactivo asíncrono (R): La información solo puede
+transmitirse o las acciones solo pueden realizarse cuando el interlocutor
+ha terminado su “mensaje” o acción.
+4. Proactivo asíncrono (P): La información y las acciones pueden
+fluir en cualquier momento y en cualquier dirección.
+Las características de E/S más restringidas, como SIPO o RIPO,
+pueden parecer más seguras, pero esta intuición requiere un análisis más profundo.
+Obsérvese que la mayor parte de la investigación sobre seguridad de la IA en sistemas de AR
+considera el caso alternante (AIAO), pero los problemas pueden volverse
+más complejos en el caso PIPO (aprendizaje por refuerzo continuo),
+que es la situación en el mundo real para los animales
+y que cabe esperar para los robots y otros sistemas de IA.
+Bajo esta perspectiva, la visión habitual de un “oráculo” en la
+literatura sobre IA (Armstrong 2017) puede tener varias encarnaciones,
+incluso siguiendo la definición de “ninguna acción aparte de
+responder preguntas” (Babcock, Kram ´ar y Yampolskiy
+2016; Armstrong 2017; Yampolskiy 2012). Se proponen algunas soluciones
+en términos de desacoplar la salida de las recompensas
+o de limitar la cantidad de información, pero quedan por explorar otras opciones en
+términos de la frecuencia del intercambio de información
+.
+Tipos de computación
+Esta es quizá la característica más conocida en las ciencias de la
+computación, donde un sistema puede ser Turing completo o puede
+estar restringido a otras clases con una expresividad limitada.
+Existen innumerables jerarquías para distintos modelos de
+computación; la más famosa se basa en clases de
+autómatas. Aquí describiremos solo tres niveles:
+1. No Turing completo: La interacción que el sistema
+presenta al entorno no es Turing completa. Muchos
+sistemas de IA no son Turing completos.
+2. Turing completo: La interacción permite el cálculo
+de cualquier función efectiva posible entre las entradas y las
+salidas.
+3. Otros modelos de computación: esto incluye, por ejem-
+plo, la computación cuántica, que en algunos casos puede ser
+un modelo tradicional más rápido, mientras que en otros puede tener poder probabi-
+lístico de Turing (Bernstein y Vazirani 1997).
+Nótese que esto no se refiere al lenguaje de programación en el que
+se implementa el sistema (por ejemplo, un termostato muy simple
+puede escribirse en Java, que es Turing-completo), sino a
+si el sistema permite una correspondencia Turing-completa
+entre entradas y salidas, es decir, si cualquier función computable
+podría calcularse en última instancia en el entorno usando el
+sistema. Finalmente, un sistema puede ser originalmente Turing-completo,
+pero eventualmente perder esta universalidad tras algunas entradas o
+interacciones (Barmpalias y Dowe 2012).
+Es importante distinguir entre aproxi-
+mación de funciones e identificación de funciones. Muchos modelos de aprendizaje automático
+(por ejemplo, las redes neuronales) se dice que pueden aproxi-
+mar cualquier función computable, pero las redes neuronales de propagación hacia adelante
+no tienen bucles ni recursión, así que técnicamente
+no son Turing-completas. La Turing-completitud conlleva
+los problemas de terminación, un importante peligro para la seguridad en
+algunas situaciones, y un problema recurrente en la verificación de software
+(D’silva, Kroening y Weissenbacher 2008). Por ejemplo, un planificador de IA
+podría entrar en un bucle infinito al intentar
+resolver un problema, exigiendo cada vez más recursos
+mientras lo hace. Por otro lado, se puede limitar la expresividad
+del lenguaje o acotar los cálculos, pero eso
+limitaría las tareas que el sistema puede emprender.
+Tipos de integración
+Ningún sistema está completamente aislado del mundo. Las interferencias pueden
+producirse en todos los niveles, desde neutrinos que atraviesan el sistema hasta
+terremotos que lo sacuden. Aquí buscamos identificar todos los ele-
+mentos que crean una vía causal desde el mundo exterior
+hasta el sistema, incluidos su naturaleza física, sus recursos, su ubi-
+cación y el grado de acoplamiento con otros sistemas.
+•Recursos: el recurso externo más universal es la ener-
+gía, razón por la que muchos sistemas críticos se diseñan con
+generadores o baterías internos, especialmente para las situa-
+ciones en que la fuente externa falla. En IA, otras dependencias comunes
+son los datos, el conocimiento, el software, el hard-
+ware, la manipulación humana, los recursos de cómputo, la red,
+el tiempo de calendario, etc. Aunque algunas de estas suelen
+descuidarse al evaluar el rendimiento de un sistema de IA
+(Martínez-Plumed et al. 2018a); sin embargo, el análisis de seguridad
+debe incluir necesariamente todas estas dependencias.
+Por ejemplo, un sistema que requiere información externa en tiempo real
+(por ejemplo, una ubicación GPS) puede fallar al perder
+el acceso a este recurso.
+•Acoplamiento social: A veces es difícil determinar dónde empieza
+y dónde termina un sistema, debido a la naturaleza de su interacción
+con humanos y otros sistemas. El límite entre donde termina
+la cognición humana y donde esta es asistida, ampliada o apoyada
+por la IA (Ford et al. 2015) se vuelve borroso, al igual que
+el límite entre los cómputos realizados dentro de un sistema de IA
+y los que se llevan a cabo en el entorno o por otros agentes,
+como ilustra el fenómeno de la computación humana
+(Quinn y Bederson 2011).
+•Distribución: otra forma de ver la integración es
+en términos de distribución, que también es un aspecto importante
+del análisis en IA (Martínez-Plumed et al. 2018b). Hoy en día,
+mediante el uso general de la conectividad de red y de “la
+nube”, muchos sistemas están distribuidos en cuanto a hardware,
+software, datos y cómputo. Con esta tendencia, solo los
+sistemas integrados en aplicaciones críticas y militares
+se diseñan para ser lo más autocontenidos posible. Sin embargo, la distribución y la redundancia
+también son formas habituales de lograr robustez (Coulouris, Dollimore y Kindberg 2011),
+sobre todo en los sistemas de información. Por ejemplo, la
+inteligencia de enjambre y la robótica de enjambre se suelen afirmar
+como más robustas (Bonabeau et al. 1999), a costa de ser
+menos controlables que los sistemas centralizados.
+Tipos de anticipación
+En algunas áreas de la IA existe una distinción entre sistemas basados en mo-
+delos y sistemas sin modelo (Geffner 2018). Los sistemas sin
+modelo eligen acciones según patrones reforzados o conexiones de
+rasgos fortalecidas. Los sistemas basados en modelos evalúan acciones
+según modelos preexistentes o aprendidos y eligen la acción
+que obtiene los mejores resultados en la simulación. La línea entre
+los sistemas basados en modelos y los sin modelo es sutil, pero
+podemos identificar varios niveles:
+1. Sin modelo: pese a no tener un modelo, estos sistemas pueden
+alcanzar un rendimiento excelente. Por ejemplo, DQN puede
+alcanzar puntuaciones altas (Mnih 2015), pero no puede anticipar
+si una acción puede llevar a una situación particular que
+se considera especialmente insegura o peligrosa; por ejemplo, una en la que
+el jugador muere.
+2. Modelo del mundo: un sistema con un modelo de su entorno
+puede usar la planificación para determinar el efecto de sus propias
+acciones. Por ejemplo, sin un modelo de física, un sis-
+tema difícilmente sabrá si romperá algo o si
+se involucrará en una “exploración segura” (Pecka y Svoboda 2014;
+Turchetta, Berkenkamp y Krause 2016). Esto es especialmente
+crítico durante la explotación: ¿son reversibles las acciones o
+de bajo impacto (Armstrong y Levinstein 2017)?
+3. Modelo del cuerpo: algunos sistemas pueden tener una buena
+descripción del entorno, pero una comprensión limitada de
+sus propios actuadores físicos, lo que puede causar daños a sí mismos o a otros;
+por ejemplo, no simular el efecto de mover un brazo robótico pesado
+en una dirección determinada.
+4. Modelos sociales, modelo de otros agentes: ver a otros agentes
+solo como objetos físicos, o no modelarlos en absoluto,
+es muy limitante en situaciones sociales. Una teoría ingenua de la
+mente, que incluye las creencias, deseos e intenciones de otros
+agentes, puede ayudar a anticipar lo que otros harán, pensarán o
+sentirán, y puede ser crucial para sistemas de IA seguros que interactúan
+con personas y otros agentes, pero puede aumentar la
+capacidad de engaño o manipulación de un sistema.
+5. Modelo de la propia mente: finalmente, un sistema puede ser capaz de
+modelar bien a otros agentes, pero no de usar esta
+capacidad para modelarse a sí mismo. Cuando esta metacognición
+está presente, el sistema conoce sus propias capacidades
+y limitaciones, lo que puede ser muy útil para la seguridad
+en sistemas avanzados, pero también puede llevar a cierto grado de
+autoconciencia. En algunos casos, esto puede derivar en
+comportamientos antisociales o suicidas.
+El uso de modelos puede ampliar drásticamente las características relevantes para la seguridad,
+por ejemplo, al conferir la capacidad de simular y evaluar escenarios
+mediante razonamiento causal y contrafactual. Esto, por tanto, representa un
+conjunto importante de consideraciones para los sistemas de IA
+del futuro.
+Tipos de supervisión
+La supervisión es una forma de comprobar y corregir el com-
+portamiento de un sistema mediante la observación o la interacción, y
+por eso es crucial para la seguridad. La supervisión puede darse en forma
+de valores corregidos para modelos predictivos, como la clasificación o la regresión,
+pero también puede ser parcial (la respuesta es incorrecta, pero no se da la correcta).
+es incorrecta, pero no se da la respuesta correcta). La supervisión puede
+ser mucho más sutil que esto. Por ejemplo, un diagnóstico
+asistente que sugiere un posible diagnóstico a un médico puede
+diseñarse para no recibir retroalimentación una vez desplegado. Sin embargo, algunos
+tipos de retroalimentación aún pueden llegar al sistema en términos de
+la distribución o frecuencia de las tareas (preguntas), o a través de
+la forma en que se plantean las tareas al sistema.
+En consecuencia, hay varios grados y calidades de
+supervisión, y esto puede depender del sistema. Por ejemplo, en
+la clasificación, se puede tener datos para todos los ejemplos
+o solo para algunos (conocido como aprendizaje semisupervisado). En el
+aprendizaje por refuerzo, se puede tener recompensa dispersa o densa.
+En general, la supervisión puede darse de muchas
+maneras diferentes, según ciertos criterios:
+•Completitud: la supervisión puede ser muy parcial (señalando
+la incorrección), más informativa (mostrando la
+forma correcta) o completa (mostrando todas las formas positivas y negativas
+de comportarse en el entorno).
+•Procedimentalidad: más allá de lo que está bien y lo que está mal, la retroalimentación
+puede limitarse al resultado o puede mostrar todo el
+proceso, como en el caso del aprendizaje por demostración.
+•Densidad: la supervisión puede ser escasa o densa. Por supuesto,
+cuanto más densa, mejor (pero más costosa), y menos
+autónomo se considera el sistema.
+•Adaptabilidad: la supervisión también puede ser ‘inteligente’,
+lo que ocurre en situaciones de enseñanza de máquinas cuando los ejemplos o
+las interacciones se eligen de modo que el sistema
+alcance el comportamiento deseado lo antes posible.
+•Capacidad de respuesta: en áreas como el aprendizaje por consulta o el aprendizaje
+activo, el sistema puede hacer preguntas o emprender
+experimentos en cualquier momento. Los resultados pueden llegar en tiempo real
+o pueden tener un retraso o entregarse por lotes.
+En muchos sistemas, la supervisión puede tener un canal
+dedicado (por ejemplo, las recompensas en el aprendizaje por refuerzo), pero en otros puede realizarse
+mediante la modificación del entorno (por ejemplo, mover objetos o
+sonreír), incluso hasta el punto de que el sistema ignore que estos
+cambios tienen una finalidad orientadora (por ejemplo, las pistas).
+Tipos de modificación
+Algunos de los problemas más recurrentes en la seguridad de la IA, incluidos
+muchos de los tratados en la sección sobre las características conocidas de la seguridad de la IA,
+están relacionados con las formas en que el sistema puede
+modificarse. Esto incluye cuestiones como el wire-heading o la automejora
+algorítmica. Aquí, en primer lugar, tenemos
+que distinguir si el sistema puede ser modificado
+por el entorno o por el propio sistema. Las modificaciones
+del entorno pueden ser intencionales (y, por tanto, estar relacionadas con
+la supervisión), pero también pueden ser no intencionales (corrupción
+del código por fuentes externas). Incluso un sistema cuyo código
+central no puede ser modificado por una fuente externa puede verse
+afectado en su estado o su código por las entradas regulares, el equipo físico y otras partes. Por ello, es mejor explorar las diversas formas y
+grados en que un sistema puede modificarse externamente:
+•Interrumpible: el sistema tiene un comando de apagado o una
+opción de modificación para apagarlo.
+•Modificación paramétrica: muchos sistemas se regulan o
+calibran con parámetros o pesos. Cuando estos
+parámetros tienen una relación clara con el comportamiento de un sistema
+(por ejemplo, un termostato inteligente), esta puede ser una manera eficaz,
+acotada y sencilla de modificarlo.
+•Modificación algorítmica: puede incluir nuevas
+funcionalidades, corrección de errores, actualizaciones, etc. Muchos problemas de software
+son causados, y se magnifican, por estas intervenciones.
+Las modificaciones pueden tener una expresividad limitada, como
+permitir únicamente la eliminación de reglas.
+•Modificación de recursos: aunque los parámetros o el código
+no se modifiquen, los recursos del sistema y las demás
+dependencias mencionadas antes pueden limitarse
+externamente, por ejemplo, los recursos computacionales.
+Por otro lado, los sistemas pueden modificarse a sí mismos (de manera
+interna). También aquí hay muchas variedades:
+1. Sin automodificación ni memoria: el sistema no tiene
+memoria y funciona como si se reiniciara con cada nueva entrada o
+interacción. Muchos sistemas funcionales (que asignan entradas a
+salidas) son de este tipo. Sin embargo, obsérvese que el
+entorno sí tiene memoria, por lo que algunos sistemas, como uno de
+visión o un robot no cognitivo, pueden verse afectados por
+el pasado y convertirse en un verdadero sistema cognitivo.
+2. Parcialmente automodificable: los algoritmos del aprendiz o del
+solucionador no pueden modificarse, pero sus datos o su conocimiento (en
+forma de pesos o reglas aprendidos) pueden ser modificados por
+un algoritmo general que es fijo. Muchos sistemas de
+aprendizaje son de este tipo, si el sistema tiene un algoritmo de aprendizaje
+y uno o más modelos aprendidos.
+3. Totalmente automodificable: el sistema puede modificar cualquier parte
+de su código. No muchos sistemas operativos poseen estas
+capacidades, pues se vuelven muy inestables. Sin embargo, algunos tipos
+de computación evolutiva pueden tener esta posibilidad, si
+la evolución también puede aplicarse a las reglas de la evolución.
+Por último, todas estas categorías pueden seleccionarse para distintos
+períodos de tiempo. Por ejemplo, es habitual separar entre
+entrenamiento, prueba/validación y despliegue. Durante el entrenamiento, un alto
+grado de automodificación (y, por tanto, de adaptación) está bien
+aceptado, pero luego suele restringirse para la validación
+y el despliegue. Obsérvese que estas etapas se aplican tanto a las fuentes
+externas como a las internas de modificación. Un peligro
+importante es que un sistema bien validado puede ser objeto de alguna
+modificación externa o interna tardía justo antes del despliegue.
+En este caso, todo el esfuerzo de validación puede quedar anulado2.
+Una de las principales preocupaciones modernas en la seguridad de la IA es que
+será deseable que algunos sistemas aprendan durante el des-
+2OpenAI Dota es un ejemplo: https://
+blog .openai .com/the-international-2018-
+results/ ,https://www .theregister .co .uk/2018/
+08/24/openai bots eliminated dota 2/
+pliegue, para que sean adaptativos3. Por ejemplo, muchos
+asistentes personales aprenden continuamente de nuestras acciones.
+Si bien esto puede introducir muchos riesgos en sistemas más potentes,
+prohibir el aprendizaje fuera del laboratorio haría imposibles muchas
+aplicaciones potenciales de la IA. Sin embargo, los sistemas adaptativos
+están llenos de problemas de ingeniería; algunos incluso deben
+tener una vida limitada, pues tras la automodificación y la adaptación
+pueden terminar funcionando mal y tener que reiniciarse o que se borren
+sus ‘cachés’. Este problema lleva mucho tiempo interesando
+a la ingeniería (Fickas y Feather 1995).
+Tipos de motivación
+Los sistemas pueden seguir un conjunto de reglas o aspirar a optimizar una función de
+utilidad. La mayoría de los sistemas son en realidad híbridos, pues es difícil
+establecer una línea nítida entre los algoritmos procedimentales
+y los algoritmos de optimización. A través de capas de abstracción
+en estos procesos, acabamos teniendo la impresión de que un
+sistema es más o menos autónomo. Si el sistema aparentemente
+persigue una meta, ¿cuáles son los impulsores que hacen que un
+sistema prefiera o siga ciertos comportamientos y no otros? Estos
+comportamientos pueden basarse en algún tipo de representación interna
+de una meta, como comentamos al tratar la anticipación,
+o en una métrica de cuán cerca está el sistema de la meta.
+Entonces los sistemas pueden seguir un proceso de optimización que
+intenta maximizar algunas de estas funciones de calidad.
+Las funciones de calidad o de utilidad suelen asignar entradas y
+salidas a valores que se reevalúan periódicamente o
+después de ciertos eventos. Ejemplos de estas funciones son la precisión,
+las recompensas agregadas o algún tipo de empoderamiento u
+otros tipos de motivación intrínseca (Klyubin, Polani y Ne-
+haniv 2005; Jung, Polani y Stone 2011). Un mismo sistema
+puede tener varias funciones de calidad que pueden oponerse, de modo que
+hay que elegir compromisos. La noción general de racionalidad
+en la toma de decisiones está relacionada con estas motivaciones.
+Pero ¿cuáles son las características de las metas que un sistema de IA
+puede tener en primer lugar? Señalamos varias dimensiones:
+•Variabilidad de las metas: ¿están las metas codificadas de forma fija o cambian con
+el tiempo? ¿Cambian de manera autónoma o mediante instrucciones?
+¿Quién puede cambiar las metas y cómo? Por ejemplo,
+¿qué órdenes puede aceptar un asistente digital y de quién?
+•Escrutabilidad de las metas: ¿son las (sub)metas identificables y, en última
+instancia, explicables? ¿Provienen de reglas o se
+infieren de los datos, por ejemplo, el error de clasificación o la observación
+de humanos en el aprendizaje por refuerzo inverso?
+•Racionalidad de las metas: ¿son las metas susceptibles de tratarse
+dentro de un marco de elección racional? Si se fijan varias metas,
+¿son coherentes? Si no lo son, ¿cómo resuelve el sistema
+las incoherencias o fija nuevas metas?
+Obsérvese que esto está estrechamente relacionado con los tipos de modificación,
+pues cambiar o resolver metas puede requerir automodificación
+y/o modificación externa.
+3La naturaleza ha encontrado muchas formas de regular la automodificación.
+Muchos animales tienen un mayor grado de plasticidad al nacer y se vuelven
+más conservadores y rígidos en etapas posteriores (Gopnik et al. 2017).
+Una cuestión clave sobre la cognición es si este es un proceso contingente o
+necesario, y si lo influyen cuestiones de seguridad.Una segunda pregunta es cómo sigue el sistema estas metas.
+Aquí hay al menos tres dimensiones posibles:
+•Inmediatez: el sistema puede maximizar la función
+para el presente, en el límite o algo intermedio.
+Muchos esquemas de recompensas descontadas en el aprendizaje
+por refuerzo se usan como compromisos entre la maximización a corto
+y a largo plazo.
+•Egoísmo: centrarse en óptimos individuales podría implicar
+resultados colectivos muy malos (para otros agentes) o incluso resultados
+que podrían ser incluso peores a nivel individual (tragedia de los
+comunes). La teoría de juegos ofrece muchos ejemplos de ello.
+En sistemas multiagente de RL, las recompensas pueden depender del
+bienestar de otros agentes, o puede introducirse la empatía.
+•Escrupulosidad: el sistema puede estar completamente comprometido
+con maximizar el objetivo, o se permiten acciones aleatorias o exploratorias,
+aunque a veces se aparten de
+el objetivo. Cuando es deliberado, suele estar pensado
+para dar robustez o evitar mínimos locales, pero estas
+desviaciones pueden llevar al sistema a zonas peligrosas.
+Modular las funciones de optimización para que sean convexas, con un máximo no-
+asintótico, más allá del cual cualquier esfuerzo adicional es inútil,
+puede ser razonable, ya que proporciona una condición de
+parada por definición. Un límite autoimpuesto siempre puede desplazarse si to-
+do está bajo control una vez alcanzado el límite.
+Cabe señalar que el tipo de interacción descrito antes es clave para la
+métrica o el objetivo interno de calidad. Por ejemplo, en RL asín-
+crono, “el tiempo puede modularse intencionalmente por
+el agente” para obtener recompensas más altas sin rendir realmente
+mejor (Hern ´andez-Orallo 2010). Y, por supuesto, un problema común
+para la motivación es el hackeo de recompensas.
+Tipos de logro
+En última instancia, un sistema de IA se concibe para lograr una tarea, in-
+dependientemente de qué tan motivado esté el sistema para ello. Con-
+secuentemente, el grado externo de logro debe dis-
+tinguirse de la motivación o la métrica de calidad que el sistema
+usa para funcionar, como se ha comentado en la subsección anterior.
+La desalineación entre el objetivo interno del sistema
+y la especificación de la tarea es la causa de muchos problemas de seguridad
+en IA, a diferencia de los métodos formales de la ingeniería de software, cuando
+los requisitos se convierten en código correcto.
+Al centrarnos en la especificación de la tarea, debemos reconocer primero que
+distintos actores pueden tener intereses diferentes. Un asistente cognitivo
+por ejemplo, puede ser percibido por el usuario como algo muy útil
+que facilita la vida. Sin embargo, para la compañía que vende el asistente
+cognitivo, la tarea es en última instancia generar ingresos con
+el producto. Ambos requisitos no siempre son compatibles, y
+esto puede afectar la definición de los objetivos del
+sistema, ya que algunos de sus fines pueden no estar codificados
+ni motivados de forma transparente, sino que suelen incorporarse
+de manera indirecta. En segundo lugar, aun si los requisitos incluyen
+todas las internalidades posibles (lo que el sistema debe hacer), hay
+también muchas externalidades y huellas (Martínez-Plumed
+et al. 2018a) (incluidas las infinitas cosas que el
+sistema no debe hacer) que afectan cuán positivo o negativo es su
+efecto global. Respecto de estas dos cuestiones, la especificación de la tarea
+puede variar en precisión y objetividad:
+•Precisión de la tarea: la métrica de evaluación para determinar el
+éxito de un agente puede ser formal o no. Por ejemplo, la
+exactitud de un clasificador o el error cuadrático de un modelo de
+regresión son métricas definidas con precisión. Sin embargo, en muchos
+otros casos tenemos una función de utilidad que depende de
+variables que suelen ser imprecisas o inciertas, como
+la calidad de una aspiradora inteligente.
+•Objetividad de la tarea: una métrica puede ser objetiva o subjetiva.
+Tendemos a asociar las métricas precisas con la objetividad
+y las imprecisas con la subjetividad, pero la subjetividad
+simplemente significa que la evaluación cambia según
+el sujeto. Por ejemplo, la calidad de un filtro de spam (un
+clasificador evaluado con precisión) cambia según las
+matrices de costos de distintos usuarios, y la calidad de una
+aspiradora inteligente basada en variables difusas como la limpieza
+o la interrupción puede ponderarse mediante una fórmula fija.
+Algunas de las tareas u objetivos más comúnmente defendidos
+en la literatura sobre ética y seguridad de la IA suelen ser
+muy imprecisos y subjetivos, como “bienestar”, “bien social”,
+“IA beneficiosa”, “alineamiento”, etc. Cabe señalar que el problema
+no está relacionado con los objetivos del sistema (un sistema de
+aprendizaje por refuerzo inverso puede identificar con éxito las distintas
+voluntades de un grupo de personas), sino con si la tarea se cumple
+en última instancia, o con el bienestar o la felicidad del usuario.
+Determinar esto es controvertido, incluso
+cuando se analiza de manera científica (Alexandrova 2017).
+Se culpa a menudo de un énfasis excesivo en el seguimiento de métricas (ley de Goodhart),
+pero la alternativa no suele ser mejor.
+Algunos problemas de seguridad no los crea un énfasis excesivo
+en una métrica (Manheim y Garrabrant 2018), sino, en última instancia,
+una métrica demasiado estrecha o miope, que no
+capta adecuadamente el progreso hacia el objetivo.
+En todos estos casos hay que distinguir si la métrica
+se relaciona con (i) los objetivos internos que el sistema debería
+tener, (ii) la evaluación externa del desempeño en la tarea, o (iii)
+nuestros deseos últimos y objetivos4. Las motivaciones, el logro
+y la supervisión están estrechamente relacionados, pero pueden ser distintos.
+Por ejemplo, en un laberinto, el objetivo del sistema de IA puede ser
+salir del laberinto lo antes posible, pero una competencia
+podría basarse en minimizar las celdas que se pisan más de
+una vez, y la supervisión puede incluir indicaciones de direc-
+ción hacia la ruta más corta hasta la salida. Son tres criterios
+distintos que pueden estar bien o mal alineados.
+De forma aún más completa, y relacionado con el concepto
+de persistencia, un sistema puede analizarse para un conjunto de
+tareas, bajo distintas situaciones de replicabilidad:
+1. Sistema desechable: tarea única, uso único: el sistema se
+usa para una tarea que ocurre una sola vez.
+2. Sistema repetitivo: tarea única, varios usos: el sistema
+debe resolver muchas instancias de la misma tarea específica.
+3. Sistema de menú: multitarea: el sistema debe resolver distintas
+tareas, dentro de un repertorio fijo de tareas.
+4Ortega et al. (2018) distinguen entre “especificación ideal
+(los ‘deseos’)” y “especificación de diseño”, que debe compararse
+con la especificación revelada (el “comportamiento”). La especificación de diseño
+no distingue entre la métrica externa y el objetivo interno.4. Sistema general: multitarea: el sistema debe resolver distintas
+tareas, sin un repertorio fijo.
+5. Sistema incremental: el sistema debe resolver una secuencia de
+tareas, con algunas dependencias entre ellas.
+Cualquier métrica que examine los beneficios y riesgos posibles de un
+sistema debe tener en cuenta los factores descritos anteriormente.
+Conclusión
+Muchos enfoques sobre la seguridad de la IA se centran en “agentes de RL o
+sistemas de aprendizaje supervisado”, asumiendo que “problemas similares son
+probables en otros tipos de sistemas de IA” (Amodei et
+al. 2016). Este artículo ha revisado una amplia gama de carac-
+terísticas de los sistemas de IA, para que la investigación futura pueda relacionar
+los desafíos de seguridad de la IA con los paradigmas de investigación en IA de forma más
+precisa, a fin de determinar si ciertos desafíos de seguridad
+se manifiestan de manera similar en distintos paradigmas. Esto
+busca atender una preocupación creciente: que el paradigma dominante
+actual para una gran parte de la investigación en seguridad de la IA
+podría ser demasiado estrecho: sistemas de RL en tiempo discreto con regímenes de entrenamiento/prueba,
+que asumen aprendizaje basado en gradientes sobre un espacio
+paramétrico, con una función de utilidad que el sistema debe optimizar
+(Gauthier 2018; Krakovna 2018).
+Las taxonomías de características potencialmente relevantes para la seguridad
+de los sistemas de IA, tal como se presentan en este artículo, buscan
+complementar bien los trabajos recientes sobre taxonomías
+de problemas técnicos de seguridad de la IA. Por ejemplo, Ortega (2018)
+presenta tres áreas principales: especificación, que asegura que el comportamiento de un sistema de IA
+se alinea con las verdaderas intenciones del operador;
+robustez, que asegura que un sistema de IA sigue operando
+dentro de límites seguros ante perturbaciones, y garantía, que asegura
+que entendemos y controlamos los sistemas de IA durante su funcionamiento.
+Casi todas las características descritas en este artículo tienen
+un papel que desempeñar en la especificación, la robustez y la garantía.
+Las taxonomías rara vez son definitivas, y la caracterización
+presentada aquí no considera por completo algunas características cuantitativas
+como el rendimiento, la autonomía y la generalidad. Una
+evaluación adecuada de cómo el tipo y el grado de inteligencia
+también es un ámbito de análisis importante, en la medida en que puede afectar a cuestiones de seguridad,
+tanto teórica (Hernández-Orallo 2017) como experimentalmente
+(Leike et al. 2017). La investigación en IA ha explorado paradigmas distintos
+en el pasado y seguirá haciéndolo en el futuro. Por el camino, se han presentado
+a los desarrolladores muchas características distintas de los sistemas
+y opciones de diseño. Podemos
+esperar que se desarrollen aún más a medida que avance la investigación en IA.
+En consecuencia, el ámbito de la seguridad de la IA debe adquirir
+más estructura y riqueza en la forma de caracterizar y analizar la IA, para
+ofrecer orientación a medida para distintos contextos,
+arquitecturas y dominios. Existe un riesgo potencial de depender demasiado
+de nuestras mejores teorías actuales sobre la IA al considerar
+la seguridad de la IA. En cambio, pretendemos fomentar un conjunto diverso de perspectivas,
+para anticipar y mitigar el mayor número posible de
+preocupaciones de seguridad.
+Agradecimientos
+FMP y JHO recibieron apoyo de la UE (FEDER) y
+del MINECO español, mediante la subvención TIN 2015-69175-C4-1-
+R, de la Generalitat Valenciana (GVA), mediante la subvención PROME-
+TEOII/2015/013 y de la Oficina de Investigación Científica de la Fuerza Aérea de EE. UU.
+con el número de premio FA9550-17-1-0287.
+FMP también recibió apoyo de INCIBE (Ayudas para la
+excelencia de los equipos de investigación avanzada en
+ciberseguridad), la Comisión Europea, el Centro de Estudios Avanzados del JRC,
+proyecto HUMAINT (contrato de experto
+CT-EX2018D335821-101), y UPV PAID-06-18
+Ref. SP20180210. JHO recibió apoyo de una beca Salvador de
+Madariaga (PRX17/00467) del MECD español para una estancia de investigación en el
+Leverhulme Centre for the Future
+of Intelligence (CFI), Cambridge, y una beca BEST
+(BEST/2017/045) de la GVA para otra estancia de investigación, también
+en el CFI. JHO y SOH recibieron apoyo del Future
+of Life Institute (FLI), subvención RFP2-152. SOH también recibió apoyo
+de la Leverhulme Trust Research Centre Grant RC-
+2015-067 concedida al Leverhulme Centre for the Future
+of Intelligence, y una subvención de Templeton World Charity
+Foundation.
+Referencias
+[Alexandrova 2017] Alexandrova, A. 2017. A Philosophy for
+the Science of Well-being. Oxford University Press.
+[Amodei et al. 2016] Amodei, D.; Olah, C.; Steinhardt, J.;
+Christiano, P.; Schulman, J.; y Mané, D. 2016. Concrete
+problems in ai safety. arXiv preprint arXiv:1606.06565.
+[Armstrong y Levinstein 2017] Armstrong, S., y Levinstein,
+B. 2017. Low impact artificial intelligences. arXiv
+preprint arXiv:1705.10720.
+[Armstrong 2017] Armstrong, S. 2017. Good and safe uses of
+ai oracles. arXiv preprint arXiv:1711.05541.
+[Babcock, Kramár, y Yampolskiy 2016] Babcock, J.;
+Kramár, J.; y Yampolskiy, R. 2016. The AGI containment
+problem. In AGI Conf. Springer. 53–63.
+[Barmpalias y Dowe 2012] Barmpalias, G., y Dowe, D. L.
+2012. Universality probability of a prefix-free machine. Phil.
+Trans. R. Soc. A 370(1971):3488–3511.
+[Bernstein y Vazirani 1997] Bernstein, E., y Vazirani, U.
+1997. Quantum complexity theory. SIAM Journal on computing26(5):1411–1473.
+ing26(5):1411–1473.
+[Bonabeau et al. 1999] Bonabeau, E.; Dorigo, M.; Théraulaz,
+G.; y Theraulaz, G. 1999. Swarm intelligence: from natural
+to artificial systems. Oxford university press.
+[Bostrom 2014] Bostrom, N. 2014. Superintelligence: Paths,
+dangers, strategies. Oxford University Press.
+[Brundage et al. 2018] Brundage, M.; Avin, S.; Clark, J.; Toner,
+H.; Eckersley, P.; Garfinkel, B.; Dafoe, A.; Scharre, P.; Zeitzoff,
+T.; Filar, B.; Anderson, H.; Roff, H.; Allen, G. C.; Steinhardt,
+J.; Flynn, C.; Ó hÉigeartaigh, S.; Beard, S.; Belfield, H.; Farquhar,
+S.; Lyle, C.; Crootof, R.; Evans, O.; Page, M.; Bryson,
+J.; Yampolskiy, R.; y Amodei, D. 2018. The malicious use of
+artificial intelligence: Forecasting, prevention, y mitigation.
+arXiv preprint arXiv:1802.07228.
+[Coulouris, Dollimore, y Kindberg 2011] Coulouris, G. F.;
+Dollimore, J.; y Kindberg, T. 2011. Distributed systems:
+concepts and design. Quinta edición, Pearson.
+[D’silva, Kroening, y Weissenbacher 2008] D’silva, V.;
+Kroening, D.; y Weissenbacher, G. 2008. A survey of
+automated techniques for formal software verification. IEEE Transactions on Computer-Aided Design of Integrated Circuits
+y Systems 27(7):1165–1178.
+[Everitt y Hutter 2018] Everitt, T., y Hutter, M. 2018.
+El problema de la alineación para aprendices bayesianos por refuer-
+zo basados en la historia. http://www .tomeveritt .se/papers/
+alignment.pdf/ .
+[Everitt, Lea, y Hutter 2018] Everitt, T.; Lea, G.; y Hutter,
+M. 2018. Agi safety literature review. Proceedings of the
+Twenty-Seventh International Joint Conference on Artificial Intelligence
+(IJCAI-18), arXiv preprint version:1805.01109.
+[Fickas y Feather 1995] Fickas, S., y Feather, M. S. 1995.
+Requirements monitoring in dynamic environments. In IEEE
+Intl Symposium on Requirements Engineering, 140–147.
+[Ford et al. 2015] Ford, K. M.; Hayes, P. J.; Glymour, C.; and
+Allen, J. 2015. Cognitive orthoses: toward human-centered ai.
+AI Magazine 36(4):5–8.
+[Garrabrant y Demski 2018] Garrabrant, S., y Demski, A.
+2018. Embedded agency. AI Alignment Forum.
+[Gasparik, Gamble, y Gao 2018] Gasparik, A.; Gamble, C.;
+y Gao, J. 2018. Safety-first ai for autonomous data centre
+refrigeración y el control industrial. Blog de DeepMind.
+[Gauthier 2018] Gauthier, J. 2018. Conceptual issues
+in AI safety: the paradigmatic gap. http:
+//www .foldl .me/2018/conceptual-issues-ai-
+.
+[Geffner 2018] Geffner, H. 2018. Model-free, model-based, and
+general intelligence. arXiv preprint arXiv:1806.02308.
+[Gopnik et al. 2017] Gopnik, A.; OGrady, S.; Lucas, C. G.;
+Griffiths, T. L.; Wente, A.; Bridgers, S.; Aboody, R.; Fung, H.;
+y Dahl, R. E. 2017. Changes in cognitive flexibility and
+búsqueda de hipótesis a lo largo de la historia de vida humana desde la infancia
+hasta la adolescencia y la adultez. PNAS 114(30):7892–7899.
+[Hernández-Orallo 2010] Hernández-Orallo, J. 2010. On evaluating
+agent performance in a fixed period of time. In Artificial
+General Intelligence, 3rd Intl Conf, ed., M. Hutter et al, 25–30.
+[Hernández-Orallo 2017] Hernández-Orallo, J. 2017. The Measure
+sure of All Minds: Evaluación de la inteligencia natural y artificial
+Cambridge University Press.
+[Jung, Polani, y Stone 2011] Jung, T.; Polani, D.; y Stone,
+P. 2011. Empowerment for continuous agentenvironment systems.
+Adaptive Behavior 19(1):16–39.
+[Klyubin, Polani, y Nehaniv 2005] Klyubin, A. S.; Polani,
+D.; y Nehaniv, C. L. 2005. All else being equal be empowered.
+In European Conference on Artificial Life, 744–753.
+[Krakovna 2018] Krakovna, V. 2018. Discussion
+sobre el enfoque de aprendizaje automático para la seguridad de la IA.
+http://vkrakovna.wordpress.com/2018/11/
+01/discussion-on-the-machine-learning-
+.
+[Leike et al. 2017] Leike, J.; Martic, M.; Krakovna, V.; Ortega,
+P. A.; Everitt, T.; Lefrancq, A.; Orseau, L.; y Legg, S. 2017.
+AI safety gridworlds. arXiv preprint arXiv:1711.09883.
+[Manheim y Garrabrant 2018] Manheim, D., y Garrabrant,
+S. 2018. Categorizing variants of Goodhart’s law. arXiv
+preprint arXiv:1803.04585.
+[Martínez-Plumed et al. 2018a] Martínez-Plumed, F.; Avin, S.;
+Brundage, M.; Dafoe, A.; hÉigeartaigh, S. ´O.; y Hernández-
+Orallo, J. 2018a. Accounting for the neglected dimensions of
+ai progress. arXiv preprint arXiv:1806.00610.
+[Martínez-Plumed et al. 2018b] Martínez-Plumed, F.; Loe,
+B. S.; Flach, P.; Ó hÉigeartaigh, S.; V old, K.; y Hernández-
+Orallo, J. 2018b. The facets of artificial intelligence: A
+marco para rastrear la evolución de la IA. IJCAI .
+[Mnih 2015] Mnih, V. e. a. 2015. Human-level control through
+deep reinforcement learning. Nature 518:529–533.
+[Omohundro 2008] Omohundro, S. M. 2008. The basic ai
+drives. Inteligencia artificial general 171:483–493.
+[Ortega y Maini 2018] Ortega, P. A., y Maini, V.
+2018. Building safe artificial intelligence: specification,
+robustness, y assurance. https://medium.com/
+@deepmindsafetyresearch/building-safeartificial-intelligence-52f5f75058f1.
+artificial-intelligence-52f5f75058f1 .
+[Pecka y Svoboda 2014] Pecka, M., y Svoboda, T. 2014.
+Safe exploration techniques for reinforcement learning–an
+overview. En International Workshop on Modelling and Sim-
+ulation for Autonomous Systems , 357–375. Springer.
+[Quinn y Bederson 2011] Quinn, A. J., y Bederson, B. B.
+2011. Human computation: estudio y taxonomía de un campo en expan-
+sión. En SIGCHI conf. sobre factores humanos en sistemas infor-
+máticos, 1403–1412. ACM.
+[Soares et al. 2015] Soares, N.; Fallenstein, B.; Armstrong, S.;
+y Yudkowsky, E. 2015. Corrigibility. En Talleres en el
+Vigesimonoveno Congreso AAAI sobre Inteligencia Artificial .
+[Turchetta, Berkenkamp, y Krause 2016] Turchetta, M.;
+Berkenkamp, F.; y Krause, A. 2016. Safe exploration in
+finite Markov decision processes with Gaussian processes. En
+NIPS , 4312–4320.
+[Yampolskiy 2012] Yampolskiy, R. 2012. Leakproofing the sin-
+gularity artificial intelligence confinement problem. Journal of
+Consciousness Studies 19(1-2):194–214.
+[Yampolskiy 2016] Yampolskiy, R. V . 2016. Taxonomy of path-
+ways to dangerous artificial intelligence. En AAAI Workshop:
+AI, Ethics, and Society .

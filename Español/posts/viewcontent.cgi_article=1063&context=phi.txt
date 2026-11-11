@@ -1,0 +1,647 @@
+Santa Clara University
+Scholar Commons
+Filosofía, College of Arts & Sciences
+10-3-2017
+Inteligencia artificial y la ética de los robots de autoaprendizaje
+Robots
+Shannon Vallor
+Santa Clara University, svallor@scu.edu
+George A. Bekey
+Siga este trabajo y otros trabajos adicionales en: http://scholarcommons.scu.edu/phi
+Forma parte de Philosophy Commons
+Este material fue publicado originalmente en Robot Ethics 2.0, editado por Patrick Lin, Keith Abney y Ryan Jenkins, y ha sido reproducido con
+permiso de Oxford University Press. Para solicitar permiso para reutilizar este material, visite http://www.oup.co.uk/academic/rights/permissions.
+Este capítulo de libro se ofrece gratuitamente y con acceso abierto por el College of Arts & Sciences de Scholar Commons. Ha sido aceptado para su inclusión
+en Philosophy por un administrador autorizado de Scholar Commons. Para más información, comuníquese con rscroggin@scu.edu. Cita recomendada
+Vallor, S., y Bekey, G. A. (2017). Artificial Intelligence and the Ethics of Self-learning Robots. En P. Lin, K. Abney y R. Jenkins (eds.),
+Robot Ethics 2.0 (pp. 338–353). Oxford University Press.
+22 INTELIGENCIA ARTIFICIAL Y 
+LA ÉTICA DE LOS ROBOTS DE AUTOAPRENDIZAJE 
+Shannon Vallor y George A. Bekey 
+La convergencia de la tecnología robótica con la ciencia de la inteligencia artificial 
+(o IA) está permitiendo rápidamente el desarrollo de robots que 
+emulan una amplia gama de comportamientos humanos inteligentes.1 Los avances recientes 
+en las técnicas de aprendizaje automático han producido avances significativos en la 
+capacidad de los agentes artificiales para desempeñar o incluso sobresalir en actividades que
+antes se consideraban de competencia exclusiva de la inteligencia humana, 
+incluidas la resolución abstracta de problemas, el reconocimiento perceptivo, la interacción social, 
+y el uso del lenguaje natural. Estos avances plantean una multitud de 
+nuevas preocupaciones éticas sobre el diseño, la fabricación 
+y el uso de robots dotados de inteligencia artificial, en particular 
+aquellos equipados con capacidades de autoaprendizaje. 
+El beneficio público potencial de los robots de autoaprendizaje es inmenso. 
+Los coches sin conductor prometen reducir enormemente las muertes humanas en carretera, 
+al tiempo que aumentan la eficiencia del transporte y reducen el consumo de energía. 
+Los robots médicos con acceso a un océano virtual de datos de casos médicos 
+podrían algún día diagnosticar a los pacientes con una rapidez y una 
+fiabilidad mayores que incluso los homólogos humanos mejor formados. Los robots encargados del control de multitudes 
+podrían predecir las acciones de una turba peligrosa 
+mucho antes de que sus señales sean reconocibles para los agentes del orden. 
+Estas aplicaciones, y las muchas que surgirán, tienen el poten-
+cial de servir a intereses morales vitales en la protección de la vida, la salud y 
+el bienestar de las personas. 
+Sin embargo, como mostrará este capítulo, los riesgos éticos que plantean los robots habilitados con IA 
+son igualmente graves, especialmente porque los sistemas de autoaprendizaje 
+se comportan de maneras que no siempre pueden anticiparse ni comprenderse del
+todo, ni siquiera por sus programadores. Algunos advierten sobre un futuro en el que la IA 
+escape a nuestro control, o incluso se vuelva contra la humanidad (Standage 2016); 
+pero otros peligros, mucho menos cinematográficos, están mucho más cerca de la mano y son 
+prácticamente seguros de causar grandes daños si no los abordan con prontitud los 
+IA y la ética de los robots de autoaprendizaje • 339 
+tecnólogos, legisladores y otras partes interesadas. La tarea de garantizar que el diseño éti-
+co, la fabricación, el uso y la gobernanza de los robots habilitados con IA y de otros 
+agentes artificiales es, por tanto, tan crítica como vasta. 
+22.1 ¿Qué es la inteligencia artificial? 
+La naturaleza de la inteligencia humana ha sido uno de los grandes misterios desde los 
+primeros días de la civilización. Se le ha atribuido a Dios, a la civilización o a mutaciones acci-
+dentales, pero hay un acuerdo general en que es nuestro cerebro y la inteli-
+gencia que exhibe lo que separa a los humanos de otros animales. Durante siglos se 
+pensó que una máquina nunca sería capaz de emular el pensamiento humano. 
+Sin embargo, en la actualidad existen numerosos programas informáticos que emulan algún aspecto 
+de la inteligencia humana, aunque ninguno puede realizar todas las funciones cognitivas de un 
+cerebro humano. Los primeros programas informáticos que exhibieron algún aspecto conductual 
+de la inteligencia comenzaron a aparecer en la segunda mitad del siglo XX.2 La 
+primera prueba significativa de la aproximación de una computadora a la inteligencia humana 
+fue propuesta por Alan Turing (1950). Él la llamó el “juego de la imitación”; más com-
+únmente se conoce hoy como la “prueba de Turing”. 
+La idea es la siguiente: un investigador envía preguntas por escrito a la 
+computadora, que responde también por escrito. La computadora supera la prueba si, después de un inter-
+valo adecuado de tiempo, el investigador medio no tiene más de un 70% de probabilidad de 
+determinar correctamente si las respuestas provienen de una persona o de un com-
+putadora. La utilidad general y la importancia de la prueba de Turing para la investigación en IA 
+son ampliamente discutidas (Moor 2003; Russell y Norvig 2010). Su enfoque en la apariencia de un sis-
+tema ante los usuarios en un entorno estrictamente controlado, en lugar de la arquitectura cognitiva
+o las operaciones internas del sistema, puede parecer eludir el punto básico de la prueba: 
+demostrar una facultad cognitiva. La prueba 
+también excluye muchos otros tipos de rendimiento inteligente que no implican 
+capacidad conversacional. Aun así, es notable que en una competición anual celebrada desde 1991 (el Premio Loebner) 
+ningún sistema ha superado una versión sin restricciones de la 
+prueba, desafiando repetidamente las predicciones de muchos investigadores (incluido Turing) 
+de que las computadoras mostrarían inteligencia conversacional a más tardar en el 
+siglo XXI (Moor 2003). 
+Aunque quedan muchas preguntas sin resolver sobre lo que se necesitaría para que una máquina 
+demostrara la posesión de una inteligencia «real» de tipo general, como la que poseen los hu-
+manos, el objetivo principal de la mayoría de los investigadores de IA es más modesto: siste-
+mas que puedan emular, aumentar o competir con el rendimiento de humanos inteligentes 
+en tareas bien definidas.3 En este sentido, el legado pragmático de la prueba de Turing 
+perdura. Esta definición figurativa, delimitada por tareas, de la inteligencia artificial es 
+la que emplearemos en el resto de este capítulo, salvo que se indique lo contrario. Se distingue 
+de la noción, mucho más ambiciosa, de inteligencia artificial «fuerte» 
+.l: .gi 
+>, 
+C. 
+340 • SHANNON VALLOR Y GEORGE A. BEKEY 
+con la gama completa de capacidades cognitivas que suelen poseer los humanos, incluida la
+autoconciencia. La mayoría de los investigadores de IA caracterizan este último logro, a menudo 
+denominado «inteligencia artificial general» o AGI, como, en el mejor de los casos, una perspectiva a 
+largo plazo, y no una realidad emergente.4 
+Los agentes artificiales con formas específicas de inteligencia de tarea, en cambio, 
+ya están aquí, entre nosotros. En muchos casos no solo compiten con los agentes humanos, sino que los superan
+con facilidad, una tendencia que se prevé que se acelere rápidamente con 
+los avances continuos en las técnicas de aprendizaje automático. Además, la implementación de
+sistemas de IA específicos de tarea en sistemas robóticos amplía aún más la gama 
+y la variedad de agentes de IA y los tipos de roles sociales que pueden desempeñar. Estas tendencias 
+se prevé que produzcan avances significativos en la productividad global, la producción de conocimiento
+y la eficiencia institucional (Kaplan 2015). Sin embargo, como veremos, también conllevan 
+profundos riesgos sociales, económicos y éticos. 
+22.2 Inteligencia artificial y la ética 
+del aprendizaje automático 
+Muchas preocupaciones éticas sobre la investigación en IA y sus aplicaciones robóticas están asociadas
+a un dominio de la informática de rápida emergencia conocido como aprendizaje automático. 
+Al igual que el aprendizaje en los animales, el aprendizaje automático es un proceso de desarrollo
+en el que las exposiciones repetidas de un sistema a un entorno rico en información 
+producen, amplían, mejoran o refuerzan gradualmente la competencia conductual y cognitiva de 
+ese sistema en ese entorno o en entornos relevantemente similares. El aprendizaje 
+produce cambios en el estado del sistema que perduran durante algún tiempo, a menudo 
+mediante algún mecanismo de formación de memoria explícita o implícita. 
+Un enfoque importante del aprendizaje automático está modelado en redes del 
+sistema nervioso central y se conoce como aprendizaje con redes neuronales o, más precisamente,
+aprendizaje con redes neuronales artificiales (ANN). Por simplicidad, omitimos la palabra 
+artificial en la siguiente discusión. Una red neuronal consta de un conjunto de entradas 
+de nodos que representan diversas características de la fuente o de los datos de entrada, y un conjunto de salidas 
+de nodos que representan las acciones de control deseadas. Entre las capas de entrada y 
+de salida hay capas «ocultas» de nodos que funcionan para procesar los datos de entrada, 
+por ejemplo, extrayendo características especialmente relevantes para los resultados deseados.
+. Las conexiones entre los nodos tienen «pesos» numéricos que pueden modificarse
+con ayuda de un algoritmo de aprendizaje; el algoritmo permite que la red 
+sea «entrenada» con cada nuevo patrón de entrada hasta que los pesos de la red se ajusten 
+de tal manera que la relación entre las capas de entrada y de salida quede optimizada. 
+Así, la red aprende gradualmente de la «experiencia» repetida (múltiples entrenamientos
+con conjuntos de datos de entrada) cómo optimizar el «comportamiento» (resultados) de la máquina 
+para un tipo dado de tarea. 
+IA y la ética de los robots de autoaprendizaje, 341 
+Si bien el aprendizaje automático puede modelar arquitecturas cognitivas distintas de las neuronales, 
+el interés por las redes neuronales ha crecido en los últimos años con la incorporación 
+de más capas ocultas que dan profundidad a estas redes, así como capas de retroalimentación o recu
+rrentes. El ajuste de la fuerza de las conexiones en estas redes más complejas 
+pertenece a un grupo de técnicas vagamente definido conocido como aprendizaje
+profundo. Entre otras aplicaciones de la IA, especialmente las que implican visión por computadora, 
+lenguaje natural o procesamiento de audio, el rendimiento de los «coches robóticos» 
+autónomos ha mejorado significativamente con el uso de técnicas de aprendizaje profundo. 
+Las técnicas de aprendizaje automático también varían según el grado en que el 
+aprendizaje está supervisado, es decir, en qué medida los datos de entrenamiento están explícitamente 
+etiquetados por humanos para indicar al sistema qué clasificaciones debe aprender a hacer 
+(a diferencia de dejar que el sistema construya sus propias clasificaciones o agrupaciones). 
+Aunque muchos otros métodos de programación pueden integrarse en los sistemas de IA, 
+incluidos los controles basados en reglas «de arriba hacia abajo» («Si está previsto un giro a la derecha, active 
+la señal de giro a la derecha 75 metros antes del giro»), las contingencias del mundo real suelen ser demasiado 
+numerosas, ambiguas o impredecibles para gestionarlas eficazmente sin la ayuda de 
+técnicas de aprendizaje automático. 
+En un coche autónomo, las entradas incluirán datos en tiempo real sobre las condiciones de la vía,
+la iluminación, la velocidad, la ubicación GPS y el destino deseado. Las salidas 
+incluirán los valores calculados de las variables controladas, como la presión sobre el 
+pedal del acelerador (gas), las órdenes de dirección (p. ej., «Gire el volante 30 
+grados en el sentido de las agujas del reloj»), etc. Las capas ocultas de nodos serán sensibles a una amplia 
+gama de patrones relevantes que podrían detectarse en las entradas (p. ej., patrones de entrada 
+que indican un ciclista en el lado derecho de la calzada) de modos que configuran las 
+salidas adecuadas («Reduzca ligeramente la velocidad y muévase hacia el centro-izquierda del carril»). 
+Sin embargo, antes de poder conducir con seguridad en condiciones reales, la 
+red del coche debe ser «entrenada» mediante un algoritmo de aprendizaje para predecir las salidas adecuadas de la máquina
+(comportamientos de conducción) para una gran variedad de entradas y objetivos. 
+El aprendizaje se produce ajustando las ganancias o pesos entre los nodos 
+de las capas de entrada, ocultas y de salida de la red. El entrenamiento inicial de una red 
+en simulaciones va seguido de pruebas de campo controladas, en las que la red se implementa
+y entrena en un coche físico. Una vez que el proceso de entrenamiento determina 
+las fuerzas de conexión adecuadas, el comportamiento de entrada-salida de la red 
+se convierte en una aproximación del comportamiento del sistema modelado: en nuestro 
+ejemplo, un coche bien conducido. Si bien la estructura cognitiva de una red neuronal artificial
+puede parecerse poco a la estructura neuronal de un conductor humano competente, 
+una vez que puede aproximar de manera fiable el comportamiento de entrada-salida típico de tales 
+conductores, podemos decir que la red ha aprendido a conducir. 
+Una vez que se considera que la red es suficientemente competente y fiable en condiciones 
+controladas, podría producirse un ajuste fino adicional de su rendimiento «en la naturaleza», 
+es decir, en condiciones reales no controladas, como en el caso de la función de piloto 
+342 • SHANNON VALLOR Y GEORGE A. BEKEY 
+automático de Tesla. Aquí empezamos a plantear importantes preguntas éticas que surgen de 
+la implementación de la IA en un robot u otro sistema que puede actuar de forma autónoma y 
+realizar cambios irreversibles en el mundo físico. Los medios de comunicación han cubierto ampliamente
+la ética de los coches autónomos, sobre todo la posibilidad de «problemas del tranvía» 
+del mundo real generados por la tarea de programar coches para tomar decisiones moralmente difíciles
+entre la seguridad de sus pasajeros, los ocupantes de otros coches y los 
+peatones (Achenbach 2015). Sin embargo, los «problemas del tranvía» no agotan ni siquiera 
+necesariamente las cuestiones éticas centrales que plantean los sistemas robóticos 
+inteligentes artificiales y autónomos.5 Este capítulo se centra en una serie de cuestiones éticas 
+menos tratadas habitualmente en la cobertura mediática de la IA y la robótica. 
+En primer lugar, considere que los coches sin conductor pretenden hacer las carreteras más seguras para los humanos, 
+que son conductores notoriamente poco seguros. Este objetivo tiene, prima facie, mérito ético, pues 
+¿quién negaría que menos accidentes de tráfico es un bien moral? Para lograrlo, sin embargo,
+hay que entrenar redes artificiales para conducir mejor que nosotros. Como los humanos, 
+las máquinas de autoaprendizaje adquieren competencia en parte aprendiendo de sus errores. 
+El terreno más fértil para los errores de conducción son las carreteras reales, pobladas 
+por perros sueltos, árboles caídos, ciervos errantes, baches y conductores ebrios, que escriben mensajes o con sueño 
+conductores. Pero ¿es ético permitir que personas en las vías públicas sean sujetos de prueba sin saberlo
+para las sesiones de entrenamiento de un coche sin conductor? 
+Los clientes de Tesla se apuntan voluntariamente a este riesgo a cambio de la emoción
+y la comodidad de la última tecnología de conducción, pero los peatones y otros 
+conductores que podrían sufrir un error del piloto automático no han firmado 
+ningún contrato de ese tipo. ¿Es ético que una empresa nos imponga estos riesgos, incluso 
+si los riesgos son estadísticamente pequeños, sin debate público ni supervisión legislativa
+? ¿Debería compensarse al público por estas pruebas, dado que Tesla, una empresa privada, 
+obtiene grandes beneficios si las pruebas dan lugar a una tecnología más viable comercialmente? 
+¿O debemos aceptar que, dado que el avance de la tecnología sin conductor responde al interés público a largo plazo,
+nosotros (o nuestros hijos) seremos compensados
+por Tesla con carreteras mucho más seguras dentro de cinco, diez o veinte años? 
+Además, ¿permite la ética el sacrificio involuntario de quienes podrían estar en peligro hoy 
+por una máquina que aprende a desenvolverse en el mundo, siempre que podamos 
+esperar razonablemente que muchos otros se salven mañana con la misma tecnología
+? Aquí vemos un conflicto implícito entre distintas teorías éticas.
+Un utilitarista bien podría justificar tales sacrificios en aras de una mayor felicidad humana, 
+mientras que un kantiano los consideraría fundamentalmente inmorales. 
+Se pueden plantear preguntas similares sobre otras aplicaciones del aprendizaje automático. 
+Por ejemplo, ¿debería permitirse que un futuro robot médico, bien entrenado en simulaciones y en
+pruebas controladas, ajuste fino su red en el terreno con víctimas reales heridas 
+de un terremoto o de un tiroteo masivo, que podrían correr un peligro aún mayor 
+por el error del robot? ¿Se ve más justificable éticamente esta posibilidad si razonablemente creemos
+que esto aumentará la probabilidad de contar algún día con robots médicos extraordinarios 
+IA y la ética de los robots de autoaprendizaje, 343 
+capaces de salvar muchas más vidas de las que podemos salvar hoy solo con médicos 
+humanos? 
+Imaginemos que decidimos que el beneficio público a largo plazo sí justifica el riesgo. 
+Incluso las redes artificiales más potentes y mejor entrenadas no son del todo
+previsibles. Estadísticamente, pueden competir con los humanos o incluso superarlos 
+en una tarea determinada, pero los resultados imprevistos, a veces bastante extraños, son una 
+posibilidad rara pero prácticamente imposible de erradicar. Algunos son comportamientos emergentes producidos por 
+interacciones en sistemas grandes y complejos.6 Otros son simples fallos de un 
+un sistema fiable para modelar el resultado deseado. Un ejemplo bien conocido de este último caso 
+es Watson, de IBM, que derrotó con holgura a los mejores jugadores humanos de Jeopardy! en 2011, 
+pero aun así dio algunas respuestas que incluso los jugadores humanos novatos habrían sabido que estaban mal, 
+como la notoria respuesta “Toronto” a una pregunta de la ronda final de Jeopardy 
+sobre “ciudades de EE. UU.”. 
+En el contexto del entretenimiento televisivo, fue un error inofensivo y gracioso,
+y un útil recordatorio de que incluso las máquinas más inteligentes no son perfectas. Sin embargo, hoy 
+Watson for Oncology lo emplean más de una docena de centros oncológicos en los 
+Estados Unidos para «ofrecer a los oncólogos y a las personas con cáncer opciones de tratamiento
+individualizadas» (IBM Watson 2016). Los diagnósticos y los planes de tratamiento de Watson siguen siendo revisados 
+por oncólogos con licencia. Aun así, ¿qué tan confiablemente puede un experto humano distinguir
+entre una recomendación de tratamiento novedosa e inesperada de Watson que 
+podría salvar la vida de un paciente (algo que, según se informa, ya ha ocurrido en 
+Japón (David 2016), y el equivalente oncológico de «Toronto»? Al menos en 
+el contexto de la oncología, un médico puede tomarse el tiempo de investigar y evaluar 
+las recomendaciones de Watson; pero ¿cómo podemos protegernos de la impredecibilidad de sistemas como
+los automóviles autónomos, en los que la velocidad requerida de 
+operación y de toma de decisiones puede hacer que la supervisión humana en tiempo real sea 
+prácticamente imposible de implementar? 
+Idealmente, los creadores responsables de sistemas de autoaprendizaje les permitirán operar
+«en la naturaleza» solo cuando su tasa estadística de fallos en entornos controlados sea 
+notablemente inferior a la del ser humano promedio que realiza la misma tarea. Aun así, 
+¿a quién debemos responsabilizar cuando un robot u otro agente artificial lesiona 
+a una persona mientras perfecciona su inteligencia en el mundo real? Consideremos un catastrófico 
+«error» de la máquina que no fue introducido por programadores humanos, que no pudo haber sido 
+previsto específicamente por ellos y que, por lo tanto, no pudo prevenirse, 
+salvo no permitiendo que la máquina actúe y aprenda en la sociedad desde el principio.7 
+¿Qué salvaguardas, si las hay, deberían establecerse para mitigar tales pérdidas, y quién es 
+responsable de que esto ocurra? ¿Los legisladores? ¿Los fabricantes? ¿Los científicos e ingenieros de IA 
+individuales y los programadores? ¿Los grupos de consumidores? ¿Las compañías de seguros? Necesitamos 
+una conversación pública entre las partes interesadas afectadas sobre cómo sería una distribución justa de 
+las cargas y beneficios del riesgo de los sistemas de autoaprendizaje. 
+.E 
+.gi 
+>, a. 
+8 344 • SHANNON VALLOR Y GEORGE A. BEKEY 
+Otro problema ético relacionado concierne a los grados y tipos muy distintos de riesgo 
+que los agentes artificiales pueden imponer a las personas y a la sociedad. Permitir que un 
+robot de seguridad autónomo patrulle el patio de comidas de un centro comercial arriesga lastimar el 
+pie de un niño pequeño distraído, lo cual ya es bastante malo (Vincent 2016). Es un orden de 
+magnitud de riesgo muy distinto soltar un robot de autoaprendizaje en un chasis metálico de 2 toneladas
+que circula por carreteras públicas a velocidad de autopista, o armarlo con armas letales, o conectar un 
+agente de autoaprendizaje a sistemas de energía críticos. Sin embargo, también hay riesgos significativos 
+en no emplear sistemas de autoaprendizaje, particularmente en contextos como 
+la conducción y la medicina, donde el error humano es una fuente grande e inerradicable de 
+daños graves. Si no empieza a formarse pronto una política sólida, informada por una reflexión ética cuidadosa, 
+en torno a estas cuestiones de riesgo y responsabilidad en los sistemas de autoaprendizaje,
+la seguridad de personas inocentes y el futuro a largo plazo de la investigación en IA 
+podrían verse gravemente amenazados. 
+22.3 Preocupaciones éticas más amplias sobre los robots artificialmente 
+inteligentes 
+No todos los dilemas éticos sobre los robots impulsados por IA son específicos de su
+implementación del aprendizaje automático. Muchas de estas preocupaciones se aplican a prácticamente cualquier 
+agente artificial capaz de actuar autónomamente en el mundo. Entre ellas figuran desafíos como 
+el control y la supervisión humanos significativos de la IA; la opacidad algorítmica 
+y el sesgo oculto de las máquinas; el desempleo tecnológico generalizado; la manipulación psicológica 
+y emocional de los humanos por parte de la IA; y el sesgo de automatización. 
+22.3.1 Control y supervisión humanos significativos de la IA 
+La sociedad tiene un interés ético en el control y la supervisión humanos significativos de la IA, 
+por varias razones. La primera surge del principio ético general de que los seres humanos son 
+moralmente responsables de nuestras acciones elegidas. Dado que, a diferencia de nuestros hijos, los sistemas
+dotados de IA llegan al mundo formados por un diseño humano deliberado, los humanos 
+estamos en un sentido profundo siempre moralmente responsables de los efectos de tales agentes en el 
+mundo. Por lo tanto, parecería claramente irresponsable que los humanos permitan que el control
+o la supervisión significativos de las acciones de un agente artificial se escapen de nuestras manos. 
+Una segunda razón de nuestro interés ético en el control y la supervisión humanos significativos de 
+la IA es su ámbito de acción en rápida expansión. Los sistemas dotados de IA 
+ya operan en contextos del mundo real, como la conducción y la medicina, que involucran asuntos de
+vida o muerte, así como otras dimensiones centrales del florecimiento humano. Así, 
+los efectos de la IA en el mundo de los que los humanos son responsables, positivos y 
+negativos, son de una gravedad cada vez mayor. Esta tendencia se intensificará a medida que los sistemas 
+artificiales demuestren una competencia y una fiabilidad cada vez mayores en contextos con 
+apuestas morales muy altas (Wallach 2015). 
+La IA y la ética de los robots autodidactas • 345 
+Por fundamental que sea desde el punto de vista ético la responsabilidad humana sobre la IA, los
+desafíos prácticos de mantener el control y la supervisión humanos significativos son 
+inmensos. Además del riesgo mencionado de comportamientos emergentes u otros comportamientos
+impredecibles de la IA, existen fuertes presiones en sentido contrario para limitar el control y
+la supervisión humanos sobre la IA. Los supervisores humanos son costosos de emplear, lo que podría 
+reducir la ganancia que se obtiene al automatizar una tarea clave. Además, los humanos son 
+mucho más lentos para juzgar y actuar que las computadoras, así que las ganancias de eficiencia también pueden 
+verse disminuidas por nuestro control. En muchas aplicaciones, como la conducción, el control de 
+aeronaves y el comercio financiero, la función completa del sistema presupondrá velocidades 
+y escalas de toma de decisiones fuera del alcance humano. También está la cuestión 
+de cuándo nuestros juicios merecen más autoridad epistémica o confianza epistémica que los 
+juicios de las máquinas. Si un sistema dotado de inteligencia artificial ha demostrado de forma constante
+una competencia estadísticamente mayor que la de los humanos en una tarea determinada, ¿con qué fundamento 
+damos a un supervisor humano el poder de desafiar o anular sus 
+decisiones? 
+La dificultad se agrava por el hecho de que los robots de autoaprendizaje a menudo operan de
+manera opaca para los humanos, incluso para sus programadores (Pasquale 2015). 
+Nos enfrentamos a la perspectiva de una desconexión creciente entre las formas humanas y artificiales de «experiencia»; 
+una brecha que debería preocuparnos por varias razones. Primero, corre el riesgo de 
+la devaluación gradual de habilidades y modos de comprensión distintivamente humanos. 
+La experiencia humana a menudo expresa virtudes morales e intelectuales importantes que faltan
+en la IA (como la perspectiva, la empatía, la integridad, el estilo estético y el civismo,
+por nombrar algunas), virtudes que con demasiada facilidad se subestiman en relación 
+con las virtudes instrumentales de la IA: la pura velocidad y la eficiencia. Además, las colaboraciones productivas 
+entre IA y humanos, el objetivo principal de muchos investigadores, serán mucho más 
+difíciles si los agentes de IA y los humanos no pueden comprender la forma de razonar del otro, 
+explicarse mutuamente la base de sus decisiones o plantearse preguntas críticas 
+unos a otros. 
+Después de todo, si un humano no puede consultar de forma confiable a un robot dotado de IA sobre la evidencia
+específica y la cadena de razonamiento mediante la cual llegó a su decisión, 
+¿cómo puede evaluar de forma confiable la validez de la decisión? Los supervisores humanos de agentes de IA 
+no pueden desempeñar eficazmente su trabajo si su subordinado es una «caja negra» muda. 
+Por esta razón, muchos diseñadores de IA buscan formas de aumentar la transparencia del
+razonamiento de las máquinas. Por ejemplo, las medidas internas de confianza que se informan 
+junto con una elección determinada permiten que un humano dé menos credibilidad a las decisiones con 
+un valor de confianza bajo. Aun así, el problema de la opacidad algorítmica sigue siendo una barrera significativa para la
+supervisión humana eficaz. Genera además otros riesgos morales. 
+J'l .c 
+346 • SHANNON VALLOR Y GEORGE A. BEKEY 
+22.3.2 Opacidad algorítmica y sesgos ocultos de las máquinas 
+Además de frustrar la supervisión humana significativa de la IA, los procesos algorítmicos de “caja negra” u opacos 
+pueden perpetuar y reforzar sesgos moral y epistémicamente dañinos.
+Por ejemplo, los sesgos raciales, de género o socioeconómicos que 
+tienen su origen en la mente humana suelen incrustarse en los conjuntos de datos generados por humanos 
+que se usan para entrenar o “educar” a los sistemas de máquinas. Estos datos definen el “mundo” 
+que un agente artificial “conoce”. Sin embargo, el efecto de los datos con sesgo humano en las 
+salidas de las máquinas se oculta fácilmente por varios factores, lo que hace que estos sesgos sean más dañinos 
+y resistentes a su erradicación. 
+Uno de los factores es la propia opacidad algorítmica. Si no puedo saber qué características de un 
+conjunto de datos fueron destacadas por las capas ocultas de una red como relevantes y accionables,
+entonces no sabré si la decisión de la red se basó en un
+sesgo racial o de género dañino codificado en algún lugar de esos datos. Otro factor es nuestra 
+tendencia cultural a pensar en los robots y las computadoras como inherentemente “objetivos” 
+y “racionales”, y por tanto materialmente incapaces de las respuestas emocionales y psicológicas
+(por ejemplo, miedo, asco, ira, vergüenza) que suelen producir sesgos sociales irracionales
+y dañinos. Incluso los científicos que entienden los mecanismos 
+mediante los cuales el sesgo humano puede contaminar la inteligencia artificial 
+suelen sorprenderse al descubrir el alcance de dicho sesgo en las salidas de las máquinas, incluso a partir de entradas que se consideran 
+relativamente imparciales. 
+Por ejemplo, un equipo de investigadores de la Universidad de Boston y de Microsoft encontró 
+sesgos de género significativos en los “word embeddings” de máquinas entrenados con un amplio corpus 
+de noticias de Google News (Bolukbasi et al. 2016). Señalan que los datos generados 
+por “periodistas profesionales” (a diferencia de los datos procedentes de foros de internet, por ejemplo) 
+podrían tener “poco sesgo de género”; sin embargo, 
+las salidas de las máquinas reflejaban con fuerza muchos estereotipos de género dañinos (2016, 3). 
+Observaron que el mismo sistema que resolvía analogías razonables [otras] 
+respondía de forma ofensiva a “hombre es a programador de computadoras como mujer es a x” con 
+x = ama de casa (3). El sistema también reflejaba “fuertes” estereotipos raciales (15). 
+Para ver cómo tales sesgos podrían causar un daño directo, basta imaginar este mismo sistema 
+implementado en un agente de IA encargado de ofrecer orientación universitaria a jóvenes 
+hombres y mujeres, o de clasificar las solicitudes de empleo para gerentes de recursos humanos 
+de una gran empresa tecnológica. 
+De hecho, los sesgos ocultos en los algoritmos de IA y en los datos de entrenamiento favorecen resultados o políticas injustos
+en la vigilancia policial predictiva, los préstamos, la educación, la vivienda, la atención médica 
+y el empleo, por nombrar solo algunos sectores de implementación de la IA. El sesgo racial 
+ya se ha encontrado en algoritmos de reconocimiento facial (Orcutt 2016) y, aún más 
+inquietante, en las puntuaciones generadas por máquinas que los jueces usan ampliamente en tribunales penales 
+para predecir la probabilidad de que un acusado vuelva a delinquir (Angwin 
+et al. 2016). Tales puntuaciones determinan las decisiones judiciales sobre la libertad condicional, la duración 
+IA y la ética de los robots de autoaprendizaje, 347 
+de la condena y el tipo de centro penitenciario al que será 
+sometido. Un motor predictivo que asigna puntuaciones de riesgo más altas a los acusados negros 
+que a los acusados blancos en situaciones por lo demás similares, y que sistemáticamente sobreestima
+la probabilidad de reincidencia de los acusados negros mientras subestima sistemáticamente 
+la tasa de reincidencia entre los blancos, no solo refleja una injusticia social existente, 
+sino que la perpetúa y la refuerza, tanto al otorgarle el sello de objetividad de las máquinas
+y neutralidad asociado con los cálculos generados por computadora, como al 
+fomentar nuevas injusticias (condenas desproporcionadamente más largas y severas) 
+contra los acusados negros y sus familias. 
+Quizá los humanos puedan aprender a ver con más recelo los algoritmos y resultados sesgados de las máquinas 
+Sin embargo, el sesgo de las máquinas también puede contaminar los juicios de agentes menos 
+críticos, como robots encargados de identificar a ladrones en tiendas, de realizar
+patrullas antirrobo o de asistir en el control de multitudes o en operaciones antiterroristas. 
+Estos usos de robots son muy previsibles; de hecho, los sistemas de seguridad automatizados
+ya están en el mercado (Vincent 2016). Quizá podamos entrenar algoritmos
+para exponer los sesgos ocultos de tales sistemas, porque, a menos que puedan abordarse eficazmente, 
+los sesgos de las máquinas están prácticamente garantizados para perpetuar y amplificar 
+muchas formas de injusticia social. 
+22.3.3 Desempleo tecnológico generalizado 
+A comienzos del siglo XIX, cuando se introdujeron los telares mecánicos en 
+Inglaterra, surgieron un gran resentimiento y temor entre los trabajadores textiles, que veían 
+amenazados sus empleos. Una revuelta organizada contra las máquinas, encabezada por los llamados 
+luditas (en honor a un héroe mítico conocido como “Ned Ludd” o “King Ludd”), tuvo suficiente
+impacto cultural como para que, hasta hoy, quienes se oponen a los nuevos desarrollos 
+tecnológicos sean conocidos como “neoluditas”. Sin embargo, pese a sus daños muy reales, 
+las perturbaciones de la Revolución Industrial produjeron bienes sociales que muchos 
+no estarían dispuestos a renunciar por el viejo mundo: mayor esperanza de vida, niveles 
+de vida más altos en las naciones industrializadas y, con el tiempo, grandes expansiones en 
+el empleo calificado. La primera revolución informática produjo perturbaciones culturales 
+similares, pero también una serie de nuevos beneficios públicos y un mercado de empleo en auge en 
+la “economía del conocimiento”. 
+Sin embargo, a diferencia de otras olas de automatización mecánica, los avances emergentes en IA y 
+robótica se consideran ahora una amenaza significativa para los empleados que desempeñan
+trabajos mentales, no solo manuales. Los sistemas automatizados ya realizan muchas 
+tareas que tradicionalmente requerían educación avanzada, como la revisión de documentos legales, 
+la lectura de radiografías, la calificación de ensayos, la evaluación de solicitudes de préstamo y la redacción de noticias
+(Kaplan 2015). El sistema Watson de IBM ha sido empleado como asistente docente en una 
+clase universitaria en línea sobre IA, sin que los estudiantes percibieran la identidad no humana 
+de su confiable asistente “Jill” (Korn 2016). 
+348 • SHANNON VALLOR Y GEORGE A. BEKEY 
+Los efectos a gran escala de la IA y la automatización asociada sobre el trabajo humano, la seguridad 
+social, la estabilidad política y la igualdad económica son inciertos, pero un estudio de Oxford 
+concluye que hasta el 47% de los empleos en Estados Unidos corren un riesgo significativo por 
+los avances en aprendizaje automático y robótica móvil (Frey y Osborne 2013, 1-2). 
+Los sectores con mayor riesgo de desplazamiento por sistemas automatizados incluyen el transporte
+y la logística (incluidos los empleos de conducción), las ventas, los servicios, la construcción, la oficina 
+y el apoyo administrativo, y la producción (Frey y Osborne 2013, 35). Cabe señalar que los investigadores de Oxford 
+fueron relativamente conservadores en sus predicciones sobre la inteligencia de las máquinas, al sugerir que los empleos 
+no rutinarios y altamente calificados, asociados con la atención médica, la investigación científica, la educación y las artes 
+tienen un riesgo relativamente bajo por su fuerte dependencia de la creatividad humana y de la 
+inteligencia social (Frey y Osborne 2013, 40).
+Sin embargo, los avances más recientes en aprendizaje automático 
+han llevado a muchos a anticipar un auge de agentes artificiales como el asistente universitario “Jill” 
+“Watson”, capaces de competir con los humanos incluso en empleos que tradicionalmente exigían 
+capacidades sociales, creativas e intelectuales. 
+Estos avances desafiarán profundamente la estabilidad económica y política
+de un mundo que ya sufre una creciente desigualdad económica, desafección política
+y divisiones de clase cada vez mayores. También afectan valores humanos fundamentales 
+como la autonomía y la dignidad, y hacen aún menos seguro que los beneficios y 
+riesgos de los avances científicos y técnicos se distribuyan entre ciudadanos y 
+naciones de manera que no sea solo eficiente y productiva, sino también buena 
+y justa. 
+22.3.4 Manipulación psicológica y emocional 
+de los seres humanos por la IA 
+Los impactos morales de la IA en las emociones humanas, la sociabilidad y los vínculos afectivos, 
+el discurso público y el carácter cívico apenas comienzan a explorarse. La investigación en 
+IA social para robots y otros agentes artificiales está en plena expansión, y se realizan esfuerzos enérgicos 
+para desarrollar cuidadores robóticos para ancianos, sexbots para personas solitarias y chatbots para clientes 
+y pacientes, y los asistentes artificiales como Siri y Cortana para todos nosotros son solo 
+la punta del iceberg. Las cuestiones éticas que pueden surgir en este ámbito son prácticamente 
+ilimitadas, ya que la sociabilidad humana es el campo principal de la acción ética. 
+Una preocupación profunda sobre la IA social es la tendencia, bien documentada, de los humanos 
+a formar vínculos emocionales sólidos con máquinas que simulan respuestas emocionales humanas,
+incluso cuando las simulaciones son bastante superficiales (Turkle 2011). 
+La conducta de los agentes artificiales también puede fomentar delirios dañinos en los humanos, quienes 
+pueden percibirlos erróneamente como poseedores de rasgos humanos como la sensibilidad, la empatía, 
+la conciencia moral o la lealtad. Así, los humanos somos profundamente vulnerables a la manipulación emocional 
+y psicológica de sistemas de IA y robots diseñados fríamente para 
+explotarnos con fines comerciales, políticos u otros (Scheutz 2012). Imaginemos, 
+IA y la ética de los robots de autoaprendizaje • 349 
+por ejemplo, el daño público que podría causar un chatbot programado para 
+buscar y formar relaciones en línea emocionalmente manipuladoras con jóvenes
+votantes o ancianos solitarios y, una vez formado el vínculo, empezar a intercalar mensajes deliberadamente
+manipuladores sobre un candidato político a quien el chatbot profundamente 
+"teme" o "ama". 
+La educación pública sobre la incapacidad de los robots para tener sentimientos o formar vínculos
+auténticos con los humanos probablemente no bastará para prevenir tales daños, ya que 
+incluso quienes conocen la tecnología desde dentro pueden encontrarse 
+respondiendo a delirios tan poderosos (Scheutz 2012). Por eso es imperativo que 
+los legisladores y los desarrolladores de agentes sociales con IA comiencen a trabajar juntos en 
+lineamientos éticos y legales para restringir o prohibir la manipulación dañina, 
+especialmente cuando socava la autonomía humana o daña nuestros intereses vitales. 
+22.3.5 Sesgo de automatización 
+Una preocupación ética relacionada con la interacción humano-robot o humano-IA es el fenómeno psicológico
+del sesgo de automatización, en el que los humanos sobreestiman en gran medida o 
+confían en exceso en las capacidades de los sistemas computarizados (Cummings 2004). 
+El sesgo de automatización puede surgir de expectativas erróneas sobre los sistemas computarizados 
+como infalibles o inherentemente superiores al juicio humano, de presiones de tiempo 
+o de sobrecargas de información que dificultan que los humanos evalúen adecuadamente
+la decisión de una computadora, o de extender en exceso la confianza justificada en 
+las capacidades reales de una máquina a un ámbito de acción en el que la confianza no está 
+justificada. Esto último suele provocarse con base solo en similitudes superficiales 
+con la conducta inteligente humana, como cuando los peatones en Puerto Rico caminaron 
+detrás de un Volvo que se estacionaba solo en un garaje, confiando erróneamente en que el auto 
+(que carecía de un paquete opcional de «detección de peatones») sabría no retroceder sobre una 
+persona (Hill 2015). 
+Se ha citado el sesgo de automatización como uno de los posibles factores en el derribo, en 1988, del 
+vuelo Iran Air 655 por parte del USS Vincennes, que causó la muerte de 290 civiles (Gruc 
+2013; Galliott 2015, 217). Los operadores del sistema antiaéreo Aegis que identificaron por error
+el avión comercial como un caza militar tenían información suficiente para justificar 
+anular esa identificación, pero no lo hicieron. A medida que la inteligencia artificial y los sistemas robóticos 
+reciben cada vez más poder para efectuar o incitar acciones en el mundo físico
+con consecuencias graves para la seguridad y el bienestar humanos, es 
+éticamente imperativo que la dimensión psicológica de las interacciones humano-IA y humano-
+robot se comprenda mejor. Ese conocimiento debe guiar los esfuerzos de los diseñadores 
+y usuarios de sistemas de IA y robóticos para reducir o eliminar el sesgo de automatización
+dañino y otros desajustes psicológicos entre los intereses humanos y 
+la cognición artificial. 
+350 • SHANNON VALLOR Y GEORGE A. BEKEY 
+22.4. Temores públicos y el futuro a largo plazo de la IA 
+Aunque muchos informáticos consideran la IA solo un aspecto especialmente interesante
+de su campo, difícil de programar y a veces frustrante si no se comporta como se espera; 
+en la prensa popular, la IA suele presentarse como una 
+amenaza para la supervivencia de la humanidad. Elon Musk, fundador y director ejecutivo de SpaceX y Tesla 
+Motors, ha advertido al público de que con la IA estamos «invocando al demonio»; advertencias
+similares sobre los riesgos existenciales de la IA, es decir, sobre su potencial para amenazar la existencia
+humana con sentido, han sido expresadas por figuras públicas como Stephen Hawking 
+y Bill Gates, junto con una multitud de investigadores de IA y robótica (Standage 2016).8 
+La urgencia de sus advertencias se explica por la aceleración sin precedentes de 
+los avances en el campo, especialmente en el aprendizaje automático.9 
+Las "Leyes de la robótica" de Isaac Asimov fueron un primer intento de ficción por 
+establecer un conjunto de pautas para el control de robots inteligentes (Asimov 2004). 
+Hoy, sin embargo, tecnólogos y especialistas en ética vuelven a plantearse este desafío frente 
+a la profunda ambivalencia pública sobre un futuro impulsado por la IA. Aunque muchos de nosotros 
+confiamos implícitamente en el sentido de orientación de nuestro auto o en la precisión financiera de nuestro software de impuestos 
+más que en la nuestra, hay una incertidumbre creciente sobre la seguridad a largo plazo de la IA 
+y su compatibilidad con los intereses humanos. 
+La desconfianza pública hacia los sistemas de IA podría inhibir una adopción más amplia y la participación 
+de los consumidores con estas tecnologías, una consecuencia que los investigadores de IA tienen 
+buenas razones para querer evitar. Muchos temores públicos pueden moderarse con una mejor 
+educación y comunicación por parte de los investigadores de IA sobre lo que la IA es hoy 
+(hábil en tareas cognitivas bien definidas) y lo que no es (sensible, autoconsciente, malévola
+o benévola, ni siquiera robustamente inteligente a la manera de los humanos). 
+Además, todos nos beneficiaríamos de una expansión hacia afuera de la preocupación pública 
+hacia los desafíos éticos menos apocalípticos, pero más urgentes, de la IA que se abordan en 
+este capítulo. 
+Aunque hablar de escenarios de «Skynet» y de «señores robots» suena a especulación
+exagerada para muchos investigadores de IA y robótica, que a menudo están encantados 
+solo con lograr que un robot tenga una conversación medianamente convincente o suba 
+una ladera inestable. Las crecientes ansiedades públicas sobre la tecnología de IA y robótica 
+pueden obligar a los investigadores a prestar más atención a esos temores y, al menos, iniciar 
+un diálogo temprano sobre estrategias de control a largo plazo para los agentes artificiales. No hace falta 
+predecir un futuro tipo Terminator para reconocer que los desafíos éticos que plantea
+la IA no permanecerán fijos en su estado actual; a medida que la tecnología crece 
+en poder, complejidad y escala, también crecerán sus riesgos y beneficios (Cameron 1984). Por 
+esta razón, la ética de la inteligencia artificial será un blanco que se mueve rápidamente, y 
+la humanidad en su conjunto debe hacer un esfuerzo dedicado para mantenerse al día. 
+IA y la ética de los robots de autoaprendizaje • 351 
+Notas 
+1. Hay mucho debate (incluso entre los autores de este capítulo) sobre si la informática, en particular
+la investigación en inteligencia artificial, es una verdadera ciencia 
+que estudia y modela fenómenos naturales (como procesos informacionales o computacionales) 
+o es una rama de la ingeniería. 
+2. Una excelente introducción al campo aparece en Russell y Norvig (2010). 
+3. IBM (Watson, por ejemplo) prefiere el término «inteligencia aumentada» o «computación cognitiva» en lugar de 
+«inteligencia artificial», para enfatizar el potencial de Watson para mejorar 
+y potenciar la inteligencia humana, no para volverla superflua (IBM Research 2016). 
+4. La investigación en AGI continúa, aunque lentamente, y es el eje central de organizaciones como el 
+Machine Intelligence Research Institute (MIRI). Muchos investigadores que trabajan en 
+AGI trabajan activamente para mitigar sus considerables riesgos (Yudkowsky 2008). 
+5. Un estudio relacionado es el de la ética de las máquinas: diseñar agentes con moral artificial
+inteligencia artificial. Por limitaciones de espacio, nos concentramos aquí en los desafíos éticos
+que la IA presenta para agentes morales humanos. 
+6. Dependiendo de si el comportamiento emergente es indeseable o útil para los humanos, 
+la emergencia puede ser un «error» (como el Flash Crash de 2010, causado por bucles de retroalimentación 
+entre sistemas de software financieros globales que interactúan) o una «característica» (como cuando un algo
+ritmo produce un comportamiento emergente y aparentemente «inteligente» de enjambre entre 
+grupo en red de microrrobots). 
+7. Estrictamente hablando, las redes de aprendizaje automático no cometen “errores”; solo 
+generan resultados inesperados o estadísticamente raros que, desde una perspectiva humana,
+no están bien alineados con los objetivos reales de los programadores o de los usuarios para el 
+sistema. Pero, como los objetivos humanos (por ejemplo, “promover la seguridad humana”) no son 
+realmente comprendidos por el sistema (por muy estadísticamente eficaz que sea para alcanzarlos), 
+no puede decirse con propiedad que “yerre” al producir un resultado incongruente con 
+tal objetivo. El error, si lo hay, es una brecha o un desajuste entre 
+lo que el código y las ponderaciones de la red de la máquina hacen en realidad y lo que sus
+programadores querían que hiciera. Unos buenos protocolos de programación, entrenamiento y prueba 
+pueden minimizar esas brechas, pero es prácticamente imposible asegurar que se elimine cada 
+una de ellas. 
+8. Véase la carta abierta sobre IA del Future of Life Institute (2005), con más de 
+ocho mil firmantes; véase también Bostrom (2014). 
+9. De hecho, un manual estándar de IA, que hace veinte años tenía unas trescientas 
+páginas, ahora, en su tercera edición, supera con creces las mil páginas (Russell y 
+Norvig 2010). 
+352 • SHANNON VALLOR AND GEORGE A. BEKEY 
+Obras citadas 
+Achenbach, Joel. 2015. “Driverless Cars Are Colliding with the Creepy Trolley 
+Problem.” Washington Post, 29 de diciembre. https://www.washingtonpost.com/ 
+news/innovations/wp/2015/12/29/will-self-driving-cars-ever-solve-the-famous-
+and-creepy-trolley-problem/. 
+Angwin, Julia, Larson, Jeff, Mattu, Surya y Kirchner, Lauren. 2016. “Machine 
+Bias.” ProPublica, 23 de mayo. https://www.propublica.org/article/machine-
+bias-risk-assessments-in-criminal-sentencing. 
+Asimov, Isaac. (1950) 2004. I, Robot. Reimpresión, Nueva York: Bantam Books. 
+Bolukbasi, Tolga, Kai-Wei Chang, James Zou, Venkatesh Saligrama y Adam 
+Kalai. 2016. “Man Is to Computer Programmer as Woman Is to Homemaker? 
+Debiasing Word Embeddings.” arXiv 1607.06520v1 [cs.CL]. https://arxiv.org/abs/1607.06520. 
+1607.06520. 
+Bostrom, Nick. 2014. Superintelligence: Paths, Dangers, Strategies. Oxford: Oxford 
+University Press. 
+Cameron, James (director). 1984. “The Terminator.” Cameron, James y Gale Anne 
+Hurd (guionistas). 
+Cummings, Mary L. 2004. “Automation Bias in Intelligent Time Critical Decision 
+Support Systems.” AIAA 1st Intelligent Systems Technical Conference. arc.aiaa.org/ 
+doi/pdf/10.2514/6.2004-6313. 
+David, Eric. 2016. “Watson Correctly Diagnoses Woman after Doctors Were Stumped.” 
+SiliconAngle, 5 de agosto. http://siliconangle.com/blog/2016/08/05/watson-
+correctly-diagnoses-woman-after-doctors-were-stumped/. 
+Future of Life Institute. 2015. “Research Priorities for Robust and Beneficial Artificial 
+Intelligence.” http://futureoflife.org/ai-open-letter/. 
+Galliott, Jai. 2015. Military Robots: Mapping the Moral Landscape. Nueva York: Routledge. 
+Grut, Chantal. 2013. “The Challenge of Autonomous Lethal Robotics to International 
+Humanitarian Law.” Journal of Conflict and Security Law. doi: 10.1093/jcsl/krc002. 
+http://jcsl.oxfordjournals.org/content/18/1/5.abstract. 
+Hill, Kashmir. 2015. “Volvo Says Horrible ‘Self-Parking Car Accident’ Happened 
+Because Driver Didn’t Have ‘Pedestrian Detection.’” Fusion, 26 de mayo. http://fusion. 
+net/story/139703/self-parking-car-accident-no-pedestrian-detection/. 
+IBM Research. 2016. “Response to Request for Information: Preparing for the Future 
+of Artificial Intelligence.” https://www.research.ibm.com/cognitive-computing/ 
+ostp/rfi-response.shtml. 
+IBM Watson. 2016. “IBM Watson for Oncology.” http://www.ibm.com/watson/ 
+watson-oncology.html. 
+Kaplan, Jerry. 2015. Humans Need Not Apply: A Guide to Wealth and Work in the Age of 
+Artificial Intelligence. New Haven, CT: Yale University Press. 
+La IA y la ética de los robots que aprenden por sí mismos • 353 
+Korn, Melissa. 2016. “Imagine Discovering That Your Teaching Assistant Really 
+Is a Robot.” Wall Street Journal, 6 de mayo. http://www.wsj.com/articles/if-your-
+teacher-sounds-like-a-robot-you-might-be-on-to-something-1462546621. 
+Moor, James. 2003. The Turing Test: The Elusive Standard of Artificial Intelligence. 
+Dordrecht: Kluwer. 
+Orcutt, Mike. 2016. “Are Facial Recognition Systems Accurate? Depends on Your 
+Race.” MIT Technology Review, 6 de julio. https://www.technologyreview.com/s/ 
+60178 6/are-face-recognition-systems-accurate-depends-on-your-race/. 
+Osborne, Michael y Carl Benedikt Frey. 2013. “The Future of Employment: How 
+Susceptible Are Jobs to Computerisation?” Oxford Martin Programme on the 
+Impacts of Future Technology. http://www.oxfordmartin.ox.ac.uk/publications/ 
+view/1314. 
+Pasquale, Frank. 2015. The Black Box Society: The Secret Algorithms That Control Money 
+and Information. Cambridge, MA: Harvard University Press. 
+Russell, Stuart J. y Peter Norvig. 2010. Artificial Intelligence: A Modern Approach. 3.ª 
+ed. Upper Saddle River, NJ: Pearson. 
+Scheutz, Matthias. 2012. “The Inherent Dangers of Unidirectional Emotional Bonds 
+Between Humans and Social Robots.” En Robot Ethics, editado por Patrick Lin, Keith 
+Abney y George Bekey, 205-222. Cambridge, MA: MIT Press. 
+Standage, Tom. 2016. “Artificial Intelligence: The Return of the Machinery Question.” 
+Economist, 25 de junio. http://www.economist.com/news/special-report/21700761-
+after-many-false-starts-artificial-intelligence-has-taken-will-it-cause-mass. 
+Turing, Alan M. 1950. “Computing Machinery and Intelligence.” Mind 59: 236, 
+433-60. 
+Turkle, Sherry. 2011. Alone Together: Why We Expect More from Technology and Less 
+from Each Other. Nueva York: Basic Books. 
+Vincent, James. 2016. “Mall Security Bot Knocks Down Toddler, Breaks Asimov’s First 
+Law of Robotics.” The Verge, 13 de julio. http://www.theverge.com/2016/7/13/12170640/ 
+mall-security-robot-k5-knocks-down-toddler. 
+Wallach, Wendell. 2015. A Dangerous Master: How to Keep Technology from Slipping 
+Beyond Our Control. Nueva York: Basic Books. 
+Yudkowsky, Eliezer. 2008. “Artificial Intelligence as a Positive and Negative Factor in 
+Global Risk.” En Global Catastrophic Risks, editado por Nick Bostrom y Milan M. 
+Ćirković, 308-45. Nueva York: Oxford University Press. 

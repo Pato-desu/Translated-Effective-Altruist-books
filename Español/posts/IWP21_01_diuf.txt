@@ -1,0 +1,815 @@
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+Neuralink y más allá: 
+Desafíos de crear un ser humano mejorado 
+D. Gurtner 
+Documento de trabajo interno n.º 21-01 
+Febrero de 2021 
+ 
+ 
+DOCUMENTO DE TRABAJO DEPARTEMENT D’INFORMATIQUE 
+DEPARTEMENT FÜR INFORMATIK Bd de Pérolles 90 CH-1700 Fribourg  www.unifr.ch/inf 
+ 
+ 
+Neuralink y más allá:
+Desafíos de crear un ser humano mejorado∗
+Dimitri Gurtner
+Máster conjunto suizo en Ciencias de la Computación
+Universidad de Friburgo, Suiza
+dimitri.gurtner@unifr.ch
+RESUMEN
+Este artículo es una revisión de la literatura sobre Neuralink, las interfaces cerebro-
+máquina (BMI) y sus aplicaciones, seguidas de posibilidades futuras
+de las BMI y sus posibles impactos. Actualmente, las BMI tienen sobre todo
+aplicaciones terapéuticas, como ayudar a personas con lesiones de la
+médula espinal a controlar directamente una computadora con
+el cerebro. Sin embargo, las BMI también pueden mejorar el aprendizaje, detectar emo-
+ciones y controlar conductas básicas. En el futuro, podrían ofrecer
+muchas posibilidades poderosas, como controlar a las personas y fusio-
+nar nuestra inteligencia con la inteligencia artificial (IA), lo cual podría
+ser necesario para mitigar la amenaza existencial de la inteligencia artificial
+general (IAG). Al mismo tiempo, probablemente tendrían graves
+impactos humanos, como la pérdida del sentido de uno mismo, la erosión de habilidades y
+problemas de privacidad, que causan daño psicológico y confusión. Este
+artículo muestra que la investigación sobre las BMI podría generar cambios drásticos, sin
+posibilidad de retorno, lo que refuerza la necesidad de abordar con urgencia
+estas cuestiones críticas.
+CONCEPTOS CCS
+•Seguridad y privacidad →Aspectos sociales de la seguridad y la pri-
+vacidad .
+PALABRAS CLAVE
+Neuralink; interfaz cerebro-máquina; BMI; BCI; CBI; BBI; transhu-
+manismo; cuestiones éticas
+1 INTRODUCCIÓN
+Desde 2017, el proyecto Neuralink de Elon Musk y las interfaces cerebro-
+máquina han recibido mucha atención [ 22]. Neuralink es una empresa de
+interfaces cerebro-máquina (BMI) que crea dispositivos diseñados
+para implantarse en cerebros humanos " para mejorar eventualmente la memoria
+e interactuar con sistemas informáticos. " [22]. El 28 de agosto de 2020, el empresario multi-
+millonario Elon Musk presentó a su cerdo Gertrude y
+el chip implantado en el cerebro del animal. El chip retransmite
+las señales neurológicas de Gertrude. A partir de esta información, una computadora
+puede predecir en cualquier momento dónde se encuentra cada una de las extremidades de Gertrude, lo que da
+esperanza de restablecer la movilidad de personas parapléjicas. Elon Musk es brillante
+para comercializar sus ideas a gran escala y generar entusiasmo
+y fascinación por sus diversos proyectos. Nunca faltan imá-
+genes vívidas: Elon Musk afirmó que tener la interfaz es comparable a
+tener un smartwatch en el cerebro. La ciencia se expande y trae nuevas
+tecnologías, lo que conlleva beneficios, pero también amenazas, a medida que cambian las
+∗Este trabajo se realizó en el marco del seminario 03805 A2020 Interdisci-
+plinary Issues in ICT, supervisado por la Dra. Michèle Courant de la Universidad de Friburgo
+en Suiza.
+Formato de referencia: Dimitri Gurtner. 2021. Neuralink y más allá: Desafíos de
+crear un ser humano mejorado. 8 páginas. Las relaciones se reconfiguran [ 23]. Para este estudio, era de interés
+investigar Neuralink, las BMI y el transhumanismo, que son a la vez
+fascinantes y aterradores. Los científicos deben asegurarse de que los benefi-
+cios se maximicen mientras se minimizan las amenazas [ 23]. La fusión de
+seres humanos y máquinas plantea naturalmente una gran cantidad de
+cuestiones éticas. ¿Rediseñará una interfaz cerebro-máquina a la humanidad? ¿Cuáles
+son los impactos?
+Este estudio es una revisión de la literatura, seguida de una evaluación de
+los impactos de las interfaces cerebro-máquina en el futuro de la humanidad. Los datos
+son principalmente datos cualitativos secundarios de artículos científicos revisados por pares
+que ofrecen una base sólida de conocimiento. Esto da
+un fundamento bien sustentado a mis decisiones metodológicas. Mis
+evaluaciones personales también se apoyan en metamodelos, como
+la Spiral Dynamics [3].
+El resto de este artículo se estructura como sigue: la sección 2 presenta
+una visión general de las interfaces cerebro-máquina (BMI) y de Neuralink.
+En la sección 3, describimos la aplicación estrella de Neuralink y
+otras aplicaciones terapéuticas de las BMI. En la sección 4, presentamos
+las aplicaciones sociales y cognitivas actuales de las BMI. La sección 5 está
+dedicada a evaluaciones, donde exploraremos las posibilidades futuras
+y analizaremos los impactos humanos, las cuestiones críticas, el transhumanismo y
+otras posibles visiones del mundo. Concluimos este artículo en la sección 6.
+2 PANORAMA DE LAS INTERFACES CEREBRO-
+MÁQUINA Y NEURALINK
+En esta sección se presentan las interfaces cerebro-máquina (BMI)
+brevemente. Aunque las BMI existen desde hace mucho tiempo, el
+proyecto Neuralink de Musk pretende llevar las BMI a otro nivel y reducir
+la brecha entre el hombre y la máquina, posiblemente de forma drástica.
+2.1 Interfaces cerebro-máquina
+En general, una interfaz cerebro-máquina es un vínculo entre un cerebro y
+una máquina. Los primeros intentos de traducir la actividad neuronal en
+comandos para controlar dispositivos externos se hicieron en monos en la
+década de 1960 [ 20]. En la década de 1970 se usó la electroencefalografía (EEG)
+para vincular directamente la actividad cerebral con computadoras [ 19]. El término "interfaz cerebro-
+computadora" apareció en la década de 1970 [ 20]. La investigación sobre interfaces cerebro-
+máquina y sus aplicaciones se consideran entre los campos más
+apasionantes e interdisciplinarios de la ciencia [ 20]. Al igual que la evolución de las com-
+putadoras, las interfaces neuronales se volverán más pequeñas y más
+potentes [ 23]. Hoy, las BMI permiten controlar un cursor en una pantalla
+[13]. Las BMI son especialmente prometedoras para la neurorrehabilitación de
+discapacidades sensoriales y motoras, la neurocomunicación y la evaluación
+cognitiva [ 20]. Además, la mejora del análisis de la actividad neu-
+ronal genera esperanzas de usar las BMI a diario en el futuro [ 20]. Las BMI
+pueden aportar enormes beneficios a la sociedad, como nuevas terapias o mejoras
+sociales y cognitivas [ 23]. Muchas personas ya se benefician de
+las BMI médicas [ 23]. En general, el objetivo principal de las BMI es reparar
+y/o aumentar el rendimiento humano [13].
+Podría considerarse que la brecha entre el ser humano y la máquina
+debe reducirse. Nuestros cerebros no están preparados para manejar el
+volumen considerable de información que traen las tecnolo-
+gías y el Internet de las Cosas (IoT) [ 19]. Además, los límites de
+la vida personal y profesional se difuminarán cada vez más. Niforatos
+et al. afirman que " [...], nuestras capacidades cognitivas no pueden depender simplemente de
+la evolución natural para seguir el ritmo de los inmensos avances en el
+campo de las tecnologías ubicuas, que siguen en gran medida sin estar informadas
+sobre nuestros estados cognitivos " [19]. Niforatos et al. han presentado una
+arquitectura de software para desarrollar aplicaciones con conciencia cognitiva
+que ajustan la presentación al usuario según su estado cognitivo actual (véase
+la figura 1) [ 19]. En general, existe la voluntad de aumentar la eficiencia humana
+reduciendo la brecha humano-máquina.
+Figura 1: Interfaz de usuario adaptativa [19]
+2.1.1 Tipos de interfaces neuronales. Existen dos categorías de BMI.
+Los enfoques no invasivos no requieren abrir el cráneo. El
+promedio de millones de neuronas puede registrarse, pero la señal está
+distorsionada e inespecífica [ 17]. En los enfoques invasivos, los electrodos
+se colocan directamente sobre la superficie de la corteza. Pueden registrarse
+señales útiles, pero promedian la actividad de miles de neuronas
+solamente [ 17]. Neuralink usa un enfoque invasivo que se analizará con más detalle
+en la sección 2.2. También distinguimos entre registro y estimu-
+lación. El registro, también llamado interfaz cerebro-computadora
+(BCI), intenta leer las señales cerebrales e interpretarlas.
+La estimulación, también llamada interfaz computadora-cerebro (CBI),
+va en la dirección opuesta y trata de estimular o controlar el
+cerebro. Existen varios tipos de tecnologías invasivas y no invasivas, de registro y
+de estimulación. Las tecnologías no invasivas también son
+interesantes. Entre ellas, mencionemos la estimulación magnética transcraneal
+(TMS) y la estimulación transcraneal por corriente continua (tDCS). La TMS
+produce un campo magnético variable con una bobina cercana al cuero cabelludo
+[23]. Puede activar o interrumpir la actividad del cerebro, lo que ayuda
+a comprender el papel de las distintas áreas cerebrales [ 23]. La TMS también es
+eficaz para tratar la depresión resistente a fármacos [ 23]. En cuanto a la tDCS,
+usa electrodos colocados en la cabeza y entrega una corriente constante y
+impulsos de corriente baja directa [ 23]. La tDCS se usa para tratar la depresión
+y el dolor. Recientemente, hay un renovado interés en usar la tDCS para me-
+jorar los procesos cognitivos y el movimiento en personas sin problemas de salud. Los intentos con la tDCS han sugerido que ayuda al cerebro a formar
+conexiones, pero aún no existen pruebas [23].
+2.2 Neuralink
+El enfoque elegido por Neuralink es invasivo y presenta algunas
+innovaciones.
+2.2.1 Sondas de polímero ultrafinas. Las sondas neurales emplean una va-
+riedad de materiales biocompatibles de película delgada. Una matriz de película delgada tiene
+hasta 96 hilos, cada uno con 32 electrodos independientes, para un
+total de 3072 contactos de electrodos [ 17]. El grosor del hilo es nominalmente
+4-6 𝜇m, lo que incluye las capas aislantes y conductoras [ 17], mientras que
+la longitud del hilo es de unos 20 mm. Se usan modificaciones superficiales " [...]
+para reducir la impedancia para la electrofisiología y aumentar la
+capacidad efectiva de transporte de carga de la interfaz " [17]. Un novedoso proceso de alineación
+y de unión flip-chip permite crear un encapsulado de 23 ×18,5
+mm2[17].
+2.2.2 Robot neuroquirúrgico. La baja rigidez a la flexión de los electrodos
+de sonda complica las inserciones [ 17]. Neuralink ha desarrollado un ro-
+bot que permite insertar de forma rápida y fiable las sondas flexibles
+para registrar regiones cerebrales dispersas [ 17]. Un software a medida permite
+planificar trayectorias de inserción que eviten la vasculatura [ 17]. La
+cabeza de inserción sostiene un conjunto "pinza-aguja" de cambio rápido
+[17]. "La punta de la aguja está diseñada tanto para engancharse en los bucles de inserción
+—para transportar e insertar hilos individuales— como para pene-
+trar las meninges y el tejido cerebral " [17]. La pinza actúa como
+soporte de las sondas durante el transporte y como guía para asegurar
+que los hilos se insertan a lo largo de la trayectoria de la aguja [ 17]. El robot
+puede insertar hasta 192 electrodos por minuto, lo que permite una opera-
+ción rápida [ 17]. La inserción robótica es un enfoque eficiente y escalable
+[17].
+Figura 2: Aguja penetrando un sustituto de tejido [17]
+2.2.3 Electrónica. El registro desde miles de puntos de electrodo
+presenta desafíos. " La densidad de canales de registro exige
+colocar la pila de amplificación y digitalización de la señal dentro del
+conjunto de la matriz " [17]. "Esta pila de registro debe amplificar pequeñas señales neu-
+rales [...] mientras rechaza el ruido fuera de banda, muestrea y digi-
+taliza las señales amplificadas, y envía en flujo los resultados para su procesamiento
+en tiempo real " [17]. Neuralink ha construido un circuito integrado específico de aplicación
+2
+(ASIC), que consta de amplificadores, convertidores analógico-digitales
+integrados (ADC) y circuitos de control para serializar
+las salidas digitalizadas [ 17]. Una estación base conectada por Ethernet
+convierte los flujos de datos, lo que permite visualizar los datos en
+tiempo real [17].
+2.2.4 Electrofisiología. Las señales digitalizadas se procesan en tiempo real
+para identificar potenciales de acción (picos). Neuralink usa un
+software personalizado de detección de picos en línea. Los parámetros de detección de picos
+deben maximizar la eficacia de decodificación [17].
+Figura 3: Superficie cortical con hilos implantados [17]
+3 APLICACIONES TERAPÉUTICAS
+Se presentan aplicaciones médicas, junto con una evaluación breve y espe-
+cífica. Dedicaremos una parte específica, más completa y
+más global a la evaluación en la sección 5.
+3.1 Lesiones de la médula espinal
+La lesión de la médula espinal es la aplicación emblemática de Neuralink. El
+objetivo es ayudar a personas con lesión medular permitiéndoles
+controlar con destreza un ratón y un teclado digitales directamente con
+sus cerebros [ 17]. Combinado con técnicas de estimulación espinal, se
+espera que este enfoque pueda restaurar funciones motoras [ 17]. Como
+se mencionó en la sección 2.1, el uso de BMI para controlar un dispositivo con el pensamiento
+se estudia desde la década de 1960 [ 20]. Sin embargo, las empresas de Musk
+se benefician de una importante recaudación de fondos y una amplia cobertura mediática.
+En el sitio web de Neuralink [ 18] se presentan las últimas versiones del
+proyecto. En la figura 4, el enlace es un dispositivo sellado e implantado que
+procesa, estimula y transmite señales neuronales [ 18].
+La aplicación de Neuralink (fig. 5) permitiría controlar un dispositivo iOS,
+teclado y ratón directamente con la actividad cerebral, solo con pensar
+en ello [18].
+3.2 Otras aplicaciones
+En general, se esperan nuevas posibilidades terapéuticas con las BMI.
+Presentamos aquí algunas de ellas.
+3.2.1 Sustitución de partes del cuerpo. Las prótesis biónicas no son nuevas, y
+el enfoque clásico no necesita BMI. Una extremidad biónica, p. ej., un
+brazo, detecta pequeñas señales generadas naturalmente cuando el usuario flexiona
+Figura 4: El enlace [18]
+ Figura 5: Aplicación de Neuralink
+los músculos del muñón. La extremidad biónica puede entonces convertir
+esas señales en movimiento de la mano.
+Sin embargo, las BMI pueden llevar este enfoque un paso más allá y permitir
+usar directamente " el cerebro para transmitir nuestras intenciones, en lugar de tener
+un paso físico adicional que traduzca esas intenciones a texto, habla o
+gestos " [22]. Las interacciones pueden volverse más fáciles, rápidas y
+naturales [22].
+3.2.2 Epilepsia. Las BCI pueden usarse para tratar trastornos neurológicos
+y revelar funciones cerebrales [ 9]. Karageorgos et al. han pre-
+sentado HALO (Hardware Architecture for LOw-power BCIs), una
+arquitectura para BCI implantables, que permite el tratamiento de tras-
+tornos, como la epilepsia [ 9]. HALO también registra y procesa datos que
+pueden usarse para entender mejor el cerebro [ 9]. La epilepsia
+se caracteriza por convulsiones epilépticas definidas por una actividad
+eléctrica excesiva e incontrolada de las neuronas [ 27]. Las señales neuronales se
+procesan para predecir convulsiones. Cuando aumenta la excitación cerebral
+se produce, "el cerebro necesita sinapsis inhibitorias para atenuar y regu-
+lar la actividad de otras células" [27]. Las BCI estimulan entonces eléctricamente
+las neuronas para mitigar la gravedad de las convulsiones [ 9]. Sin embargo, el
+tiempo entre el inicio de la convulsión y la estimulación debe ser muy breve, es decir,
+decenas de milisegundos [ 9]. Además, se necesita hardware de bajo consumo para una
+implantación segura y crónica [ 9]. HALO se inspira en enfoques
+anteriores pero ofrece una comunicación cerebral de mayor ancho de banda en
+tiempo real con bajo consumo [ 9]. También pueden considerarse enfoques no invasivos,
+como la tDCS y la TMS [27] (véase la sección 2.1.1).
+3.2.3 Parkinson. El Parkinson, al igual que la epilepsia, puede tratarse
+con estimulación cerebral profunda (DBS). La DBS pertenece a las BMI invasivas.
+Se requiere cirugía para implantar un fino cable de electrodo en la parte del
+cerebro responsable del movimiento anormal [ 22]. Una segunda intervención
+quirúrgica es entonces necesaria para implantar un generador de impulsos
+con batería (IPG) en el abdomen o bajo la clavícula. El IPG
+puede entonces dar impulsos eléctricos al cerebro para ayudar a controlar algunos
+síntomas motores.
+3.2.4 Autismo. En los últimos años se han asignado fondos importantes
+al programa Brain Research through Advancing Innovative Neu-
+rotechnologies (BRAIN) para comprender mejor los orígenes de la cog-
+nición y otras actividades cerebrales. Se espera que se encuentren
+3
+tratamientos más eficaces para afecciones como el autismo y los trastornos del ánimo
+[ 22]. Con el enfoque TMS (véase la sección 2.1.1), pudimos
+mostrar una mejora en las habilidades sociales en personas con autismo [ 23].
+3.2.5 Depresión. La depresión es la afección de salud mental más
+común. Alrededor de un tercio de los casos de depresión son resistentes al
+tratamiento [ 23]. Las terapias con BMI se ven como una esperanza para las personas a las que
+los fármacos no han logrado tratar. Si bien los fármacos pueden ser ineficaces porque
+afectan a todo el cuerpo, las BMI pueden dirigirse con precisión a las
+regiones relevantes del cerebro [ 23]. Los medicamentos para la salud mental tienen efectos
+secundarios, como aumento de peso y disminución de la libido. Las BMI pueden tener
+efectos secundarios también, pero podrían ser menos graves que los de los fármacos [23].
+3.2.6 Diagnóstico de enfermedades cerebrales. Además, las enfermedades cerebrales que
+provocan disfunción del sistema de comunicación sináptica podrían
+diagnosticarse mejor con BMI [ 27]. En general, las BMI pueden considerarse
+alternativas o enfoques competidores de la medicina tradicional en
+áreas específicas. Se espera que esta tendencia se intensifique en el futuro.
+4 APLICACIONES SOCIALES Y COGNITIVAS
+En esta sección abordamos las aplicaciones sociales y cognitivas. Los
+problemas de estas aplicaciones son más críticos que los de las aplicaciones terapéuticas.
+Por tanto, estos problemas se presentarán en la sección 5.
+4.1 Aprendizaje y mejora
+El cerebro es un sistema dinámico que genera patrones espaciotemporales espontáneos
+incluso sin estímulos, movimientos ni tareas cognitivas
+[10]. En los seres humanos, a estos patrones se les llama actividad cerebral en estado de reposo
+[10]. La actividad cerebral en reposo revela mucha información
+sobre la edad, los trastornos mentales y la capacidad cognitiva [10]. «Al
+combinar la decodificación de información a partir de la actividad cerebral y su neuro-
+rretroalimentación en paradigmas de aprendizaje por refuerzo, podemos controlar de forma inconsciente
+patrones de actividad cerebral que corresponden a información específica»
+[10]. Esto puede conducir a terapias para trastornos psiquiátricos, pero también a
+una mayor capacidad cognitiva [10]. Se espera que esta tecnología
+esté pronto disponible en dispositivos mucho más baratos y ligeros, como
+el EEG y la espectroscopia de infrarrojo cercano [10].
+Las interfaces externas se utilizan cada vez más para intentar mejorar
+la memoria y la concentración [23]. Los auriculares que emplean
+tDCS (véase la sección 2.1.1) podrían mejorar la memoria [23]. La memoria de trabajo
+ha mejorado en personas mayores con una técnica similar
+[23]. Experimentos militares de EE. UU. han sugerido que la tDCS podría
+agudizar las habilidades mentales [23]. La tDCS también puede potenciar el rendimiento físico, además del
+mental [23]. Por ejemplo, 20 minutos de exposición a
+tDCS podrían mejorar el rendimiento máximo de los ciclistas [23]. Sin embargo,
+otros investigadores han advertido sobre posibles daños a
+el cerebro [23].
+Los estudios han demostrado que las funciones cognitivas cerebrales podrían mejorarse
+mediante intervenciones de entrenamiento cognitivo, en las que los aprendices
+realizan tareas cognitivas [25]. Sin embargo, si la tarea que realiza el aprendiz
+es demasiado difícil, la motivación y la concentración pueden
+disminuir, lo que da lugar a una mejora escasa o nula de las funciones cognitivas
+[25]. Taya et al. proponen monitorizar los estados mentales de los aprendices,
+como la carga cognitiva, para facilitar y optimizar el progreso
+del aprendizaje [25]. El enfoque utiliza biomarcadores objetivos
+basados en las propiedades espectrales de las señales de EEG [25]. Para discriminar
+los estados mentales, las características extraídas se someten a herramientas matemáticas basadas en aprendizaje automático [25]. Además, Taya et al. introdujeron
+el enfoque del conectoma funcional, que se basa en
+la teoría de grafos [25]. Un conectoma es un mapa completo de
+las conexiones neuronales y puede verse como su diagrama de cableado. El
+enfoque del conectoma cerebral puede proporcionar biomarcadores adicionales para
+facilitar el proceso de aprendizaje. Puede usarse para comprender los mecanismos
+que subyacen a las funciones cognitivas cerebrales, pero también para detectar
+estados mentales [25].
+4.2 Control de la alerta y del reparto de la
+carga cognitiva
+Maksimenko et al. pudieron clasificar la actividad cerebral en dos escenarios
+según el grado de atención del observador, que a su vez
+se ve afectado por la motivación para una tarea y por la complejidad de la
+tarea [14]. Los dos escenarios describían oscilaciones neuronales distintas
+compuestas por ondas alfa y beta. Maksimenko et al. pudieron construir
+una BMI no invasiva para estimar y controlar el grado de alerta
+en tiempo real [14]. El dispositivo se basaba en un registrador de EEG y en un
+software de adquisición desarrollado a medida. El control del grado de
+atención se realizaba mediante una señal de retroalimentación con estimulación externa.
+Cuando el sujeto perdía la concentración, sonaba una señal acústica para re-
+enfocar su atención [14]. Monitorizar y controlar la atención y la alerta humanas
+pueden tener aplicaciones esenciales en tareas
+que requieren una atención considerable, como el control del tráfico aéreo, el pilotaje
+y la conducción de larga distancia [14].
+Además, la carga cognitiva de una tarea puede compartirse entre los miembros
+de un grupo [13]. En otro artículo, Maksimenko et al. propusieron
+una interfaz cerebro a cerebro (BBI) que estima los estados cerebrales de
+los participantes y distribuye de forma óptima una carga cognitiva entre
+los miembros del grupo que trabajan en una tarea común, aumentando el rendimiento
+humano global [13]. La carga de trabajo puede compartirse entre
+los participantes según su rendimiento actual, que se estima
+a partir de su actividad cerebral eléctrica [13]. La BBI utiliza un registrador de EEG
+y no es invasiva. Con la interacción de humano a humano, también
+se comprobó que el sujeto que al principio mostraba un mayor grado
+de alerta aumentó su alerta gracias a la ayuda de
+su pareja [13]. La eficiencia de un equipo puede aumentarse
+asignando la carga de trabajo más difícil a los operadores que muestran el
+mejor rendimiento [13].
+4.3 Leer pensamientos y emociones
+La lectura de la mente se ha vinculado tradicionalmente con las historias de ciencia ficción.
+Sin embargo, ya se han dado los primeros pasos para percibir pensamientos [11].
+Los científicos ya cuentan con el marco matemático necesario, y
+las únicas limitaciones están en la medición de la actividad cerebral. Un estudio
+mostró que, basándose solo en la actividad cerebral de voluntarios, un modelo
+informático logró producir imágenes de las letras que los voluntarios
+miraban [11]. Los voluntarios miraron primero copias manuscritas
+de letras, mientras una máquina de resonancia magnética funcional (fMRI)
+medía las respuestas de su cerebro [11]. Basándose
+en la ley de Bayes, en los patrones de actividad cerebral y en el aprendizaje automático,
+el modelo informático puede mostrar una imagen de la letra vista
+por el voluntario [11]. En otro experimento, Akbari et al. lograron
+reproducir los sonidos de los números escuchados por los participantes, a partir
+de su actividad cerebral [1]. En el futuro, podría ser posible usar
+este tipo de algoritmo para decodificar pensamientos.
+4
+Carella et al. han demostrado que las emociones también pueden clasificarse
+a partir de registros de EEG mediante el método de descomposición en modos empíricos
+(EMD) [6]. Observaron que la detección de emociones es posi-
+ble con una precisión superior al 70%. Zander et al. propusieron fusionar
+la monitorización cognitiva con la tecnología BCI [30]. La monitorización cognitiva
+utiliza la decodificación en tiempo real de señales cerebrales para obtener información
+sobre el estado cognitivo del usuario. Con la fusión de estas tecnologías,
+Zander et al. pudieron proporcionar información sobre las intenciones de los usuarios,
+sus interpretaciones de la situación y sus estados emocionales [30]. El estudio
+se centró en aplicaciones para usuarios sanos [30], por lo que no se limitó
+a aplicaciones terapéuticas.
+En general, la brecha entre humanos y máquinas se está reduciendo.
+Los nuevos sistemas permiten la entrada por gestos y por voz para crear formas únicas e in-
+tuitivas de interactuar con las computadoras [22]. Las BMI reducen
+esta brecha aún más y permiten vislumbrar la interacción humano-humano
+. Potencialmente, podríamos usar las BMI para comprender mejor
+y comunicarnos entre nosotros aclarando nuestros pensamientos y
+sentimientos [22].
+4.4 Vínculos cerebrales y control de la conducta
+B. Min explicó el enfoque de usar BCI y sonicación de ultrasonido focalizado de baja intensidad
+(LIFU) para obtener una interfaz cerebro a cerebro
+(BBI) [16]. El objetivo es obtener una interfaz en la que
+dos cerebros individuales se comuniquen enviando señales a través de
+computadoras. Cabe esperar una amplia gama de comunicación mental
+[16].
+Yoo et al. lograron establecer vínculos funcionales entre el cerebro de un humano
+y el de una rata [29]. El ultrasonido focalizado transcraneal (FUS)
+puede modular la actividad neuronal de regiones cerebrales específicas, desempeñando
+el papel de una CBI estimulante no invasiva. Además, el uso de técnicas BCI no invasivas
+como la adquisición de EEG y el procesamiento de señales,
+permite registrar la actividad cerebral y traducirla para generar
+comandos de computadora. Puede crearse un vínculo entre dos cerebros uniendo
+estas tecnologías, creando así una interfaz cerebro a cerebro
+[29]. La implementación podría usarse para traducir la intención del
+voluntario humano de estimular la región motora del cerebro de una rata que
+es responsable del movimiento de la cola [29]. Gracias a la BBI, el voluntario humano
+pudo entonces mover la cola de la rata solo con el pensamiento. La
+interfaz podría alcanzar una precisión de alrededor del 94% [29].
+Rao et al. han presentado una interfaz directa cerebro a cerebro (BBI)
+en humanos [21]. Se ilustró con un videojuego en el que dos
+humanos deben cooperar mediante comunicación BBI directa. Un
+diagrama esquemático de la configuración puede verse en la fig. 6. El objetivo
+del juego es defender una ciudad de cohetes enemigos disparando un ca-
+ñón. Un avión aliado también sobrevuela el cielo, y no debe ser
+contra el que se dispara. El primer usuario (el emisor) ve el juego, pero no puede controlar
+el cañón. El segundo usuario (el receptor) se encuentra en otro
+edificio. No ve el juego, pero tiene un panel táctil para disparar el
+cañón. La comunicación BBI usó EEG no invasivo para registrar
+la señal cerebral del emisor, y TMS no invasiva para estimular el
+cerebro del receptor. Durante los ensayos, el emisor transmitía la intención de disparar
+el cañón mediante imaginería motora de la mano derecha [21]. Cuando
+la computadora del receptor recibía una orden de disparo, se aplicaba un pulso de TMS
+al cerebro del receptor, lo que provocaba un movimiento de la
+mano derecha de este, que accionaba el panel táctil que disparaba el cañón. Aunque rudimentario, aporta evidencia de que la infor-
+mación puede transmitirse de un cerebro humano a otro [21].
+Este experimento es también una prueba de concepto que muestra que un
+ser humano puede ser controlado por otro ser humano.
+Figura 6: Interfaz directa cerebro a cerebro [21]
+Como se explicó, la comunicación mente a mente sigue siendo ficticia
+por ahora, pero los componentes básicos se han demostrado en el
+laboratorio [23].
+4.5 Militar
+Con diademas de EEG ya es posible pilotar drones usando solo señales
+cerebrales [23]. El Programa de Neurotecnología No Quirúrgica de Nueva
+Generación (N3) de la DARPA de Estados Unidos busca desarrollar
+ICC bidireccionales de alto rendimiento. Sus principales aplicaciones son
+controlar vehículos aéreos, la ciberdefensa o el trabajo en equipo con
+computadoras durante misiones militares [23]. Además, como se mencionó en la sección 4.1, las ICC no-
+invasivas como tDCS podrían mejorar habilidades mentales. Las aplicaciones militares y de
+seguridad son las que suscitan las mayores inquietudes. Mejorar
+mental y físicamente a los seres humanos podría ofrecer cierta protección, pero también podría usarse
+para organizar operaciones hostiles a distancia [23].
+La siguiente sección explorará posibilidades y preocupaciones futuras
+de las ICC.
+5 EVALUACIONES
+Hasta ahora hemos visto aplicaciones de ICC de vanguardia, que nos
+permitirán analizar posibilidades futuras. Después se evaluarán los impactos
+humanos y las cuestiones éticas, así como el transhumanismo y sus
+consecuencias.
+5.1 Posibilidades futuras
+Las ICC podrían ofrecer beneficios como mejor salud, mejor memoria, mejor
+concentración y un envejecimiento más saludable. Sin embargo, también implican
+nuevos riesgos, como el acceso a pensamientos o estados de ánimo [23], con una
+posible deriva hacia el control de las personas.
+5
+5.1.1 Acceso al cerebro y ser controlado. Las personas podrían vol-
+verse telepáticas y comunicarse sin palabras mediante
+el acceso a los pensamientos [23]. Más allá de los pensamientos, las experiencias sensoriales
+podrían comunicarse de humano a humano, como
+postales neuronales, en las que oír, ver y saborear podrían ser posibles.
+Alternativamente, experiencias de vida como disfrutar de una comida o dar un
+salto en paracaídas podrían vivirse virtualmente y ofrecer sensaciones como si
+fueran reales [23]. Más razonablemente, parece posible que podamos
+crear imágenes de lo que las personas están pensando en los
+próximos 20 años [11].
+Si se pudiera acceder a los pensamientos, las empresas podrían usar este enfoque
+con fines publicitarios y poner anuncios emergentes en nuestra cabeza [23]. Ade-
+más, el delito de pensamiento de George Orwell en su novela distópica
+«1984» podría convertirse en realidad, y las personas podrían
+ser arrestadas simplemente por pensar de forma divergente. Las preocupaciones por la privacidad deben
+abordarse de manera definitiva. Al acceder a los pensamientos, los políticos podrían
+reclutar personas para sus causas [23]. En el futuro, podría ser posible
+que los gobiernos controlen y manipulen la conducta de las personas, no
+solo a través de los medios de comunicación masivos, sino también enviando directamente órdenes
+o introduciendo ideologías en sus cerebros [20]. En general, si el cerebro humano
+puede ser controlado, ello implicará una multitud de consecuencias.
+Podríamos imaginar que partes de nuestro cerebro podrían desactivarse si no
+hemos pagado nuestras facturas. Podríamos imaginar un ransomware aplicado
+a un cerebro, con hackers que cifran el cerebro y piden un
+rescate para descifrarlo.
+5.1.2 Memoria digital. Quizás las ICC también ofrezcan oportunidades
+apasionantes para potenciar el propio cerebro. Las ICC invasivas o no invasivas
+podrían ayudarnos a recordar más y mejor, aprender más rápido, tomar
+mejores decisiones y resolver problemas sin sesgos [23]. En lugar
+de un entrenamiento arduo, podríamos simplemente descargar una nueva habilidad, como hace Neo
+en la película de ciencia ficción Matrix. Las interfaces neuronales podrían
+elevar los niveles de logro educativo al ayudar a los estudiantes a aprender,
+recordar y concentrarse mejor [23]. Las ICC invasivas podrían con-
+vertirse en partes del cuerpo, como lo son hoy los marcapasos. Nuestra memoria y todo
+su conocimiento asociado podrían respaldarse de forma segura en dispositivos
+digitales o subirse a la nube [23].
+5.1.3 Fusionar nuestra inteligencia con la IA. Nuestro cerebro está compuesto por
+unos 86 000 millones de neuronas, y cada neurona puede establecer conexiones
+con miles de otras neuronas mediante enlaces llamados sinapsis [23].
+Mientras que las computadoras pueden realizar miles de millones de operaciones por segundo
+pero solo están conectadas a unos pocos vecinos, las neuronas del cerebro pueden
+realizar solo unas 1000 operaciones por segundo, pero pueden comuni-
+carse con miles de vecinos [23]. Por ello, la comparación
+entre cerebro y computadora es complicada. Además, gran parte
+del cerebro humano sigue siendo desconocida, como el lenguaje
+con el que se comunican las neuronas o la tendencia del cerebro a formar
+conexiones [23].
+Hoy en día, la inteligencia artificial (IA) « es una herramienta tecnológica
+importante que permite que muchas interfaces neuronales funcionen » [23]. Las ICC usan IA
+para convertir señales neuronales en datos digitales, por ejemplo, para interpretar
+las instrucciones del cerebro para mover un brazo protésico [23]. En el
+futuro, sin embargo, podría surgir una relación más intrincada entre las ICC y
+la IA. Como se mencionó antes, las computadoras y los cerebros son
+distintos, pero pueden percibirse como complementarios. Los humanos tienen
+capacidad de toma de decisiones e inteligencia emocional, mientras que las compu-
+tadoras son buenas para procesar rápidamente una gran cantidad de datos. Por ello, varios expertos en tecnología creen que podrían surgir impactos beneficiosos
+al vincular la inteligencia humana y la artificial mediante las ICC
+[23]. En general, empresas como Neuralink también persiguen el objetivo
+de vincular cerebros humanos e IA [23]. Niforatos et al. sostienen que
+aunque suene a escenario de ciencia ficción, la idea de que los humanos
+converjan con las máquinas no solo podría ser pronto una realidad, sino
+también una necesidad [19]. Niforatos et al. creen « que el cerebro humano
+y la tecnología pueden y deben trabajar más estrechamente en tán-
+dem para amplificar nuestras capacidades cognitivas en la era de las distracciones
+y la sobrecarga informativa » [19]. Elon Musk dijo que el objetivo a largo plazo de Neuralink
+es alcanzar « simbiosis con la inteligencia artificial »,
+lo cual es necesario para competir con una IA cada vez más poderosa, y
+de la que dependerá la supervivencia de la humanidad. Esa forma de
+inteligencia colaborativa podría surgir y traer aplicaciones revolucionarias,
+pero también plantear importantes cuestiones éticas [23].
+5.2 Impactos humanos y cuestiones éticas
+Al hablar de los impactos de la tecnología, Paul Virilio dijo: «Cuando
+inventas el barco, también inventas el naufragio; cuando inventas el
+avión, también inventas el accidente aéreo; y cuando inventas la electricidad,
+inventas la electrocución... Toda tecnología lleva consigo su propia negatividad,
+que se inventa al mismo tiempo que el progreso técnico». Buruk et al.
+escribieron resúmenes ficticios sobre el diseño de tecnologías infantiles
+en la era del transhumanismo en 2077 [4]. Una de estas ficciones na-
+rra que, en el año 2065, el gobierno neerlandés declaró que todos
+los recién nacidos en los Países Bajos debían someterse a un procedimiento para
+equiparse con implantes de respiración acuática, debido a la imposibilidad
+de instalar estos implantes en adultos. El artículo ficticio explora
+los impactos de esta legislación, en particular la creación de una nueva gene-
+ración de niños que usan los canales de Ámsterdam como zonas de juego
+sin supervisión [4]. Este ejemplo nos muestra que la tecnología siempre
+afecta a los seres humanos, lo que parece especialmente cierto para las ICC,
+lo que refuerza la necesidad de considerar estas cuestiones de forma proactiva.
+5.2.1 Alteración o pérdida del sentido de uno mismo. Un posible impacto de las ICC es
+la pérdida del sentido de uno mismo [24]. En algunas personas sordas, los implantes pueden
+marcar una diferencia vital. Sin embargo, algunas otras personas rechazan por completo
+los implantes, al considerar la sordera como una identidad y no como
+una discapacidad. Están acostumbradas a su condición, y la lengua de señas
+les proporciona un medio de comunicación pleno y natural [ 23].
+Al ser potenciadas, ya no se reconocen a sí mismas [ 7]. Anita
+Silvers ha considerado los implantes cocleares para la sordera como una "tiranía
+de lo normal", diseñada para adaptar a las personas sordas a un mundo diseñado por
+los oyentes, suponiendo la inferioridad de la sordera [ 28]. El concepto
+del yo (self) se cuestiona: ¿somos nosotros como humanos? ¿O es la tecnología [ 23]?
+Al final, cada experiencia humana es distinta y tiene un valor
+significativo.
+5.2.2 Erosión de habilidades y autonomía. Si las BMI invasivas toman
+decisiones dentro de nuestros cuerpos, ¿seguimos siendo autónomos [ 23]? Al po-
+tenciar nuestras funciones corporales, en cierto modo las estaríamos reemplazando.
+Si nuestras funciones corporales naturales dejaran de usarse, probablemente
+perderíamos nuestras capacidades. Esto llevaría a una dependencia íntima, peligrosa
+y considerablemente mayor de la tecnología, hasta llegar
+al punto de no retorno. Debemos preguntarnos seriamente si
+deberíamos usar las BMI para mejorar las capacidades de personas sanas
+[28].
+6
+5.2.3 Problemas de privacidad. Las BMI pueden recopilar grandes cantidades de biodatos físicos
+y neuronales. En este contexto, será difícil preservar
+la privacidad y controlar el uso de los datos personales [ 23]. Un dispositivo portátil de lectura mental
+puede no estar del todo fuera de alcance en el futuro, y
+es necesario establecer ya pautas de privacidad [ 11]. En general,
+las personas se resisten a permitir que los sistemas comprendan sus intenciones,
+y no quieren que sus pensamientos sean leídos y revelados
+[22]. Tampoco está claro qué creen las personas que los sensores pueden revelar, y
+las personas se apoyan en creencias existentes sobre el cuerpo para explicar lo que
+podrían revelar [ 15]. El acceso transparente a los pensamientos podría modificar
+el comportamiento de las personas y afectar su bienestar [ 23]. El estilo del Gran Hermano
+de vigilancia mental crearía sin duda un
+daño psicológico [ 23]. Sin llegar a la lectura mental, la privacidad de la carga cognitiva
+ya es un problema. No solo las personas no están dispuestas a revelar
+su carga cognitiva, sino que además podría generar un estrés considerable, por
+ejemplo, si su jefe supiera exactamente su carga cognitiva actual para
+una tarea específica. Ahora bien, como hemos visto en la sección 4.2, la monitorización de la carga cognitiva
+y el intercambio de la carga cognitiva entre los miembros del equipo
+ya es una realidad, lo que refuerza la necesidad de normas desde ahora.
+5.2.4 Cuestiones jurídicas. Si las interfaces neuronales pueden influir intencionalmente en
+el comportamiento de las personas, ¿deberían ser prescritas por los Estados? [ 23].
+Por ejemplo, podríamos imaginar que los gobiernos usarían estas
+tecnologías para reducir el gasto en salud pública influyendo directamente en
+las personas para que coman de forma más sana. Ese poder podría luego extenderse a
+contextos más amplios, como las sanciones en la justicia penal. Por el contrario,
+en lugar de prescribir, algunas interfaces podrían ser proscritas [ 23]. Necesitamos
+con urgencia definir quién debe controlar el acceso a las BMI, por
+razones de seguridad. En cuanto a los problemas de privacidad, la regulación y las leyes serán
+necesarias.
+5.2.5 Cuestiones sociales. Las dimensiones éticas del uso de las BMI van
+más allá de los contextos de la investigación clínica y la atención al paciente, como
+las presiones económicas y los controles regulatorios asociados a la co-
+mercialización de las BMI [ 2]. Al tener BMI, se esperan más interacciones
+con máquinas, lo que reduce las interacciones sociales. Las BMI
+también contribuirán a ampliar las desigualdades, como siempre ha hecho la tecnología,
+al ofrecer ventajas a quienes pueden pagarlas [23].
+5.3 Transhumanismo y cuestiones filosóficas
+Las BMI desafían la esencia misma de lo que significa ser humano [ 12].
+Como hemos visto en la sección 5.2.1, los implantes pueden alterar el sentido de
+yo. La diferencia entre mejora y tratamiento es tenue
+y depende de cómo se definan la normalidad y la enfermedad [ 28]. Christopher
+Boorse " define la enfermedad como una desviación estadística del funcionamiento típico de la especie
+funcionamiento " [28]. Es cuestionable si "mejora" es un incre-
+mento o una reducción, o si la mejora es necesaria en absoluto. Hay que
+tomar decisiones. Otra pregunta interesante es si la mejo-
+ra puede lograrse de otra manera, es decir, sin BMI invasivas. Por
+ejemplo, hemos visto en la sección 4.1 que el entrenamiento cognitivo puede
+mejorar las funciones cognitivas del cerebro.
+El transhumanismo es una visión del mundo. Considera la mejora
+como intervenciones que promueven características corporales y cognitivas
+para alcanzar una etapa posthumana [ 5], en la que la propia condición humana
+se transforma. Plantea numerosas preguntas éticas y filosóficas,
+como las siguientes: ¿Cómo queremos vivir como seres humanos? ¿Es tal
+una transformación profunda seguir siendo humanos? El transhumanismo podría mostrar una visión productivista del ser humano
+, en lugar de una visión cualitativa de la experiencia de la vida en la tierra.
+Sin embargo, el debate podría no ser tan trivial si consideramos la
+posibilidad de que la singularidad se convierta en realidad. La singu-
+laridad, también conocida como inteligencia artificial general (IAG), puede
+definirse como el punto en que la IA puede mejorarse a sí misma más rápido que los humanos
+. Algunos sostienen que la IAG no llegará a realizarse [ 8], mientras que los expertos en IA
+calculan que hay alrededor de un 50% de probabilidad de que la IAG ocurra antes de
+2060 [ 26]. Personalidades como Stephen Hawking y Elon Musk
+también advierten sobre la IA. Como hemos visto en la sección 5.1.3, Elon
+Musk y Neuralink defienden las BMI y la fusión con la IA para la super-
+vivencia de la humanidad. En esencia, puede vincularse a una pregunta filosófica
+: ¿la conciencia emerge o es trascendental?
+Sin embargo, ¿cómo será el mundo si la amenaza de la IA es real, y
+la fusión con la máquina se vuelve realidad? Por ejemplo, si los niños pueden
+descargar materias escolares en segundos, en lugar de aprenderlas lentamente
+a lo largo de los años, ¿cómo será la infancia? ¿Se usará el tiempo
+ahorrado para disfrutar de la vida o para adquirir cada vez más habilidades? ¿Qué
+pasará con las relaciones sociales y las amistades tempranas que se forjan en la escuela?
+El cambio potencial es tan grande que nadie puede predecir con
+certeza cuál sería el resultado.
+5.3.1 Transhumanismo a través de Spiral Dynamics. Aquí presentaremos
+el transhumanismo a través de los distintos niveles del modelo Spiral Dy-
+namics [3]. En cada nivel, simbolizado por un color, mostraremos cómo
+el transhumanismo podría ser usado por el sistema y cómo podría ayudar a
+fomentar las características de cada nivel. En Beige, el transhumanismo podría
+verse como una herramienta individual de supervivencia, frente a otros organismos o
+frente a la propia tecnología. En Púrpura, el transhumanismo podría permitir
+una mejor conexión entre las personas mediante inter-
+faces cerebro a cerebro, y una mejor armonía con la naturaleza. En Rojo, el transhumanismo
+podría usarse como herramienta de dominación, donde las personas intentarían obtener
+las mejores BMI para dominar a los demás. En Azul, el transhumanismo
+se usaría para reducir a las personas a tareas específicas y reforzar la jerar-
+quía. En Naranja, las BMI se usarían para llegar a la cima
+de la jerarquía, aumentando así la competencia entre individuos.
+En la base de la jerarquía, equiparíamos a las personas con BMI
+para aumentar su productividad. En Verde, las BBI permitirían enten-
+der todos los idiomas y culturas, y experimentar con empatía total
+sintiendo lo que sienten los demás. Con el transhumanismo, los seres humanos
+estarían conectados, lo que permitiría una conciencia global
+y unidad. En Amarillo, el transhumanismo haría posible
+comprender las diferencias entre individuos e integrar todos
+los potenciales y habilidades. En Turquesa, el transhumanismo se usaría
+para igualar a las personas tanto física como cognitivamente. En Coral,
+con mayor conciencia, aceptación y libertad, ¿todavía necesitaríamos
+el transhumanismo? ¿O simplemente preferiríamos vivir sin
+él?
+Ahora supongamos que nuestra sociedad se encuentra actualmente en Naranja, donde la
+calidad de vida no es una prioridad y la eficiencia gobierna el mundo. Este
+deseo de eficiencia podría justificar plenamente la carrera por el transhumanismo.
+Como el transhumanismo es irreversible, sellaríamos el mundo en
+Naranja y detendríamos la evolución de la humanidad, limitándola a la eficiencia
+y a la competencia.
+Este modelo es interesante para mostrar que las razones y usos de
+el transhumanismo puede ser radicalmente distinto según los valores centrales de
+7
+cada sociedad. Por ello, existe una necesidad urgente de considerar globalmente los problemas
+del transhumanismo.
+6 CONCLUSIÓN
+En resumen, este artículo presentó primero las interfaces cerebro-máquina (BMI,
+por sus siglas en inglés), Neuralink y su tecnología para producir
+BMI invasivas. Actualmente, las BMI tienen sobre todo aplicaciones terapéuticas,
+como ayudar a personas con lesiones de la médula espinal a controlar directamente
+una computadora con el cerebro. Otras aplicaciones terapéuticas
+incluyen la epilepsia, la enfermedad de Parkinson y el autismo. Las BMI también
+tienen aplicaciones sociales y cognitivas, como el aprendizaje, la mejora,
+el control del comportamiento y la lectura de pensamientos. Otro objetivo
+de este trabajo fue presentar una evaluación de las posibilidades futuras
+de las BMI, como el control cerebral y la fusión de nuestra inteligencia
+con la IA. Se expusieron los impactos humanos y los problemas éticos resultantes,
+como la pérdida del sentido de uno mismo, el deterioro de habilidades
+y otros problemas. Por último, este artículo exploró el transhumanismo, su
+posible necesidad con la llegada de la inteligencia artificial general, así como
+sus distintas razones de ser. En cuanto
+a los temas abiertos, las BMI todavía se encuentran en una etapa temprana
+de desarrollo, por lo que aún es difícil predecir con exactitud hacia dónde se
+dirigen. Las investigaciones futuras deberían considerar con más cuidado
+los posibles efectos de las BMI, en particular los impactos humanos de las BMI
+actuales y futuras. Hemos mostrado que la investigación sobre BMI podría
+generar cambios drásticos sin posibilidad de retorno, lo que refuerza la necesidad
+de abordar con urgencia estos problemas críticos.
+AGRADECIMIENTOS
+A la Dra. Michèle Courant, de la Universidad de Friburgo en Suiza, por
+su tutoría durante todo el seminario, sus valiosos consejos y su
+apoyo para escribir el presente artículo.
+REFERENCIAS
+[1]Hassan Akbari, Bahar Khalighinejad, Jose L. Herrero, Ashesh D. Mehta, y Nima
+Mesgarani. 2018. Hacia la reconstrucción de habla inteligible a partir de la corteza
+auditory cortex. (2018). https://doi.org/10.1101/350124
+[2]Thomas Baldwin, Jonathan Cole, Maria Fitzgerald, Jenny Kitzinger, Graeme
+Laurie, Jack Price, Nikolas Rose, Steven Rose, Ilina Singh, Vincent Walsh, y
+Kevin Warwick. 2013. Neurotecnologías novedosas: intervenir en el cerebro . Nuffield
+Council on Bioethics.
+[3]DE Beck y CC Cowan. 1996. Spiral dynamics: mastering values, leadership, y
+change . Blackwell Business.
+[4]Oğuz ’Oz’ Buruk, Oğuzhan Özcan, Gökçe Elif Baykal, Tilbe Göksun, Selçuk Acar,
+Güler Akduman, Mehmet Aydın Baytaş, Ceylan Beşevli, Joe Best, Aykut Coşkun,
+Hüseyin Uğur Genç, A. Baki Kocaballi, Samuli Laato, Cássia Mota, Konstantinos
+Papangelis, Marigo Raftopoulos, Richard Ramchurn, Juan Sádaba, Mattia Thibault,
+Annika Wolff, y Mert Yildiz. 2020. Children in 2077: Designing Children’s
+Tecnologías para la infancia en la era del transhumanismo. En Extended Abstracts of the 2020
+CHI Conference on Human Factors in Computing Systems (Honolulu, HI, EE. UU.)
+(CHI EA ’20) . Association for Computing Machinery, Nueva York, NY, EE. UU., 1–14.
+https://doi.org/10.1145/3334480.3381821
+[5]Laura Cabrera. 2012. Mejora social: repensar el papel de las tecnologías
+emergentes. En Proceedings of the 2012 Virtual Reality International Conference
+(Laval, Francia) (VRIC ’12) . Association for Computing Machinery, Nueva York, NY,
+EE. UU., Artículo 7, 6 páginas. https://doi.org/10.1145/2331714.2331723
+[6]Tommaso Carella, Matteo De Silvestri, Mary Finedore, Isaac Haniff, y Hananeh
+Esmailbeigi. 2018. Emotion Recognition for Brain Machine Interface: Non-linear
+Análisis espectral de señales de EEG mediante descomposición modal empírica. 2018
+40.ª Conferencia Internacional Anual de la Sociedad de Ingeniería en Medicina y
+Biology Society (EMBC) (2018). https://doi.org/10.1109/embc.2018.8512228
+[7]Liam Drew. 2019. La ética de las interfaces cerebro-computadora. Nature 571, 7766
+(2019). https://doi.org/10.1038/d41586-019-02214-2
+[8]Ragnar Fjelland. 2020. Por qué no se hará realidad la inteligencia artificial general.
+Humanities and Social Sciences Communications 7, 1 (2020). https://doi.org/10.
+1057/s41599-020-0494-4[9]Ioannis Karageorgos, Karthik Sriram, Jan Vesely, Michael Wu, Marc Powell,
+David Borton, Rajit Manohar, y Abhishek Bhattacharjee. 2020. Hardware-
+Software Co-Design for Brain-Computer Interfaces. 2020 ACM/IEEE 47th Annual
+International Symposium on Computer Architecture (ISCA) (2020). https://doi.org/
+10.1109/isca45697.2020.00041
+[10] Mitsuo Kawato. 2015. Visualizing and Manipulating Brain Dynamics. En Proceed-
+ings of the 2015 ACM International Joint Conference on Pervasive and Ubiquitous
+Computing (Osaka, Japón) (UbiComp ’15) . Association for Computing Machinery,
+Nueva York, NY, EE. UU., 1. https://doi.org/10.1145/2750858.2815826
+[11] Erica Klarreich. 2014. Reading brains. Commun. ACM 57, 3 (2014), 12–14. https:
+//doi.org/10.1145/2567649
+[12] The Lancet. 2019. iHuman: una visión futurista de la experiencia humana. The
+Lancet 394, 10203 (2019), 979. https://doi.org/10.1016/s0140-6736(19)32141-5
+[13] Vladimir A. Maksimenko, Alexander E. Hramov, Nikita S. Frolov, Annika Lüt-
+tjohann, Vladimir O. Nedaivozov, Vadim V. Grubov, Anastasia E. Runnova,
+Vladimir V. Makarov, Jürgen Kurths, Alexander N. Pisarchik, y et al. 2018.
+Increasing Human Performance by Sharing Cognitive Load Using Brain-to-Brain
+Interface. Frontiers in Neuroscience 12 (2018). https://doi.org/10.3389/fnins.2018.
+00949
+[14] Vladimir A. Maksimenko, Anastasia E. Runnova, Maksim O. Zhuravlev,
+Vladimir V. Makarov, Vladimir Nedayvozov, Vadim V. Grubov, Svetlana V. Pche-
+lintceva, Alexander E. Hramov, y Alexander N. Pisarchik. 2017. Visual per-
+ception affected by motivation and alertness controlled by a noninvasive brain-
+computer interface. Plos One 12, 12 (2017). https://doi.org/10.1371/journal.pone.
+0188700
+[15] Nick Merrill, John Chuang, y Coye Cheshire. 2019. Sensing is Believing.
+Proceedings of the 2019 on Designing Interactive Systems Conference (2019). https:
+//doi.org/10.1145/3322276.3322286
+[16] Byoung-Kyong Min. 2013. Eeg/sonication-based brain-brain interfacing. 2013
+International Winter Workshop on Brain-Computer Interface (BCI) (2013). https:
+//doi.org/10.1109/iww-bci.2013.6506614
+[17] Elon Musk. 2019. Una plataforma integrada de interfaz cerebro-máquina con miles de
+canales. Journal of Medical Internet Research 21, 10 (2019). https:
+//doi.org/10.2196/16194
+[18] Neuralink. 2020. https://neuralink.com/approach/
+[19] Evangelos Niforatos, Athanasios Vourvopoulos, y Marc Langheinrich. 2017.
+Cómo amplificar la cognición humana. Proceedings of the 2017 ACM International Joint
+Conference on Pervasive and Ubiquitous Computing y Proceedings of the 2017
+ACM International Symposium on Wearable Computers (2017). https://doi.org/10.
+1145/3123024.3129266
+[20] Alexander N Pisarchik, Vladimir A Maksimenko, y Alexander E Hramov. 2019.
+De una tecnología novedosa a aplicaciones novedosas: comentario sobre «Una plataforma integrada
+de interfaz cerebro-máquina con miles de canales», de Elon Musk
+y Neuralink (Preprint). (2019). https://doi.org/10.2196/preprints.16356
+[21] Rajesh P. N. Rao, Andrea Stocco, Matthew Bryan, Devapratim Sarma, Tiffany M.
+Youngquist, Joseph Wu, y Chantel S. Prat. 2014. A Direct Brain-to-Brain
+Interface in Humans. PLoS ONE 9, 11 (2014). https://doi.org/10.1371/journal.
+pone.0111332
+[22] Esther Shein. 2017. Overcoming disabilities. Commun. ACM 60, 11 (2017), 17–19.
+https://doi.org/10.1145/3137838
+[23] The Royal Society. 2019. iHuman: difuminando los límites entre mente y máquina . The
+Royal Society. https://royalsociety.org/-/media/policy/projects/ihuman/report-
+neural-interfaces.pdf
+[24] TA Swiss. 2020. Ausschreibungs-Unterlagen zur Studie «Bioelektronik». s. f.
+(2020).
+[25] Fumihiko Taya, Yu Sun, Fabio Babiloni, Nitish Thakor, y Anastasios Bezerianos.
+2015. Mejora cerebral mediante entrenamiento cognitivo: una nueva perspectiva desde el conectoma
+connectome. Frontiers in Systems Neuroscience 9 (2015). https://doi.org/10.3389/
+fnsys.2015.00044
+[26] Kutay Tezcan, Magnus RC Wootton, y Cem Dilmegani. 2020. 995 experts
+opinion AGI singularity by 2060 (2021 update). https://research.aimultiple.com/
+artificial-general-intelligence-singularity-timing
+[27] Mladen Veletic y Ilangko Balasingham. 2019. Synaptic Communication Engi-
+neering for Future Cognitive Brain–Machine Interfaces. Proc. IEEE 107, 7 (2019),
+1425–1441. https://doi.org/10.1109/jproc.2019.2915199
+[28] Daniela De Venuto y Alberto Sangiovanni Vincentelli. 2013. Dr. Frankensteins
+Dream Made Possible Implanted Electronic Devices. Design, Automation & Test
+in Europe Conference & Exhibition (DATE), 2013 (2013). https://doi.org/10.7873/
+date.2013.311
+[29] Seung-Schik Yoo, Hyungmin Kim, Emmanuel Filandrianos, Seyed Javid Taghados,
+y Shinsuk Park. 2013. Non-Invasive Brain-to-Brain Interface (BBI): Establishing
+Functional Links between Two Brains. PLoS ONE 8, 4 (2013). https://doi.org/10.
+1371/journal.pone.0060410
+[30] Thorsten O Zander y Christian Kothe. 2011. Towards passive brain–computer
+interfaces: aplicación de la tecnología de interfaz cerebro-computadora a la interacción humano-máquina
+systems in general. Journal of Neural Engineering 8, 2 (mar 2011), 025005. https:
+//doi.org/10.1088/1741-2560/8/2/025005
+8

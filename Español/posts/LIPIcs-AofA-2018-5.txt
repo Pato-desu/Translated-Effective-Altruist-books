@@ -1,0 +1,557 @@
+Pensar con antelación sobre el último algoritmo
+que alguna vez necesitaremos inventar
+Olle Häggström
+Departamento de Ciencias Matemáticas, Chalmers University of Technology, 412 96 Gotemburgo, Suecia,
+e Institute for Future Studies, Box 591, 101 31 Estocolmo, Suecia
+olleh@chalmers.se
+Resumen
+Revisamos los debates actuales sobre las posibilidades y los riesgos asociados a un
+avance de la inteligencia artificial de un nivel tal que coloca a la humanidad en una situación en la que ya no es la principal
+entidad del planeta en términos de inteligencia general. Se subraya la importancia de pensar con antelación en tal
+suceso. Entre los temas clave están cuándo y con qué rapidez es probable que
+surja la superinteligencia, los objetivos y las motivaciones de una máquina superinteligente, y qué podemos hacer para mejorar
+las probabilidades de un resultado favorable.
+Clasificación temática ACM 2012: Metodologías de computación → Fundamentos filosóficos/teóricos de la
+inteligencia artificial
+Palabras clave y frases: explosión de inteligencia, teoría de Omohundro–Bostrom, superinteligencia
+Identificador digital de objeto 10.4230/LIPIcs.AofA.2018.5
+Categoría: Conferencias magistrales
+1 Introducción
+En 1951, Alan Turing, en su «Intelligent machinery, a heretical theory» [41], anticipó muchas
+de las ideas clave de la futurología actual sobre la inteligencia artificial (IA):
+Mi afirmación es que pueden construirse máquinas que simulen el comportamiento
+de la mente humana muy de cerca. [...] Supongamos ahora, por el bien del argumento, que
+estas máquinas son una posibilidad genuina, y veamos las consecuencias de construirlas.
+[...] Parece probable que, una vez iniciado el método de pensamiento de las máquinas, no
+tardaría mucho en superar nuestras débiles facultades. No habría ninguna duda de que las máquinas
+dejarían de morir y podrían conversar entre sí para afilar
+su ingenio. En algún momento, por tanto, tendríamos que esperar que las máquinas tomaran el control.
+Uno de los colaboradores de Turing en Bletchley Park, el matemático I.J. Good, hizo más tarde
+una predicción relacionada, en un famoso pasaje [ 13] del cual el título del presente artículo se toma en parte
+prestado:
+Sea una máquina ultrainteligente aquella que pueda superar con creces todas las
+actividades intelectuales de cualquier hombre, por inteligente que sea. Como el diseño de máquinas es una
+de esas actividades intelectuales, una máquina ultrainteligente podría diseñar máquinas aún
+mejores; entonces, sin duda, habría una «explosión de inteligencia», y la
+inteligencia del hombre quedaría muy atrás. Así, la primera máquina ultrainteligente es
+la última invención que el hombre necesitará hacer.
+©Olle Häggström;
+con licencia Creative Commons CC-BY
+29.ª Conferencia Internacional sobre Métodos Probabilísticos, Combinatorios y Asintóticos para el Análisis de
+Algoritmos (AofA 2018).
+Editores: James Allen Fill y Mark Daniel Ward; artículo n.º 5; pp. 5:1–5:12
+Leibniz International Proceedings in Informatics
+Schloss Dagstuhl – Leibniz-Zentrum für Informatik, Dagstuhl Publishing, Alemania
+5:2 El último algoritmo
+El término que hoy se prefiere para lo que Good llamó ultrainteligencia es superinteligencia:
+una máquina superinteligente es aquella que supera con creces el rendimiento humano en todo el
+abanico de habilidades cognitivas pertinentes, incluida la cualidad de apariencia misteriosa que llamamos creatividad
+o la capacidad de pensar fuera de lo convencional. Definir la inteligencia de un agente no es, por supuesto,
+sencillo, y aquí no se dará una definición estricta, pero puede pensarse de manera informal
+como la capacidad de dirigir el mundo hacia cualesquiera que sean los objetivos del agente. Si una máquina tiene al
+menos una capacidad de nivel humano de este tipo en más o menos todo el rango de dominios que
+encuentran los humanos, hablamos de inteligencia artificial general (AGI), y si su inteligencia general
+supera con creces la de los humanos, entonces tiene superinteligencia.
+¿Es realmente razonable esperar superinteligencia en poco tiempo, digamos antes del
+fin del presente siglo? Se trata de un tema muy controvertido, en el que las opiniones de los expertos varían
+enormemente; y aunque acepto que la cuestión está abierta, sostengo también —como la primera de mis dos
+afirmaciones principales de este artículo— que la aparición de la superinteligencia es un escenario
+suficientemente plausible como para tomarlo en serio. Esta afirmación se defiende en la Sección 2, sobre la posibilidad en
+principio de la superinteligencia, y en las Secciones 3 y 4, sobre los plazos.
+La segunda afirmación principal de este artículo es que tiene gran importancia práctica pensar con
+antelación en los aspectos de seguridad de un avance hacia la superinteligencia, porque si esos aspectos
+se ignoran o se gestionan mal, el suceso podría tener consecuencias catastróficas para
+la humanidad. Estos riesgos se analizan en la Sección 5, apoyándose sobre todo en la teoría de Omohundro–Bostrom
+sobre los objetivos instrumentales frente a los finales de la IA, que se explica con cierto detalle. Ideas sobre cómo
+garantizar un resultado más benigno se discuten brevemente en la Sección 6, y la Sección 7 ofrece
+algunas observaciones finales.
+2 La posibilidad en principio
+¿Es posible en principio una máquina superinteligente en el universo que habitamos? Si algo sobrenatural
+—un alma humana o algo por el estilo— existe, entonces todas las apuestas quedan anuladas, así que
+ignoraré esa posibilidad y me centraré en el caso más susceptible de argumentación racional:
+un mundo físico en el que todos los fenómenos de alto nivel, incluida la mente humana,
+son el resultado de determinadas disposiciones de la materia. Asumiendo esto, el ejemplo del cerebro humano
+demuestra que existen disposiciones de la materia que dan lugar a una inteligencia de nivel
+humano.
+Hay varias formas independientes de argumentar que es poco probable que el cerebro humano esté
+cerca de una disposición óptima de la materia para producir inteligencia. Una consiste en señalar
+el hecho de que nuestro cerebro es producto de la evolución biológica, que, vista como un algoritmo de optimización,
+es una búsqueda local bastante primitiva que, en un contexto tan complejo como
+la optimización de la inteligencia, es poco probable que encuentre algo parecido a un óptimo global. Otra
+cosa a la que apuntar es la extrema lentitud del sistema nervioso en comparación con la forma en que el mismo
+procesamiento de información podría llevarse a cabo en una computadora electrónica moderna. Una tercera
+es la gran cantidad de descalibraciones y sesgos evidentes que tiene nuestro cerebro [ 12], y que podrían corregirse
+para ello. Véase también Sotala [ 38] para más ejemplos concretos de formas en las que hay margen
+de mejora sobre la inteligencia humana.
+Así pues, hay buenas razones para creer que existen disposiciones físicas de la materia que
+producen una inteligencia muy superior a la del cerebro humano, es decir, superinteligencia. El argumento
+hasta ahora no demuestra que pueda implementarse en una computadora digital, pero si aceptamos
+el principio de Church–Turing–Deutsch, según el cual un dispositivo de cómputo Turing-completo puede usarse para
+simular cualquier proceso físico [ 9], entonces existe por ahí un algoritmo que logra
+superinteligencia.
+O. Häggström 5:3
+Este argumento no es del todo sólido, pues si el algoritmo se basa en simular
+el proceso físico a un nivel muy bajo (por ejemplo, el movimiento de partículas elementales), entonces una
+implementación de este en una computadora digital podría resultar tan lenta que no pueda reconocerse
+como superinteligente. Pero parece plausible que deberían ser posibles implementaciones más eficientes
+del procesamiento esencial de información del sistema debería ser posible. Señalamos de paso que el
+nivel de detalle con el que hay que implementar un cerebro humano
+en una computadora digital para capturar su inteligencia sigue siendo una cuestión muy abierta [34].
+Aunque sigue habiendo cierta incertidumbre, consideraciones como estas sugieren con fuerza la existen-
+cia de algoritmos que se pueden implementar en una computadora digital para lograr superinteligencia.
+Husfeldt [ 24] acepta la existencia de tal algoritmo, lo llama el monstruo de la biblioteca de
+Turing, y sugiere que es prohibitivamente difícil encontrar tal monstruo. Así que, incluso si
+aceptamos su existencia, deberíamos seguir abiertos a la posibilidad de que la respuesta a la pregunta
+que aborda la siguiente sección —la de cuándo podemos esperar una máquina superinteligente—
+sea «nunca». Podría ser que encontrarla requiera, salvo por un milagro de nivel termodinámico,
+cantidades astronómicas (o mayores) de búsqueda por fuerza bruta, así que en la discusión de las próximas secciones
+cuándo cabe esperar la aparición de la superinteligencia, el tiempo t=∞ se considerará una
+posibilidad genuina.
+3 ¿Cuándo esperar la superinteligencia?
+Dado el auge actual de los avances en IA para una amplia gama de aplicaciones, como la síntesis de voz
+[37], los juegos de mesa [36] y los vehículos autónomos [25], puede resultar tentador interpretar
+esto como señal de que la IAG y la superinteligencia están a la vuelta de la esquina. No deberíamos saltar
+demasiado rápido a tales conclusiones, sin embargo. Muchos comentaristas, incluido recientemente Jordan
+[26], enfatizan una discontinuidad fundamental entre las aplicaciones de IA especializada y la IAG:
+las primeras, en general, no deben entenderse como peldaños hacia las segundas, y
+pueden tener toda la razón. (Por otro lado, véase Yudkowsky [44], quien señala que
+no tenemos pruebas sólidas para concluir que la IAG y la superinteligencia no están a la
+vuelta de la esquina.)
+Al mirar la historia de la IA, el contraste entre los logros extraordinarios de
+las aplicaciones de IA especializada y el progreso mucho menos impresionante hacia la IAG es
+llamativo. A veces se afirma que este último ha sido literalmente nulo, pero eso me parece
+un poco severo. Por ejemplo, hace unos años se desarrolló una IA que aprendió rápidamente a
+jugar con éxito una serie de videojuegos de Atari [29]. Como reconocí en [19], esto está, por supuesto,
+muy lejos de la capacidad de manejar la gama completa de tareas que los humanos encuentran en
+el mundo físico y social que habitamos; no obstante, es una mejora no nula respecto a
+tener una habilidad especializada en un solo videojuego. Una posible vía hacia la IAG, entre
+muchas otras, podría ser una expansión paso a paso del dominio en el que la máquina es capaz de actuar
+de forma inteligente.
+Actualmente no tenemos ideas muy claras sobre qué enfoque de la IA tiene el mejor potencial
+para lograr la IAG. El principal motor del rápido progreso que vemos hoy en diversas aplicaciones
+de IA es el enfoque del aprendizaje profundo, que es esencialmente un rejuvenecimiento y un
+desarrollo ulterior de viejas técnicas de redes neuronales que antes daban resultados poco impresionantes, pero que
+en muchos casos funcionan notablemente bien hoy, gracias a máquinas más rápidas y al acceso a
+enormes conjuntos de datos de entrenamiento. Sin embargo, no está escrito en piedra que el aprendizaje profundo vaya a conservar su
+posición como paradigma dominante de la IA para siempre. Otros enfoques potencialmente útiles que comparten
+la característica de caja negra del aprendizaje profundo incluyen la programación genética, que imita la
+evolución biológica, y la copia por fuerza bruta del funcionamiento del cerebro humano con suficiente detalle
+AofA 2018
+5:4 The Last Algorithm
+para reproducir su comportamiento. Esta última posibilidad es defendida con entusiasmo por Kurzweil [27]
+y analizada de forma más equilibrada por Sandberg y Bostrom [34]. Alternativamente,
+podríamos ver un renacer del enfoque no de caja negra de la GOFAI (Good Old-Fashioned AI, «la buena y vieja IA») con
+codificación manual explícita de los conceptos centrales y los procedimientos de razonamiento de la máquina. O quizá
+alguna combinación hasta ahora no probada de estos enfoques, o algo completamente distinto. Podría
+ocurrir que ninguno de ellos llegue nunca a producir la IAG, pero la postura razonable parece ser, al menos,
+estar abiertos a la posibilidad de que alguno de ellos acabe lográndolo.
+Pero ¿cuándo ocurriría eso? Es muy incierto, como ilustra una encuesta de
+Müller y Bostrom [30] sobre las estimaciones de los 100 investigadores de IA más citados del mundo:
+estimaciones que se extienden a lo largo de todo el presente siglo, e incluso más allá. No solo es
+grande la diferencia entre individuos, sino que los intervalos de incertidumbre reportados individualmente
+también tienden a ser amplios. Entre los 29 que respondieron, la mediana de sus estimaciones del
+momento en que cabe esperar que haya llegado una IAG a nivel humano con probabilidad del 50 % (dado
+que «la actividad científica humana continúe sin perturbaciones negativas importantes») es 2050, con una
+mediana de 50 % para la probabilidad de que la superinteligencia surja en los 30 años
+posteriores. Resultados más detallados pero en general coherentes se reportan en la encuesta más reciente
+de Grace et al. [14]. Otra encuesta de expertos se recoge en lo que parece un intento deliberado
+de restar importancia a la reflexión anticipada sobre la IAG y la superinteligencia [11],
+pero véase [8] para una refutación eficaz.
+La respuesta breve a la pregunta de cuándo esperar la superinteligencia es que no lo sabemos:
+los expertos están muy divididos. En tal situación, sería epistémicamente temerario
+tener una creencia firme sobre si/cuándo ocurrirá la superinteligencia, en lugar de aceptar con prudencia y
+reflexión que puede ocurrir en décadas, en siglos, o no ocurrir
+nunca.
+Sin embargo, es bastante común oír, incluso entre comentaristas a quienes la etiqueta «experto en IA»
+parece justificada, actitudes despectivas hacia la idea de una futura superinteligencia;
+Dubhashi y Lappin [10] y Bentley [3] son ejemplos típicos (véase [20] para mi respuesta justa y
+equilibrada a este último). Rara vez o nunca estos comentaristas ofrecen argumentos
+convincentes para su postura. Así pues, uno podría preguntarse cuáles son las razones reales de su postura,
+y, aunque es dudoso especular sobre los motivos del contrincante, hice un
+intento valiente en [17] de sugerir una explicación de su postura en términos de lo que decidí
+llamar «vulgopopperianismo», que definí como la actitud implícita de alguien que
+(a) está moderadamente familiarizado con la teoría popperiana de la ciencia, (b) le gusta el tipo
+de asimetría [que aparece entre la tarea de mostrar que todos los cisnes son blancos y
+mostrar que existe al menos un cisne no blanco], y (c) se regocija en afirmar, siempre que
+se encuentra con dos hipótesis en competencia, una de las cuales prefiere por las razones que sea,
+alguna asimetría tal que toda (o casi toda) la carga de la prueba recaiga en
+probar la otra hipótesis, y en insistir en que, hasta que no se presente una prueba concluyente de ello,
+podemos dar por sentado que la hipótesis preferida es correcta.
+El caso del momento de la superinteligencia puede concretarse, por ejemplo, como una elección entre
+dos hipótesis en competencia, (H1) y (H2), donde (H1) es la hipótesis de que alcanzar
+la superinteligencia es difícil, en el sentido de no ser alcanzable (salvo quizá por una suerte extrema
+) mediante el progreso tecnológico humano para el año 2100. (H2) es la hipótesis complementaria,
+según la cual alcanzar la superinteligencia es comparativamente fácil, en el sentido de estar al alcance del
+progreso tecnológico humano (si se le deja continuar sin trabas) en 2100. A priori, ambas
+hipótesis parecen razonablemente plausibles, y la evidencia disponible hoy a favor de una sobre la
+otra es bastante débil (en ambos sentidos). Esto le da a un vulgopopperiano que favorece (H1) la
+oportunidad de centrarse en la escasez de evidencia para (H2) y, así, declarar ganadora a (H1),
+O. Häggström 5:5
+mientras ignora la escasez de evidencia para (H1). Esto puede respaldarse con una analogía con
+el ejemplo del cisne: igual que nos aferramos a la hipótesis de «todos los cisnes son blancos» hasta encontrar un cisne no blanco,
+podemos aferrarnos a (H1) mientras no se haya producido ninguna superinteligencia
+[17]. Creo que este ejemplo habría (o al menos debería) haber inquietado a Popper,
+porque la idea detrás de su teoría del falsacionismo es hacer que la ciencia se autocorrija [33],
+mientras que en el caso de aferrarse obstinadamente a (H1), la autocorrección deseada (en caso de que (H1) sea
+errónea) probablemente se materialice solo en el momento en que aparezca la superinteligencia, y ya sea
+demasiado tarde para evitar un apocalipsis de la IA, un escenario cuya plausibilidad defenderé en
+la sección 5.
+4 ¿Qué tan repentinamente?
+Relacionada con, aunque distinta de, la cuestión de cuándo cabe esperar la superinteligencia, está
+la de qué tan repentina es probable que sea su aparición desde niveles modestos de inteligencia. Bostrom
+[6] distingue entre despegue lento y despegue rápido, donde el primero ocurre a lo largo de
+escalas de tiempo largas, como décadas o siglos, y el segundo en escalas cortas, como
+minutos, horas o días (también habla del caso intermedio de despegue moderado, pero
+para la presente discusión bastará con contrastar los dos casos extremos). El despegue rápido es
+más o menos sinónimo de la Singularidad (popularizada en el libro de Kurzweil de 2005 [27])
+y explosión de inteligencia (el término acuñado por I.J. Good, citado en la sección 1, y el
+que hoy prefieren la mayoría de los futurólogos de la IA). La importancia práctica de decidir
+si el despegue lento o el rápido es el escenario más probable radica sobre todo en que el segundo nos deja menos
+oportunidad de adaptarnos durante la transición, lo que hace aún más importante prepararnos con
+antelación para el acontecimiento.
+La idea más a menudo defendida a favor de un despegue rápido es la auto-
+mejora recursiva sugerida en la cita de Good de la sección 1. Una vez que hemos logrado crear
+una IA que nos supera en inteligencia general, tenemos en particular que esta
+IA está mejor equipada que nosotros para construir la siguiente generación, mejorada, de IA, que
+a su vez será aún mejor para construir la IA siguiente, y así sucesivamente en una espiral
+de aceleración rápida hacia la superinteligencia. Pero ¿es obvio que esta espiral se acelerará rápidamente?
+No, porque la máquina podría encontrar pronto algún punto de
+rendimientos decrecientes: el fenómeno de «ya se han recogido todos los frutos al alcance de la mano».
+Así, el problema de decidir entre despegue rápido y lento parece seguir abierto aunque podamos
+establecer que es probable una dinámica de automejora recursiva.
+Igual que con la cuestión temporal analizada en la sección 3, nuestra situación epistémica respecto a
+lo repentino con que cabe esperar que surja la superinteligencia está impregnada de incertidumbre. Aun así, creo
+que hoy estamos algo mejor preparados para abordar la cuestión de la repentinidad que la del
+momento, porque, a diferencia de lo que ocurre con el momento, disponemos de un marco teórico que parece prometedor
+para tratar la repentinidad. En su influyente artículo de 2013 [43], Yudkowsky toma prestado
+de la economía el concepto de rendimientos de la reinversión, enmarca la automejora de la IA como
+una forma de reinversión cognitiva, y formula el problema del despegue lento frente al rápido en términos de
+si los rendimientos de la reinversión cognitiva crecen o decrecen con el nivel de inteligencia.
+Grosso modo, los rendimientos crecientes conducen a una explosión de inteligencia, mientras que los decrecientes dejan
+a la IA luchando por llegar más arriba en el árbol que las ramas bajas, sin frutos ya en ellas.
+A partir de esa idea, un camino a seguir es estimar los rendimientos de la reinversión cognitiva
+a partir de diversos conjuntos de datos, por ejemplo, de la historia evolutiva del homo sapiens, y
+pensar con cuidado hasta qué punto los resultados obtenidos se generalizan a un despegue de la IA. Yudkowsky
+hace algo de esto en [43] y se inclina tentativamente hacia la idea de que una explosión de inteligencia
+AofA 2018
+5:6 The Last Algorithm
+es probable. Esto puede contrastarse con las cifras de la encuesta de Müller–Bostrom [30]
+citada en la sección 3, que sugieren que la mayoría de los expertos en IA se inclina más por un despegue lento.
+No obstante, dudo que la mayoría de estos expertos hayan pensado tan sistemáticamente y tan a fondo
+en el tema como Yudkowsky.
+5 Objetivos de la superinteligencia artificial: teoría de Omohundro–Bostrom
+Las consecuencias de un avance en la IA general pueden resultar extremadamente beneficiosas para la humanidad, o
+pueden resultar catastróficas. Un ejemplo favorito de lo segundo, caricaturesco a propósito para
+subrayar que es solo un ejemplo, es el llamado Armagedón de los clips, que
+se remonta al menos a 2003 [4]. Imaginemos una fábrica de clips dirigida por una IA avanzada (pero
+aún no superinteligente), programada para maximizar la producción de clips. Sus
+ingenieros informáticos intentan continuamente mejorarla y, un día, más o menos por accidente, logran
+llevar la máquina por encima del umbral en el que entra en la espiral de automejora,
+provocando una explosión de inteligencia. De esa explosión surge la primera y única
+superinteligencia artificial del mundo. Habiendo conservado su objetivo de maximizar la producción de clips, procede de inmediato
+a convertir todo nuestro planeta (incluidos nosotros) en un enorme montón de clips, seguido
+de una expansión hacia el espacio exterior para convertir el resto del universo observable en
+clips. (Para los lectores que se sientan repelidos por el carácter burdo y aparentemente rebuscado del
+Armagedón de los clips, recomiendo los experimentos mentales más sutiles y elaborados, pero no menos
+aterradores, que ofrecen Armstrong [1] y Tegmark [40].)
+Por supuesto, la futurología de la IA no consiste en imaginar al azar escenarios extraños, sino en
+razonar con todo el rigor que admite el tema sobre lo que es plausible y lo que es probable. La
+dificultad para evaluar si un apocalipsis como el Armagedón de los clips
+podría ocurrir realmente no reside tanto en lo que una máquina superinteligente sería capaz
+de hacer, sino en lo que estaría motivada a hacer. (Para algunos escenarios vívidos que ilustran
+la capacidad de una IA superinteligente, véanse, por ejemplo, [42], [6] y [40].) Actualmente, la única opción
+para ir más allá de meras especulaciones sobre los objetivos y motivaciones de una IA superinteligente es
+lo que en mi libro de 2016 [16] decidí llamar la teoría de Omohundro–Bostrom
+de los objetivos finales frente a los objetivos instrumentales de la IA, en honor a las contribuciones clave de Omohundro
+[31,32] y Bostrom [5,6]. El objetivo final de un agente es lo que el agente valora como un fin en sí mismo
+y no como un medio para lograr otra cosa. Un objetivo instrumental, en cambio,
+es uno que se establece como peldaño hacia otro objetivo.
+(Algunos filósofos, como Searle [35], gustan de decir que todo este enfoque es
+confuso, porque las computadoras no pueden tener objetivos. Pero la confusión está de su lado, pues
+incluso los misiles de búsqueda de calor y los termostatos tienen objetivos en el sentido relevante. Véase [15] mi
+respuesta detallada a Searle.)
+Las dos piedras angulares de la teoría de Omohundro–Bostrom son la tesis de la ortogonalidad
+y la tesis de la convergencia instrumental. Empezamos por la primera.
+La tesis de la ortogonalidad: casi cualquier objetivo final es compatible con niveles de
+inteligencia más o menos arbitrariamente altos.
+En su formulación original, Bostrom [5] omite el calificativo «arbitrariamente altos» (escribe en su lugar
+«cualquiera»), pero prefiero incluirlo para no tener que preocuparme por posibles contraejemplos
+que combinen baja inteligencia con objetivos conceptualmente avanzados. Sin embargo, sí incluye
+los calificativos «más o menos» (en ambos lugares), subrayando la falta de precisión matemática
+de la afirmación; realmente parece necesario por el tipo de contraejemplos que se analizan
+hacia el final de esta sección.
+O. Häggström 5:7
+Ante la pregunta «¿qué tenderá a hacer una máquina superinteligente?»,
+la tesis de la ortogonalidad por sí sola obviamente no ayuda mucho a reducir la
+respuesta inútil «puede pasar cualquier cosa». Sin embargo, sirve de antídoto a
+los antropomorfismos ingenuos (pero bastante comunes; [22] es un ejemplo típico), como «el Armagedón de los clips
+es imposible, porque tener un objetivo tan estúpido contradiría directamente la propia
+noción de superinteligencia; seguramente alguien superinteligente se daría cuenta de que cosas
+como el bienestar humano y la preservación de los ecosistemas son más importantes que
+producir monomaníacamente cantidades cada vez mayores de clips», que confunden inteligencia con objetivos. La
+tesis de la ortogonalidad nos recuerda distinguir entre inteligencia y objetivos.
+Más útil para precisar lo que cabe esperar que haga una máquina superinteligente es
+la tesis de la convergencia instrumental, combinada con un conjunto de
+objetivos concretos a los que se aplica.
+La tesis de la convergencia instrumental: hay varios objetivos instrumentales
+que es probable que adopte un agente suficientemente inteligente para perseguir su
+objetivo final, para una amplia gama de objetivos finales y en una amplia gama de circunstancias.
+Omohundro [31] y Bostrom [5] enumeran varios objetivos instrumentales que sostienen que están en el
+ámbito de aplicabilidad de la tesis de la convergencia instrumental:
+Autoconservación: si sigues existiendo y en funcionamiento, estarás en una
+mejor posición para trabajar en tu objetivo final en comparación con si te apagan, así que
+¡no dejes que nadie te desenchufe!
+Automejora: mejoras en el diseño de tu propio software y hardware.
+Adquisición de recursos, como hardware, pero también cosas como dinero, en caso de que el
+agente opere en un mundo que sigue dominado por el tipo de economía que tenemos hoy.
+Integridad de la meta: asegurarse de que su meta final permanezca intacta.
+La meta instrumental de la automejora desempeña un papel especial en la teoría de la inteligencia
+explosión que se analiza en la sección 5, porque explica por qué, entre los millones de otras cosas
+que podría decidir hacer, no deberíamos sorprendernos de ver que la IA decida abrirse paso hacia
+la espiral de la automejora recursiva.
+El valor, para perseguir una meta final genérica, de las tres primeras metas instrumentales
+de la lista es más o menos evidente por sí mismo, pero el cuarto elemento de la lista –la meta
+integridad –puede requerir una explicación. A modo de ejemplo sencillo, imaginemos una IA con la meta
+de maximizar la producción de clips, y supongamos que, quizá desencadenada por algún
+impulso externo, empieza a considerar si, en efecto, la preservación de los ecosistemas podría ser en realidad una
+meta preferible que perseguir, en comparación con maximizar la producción de clips. ¿Debería seguir con
+la meta antigua, o debería cambiar? Para decidir, necesita algún criterio que indique cuál meta
+es la mejor. Como todavía no ha pasado a la nueva meta, sino que solo está considerando
+si hacerlo, todavía tiene la meta de maximización de clips, así que el criterio será: ¿qué
+meta es probable que lleve a un número mayor de clips? En casi todas, salvo en algunas
+circunstancias muy forzadas, la maximización de clips ganará esta comparación, así que la IA se aferrará a
+eso.
+Armados con la teoría de Omohundro–Bostrom, estamos en condiciones de comprender que
+un escenario como el Armagedón de los clips no es tan descabellado como podría parecer a primera vista. La
+tesis de la ortogonalidad nos ayuda a ver que, aunque la maximización de clips puede parecernos extraña
+(porque tenemos otras metas), no tiene por qué parecérsela a la máquina, que, en cambio, puede
+encontrar metas como la preservación de los ecosistemas y la promoción del bienestar humano completamente carentes de sentido.
+La meta instrumental de la automejora ayuda a explicar por qué el maximizador de clips podría
+atravesar una explosión de inteligencia, y la meta instrumental de la integridad de la meta explica por qué
+AofA 2018
+5:8 The Last Algorithm
+se puede esperar que la máquina salga de la explosión de inteligencia con su deseo monomaníaco
+de producir clips intacto.
+Una objeción habitual a los escenarios similares al Armagedón de los clips es que una superinteligencia
+entenderá que sus programadores humanos originales no pretendían que transformara el
+universo observable en clips, y por tanto se abstendrá de hacerlo. El error
+aquí consiste en dar por sentado que “hacer cosas que agraden a sus programadores” figura entre las
+metas de la máquina. Todo programador de hoy sabe que siempre que hay una discrepancia
+entre lo que el programador pretende y lo que aparece literalmente en el código informático, lo que cuenta es
+lo segundo. La teoría de Omohundro–Bostrom predice que ese principio seguirá siendo válido
+para las máquinas superinteligentes. Si eso suena a mala noticia, quizá un remedio podría ser
+hacer de “hacer cosas que agraden a sus programadores” la meta final de la máquina. Ideas en esa
+línea se están considerando, de hecho, en trabajos contemporáneos sobre el riesgo de la IA. Más sobre ello en la
+próxima sección.
+Antes de eso, quiero subrayar que, aunque la teoría de Omohundro–Bostrom es, por ahora,
+una herramienta indispensable para razonar sobre las consecuencias de un avance de la IAG, es
+también hasta cierto punto provisional. Sus dos pilares tratan con conceptos confusos y con
+fronteras difusas, y no (por ahora, en su forma actual) merecen el mismo estatus epistémico
+que los teoremas matemáticos establecidos de una vez por todas. Por tanto, las predicciones
+derivadas de la teoría deben tratarse con cierto grado de humildad epistémica (lo cual
+no significa que puedan descartarse sin más). En mi reciente artículo [ 18] analizo una
+variedad de desafíos a la validez y al alcance de aplicabilidad de la teoría de Omohundro–Bostrom
+– en particular, los tres siguientes.
+Primero, autorreferencialidad. Bostrom [ 5] señala que una máquina superinteligente con
+la meta final de ser estúpida (debidamente especificada) es poco probable que siga siendo superinteligente
+durante mucho tiempo. Así, a todos los efectos prácticos, la meta final de ser estúpida sirve como
+contraejemplo de la tesis de la ortogonalidad. Dado un contraejemplo, ¿cómo podemos detener una
+oleada de otros? Hay que encontrar alguna condición adicional sobre la meta final que excluya
+el ejemplo de la estupidez y cuya inclusión haga verdadera la tesis de la ortogonalidad. Un candidato
+evidente es que la meta final no pueda referirse a la propia máquina, pero la discusión en
+[18] apunta a que definir tal autorreferencialidad es un problema muy complejo.
+Segundo, el desafío físico de Tegmark. ¿Podrían otras propiedades de una meta final, más allá de
+la autorreferencialidad, tener el potencial de invalidar la conclusión de la tesis de la ortogonalidad?
+Un candidato quizá demasiado obvio es la incoherencia. ¿Qué significaría siquiera que la máquina
+actuara hacia una meta incoherente? Tegmark [ 39] sugiere que la clase de metas incoherentes
+podría ser mucho mayor de lo que pensamos actualmente:
+Supongamos que programamos una IA amigable para maximizar el número de humanos cuyas almas van
+al cielo en el más allá. Primero intenta cosas como aumentar la compasión de las personas y
+la asistencia a la iglesia. Pero supongamos que luego alcanza una comprensión científica completa de
+los humanos y de la conciencia humana, y descubre que no existe tal cosa como un alma.
+¿Y ahora qué? De la misma manera, es posible que cualquier otra meta que le demos basándonos en nuestra
+comprensión actual del mundo (“maximizar el sentido de la vida humana”,
+por ejemplo) pueda acabar siendo considerada por la IA como indefinida.
+Tercero, los valores humanos son un desastre. Si creemos que el marco de Omohundro–Bostrom
+capta algo importante sobre la estructura de metas de un agente suficientemente inteligente,
+entonces también deberíamos esperar que su nítida dicotomía entre metas finales e instrumentales sea observable
+en tales agentes. El agente más inteligente que conocemos es el Homo sapiens, pero las metas de un
+ser humano típico no parecen admitir una dicotomía tan nítida [18].
+O. Häggström 5:9
+6 Alineación de la IA
+Se han hecho varios intentos para evitar la conclusión de Turing [ 41] (citada en la sección 1)
+de que ante la presencia de máquinas superinteligentes, «deberíamos esperar que las máquinas
+tomen el control», pero ninguno de ellos parece ofrecer una solución nítida. Probablemente el más
+estudiado de tales intentos es el llamado enfoque de la IA en una caja, que consiste en mantener la máquina
+encerrada e incapaz de influir en el mundo salvo a través de un canal de comunicación estrecho y cuidadosamente controlado.
+Aunque esto merece más estudio, el estado actual del arte
+parece apuntar en la dirección de que tal encierro es extremadamente difícil y que cabe esperar
+que funcione como mucho durante un periodo temporal y bastante breve; véanse, por ejemplo, [2] y [21].
+Por tanto, tiene sentido estudiar si es posible aceptar que la superinteli-
+gencia tome el control y, aun así, obtener un resultado favorable (lo que sea que eso signifique). Para que eso
+ocurra, necesitamos que la IA tenga metas que jueguen a nuestro favor. Debido a la meta instrumental
+de integridad de la meta, analizada en la sección 5, es poco probable que una IA superinteligente
+nos permita manipular su meta final, así que la meta favorable debe instalarse en la IA
+antes de que alcance la superinteligencia. Este es el objetivo del programa de investigación sobre la alineación de la IA,
+formulado (bajo el título alternativo IA amigable, que, sin embargo, quizá sea mejor
+evitar, pues tiene un matiz innecesariamente antropomórfico) en el artículo seminal de Yudkowsky de 2008
+[42], y muy debatido desde entonces; véanse, por ejemplo, [6], [16] y [40].
+Siguiendo a Bostrom [ 6], podemos pensar la alineación de la IA como dos problemas: primero, el difícil
+problema técnico de cómo codificar cuáles sean las metas deseadas e instalarlas en
+la IA –Bostrom lo llama el problema de la carga de valores y «un desafío de investigación digno
+del mejor talento matemático de la próxima generación». Segundo, el problema ético de
+qué son los objetivos deseados, quién tiene derecho a determinarlos y mediante qué procedimiento (democrático
+u otro). Probablemente no queremos dejar en manos de un pequeño grupo de desarrolladores de IA en
+Silicon Valley u otro lugar la decisión sobre el destino de la humanidad durante el resto de la eternidad. La mayoría
+de los pensadores de este campo (incluidos Yudkowsky [ 42] y Bostrom [ 6]) parecen coincidir en que, en lugar de
+codificar explícitamente a mano los valores que queremos que tenga la IA, es preferible un enfoque indirecto,
+en el que de algún modo se instruye a la IA para que averigüe lo que queremos o, mejor aún, lo que
+habríamos querido si fuéramos más conocedores y éticamente maduros, y si tuviéramos más tiempo
+para pensarlo.
+Una idea clave, que se remonta al menos a Yudkowsky [ 42], es que los valores humanos son muy frágiles,
+en el sentido de que equivocarse aunque sea un poco al definirlos puede acarrear consecuencias catastróficas
+en manos de una superinteligencia artificial. También puede haber una tensión entre lo que es bueno para la humanidad y lo que es bueno
+en un sentido menos antropocéntrico y quizá más objetivo
+(por ejemplo, el objetivo «maximizar la cantidad de utilidad hedónica en el mundo» podría en cierto
+sentido ser muy bueno para el universo, pero también es probable que conduzca a la pronta extinción de
+la humanidad, ya que nuestros cuerpos y cerebros probablemente están muy lejos de optimizar la cantidad de
+utilidad hedónica por kilogramo de materia.
+Resolver el problema de la alineación de la IA debería, en mi opinión, estar entre las tareas de investigación más urgentes de hoy,
+pero no por la razón de que la AGI y la superinteligencia vayan a surgir probablemente en los próximos años
+(aunque véase [ 44]). Más bien, incluso si están a décadas de distancia, el problema puede ser tan difícil
+que necesitemos esas décadas para resolverlo,
+con poco o ningún margen para la procrastinación.
+7 Observaciones finales
+Permítanme concluir con las siguientes observaciones.
+AofA 2018
+5:10 The Last Algorithm
+1. El lector puede haber notado la discrepancia entre el uso del plural por parte de Turing [ 41]
+al hablar de «máquinas [tomando] control», y mi uso del singular al hablar de
+la IA superinteligente. Mi elección del singular se debe a lo que Bostrom [ 6] llama
+«ventaja estratégica decisiva»: sobre todo en caso de un despegue rápido, se puede esperar que la primera máquina
+que alcance la superinteligencia tome el control de forma que impida
+que otras máquinas desafíen su monopolio de poder. Pero este resultado no es seguro,
+y Bostrom dedica también un capítulo a lo que llama resultados multipolares, sin tal
+monopolio. Tal resultado podría surgir si la AGI se alcanza primero mediante emulaciones cerebrales,
+en un momento en que nuestra comprensión del cerebro humano aún no basta para permitir
+manipular las emulaciones mucho más allá de lo que ya hacemos con nuestros cerebros hoy;
+Hanson [ 23] ofrece un relato rico y fascinante de las muchas rarezas sociales que tal
+avance podría provocar.
+2. Crear superinteligencia es, por supuesto, difícil, pero crear superinteligencia y alineación de la IA
+puede ser aún más difícil. Esto significa que, si varios actores (empresas o
+países) compiten por ser los primeros (y probablemente los únicos) en crear superinteligencia,
+puede haber incentivos para recortar camino en la tarea de alineación de la IA o incluso ignorarla
+por completo. Una situación así sería terriblemente peligrosa (véanse, por ejemplo, Miller [ 28] y Cave
+y ÓhÉigeartaigh [ 7]), y debería evitarse, por ejemplo, fomentando un espíritu de cooperación internacional
+en lugar de competencia. Eso es quizá más fácil de decir que de hacer.
+3. Aparte de la superinteligencia, hay muchos otros problemas sobre el futuro de la IA
+que necesitamos atender con urgencia, relativos, por ejemplo, a la integridad y la vigilancia masiva, la
+consecuencias sociales de la tecnología de robots sexuales, las carreras armamentistas de armas autónomas o los efectos
+de la automatización sobre el desempleo. A veces se sugiere que el discurso sobre la superinteligencia
+en la futurología de la IA es una distracción peligrosa de estos otros problemas; véase, por ejemplo,
+Dubhashi y Lappin [ 10]. Estoy de acuerdo en que estos otros problemas son extremadamente importantes,
+pero no en que esto signifique que debamos ignorar la superinteligencia. Sería
+malo que lográramos sortear todos esos problemas sociales más terrenales de la IA
+solo para acabar convertidos en clips de papel. Necesitamos abordar todos estos
+problemas, incluida la superinteligencia.
+Referencias
+1 Stuart Armstrong. Smarter Than Us: The Rise of Machine Intelligence. Machine Intelli-
+gence Research Institute, Berkeley, CA, 2014.
+2 Stuart Armstrong, Anders Sandberg y Nick Bostrom. Thinking inside the box: con-
+trolling and using an oracle AI. Minds and Machines, 22:299–324, 2012.
+3 Peter Bentley. The three laws of artificial intelligence: Dispelling common myths. En
+Should we fear artificial intelligence?, págs. 6–12. Comité STOA (Science
+and Technology Options Assessment) del Parlamento Europeo, Bruselas, 2018.
+4 Nick Bostrom. Ethical issues in advanced artificial intelligence. En I. Smit et al., editores,
+Cognitive, Emotive and Ethical Aspects of Decision Making in Humans and in Artificial
+Intelligence, vol. 2, págs. 12–17. International Institute of Advanced Studies in Systems
+Research and Cybernetics, 2003.
+5 Nick Bostrom. The superintelligent will: motivation and racionalidad instrumental in ad-
+vanced artificial agents. Minds and Machines, 22:71–85, 2012.
+6 Nick Bostrom. Superintelligence: Paths, Dangers, Strategies. Oxford University Press,
+Oxford, 2014.
+7 Stephen Cave y Seán ÓhÉigeartaigh. An AI race for strategic advantage: rhetoric and
+risks. Preimpresión, 2018.
+O. Häggström 5:11
+8 Allan Dafoe y Stuart Russell. Yes, we are worried about the riesgo existencial of artificial
+intelligence. MIT Technology Review, noviembre de 2016.
+9 David Deutsch. Quantum theory, the Church–Turing principle and the universal quantum
+computer. Proceedings of the Royal Society A, 400:97–117, 1985.
+10 Devdatt Dubhashi y Shalom Lappin. AI dangers: imagined and real. Communications
+of the ACM, 60:43–45, 2016.
+11 Oren Etzioni. No, the experts don’t think superintelligent AI is a threat to humanity. MIT
+Technology Review, septiembre de 2016.
+12 Thomas Gilovich, Dale Griffin y Daniel Kahnemann. Heuristics and Biases: The Psy-
+chology of Intuitive Judgment. Cambridge University Press, Cambridge, UK, 2002.
+13 I.J. Good. Speculations concerning the first ultraintelligent machine. En F. Alt y M. Ru-
+binoff, editores, Advances in Computers, vol. 6, 1965.
+14 Katja Grace, John Salvatier, Allan Dafoe, Baobao Zhang y Owain Evans. When will
+AI exceed human performance? Evidence from AI experts. arXiv:1705.08807, 2017.
+15 Olle Häggström. Does the Chinese room argument preclude a robot uprising? OUPblog,
+Oxford University Press, enero de 2016.
+16 Olle Häggström. Here Be Dragons: Science, Technology and the Future of Humanity.
+Oxford University Press, Oxford, 2016.
+17 Olle Häggström. Vulgopopperianism. Häggström hävdar, febrero de 2017.
+18 Olle Häggström. Challenges to the Omohundro–Bostrom framework for AI motivations.
+Preimpresión, 2018.
+19 Olle Häggström. Remarks on artificial intelligence and rational optimism. En Should we fear
+artificial intelligence?, págs. 19–26. Comité STOA (Science and Technology
+Options Assessment) del Parlamento Europeo, Bruselas, 2018.
+20 Olle Häggström. A spectacularly uneven AI report. Häggström hävdar, marzo de 2018.
+21 Olle Häggström. Strategies for an unfriendly oracle AI with reset button. En Roman
+Yampolskiy, editor, Artificial Intelligence Safety and Security. CRC Press, Boca Raton,
+FL, en prensa, 2018.
+22 Brett Hall. Superintelligence. Part 4: Irrational rationality. http://www.bretthall.org/
+superintelligence-4.html, 2016.
+23 Robin Hanson. The Age of Em: Work, Love and Life When Robots Rule the Earth. Oxford
+University Press, Oxford, 2016.
+24 Thore Husfeldt. The monster in the library of Turing. https://thorehusfeldt.files.
+wordpress.com/2015/04/bostrom.pdf, 2015.
+25 Joel Janai, Fatma Güney, Aseem Behl y Andreas Geiger. Computer vision for autonom-
+ous vehicles: problems, datasets and state-of-the-art. arXiv:1704.05519, 2017.
+26 Michael Jordan. Artificial intelligence – the revolution that hasn’t happened yet. Medium,
+abril de 2018.
+27Ray Kurzweil. The Singularity Is Near: When Humans Transcend Biology (La singularidad está cerca: cuando los humanos trascienden la biología). Viking, Nueva
+York, 2005.
+28James Miller. Singularity Rising: Surviving and Thriving in a Smarter, Richer, and More (El ascenso de la singularidad: sobrevivir y prosperar en un mundo más inteligente, más rico y más
+peligroso). Benbella, Dallas, TX, 2012.
+29Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G.
+Bellemare, Alex Graves, Martin Riedmiller, Andreas K. Fidjeland, Georg Ostrovski, Stig
+Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Ku-
+maran, Daan Wierstra, Shane Legg y Demis Hassabis. Control de nivel humano mediante
+aprendizaje por refuerzo profundo. Nature, 518:529–533, 2015.
+30Vincent Müller y Nick Bostrom. Progreso futuro en la inteligencia artificial: una encuesta de
+opinión de expertos. En Fundamental Issues of Artificial Intelligence, páginas 553–571. Springer,
+Nueva York, 2016.
+AofA 2018
+5:12 The Last Algorithm
+31StephenOmohundro. Los impulsos básicos de la IA. En P. Wang, B. Goertzel y S. Franklin, editores,
+Artificial General Intelligence 2008: Proceedings of the First AGI Conference, páginas 483–
+492. IOS, Ámsterdam, 2008.
+32Stephen Omohundro. Inteligencia artificial racional para el bien común. En A. Eden,
+J. Moor, J. Søraker y E. Stenhart, editores, Singularity Hypotheses: A Scientific and
+Philosophical Assessment, páginas 161–175. Springer, Nueva York, 2012.
+33Karl Popper. La lógica del descubrimiento científico. Hutchinson, Londres, 1959.
+34Anders Sandberg y Nick Bostrom. Emulación de cerebro completo: una hoja de ruta. Informe técnico del Future of
+Humanity Institute n.º 2008-3, 2008.
+35John Searle. Lo que su computadora no puede saber. New York Review of Books, octubre de 2014.
+36David Silver, Thomas Hubert, Julian Schrittwieser, Ioannis Antonoglou, Matthew Lai,
+Arthur Guez, Marc Lanctot, Laurent Sifre, Dharshan Kumaran, Thore Graepel, Timothy
+Lillicrap, Karen Simonyan y Demis Hassabis. Dominar el ajedrez y el shogi mediante autojuego
+con un algoritmo general de aprendizaje por refuerzo. arXiv:1712.01815, 2017.
+37R.J. Skerry-Ryan, Eric Battenberg, Ying Xiao, Yuxuan Wang, Daisy Stanton, Joel Shor,
+Ron J. Weiss, Rob Clark y Rif A. Saurous. Hacia la transferencia de prosodia de extremo a extremo para
+la síntesis de voz expresiva con Tacotron. arXiv:1803.09047, 2018.
+38Kaj Sotala. ¿Qué tan factible es el desarrollo rápido de una superinteligencia artificial? Physica
+Scripta, 92:113001, 2017.
+39Max Tegmark. Inteligencia artificial amigable: el desafío de la física. arXiv:1409.0813, 2014.
+40Max Tegmark. Vida 3.0: ser humano en la era de la inteligencia artificial. Brockman Inc,
+Nueva York, 2017.
+41Alan Turing. Maquinaria inteligente: una teoría herética. BBC, 1951.
+42Eliezer Yudkowsky. La inteligencia artificial como factor positivo y negativo en el riesgo global.
+En Nick Bostrom y Milan Cirkovic, editores, Global Catastrophic Risks, páginas 308–345.
+Oxford University Press, Oxford, 2008.
+43Eliezer Yudkowsky. Microeconomía de la explosión de inteligencia. Machine Intelligence Research
+Institute, 2013.
+44Eliezer Yudkowsky. No hay alarma de incendios para la inteligencia artificial general. Machine Intelli-
+gence Research Institute, 2017.

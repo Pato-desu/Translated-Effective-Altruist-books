@@ -1,0 +1,133 @@
+Uncertainty over time and Bayesian updating — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Uncertainty over time and Bayesian updating
+Worldview Investigations
+Oct. 25
+Written By
+Rethink Priorities
+This post is part of Rethink Priorities’ Worldview Investigations Team’s
+CURVE Sequence
+: “Causes and Uncertainty: Rethinking Value in Expectation.” The aim of this sequence is twofold: first, to consider alternatives to expected value maximization for cause prioritization; second, to evaluate the claim that a commitment to expected value maximization robustly supports the conclusion that we ought to prioritize existential risk mitigation over all else.  This post examines how uncertainty increases over time and estimates a model of how a Bayesian would interpret increasingly uncertain forecasts.
+Read the introduction to the series
+Executive summary
+We face a trade-off when deciding between actions with short- versus long-run impacts: on the one hand, predictions of short-run impacts are more certain, but their expected value may be lower; on the other, the expected value of long-run impacts may be larger, but the predictions on which they’re based are more uncertain. If uncertainty rises faster than impact, then we may prefer the action with smaller but more certain impacts. What can we say, if anything, about the rate at which uncertainty increases as the time horizon of the prediction increases?
+In this post, I offer some empirical estimates of how quickly uncertainty about impact rises over the range of 1-20 years using data from various development economics randomized controlled trials. I make statistical predictions of the impacts over various time horizons and compare these to the true results.
+I then use and extrapolate from these results to estimate a model of Bayesian updating that formally combines the signal from such predictions with a prior to produce a posterior distribution of the impact, under some strong simplifying assumptions. When the signal has low uncertainty, the posterior is primarily determined by the signal. I show how as the noise of the signal increases over time, the posterior is increasingly determined by our prior expectations.
+Even with a gradual increase in uncertainty over time, the posterior expected value of long-run impacts shrinks towards 0 as time progresses. My preferred, best-case estimates say that the posterior expected value is 10% of the signal expected value after 561 years and 1% after 6,168 years, although I show that these estimates themselves are highly uncertain and sensitive to modeling choices.
+I discuss the limitations of this work and the upshots for interpreting quantitative models that include very long-run effects, such as Rethink Priorities’ forthcoming Cross-Cause Cost-Effectiveness Model (CCM). As the estimates of the impact of x-risk and other far-future-focused interventions are less certain, these estimates should play a relatively smaller role in your all-things-considered view than the more certain short-run effects.
+Introduction
+When we evaluate interventions, a challenge arises when comparing short-term to long-term impacts: short-term predictions are generally more precise but may have smaller impacts, while long-term predictions might be suggestive of larger impacts but come with increased uncertainty. This prompts the question: as prediction horizons lengthen, how does uncertainty around these predictions increase? And what does this uncertainty imply for our all-things-considered beliefs about the relative impact of short and long-run interventions?
+To address this, I employ data from various development economics randomized controlled trials (RCTs), making statistical predictions of impacts over time spans ranging from 1 to 20 years. I use the
+surrogate index method
+to make predictions and the dataset of the predictions comes from
+an associated paper
+(
+EA Forum post
+) co-authored with Jojo Lee and Victor Wang. I compare these predictions to the observed impacts from the RCTs outcomes to measure forecast error.
+I correct the predictions to remove bias and then use the corrected estimates of forecast error to assess how uncertainty increases over time using graphs and meta-analysis. I show that over the 20 years in my data, forecast noise increases fairly gradually. Furthermore, the relationship between noise and time horizon is roughly linear, although the power of the data to detect non-linearities is limited.
+To assess how this increase in forecast noise might affect our relative valuation of interventions with short and long-run impacts, I then use these empirical estimates to estimate
+a Bayesian updating model
+introduced by Duncan Webb.
+To build intuition for how the model works, imagine we produce an estimate of the expected value of some intervention using a quantitative method, like the surrogate index or an informal back of the envelope calculation (BOTEC). Call this estimate a
+signal
+. In
+this classic post
+, Holden Karnofsky argues that we should not take signals of this type literally. Instead, we should combine the signal with a
+prior
+distribution, our beliefs before we saw the signal. Once we combine our prior with the signal, we get a
+posterior
+distribution of the impact of an action. Importantly, our posterior distribution depends on how noisy the signal is. The noisier the signal, the closer the expected value of our posterior distribution remains to our prior. For example, we would probably think a BOTEC done in 2 minutes produces a much noisier signal than a well-executed RCT and so, if both produced the same signal, but with different levels of precision, the RCT would shift the expected value of our posterior further away from the prior.
+Now imagine our quantitative method produces two signals; one for the short-run value of the intervention (say, the effect after 1 year) and one for the long-run (say, the effect after 50 years). It seems reasonable to assume that the 1-year signal will be more precise than the 50-year signal. If we modeled the impact of a cash transfer from GiveDirectly, we’d be fairly confident in the precision of the signal for the effect on outcomes like consumption and savings after 1 year. However, the signal for the effect after 50 years would be much less precise: we’d have to assess whether the cash transfer is likely to kickstart a persistent growth in income, look at multigenerational effects, consider how the economy as a whole would be affected, and so on. In other words, the variance or the noise of this 50-year signal would be much greater than the variance of the 1-year signal. As such, we would put less weight on the 50-year signal than the 1-year signal when forming our posteriors for the short- and long-run values of the intervention.
+Webb formalizes and extends this idea in
+an economic model of Bayesian updating
+. In Webb’s model we receive unbiased signals of the expected value of an intervention at each time period t in the future (e.g., the signals come from a BOTEC or some other quantitative method). Importantly, the noise on these signals increases as the time horizon increases and we look further into the future. This captures the intuition from above, that uncertainty increases with time horizon. What matters in the model is the rate at which the noise on the signals increases. If the noise increases sufficiently fast, then the posterior expected value of the long-term effects of an intervention may be smaller than the posterior expected value of the short-run effects of that intervention, even if the long-term expected value signals are far greater than the short-run signals.
+I use data on statistical forecasts of the long-run results of RCTs to empirically estimate this model of Bayesian updating (explained in more detail below). As mentioned above, I find a gradual increase in signal/forecast noise. Despite this gradual increase, if we extrapolate forward linearly, the posterior expected value of the long-run effects of an intervention shrinks significantly towards the expected value of the prior, which I assume to be 0. With my preferred, best-case estimates, the posterior expected value is 10% of the signal expected value after 1,600 years. After 18,000 years, the posterior expected value is 1% of the signal expected value. In other words, if we received a signal that an intervention produced 100 utils each year, then our posterior expected value would be 10 utils after 1,600 years, and only 1 util after 18,000 years.
+I explore a number of different cases as robustness checks and show how allowing for non-linearities in the relationship between forecast error and horizon can result in a very wide range of results. I note that all the results are dependent on the strong theoretical and empirical assumptions I make regarding the structure of the prior and the signal, and extrapolation across time. Relaxing these assumptions may significantly change the relationship between the signal and the posterior expected value. Similarly, using different data sources may also change these relationships significantly in either direction. I discuss these limitations further at the end.
+This report has implications for how we interpret the results of quantitative models such as Rethink Priorities’ forthcoming Cross-Cause Cost-Effectiveness Model (CCM). We should think like Bayesians when we interpret the results or signals of such models. When the signals are about short-term value and we think the signals are relatively precise, they should play a relatively large role in forming our posterior distribution or our all-things-considered view. On the other hand, some of the signals about long-term value depend on projections up to several billion years into the future. They are much less precise as they depend on many parameters about which we might be deeply uncertain. As a result, when we integrate these signals into our all-things-considered view, we should place less weight on them relative to the more precise short-run effects. Within the CCM, we can quantify the uncertainty of estimates due to parameter uncertainty, but, as with most models, we’re unable to quantify model uncertainty—the concern that we are using the wrong model—and this model uncertainty might be the dominant source of our uncertainty, especially for more speculative long-run value estimates.
+In the rest of the report, I go into the theory behind Bayesian updating with increasing uncertainty over time. I then describe the data I use, how to estimate forecast noise and how to estimate the relationship between time horizon and forecast noise while dealing with potential confounding. I show how forecast noise changes over time horizon in my dataset and use this to estimate how much the signal expected value should be adjusted to end up with a Bayesian posterior expected value. I explore a number of different cases and conclude by discussing the limitations of this approach and potential improvements in future work.
+Read the full post
+David Rhys Bernard
+Rethink Priorities
+Previous
+Previous
+Road safety: Landscape of the problem and routes to effective policy advocacy
+Next
+Next
+Charting the precipice
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.

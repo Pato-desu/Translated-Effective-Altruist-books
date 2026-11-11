@@ -1,0 +1,576 @@
+Understanding the diffusion of large language models: summary — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Understanding the diffusion of large language models: summary
+Longtermism
+AI Safety & Governance
+Dec. 21
+Written By
+Ben Cottier
+Read on the EA Forum
+5-minute summary
+Time from GPT-3’s
+publication
+(May 2020) to…
+Time
+Date
+Model
+Organizations involved
+A better model is produced
+[1]
+7 months
+[2]
+Dec 2020
+Gopher
+Deepmind
+A better or equally good model is open-sourced
+[3]
+AND
+A successful, explicit attempt at replicating GPT-3 is completed
+23 months
+(equally good model
+[4]
+)
+May 2022
+OPT-175B
+Meta AI Research
+Table 1: Key facts about the diffusion of GPT-3-like models
+I present my findings from case studies on the diffusion of nine language models that are similar to OpenAI’s GPT-3 model, including GPT-3 itself.
+[5]
+By “diffusion”, I mean the spread of artifacts among different actors, where artifacts include trained models, code, datasets, and algorithmic insights.
+[6]
+Diffusion can occur through different mechanisms, including open publication and replication.
+[7]
+Seven of the models in my case studies are “GPT-3-like” according to my definition, which basically means they are similar to GPT-3 in design and purpose, and have similar or better capabilities. Two models have clearly worse capabilities but were of interest for other reasons. (
+more
+)
+I think the most important effects of diffusion are effects on (1) AI timelines—the leading AI developer can get to TAI sooner by using knowledge shared by other developers, (2) who leads AI development, (3) by what margin they lead, and (4) how many actors will plausibly be contenders to develop transformative AI (TAI)
+[8]
+. The latter three effects in turn affect AI timelines and the competitiveness of AI development. Understanding cases of diffusion today may improve our ability to predict and manage the effects of diffusion in the lead up to TAI being developed. (
+more
+)
+See Table 1 for key facts about the timing of GPT-3-like model diffusion. Additionally, I’m 90% confident that no model exists which is (a) uncontroversially better than GPT-3 and (b) has its model weights immediately available for download by anyone on the internet (as at November 15, 2022). However, GLM-130B (
+Tsinghua University, 2022
+)—publicized in August 2022 and developed by Tsinghua University and the Chinese AI startup Zhipu.AI—comes very close to meeting these criteria: it is probably better than GPT-3,
+[9]
+but still
+requires approval
+to download the weights. (
+more
+)
+I’m 85% confident that in the two years since the publication of GPT-3 (in May 2020), publicly known GPT-3-like models have only been developed by (a) companies whose focus areas include machine learning R&D and have more than $10M in financial capital, or (b) a collaboration between one of these companies and either academia, or a state entity, or both. That is, I’m 85% confident that there has been no publicly known GPT-3-like model developed solely by actors in academia, very small companies, independent groups, or state AI labs.
+[10]
+(
+more
+)
+In contrast, I think that hundreds to thousands of people have enough resources and talent to
+use
+a GPT-3-like model through their own independent setup (rather than just an API provided by another actor). This is due to wider access to the model weights of GPT-3-like models such as OPT-175B and BLOOM since May 2022. (
+more
+)
+I estimate that the cost of doing the “largest viable deployment”
+[11]
+with a GPT-3-like model would be 20% of the cost of developing the model (90% CI: 10 to 68%)
+[12]
+, in terms of the dollar cost of compute alone. This means that deployment is most likely much less prohibitive than development. For people aiming to limit/shape diffusion, this analysis lends support to targeting interventions at the development stage rather than the deployment stage. (
+more
+)
+Access to compute appears to have been the main factor hindering the development of GPT-3-like models. The next biggest hindering factor appears to have been acquiring the necessary machine learning and engineering expertise. (
+more
+)
+The biggest factors accelerating the development of GPT-3-like models in the cases that I studied were, in order from most to least important, (1) publicity about GPT-3’s capabilities, (2) the sponsorship of compute resources,
+[13]
+and (3) the release of open-source tools for large-scale model training. (
+more
+)
+In my case studies, the diffusion of GPT-3-like models to top AI developers besides OpenAI—namely, DeepMind and Google's AI labs
+[14]
+—seemed bottlenecked by the insight of how useful GPT-3-like models are, and how predictable the benefits of scaling up language models are. (
+more
+)
+Other things that were necessary to develop a GPT-3-like model—e.g., engineering expertise, dataset collection and preprocessing, computing power—were already well within these top developers' capacity. (See key takeaway 2 in
+this post
+).
+I’m 70% confident that publication decisions for language model results by the top three language model developers (currently Google, DeepMind, and OpenAI) will become more closed on average compared to the last 3 years. While I think this is a beneficial outcome overall, I expect publication practices to still be suboptimal and worth improving via interventions.
+[15]
+(
+more
+)
+Out of the three technological inputs to AI development (compute, data, and algorithmic insights), I believe compute is the input worth the most focus when trying to differentially limit AI progress in a way that reduces AI x-risk. This is because (a) I expect that scaling of compute will continue to be crucial for AI progress in the future (even with major paradigm shifts in the way AI is developed), and (b) compute seems like the most tractable input to govern. However, I believe it is still worth the AI governance community putting some resources toward limiting both access to machine learning datasets and the spread of algorithmic insights. Below are proposals I believe are probably worth doing, but my belief has a low enough
+resilience
+that the next step should be to further consider whether or not to do them.
+[16]
+(
+more
+)
+Policy teams at AI labs should set up more discussions (in private) with top AI developers about reducing risks from the disclosure of key algorithmic insights.
+AI developers should avoid open-sourcing new large datasets, and consider providing “structured access” to datasets instead.
+Top AI developers should invest more than they currently do in the information security and operations security of their AI research and development.
+20-minute summary
+Background
+I present case studies of the diffusion of the 175-billion-parameter GPT-3 language model, and eight similar language models. Here, “diffusion” refers to an actor acquiring some artifact of AI research and development—e.g., a trained machine learning model.
+[17]
+Based on the case studies, I make inferences about the overall character of diffusion for large language models. More tentatively, I consider what the case studies and other research implies for the future diffusion of state-of-the-art language models, and for AI governance interventions that could reduce risks from TAI.
+I present a database containing detailed information from my case studies:
+Diffusion trends for GPT-3-like models
+. (
+more
+)
+I define terms and taxonomies that are relevant to diffusion. (
+more
+)
+“GPT-3-like model” is a term I use for a densely activated neural network model that (a) was trained to autoregressively predict text and (b) was trained using at least 1E+23 FLOPs of compute.
+This also includes a taxonomy of diffusion “mechanisms”—the means by which an actor acquires an artifact of machine learning research. The four mechanisms that were in-scope for this research project are:
+Open publication
+: where the artifact is made publicly available, by or with the permission of the original authors.
+Replication
+: where a machine learning model is trained from random initialization with an identical architecture to some existing model, and this new model has a performance differing by no more than 2% on the same benchmarks to the original model.
+[4]
+Incremental research
+: where research makes a relatively small change to an existing method, and produces a comparable or better artifact in the process.
+Multiple discovery
+: where two actors independently come up with the same idea or result. Considering the role of multiple discovery helps evaluate the counterfactual impact of decisions that affect diffusion.
+I focus on open publication, replication, and incremental research more than on other mechanisms of diffusion. This is because I found those mechanisms to be the most common and easiest to identify in the domain of large language model diffusion.
+[18]
+I don’t consider mechanisms like leaks by lab staff or espionage because they don’t seem to have been relevant so far.  Furthermore, I focus on factors (i.e., things that enable or hinder diffusion) which seem to have been important in the diffusion of GPT-3-like models to date. (
+more
+)
+I think the most important effects of diffusion are effects on (1) AI timelines—the leading AI developer can get to TAI sooner by using knowledge shared by other developers, (2) who leads AI development, (3) by what margin they lead, and (4) how many actors will plausibly be contenders to develop transformative AI (TAI).
+[8]
+The latter three effects in turn affect AI timelines and the competitiveness of AI development. (
+more
+)
+I then give three key reasons why my research on the diffusion of GPT-3-like models in the last 2 years could inform how to reduce risks from TAI: (
+more
+)
+The way that diffusion works today (in broad terms) might persist until the development of TAI, especially if TAI is developed relatively soon (e.g., in the next 10 years).
+TAI systems (or components of them) might resemble today’s best-performing language models, especially if the
+scaling hypothesis
+is true. So the implications of diffusion related to such models may be similar to the implications of diffusion related to TAI systems.
+Even if a lot changes between now and TAI, the history of diffusion improves our understanding of what
+could
+happen.
+Key takeaways
+It took two years until an actor that explicitly aimed to replicate GPT-3 succeeded and published about it—why was that?
+Table 2: Key information from the language model case studies. Columns from left to right: the model name, the date the model was produced, the training compute used for the final model training run in FLOPs, the actual compute cost of the final model training run (in USD), the size of the core team that developed and evaluated the model,
+[19]
+and how the model compares in performance (in a broad sense) to GPT-3.
+[20]
+Most of the data are estimates and best guesses.
+[21]
+See the
+diffusion database
+for more information on what the data mean and my reasoning process.
+It took two years until an actor that explicitly aimed to replicate GPT-3 succeeded and published about it (namely, Meta AI Research publishing
+OPT-175B
+). The only other explicit replication attempt I am aware of has not succeeded; this is the GPT-NeoX project by the independent research collective EleutherAI.
+[22]
+I identified nine other models that were GPT-3-like according to my definition, which were produced as early as May 2021 and throughout the subsequent year.
+[23]
+These do not appear to be explicit replication attempts, but they are evidence of which actors are capable of replication.
+I think the main factors that made diffusion slower than it could have been were (a) the cost of compute needed to develop a GPT-3-like model and (b) the difficulty of acquiring the talent needed to develop such a model. Acquiring the necessary datasets or algorithmic insights were
+not
+significant bottlenecks, because acquiring data costs much less than acquiring compute or talent, and because most insights became publicly available. (
+more
+)
+I’m 85% confident that in the two years since the publication of GPT-3 (in May 2020), publicly known GPT-3-like models have only been developed by (a) companies whose focus areas include machine learning R&D and have more than $10M in financial capital, or (b) a collaboration between one of these companies and either academia, or a state entity, or both. That is, I’m 85% confident that there has been no publicly known GPT-3-like model developed solely by actors in academia, very small companies, independent groups, or state AI labs.
+[24]
+(
+more
+)
+I estimate the actual compute cost of the original GPT-3
+final
+training run as $12M (90% CI: 5M–33M). Meanwhile, I estimate the actual cost of the OPT-175B final training run as $1.7M (90% CI: $1.5M–$2.3M), which is roughly seven times cheaper. Further estimates of cost and talent requirements are in Table 3.
+Part of the fall in cost is clearly due to hardware efficiency improvements (the NVIDIA A100 GPU used for OPT-175B can be up to six times more efficient than the NVIDIA V100 GPU used for GPT-3). The technical challenge to replicate GPT-3 has also decreased, which I attribute to the release of more publicly available insights and open-source software. (
+more
+)
+In addition to the above estimates, I find that following
+Hoffmann scaling laws
+(used for the Chinchilla model) leads to a roughly 3x decrease in compute cost to produce a GPT-3 equivalent, compared to using the same model size and training tokens as the original GPT-3. (
+more
+)
+I estimate that the core team developing a GPT-3-like model requires at least two years of collective experience in training language models with billions of parameters or more, including specific expertise in training efficiency and debugging for neural networks at that scale (
+more
+).
+I also considered a model where talent and compute cost are somewhat exchangeable (unlike in the above estimates). The idea of this model is that only with strong talent would you be able to train a GPT-3-like model with high hardware utilization, and minimal experiments or failed attempts, and only with strong hardware assets (namely, AI compute clusters) would you be able to minimize the price of compute (compared to cloud computing). In particular, if an actor’s total compute budget was only about $2 million (90% CI: 0.5–5), I estimate that replicating GPT-3 would require talent and hardware assets that are currently available only to the top 3–7 AI labs. Meanwhile, if an actor had a total compute budget of about $10 million (90% CI: 3–30), they could afford to fail more, have less efficient training, and less direct access to hardware. I estimate that on this larger budget, an actor would only require about four people with two years of collective full-time experience training language models with at least one billion parameters. (
+more
+)
+Estimated quantity
+GPT-3 (May 2020)
+OPT-175B (May 2022)
+Actual compute cost of the final training run
+$12M (90% CI: $5M–$33M) (
+reasoning
+)
+$1.7M (90% CI: $1.5M–$2.3M)
+(
+reasoning
+)
+Actual total compute cost (inc. trial and error, preliminary experiments)
+[25]
+$49M (90% CI: $15M–$130M) (
+calculation
+)
+$6M (90% CI: $4M–$10M)
+(
+calculation
+)
+Core team size
+[26]
+25 people
+11 people
+Table 3: Comparison of estimated compute costs and core team sizes for GPT-3 vs. OPT-175B, which was intended to replicate GPT-3.
+GPT-3 itself can be used and fine-tuned via an API. Despite this, there’s still demand for direct access to the model’s weights, and multiple similar models now exist that provide access to weights.
+(
+Go to section
+)
+I estimate that OPT-175B can be downloaded by hundreds to thousands of ML researchers in academia, government, and industry labs, subject to approval.
+Following OPT-175B were BigScience’s
+BLOOM
+and Tsinghua’s
+GLM-130B
+, which are similar to GPT-3 but not replicas. The latter two models are publicly available for anyone to download. These are the only GPT-3-like models I am aware of up to September 2022 that are easy to
+directly
+access (i.e., anyone can download the weights of the model without the restrictions of an API).
+What resources are required to actually use GPT-3-like models? How does the cost of deployment compare to the cost of development?
+(
+Go to section
+)
+See the table below for my insights. The upshot is that deployment is generally much cheaper than development. I think this strengthens the case for focusing on model development rather than deployment, in terms of where to target interventions on diffusion.
+One reason to care about deployment is that the use of powerful AI systems by humans could in some scenarios pose existential risk or serve as a risk factor. (
+more
+)
+Another reason is that deployment can help actors accelerate development by gaining profits, attracting investment through demonstrations, or using AI to accelerate AI R&D directly. (
+more
+)
+I mostly modeled my answer to the above question using one GPT-3-like model, BLOOM—see the results table below.
+I chose BLOOM because it is the only GPT-3-like model I was aware of (as of July 2022) that is open-source. But most of my analysis depends merely on BLOOM’s basic transformer architecture and number of parameters, so any similarly sized language model can be substituted.
+I think it’s useful to analyze who can run a model like BLOOM independently, even though there is in fact an openly accessible API for BLOOM. One can then apply a similar analysis to future models where there is a stronger incentive to run the model independently.
+I focused on a set of “deployment scenarios”—ways of deploying an AI model—that seemed like they could be very impactful, for better or worse. For example, a very large disinformation campaign.
+My analysis supports prioritizing interventions at the development stage rather than the deployment stage. Interventions targeting development seem generally more tractable because they can take advantage of the larger compute and talent barriers involved. Another reason there is more leverage at the development stage is that the developers of models seem to be in the most convenient position to deploy those same models.
+[27]
+Deployment scenario
+Compute cost (USD)
+[28]
+Direct talent requirement
+[29]
+Generate 150 million English words by running one instance of the BLOOM model independently, for 24 hours.
+240
+One top 1% CS graduate that passed a course on natural language processing with deep learning, given three months of effort; or equivalent
+Generate 150 million English words using GPT-3 via the OpenAI API.
+4000
+Negligible
+Produce content equal in size to 1% of the average number of Tweets per day, for one year. Use instances of the BLOOM model running on cloud compute.
+160K
+(90% CI: 88K to 260K)
+5 professional software developers that have worked with ML projects, and five ML engineers who know how to run language models over multiple GPUs.
+Labor cost: $250K
+Use a hypothetical GPT-3-sized coding language model to improve one million software developers’ productivity by between 1% and 10%.
+2M
+(90% CI: 260K to 8.4M)
+15 professional software developers that have worked with ML projects, and five ML engineers who know how to run language models over multiple GPUs.
+Labor cost: $500K
+Do the largest viable deployment of a GPT-3-like model (based on above two scenarios, adjusted by other evidence).
+[30]
+2.6M
+(90% CI: 950K to 6.2M)
+[not estimated]
+Table 4: Summary of deployment scenarios and the estimated requirements for them. Most of the talent requirement estimates and the final two compute cost estimates are very rough.
+What have been the prevailing mechanisms and accelerating/hindering factors of diffusion for GPT-3-like models?
+(
+Go to section
+)
+Incremental research
+[31]
+was the prevailing diffusion mechanism for actors to gain direct access to the weights of a GPT-3-like model, up until the release of OPT-175B in May 2022. I identified nine GPT-3-like models that were developed as part of incremental research prior to OPT-175B, and none of them had their weights made widely accessible. The wider accessibility of OPT-175B changed the prevailing diffusion mechanism to open publication, because I estimate that there are more actors with direct access to the OPT-175B model weights than actors that have developed GPT-3-like models themselves. (
+more
+)
+I don’t think that multiple discovery was significantly involved in the diffusion of GPT-3-like models. In particular, I think if the relevant papers weren’t published, it would’ve been 6 months (90% CI: 1–18 months) before any other actor would’ve discovered either a model with GPT-3’s capabilities or the
+scaling laws
+it was based on.
+It’s plausible that the publication of the GPT-3 and scaling laws papers was unnecessarily early in terms of beating other actors to the punch, but I don’t have enough evidence to be confident in that claim. Regardless, I think that developers should have more scrutiny about whether they are really in a race to publish, because the harm of accelerating AI capabilities could outweigh the benefit of publishing first with a more responsible strategy (in order to establish better publication norms).
+Access to compute appears to have been the main factor hindering the development of GPT-3-like models. The next biggest hindering factor appears to have been acquiring the necessary machine learning and engineering expertise. (
+more
+)
+While monetary cost is not the only measure of how significant a factor is, the following cost comparisons may be insightful:
+This Guesstimate model
+compares labor to compute cost for the average project to develop a GPT-3-like model.
+[32]
+This model suggests that the total compute cost (not just the cost of the final training run) is 16x higher (90% CI: 3x to 81x) than the labor cost, which is estimated to be $1.7M (90% CI: 380K to 3.9M). However, this model just accounts for salaries, and not benefits or the cost of hiring for good enough talent in large language model training.
+My 90% CI for the cost of producing the unprocessed GPT-3 training dataset is $660K (90% CI: 270K to 1.3M). Total compute costs are thus 31x higher (90% CI: 7x to 97x) than that. See
+this appendix
+for details.
+The biggest accelerating factors in the cases that I studied (i.e., factors that aren't
+necessary
+for developing GPT-3-like models but that seemed to make development easier or more likely) are, in order of apparent importance, (1) publicity about GPT-3’s capabilities, (2) the sponsorship of compute resources, and (3) the release of open-source tools for large-scale model training. (
+more
+)
+The diffusion of closed-source GPT-3-like models has been accelerated by incremental progress in, and open publication of,
+artifacts that are relevant to a given model
+(as opposed to just the models themselves). Relevant artifacts include datasets, smaller models, specialized software tools, and published method details (e.g., parallelism strategies). I call this process a
+diffusion cascade
+—diffusion of model-relevant artifacts begets diffusion of the model itself. Diffusion cascades can be limited by minimizing the spread of model-relevant artifacts (rather than
+only
+avoiding publishing model weights or algorithmic insights). (
+more
+)
+In addition to
+never
+publishing,
+delaying
+publication can be and has been successfully used to limit diffusion. I estimate that the publication of
+Brown et al. (2020)
+and
+Rae et al. (2021)
+was delayed by four and nine months respectively. (I’m measuring the delay from the time when the paper would have been ready to publish if the work towards publishing the paper was done as soon as possible.) Both delays seemed partly motivated by a desire to delay wide access to a powerful model. I also think that both of those delays probably did slow diffusion of GPT-3-like models significantly, though I didn’t make precise estimates about this. (
+more
+)
+What publication decisions have been made for projects to develop GPT-3-like models? What were the different rationales for these decisions, and what impact did the decisions have? How will publication decisions change in the future?
+(
+Go to section
+)
+The open publication of artifacts such as training source code has had significant effects on diffusion (detailed below). But most of the effect was on actors such as Meta AI and EleutherAI, who are
+not
+leading language model developers. I think it’s more important to understand the effects of publication decisions on diffusion among the top developers—I consider the current top three to be Google, DeepMind, and OpenAI.
+Based on my case studies, it seems that prior to the publication of GPT-3, Google Research and DeepMind were bottlenecked by the insight of how useful GPT-3-like models are, and how predictable the benefits of scaling up language models are. Once they had that insight (due to knowledge of GPT-3 and its success), they proceeded to create their own GPT-3-like models (namely Gopher, Chinchilla, and PaLM). The other requirements—engineering expertise, dataset collection and preprocessing, computing power—were already well within their capacity. I don’t think that the open publication of GPT-3-related artifacts besides the above-mentioned insight had significant effects on Google’s AI labs, or DeepMind, or OpenAI.
+I’m 70% confident that going forward, publication decisions by the top three language model developers will become more closed on average. This is due to the incentives for closedness prevailing as capabilities improve. The incentives for closedness that I considered are (a) maintaining an advantage in capabilities, (b) protecting commercial IP, (c) avoiding regulation by reducing attention on capabilities, and (d) reducing both societal and public relations risk from misuse of diffused artifacts. (
+more
+)
+A key question is the publication strategy of Google’s AI labs in particular, as Google as a whole seems likely to remain one of the top developers for many years, and their publication decisions have varied greatly even in the past three years. But I’m still 65% confident that Google will open-source fewer of their best-performing language models in the future than they do today. (
+more
+)
+While I do expect publication practices from top developers to become more closed overall than they are now, this does not mean that publication practices will be anywhere near optimal. Model developers ought to recognise the potential harm from publishing all types of artifacts—algorithmic insights, training data, models, software tools, and training code (in that order of importance). Information security and the careful evaluation of the potential impacts of publication are critical to minimize harms from diffusion. I provide more detail about related interventions in
+the post about implications
+.
+In all of my case studies, details about the training process, model architecture, and hyperparameter values were openly published. This seemed to have significant effects on diffusion. (
+more
+)
+For example, EleutherAI based their choice of hyperparameter values on those of GPT-3 (which were published by the original authors) rather than doing their own hyperparameter tuning. I estimate that this decision shortened the duration of the GPT-NeoX-20B project by one month (90% CI: zero to three months).
+In general I estimate that disclosing all hyperparameter values for a GPT-3-like model saves 8% (90% CI: 1% to 20%) of the total compute cost needed to replicate that model.
+Training source code, training datasets, and trained models have been published much less than implementation details overall. Publication of these artifacts has significant effects on diffusion, but less so than algorithmic insights and implementation details. (
+more
+)
+Code for model training saves time on implementation and can reveal insights, e.g., about how to achieve better training efficiency. My best guess is that the lack of existing open-source implementations delayed EleutherAI’s GPT-NeoX-20B by two months (90% CI: one to six months), and delayed Meta AI’s OPT project by two weeks (90% CI: one to six weeks)—less time than for EleutherAI due to Meta AI probably having more resources and talent.
+I think that lack of access to large enough training datasets, and lack of open-source code to process raw data into training datasets, delayed GPT-NeoX-20B by four weeks (90% CI: one to ten weeks).
+Implications of my research for forecasting and beneficially shaping the diffusion of AI technology
+(
+Go to section
+)
+If we want to beneficially shape the diffusion of AI technology in general, I think the following outcomes are both good and tractable enough to aim for. (
+more
+)
+Delay the arrival of TAI by reducing diffusion.
+Have fewer actors in the lead to develop TAI.
+Help more favorable
+[33]
+actors become leaders, or remain leaders, or increase their lead relative to less favorable actors and while ideally not speeding up AI timelines in absolute terms.
+Reduce downside risks from the last two outcomes above by supporting scrutiny towards leading actors and supporting some research outside the leading actors (mainly AI alignment research).
+The key combination of factors that limited the diffusion of GPT-3-like models was (a) that training such models required a very expensive amount of compute, and (b) that the model weights for existing GPT-3-like models were not openly published. Limiting diffusion is much easier when both of these circumstances hold. If compute cost becomes less prohibitive but models remain closed-source, then the information security and publication practices around algorithmic insights would become more important levers than they are today. Limiting diffusion seems less tractable overall in that scenario. (
+more
+)
+One way to steer diffusion in a way that reduces AI x-risk is to differentially limit access to the technological inputs of AI development—namely compute, data, and algorithms.
+[34]
+I believe it would be best to focus on differentially limiting access to compute, but to still put some resources toward differentially limiting access to data and algorithmic insights. For the sake of promoting ideas I believe to be more neglected, I do not discuss interventions for compute in this work, because they have been explored in previous work.
+[35]
+(
+more
+)
+To beneficially shape the diffusion of data, I think it would be good for leading AI developers or data curators to do the things listed below. I believe these things are probably worth doing, but that belief has a low enough
+resilience
+that the next step should be further consideration of whether or not to do these things. (
+more
+)
+Don’t open-source new big datasets.
+Set up “structured access” to datasets if there is enough demand for the data. To my knowledge this is a novel proposal
+[36]
+which would involve the owner of the dataset not sharing the dataset but still allowing users to train models on it. I think it is worth preemptively setting up structured access to datasets in case data becomes a more precious and consequently more controllable resource in the future.
+To beneficially shape the diffusion of algorithmic insights, I think the proposals below are promising. I believe these things are probably worth doing, but that belief has a low enough resilience that the next step should be further consideration of whether or not to do these things. (
+more
+)
+Initiate more discussions (in private) with top AI developers about reducing risks from the disclosure of key algorithmic insights. Researchers at Google seem like the most important people to talk to, given that Google seems to be the most well-resourced AI developer in the world, but appears to be less consistent than OpenAI and DeepMind in its publication strategy in the past three years (as discussed previously). If some top AI researchers were to initiate these discussions after carefully preparing strong arguments and clear presentations of those arguments, I would intuitively guess that there is a 20% chance (90% CI: 1 to 50%) that the discussions lead top developers to publish one less insight as important as
+Hoffmann scaling laws
+per year (I estimate that, compared to the Kaplan scaling laws that GPT-3-like models have roughly followed to date, Hoffmann scaling laws enable roughly 3 times less training compute to achieve the same performance).
+I think that top AI developers should invest more than they currently do in the information security and operations security of their AI research and development. However, I have not investigated the costs and benefits of this thoroughly enough to make more concrete recommendations.
+I generally endorse the use of
+structured access
+for AI systems that are at or beyond today’s state of the art in their domain, if there is a strong enough case for beneficial uses of the model in research or commerce. (
+more
+)
+Questions for further investigation
+(
+Go to section
+)
+I recommend the following topics for further investigation. Feel free to reach out to me about these research ideas. I may be able to offer advice, suggest links, and suggest people to talk to. It's possible that I or Rethink Priorities could help connect you with funding to work on these ideas if you're interested and a good fit.
+Further research to evaluate my proposals to limit access to datasets and algorithmic insights.
+What is the relevance and importance of diffusion mechanisms that were not involved in my case studies? These mechanisms include leaks, espionage, and extortion.
+Case studies of diffusion in other domains of AI.
+This would be useful both to expand the overall amount of empirical data on diffusion, and to see how well/poorly my findings generalize to other domains.
+Notable candidates for study are
+AlphaGo Zero
+(game playing domain) and
+DALL-E
+(text-image domain).
+Investigating emerging AI developers such as Stability AI who could plausibly catch up to current leaders in certain domains.
+What is the rationale behind the publication strategies of these developers?
+Will their strategies shift as their AI capabilities improve and their products become more valuable?
+Further investigation of how deployment requirements could limit diffusion.
+What resources will be required to deploy an AI system that leads to transformative impact? Who will be able to access those resources?
+How might the cost of model inference change relative to the cost of training?
+How much will different inputs to AI development contribute to AI progress?
+At various points in this sequence, I present my best guesses about the relative importance of different inputs to AI development. However, I still have a lot of uncertainty, and I think further research could reduce the uncertainty substantially.
+Other topics (see this
+section
+)
+How confident should you be in my findings?
+The following information is something like a long-form
+epistemic status
+. It's intended to help you calibrate your confidence in my conclusions throughout the sequence. However, I don't think it's important to read through this, because I explain my reasoning and indicate levels of uncertainty throughout the sequence.
+This sequence consists of:
+Medium to high-confidence descriptions of large language model diffusion that has happened in the last two years, and why it happened
+Low to medium-confidence predictions about the future dynamics of diffusion
+Low to medium-confidence takeaways of my research for the governance of TAI
+The findings in this sequence have the following notable limitations:
+Much of the data from my case studies is highly uncertain, with quantitative estimates often spanning an order of magnitude.
+I often generalize from just a small set of case studies that were all from the same narrow domain. Some of my conclusions are not robust to counterexamples that I might discover in future. However, I have tried my best to factor this possibility into my confidence levels.
+Many of my bottom-line conclusions are not supported by much hard evidence, and are instead based on a combination of logical arguments and intuitions.
+Most of the research was carried out April–August 2022. Writing mostly took place from September–October 2022. I then made some final adjustments from November–December 2022. This means that I am mostly not accounting for new information that has become available from September 2022 onwards.
+I tried to provide quantitative estimates wherever I had time to do so, and thought that would be clearer, easier to meaningfully critique, and perhaps more useful than providing only qualitative statements (which are often liable to a wide range of interpretations). This means I give many estimates that I have low confidence in, that are not based on much, and/or that I expect might change dramatically following further research or thought.
+The project involved roughly 500 hours of research, consisting mostly of:
+Case studies of GPT-3-like models informed by my own research from public internet sources
+My independent thinking and reasoning, in the form of estimates, forecasts, and arguments
+Interviews or email exchanges with ~30 experts, namely:
+~13 AI governance researchers with relevant knowledge or better-informed opinions than me
+~17 people with experience in large language model R&D
+The accuracy of my findings has been tested in the following ways. Note that I am responsible for any remaining inaccuracies in this sequence.
+~14 external professionals in the AI governance community read the  summaries and left at least one comment about something they were skeptical of or found inaccurate, which I then rectified as best I could.
+Michael Aird—Senior Research Manager on the AI Governance & Strategy team at Rethink Priorities, and my manager—reviewed the entire sequence for accuracy and reasonableness. However, Michael is not an expert in the topic and did not thoroughly vet my reasoning.
+Erich Grunewald—Research Assistant on the AI Governance & Strategy team at Rethink Priorities—reviewed the summaries and posts
+4
+,
+5
+, and
+7
+for accuracy and reasonableness. Erich did various things to check my reasoning in detail, but not comprehensively. For example, Erich played around with one of my Guesstimate models to check that it seemed reasonable.
+~11 other people at Rethink Priorities provided a general review of various small fractions of the sequence at various stages of drafting.
+In terms of technical AI experience, I have:
+~500 hours of experience doing research projects centered on deep learning.
+For example, one ~100 hour project was about the generalization capability of a small transformer model on worded mathematics problems.
+An MSc in Artificial Intelligence from the University of Edinburgh, including a course on natural language processing using deep learning.
+~1500 hours of experience with software development in a collaborative machine learning research context.
+The work for this sequence was done mostly during a Fellowship at Rethink Priorities, as part of my first major AI governance research project.
+I stopped working on this when it seemed best to move on to other projects, rather than when I felt there were no obvious ways to further improve it.
+Acknowledgements
+This research is a project of
+Rethink Priorities
+. It was written by Ben Cottier. Thanks to Alexis Carlier, Amanda El-Dakhakhni, Ashwin Acharya, Ben Snodin, Bill Anderson-Samways, Erich Grunewald, Jack Clark, Jaime Sevilla, Jenny Xiao, Lennart Heim, Lewis Ho, Lucy Lim, Luke Muehlhauser, Markus Anderljung, Max Räuker, Micah Musser, Michael Aird, Miles Brundage, Oliver Guest, Onni Arne, Patrick Levermore, Peter Wildeford, Remco Zwetsloot, Renan Araújo, Shaun Ee, Tamay Besiroglu, and Toby Shevlane for helpful feedback. If you like our work, please consider
+subscribing to our newsletter
+. You can explore our completed public work
+here
+.
+^
+See this
+cell
+of my diffusion database for why I think Gopher performs better than GPT-3—but I think this claim is uncontroversial.
+^
+The Model Card in Appendix B of the paper published in December 2021 (
+Rae et al., 2021, p. 49
+) states the "Model Date" is December 2020, and according to the paper introducing Model Cards (
+Khan et al., 2022
+), this is the answer to "When was the model developed?".
+^
+The model weights of OPT-175B are not immediately accessible to download by anyone on the internet. However, I estimate the weights can be downloaded by hundreds to thousands of ML researchers in academia, government, and industry labs, subject to approval. Meanwhile, the
+training code
+is open-source. See this
+section
+for more information.
+^
+OPT-175B just meets my threshold for “equally good”, as it had about 2% worse accuracy than GPT-3 on average, on the 14 benchmarks that were evaluated for both GPT-3 and OPT-175B (see this
+cell
+in my diffusion database). The 2% threshold is somewhat arbitrary. I chose that threshold partly because the OPT paper itself claimed (e.g. in the Abstract) that OPT-175B performance is “comparable” to GPT-3 (
+Zhang et al., 2022
+), and partly based on my not-well-informed intuition regarding how a 2% performance difference over a few benchmarks would affect the overall usefulness of the language model.
+Ben Cottier
+Ben Cottier
+Ben Cottier completed a research fellowship at Rethink Priorities working on AI Governance and Strategy. Previously, he was a Research Software Engineer at Invenia Labs, and received funding for independent research to understand expert views on transformative artificial intelligence. He holds an MSc in Artificial Intelligence from the University of Edinburgh.
+Previous
+Previous
+Background for “Understanding the diffusion of large language models”
+Next
+Next
+The REDD+ framework for reducing deforestation and mitigating climate change: overview, evaluation, and cost-effectiveness
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.

@@ -1,0 +1,653 @@
+GPT-3-like models are now much easier to access and deploy than to develop — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+GPT-3-like models are now much easier to access and deploy than to develop
+Longtermism
+AI Safety & Governance
+Dec. 21
+Written By
+Ben Cottier
+Read on the EA Forum
+This post is one part of the sequence
+Understanding the diffusion of large language models
+.  As context for this post, I strongly recommend reading at least the
+5-minute summary
+of the sequence.
+Key takeaways
+GPT-3 itself can be used and fine-tuned via an API. Despite this, there’s still demand for direct access to the model’s weights, and multiple similar models now exist that provide access to weights. OPT-175B is a GPT-3 replica; I estimate that its model weights can be downloaded by hundreds to thousands of ML researchers in academia, government, and industry labs, subject to approval. BLOOM is similar to GPT-3, but not a replica, and is publicly available for anyone to download. (
+more
+)
+What resources are required to actually use these models? (
+more
+)
+One relevant question is how much money and talent it would take to generate a large volume of text with about the same average usefulness as GPT-3’s outputs. (
+more
+)
+Based on publicly listed pricing, running GPT-3 via the OpenAI API would generate approximately 150 million English words for $4000.
+[1]
+I estimate that a user could generate 150 million English words per day of similar usefulness to GPT-3’s outputs for as little as $240 per day by running one instance of BLOOM independently (i.e., downloading the model weights and running the model on a server that they either directly rent or own).
+I estimate there are 5000 people (90% CI: 100 to 45,000) that are capable of running BLOOM independently.
+[2]
+What about for a very large-scale application of a GPT-3-like model—for example, generating text equivalent to 1% of global Twitter activity for one year, or assisting one million software developers with coding for one year? I estimate that deploying a model like BLOOM in these ways would be 20% of the cost of
+developing
+the model (90% CI: 10 to 68%), in terms of the dollar cost of compute alone. This means that deployment is most likely much less prohibitive than development. But it means I give a 5% chance that for the largest-scale applications, the cost of deploying the model is at least 68% of the cost of developing the model, which would make deployment similarly prohibitive. (
+more
+)
+I don’t think that labor costs change the overall conclusion here, though I didn’t directly account for it in this model. I estimated the labor cost of the coding assistant scenario to be $500K, which is only 1/5th of the median estimate of the compute cost.
+My analysis supports prioritizing interventions at the development stage rather than the deployment stage. Interventions targeting development seem generally more tractable, because they can take advantage of the larger compute and talent barriers involved. Another reason there is more leverage at the development stage is that the developers of models seem to be in the most convenient position to deploy those same models.
+[3]
+(
+more
+)
+Some caveats to the above points:
+I still expect that most actors that use state-of-the-art AI systems for inference will do so via APIs provided by some other actor, rather than via developing a system themselves or downloading and independently running a system. Furthermore, when AI systems diffuse to the point of being publicly accessible, it seems very likely that someone will also set up and open-source a convenient way to use those systems in the form of an API or other software. (
+more
+)
+Some actors will be able to scale up to afford larger deployments, using a feedback loop of commercial deployment, which generates revenue, which in turn funds larger deployment. As such, expensive deployments may be ultimately accessible to more actors than one would initially think. (
+more
+)
+Some GPT-3-like models are widely available for download
+Here I overview two GPT-3-like models, OPT-175B and BLOOM. OPT-175B is a GPT-3 replica that can be downloaded by ML researchers in academia, government and industry labs (after their request for access is approved). BLOOM is similar to GPT-3, but not a replica, and is available for anyone to download.
+OPT-175B
+BLOOM
+Average task accuracy compared to GPT-3 (estimated based on the available evaluations)
+2 percentage points worse (90% CI: 1–5)
+2 percentage points worse (90% CI: 1–10)
+Access type
+Approval-based
+Open-source
+Access criteria
+People in academia, government, and industry labs that have published research involving language models
+None
+API?
+Yes
+Yes
+(small-scale use)
+[4]
+Estimate of who can deploy the model independently (i.e., not using an existing API)
+Anyone that is granted access (based on the access criteria)
+Top 1% CS graduates that passed a course on natural language processing with deep learning, given 3 months of effort; or equivalent
+Table 1: attributes of OPT-175B and BLOOM
+Note that
+many other GPT-3-like models have been developed before OPT-175B and BLOOM became available.
+However, I am 80% confident that before July 2022, no other GPT-3-like models had their trained weights widely available for download.
+[5]
+In terms of understanding the most important impacts of diffusion, I think which GPT-3-like models are currently accessible is less important than the timing, development and release strategy of GPT-3-like models. I cover those characteristics in the other post in the sequence.
+Despite the existence of APIs that provide access to model outputs and fine-tuning, there is demand for direct access to model weights
+To date, the trained model weights for GPT-3 have not been made available.
+[6]
+Having direct access to trained model weights would allow someone to (a) run the model independently on a computing cluster, (b) make copies of the model, (c) fine-tune the model for new tasks, and anything else that requires access to the values of weights (e.g., interpretability research). Although OpenAI provides an API that allows access to GPT-3
+outputs
+and
+fine-tuning procedures
+, this API places considerable limits on diffusion. As well as preventing direct access to model weights,
+[7]
+the API limits the applications of the model through OpenAI’s monitoring and review process,
+[8]
+and limits the speed at which model outputs can be accessed.
+[9]
+So while the OpenAI API may be satisfactory for many users to access GPT-3 capabilities, it does not allow as much breadth and freedom in the use of the model as direct access to trained model weights would have.
+The lack of direct access to GPT-3 model weights appears to have created a demand for that access. The demand is strong enough that multiple actors have spent millions of dollars to make GPT-3-like models more widely and freely available.
+[10]
+GPT-3 itself is almost certainly profitable for OpenAI given that its commercial API has not been discontinued. So I think the most obvious incentive for AI
+companies
+to create a GPT-3-like model is to develop their own products using their own model.
+[11]
+On the academic side, there seems to be growing interest in studying
+foundation models
+—GPT-3 is one such model. The research collaboration that culminated in BLOOM involved more than one thousand researchers (
+BigScience, 2022
+). Meanwhile,
+Zhang et al. (2022, p. 1)
+state: “Our aim in developing this suite of OPT models is to enable reproducible and responsible research at scale, and to bring more voices to the table in studying the impact of these LLMs.” Finally,
+Black et al. (2022, p. 1)
+state: “We make the models weights freely and openly available to the public through a permissive license, motivated by the belief that open access to LLMs is critical to advancing research in a wide range of areas—particularly in AI safety, mechanistic interpretability, and the study of how LLM capabilities scale.”
+[12]
+OPT-175B can be directly accessed by hundreds to thousands of AI researchers
+OPT-175B is a 175-billion-parameter language model from Meta AI Research, announced in May 2022 (
+Zhang et al., 2022
+). The primary goal of OPT-175B was as a replication of GPT-3.
+[13]
+The replication seems to have largely succeeded; however, the model performed an average of two percentage points worse than GPT-3 on 14 benchmarks across zero-shot and few-shot evaluation settings.
+[14]
+The trained OPT-175B model seems to be accessible by anyone that can demonstrate their status as a researcher affiliated with academia, government, civil society, or an industry lab, who has relevant publications.
+[15]
+Based on what it says in the paper and the application form, I estimate that 1000 (90% CI: 200–3000) people could be eligible, and all of these people could be granted access in the first year following release.
+[16]
+This number depends on how quickly applications are processed and how relevant the applicant’s publications need to be.
+Direct access to OPT-175B’s trained model weights is provided upon request.
+[17]
+It therefore seems that anyone who currently has access could pass on the weights to someone else, or even make the weights publicly available for download. The potential for diffusion would thereby increase even further. It is not clear to me whether these actions would violate the terms of copyright stated in the license agreement for OPT-175B.
+[18]
+I am not aware of any unilateral open-sourcing event like this occurring yet for OPT-175B. However, I am only 60% confident that this has not happened. My confidence is based on how little time has passed since OPT-175B was released, that I haven’t heard about it happening, and that searching DuckDuckGo for “download opt-175b model” does not have any confirming results on the first page.
+[19]
+At some point after OPT 175B’s release, this
+API
+for OPT 175B was released by a team at ​​
+Sky Lab, UC Berkeley
+.
+[20]
+BLOOM can be downloaded by anyone
+BLOOM is a 176-billion-parameter language model from the open research collaboration known as
+BigScience
+. BLOOM was released in July 2022. The prior model that most influenced the design of BLOOM was apparently Megatron-LM (
+Shoeybi et al., 2019
+), which along with GPT-3 is heavily based on GPT-2 (
+Radford et al., 2019
+).
+[21]
+[22]
+Despite its similar size and pretraining approach, unlike OPT-175B I don’t consider BLOOM to be an exact replication attempt. This is partly because it is not stated by the authors as an explicit replication attempt. It is also because the training data for BLOOM is much more multilingual, which was emphasized in
+BigScience (2022)
+.
+[23]
+My best guess is that BLOOM is worse than GPT-3 on most tasks to a similar degree to OPT-175B.
+[24]
+On the other hand, I expect that BLOOM’s more multilingual training data leads to a
+wider
+spread
+of capabilities across languages.
+Unlike OPT-175B, BLOOM’s trained model weights are publicly
+available
+to download from the HuggingFace website. HuggingFace is also
+hosting
+a public API for BLOOM. So access to BLOOM is even more open than for OPT-175B. Anyone with decent internet and 329 GB of storage can start downloading the weights immediately, without any request for access.
+[25]
+What resources are required to actually use GPT-3-like models?
+Deployment scenario
+Compute cost (USD)
+[26]
+Direct talent requirement
+[27]
+Generate 150 million English words by running one instance of the BLOOM model independently, for 24 hours.
+240
+One top 1% CS graduate that passed a course on natural language processing with deep learning, given three months of effort; or equivalent
+Generate 150 million English words using GPT-3 via the OpenAI API.
+4000
+Negligible
+Produce content equal in size to 1% of the average number of Tweets per day, for one year. Use instances of the BLOOM model running on cloud compute.
+160K (90% CI: 88K to 260K)
+5 professional software developers that have worked with ML projects, and five ML engineers who know how to run language models over multiple GPUs.
+Labor cost: $250K
+Use a hypothetical GPT-3-sized coding language model to improve one million software developers’ productivity by between 1% and 10%.
+2M (90% CI: 260K to 8.4M)
+15 professional software developers that have worked with ML projects, and five ML engineers who know how to run language models over multiple GPUs.
+Labor cost: $500K
+Do the largest viable deployment of a GPT-3-like model (based on above two scenarios, adjusted by other evidence).
+[28]
+2.6M (90% CI: 950K to 6.2M)
+[not estimated]
+Table 2: Summary of deployment scenarios and the estimated requirements for them, explored in this section
+So far I have considered the ability to access (i.e., download and interact with) trained model weights of GPT-3-like models. But if an actor has only downloaded some model weights, the cost and talent requirements to actually run inference with the model could be far from trivial.
+[29]
+Even further resources would be needed to deploy a model at a scale large enough to build a profitable business.
+An important question is:
+how large is the barrier to deploying a model impactfully, compared to training a model?
+I measure how large the barrier is in terms of compute cost and talent requirements.
+I will first consider this question in the case of a GPT-3-like model, BLOOM. My choice of BLOOM is not particularly special; it is just the only GPT-3-like model I was aware of (as of July 2022) that is open-source. Most of the analysis that follows depends merely on BLOOM’s basic Transformer architecture and number of parameters, so any similarly-sized language model can be substituted. My assumptions about what BLOOM is
+capable
+of are less defensible, but again, I think it serves as a basis for useful hypotheticals.
+I think the most important version of the question is how large the barrier is to deploying
+transformative
+AI (TAI) systems. Nonetheless, asking this question of present-day AI systems still seems useful. In particular,
+the answer to this question affects which actors will be incentivized to develop or gain access to AI systems, and to deploy those systems.
+In turn, some actors may gain insight and revenue from these systems, and thereby become more able to develop, access, and diffuse TAI in the future.
+One actor can build a model API and other software tools to make deployment easy for other actors
+I expect that most actors that use state-of-the-art AI systems for inference will do so via APIs provided by some other actor.
+The AI system will be hosted by some organization, and users will make queries to the model via an API.
+[30]
+The most prominent example of such an API today is the
+OpenAI API
+. If an actor merely wants to run inference with a model, there are strong incentives for using an API—the provider of the API handles all of the setup, running costs and maintenance, while the user merely needs to make queries to the API to get outputs from the model.
+However, as I argued
+above
+, there are still incentives to
+not
+use a particular model API.
+An API inherently limits a user’s interaction with a model. A user can’t necessarily probe or fine-tune the model in any way they want, nor use the model for any application, due to content policies and content filtering.
+[31]
+Furthermore, there are many models for which no API is released in the first place, but which some actors may want to replicate, such as the Chinchilla model from DeepMind (
+Hoffmann et al., 2022
+).
+Suppose that the weights for some model become publicly available. This could happen via deliberate open publication by the original developer of the model, or by some other diffusion mechanism like replication or theft.
+Due to the incentives to use open-source models, it seems very likely that someone will also set up and open-source a convenient way to use that model.
+There will very likely be enough actors in the world that at least one of them is motivated to do this.
+At that point, many more people will be capable of running the model, either via an API or other tools that are open-sourced.
+BLOOM has an API with fully open access on this
+page
+. I was able to create a HuggingFace account (only requiring an email address) and run inference with BLOOM immediately using the text box on the right side of the page. This interface is only a preview—HuggingFace has a more comprehensive and scalable
+hosted inference API
+to make it easy to deploy the models that they host, including BLOOM. Hugging Face
+offers
+a $9/month plan that allows up to one million input characters for model inference per month. Again, given the convenience of APIs like this, I expect that most actors that use models will do so via APIs provided by other actors.
+Even running a GPT-3-like model independently seems feasible for thousands of individuals
+I have just argued that most actors that use models will do so via other actors’ APIs. However,
+I still expect there to be cases of diffusion where some actors want to run a model independently.
+By running “independently,” I mean that an actor downloads the model weights and runs the model on a server that they either directly rent or own. The incentive for independent deployment could arise because
+There is no existing API for a model of interest, or
+Existing APIs are not sufficient for some actors’ aims.
+For (1), there might be no existing API because the model developer wants to limit diffusion of capabilities, or simply has no interest in providing wider access to the model. For (2), the actors in question could be startups that want to scale up to train and deploy their own models, or malicious actors that don’t want their malicious usage to be tracked (even if permitted) by an API.
+For these reasons,
+I think it’s useful to analyze who can run a model like BLOOM independently, even though there is in fact an openly accessible API for BLOOM. One can then apply a similar analysis to future models where there is a stronger incentive to run the model independently.
+By my calculations, the most compute-efficient way to run inference with BLOOM by renting compute from the cloud is to use one 8 x 80 GB A100 GPU node. Based on that,
+running one instance of BLOOM independently would
+cost
+$10/hr
+from the cloud provider Lambda, using a minimum three-month rent commitment.
+A user could generate 150 million English words for $240 per day this way if running the model 24/7
+.
+For comparison, based on current
+OpenAI API pricing
+, using GPT-3 via the OpenAI API would generate this many words for $4000.
+[32]
+I estimate that 5000 people in the world (90% CI: 100 to 45,000) have the talent required to run BLOOM independently this way. See
+this appendix
+for the reasoning behind these estimates.
+Deploying a GPT-3-like model to have significant impact on the world is probably one order of magnitude cheaper than training the model
+I have just considered the constraints involved in running a single instance of BLOOM. But useful deployments of BLOOM could be much larger. To get a sense of how much the
+largest
+viable deployments of GPT-3-like models would cost, I consider two representative scenarios. The largest viable deployment is the deployment with the highest volume of model outputs that
+Would be possible for at least one actor to do by now if they tried
+Is worth the cost—not necessarily profit-wise, but in achieving the actor's goal. For example, a large-scale automated disinformation campaign may not generate revenue but may achieve a political goal.
+Scenario 1: automated text disinformation campaign (modeled as 1% of Twitter activity)
+The first scenario is an automated text disinformation campaign.
+[33]
+A crude way to model this is producing content equal in size to 1% of the average number of Tweets per day, which I estimated as 670 million. Using BLOOM running on cloud compute to accomplish this, I estimate the cost would be $450 per day (90% CI: 240 to 720) or $160K per year (90% CI: 88 to 260).
+[34]
+For comparison, accomplishing this with GPT-3 via the OpenAI API (assuming it was allowed) would cost $5100 (90% CI: 3800 to 6600) per day or $1.9M (90% CI: 1.4 to 2.4) per year. My best-guess estimate of the total compute cost to develop a GPT-3 replica from scratch was $13 million with a 90% CI of $4 million to $36 million (see this
+section
+). So
+even for a very large-scale sustained operation, such as generating text equivalent to 1% of global Twitter activity for one year, model training would be about a 100x larger constraint financially
+. See
+this
+appendix
+for supporting reasoning.
+Scenario 2: GPT-3-sized coding language model that is very commercially successful
+The second scenario I consider is a GPT-3-sized coding language model that is very commercially successful. This means the model is used to improve one million software developers’ productivity by between 1% and 10%.
+[35]
+I estimate the cost of this would be $2M per year (90% CI: 260K to 8.4M). So on my best guess, this cost is still an order of magnitude lower than the total development cost of the model at $13M. But this cost is
+plausibly
+close to the total development cost, given the upper bound is $8.4M. See
+this
+appendix
+for supporting reasoning.
+Talent requirements and labor cost
+In terms of talent requirements, I’m confident that the level of talent required to train any machine learning model is basically sufficient to run inference with that model, because forward passes of the model are performed as part of the training process. However, deploying a large language model at a commercially viable scale generally requires other areas of talent. These areas include more traditional software development skills to build APIs and host models on servers. However, I expect that ML engineering talent is the bottleneck for deployment, because it is more scarce than other software engineering talent. Based on that,
+my best guess is that large-scale deployment like in the above scenarios would approximately require
+Five professional software developers that have worked with ML projects for the Twitter scenario
+15 professional software developers that have worked with ML projects for the coding assistant scenario (because I imagine much more software infrastructure and maintenance is needed to serve 1 million users compared to just posting Tweets via bots)
+Five ML engineers who know how to run language models over multiple GPUs (in both scenarios)
+I do not have a rigorous justification for these exact requirements; they just seem like the most intuitively plausible to me.
+[36]
+Let’s suppose this team is working on the project with a salary of $100k per person for the entire year. Then
+the one-year Twitter scenario above would cost the equivalent of 10 x 100k = $1M in talent, while the coding assistant scenario would cost $2M. However, I expect that the actual time spent on such a project would be closer to three months full-time equivalent. So
+my final labor cost estimate is $250K for the Twitter scenario and $500K for the coding assistant scenario.
+[37]
+Combining the scenarios and accounting for other evidence to estimate the compute cost of the “largest viable deployment”
+Combining the Twitter and coding assistant compute cost estimates in this
+Guesstimate model
+, I get an overall estimate of $1.3M (90% CI: 230K to 5.2M). As a percentage of the GPT-3 replication cost estimate, this is 12% (90% CI: 1.3 to 56%).
+As another line of evidence, I tried to find information on what percentage of the cost of machine learning applications as a whole is accounted for by inference rather than training. I found two sources estimating 80-90% of the cost is for inference.
+[38]
+However, those sources don’t provide clear evidence or reasoning for those estimates, and they appear to be incentivized to give high estimates. Updating slightly for this evidence,
+my overall estimate of the cost of the largest viable deployments of GPT-3-like models is 20% of the development cost (90% CI: 10 to 68). Converting this back to dollars, I get $2.6M (90% CI: 1 to 6.6).
+[39]
+Putting this all together,
+in my median scenario the development of a GPT-3-like model costs about 5 times more than the largest viable deployment of the model
+. But my confidence interval means there is a 5% chance that there are deployment scenarios which (a) cost more than 68% as much as developing the model, and (b) have a significant impact, such as improving one million software developer’s productivity by a few percent.
+So
+plausibly, for the highest-impact applications, the cost of deployment is almost as prohibitive as the cost of development.
+Barriers to deployment will decrease over time for actors that scale up commercially
+One consideration I haven’t taken into account in the above analysis is the ability for actors to scale up via commercial revenue. Actors could deploy a model at a small but profitable scale, then use the resulting revenue to scale up, then deploy at a larger and more profitable scale, and so on in an amplifying feedback loop. This feedback loop can also have discontinuous jumps—if an actor has a moderately successful and promising application of AI, they might suddenly receive much more funding from investors. AI21 Labs is an example, reportedly raising $64M in funding in July 2022 and thereby almost doubling their total capital (
+Wiggers, 2022
+).
+Having said that, the current leading AI developers can also set up this amplifying feedback loop, and have the biggest head start. So I think that leading developers are likely to maintain a steady (and perhaps an accelerating) lead this way. Because of this maintained lead, I think the number of actors that can afford to independently deploy future state-of-the-art models will most likely
+not
+increase significantly over time, even as smaller actors scale up.
+Upshot: focus more on shaping development than deployment
+Above, I have argued that the development of GPT-3-like models is a much larger constraint than the deployment of models. I think there is more opportunity for the AI governance community to take advantage of the larger constraint on development, than to make deployment more difficult. For example, diffusion can be limited by taking advantage of the large compute and talent requirements to train GPT-3-like models. Meanwhile, deployment seems much easier to do and more difficult to control. This is because the cost of even the largest viable deployments seem to be much smaller (about four times smaller, at my best guess).
+Furthermore, the developers of models seem to be in the most convenient position to deploy those same models. This is because
+There is significant overlap in the expertise required to develop and deploy.
+The compute used for training the model is probably much more than is needed to deploy (again, based on my above analysis), so this compute can be reused.
+The developer has the most control over the model initially, because they are the first to possess the model and can decide to keep it private.
+For these reasons,
+I think
+the AI governance community should prioritize limiting which actors can develop models over limiting which actors can deploy models.
+Appendix: Who can download and run BLOOM independently?
+Cost: $240 for 150 million words
+For the number of words, see the “Actual throughput (tokens per day per GPU node)” cell in
+this Guesstimate model
+, which estimates 200 million tokens per day. Average words per token is 0.75 (see
+https://perma.cc/T6M8-Q9BJ
+), so 200M tokens corresponds to roughly 150M words. The cost per hour comes from the "Reserved pricing" for 8x NVIDIA A100 80GB GPUs from Lambda, listed here:
+https://perma.cc/TTB9-B8TF
+.
+Most CS graduates could in principle afford the financial cost of $240 to run BLOOM for one day, but running BLOOM for a year (say) would then cost ~$90K which would only be affordable for perhaps tens to hundreds of individuals.
+Talent pool: Thousands of people
+Let’s consider the minimum talent required to download BLOOM and run the model on a separate cloud compute server.
+[40]
+I think this requirement is equivalent to a single top-one-percentile Computer Science graduate who has passed at least one course on natural language processing with deep learning, and who can spend three months full-time figuring out how to run the model. This is because a lot of the know-how to run the model is available on the internet, such that a strong machine learning background is
+not
+required to start with. For example,
+EleutherAI’s Discord server
+would have a lot of relevant information and people willing to help. Tools such as
+HuggingFace accelerate
+make it easier to use machine learning models with multiple GPUs (which seems to be required for models as big as BLOOM).
+Besides that, I don’t have special reasons to specify the requirement as a single top-one-percentile CS graduate with introductory machine learning experience spending three months trying. It is just a concrete-enough requirement that is intuitively plausible to me. I think that the people in this set are a useful indication of the actual set, because it seems to overlap significantly with the actual set. For instance, I’m confident that high-percentile CS graduates make up more than 20% of the actual set.
+Reasoning for the calculation:
+According to
+datausa.io
+, there are currently about two million Computer Science graduates in the US workforce.
+I’ll assume that 1% of these top 1% graduates have the requisite machine learning knowledge. Although machine learning seems to be a popular subject nowadays, many existing graduates would have graduated before machine learning was very popular, and fewer still would retain the knowledge through relevant work or continued study. My intuitive guess is that only 10% of the existing top graduates studied it, and only 10% of those have retained the requisite knowledge, hence 1%.
+The US population is 335 million according to
+Worldometer
+, while the
+world
+population is 8 billion.
+So a crude estimate of people meeting the above talent requirement is: 2 million / 335 million
+8 billion
+1%
+1% ~= 5000.
+I think it’s likely that any of these 5000 people would have good internet access and be able to rent at least one 8x A100 80 GB GPU server from a cloud provider such as
+Lambda
+. One of these servers seems sufficient to run BLOOM because the server’s total memory of 640 GB is much larger than the amount of memory taken up by the model weights of BLOOM, which is 329 GB.
+[41]
+As a lower bound, it seems implausible that the number could be any lower than the total number of “infrastructure engineers” I counted in my case studies, which was 73 (see this
+cell
+in the diffusion database). So I set an approximated lower bound at 100.
+As an upper bound, it seems implausible that the number of people capable of running BLOOM exceeds the number of times the BLOOM repository (which includes the model weight files) has been downloaded. I could not find a total number of downloads, but the downloads in the past month (as of October 10, 2022) are reported at about 15,000 (see
+repository page
+). Assuming the same number of downloads happened in the other two months since the repository was released in early July, that would make 45,000 downloads in total. The actual number may be higher because of a spike in interest in BLOOM in the first month after it was announced, but I find any significantly higher number too implausible given the technical difficulty of running a model as large as BLOOM. The number would also be close to this, at 50,000, if I instead chose 10% for one of the two 1% numbers in the “CS graduates” calculation above, which seems barely plausible.
+So my overall estimate is 5000 with a 90% CI of 100 to 45,000.
+Appendix: Cost of producing 1% of Twitter activity with BLOOM
+See this
+Guesstimate model
+for calculations and reasoning.
+Buchanan et al. (2021, p. 58)
+provide a point of comparison: "...creating enough content to equal in size to one percent of global Twitter activity would require hundreds of GPT-3s running 24/7 and would cost tens of millions of dollars per year." So my cloud-compute cost estimate ($160K) is about two orders of magnitude lower than theirs (~$10M). Their reasoning is not entirely clear, especially the calculation behind “hundreds of GPT-3s.” However, they seem to make the following different assumptions:
+The actor buys the hardware rather than renting the hardware from a cloud vendor.
+A ~2x larger memory footprint for the model than in my estimate. This is likely based on using a FP32 number representation rather than the FP16 number representation which is now more common for large language models, including BLOOM (it says “​​Bf16 weights” at
+https://huggingface.co/bigscience/bloom#speeds-sizes-times
+which refers to the bfloat16 number representation).
+Using
+V100
+GPUs rather than the newer
+A100
+GPUs
+V100 has ~3 slower peak throughput (125 teraflop/s vs. 312 teraflop/s)
+V100 has less than half the memory capacity (32 GB vs. 80 GB), therefore requiring ~2x the number of chips to fit the model in memory.
+Based on the rough factors of difference in (2) and (3), I get 2
+3
+2 = 12x overall. So the two orders of magnitude difference seems mostly, but perhaps not entirely, explained by the difference in assumptions that I came up with.
+Appendix: Cost to run a GPT-3-size coding language model that is very commercially successful
+See this
+Guesstimate model
+for calculations and reasoning.
+Acknowledgements
+This research is a project of
+Rethink Priorities
+. It was written by Ben Cottier. Thanks to Alexis Carlier, Amanda El-Dakhakhni, Ashwin Acharya, Ben Snodin, Bill Anderson-Samways, Erich Grunewald, Jack Clark, Jaime Sevilla, Jenny Xiao, Lennart Heim, Lewis Ho, Lucy Lim, Luke Muehlhauser, Markus Anderljung, Max Räuker, Micah Musser, Michael Aird, Miles Brundage, Oliver Guest, Onni Arne, Patrick Levermore, Peter Wildeford, Remco Zwetsloot, Renan Araújo, Shaun Ee, Tamay Besiroglu, and Toby Shevlane for helpful feedback. If you like our work, please consider
+subscribing to our newsletter
+. You can explore our completed public work
+here
+.
+^
+The 150 million words is somewhat arbitrary. The number came about in my estimate of how many tokens the BLOOM model could generate when running continuously on an 8x 80GB A100 GPU instance for 24 hours, at a typical hardware utilization rate.
+^
+That said, my intuition is that the number of people who will actually learn how to run and then use BLOOM independently for some research or application, at any point in time since BLOOM was released, is much lower. My 90% CI for that number is 10 to 1000. I expect that most people who use BLOOM will use an API rather than run it themselves.
+^
+Note that there are other (perhaps stronger) reasons to focus on the model development stage.
+Firstly, the forms of diffusion that help actors develop models pushes AI progress forward more than the forms of diffusion that help actors deploy models. Pushing AI progress forward is what shortens AI timelines and thereby increases AI existential risk.
+Secondly, a lot of AI existential risk comes from
+misaligned power-seeking AI
+rather than misuse by humans. I expect that reducing diffusion of deployment would have a smaller effect on this source of risk.
+^
+The BLOOM announcement blog post states “We're finalizing an inference API for large-scale use even without dedicated hardware or engineering. In the meantime, for quick tests, prototyping, and lower-scale use, you can already
+play with an early version
+on the HF hub” (
+BigScience, 2022
+).
+^
+My confidence is based on (a) skimming the papers and/or blog posts for all GPT-3-like models in the diffusion
+database
+for mention of model access; (b) the 20-billion parameter GPT-NeoX-20B model being “to the best of our knowledge, the largest dense autoregressive model that has publicly available weights at the time of submission” as of February 2022 (
+Black et al., 2022
+); (c) none of the experts that I consulted with, nor papers that I looked at, mentioned other models that are both GPT-3-like and widely available for download. (I did not ask any experts about this directly, but several experts mentioned BLOOM and OPT, so it’s likely that they would have also mentioned other widely-accessible models if they existed.)
+YaLM
+from the Russian tech company Yandex is a possible exception (which was in fact known to me), but given that it has only 100 billion parameters, my guess is that it does not have comparable performance to GPT-3.
+^
+Throughout this sequence, “GPT-3” refers to the original 175-billion-parameter model that was first described in
+Brown et al. (2020)
+unless
+it is mentioned in the context of using the OpenAI API, which provides an updated version of the model.
+^
+See
+Shelvane (2022, p. 105)
+: a member of the OpenAI policy team told the author that “[researchers] can't make any changes to the underlying weights [of GPT-3]. They can't fine-tune it arbitrarily. They can't remove layers, they can't inspect the activations; they can't do all sorts of things.”
+^
+See
+Usage Guidelines
+which describe the procedure for application review, and the content policy.
+^
+See
+Shelvane (2022, p. 84)
+: “the [OpenAI] API is designed to prevent users from stealing GPT-3 [...] the API comes with usage quotas, which users must apply to increase.”
+^
+The cost of millions of dollars is based on my training compute cost estimates for OPT-175B and BLOOM. See this
+column
+in the diffusion database.
+^
+An example of this is AI21 Labs with Jurassic-1-Jumbo, provided via AI21 Studio (
+AI21 Labs, 2022
+).
+^
+GPT-NeoX-20B does not meet my definition of a GPT-3-like model, but it still serves as an informative case study.
+^
+See
+Zhang et al. (2022, p. 8)
+: "Given our primary goal as a replication of GPT-3..."
+^
+See the note on
+this cell
+in the diffusion database. I have not investigated whether the lower performance is significant in terms of how useful the model is, and I lack the intuition to judge this at face value.
+Zhang et al. (2022, p. 8)
+claim a “parity in performance for standard evaluation datasets used in the GPT-3 models,” but I didn’t find a clear statistical basis for this claim in the paper.
+^
+See
+Zhang et al. (2022)
+, Introduction, p. 1: "We are releasing all of our models between 125M and 66B parameters, and will provide full research access to OPT-175B upon request. Access will be granted to academic researchers; those affiliated with organizations in government, civil society, and academia; and those in industry research laboratories." The
+form
+to request model access includes fields for “Organization / Affiliation,” “Intended Use,” and “Previous related publications.”
+^
+Based on my estimated number of natural language processing researchers at top universities. I also estimate this number is less than the estimated number of applications that can be processed in one year. See this
+Guesstimate model
+for further details.
+^
+See
+Zhang et al. (2022)
+, Introduction, p. 1: “will provide full research access to OPT-175B upon request.” I interpret this as making the OPT-175B trained model weight file(s) available for download to the requester.
+^
+See
+access request form
+: “Subject to your compliance with the Documentation and Sections 2, 3, and 5, Meta grants you a non-exclusive, worldwide, non-transferable, non-sublicensable, revocable, royalty free and limited license under Meta’s copyright interests to reproduce, distribute, and create derivative works of the Software solely for your non-commercial research purposes.” Section 2 places restrictions on copying for certain purposes or copying without including the copyright, but not total restriction.
+^
+The search can be roughly replicated at this
+link
+, but I failed to obtain a working archived copy of the search.
+^
+I have not figured out when the API was released, but I only became aware of it in October 2022.
+^
+For the influence of Megatron-LM on BLOOM, see
+https://huggingface.co/bigscience/bloom#model-architecture-and-objective
+: the BLOOM model architecture is "Modified from Megatron-LM GPT2 (see paper, BLOOM Megatron code)". The BLOOM Megatron code (
+https://github.com/bigscience-workshop/Megatron-DeepSpeed
+) is "a detached fork of
+https://github.com/microsoft/Megatron-DeepSpeed
+, which itself is a fork of
+https://github.com/NVIDIA/Megatron-LM
+." The original Megatron-LM code was open-sourced to accompany
+Shoeybi et al. (2019)
+.
+^
+For the influence of GPT-2 on Megatron-LM, see
+Shoeybi et al. (2019)
+, Abstract, p.1: “...we train an 8.3 billion parameter transformer language model similar to GPT-2.”
+^
+For GPT-3 see the paper, p.14: “Although GPT-3’s training data is still primarily English (93% by word count), it also includes 7% of text in other languages.” For BLOOM, see
+model card
+: English is only 30.04% of the training data (presumably also measured by word count).
+^
+This is based on the following evidence. When I averaged the normalized accuracy on tasks that BigScience has evaluated for both BLOOM and OPT-175B, both BLOOM and OPT-175B both achieved approximately 47% accuracy. OPT-175B, in turn, had 2% less accuracy on average compared to GPT-3, on the tasks that OPT-175B was evaluated on in
+Zhang et al. (2022, p. 17)
+. So this suggests that BLOOM is similarly worse than GPT-3 on those tasks. A big caveat to this is that the set of tasks that BigScience has evaluated for both BLOOM and OPT-175B seem far from comprehensive. See this Colab
+notebook
+for the calculations and further explanation.
+^
+The 329 GB size was listed under “Checkpoint size” at
+https://huggingface.co/bigscience/bloom#speeds-sizes-times
+^
+Compute cost estimates are just based on cloud compute prices, and exclude the cost of other hardware such as a laptop to set up the cloud computing instance.
+^
+By “direct” I mean the people and skills that are required to set up the model and keep the model running in the deployment setting, excluding people that maintain software dependencies (e.g. PyTorch), or people that give advice on how to do deployment.
+^
+This means the deployment with the highest volume of model outputs that (a) would be possible for at least one actor to do by now if they tried; (b) is worth the cost—not necessarily in terms of financial revenue, but in achieving the actor's goal. See this
+Guesstimate model
+for calculations (the method is also explained in the main text).
+^
+Inference means passing data into the model and obtaining an output. This is also known as a “forward pass” of the model.
+^
+By “hosted” I mean that the organization stores the model on a server, and runs the model on hardware that is owned or rented by the organization.
+^
+See for example the OpenAI API
+Usage Guidelines
+which describe the procedure for application review, and the content policy.
+^
+The listed price for Davinci (which is presumably some version of the 175-billion parameter GPT-3 model) is $0.02 per 1000 tokens. 1000 tokens is roughly 750 English words based on this
+page
+. Therefore 150,000,000 words requires 150e6
+0.02 / 750 ~= $4000.
+^
+Credit to
+Buchanan et al. (2021)
+section 4 (starting p. 55) for the inspiration for this scenario.
+^
+Note that I am glossing over the actual capability of BLOOM to automate disinformation effectively. On this point (but substituting GPT-3 for BLOOM),
+Buchanan et al. (2021)
+concluded that “although GPT-3 will not replace all humans in disinformation operations, it is a tool that can help them to create moderate- to high-quality messages at a scale much greater than what has come before.” As I explained earlier, BLOOM seems less capable overall than GPT-3, so the quality of messages would generally be lower, or a human operator would need to spend more time ensuring the messages are high enough quality.
+^
+Again, I am not accounting for the
+likelihood
+of a GPT-3-size coding language model being able to improve ~1 million software developers’ productivity by 1-10%. However, I think this is plausible given that OpenAI Codex is an existing 20-billion-parameter model that is already being marketed as a tool to improve developer productivity (
+OpenAI, 2022
+). Intuitively, I think that users wouldn’t be willing to adopt Codex (or tools building on Codex) in the long-term if they didn’t expect to get an overall productivity improvement of 1% or more.
+^
+After I made these estimates, I obtained a reference class estimate. The reference class was the team working on
+GitHub Copilot
+, GitHub’s code suggestion tool powered by OpenAI Codex, which is a 20-billion parameter language model trained on code. I searched the term "GitHub copilot" on LinkedIn, filtered by "People", and then reviewed the first 4 pages of results for people that appeared to be currently working as engineers or developers for GitHub Copilot (after the 4th page, the results did not seem relevant enough to be worth continuing). I found 4 ML or Research Engineers, and 8 Software or Data Engineers, making 12 people in total. I think it's most likely that this LinkedIn search underestimates the true number of contributors, due to false negatives. This estimate is close to my intuitive estimate, but it should be taken as weak evidence due to being one case with a limited methodology. See this
+document
+for more details on the method. Due to time constraints, I did not use this evidence to update my final estimate.
+^
+The three months is just an intuitive estimate based on project durations in my 1.5 years of experience in software engineering at a company that deployed ML models.
+^
+See
+Leopold (2019)
+(reports 80-90%) and
+Barr (2019)
+(reports “up to 90%”).
+^
+See
+Guesstimate model
+for calculations.
+^
+Note: there is already an API to run inference with BLOOM
+here
+, but I think it’s useful to consider the general case where an actor deploys independently on a separate server, with less limit on usage.
+^
+See the
+BLOOM model card
+—“Speeds, Sizes, Times” section.
+Ben Cottier
+Ben Cottier
+Ben Cottier completed a research fellowship at Rethink Priorities working on AI Governance and Strategy. Previously, he was a Research Software Engineer at Invenia Labs, and received funding for independent research to understand expert views on transformative artificial intelligence. He holds an MSc in Artificial Intelligence from the University of Edinburgh.
+Previous
+Previous
+The replication and emulation of GPT-3
+Next
+Next
+Background for “Understanding the diffusion of large language models”
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.

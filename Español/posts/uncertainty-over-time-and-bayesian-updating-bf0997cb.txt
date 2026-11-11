@@ -1,0 +1,133 @@
+Incertidumbre a lo largo del tiempo y actualización bayesiana — Rethink Priorities
+0
+Ir al contenido
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones de cosmovisión
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleo
+Donar
+Abrir menú
+Cerrar menú
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones de cosmovisión
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleo
+Donar
+Abrir menú
+Cerrar menú
+Carpeta:
+Sobre nosotros
+Atrás
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Carpeta:
+Investigación
+Atrás
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones de cosmovisión
+Carpeta:
+Servicios
+Atrás
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleo
+Donar
+Incertidumbre a lo largo del tiempo y actualización bayesiana
+Investigaciones de cosmovisión
+25 oct.
+Escrito por
+Rethink Priorities
+Esta entrada forma parte de la serie del equipo de Investigaciones de cosmovisión de Rethink Priorities
+Serie CURVE
+: «Causas e incertidumbre: repensar el valor en la expectativa.» El objetivo de esta serie es doble: primero, considerar alternativas a la maximización del valor esperado para la priorización de causas; segundo, evaluar la afirmación de que el compromiso con la maximización del valor esperado respalda de forma sólida la conclusión de que deberíamos priorizar la mitigación del riesgo existencial por encima de todo lo demás. Esta entrada examina cómo aumenta la incertidumbre con el tiempo y estima un modelo de cómo interpretaría un bayesiano una predicción cada vez más incierta.
+Lea la introducción a la serie
+Resumen ejecutivo
+Al decidir entre acciones con impactos a corto y a largo plazo nos enfrentamos a una compensación: por un lado, las predicciones de los impactos a corto plazo son más seguras, pero su valor esperado puede ser menor; por otro, el valor esperado de los impactos a largo plazo puede ser mayor, pero las predicciones en que se basan son más inciertas. Si la incertidumbre crece más rápido que el impacto, entonces podemos preferir la acción con impactos más pequeños pero más seguros. ¿Qué podemos decir, si es que podemos decir algo, sobre la velocidad a la que aumenta la incertidumbre a medida que se alarga el horizonte temporal de la predicción?
+En esta entrada ofrezco algunas estimaciones empíricas de la rapidez con que aumenta la incertidumbre sobre el impacto en el rango de 1 a 20 años, usando datos de varios ensayos controlados aleatorizados de economía del desarrollo. Hago predicciones estadísticas de los impactos en distintos horizontes temporales y las comparo con los resultados reales.
+Después utilizo y extrapolo estos resultados para estimar un modelo de actualización bayesiana que combina formalmente la señal de tales predicciones con una distribución a priori, para producir una distribución a posteriori del impacto, bajo algunos supuestos simplificadores fuertes. Cuando la señal tiene baja incertidumbre, la distribución a posteriori está determinada principalmente por la señal. Muestro cómo, a medida que el ruido de la señal aumenta con el tiempo, la distribución a posteriori está determinada cada vez más por nuestras expectativas a priori.
+Incluso con un aumento gradual de la incertidumbre con el tiempo, el valor esperado a posteriori de los impactos a largo plazo se reduce hacia 0 a medida que avanza el tiempo. Mis estimaciones preferidas, en el mejor de los casos, indican que el valor esperado a posteriori es el 10% del valor esperado de la señal tras 561 años, y el 1% tras 6,168 años, aunque muestro que estas estimaciones son muy inciertas y sensibles a las decisiones de modelización.
+Analizo las limitaciones de este trabajo y las consecuencias para interpretar los modelos cuantitativos que incluyen efectos a muy largo plazo, como el próximo Cross-Cause Cost-Effectiveness Model (CCM) de Rethink Priorities. Como las estimaciones del impacto del riesgo existencial y de otras intervenciones centradas en el futuro lejano son menos seguras, estas estimaciones deberían desempeñar un papel relativamente menor en su visión global que los efectos más seguros a corto plazo.
+Introducción
+Al evaluar intervenciones surge un desafío cuando se comparan los impactos a corto y a largo plazo: las predicciones a corto plazo suelen ser más precisas pero pueden tener impactos menores, mientras que las predicciones a largo plazo podrían sugerir impactos mayores, pero vienen acompañadas de más incertidumbre. Esto plantea la pregunta: a medida que se alargan los horizontes de predicción, ¿cómo aumenta la incertidumbre alrededor de estas predicciones? ¿Y qué implica esta incertidumbre para nuestras creencias, teniéndolo todo en cuenta, sobre el impacto relativo de las intervenciones a corto y a largo plazo?
+Para abordar esto, utilizo datos de varios ensayos controlados aleatorizados (RCT) de economía del desarrollo, haciendo predicciones estadísticas de los impactos en plazos que van de 1 a 20 años. Uso el
+método de índice sustituto
+para hacer las predicciones, y el conjunto de datos de las predicciones procede de
+un artículo asociado
+(
+entrada de EA Forum
+) escrito en coautoría con Jojo Lee y Victor Wang. Comparo estas predicciones con los impactos observados en los resultados de los RCT para medir el error de pronóstico.
+Corrijo las predicciones para eliminar el sesgo y luego utilizo las estimaciones corregidas del error de pronóstico para evaluar, mediante gráficos y metaanálisis, cómo aumenta la incertidumbre con el tiempo. Muestro que, a lo largo de los 20 años de mis datos, el ruido de los pronósticos aumenta de forma bastante gradual. Además, la relación entre el ruido y el horizonte temporal es aproximadamente lineal, aunque la capacidad de los datos para detectar no linealidades es limitada.
+Para evaluar cómo podría afectar este aumento del ruido de los pronósticos a nuestra valoración relativa de intervenciones con impactos a corto y a largo plazo, utilizo después estas estimaciones empíricas para estimar
+un modelo de actualización bayesiana
+presentado por Duncan Webb.
+Para entender intuitivamente cómo funciona el modelo, imagine que producimos una estimación del valor esperado de alguna intervención mediante un método cuantitativo, como el índice sustituto o un cálculo informal de servilleta (BOTEC). Llame a esta estimación una
+señal
+. En
+esta entrada clásica
+, Holden Karnofsky sostiene que no deberíamos tomar literalmente señales de este tipo. En cambio, deberíamos combinar la señal con una
+distribución a priori
+, es decir, nuestras creencias antes de ver la señal. Una vez que combinamos nuestra distribución a priori con la señal, obtenemos una
+distribución a posteriori
+del impacto de una acción. Es importante que nuestra distribución a posteriori dependa de cuán ruidosa es la señal. Cuanto más ruidosa es la señal, más se mantiene el valor esperado de nuestra distribución a posteriori cerca de nuestra distribución a priori. Por ejemplo, probablemente pensaríamos que un BOTEC hecho en 2 minutos produce una señal mucho más ruidosa que un RCT bien ejecutado y, por tanto, si ambos produjeran la misma señal, pero con distintos niveles de precisión, el RCT desplazaría el valor esperado de nuestra distribución a posteriori más lejos de la distribución a priori.
+Ahora imagine que nuestro método cuantitativo produce dos señales: una para el valor a corto plazo de la intervención (digamos, el efecto tras 1 año) y otra para el largo plazo (digamos, el efecto tras 50 años). Parece razonable suponer que la señal de 1 año será más precisa que la de 50 años. Si modeláramos el impacto de una transferencia de efectivo de GiveDirectly, estaríamos bastante seguros de la precisión de la señal sobre efectos en resultados como el consumo y el ahorro tras 1 año. Sin embargo, la señal sobre el efecto tras 50 años sería mucho menos precisa: tendríamos que evaluar si es probable que la transferencia de efectivo impulse un crecimiento persistente del ingreso, examinar los efectos intergeneracionales, considerar cómo se vería afectada la economía en su conjunto, y así sucesivamente. En otras palabras, la varianza o el ruido de esta señal de 50 años sería mucho mayor que la varianza de la señal de 1 año. Por tanto, al formar nuestras distribuciones a posteriori para los valores a corto y a largo plazo de la intervención, daríamos menos peso a la señal de 50 años que a la de 1 año.
+Webb formaliza y amplía esta idea en
+un modelo económico de actualización bayesiana
+. En el modelo de Webb recibimos señales insesgadas del valor esperado de una intervención en cada periodo t en el futuro (por ejemplo, las señales provienen de un BOTEC u otro método cuantitativo). Es importante que el ruido de estas señales aumenta a medida que crece el horizonte temporal y miramos más lejos hacia el futuro. Esto recoge la intuición anterior de que la incertidumbre aumenta con el horizonte temporal. Lo que importa en el modelo es la velocidad a la que aumenta el ruido de las señales. Si el ruido crece con suficiente rapidez, entonces el valor esperado posterior de los efectos a largo plazo de una intervención podría ser menor que el valor esperado posterior de sus efectos a corto plazo, incluso si las señales de valor esperado a largo plazo son mucho mayores que las señales a corto plazo.
+Utilizo datos de pronósticos estadísticos sobre los resultados a largo plazo de ensayos controlados aleatorizados (RCT) para estimar empíricamente este modelo de actualización bayesiana (que se explica con más detalle más abajo). Como se mencionó antes, encuentro un aumento gradual del ruido de las señales o pronósticos. A pesar de este aumento gradual, si extrapolamos linealmente hacia adelante, el valor esperado posterior de los efectos a largo plazo de una intervención se reduce de forma significativa hacia el valor esperado del prior a priori, que supongo que es 0. Con mis estimaciones preferidas, en el mejor escenario, el valor esperado posterior es el 10% del valor esperado de la señal después de 1,600 años. Después de 18,000 años, el valor esperado posterior es el 1% del valor esperado de la señal. Dicho de otro modo, si recibiéramos una señal de que una intervención produce 100 utils cada año, nuestro valor esperado posterior sería de 10 utils después de 1,600 años, y de solo 1 util después de 18,000 años.
+Exploro varios casos distintos como pruebas de robustez y muestro cómo permitir no linealidades en la relación entre el error de pronóstico y el horizonte puede dar lugar a un rango de resultados muy amplio. Observo que todos los resultados dependen de los fuertes supuestos teóricos y empíricos que hago sobre la estructura del prior a priori y de la señal, así como de la extrapolación a lo largo del tiempo. Relajar estos supuestos puede cambiar de forma significativa la relación entre la señal y el valor esperado posterior. De manera similar, usar distintas fuentes de datos también puede cambiar estas relaciones de forma significativa, en cualquier dirección. Analizo estas limitaciones con más detalle al final.
+Este informe tiene implicaciones para la forma en que interpretamos los resultados de modelos cuantitativos como el Modelo de Costo-Efectividad Entre Causas (CCM) de Rethink Priorities, que aún no se ha publicado. Debemos pensar como bayesianos cuando interpretamos los resultados o las señales de estos modelos. Cuando las señales se refieren al valor a corto plazo y consideramos que son relativamente precisas, deberían desempeñar un papel relativamente grande al formar nuestra distribución posterior o nuestra visión global. En cambio, algunas de las señales sobre el valor a largo plazo dependen de proyecciones de hasta varios miles de millones de años en el futuro. Son mucho menos precisas, porque dependen de muchos parámetros sobre los que podríamos tener una incertidumbre profunda. Por tanto, al integrar estas señales en nuestra visión global, deberíamos darles menos peso que a los efectos a corto plazo, más precisos. Dentro del CCM podemos cuantificar la incertidumbre de las estimaciones debida a la incertidumbre de los parámetros, pero, como en la mayoría de los modelos, no podemos cuantificar la incertidumbre del modelo (la preocupación de que estemos usando el modelo equivocado), y esta incertidumbre del modelo podría ser la fuente dominante de nuestra incertidumbre, especialmente en el caso de las estimaciones más especulativas de valor a largo plazo.
+En el resto del informe, analizo la teoría detrás de la actualización bayesiana con incertidumbre creciente en el tiempo. Después describo los datos que utilizo, cómo estimar el ruido de los pronósticos y cómo estimar la relación entre el horizonte temporal y el ruido del pronóstico, lidiando con posibles factores de confusión. Muestro cómo cambia el ruido del pronóstico con el horizonte temporal en mi conjunto de datos y uso esto para estimar cuánto debe ajustarse el valor esperado de la señal para obtener un valor esperado posterior bayesiano. Exploro varios casos distintos y concluyo analizando las limitaciones de este enfoque y las posibles mejoras en trabajos futuros.
+Lea la publicación completa
+David Rhys Bernard
+Rethink Priorities
+Anterior
+Anterior
+Seguridad vial: panorama del problema y vías para una promoción eficaz de políticas
+Siguiente
+Siguiente
+Charting the precipice
+Boletín
+Dirección de correo electrónico
+Suscribirse
+¡Gracias!
+Sobre nosotros
+Nuestro equipo
+Oportunidades profesionales
+Política de privacidad
+Nuestro trabajo
+Investigación y publicaciones
+Boletín
+Todo el contenido es © Rethink Priorities o de sus respectivos autores, salvo que se indique lo contrario.

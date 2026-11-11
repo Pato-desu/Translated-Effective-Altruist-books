@@ -1,0 +1,688 @@
+ 
+ 
+ Modelos dinámicos aplicados al aprendizaje de valores en la inteligencia artificial 
+ Nicholas Kluge Corrêa1 y Nythamar de Oliveira2 
+ 1Máster en Ingeniería Eléctrica y doctorando en Filosofía - PUCRS 
+ nicholas.correa@acad.pucrs.br , ORCID: 0000 -0002 -5633 -6094 
+ 2 Doctor en Filosofía (State University of New York, 1994), profesor titular - PUCRS 
+ nythamar@yahoo.com , ORCID: 0000 -0001 -9241 -1031 
+ Programa de Posgrado en Filosofía de la Pontificia Universidad Católica de Rio Grande do Sul – 
+ Av. Ipiranga, 6681 - Partenon, Porto Alegre - RS, 90619 -900. 
+ 
+Resumen Los expertos en el desarrollo de la inteligencia artificial (IA) prevén que los avances en el desarrollo de sistemas y agentes inteligentes remodelarán áreas vitales de nuestra sociedad. Sin embargo, si ese avance no se realiza de forma prudente y crítico-reflexiva, puede tener resultados negativos para la humanidad. Por esta razón, varios investigadores del área intentan desarrollar un concepto de IA robusto, beneficioso y seguro para la preservación de la humanidad y del medio ambiente. Actualmente, varios de los problemas abiertos en el campo de la investigación en IA surgen de la dificultad de evitar comportamientos no deseados de los agentes y sistemas inteligentes y, al mismo tiempo, de especificar lo que queremos que hagan dichos sistemas, especialmente cuando buscamos la posibilidad de que agentes inteligentes actúen en varios dominios a largo plazo. Es de suma importancia que los agentes inteligentes artificiales tengan sus valores alineados con los valores humanos, dado que no podemos esperar que una IA desarrolle valores morales humanos simplemente por su inteligencia, como se discute en la tesis de la ortogonalidad. Quizás esta dificultad provenga de la forma en que abordamos el problema de expresar objetivos, valores y fines, utilizando métodos cognitivos representacionales. Una solución a este problema sería el enfoque dinámico propuesto por Dreyfus, cuya filosofía fenomenológica muestra que la experiencia humana de estar-en-el-mundo no está bien representada, en varios aspectos, por el método cognitivo simbólico o conexionista, especialmente en lo que respecta a la cuestión del aprendizaje de valores. Un posible enfoque para este problema sería utilizar modelos teóricos como SED (situated embodied dynamics, dinámica situada y encarnada) para abordar el problema del aprendizaje de valores en la IA.  
+ 
+Palabras clave: Inteligencia artificial, Aprendizaje de valores, Ciencia cognitiva, Cognición dinámica. 
+ 
+I. Introducción  
+Los investigadores y especialistas en el desarrollo de la inteligencia artificial (IA) estipulan que dentro de 10 
+años muchas actividades humanas serán superadas por las máquinas en términos de eficiencia. Varios 
+aspectos de nuestras políticas públicas tendrán que modificarse para acomodar 
+tales avances, que prometen remodelar áreas como el transporte, la salud, la economía, el combate militar, el estilo de vida 
+etc. (GRACE et al. 2017). También existe preocupación por los riesgos que las máquinas con un 
+alto nivel de inteligencia humana o sobrehumana pueden acarrear a la humanidad en las próximas décadas. Una 
+encuesta realizada por Müller y Bostrom (2016) consistió en construir un cuestionario para 
+CORE Metadatos, citas y artículos similares en core.ac.uk
+Proporcionado por PhilPapers
+evaluar el progreso en el campo de la investigación en IA y las perspectivas de futuro, entrevistando a diversos 
+expertos del campo. El cuestionario mostró que, en promedio, existe una     probabilidad de que 
+la inteligencia de máquina de alto nivel (humana) se alcance entre 2040 y 2050, alcanzando una 
+    probabilidad hacia 2075. Se estima además que esta inteligencia superará el rendimiento humano 
+en 2 años (     probabilidad) a 30 años (     probabilidad) tras alcanzar la inteligencia humana 
+niveles de inteligencia humana (MÜLLER; BOSTROM, 2016).  
+Sin embargo, en la misma encuesta,      de los encuestados clasificó este desarrollo de la IA como “malo” 
+o “extremadamente malo” para la humanidad (MÜLLER; BOSTROM, 2016). Como no hay garantía 
+de que tales sistemas serán “buenos” para la humanidad, debemos investigar más a fondo el futuro de la 
+superinteligencia y los riesgos que plantea para la raza humana. Varias preguntas abiertas y 
+problemas deben resolverse. ¿Cómo remediaremos los impactos económicos de la IA para evitar 
+efectos negativos como el desempleo masivo (FREY; ORSBORNE, 2013)? ¿Cómo podemos 
+evitar que la automatización de los empleos empuje la distribución del ingreso hacia una 
+distribución de poder desproporcionado entre clases, géneros y razas (BRYNJOLFSSON; MCAFEE, 
+2014)? ¿Pueden construirse armas letales autónomas sin cambiar los derechos humanitarios, y 
+¿deben prohibirse por completo las armas autónomas (DOCHERTY, 2012) (CHURCHILL; 
+ULFSTEIN, 2000)? ¿Cómo podemos garantizar la privacidad aplicando el aprendizaje automático a datos confidenciales 
+como fuentes de datos médicos, líneas telefónicas, correos electrónicos y patrones de comportamiento en línea (ABADI et al. 
+2016)? ¿Cómo podemos entender lo que hacen los complejos sistemas de IA para clasificar y 
+reconstruir iterativamente imágenes a partir de redes neuronales (MORDVINTSEV, OLAH, TYKA, 2015)?  
+Algunos investigadores ya han creado modelos (ASI-PATH) de cómo una IA podría causar algún 
+tipo de catástrofe, volviéndose superinteligente mediante la automejora recursiva 
+(BARRET; BAUM, 2017), algo conocido en la literatura sobre IA como Singularidad. Tales 
+modelos sugieren escenarios en los que los agentes inteligentes, tras obtener algún tipo de 
+ventaja estratégica (DSA, ventaja estratégica decisiva, o MSA, ventaja estratégica mayor), como 
+avances en nanotecnología o robótica, podrían alcanzar un poder considerable de dominación 
+(BOSTROM; ĆIRKOVIĆ, 2008). Los escenarios sugieren distintos tipos de tomas de control 
+por sistemas de inteligencia artificial, desde despegues rápidos, situaciones en las que una toma de control 
+drástica por parte de tales sistemas ocurre, hasta despegues lentos, en los que la raza humana se vuelve gradualmente más 
+dependiente y, en cierta medida, bajo el control de la IA (SOTALA, 2018).  
+El desarrollo de una ética de la IA presupone, en efecto, las formulaciones intuitivas de las llamadas 
+Tres Leyes de la Robótica de Isaac Asimov (19 50), en una época en que este tema aún parecía 
+relegado al ámbito de la ciencia ficción; recordemos que tales codificaciones ético-morales se 
+introdujeron en un cuento de 1942, Runaround: “(1) Un robot no puede dañar a un ser humano ni, por 
+inacción, permitir que un ser humano sufra daño; (2) un robot debe obedecer las órdenes que le den los seres humanos, 
+excepto cuando tales órdenes entren en conflicto con la Primera Ley; (3) un robot debe proteger su 
+existencia, siempre que tal protección no entre en conflicto con la Primera o la Segunda Ley. En nuestro 
+siglo, esta orientación ética de no dañar a la humanidad se extendió no solo a los robots y 
+artefactos robóticos, sino a las máquinas y dispositivos inteligentes asociados en general con la 
+IA y sus recursos.  
+Así, Shulman (2010, pp. 2) propone un modelo que explica en qué situaciones una IA abandonaría la 
+cooperación con la raza humana y emprendería una acción hostil, en la que un agente artificial 
+que cree tener una   probabilidad de éxito si inicia una agresión, recibiendo 
+cierta utilidad esperada               , y con una (      ) probabilidad de fracaso, recibiendo 
+              . Si abandona la estrategia agresiva, el agente recibe utilidad 
+                  . La IA iniciará racionalmente la agresión solo si:  
+                                                 
+II. Problemas de seguridad en la IA  
+En última instancia, existe un consenso en la literatura: el desarrollo de la IA debe hacerse de manera segura, 
+beneficiosa y robusta. Un artículo publicado por Amodei et al. (2016), titulado 
+“Concrete Problems in AI Safety” enumera varios problemas abiertos en el campo de la investigación en IA que 
+deben abordarse si queremos cosechar los beneficios de la IA sin comprometer nuestra seguridad. Estos 
+problemas se clasifican en problemas de especificación y de robustez, y son las barreras actuales 
+que deben superarse en el área (LEIKE et al. 2017).  
+Para sintetizar y desarrollar mejor el contenido de este estudio, nos referiremos brevemente solo a 
+los errores de especificación. Los errores de especificación ocurren cuando la función de utilidad de la IA está mal 
+especificada por los programadores, lo que causa resultados no deseados e incluso dañinos, aun si el aprendizaje es 
+perfecto con datos explícitamente claros (AMODEI et al. 2016). Algunos ejemplos de errores de 
+especificación son los efectos secundarios negativos, el hackeo de recompensas y la interrupción segura (corregibilidad). 
+Los efectos secundarios negativos ocurren cuando la maximización de la función de recompensa se centra en 
+alcanzar un objetivo mientras el agente ignora factores importantes del entorno, lo que provoca 
+posibles efectos colaterales. En el hackeo de recompensas, el agente de IA encuentra una solución a su objetivo que 
+maximiza su función de recompensa pero, de forma inesperada, pervierte la intención de los programadores 
+(AMODEI et al. 2016). La interrupción segura o corregibilidad se ocupa de cómo podemos interrumpir 
+un agente si se comporta de forma inesperada y, en cierta medida, corregir los errores detectados 
+sin que el agente se oponga a las interrupciones. (SOARES et al. 2015).  
+Dos tesis publicadas por Bostrom (2012), propuestas por primera vez por Omohundro (2008) en su 
+artículo seminal «The Basic AI Drives», señalan cómo estos problemas pueden suponer un riesgo. La 
+tesis de la convergencia instrumental nos muestra cómo una serie de objetivos de automejora y 
+conservación pueden ser perseguidos por cualquier agente inteligente con un objetivo terminal. Podemos 
+formular esta tesis del siguiente modo: 
+Pueden identificarse varios objetivos instrumentales, que son convergentes en 
+el sentido de que su logro aumentaría las probabilidades del objetivo terminal 
+del agente, lo que implica que estos objetivos instrumentales son probablemente 
+perseguidos por cualquier agente inteligente (BOSTROM, 2012, p. 6).  
+Sin una ingeniería cuidadosa de estos sistemas, los riesgos de una «explosión de inteligencia» (el 
+aumento exponencial de la capacidad cognitiva del agente) pueden crear agentes mucho más 
+poderosos que nuestra capacidad para controlarlos. Por otro lado, y en correlación con la primera tesis, 
+la tesis de la ortogonalidad propone que la inteligencia y los objetivos finales tienen propiedades independientes y 
+ortogonales. La hipótesis se argumenta así: 
+La inteligencia y los objetivos últimos son ejes ortogonales a lo largo de los cuales los posibles 
+agentes pueden variar libremente. En otras palabras, más o menos cualquier nivel de inteligencia 
+podría, en principio, combinarse con más o menos cualquier objetivo final 
+(BOSTROM, 2012, p. 3).  
+El razonamiento detrás de la tesis de la ortogonalidad es análogo a la llamada guillotina de Hume 
+(también conocida en inglés como bifurcación de Hume o ley de Hume), que opone lo que es fáctica y 
+empíricamente verificable (cuestiones de hecho y existencia real) a lo que debería ser, en términos racionales, 
+normativo y contrafactual (relaciones de ideas). Hume observó una diferencia significativa 
+entre las afirmaciones descriptivas y las prescriptivas o normativas, y por ello 
+no sería obvio, evidente por sí mismo (self-evident) ni válido (valid) derivar estas últimas de 
+las primeras. El paso indebido del ser (Is) al deber ser (Ought), que sería uno de los 
+problemas seminales de la investigación en metaética, ética normativa y ética aplicada en el 
+siglo XX, lo señaló el filósofo escocés en un famoso pasaje de la sección I de 
+la parte I de su Tratado de la naturaleza humana:  
+ En todo sistema moral que he encontrado hasta ahora, siempre he observado 
+que el autor sigue durante un tiempo el modo común de razonar, 
+estableciendo la existencia de Dios, o haciendo observaciones sobre 
+los asuntos humanos, cuando de pronto me sorprende ver que, en lugar de las 
+habituales cópulas proposicionales, como es y no es, no encuentro ni una sola 
+proposición que no esté conectada con otra mediante un debe o no debe. 
+Este cambio es imperceptible pero de suma importancia. Pues como este 
+debe o no debe expresa una nueva relación o afirmación, sería necesario 
+notarla y explicarla; al mismo tiempo, sería necesario dar 
+una razón de algo que parece inconcebible, es decir, cómo esta nueva 
+relación puede deducirse de otras totalmente distintas (HUME, 2009, p. 
+509).  
+ Así como las afirmaciones descriptivas, puramente fácticas, solo pueden vincular o implicar otras afirmaciones descriptivas o 
+fácticas y nunca normas, los problemas de ortogonalidad y alineación de valores 
+consisten en garantizar que, si una AGI (inteligencia artificial general, es decir, una hipotética 
+inteligencia de una máquina con la capacidad de comprender o aprender cualquier tarea intelectual que un 
+ser humano puede realizar) llegara a desarrollar suficiente inteligencia para tener poder sobre la 
+especie humana, que esa inteligencia haría con los seres humanos solo lo que quisiéramos o 
+aceptáramos que se hiciera.  
+En este sentido, el problema de la alineación es idéntico a lo que vemos en la filosofía moral sobre el 
+utilitarismo, en el sentido de que la maximización de la utilidad por parte de algún agente moral puede culminar en 
+conclusiones moralmente repugnantes, incluida la violación de los derechos de otros. Aunque 
+puede garantizar la resolución de tareas en tiempo computacional (polinómico), la mera eficiencia 
+u optimización de procedimientos no asegura la universalizabilidad normativa (que sería, además, 
+una premisa básica de los modelos éticos deontológicos y no utilitaristas) y puede 
+terminar en conflicto con los intereses o derechos de otras personas. Conviene señalar también que la 
+ética de la inteligencia artificial forma parte de la ética de la tecnología en general y, en concreto, 
+de los robots, las máquinas de aprendizaje y otros artefactos y entidades artificialmente inteligentes.  
+En nuestro enfoque, la ética de la IA comprende tanto la robótica (ética robótica), que se ocupa 
+del comportamiento moral de los seres humanos al diseñar, construir, usar y programar 
+seres artificialmente inteligentes, y una ética de las máquinas, que se ocupa del 
+comportamiento moral de los propios agentes morales artificiales. Tanto la bioética como la neuroética tendrían 
+mucho que aprender, enseñar y con lo que interactuar con la ética de la inteligencia artificial, especialmente 
+a través de la interfaz de modelos de vida artificial, la edición genómica y las redes neuronales con los 
+desafíos ético-normativos de la ortogonalidad, la alineación de valores y el transhumanismo, 
+integrando los legados neurobiológicos, culturales y tecnológicos del homo sapiens 
+sapiens. 
+El sesgo antropomórfico tiende a moldear todo el espectro de mentes e inteligencias posibles, 
+pero esto es un error, conocido como la falacia de la proyección mental (JAYNES, 2003). Por el 
+contrario, consideramos la inteligencia como una función de optimizar la capacidad de un agente para alcanzar 
+objetivos en una amplia variedad de entornos con recursos limitados (LEGG, 2008). Para ilustrar mejor 
+esta idea, usamos una cita de Dijkstra (1984): «la cuestión de si una 
+máquina puede pensar es tan relevante como la cuestión de si los submarinos pueden nadar». El límite 
+superior del procesamiento bruto de todo el universo conocido, impuesto por las leyes de la física, es 
+10120 operaciones en 1090 bits (10120 bits incluidos los grados de libertad gravitacional) 
+(LLOYD, 2002). El nivel humano de procesamiento de información es de 1011 operaciones por segundo 
+(MORAVEC, 1998). Esta diferencia entre el nivel humano y el grado más alto posible de 
+optimización deja abierta una amplia gama de posibles niveles de inteligencia sobrehumana 
+(SOTALA, 2010). En el sentido kantiano, la razón puede definirse como la capacidad de obtener inferencias 
+lógicas o, de forma sistemática, la capacidad de sintetizar en unidad, mediante principios 
+abarcadores, los conceptos proporcionados por el intelecto, de modo que los agentes usan la razón para establecer y 
+perseguir fines (metas, propósitos, Zwecken), usando el resto de la naturaleza como medio para sus fines. 
+La humanidad se considera así un fin en sí misma y un fin terminal de la naturaleza (ALLISON, 
+1996).  
+Por estas razones, la alineación de los valores entre la IA y los humanos es un problema importante que 
+debe resolverse en el área de la ética de las máquinas (SOARES; FALLESTEIN, 2014). Prácticamente todos 
+los problemas de especificación, robustez y alineación de valores parecen producirse en el mismo punto, 
+cuando nuestras representaciones de los valores o de los objetivos finales (metas) pierden su significado o son 
+malinterpretadas. ¿Está condenado al error el enfoque objetivo-representacional? ¿Serían los 
+modelos cognitivos usados en la creación de agentes artificialmente inteligentes, en especial el simbolismo 
+y el conexionismo, incapaces de expresar el significado de los valores humanos? Si es así, 
+¿existiría alguna alternativa? 
+III. Modelos cognitivos: simbolismo y conexionismo  
+Desde finales de la década de 1950, el debate sobre la cognición y la inteligencia ha estado impregnado 
+por el marco computacional, también conocido como visión simbólica. Esta perspectiva parte de 
+la suposición de que los sistemas cognitivos son inteligentes en el sentido de que pueden codificar conocimiento en 
+representaciones simbólicas. Los simbolistas creen que mediante conjuntos de reglas “si-entonces” y otras 
+formas de cálculo para algoritmos simbólicos, toda la cognición se logra manipulando 
+tales representaciones (THAGARD, 1992).  
+Newell (1990) definió la propuesta computacionalista, también denominada 
+“Hipótesis del Sistema de Símbolos Físicos”, de la siguiente manera: los sistemas cognitivos naturales son inteligentes 
+por ser sistemas físicos que manipulan símbolos de tal manera que presentan un comportamiento inteligente, 
+codificando conocimiento sobre el mundo externo en estructuras simbólicas (NEWELL, 
+1990, pp. 75-79). Newell ha dedicado gran parte de su trabajo a construir sistemas que expresen su 
+visión de un sistema de símbolos físicos. Su modelo más prometedor se conoce como SOAR. SOAR es 
+un sistema computacional simbólico que formula sus tareas con base en jerarquías de símbolos y metas, 
+generando así un sistema algorítmico de producción y toma de decisiones para 
+la resolución de problemas (NEWELL, 1990, p. 39). 
+de la cognición son efectos de alto nivel que dependen de fenómenos de bajo nivel. Así, la 
+hipótesis conexionista encapsula la idea de que lo que determina la capacidad cognitiva de un agente no es 
+la capacidad de manipulación representacional, sino su arquitectura. 
+Así, los conexionistas abordan el problema de la cognición mediante ingeniería inversa 
+del sistema nervioso central, copiando su unidad básica de procesamiento, es decir, la neurona (Churchland 
+y Sejnowski, 1992, p. 2). Sejnowski (1988, p. 7) señala en su hipótesis conexionista: “El 
+procesador intuitivo es un sistema conexionista dinámico subconceptual que no admite una 
+descripción completa, formal y precisa a nivel conceptual”. 
+Así, las teorías de la cognición en la IA (simbolismo, conexionismo y dinamismo) pueden 
+considerarse estructuras teóricas, ya que nos proporcionan los filtros, analogías y 
+metáforas con las que tratamos de entender el fenómeno de la cognición, y así crear 
+modelos teóricos que puedan generar simulaciones a ser probadas (BEER, 1998). El simbolismo, 
+por ejemplo, destaca las representaciones internas del sistema o agente, y los algoritmos 
+mediante los cuales estas representaciones se manipulan. El conexionismo enfatiza la arquitectura 
+de redes neuronales, el algoritmo de aprendizaje, la preparación de los datos de entrenamiento y el protocolo 
+utilizado (ELIASMITH, 1996).  
+Sin embargo, las limitaciones de la hipótesis computacional simbólica, especialmente en los aspectos 
+de tiempo, arquitectura, cómputo y representación, llevaron a los investigadores a considerar nuevos 
+modelos teóricos, como la hipótesis dinámica (van GELDER, 1998). Y aunque 
+el modelo conexionista es similar al modelo dinámico en los aspectos señalados 
+en el modelo simbólico (tiempo, arquitectura, cómputo y representación), el modelo conexionista 
+todavía no logra producir agentes que puedan resolver los problemas antes mencionados de especificación y 
+robustez.  
+En este artículo no adoptamos una posición antirrepresentacionalista, ya que los humanos usamos y manipulamos constantemente 
+representaciones, como en el lenguaje, la escritura, el habla, la música y otras formas de 
+pensamiento abstracto. Sin embargo, nos posicionamos con escepticismo respecto a la función de las 
+representaciones en sistemas que involucran métodos de objetivos-valores y, por tanto, conducta orientada a metas. 
+Quizá, en algunos casos, los roles que desempeñan los estados internos de un agente cognitivo 
+simplemente no pueden interpretarse como representacionales (FRANKISH; RAMSEY, 2014). 
+IV. Crítica del método simbólico  
+Una de las críticas más importantes contra el modelo de cómputo simbólico es la dificultad para 
+cumplir con las restricciones de tiempo. Al tratar de replicar el fenómeno de la cognición, van Gelder 
+y Port (1998, p. 2) afirman que los simbolistas “dejan el tiempo fuera del panorama”. Dado que 
+el objetivo de la ciencia cognitiva es describir la conducta de los agentes cognitivos naturales, y por definición, 
+estos agentes operan en tiempo real, un modelo cognitivo que replique la experiencia humana 
+de la cognición debe presentar procesos cognitivos en tiempo real (en el caso de los humanos: ± 
+10 milisegundos) (van GELDER; PORT, 1998).  
+Los límites impuestos por la arquitectura simbólica son otra fuente de críticas al 
+método computacional. Para Newell (NEWELL, 1990, p. 82), la conducta está determinada por un 
+contenido variable procesado por una estructura fija, que es la arquitectura. Los dinamicistas 
+critican esta visión del sistema cognitivo como “una caja” dentro de un cuerpo, a su vez dentro de un 
+entorno físico. Sin embargo, ¿dónde trazamos la línea que separa la caja del cuerpo? Y, de forma 
+más controvertida, ¿el cuerpo del entorno? Van Gelder y Port (1998, p. 8) 
+analizan la arquitectura interna del agente cognitivo como no siendo una estructura fija, donde todos 
+los aspectos de la cognición (cerebro, cuerpo y entorno) se influyen mutuamente 
+de forma continua.  
+En consecuencia, esta visión de la arquitectura suele referirse al método simbólico como 
+un método computacional, porque describe la mente como un tipo especial de computadora. Esta 
+caracterización sigue la arquitectura propuesta por Newell (1990), e identifica la 
+computadora mental con el cerebro. El cuerpo, a través de los órganos sensoriales, entrega al 
+sistema cognitivo (cerebro) representaciones del estado de su entorno; el sistema, por su parte, 
+calcula una respuesta apropiada y el cuerpo ejecuta la acción (van GELDER; PORT, 
+1998, p. 1). Sin embargo, este sistema de percibir-planificar-actuar ignora fenómenos importantes en la toma de 
+decisiones, como los actos reflejos, y la velocidad con que tales acciones se 
+expresan en los agentes cognitivos reales, lo que demuestra una vez más que el método computacional simbólico 
+carece de fundamento en la realidad biológica y física del fenómeno de la cognición. 
+Hubert Dreyfus (1992) fue uno de los críticos más destacados del enfoque representacional simbólico 
+en el campo de la investigación en IA. Basado en la filosofía hermenéutico-existencialista 
+propuesta por Martin Heidegger, Dreyfus indicó en sus obras que la manipulación de 
+símbolos y representaciones no basta para generar el tipo no representacional de 
+existencia de un ser en el mundo (Dasein). En el fondo de este callejón sin salida, persiste una 
+crítica al pensamiento cartesiano materialista y al dualismo sujeto-objeto: el cartesianismo materialista 
+que intenta, sin éxito, replicar todo el mundo “dentro de la mente” está condenado a 
+fracasar según Dreyfus, porque es imposible contener el mundo dentro de la mente por el 
+simple hecho de que el mundo es infinitamente complejo y nosotros somos criaturas finitas (DREYFUS, 2007). 
+Así, un sistema autocontenido y rígido no es capaz de replicar el tipo de agente cognitivo 
+que deseamos. Quizás esto nos indica que las representaciones y la experiencia deben operar 
+juntas para que las primeras tengan sentido. 
+V. Conexionismo y aprendizaje de valores  
+Podemos ver que muchos de los problemas mencionados surgen de la dificultad de los 
+programadores para expresar el significado de lo que se propone en el lenguaje (errores de 
+especificación) y cómo debería cambiar esto cuando evoluciona el contexto del entorno (errores de 
+robustez). Sea el modelo cognitivo representacional, que usa reglas de conducta (si-entonces), o el 
+modelo conexionista, que usa redes neuronales artificiales con funciones de recompensa, seguimos llegando al 
+mismo callejón sin salida. ¿Cómo expresamos nuestras metas y alineamos los valores de los agentes 
+artificialmente inteligentes con los nuestros?  
+El enfoque relacionado enfrenta varias dificultades en esta tarea, que se exploran con más 
+detalle a continuación. Comúnmente, las redes neuronales artificiales se entrenan de forma supervisada, usando 
+datos de entrenamiento etiquetados; sin embargo, este método puede no ser el más seguro para el aprendizaje de valores. Dreyfus 
+y Dreyfus (1992) citan un ejemplo en el que un sistema de aprendizaje automático se entrena para clasificar, o 
+no, vehículos militares terrestres ocultos entre los árboles. El clasificador, durante el entrenamiento, fue 
+capaz de identificar con gran precisión los vehículos deseados; sin embargo, el sistema tenía un criterio difuso 
+rendimiento con imágenes fuera del grupo de entrenamiento. Más tarde se descubrió que el conjunto de 
+fotos usado para el entrenamiento que contenía vehículos se tomó en un día soleado, mientras que las imágenes 
+sin vehículos se hicieron en un día nublado. Lo que el clasificador identificaba era el 
+brillo de las imágenes. Potencialmente, el aprendizaje de valores por inducción es susceptible a este fallo 
+(SOARES, 2016). 
+Por esta razón, se espera que los agentes inteligentes artificiales posean una propiedad llamada 
+corregibilidad. Tales sistemas deben tener su función de recompensa o jerarquía de valores ajustada en 
+caso de que ocurra algo no deseado. Sin embargo, también es necesario que esos mismos agentes no puedan 
+influir en su entorno de aprendizaje o en su función de recompensa, y mucho menos impedir que se 
+modifique. Actualmente no hay soluciones para este problema (SOARES; FALLENSTEIN, 
+2015). Además, tanto los métodos de entrenamiento supervisado, que usan datos etiquetados, como el refuerzo 
+aprendizaje por refuerzo, que usa funciones de utilidad como sustituto de resultados deseables, son extremadamente vulnerables 
+para identificar ambigüedades (SOARES, 2016), como lo demuestran los problemas del “aprendiz de brujo” 
+y las situaciones en las que el sistema, debido a la divergencia en los entornos de prueba y en los nuevos 
+entornos, así como la especificación errónea de objetivos, tienen la oportunidad de manipular su 
+recompensa (BOSTROM, 2014). El escenario de manipulación de la recompensa, o “wireheading”, se compara erróneamente con 
+humanos que estimulan su placer (p. ej., el consumo de drogas). El apetito humano es saciable; un agente artificial 
+con el poder de maximizar su recompensa no detendrá su comportamiento “compulsivo”. Lo hará 
+incluso buscar medios para perpetuar su comportamiento autocompensatorio, libre de interferencias 
+(OMOHUNDRO, 2009). 
+La función de utilidad puede explicarse mediante el teorema de utilidad de von Neumann-Morgenstern (von 
+NEUMANN; MORGENSTERN, 1953). El teorema configura las funciones de utilidad mediante 
+la ordenación de preferencias: A se prefiere a B, o B se prefiere a A, o ambas tienen el mismo 
+valor de preferencia. Una función de utilidad permite que, dado el estado del agente y el estado del 
+mundo en general, se genere una decisión del agente entre dos o más opciones. El concepto de 
+función de utilidad es una formalización matemática de la noción de valores humanos y es 
+ampliamente utilizado en economía y teoría de la decisión. Sin embargo, uno de los problemas más conocidos de 
+este modelo es el hecho empírico de que los humanos violan los axiomas de la teoría de la utilidad y no 
+tienen funciones de utilidad coherentes (TVERSKY; KAHNEMAN, 1981).  
+Una alternativa sería modelar la intención de los operadores mediante el aprendizaje por refuerzo inverso 
+(NG; RUSSELL, 2000): en el que un agente trata de identificar y maximizar la función de recompensa 
+de otro agente del entorno (generalmente, un operador humano). Sin embargo, las preferencias 
+humanas no siempre pueden capturarse solo con observaciones, y si se modelan 
+de manera óptima, el aprendizaje inverso por refuerzo demuestra el problema de aprender “errores” o 
+sesgos del comportamiento humano como soluciones válidas. Avances recientes en el área, como el CIRL 
+(aprendizaje cooperativo por refuerzo inverso) resolverían este problema: 
+en lugar de estimar y adoptar la función de recompensa del ser humano como propia, el sistema 
+intenta resolver un POMDP (proceso de decisión de Markov parcialmente observable), lo que lleva a un 
+comportamiento de aprendizaje cooperativo, en el que el sistema o agente trata de maximizar la 
+función de recompensa del operador, pero sin saber cuál es (HADFIELD-MENELL, 2016). Sin embargo, 
+este enfoque genera problemas de interpretación, como la identificación de la ambigüedad y 
+problemas de coordinación entre los agentes que participan en el POMDP. 
+Además, las situaciones en las que los humanos forman parte del sistema de recompensa de una IA, también llamadas 
+human-in-the-loop (humano en el bucle), no se consideran seguras, ya que hay pruebas sólidas de que los agentes artificiales 
+inteligentes tenderían a manipular la parte humana de su mecanismo de recompensa 
+si eso significara un aumento de la recompensa (HIBBARD, 2012; BOSTROM, 2014). En general, nuestros 
+métodos de entrenamiento actuales para el modelo cognitivo conexionista no son apropiados para una IA 
+o IAG (inteligencia artificial general) que opere en el mundo real. Los posibles escenarios de auto-
+mejora, o incluso una “explosión de inteligencia”, tal como explica la Tesis de la 
+convergencia instrumental (BOSTROM, 2012), pueden generar consecuencias catastróficas para la humanidad 
+(YUDKOWSKY, 2008). El objetivo último de estos agentes es maximizar la recompensa, siendo 
+nuestros valores y objetivos solo instrumentales para su objetivo último. Tales agentes pueden aprender que 
+los objetivos humanos son instrumentalmente útiles para obtener grandes recompensas, pero reemplazables, sobre todo si 
+la inteligencia de estos agentes es superior a la nuestra (DEWEY, 2011). 
+Ya sea por representatividad simbólica o por entrenamiento conexionista, hasta ahora los objetivos de valor 
+no pueden expresarse de forma segura, y dada la importancia de alinear los valores humanos con la IA, deben 
+investigarse nuevos métodos. Proponemos en este artículo que el modelo cognitivo dinámico 
+ofrece una nueva forma de pensar el problema de la alineación. En la siguiente sección, 
+analizaremos algunas de las características del modelo dinámico teórico de la cognición. 
+VI. Modelo cognitivo dinámico  
+Puede decirse que muchos modelos teóricos comienzan como metáforas o analogías, y luego se convierten 
+en teorías que pueden implementarse en modelos y posteriormente simularse. Las estructuras conceptuales 
+que formamos a través de este proceso pueden tener un gran impacto en la forma en que realizamos 
+nuestros estudios, la manera en que abordamos el problema, el lenguaje con el que describimos los fenómenos, y 
+la forma en que formulamos una pregunta e interpretamos una respuesta. La teoría de los sistemas dinámicos 
+nos invita a pensar en el fenómeno de la cognición y la experiencia humana de una manera progresiva, 
+tal como propone Van Gelder (1998, p. 4), cuya Hipótesis Dinámica postula: 
+“Los sistemas cognitivos naturales son ciertos tipos de sistemas dinámicos, y se entienden mejor 
+desde la perspectiva dinámica”. Los sistemas dinámicos, en este sentido, son sistemas en los que, a medida que 
+evolucionan en el tiempo, sus variables determinan continua y simultáneamente la evolución 
+de una de las otras; dicho de otro modo, son sistemas gobernados por ecuaciones diferenciales no lineales 
+(van GELDER; PORT, 1998, p. 6). Con esta afirmación, el dinamicista sitúa al agente 
+en una situación de acoplamiento con el entorno, convirtiendo el sistema cerebro-cuerpo-entorno en un 
+sistema dinámico cognitivo autónomo, en el que ya no tiene sentido hablar de cognición 
+o de experiencia sin reconocer los tres aspectos de esta tríada (van GELDER; PORT, 1998, 
+p. 23). 
+Un sistema dinámico es una abstracción matemática compuesta por un espacio de estados, un conjunto de 
+tiempos ordenados     , y un operador de evolución φ que transforma un estado en otro a lo largo de. 
+  puede ser numérico o simbólico, continuo, discreto o híbrido, de cualquier topología o dimensión. 
+  suele expresarse mediante el conjunto de enteros o de números reales, y la evolución del 
+operador puede ser determinista o estocástico (KUZNETSOV, 2004). La actividad situada tiene 
+sus orígenes filosóficos en la obra fenomenológica de Heidegger (2012), que Dreyfus 
+(1992) aplicó al campo de la IA, en el que se asume que el agente heideggeriano no puede 
+separarse del entorno o de su contexto interpretativo. La Psicología Ecológica de Gibson 
+(1979) también es un precursor de la actividad situada, con su noción de affordances (posibilidades de acción): 
+Gibson enfatiza la relación entorno-organismo en el fenómeno de la percepción 
+como una vía de doble sentido, en la que se percibe para actuar y se actúa para percibir. La idea de cognición situada 
+puede extenderse a teorías como la “mente extendida” (CLARK & CHALMERS, 
+1998), también conocida como ECH (hipótesis de la cognición extendida) (ROCKWELL, 2010), la cual 
+nos invita a pensar de una manera diferente sobre el pensamiento cartesiano que coloca la mente encarcelada 
+dentro del cerebro. Explicamos la gravedad como la relación entre campos gravitatorios; 
+el electromagnetismo, por campos electromagnéticos; la posición de las partículas subatómicas se expresa 
+mediante ondas probabilísticas usando la ecuación de Schrödinger, la longitud de onda de De Broglie, y 
+el principio de incertidumbre de Heisenberg. Así, parece probable que una teoría sofisticada que explique 
+la conciencia y la experiencia de un agente cognitivo implique algún tipo de teoría que se refiera 
+a la fluctuación dinámica de los campos. 
+El modelo teórico que presentamos en este artículo es SED (situated embodied dynamics), 
+propuesto por Beer (2000), que enfatiza cómo la experiencia cognitiva surge de la 
+interacción dinámica cerebro-cuerpo-entorno. En primer lugar, SED toma en cuenta la 
+situación como algo fundamental para la cognición, colocando la acción concreta, es decir, literalmente actuar en 
+el mundo, como algo más fundamental que las descripciones abstractas de esta acción. Así, 
+la tarea final del agente inteligente es actuar, una acción que ocurre en un entorno, el cual 
+es una parte central del comportamiento, ya que es lo que da sentido y contexto a la acción. Y 
+la interacción del agente con el entorno es mutua; el entorno no es solo una 
+fuente de problemas por resolver, sino un socio con el que el agente se involucra de momento 
+a momento (FRANKISH; RAMSEY, 2014). En el enfoque SED, el concepto de encarnación 
+establece que la forma física y sus aspectos funcionales y biomecánicos son aspectos esenciales 
+para el comportamiento, así como su biología y fisiología; en el caso de los agentes artificiales, la mecánica, 
+el hardware y el software. Todos estos factores crean la realización conceptual mediante la cual creamos 
+nuestras experiencias y representaciones. 
+La idea de encarnación tiene su origen en la fenomenología desarrollada por Merleau-Ponty 
+(1962), quien además fue uno de los precursores de la noción de affordance de Gibson (1979), 
+que coloca la implicación del cuerpo como crucial para la forma en que percibimos y actuamos con el entorno. 
+Además, al ser la estructura biológica que sostiene la cognición vital del 
+fenómeno cognitivo, debemos pensar en las implicaciones o posibilidades de que este fenómeno sea 
+duplicado por componentes electrónicos, y en qué conceptos y abstracciones podría generar tal formación, 
+dada la importancia de la experiencia encarnada en la creación de conceptos abstractos 
+(LAKOFF; JOHNSON, 1999). Así, el papel del lenguaje, las metáforas y las representaciones mentales 
+en la formulación de los conceptos usados en las teorías científicas es evidente, a pesar de todo 
+compromiso ontológico con cierto realismo científico. El término “epistemología naturalizada”, 
+acuñado por W.V. Quine en su ensayo seminal de 1969 “Epistemology Naturalized”, siguió 
+varias de las premisas epistémicas del escepticismo de Hume que, como señalamos arriba, 
+disuelve toda fundamentación de inspiración platónica, incluido el dualismo del racionalismo cartesiano, 
+en su pretensión de justificar un conocimiento seguro de la verdad del mundo exterior. Según 
+Quine (1969, p. 75): 
+Fue triste para los epistemólogos, Hume y otros, tener que aceptar la 
+imposibilidad de derivar estrictamente la ciencia del mundo externo a partir de 
+la evidencia sensorial. Sin embargo, dos principios fundamentales del empirismo siguieron 
+inatacables, y siguen siéndolo hoy. Uno es que toda evidencia que 
+existe para la ciencia es evidencia sensorial. El otro es que toda inculcación de 
+significados de palabras debe descansar en última instancia en la evidencia sensorial (QUINE, 1969, p.  
+75). 
+Como en Quine, el empirismo de inspiración humeana que nos interesa, desde Dreyfus, Rorty, Prinz 
+y el neopragmatismo, es intersubjetivo, falsacionista y, curiosamente, externalista, es decir, una 
+forma de pragmatismo lingüístico social e históricamente co-constitutivo del sujeto observador y 
+del mundo objetivo por conocer, experimentar, vivir. El problema del conocimiento, así como 
+el de dar razones para la acción moral, sigue siendo el gran problema humano según la 
+formulación humeana: en palabras de Quine (1969, p. 72), “el problema humeano es la condición humana” 
+de modo que ni siquiera la inducción (como la que han adoptado los modelos de 
+equilibrio reflexivo en metaética y filosofía de la ciencia) puede resolver las falacias naturalistas 
+que surgen de la guillotina. El externalismo de los naturalistas, en la estela de Hume y 
+Quine, se opondría aquí al internismo de los racionalistas y de Kant, según el cual la 
+justificación epistémica de la cognición y de la acción moral se encuentra en la conciencia (cogito) o en una 
+estructura de subjetividad trascendental.  
+Aunque no podemos desarrollar aquí el problema internalista-externalista, creemos que el 
+debate entre racionalismo y empirismo que lo precedió nos autoriza a afirmar, como sugirió Quine, 
+que el gran error de Hume habría sido reducir los juicios analíticos a juicios a 
+priori, universales y necesarios, en oposición a los sintéticos. A su vez, son reducibles 
+a juicios a posteriori, particularidades contingentes, sin resolver el problema de la inducción 
+sino permitiendo, por el contrario, su retorno por la puerta trasera, como mostraría Popper, mediante 
+el autoengaño de quienes pretenden justificar la acción moral con un argumento trascendental o 
+normativista. Nuestra intuición programática sobre la ética de la IA es, por tanto, que ni 
+el naturalismo parece poder reducir la alineación a un programa utilitarista, ni los 
+modelos deontológicos normativos y sus argumentos trascendentales parecen satisfactorios para 
+evitar la sospecha antropomórfica. 
+La neuroetología computacional es un área distinta de la neurociencia, ya que implica la creación de 
+modelos conjuntos de circuitos neuronales, biomecánica y nichos ecológicos como partes relevantes de un 
+agente cognitivo (CHIEL; BEER, 1997). El trabajo en el campo de la robótica autónoma enfatiza 
+que el comportamiento inteligente es una propiedad emergente de un agente incorporado en un entorno 
+con el que debe interactuar continuamente. Así, la visión computacional simbólica, que coloca 
+al cerebro como la fuente de órdenes que se emiten al cuerpo, puede ser incompleta. Puede 
+existir una cognición o “mente” del cuerpo (o sistema mecánico), gobernada por las leyes de la 
+propia física. Esto pone al sistema nervioso no en posición de emitir órdenes, sino 
+sugerencias, reconciliadas con el contexto biomecánico y ecológico (RAIBERT; 
+HODGINS, 1993). Existe la posibilidad de que una IA que comprenda conceptos humanos 
+requiera un diseño muy cercano al de un ser humano (SOTALA; 
+YAMPOLSKIY, 2013).  
+Finalmente, para entender el enfoque SED debemos analizar la dinámica asumida. Nos referimos a 
+la dinámica como una teoría matemática que describe sistemas que cambian sistemáticamente con el 
+tiempo. El marco dinámico también nos proporciona un filtro distinto para observar el 
+fenómeno en cuestión (FRANKISH; RAMSEY, 2014). Los sistemas dinámicos están ciertamente 
+configurados como un cuerpo de matemáticas, y no como una teoría científica del mundo natural. Los 
+ejemplos más comunes de sistemas dinámicos son conjuntos de ecuaciones diferenciales parciales, usadas para 
+describir fenómenos como el movimiento del agua, el comportamiento de los campos electromagnéticos, la 
+posición de las partículas subatómicas, entre otros fenómenos naturales. Así, la 
+perspectiva dinámica trae consigo un conjunto de conceptos y filtros que influyen en la forma en que pensamos sobre 
+el fenómeno estudiado; al abordar cualquier sistema desde la perspectiva dinámica, buscamos 
+identificar un conjunto de variables de estado cuya evolución puede explicar el comportamiento observado, las 
+leyes dinámicas mediante las cuales evolucionan en el tiempo los valores de estas variables, la estructura dimensional 
+de su evolución, los posibles estados y los parámetros dominantes (BEER, 2000). 
+Finalmente, la hipótesis de la estructura situada, encarnada y dinámica postula que cerebros, 
+cuerpos y entornos son sistemas dinámicos, gobernados por leyes dinámicas, y que la dinámica 
+de esta tríada está acoplada: el estudio del comportamiento del sistema dinámico completo, cerebro-
+cuerpo-entorno, es el objeto correcto de estudio para la cognición (BEER, 2000). La conclusión más crucial 
+que se puede extraer de este modelo es: el comportamiento es una propiedad de todo el sistema cerebro-
+cuerpo-entorno y, por tanto, no puede atribuirse adecuadamente a ningún subsistema 
+aislado de los demás. Proponemos que tal enfoque, SED, puede ser un modelo interesante 
+para agentes encarnados y sistemas de IA seguros.  
+VII. Discusión y conclusión  
+¿Cómo puede ser útil este enfoque dinámico para el problema del aprendizaje de valores? Esta ha sido 
+la pregunta orientadora de este estudio. Hemos visto en este estudio el avance inminente de las 
+tecnologías de IA, y la importancia de que dichos avances se realicen de forma segura, porque no podemos 
+antropomorfizar la IA, ni esperar que los agentes inteligentes artificiales tengan los mismos 
+objetivos terminales (valores) que nosotros. Por lo tanto, el aprendizaje de valores se convierte en un área de importancia crucial en 
+el campo. Las limitaciones presentes en el método simbólico representacional y en el modelo conexionista 
+pueden estar indicándonos que debe considerarse un enfoque diferente para los problemas conductuales de 
+los agentes inteligentes. El dinamismo, sin duda, aborda el problema de 
+manera distinta y revela nuevos aspectos que tanto el modelo simbólico como el conexionista dejan 
+de lado.  
+¿Cómo debemos entender la naturaleza y el papel de este estado interno dentro de un agente dinámico? La 
+interpretación computacional tradicional de tales estados sería como representaciones internas. 
+Por desgracia, a pesar del papel fundamental que la noción de representación desempeña en 
+los enfoques computacionales, hay muy poco acuerdo sobre cuál es su función real en 
+el control y el mantenimiento de la conducta. También debemos recordar que el simbolismo, 
+el conexionismo y el dinamismo son estructuras teóricas, no teorías científicas del mundo natural, 
+es decir, no pueden ser probadas ni refutadas. Mientras que el simbolismo enfatiza la 
+manipulación de representaciones internas, el conexionismo enfatiza la arquitectura de la 
+red y el protocolo de entrenamiento. La estructura SED, por otro lado, resalta el 
+espacio de trayectorias y las influencias determinantes sobre el sistema cerebro-cuerpo-entorno. Un 
+enfoque dinámico del problema del aprendizaje de valores puede ayudarnos a dilucidar algunos de los 
+problemas del aprendizaje de valores. Sin embargo, como se afirmó antes, no nos colocamos en una posición de 
+antirrepresentacionalismo. Por el contrario, es probable que una teoría completa de la cognición utilice las 
+tres estructuras teóricas. Sugerimos que, en ciertos casos, como en la conducta orientada a metas, el 
+funcionamiento interno de un agente dinámico no puede interpretarse como representativo a menos que 
+afinemos qué puede ser o significar realmente una representación. 
+Gärdenfors (2000) propone una teoría general de la representación, en la que conceptos como los valores 
+se representan como formas geométricas dentro de un espacio multidimensional. Varios estudios de modelado cerebral 
+intentan comprender cómo el cerebro crea y manipula la información 
+(KRIEGESKORTE; KIEVIT, 2013), y hallazgos recientes que utilizan simulaciones de grupos corticales 
+analizados mediante topología algebraica muestran que el cerebro parece organizarse de manera ordenada y 
+geométrica cuando analizamos su estructura como un objeto multidimensional (REIMANN et al. 
+2017). Es posible que estructuras similares, correspondientes al concepto de valor, se encuentren en 
+el campo hiperdimensional que compone el agente cognitivo.  
+El enfoque dinámico se diferencia de los modelos cognitivos simbólico y conexionista porque 
+sitúa la biomecánica y la ecología con la misma relevancia que la actividad neuronal en el 
+fenómeno de la cognición. Quizás las dificultades que hemos encontrado al aprender valores y 
+otros problemas en el campo de la IA se deban al hecho de que estamos ignorando dos factores cruciales del 
+fenómeno. Las implicaciones de la hipótesis dinámica no solo traen una nueva forma de 
+pensar, sino también nuevos problemas para la investigación en IA, alimentando así nuevas ideas en áreas 
+como la neurofilosofía, la neurociencia, la metaética, la neuroetología computacional y el 
+campo interdisciplinario de la propia ciencia cognitiva. En conclusión, se necesitan mejoras y una mejor 
+comprensión de los conceptos de sistemas dinámicos, con la promesa de que tales métodos 
+pueden ser útiles para el problema de la alineación de valores en la IA y para la ciencia cognitiva 
+comunidad en general. 
+Agradecimientos  
+Me gustaría agradecer al Programa de Excelencia Académica (PROEX) de la Fundación CAPES 
+(Coordinación para el Perfeccionamiento del Personal de Educación Superior) y al Programa de Posgrado 
+en Filosofía de la Pontificia Universidad Católica de Río Grande del Sur, Brasil. 
+Financiación  
+Investigación financiada por el Programa de Excelencia Académica (PROEX) de la Fundación CAPES 
+(Coordinación para el Perfeccionamiento del Personal de Educación Superior), Brasil. 
+Referencias  
+ABADI, M. et al. Deep Learning with Differential Privacy. En: arxiv.org/abs/1607.00133, 
+2016.  
+ALLISON, H. E. Idealism and Freedom: Essays on Kant’s Theoretical and Practical 
+Philosophy. Cambridge University Press, 1996.  
+AMODEI, D. OLAH, C. STEINHARDT, J. CHRISTIANO, P. SCHULMAN, J. MANÉ, D. 
+Concrete problems in AI safety. arXiv preprint arXiv:1606.06565, 2016.  
+ASIMOV, I. I, Robot. New York: Doubleday, 1950. 
+BARRETT, A. M. BAUM, S. D. Un modelo de vías hacia la superinteligencia artificial 
+Catastrophe for Risk and Decision Analysis. Journal of Experimental & Theoretical Artificial 
+Intelligence, JETAI (29), n.º 2, pp. 397-414, 2017. Disponible en: 
+https://arxiv.org/pdf/1607.07730  
+BEER, R. D. Computational and dynamical languages for autonomous agents. En: It’s about 
+tiempo: Una visión general del enfoque dinámico de la cognición. Mind as motion: Explorations in 
+the dynamics of cognition. Cambridge, Mass.: MIT Press, 1998, p. 121-147. 
+BEER, R. D. Enfoques dinámicos de la ciencia cognitiva. Trends in Cognitive Sciences. 4ª, p. 
+91-99, 2000.  
+BEER, R. D. The dynamics of active categorical perception in an evolved model agent (con 
+comentario y respuesta). Adaptive Behavior. 11ª ed, p. 209-243, 2003.  
+BOSTROM, N. La voluntad superinteligente: motivación y racionalidad instrumental en 
+Advance Artificial Agents. Minds and Machines, 22ª, p. 71-85, 2012.  
+BOSTROM, N. Superintelligence, Chapter 12. Oxford University Press, 2014.  
+BOSTROM, N. ĆIRKOVIĆ, M. Introduction. En: Global Catastrophic Risks, editado por 
+Bostrom, N. Ćirković, M. New York: Oxford University Press, pp. 1-30, 2008.  
+BRYNJOLFSSON, E. MCAFEE, A. La segunda era de las máquinas: trabajo, progreso y 
+Prosperity in a Time of Brilliant Technologies. New York: W.W. Norton; Company, 2014.  
+CHIEL, H. J. BEER, R. D. El cerebro tiene un cuerpo: la conducta adaptativa surge de las interacciones 
+of nervous system, body and environment. Trends in Neurosciences, n.º 20, V. (12), pp. 553-
+557, 1997.  
+CHURCHLAND, P. S. SEJNOWSKI, T. The computational brain. Cambridge, MA, MIT 
+Press. 1992.  
+CHURCHILL, R. R. ULFSTEIN, G. Autonomous Institutional Arrangements in Multilateral 
+Environmental Agreements: A Little-Noticed Phenomenon in International Law. American 
+Journal of International Law, 94ª ed, V (4), p. 623-659, 2000. dx.doi.org/10.2307/2589775  
+CLARK, A & CHALMERS, D. J. The extended mind. Analysis 58ª ed, p. 7-19. 1998.  
+DEWEY, D. Aprender qué valorar. Artificial General Intelligence (inteligencia artificial general), p. 309-314, 2011.  
+DIJKSTRA, E. W. The threats to computing science. Trabajo presentado en el ACM 1984 South 
+Central Regional Conference, Austin, TX, Nov. 16-18, 1984.  
+DOCHERTY, B. L. Losing Humanity: The Case Against Killer Robots. New York: Human 
+Rights Watch, 2012.  
+DREYFUS, H. L. What Computers Still Can’t Do: A critique of Artificial Reason. 
+Cambridge: MIT Press, 1992.  
+DREYFUS, H. L. DREYFUS, S. E. Lo que los expertos artificiales pueden y no pueden hacer. AI Society, 6ª 
+ed, V (1), p. 18-26, 1992.  
+DREYFUS, H. L. Por qué fracasó la inteligencia artificial heideggeriana y cómo corregirla 
+require making it more Heideggerian. Philosophical Psychology. 20ª ed, V (2), 2007.  
+ELIASMITH, C. El tercer contendiente: un examen crítico de la teoría dinamicista de 
+cognition. Philosophical Psychology, 9ª ed, V (4), p. 441-463, 1996.  
+FRANKISH, K. RAMSEY, W. N. The Cambridge handbook of artificial intelligence.  
+Cambridge University Press. 2014.  
+FREY, C. OSBORNE, M. El futuro del empleo: ¿qué tan susceptibles son los empleos a 
+Computerisation? Technical Report, Oxford Martin School, University of Oxford, Oxford, 
+UK, 2013.  
+GÄRDENFORS, P. Conceptual Spaces: The Geometry of Thought. MIT Press. 2000.  
+GIBSON, J. J. The Ecological Approach to Visual Perception. Houghton Mifflin. 1979.  
+GRACE, K. SALVATIER, J. DAFOE, A. ZHANG, B. EVANS, O. When will AI exceed 
+human performance? Evidence from AI experts. arXiv preprint arXiv:1705.08807. 2017.  
+HADFIELD-MENELL, D. RUSSELL, S. J. ABBEEL, P. DRAGAN, A. Cooperative inverse 
+reinforcement learning. Advances in neural information processing systems, p. 3909-3917, 
+2016.  
+HEIDEGGER, M. Ser e Tempo. Traducción y edición bilingüe con notas de Fausto Castilho. 
+Campinas y Petrópolis: Editora Unicamp y Vozes, 2012. (1927)  
+HIBBARD, B. The error in my 2001 VisFiles column. 2012.  
+HUME, D. Tratado de la naturaleza humana. Traducción de Débora Danowiski. 2.ª ed. São Paulo:  
+Editora da UNESP, 2009. (1739)  
+JAYNES, E. T. Probability theory: The logic of science. Ed. G. Larry Bretthorst. New York: 
+Cambridge University Press. 2003. doi:10.2277/0521592712.  
+KRIEGESKORTE, N. KIEVIT, R. A. Representational geometry: integrating cognition, 
+computation, and the brain. Trends in Cognitive Sciences, n.º 17, V.(8), pp. 401-12, 2013.  
+KUZNETSOV, Y. A. Elements of Applied Bifurcation Theory. 3.ª ed. Springer. 2004.  
+LAKOFF, G. JOHNSON, M. Philosophy in the Flesh. Basic Books. 1999.  
+LEGG, S. Is there an elegant universal theory of prediction? In: Algorithmic learning theory: 
+17th international conference, ALT 2006, Barcelona, Spain, October 7-10, 2006. 
+Proceedings, ed. José L. Balcázar, Philip M. Long, and Frank Stephan. Lecture Notes in 
+Computer Science 4264. Berlin: Springer. 2006. doi:10.1007/11894841_23.  
+LEIKE, J. MARTIC, M. KRAKOVNA, V. ORTEGA, P. EVERITT, T. LEFRANCQ, A. 
+ORSEAU, L. AI Safety Gridworlds. arXiv preprint arXiv:1711.09883. 2017.  
+LLOYD, S. Computational capacity of the universe. Physical Review Letters 88 (23): 237901, 
+2002. doi:10.1103/PhysRevLett.88.237901.  
+MERLEAU-PONTY, M. Phenomenology of Perception. New York: Humanities Press, 1962.  
+(1945)  
+MORAVEC, H. P. When will computer hardware match the human brain? Journal of 
+Evolution and Technology 1998. Disponible en: 
+http://www.transhumanist.com/volume1/moravec.htm.  
+MORDVINTSEV, A. OLAH, C. TYKA, M. Inceptionism: Going deeper into neural 
+networks. In: Google Research Blog. Consultado el 20 de junio de 2015.  
+MÜLLER, V. C. BOSTROM, N. Future progress in artificial intelligence: A survey of expert 
+opinion. Fundamental issues of artificial intelligence, p. 555-572, 2016.  
+NEWELL, A. Unified theories of cognition. Cambridge, MA, Harvard University Press. 1990.  
+NG, A. Y. RUSSELL, S. J. Algorithms for inverse reinforcement learning. In Pat Langley, 
+editor, 17th International Conference on Machine Learning (ICML-'00), p. 663-670, 2000.  
+OMOHUNDRO, S. M. The Nature of Self-Improving Artificial Intelligence. Disponible en: 
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.137.1199&rep=rep1&type=pdf. 
+Consultado el 11 de agosto de 2019.  
+QUINE, W.V.O. Epistemology Naturalized. In Ontological Relativity and Other Essays. New 
+York: Columbia University Press, 1969, pp. 69-90. 
+ 
+RAIBERT, M. H. HODGINS, J.K. Biological Neural Networks. Invertebrate Neuroethology 
+and Robotics. Academic Press, p. 319-354, 1993.  
+REIMANN, M. W. NOLTE, M. SCOLAMIERO, M. TURNER, K. PERIN, R. CHINDEMI, 
+G. DŁOTKO, P. LEVI, R. HESS, K. MARKRAM, H. Cliques of Neurons Bound into 
+Cavities Provide a Missing Link between Structure and Function. Frontiers in Computational 
+Neuroscience. n.º 11, V(48), 2017. doi:10.3389/fncom.2017.0004  
+ROCKWELL, T. Extended cognition and intrinsic properties. Philosophical Psychology, 23.ª 
+ed, p. 741-757, 2010.  
+ROCKWELL, T. Neither Brain nor Ghost: A Non-Dualist Alternative to the Mind-Brain 
+Identity Theory. Bradford Books, MIT Press, 2005.  
+SHULMAN, C. Omohundro's Basic AI Drives and Catastrophic Risks. The Singularity 
+Institute, 2010. Disponible en: https://intelligence.org/files/BasicAIDrives.pdf  
+SMOLENSKY, P. On the proper treatment of connectionism. Behavioral and Brain Sciences. 
+11.ª ed, V(1), p. 1-23, 1988.  
+SOARES, N. FALLENSTEIN, B. Aligning Superintelligence with Human Interests: A 
+Technical Research Agenda. Technical Report, Machine Intelligence Research Institute, 
+Berkeley, CA. 2014.  
+SOARES, N. FALLENSTEIN, B. YUDKOWSKY, E. ARMSTRONG, S. Corrigibility. 
+Artificial Intelligence and Ethics, ed. T. Walsh, AAAI Technical Report WS-15-02. Palo 
+Alto, CA: AAAI Press, 2015.  
+SOARES, N. Value Learning Problem. In: Ethics for Artificial Intelligence Workshop at 25th 
+International Joint Conference on Artificial Intelligence (IJCAI-2016) New York, NY, USA 
+9-15 July, 2016. 
+SOTALA, K. From mostly harmless to civilization-threatening: Pathways to dangerous 
+artificial intelligences. In ECAP10: VIII European Conference on Computing and Philosophy, 
+edited by Klaus Mainzer. Munich, 2010.  
+SOTALA, K. Disjunctive scenarios of catastrophic AI risk. Artificial Intelligence Safety and 
+Security, pp. 315-337, 2018.  
+SOTALA, K. YAMPOLSKIY, R. V. Responses to Catastrophic AGI Risk: A Survey. 
+Technical report. Berkeley, CA: Machine Intelligence Research Institute. 2013.  
+THAGARD, P. Conceptual revolutions. Princeton, Princeton University Press. 1992.  
+TVERSKY, A. KAHNEMAN, D. The framing of decisions and the psychology of choice. 
+Science, n.º 211, V.(4481), pp. 453-458, 1981.  
+VAN GELDER, T. The dynamical hypothesis is ciencia cognitiva. Behavioral and Brain 
+Sciences. 21.ª ed, p. 615-628, 1998.  
+VAN GELDER, T. PORT, R. It’s about time: An overview of the dynamical approach to 
+cognition. Mind as motion: Explorations in the dynamics of cognition. Cambridge, MA, MIT. 
+1998.  
+VON NEUMANN, J. MORGENSTERN, O. Theory of games and economic behavior. 
+Princeton, NJ: Princeton University Press. 1953.  
+YUDKOWSKY, E. Artificial Intelligence as a Positive and Negative Factor in Global Risk. 
+In: Global Catastrophic Risks, edited by N. Bostrom and M. M. Ćirković, 308-45. New York: 
+Oxford University Press, 2008. https://intelligence.org/files/AIPosNegFactor.pdf  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sobre los autores 
+  
+ 
+ 
+ 
+Corrêa, N. K es doctorando en filosofía y máster en ingeniería eléctrica por la Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS). Actualmente trabaja como investigador en el área de ética de las máquinas en la Universidade PUCRS, en Brasil. Tiene interés académico en la alineación moral entre la IA y los seres humanos.  
+ 
+De Oliveira, N.F. Ph.D. en Filosofía por la State University of New York at Stony Brook. Actualmente es profesor titular en la Pontifical Catholic University of Rio Grande do Sul (PUCRS), coordinador de Filosofía en CAPES (2018-22), coordinador del Grupo de Investigación en Neurofilosofía (Brain Institute, InsCer), editor de la revista Veritas, miembro del Comité de Bioética Clínica y miembro del comité coordinador del Centro Brasileño de Investigación en Democracia, creado en 2009. Corrêa, N. K es doctorando en filosofía y máster en ingeniería eléctrica, y actualmente trabaja en el área de ética de las máquinas en la Universidad PUCRS de Brasil. Tiene interés académico en el área de la ética de las máquinas y en el problema de la alineación moral entre la IA y los seres humanos.  
+ 

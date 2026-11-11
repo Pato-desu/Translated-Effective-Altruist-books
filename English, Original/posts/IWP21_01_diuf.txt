@@ -1,0 +1,815 @@
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+Neuralink and Beyond: 
+Challenges of Creating an Enhanced Human 
+D. Gurtner 
+Internal working paper no 21-01 
+February 2021 
+ 
+ 
+WORKING PAPER DEPARTEMENT D’INFORMATIQUE 
+DEPARTEMENT FÜR INFORMATIK Bd de Pérolles 90 CH-1700 Fribourg  www.unifr.ch/inf 
+ 
+ 
+Neuralink and Beyond:
+Challenges of Creating an Enhanced Human∗
+Dimitri Gurtner
+Swiss Joint Master of Science in Computer Science
+University of Fribourg, Switzerland
+dimitri.gurtner@unifr.ch
+ABSTRACT
+This article is a literature review of Neuralink, brain-machine inter-
+faces (BMIs) and their applications, followed by future possibilities
+of BMIs and their potential impacts. Currently, BMIs predominantly
+have therapeutic applications, such as helping people with spinal
+cord injury by allowing them to control a computer directly with
+their brain. However, BMIs can also improve learning, detect emo-
+tions, and control basic behaviors. In the future, they could offer
+many powerful possibilities, such as controlling people and merg-
+ing our intelligence with artificial intelligence (AI), which may
+be necessary to mitigate the existential threat of artificial general
+intelligence (AGI). Simultaneously, they would likely have severe
+human impacts, such as loss of sense of self, erosion of skills, and
+privacy issues, creating psychological harm and confusion. This
+paper shows that BMI research could generate drastic changes with
+no possible return, thus reinforcing the need to urgently address
+these critical issues.
+CCS CONCEPTS
+•Security and privacy →Social aspects of security and pri-
+vacy .
+KEYWORDS
+Neuralink; brain-machine interface; BMI; BCI; CBI; BBI; transhu-
+manism; ethical issues
+1 INTRODUCTION
+Since 2017, Elon Musk’s project Neuralink and brain-machine in-
+terfaces have received a lot of attention [ 22]. Neuralink is a brain-
+machine interface (BMI) company that creates devices designed
+to be implanted in human brains " to eventually improve memory
+and interface with computer systems. " [22]. On August 28, 2020, bil-
+lionaire entrepreneur Elon Musk presented his pig Gertrude and
+the chip implanted in the animal’s brain. The chip retransmits
+Gertrude’s neurological signals. From this information, a computer
+can predict at any time where each of Gertrude’s members is, giving
+hope to restore mobility to paraplegic people. Elon Musk is brilliant
+at marketing his ideas on a large scale and creating enthusiasm
+and fascination for his various projects. Never short of vivid im-
+ages, Elon Musk claimed that having the interface is comparable to
+have a smartwatch in your brain. Science expands and brings new
+technologies, which leads to benefits, but also threats, as society’s
+∗This work was done within the framework of the seminar 03805 A2020 Interdisci-
+plinary Issues in ICT , supervised by Dr. Michèle Courant of the University of Fribourg
+in Switzerland.
+Reference Format: Dimitri Gurtner. 2021. Neuralink and Beyond: Challenges of Creat-
+ing an Enhanced Human. 8 pages.relationships are reshaped [ 23]. For this study, it was of interest to
+investigate Neuralink, BMIs, and transhumanism, which are both
+fascinating and frightening. Scientists need to ensure that the bene-
+fits are maximized while minimizing the threats [ 23]. The fusion of
+human beings and machines naturally raises a plethora of ethical
+questions. Will a brain-machine interface redesign humanity? What
+are the impacts?
+This study is a literature review, followed by an evaluation of
+the impacts of brain-machine interfaces on humanity’s future. Data
+types are mostly secondary qualitative data from peer-reviewed
+scientific papers, which provide a solid basis of knowledge. It gives
+a well-grounded foundation to my methodological choices. My
+personal evaluations are also supported by meta-models, such as
+theSpiral Dynamics [3].
+The rest of this paper is structured as follows: section 2 shows
+an overview of brain-machine interfaces (BMIs) and Neuralink.
+In section 3, we describe Neuralink’s showcase application and
+other therapeutic applications of BMIs. In section 4, we present
+the current social and cognitive applications of BMIs. Section 5 is
+devoted to evaluations, where we will explore future possibilities
+and discuss human impacts, critical issues, transhumanism, and
+other possible world visions. We conclude this paper in section 6.
+2 OVERVIEW OF BRAIN-MACHINE
+INTERFACES AND NEURALINK
+In this section, brain-machines interfaces (BMIs) are presented
+briefly. Although BMIs have been around for a long time, Musk’s
+Neuralink project intends to bring BMIs to another level and narrow
+the gap between man and machine, possibly dramatically.
+2.1 Brain-Machine Interfaces
+Generally, a brain-machine interface is a link between a brain and
+a machine. The first attempts to translate neuronal activity into
+commands to control external devices were made in monkeys in the
+1960s. [ 20]. In the 1970s, electroencephalography (EEG) was used
+to link brain activity with computers directly [ 19]. The term "brain-
+computer interface" appeared in the 1970s [ 20]. Brain-machine
+interface research and its applications are considered as the most
+exciting interdisciplinary fields of science [ 20]. Similar to com-
+puters’ evolution, neural interfaces will become smaller and more
+powerful [ 23]. Today, BMIs allow controlling a cursor on a screen
+[13]. BMIs are particularly promising for neurorehabilitation of
+sensory and motor disabilities, neurocommunication, and cognitive
+state evaluation [ 20]. Furthermore, better neuronal activity analy-
+ses hold out hope for the use of BMIs daily in the future [ 20]. BMIs
+can bring huge benefits to society, such as novel therapies, or social
+and cognitive enhancement [ 23]. Many people already benefit from
+medical BMIs [ 23]. Generally, the main goal of BMIs is to repair
+and/or increase human performance [13].
+One could consider that the gap between human and machine
+needs to be reduced. Our brains are not prepared to deal with the
+considerable volume of information brought by pervasive technolo-
+gies and the Internet of Things (IoT) [ 19]. In addition, the limits of
+personal and professional life will be increasingly blurred. Niforatos
+et al. affirm that " [...], our cognitive capacities cannot simply rely on
+natural evolution to keep up with the immense advancements in the
+field of Ubiquitous technologies, which remain largely uninformed
+about our cognitive states " [19]. Niforatos et al. have presented a
+software architecture for developing cognition-aware applications
+that adjust user presentation to user’s current cognitive state (see
+figure 1) [ 19]. Generally, there is a will to increase human efficiency
+by reducing the human-machine gap.
+Figure 1: Adaptive user interface [19]
+2.1.1 Types of Neural Interfaces. There are two categories of BMIs.
+Noninvasive approaches do not require opening the skull. The
+average of millions of neurons can be recorded, but the signal is
+distorted and nonspecific [ 17]. In invasive approaches, electrodes
+are placed directly on the surface of the cortex. Useful signals can
+be recorded, but they average the activity of thousands of neurons
+only [ 17]. Neuralink uses an invasive approach that will be further
+discussed in section 2.2. We also distinguish recording and stimu-
+lating activities. Recording, also mentioned as brain-to-computer
+interface (BCI), attempts to read brain signals and interpret them.
+Stimulating, also mentioned as computer-to-brain interface (CBI),
+goes in the opposite direction and tries to stimulate or control the
+brain. There are various kinds of invasive/noninvasive and record-
+ing/stimulating technologies. Noninvasive technologies are also
+interesting. Among these, let us cite transcranial magnetic stimula-
+tion (TMS) and transcranial direct current stimulation (tDCS). TMS
+produces a changing magnetic field with a coil close to the scalp
+[23]. It can activate or disrupt activity in the brain, which helps
+to understand the role of the various brain areas [ 23]. TMS is also
+effective in treating drug-resistant depression [ 23]. As for tDCS,
+it uses electrodes placed on the head and delivers constant and
+direct low current impulses [ 23]. tDCS is used to treat depression
+and pain. Recently, there is renewed interest in using tDCS to im-
+prove cognitive processes and movement in people without healthproblems. Attempts of tDCS have suggested it helps the brain form
+connections, but no evidence yet exists [23].
+2.2 Neuralink
+The approach chosen by Neuralink is invasive and presents a few
+innovations.
+2.2.1 Ultra-fine Polymer Probes. The neural probes employ a va-
+riety of biocompatible thin film materials. A thin film array has
+up to 96 threads, each containing 32 independent electrodes, for a
+total of 3072 electrode contacts [ 17]. Thread thickness is nominally
+4-6𝜇m, which includes insulation and conductor layers [ 17], while
+thread length is about 20 mm. Surface modifications are used " [...]
+to lower the impedance for electrophysiology and increase the effective
+charge-carrying capacity of the interface " [17]. A novel alignment
+and flip-chip bonding process allow to create a package of 23 ×18.5
+mm2[17].
+2.2.2 Neurosurgical Robot. The low bending stiffness of electrode
+probes complicates insertions [ 17]. Neuralink has developed a ro-
+bot that allows inserting rapidly and reliably the flexible probes
+to record scattered brain regions [ 17]. Custom software enables
+planning of insertion paths to avoid vasculature [ 17]. The robot’s
+insertion head holds a quick-swappable "needle-pincher" assembly
+[17]. "The tip of the needle is designed both to hook onto insertion
+loops—for transporting and inserting individual threads—and to pen-
+etrate the meninges and brain tissue " [17]. The pincher acts as a
+support for the probes during transport and as a guide to ensure
+that the threads are inserted along the needle’s path [ 17]. The robot
+can insert up to 192 electrodes per minute, which allows a quick op-
+eration [ 17]. Robotic insertion is an efficient and scalable approach
+[17].
+Figure 2: Needle penetrating tissue proxy [17]
+2.2.3 Electronics. Recording from thousands of electrode sites
+presents challenges. " The density of recording channels necessitates
+placing the signal amplification and digitization stack within the
+array assembly " [17]. "This recording stack must amplify small neu-
+ral signals [...] while rejecting out-of-band noise, sample and digi-
+tize the amplified signals, and stream out the results for real-time
+processing " [17]. Neuralink has built a custom application-specific
+2
+integrated circuit (ASIC), which consists of amplifiers, on-chip
+analog-to-digital converters (ADCs), and control circuitry for se-
+rializing the digitized outputs [ 17]. An Ethernet-connected base
+station converts the data streams, allowing to visualize the data in
+real time [17].
+2.2.4 Electrophysiology. Digitized signals are processed in real
+time to identify action potentials (spikes). Neuralink uses custom
+online spike-detection software. The spike detection parameters
+have to maximize decoding efficacy [17].
+Figure 3: Cortical surface with implanted threads [17]
+3 THERAPEUTIC APPLICATIONS
+Medical applications are presented, along with a succinct and spe-
+cific evaluation. We will devote a dedicated, more complete, and
+more global part to an evaluation in section 5.
+3.1 Spinal Cord Injuries
+Spinal cord injury is the showcase application of Neuralink. The
+goal is to help people with spinal cord injury by allowing them
+to dexterously control a digital mouse and keyboard directly with
+their brains [ 17]. Combined with spinal stimulation techniques, it
+is hoped that this approach could restore motor functions [ 17]. As
+mentioned in section 2.1, using BMIs to control a device by thought
+has been studied since the 1960s [ 20]. However, Musk’s companies
+benefit from significant fundraising and extensive media coverage.
+On the website of Neuralink [ 18], the latest versions of the project
+are presented. On figure 4, the link is a sealed and implanted de-
+vice that processes, stimulates, and transmits neural signals [ 18].
+The Neuralink app (fig. 5) would allow controlling an iOS device,
+keyboard, and mouse directly with brain activity, just by thinking
+about it [18].
+3.2 Other Applications
+Generally, novel therapeutic possibilities are expected with BMIs.
+We will present some of them here.
+3.2.1 Replacement of body parts. Bionic limbs are not new, and
+the classical approach does not need BMIs. A bionic limb, e.g., an
+arm, detects small naturally generated signals when the user flexes
+Figure 4: The link [18]
+ Figure 5: Neuralink app
+their residual limb muscles. The bionic limb is then able to convert
+them into hand movement.
+However, BMIs can push this approach a step further and allow
+to directly use " the brain to convey our intentions, rather than having
+an extra, physical step translating those intentions to text, speech, or
+gestures " [22]. The interactions can be made easier, faster, and more
+natural [22].
+3.2.2 Epilepsy. BCIs can be used to treat neurological disorders
+and reveal about brain functions [ 9]. Karageorgos et al. have pre-
+sented HALO (Hardware Architecture for LOw-power BCIs), an
+architecture for implantable BCIs, that allows the treatment of dis-
+orders, such as epilepsy [ 9]. HALO also records/processes data that
+can be used for a better understanding of the brain [ 9]. Epilepsy
+is characterized by epileptic seizures defined by uncontrolled and
+excessive electrical activity of neurons [ 27]. Neuronal signals are
+processed to predict seizures. When an increase in brain excitation
+occurs, "the brain needs inhibitory synapses to tone down and regu-
+late the activity of other cells" [27]. BCIs then electrically stimulate
+neurons to mitigate the severity of the seizures [ 9]. However, the
+time between seizure onset and stimulation must be very short, i.e.,
+tens of milliseconds [ 9]. Also, low-power hardware is needed for a
+safe and chronic implantation [ 9]. HALO is inspired by previous
+approaches but offers higher bandwidth brain communication in
+real time at low-power [ 9]. Noninvasive approaches can also be
+considered, such as tDCS and TMS [27] (see section 2.1.1).
+3.2.3 Parkinson. Parkinson, as well as epilepsy, can be treated
+by deep brain stimulation (DBS). DBS belongs to invasive BMIs.
+Surgery is required to implant a thin electrode wire in the part of the
+brain responsible for abnormal movement [ 22]. A second surgical
+intervention is then necessary to implant an impulse generator
+battery (IPG) in the abdomen or under the collarbone. The IPG
+can then give electrical impulses to the brain to help control some
+motor symptoms.
+3.2.4 Autism. In recent years, important funding has been allo-
+cated to the Brain Research through Advancing Innovative Neu-
+rotechnologies (BRAIN) to understand better the origins of cog-
+nition and other brain activities. It is hoped that more effective
+3
+treatments can be found for conditions like autism and mood disor-
+ders [ 22]. With the TMS approach (see section 2.1.1), we were able
+to show an improvement in social skills in people with autism [ 23].
+3.2.5 Depression. Depression is the most common mental health
+condition. About one-third of cases of depression are treatment-
+resistant [ 23]. BMI therapies are regarded as hope for people that
+drugs have failed to treat. While drugs could be ineffective because
+they affect the whole body, BMIs can precisely target relevant
+regions of the brain [ 23]. Mental health medications have side-
+effects, such as weight gain and decreased libido. BMIs can have
+side-effects as well, but they might be less severe than drugs [23].
+3.2.6 Diagnosis of Brain Diseases. In addition, brain diseases that
+promote dysfunction of the synaptic communication system may
+be better diagnosed with BMIs [ 27]. Generally, BMIs can be viewed
+as alternatives or competing approaches to traditional medicine in
+specific areas. This trend is expected to intensify in the future.
+4 SOCIAL AND COGNITIVE APPLICATIONS
+In this section, we address social and cognitive applications. The
+issues for these applications are more critical than for therapeutic
+applications. Thus, these issues will be presented in section 5.
+4.1 Learning and Enhancement
+The brain is a dynamical system that generates spontaneous spa-
+tiotemporal patterns even without inputs, movements, or cognitive
+tasks [ 10]. For humans, these patterns are called resting state brain
+activities [ 10]. The resting state brain activity tells much informa-
+tion about age, mental disorder, and cognitive capability [ 10]. "By
+combining information decoding from brain activity and its neuro-
+feedback in reinforcement learning paradigms, we can unconsciously
+control brain activity patterns corresponding to specific information "
+[10]. This can lead to therapies for psychiatric disorders, but also to
+increased cognitive abilities [ 10]. It is expected that this technology
+will soon be available in much cheaper and lighter devices such as
+EEG and near infrared spectroscopy [10].
+External interfaces are increasingly being used to attempt en-
+hancements of memory and concentration [ 23]. Headsets using
+tDCS (see section 2.1.1) could improve memory [ 23]. Working
+memory has been improved in older people using a similar tech-
+nique [ 23]. US military experiments have suggested that tDCS could
+sharpen mental skills [ 23]. tDCS can also enhance physical, as well
+as mental performance [ 23]. For example, 20 minutes of exposure to
+tDCS could improve the peak performance of cyclists [ 23]. However,
+other researchers have issued warnings about possible damages to
+the brain [23].
+Studies have shown that brain cognitive functions could be im-
+proved through cognitive training interventions, in which learners
+perform cognitive tasks [ 25]. However, if the task that the learner
+is performing is too difficult, motivation and concentration can
+decrease, resulting in a poor or a lack of improvement in cogni-
+tive functions [ 25]. Taya et al. propose to monitor learners’ mental
+states such as cognitive workload to facilitate and optimize the
+learning progress [ 25]. The approach uses objective biomarkers
+based on spectral properties of EEG signals [ 25]. To discriminate
+mental states, extracted features are subjected to mathematicaltools based on machine learning [ 25]. Furthermore, Taya et al. in-
+troduced the functional connectome approach, which is based on
+the graph theory [ 25]. A connectome is a comprehensive map of
+neural connections and can be seen as its wiring diagram. The
+brain connectome approach can provide additional biomarkers for
+facilitating the learning process. It can be used to understand mech-
+anisms underlying brain cognitive functions, but also to detect
+mental states [25].
+4.2 Alertness Control and Cognitive Load
+Sharing
+Maksimenko et al. could classify the brain activity into two scenar-
+ios depending on the degree of attention of the observer, which in
+turn is affected by the motivation for a task and the task complex-
+ity [14]. The two scenarios described different neural oscillations
+composed of alpha and beta waves. Maksimenko et al. could build
+a noninvasive BMI to estimate and control the degree of alertness
+in real time [ 14]. The device was based on an EEG recorder and a
+custom developed acquisition software. Controlling the degree of
+attention was done by a feedback signal using external stimulation.
+When the subject lost concentration, a sound signal ringed for re-
+sharpening his attention [ 14]. Monitoring and controlling human
+attention and alertness can find essential applications during tasks
+that require significant attention, such as air traffic control, piloting,
+and long-distance driving [14].
+Also, the cognitive load of a task can be shared among members
+of a group [ 13]. In another article, Maksimenko et al. proposed
+a brain-to-brain interface (BBI) which estimates brain states of
+the participants and distributes optimally a cognitive load among
+group members working on a common task, increasing the over-
+all human performance [ 13]. The workload can be shared among
+participants depending on their current performance, which is esti-
+mated from their electrical brain activity [ 13]. The BBI uses an EEG
+recorder and is noninvasive. With human-to-human interaction, it
+was also found that the subject who initially showed higher degree
+of alertness, exhibited increased alertness due to the assistance of
+his/her partner [ 13]. The efficiency of a team can be increased by
+giving the most difficult workload on operators who exhibit the
+best performance [13].
+4.3 Reading Thoughts and Emotions
+Mind reading has traditionally been linked to science fiction stories.
+However, the first steps of perceiving thoughts have been taken [ 11].
+Scientists already have the needed mathematical framework, and
+the only limitations lie in the measurement of brain activity. A study
+showed that based only on volunteers’ brain activity, a computer
+model was able to produce images of the letters that the volunteers
+were looking at [ 11]. Volunteers first looked at handwritten copies
+of letters, while a functional magnetic resonance imaging (fMRI)
+machine measured the responses of their brain [ 11]. Depending
+on Bayes’ Law, patterns of brain activity, and machine learning,
+the computer model can display an image showing the letter seen
+by the volunteer [ 11]. In another experiment, Akbari et al. could
+reproduce the sounds of numbers listened to by participants, based
+on their brain activity [ 1]. In the future, it might be possible to use
+this type of algorithm to decode thoughts.
+4
+Carella et al. have shown that emotions can also be categorized
+from EEG recordings using the empirical mode decomposition
+(EMD) method [ 6]. They observed that emotion detection is pos-
+sible with an accuracy of over 70%. Zander et al. proposed to fuse
+cognitive monitoring with BCI technology [ 30]. Cognitive moni-
+toring uses real-time brain signal decoding for gaining information
+on the cognitive user state. With the fusion of these technologies,
+Zander et al. could provide information about the users’ intentions,
+situational interpretations, and emotional states [ 30]. The study
+focused on applications for healthy users [ 30], thus not limiting
+itself to therapeutic applications.
+Generally, the gap between human and machine is narrowing.
+New systems allow gesture and voice input to create unique and in-
+tuitive ways for users to interact with computers [ 22]. BMIs reduce
+this gap even further and allow for a glimpse of human-human
+interaction. Potentially, we could use BMIs to better understand
+and communicate with each other by clarifying our thoughts and
+feelings [22].
+4.4 Brain Links and Behavior’s Control
+B. Min explained the approach of using BCIs and low-intensity
+focused-ultrasound (LIFU) sonication to obtain a brain-to-brain
+interface (BBI) [ 16]. The goal is to obtain an interface in which
+two individual brains communicate by sending signals through
+computers. A wide range of mental communication can be expected
+[16].
+Yoo et al. could establish functional links between a human’s
+brain and a rat’s brain [ 29]. Transcranial focused ultrasound (FUS)
+can modulate the neural activity of specific brain regions, playing
+the role of a stimulating noninvasive CBI. Also, the use of noninva-
+sive BCI techniques, such as EEG acquisition and signal processing,
+allows to record brain activity and translates it to generate com-
+puter commands. A link could be created between two brains by
+joining these technologies, thus creating a brain-to-brain interface
+[29]. The implementation could be used to translate the human
+volunteer’s intention to stimulate a rat’s brain motor region re-
+sponsible for tail movement [ 29]. Thanks to the BBI, the human
+volunteer was then able to move the rat’s tail only by thought. The
+interface could achieve about 94% accuracy [29].
+Rao et al. have presented a direct brain-to-brain interface (BBI)
+in humans [ 21]. It was illustrated in a computer game where two
+humans must cooperate through direct BBI communication. A
+schematic diagram of the setup can be seen in fig. 6. The goal
+of the game is to defend a city from enemy rockets by firing a can-
+non. A friendly airplane also flies across the sky, and should not be
+shot at. The first user (the sender) sees the game but cannot control
+the cannon. The second user (the receiver) is located in another
+building. He does not see the game, but he has a touchpad to fire the
+cannon. The BBI communication used noninvasive EEG to record
+the sender’s brain signal, and noninvasive TMS for stimulating the
+receiver’s brain. During trials, the sender conveyed the intent to fire
+the cannon by engaging in right-hand motor imagery [ 21]. When
+the receiver’s computer received a fire command, a TMS pulse was
+delivered to the receiver’s brain, which caused a movement of the
+receiver’s right hand, and thus operated the touchpad which firedthe cannon. Although rudimentary, it provides evidence that infor-
+mation can be transmitted from one human brain to another [ 21].
+This experiment is also a proof of concept to show that a human
+being can be controlled by another human being.
+Figure 6: Direct brain-to-brain interface [21]
+As explained, mind-to-mind communication remains fictitious
+for now, but the building blocks have been demonstrated in the
+laboratory [23].
+4.5 Military
+With EEG headsets, we can already pilot drones using brain signals
+only [ 23]. The Next-Generation Nonsurgical Neurotechnology (N3)
+program of the US’s DARPA aims to develop high-performance and
+bi-directional BMIs. The main applications are controlling aerial
+vehicles, cyber defense, or teaming with computers during military
+missions [ 23]. Furthermore, as mentioned in section 4.1, noninva-
+sive BMIs such as tDCS could improve mental skills. Military and
+security applications raise the most significant worries. Enhancing
+humans mentally and physically could provide some protection
+but could also be used to organize hostile operations remotely [ 23].
+The following section will explore future possibilities and concerns
+of BMIs.
+5 EVALUATIONS
+So far, we have seen state-of-the-art BMI applications, which will
+allow us to discuss future possibilities. Then, human impacts and
+ethical issues will be evaluated, as well as transhumanism and its
+consequences.
+5.1 Future Possibilities
+BMIs could offer benefits such as better health, better memory, bet-
+ter concentration, and healthier aging. However, they also involve
+new risks such as thoughts or moods being accessed [ 23], with a
+possible drift towards controlling people.
+5
+5.1.1 Access to the Brain and Being Controlled. People could be-
+come telepathic and be able to communicate without words by
+accessing thoughts [ 23]. Beyond thoughts, sensory experiences
+could be communicated from humans to humans, such as neural
+postcards, where hearing, seeing, and tasting could be possible.
+Alternatively, life experiences such as enjoying a meal or taking a
+parachute jump could be lived virtually and offer sensations as if
+they were real [ 23]. More reasonably, it seems possible that we will
+be able to create pictures of what people are thinking about within
+the next 20 years [11].
+If thoughts could be accessed, companies could use this approach
+for marketing purposes, and put pop-ups in our heads [ 23]. Fur-
+thermore, George Orwell’s thoughtcrime of his dystopian novel
+"Nineteen Eighty-Four" could become a reality, and people could
+simply be arrested for divergent thinking. Privacy concerns need
+definitively to be addressed. By accessing thoughts, politicians could
+recruit people to their causes [ 23]. In the future, it could be possible
+that governments will control and manipulate people’s behavior not
+only through mass media but also by directly sending commands
+or putting ideologies into their brains [ 20]. Generally, if the human
+brain can be controlled, it will imply a plethora of consequences.
+We could imagine that parts of our brain could be deactivated if we
+have not paid our invoices. We could imagine ransomware applied
+on a brain, with hackers encrypting the brain and asking for a
+ransom to decrypt it.
+5.1.2 Digital Memory. BMIs will perhaps also offer exciting op-
+portunities to enhance the brain itself. Invasive or noninvasive
+BMIs could help us remember more and better, learn faster, make
+better decisions, and solve problems without biases [ 23]. Instead
+of hard training, we could simply download a new skill as Neo
+does in the science fiction movie Matrix . Neural interfaces could
+raise educational achievement levels by helping students to learn,
+remember, and concentrate better [ 23]. Invasive BMIs could be-
+come body parts, as peacemakers are today. Our memory and all
+its associated knowledge could be securely backed up on digital
+devices or uploaded to the cloud [23].
+5.1.3 Merge our intelligence with AI. Our brain is composed of
+around 86 billion neurons, and each neuron can make connections
+without thousands of other neurons via links called synapses [ 23].
+While computers can perform billions of operations per second
+but are connected to a few neighbors only, the brain’s neurons can
+perform only around 1,000 operations per second, but can commu-
+nicate with thousands of neighbors [ 23]. Hence, the comparison
+between brain and computer is complicated. Additionally, much
+about the human brain remains unknown, such as the language
+with which neurons communicate or the brain’s propensity to form
+connections [23].
+Today, artificial intelligence (AI) " is an important technological
+tool that allows many neural interfaces to function " [23]. BMIs use AI
+to convert neural signals into digital data, for example, to interpret
+instructions from the brain to move a prosthetic arm [ 23]. In the
+future, however, a more intricate relationship between BMIs and
+AI could emerge. As mentioned above, computers and brains are
+different but can be perceived as complementary. Humans have
+decision-making capacity and emotional intelligence, while com-
+puters are good at processing a considerable number of data quickly.Hence, several technology experts believe that beneficial impacts
+could arise from linking human and artificial intelligence via BMIs
+[23]. In general, companies like Neuralink also pursue the goal
+of linking human brains and AI [ 23]. Niforatos et al. argue that
+while sounding like a science fiction scenario, the notion of humans
+converging with machines not only could be soon a reality, but
+also a necessity [ 19]. Niforatos et al. believe " that the human brain
+and technology can and should be able to work more closely in tan-
+dem for amplifying our cognitive capacities in the era of distractions
+and information overload " [19]. Elon Musk said that Neuralink’s
+long-term goal is to achieve " symbiosis with artificial intelligence ",
+which is required to compete with an ever more powerful AI, and
+on which the survival of humanity will depend. Such a form of
+collaborative intelligence could emerge and bring revolutionary
+applications, but also raise significant ethical issues [23].
+5.2 Human Impacts and Ethical Issues
+Talking about the impacts of technology, Paul Virilio said, “ When
+you invent the ship, you also invent the shipwreck; when you invent the
+plane you also invent the plane crash; and when you invent electricity,
+you invent electrocution... Every technology carries its own negativity,
+which is invented at the same time as technical progress. ” Buruk et al.
+wrote fictional abstracts about designing children’s technologies
+in the age of transhumanism in 2077 [ 4]. One of these fictions nar-
+rates that, in the year 2065, the Dutch government declared that all
+new-borns in the Netherlands should undergo a procedure to be
+equipped with water-breathing implants, due to the impossibility
+of installing these implants in adults. The fictional paper explores
+the impacts of this legislation, notably the creation of a new gener-
+ation of children using the canals of Amsterdam as unsupervised
+playgrounds [ 4]. This example shows us that technology always
+impacts human beings, which seems to be especially true for BMIs,
+reinforcing the need to consider these issues proactively.
+5.2.1 Alter or Loss of Sense of Self. A possible impact of BMIs is
+the loss of sense of self [ 24]. For some deaf people, implants can
+make a vital difference. However, some other people entirely reject
+the implants, considering deafness to be an identity rather than
+a disability. They are used to their condition, and sign language
+provides them with a full and natural communication means [ 23].
+By being augmented, they no longer find themselves [ 7]. Anita
+Silvers has considered cochlear implants for deafness as a "tyranny
+of the normal", designed to adjust deaf people to a world designed by
+the hearing, assuming the inferiority of deafness [ 28]. The concept
+ofselfis challenged: is it us as humans? Or is it the technology [ 23]?
+In the end, each human experience is different and has a meaningful
+value.
+5.2.2 Erosion of Skills and Autonomy. If invasive BMIs are making
+decisions within our bodies, are we still autonomous [ 23]? By en-
+hancing our bodily functions, we would be replacing them in a way.
+As our natural bodily functions would no longer be used, we would
+likely lose our abilities. This would lead to an intimate, dangerous,
+and significantly increased dependence on technology, reaching
+the point of no return. We definitively have to ask ourselves if we
+should be using BMIs to improve the abilities of healthy people
+[28].
+6
+5.2.3 Privacy Issues. BMIs can collect large amounts of physical
+and neural biodata. In this context, it will be challenging to preserve
+privacy and control the use of personal data [ 23]. A portable mind-
+reading device may not be completely out of reach in the future, and
+there is a need to establish privacy guidelines now [ 11]. Generally,
+people are reluctant to allow systems to understand their intentions,
+and they do not want their inner thoughts to be read, and revealed
+[22]. It is also unclear what people believe sensors can reveal, and
+people rely on existing beliefs about the body to explain what they
+might disclose [ 15]. Transparent access to thoughts could modify
+people’s behavior and affect their well-being [ 23].Big Brother’s style
+of mental surveillance would undoubtedly create psychological
+harm [ 23]. Without going so far as to mind-reading, cognitive load’s
+privacy is already an issue. Not only are people unwilling to disclose
+their cognitive load, but it could also generate significant stress, for
+example, if their boss knew exactly their current cognitive load for
+a specific task. Now, as we have seen in section 4.2, cognitive load
+monitoring and cognitive load sharing between team members is
+already a reality, strengthening the need for rules now.
+5.2.4 Legal Issues. If neural interfaces can intentionally influence
+individuals’ behavior, should they be prescribed by states? [ 23].
+For example, we could imagine that governments would use these
+technologies to reduce their public health bill by directly influencing
+people to eat healthier. That power could then be extended in
+broader contexts, such as sanctions in criminal justice. Conversely,
+instead of prescribing, some interfaces could be proscribed [ 23]. We
+imperatively need to define who should control access to BMIs, for
+safety reasons. As for privacy issues, regulation and laws will be
+needed.
+5.2.5 Social Issues. The ethical dimensions of the use of BMIs go
+beyond the contexts of clinical research and patient care, such as
+economic pressures and regulatory controls associated with com-
+mercial availability of BMIs [ 2]. By having BMIs, more interactions
+with machines are expected, diminishing social interactions. BMIs
+will also contribute to widening inequalities, as technology always
+does, by offering advantages to users who can afford it [23].
+5.3 Transhumanism and Philosophical Issues
+BMIs challenge the very essence of what it means to be human [ 12].
+As we have seen in section 5.2.1, implants can alter the sense of
+self. The difference between enhancement and treatment is thin
+and depends on defining normality and disease [ 28]. Christopher
+Boorse " defines disease as a statistical deviation from species-typical
+functioning " [28]. It is questionable whether "enhancement" is an in-
+crease or a reduction, or if enhancement is necessary at all. Choices
+must be made. Another interesting question is whether enhance-
+ment can be achieved differently, i.e., without invasive BMIs. For
+example, we have seen in section 4.1 that cognitive training can
+improve brain cognitive functions.
+Transhumanism is a vision of the world. It sees enhancement
+as interventions that promote bodily and cognitive characteristics
+to reach a post-human stage [ 5], where the human condition itself
+is transformed. It raises many ethical and philosophical questions,
+such as the following: How do we want to live as humans? Is such
+a profound transformation still being human?Transhumanism could show a productivist view of the human
+being, instead of a qualitative view of life’s experience on earth.
+However, the debate may not be so trivial when we consider the
+possibility that the singularity could become a reality. The singu-
+larity, also known as artificial general intelligence (AGI), can be
+defined as the point where AI can improve itself faster than humans
+can. Some argue that AGI will not be realized [ 8], while AI experts
+estimate that there is around 50% chance that AGI will occur until
+2060 [ 26]. Personalities such as Stephen Hawking and Elon Musk
+are also warning about AI. As we have seen in section 5.1.3, Elon
+Musk and Neuralink advocate BMIs and fusion with AI for the sur-
+vival of humanity. In its essence, it can be linked to a philosophical
+question: does consciousness emerge, or is it transcendental?
+However, what will the world be like if the AI threat is real, and
+fusion with the machine becomes a reality? For example, if kids can
+download school subjects in seconds, instead of slowly learning
+them over the years, what will childhood be like? Will the time
+saved be used to enjoy life or to acquire more and more skills? How
+about social relationships and early friendships built at school?
+The potential change is so massive that no one can predict with
+certainty what the outcome would be.
+5.3.1 Transhumanism through Spiral Dynamics. Here, we will present
+transhumanism through the various levels of the model Spiral Dy-
+namics [3]. At each level, symbolized by a color, we will show how
+transhumanism could be used by the system and how it could help
+foster the characteristics of a level. At Beige , transhumanism could
+be seen as an individual survival tool, against other organisms or
+against technology itself. At Purple , transhumanism could enable
+a better connection between people through brain-to-brain inter-
+faces, and a better harmony with nature. At Red, transhumanism
+could be used as a domination tool, where people would try to get
+the best BMIs to dominate others. At Blue, transhumanism would
+be used to reduce people to specific tasks and strengthen the hier-
+archical structure. At Orange , BMIs would be used to reach the top
+of the hierarchy, thus increasing competition between individuals.
+At the bottom of the hierarchy, we would equip people with BMIs
+to increase their productivity. At Green , BBIs would allow to under-
+stand all languages and cultures, and experiment with full empathy
+by feeling what others are feeling. With transhumanism, humans
+would be connected, which would allow for global consciousness
+and unity. At Yellow , transhumanism would make it possible to
+understand the differences between individuals and integrate all
+potentials and skills. At Turquoise , transhumanism would be used
+to make people equal both physically and cognitively. At Coral ,
+with increased awareness, acceptance, and freedom, would we even
+need transhumanism? Or would we simply prefer to live without
+it?
+Now suppose that our society currently lies at Orange , where the
+quality of life is not a priority, and efficiency rules the world. This
+desire for efficiency could fully justify the race for transhumanism.
+Since transhumanism is irreversible, we would seal the world at
+Orange and stop the evolution of humanity, limiting it to efficiency
+and competition.
+This model is interesting to show that the reasons and uses of
+transhumanism can be radically different, depending on society’s
+7
+core values. Thus, there is an urgent need to consider the issues of
+transhumanism globally.
+6 CONCLUSION
+In summary, this paper first introduced brain-machine interfaces
+(BMIs), Neuralink, and its technology to produce invasive BMIs.
+Currently, BMIs mainly have therapeutic applications, such as help-
+ing people with spinal cord injury by allowing them to control a
+computer directly with their brain. Other therapeutic applications
+include epilepsy, Parkinson’s disease, and autism. BMIs also have
+social and cognitive applications, such as learning, enhancement,
+behavior control, and reading thoughts. Another objective of this
+work was to present an evaluation, showing the future possibilities
+of BMIs, such as brain control, and the fusion of our intelligence
+with AI. The resulting human impacts and ethical issues were pre-
+sented, such as loss of sense of self, erosion of skills, and other
+issues. Finally, this paper explored transhumanism, its potential
+necessity with the advent of artificial general intelligence, as well
+as its different reasons for being.
+Concerning open issues, BMIs are still in their infancy stage of
+development, and, therefore, it is still difficult to predict exactly
+where they are going. Future research should consider more care-
+fully the potential effects of BMIs, particularly the human impacts
+of current and future BMIs. We have shown that BMI research could
+generate drastic changes with no possible return, thus reinforcing
+the need to urgently address these critical issues.
+ACKNOWLEDGMENTS
+To Dr. Michèle Courant of the University of Fribourg in Switzerland,
+for her mentoring during the whole seminar, her precious advice,
+and her support to write the current paper.
+REFERENCES
+[1]Hassan Akbari, Bahar Khalighinejad, Jose L. Herrero, Ashesh D. Mehta, and Nima
+Mesgarani. 2018. Towards reconstructing intelligible speech from the human
+auditory cortex. (2018). https://doi.org/10.1101/350124
+[2]Thomas Baldwin, Jonathan Cole, Maria Fitzgerald, Jenny Kitzinger, Graeme
+Laurie, Jack Price, Nikolas Rose, Steven Rose, Ilina Singh, Vincent Walsh, and
+Kevin Warwick. 2013. Novel Neurotechnologies: Intervening in the Brain . Nuffield
+Council on Bioethics.
+[3]DE Beck and CC Cowan. 1996. Spiral dynamics: mastering values, leadership, and
+change . Blackwell Business.
+[4]Oğuz ’Oz’ Buruk, Oğuzhan Özcan, Gökçe Elif Baykal, Tilbe Göksun, Selçuk Acar,
+Güler Akduman, Mehmet Aydın Baytaş, Ceylan Beşevli, Joe Best, Aykut Coşkun,
+Hüseyin Uğur Genç, A. Baki Kocaballi, Samuli Laato, Cássia Mota, Konstantinos
+Papangelis, Marigo Raftopoulos, Richard Ramchurn, Juan Sádaba, Mattia Thibault,
+Annika Wolff, and Mert Yildiz. 2020. Children in 2077: Designing Children’s
+Technologies in the Age of Transhumanism. In Extended Abstracts of the 2020
+CHI Conference on Human Factors in Computing Systems (Honolulu, HI, USA)
+(CHI EA ’20) . Association for Computing Machinery, New York, NY, USA, 1–14.
+https://doi.org/10.1145/3334480.3381821
+[5]Laura Cabrera. 2012. Social Enhancement: Re-Thinking the Role of Emerging
+Technologies. In Proceedings of the 2012 Virtual Reality International Conference
+(Laval, France) (VRIC ’12) . Association for Computing Machinery, New York, NY,
+USA, Article 7, 6 pages. https://doi.org/10.1145/2331714.2331723
+[6]Tommaso Carella, Matteo De Silvestri, Mary Finedore, Isaac Haniff, and Hananeh
+Esmailbeigi. 2018. Emotion Recognition for Brain Machine Interface: Non-linear
+Spectral Analysis of EEG Signals Using Empirical Mode Decomposition. 2018
+40th Annual International Conference of the IEEE Engineering in Medicine and
+Biology Society (EMBC) (2018). https://doi.org/10.1109/embc.2018.8512228
+[7]Liam Drew. 2019. The ethics of brain–computer interfaces. Nature 571, 7766
+(2019). https://doi.org/10.1038/d41586-019-02214-2
+[8]Ragnar Fjelland. 2020. Why general artificial intelligence will not be realized.
+Humanities and Social Sciences Communications 7, 1 (2020). https://doi.org/10.
+1057/s41599-020-0494-4[9]Ioannis Karageorgos, Karthik Sriram, Jan Vesely, Michael Wu, Marc Powell,
+David Borton, Rajit Manohar, and Abhishek Bhattacharjee. 2020. Hardware-
+Software Co-Design for Brain-Computer Interfaces. 2020 ACM/IEEE 47th Annual
+International Symposium on Computer Architecture (ISCA) (2020). https://doi.org/
+10.1109/isca45697.2020.00041
+[10] Mitsuo Kawato. 2015. Visualizing and Manipulating Brain Dynamics. In Proceed-
+ings of the 2015 ACM International Joint Conference on Pervasive and Ubiquitous
+Computing (Osaka, Japan) (UbiComp ’15) . Association for Computing Machinery,
+New York, NY, USA, 1. https://doi.org/10.1145/2750858.2815826
+[11] Erica Klarreich. 2014. Reading brains. Commun. ACM 57, 3 (2014), 12–14. https:
+//doi.org/10.1145/2567649
+[12] The Lancet. 2019. iHuman: a futuristic vision for the human experience. The
+Lancet 394, 10203 (2019), 979. https://doi.org/10.1016/s0140-6736(19)32141-5
+[13] Vladimir A. Maksimenko, Alexander E. Hramov, Nikita S. Frolov, Annika Lüt-
+tjohann, Vladimir O. Nedaivozov, Vadim V. Grubov, Anastasia E. Runnova,
+Vladimir V. Makarov, Jürgen Kurths, Alexander N. Pisarchik, and et al. 2018.
+Increasing Human Performance by Sharing Cognitive Load Using Brain-to-Brain
+Interface. Frontiers in Neuroscience 12 (2018). https://doi.org/10.3389/fnins.2018.
+00949
+[14] Vladimir A. Maksimenko, Anastasia E. Runnova, Maksim O. Zhuravlev,
+Vladimir V. Makarov, Vladimir Nedayvozov, Vadim V. Grubov, Svetlana V. Pche-
+lintceva, Alexander E. Hramov, and Alexander N. Pisarchik. 2017. Visual per-
+ception affected by motivation and alertness controlled by a noninvasive brain-
+computer interface. Plos One 12, 12 (2017). https://doi.org/10.1371/journal.pone.
+0188700
+[15] Nick Merrill, John Chuang, and Coye Cheshire. 2019. Sensing is Believing.
+Proceedings of the 2019 on Designing Interactive Systems Conference (2019). https:
+//doi.org/10.1145/3322276.3322286
+[16] Byoung-Kyong Min. 2013. Eeg/sonication-based brain-brain interfacing. 2013
+International Winter Workshop on Brain-Computer Interface (BCI) (2013). https:
+//doi.org/10.1109/iww-bci.2013.6506614
+[17] Elon Musk. 2019. An Integrated Brain-Machine Interface Platform With Thou-
+sands of Channels. Journal of Medical Internet Research 21, 10 (2019). https:
+//doi.org/10.2196/16194
+[18] Neuralink. 2020. https://neuralink.com/approach/
+[19] Evangelos Niforatos, Athanasios Vourvopoulos, and Marc Langheinrich. 2017.
+Amplifying human cognition. Proceedings of the 2017 ACM International Joint
+Conference on Pervasive and Ubiquitous Computing and Proceedings of the 2017
+ACM International Symposium on Wearable Computers (2017). https://doi.org/10.
+1145/3123024.3129266
+[20] Alexander N Pisarchik, Vladimir A Maksimenko, and Alexander E Hramov. 2019.
+From Novel Technology to Novel Applications: Comment on “An Integrated
+Brain-Machine Interface Platform With Thousands of Channels” by Elon Musk
+and Neuralink (Preprint). (2019). https://doi.org/10.2196/preprints.16356
+[21] Rajesh P. N. Rao, Andrea Stocco, Matthew Bryan, Devapratim Sarma, Tiffany M.
+Youngquist, Joseph Wu, and Chantel S. Prat. 2014. A Direct Brain-to-Brain
+Interface in Humans. PLoS ONE 9, 11 (2014). https://doi.org/10.1371/journal.
+pone.0111332
+[22] Esther Shein. 2017. Overcoming disabilities. Commun. ACM 60, 11 (2017), 17–19.
+https://doi.org/10.1145/3137838
+[23] The Royal Society. 2019. iHuman: blurring lines between mind and machine . The
+Royal Society. https://royalsociety.org/-/media/policy/projects/ihuman/report-
+neural-interfaces.pdf
+[24] TA Swiss. 2020. Ausschreibungs-Unterlagen zur Studie «Bioelektronik». None
+(2020).
+[25] Fumihiko Taya, Yu Sun, Fabio Babiloni, Nitish Thakor, and Anastasios Bezerianos.
+2015. Brain enhancement through cognitive training: a new insight from brain
+connectome. Frontiers in Systems Neuroscience 9 (2015). https://doi.org/10.3389/
+fnsys.2015.00044
+[26] Kutay Tezcan, Magnus RC Wootton, and Cem Dilmegani. 2020. 995 experts
+opinion AGI singularity by 2060 (2021 update). https://research.aimultiple.com/
+artificial-general-intelligence-singularity-timing
+[27] Mladen Veletic and Ilangko Balasingham. 2019. Synaptic Communication Engi-
+neering for Future Cognitive Brain–Machine Interfaces. Proc. IEEE 107, 7 (2019),
+1425–1441. https://doi.org/10.1109/jproc.2019.2915199
+[28] Daniela De Venuto and Alberto Sangiovanni Vincentelli. 2013. Dr. Frankensteins
+Dream Made Possible Implanted Electronic Devices. Design, Automation & Test
+in Europe Conference & Exhibition (DATE), 2013 (2013). https://doi.org/10.7873/
+date.2013.311
+[29] Seung-Schik Yoo, Hyungmin Kim, Emmanuel Filandrianos, Seyed Javid Taghados,
+and Shinsuk Park. 2013. Non-Invasive Brain-to-Brain Interface (BBI): Establishing
+Functional Links between Two Brains. PLoS ONE 8, 4 (2013). https://doi.org/10.
+1371/journal.pone.0060410
+[30] Thorsten O Zander and Christian Kothe. 2011. Towards passive brain–computer
+interfaces: applying brain–computer interface technology to human–machine
+systems in general. Journal of Neural Engineering 8, 2 (mar 2011), 025005. https:
+//doi.org/10.1088/1741-2560/8/2/025005
+8
