@@ -10,7 +10,7 @@ AI-generated EPUB translations of key books on **Effective Altruism** and **Rati
 Each language has one release with all its books as files. To get a single book, use its link in the table below.
 
 - **English (originals)**: 14 books and 2048 shorter texts, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/en-latest)
-- **Spanish**: 13 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
+- **Spanish**: 12 books and 1 shorter texts, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/es-latest)
 - **Chinese**: 2 books, [download all](https://github.com/Pato-desu/Translated-Effective-Altruist-books/releases/tag/zh-latest)
 <!-- downloads:end -->
 
@@ -22,18 +22,18 @@ Click a title's file link to download that EPUB. All files open in any e-reader.
 | :--- | :--- | :--- | :--- |
 | **Doing Good Better** | William MacAskill | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Hacer%20el%20bien%20mejor_%20Como%20el%20Altruismo%20Eficaz%20puede%20hacer%20la%20diferencia%20-%20William%20MacAskill.epub) · [English EPUB](English%2C%20Original/Doing%20Good%20Better_%20How%20Effective%20Altruism%20can%20make%20the%20difference%20-%20William%20MacAskill.epub) |
 | **Rationality: From AI to Zombies** | Eliezer Yudkowsky | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Racionalidad_%20de%20la%20A%20a%20la%20Z%20-%20Eliezer%20Yudkowsky.epub) · [English EPUB](English%2C%20Original/Rationality_%20From%20AI%20to%20Zombies%20-%20Eliezer%20Yudkowsky.epub) |
-| **Animal Liberation** | Peter Singer | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/Animal%20Liberation%20%28PDFDrive%29.epub) · [English PDF](English%2C%20Original/archive/Animal%20Liberation%20%28PDFDrive%29.pdf) |
-| **Superintelligence** | Nick Bostrom | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.epub) · [English PDF](English%2C%20Original/archive/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.pdf) |
-| **The Scout Mindset** | Julia Galef | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/Galef%20-%20The%20Scout%20Mindset.epub) · [English PDF](English%2C%20Original/archive/Galef%20-%20The%20Scout%20Mindset.pdf) |
-| **The Most Important Century** (Cold Takes series) | Holden Karnofsky | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/Most%20important%20century.epub) · [English PDF](English%2C%20Original/archive/Most%20important%20century.pdf) |
-| **CFAR Handbook** (2021) | Center for Applied Rationality | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/CFAR_Handbook_2021.epub) · [English PDF](English%2C%20Original/archive/CFAR_Handbook_2021.pdf) |
-| **The Most Good You Can Do** | Peter Singer | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) · [English PDF](English%2C%20Original/archive/Singer%20-%20Most%20Good%20You%20Can%20Do.pdf) |
-| **Avoiding the Worst** | Tobias Baumann | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/baumann-avoiding-the-worst.epub) · [English PDF](English%2C%20Original/archive/Baumann%20-%20Avoiding%20Worst%20final.pdf) |
-| **The Hedonistic Imperative** | David Pearce | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/hedonistic%20imperative.epub) · [English PDF](English%2C%20Original/archive/hedonistic%20imperative.pdf) |
-| **Reasoned Politics** | Magnus Vinding | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/reasoned-politics.epub) · [English PDF](English%2C%20Original/archive/reasoned-politics.pdf) |
-| **Suffering-Focused Ethics** | Magnus Vinding | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/archive/suffering-focused-ethics.epub) · [English PDF](English%2C%20Original/archive/suffering-focused-ethics.pdf) |
-| **The Precipice** | Toby Ord | Chinese, English | [Chinese EPUB](Chinese/%E5%8D%B1%E5%B4%96%20The%20Precipice.epub) · [English PDF](English%2C%20Original/archive/Ord%20-%20Precipice.pdf) |
-| **What We Owe the Future** | William MacAskill | Chinese, English | [Chinese EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) · [English PDF](English%2C%20Original/archive/What%20We%20Owe%20Future%20Macaskill.pdf) |
+| **Animal Liberation** | Peter Singer | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Animal%20Liberation%20%28PDFDrive%29.epub) · [English PDF](English%2C%20Original/Animal%20Liberation%20%28PDFDrive%29.pdf) |
+| **Superintelligence** | Nick Bostrom | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.epub) · [English PDF](English%2C%20Original/Bostrom%20-%20Superintelligence%20Paths%2C%20Dangers%2C%20Strategies%20%28PDFDrive%29.pdf) |
+| **The Scout Mindset** | Julia Galef | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Galef%20-%20The%20Scout%20Mindset.epub) · [English PDF](English%2C%20Original/Galef%20-%20The%20Scout%20Mindset.pdf) |
+| **The Most Important Century** (Cold Takes series) | Holden Karnofsky | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Most%20important%20century.epub) · [English PDF](English%2C%20Original/Most%20important%20century.pdf) |
+| **CFAR Handbook** (2021) | Center for Applied Rationality | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/CFAR_Handbook_2021.epub) · [English PDF](English%2C%20Original/CFAR_Handbook_2021.pdf) |
+| **The Most Good You Can Do** | Peter Singer | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/Singer%20-%20Most%20Good%20You%20Can%20Do.epub) · [English PDF](English%2C%20Original/Singer%20-%20Most%20Good%20You%20Can%20Do.pdf) |
+| **Avoiding the Worst** | Tobias Baumann | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/baumann-avoiding-the-worst.epub) · [English PDF](English%2C%20Original/Baumann%20-%20Avoiding%20Worst%20final.pdf) |
+| **The Hedonistic Imperative** | David Pearce | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/hedonistic%20imperative.epub) · [English PDF](English%2C%20Original/hedonistic%20imperative.pdf) |
+| **Reasoned Politics** | Magnus Vinding | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/reasoned-politics.epub) · [English PDF](English%2C%20Original/reasoned-politics.pdf) |
+| **Suffering-Focused Ethics** | Magnus Vinding | Spanish, English | [Spanish EPUB](Espa%C3%B1ol/suffering-focused-ethics.epub) · [English PDF](English%2C%20Original/suffering-focused-ethics.pdf) |
+| **The Precipice** | Toby Ord | Chinese, English | [Chinese EPUB](Chinese/%E5%8D%B1%E5%B4%96%20The%20Precipice.epub) · [English PDF](English%2C%20Original/Ord%20-%20Precipice.pdf) |
+| **What We Owe the Future** | William MacAskill | Chinese, English | [Chinese EPUB](Chinese/%E6%9C%AA%E6%9D%A5%E7%9A%84%E4%BA%8F%E6%AC%A0%20What%20We%20Owe%20the%20Future.epub) · [English PDF](English%2C%20Original/What%20We%20Owe%20Future%20Macaskill.pdf) |
 
 Besides the books, 2049 shorter texts (articles, forum and blog posts, papers) are translated: see [ARCHIVE.md](ARCHIVE.md). <!-- archive-link -->
 
@@ -72,6 +72,6 @@ python scripts/links.py <book> es                       # restore external links
 python scripts/consistency.py <book> es --mine 30       # term-consistency report -> reports/
 python scripts/pdfread.py <file.pdf>                    # text PDF -> Markdown chapters in work/
 python scripts/mdepub.py <book.md> --out <file.epub> --lang zh-Hans   # Markdown chapters -> one EPUB
-python scripts/archive.py prepare|finish <file> <lang>  # PDF, text or HTML file -> Español/archive/
+python scripts/archive.py prepare|finish <file> <lang>  # PDF, text or HTML file -> Español/posts/
 python scripts/publish.py [--dry-run]                   # copy the public files to the public repo and refresh releases
 ```
