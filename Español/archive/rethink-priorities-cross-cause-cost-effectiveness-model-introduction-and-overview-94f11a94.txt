@@ -1,0 +1,236 @@
+Modelo de costo-efectividad transversal de Rethink Priorities: introducción y panorama general — Rethink Priorities
+0
+Ir al contenido
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleos
+Donar
+Abrir menú
+Cerrar menú
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleos
+Donar
+Abrir menú
+Cerrar menú
+Carpeta:
+Sobre nosotros
+Atrás
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Carpeta:
+Investigación
+Atrás
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Carpeta:
+Servicios
+Atrás
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Empleos
+Donar
+Modelo transversal de costo-efectividad de Rethink Priorities
+Investigaciones sobre cosmovisiones
+3 de nov.
+Escrito por
+Rethink Priorities
+Esta publicación forma parte de la
+secuencia CURVE
+: “Causas e incertidumbre: repensar el valor en esperanza”. El objetivo de esta secuencia es doble: primero, considerar alternativas a la maximización del valor esperado para la priorización de causas; segundo, evaluar la afirmación de que el compromiso con la maximización del valor esperado respalda de manera sólida la conclusión de que debemos priorizar la mitigación del riesgo existencial por encima de todo lo demás. Esta publicación presenta una herramienta de software que estamos desarrollando para comprender mejor el riesgo y la efectividad.
+Leer la introducción de la serie
+Resumen ejecutivo
+El
+modelo transversal de costo-efectividad
+(CCM, por sus siglas en inglés) es una herramienta de software en desarrollo por Rethink Priorities para producir evaluaciones de costo-efectividad en distintas áreas de causa.
+El CCM permite evaluar intervenciones en salud global y desarrollo, bienestar animal y mitigación de riesgos existenciales.
+El CCM también incluye funciones para evaluar proyectos de investigación orientados a mejorar las intervenciones existentes o a descubrir alternativas más efectivas.
+El CCM sigue un enfoque de Monte Carlo para estimar probabilidades.
+El CCM acepta distribuciones proporcionadas por el usuario como valores de parámetros.
+Nuestro objetivo principal con el CCM es aclarar cómo se traducen las elecciones de parámetros en incertidumbre sobre los posibles resultados.
+Las limitaciones del CCM lo convierten en una herramienta inadecuada para comparaciones definitivas.
+El modelo está optimizado para ciertos proyectos efectivos fácilmente cuantificables y no puede evaluar muchas causas relevantes.
+Las distribuciones de probabilidad son una forma cuestionable de representar la incertidumbre profunda.
+El modelo puede no manejar adecuadamente la posible interdependencia entre parámetros.
+Construir y usar el CCM ha confirmado algunas de nuestras expectativas. También nos ha sorprendido de otras maneras.
+Con elecciones de parámetros que nos parecen plausibles, los proyectos de mitigación del riesgo existencial dominan a los demás en valor esperado a largo plazo, pero los resultados tienen una varianza demasiado alta para aproximarlos mediante simulaciones de Monte Carlo sin extraer miles de millones de muestras.
+El valor esperado de la mitigación del riesgo existencial a largo plazo está determinado sobre todo por los valores extremos posibles de un puñado de parámetros muy inciertos.
+Las intervenciones de bienestar animal más prometedoras tienen un valor esperado mucho mayor que las principales intervenciones de salud global y desarrollo, con un nivel de incertidumbre algo mayor.
+Incluso con intervenciones y proyectos de investigación a corto plazo relativamente sencillos, gran parte del valor esperado de los proyectos resulta de la combinación poco probable de valores extremos de los parámetros.
+Planeamos organizar
+un recorrido en línea y una sesión de preguntas y respuestas sobre el modelo
+con el equipo de Investigaciones sobre cosmovisiones de Rethink Priorities el Giving Tuesday, 28 de noviembre de 2023, a las 9 a. m. PT / mediodía ET / 5 p. m. BT / 6 p. m. CET. Si desea asistir a este evento, por favor
+regístrese
+aquí.
+Descripción general
+El modelo transversal de costo-efectividad (CCM) de Rethink Priorities es una herramienta de software que estamos desarrollando para evaluar la efectividad relativa de proyectos en tres grandes ámbitos: salud global y desarrollo, bienestar animal y mitigación de riesgos existenciales. Puede probar nuestra versión inicial en
+ccm.rethinkpriorities.org
+y enviarnos sus comentarios en esta publicación o
+mediante este formulario
+.
+El modelo produce estimaciones de efectividad, entendidas en términos del efecto sobre la suma del bienestar de los individuos, para intervenciones y proyectos de investigación dentro de estos ámbitos. Los resultados se generan mediante cálculos sobre los valores de los parámetros proporcionados por el usuario. Debido a las muchas controversias e incertidumbres que rodean a estos parámetros, sigue un enfoque de Monte Carlo para tener en cuenta nuestra incertidumbre: los usuarios no proporcionan valores precisos, sino que especifican distribuciones de valores posibles; luego, cada ejecución del modelo genera un gran número de muestras de estas distribuciones de parámetros, que se usan como insumos para calcular muchos resultados posibles por separado. El objetivo es que las conclusiones reflejen lo que deberíamos creer sobre la dispersión de los posibles resultados, dada nuestra incertidumbre sobre los parámetros.
+Propósito
+El CCM calcula distribuciones de la efectividad relativa de diferentes intervenciones benéficas y proyectos de investigación para que puedan compararse. Como estas distribuciones dependen de valores de parámetros muy inciertos, no pretende establecer conclusiones definitivas sobre la efectividad relativa de distintos proyectos. Es difícil incorporar en un solo modelo la enorme cantidad de consideraciones relevantes y toda la amplitud de nuestras incertidumbres.
+En cambio, los resultados del CCM aportan
+evidencia
+sobre la costo-efectividad relativa. Los usuarios deben combinar esa evidencia tanto con una comprensión de las limitaciones del modelo como con otras fuentes de evidencia para formarse sus propias opiniones. El CCM puede influir en lo que creemos, aunque no debería decidirlo por nosotros.
+Además de ayudarnos a comprender las implicaciones de los valores de los parámetros, el CCM también pretende servir como herramienta para entender mejor la dinámica de la incertidumbre. Puede ser esclarecedor ver cuánto dominan el cálculo del valor esperado las posibilidades muy remotas, y cómo pequeños cambios en algunos parámetros pueden marcar una gran diferencia en los resultados. La mejor forma de usar el modelo es interactuar con él: ver cómo distintas distribuciones de parámetros afectan a los resultados.
+Características clave
+No somos los primeros en generar estimaciones de costo-efectividad para proyectos diversos ni en crear un modelo para hacerlo. Vemos el valor del presente modelo en las siguientes características:
+Modelamos la incertidumbre con simulaciones
+Como hemos dicho, no estamos seguros de muchos de los parámetros principales que intervienen en la producción de resultados del modelo. Para reflejar esa incertidumbre, ejecutamos el modelo con diferentes valores para esos parámetros.
+En la versión actual del modelo, usamos 150.000 muestras independientes de cada una de las distribuciones de parámetros para generar resultados. Estas muestras pueden considerarse insumos de ejecuciones independientes. Las ejecuciones generan un conjunto de resultados que reflejan nuestra distribución de probabilidad subjetiva adecuada sobre los resultados. Si las incertidumbres sobre los insumos del modelo se reflejan adecuadamente, estos resultados deberían cubrir el rango de posibilidades que racionalmente cabe esperar.
+Incorporamos distribuciones de parámetros especificadas por el usuario
+Para reflejar la incertidumbre sobre los parámetros, el modelo genera múltiples simulaciones con distintas combinaciones de valores. Los valores de los parámetros en cada simulación se muestrean a partir de distribuciones sobre posibles números. Aunque proporcionamos algunas distribuciones predeterminadas que consideramos razonables, también permitimos que los usuarios moldeen las distribuciones para representar sus propias incertidumbres. Incluimos varios tipos de distribuciones entre las que pueden elegir; también les permitimos fijar los límites y un intervalo de confianza para la distribución que elijan.
+Nuestros resultados recogen la posibilidad de resultados ineficaces
+No conocemos con certeza los valores de los parámetros que intervienen en nuestros cálculos del valor esperado de nuestros proyectos. Tampoco sabemos con certeza cómo los acontecimientos del mundo afectan a sus resultados. Las campañas pueden fracasar. Los esfuerzos de mitigación pueden salir contraproducentes. Los proyectos de investigación pueden ser ignorados. Se podría intentar captar el efecto de tales sucesos aleatorios aplicando un descuento al resultado: si hay un 30% de probabilidad de que un proyecto fracase, podríamos simplemente reducir cada valor muestreado un 30%. En cambio, intentamos captar este último tipo de incertidumbre determinando aleatoriamente el resultado de ciertos eventos críticos en cada simulación. Si los eventos críticos salen bien, la simulación recibe el valor calculado completo de la intervención. Si salen mal, esa simulación registra un valor nulo o negativo.
+Muchos proyectos podrían marcar una gran diferencia positiva en el mundo, pero solo son eficaces en las condiciones adecuadas. Si existe cierta probabilidad de que nuestro proyecto fracase, podemos esperar que los rangos de resultados del modelo incluyan muchas muestras en las que la intervención no marca ninguna diferencia.
+Incluir los resultados de los acontecimientos del mundo nos ayuda a ver cuánto riesgo hay de que nuestros esfuerzos se desperdicien. Esto es importante para medir con precisión el riesgo según los procedimientos de decisión alternativos que se exploran en otra parte
+en
+esta
+secuencia
+.
+Permitimos a las personas usuarias especificar la probabilidad de extinción para distintas eras futuras
+Dedicamos más trabajo a los cálculos sobre el valor que aporta la mitigación del riesgo existencial en comparación con otras áreas de causa. Las evaluaciones de efectividad en esta área de causa son muy sensibles a
+particularmente complejas
+consideraciones
+y relativamente menos exploradas.
+Un factor crítico para evaluar el efecto de la mitigación del riesgo existencial es el
+número de nuestros descendientes
+. Esto depende en parte de cuánto tiempo sobrevivamos antes de la extinción, lo que a su vez depende de las amenazas futuras para nuestra especie. Permitimos que las personas usuarias capturen sus propias opiniones sobre el riesgo especificando predicciones de riesgo personalizadas que incluyan evaluaciones anuales de riesgo para los periodos relevantes de los próximos milenios.
+Estructura
+La herramienta contiene dos módulos principales.
+En primer lugar, el modelo contiene un módulo para evaluar la efectividad de las intervenciones directamente orientadas a marcar una diferencia. Esta herramienta utiliza submodelos para evaluar y comparar intervenciones en salud y desarrollo globales, bienestar animal y mitigación del riesgo existencial.
+En segundo lugar, el modelo contiene un módulo para comparar la efectividad de los proyectos de investigación destinados a mejorar la efectividad del dinero gastado en intervenciones directas. Esta herramienta combina parámetros relativos a la probabilidad de encontrar e implementar una mejora con los costos incurridos en la búsqueda.
+Módulo de intervenciones
+El módulo de evaluación de intervenciones ofrece evaluaciones de la efectividad de las intervenciones en tres categorías: salud y desarrollo globales, bienestar animal y mitigación del riesgo existencial. La efectividad de las intervenciones dentro de cada categoría se expresa en unidades equivalentes a AVAD evitados por cada $1000 gastados en el margen actual.
+Dados los distintos requisitos de intervenciones con objetivos diferentes, el CCM se basa en varios submodelos para calcular la efectividad de intervenciones de distintos tipos.
+Salud y desarrollo globales
+Incluimos varias estimaciones de referencia sobre la costo-efectividad de organizaciones benéficas de salud y desarrollo globales para evaluar la efectividad relativa de los proyectos de bienestar animal y de riesgo existencial. Tomamos estas estimaciones de otras fuentes, como GiveWell, que esperamos que sean tan fiables como cualquier cosa que pudiéramos producir nosotros mismos. Sin embargo, estas estimaciones no incorporan incertidumbre. Para intentar dar cuenta de ello y expresar nuestras propias incertidumbres sobre estas estimaciones, usamos distribuciones centradas en ellas.
+Bienestar animal
+Nuestro
+modelo de bienestar animal
+evalúa los efectos de distintas intervenciones sobre el bienestar de poblaciones de animales de granja. Los parámetros que intervienen en estos cálculos incluyen el tamaño de la población de granja, la proporción que se verá afectada, el grado de mejora del bienestar y los costos del proyecto (entre otros).
+Como la unidad común de valor usada para comparar intervenciones se mide en años de vida humana ajustados por discapacidad, descontamos el bienestar de los animales no humanos según su probabilidad de sintiencia y sus capacidades de bienestar. Nuestros valores predeterminados se basan en los hallazgos del
+Moral Weight Project
+, aunque pueden modificarse para reflejar una amplia gama de opiniones sobre las consideraciones morales que intervienen en las compensaciones entre humanos y animales y entre distintos animales.
+Mitigación del riesgo existencial
+Nuestro
+modelo de riesgo existencial
+estima el efecto que la mitigación del riesgo tiene tanto en la prevención de catástrofes a corto plazo como en la extinción. En ambos casos, calculamos la efectividad en términos de la diferencia que la intervención marca en años de vida humana vividos.
+Suponemos que el trabajo de mitigación del riesgo existencial puede reducir (o aumentar accidentalmente) la probabilidad de eventos catastróficos o existenciales a lo largo de unas décadas, pero no tiene un impacto perpetuo en el nivel de riesgo. El valor principal de una intervención está en ayudarnos a atravesar este periodo con seguridad. En muchas de las muestras, el resultado de la aleatorización de nuestro modelo significa que no sufrimos ningún evento en las próximas décadas, independientemente de la intervención. Si eso ocurre, o si sufrimos un evento a pesar de la intervención, la intervención no aporta ningún beneficio para su costo. En otras, la intervención permite que nuestra especie sobreviva durante miles de años, colonizando gradualmente la galaxia y más allá. En otras más, nuestros esfuerzos salen contraproducentes y provocamos un evento de extinción que de otro modo no habría ocurrido.
+La importancia del riesgo existencial depende de los tamaños futuros de la población. Como respuesta a
+la extrema incertidumbre del futuro
+, usamos por defecto un punto de corte a mil años, en el que la población está limitada por la capacidad de la Tierra. Sin embargo, permitimos ampliar este marco temporal en cualquier medida. Suponemos que, con tiempo suficiente, los humanos acabarán expandiéndose más allá de nuestro sistema solar, y por simplicidad aceptamos una tasa de colonización constante e igual en cada dirección. La población futura de nuestros sucesores dependerá de la densidad de sistemas habitables, de la población por sistema y de la velocidad a la que los colonicemos. Dado el alto ritmo de crecimiento de un volumen con expansión de diámetro constante, encontramos que la velocidad de expansión y el tiempo hasta la extinción son los factores más importantes para decidir la efectividad. Las intervenciones pueden tener una efectividad media extraordinariamente alta aunque, la gran mayoría de las veces, no hagan nada.
+Módulo de proyectos de investigación
+El submódulo de proyectos de investigación ofrece evaluaciones de proyectos de investigación destinados a mejorar la calidad de las intervenciones de salud y desarrollo globales y de bienestar animal. Estos proyectos marcan una diferencia en la costo-efectividad del dinero gastado en un proyecto si tienen éxito. Sin embargo, con frecuencia son especulativos y no logran encontrar una mejora, o bien encuentran una mejora que no se adopta. El submódulo permite a las personas usuarias especificar el efecto de trasladar dinero de una intervención con cierta efectividad a otra intervención hipotética de mayor efectividad; a continuación, crea una evaluación del valor de la investigación debido a la promoción de ese cambio.
+Si un proyecto de investigación logra encontrar una mejora en la efectividad, el valor producido depende de cuánto dinero se vea influido como resultado. La investigación no es gratuita, así que contamos los costos de la investigación en términos del uso contrafactual de ese dinero en las propias intervenciones.
+Limitaciones
+El módulo de intervenciones tiene varias limitaciones importantes que reducen su utilidad para generar comparaciones de costo-efectividad entre causas. Todos los resultados deben interpretarse con cuidado y usarse con prudencia.
+Está orientado a tipos específicos de intervenciones
+Los submodelos de mitigación del riesgo existencial y de bienestar animal abstraen algunas particularidades de las intervenciones dentro de su ámbito para permitirles representar distintas intervenciones siguiendo una lógica similar. Están lejos de ser completamente generales. El modelo de bienestar animal apunta a intervenciones que reducen el sufrimiento de los animales. Las intervenciones destinadas a promover el vegetarianismo, que tienen un efecto indirecto sobre el sufrimiento animal, no están representadas. El modelo de mitigación del riesgo existencial apunta a intervenciones que reducen el riesgo de extinción humana a corto plazo. Muchos otros proyectos largoplacistas, como los destinados a mejorar la toma de decisiones institucionales o a expandir el círculo moral, no están representados.
+Otras intervenciones requerirían opciones de parámetros y una lógica diferentes para procesarlas. Las intervenciones que elegimos representar son razonablemente generales, se cree que son muy efectivas en al menos algunos casos y son de particular interés para Rethink Priorities. Hemos evitado modelar muchas intervenciones idiosincrásicas o difíciles de evaluar, pero eso deja al modelo radicalmente incompleto para fines de evaluación general.
+Las distribuciones son una forma cuestionable de manejar la incertidumbre profunda
+Representamos nuestra incertidumbre sobre los parámetros con distribuciones sobre posibles valores. Esto cumple bien con algunas formas de incertidumbre. Para aprovecharlo, los usuarios deben tener cuidado de prestar atención no solo a los valores medios, sino también a la variedad de resultados.
+Sin embargo, representar la incertidumbre con distribuciones exige saber qué distribuciones elegir. A menudo, cuando nos enfrentamos a preguntas sobre las que realmente ignoramos, es difícil saber dónde trazar los límites o cómo dividir la mayor parte de los valores. Representar incertidumbres con distribuciones puede darnos una falsa sensación de confianza de que nuestra ignorancia se ha incorporado adecuadamente, cuando en realidad hemos reemplazado nuestras incertidumbres por una distribución algo arbitraria.
+El modelo no maneja la incertidumbre del modelo
+Cuando es factible, el CCM busca representar nuestra incertidumbre dentro del modelo para producir resultados que la incorporen. Sin embargo, no toda forma de incertidumbre puede representarse dentro de un modelo. Si bien una cantidad importante de incertidumbre puede estar en los valores de los parámetros, también podemos no estar seguros de qué parámetros deberían incluirse en el modelo y de cómo deberían relacionarse entre sí. Si hemos elegido el conjunto equivocado de parámetros, o hemos omitido algunos parámetros importantes, los resultados no reflejarán lo que deberíamos creer. Si hemos dejado fuera consideraciones que podrían reducir el valor de algunos resultados, los resultados serán demasiado optimistas. Si no estamos seguros de que nuestra elección de parámetros sea correcta, las estimaciones del modelo caerán en una banda más estrecha de la que deberían.
+El modelo asume independencia de los parámetros
+Generamos el valor de los parámetros con muestras independientes de distribuciones suministradas por el usuario. Los valores elegidos para cada parámetro no afectan a los valores elegidos para los demás. Es probable que algunos parámetros deberían depender unos de otros, ya sea porque los factores subyacentes están interrelacionados o porque nuestra ignorancia sobre ellos puede estar correlacionada. Por ejemplo, la velocidad con la que la humanidad se expande por todas partes podría estar correlacionada con la probabilidad de extinción en cada año del futuro lejano. O bien, el número de camarones criados podría estar correlacionado con la proporción de camarones que podemos esperar afectar. La interdependencia sugeriría que la distribución correcta de los resultados no tendrá la forma que el modelo efectivamente produce. Lo mitigamos en algunos casos derivando algunos valores de los parámetros a partir de nuestra comprensión de su relación, pero no podemos capturar del todo todas las relaciones probabilísticas entre los valores de los parámetros y, en general, no lo intentamos.
+Lecciones
+A pesar de las limitaciones del CCM, ofrece varias lecciones generales.
+El valor esperado de las intervenciones de mitigación del riesgo existencial depende de la dinámica de la población futura
+Por lo que sabíamos al inicio, muchos factores podrían haber desempeñado un papel importante en explicar el posible valor de las intervenciones de mitigación del riesgo existencial. Dada nuestra interpretación del valor futuro en términos de años totales vividos ponderados por bienestar, resulta que la cantidad precisa de valor depende, más que de nada, de dos factores: el tiempo que tardarán en extinguirse nuestros sucesores y la velocidad de la expansión poblacional. Otros factores, como el valor de las vidas individuales, no marcan mucha diferencia.
+El tamaño del efecto es tan enorme que incluir en el modelo una tasa de expansión alta como posibilidad hará que el riesgo existencial tenga una costo-efectividad esperada extremadamente alta, prácticamente sin importar lo improbable que sea. Cada uno de estos dos factores es radicalmente incierto. No sabemos qué podría causar la extinción humana si suponemos que deberíamos sobrevivir mil años. No tenemos idea de cuán factible será para nosotros colonizar otros sistemas. Por lo tanto, los valores esperados altos que produce un modelo reflejan el hecho de que no podemos descartar ciertos escenarios.
+El valor de la mitigación del riesgo existencial es extremadamente variable
+Varios factores se combinan para hacer que la mitigación del riesgo existencial tenga una varianza particularmente alta.
+Medimos la efectividad de la mitigación como la reducción proporcional del riesgo anual. Al establecer los valores predeterminados, también hemos supuesto que, incluso si el riesgo por siglo es alto, el riesgo anual es bastante bajo. También nos pareció poco plausible que cualquier proyecto individual, incluso un megaproyecto de mil millones de dólares, eliminara una parte significativa del riesgo de cualquier amenaza dada. Además, para ciertos tipos de intervenciones, parece que cualquier proyecto que pudiera reducir el riesgo también podría aumentarlo. Para la IA, le damos a esto una probabilidad no trivial por defecto. Finalmente, en cada simulación, el valor aproximado de la extinción causada o evitada depende en gran medida de los valores precisos de ciertos parámetros.
+Como resultado, incluso con 150k simulaciones, los cálculos de valor esperado en cualquier ejecución del modelo (que permite un futuro largo) oscilan entre valores positivos y negativos. Esto no significa que el valor esperado sea incognoscible. Nuestro modelo se estabiliza una vez que incluimos miles de millones de simulaciones. Pero el hecho de que se necesiten tantas demuestra que los resultados tienen una varianza extremadamente alta y que tenemos poca capacidad para predecir el valor real que produce cualquier intervención individual.
+Los resultados de las colas pueden capturar una enorme cantidad de valor esperado
+Un resultado sorprendente del modelo fue cuánto del valor esperado, incluso de los proyectos e intervenciones menos especulativos, proviene de combinaciones raras de muestras de los valores extremos de los parámetros. Descubrimos que algunos de los resultados que no cabían en nuestros gráficos, porque los valores eran demasiado raros y extremos, aun así podían representar un porcentaje grande del valor esperado.
+Esto sugiere que los límites que trazamos alrededor de nuestra incertidumbre pueden ser muy significativos. Si esos límites son algo arbitrarios, es probable que el modelo sea inexacto. Sin embargo, también significa que aclarar nuestra incertidumbre en torno a los valores extremos de los parámetros puede ser particularmente importante y estar desatendido.
+Las correlaciones no representadas pueden ser decisivas
+Finalmente, por simplicidad, hemos decidido hacer independientes entre sí los parámetros. Como se señaló antes, esto es potencialmente problemático: incluso si representamos los parámetros correctos con las distribuciones correctas, podemos pasar por alto correlaciones entre esas distribuciones. Las lecciones anteriores también sugieren que nuestra incertidumbre sobre las correlaciones en eventos de alta varianza podría trastocar los resultados.
+Si tuviéramos razones para pensar que existe una relación positiva entre la probabilidad de que los proyectos de mitigación del riesgo existencial salgan contraproducentes y la rapidez con la que la humanidad podría colonizar el espacio, el valor esperado del trabajo de mitigación podría resultar masivamente negativo. Si hubiera alguna razón para esperar cierta correlación entre el peso moral de los camarones y la población por sistema solar habitable, por ejemplo, si un peso moral alto nos llevara a creer que las mentes digitales son posibles, el valor relativo que el modelo asigna al bienestar de los camarones y al trabajo sobre los riesgos de una IA desbocada podría verse muy distinto.
+Esto es interesante en parte por lo poco exploradas que están estas correlaciones. No nos resulta del todo evidente que existan correlaciones críticas que no hayamos modelado, pero el hecho de que tales correlaciones podrían invertir nuestras evaluaciones relativas debería hacernos dudar antes de aceptar a la ligera los resultados del modelo. Aun así, en ausencia de correlaciones concretas propuestas, puede que sea lo mejor que tenemos.
+Planes futuros
+Hemos aprendido mucho del proceso de planificar y desarrollar el CCM. Nos ha obligado a aclarar nuestros supuestos y a cuantificar nuestra incertidumbre. Donde ha producido resultados sorprendentes, nos ha ayudado a entender de dónde provienen. En otros aspectos, ha servido para confirmar nuestras expectativas previas.
+Seguiremos usándolo y desarrollándolo en Rethink Priorities. El módulo de proyectos de investigación se creó para ayudar a evaluar posibles proyectos de investigación en Rethink Priorities, y lo usaremos con ese fin. Pondremos a prueba nuestras elecciones de parámetros, refinaremos sus veredictos e incorporaremos otras consideraciones al modelo. También esperamos poder ampliar nuestro módulo de intervenciones para incluir distintos tipos de intervenciones.
+Mientras tanto, esperamos que otros lo encuentren una herramienta valiosa para explorar sus propios supuestos.
+Si tiene ideas sobre lo que funciona bien en nuestro modelo o sobre consideraciones importantes que hayamos pasado por alto, nos encantaría saberlo
+a través de este formulario
+,
+en los comentarios de abajo, o en
+dshiller@rethinkpriorities.org
+.
+Agradecimientos
+El CCM fue diseñado y escrito por Bernardo Baron, Chase Carter, Agustín Covarrubias, Marcus Davis, Michael Dickens, Laura Duffy, Derek Shiller y Peter Wildeford. La base de código hace un uso extensivo de squigglepy, de Peter Wildeford, e incorpora componentes de la biblioteca squiggle de quri.
+Esta visión general fue escrita por Derek Shiller. La orientación conceptual de este proyecto fue proporcionada por David Rhys Bernard
+,
+Hayley Clatterbuck, Laura Duffy, Bob Fischer y Arvo Muñoz Morán. Gracias también a todos los que informaron errores o hicieron sugerencias de mejora. La publicación es un proyecto de Rethink Priorities, un laboratorio global de ideas y acción que busca hacer el bien a gran escala. Investigamos y ponemos en práctica oportunidades urgentes para mejorar el mundo. Actuamos sobre estas oportunidades desarrollando e implementando estrategias, proyectos y soluciones para problemas clave. Hacemos este trabajo en estrecha colaboración con fundaciones y organizaciones sin fines de lucro centradas en el impacto u otras entidades. Si le interesa el trabajo de Rethink Priorities, considere suscribirse a nuestro
+boletín
+. Puede explorar nuestro trabajo público ya completado
+aquí
+.
+Laura Duffy
+Bernardo Baron
+Chase Carter
+Agustín Covarrubias
+Marcus Davis
+Michael Dickens
+Derek Shiller
+Peter Wildeford
+Rethink Priorities
+Anterior
+Anterior
+Incorporación y visualización de la incertidumbre en análisis de costo-efectividad: un recorrido con las estimaciones de GiveWell para StrongMinds
+Siguiente
+Siguiente
+Una revisión de la tasa de descuento de GiveWell
+Boletín
+Correo electrónico
+Suscribirse
+¡Gracias!
+Acerca de
+Nuestro equipo
+Oportunidades profesionales
+Política de privacidad
+Nuestro trabajo
+Investigación y publicaciones
+Boletín
+Todo el contenido es ©Rethink Priorities o de sus respectivos autores, salvo que se indique lo contrario.

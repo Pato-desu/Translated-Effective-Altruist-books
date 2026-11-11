@@ -1,0 +1,774 @@
+Diseño moral y tecnología 63 4. Programación moral
+Construcción de un metamodelo moral heurístico flexible para 
+un control significativo de la IA en sociedades pluralistas
+Nadisha-Marie Aliman1 y Leon Kester2*
+1Universidad de Utrecht, Facultad de Ciencias, Departamento de Ciencias de la Información y 
+de la Computación, Princetonplein 5, 3584 CC Utrecht, Países Bajos; 
+2TNO Países Bajos, Sistemas Autónomos Inteligentes, Postbus 96864, 2509 JG 
+La Haya, Países Bajos; leon.kester@tno.nl
+Resumen
+La inteligencia artificial (IA) penetra cada vez más ámbitos de aplicación. Su 
+progreso en escala, velocidad y alcance magnifica los beneficios sociales potenciales 
+pero también riesgos relevantes para la ética y la seguridad. Por ello, resulta vital buscar un 
+control significativo de los sistemas de IA actuales (es decir, herramientas). Para ello, se 
+puede buscar contrapesar la creciente capacidad de resolución de problemas de la IA con 
+condiciones de frontera centrales para la moralidad humana. Sin embargo, un problema importante es 
+que la moralidad existe en un ámbito explicativo sensible al contexto y en constante cambio 
+co-creado por los humanos mediante el lenguaje natural, que es inherentemente ambiguo 
+en múltiples niveles y no es comprensible ni legible por máquinas. 
+Un problema relacionado es lo que llamamos «vértigo epistémico», un fenómeno vinculado 
+a la circunstancia inevitable de que uno siempre podría estar equivocado. Sin embargo, aunque 
+la duda universal no puede eliminarse de la moralidad, no tiene por qué magnificarse 
+si el diseño anticipa la posibilidad o necesidad de refinamientos constantes. 
+Así, la moralidad se refiere al conjunto de normas y valores que se aplican a nivel 
+de una sociedad, de otros colectivos de personas no especificados con más detalle, o a nivel de 
+un individuo. Las normas son instrumentales para alcanzar la realización de los valores, 
+siendo estos un término general para todo lo que parece decisivo para distinguir 
+entre lo correcto y lo incorrecto, un objeto central de estudio en la ética. En resumen, para un 
+control significativo de la IA frente al trasfondo de la naturaleza cambiante, sensible al contexto,
+y moldeada lingüísticamente de la moralidad humana, resulta útil 
+construir modelos heurísticos descriptivos, y por tanto lo bastante flexibles y legibles para la IA, 
+de la moralidad. De este modo, la capacidad de resolución de problemas de la IA podría canalizarse 
+eficientemente a través de estos modelos actualizables, para idealmente potenciar los beneficios 
+y mitigar los riesgos en la fase de despliegue de la IA, con el posible efecto
+secundario de mejorar las conjeturas morales humanas. Para ello, presentamos 
+Bart Wernaart (ed.) 
+Diseño moral y tecnología
+DOI: 10.3920/978-90-8686-922-0_4, © Wageningen Academic Publishers 2022
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 04 de octubre de 2022, 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+64 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester un marco transdisciplinario novedoso denominado utilitarismo aumentado (AU) 
+(Aliman y Kester, 2019b), formulado desde una postura metaética. 
+AU busca apoyar la tarea centrada en el ser humano de aprovechar las normas humanas 
+y los valores para orientar explícita y trazablemente la IA antes de que los humanos mismos sean 
+orientados sin darse cuenta y de manera ininteligible por la opacidad del despliegue de la IA. 
+Es importante señalar que AU es descriptivo, no normativo y explicativo (Aliman, 
+2020), y no debe confundirse con el utilitarismo normativo. (Mientras que 
+la ética normativa se refiere a «lo que uno debe hacer», la ética descriptiva se refiere 
+a estudios empíricos sobre la toma de decisiones éticas humanas.) Este capítulo ofrece 
+al lector una visión general compacta de cómo AU reúne elementos de la IA, la psicología moral 
+la ciencia cognitiva y afectiva, las matemáticas, la ingeniería de sistemas, 
+la cibernética y la epistemología para construir una estructura genérica capaz de codificar heurísticamente 
+marcos morales dados en una forma legible por máquinas. Abordamos temáticamente 
+perspectivas novedosas y también advertencias vinculadas a los riesgos de la IA avanzada que generan incentivos 
+para trabajos futuros.
+Conceptos clave
+ ▶Para un control significativo de la IA, hay que canalizar la capacidad de la IA usando 
+la moralidad humana
+ ▶La moralidad humana es sensible al contexto, cambiante y ambiguamente 
+integrada en el lenguaje
+ ▶Es difícil hacer que la moralidad humana sea legible por máquinas
+ ▶La ética descriptiva es el estudio de cómo se pone en práctica la moralidad humana y 
+no de lo que uno debe hacer
+ ▶El utilitarismo aumentado (AU) no debe confundirse con el utilitarismo. 
+AU es un marco transdisciplinario para el control significativo de una 
+IA de naturaleza metaética, descriptiva, explicativa y no normativa
+ ▶AU ofrece una estructura genérica legible por IA para modelos morales heurísticos 
+que facilitan el control de la IA
+ ▶Así, AU reúne elementos de la ética descriptiva, la epistemología 
+y una amplia gama de disciplinas científicas, lo que conduce a perspectivas novedosas que 
+son relevantes para trabajos futuros sobre el control de la IA
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 04 de octubre de 2022, 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+Diseño moral y tecnología 65
+4. Programación moral 4.1 Una solución teórica para el control significativo de la 
+inteligencia artificial
+Bajo el utilitarismo aumentado (AU), se puede subdividir la tarea práctica central 
+de controlar significativamente la IA mediante modelos heurísticos 
+legibles por máquinas2 en tres subtareas desafiantes. Las dos primeras requieren 
+fundamentos teóricos epistémicos y científicos. La tercera subtarea se refiere a 
+la realización de una implementación compleja con múltiples partes interesadas. Mientras que esta sección 
+se centra en las dos primeras subtareas teóricas, la última se presenta en la siguiente 
+sección 4.2. En primer lugar, aunque es habitual que los humanos extraigan mentalmente 
+los eventos moralmente relevantes de la experiencia en curso a la que se aplican los juicios morales, 
+la IA no realiza automáticamente tales evaluaciones ni el tipo de 
+procedimiento de extracción moral que se requiere en primer lugar. Podría llamarse a esto último 
+un problema de fragmentación moral, es decir, el problema de encontrar un nivel de abstracción significativo 
+para los modelos morales heurísticos. Como analogía ilustrativa de otro 
+contexto, puede considerarse el ejemplo de la adquisición del lenguaje humano, en la que 
+los bebés enfrentan el problema de fragmentación lingüística de dividir la información que reciben 
+como, por ejemplo, la información auditiva, en fragmentos significativos (Isbilen 
+y Christiansen, 2020). Un problema similar también lo enfrentan los adultos en 
+el proceso de adquisición de una segunda lengua. Sin conocimiento semántico previo 
+suele ser abrumador identificar los límites de las palabras individuales o de las expresiones multi-
+palabra a partir del habla. En segundo lugar, aun si una IA estuviera programada con 
+un nivel de abstracción moral adecuado para un marco ético seleccionado y se 
+hubieran completado los parámetros de relevancia dentro de ese marco elegido, uno se 
+enfrenta a un viejo problema epistémico: ¿qué pasa si te equivocaste y cambiaste de opinión 
+o si no estabas seguro de tus elecciones? A continuación, examinamos algunas 
+soluciones teóricas a estas dos subtareas de AU.
+4.1.1 Fragmentación moral
+Como se mencionó antes, AU se formula desde una postura metaética no normativa 
+lo que significa que, en lugar de discutir lo que uno debe hacer (como ocurre en el 
+utilitarismo), se sitúa en un nivel superior, centrado en lo que 
+es la moralidad en sí, cómo se aplica y por qué. Sin embargo, en lugar de tener 
+aspiraciones filosóficas, AU se ocupa de estas deliberaciones por razones 
+esencialmente pragmáticas, orientadas a la seguridad y socio-tecnológicas. Para ello, AU 
+emplea conocimientos de distintas disciplinas científicas para tener una visión más clara de 
+la naturaleza de la moralidad humana, e integra una perspectiva de sistemas relevante para la ingeniería 
+2 Nótese que estos modelos son heurísticos, ya que uno siempre solo está provisionalmente 
+blancos complejos y en movimiento de la moralidad. Como resultado, tanto los objetivos morales como los modelos abstractos de estos 
+son falibles y no necesariamente óptimos en ningún momento. En resumen, se reconoce que uno 
+siempre podría estar equivocado. fragmentación moral 
+problema
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 04 de octubre de 2022, 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+66 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester perspectiva para finalmente elaborar soluciones técnicamente viables. Es así como en tal 
+un contexto pragmático orientado a la seguridad que AU estudia esta primera subtarea de la 
+agrupamiento moral («moral chunking») para un control significativo de la IA. Para empezar, la AU puede entenderse conceptualmente 
+como una especie de interfaz independiente de la entrada entre humanos dotados 
+de una determinada instancia de un marco ético y la IA que pretenden alinear 
+con dicho marco. Para poder cumplir este papel genérico de interfaz, la AU debe 
+buscar un agrupamiento moral eficiente con capacidad para ser idealmente aplicable 
+a la mayoría de los marcos éticos que la sociedad elegiría para controlar la IA. En el 
+contexto de los vehículos autónomos, trabajos recientes han constatado que «es esencial 
+aumentar la confianza del público en que se tienen en cuenta los valores de una sociedad pluralista» 
+(Dubljević et al., 2021). Esto puede aplicarse de forma más general a cualquier 
+IA desplegada a escala social. En esta línea, la AU apunta a lo que podría concebirse 
+como un posible conjunto superior heurístico moral mínimo (SHMS) que capture la 
+pluralidad de marcos éticos candidatos disponibles en la práctica para la programación 
+moral, con la condición previa de que la AU debe señalar las inconsistencias formales conocidas 
+para prevenir los problemas prácticos de seguridad previsibles en el despliegue de la IA. 
+Lo último muestra por qué el agrupamiento moral en la AU no puede ser meramente 
+descriptivo, sino que debe ser al mismo tiempo explicativo. Desde la perspectiva de la ingeniería de sistemas, 
+aspirar específicamente a un SHMS no solo resulta interesante por ser más simple, sino que también es 
+más eficiente energéticamente, ya que no se integran 
+más parámetros de los necesarios (lo que, por ejemplo, exigiría más capacidad de cómputo) 
+y al mismo tiempo se cumple el requisito de integrar fenómenos de pluralismo moral 
+cuya existencia se ha corroborado con frecuencia en estudios de psicología moral 
+(Schein y Gray, 2018).
+Las tres teorías éticas normativas clásicas que se mencionan con frecuencia 
+como candidatas para la programación moral son la ética de la virtud, la ética deontológica 
+y el utilitarismo. Obsérvese que el agrupamiento moral en la AU es agnóstico respecto a 
+si el marco ético candidato es, en efecto, de naturaleza normativa, relativista, 
+comparativa, puramente pragmática u otra. Aquí usamos el ejemplo de 
+los tres marcos normativos por su relevancia en los debates de ética de la IA y de seguridad de la IA. 
+Mientras que la ética de la virtud se centra en las virtudes exhibidas por el agente, 
+la deontología pone el énfasis en la acción misma y el utilitarismo en las consecuencias 
+de la acción para el receptor de la acción, también llamado paciente. En la programación 
+moral, el agente que lleva a cabo la acción suele ser la IA, mientras que el paciente 
+es un ser humano. Sin embargo, en contextos de colaboración entre humanos y máquinas, agentes y pacientes 
+pueden ser humanos o IA según la situación, lo que significa 
+que a veces una tarea puede, en teoría, limitarse también a las IA (por ejemplo, si 
+la tarea colaborativa fuera demasiado peligrosa para ser realizada por agentes humanos). En 
+el campo de la IA, el uso generalizado de sistemas de IA maximizadores de utilidad, en forma de 
+agentes de aprendizaje por refuerzo, modelados según la economía utilitarista, 
+han establecido las funciones de utilidad como estándar por defecto para la programación moral, por su 
+rasgo característico de reflejar una supuesta toma de decisiones racional. Sin embargo, existe el 
+conjunto superior heurístico moral más pequeño
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+Diseño moral y tecnología 67
+4. La programación moral puede implicar una diferencia entre: (1) lo que los humanos creen que deberían hacer; y (2) 
+lo que quieren que haga una IA en la práctica. Además, puede haber una diferencia 
+entre lo primero y lo que los humanos pueden hacer realmente, así como entre lo 
+segundo y lo que una IA puede hacer en la práctica. Las consecuencias prácticas de 
+estas salvedades (re)aparecen a lo largo de nuestro análisis. En el siguiente párrafo 
+arrojamos primero luz sobre algunos conocimientos científicos clave que son relevantes para el 
+agrupamiento moral en el marco de la AU.
+Estudios recientes de psicología moral sugieren que la moralidad humana se basa en 
+construcciones, es esencialmente dependiente del observador, sensible al contexto, multifacética,
+y está vinculada a diversos fenómenos de percepción mental, a menudo implícitos, y a 
+valoraciones inconscientes. Por ejemplo, las evaluaciones empíricas en el contexto del 
+modelo de Agentes, Actos y Consecuencias (Dubljević et al., 2018) (modelo ADC
+) corroboraron que los juicios morales unifican intuiciones de los tres 
+marcos normativos comunes mencionados antes, lo que, según los 
+autores, «proporciona una explicación del atractivo intuitivo de las teorías morales dominantes» 
+(Dubljević et al., 2018). Siguiendo la teoría de la moralidad diádica 
+(TDM) (Schein y Gray, 2018), los juicios morales humanos son construcciones basadas en el daño 
+que se relacionan con una plantilla cognitiva dependiente del observador que codifica 
+cuánto daño causa un agente intencional a un paciente vulnerable. De este 
+modo, la TDM concibe la moralidad como una unidad en la variedad del daño percibido. 
+Desde el marco del juicio moral como categorización (MJAC)  
+(McHugh et al., 2021), «comprender cómo se forman los juicios morales requiere 
+tener en cuenta toda la complejidad y variabilidad de nuestros juicios morales». 
+Es decir, el MJAC conjetura (en el espíritu de los marcos construccionistas en 
+psicología (Oosterwijk et al., 2012)) que los juicios morales son construcciones cognitivo-afectivas
+dependientes del observador basadas en elementos de dominio general 
+(no limitados al daño), que describen la moralidad como uno de los conjuntos potencialmente 
+infinitos de conceptualizaciones situadas y encarnadas, es decir, categorías que las mentes humanas 
+pueden generar y aprender a generar. En general, las teorías construccionistas de la psicología 
+y de la neurociencia afectiva revelan que la cognición humana es inseparablemente afectiva 
+(Hoemann y Feldman Barrett, 2019; Kleckner et 
+al., 2017), por lo que la suposición de que los humanos son agentes racionales fríos que actúan 
+según una estrategia matemática libre de afecto es un mito. Como afirma Barrett 
+(2017), el cerebro humano está estructurado anatómicamente de tal modo que ninguna acción 
+está libre de interocepción y afecto.
+En conjunto, se puede concluir que, para abordar de forma significativa la subtarea de 
+agrupamiento moral, la AU, en su búsqueda de un SHMS que integre los candidatos presentados, 
+debe tratar de acomodar la amplitud y variedad potenciales de la 
+moralidad humana extendida. Los parámetros deben poder especificarse (lo que significa 
+que no tienen por qué especificarse, pero pueden especificarse opcionalmente) no solo para el agente 
+(como, por ejemplo, en la ética de la virtud), no solo para la acción (como, por ejemplo, en la deontología), ni 
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+68 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester solo para las consecuencias (como, por ejemplo, en el utilitarismo), sino también para la
+perspectiva de primera persona del observador que realiza el juicio moral (como 
+por ejemplo, en la ética del cuidado laica, en algunas escuelas de filosofía india y también en 
+la ética cristiana), lo que añade otras consideraciones relacionales. Pero, dado que el 
+observador humano existe dentro de estratos sociopsicotecnofísicos únicos, 
+tiene una historia de desarrollo única y se sitúa en un contexto espacial y 
+temporal específico, parámetros tan heterogéneos como el trasfondo sociocultural, 
+las características psicológicas, las peculiaridades en la percepción mental, el estado 
+fisiológico y de salud actual y las condiciones ambientales pueden tener un efecto decisivo en el 
+juicio sobre los sucesos morales (véanse también, por ejemplo, Haidt (2001) y Schwartz (2016) para 
+perspectivas más relacionadas sobre la toma de decisiones éticas humanas). Curiosamente, 
+incluso el idioma en que se presenta un suceso moral puede influir en 
+los juicios morales a través de diferencias en las asociaciones afectivas, lo que puede dar lugar a 
+una tendencia a una mayor distancia en contextos de segunda lengua (McHugh et al., 
+2021). Además, los accidentes similares con coches autónomos se consideraron 
+más graves que los que involucran a conductores humanos, independientemente de la causa 
+(Liu et al., 2019).
+En resumen, queda claro que, para dar sentido a la moralidad humana 
+en múltiples marcos éticos diferentes, la programación moral basada en la AU 
+debe ser capaz, como mínimo, de acomodar una variedad de parámetros con 
+respecto a los siguientes elementos genéricos que pueden servir provisionalmente como un SHMS  
+base para la agrupación moral: perceptor, agente, acción, paciente. Estos cuatro elementos 
+conforman una tétrada tentativa de agrupación moral SHMS para AU (en adelante denominada 
+tétrada de agrupación SHMS). Dicho esto, es importante señalar que, en 
+efecto, una amplia gama de sesgos epistémicamente relevantes puede surgir en el contexto de 
+los juicios morales. Esto incluye especialmente distorsiones de la percepción mental (Gray 
+et al., 2012; Wegner y Gray, 2017) e inconsistencias formales. Por ejemplo, 
+en estudios empíricos, las personas basaban sus juicios morales sobre agentes artificiales, entre 
+otros factores, en la intencionalidad percibida y el antropomorfismo (Bigman et al., 
+2019), los sentimientos percibidos (Yam et al., en prensa) y la agencia percibida, en la que 
+esta última puede incluso afectar el sentido de agencia del perceptor humano (Ciardo 
+et al., 2020).
+En lugar de imponer una elección, AU proporciona una interfaz genérica de apoyo como 
+andamio para marcos éticos candidatos. Sin embargo, AU fomenta el 
+pensamiento crítico y señala cuestiones epistémicas relacionadas con inconsistencias (formales) que pueden 
+afectar la seguridad de la IA después del despliegue. Por ejemplo, para la IA en contextos éticos de alto riesgo, 
+se ha demostrado que las funciones de utilidad utilitaristas y consecuencialistas 
+enfrentan teoremas de imposibilidad relevantes para la seguridad (Eckersley, 2018), que pueden 
+derivarse formalmente al aplicar el utilitarismo a la ética poblacional (Arrhenius, 
+2000; Greaves, 2017). Estos teoremas de imposibilidad se vinculan con un problema de 
+percepción mental que se ha llamado ‘la falacia perspectivista de la utilidad 
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+Diseño moral y tecnología 69
+4. Programación moral’3 (Aliman, 2020; Aliman y Kester, 2019a). Por ello, AU señala 
+funciones de utilidad utilitaristas clásicas como problemáticas para la IA de alto riesgo. Para resolver 
+este problema de la función de utilidad en la seguridad de la IA, en los últimos años se han propuesto diferentes soluciones, 
+entre las cuales enumeramos brevemente las dos opciones que siguen. 
+Como primera opción, es notable que el propio AU facilita la formulación de funciones de utilidad 
+en un nivel de abstracción más alto, que no está sujeto a los 
+teoremas de imposibilidad utilitaristas. De hecho, AU toma su nombre de este punto de partida. 
+Concretamente, en su búsqueda de un SHMS, también se consideró si las funciones éticas 
+formuladas matemáticamente, como los candidatos AU, debían ser siempre problemáticas por 
+razones teóricas o si era posible una alternativa significativa. 
+El utilitarismo clásico asigna utilidades a estados del mundo, es decir, a 
+instantáneas temporales que codifican meramente las consecuencias de las acciones sobre el paciente. 
+Yendo más allá, AU facilita la elaboración de funciones de utilidad que no están 
+afectadas por esos teoremas de imposibilidad. Esto es posible en AU mediante 
+funciones de utilidad dinámicamente actualizables formuladas a nivel de integrales temporales 
+que abarcan toda la tétrada de agrupación SHMS, es decir, con información sobre el perceptor, 
+agente, acción y paciente (Aliman, 2020). Una segunda opción para sortear los 
+teoremas de imposibilidad utilitaristas es codificar probabilísticamente la incertidumbre moral 
+en las funciones de utilidad de la IA (lo que matemáticamente significa considerar funciones que son 
+ya sea órdenes parciales o distribuciones de probabilidad sobre órdenes totales, en lugar de los 
+órdenes totales clásicos que usa el utilitarismo), tal como lo propone Eckersley (2018). 
+Esto último nos lleva a la siguiente subtarea, relativa a la pregunta ineludible: 
+¿y si uno no está seguro de su marco ético?
+4.1.2 Vértigo epistémico
+En virtud de la AU, se reconoce no solo que uno podría equivocarse en el contexto de la 
+toma de decisiones morales, sino que siempre podría equivocarse. Esto está en línea 
+con los supuestos epistémicos de Karl Popper de que todo conocimiento es falible 
+(Popper, 1995). Los seres humanos experimentan proyecciones perspectivistas encarnadas y moduladas socialmente, 
+cognitivo-afectivas del mundo. Además, bajo un 
+relato deflacionista, en el que la verdad no se equipara con el consenso, los seres humanos no 
+habitan una era de “posverdad” (Aliman y Kester, 2020), ya que es claro que 
+incluso en el pasado la experiencia sensorial no daba acceso directo a la verdad 
+en virtud de estar incrustada en una red de conocimiento previo desde dentro de una 
+perspectiva egocéntrica en primera persona del mundo moldeada por la dinámica cognitivo-afectiva 
+que hace de “posverdad” un término inexacto. En general, las conjeturas bien probadas y no refutadas 
+podrían ser erróneas, y las conjeturas previamente refutadas empíricamente 
+podrían ser verdaderas si los supuestos subyacentes a las observaciones empíricas fueran 
+erróneos (Frederick, 2020a). El realismo afectivo, el fenómeno de que uno tiende a 
+3 Para ejemplos de escenarios sobre cómo se manifiesta esta falacia, véase Aliman, 2020. dinámicamente 
+actualizable a  
+el nivel de tiempo 
+integrales
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022 6:24:32 AM - Utrecht University IP Address:131.211.12.11 
+
+70 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kestersee lo que uno cree a través del afecto entrelazado con la percepción (Fridman et al., 
+2019; Siegel et al., 2018), se suma a lo que llamamos vértigo epistémico. La moralidad es 
+de naturaleza conjetural; incluso los componentes inconscientes provienen de un modelo generativo 
+del mundo con ciertos a priori que codifican supuestos y asociaciones 
+del pasado, lo cual es clave para el realismo afectivo. En resumen, también la moralidad se ve afectada 
+por este vértigo epistémico ineludible. Afortunadamente, nuestro objetivo epistémico general 
+todavía puede ser crear explicaciones cada vez mejores (Frederick, 2020a), es decir, separar 
+las mejores de las peores explicaciones (con base en la crítica teórica y, si es 
+posible, en la refutación empírica), mientras se crean nuevas de forma constante. El punto crucial 
+ahora es: ¿qué significa para la programación moral?
+En primer lugar, debido a la falibilidad del conocimiento humano, cualquier marco para un 
+control significativo de la IA debe ser actualizable por diseño. (Dado que no se puede 
+predecir científicamente el futuro de la creación de conocimiento, incluso las entidades que hoy afirman 
+conocer la verdad moral objetiva hoy no pueden predecir que no serán 
+capaces de cambiar su propia visión en el futuro.) Cuando se aplica a una IA que 
+se despliega a escalas socialmente relevantes, un mecanismo de actualización genérico de este tipo 
+se ha denominado instancia de un circuito de retroalimentación sociotecnológico (Aliman, 
+2020). En segundo lugar, el punto de partida de tal mecanismo de retroalimentación moral 
+impulsado por la IA (incluso a escalas más pequeñas) no necesita y no puede demostrarse lógicamente 
+correcto. Las justificaciones son lógicamente inválidas, como mostró Popper hace mucho tiempo (Bartley, 
+1976). Por ejemplo, al contemplar la afirmación de que todos los cisnes son blancos, 
+ninguna cantidad de observaciones repetidas de cisnes blancos puede probar su veracidad. 
+Por lo tanto, basta con elegir puntos de partida razonables y bien probados sin 
+afirmaciones relacionadas con la verdad. Dependiendo de la escala del despliegue de la IA, se puede 
+elegir entre una gran variedad de opciones formalmente consistentes internamente, que incluyen 
+p. ej., teorías normativas de la propia cultura, el andamiaje de función de utilidad tetrádica mejorado con AU 
+(SHMS) completado con parámetros de un marco ético autoseleccionado 
+marco, reglas legales para contextos penalizados, algunos parámetros de los 
+Objetivos de Desarrollo Sostenible de la ONU, otras normas internacionales, teorías comparativas, 
+teorías, alternativas pragmáticas, cualquier combinación a medida de estas o ponderada 
+sumas, etcétera. En tercer lugar, AU puede utilizarse para refinar el razonamiento moral 
+si se desea. Por ejemplo, con la opción de función de utilidad mejorada con AU, se puede 
+probar el conocimiento moral implementado por la IA especificado al inicio de una iteración de 
+un circuito de retroalimentación sociotecnológico o de un circuito de retroalimentación organizacional. Mediante 
+entornos de simulación, se puede aprovechar el razonamiento contrafactual (Aliman 
+y Kester, 2019a) y diseñar funciones de utilidad adversariales mejoradas con AU, ya sea 
+para que diferentes concepciones morales compitan entre sí en la autoeducación 
+o simplemente para explorar nuevos candidatos a los propios valores morales.
+La pregunta al final de la última sección planteaba: ¿qué pasa si uno no está seguro de 
+su marco ético? Quedan dos salvedades pertinentes para responder a esta 
+se abordan en este párrafo y en el siguiente. En primer lugar, independientemente de 
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP:131.211.12.11 
+
+Diseño moral y tecnología 71
+4. Programación moral: el marco ético elegido, existe en general una limitación inherente a la 
+inserción de modelos morales en los sistemas de IA. De hecho, según el marco, 
+se asume antes del despliegue que la totalidad de opciones, alternativas, 
+parámetros y/o resultados se conoce de antemano. Sin embargo, la toma de decisiones morales humana 
+es impredecible, a menudo disruptiva, e incluso puede ser adversarial 
+como puede deducirse del ejemplo con la función de utilidad adversarial mejorada con AU 
+función. Como afirma Deutsch (2011): ‘Es un error concebir la elección y la 
+toma de decisiones como un proceso de selección entre opciones existentes según 
+una fórmula fija. Eso omite el elemento más importante de la toma de decisiones, 
+a saber, la creación de nuevas opciones. ’ En resumen, en la toma de decisiones morales puede 
+ocurrir que las personas creen alternativas adicionales aún desconocidas. Puede ocurrir que 
+eliminen y reemplacen supuestos morales iniciales si experimentan de forma adversarial 
+con valores nuevos y distintos que crean o descubren. Desde este punto de vista, 
+‘la racionalidad nos permite actuar de acuerdo con nuestras teorías mejor contrastadas, ya que 
+pueden ser verdaderas; pero también nos permite actuar contra ellas, precisamente porque nuestras 
+teorías mejor contrastadas pueden ser falsas y, de hecho, pueden refutarse cuando actuamos 
+contra ellas’ (Frederick, 2020b). Una IA actual desplegada no es capaz de 
+realizar una tarea adversarial creativa que requiera conocimiento explicativo. Por 
+esta razón, describimos la programación moral basada en AU como una forma de facilitar 
+el diseño de modelos morales heurísticos, sombras aproximadas y efímeras de 
+la moralidad que deben actualizarse necesariamente con el tiempo.
+En segundo lugar, la idea de elaborar modelos morales asignando incertidumbre probabilística 
+a los propios valores morales (lo que es distinto de las sumas ponderadas) 
+con la esperanza de externalizar su resolución a un sistema de IA después del despliegue 
+conlleva reservas epistémicas y relevantes para la seguridad. Desde el vértigo epistémico 
+queda claro que las probabilidades objetivas para las conjeturas, es decir, la certeza absoluta, no están 
+nunca garantizadas, por la falta de experiencia directa de la verdad. Sin embargo, el caso 
+de las probabilidades subjetivas para marcos éticos normativos puede llevar a implicaciones auto-
+contradictorias para la IA, entre otras razones porque es epistémicamente 
+permisible actuar contra los supuestos previos de uno (Frederick, 2020a) (por ejemplo, en 
+un intento de ponerlos a prueba). Por tanto, esto incluye también: (1) la opción de actuar 
+contra las propias probabilidades subjetivas; y (2) la de actuar según opciones nuevas y distintas 
+creadas espontáneamente. La primera puede llevar al control de la IA ad absurdum  
+y la segunda no puede ser realizada por la IA actual, ya que se requiere conocimiento 
+explicativo. En resumen, la incertidumbre moral probabilística en la programación moral 
+es viable si se considera heurística, y cuya resolución requeriría 
+que la IA consulte a un humano en la fase posterior al despliegue. De lo contrario, 
+especialmente en casos éticos de alto riesgo, delegar un lanzamiento metafórico de 
+dados (cargados) (o lanzamiento de moneda) a un sistema de IA desplegado solo añade borrosidad a los 
+modelos morales heurísticos ya plagados de dudas, no es óptimo para el control 
+cibernético (dicho de forma simple, el conocimiento incompleto es mejor que ninguno (Wiener, 1960)), 
+y puede ser muy cuestionable por razones de seguridad, rendición de cuentas y falta de modelos morales 
+heurísticos
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP:131.211.12.11 
+
+72 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester: toma de decisiones participativa. La existencia del vértigo epistémico significa que 
+no podemos eliminar inherentemente la duda del mundo, pero no tenemos por qué magnificarla. 
+Podemos aceptar la conjetura de que siempre podríamos estar equivocados, pero podemos esforzarnos por 
+explicaciones (morales) cada vez mejores dentro de mecanismos de retroalimentación (morales), 
+entre otras cosas para elaborar mejores modelos morales heurísticos implementados por IA. En síntesis, 
+los humanos inciertos, provistos de algunos dados en el momento de la decisión moral,
+podrían lanzar esos dados, pero también podrían crear inesperadamente (en colaboración) nuevas 
+soluciones aún desconocidas para el problema, algo que las IA actuales no pueden hacer. 
+Por tanto, en casos éticos de alto riesgo de programación moral, se recomienda 
+reservar el lanzamiento de dados (si realmente es necesario) para las personas.
+4.2 Uso práctico de la solución teórica
+Como se mencionó en la sección 4.1, el control significativo de la IA basado en AU puede plantearse 
+en términos de tres subtareas. En esta sección, abordaremos finalmente la tercera. 
+Tras integrar el conocimiento teórico sobre cómo abordar las dos primeras subtareas, 
+es decir, el problema de la fragmentación moral y el vértigo epistémico, todavía nos enfrentamos a 
+el complejo problema de ingeniería de sistemas de idear estrategias conscientes de la seguridad 
+para el despliegue de IA basado en AU. Ante el trasfondo de los riesgos de la IA en forma de 
+daños de primer orden y posibles repercusiones de segundo orden que surgen en 
+entornos entrelazados con múltiples partes interesadas, ya sea a nivel de una organización o 
+contextos sociales más amplios, esta tercera subtarea de AU enfrenta desafíos no triviales. 
+En esta sección, explicamos cómo los fundamentos teóricos de la última 
+sección pueden aprovecharse para la gestión de la programación moral en 
+entornos prácticos con AU como interfaz. Por último, tratamos brevemente una cuestión práctica abierta 
+cuya relevancia ha aumentado en los últimos años: ¿podemos elaborar un enfoque fundado en principios 
+frente a los riesgos que plantea desplegar una IA que opera en regímenes que 
+superan ampliamente a sus homólogos humanos en velocidad, escala y 
+selectividad? Desglosamos el problema de fondo, presentamos lo que llamamos el 
+‘problema del no-cuerpo’ en la seguridad de la IA y explicamos cómo una posible opción podría 
+consistir en utilizar AU junto con una estrategia de motivación cibernética 
+para la seguridad de la IA avanzada; sin embargo, también describimos reservas nuevas.
+4.2.1 Gestión de la programación moral con 
+utilitarismo aumentado
+En contextos de despliegue de IA a pequeña escala, AU ya puede cumplir una función relevante 
+en el proceso de diseño. En concreto, en el diseño de IA basado en AU a pequeña escala 
+el requisito general del dominio es doble. En primer lugar, por razones de seguridad, hay un 
+requisito vital de ofrecer únicamente modelos morales heurísticos bien formados, internamente consistentes y legibles por máquina
+como opciones, es decir, que, por ejemplo, no se sepa que estén 
+afectados por teoremas de imposibilidad especificados matemáticamente. Los formatos legibles por máquina concebibles 
+van desde formas basadas en reglas hasta la ingeniería de sistemas de utilidad mejorada con AU 
+problema
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP:131.211.12.11 
+
+Diseño moral y tecnología 73
+4. Programación moral: funciones y grafos de conocimiento. En segundo lugar, existe el requisito de 
+que los diseñadores ofrezcan una interfaz actualizable y ajustable por el usuario que dé a cada 
+usuario la posibilidad (si lo desea) de adaptar su propio modelo moral heurístico individualizado 
+seleccionando de un amplio conjunto de elementos específicos tomados del 
+conjunto tetrádico genérico de fragmentación SHMS. Es importante señalar que, como AU es no normativo, 
+metaético y descriptivo, solo actúa como un andamiaje estructurado vacío, dejado  
+en blanco. Es el usuario quien especifica si y cuáles de los múltiples 
+parámetros morales pensables y disponibles relacionados con el perceptor, el agente, la acción, 
+y/o el paciente que instanciar. Como resultado, mediante la codificación AU adaptada, la 
+capacidad de resolución de problemas del sistema de IA puede operar ahora dentro de los límites
+morales individualizados y autodeterminados del usuario. Opcionalmente, los diseñadores pueden 
+además ofrecer una preselección, por ejemplo, a partir de modelos morales heurísticos comunes 
+o de sus propias inclinaciones.
+En el caso de la IA desplegada en ámbitos públicos y en contextos a gran escala jurídicamente relevantes, 
+los problemas emergentes de rendición de cuentas exigen una asignación clara de 
+responsabilidades. En este caso, los modelos morales heurísticos bien formados y legibles por máquina 
+deberían, idealmente y cuando sea factible, estar sujetos no solo al derecho indicativo (soft law) 
+pero también mediante leyes vinculantes (hard law). Sin embargo, parece oportuno reconocer que una 
+regulación central de la seguridad de la IA podría, si no se contrarresta activamente con medidas prácticas novedosas, 
+implicar de forma indeseable capas burocráticas que temporalmente no están a la 
+par con el progreso tecnológico en curso. En cualquier caso, un requisito inherente 
+de un esquema compatible con leyes vinculantes o normas blandas (como también ocurría en 
+el ámbito de menor escala) es que el ajuste fino de un modelo moral heurístico y 
+el diseño de un sistema de IA centrado en su capacidad de resolución de problemas en un dominio dado 
+sean separables. Más precisamente, para que tal estrategia sea viable se requiere 
+arquitecturas de IA para las que los objetivos y la capacidad de resolución de problemas sean 
+ortogonales entre sí (es decir, puedan combinarse libremente). Solo mediante este tipo de 
+desenredo basado en la ortogonalidad puede realizarse la estrategia basada en AU descrita. 
+(Obsérvese que el desenredo basado en la ortogonalidad es decididamente distinto 
+y no debe confundirse con la tesis de la ortogonalidad propuesta por 
+Bostrom, quien afirma que «la inteligencia y los objetivos finales son ejes ortogonales a lo largo de los cuales 
+pueden variar libremente los agentes posibles» (Bostrom, 2012). Sin embargo, en cambio 
+se sostiene que: «El desenredo basado en la ortogonalidad está estrictamente limitado a 
+un cuantificador existencial: solo supone que existe una arquitectura de IA 
+para la que se cumple la ortogonalidad. Desde la perspectiva de la lógica de predicados, si 
+la tesis de la ortogonalidad formulada para todos los agentes se cumple o no es distinto 
+y separado de nuestro supuesto de desenredo basado en la ortogonalidad» 
+(Aliman, 2020).) Desde la perspectiva de la ingeniería de sistemas, esto significa que 
+debe existir una arquitectura de sistema de IA para la que sea posible separar 
+el «qué» del «cómo», a fin de permitir una asignación desenredada de 
+responsabilidades. Ejemplos de tipos existentes de sistemas de IA en los que esto es posible 
+son los sistemas de aprendizaje profundo y los sistemas inteligentes híbridos que instancian MDP 
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP: 131.211.12.11 
+
+74 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester en la planificación basada en utilidad (pero también los agentes de inferencia activa más recientes 
+(Smith et al., 2021)). Los sistemas inteligentes pueden ejecutar el bucle OODA 
+y a menudo se les ha denominado «sistemas autónomos». Sin embargo, optamos 
+por usar el término «sistema inteligente», ya que esas IA no establecen sus propios 
+objetivos de forma autónoma. En cambio, siempre actúan según modelos morales heurísticos 
+definidos por humanos.
+En la figura 4.1 ofrecemos una ilustración simplificada del despliegue de un sistema inteligente 
+en contextos a gran escala que utiliza una codificación AU elaborada por las partes interesadas 
+limitada, en este ejemplo, por leyes vinculantes. La parte interesada en cuestión es una 
+entidad de relevancia social que realiza una determinada operación. Para la transparencia y 
+para mejorar la explicabilidad, el sistema inteligente proporciona información sobre 
+su funcionamiento interno mediante contrafácticos de cursos de acción seleccionados para aclarar 
+su actuación hacia el entorno y la parte interesada. Si más adelante se requiere, estos 
+ejemplos de razonamiento contrafáctico pueden usarse para auditorías y en contextos forenses 
+y judiciales. Los fabricantes son responsables de realizar pruebas de seguridad 
+y de protección antes del despliegue y durante todo el ciclo de vida. Es importante señalar que, por 
+las incoherencias formales analizadas antes, si la codificación AU elegida 
+representa una función de utilidad, no puede ser una convencional. Debe ser una 
+alternativa no propensa a teoremas de imposibilidad, como por ejemplo las funciones de utilidad AU mejoradas 
+(donde las normas y reglas también pueden usarse como restricciones de 
+la función), una opción de suma ponderada interteórica o funciones moralmente inciertas 
+con órdenes parciales que conducen necesariamente a consultar de inmediato a entidades humanas. 
+En conjunto, la figura contiene múltiples bucles de retroalimentación. Aunque un análisis 
+en profundidad excede el alcance de este capítulo y se ha realizado en otros lugares, 
+llamamos la atención del lector sobre dos bucles de retroalimentación basados en AU. El exterior 
+bucle de retroalimentación, resaltado en azul, que comprende el poder legislativo, la parte interesada, 
+el sistema inteligente y el entorno, refleja un bucle de retroalimentación socio-tecnológico. 
+En ese nivel, que también puede apoyarse en simulaciones o en pequeños 
+experimentos en entornos sintéticos, puede producirse una mejora ética a nivel social 
+mediante la prueba y el refinamiento en la práctica de modelos morales heurísticos, tal como 
+se ha expuesto. Sin embargo, el pequeño bucle interno de retroalimentación entre la parte interesada 
+y el sistema inteligente (y, por analogía, entre usuario e IA en contextos de pequeña escala), 
+aunque aparentemente sencillo, ya refleja un problema complejo emergente 
+para el despliegue de futuras IA más avanzadas que superen a las entidades humanas 
+en cuanto a velocidad, escala y alcance. Mientras que en contextos más pequeños y menos complejos 
+el daño causado por la IA parece más manejable, es concebible que el despliegue 
+futuro de la IA pueda tener repercusiones más imprevistas. En la siguiente 
+subsección, explicamos brevemente cómo un análisis más detallado de este bucle de retroalimentación 
+revela lo que denominamos el «problema del no-cuerpo».
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP: 131.211.12.11 
+
+Diseño moral y tecnología 75
+4. Programación moral4.2.2 Riesgos de la inteligencia artificial avanzada de tipo I y 
+el «problema del no-cuerpo»
+Antes de analizar los riesgos de la IA, distinguimos taxonómicamente entre dos tipos 
+de sistemas. A diferencia de los humanos, la IA actual no puede crear ni 
+comprender conscientemente el conocimiento explicativo. Recientemente se ha propuesto el término independiente del sustrato 
+«sistema de tipo II» (Aliman, 2020) para los sistemas que son capaces de 
+crear y comprender conscientemente conocimiento explicativo. Los sistemas de tipo I son 
+todos los sistemas que no pueden cumplir esta tarea. Por tanto, desde esa perspectiva, todas 
+las IA actuales son de tipo I y no conscientes, y no existe ninguna IA de tipo II 
+existente. Los animales no humanos son sistemas de tipo I conscientes. En términos más amplios, 
+los humanos son actualmente los únicos ejemplos conocidos de sistemas de tipo II (todos los cuales 
+son necesariamente conscientes). Sin embargo, desde un punto de vista puramente teórico, 
+aunque ningún sistema artificial de este tipo se ha implementado en ningún lugar de la Tierra, la IA de tipo 
+II debe ser posible, ya que no la prohíbe ninguna ley de la naturaleza y debido 
+a la universalidad de la computación. La paradoja de la seguridad de la IA afirma que el control 
+y la alineación de valores son requisitos conjugados en la seguridad de la IA. Dicho de forma sencilla, 
+no se puede controlar y alinear en valores simultáneamente con la misma entidad. La alineación de valores 
+mediante la moralidad requiere comprensión y conocimiento explicativo, 
+que la IA de tipo I no puede alcanzar. Dicho de otro modo, aunque el objetivo actual de muchos 
+investigadores es lograr la conjunción de control y alineación de valores para el poder legislativo
+poder
+FabricanteEntornoSistema inteligente
+sistema
+ContrafácticosContrafácticosContra-
+facticosContra-
+facticosExplicaciones
+ExplicacionesExplicaciones
+PruebasParte interesadaJudicial
+poder
+Codificación AU
+Acciones
+ObservacionesObservacionesObservacionesLey
+Figura 4.1. Ilustración simplificada de un bucle de retroalimentación socio-tecnológico basado en AU (resaltado con líneas discontinuas).
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP: 131.211.12.11 
+
+76 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon KesterIA de tipo I: se postula que podemos intentar controlarla, pero no podemos alinearnos genuinamente en valores
+con ella en nuestros ámbitos de interés. Una vez que exista una IA de tipo II, podríamos 
+entonces alinearnos con ella en valores (si ella está de acuerdo), pero no podríamos controlarla, de la misma manera 
+que no podemos controlar a los humanos a largo plazo, y la esclavitud es antiética. 
+Esto vale tanto para los humanos como para la IA hipotética de tipo II. Es importante señalar que 
+no tiene sentido decir que un sistema de tipo II es más peligroso que un 
+sistema de tipo I no consciente. Sería análogo a comparar a los humanos 
+con los cuchillos. Los humanos y también la IA hipotética de tipo II podrían, por supuesto, tener 
+intenciones violentas, pero eso no es lo que determina su naturaleza de tipo II. Los actores malintencionados 
+ya podrían diseñar IA peligrosa de tipo I para provocar riesgos graves. 
+(En el capítulo 10 analizamos un ejemplo de programación inmoral con la IA de lenguaje actual 
+y los riesgos significativos asociados.)
+En general, el caso de la IA de tipo II no tiene relevancia práctica hoy en día, y 
+su problema sería un caso híbrido de construcción participativa de sentido entre 
+creadores de conocimiento explicativo. Por ello, en lo que sigue nos centramos estrictamente en 
+las IA de tipo I existentes, y por tanto no conscientes, cuyas capacidades superan a las humanas 
+en escala, velocidad y/o selectividad. Cabe argumentar que los sistemas inteligentes representados 
+en el pequeño bucle de retroalimentación con las partes interesadas o usuarios son candidatos a 
+nuevos riesgos emergentes de la IA avanzada de tipo I. Surge entonces una pregunta interesante: 
+¿cómo puede implementarse el control de la IA avanzada de tipo I sin una auténtica 
+alineación de valores? En nuestra opinión, al examinar más de cerca este bucle de retroalimentación entre humanos e IA de tipo I 
+podría revelar algunas pistas sobre el mensaje subyacente relevante para la cibernética 
+y sobre el problema de su transmisión. En 1960, Norbert Wiener, uno de los primeros cibernéticos, 
+afirmó: «La acción humana es una acción de retroalimentación» (Wiener, 1960). De hecho, es 
+insuficiente que los humanos pudieran en teoría reaccionar adecuadamente a un 
+mensaje de una IA de tipo I en la forma especificada de contrafácticos. Si los humanos tardan 
+demasiado en entender ese mensaje en primer lugar, podrían producirse consecuencias indeseables imprevistas 
+ya podrían haberse producido antes de que pudieran actuar sobre él, 
+por ejemplo apagándola manualmente. Wiener puso el ejemplo hipotético de una 
+fábrica automatizada de botellas, programada para maximizar la productividad y cuyo 
+propietario podría quedar «en quiebra por el enorme inventario de botellas invendibles 
+fabricadas antes de que se diera cuenta de que debería haber detenido la producción seis meses 
+antes» (Wiener, 1960). Por estas razones, muchos investigadores de seguridad de la IA 
+conjeturan sobre la necesidad de volver artificialmente «tonta» a la IA de tipo I (Trazzi and 
+Yampolskiy, 2020), es decir, mantener artificialmente las capacidades de la IA al nivel humano o 
+por debajo antes de que alcance la «superinteligencia» y supere a sus homólogos humanos. 
+Pero, en nuestra opinión, «el precio de la seguridad es la creatividad eterna» (Aliman et al., 2021). 
+Desde un punto de vista funcional, considerando las distintas formas de procesamiento de la información, 
+se podría considerar a los humanos y a la IA de tipo I como subpartes distintas de 
+la misma unidad funcional, cuyo problema consiste en añadir significado a los mensajes y 
+sincronizar su transmisión para mantener la creación de conocimiento explicativo 
+como el subconjunto más relevante de la creatividad. El constructo independiente del sustrato 
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP: 131.211.12.11 
+
+Diseño moral y tecnología 77
+4. Programación moral: el constructo de una unidad funcional híbrida que comprende entidades de tipo II (hoy solo 
+aplicable a los humanos) y entidades de tipo I (como las IA de tipo I, pero también cualquier 
+otra entidad de tipo I) puede denominarse «cyborgnet». (Este último término es esencialmente 
+distinto de la palabra cyborg, se formula a un nivel mucho más general y 
+se inserta en un marco teórico propio y novedoso (Aliman, 2021).) Explicamos 
+cómo esto podría motivar finalmente una posible estrategia de futuro.
+En un cyborgnet, la creatividad está necesariamente encarnada, ya que las entidades de tipo II también son 
+entidades físicas. Desde este punto de vista, una comunicación entre humanos 
+e IA de tipo I que no se ajuste a los elementos corporales humanos no contiene 
+información suficiente. Dicho muy sencillamente, la mayoría de los modelos morales heurísticos 
+actuales para la IA de tipo I pertenecen al no-cuerpo. Aplicando nuestra postura funcional, sería 
+la creatividad cyborgnet encarnada la que se pretende aumentar, y no 
+la inteligencia de una IA por separado ni la inteligencia de un humano aislado por separado. 
+En resumen, el cuerpo relevante a considerar es el «cuerpo» de todo el 
+cyborgnet en un contexto de despliegue dado. Un futuro sistema inteligente de tipo I 
+que se desplegara en entornos robóticos podría estar equipado con 
+elementos (ciber-)físicos técnicamente autocontrolados. Sin embargo, no bastaría con que 
+desarrollara una autoevaluación y una autogestión técnicas 
+de esas partes propias, sino que habría que integrar también un modelo de la entidad física humana 
+en tiempo real. Esto podría incluir comandos de voz dirigidos por la IA de tipo I, una 
+mezcla híbrida de muestreo de la experiencia sensible al contexto mediante actividad fisiológica 
+incluido el seguimiento de la excitación, valoraciones humanas de valencia, etc. Los bucles de 
+retroalimentación son, por definición, bidireccionales. Los humanos podrían recibir información adicional 
+sobre el estado de la IA de tipo I. Por ejemplo, además de los contrafácticos 
+proyectados al pasado y al futuro, la información sobre el estado físico de la IA de tipo 
+podría visualizarse de forma eficiente o transmitirse mediante extensiones sensoriales. Esto podría 
+crear, como efecto secundario, nuevas affordances sociomateriales que estimulen la 
+creatividad humana. En resumen, resolver el problema del no-cuerpo de forma bidireccional mediante 
+la concepción de humanos e IA de tipo I como entidades distintas pero conectadas dentro de 
+un mismo cyborgnet que participa en bucles de retroalimentación podría mejorar la
+transmisión interna del mensaje en el cyborgnet y proporcionar un anclaje físico del sentido. 
+A su vez, esto podría mitigar el problema del control de la IA de tipo I al transformarlo en 
+una tarea de integración funcional híbrida bidireccional a nivel de cyborgnet. 
+En última instancia, se podría, por ejemplo, inyectar señales corporales humanas en tiempo real como un 
+parámetro adicional en un modelo moral heurístico basado en AU. De este modo, la 
+capacidad de resolución de problemas de la IA de tipo I podría canalizarse no solo por la 
+moralidad humana, sino también por la creatividad cyborgnet encarnada. (En el capítulo 10 analizamos 
+cómo la IA actual podría emplearse para contrarrestar los propios ataques de IA mediante 
+el aumento de la creatividad cyborgnet.) Por tanto, en lugar de diseñar una IA de tipo I aislada 
+y artificialmente tonta, con la inteligencia humana como límite superior, este 
+diseño funcional cyborgnet buscaría ajustar y adaptar idealmente sus 
+subcomponentes entre sí, incluido el cuerpo. Y, como suele decirse, el cyborgnet
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022, 6:24:32 AM - Utrecht University Dirección IP: 131.211.12.11 
+
+78 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon Kester es más que la suma de sus partes... Por otro lado, un canal de información de mayor capacidad 
+(dado que se transfieren más datos) puede generar costes más elevados. 
+Además, pueden surgir preocupaciones de privacidad y riesgos de seguridad. Los datos privados compartidos en 
+esas redes cyborgnet de intercambio de información podrían ser explotados por 
+actores malintencionados. Sin embargo, para contrarrestar estos riesgos, el paradigma de confianza cero 
+de la ciberseguridad debe aplicarse de forma proactiva en múltiples niveles.
+4.3 Conclusiones
+Wernaart (2021) delineó un punto de partida sofisticado para una hoja de ruta sobre 
+la programación moral, incluidos los casos éticos de alto riesgo en los que el diseñador 
+no es la autoridad moral central. AU es uno de los posibles marcos explicativos metaéticos no normativos que
+pueden utilizarse para la programación moral en 
+una sociedad pluralista. En resumen, el objetivo del marco AU transdisciplinar es 
+acomodar los requisitos del pluralismo moral proporcionando un 
+andamiaje SHMS genérico de apoyo, dejado en blanco, en el que las autoridades morales (especialmente los usuarios 
+o la sociedad, pero también los diseñadores en configuraciones por defecto) introducen modelos morales heurísticos 
+flexibles, actualizables y legibles por máquina. Explicamos cómo AU aborda las 
+tres subtareas principales de esta compleja empresa: el problema de la fragmentación moral (moral chunking), 
+el vértigo epistémico y la subtarea práctica de ingeniería de sistemas del despliegue de IA basado en AU. 
+Por último, ofrecimos una descripción diferenciada de los riesgos de la IA avanzada 
+y reflexionamos sobre una estrategia de encarnación cyborgnet que podría aportar resiliencia 
+– aunque no inmunidad – ofreciendo diversos incentivos para trabajos futuros.
+Referencias
+Aliman, N.M., 2020. Hybrid cognitive-affective strategies for AI safety. Tesis doctoral 
+Utrecht University, Países Bajos. https://doi.org/10.33540/203
+Aliman, N.M., 2021. Cyborgnet theory. Disponible en: https://nadishamarie.jimdo.com/
+app/download/10822805671/CT.pdf?t=1632837017.
+Aliman, N.M. and Kester, L., 2019a. Transformative AI governance and AI-empowered 
+mejora ética mediante simulaciones preventivas. Delphi – Interdisciplinary 
+Review of Emerging Technologies, 2: 23-29. https://doi.org/10.21552/
+delphi/2019/1/6
+Aliman, N.M. y Kester, L., 2019b. Variedad requerida en las funciones de utilidad éticas para la alineación de valores de la IA 
+. En Workshop on Artificial Intelligence Safety 2019 co-located with 
+the 28th International Joint Conference on Artificial Intelligence AISafety@IJCAI 
+2019. Disponible en: http://ceur-ws.org/Vol-2419/paper_12.pdf.
+Aliman, N.M. y Kester, L., 2020. ¿Cómo enfrentar la “posverdad” inmersiva en la AIVR? Philosophies, 
+5: 45. https://doi.org/10.3390/philosophies5040045
+Aliman, N.M., Kester, L. y Yampolskiy, R., 2021. Observatorio transdisciplinario de la IA 
+: análisis retrospectivos y contradistinciones orientadas al futuro. Philosophies, 6: 6. 
+https://doi.org/10.3390/philosophies6010006
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022 6:24:32 AM - Utrecht University, dirección IP: 131.211.12.11 
+
+Diseño moral y tecnología 79
+4. Programación moralArrhenius, G., 2000. Un teorema de imposibilidad para las axiologías welfaristas. Economics & 
+Philosophy, 16: 247-266.
+Barrett, L.F., 2017. Cómo se hacen las emociones: la vida secreta del cerebro. Houghton Mifflin 
+Harcourt, Boston, MA, EE. UU.
+Bartley, W.W., 1976. La filosofía de Karl Popper. Philosophia 6: 463-494. https://doi.
+org/10.1007/BF02379286
+Bigman, Y.E., Waytz, A., Alterovitz, R. y Gray, K., 2019. Hacer responsables a los robots: 
+los elementos de la moralidad de las máquinas. Trends in cognitive sciences, 23: 365-368. https://
+doi.org/10.1016/j.tics.2019.02.008
+Bostrom, N., 2012. La voluntad superinteligente: motivación y racionalidad instrumental en 
+agentes artificiales avanzados. Minds and Machines, 22: 71-85. https://doi.org/10.1007/
+s11023-012-9281-3
+Ciardo, F., Beyer, F., De Tommaso, D. y Wykowska, A., 2020. La atribución de agencia intencional 
+a los robots reduce el propio sentido de agencia. Cognition, 194: 104109. 
+https://doi.org/10.1016/j.cognition.2019.104109
+Deutsch, D., 2011. El comienzo del infinito: explicaciones que transforman el mundo. 
+Penguin, Londres, Reino Unido.
+Dubljević, V., List, G.F., Milojevich, J., Ajmeri, N., Bauer, W., Singh, M.P., Bardaka, 
+E., Birkland, T., Edwards, C., Mayer, R. y Muntean, I., 2021. Hacia un sistema sociotécnico racional 
+y ético de vehículos autónomos: una aplicación novedosa del 
+análisis de decisión multicriterio. arXiv preprint arXiv:2102.02928 https://arxiv.org/
+abs/2102.02928
+Dubljević, V., Sattler, S. y Racine, E., 2018. Descifrar la intuición moral: cómo los agentes, 
+los actos y las consecuencias influyen en el juicio moral. PloS one, 13: p.e0204631. 
+https://doi.org/10.1371/journal.pone.0206750
+Eckersley, P., 2018. Teoremas de imposibilidad e incertidumbre en la alineación de valores de la IA (o 
+por qué su AGI no debería tener una función de utilidad). arXiv preprint arXiv:1901.00064. 
+https://arxiv.org/abs/1901.00064
+Frederick, D., 2020a. Contra la corriente filosófica: ensayos sobre el racionalismo 
+crítico popperiano. Critias Publishing. Yeovil, Reino Unido.
+Frederick, D., 2020b. El falsacionismo y el problema pragmático de la inducción. Organon 
+F, 27: 494-503.
+Fridman, J., Barrett, L.F., Wormwood, J.B. y Quigley, K.S., 2019. Aplicación de la teoría 
+de la emoción construida a la toma de decisiones policial. Frontiers in Psychology, 10: 1946. 
+https://doi.org/10.3389/fpsyg.2019.01946
+Gray, K., Young, L. y Waytz, A., 2012. La percepción de la mente es la esencia de la moralidad. 
+Psychological Inquiry, 23: 101-124. https://doi.org/10.1080/1047840X.2012.651387
+Greaves, H., 2017. Axiología de la población. Philosophy Compass, 12: p.e12442. https://doi.
+org/10.1111/phc3.12442
+Haidt, J., 2001. El perro emocional y su cola racional: un enfoque intuicionista social 
+del juicio moral. Psychological Review, 108(4), 814-834. https://doi.
+org/10.1037/0033-295X.108.4.814
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022 6:24:32 AM - Utrecht University, dirección IP: 131.211.12.11 
+
+80 Diseño moral y tecnología
+Nadisha-Marie Aliman y Leon KesterHoemann, K. y Feldman Barrett, L., 2019. Los conceptos disuelven fronteras artificiales en 
+el estudio de la emoción y la cognición, uniendo cuerpo, cerebro y mente. Cognition and 
+Emotion, 33: 67-76. https://doi.org/10.1080/02699931.2018.1535428
+Isbilen, E.S. y Christiansen, M.H., 2020. Restricciones de memoria basadas en fragmentos sobre la 
+evolución cultural del lenguaje. Topics in Cognitive Science, 12: 713-726. https://
+doi.org/10.1111/tops.12376
+Kleckner, I.R., Zhang, J., Touroutoglou, A., Chanes, L., Xia, C., Simmons, W.K., Quigley, 
+K.S., Dickerson, B.C. y Barrett, L.F., 2017. Evidencia de un sistema cerebral a gran escala 
+que sustenta la alostasis y la interocepción en los humanos. Nature Human Behaviour, 1: 
+1-14. https://doi.org/10.1038/s41562-017-0069
+Liu, P., Du, Y. y Xu, Z., 2019. Máquinas contra humanos: las respuestas sesgadas de las personas ante 
+accidentes de tráfico con vehículos autónomos. Accident Analysis & Prevention, 
+125: 232-240. https://doi.org/10.1016/j.aap.2019.02.012
+McHugh, C., McGann, M., Igou, E.R. y Kinsella, E.L., 2021. El juicio moral 
+como categorización (MJAC). Perspectives on Psychological Science. https://doi.
+org/10.1177/1745691621990636
+Oosterwijk, S., Lindquist, K.A., Anderson, E., Dautoff, R., Moriguchi, Y. y 
+Barrett, L.F., 2012. Estados de la mente: las emociones, las sensaciones corporales y los pensamientos comparten 
+redes neurales distribuidas. NeuroImage, 62: 2110-2128. https://doi.org/10.1016/j.
+neuroimage.2012.05.079
+Popper, K.R. 1995. En busca de un mundo mejor: conferencias y ensayos de treinta años. 
+Routledge, Brighton, Reino Unido.
+Schein, C. y Gray, K., 2018. La teoría de la moralidad diádica: reinventar el juicio 
+moral redefiniendo el daño. Personality and Social Psychology Review, 22: 32-70. 
+https://doi.org/10.1177/1088868317698288
+Schwartz, M.S., 2016. Teoría de la toma de decisiones éticas: un enfoque integrado. Journal 
+of Business Ethics, 139: 755-776. https://doi.org/10.1007/s10551-015-2886-8
+Siegel, E.H., Wormwood, J.B., Quigley, K.S. y Barrett, L.F., 2018. Ver lo que se siente: 
+el afecto guía la percepción visual de rostros estructuralmente neutros. Psychological Science, 
+29: 496-503. https://doi.org/10.1177/0956797617741718
+Smith, R., Friston, K. y Whyte, C., 2021. Un tutorial paso a paso sobre la inferencia activa 
+y su aplicación a datos empíricos. https://psyarxiv.com/b4jm6/
+Trazzi, M. y Yampolskiy, R.V., 2020. Estupidez artificial: datos que necesitamos para hacer que las máquinas 
+sean nuestras iguales. Patterns, 1: 100021. https://doi.org/10.1016/j.patter.2020.100021
+Wegner, D.M. y Gray, K., 2017. El club de la mente: quién piensa, qué siente y por qué 
+importa. Penguin, Londres, Reino Unido.
+Wernaart, B., 2021. Elaboración de una hoja de ruta para la programación moral de la tecnología inteligente. 
+Technology in Society, 64: 101466. https://doi.org/10.1016/j.techsoc.2020.101466
+Wiener, N., 1960. Algunas consecuencias morales y técnicas de la automatización. Science, 131: 
+1355-1358. https://www.jstor.org/stable/1705998
+Yam, K.C., Bigman, Y.E., Tang, P.M., Ilies, R., De Cremer, D., Soh, H. y Gray, K., en 
+prensa. Robots en el trabajo: las personas prefieren, y perdonan, a los robots de servicio con 
+sentimientos percibidos. The Journal of Applied Psychology, ###. https://doi.org/10.1037/apl0000834
+ https://www.wageningenacademic.com/doi/pdf/10.3920/978-90-8686-922-0_4 - martes, 4 de octubre de 2022 6:24:32 AM - Utrecht University, dirección IP: 131.211.12.11 
+
