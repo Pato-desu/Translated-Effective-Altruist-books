@@ -1,0 +1,383 @@
+How Can Risk Aversion Affect Your Cause Prioritization? — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+How can risk aversion affect your cause prioritization?
+Worldview Investigations
+Oct. 20
+Written By
+Rethink Priorities
+This is a linkpost for
+https://docs.google.com/document/d/1CZ5S-Eayxr64z5YADYR9M3P2WTp4u2Pgb4N-ynYbbMU/edit?usp=sharing
+This post is part of Rethink Priorities’ Worldview Investigations Team’s
+CURVE Sequence
+: “Causes and Uncertainty: Rethinking Value in Expectation.” The aim of this sequence is twofold: first, to consider alternatives to expected value maximization for cause prioritization; second, to evaluate the claim that a commitment to expected value maximization robustly supports the conclusion that we ought to prioritize existential risk mitigation over all else.
+Read the full paper
+Read the introduction to the series
+Executive Summary
+Motivation
+Imagine you’re faced with the following two choices, A and B, and you can push a button to select one or the other to occur. If you choose A, you will save 10 people’s lives with 99% certainty. If you choose B, you have a 1% chance of saving 1,200 people’s lives and a 99% chance of saving none. Which would you choose?
+Using expected value (EV) maximization,
+[1]
+the answer is straightforward: you choose B, because when you multiply the 1% probability of saving the 1200 people, the expected value of the choice is 12 lives saved, compared to 9.9 for option A.
+But maybe your intuitions say that EV maximization is missing something important. For example, you might be pulled towards A by this thought: “It’s nearly certain that if I choose B, I save nobody, letting 10 people die who I could almost certainly have saved.” And maybe if you’d still choose B for the stakes considered here (1200 lives with 1% probability), would you be comfortable choosing it if the gamble involved 1.2 trillion lives and had only a 10
+-11
+probability of success?
+You also might worry about expected value maximization from a different direction: a special concern about avoiding the worst outcomes. Imagine that option A stays the same but now option B involves saving 900 people with a 1% probability, making its expected value lower than that of A. You might think that you should still choose B because you think it’s especially important not to let 900 people die, even if you have a small chance of saving them.
+Finally, you might worry about EV maximization because you might doubt the stipulated probabilities of the choice between A and B. What if you don’t know for certain that there’s a precisely 99% or 1% chance of saving 10 or 1200 lives, even if those are your best estimates? This problem is especially pressing when there could be additional downside risks. How should your decisions change if there’s a third option, C, where you could save 1200 people with an estimated 3% chance of success, but there’s also an estimated 1% chance of causing the deaths of 1800, and, on top of that, you’re not really sure of either probability? Yet again, our considered judgments may not match what EV maximization recommends.
+Questions about how to navigate various types of risk and risk aversion permeate cause prioritization discussions. For example, many people are attracted to movements like effective altruism because they want to know with a high degree of confidence that they’re
+actually
+doing good rather than throwing their money away on ineffective philanthropic efforts. On the other hand, there are strong arguments for taking a
+hits-based giving
+approach in cause areas where the expected value is very high. If you favor spending on existential risk mitigation or insect welfare interventions, you might appeal to the thought that, even if the probabilities of an existential catastrophe or insect sentience are very small, we should err on the side of caution. That is, we should pay special attention to avoid the worst-case scenario where the possibility for flourishing is severely curtailed or large amounts of suffering are allowed to persist. Regardless of where you come down on these questions, it’s incredibly difficult to be confident in the probabilities and values we assign to countless important claims and parameters that affect our cause prioritization calculations. Should we still gamble with our resources when we know so little? If so, how much risk would be too much?
+This report creates mathematical frameworks and tools to address the following question:
+How can the relative cost-effectiveness of donating to different interventions within and between three cause areas (existential and non-existential catastrophic risk mitigation,
+[2]
+global health and development, and animal welfare) change when we consider risk aversion under decision-theoretic alternatives to expected value theory?
+This question is explored in the four sections of this report, in which I:
+Delve into the
+mathematical models
+used to implement each type of risk aversion
+Describe the procedures and data used to model the
+cost-effectiveness
+of each charitable intervention considered here
+Present and analyze
+the relative cost-effectiveness of each intervention when different types and levels of risk aversion are applied
+Conclude
+by discussing some limitations of the risk aversion and cost-effectiveness models explored and by describing opportunities for further research which I hope to pursue soon.
+Below is a summary of these four sections, which I expand upon in the rest of the
+report
+.
+Risk Models Considered
+In investigating the motivating question above, I disambiguate three broad categories of risk aversion and build cross- and intra-cause comparison models that incorporate different degrees of aversion to each type of risk. These three types of risk aversion are
+“Avoiding the worst” risk aversion: All else equal, we are averse to the worst states of the world arising and want to take actions that prevent them or lessen their badness.
+Difference-making risk aversion: All else equal, we are averse to our actions doing no tangible good in the world or, worse, causing harm.
+Ambiguity aversion: All else equal, we should be particularly cautious when taking actions for which the probabilities of the possible outcomes are unknown and quite uncertain.
+To address risk aversion that cautions us to
+“avoid the worst” states of the world
+, I built a model that implements Lara Buchak’s
+risk-weighted utility theory (REU)
+, as discussed in Buchak’s 2014
+paper
+“Risk and Tradeoffs.” The eight bad states of the world that I consider are combinations of the following events: egg-laying hens are/are not sentient and suffering immensely, shrimp are/are not sentient and suffering immensely, and the value of the future is/is not lost in an existential catastrophe.
+Next, I built three decision theory models that incorporate
+risk aversion with respect to making a difference
+. For causes like global health and animal welfare, the definition of “difference-making” is straightforward: the number of human-equivalent DALYs averted by the intervention. However, for existential risk interventions, what counts as “making a difference” is a little more ambiguous: are our actions valuable only if they prevent an existential or non-existential catastrophe that would have otherwise occurred, or is it valuable to merely lower the probability of a catastrophe?
+[3]
+Two of the three difference-making risk aversion models assume that value for existential risk projects is created only if the intervention averts a catastrophe that would have otherwise occurred. The first is a method my colleague, Hayley Clatterbuck,
+[4]
+and I created which I call
+“difference-making risk-weighted expected utility” (DMREU)
+. Modeled on Lara Buchak’s risk-weighted expected utility model, the difference-making risk-weighted expected utility model changes what we mean by the “outcome” to be focused locally on the marginal cost-effectiveness of an intervention. DMREU gives extra weight to outcomes that come out at the beginning of a ranked list from worst to best change in the utility of the world from before to after the intervention. The second model that incorporates difference-making risk aversion is based on Bottomley and Williamson’s 2023
+paper
+on
+weighted linear utility theory (WLU)
+,
+[5]
+“Rational risk-aversion: Good things come to those who weight.” WLU differs from the rank-dependent DMREU model in that it is stakes-sensitive; rather than giving extra weight to the
+lowest-ranked
+outcomes, WLU gives extra weight to outcomes we cause in proportion to how bad they are
+in magnitude
+.
+Now, suppose we value risk reductions themselves, rather than just existential catastrophes prevented. If we knew the amount by which our actions reduced existential risk, the expected value of the intervention would be clear: just multiply the change in the probability of an existential catastrophe by the amount of counterfactual value saved from preventing a catastrophe. Importantly, however, we are uncertain about our effects on existential risk levels, which creates massive variation in the expected amount of difference made by our actions. The third difference-making risk aversion model is called the
+“expected difference made” (EDM)
+risk aversion model. This model uses
+ambiguity aversion functions
+to aggregate the expected difference-made estimates of donating to existential risk projects while giving disproportionate weight to the worst of the set.
+Like expected difference made risk aversion, implementing REU yields considerable variation in its expected utility estimates when I change the input parameters. As such, I also apply ambiguity aversion functions to aggregate the risk-weighted expected utility estimates created.
+Figure 1 below shows a taxonomy of the risk aversion models developed. The first distinguishing factor is whether the risk aversion model focuses on making a difference or avoiding the worst states of the world. Difference-making models are further subdivided by whether you value lowering the probability of an existential risk occurring (expected difference made + ambiguity aversion) or counterfactually preventing existential catastrophes. Models for the latter (WLU and DMREU) differ in whether they’re stakes-sensitive. REU is the only “avoiding the worst” risk aversion model included. However, we can choose to apply a layer of ambiguity aversion in aggregating the REU results because of the substantial variation in probabilities related to background risk levels and whether and by how much our existential risk mitigation efforts succeed.
+Figure 1: A taxonomy of risk-aversion models
+For each of these risk and uncertainty aversion models, I see how the relative cost-effectiveness of several choice EA interventions changes or stays the same with different degrees of risk aversion. I describe these interventions in the
+r
+esults section
+.
+Interventions Considered
+Amongst the various cause areas popular among effective altruists, it might appear at first that existential risk mitigation interventions might be the most susceptible to risk aversion concerns, especially of the “difference-making” type, whereas global health and development interventions are safer. It is certainly true that the former interventions deal with great uncertainty: How likely is any intervention to have an impact on existential risk? How confident should we be that any impacts it has are beneficial, and how large are they? When does an intervention deserve counterfactual credit, and how much?
+However, risks of failure are present within other cause areas, too. For instance, even though I’m pretty confident that donating to the Against Malaria Foundation has a positive impact, lobbying to get a new economic or health policy passed is a risky endeavor within global health. Moreover, leaving small probabilities of existential catastrophes unaddressed is also a risky choice if we’re averse to highly unfavorable states of the world coming about (e.g., human civilization being permanently wiped out).
+Animal welfare advocacy faces similar questions: How much should we stick to tried-and-true interventions like cage-free corporate campaigns versus branching out into new areas like shrimp welfare? Here, two forms of risk prevail, mostly surrounding shrimps’ capacity for welfare. First, because shrimp could be sentient (here defined as having a non-zero capacity for welfare), there’s a risk that the level of shrimp suffering in the world is extremely high. However, we might think there’s less evidence for shrimp sentience than there is for hen sentience. So, spending on shrimp welfare has a higher chance of doing no good compared to spending on layer hen welfare.
+With all these considerations in mind, I created at least two intervention profiles for each cause area. Each intervention considered differs based on 1) its expected cost-effectiveness and/or 2) the variance in its cost-effectiveness.
+For global health and development, these include donating to:
+The Against Malaria Foundation, and
+An organization trying to pass road safety laws (e.g., DUI or helmet laws) in developing countries
+For animal welfare, these include donating to organizations that:
+Conduct corporate cage-free campaigns for layer hens,
+Promote stunning for the humane slaughter of farmed shrimp (to relieve suffering from harvest and slaughter), and
+Address unhealthy ammonia concentrations in farmed shrimp’s aqueous environment
+The last intervention is a hypothetical shrimp welfare intervention. I included it as a model to get a more complete range of the possible cost-effectiveness of shrimp welfare interventions, beyond humane slaughter methods.
+Finally, I considered two types of existential risk mitigation interventions:
+One with a lower probability of having an impact, less certainty about the direction of the effect, and higher effect sizes in expectation. This project is labeled the “risky” or “higher-risk, higher-EV” intervention throughout this report.
+One with a higher probability of having an impact, greater certainty about the direction of the effect, and lower effect sizes in expectation. This project is labeled as the “conservative” or “lower-risk, lower-EV” intervention throughout this report.
+Assessing the number of years of counterfactual credit involved in existential risk mitigation projects is both incredibly difficult and mightily consequential for the bottom-line cost-effectiveness estimates. To address this, I model both the risky and conservative interventions assuming two very different periods of counterfactual impact: between 100 and 1000 years (with 90% confidence) and between 10,000 and 100,000 years (with 90% confidence).
+[6]
+The variation in the results underscores how, in addition to our uncertainty around how to treat risk, we’re radically uncertain about how to value existential risk mitigation efforts.
+[7]
+Key Takeaways
+These Models are Works in Progress
+As I describe in the
+limitations section
+, this paper cannot definitively answer: “What is the relative cost-effectiveness of each cause I could donate to?” However, it does provide a formal guide for addressing the question: “If I believe [this set of parameters] and assume this methodology for estimating cost-effectiveness, what is the approximate relative value of donating to each intervention under various types and degrees of risk aversion?”
+Nevertheless, I’m optimistic that this report provides a good attempt at analyzing how risk aversion can impact intra- and cross-cause cost-effectiveness comparisons–one which can be improved upon as we uncover more empirical evidence and create better frameworks for doing cost-effectiveness analysis.
+Results
+Given my modeling assumptions, here are some of the key takeaways from when I apply risk aversion models to analyze the cost-effectiveness of all of the animal welfare, global health, and existential risk interventions. The full results are in
+this spreadsheet
+and are explained in
+this section
+of this report. All calculations are made in
+this GitHub repository
+.
+Spending on corporate cage-free campaigns for egg-laying hens is robustly
+[8]
+cost-effective under nearly all reasonable types and levels of risk aversion considered here.
+Using welfare ranges based roughly on Rethink Priorities’ results,
+[9]
+spending on corporate cage-free campaigns averts over an order of magnitude more suffering than the most robust global health and development intervention, Against Malaria Foundation. This result holds for almost any level of risk aversion and under any model of risk aversion.
+The only scenario in which cage-free campaigns were net-negative was at the highest level of WLU risk aversion tested. This result occurs because, at that level of stakes-sensitive risk aversion, the chance of doing a large amount of harm if cage-free campaigns are net bad was high enough to balance out the good done in the vast majority of simulations.
+Corporate cage-free campaigns are typically more robust to difference-making risk aversion (DMREU, WLU, and EDM) than either of the shrimp welfare interventions studied. This result is owing to the following factors: hens are very likely to be sentient, they have moderately high welfare ranges relative to humans, there are billions of hens suffering in battery cages (so the scope is very high), and there is evidence that corporate cage-free campaigns affect many hens per dollar and are quite effective at reducing suffering.
+Moreover, the existing level of hen suffering that probably exists is high enough that “avoid the worst” risk aversion (REU) gives extra value to cage-free campaigns relative to other causes.
+If existential risk mitigation projects have counterfactual effects that last between 10,000 and 100,000 years, then corporate cage-free campaigns are likely less cost-effective than these interventions in expectation. However, the risk-neutral cost-effectiveness of corporate cage-free campaigns is comparable to existential risk projects considered that have periods of counterfactual impact of 100 to 1000 years.
+The value of both the higher-risk, higher-reward and lower-risk, lower-reward existential risk mitigation projects modeled is highly contingent upon the counterfactual period of impact as well as one’s risk attitudes.
+Interventions with long-lasting counterfactual impacts (10,000 to 100,000 years) are between 5 times to two orders of magnitude more cost-effective under EV maximization and REU (with no ambiguity aversion) than the next-best interventions (the hypothetical shrimp intervention that treats ammonia concentrations and corporate cage-free campaigns).
+The existential risk reduction projects are comparable in risk-neutral expected value, ambiguity-neutral EDM, and ambiguity-neutral REU to corporate cage-free campaigns and the hypothetical shrimp welfare intervention that addresses ammonia concentrations if the counterfactual impact period is 100 to 1000 years.
+However, suppose you’re averse to having no impact on the probability that an existential catastrophe occurs or, worse, raising that probability.
+Then, under the EDM and ambiguity-averse REU models, the higher-risk, higher-EV existential risk projects decrease dramatically in their relative cost-effectiveness compared to corporate campaigns. At higher levels of ambiguity aversion, they become worse than doing nothing.
+On the other hand, both EDM and ambiguity-averse REU demonstrate that existential risk interventions can be robustly positive and cost-effective if the intervention has a high chance of having an impact and a low chance of backfiring.
+Finally, suppose you care about difference-making in the sense of not spending money on interventions that cause or don’t counterfactually prevent catastrophes.
+Then, the DMREU and WLU model results show that even small amounts of risk aversion of this form are enough to make the higher-risk, higher-EV existential risk projects considered worse than doing nothing.
+The lower-risk, lower-EV existential risk projects are robust up to a low amount of difference-making risk aversion, but moderate levels are enough to make the risk of doing nothing or harming the world too overwhelming.
+Say you need the probability of saving 1000 people in a forced gamble to be at least 3% in order to choose this risky option over saving 10 people with 100% certainty. In that case, DMREU suggests you would not want to donate to any of the existential risk projects we considered.
+Under all models except ambiguity-neutral REU, whether the hypothetical shrimp welfare intervention that targets unhealthy ammonia concentrations is over an order of magnitude more cost-effective than the Against Malaria Foundation’s work is dependent on one’s level of risk aversion.
+This contingency arises because we put a wide range on the probability of shrimp sentience that is, on average, relatively low. Additionally, we have great uncertainty about shrimps’ welfare range relative to humans (or hens, for that matter). As such, there is a high probability of doing little good by spending on shrimp welfare interventions even though the risk-neutral expected value of interventions that target welfare threats like ammonia could be very high.
+Under ambiguity-neutral REU, the possibility that shrimp are suffering greatly from high ammonia concentrations is given disproportionate weight compared to the risk-neutral expected utility calculations. As a consequence, this high risk of suffering balances out some of the uncertainty around shrimps’ capacity for welfare.
+Concretely, the change in the risk-weighted expected utility of spending on the hypothetical ammonia intervention over doing nothing is about an order of magnitude greater than the change in the risk-weighted expected utility of spending on the Against Malaria Foundation over doing nothing.
+However, introducing ambiguity aversion on top of risk-weighted expected utility is enough for the cost-effectiveness of spending on the ammonia-targeting shrimp welfare intervention to become within an order of magnitude of that of the Against Malaria Foundation.
+Under all three difference-making risk aversion models (DMREU, WLU, and EDM), the relative cost-effectiveness of donating to the ammonia intervention and the Against Malaria Foundation also changes significantly with different risk preferences. Nevertheless, the ammonia intervention is likely more cost-effective than donating to the Against Malaria Foundation under low to moderate levels of risk aversion.
+Say you need the probability of saving 1000 people in a forced gamble to be at least 5% in order to choose this risky option over saving 10 people with 100% certainty. In this case, donating to the Against Malaria Foundation is probably within an order of magnitude as cost-effective as the hypothetical ammonia intervention under the DMREU model. At lower levels of risk aversion, the shrimp intervention is likely more cost-effective by an order of magnitude using the DMREU model.
+Under the WLU model, donating to the Against Malaria Foundation is within an order of magnitude as cost-effective as donating to the hypothetical ammonia intervention at the two highest levels of risk aversion tested.
+Under the expected-differences made model, the two interventions were within an order of magnitude as cost-effective as each other at the higher level of ambiguity aversion tested.
+At all other levels of difference-making risk aversion, the hypothetical ammonia intervention is likely more choice-worthy at current margins.
+Within global health and development, the cost-effectiveness of the road safety legislation intervention that has a ~24% chance of succeeding is roughly equal under risk-neutral expected value theory to that of the Against Malaria Foundation. However, introducing low-to-moderate levels of difference-making risk aversion against having zero impact is enough to cut the relative cost-effectiveness of road safety interventions by at least 50% under DMREU, WLU, and EDM.
+Point (4) underscores how risk aversion doesn’t prefer one cause area over another inherently–rather, it’s a way of assessing altruistic efforts under a complex set of preferences about making a difference and avoiding bad outcomes that affect intra-cause comparisons as well as inter-cause comparisons.
+Finally, shrimp welfare interventions that reform how shrimp are harvested and slaughtered by implementing stunning machines are probably between one to two orders of magnitude less cost-effective in expectation than the hypothetical ammonia intervention. This result arises because harvest and slaughter make up a small proportion of shrimps’ lives compared to other welfare threats that have a longer duration, such as addressing unhealthy levels of ammonia concentration.
+This conclusion is admittedly speculative. I do not know how much an intervention targeting ammonia concentrations would cost, how likely it is to succeed, or the fraction of shrimp globally it could affect per amount of money spent. I’m assuming the values for these parameters are similar to those for the shrimp stunning intervention. However, it could be that such interventions are infeasible in the short term, whereas stunning interventions might be more likely to succeed right now. Alternatively, ammonia mitigation interventions might be even more cost-effective than is assumed here.
+Under this report’s modeling assumptions, the estimated expected number of sentience-adjusted, human-equivalent DALYs averted by the shrimp stunning intervention is about 30 DALYs/$1000, compared to about 1500 DALYs/$1000 for the hypothetical intervention that addresses ammonia concentrations and 19 DALYs/$1000 for the Against Malaria Foundation.
+[10]
+Table Summary of Results
+In Table 1 below, I summarize a few of the many cost-effectiveness results from each cause for all the risk aversion theories and at different levels of risk aversion. There are many more levels of risk aversion tested, so I encourage you to visit the spreadsheet and report to see them all.
+The interventions are scored by how many orders of magnitude the cost-effectiveness estimate was above zero, per $1000 spent. A score of 3, for example, means the cost-effectiveness is at least 1000 risk-weighted units per $1000 spent. A score of 0 that’s shaded yellow means that the cost-effectiveness is between 0 and 10. A score of zero that’s shaded orange is between 0 and -10 risk-weighted units per $1000 spent. A score of -5 signifies that the intervention’s cost-effectiveness was less than -100,000 risk-weighted units per $1000 spent when risk aversion was applied (i.e., it’s worse than doing nothing).
+The scores are best compared within columns because the units of cost-effectiveness can differ when different types of risk aversion are applied. However, high positive cost-effectiveness across many risk aversion types and levels is evidence of a cause’s robustness.
+Table 1: Interventions ranked by cost-effectiveness, in orders of magnitude above zero, per $1000 spent.
+Cause
+Risk-Neutral EV Maximization
+DMREU, moderate risk aversion (0.05)
+WLU, moderate risk aversion (0.10)
+EDM, lower ambiguity aversion
+EDM, higher ambiguity aversion
+REU, Moderate risk aversion, ambiguity-neutral
+REU, Moderate risk aversion, higher ambiguity-aversion
+Long-term risky x-risk project
+5
+-5
+-5
+3
+-5
+4
+-4
+Long-term conservative x-risk project
+4
+-3
+-2
+4
+4
+3
+3
+Near-term risky x-risk project
+3
+-3
+-3
+1
+-3
+2
+-2
+Shrimp - Ammonia
+3
+2
+2
+2
+1
+2
+1
+Chickens
+3
+2
+2
+2
+2
+3
+2
+Near-term conservative x-risk project
+2
+-1
+0
+2
+2
+1
+1
+Shrimp - Stunning
+1
+0
+0
+1
+0
+1
+0
+Against Malaria Foundation
+1
+1
+1
+1
+1
+1
+1
+Road Safety
+[11]
+1
+0
+0
+1
+0
+Key Limitations and Areas for Future Research
+This report compares spending on individual cause areas at one instance in time. Future research could analyze how diversification and repeated donations over time affect the optimal allocation of resources under risk-averse preferences
+[more]
+.
+These models do not consider diminishing marginal returns to spending in each cause area, and therefore the results should be considered limited to the context of small amounts of spending at one point in time
+[more]
+.
+I am only considering the first-order cost-effectiveness of the interventions, whereas it is likely there are externalities (potentially both positive and negative) to spending on each intervention
+[more]
+.
+The model for the value of existential risk reduction used in this report is simplified and should be made more sophisticated in future versions of this project (and possibly extended to incorporate future suffering risks)
+[more]
+.
+Many of the parameters for the cost-effectiveness of some cause areas are guesses or based on considered judgment, so some of the results should be considered conditional on the inputs rather than reflections of real cost-effectiveness
+[more]
+.
+Acknowledgements
+The paper was written by Laura Duffy. Thanks to Aaron Boddy, Hayley Clatterbuck and the other members of WIT, Marcus A. Davis, Will McAuliffe, Hannah McKay, and Matt Romer for helpful discussions and feedback. The post is a project of Rethink Priorities, a global priority think-and-do tank, aiming to do good at scale. We research and implement pressing opportunities to make the world better. We act upon these opportunities by developing and implementing strategies, projects, and solutions to key issues. We do this work in close partnership with foundations and impact-focused non-profits or other entities. If you're interested in Rethink Priorities' work, please consider subscribing to our
+newsletter
+. You can explore our completed public work
+here
+.
+^
+In this report, I use the phrases “value” and “utility” interchangeably.
+^
+Often in this report, I use the short-hand term “existential risk,” but I also model the value of reducing non-existential catastrophic risks.
+^
+It’s entirely possible that the correct model of difference-making lies in between: spending can be valuable if it counterfactually averts an existential or non-existential catastrophe or if it provides a necessary but insufficient (alone) contribution to a series of projects that, collectively, avert a catastrophe. This third case is hard to model, and could be addressed in future research.
+^
+Clatterbuck explores how risk aversion interacts with animal and global health causes in
+this post
+, which uses stylized numbers. This paper attempts to provide more empirically based numbers that incorporate further uncertainty.
+^
+There is some debate as to whether one must consider the “background” amount of utility in the world to implement WLU; that is, is WLU a state-of-the-world-based theory or a difference-making theory? I adopt the latter version, which is equivalent to a state-of-the-world-based theory that sets the “background” utility of the world at zero. I do so because finding the aggregate utility of the entire world seems currently intractable, fraught with even more ethical questions, and out of the scope of this project.
+^
+The interpretation of “counterfactual credit” varies depending on what type of risk aversion we’re considering. For difference-making risk aversion, the counterfactual credit period represents the time until another exogenous nullifying event that undoes our counterfactually changing whether an x-risk event occurs. For ambiguity aversion and "avoiding the worst" risk aversion, the period of counterfactual credit represents the length of time over which our risk reduction efforts leave an effect on the probability of an x-risk event.
+^
+In the coming weeks, Rethink Priorities’ Worldview Investigations Team will publish work that more fully explores how uncertainty about the future affects how valuable existential risk mitigation is. But in this report, I take a simpler approach to modeling the value of existential risk for purposes of demonstrating the effects risk aversion can have on the relative value of causes. The methodology and results shouldn’t be considered my or Rethink Priorities’ final views about existential risk correct cost-effectiveness estimates.
+^
+Throughout this report, I use the term “robust” to mean that an intervention’s cost-effectiveness relative to others does not dramatically decline or become negative when risk aversion is applied.
+^
+For hens, I use sentience-conditioned welfare range estimates based on those from Rethink Priorities’
+Moral Weight Project
+. Specifically, I assume that hens’ sentience-conditioned welfare range is distributed lognormally with a 90% confidence interval of 0.02 to 1. The mean sentience-conditioned welfare range is 0.29. I assume that the probability that hens are sentient is between 75% and 95% with a mean of approximately 90%. I also assume that the cost-effectiveness of corporate cage-free campaigns has decreased by between 20% and 60% from prior estimates conducted in 2019 (see the cage-free campaigns’ cost-effectiveness methodology
+section
+). In soon-to-be-published work, I will consider the cost-effectiveness of cage-free campaigns under substantially lower welfare ranges under risk aversion considerations. Roughly speaking, if you decrease the sentience-conditioned welfare ranges to be between 0.01 and 0.04, then cage-free campaigns are still probably more cost-effective than the Against Malaria Foundation’s work, but they’re safely within an order of magnitude of each other.
+^
+I assume that shrimps’ sentience-conditioned welfare ranges are lognormally distributed between 0.01 and 2 with 90% confidence. However, I also clip the welfare ranges from above at 5 times the human welfare range and at 0.000001 from below. This produces a mean sentience-conditioned welfare range that is roughly 0.44, which is the same as the mean estimate from the Rethink Priorities welfare range
+mixture model
+that includes neuron counts. I also assume the mean probability of sentience is 40% for shrimp (90% CI: 20% to 70%). As noted above, I’ll publish risk-aversion analyses that use lower welfare ranges for shrimp in the coming days.
+^
+I decided to not include the road safety intervention because it’s a global health intervention with nearly identical expected cost-effectiveness as donating to the Against Malaria Foundation. By contrast, both shrimp welfare interventions have extremely different cost-effectiveness estimates, as do the low and high-risk existential risk mitigation projects, so I included both project profiles for these cause areas.
+Read the next post in the sequence
+Laura Duffy
+Rethink Priorities
+Previous
+Previous
+How bad would human extinction be?
+Next
+Next
+Prioritizing animals of uncertain sentience
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.

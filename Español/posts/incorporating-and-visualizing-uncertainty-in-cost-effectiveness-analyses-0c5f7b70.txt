@@ -1,0 +1,303 @@
+Incorporación y visualización de la incertidumbre en los análisis de costo-efectividad: un recorrido con las estimaciones de GiveWell para StrongMinds — Rethink Priorities
+0
+Ir al contenido
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Carreras profesionales
+Donar
+Abrir menú
+Cerrar menú
+Sobre nosotros
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Investigación
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Servicios
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Carreras profesionales
+Donar
+Abrir menú
+Cerrar menú
+Carpeta:
+Sobre nosotros
+Atrás
+Sobre nosotros
+Nuestro equipo
+Contacto
+Transparencia
+Carpeta:
+Investigación
+Atrás
+Base de datos de investigación
+Bienestar animal
+Salud global y desarrollo
+Riesgos catastróficos globales
+Encuestas y análisis de datos
+Investigaciones sobre cosmovisiones
+Carpeta:
+Servicios
+Atrás
+Patrocinio fiscal y apoyo operativo
+Anuncios
+Boletín
+Carreras profesionales
+Donar
+Incorporación y visualización de la incertidumbre en los análisis de costo-efectividad: un recorrido con las estimaciones de GiveWell para StrongMinds
+Encuestas y análisis de datos
+7 nov.
+Escrito por
+Rethink Priorities
+Un primer paso habitual para incorporar la incertidumbre en un análisis de costo-efectividad (CEA) es expresar no solo un
+estimado puntual
+(es decir, un único número) para un dato de entrada del CEA, sino también ofrecer algún indicador de la incertidumbre en torno a ese estimado. Esto podría describirse como un escenario optimista frente a uno pesimista, o como los límites inferior y superior de algún intervalo de confianza o de incertidumbre. Luego se realiza un CEA combinando todos los datos optimistas para crear un resultado final optimista, y todos los datos pesimistas para crear un resultado final pesimista. A esto lo llamo “enfoque basado en intervalos”. Puede contrastarse con un “enfoque probabilístico” más completo, en el que la incertidumbre se define mediante distribuciones de probabilidad de valores, que representan el rango de posibilidades que creemos que pueden tomar los distintos datos de entrada. Aunque muchas personas saben que un enfoque probabilístico evita las limitaciones de un enfoque basado en intervalos, puede que no sepan por dónde empezar en cuanto a qué distribuciones son posibles o qué tipo de valores denotan.
+Espero abordar esto en la presente entrada y en la aplicación que la acompaña. Concretamente, busco:
+Mostrar cómo realizar un CEA solo con un enfoque basado en intervalos puede llevar a una sobreestimación sustancial de la incertidumbre implícita en los datos de entrada iniciales, y cómo un enfoque probabilístico puede corregir esto y, al mismo tiempo, permitir conocimientos y evaluaciones adicionales
+Presentar una nueva herramienta que desarrollé, llamada
+Distributr
+que permite a los usuarios familiarizarse y sentirse más cómodos con una variedad de distribuciones y con los tipos de valores que implican
+Usar esta herramienta para ayudar a generar una aproximación probabilística de los datos que GiveWell utilizó en su evaluación de StrongMinds,
+[1]
+y realizar una evaluación probabilística más completa basada en estos datos
+Mostrar cómo puede hacerse esto sin necesidad de programar, usando
+Distributr
+y una hoja de cálculo sencilla
+En última instancia, espero ayudar al lector a sentirse más capaz y seguro de la posibilidad de incorporar la incertidumbre en sus propios análisis de costo-efectividad.
+Propagación de la incertidumbre y el valor de ir más allá de un enfoque basado en intervalos
+El análisis de costo-efectividad consiste en construir un modelo de cómo distintos factores se combinan para determinar tanto la efectividad de una intervención como los costos de su implementación. Por ejemplo, cuando pensamos en distribuir mosquiteros para prevenir la malaria, podríamos considerar cómo el costo de la distribución puede variar entre regiones, cómo los efectos de la distribución de mosquiteros dependerán de la probabilidad de que las personas los usen para su propósito previsto, y la probabilidad de que los receptores los instalen correctamente. Todos estos factores y otros se combinan para producir una estimación del costo-efectividad de una intervención, que dependerá de los valores que asignemos a los distintos datos de entrada.
+Una forma en que un investigador podría intentar expresar la incertidumbre en estos datos de entrada es fijar límites superiores e inferiores razonables para cada uno de ellos. Luego, el investigador podría intentar propagar esta incertidumbre de los datos de entrada a la incertidumbre esperada en los resultados, realizando sobre sus límites superiores y sobre sus límites inferiores los mismos cálculos de costo-efectividad que hizo con sus estimaciones puntuales, y así producir límites superiores e inferiores correspondientes para el costo-efectividad final.
+Un ejemplo de enfoque basado en intervalos es la evaluación de GiveWell
+sobre la CEA de Happier Lives Institute (HLI) para StrongMinds
+. El propósito de esta entrada no es ofrecer una evaluación independiente de StrongMinds ni de la valoración de HLI sobre esta organización, ni la conclusión principal pretende ser una crítica a que GiveWell haya utilizado un enfoque basado en intervalos en esa entrada.
+[2]
+Más bien, espero guiar al lector en la comprensión de las limitaciones de este enfoque y, luego, usando las cifras de GiveWell como punto de partida concreto, mostrar cómo podría adoptarse un enfoque probabilístico más completo sin depender de un conocimiento avanzado de estadística o matemáticas, ni de programar.
+La entrada de GiveWell considera cómo diversos factores como
+el sesgo de deseabilidad social
+entre los receptores de la intervención,
+el sesgo de publicación
+en los informes sobre los efectos de intervenciones de salud mental, y
+el cambio de contexto
+en el que se realiza la intervención pueden influir en lo que deberíamos considerar razonablemente como la eficacia de una intervención de salud mental como StrongMinds. Estos datos se expresan en términos de una mejor estimación, con sus correspondientes límites optimista y pesimista. Estos límites se utilizan para calcular las estimaciones optimista y pesimista del costo-efectividad general de la intervención.
+Un problema clave al propagar la incertidumbre de esta manera es que puede inflar de forma drástica la incertidumbre de los resultados finales que se calculan a partir de las variables de entrada subyacentes. Podemos verlo con un ejemplo sencillo, en el que una estimación total final se determina por la suma de cuatro variables de entrada: A, B, C y D.
+Imaginemos que nuestra incertidumbre sobre los valores de A, B, C y D puede expresarse como una clásica curva en forma de campana (es decir, una distribución normal) centrada en 0, con una desviación estándar de 1. Esto produce una media de 0 y un intervalo del 90% de aproximadamente -1.6 a 1.6 para cada dato de entrada.
+[3]
+Los llamaremos nuestros límites pesimista y optimista. Usando un enfoque basado en intervalos, produciríamos una estimación pesimista y una optimista para nuestro total sumando cada uno de estos límites. Nuestros valores totales pesimista y optimista serían entonces de aproximadamente -6.4 y 6.4, respectivamente (-1.6
+4, y 1.6
+4).
+En cambio, un enfoque probabilístico utiliza toda la distribución de cada dato de entrada: generamos la estimación total tomando muestras de nuestras distribuciones de A, B, C y D, y sumándolas en cada ocasión para obtener el total. Así terminamos con una distribución completa de estimaciones totales, y podemos calcular directamente el intervalo del 90% para esta distribución. En lugar de ir de aproximadamente -6.4 a 6.4, el verdadero intervalo del 90% para el total va de aproximadamente -3.3 a 3.3.
+En este ejemplo de juguete se muestra el gráfico siguiente. Cuando calculamos correctamente los números sin redondear hasta el resumen final, encontramos que el intervalo del 90% producido con un enfoque basado en intervalos es el doble de ancho que el producido por el enfoque probabilístico (exacto). Incluso es 1.3 veces mayor que el intervalo verdadero del 99%, lo que muestra con claridad cómo el enfoque basado en intervalos conduce a estimaciones muy extremas e infla considerablemente nuestra incertidumbre. Este es un ejemplo más bien conservador de los niveles de inflación que puede producir un enfoque basado en intervalos, porque la inflación aumenta a medida que añadimos más variables a la ecuación (muchos análisis de costo-efectividad (CEA) implican bastantes más de cuatro entradas), y también puede variar según la forma exacta en que se configuren las variables para interactuar entre sí (por ejemplo, sumando o multiplicando), así como según las distribuciones que se usen. Por ejemplo, al multiplicar juntos 4 valores distribuidos log-normalmente, observamos que el enfoque basado en intervalos genera una estimación final cuyos límites son 13 veces más anchos que el nivel verdadero de incertidumbre.
+La razón de esta inflación es que, a menos que tengamos motivos para creer lo contrario, suponemos que cada una de nuestras variables de entrada es independiente de las demás. Sin embargo, con un enfoque basado en intervalos es como si dijéramos no solo que todas nuestras variables de entrada están correlacionadas entre sí, sino perfectamente correlacionadas: para obtener nuestro límite inferior final tomamos las 4 entradas pesimistas, y para nuestro límite superior final tomamos las 4 optimistas. En un ejemplo con solo 4 variables distribuidas normalmente, la probabilidad de que extraigamos 4 veces seguidas valores en o por encima del 90% central de los posibles resultados, todos en la misma dirección positiva o negativa, es extremadamente pequeña (5% x 5% x 5% x 5% = 0.000625%), y refleja un resultado extremo y muy improbable. Hemos pasado de entradas pesimistas a algunos de los resultados más malos posibles, y de entradas optimistas a los más fantásticamente buenos.
+Con referencia al ejemplo de los mosquiteros para la malaria antes mencionado, sería como si la distribución fuera tan cara como en nuestro escenario altamente pesimista,
+y
+el número de personas que usan mosquiteros para pescar o para algún otro fin fuera tan alto como en nuestro escenario altamente pesimista,
+y
+la proporción de quienes instalan bien los mosquiteros fuera tan baja como en nuestro escenario altamente pesimista. Cada una de estas cosas podría ser simplemente un resultado pesimista para cada variable, pero se ve que, cuando se dan todas juntas, crean un resultado final muy sombrío, y uno que es extremadamente improbable si cada una ya era poco probable por separado.
+Para evitar estos errores, idealmente deberíamos poder incorporar de forma más completa la incertidumbre en nuestras evaluaciones de costo-efectividad.
+Herramientas y consejos para generar distribuciones de incertidumbre que usar en los CEA
+Herramientas existentes para incorporar la incertidumbre
+Cuando se quiere usar un enfoque probabilístico de la incertidumbre en un análisis de costo-efectividad, un obstáculo puede ser la falta de familiaridad con las herramientas que pueden producir tales distribuciones. Podríamos estipular que creemos que una de nuestras variables de entrada se distribuye normalmente, pero ¿cómo obtenemos esta distribución? Más allá de usar directamente un lenguaje de programación como R o Python, se han desarrollado diversas herramientas para ayudar a generar y trabajar con distribuciones.
+Guesstimate
+permite al usuario generar una gran variedad de distribuciones de probabilidad, que también pueden conectarse entre sí o pasarse por distintas funciones para crear CEA construidos a partir de una serie de entradas y supuestos (para un breve tutorial, véase
+aquí
+, y para una guía más detallada,
+aquí
+).
+Dagger
+es una herramienta similar orientada a modelar y cuantificar la incertidumbre. Algunas herramientas más orientadas a la planificación empresarial y a la evaluación de proyectos, como
+Causal
+, también permiten generar modelos con incertidumbre. Avanzando hacia enfoques basados en código, el Quantified Uncertainty Research Institute ha desarrollado
+Squiggle
+, un lenguaje de programación diseñado específicamente para trabajar con distribuciones de incertidumbre (véase
+aquí
+para un tutorial o una explicación). Peter Wildeford, de Rethink Priorities, ha implementado Squiggle como un paquete de Python llamado
+SquigglePy
+. Varias de estas herramientas tienen además la ventaja de que no es necesario describir la distribución estadística en términos de sus parámetros propios, como la media y la desviación estándar, sino que se puede dar una mejor estimación y algunos límites, y generarán una distribución correspondiente si es posible. Por último, los lenguajes de programación de propósito general, en particular R y Python, tienen acceso a prácticamente cualquier distribución que se pueda imaginar.
+Presentamos
+Distributr
+para explorar y generar distribuciones de probabilidad
+Más allá de saber cómo generar distribuciones, muchas personas que podrían querer incorporar la incertidumbre en sus CEA quizá simplemente no conocen la gama de distribuciones disponibles ni los valores que implican, o no tienen confianza en ese conocimiento. En las conversaciones que he mantenido con personas que piensan incorporar la incertidumbre en los CEA (lo mismo ocurre al elegir distribuciones previas en los análisis bayesianos), la falta de confianza para saber qué distribuciones son posibles y qué significan se menciona con más frecuencia que el desconocimiento de herramientas específicas para generarlas.
+Para ayudarme a comprender mejor las distintas distribuciones, he desarrollado una aplicación que puede visualizar una gama de distintas distribuciones de probabilidad de múltiples formas, con una serie de estadísticos resumidos (véase la captura de pantalla de abajo). La aplicación puede considerarse como una especie de portafolio de distribuciones, en el que se pueden explorar y observar distintas distribuciones disponibles mediante diferentes tipos de gráficos, junto con varios datos resumidos, para comprenderlas mejor y relacionarlas con sus conocimientos o expectativas sobre una variable de entrada de un CEA. El objetivo principal de la aplicación es ayudar al usuario a familiarizarse con las distribuciones y a sentirse más seguro al trabajar con ellas, pero parte de su funcionalidad puede usarse para realizar un CEA probabilístico.
+La aplicación, llamada
+Distributr
+- puede usarse
+aquí
+. Tenga en cuenta que, como esta aplicación funciona en un servidor R Shiny, actualmente no está preparada para un gran volumen de usuarios o solicitudes, por lo que, si muchas personas la usan a la vez, es posible que se desconecte o agote el tiempo de espera.
+[4]
+También es posible
+descargar el código de la aplicación desde GitHub
+, en cuyo caso puede ejecutarla directamente en su propio ordenador con R, sin depender del servidor R Shiny. Un documento que describe los distintos tipos de distribuciones, gráficos y estadísticos resumidos disponibles en la aplicación puede consultarse
+aquí
+(no es necesario leer esa documentación para continuar con esta entrada ni para usar la aplicación).
+Además de explorar qué tipos de valores indican distintas distribuciones y sus posibles especificaciones de parámetros, Distributr también muestra el comando de R que podría usarse para generar una muestra propia de la distribución, y permite descargar un archivo csv con 10,000 muestras de hasta 10 distribuciones distintas en un solo archivo csv. Por tanto, si no se siente cómodo programando, sería posible especificar varias distribuciones en la aplicación y luego usar Excel o Google Sheets para indicar cómo se relacionan entre sí estas distintas distribuciones y formar un CEA basado en las distribuciones generadas.
+Usando Distributr, pude visualizar y evaluar la correspondencia de una serie de distribuciones distintas con las estimaciones mejor, pesimista y optimista de la CEA de Strongminds de GiveWell. Por ejemplo, GiveWell sugiere una corrección por sesgo de deseabilidad social del efecto de la intervención de Strongminds de aproximadamente 80% [70%-90%]. Usé una distribución beta para reflejar que esta estimación es una proporción o porcentaje. Suponiendo que los rangos pesimista y optimista representan un intervalo del 90%, esto correspondería aproximadamente a una distribución beta con una media de .8 y una precisión de 40:
+Al usar una serie de distribuciones para hacer aproximaciones similares a las estimaciones que proporciona GiveWell, es posible generar un conjunto completo de distribuciones probabilísticas correspondientes a cada una de las variables de entrada utilizadas en la CEA de Strongminds. Estas pueden combinarse después para producir estimaciones probabilísticas de costo-efectividad.
+Aproximación y ejecución de una CEA probabilística para Strongminds basada en las cifras de GiveWell
+Aproximación de las entradas de GiveWell
+La tabla siguiente muestra las estimaciones puntuales de HLI para distintas entradas de una CEA para Strongminds, tal como se reportan en la publicación de GiveWell, junto con entradas adicionales que GiveWell incluyó en su CEA, así como las estimaciones mejor, optimista y pesimista de GiveWell para estas entradas. Incluyo distribuciones que corresponden aproximadamente a estas estimaciones de GiveWell, y un ejemplo de código en R que genera la distribución respectiva (en el Apéndice muestro que se aplican conclusiones similares a las de abajo si solo se usan distribuciones uniformes agnósticas).
+Subrayo que estas son solo coincidencias aproximadas, y también que se basan en el supuesto de que las estimaciones de GiveWell representan algo así como una media para la mejor suposición, y un intervalo central del 90% para los límites optimista y pesimista. Estos números tendrían que cambiarse si no fuera así y, en la práctica, se buscaría generar estas distribuciones en colaboración con la persona que propone los valores plausibles, para asegurar que las distribuciones reflejen el conocimiento y las expectativas que pretenden codificar. Este proceso también puede ayudar a afinar y explicitar mejor las expectativas propias. Algunos puntos a considerar aquí serían no solo qué representan los límites de incertidumbre, sino también si la estimación puntual refleja la media, la mediana o la moda, lo que puede divergir de forma significativa cuando se usan distribuciones que no son simétricas. Como ejemplo de dónde sería útil este tipo de consulta, el
+Multiplicador de duración
+estimación puntual y los límites fueron especialmente difíciles de generar con un grado razonable de similitud usando una distribución estadística formal, y los valores generados por la distribución elegida tienen una cola larga que puede desviarse hacia duraciones negativas (lo cual no es posible para esta entrada). Por ello, limité el valor mínimo de estos valores a 0.2 después de muestrearlos de la distribución. Podría elegirse, tras más discusión, una distribución más adecuada que no necesitara un tope artificial, o un tope distinto.
+[5]
+Por tanto, el propósito de este procedimiento no es actualizar directamente las estimaciones proporcionadas por GiveWell ni por HLI, sino demostrar, con un ejemplo concreto y pertinente, cómo podría incorporarse la incertidumbre y cómo un enfoque probabilístico podría llevar de forma plausible a conclusiones y niveles de incertidumbre distintos en las estimaciones finales.
+Realización de los cálculos de costo-efectividad
+En la CEA, primero necesitamos calcular el efecto esperado para una persona que se somete directamente a la intervención. Este es simplemente el producto de
+Efecto inicial
+Deseabilidad social
+Sesgo de publicación
+Cambio de contexto
+Multiplicador de duración
+. A continuación, podemos usar este
+Efecto individual
+estimado para calcular un
+Efecto indirecto en el hogar
+: cuánto se benefician indirectamente quienes viven en el hogar del receptor porque el receptor recibe directamente la intervención. Esto es el resultado de:
+Efecto individual
+Beneficio para el hogar
+(N hogar - 1).
+El
+Efecto total
+de la intervención es entonces
+Efecto individual
++
+Efecto indirecto en el hogar
+.
+Ahora que tenemos este estimado de
+Efecto total
+, lo convertimos a una escala general de ‘unidades de satisfacción vital’. Esto se hace multiplicando:
+Efecto total
+Satisfacción por DE
+. A continuación, lo convertimos en una estimación de cuántas de estas ‘unidades de satisfacción vital’ obtenemos por cada 1000 dólares gastados en la intervención:
+Efecto total en unidades de satisfacción
+(1000 / Costo)
+.
+Por último, si lo deseamos, podemos comparar esto
+Unidades de satisfacción vital por cada 1000 dólares
+estimación con otras intervenciones que se han estimado en términos de esta misma métrica. En la publicación de GiveWell, esto se hace en relación con GiveDirectly y con la Against Malaria Foundation (AMF):
+Unidades de satisfacción vital por cada 1000 dólares de Strongminds / Unidades de satisfacción vital por cada 1000 dólares de la intervención de comparación
+. HLI y GiveWell sugirieron que GiveDirectly logró 8
+Unidades de satisfacción vital por cada 1000 dólares
+, y HLI asignó a AMF 81 en esta métrica, y GiveWell 70. Nos quedamos con la estimación de GiveWell en nuestro análisis probabilístico.
+Ahora podemos ver cómo se comparan estas estimaciones intermedias y finales al ejecutar una aproximación probabilística basada en los escenarios optimista y pesimista de GiveWell, en comparación con usar estos límites de escenario como entradas directas en los cálculos anteriores.
+Pasando de las etapas iniciales de la CEA (el
+Efecto individual
+) a las etapas finales (comparar unidades de satisfacción vital por cada 1000 dólares frente a AMF o GiveDirectly), la amplitud de los límites de incertidumbre resulta de 1.7 a 2.8 veces mayor en las estimaciones obtenidas mediante un enfoque basado en intervalos, en comparación con la aproximación probabilística. Por tanto, los límites superiores basados en una estimación probabilística más completa de los efectos de Strongminds están mucho más lejos de las estimaciones puntuales de HLI de lo que lo están los límites superiores que sugiere la publicación de GiveWell.
+Una vez más, la medida en que puede haberse sobreestimado la incertidumbre al usar un enfoque basado en intervalos dependería de lo que esos intervalos representen exactamente, y sería distinta si se tomaran como algo distinto de un intervalo del 90%. Esto incluso podría señalar una limitación adicional del enfoque basado en intervalos: quizá no sepamos exactamente qué pretenden representar los puntos e intervalos. Podrían reflejar el rango del 90% o del 95% de los datos; la idea de ‘pesimista’ de una persona puede ser muy distinta de la de otra. Podrían ser el 90% central de los valores, cortando el 5% superior e inferior, o podrían ser el 90%
+más probable
+esperado
+de los valores. Sin embargo, la única forma en que este enfoque no llevaría al menos a cierta sobreestimación de la incertidumbre es que los límites indicaran los valores máximo y mínimo absolutos posibles para cada entrada.
+Si las estimaciones de un enfoque basado en intervalos muestran una incertidumbre mayor de la que parece razonable según una evaluación probabilística más completa, ¿importa realmente? Después de todo, las estimaciones medias resultan efectivamente iguales. Incluso podría argumentarse que estos intervalos de incertidumbre más amplios son algo bueno, quizá una reflexión conservadora o más humilde de nuestra incertidumbre.
+Sostengo que sí importa, sobre todo a la hora de evaluar distintos programas en comparación entre sí. Analizaremos algunos enfoques para comparar programas en la sección
+Hacer comparaciones probabilísticas con otros programas o intervenciones
+como se explica más abajo, pero en pocas palabras, el enfoque probabilístico nos permite hacer evaluaciones de los programas mucho más matizadas. Si solo tenemos los intervalos, lo único que podemos afirmar razonablemente, si la estimación de un programa cae dentro de los límites de otro, es que no podemos confirmar ni negar una diferencia entre ellos. Con un enfoque probabilístico, en cambio, podemos evaluar la probabilidad relativa de que un programa supere al otro. Además, con un enfoque basado en intervalos no tenemos idea de cómo varía la plausibilidad de los distintos valores dentro de esa región acotada. Aunque pueda parecer conservador pecar por exceso al expresar nuestra incertidumbre, corre el riesgo de ser engañoso, al sobrestimar de forma drástica la plausibilidad de los valores extremos.
+Estos puntos pueden entenderse observando el gráfico siguiente, que muestra las diferencias entre las inferencias que puede obtenerse al seguir un enfoque probabilístico, frente a un enfoque basado en intervalos, para comparar programas. En primer lugar, según la estimación probabilística, la probabilidad de que Strongminds sea exactamente igual o peor que GiveDirectly parece bastante baja, ya que representa el 5 % más pesimista de nuestros posibles resultados (aunque, por supuesto, no está descartada). El intervalo de incertidumbre que produce el enfoque basado en intervalos se extiende mucho más hacia resultados negativos extremos para Strongminds, y así puede hacer que esos resultados parezcan más plausibles de lo que probablemente son.
+Además, en el extremo opuesto, una parte muy grande del intervalo de incertidumbre de GiveWell (de hecho, la mayor parte) cubre el 5 % más alto de nuestras estimaciones probabilísticas para Strongminds. Si inspeccionamos visualmente el rango pesimista-optimista de GiveWell, podríamos concluir que es razonablemente probable que Strongminds produzca unas 30 unidades de satisfacción vital por cada 1000 dólares. Al fin y al cabo, este valor está mucho más cerca de la “mejor estimación” que del valor “optimista”, y el intervalo no aporta más información sobre qué tan probable es cada resultado. Sin embargo, si consultamos el gráfico producido con el enfoque probabilístico, vemos que este resultado está en el 5 % de valores más optimista y, por tanto, es comparativamente improbable. El enfoque basado en intervalos corre el riesgo de hacer que resultados relativamente extremos parezcan más probables de lo que en realidad son.
+De hecho, con el enfoque basado en intervalos, un programa de comparación podría ser dos veces mejor que el 95 % de nuestras expectativas para el programa, pero aun así caería dentro de los límites sobreextendidos que produce este enfoque, y podría considerarse que tiene poca diferencia plausible en efectividad. Cabe señalar que el enfoque probabilístico no rechaza de plano la posibilidad de estos valores: podemos calcular directamente las probabilidades que esperamos para que los valores aparezcan en todo el rango de posibilidades plausibles.
+Uso de Distributr y una hoja de cálculo para hacer los cálculos
+Los cálculos y gráficos anteriores se hicieron en R, pero también es posible usar Distributr para generar un archivo csv con muestras de las distribuciones posibles de los distintos insumos. Después podemos usar Excel o Hojas de cálculo de Google para realizar cálculos a partir de las muestras y resumir las estimaciones resultantes, como se hizo en
+esta hoja
+.
+[6]
+Por tanto, gran parte de la incorporación de la incertidumbre en CEA relativamente simples, como esta, podría hacerse incluso si el usuario se siente más cómodo con las hojas de cálculo que programando.
+Visualización de los resultados de CEA con Distributr
+Una vez generado un conjunto de distribuciones de resultados, tampoco nos limitamos a las funciones de resumen disponibles en el software de hojas de cálculo. Podemos guardar los valores de nuestras estimaciones en un nuevo archivo csv y subirlos a Distributr como distribuciones personalizadas (los resultados están disponibles como una hoja de cálculo de Google
+aquí
+). Esto permite visualizarlas por completo y explorar sus implicaciones usando una gran variedad de estadísticos resumidos disponibles en Distributr.
+Comparaciones probabilísticas con otras intervenciones
+Además de proporcionar límites para las estimaciones que reflejan con más precisión la propagación de la incertidumbre, el uso de un enfoque probabilístico permite algunos tipos adicionales de comparaciones y visualizaciones que no serían posibles con un enfoque basado en intervalos.
+[7]
+Si tuviéramos una distribución de estimaciones de efectividad de un CEA de otro proyecto, podríamos comparar directamente los programas restando una distribución de la otra. La distribución resultante reflejaría la distribución de incertidumbre que rodea a las
+diferencias
+entre los dos programas evaluados, y también podría resumirse con una estimación puntual y distintos intervalos de incertidumbre según se desee, o mediante la consideración de las probabilidades relativas del rango de diferencias plausibles. Esto nos permite hacer comparaciones mucho más detalladas y sensibles que si solo pudiéramos juzgar si la estimación de un programa cae o no dentro de los límites de incertidumbre de otro.
+Para las comparaciones con AMF y con GiveDirectly no tenemos una distribución de incertidumbre, pero sí una estimación puntual (de GiveWell, como se indicó antes, AMF parece generar alrededor de 70 unidades de satisfacción por cada 1000 dólares, y GiveDirectly alrededor de 8). Podríamos calcular la proporción de nuestra distribución de estimaciones para Strongminds que supera o queda por debajo de estos programas de comparación.
+Para expresar que hay cierta incertidumbre en las estimaciones puntuales de AMF y GiveDirectly, o simplemente para reflejar que queremos ser algo conservadores al considerar que una nueva intervención es claramente inferior o superior a un programa de comparación establecido, también podríamos añadir un rango alrededor de estas estimaciones puntuales. Solo si una estimación de nuestra distribución para Strongminds cae fuera de este rango podríamos sugerir que el programa parece ser mejor o peor. Esto se conoce como establecer un
+Rango de equivalencia práctica
+(ROPE). A modo de demostración, establecimos un ROPE en torno a las estimaciones de modo que las intervenciones comparadas tengan que superarse entre sí en un 33 % para considerarse “diferentes” en cuanto a su costo-efectividad.
+[8]
+Por claridad visual, y a costa de cierta precisión, presentamos los resultados de este procedimiento a continuación como un par de gráficos de cuadrícula o “waffle”. La totalidad de cada cuadrícula representa el 100 % de los resultados estimados de forma probabilística, y cada cuadrado representa el 1 % de estos resultados. En estos gráficos, Strongminds sale bastante bien parado frente a GiveDirectly: la mayoría de los cuadrados indica superioridad de Strongminds, y solo un cuadrado, que representa el 1,2 % de las comparaciones, indica inferioridad. Sin embargo, en la comparación entre Strongminds y AMF, prácticamente la totalidad de nuestras estimaciones probabilísticas favorece a AMF.
+Resumen y observaciones finales
+Como espero haber demostrado, incorporar la incertidumbre en los CEA mediante un enfoque basado en intervalos puede llevar a sobrestimar de forma sustancial la incertidumbre de los resultados finales. Este problema puede corregirse usando distribuciones de probabilidad para representar esa incertidumbre.
+Realizar los cálculos de un CEA con muestras aleatorias de estas distribuciones propaga la incertidumbre por el modelo de costo-efectividad de forma más adecuada. Además, contar con una distribución completa de estimaciones abre la posibilidad de distintos tipos de estadísticos resumidos (por ejemplo, distintas estimaciones puntuales, distintos rangos y tipos de intervalos), diferentes formas de comparar nuestras estimaciones con otros programas y, en última instancia, distintas formas de presentación visual e inferencia.
+Existen numerosas herramientas para generar distribuciones de valores que se usen en un CEA, desde un lenguaje de programación como R o Python hasta software especializado (gran parte del cual ha sido desarrollado por personas de la comunidad EA o cercanas a ella precisamente para este fin). Mi objetivo al compartir Distributr fue facilitar la exploración de distintas distribuciones a quienes no tienen experiencia en programación, porque creo que a menudo lo que frena a quienes quieren empezar a incorporar incertidumbre en sus CEA es la falta de confianza o de familiaridad con las distintas distribuciones. Sin embargo, Distributr también puede usarse para generar muestras aleatorias de distribuciones especificadas y realizar CEA probabilísticos relativamente sencillos solo con una hoja de cálculo, y después para visualizar y explorar las distribuciones resultantes de los desenlaces.
+Pasar de un enfoque basado en intervalos a un enfoque probabilístico más completo puede aumentar de forma sustancial la validez y el matiz de las inferencias, e incluso cambiar los tipos de inferencia que pueden hacerse. Espero que esta entrada, así como las herramientas y el código que la acompañan, facilite hacerlo.
+Agradecimientos
+Esta entrada fue escrita por Jamie Elsey con aportaciones de David Moss. Distributr fue desarrollado por Jamie Elsey. Queremos agradecer a Ozzie Gooen su revisión y sus sugerencias sobre el borrador final de esta entrada.
+Apéndice
+Las distribuciones uniformes también producen resultados menos extremos que los que sugiere un enfoque basado en intervalos
+Una preocupación posible es que ajustar estas distintas distribuciones parezca demasiado ambicioso: simplemente no podemos asignar distribuciones a nuestras expectativas de este modo, porque implica demasiada certeza sobre los datos de entrada. Aunque sostendría que a menudo sí tenemos expectativas bastante concretas sobre qué formas de distribución son razonables para nuestros datos de entrada, no tenemos por qué depender de una forma específica. La distribución más agnóstica que podemos usar es la uniforme, en la que todos los valores dentro de un conjunto de límites son igualmente plausibles. De nuevo, si tratamos los intervalos especificados en la entrada de GiveWell como un intervalo del 90%, podemos ampliarlos un 5% a cada lado para obtener un intervalo sencillo del 100%, y generar distribuciones uniformes dentro de esos límites. Este enfoque de distribución uniforme, aunque sigue haciendo muchas menos suposiciones que nuestro enfoque personalizado de arriba, sigue sugiriendo que el enfoque basado en intervalos genera estimaciones infladas.
+^
+Esta entrada se basa en una charla interna que di a investigadores de Rethink Priorities. El objetivo de la charla era debatir formas de incorporar y visualizar la incertidumbre en los análisis de costo-efectividad (CEA). En los días previos a la charla, GiveWell publicó su evaluación del CEA del Happier Lives Institute para StrongMinds. Esa entrada ofrecía un CEA pertinente y oportuno que podía usar como ejemplo concreto para incorporar incertidumbre, y es el ejemplo en torno al cual se orienta esta entrada.
+Uso la evaluación de StrongMinds de GiveWell como punto de partida y ejemplo concreto, porque creo que esto resulta mucho más interesante que trabajar por completo en abstracto. Tomo las evaluaciones de GiveWell como dadas a efectos de demostración, y no realicé investigación adicional para determinar si estas estimaciones, o las del Happier Lives Institute (HLI), son razonables. Solo trabajo con las cifras tal como se presentan en la mencionada entrada de GiveWell, no con el informe original del HLI ni con las discusiones posteriores del HLI y de otros. Un informe original del Happier Lives Institute sobre la costo-efectividad de StrongMinds puede consultarse
+aquí
+, y un segundo informe sobre los efectos derrame en los hogares
+aquí
+. Una respuesta del HLI a la entrada de GiveWell puede consultarse
+aquí
+.
+^
+Sabemos, por ejemplo, que varias contribuciones, y de hecho la contribución ganadora, al concurso ‘Change our minds’ de GiveWell se centraron en posibles formas de incorporar la incertidumbre en los CEA de GiveWell; véase la lista de participaciones
+aquí
+y una participación ganadora sobre la incertidumbre
+aquí
+.
+La inclusión de solo una estimación puntual para las cifras del 'HLI' que siguen no debe interpretarse como que el HLI se base exclusivamente en estimaciones puntuales en sus evaluaciones; refleja las cifras presentadas en la entrada de GiveWell. Algunas de las estimaciones de los informes del HLI señalados en la nota 1 sí incluyen intervalos y estimación probabilística, que no hemos evaluado.
+^
+Esto significa simplemente que se espera que el 90% de los valores generados por esta distribución caiga entre -1.6 y 1.6, con un 5% de valores por encima y un 5% por debajo de este intervalo.
+^
+Espero que esto no ocurra, pero si llega a ese punto, haga clic en el enlace y, si se agota el tiempo o no parece funcionar, esta es la causa más probable, ya que la aplicación sí funciona correctamente en vivo en un navegador web cuando el uso no es alto.
+^
+En general, vale la pena comprobar los valores mínimos y máximos generados a partir de las distribuciones de entrada para detectar valores poco plausibles o no válidos que podrían afectar a un CEA. También he añadido desde entonces otras distribuciones a la aplicación, como la distribución PERT, que podrían ser alternativas adecuadas a la normal asimétrica.
+^
+Tenga en cuenta que, dado que Google Sheets ofrece menos funciones que R, resumí las estimaciones usando un intervalo central del 90% en lugar de un intervalo de máxima densidad, así que los números no son exactamente los mismos que en los gráficos (esto también puede deberse a la variación en el muestreo aleatorio de las distribuciones, aun usando los mismos estadísticos resumidos).
+^
+Algunas consideraciones adicionales sobre formas de comparar programas se analizan en el texto de Noah Haber
+aquí
+, y un análisis más detallado de las ideas basadas en ROPE presentadas en esta sección puede encontrarse en la obra de John Kruschke
+aquí
+.
+^
+Tenga en cuenta que esto equivaldría a un ROPE en la comparación de costo-efectividad de A / costo-efectividad de B de aproximadamente .75 a 1.33, no de .67 a 1.33: si A / B es 1.33, entonces A es 1.33 veces mejor que B. Si A / B es .75, entonces B es 1.33 veces mejor que A. La magnitud de este ROPE es completamente arbitraria y se eligió solo a efectos de demostración, pero en escenarios concretos los responsables de tomar decisiones pueden tener diversas razones prácticas para interesarse por si una intervención es más de
+x
+veces mejor que otra.
+Jamie Elsey
+David Moss
+Rethink Priorities
+Anterior
+Anterior
+Cómo Rethink Priorities aborda el riesgo y la incertidumbre
+Siguiente
+Siguiente
+Modelo de costo-efectividad entre causas de Rethink Priorities
+Boletín
+Dirección de correo electrónico
+Suscribirse
+¡Gracias!
+Sobre nosotros
+Nuestro equipo
+Oportunidades profesionales
+Política de privacidad
+Nuestro trabajo
+Investigación y publicaciones
+Boletín
+Todo el contenido es ©Rethink Priorities o de sus respectivos autores, salvo que se indique lo contrario.
