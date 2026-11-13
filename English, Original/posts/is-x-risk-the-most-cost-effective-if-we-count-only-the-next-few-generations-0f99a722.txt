@@ -1,0 +1,562 @@
+Is x-risk the most cost-effective if we count only the next few generations? — Rethink Priorities
+0
+Skip to Content
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+About Us
+About us
+Our Team
+Contact
+Transparency
+Research
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Services
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Open Menu
+Close Menu
+Folder:
+About Us
+Back
+About us
+Our Team
+Contact
+Transparency
+Folder:
+Research
+Back
+Research Database
+Animal Welfare
+Global Health and Development
+Global Catastrophic Risks
+Surveys and Data Analysis
+Worldview Investigations
+Folder:
+Services
+Back
+Fiscal Sponsorship and Operations Support
+Announcements
+Newsletter
+Careers
+Donate
+Is x-risk cost-effective if we only count a few generations?
+Worldview Investigations
+Oct. 30
+Written By
+Rethink Priorities
+This is a linkpost for
+https://docs.google.com/document/d/1u9nAm6id_03atEX4HpaYNf7yPgc3GsVGsy_18Suu_lI/edit?usp=sharing
+This post is part of Rethink Priorities’ Worldview Investigations Team’s
+CURVE Sequence
+: “Causes and Uncertainty: Rethinking Value in Expectation.” The aim of this sequence is twofold: first, to consider alternatives to expected value maximization for cause prioritization; second, to evaluate the claim that a commitment to expected value maximization robustly supports the conclusion that we ought to prioritize existential risk mitigation over all else.
+Read the introduction to the series
+Change Log
+As of Nov 7, 2023, the following changes have been made to this report:
+The model has been run again to incorporate changes to the DALY burden of malaria. This change is only relevant to the REU model, and it is described more in this portion of the related
+risk aversion report
+from which this report derives much of its methodology. There is no appreciable difference in the results.
+I also updated the presentation of the overall results across different risk aversion theories in Table 3. If a cause area’s cost-effectiveness has a risk-weighted value above 1 unit per $1000 spent, then the value displayed in Table 3 is the base-10 logarithm of the risk-weighted cost-effectiveness. For example, a cause area whose cost-effectiveness is 100 risk-weighted units per $1000 spent has a score of 2.0. If a cause area’s cost-effectiveness is less than -1 after risk aversion is incorporated, then the value displayed is the negative of the base-10 logarithm of the absolute value of the area’s cost-effectiveness. Here, if a cause’s risk-weighted value is -1000 per $1000 spent, then the score in Table 3 is -3. If a cause’s risk-weighted value is between -1 and 1 per $1000 spent, then it’s entered in Table 3 as ~0, or roughly zero.
+Executive Summary
+Motivation
+In a
+recent post
+, David Rhys Bernard puts forth several considerations that should give us pause in accepting the “Time of Perils” hypothesis, which holds that we live in a world where existential risk is high now due to AI and other threats, but will fall to near zero and allow us to have a long and valuable future if we survive this time of perils. Moreover, as Arvo Muñoz Morán has
+recently shown
+, the value of existential risk reduction efforts diverges if we live in a time of perils versus an age with constant existential risk. If we take these great uncertainties about the “time of perils” hypothesis and the long-run value of affecting existential risk seriously, what might it imply for our cause prioritization?
+One response would be to side-step these uncertainties about the far future and instead argue for existential risk’s value on time horizons that are easier to forecast. For example, one argument for the idea that existential risk mitigation should be a top priority for governments and philanthropists (and especially effective altruists) alike could go as follows:
+You don’t have to believe in sci-fi futures with digital minds, space colonization, or transformative AI for existential risk to be as much or more cost-effective than the top global health and animal welfare interventions. You don’t even have to believe that our risk-reduction efforts will persist indefinitely or that people millions of years in the future matter as much as people in the present.
+All you have to believe is that the next few generations of people matter as much as we do, that existential risk is a threat to human civilization over their lifespans, and that we can do something to lower this risk. Under these assumptions, existential risk reduction is probably at least as cost-effective as a philanthropic intervention as our alternatives, if not more.
+Let us call this view the “common-sense case for spending in existential risk reduction,” or, for short, the “common sense case.” Specifically, let’s define the common-sense case for investing in existential risk reduction as
+Assuming the average population and quality of life per person are similar to or slightly higher than current levels
+Valuing people in the next 120 to 180 years (now through the end of our grandchildren’s to possibly our great-great-grandchildren’s lives)
+[1]
+equally
+Assigning no value to non-human animals at any point in time or to humans beyond this time period in terms of estimating the value of existential risk prevention.
+Previous researchers have investigated and debated whether existential risk mitigation is cost-effective when considering just the present generation.
+[2]
+These prior estimates, while useful, typically only estimate the expected value of existential risk mitigation work. However, part of the motivation for the common-sense case for existential risk mitigation work is to assess the cause area’s robustness under reasonable disagreement. There are different topics we can reasonably disagree about. For one, we might disagree about who matters; the common-sense case, in valuing the next few generations only, is conservative in this regard. Moreover, there is disagreement about the cost-effectiveness of and potential for downside risks in existential risk mitigation work. Relatedly, there is disagreement about how to approach this uncertainty and whether to incorporate risk aversion. Some people may have reservations about going all-in on interventions that are expected value-positive yet risky. In this report, I build upon the prior work that’s been done on the near-term value of existential risk reduction by putting particular emphasis on the latter two topics of disagreement: empirical uncertainty and risk attitudes. In doing so, I assess how each of these affects the relative value of existential risk mitigation compared to other causes.
+Simply put, under the common-sense case, you shouldn’t have to rely on the
+time of perils hypothesis
+being likely, on existential risk reduction to be certainly good, or willingness to go in on low-probability, high-EV bets for existential risk reduction to be a good spending opportunity. If existential risk interventions are competitive with or better than a global health or animal intervention under conservative assumptions, then the case for spending on it will be greatly strengthened.
+Is the common-sense case enough for existential risk mitigation to be decisively more cost-effective than global health and/or animal welfare interventions in risk-neutral expectation? If so, under what empirical and moral weight assumptions? And, if we’re open to decision-theoretic alternatives to risk-neutral expected value maximization, how (if at all) do these conclusions change when we incorporate risk aversion?
+In addressing these broad themes, some more specific questions we might be interested in are:
+How much do we have to lower existential risk, in expectation, to reach cost-competitiveness with various global health and animal interventions?
+How do changes in how we value non-human animals affect our conclusions?
+If we’re risk-averse with respect to our money making a difference or avoiding the worst states of the world, how does our assessment of the relative value of the cause areas change?
+In this report, I address these questions using the following steps:
+I first describe a range of
+prior estimates
+of the tractability of existential risk mitigation to get a sense of what expected cost-effectiveness estimates are typically considered “plausible” within the effective altruist community.
+Then, I use a mathematical model that estimates the cost-effectiveness of
+twelve “scenarios”
+for existential risk projects that each have different distributions of impacts on existential risk and different degrees of plausibility.
+Next, I
+model
+the cost-effectiveness of a low-risk global health intervention and three animal interventions for comparison.
+Fourth, I
+compare
+the cost-effectiveness of each existential risk reduction scenario to these other causes under expected value maximization theory and with different types and levels of risk aversion.
+Finally, I offer some key takeaways from and limitations of the risk aversion and cost-effectiveness models, and I offer
+opportunities
+for future research.
+In the following section, I give an overview of the example existential risk projects tested. Then, I describe the comparison interventions from animal welfare and global health cause areas I used. Finally, I give an overview of the results from evaluating the cost-effectiveness of each project compared to the animal and global health interventions considered under expected value maximization and risk-averse decision frameworks.
+Existential Risk Mitigation Scenarios
+There are twelve example interventions I use to evaluate how spending $100 million on existential risk mitigation fares under the common-sense case. The four variables I include in the analysis are:
+The probability of the intervention having a non-zero counterfactual impact on existential risk levels over the period of consideration (the next 120-180 years);
+The probability that, given an intervention has an effect, the effect is to lower the probability of an existential catastrophe over the period of consideration;
+If an intervention inadvertently raises existential risk, the relative size of that increase in risk compared to how much risk would have been reduced had the intervention succeeded; and
+If an intervention succeeds, the number of basis points of cumulative risk reduced, normalized to per billion dollars spent (assuming no diminishing marginal returns)
+I also build a model of the impact of averting non-existential catastrophes using the first three variables (and assuming a relative reduction in the risk of various sized non-existential catastrophes).
+The twelve examples, or “scenarios,” for how an existential risk reduction project that costs $100 million could turn out are included in Table 1 below. They are color-coded by how plausible I judge them to be based on the number of assumptions they make that are favorable to existential risk mitigation. For example, if the scenario assumes that a project has a 90% chance of having a counterfactual effect, this is counted as a favorable assumption that slightly decreases its plausibility.
+[3]
+The dark green projects are labeled “extremely plausible and conservative,” the light green projects are labeled “plausible but less conservative,” the yellow projects are “possible yet not conservative,” and the red projects are deemed “implausible.” Bolding of the scenarios’ names is used throughout to indicate which interventions had a high (45%) chance of raising existential risk conditional on the effect being non-zero. I describe each scenario and its classification further in the
+methodology section
+.
+It’s worth noting how implausible scenarios 10 through 12 are. They involve reducing very large amounts of existential risk that are outside the typical bounds of even the more optimistic projections by existential risk mitigation researchers (see this
+section
+of the report). On top of that, scenarios 10 and 11 assume very high probabilities of success. I think it’s very unlikely that an intervention we’d find any time soon could have an 81% probability of reducing existential risk and reduce a substantial amount of the existential risk over the next few centuries for so little money.
+Table 1: Parameter specifications for simulating the value of existential risk mitigation and the res. The interventions tested assume a project spends $100 million over its lifetime, but I normalize the risk reductions in terms of basis points per billion dollars spent
+P(Effect)
+P(Good | Effect)
+Rel. Magnitude of Bad Effect
+BP Risk Reduced per $1B | Good Impact
+E(BP Reduced/$1B)
+Scenario 1
+0.2
+0.55
+0.1 to 1.0
+0.5 to 5.0
+0.2
+Scenario 2
+0.2
+0.55
+0.1 to 1
+1.0 to 10.0
+0.3
+Scenario 3
+0.9
+0.55
+0.1 to 0.6
+0.5 to 5.0
+0.8
+Scenario 4
+0.9
+0.90
+0.1 to 0.6
+0.5 to 5.0
+1.6
+Scenario 5
+0.9
+0.55
+0.1 to 0.6
+1.0 to 10.0
+1.5
+Scenario 6
+0.9
+0.90
+0.1 to 0.6
+1.0 to 10.0
+3.2
+Scenario 7
+0.9
+0.90
+0.1 to 0.6
+5.0 to 15.0
+7.2
+Scenario 8
+0.9
+0.55
+0.1 to 0.6
+5.0 to 15.0
+3.5
+Scenario 9
+0.2
+0.55
+0.1 to 1.0
+50.0 to 150.0
+6.9
+Scenario 10
+0.9
+0.90
+0.1 to 0.6
+50.0 to 150.0
+72
+Scenario 11
+0.9
+0.90
+0.1 to 0.6
+500.0 to 1000.0
+567
+Scenario 12
+0.2
+0.55
+0.1 to 1.0
+500.0 to 1000.0
+55
+Global Health and Animal Welfare Interventions
+Here, the low-risk global health intervention I included is donating to the Against Malaria Foundation to buy anti-malaria bet nets.
+The animal interventions include corporate cage-free campaigns and two shrimp welfare interventions. The first shrimp welfare intervention is one that introduces stunners to prevent suffering from harvest and slaughter in an ice slurry. The other is a (hypothetical) intervention that reduces the prevalence of harmful ammonia concentrations in shrimp farms.
+I vary the moral weights of each animal species by using both welfare ranges based on Rethink Priorities’ work as well as substantially more conservative ones. Doing so allows me to test how dependent the resulting relative cost-effectiveness of existential risk mitigation work under the “common-sense case” is on how much you value animals. Under the higher welfare ranges based on Rethink Priorities’ estimates, shrimp have welfare ranges that are between 0.01 and 2 with a mean of 0.44, conditional on their being sentient (I give this a 20% to 70% chance of being true with a mean of 40%). Hens, under the Rethink Priorities-based estimates, are assumed to have sentience-conditioned welfare ranges of between 0.02 to 1 with a mean of 0.29. Hens’ probability of sentience is assumed to be between 75% and 95% with a mean near 90%. Under the lower welfare ranges, I assume shrimps’ sentience-conditioned welfare ranges are between 0.001 and 0.01 and hens’ sentience-conditioned welfare ranges are between 0.01 and 0.04. The probabilities of sentience do not change.
+Main Results
+Brief Note About Interpreting These Results
+In this report, I say that two causes are “cost-competitive” with each other if they’re not an order of magnitude apart or more. That is, if cause A is between 0.1 and 10 times as good (exclusive bounds) as cause B, then cause A is cost-competitive with cause B. I define the range for cost-competitiveness to be wide because these are imprecise cost-effectiveness analyses with lots of uncertainty, so generalizations between causes shouldn’t be made if the difference between them isn’t an order of magnitude.
+Summary of Results Assuming Risk-Neutrality
+Table 3 below includes the summary of results for the risk-neutral cost-effectiveness estimates of all the existential risk, animal, and global health interventions studied. The full results are located in
+this spreadsheet
+and are analyzed in this section of the
+report
+. The calculations are in the “common_sense_comparison.ipynb” file of the accompanying
+GitHub repository
+.
+Here are some key findings:
+Under pure risk-neutrality, whether an existential risk intervention can reduce more than 1.5 basis points per billion dollars spent determines whether the existential risk intervention is an order of magnitude better than the Against Malaria Foundation (AMF).
+Spending on AMF is cost-competitive with the more conservative existential risk interventions.
+Spending on AMF is cost-competitive with scenarios 1-3, which reduce between 0.15 and 0.8 basis points per $1 billion spent in expectation.
+However, AMF is probably an order of magnitude less cost-effective than plausible scenarios that are less conservative.
+Scenarios 4 and 5 reduce 1.5 and 1.6 basis points per $1 billion and are nearly exactly 10 times more cost-effective than AMF as modeled.
+Scenarios 6 through 9 are not conservative, but still possible. These scenarios are estimated to be up to 40 times more cost-effective than AMF.
+Only the most implausible scenarios are estimated to be more than two orders of magnitude more cost-effective than spending on AMF.
+If you use welfare ranges that are close to Rethink Priorities’ estimates, then only the most implausible existential risk intervention is estimated to be an order of magnitude more cost-effective than cage-free campaigns and the hypothetical shrimp welfare intervention that treats ammonia concentrations. All other existential risk interventions are competitive with or an order of magnitude less cost-effective than these high-impact animal interventions.
+Even scenarios 10 and 12–which assume that $1 billion can reduce between ~50 and ~70 basis points per $1 billion–aren’t an order of magnitude more cost-effective than the hypothetical ammonia intervention and cage-free campaigns
+Scenarios that reduce between 0.15 and 0.8 basis points per $1 billion are likely less cost-effective than these animal interventions by an order of magnitude or more.
+Scenarios that reduce, in expectation, between 1.5 and 7.2 basis points per $1 billion are cost-competitive with spending on the ammonia intervention and cage-free campaigns.
+Even if you think that Rethink Priorities’ welfare ranges are far too high, many of the plausible existential risk interventions are not an order of magnitude more cost-effective than the hypothetical ammonia-treating shrimp welfare intervention or cage-free campaigns.
+Under low welfare ranges of 0.001 to 0.01 (conditioned on sentience), the ammonia-treating shrimp welfare intervention is as cost-effective in expectation as AMF and cost-competitive with interventions that reduce less than 1.5 basis points per $1 billion.
+Assuming hens have welfare ranges of 0.01 to 0.04 (conditioned on sentience), then all existential risk interventions that reduce 3.5 or fewer basis points per billion dollars spent are cost-competitive with cage-free campaigns, but no more.
+Whether the intervention that stuns shrimp to prevent harm upon harvest and slaughter is, in expectation, cost-competitive with any existential risk mitigation projects depends entirely on shrimps’ welfare ranges.
+Under the Rethink Priorities-inspired estimates, the shrimp stunning intervention is cost-competitive with all of the interventions that reduce 1.6 or fewer basis points per billion dollars.
+However, if you assume shrimp–even if sentient–have welfare ranges between 0.001 and 0.01 times that of humans, then the shrimp stunning intervention is not cost-competitive with any other interventions.
+Table 2: Risk-neutral estimates of the mean number of QALYs/DALYs (sentience-adjusted, human equivalent) averted per $1000 spent for each of the cause areas and existential risk projects considered.
+Intervention
+Mean QALYs/DALYs averted/$1000
+Scenario 11
+67,125
+Scenario 10
+8,525
+Scenario 12
+6,320
+Shrimp - Ammonia, RP Moral Weights
+1,471
+Chickens - RP Moral Weights
+1,132
+Scenario 7
+844
+Scenario 9
+806
+Scenario 8
+422
+Scenario 6
+374
+Scenario 5
+200
+Scenario 4
+188
+Scenario 3
+88
+Chickens - Low Moral Weights
+73
+Scenario 2
+47
+Shrimp - Stunning, RP Moral Weights
+38
+Against Malaria
+19.1
+Shrimp - Ammonia, Low Moral Weights
+18.5
+Scenario 1
+13
+Shrimp - Stunning, Low Moral Weights
+0.5
+Summary of Results Under Risk-Averse Decision Theories
+Existential risk reduction projects that have a high likelihood of lowering risk can be cost-competitive
+with highly reliable cause areas like cage-free campaigns and the Against Malaria Foundation
+under low levels of all types of risk aversion modeled, even if we only value the next few generations.
+Some of these lower-risk projects are also competitive under moderate risk aversion levels, depending on the type of risk aversion considered.
+However, existential risk reduction projects may not have this high degree of certainty of having a good effect.
+For hypothetical, expected-value positive projects that have a high chance of having zero impact (80%) and/or, conditional on having an impact, a high chance (45%) of having negative impacts, low to moderate risk aversion can make these projects worse than doing nothing.
+Below I give an overview of how risk aversion affects the relative cost-effectiveness of existential risk reduction efforts, from most influential to least influential.
+Counterfactual Difference-Making Risk Aversion
+Recall that these models assume that we’re spending $100 million on either: an existential risk reduction project, cage-free campaigns, the Against Malaria Foundation, a shrimp welfare intervention that treats ammonia concentrations, or a shrimp welfare intervention that implements stunning before harvest and slaughter.
+One way a philanthropist might approach their spending is from the angle of “How much of a positive difference is my money making counterfactually?” In turn, they might be averse to their money having zero impact or making the world worse. In this context, an intervention might be penalized if it doesn’t prevent an existential or non-existential catastrophe, or if the animals it is trying to help aren’t capable of experiencing pain and pleasure (not sentient). If it causes a catastrophe or increases the suffering of animals or humans, then this is penalized even more.
+The two counterfactual difference-making models of risk aversion yield approximately the same results when comparing the relative value of existential risk reduction to other causes under “counterfactual difference-making” risk aversion:
+All of the existential risk reduction interventions that have a high (45%) chance of raising existential risk (if they have a non-zero effect) are net-negative under slight amounts of difference-making risk aversion.
+By contrast, existential risk reduction interventions that have a high probability (90%) of lowering existential risk given they have an effect can withstand a small to moderate amount of counterfactual difference-making risk aversion and still be net-positive.
+However, even low levels of this risk aversion put most of these plausible low-risk existential risk interventions within an order of magnitude of the Against Malaria Foundation, cage-free campaigns (using low moral weights) and the hypothetical ammonia-treatment shrimp welfare intervention (using low moral weights).
+Expected Difference-Making and Ambiguity Aversion
+Now, we might (quite reasonably) say we’re being too risk averse if we require risk reductions to
+counterfactually
+prevent or cause an existential catastrophe in order to have positive (or negative) value. Instead, we might value
+expected
+differences made, in which case raising or lowering the probability of a catastrophe counts towards its value in proportion to the risk change. In this case, we’re still uncertain about how our actions will affect existential risk levels and are averse to increases in risk or failure to affect risk levels. (Our assessments about global health or animal welfare don’t change from the counterfactual differences made model).
+When we value expected differences made (and disproportionately penalize the worst possible expected outcomes), then:
+Existential risk interventions that have a high probability (90%) of having an effect and, conditioned on that effect, of lowering existential risk (90%) maintain high value under the two levels of ambiguity aversion tested.
+Moreover, these interventions can become an order of magnitude better than the shrimp welfare interventions (especially when using lower moral weights.) Nevertheless, only a few of the plausible interventions are an order of magnitude better than the Against Malaria Foundation or cage-free campaigns–even under low moral weights.
+These scenarios include scenarios 4, 6, and 7 (all plausible) and 10 and 11 (implausible)
+At the higher level of ambiguity aversion tested, the only plausible scenario to be more than 10 times more cost-effective than donating to cage-free campaigns assuming hens’ welfare ranges are low (1% to 4% that of humans) was scenario 7. This scenario is expected to reduce 7.2 basis points per billion spent.
+Moreover, only scenarios 6 and 7, which are highly likely to succeed and which reduce more than 3.2 basis points per billion on average, are more cost-effective than the Against Malaria Foundation under this higher level of ambiguity aversion.
+Higher ambiguity aversion penalizes animal interventions where the animal being helped has a high chance of not being sentient. Under Rethink Priorities' moral weights, the shrimp intervention that reduces ammonia concentrations is still cost-competitive with almost all of the plausible existential risk interventions, but the stunning intervention and both interventions when using low moral weights are at least an order of magnitude worse than the high-confidence existential risk interventions.
+On the other end of the spectrum, projects with a low (20%) probability of affecting existential risk and a high (45%) chance, conditional on having an effect, of raising existential risk lose value under low risk aversion and are typically net-negative under the higher levels of expected difference-making risk aversion tested.
+These scenarios include 1, 2, 9, and 12.
+With the exception of scenario 12 (which is implausible), these scenarios are never more than an order of magnitude more cost-effective than cage-free campaigns under low moral weights under even the lower level of expected difference-making risk aversion. Only one (scenario 9) is an order of magnitude more cost-effective than the Against Malaria Foundation. Scenarios 1 and 2 were within an order of magnitude of risky animal interventions like the ammonia water treatment shrimp intervention.
+In the middle are scenarios that are risky by either 1) having a low probability (20%) of affecting existential risk or 2) having a high (45%) probability of backfiring conditional on impact, but not both.
+They’re robustly net-positive on expected difference-making risk aversion, but none is an order of magnitude more cost-effective under risk aversion than cage-free campaigns using low moral weights or the Against Malaria Foundation.
+These include scenarios 3, 5, and 8.
+“Avoiding the worst” Risk Aversion
+Finally, if you are risk averse to bad states of the world arising (like human extinction or widespread animal suffering), the cost-effectiveness of existential risk mitigation increases relative to the other cause areas. However, this doesn’t change the bottom-line conclusions from earlier sections that:
+Cage-free campaigns are robustly cost-effective compared to most or all plausible existential risk reduction projects (depending on whether we use low or Rethink Priorities’ welfare ranges).
+Spending on the Against Malaria Foundation is competitive with spending on several of the most plausible existential risk reduction projects, and it is probably no more than an order of magnitude worse in relative cost-effectiveness than the “possible yet not conservative” existential risk reduction projects.
+The value of shrimp welfare interventions varies greatly depending on the specific welfare improvement made and the moral weights used.
+The shrimp stunning intervention is likely at least an order of magnitude less cost-effective than nearly all the existential risk reduction projects under low moral weights.
+However, a hypothetical intervention that targets ammonia concentration is cost-competitive with all of the plausible existential risk interventions except 7 and 9–even when using low moral weights.
+Moreover, if one uses Rethink Priorities’ moral weights, the shrimp stunning intervention is within an order of magnitude of all the plausible existential risk interventions, and the ammonia treatment intervention is likely an order of magnitude more cost-effective than the most conservative existential risk interventions (scenarios 1 and 2).
+Moreover, when higher amounts of ambiguity aversion are applied on top of “avoiding the worst” risk aversion (either in the risk-neutral baseline or with moderate risk aversion), the same projects that have net-negative values under the expected differences-made model become net-negative here, too. As such, aversion to raising the probability of a catastrophe is sometimes enough to cancel out the boost to existential risk interventions that is given by “avoiding the worst” risk aversion.
+Table Summary of Results
+In Table 3 below, I summarize how cost-effective each existential risk scenario is (in how many orders of magnitude it was better than zero) alongside all the animal welfare interventions and the Against Malaria Foundation for comparison. If a cause area’s cost-effectiveness has a risk-weighted value above 1 unit per $1000 spent, then the value displayed in Table 3 is the base-10 logarithm of the risk-weighted cost-effectiveness. For example, a cause area whose cost-effectiveness is 100 risk-weighted units per $1000 spent has a score of 2.0. If a cause area’s cost-effectiveness is less than -1 after risk aversion is incorporated, then the value displayed is the negative of the base-10 logarithm of the absolute value of the area’s cost-effectiveness. Here, if a cause’s risk-weighted value is -1000 per $1000 spent, then the score in Table 3 is -3. If a cause’s risk-weighted value is between -1 and 1 per $1000 spent, then it’s entered in Table 1 as ~0, or roughly zero.
+On the far-left column is the risk-neutral expected value comparison of all the causes. The columns labeled “DMREU” and “WLU” correspond to the two counterfactual difference-making models at low levels of risk aversion. “EDM” corresponds to the expected differences-made model of risk aversion. “REU” is the name of the model for “avoid the worst” risk aversion. All of these models are described more fully in the rest of this report, as well as my other risk aversion report.
+Importantly, two causes that are labeled “2” and “1” might be still cost-competitive–for example, if the per-$1000 spent value was 200 for one intervention and 50 for the other, the difference is only four-fold.
+Table 3: Comparison of the risk-neutral and risk-weighted cost-effectiveness of each intervention under different risk models. Results are summarized in terms of how many orders of magnitude their cost-effectiveness estimate is above (positive) or below (negative) zero, per $1000 spent.
+Cause
+Risk-Neutral EV Maximixation
+DMREU, low risk aversion (0.03)
+WLU, low risk aversion (0.05)
+EDM, lower ambiguity aversion
+EDM, higher ambiguity aversion
+REU, Moderate risk aversion, ambiguity - neutral
+REU, Moderate risk aversion, higher ambiguity - aversion
+Scenario 11
+4.8
+4.0
+4.0
+4.8
+4.7
+4.0
+3.9
+Scenario 10
+3.9
+2.6
+3.1
+3.9
+3.8
+3.1
+3.0
+Scenario 12
+3.8
+-3.5
+-3.5
+3.2
+-3.5
+3.0
+-2.6
+Shrimp - Ammonia, RP Moral Weights
+3.2
+2.5
+2.6
+2.9
+1.8
+2.7
+1.9
+Chickens - RP Moral Weights
+3.1
+2.9
+2.8
+2.9
+2.8
+3.1
+2.8
+Scenario 7
+2.9
+-1.2
+2.0
+2.9
+2.8
+2.1
+2.0
+Scenario 9
+2.9
+-2.7
+-2.7
+2.3
+-2.6
+2.1
+-1.8
+Scenario 8
+2.6
+-2.1
+-2.0
+2.5
+2.2
+1.8
+1.4
+Scenario 6
+2.6
+~ 0
+1.8
+2.5
+2.4
+1.7
+1.5
+Scenario 5
+2.3
+-1.8
+-1.6
+2.1
+1.6
+1.4
+0.8
+Scenario 4
+2.3
+0.3
+1.5
+2.2
+2.1
+1.4
+1.2
+Scenario 3
+1.9
+-1.2
+-0.8
+1.8
+1.4
+1.1
+0.5
+Chickens - Low Moral Weights
+1.9
+1.7
+1.7
+1.8
+1.6
+1.9
+1.7
+Scenario 2
+1.7
+-1.2
+-1.1
+0.9
+-1.4
+0.7
+-0.5
+Shrimp - Stunning, RP Moral Weights
+1.6
+1.1
+1.2
+1.3
+0.8
+1.4
+1.0
+Against Malaria
+1.3
+1.3
+1.2
+1.3
+1.2
+1.3
+1.2
+Shrimp - Ammonia, Low Moral Weights
+1.3
+0.7
+0.8
+1.0
+0.3
+1.0
+0.5
+Scenario 1
+1.1
+-0.9
+-0.9
+0.6
+-1.1
+0.4
+-0.2
+Shrimp - Stunning, Low Moral Weights
+~ 0
+~ 0
+~ 0
+~ 0
+~ 0
+~ 0
+~ 0
+Limitations and Opportunities for Future Research
+Ways These Models Are Friendly to Existential Risk Spending
+There are many ways in which this model uses assumptions that are friendly to existential risk mitigation work. Some of these assumptions include:
+The existential risk mitigation interventions are always net-positive in expectation
+If an intervention backfires, the magnitude of the increase in existential risk is limited to a fraction of the decrease in existential risk of a successful project
+The assumed probabilities that a $100-million intervention has a non-zero effect on existential and non-existential risk are pretty high–even in the conservative scenarios
+Ways These Models Are Friendly to Global Health and Animal Spending
+There are also a number of ways in which these models use assumptions that favor global health and animal welfare spending. For example, some assumptions in my cost-effectiveness models include:
+I assume the downside risks to donating to animals or global health are small
+When using Rethink Priorities’ welfare ranges at least, I assume hedonism is the correct theory under which to measure changes in welfare and convert them to moral value
+I assume the cost-effectiveness of cage-free campaigns hasn’t declined significantly more than 20% to 60% in recent years
+I assume that spending $100 million on animal welfare (conditional on the animals’ sentience) or global health has a non-zero effect
+Limitations of These Models In General
+Finally, there are some limitations that 1) affect the cost-effectiveness models of all of the cause areas included in this report, or 2) would have an unknown effect on the results presented here. Some of these limitations include:
+Marginal returns to increased spending probably will change with increased spending in all cause areas. The rate at which this occurs probably differs by cause area and is not modeled here, but I hope to do so in future work.
+I assume risk reductions apply to the cumulative risk of existential and non-existential catastrophes over the period of impact (the next few generations), but it’s more likely that the timing and persistence of risk reductions matter, too.
+The risk models are good for comparing the choiceworthiness of spending when we’re spending small amounts of money on a single cause, but realistically we might want to compare different portfolios of spending that diversify across causes.
+The cost-effectiveness models include only first-order effects of spending on each cause. It’s likely that there are interactions between causes and/or positive and negative externalities to spending on each intervention.
+Many parameters used in some cost-effectiveness models are guesses or based on considered judgment.
+Opportunities for Future Research
+Based on these limitations, I would like to do further research that makes the following improvements to the risk aversion and cost-effectiveness models for all causes:
+Building a model of how the cost-effectiveness of each cause changes as more money is spent in the area.
+Analyzing and comparing the value of various, more diverse spending portfolios made over time and under different degrees of risk aversion.
+Adding greater sophistication to the existential risk mitigation cost-effectiveness model by, in particular, adding factors relating to the timing and persistence of different projects.
+Acknowledgements
+The paper was written by Laura Duffy. Thanks to the other members of the Worldview Investigations Team and Marcus A. Davis for helpful discussions and feedback. The post is a project of Rethink Priorities, a global priority think-and-do tank, aiming to do good at scale. We research and implement pressing opportunities to make the world better. We act upon these opportunities by developing and implementing strategies, projects, and solutions to key issues. We do this work in close partnership with foundations and impact-focused non-profits or other entities. If you're interested in Rethink Priorities' work, please consider subscribing to our
+newsletter
+. You can explore our completed public work
+here
+.
+^
+I created the bounds on the confidence interval for the number of years counted in the common-sense case using the following reasoning: I’m in my early 20s, so I predict that, if I have grandchildren, they’ll be born roughly forty years from now, assuming that the time between generations is roughly 30 years. I estimate they’ll live roughly 80 years, so the span from now until my hypothetical grandchildren die is 120 years. This is the lower bound on my confidence interval for “How far out from now do I value the future?” Moreover, assuming the gaps between generations are 30 years, then my great-great-grandchildren would be born 100 years from now and would live until 180 years from now. As such, 180 years serves as the upper bound for how far out from now I value the future.
+^
+For example, Eli Lifland has
+argued
+that, using rough-yet-commonly-assumed risk-reduction estimates, the expected cost to save a human life in the short term from an existential risk or global catastrophic risk is in the range of $125 to $1250. Lifland suggests that prioritizing existential risk mitigation over other cause areas, such as animal welfare or global health and development, on cost-effectiveness grounds probably requires including future generations in the calculations to some extent.
+^
+Specifically, I gave an “implausibility score” to each of the scenarios. Assumptions that there is a high probability of having a non-zero effect, a high probability of any effect there is being good, and a lower magnitude of backfire effects each add one implausibility point to the score. For the amount of risk reduced by successful projects, I add 1 implausibility point if you assume that 1-10 basis points are reduced per $1 billion, 2 points for 5-15 basis points per billion, 4 points for 50-150 basis points per billion, and 8 points for 500-1000 basis points per billion. Scenarios that have zero to one point are “extremely plausible and conservative,” scenarios that get 2 to 3 points are “plausible but less conservative,” scenarios that get 4-to 5 points are “possible yet not conservative,” and six or more points constitutes an implausible project. Basically, to get six implausibility points, you have to combine reducing 50-150 basis points per billion dollars–which is outside the range given by existential risk researchers–and assume the projects are very likely to succeed. This seems to count as implausible to me.
+Read the full post
+Laura Duffy
+Rethink Priorities
+Previous
+Previous
+A review of GiveWell’s discount rate
+Next
+Next
+Road safety: Landscape of the problem and routes to effective policy advocacy
+Newsletter
+Email Address
+Sign Up
+Thank you!
+About
+Our Team
+Career Opportunities
+Privacy Policy
+Our Work
+Research and Publications
+Newsletter
+All content ©Rethink Priorities or its respective authors, unless otherwise noted.
