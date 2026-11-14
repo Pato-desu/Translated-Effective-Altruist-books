@@ -238,14 +238,14 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · 80000 Hours / Ezra Klein on aligning journalism, politics, and what matters most - 80,000 Hours.txt · 1p_a4hpylMyOtLWDpl4ogbS03VsOS-Jc- · 157 KB · txt · es done 2026-11-12 (22/22 batches, `Español/posts/Ezra Klein on aligning journalism, politics, and what matters most - 80,000 Hours.txt`)
 - [x] es · 80000 Hours / Joan Rohlfing on how to avoid catastrophic nuclear blunders - 80,000 Hours.txt · 1pVUNABUF6fJy4TOrhWV-WZZKSWN5r0UO · 157 KB · txt · es done 2026-11-12 (22/22 batches, `Español/posts/Joan Rohlfing on how to avoid catastrophic nuclear blunders - 80,000 Hours.txt`)
 - [x] es · 80000 Hours / 72.txt · 1wamQx4pBOKXWUoQvO0RnvW_IdcQ3Bdq0 · 173 KB · txt · es done 2026-11-12 (25/25 batches, `Español/posts/80000 Hours 72.txt`)
-- [ ] es · 80000 Hours / The world’s most intellectual foundation is hiring. Holden Karnofsky, founder of GiveWell, on how philanthropy can have maximum impact by taking big risks. - 80,000 Hours.txt · 1jIVlv3k7UbWXVQLtQ3dKTh-_xpQBw1aN · 205 KB · txt
-- [ ] es · 80000 Hours / Vitalik Buterin on effective altruism, better ways to fund public goods, the blockchain_s problems so far, and how it could yet change the world - 80,000 Hours.txt · 1HkEKaKSzl0Hqcy4WTcfvGM-dulV3qlqo · 207 KB · txt
-- [ ] es · 80000 Hours / Bryan Caplan on whether lazy parenting is OK, what really helps workers, and betting on beliefs - 80,000 Hours.txt · 1pAxS6dgLmzGFfK7NFeVRPcaa2rsiJztM · 207 KB · txt
-- [ ] es · 80000 Hours / 18.txt · 1mlgH2PO6PPG5YjiE96YSqInxIyGBJxnv · 214 KB · txt
-- [ ] es · 80000 Hours / Will MacAskill on what we owe the future - 80,000 Hours.txt · 1oM7_j5LI2iGpxVNoQA1M-l8xp20XcgnV · 221 KB · txt
-- [ ] es · 80000 Hours / Chris Olah on what the hell is going on inside neural networks - 80,000 Hours.txt · 16HATeMDkI_YvrIAHVRAO_ZbdKzyv0tXl · 237 KB · txt
-- [ ] es · 80000 Hours / Toby Ord on the precipice and humanity_s potential futures - 80,000 Hours.txt · 110rSvA6LaBbLq3wAsXpYE40bEniBJmTv · 260 KB · txt
-- [ ] es · 80000 Hours / Sam Bankman-Fried on taking a high-risk approach to crypto and doing good - 80,000 Hours.txt · 1p5AEJPHejpYedvxw9TKPxf2hDPf3mahq · 264 KB · txt
+- [x] es · 80000 Hours / The world’s most intellectual foundation is hiring. Holden Karnofsky, founder of GiveWell, on how philanthropy can have maximum impact by taking big risks. - 80,000 Hours.txt · 1jIVlv3k7UbWXVQLtQ3dKTh-_xpQBw1aN · 205 KB · txt · es done 2026-11-13 (30/30 batches, `Español/posts/The world’s most intellectual foundation is hiring. Holden Karnofsky, founder of GiveWell, on how philanthropy can have maximum impact by taking big risks. - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / Vitalik Buterin on effective altruism, better ways to fund public goods, the blockchain_s problems so far, and how it could yet change the world - 80,000 Hours.txt · 1HkEKaKSzl0Hqcy4WTcfvGM-dulV3qlqo · 207 KB · txt · es done 2026-11-13 (30/30 batches, `Español/posts/Vitalik Buterin on effective altruism, better ways to fund public goods, the blockchain_s problems so far, and how it could yet change the world - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / Bryan Caplan on whether lazy parenting is OK, what really helps workers, and betting on beliefs - 80,000 Hours.txt · 1pAxS6dgLmzGFfK7NFeVRPcaa2rsiJztM · 207 KB · txt · es done 2026-11-13 (29/29 batches, `Español/posts/Bryan Caplan on whether lazy parenting is OK, what really helps workers, and betting on beliefs - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / 18.txt · 1mlgH2PO6PPG5YjiE96YSqInxIyGBJxnv · 214 KB · txt · es done 2026-11-13 (29/29 batches, `Español/posts/80000 Hours 18.txt`)
+- [x] es · 80000 Hours / Will MacAskill on what we owe the future - 80,000 Hours.txt · 1oM7_j5LI2iGpxVNoQA1M-l8xp20XcgnV · 221 KB · txt · es done 2026-11-13 (31/31 batches, `Español/posts/Will MacAskill on what we owe the future - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / Chris Olah on what the hell is going on inside neural networks - 80,000 Hours.txt · 16HATeMDkI_YvrIAHVRAO_ZbdKzyv0tXl · 237 KB · txt · es done 2026-11-13 (35/35 batches, `Español/posts/Chris Olah on what the hell is going on inside neural networks - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / Toby Ord on the precipice and humanity_s potential futures - 80,000 Hours.txt · 110rSvA6LaBbLq3wAsXpYE40bEniBJmTv · 260 KB · txt · es done 2026-11-13 (38/38 batches, `Español/posts/Toby Ord on the precipice and humanity_s potential futures - 80,000 Hours.txt`)
+- [x] es · 80000 Hours / Sam Bankman-Fried on taking a high-risk approach to crypto and doing good - 80,000 Hours.txt · 1p5AEJPHejpYedvxw9TKPxf2hDPf3mahq · 264 KB · txt · es done 2026-11-13 (38/38 batches, `Español/posts/Sam Bankman-Fried on taking a high-risk approach to crypto and doing good - 80,000 Hours.txt`)
 - [ ] es · 80000 Hours / David Chalmers on the nature and ethics of consciousness - 80,000 Hours.txt · 1opa7OcRjfKO25Jh5yhqMpN0w5Wtf5jpR · 361 KB · txt
 - [x] es · givewell / responses-to-blog-comments.txt · 1QuvtRoAWXwW4XNbFojxnhFpMqCq6L0oq · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/posts/responses-to-blog-comments.txt`)
 - [x] es · givewell / please-take-3-minutes-to-help-us-set-priorities.txt · 1DaDC1gCq4Mzh-lY41LhNe3yhuxHlON_7 · 4 KB · txt · es done 2026-10-29 (1/1 batches, `Español/posts/please-take-3-minutes-to-help-us-set-priorities.txt`)
@@ -688,7 +688,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Open Philanthropy / Alcohol Taxation - Open Philanthropy.txt · 1Ow6eV-tzpPfQJ-ghIkzNOhbtOwhOWtjN · 35 KB · txt · es done 2026-10-29 (7/7 batches, `Español/posts/Alcohol Taxation - Open Philanthropy.txt`)
 - [x] es · Open Philanthropy / Nuclear Weapons Policy - Open Philanthropy.txt · 11ntLQHIS76t9uMH9uwtHPJmI3D5tiVf3 · 95 KB · txt · es done 2026-11-12 (16/16 batches, `Español/posts/Nuclear Weapons Policy - Open Philanthropy.txt`)
 - [x] es · Open Philanthropy / 21.txt · 1y1u9tPsYQv8chR3S9L5vwNWw4Lkudn4j · 137 KB · txt · es done 2026-11-12 (20/20 batches, `Español/posts/Open Philanthropy 21.txt`)
-- [ ] es · Open Philanthropy / 5.txt · 1eEAX5VZ9R8CKVO__tLOG4lVyRhUo-1M0 · 222 KB · txt
+- [x] es · Open Philanthropy / 5.txt · 1eEAX5VZ9R8CKVO__tLOG4lVyRhUo-1M0 · 222 KB · txt · es done 2026-11-13 (31/31 batches, `Español/posts/Open Philanthropy 5.txt`)
 - [-] es · charity entrepreneurship / Progress update.txt · 12ij1J7o1a5SQov8PvxsFmTUevAJ_LIrg · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · charity entrepreneurship / 2020 Top Charity Ideas.txt · 1Wh6B1EBny8BdCDb99In6UCiSO0wP_Psm · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · charity entrepreneurship / How CE Selects Cause Areas.txt · 19HIKBbfUVQd75lK3pD2NCkyKWWsCZNpl · 1 KB · txt · under 2 KB: empty page or stub
@@ -752,8 +752,8 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · charity entrepreneurship / 9475db_a1f6dde1f00e4e768b807327dd17a13e.txt · 1Xbp_nrLMd8_6PQfFWEuEH5njE6DF4Obk · 65 KB · txt · es done 2026-11-12 (8/8 batches, `Español/posts/9475db_a1f6dde1f00e4e768b807327dd17a13e.txt`)
 - [x] es · charity entrepreneurship / 26c75f_9fabb713c4c245f4beab12d0b0ca491d.txt · 18mtf-QlMqBSpfuET279Z2x02GVEc-HLp · 67 KB · txt · es done 2026-11-12 (9/9 batches, `Español/posts/26c75f_9fabb713c4c245f4beab12d0b0ca491d.txt`)
 - [x] es · charity entrepreneurship / 9475db_eb7241bc20dd485ea5a58b064a7ac7cf.txt · 1pY3gHQkCpijNI4qd3tsGnFkPC5Wozt4o · 70 KB · txt · es done 2026-11-13 (8/8 batches, `Español/posts/9475db_eb7241bc20dd485ea5a58b064a7ac7cf.txt`)
-- [ ] es · charity entrepreneurship / 9475db_78d4ea33d14746dc98622c2e6fa85e72.txt · 1vzLTlMFYH7UzLO1V8BlT2yFqqzQmLvvr · 92 KB · txt
-- [ ] es · charity entrepreneurship / 9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.txt · 1j9FQ77yPwvw2dy5yvCueEYHH64LCpWKj · 93 KB · txt
+- [x] es · charity entrepreneurship / 9475db_78d4ea33d14746dc98622c2e6fa85e72.txt · 1vzLTlMFYH7UzLO1V8BlT2yFqqzQmLvvr · 92 KB · txt · es done 2026-11-13 (13/13 batches, `Español/posts/9475db_78d4ea33d14746dc98622c2e6fa85e72.txt`)
+- [x] es · charity entrepreneurship / 9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.txt · 1j9FQ77yPwvw2dy5yvCueEYHH64LCpWKj · 93 KB · txt · es done 2026-11-13 (12/12 batches, `Español/posts/9475db_e180d0f6ed634523a1e5ffa6f56c1dcf.txt`)
 - [-] es · LessWrong top posts / There_s No Fire Alarm for Artificial General Intelligence - LessWrong.txt · 1jU_5Cqq70yEpMABYqIPYuzOA4WMCOxkP · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · LessWrong top posts / web archive.txt · 11-DoysMPkWvmW6LmlySplRhOjyjkmeKp · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · LessWrong top posts / A Child_s Petrov Day Speech - LessWrong.txt · 1ss2G1K9WGmyHwm8gnSr6Man88htum7H2 · 2 KB · txt · under 2 KB: empty page or stub
@@ -832,20 +832,20 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · LessWrong top posts / What 2026 looks like - LessWrong.txt · 1nBTOvHt-qmMkzCYpySEcZrE8CVTf557V · 58 KB · txt · es done 2026-10-29 (9/9 batches, `Español/posts/What 2026 looks like - LessWrong.txt`)
 - [x] es · LessWrong top posts / A Return to Discussion - LessWrong.txt · 1DuZEyr93aXQbahvOZ0sgf9dfcP2YZ0y1 · 59 KB · txt · es done 2026-10-29 (8/8 batches, `Español/posts/A Return to Discussion - LessWrong.txt`)
 - [x] es · LessWrong top posts / A Second Year of Spaced Repetition Software in the Classroom - LessWrong.txt · 1U2v8MpG0NLSiZDj3Jy4es5BxAEDFfL-l · 61 KB · txt · es done 2026-11-13 (9/9 batches, `Español/posts/A Second Year of Spaced Repetition Software in the Classroom - LessWrong.txt`)
-- [ ] es · LessWrong top posts / On saving the world - LessWrong.txt · 1szw4LtUGNArbFxNDPKlFpSEYEWHDwVKN · 61 KB · txt
+- [x] es · LessWrong top posts / On saving the world - LessWrong.txt · 1szw4LtUGNArbFxNDPKlFpSEYEWHDwVKN · 61 KB · txt · es done 2026-11-13 (9/9 batches, `Español/posts/On saving the world - LessWrong.txt`)
 - [x] es · LessWrong top posts / Unifying Bargaining Notions(1 of 2) - LessWrong.txt · 1E857_mVZ9aZvPb9k0FAbvjMgEgruLQxi · 70 KB · txt · es done 2026-11-13 (10/10 batches, `Español/posts/Unifying Bargaining Notions(1 of 2) - LessWrong.txt`)
-- [ ] es · LessWrong top posts / Counter-theses on Sleep - LessWrong.txt · 1W0i_HT0Ht6lxOsswD8spvDgoAoypcbsS · 70 KB · txt
+- [x] es · LessWrong top posts / Counter-theses on Sleep - LessWrong.txt · 1W0i_HT0Ht6lxOsswD8spvDgoAoypcbsS · 70 KB · txt · es done 2026-11-13 (10/10 batches, `Español/posts/Counter-theses on Sleep - LessWrong.txt`)
 - [x] es · LessWrong top posts / Two-year update on my personal AI timelines - LessWrong.txt · 17KW1ylxQfpajLq_1DBf1iCFJdb6RKn1V · 75 KB · txt · es done 2026-11-13 (10/10 batches, `Español/posts/Two-year update on my personal AI timelines - LessWrong.txt`)
-- [ ] es · LessWrong top posts / Prediction is hard, especially of medicine - LessWrong.txt · 1jqEDkfq3hvQv1T-Z7k8_yVEnu8JdFEVE · 75 KB · txt
-- [ ] es · LessWrong top posts / Building up to an Internal Family Systems model - LessWrong.txt · 1T83q1lMopm0X-wX6BM-DaBgOUbCGxYGf · 78 KB · txt
-- [ ] es · LessWrong top posts / A Crash Course in the Neuroscience of Human Motivation - LessWrong.txt · 12PzBIQlRE-7Zz9tpQGaE1SC2P9YnxQH2 · 95 KB · txt
-- [ ] es · LessWrong top posts / Common knowledge about Leverage Research 1.0 - LessWrong.txt · 1q-mowQkvN3p_U9XZp1bw4mL9ZMjIG5xi · 99 KB · txt
-- [ ] es · LessWrong top posts / Be Happier - LessWrong.txt · 1yCzsuQfYYFnQzxZT8PmyvO-KRYE4vmKf · 101 KB · txt
-- [ ] es · LessWrong top posts / Scientific Self-Help﹕ The State of Our Knowledge - LessWrong.txt · 1uPsRq3iQi9-RUrsQMV_Ijgoge9J7G8b5 · 104 KB · txt
-- [ ] es · LessWrong top posts / Concept Safety﹕ Producing similar AI-human concept spaces - LessWrong.txt · 1CWeQUIYXE-sz7yFr4pPhhAtTyY0OP4Za · 108 KB · txt
-- [ ] es · LessWrong top posts / Where I agree and disagree with Eliezer - LessWrong.txt · 1IXFv6k_r2VkivaqG8sp3W5Qs-9Lk2O6v · 117 KB · txt
-- [ ] es · LessWrong top posts / Pascal_s Muggle﹕ Infinitesimal Priors and Strong Evidence - LessWrong.txt · 1BzHgbcE5CWY8tlR2JM3NarQvnk6CWPX9 · 125 KB · txt
-- [ ] es · LessWrong top posts / 2018 AI Alignment Literature Review and Charity Comparison - LessWrong.txt · 1EKJbwSPMZ3hdTM4YSoqdpsvjyKW311eT · 148 KB · txt
+- [x] es · LessWrong top posts / Prediction is hard, especially of medicine - LessWrong.txt · 1jqEDkfq3hvQv1T-Z7k8_yVEnu8JdFEVE · 75 KB · txt · es done 2026-11-13 (10/10 batches, `Español/posts/Prediction is hard, especially of medicine - LessWrong.txt`)
+- [x] es · LessWrong top posts / Building up to an Internal Family Systems model - LessWrong.txt · 1T83q1lMopm0X-wX6BM-DaBgOUbCGxYGf · 78 KB · txt · es done 2026-11-13 (12/12 batches, `Español/posts/Building up to an Internal Family Systems model - LessWrong.txt`)
+- [x] es · LessWrong top posts / A Crash Course in the Neuroscience of Human Motivation - LessWrong.txt · 12PzBIQlRE-7Zz9tpQGaE1SC2P9YnxQH2 · 95 KB · txt · es done 2026-11-13 (14/14 batches, `Español/posts/A Crash Course in the Neuroscience of Human Motivation - LessWrong.txt`)
+- [x] es · LessWrong top posts / Common knowledge about Leverage Research 1.0 - LessWrong.txt · 1q-mowQkvN3p_U9XZp1bw4mL9ZMjIG5xi · 99 KB · txt · es done 2026-11-13 (13/13 batches, `Español/posts/Common knowledge about Leverage Research 1.0 - LessWrong.txt`)
+- [x] es · LessWrong top posts / Be Happier - LessWrong.txt · 1yCzsuQfYYFnQzxZT8PmyvO-KRYE4vmKf · 101 KB · txt · es done 2026-11-13 (14/14 batches, `Español/posts/Be Happier - LessWrong.txt`)
+- [x] es · LessWrong top posts / Scientific Self-Help﹕ The State of Our Knowledge - LessWrong.txt · 1uPsRq3iQi9-RUrsQMV_Ijgoge9J7G8b5 · 104 KB · txt · es done 2026-11-13 (14/14 batches, `Español/posts/Scientific Self-Help﹕ The State of Our Knowledge - LessWrong.txt`)
+- [x] es · LessWrong top posts / Concept Safety﹕ Producing similar AI-human concept spaces - LessWrong.txt · 1CWeQUIYXE-sz7yFr4pPhhAtTyY0OP4Za · 108 KB · txt · es done 2026-11-13 (16/16 batches, `Español/posts/Concept Safety﹕ Producing similar AI-human concept spaces - LessWrong.txt`)
+- [x] es · LessWrong top posts / Where I agree and disagree with Eliezer - LessWrong.txt · 1IXFv6k_r2VkivaqG8sp3W5Qs-9Lk2O6v · 117 KB · txt · es done 2026-11-13 (16/16 batches, `Español/posts/Where I agree and disagree with Eliezer - LessWrong.txt`)
+- [x] es · LessWrong top posts / Pascal_s Muggle﹕ Infinitesimal Priors and Strong Evidence - LessWrong.txt · 1BzHgbcE5CWY8tlR2JM3NarQvnk6CWPX9 · 125 KB · txt · es done 2026-11-13 (18/18 batches, `Español/posts/Pascal_s Muggle﹕ Infinitesimal Priors and Strong Evidence - LessWrong.txt`)
+- [x] es · LessWrong top posts / 2018 AI Alignment Literature Review and Charity Comparison - LessWrong.txt · 1EKJbwSPMZ3hdTM4YSoqdpsvjyKW311eT · 148 KB · txt · es done 2026-11-13 (21/21 batches, `Español/posts/2018 AI Alignment Literature Review and Charity Comparison - LessWrong.txt`)
 - [-] es · EA Forum top 1600ish posts / 659.txt · 1ylpzzxY0wiz3j6J-ChjsfsrLcq_IR_Dj · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · EA Forum top 1600ish posts / 635.txt · 1QYsCyAt4rucmW3G5xTRhiy5mPxTr5EEU · 2 KB · txt · under 2 KB: empty page or stub
 - [-] es · EA Forum top 1600ish posts / 632.txt · 1QWB38kXg1yj5YrlDLDKTF1bGvjkzniRL · 2 KB · txt · under 2 KB: empty page or stub
@@ -993,18 +993,18 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · EA Forum top 1600ish posts / 520.txt · 1uxJCqVDZL_dkQsFpXM-JRK5M1Ecc5lR7 · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/posts/EA Forum top 1600ish posts 520.txt`)
 - [x] es · EA Forum top 1600ish posts / 616.txt · 1CUsWdMgQOqsJNNXSt--WW7QLavn6AzLV · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/posts/EA Forum top 1600ish posts 616.txt`)
 - [x] es · EA Forum top 1600ish posts / 505.txt · 1oibHRvTDxHAzi_Zc9G5xnRKB2OmEkIV0 · 57 KB · txt · es done 2026-10-29 (8/8 batches, `Español/posts/EA Forum top 1600ish posts 505.txt`)
-- [ ] es · EA Forum top 1600ish posts / 649.txt · 18IsZfPB3VzjC_hBRVbGCdVGp8qh8Tf8n · 61 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 470.txt · 1jPyTY1ZT40yTSrkDvFAwehOlhBfweNWf · 62 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 577.txt · 1wPRh2CSEEmQAMZIjp_MxARU7SBd8eL3T · 63 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 611.txt · 1YXLHq1B1LhoLdU_8IqHyGiYTx8yKLVHV · 72 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 535.txt · 1Psqy8q1qNuMXf-YGQGUq0wUiEAAnn8DA · 74 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 637.txt · 1ml7q2IC39VNXywQEXLo571oDJgKScz-u · 97 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 622.txt · 1gM7texYXOHDsUCRN1hUl5fgowoTEDVxt · 105 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 609.txt · 1wLlMMGAt094exJEXlKZVG7i4Wg82rDpq · 107 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 457.txt · 188sErESFDCsUw_y76dCNHmy0iRA-mCaX · 111 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 538.txt · 1Hul8yfSVcoCoP4LY_xHhuPccv0rO_8of · 114 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 377.txt · 1Xv9RqXfzWchlJEwZl6rR1sHbLN9tWJ1E · 122 KB · txt
-- [ ] es · EA Forum top 1600ish posts / 570.txt · 1PuZBl1sY5lyjERBg_MWcVG-27V02Zc0k · 139 KB · txt
+- [x] es · EA Forum top 1600ish posts / 649.txt · 18IsZfPB3VzjC_hBRVbGCdVGp8qh8Tf8n · 61 KB · txt · es done 2026-11-13 (9/9 batches, `Español/posts/EA Forum top 1600ish posts 649.txt`)
+- [x] es · EA Forum top 1600ish posts / 470.txt · 1jPyTY1ZT40yTSrkDvFAwehOlhBfweNWf · 62 KB · txt · es done 2026-11-13 (9/9 batches, `Español/posts/EA Forum top 1600ish posts 470.txt`)
+- [x] es · EA Forum top 1600ish posts / 577.txt · 1wPRh2CSEEmQAMZIjp_MxARU7SBd8eL3T · 63 KB · txt · es done 2026-11-13 (9/9 batches, `Español/posts/EA Forum top 1600ish posts 577.txt`)
+- [x] es · EA Forum top 1600ish posts / 611.txt · 1YXLHq1B1LhoLdU_8IqHyGiYTx8yKLVHV · 72 KB · txt · es done 2026-11-13 (10/10 batches, `Español/posts/EA Forum top 1600ish posts 611.txt`)
+- [x] es · EA Forum top 1600ish posts / 535.txt · 1Psqy8q1qNuMXf-YGQGUq0wUiEAAnn8DA · 74 KB · txt · es done 2026-11-13 (11/11 batches, `Español/posts/EA Forum top 1600ish posts 535.txt`)
+- [x] es · EA Forum top 1600ish posts / 637.txt · 1ml7q2IC39VNXywQEXLo571oDJgKScz-u · 97 KB · txt · es done 2026-11-13 (14/14 batches, `Español/posts/EA Forum top 1600ish posts 637.txt`)
+- [x] es · EA Forum top 1600ish posts / 622.txt · 1gM7texYXOHDsUCRN1hUl5fgowoTEDVxt · 105 KB · txt · es done 2026-11-13 (15/15 batches, `Español/posts/EA Forum top 1600ish posts 622.txt`)
+- [x] es · EA Forum top 1600ish posts / 609.txt · 1wLlMMGAt094exJEXlKZVG7i4Wg82rDpq · 107 KB · txt · es done 2026-11-13 (16/16 batches, `Español/posts/EA Forum top 1600ish posts 609.txt`)
+- [x] es · EA Forum top 1600ish posts / 457.txt · 188sErESFDCsUw_y76dCNHmy0iRA-mCaX · 111 KB · txt · es done 2026-11-13 (15/15 batches, `Español/posts/EA Forum top 1600ish posts 457.txt`)
+- [x] es · EA Forum top 1600ish posts / 538.txt · 1Hul8yfSVcoCoP4LY_xHhuPccv0rO_8of · 114 KB · txt · es done 2026-11-14 (16/16 batches, `Español/posts/EA Forum top 1600ish posts 538.txt`)
+- [x] es · EA Forum top 1600ish posts / 377.txt · 1Xv9RqXfzWchlJEwZl6rR1sHbLN9tWJ1E · 122 KB · txt · es done 2026-11-14 (17/17 batches, `Español/posts/EA Forum top 1600ish posts 377.txt`)
+- [x] es · EA Forum top 1600ish posts / 570.txt · 1PuZBl1sY5lyjERBg_MWcVG-27V02Zc0k · 139 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/EA Forum top 1600ish posts 570.txt`)
 - [ ] es · EA Forum top 1600ish posts / 453.txt · 1pX8EScmEvHkWUlAPFPy3TguwdAvKRfId · 205 KB · txt
 - [-] es · Slate Star Codex and ACX / 2013-12-28-meetup-southeast-michigan-.txt · 1SHpXghYALbSHtEG0npvalOodmXUiTUno · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Slate Star Codex and ACX / 2013-05-15-overheard-in-the-box-part-ii-.txt · 1xvmHmD30tq4FXGxcjQKaeEXWL0Eg0U_6 · 1 KB · txt · under 2 KB: empty page or stub
@@ -1089,11 +1089,11 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Slate Star Codex and ACX / 2013-12-29-the-spirit-of-the-first-amendment-.txt · 16oR-KhYjeB55msF75BpXdFoIeJZcoV5f · 60 KB · txt · es done 2026-10-30 (9/9 batches, `Español/posts/2013-12-29-the-spirit-of-the-first-amendment-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt · 1mPgUeFGG_OuSIWoBYm_tp6sVdbJMZwno · 60 KB · txt · es done 2026-10-29 (9/9 batches, `Español/posts/2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-11-26-a-letter-i-will-probably-send-to-the-fda-.txt · 1R3d5Qa49fseDqTWKPytZD7pWSHrXzria · 62 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-26-more-links-for-january-.txt · 1YTapV4x2lbTlC8kz1Cx1X8MkpMGUyG8g · 65 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-25-fake-consensualism-.txt · 1SHORBOxwdWI1kihk6FAF4LrZLYq2-GhW · 69 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-03-13-valleys-have-two-sides-.txt · 1pal09ZqiNRAoLDHI05Vsy95pYAukdB5X · 70 KB · txt
+- [x] es · Slate Star Codex and ACX / 2014-01-26-more-links-for-january-.txt · 1YTapV4x2lbTlC8kz1Cx1X8MkpMGUyG8g · 65 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2014-01-26-more-links-for-january-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-25-fake-consensualism-.txt · 1SHORBOxwdWI1kihk6FAF4LrZLYq2-GhW · 69 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2013-08-25-fake-consensualism-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-03-13-valleys-have-two-sides-.txt · 1pal09ZqiNRAoLDHI05Vsy95pYAukdB5X · 70 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/2013-03-13-valleys-have-two-sides-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2013-07-17-who-by-very-slow-decay-.txt · 1yWrr-NZw3A3FhCNTNFiucTafyYEq0_Ee · 70 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-10-31-the-poor-you-will-always-have-with-you-.txt · 1ET0GrTs3_Ulb7ViB3wbqgJ2-iL6QKbWr · 70 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-10-31-the-poor-you-will-always-have-with-you-.txt · 1ET0GrTs3_Ulb7ViB3wbqgJ2-iL6QKbWr · 70 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2013-10-31-the-poor-you-will-always-have-with-you-.txt`)
 - [ ] es · Slate Star Codex and ACX / 2014-01-08-links-for-january-.txt · 1tOqDV2mpY-TTsuqj7dAudVV1LYEbfP8Q · 89 KB · txt
 - [ ] es · Slate Star Codex and ACX / 2014-01-05-marijuana-much-more-than-you-wanted-to-know-.txt · 1zmZqeThs1pr32z4ifE7Y5vjcnTNeh-V0 · 94 KB · txt
 - [ ] es · Slate Star Codex and ACX / 2013-06-09-all-debates-are-bravery-debates-.txt · 1XfwWKt4-Qi0Tl0jnDYqIdDnwmcWmCgiN · 96 KB · txt
