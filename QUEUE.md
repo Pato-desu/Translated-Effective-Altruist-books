@@ -1005,7 +1005,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · EA Forum top 1600ish posts / 538.txt · 1Hul8yfSVcoCoP4LY_xHhuPccv0rO_8of · 114 KB · txt · es done 2026-11-14 (16/16 batches, `Español/posts/EA Forum top 1600ish posts 538.txt`)
 - [x] es · EA Forum top 1600ish posts / 377.txt · 1Xv9RqXfzWchlJEwZl6rR1sHbLN9tWJ1E · 122 KB · txt · es done 2026-11-14 (17/17 batches, `Español/posts/EA Forum top 1600ish posts 377.txt`)
 - [x] es · EA Forum top 1600ish posts / 570.txt · 1PuZBl1sY5lyjERBg_MWcVG-27V02Zc0k · 139 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/EA Forum top 1600ish posts 570.txt`)
-- [ ] es · EA Forum top 1600ish posts / 453.txt · 1pX8EScmEvHkWUlAPFPy3TguwdAvKRfId · 205 KB · txt
+- [x] es · EA Forum top 1600ish posts / 453.txt · 1pX8EScmEvHkWUlAPFPy3TguwdAvKRfId · 205 KB · txt · es done 2026-11-14 (28/28 batches, `Español/posts/EA Forum top 1600ish posts 453.txt`)
 - [-] es · Slate Star Codex and ACX / 2013-12-28-meetup-southeast-michigan-.txt · 1SHpXghYALbSHtEG0npvalOodmXUiTUno · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Slate Star Codex and ACX / 2013-05-15-overheard-in-the-box-part-ii-.txt · 1xvmHmD30tq4FXGxcjQKaeEXWL0Eg0U_6 · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Slate Star Codex and ACX / 2013-05-15-index-posts-on-raikoth-.txt · 11T7obsmUC8XcWmo2EL88pSet8ipkDSu8 · 1 KB · txt · under 2 KB: empty page or stub
@@ -1088,22 +1088,22 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Slate Star Codex and ACX / 2013-12-12-papal-pr-.txt · 1BwVRIQi3wY5wSc_RRVYPga7eR2eHIUJ0 · 54 KB · txt · es done 2026-10-29 (8/8 batches, `Español/posts/2013-12-12-papal-pr-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-12-29-the-spirit-of-the-first-amendment-.txt · 16oR-KhYjeB55msF75BpXdFoIeJZcoV5f · 60 KB · txt · es done 2026-10-30 (9/9 batches, `Español/posts/2013-12-29-the-spirit-of-the-first-amendment-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt · 1mPgUeFGG_OuSIWoBYm_tp6sVdbJMZwno · 60 KB · txt · es done 2026-10-29 (9/9 batches, `Español/posts/2013-06-17-the-what-youd-implicitly-heard-before-telling-thing-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-11-26-a-letter-i-will-probably-send-to-the-fda-.txt · 1R3d5Qa49fseDqTWKPytZD7pWSHrXzria · 62 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-11-26-a-letter-i-will-probably-send-to-the-fda-.txt · 1R3d5Qa49fseDqTWKPytZD7pWSHrXzria · 62 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/2013-11-26-a-letter-i-will-probably-send-to-the-fda-.txt`)
 - [x] es · Slate Star Codex and ACX / 2014-01-26-more-links-for-january-.txt · 1YTapV4x2lbTlC8kz1Cx1X8MkpMGUyG8g · 65 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2014-01-26-more-links-for-january-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-08-25-fake-consensualism-.txt · 1SHORBOxwdWI1kihk6FAF4LrZLYq2-GhW · 69 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2013-08-25-fake-consensualism-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-03-13-valleys-have-two-sides-.txt · 1pal09ZqiNRAoLDHI05Vsy95pYAukdB5X · 70 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/2013-03-13-valleys-have-two-sides-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2013-07-17-who-by-very-slow-decay-.txt · 1yWrr-NZw3A3FhCNTNFiucTafyYEq0_Ee · 70 KB · txt
+- [x] es · Slate Star Codex and ACX / 2013-07-17-who-by-very-slow-decay-.txt · 1yWrr-NZw3A3FhCNTNFiucTafyYEq0_Ee · 70 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2013-07-17-who-by-very-slow-decay-.txt`)
 - [x] es · Slate Star Codex and ACX / 2013-10-31-the-poor-you-will-always-have-with-you-.txt · 1ET0GrTs3_Ulb7ViB3wbqgJ2-iL6QKbWr · 70 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/2013-10-31-the-poor-you-will-always-have-with-you-.txt`)
-- [ ] es · Slate Star Codex and ACX / 2014-01-08-links-for-january-.txt · 1tOqDV2mpY-TTsuqj7dAudVV1LYEbfP8Q · 89 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2014-01-05-marijuana-much-more-than-you-wanted-to-know-.txt · 1zmZqeThs1pr32z4ifE7Y5vjcnTNeh-V0 · 94 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-09-all-debates-are-bravery-debates-.txt · 1XfwWKt4-Qi0Tl0jnDYqIdDnwmcWmCgiN · 96 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-09-24-prediction-is-very-difficult-especially-of-the-past-.txt · 1jMxIX8idzVfiWJy0wmb4XgWy_ugpDCMk · 97 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-05-30-fetal-attraction-abortion-and-the-principle-of-charity-.txt · 11LxDGPWyyPVYh3Pna07fKQzzfQXFOEjN · 117 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-08-06-on-first-looking-into-chapmans-pop-bayesianism-.txt · 1lwTJI8GToz8YTFvgpiLvR6u0sNoC3zAa · 120 KB · txt
-- [ ] es · Slate Star Codex and ACX / 2013-06-30-the-lottery-of-fascinations-.txt · 1h4eKz5oa93S9XWnvC5hgq9yapXNLZFvb · 124 KB · txt
-- [ ] es · kelsey piper / movement-capture-civil-rights-philanthropy-funding.txt · 1WDsUAEf0Bvk_6Ty9xfqIOOAhaurvBEic · 135 KB · txt
-- [ ] es · kelsey piper / jeff-bezos-elon-musk-colonizing-mars-moon-space-blue-origin-spacex.txt · 1yIBfYhxI-lPW0_NNFgXh0BxmwjNpeL-o · 145 KB · txt
-- [ ] es · kelsey piper / florida-beaches-reopening-coronavirus-social-distancing.txt · 1g3Wc55m3DInc_5paeWCCxykJi55PeiDp · 145 KB · txt
+- [x] es · Slate Star Codex and ACX / 2014-01-08-links-for-january-.txt · 1tOqDV2mpY-TTsuqj7dAudVV1LYEbfP8Q · 89 KB · txt · es done 2026-11-14 (13/13 batches, `Español/posts/2014-01-08-links-for-january-.txt`)
+- [x] es · Slate Star Codex and ACX / 2014-01-05-marijuana-much-more-than-you-wanted-to-know-.txt · 1zmZqeThs1pr32z4ifE7Y5vjcnTNeh-V0 · 94 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/2014-01-05-marijuana-much-more-than-you-wanted-to-know-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-09-all-debates-are-bravery-debates-.txt · 1XfwWKt4-Qi0Tl0jnDYqIdDnwmcWmCgiN · 96 KB · txt · es done 2026-11-14 (13/13 batches, `Español/posts/2013-06-09-all-debates-are-bravery-debates-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-09-24-prediction-is-very-difficult-especially-of-the-past-.txt · 1jMxIX8idzVfiWJy0wmb4XgWy_ugpDCMk · 97 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/2013-09-24-prediction-is-very-difficult-especially-of-the-past-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-05-30-fetal-attraction-abortion-and-the-principle-of-charity-.txt · 11LxDGPWyyPVYh3Pna07fKQzzfQXFOEjN · 117 KB · txt · es done 2026-11-14 (17/17 batches, `Español/posts/2013-05-30-fetal-attraction-abortion-and-the-principle-of-charity-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-08-06-on-first-looking-into-chapmans-pop-bayesianism-.txt · 1lwTJI8GToz8YTFvgpiLvR6u0sNoC3zAa · 120 KB · txt · es done 2026-11-14 (17/17 batches, `Español/posts/2013-08-06-on-first-looking-into-chapmans-pop-bayesianism-.txt`)
+- [x] es · Slate Star Codex and ACX / 2013-06-30-the-lottery-of-fascinations-.txt · 1h4eKz5oa93S9XWnvC5hgq9yapXNLZFvb · 124 KB · txt · es done 2026-11-14 (17/17 batches, `Español/posts/2013-06-30-the-lottery-of-fascinations-.txt`)
+- [x] es · kelsey piper / movement-capture-civil-rights-philanthropy-funding.txt · 1WDsUAEf0Bvk_6Ty9xfqIOOAhaurvBEic · 135 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/movement-capture-civil-rights-philanthropy-funding.txt`)
+- [x] es · kelsey piper / jeff-bezos-elon-musk-colonizing-mars-moon-space-blue-origin-spacex.txt · 1yIBfYhxI-lPW0_NNFgXh0BxmwjNpeL-o · 145 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/jeff-bezos-elon-musk-colonizing-mars-moon-space-blue-origin-spacex.txt`)
+- [x] es · kelsey piper / florida-beaches-reopening-coronavirus-social-distancing.txt · 1g3Wc55m3DInc_5paeWCCxykJi55PeiDp · 145 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/florida-beaches-reopening-coronavirus-social-distancing.txt`)
 - [ ] es · kelsey piper / coronavirus-forecasting-models-predictions.txt · 19c0amP6EosAioInEI8wuQM6DrAPzyBL_ · 155 KB · txt
 - [ ] es · kelsey piper / andrew-cuomo-has-a-plan-to-start-reopening-new-york-eventually.txt · 1Opi3HJXfFH4NEEk-7ZByfIYalyRlfbiQ · 157 KB · txt
 - [ ] es · kelsey piper / ai-artificial-intelligence-humanity-threat.txt · 175GfgrnblUjV4N2-1zy2016mKQDtMjnq · 159 KB · txt
@@ -1308,17 +1308,17 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · happier lives / 1688148067_.txt · 1BeKKcR77L8rNrCOQpUNyR3nIfcHxqnUU · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/happier lives 1688148067_.txt`)
 - [x] es · happier lives / 1688148028_.txt · 1NNkOx6-P5e7Gy9hY5oKNsr1R2dTdDA1s · 58 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/happier lives 1688148028_.txt`)
 - [x] es · happier lives / 1688148054_.txt · 1ZAMASLT12EyZjQA8lxSP-vgaoHu0yAgs · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/happier lives 1688148054_.txt`)
-- [ ] es · happier lives / 1688148040_.txt · 1zZ2XcvTdrK5-hid0U4t0dsbkg2-wHPbN · 64 KB · txt
-- [ ] es · happier lives / 1688148095_.txt · 1NcWmpJR-_--I9kZSRvuUJsf0iWeBV5XH · 72 KB · txt
-- [ ] es · happier lives / 1688148044_.txt · 1zDLV7UXlyt-mF1pgi4akm6v2gsxEBpH4 · 74 KB · txt
-- [ ] es · happier lives / 1688148089_.txt · 1FUSZJd0bkkqbMc3mZpleQFpseA-yKVSJ · 80 KB · txt
-- [ ] es · happier lives / 1688148077_.txt · 1dV2F8zju7WhbemTeCYoSq0QvTn8hjVE9 · 81 KB · txt
+- [x] es · happier lives / 1688148040_.txt · 1zZ2XcvTdrK5-hid0U4t0dsbkg2-wHPbN · 64 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/happier lives 1688148040_.txt`)
+- [x] es · happier lives / 1688148095_.txt · 1NcWmpJR-_--I9kZSRvuUJsf0iWeBV5XH · 72 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/happier lives 1688148095_.txt`)
+- [x] es · happier lives / 1688148044_.txt · 1zDLV7UXlyt-mF1pgi4akm6v2gsxEBpH4 · 74 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148044_.txt`)
+- [x] es · happier lives / 1688148089_.txt · 1FUSZJd0bkkqbMc3mZpleQFpseA-yKVSJ · 80 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148089_.txt`)
+- [x] es · happier lives / 1688148077_.txt · 1dV2F8zju7WhbemTeCYoSq0QvTn8hjVE9 · 81 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148077_.txt`)
 - [ ] es · happier lives / 1688148094_.txt · 1bQdJT5HpNCYsTEwe2ZOxVGb2qSNnejk6 · 82 KB · txt
-- [ ] es · happier lives / 1688148030_.txt · 17v7qVXL3SM-0txO_l-y7KouS-UF6mh8H · 82 KB · txt
-- [ ] es · happier lives / 1688148027_.txt · 1LRxUjHC0HuFRtRBrPNzE4B13FjGFTuT0 · 83 KB · txt
-- [ ] es · happier lives / 1688148074_.txt · 1UGtg1VG8x72FgvPoRnTtFtRzK9kSwDl8 · 88 KB · txt
-- [ ] es · happier lives / 1688148033_.txt · 1SoHxLcCda__Sjw8q8pOcpK5A54SfsImQ · 89 KB · txt
-- [ ] es · happier lives / 1688148032_.txt · 1DbCUme1ianE6whuoTtyCNijggAlyqGgw · 90 KB · txt
+- [x] es · happier lives / 1688148030_.txt · 17v7qVXL3SM-0txO_l-y7KouS-UF6mh8H · 82 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148030_.txt`)
+- [x] es · happier lives / 1688148027_.txt · 1LRxUjHC0HuFRtRBrPNzE4B13FjGFTuT0 · 83 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148027_.txt`)
+- [x] es · happier lives / 1688148074_.txt · 1UGtg1VG8x72FgvPoRnTtFtRzK9kSwDl8 · 88 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148074_.txt`)
+- [x] es · happier lives / 1688148033_.txt · 1SoHxLcCda__Sjw8q8pOcpK5A54SfsImQ · 89 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/happier lives 1688148033_.txt`)
+- [x] es · happier lives / 1688148032_.txt · 1DbCUme1ianE6whuoTtyCNijggAlyqGgw · 90 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/happier lives 1688148032_.txt`)
 - [ ] es · happier lives / 1688148076_.txt · 1P__RBcvsKjxdcP0dVHPUiUhek1xyFSrr · 101 KB · txt
 - [ ] es · happier lives / 1688148064_.txt · 1OfDOFWgAdnQcwH6GwpeKjN1xrkHmG0Mk · 111 KB · txt
 - [ ] es · happier lives / 1688148090_.txt · 13ahuJ894keVhU-sKbn5HZFNlYqw2Tcn2 · 126 KB · txt
@@ -1465,17 +1465,17 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Reducing-Suffering / Why Charities Usually Don_t Differ Astronomically in Expected Cost-Effectiveness.txt · 1_SRLx4fLFrrkwKCnsKZFx6ia0xna34jE · 55 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/Why Charities Usually Don_t Differ Astronomically in Expected Cost-Effectiveness.txt`)
 - [x] es · Reducing-Suffering / Consciousness Is a Process, Not a Moment.txt · 1g_7jLi5Rd5_ahCHf4f2JRgnRnCSdrJOx · 58 KB · txt · es done 2026-10-30 (9/9 batches, `Español/posts/Consciousness Is a Process, Not a Moment.txt`)
 - [x] es · Reducing-Suffering / Vegans Should Not Eat Insects﹕ A Reply to Fischer (2016).txt · 1kbJxBdRQOG6RCUZ0EKhzn-bIrSOQdEcB · 59 KB · txt · es done 2026-10-30 (9/9 batches, `Español/posts/Vegans Should Not Eat Insects﹕ A Reply to Fischer (2016).txt`)
-- [ ] es · Reducing-Suffering / How to Interpret a Physical System as a Mind.txt · 1UvA6e3OVUAZzPOv1xzamoN-8gjx469_f · 61 KB · txt
-- [ ] es · Reducing-Suffering / Ranking Explanations of the Fermi Paradox.txt · 1jToJQqCj-8BEmg1rDd9gby6pmFNPlBAs · 63 KB · txt
-- [ ] es · Reducing-Suffering / Speculations on Invertebrate Population Dynamics Relevant to Reducing Suffering.txt · 1QRZsFrB2N1FBilUGt7EoMbtkSzMBdUN8 · 69 KB · txt
-- [ ] es · Reducing-Suffering / Ethical Issues in Artificial Reinforcement Learning.txt · 1Aqi0Dq3QmPQmhMUaLboXjEl_4vhWnJzm · 74 KB · txt
-- [ ] es · Reducing-Suffering / Water Use Often Kills Zooplankton.txt · 19su7IpsVlgnmQsO2JZwioemVpDTssdND · 82 KB · txt
-- [ ] es · Reducing-Suffering / Applied Welfare Biology and Why Wild-Animal Advocates Should Focus on Not Spreading Nature.txt · 1B7BrYngLn39uHKnN7zUq7r_7fujil_9I · 84 KB · txt
-- [ ] es · Reducing-Suffering / Higher-Order Theories of Consciousness by Themselves Are Too Parochial.txt · 1fDnDv2SZhrynTCboFXUtOBYcQOowqPTV · 84 KB · txt
-- [ ] es · Reducing-Suffering / Crop Cultivation and Wild Animals.txt · 10LoT5-0DVbv7lXXWIiVfxhnKhqZPSsEq · 85 KB · txt
-- [ ] es · Reducing-Suffering / Dissolving Confusion about Consciousness.txt · 1_65ctCBJJJICbx1--T52eM0HlY71srQq · 96 KB · txt
-- [ ] es · Reducing-Suffering / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 14QjDK5TLG8VOU6QjG-8BLu7P-lX99Jhw · 100 KB · txt
-- [ ] es · Reducing-Suffering / Anthropics without Reference Classes.txt · 1A9zRJ6eSmWNEFl7wYfRiTPFNI8WXmPup · 100 KB · txt
+- [x] es · Reducing-Suffering / How to Interpret a Physical System as a Mind.txt · 1UvA6e3OVUAZzPOv1xzamoN-8gjx469_f · 61 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/How to Interpret a Physical System as a Mind.txt`)
+- [x] es · Reducing-Suffering / Ranking Explanations of the Fermi Paradox.txt · 1jToJQqCj-8BEmg1rDd9gby6pmFNPlBAs · 63 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Ranking Explanations of the Fermi Paradox.txt`)
+- [x] es · Reducing-Suffering / Speculations on Invertebrate Population Dynamics Relevant to Reducing Suffering.txt · 1QRZsFrB2N1FBilUGt7EoMbtkSzMBdUN8 · 69 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Speculations on Invertebrate Population Dynamics Relevant to Reducing Suffering.txt`)
+- [x] es · Reducing-Suffering / Ethical Issues in Artificial Reinforcement Learning.txt · 1Aqi0Dq3QmPQmhMUaLboXjEl_4vhWnJzm · 74 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Ethical Issues in Artificial Reinforcement Learning.txt`)
+- [x] es · Reducing-Suffering / Water Use Often Kills Zooplankton.txt · 19su7IpsVlgnmQsO2JZwioemVpDTssdND · 82 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/Water Use Often Kills Zooplankton.txt`)
+- [x] es · Reducing-Suffering / Applied Welfare Biology and Why Wild-Animal Advocates Should Focus on Not Spreading Nature.txt · 1B7BrYngLn39uHKnN7zUq7r_7fujil_9I · 84 KB · txt · es done 2026-11-14 (13/13 batches, `Español/posts/Applied Welfare Biology and Why Wild-Animal Advocates Should Focus on Not Spreading Nature.txt`)
+- [x] es · Reducing-Suffering / Higher-Order Theories of Consciousness by Themselves Are Too Parochial.txt · 1fDnDv2SZhrynTCboFXUtOBYcQOowqPTV · 84 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/Higher-Order Theories of Consciousness by Themselves Are Too Parochial.txt`)
+- [x] es · Reducing-Suffering / Crop Cultivation and Wild Animals.txt · 10LoT5-0DVbv7lXXWIiVfxhnKhqZPSsEq · 85 KB · txt · es done 2026-11-14 (13/13 batches, `Español/posts/Crop Cultivation and Wild Animals.txt`)
+- [x] es · Reducing-Suffering / Dissolving Confusion about Consciousness.txt · 1_65ctCBJJJICbx1--T52eM0HlY71srQq · 96 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Dissolving Confusion about Consciousness.txt`)
+- [x] es · Reducing-Suffering / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 14QjDK5TLG8VOU6QjG-8BLu7P-lX99Jhw · 100 KB · txt · es done 2026-11-14 (15/15 batches, `Español/posts/How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt`)
+- [x] es · Reducing-Suffering / Anthropics without Reference Classes.txt · 1A9zRJ6eSmWNEFl7wYfRiTPFNI8WXmPup · 100 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Anthropics without Reference Classes.txt`)
 - [ ] es · Reducing-Suffering / Assorted tips on personal finance.txt · 1nhrsXDq48cJlZV3Lrt0ndrCCwPwT6zc9 · 107 KB · txt
 - [ ] es · Reducing-Suffering / How Rainforest Beef Production Affects Wild-Animal Suffering.txt · 19gmTRqVNYpDehXcSTvkDwB1VR6dYo5pX · 142 KB · txt
 - [-] es · Centre on Long-Term Risk / The evidentialist’s wager - William MacAskill, Aron Vallinder (Global Priorities Institute, Oxford University) Caspar Österheld (Duke University), Carl Shulman (Future of Humanity Institute, Oxford University), Johannes Treutlein (T_78aabe7492884404.txt · 1bBOAeQqcRNBr_Yryfu2-g2XY83CWpLPh · 1 KB · txt · under 2 KB: empty page or stub
@@ -1496,12 +1496,12 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Centre on Long-Term Risk / The Commitment Races problem - AI Alignment Forum.txt · 1uMyT1md8JEw9U-s09uwXU8S7ZEWc-T_J · 48 KB · txt · es done 2026-10-30 (7/7 batches, `Español/posts/The Commitment Races problem - AI Alignment Forum.txt`)
 - [x] es · Centre on Long-Term Risk / Soft takeoff can still lead to decisive strategic advantage - AI Alignment Forum.txt · 1mP3xkybE6z2yP6dTQfGXcbwYp-nOFwvZ · 49 KB · txt · es done 2026-10-30 (7/7 batches, `Español/posts/Soft takeoff can still lead to decisive strategic advantage - AI Alignment Forum.txt`)
 - [x] es · Centre on Long-Term Risk / Normative Disagreement as a Challenge for Cooperative AI – Center on Long-Term Risk.txt · 1jvEwaPRDBU25RgUAWhT1gF0qZyvG6Su6 · 58 KB · txt · es done 2026-10-30 (9/9 batches, `Español/posts/Normative Disagreement as a Challenge for Cooperative AI – Center on Long-Term Risk.txt`)
-- [ ] es · Centre on Long-Term Risk / Evolutionary Stability of Other-Regarding Preferences Under Complexity Costs – Center on Long-Term Risk.txt · 1LA57AxStBns5BeqrQEo_sBzkHENfApGr · 62 KB · txt
-- [ ] es · Centre on Long-Term Risk / Commitment games with conditional information revelation – Center on Long-Term Risk.txt · 1pMyvHnxODqkcYDjWp3750YqAURTgEJuv · 63 KB · txt
-- [ ] es · Centre on Long-Term Risk / Tranquilism – Center on Long-Term Risk.txt · 1rZ7gGa19l16gXz7mCYHZXXyQz_VkSMpu · 65 KB · txt
-- [ ] es · Centre on Long-Term Risk / The optimal timing of spending on AGI safety work / index﹔ why we should probably be spending more now – Center on Long-Term Risk.txt · 1iEjFSZnq-tYczkUmyhX3bgl67Aumgn9I · 81 KB · txt
-- [ ] es · Centre on Long-Term Risk / Replicating and extending the grabby aliens model – Center on Long-Term Risk.txt · 1HBDur2RO8vWpt4citcGSkozH3TSZDVa8 · 99 KB · txt
-- [ ] es · Centre on Long-Term Risk / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 1fs2ssZKU7LK0JLkyqm7BhPR0KqcCWA5b · 100 KB · txt
+- [x] es · Centre on Long-Term Risk / Evolutionary Stability of Other-Regarding Preferences Under Complexity Costs – Center on Long-Term Risk.txt · 1LA57AxStBns5BeqrQEo_sBzkHENfApGr · 62 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/Evolutionary Stability of Other-Regarding Preferences Under Complexity Costs – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Commitment games with conditional information revelation – Center on Long-Term Risk.txt · 1pMyvHnxODqkcYDjWp3750YqAURTgEJuv · 63 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/Commitment games with conditional information revelation – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Tranquilism – Center on Long-Term Risk.txt · 1rZ7gGa19l16gXz7mCYHZXXyQz_VkSMpu · 65 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Tranquilism – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / The optimal timing of spending on AGI safety work / index﹔ why we should probably be spending more now – Center on Long-Term Risk.txt · 1iEjFSZnq-tYczkUmyhX3bgl67Aumgn9I · 81 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/index﹔ why we should probably be spending more now – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / Replicating and extending the grabby aliens model – Center on Long-Term Risk.txt · 1HBDur2RO8vWpt4citcGSkozH3TSZDVa8 · 99 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Replicating and extending the grabby aliens model – Center on Long-Term Risk.txt`)
+- [x] es · Centre on Long-Term Risk / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 1fs2ssZKU7LK0JLkyqm7BhPR0KqcCWA5b · 100 KB · txt · es done 2026-11-14 (15/15 batches, `Español/posts/Centre on Long-Term Risk How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt`)
 - [ ] es · Centre on Long-Term Risk / Cooperation, Conflict, and Transformative Artificial Intelligence﹕ A Research Agenda – Center on Long-Term Risk.txt · 1ImDHBFStMHyxUbNdXzXadErMC4ZotZAQ · 135 KB · txt
 - [ ] es · Centre on Long-Term Risk / Safe Pareto Improvements for Delegated Game Playing – Center on Long-Term Risk.txt · 1KU2M6ezkRva6oLlcB_5qTNtcPfpOBmT1 · 139 KB · txt
 - [-] es · Rethink Priorities / Transparency — Rethink Priorities.txt · 1ECEwZbRmnxJ1NBa3vYbUveo7IqngetFe · 1 KB · txt · under 2 KB: empty page or stub
@@ -1682,21 +1682,21 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Rethink Priorities / 4.txt · 18I4x_aZU38-vVdjTciH4GEPneYLul_O5 · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/Rethink Priorities 4.txt`)
 - [x] es · Rethink Priorities / 10.txt · 1B6txgViyfW8FuYnuKb-DU1VOKIzEoJGD · 57 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/Rethink Priorities 10.txt`)
 - [x] es · Rethink Priorities / 97.txt · 19axL8mbvf0nV5eFXp7b_zSPik-bo1Xs6 · 59 KB · txt · es done 2026-10-30 (8/8 batches, `Español/posts/Rethink Priorities 97.txt`)
-- [ ] es · Rethink Priorities / 113.txt · 1HGt96bYIBtV2VuF67wcW-TA12V4BEz0M · 63 KB · txt
-- [ ] es · Rethink Priorities / 43.txt · 1JGM7dNPt6GGO5JnysdekyzNcG-ziQfD6 · 63 KB · txt
-- [ ] es · Rethink Priorities / Using artificial intelligence (machine vision) to increase the effectiveness of human-wildlife conflict mitigations could benefit WAW — Rethink Priorities.txt · 1crEVz4WXrvXDpxNZKwG1nnTGn1G_Su0M · 63 KB · txt
-- [ ] es · Rethink Priorities / 140.txt · 1NeDu0bs2FBnAMtKHfpwIZRBKS5KN_Epz · 64 KB · txt
-- [ ] es · Rethink Priorities / Invertebrate sentience﹕ a useful empirical resource — Rethink Priorities.txt · 12gYzvmTahQWatJ_1Xw9OcnB88epB0zvP · 64 KB · txt
-- [ ] es · Rethink Priorities / 27.txt · 1rWFB9svu1kY53BjghwI_LgBqMrxouv76 · 68 KB · txt
-- [ ] es · Rethink Priorities / 146.txt · 13SgDH9mbTC-XoKPALbzwaTJEE5Ov3aFn · 69 KB · txt
-- [ ] es · Rethink Priorities / 93.txt · 1VqdH3mx1Rd3h2kGF5b7Npyi9_sfcpiv8 · 69 KB · txt
-- [ ] es · Rethink Priorities / 68.txt · 1jPHr5d2CjeoWg3B9NznXfhFjn9ioAqQk · 71 KB · txt
-- [ ] es · Rethink Priorities / Towards a longtermist framework for evaluating democracy-related interventions — Rethink Priorities.txt · 1a1j0WTrY5vKPupd2N6Z78yWK8neh4UYG · 71 KB · txt
-- [ ] es · Rethink Priorities / 22.txt · 14SxOck3sMBGensqjg9k7mvDcFpdjmJGv · 77 KB · txt
-- [ ] es · Rethink Priorities / 102.txt · 14X-0pqwpjkKu-PC4GMjuMHcK5uopLwah · 78 KB · txt
-- [ ] es · Rethink Priorities / 28.txt · 1bd1FGb0ScgtIkb_FW_OR5UPQz6z4plzI · 78 KB · txt
-- [ ] es · Rethink Priorities / 162.txt · 1eM13_J1JO_JTdNv2zR1plz_cu4R8_0Fb · 79 KB · txt
-- [ ] es · Rethink Priorities / 83.txt · 1cExwkqLS9nP1ij-2LnzAbHLlT1qZtX16 · 80 KB · txt
+- [x] es · Rethink Priorities / 113.txt · 1HGt96bYIBtV2VuF67wcW-TA12V4BEz0M · 63 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/Rethink Priorities 113.txt`)
+- [x] es · Rethink Priorities / 43.txt · 1JGM7dNPt6GGO5JnysdekyzNcG-ziQfD6 · 63 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 43.txt`)
+- [x] es · Rethink Priorities / Using artificial intelligence (machine vision) to increase the effectiveness of human-wildlife conflict mitigations could benefit WAW — Rethink Priorities.txt · 1crEVz4WXrvXDpxNZKwG1nnTGn1G_Su0M · 63 KB · txt · es done 2026-11-14 (9/9 batches, `Español/posts/Using artificial intelligence (machine vision) to increase the effectiveness of human-wildlife conflict mitigations could benefit WAW — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 140.txt · 1NeDu0bs2FBnAMtKHfpwIZRBKS5KN_Epz · 64 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 140.txt`)
+- [x] es · Rethink Priorities / Invertebrate sentience﹕ a useful empirical resource — Rethink Priorities.txt · 12gYzvmTahQWatJ_1Xw9OcnB88epB0zvP · 64 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Invertebrate sentience﹕ a useful empirical resource — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 27.txt · 1rWFB9svu1kY53BjghwI_LgBqMrxouv76 · 68 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 27.txt`)
+- [x] es · Rethink Priorities / 146.txt · 13SgDH9mbTC-XoKPALbzwaTJEE5Ov3aFn · 69 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 146.txt`)
+- [x] es · Rethink Priorities / 93.txt · 1VqdH3mx1Rd3h2kGF5b7Npyi9_sfcpiv8 · 69 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 93.txt`)
+- [x] es · Rethink Priorities / 68.txt · 1jPHr5d2CjeoWg3B9NznXfhFjn9ioAqQk · 71 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Rethink Priorities 68.txt`)
+- [x] es · Rethink Priorities / Towards a longtermist framework for evaluating democracy-related interventions — Rethink Priorities.txt · 1a1j0WTrY5vKPupd2N6Z78yWK8neh4UYG · 71 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/Towards a longtermist framework for evaluating democracy-related interventions — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 22.txt · 14SxOck3sMBGensqjg9k7mvDcFpdjmJGv · 77 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 22.txt`)
+- [x] es · Rethink Priorities / 102.txt · 14X-0pqwpjkKu-PC4GMjuMHcK5uopLwah · 78 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 102.txt`)
+- [x] es · Rethink Priorities / 28.txt · 1bd1FGb0ScgtIkb_FW_OR5UPQz6z4plzI · 78 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 28.txt`)
+- [x] es · Rethink Priorities / 162.txt · 1eM13_J1JO_JTdNv2zR1plz_cu4R8_0Fb · 79 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 162.txt`)
+- [x] es · Rethink Priorities / 83.txt · 1cExwkqLS9nP1ij-2LnzAbHLlT1qZtX16 · 80 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 83.txt`)
 - [ ] es · Rethink Priorities / 49.txt · 1lc0ZXBbO11bNRupJ1CdyP-hEfATcWxTA · 81 KB · txt
 - [ ] es · Rethink Priorities / My thoughts on nanotechnology strategy research as an EA cause area — Rethink Priorities.txt · 1_CAyIUKsChdBhBM9h0PNRiqhYl9ti101 · 81 KB · txt
 - [ ] es · Rethink Priorities / 130.txt · 13cSp_D4Z5Fd3mmqHAqvNUMN9H5dRje2F · 82 KB · txt
