@@ -1105,25 +1105,25 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · kelsey piper / jeff-bezos-elon-musk-colonizing-mars-moon-space-blue-origin-spacex.txt · 1yIBfYhxI-lPW0_NNFgXh0BxmwjNpeL-o · 145 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/jeff-bezos-elon-musk-colonizing-mars-moon-space-blue-origin-spacex.txt`)
 - [x] es · kelsey piper / florida-beaches-reopening-coronavirus-social-distancing.txt · 1g3Wc55m3DInc_5paeWCCxykJi55PeiDp · 145 KB · txt · es done 2026-11-14 (19/19 batches, `Español/posts/florida-beaches-reopening-coronavirus-social-distancing.txt`)
 - [ ] es · kelsey piper / coronavirus-forecasting-models-predictions.txt · 19c0amP6EosAioInEI8wuQM6DrAPzyBL_ · 155 KB · txt
-- [ ] es · kelsey piper / andrew-cuomo-has-a-plan-to-start-reopening-new-york-eventually.txt · 1Opi3HJXfFH4NEEk-7ZByfIYalyRlfbiQ · 157 KB · txt
-- [ ] es · kelsey piper / ai-artificial-intelligence-humanity-threat.txt · 175GfgrnblUjV4N2-1zy2016mKQDtMjnq · 159 KB · txt
-- [ ] es · kelsey piper / doomsday-clock-2019-two-minutes-from-midnight.txt · 1jkghGeG13nZG8ftdUfsBtNvErV7IcAcR · 159 KB · txt
-- [ ] es · kelsey piper / 10-year-challenge-global-poverty-good-news.txt · 1aIszA4qnd6xLVW7AH1uCHt87v4seDuCu · 159 KB · txt
-- [ ] es · kelsey piper / child-mortality-global-poverty-literacy-good-news.txt · 1c_cuEQz7g1n9DUMaqHiL8JR-Gb_dAUJc · 159 KB · txt
-- [ ] es · kelsey piper / bill-gates-stanford-ai-like-nuclear-weapons.txt · 1mMmj-NhVYKhpVT4f1MALNx4ugsr0HQpd · 160 KB · txt
-- [ ] es · kelsey piper / dennys-beyond-burgers-meatless-meat-vegan.txt · 15knXkRVTjiBkesFSiy-W3WPOl7YdYCQ- · 160 KB · txt
-- [ ] es · kelsey piper / washington-jay-inslee-hens-animal-cruelty.txt · 19xhaNQ086umr7XIjf4JDRpntL5vBeDMc · 160 KB · txt
-- [ ] es · kelsey piper / dog-cat-meat-illegal-farm-bill-animal-cruelty.txt · 1tL_XXo4p6lKAhKHCUdiZYVKcz4u_o97K · 161 KB · txt
-- [ ] es · kelsey piper / quebec-figured-out-a-simple-way-to-get-people-to-donate-more-to-charity.txt · 17fpkiek304sQszvPHa8WSwPoSas6b9Lp · 161 KB · txt
-- [ ] es · kelsey piper / india-man-suing-parents-giving-birth-antinatalism-raphael-samuel.txt · 1r1PWsw1YGhck6hanc2T2gj6QMqKRUn_S · 161 KB · txt
+- [x] es · kelsey piper / andrew-cuomo-has-a-plan-to-start-reopening-new-york-eventually.txt · 1Opi3HJXfFH4NEEk-7ZByfIYalyRlfbiQ · 157 KB · txt · es done 2026-11-15 (21/21 batches, `Español/posts/andrew-cuomo-has-a-plan-to-start-reopening-new-york-eventually.txt`)
+- [x] es · kelsey piper / ai-artificial-intelligence-humanity-threat.txt · 175GfgrnblUjV4N2-1zy2016mKQDtMjnq · 159 KB · txt · es done 2026-11-15 (22/22 batches, `Español/posts/ai-artificial-intelligence-humanity-threat.txt`)
+- [x] es · kelsey piper / doomsday-clock-2019-two-minutes-from-midnight.txt · 1jkghGeG13nZG8ftdUfsBtNvErV7IcAcR · 159 KB · txt · es done 2026-11-15 (22/22 batches, `Español/posts/doomsday-clock-2019-two-minutes-from-midnight.txt`)
+- [x] es · kelsey piper / 10-year-challenge-global-poverty-good-news.txt · 1aIszA4qnd6xLVW7AH1uCHt87v4seDuCu · 159 KB · txt · es done 2026-11-15 (21/21 batches, `Español/posts/10-year-challenge-global-poverty-good-news.txt`)
+- [x] es · kelsey piper / child-mortality-global-poverty-literacy-good-news.txt · 1c_cuEQz7g1n9DUMaqHiL8JR-Gb_dAUJc · 159 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/child-mortality-global-poverty-literacy-good-news.txt`)
+- [x] es · kelsey piper / bill-gates-stanford-ai-like-nuclear-weapons.txt · 1mMmj-NhVYKhpVT4f1MALNx4ugsr0HQpd · 160 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/bill-gates-stanford-ai-like-nuclear-weapons.txt`)
+- [x] es · kelsey piper / dennys-beyond-burgers-meatless-meat-vegan.txt · 15knXkRVTjiBkesFSiy-W3WPOl7YdYCQ- · 160 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/dennys-beyond-burgers-meatless-meat-vegan.txt`)
+- [x] es · kelsey piper / washington-jay-inslee-hens-animal-cruelty.txt · 19xhaNQ086umr7XIjf4JDRpntL5vBeDMc · 160 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/washington-jay-inslee-hens-animal-cruelty.txt`)
+- [x] es · kelsey piper / dog-cat-meat-illegal-farm-bill-animal-cruelty.txt · 1tL_XXo4p6lKAhKHCUdiZYVKcz4u_o97K · 161 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/dog-cat-meat-illegal-farm-bill-animal-cruelty.txt`)
+- [x] es · kelsey piper / quebec-figured-out-a-simple-way-to-get-people-to-donate-more-to-charity.txt · 17fpkiek304sQszvPHa8WSwPoSas6b9Lp · 161 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/quebec-figured-out-a-simple-way-to-get-people-to-donate-more-to-charity.txt`)
+- [x] es · kelsey piper / india-man-suing-parents-giving-birth-antinatalism-raphael-samuel.txt · 1r1PWsw1YGhck6hanc2T2gj6QMqKRUn_S · 161 KB · txt · es done 2026-11-15 (22/22 batches, `Español/posts/india-man-suing-parents-giving-birth-antinatalism-raphael-samuel.txt`)
 - [ ] es · kelsey piper / air-pollution-dust-nber-study-child-deaths.txt · 1BQiRhwtDtU-3z00Fk6JbO8Q-2ZpL3IDW · 161 KB · txt
-- [ ] es · kelsey piper / warning-people-off-tainted-drinking-water-may-have-killed-children.txt · 108G7pqW9ioifD399IXCE0qE7AQcwbmk9 · 162 KB · txt
-- [ ] es · kelsey piper / impossible-foods-beyond-meat-sodexo-aramark-meatless.txt · 1GyJikiQEfMPJNMts4XWHIoEZx_QSsyj9 · 162 KB · txt
-- [ ] es · kelsey piper / publication-bias-economics-journal.txt · 1FAQrnmaXoZ4T_hwlnNpicM_ZD_Qvv05H · 162 KB · txt
-- [ ] es · kelsey piper / marriott-cage-free-eggs-vegan-protesters-animal-welfare.txt · 1n4ESm2YQ1pnSiu8rM8cbhZGRVM2--5y5 · 162 KB · txt
-- [ ] es · kelsey piper / biological-weapons-xrisks-future-of-life-institute.txt · 1xhk2QSsxB5EcdeJc9LMXHgHmdou_kcjX · 162 KB · txt
-- [ ] es · kelsey piper / chickens-died-hurricane-florence-factory-farms.txt · 1jOSfDHy681-934gG6zCvTtpPtyXV1lP2 · 162 KB · txt
-- [ ] es · kelsey piper / global-catastrophic-risks-national-policy.txt · 1gV5H-I5n-VFDZH2xK0DdPf6emBeRi022 · 163 KB · txt
+- [x] es · kelsey piper / warning-people-off-tainted-drinking-water-may-have-killed-children.txt · 108G7pqW9ioifD399IXCE0qE7AQcwbmk9 · 162 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/warning-people-off-tainted-drinking-water-may-have-killed-children.txt`)
+- [x] es · kelsey piper / impossible-foods-beyond-meat-sodexo-aramark-meatless.txt · 1GyJikiQEfMPJNMts4XWHIoEZx_QSsyj9 · 162 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/impossible-foods-beyond-meat-sodexo-aramark-meatless.txt`)
+- [x] es · kelsey piper / publication-bias-economics-journal.txt · 1FAQrnmaXoZ4T_hwlnNpicM_ZD_Qvv05H · 162 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/publication-bias-economics-journal.txt`)
+- [x] es · kelsey piper / marriott-cage-free-eggs-vegan-protesters-animal-welfare.txt · 1n4ESm2YQ1pnSiu8rM8cbhZGRVM2--5y5 · 162 KB · txt · es done 2026-11-15 (22/22 batches, `Español/posts/marriott-cage-free-eggs-vegan-protesters-animal-welfare.txt`)
+- [x] es · kelsey piper / biological-weapons-xrisks-future-of-life-institute.txt · 1xhk2QSsxB5EcdeJc9LMXHgHmdou_kcjX · 162 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/biological-weapons-xrisks-future-of-life-institute.txt`)
+- [x] es · kelsey piper / chickens-died-hurricane-florence-factory-farms.txt · 1jOSfDHy681-934gG6zCvTtpPtyXV1lP2 · 162 KB · txt · es done 2026-11-15 (22/22 batches, `Español/posts/chickens-died-hurricane-florence-factory-farms.txt`)
+- [x] es · kelsey piper / global-catastrophic-risks-national-policy.txt · 1gV5H-I5n-VFDZH2xK0DdPf6emBeRi022 · 163 KB · txt · es done 2026-11-15 (23/23 batches, `Español/posts/global-catastrophic-risks-national-policy.txt`)
 - [ ] es · kelsey piper / jerry-brown-nuclear-war-doomsday-clock-climate-change-existential-risk.txt · 10H8-1HFSMtq9NhStIVNTvC9CvDTf8jX6 · 163 KB · txt
 - [ ] es · kelsey piper / usaid-predict-pandemic-preparedness.txt · 1cI4CYMRwJUN2OfLpidqlc7kjCnIupCPm · 164 KB · txt
 - [ ] es · kelsey piper / covid-19-poverty-hunger-developing-nations.txt · 1siK0g_yfKcZ0QqXCmz4mhox26zMmPP8J · 164 KB · txt
@@ -1313,14 +1313,14 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · happier lives / 1688148044_.txt · 1zDLV7UXlyt-mF1pgi4akm6v2gsxEBpH4 · 74 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148044_.txt`)
 - [x] es · happier lives / 1688148089_.txt · 1FUSZJd0bkkqbMc3mZpleQFpseA-yKVSJ · 80 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148089_.txt`)
 - [x] es · happier lives / 1688148077_.txt · 1dV2F8zju7WhbemTeCYoSq0QvTn8hjVE9 · 81 KB · txt · es done 2026-11-14 (10/10 batches, `Español/posts/happier lives 1688148077_.txt`)
-- [ ] es · happier lives / 1688148094_.txt · 1bQdJT5HpNCYsTEwe2ZOxVGb2qSNnejk6 · 82 KB · txt
+- [x] es · happier lives / 1688148094_.txt · 1bQdJT5HpNCYsTEwe2ZOxVGb2qSNnejk6 · 82 KB · txt · es done 2026-11-15 (11/11 batches, `Español/posts/happier lives 1688148094_.txt`)
 - [x] es · happier lives / 1688148030_.txt · 17v7qVXL3SM-0txO_l-y7KouS-UF6mh8H · 82 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148030_.txt`)
 - [x] es · happier lives / 1688148027_.txt · 1LRxUjHC0HuFRtRBrPNzE4B13FjGFTuT0 · 83 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148027_.txt`)
 - [x] es · happier lives / 1688148074_.txt · 1UGtg1VG8x72FgvPoRnTtFtRzK9kSwDl8 · 88 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/happier lives 1688148074_.txt`)
 - [x] es · happier lives / 1688148033_.txt · 1SoHxLcCda__Sjw8q8pOcpK5A54SfsImQ · 89 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/happier lives 1688148033_.txt`)
 - [x] es · happier lives / 1688148032_.txt · 1DbCUme1ianE6whuoTtyCNijggAlyqGgw · 90 KB · txt · es done 2026-11-14 (12/12 batches, `Español/posts/happier lives 1688148032_.txt`)
-- [ ] es · happier lives / 1688148076_.txt · 1P__RBcvsKjxdcP0dVHPUiUhek1xyFSrr · 101 KB · txt
-- [ ] es · happier lives / 1688148064_.txt · 1OfDOFWgAdnQcwH6GwpeKjN1xrkHmG0Mk · 111 KB · txt
+- [x] es · happier lives / 1688148076_.txt · 1P__RBcvsKjxdcP0dVHPUiUhek1xyFSrr · 101 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/happier lives 1688148076_.txt`)
+- [x] es · happier lives / 1688148064_.txt · 1OfDOFWgAdnQcwH6GwpeKjN1xrkHmG0Mk · 111 KB · txt · es done 2026-11-15 (15/15 batches, `Español/posts/happier lives 1688148064_.txt`)
 - [ ] es · happier lives / 1688148090_.txt · 13ahuJ894keVhU-sKbn5HZFNlYqw2Tcn2 · 126 KB · txt
 - [ ] es · happier lives / 1688148047_.txt · 1g-zyq_0khR6GcVwwhlex39okGriwWJE1 · 127 KB · txt
 - [ ] es · happier lives / 1688148085_.txt · 1zhDNH_-mp9isi_Gg6SqLIwcoW3HZbUMk · 158 KB · txt
@@ -1476,7 +1476,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Reducing-Suffering / Dissolving Confusion about Consciousness.txt · 1_65ctCBJJJICbx1--T52eM0HlY71srQq · 96 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Dissolving Confusion about Consciousness.txt`)
 - [x] es · Reducing-Suffering / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 14QjDK5TLG8VOU6QjG-8BLu7P-lX99Jhw · 100 KB · txt · es done 2026-11-14 (15/15 batches, `Español/posts/How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt`)
 - [x] es · Reducing-Suffering / Anthropics without Reference Classes.txt · 1A9zRJ6eSmWNEFl7wYfRiTPFNI8WXmPup · 100 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Anthropics without Reference Classes.txt`)
-- [ ] es · Reducing-Suffering / Assorted tips on personal finance.txt · 1nhrsXDq48cJlZV3Lrt0ndrCCwPwT6zc9 · 107 KB · txt
+- [x] es · Reducing-Suffering / Assorted tips on personal finance.txt · 1nhrsXDq48cJlZV3Lrt0ndrCCwPwT6zc9 · 107 KB · txt · es done 2026-11-15 (16/16 batches, `Español/posts/Assorted tips on personal finance.txt`)
 - [ ] es · Reducing-Suffering / How Rainforest Beef Production Affects Wild-Animal Suffering.txt · 19gmTRqVNYpDehXcSTvkDwB1VR6dYo5pX · 142 KB · txt
 - [-] es · Centre on Long-Term Risk / The evidentialist’s wager - William MacAskill, Aron Vallinder (Global Priorities Institute, Oxford University) Caspar Österheld (Duke University), Carl Shulman (Future of Humanity Institute, Oxford University), Johannes Treutlein (T_78aabe7492884404.txt · 1bBOAeQqcRNBr_Yryfu2-g2XY83CWpLPh · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Centre on Long-Term Risk / Multiple Resolution.txt · 1jGni1V7y6B9vIHbxE5OTIuwta49k2Dn4 · 1 KB · txt · under 2 KB: empty page or stub
@@ -1697,32 +1697,32 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Rethink Priorities / 28.txt · 1bd1FGb0ScgtIkb_FW_OR5UPQz6z4plzI · 78 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 28.txt`)
 - [x] es · Rethink Priorities / 162.txt · 1eM13_J1JO_JTdNv2zR1plz_cu4R8_0Fb · 79 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 162.txt`)
 - [x] es · Rethink Priorities / 83.txt · 1cExwkqLS9nP1ij-2LnzAbHLlT1qZtX16 · 80 KB · txt · es done 2026-11-14 (11/11 batches, `Español/posts/Rethink Priorities 83.txt`)
-- [ ] es · Rethink Priorities / 49.txt · 1lc0ZXBbO11bNRupJ1CdyP-hEfATcWxTA · 81 KB · txt
-- [ ] es · Rethink Priorities / My thoughts on nanotechnology strategy research as an EA cause area — Rethink Priorities.txt · 1_CAyIUKsChdBhBM9h0PNRiqhYl9ti101 · 81 KB · txt
-- [ ] es · Rethink Priorities / 130.txt · 13cSp_D4Z5Fd3mmqHAqvNUMN9H5dRje2F · 82 KB · txt
-- [ ] es · Rethink Priorities / 82.txt · 1jhWMBU3yhxGojUF46lyNhJg8GjLIh7Jm · 82 KB · txt
-- [ ] es · Rethink Priorities / 110.txt · 1gn8juNfxDdoJS3_fEdjUIdfxlF7bgMd_ · 82 KB · txt
-- [ ] es · Rethink Priorities / Intervention profile﹕ ballot initiatives — Rethink Priorities.txt · 1YlCMxG_yA9Q5iyIQk6c8AAW-N59SnbrV · 83 KB · txt
-- [ ] es · Rethink Priorities / 25.txt · 1cy_ZGGLpjkCSzN2WFGtNee45ciC18pG4 · 85 KB · txt
-- [ ] es · Rethink Priorities / 127.txt · 16Mnx-oAn1w4zba7IYcNQgd80kRvAGBCd · 85 KB · txt
-- [ ] es · Rethink Priorities / Invertebrate welfare cause profile — Rethink Priorities.txt · 16vfC77OL4cbwAq9OXYm9xva2IqajCzAb · 85 KB · txt
-- [ ] es · Rethink Priorities / 50.txt · 1jvXhtGlyuFstKYg58QRfXZdPIhjNw4-M · 86 KB · txt
-- [ ] es · Rethink Priorities / The rodent birth control landscape — Rethink Priorities.txt · 1nDQ7Tq_cs5Xr4lWVjzqQpByWb9ziZv9N · 86 KB · txt
-- [ ] es · Rethink Priorities / 54.txt · 1x1IE54jYFYj-PSQyNk2zkH63JpQCwkHk · 86 KB · txt
-- [ ] es · Rethink Priorities / Effectiveness of a theory-informed documentary to reduce consumption of meat and animal products﹕ three randomized controlled experiments — Rethink Priorities.txt · 1Pn-ER5D64qpmiJt03529rQWZsnXd2GtL · 86 KB · txt
-- [ ] es · Rethink Priorities / 134.txt · 1hRkrkPKotHPrhYJVtI293LBvJnTjGTDC · 88 KB · txt
-- [ ] es · Rethink Priorities / Invertebrate sentience﹕ summary of findings, part 2 — Rethink Priorities.txt · 1ozxSOO271ikJqZkshYqTs6X4r2Ff9mz_ · 88 KB · txt
-- [ ] es · Rethink Priorities / 122.txt · 1vI9mwE8F7uqSEt05uWdFR2HeD8ymajtD · 89 KB · txt
-- [ ] es · Rethink Priorities / Deliberation may improve decision-making — Rethink Priorities.txt · 1XYEi-BhGXFbTKI4KS2edHk713c9oe_X9 · 89 KB · txt
-- [ ] es · Rethink Priorities / 71.txt · 1HKAW-umjJALOzWDvm5Rj9HnIA4SaIB21 · 89 KB · txt
-- [ ] es · Rethink Priorities / 119.txt · 1GuaI-7xeJJATj1DqARsNOWITlS71Ln43 · 92 KB · txt
-- [ ] es · Rethink Priorities / 76.txt · 1rTRjr9i0AZTTWhnEYyX_q6ZD1QM1eN7p · 93 KB · txt
-- [ ] es · Rethink Priorities / Global lead exposure report — Rethink Priorities.txt · 1GGYWy8_fuK9bNolNYr_N40bf9XcDbaPn · 93 KB · txt
-- [ ] es · Rethink Priorities / 56.txt · 1yFs9eg82zZfRHVbM81ylWaHJiMAhRolg · 93 KB · txt
-- [ ] es · Rethink Priorities / EA Survey 2020﹕ Donation Data — Rethink Priorities.txt · 1EGeXZoMwiZI3c9Jry2qlY3syNmzyQJ7J · 93 KB · txt
-- [ ] es · Rethink Priorities / 123.txt · 1ngrAkIQF8acJFDuNdL6KEcBuRqBee1Ka · 98 KB · txt
-- [ ] es · Rethink Priorities / 3.txt · 156bxy2bCwUBnMtA3V_xpucWEEL5CqdWX · 99 KB · txt
-- [ ] es · Rethink Priorities / 128.txt · 1cSwoxtnvqIKY1PoYOTOtJGg5QSQ1Mtgv · 100 KB · txt
+- [x] es · Rethink Priorities / 49.txt · 1lc0ZXBbO11bNRupJ1CdyP-hEfATcWxTA · 81 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 49.txt`)
+- [x] es · Rethink Priorities / My thoughts on nanotechnology strategy research as an EA cause area — Rethink Priorities.txt · 1_CAyIUKsChdBhBM9h0PNRiqhYl9ti101 · 81 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/My thoughts on nanotechnology strategy research as an EA cause area — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 130.txt · 13cSp_D4Z5Fd3mmqHAqvNUMN9H5dRje2F · 82 KB · txt · es done 2026-11-15 (11/11 batches, `Español/posts/Rethink Priorities 130.txt`)
+- [x] es · Rethink Priorities / 82.txt · 1jhWMBU3yhxGojUF46lyNhJg8GjLIh7Jm · 82 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 82.txt`)
+- [x] es · Rethink Priorities / 110.txt · 1gn8juNfxDdoJS3_fEdjUIdfxlF7bgMd_ · 82 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 110.txt`)
+- [x] es · Rethink Priorities / Intervention profile﹕ ballot initiatives — Rethink Priorities.txt · 1YlCMxG_yA9Q5iyIQk6c8AAW-N59SnbrV · 83 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Intervention profile﹕ ballot initiatives — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 25.txt · 1cy_ZGGLpjkCSzN2WFGtNee45ciC18pG4 · 85 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 25.txt`)
+- [x] es · Rethink Priorities / 127.txt · 16Mnx-oAn1w4zba7IYcNQgd80kRvAGBCd · 85 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 127.txt`)
+- [x] es · Rethink Priorities / Invertebrate welfare cause profile — Rethink Priorities.txt · 16vfC77OL4cbwAq9OXYm9xva2IqajCzAb · 85 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Invertebrate welfare cause profile — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 50.txt · 1jvXhtGlyuFstKYg58QRfXZdPIhjNw4-M · 86 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 50.txt`)
+- [x] es · Rethink Priorities / The rodent birth control landscape — Rethink Priorities.txt · 1nDQ7Tq_cs5Xr4lWVjzqQpByWb9ziZv9N · 86 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/The rodent birth control landscape — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 54.txt · 1x1IE54jYFYj-PSQyNk2zkH63JpQCwkHk · 86 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Rethink Priorities 54.txt`)
+- [x] es · Rethink Priorities / Effectiveness of a theory-informed documentary to reduce consumption of meat and animal products﹕ three randomized controlled experiments — Rethink Priorities.txt · 1Pn-ER5D64qpmiJt03529rQWZsnXd2GtL · 86 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Effectiveness of a theory-informed documentary to reduce consumption of meat and animal products﹕ three randomized controlled experiments — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 134.txt · 1hRkrkPKotHPrhYJVtI293LBvJnTjGTDC · 88 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 134.txt`)
+- [x] es · Rethink Priorities / Invertebrate sentience﹕ summary of findings, part 2 — Rethink Priorities.txt · 1ozxSOO271ikJqZkshYqTs6X4r2Ff9mz_ · 88 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Invertebrate sentience﹕ summary of findings, part 2 — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 122.txt · 1vI9mwE8F7uqSEt05uWdFR2HeD8ymajtD · 89 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 122.txt`)
+- [x] es · Rethink Priorities / Deliberation may improve decision-making — Rethink Priorities.txt · 1XYEi-BhGXFbTKI4KS2edHk713c9oe_X9 · 89 KB · txt · es done 2026-11-15 (12/12 batches, `Español/posts/Deliberation may improve decision-making — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 71.txt · 1HKAW-umjJALOzWDvm5Rj9HnIA4SaIB21 · 89 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 71.txt`)
+- [x] es · Rethink Priorities / 119.txt · 1GuaI-7xeJJATj1DqARsNOWITlS71Ln43 · 92 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 119.txt`)
+- [x] es · Rethink Priorities / 76.txt · 1rTRjr9i0AZTTWhnEYyX_q6ZD1QM1eN7p · 93 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 76.txt`)
+- [x] es · Rethink Priorities / Global lead exposure report — Rethink Priorities.txt · 1GGYWy8_fuK9bNolNYr_N40bf9XcDbaPn · 93 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Global lead exposure report — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 56.txt · 1yFs9eg82zZfRHVbM81ylWaHJiMAhRolg · 93 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/Rethink Priorities 56.txt`)
+- [x] es · Rethink Priorities / EA Survey 2020﹕ Donation Data — Rethink Priorities.txt · 1EGeXZoMwiZI3c9Jry2qlY3syNmzyQJ7J · 93 KB · txt · es done 2026-11-15 (13/13 batches, `Español/posts/EA Survey 2020﹕ Donation Data — Rethink Priorities.txt`)
+- [x] es · Rethink Priorities / 123.txt · 1ngrAkIQF8acJFDuNdL6KEcBuRqBee1Ka · 98 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 123.txt`)
+- [x] es · Rethink Priorities / 3.txt · 156bxy2bCwUBnMtA3V_xpucWEEL5CqdWX · 99 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 3.txt`)
+- [x] es · Rethink Priorities / 128.txt · 1cSwoxtnvqIKY1PoYOTOtJGg5QSQ1Mtgv · 100 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 128.txt`)
 - [ ] es · Rethink Priorities / 8.txt · 1lGz4EjKerSeyLL6SFySZcb11O3sSE1-K · 100 KB · txt
 - [ ] es · Rethink Priorities / 20.txt · 196M05SDg7ULjX3uHp-pPMMehqwH6wBj9 · 101 KB · txt
 - [ ] es · Rethink Priorities / 126.txt · 19oB_P63rUxvsUBCAd9EBM0jALR2OHBqO · 109 KB · txt

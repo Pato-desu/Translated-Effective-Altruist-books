@@ -1,0 +1,938 @@
+Estimación de los pesos morales - Happier Lives Institute
+Ideas clave
+Investigación
+Resumen general
+Publicaciones
+Agenda de investigación
+Lista de lectura
+Acerca de
+Equipo
+Historia
+Noticias
+Eventos
+Empleo
+Done ahora
+Seleccionar página
+Estimación de los pesos morales
+por
+Clare Donaldson
+,
+Joel McGuire
+y
+Michael Plant
+|
+agosto de 2020
+Filosofía
+|
+Investigación teórica
+Mostramos cómo los años de vida ajustados por bienestar (WELLBY) pueden usarse para estimar el valor de distintos resultados. Después estimamos los valores de dos insumos clave del análisis de GiveWell: duplicar el consumo de una persona durante un año y evitar la muerte de un niño menor de 5 años.
+Descargar el informe en PDF
+Debatir en el Foro de EA
+Estimación de los pesos morales
+1. Resumen
+2. Introducción
+2.1 Los enfoques de GiveWell hasta la fecha
+2.2 El enfoque de los años de vida ajustados por bienestar (WELLBY)
+3. Estimación del efecto sobre el BS de duplicar el consumo de una persona durante un año
+3.1 Estimaciones de la literatura existente
+3.2 Efecto directo de duplicar el consumo sobre el receptor
+3.2.1 ¿Cuál es el efecto en WELLBY?
+3.2.2 Consideraciones adicionales
+3.3 Efectos de derrame
+3.4 Ajuste por duplicar el consumo
+4. WELLBY perdidos por la muerte de un menor de 5 años
+4.1 Pérdida directa de WELLBY por la muerte
+4.1.1 Cuenta deprivacionista
+4.1.2 Cuenta del interés relativo al tiempo (TRIA)
+4.2 Efectos de derrame en el hogar: impacto del duelo en el BS
+4.3 Consideraciones adicionales
+5. Discusión de los resultados del modelo
+5.1 Nuestros resultados
+5.2 Comparación con otros métodos
+5.3 Incertidumbres y sensibilidad
+6. Observaciones finales
+Apéndice A: Efectos sobre el BS de las transferencias de efectivo a largo plazo
+Apéndice B: Efectos de derrame comunitarios
+Notas finales
+1. Resumen
+Para determinar cómo hacer el bien con la mayor eficacia en relación con su costo, es necesario estimar el valor de provocar distintos resultados. Describimos brevemente los métodos recientes que GiveWell ha usado para ello. Luego presentamos un método alternativo, los años de vida ajustados por bienestar («WELLBY»), y lo usamos para estimar el valor de dos insumos clave del análisis de GiveWell: duplicar el consumo de una persona durante un año y evitar la muerte de un niño menor de 5 años. Con el enfoque WELLBY, los resultados se evalúan en términos de su impacto sobre el bienestar subjetivo; aquí usamos la satisfacción vital autoinformada.
+Nuestro objetivo principal es mostrar que el enfoque WELLBY podría usarse, y no que deba usarse. Nuestra estimación del valor relativo de los dos resultados debe tomarse como preliminar, no como definitiva.
+Estimamos los efectos de duplicar el consumo a partir de la evidencia de ensayos controlados aleatorizados de transferencias de efectivo en Kenia, realizados en colaboración con GiveDirectly. El efecto total de las transferencias se calcula infiriendo una disminución anual de la satisfacción vital. Incluimos los efectos de derrame dentro del hogar, pero excluimos los efectos entre hogares, debido a la evidencia contradictoria.
+1
+Aunque en el Apéndice B representamos gráficamente los efectos de derrame comunitarios conocidos e ilustramos una agregación preliminar.
+Para tener en cuenta la incertidumbre de nuestro modelo, introducimos intervalos de confianza subjetivos del 90% y ejecutamos simulaciones de Monte Carlo.
+El valor de evitar una muerte para la persona cuya muerte se evita se estima a partir de dos visiones filosóficas de la muerte: el deprivacionismo (el desvalor es toda la satisfacción vital perdida) y la cuenta del interés relativo al tiempo (TRIA) (el desvalor es toda la satisfacción vital perdida, descontada por la conexión psicológica con el propio yo futuro). En efecto, el deprivacionismo sostiene que es mejor salvar a niños de 2 años que a personas de 20; la TRIA sostiene lo contrario. También evaluamos el efecto del duelo en los familiares usando datos de satisfacción vital.
+Estas estimaciones se basan en ciertos supuestos filosóficos (implícitos). Señalamos cómo supuestos distintos cambiarían sustancialmente los resultados y reducirían el valor relativo de evitar muertes. Estas cuestiones son independientes de cómo o si deben usarse los WELLBY: con supuestos distintos, simplemente se calcularían los WELLBY de otra manera. Nuestra tarea es solo destacar las implicaciones de (algunas) teorías, en lugar de evaluarlas.
+Nuestro modelo estima que la razón de valor entre evitar la muerte de un menor de 5 años y duplicar el consumo de una persona durante un año es de 154:1 según el deprivacionismo, y de 33:1 según la TRIA. Como referencia, GiveWell usa actualmente una razón de 100:1,
+2
+Véase el análisis de GiveWell
+de costo-efectividad de 2019
+.
+basado en un promedio del personal de 47:1 y en una estimación de 230:1 de la encuesta de preferencias de beneficiarios de IDinsight (descrita en el texto principal).
+3
+Véase la tabla 4 (fila 1) del
+informe de IDinsight
+.
+Cerramos señalando diversas incertidumbres sobre la estimación de WELLBY que pueden abordarse con más investigación: los efectos de las transferencias de efectivo a lo largo del tiempo; los efectos de derrame (de las transferencias y de las muertes); la ubicación del «punto neutro», equivalente a la no existencia; y los impactos evaluados en términos de felicidad en lugar de satisfacción vital.
+2. Introducción
+Hay muchas formas de ayudar a los demás. Quien asigne recursos con este fin
+–
+desde los responsables de políticas que distribuyen presupuestos gubernamentales hasta las personas que donan a una organización benéfica
+–
+debe elegir entre programas con resultados distintos, como evitar muertes, aliviar la pobreza, mejorar la educación o la salud mental. Comparar el valor de estos resultados es una tarea difícil, pero necesaria, si queremos usar estos recursos para beneficiar a los demás en la mayor medida posible.
+Gran parte de la investigación para identificar las organizaciones benéficas más costo-efectivas del mundo la produce GiveWell.
+GiveWell está reconsiderando actualmente
+su marco para evaluar el valor de los resultados, al que llama «pesos morales». Por eso, nos
+pareció oportuno presentar un método para comparar el valor de distintos resultados: los años de vida ajustados por bienestar, o WELLBY. En el enfoque WELLBY, las medidas del bienestar subjetivo (BS), es decir, los autoinformes de felicidad y satisfacción vital, se usan como moneda común con la que se mide el impacto de los cambios. Usamos este enfoque para estimar los valores (relativos) de dos de los tres resultados clave del modelo de GiveWell: duplicar el consumo durante un año y evitar la muerte de un niño menor de 5 años. Aunque esta entrada se centra en el marco de GiveWell, el método es aplicable en general.
+Primero exponemos los enfoques de GiveWell hasta la fecha. Luego presentamos nuestra alternativa, hacemos con ella una estimación inicial y comparamos los resultados.
+Nuestro propósito principal aquí no es argumentar que el método WELLBY
+deba
+usarse, aunque más adelante justificaremos brevemente su uso. Más bien, queremos mostrar cómo
+puede
+usarse; esta entrada pretende ser una «prueba de concepto». Nuestro objetivo es presentar la metodología a los lectores y ofrecer una revisión inicial de los datos de BS disponibles en los contextos que nos interesan
+–
+de población con muy bajos ingresos. Consideramos que nuestra estimación es preliminar y no definitiva; advertimos contra actualizar con fuerza nuestras creencias a partir de ella. Más adelante mencionamos el trabajo empírico y teórico adicional que se requiere.
+2.1 Los enfoques de GiveWell hasta la fecha
+El modelo de costo-efectividad de GiveWell usa tres resultados principales:
+Duplicar el consumo de una persona durante un año.
+Evitar la muerte de una persona menor de 5 años.
+Evitar la muerte de una persona mayor de 5 años.
+En el pasado
+, GiveWell determinaba sus pesos morales pidiendo primero a su personal que diera sus propias estimaciones del valor relativo de los tres resultados. La mediana de las asignaciones del personal se usaba luego como valor relativo de estos resultados en su análisis de costo-efectividad. Este método permite resolver los desacuerdos
+–
+apela a una especie de «sabiduría de las multitudes»
+–
+pero no responde a la pregunta de cómo alguien podría, en primer lugar, formarse una opinión justificable y basada en evidencia sobre cuáles son los pesos morales apropiados; los miembros del personal eran libres de elegir su propio método. ¿Qué método podría usar alguien?
+Una opción, que GiveWell ha explorado recientemente, son las «preferencias de los beneficiarios».
+IDinsight
+, una organización de investigación, realizó encuestas en Ghana y Kenia para captar las elecciones de los beneficiarios de los programas que recomienda GiveWell (
+informe completo
+). IDinsight preguntó a las personas tanto por su «disposición a pagar» para reducir el riesgo de muerte de ellas mismas y de sus hijos como por elegir
+–
+adoptando la perspectiva de un responsable de decisiones en su comunidad
+–
+entre programas que salvan una vida o proporcionan un número de transferencias en efectivo. Discutimos brevemente la metodología específica y el resultado de estas encuestas más adelante.
+Si bien depender de las preferencias (reveladas o declaradas) para determinar el valor de los resultados es estándar en economía, este enfoque enfrenta una serie de desafíos
+–
+véase Bronsteen, Buccasfusco y Masur (
+2013
+) para una revisión exhaustiva. Una dificultad inevitable de usar preferencias es que se basan en que las personas hagan predicciones sobre cómo distintas situaciones hipotéticas las afectarían a ellas (y a otros) si llegaran a ocurrir. La investigación psicológica sobre
+pronóstico afectivo (affective forecasting)
+ha demostrado que las personas no son muy buenas para predecir cómo se sentirán, y que estos pronósticos sufren de una serie de sesgos (
+Gilbert y Wilson 2006
+). Un ejemplo son las ilusiones de enfoque, en las que sobrevaloramos el efecto de factores fácilmente imaginables (
+Kahneman et al. 2006
+). Incluso para las preferencias reveladas (las elecciones que las personas realmente hacen, y que a menudo los economistas consideran el estándar de oro), las personas aún necesitan pronosticar cómo se sentirán como resultado de su elección. Kahneman y Thaler (
+2006
+) sostienen que
+la utilidad de decisión
+(lo que las personas eligen) y
+utilidad experimentada
+(cómo se sienten) son, por tanto, prácticamente distintas. Como resulta mucho más fácil para las personas decir cómo se sienten en este momento, esta es una ventaja central de usar los informes de bienestar subjetivo para valorar los resultados, suponiendo que la utilidad experimentada sea valiosa.
+2.2 El enfoque del año de vida ajustado por bienestar (WELLBY)
+Los WELLBY, en su estructura, son bastante similares a las métricas de salud bien establecidas, el año de vida ajustado por calidad y el año de vida ajustado por discapacidad (AVAC y AVAD, o QALY y DALY), que combinan calidad y cantidad de salud en un único número. Un año en perfecta salud vale 1 AVAC, mientras que vivir un año con una condición cuyo peso de utilidad fuera 0.5 valdría 0.5 AVAC, y así sucesivamente.
+4
+Los QALY miden la salud ganada, mientras que los DALY miden la salud perdida. Una revisión de otras diferencias puede encontrarse en Gold, Stevenson y Fryback (
+2002
+).
+Un peso de QALY de 0 equivale a estar muerto, y puede haber estados peores que la muerte (
+Tilling et al. 2010
+). Se asume que cada Q/DALY tiene el mismo beneficio para una persona que para otra, lo que permite comparar tratamientos de salud en cuanto a costo-efectividad (si se conoce la información de costos). Los pesos de Q/DALY para distintos estados de salud se determinan pidiendo a las personas que hagan compensaciones hipotéticas entre estados de salud, por lo que usan el mismo método subyacente que el enfoque de preferencias del beneficiario.
+La diferencia clave es que los WELLBY se construyen usando medidas de bienestar subjetivo, a saber, autoinformes de felicidad y satisfacción con la vida (
+Frijters et al. 2020
+;
+Birkjaer, Kaats y Rubio 2020
+). Un WELLBY, en este documento, equivale a un aumento de 1 punto en una escala de satisfacción con la vida de 0 a 10, para una persona durante un año. La satisfacción con la vida se mide típicamente preguntando “En general, ¿qué tan satisfecho está con su vida en estos días?” (0 – nada, 10 – completamente). Una diferencia, entonces, es que, mientras que un peso de QALY de 0 equivale a estar muerto, las escalas de satisfacción con la vida no tienen un “punto neutral” claro equivalente a la no existencia, un tema que retomamos más adelante.
+Si bien los investigadores han medido el bienestar subjetivo (SWB) durante varias décadas (
+Diener, Lucas y Oishi 2018
+), las propuestas de basar la toma de decisiones en el SWB son relativamente recientes, y se han centrado sobre todo en la formulación de políticas públicas en países de altos ingresos (p. ej.
+GHC 2018
+;
+Layard et al. 2020
+). Los esfuerzos por usar el SWB para evaluar la costo-efectividad en contextos de bajos ingresos son aún más incipientes.
+5
+Solo conocemos los intentos de uno de nosotros (
+Plant, 2019, cap. 7
+), quien ofrece estimaciones puntuales aproximadas del valor de salvar vidas, reducir la pobreza y tratar la salud mental. Mejoramos la estimación previa de Plant sobre el valor de duplicar el consumo y de evitar muertes de varias maneras: recurrimos a un abanico más amplio de estudios para estimar el valor de duplicar el consumo (del hogar) y evaluamos su efecto total a lo largo del tiempo, modelándolo como una disminución anual; usamos una simulación de Monte Carlo con intervalos de confianza subjetivos del 90% para tener en cuenta la incertidumbre; y estimamos la gravedad de la muerte según dos posturas filosóficas.
+Dividimos nuestra estimación de WELLBY en varias partes. Primero analizamos el efecto de duplicar el consumo y luego el de evitar la muerte de un niño menor de 5 años. En ambos casos, comenzamos considerando los efectos “directos”: los que recaen en la persona cuyo consumo se duplicó o que murió, respectivamente. Después consideramos los efectos en el hogar de esa persona, en cada caso. Discutimos brevemente los efectos en la comunidad en general, pero no los incluimos en nuestro modelo, porque serían muy especulativos
+–
+en especial en el caso de evitar una muerte.
+Puede consultarse un modelo de este análisis en Guesstimate
+aquí
+.
+6
+Puede editar los datos de entrada en Guesstimate para ver cómo varían los resultados. Los resultados cambiarán ligeramente solo con recargar la página, porque las simulaciones se vuelven a ejecutar. El valor grande que aparece en una celda es la media; si hace clic en ‘Expandir’ en cualquier celda puede ver la mediana (el percentil 50). Estos valores pueden ser bastante distintos, en especial si la presencia de unos pocos valores extremos altera más la media que la mediana. Puede leer más sobre Guesstimate en la
+documentación
+.
+Guesstimate permite a los usuarios introducir su incertidumbre (y su distribución) para cada parámetro. Guesstimate ejecuta simulaciones de Monte Carlo, que son repeticiones del mismo cálculo usando valores aleatorios de la distribución de probabilidad de cada parámetro. Esto significa que puede obtener una estimación de la incertidumbre del valor del resultado. Describimos las entradas de nuestro modelo a lo largo de la publicación.
+Un último comentario antes de empezar: la decisión de basar los WELLBY en la satisfacción con la vida, y no en la felicidad, puede parecer controvertida a algunos. Existe una
+visión de larga data
+según la cual
+el bienestar
+–
+lo que en última instancia hace que nuestras vidas vayan bien
+–
+consiste en la felicidad (un saldo positivo de estados conscientes agradables sobre los desagradables), y no en otra cosa, como la satisfacción con la vida (un juicio sobre cómo va la vida en general). Aunque simpatizamos con esta visión, nos vemos empujados a usar datos de satisfacción con la vida porque son mucho más abundantes que los datos de felicidad. Cuando haya más datos disponibles, sería sencillo reemplazar los datos de entrada de nuestro modelo. Sigue abierta la cuestión de cuánta diferencia haría esto en la práctica para las decisiones de priorización: la investigación indica que lo que hace a las personas más felices tiende también a hacerlas más satisfechas con sus vidas, aunque algunas cosas tienen un mayor impacto en la felicidad que en la satisfacción con la vida, o viceversa (
+Kahneman y Deaton 2010
+;
+Boarini et al. 2012
+).
+7
+En un cálculo aproximado, Plant (
+2019
+) p. 228-9 sostiene que, como la depresión y la ansiedad tienen un impacto relativamente mayor en la felicidad que en la satisfacción con la vida, y aumentar el ingreso tiene un efecto relativamente menor en la felicidad que en la satisfacción con la vida, el valor relativo de tratar la ansiedad o la depresión frente a duplicar el ingreso es unas tres veces mayor usando la felicidad que la satisfacción con la vida (lo que deja abierto cuál tiene mayor costo-efectividad en términos absolutos con cualquiera de las dos medidas).
+En todo caso, el uso de cualquiera de las dos medidas subjetivas mejora nuestra comprensión de lo que afecta la vida de las personas.
+3. Estimación del efecto sobre el SWB de duplicar el consumo de una persona durante un año
+(véase la nota al pie)
+8
+GiveWell prefiere considerar el consumo en lugar del ingreso (véase
+Guide to GiveWell CEAs
+). El consumo incluye el valor de todos los bienes utilizados dentro de un hogar. Por ejemplo, si los cultivos se producen y se comen en casa, su valor se incluiría en el consumo, pero no en el ingreso. Sin embargo, el consumo se operacionaliza con más frecuencia como gasto total, en lugar del valor de todos los bienes consumidos.
+3.1 Estimaciones a partir de la literatura existente
+Comenzamos presentando los tamaños del efecto del SWB en desviaciones estándar (como es habitual en la literatura).
+9
+Si un estudio encuentra un aumento de 1 punto en LS, y la desviación estándar es de 2 puntos de LS, entonces el tamaño del efecto es de 0.5 DE. Estandarizar de esta manera permite comparar fácilmente la magnitud de los efectos medidos en escalas distintas.
+Estudios transversales previos
+10
+Los trabajos puramente transversales adolecen de dos inconvenientes cuando intentamos estimar el impacto total de un shock de ingresos sobre el SWB. Primero, las estimaciones transversales no tienen componente temporal, así que no sabemos cuánto dura el efecto. Segundo, no son causales. No sabemos cuánto de este coeficiente puede explicarse porque una mayor satisfacción con la vida conduce a mayores ingresos, o viceversa.
+trabajos que analizan la relación entre ingresos y satisfacción con la vida (LS) en países de bajos ingresos sugieren que duplicar los ingresos produce un aumento de 0.24
+11
+El resultado proviene de 0.36*ln(2) = 0.24, donde 0.36 era el coeficiente de log(ingreso). La ventaja de usar un modelo lineal-logarítmico es que permite interpretar los coeficientes
+como cambios porcentuales
+así que puede estimarse el efecto de duplicar sin conocer las unidades originales (aunque cuanto mayor sea el cambio, peor aproximación ofrece).
+desviaciones estándar (DE) de la satisfacción con la vida.
+12
+De la Encuesta Mundial de Gallup de 2005 a 2012 (Stevenson y Wolfers 2013, p. 601). Stevenson y Wolfers también consideran resultados de la Escalera de Cantril, una pregunta de evaluación de la vida que pide a las personas imaginar una escalera con peldaños de 0 a 10, donde 10 es la mejor vida posible y 0 la peor, y situarse en ella. En este caso, duplicar los ingresos produce un aumento de 0.25*ln(2) DE en LS.
+Históricamente, gran parte de la literatura causal sobre el efecto de los ingresos en el SWB provino de estudios de loterías. Un estudio reciente destacado en esta línea, de Lindqvist et al. (
+2020
+) estima que entre los ganadores suecos de la lotería (encuestados 5
+–
+22 años después del sorteo), una ganancia equivalente a duplicar los ingresos anuales durante 20 años provoca un aumento de 0.26 DE en la satisfacción con la vida.
+13
+“El efecto causal del logaritmo del ingreso sobre la LS global implicado por nuestra estimación es 0.38”, lo que corresponde a 0.38*ln(2) para duplicar los ingresos. Véase también la Figura 4 en Lindqvist et al.
+La desviación estándar de LS es 1.93 en este estudio (véase la Tabla 3), por lo que esto equivale aproximadamente a un cambio de 0.5 puntos de LS.
+3.2 Efecto directo de duplicar el consumo en la persona receptora
+Recientemente, el estudio de los efectos de entregar transferencias monetarias (CT) en países de bajos ingresos mediante ensayos controlados aleatorizados (ECA) ha aportado evidencia causal adicional y más pertinente. Los resultados de varios estudios realizados en colaboración con
+GiveDirectly
+se presentan en la Tabla 1. Basamos nuestro modelo Guesstimate en estos estudios. Egger et al. (
+2019
+) tiene el mayor tamaño de muestra y es el más parecido al programa actual de GiveDirectly. En un metaanálisis próximo, McGuire, Bach-Mortensen y Kaiser (
+n.d.
+) considerarán un número mucho mayor de estudios
+,
+14
+Un artículo reciente de Ridley et al. (2020) agrega los efectos de las transferencias monetarias sobre la salud mental y el bienestar psicológico. La Figura 10 muestra los efectos por cada 1000 dólares (PPA) gastados.
+y presentará un enfoque más formal de agregación.
+Tabla 1:
+Estudios de GiveDirectly
+Estudio
+Tamaño de la muestra
+Tamaño medio de la transferencia monetaria (USD, PPA)
+Tiempo desde la transferencia (meses)
+Tamaño del efecto (EE) (DE de la satisfacción con la vida)
+Haushofer y Shapiro (2016)
+1,474
+709
+6.9
+0.17 (0.05)
+Haushofer y Shapiro (2018) –
+seguimiento del estudio anterior
+34
+0.08 (0.05)
+Egger et al. (2019)
+5,432
+1,871
+19
+0.14 (0.03)
+Haushofer, Mudida y Shapiro (2020)
+5,309
+1,076
+13
+0.21 (0.09)
+Nota:
+PPA = paridad de poder adquisitivo, EE = error estándar, DE = desviación estándar
+Como puede verse en la Tabla 1, el tamaño de las transferencias va de $709 a $1,871, y el tiempo medio transcurrido entre la recepción de la transferencia y la encuesta va de 7 a 34 meses. Dado que ambos factores probablemente afectan el tamaño del efecto medido, combinar los resultados de la Tabla 1 no es trivial. A continuación describimos nuestro modelo basado en esta información; esperamos mejorar la agregación en nuestro trabajo futuro incorporando más estudios.
+Construimos un modelo simple de decaimiento exponencial del efecto en el SWB a lo largo del tiempo, suponiendo que el efecto será un porcentaje fijo del año anterior:
+SWB = c * (1 – d)
+t
+donde SWB es el tamaño del efecto (en DE), c es una constante (el efecto en el tiempo = 0), d es la tasa anual de decaimiento del efecto y t es el tiempo en años. Estimamos los parámetros que mejor se ajustan a esta ecuación a partir de los cuatro puntos de datos de los estudios de GiveDirectly.
+15
+Usando un modelo de regresión lineal (por lo tanto, restringiendo las estimaciones de los parámetros —log(tasa de decaimiento) y tamaño inicial del efecto— a distribuirse normalmente).
+La Figura 1A muestra la estimación central, así como los intervalos de confianza de 66 % y 90 %. La estimación central corresponde a una tasa anual de decaimiento de 32 % y a un tamaño inicial del efecto de 0.26 DE. Introdujimos en Guesstimate los intervalos de confianza inferidos para estos parámetros. La Figura 1B muestra la distribución de 5000 muestras de cada parámetro, y la Figura 1C muestra las trayectorias resultantes (es decir, un reflejo de las simulaciones de Monte Carlo ejecutadas en Guesstimate).
+Figura 1:
+Modelo de decaimiento exponencial del tamaño del efecto sobre la satisfacción con la vida (en desviaciones estándar) a lo largo del tiempo
+Notas:
+(A) Los tamaños de efecto medidos de la LS en los estudios de GiveDirectly se muestran como círculos de colores. Se muestran la estimación central y los intervalos de confianza de 66 % y 90 % del modelo, ajustado con una regresión lineal.
+(B) 5,000 muestras de las distribuciones de la tasa de decaimiento y del tamaño inicial del efecto, mostradas como histogramas.
+(C) Las trayectorias de LS a lo largo del tiempo según las muestras de parámetros mostradas en (B). Esto ilustra las simulaciones de Monte Carlo ejecutadas en Guesstimate.
+Modelar el efecto en el SWB a lo largo del tiempo con solo cuatro puntos de datos es lamentable, pero es el enfoque más justificable dada la escasa información relevante. Los intervalos de confianza son correspondientemente amplios: 2
+–
+53 % para la tasa de decaimiento, y de 0.14 a 0.48 DE para el efecto inicial. Una tasa anual de decaimiento de 32 % implica que el tamaño del efecto cae por debajo de 0.05 DE a los cinco años y por debajo de 0.01 DE a los nueve años. En el Apéndice A describimos otros artículos que estudian los efectos en el SWB a lo largo del tiempo, aunque cada uno difiere de los estudios de GiveDirectly en al menos un aspecto, y los resultados son mixtos, así que no actualizamos nuestro modelo en ninguna dirección. No dejamos que el efecto continúe indefinidamente, sino que introducimos un tiempo de cinco años en el que el efecto termina (IC del 90 %: 2
+–
+10 años). El efecto total a lo largo del tiempo en WELLBY es el área bajo la curva (determinada integrando la ecuación 1).
+3.2.1 ¿Cuál es el efecto en WELLBY?
+Para convertir el tamaño del efecto de desviaciones estándar (DE) a WELLBY necesitamos conocer la desviación estándar de los datos de satisfacción con la vida (LS) en los estudios de GiveDirectly. La DE basal de LS para la muestra compartida usada en Haushofer y Shapiro (2016, 2018) e informada en Haushofer, Reisinger y Shapiro (
+2019
+) es 2.66.
+16
+Página 25: este es el único valor no estandarizado de una DE proporcionado en los estudios de GiveDirectly.
+Otros estudios tienen una DE menor;
+17
+Stevenson y Wolfers (2013) parecen tener una DE de 2; British Household Panel Survey = 1.9; Lindqvist et al. = 1.93; informe de beneficiarios de IDinsight = 2.32. Kilburn et al. informan 1.3 DE de LS en una escala de 1 a 5
+ponemos de 1.9 a 2.7 como nuestro intervalo de confianza subjetivo de 90 %. Estimamos que el efecto total en la persona receptora directa de una CT es de ~1.8 (0.6
+–
+5.0) WELLBY.
+3.2.2 Consideraciones adicionales
+No hemos considerado que el aumento de los ingresos parezca estar vinculado a la esperanza de vida
+18
+Véase O’Hare et al. (
+2013
+), Bastagli et al. (
+2019
+) y la página de
+Our World in Data
+.
+y que los niveles más altos de SWB reportados
+19
+Véase Martín-María et al. (
+2017
+).
+parecen estar relacionados con reducciones de la mortalidad por todas las causas.
+3.3 Efectos de derrame
+Si podemos, también queremos contar los efectos de «derrame» (spillover), es decir, el impacto de una intervención sobre quienes no son los beneficiarios directos (en este caso, la persona que recibe la transferencia). Aquí consideramos, por turnos, los derrames dentro del hogar, es decir, hacia los miembros de la familia, y hacia quienes están fuera de él, por ejemplo los vecinos.
+Haushofer y Shapiro (
+2016
+) administró encuestas a los jefes de hogar que recibían una transferencia monetaria; a veces eran dos personas (por lo general, una esposa y un esposo) y a veces una sola persona.
+20
+En Egger et al. (2019), en los hogares con una pareja casada o que convive, uno de los miembros de la pareja fue seleccionado al azar como el encuestado objetivo.
+Por tanto, los resultados de satisfacción vital ya se promedian entre los jefes de hogar; usamos el efecto sobre el beneficiario (ya estimado) como efecto promedio sobre los jefes de hogar. En el grupo de tratamiento había 369 hogares con dos jefes y 102 hogares con un solo jefe, lo que corresponde a un promedio de 1.78 jefes por hogar.
+Luego necesitamos estimar los efectos de derrame sobre otros miembros del hogar. No hay estimaciones del impacto directo de una transferencia monetaria (CT) sobre el bienestar subjetivo (SWB) de los miembros del hogar que no son jefes de hogar; esta es un área prometedora para futuras investigaciones. Sin embargo, los efectos de derrame positivos parecen probables por varias razones derivadas de la expansión compartida de recursos. Haushofer y Shapiro (
+2013
+) informan de grandes aumentos en bienes comunes del hogar, como el ganado y los muebles, y en la probabilidad de tener un techo de hierro; los hogares también gastan unos 25 dólares más al mes en alimentos (véase un resumen de GiveWell
+aquí
+). En Egger et al. (
+2019
+), mejoran el índice de educación y de seguridad alimentaria de los niños. Las transferencias monetarias parecen reducir la actividad económica de los niños (
+de Hoop y Rosati, 2014
+),
+lo cual probablemente es beneficioso para la salud mental de niños y adolescentes
+(
+Sturrock y Hodes, 2016
+).
+Se ha vinculado las transferencias monetarias con una disminución de la transmisión intergeneracional de la depresión
+(
+Eyal y Burns, 2019
+).
+Ante la falta de información mucho más detallada, asumimos que el efecto de derrame sobre los demás miembros del hogar
+–
+distintos del jefe o jefes de hogar
+–
+tiene intervalos de confianza del 90 % que van de 20
+–
+al 100 % del efecto sobre la satisfacción vital del beneficiario. Notamos que esta es una incertidumbre no trivial, dado que hay casi el doble de miembros «otros» que jefes de hogar.
+21
+Hay cierta evidencia de resultados distintos según si quien recibe la transferencia monetaria es una mujer o un hombre; por ejemplo, Haushofer y Shapiro (2016) encuentran diferencias significativas (al nivel del 10 %) en el bienestar psicológico y el empoderamiento femenino entre los hogares con beneficiarias mujeres y los hogares con beneficiarios hombres (pero sin diferencias significativas en ningún otro efecto del tratamiento). Los autores ilustran estas diferencias con más detalle en Haushofer et al. (
+2019
+), donde muestran que los efectos sobre el bienestar psicológico parecen deberse a las mujeres. Este resultado coincide con otra evaluación de una transferencia monetaria, que encontró que el impacto sobre el SWB se debe a los hogares encabezados por mujeres (y que responden) (Handa y Park,
+2014
+). Es posible que también haya diferencias en los demás miembros del hogar, según si el beneficiario es hombre o mujer. Dado que los estudios de GiveDirectly seleccionan aleatoriamente si el beneficiario es hombre o mujer, y por tanto los resultados reflejan ambos casos, no hemos intentado tener en cuenta las diferencias entre los hogares con beneficiarias mujeres y con beneficiarios hombres.
+El tamaño del hogar se informa en Egger et al. (
+2019
+) como 4.3, y en Haushofer, Reisinger y Shapiro (
+2015
+)
+22
+Otro documento de trabajo sobre los experimentos reportados en Haushofer y Shapiro 2016, 2018.
+como 5.1; introducimos este rango en Guesstimate. Nuestro modelo calcula que el efecto total por cada transferencia de GiveDirectly es de 3.2 (1.0
+–8.
+9) WELLBY para el o los jefes de hogar y 2.2 WELLBY (0.5
+–
+6.9) para los demás miembros del hogar.
+No incluimos efectos sobre quienes están fuera del hogar, porque somos suficientemente inciertos sobre cuáles son
+–
+en este caso, pero todavía más en la siguiente sección (evitar una muerte). La evidencia causal más relevante de los efectos de derrame en la comunidad proviene de los propios estudios de GiveDirectly. Mientras que Haushofer y Shapiro (
+2018
+) encontraron evidencia de efectos de derrame psicológicos negativos en la comunidad, los estudios más recientes de GiveDirectly (Egger et al.,
+2019
+; Haushofer, Mudida y Shapiro,
+2020
+)
+–
+con muestras más grandes y basados en una versión del programa más parecida a la práctica actual
+–
+no los encontraron. Una síntesis de estudios que midieron efectos comunitarios sugiere que los efectos de derrame sobre el SWB son, en conjunto, insignificantes (véase el Apéndice 2).
+Vale la pena señalar que la falta de efectos de derrame negativos en la comunidad es inusual, a la luz de la literatura más amplia sobre el SWB, aunque no necesariamente sorprendente. En una revisión basada en datos de países de ingresos altos, Clark (
+2016
+) sostiene que hay una «considerable variedad de evidencia de que el bienestar es relativo al ingreso»; en otras palabras, importa no solo cuán rico es uno, sino cuán ricos son aquellos con los que uno se compara, y que otros se enriquezcan le haría sentirse peor. El efecto relativo del ingreso se ha propuesto como explicación de la «paradoja de Easterlin», el hallazgo de que el aumento de los ingresos no parece incrementar la felicidad promedio a largo plazo, aunque las personas y los países más ricos son más felices que las personas y los países más pobres (
+Easterlin 2016
+;
+Kaiser y Vendrik, 2018
+). Clark señala que, si bien la evidencia indica que, en general, existe un efecto relativo del ingreso, no está claro qué tan grande es ni si funciona de manera distinta para quienes viven en la pobreza, tema que ha recibido poco estudio.
+23
+Lo que se ha hecho sugiere que el efecto relativo del ingreso sigue siendo grande en contextos de ingresos bajos (Reyes-García et al.,
+2016
+). En el caso del ECA de Natali et al. sobre una transferencia monetaria en Zambia, encuentran «evidencia de que la vía de la pobreza relativa domina a la vía de la pobreza absoluta para explicar los efectos del tratamiento» (
+2018
+).
+Agradecemos más investigaciones sobre los efectos del ingreso relativo en estos niveles bajos de ingreso absoluto.
+3.4 Ajuste por duplicar el consumo
+Hasta ahora hemos considerado los efectos de recibir una transferencia monetaria en un hogar. Sin embargo, el peso moral de GiveWell se refiere específicamente a duplicar el consumo de
+una persona
+durante un año; damos dos pasos para llegar a una estimación de este valor. Los estudios de GiveDirectly informan del consumo anual del hogar (y no del consumo individual). El monto de la transferencia no es igual al consumo anual del hogar; nuestro primer paso es ajustar el efecto de la transferencia para reflejar qué proporción representa de duplicar el consumo anual del hogar. Egger et al. (2019) señalan que la transferencia ($1,871 PPP) corresponde al 75 % del gasto anual promedio del hogar en los hogares beneficiarios. Existe una relación aproximadamente lineal-logarítmica
+24
+y = a + b . log(x) + error
+entre el ingreso y la satisfacción vital (
+Jebb et al. 2018
+) (lo que significa que los cambios de ingreso tienen menos efecto sobre la satisfacción vital a ingresos más altos). Usamos esta relación para ajustar a un cambio del 100 % en el consumo (es decir, duplicarlo) durante un año, lo que aumenta el tamaño del efecto en un 24 %.
+25
+Véase la parte superior de la página 4 en
+estas notas
+: «para un modelo lineal-logarítmico, el cambio esperado en Y asociado con un aumento de p % en X puede calcularse como βˆ · log([100 + p]/100)». Por tanto, el multiplicador sobre el efecto de un cambio del 75 % en el consumo para un cambio del 100 % en el consumo = (log(200/100) / log(175/100)) = 1.24, o 24 %. En Haushofer y Shapiro (2016), la transferencia promedio de $709 equivale al 37 % del consumo anual del hogar ($1,896; mensual serían $158). Usando la misma ecuación para calcular cómo ajustar el tamaño del efecto en este caso se obtiene un multiplicador de (log(200/100) / log(137/100)) = 2.2. Intuitivamente, esto parece demasiado alto y no lo usamos en nuestro modelo. $709 es el promedio de una transferencia pequeña y una grande; en el futuro podríamos obtener los tamaños de efecto por separado.
+Este es un ajuste no trivial, y es posible que una relación lineal-logarítmica no se cumpla en este contexto; esto podría determinarse con más investigación. En segundo lugar, tenemos en cuenta duplicar el consumo
+de una persona
+(en lugar del hogar) durante un año. Lo hacemos dividiendo el efecto (modelado) de duplicar el consumo del hogar entre el número promedio de miembros del hogar.
+26
+Por tanto, es importante señalar que el efecto ‘sobre una persona’ es en realidad el efecto promedio sobre un miembro del hogar (adultos y niños). En general, preferimos trabajar a nivel de hogar, y no a nivel individual, porque no tenemos mucha información sobre cómo se reparten el consumo de referencia o la CT entre los miembros del hogar.
+4. WELLBYs perdidos por la muerte de un menor de 5 años
+4.1 Pérdida directa de WELLBYs por la muerte
+4.1.1 Cuenta deprivacionista
+Primero estimamos el número de WELLBYs perdidos por la muerte de un menor de 5 años mediante el enfoque matemáticamente más simple: lo malo de la muerte es el bienestar total del que se priva a la persona al no vivir más tiempo, es decir, los años de vida perdidos multiplicados por el bienestar contrafactual.
+27
+Por tanto, suponemos que el bienestar futuro esperado es igual al de hoy. Se trata de un supuesto simplificador, ya que no tenemos claro cómo pensar en la trayectoria del bienestar mundial futuro.
+Esto se denomina la cuenta ‘deprivacionista’ de lo malo de la muerte.
+28
+Esto es parecido a la forma en que
+se usan los AVAD para estimar la carga de enfermedad
+. Véase Gamlund y Solberg (
+2019
+) para una recopilación de ensayos filosóficos sobre el daño de la muerte.
+Esperanza de vida
+Usamos datos de Kenia, en línea con la estimación derivada de duplicar el consumo. La
+ONU proporciona estimaciones de la esperanza de vida
+proyectadas hacia el futuro;
+29
+A menudo se informa la esperanza de vida “de periodo” (véase
+Our World in Data
+para una explicación). Probablemente esperamos que la esperanza de vida aumente en el futuro para la mayoría de las personas, lo que no se reflejaría en las esperanzas de vida de periodo. Esta es una ventaja de las esperanzas de vida proyectadas que ofrece la ONU.
+para un niño de un año en Kenia, nacido entre 2020 y 2025, la esperanza de vida mediana es 69.6 (IC del 95%: 68.9
+–
+71.5). Las organizaciones benéficas de GiveWell se centran deliberadamente en ayudar a los más pobres, que probablemente tienen una esperanza de vida más baja. Achoki et al. (
+2020
+) muestran la variación de la esperanza de vida entre los condados de Kenia: en 2016, tres condados tenían una esperanza de vida superior a 71 años y 2 condados estaban por debajo de 60 años. En Guesstimate introdujimos un intervalo de confianza subjetivo del 90% de 62
+–
+72 para la esperanza de vida. También introdujimos una distribución uniforme de edades entre 0 y 5 para representar a los niños menores de 5 años.
+Satisfacción vital
+La satisfacción vital media estimada en Kenia es 4.4/10.
+30
+Véase
+World Happiness Report 2013
+. Usamos 2013 por coherencia, ya que es aproximadamente el periodo del estudio de Haushofer & Shapiro (2016). No importa mucho qué año se elija, ya que
+2019
+la SV estimada es 4.5.
+De nuevo, probablemente esto no sea representativo de los beneficiarios de los programas recomendados por GiveWell. Para las muestras de GiveDirectly que informan puntuaciones de SV no estandarizadas, la SV de referencia es 3.9 / 10, con una DE de 2.66 (Haushofer, Reisinger y Shapiro
+2019
+). IDinsight incluyó una pregunta sobre BS en su encuesta de preferencias de los beneficiarios; los encuestados en Kenia tuvieron una
+puntuación media de satisfacción vital de 2.3/10
+(
+n = 1,808, DE = 2.32 ).
+31
+Figura 8, página 42.
+Como comenta IDinsight, esto es más bajo de lo esperado a partir de la extrapolación de los resultados de encuestas representativas a nivel nacional.
+32
+Para demostrarlo, IDinsight supuso que la satisfacción vital varía con el logaritmo del consumo anual per cápita. Utilizaron tres estimaciones del coeficiente de regresión: una de sus propios resultados y, además, las de Deaton (2008) y Stevenson (2013). La satisfacción vital predicha de la muestra de su encuesta es 3.62, 3.35 y 4.22. Véase la nota al pie de la página 95.
+IDinsight sugiere que esto podría deberse a que la pregunta sobre satisfacción vital se hizo al final de su encuesta, lo que sesga las respuestas, o a que la relación lineal-logarítmica aproximada entre ingreso y SV no se cumple en la parte baja de la distribución mundial de ingresos. En nuestro modelo introdujimos un intervalo de confianza subjetivo del 90% de 2.3
+–
+4.4.
+Teniendo en cuenta el futuro
+Hasta ahora nos hemos centrado en la evidencia del nivel actual de BS. Sin embargo, es probable que el BS medio cambie en el futuro (por ejemplo, el desarrollo económico puede tener efectos positivos sobre la SV, mientras que el cambio climático podría tener efectos negativos). Predecir el BS futuro es un área prometedora para trabajos posteriores, pero hasta ahora le hemos dedicado muy poco tiempo. No obstante, está claro que los cambios en la calidad de vida futura podrían ser grandes, por lo que queremos tenerlos en cuenta en el modelo.
+Además de los cambios en la calidad de vida, también existen riesgos de eventos catastróficos globales, regionales o nacionales, es decir, riesgos (no incluidos en la esperanza de vida) que podrían reducir la cantidad de vida y, por tanto, el BS total a lo largo de la vida.
+33
+P. ej., Toby Ord, The Precipice (la transcripción del pódcast de 80,000 Hours puede consultarse
+aquí
+).
+Estos dos factores (el cambio en los niveles de SV, y tener en cuenta
+34
+Descontar el dinero o los activos obtenidos en el futuro es sensato, pero este razonamiento no se aplica necesariamente a la salud o al bienestar. Véase
+este informe de Giving What We Can
+de Ord y Wiblin. Obsérvese que aquí consideramos los efectos de los programas que se realizan hoy (por lo que el debate sobre el descuento para tener en cuenta los programas realizados en el futuro no es pertinente).
+los riesgos futuros) son difíciles de incorporar de forma limpia en Guesstimate. Dado esto, y el hecho de que nuestras ideas actuales son algo especulativas, usamos una celda para combinar estos efectos y hacer un ajuste global. Estimamos el intervalo de confianza subjetivo de este ajuste en
+esta hoja de cálculo
+, considerando estimaciones superior e inferior del impacto final en WELLBYs. Para el límite superior, usamos una tasa de descuento anual de 0.18%
+35
+Esto se calcula tomando la estimación de Toby Ord de una probabilidad de 1 entre 6 de que la humanidad no supere el próximo siglo y suponiendo que el riesgo es constante en ese periodo.
+y supongamos que la SV aumentará linealmente 4 puntos en los próximos 70 años. Para el límite inferior, usamos una tasa de descuento anual de 0.4%
+36
+Esto es muy especulativo, pero se calcula a partir de que los riesgos adicionales para la población pertinente (por ejemplo, catástrofes regionales) son igual de probables que los riesgos existenciales.
+y supongamos que la SV se mantendrá igual. En comparación con ignorar ambos factores, la estimación del límite superior aumenta en un 63% el valor en WELLBYs causado directamente por salvar al niño, y el límite inferior lo reduce en un 17%. Por tanto, al tenerlos en cuenta, nuestro modelo aumenta el valor directo de evitar muertes.
+37
+No hemos ajustado los efectos a corto plazo en el modelo, por ejemplo, los efectos de las transferencias de efectivo; esto supondría una diferencia pequeña.
+El punto neutro
+Una cuestión importante y difícil es en qué lugar de la escala de 0 a 10 el valor equivale al de la no existencia; dicho de otro modo, el nivel al que seguir existiendo sería, en conjunto, ni bueno ni malo para la persona si continuara viviendo en ese nivel. Nos referimos a esto como el ‘punto neutro’.
+No está claro dónde está el punto neutro y se ha debatido poco sobre cómo determinarlo, en principio. Los investigadores del BS a veces tratan el punto medio de las escalas de BS (p. ej., 5/10) como el punto en el que alguien no está ni satisfecho ni insatisfecho, o ni feliz ni infeliz (p. ej.,
+Diener et al. 2018
+). Si tomáramos esto como punto neutro, tendría la implicación controvertida de que muchas personas, incluido el keniano medio, tienen vidas que actualmente no merecen la pena (considerando solo su bienestar). Otros investigadores tratan el extremo inferior de la escala, p. ej., 0/10 para la satisfacción vital, como punto neutro (p. ej.,
+Layard et al. 2020
+). Esto tiene una implicación controvertida distinta: no es posible que nadie, usando una escala de satisfacción vital, tenga una vida que no merezca la pena.
+Un método, no obviamente correcto, sería preguntar al público a qué nivel le resultaría indiferente la existencia o la no existencia. Una encuesta pequeña (n<100) en el Reino Unido encontró que, con un nivel de satisfacción vital de alrededor de 2/10, los encuestados preferirían la muerte a la vida.
+38
+Peasgood et al. (borrador no publicado)
+La encuesta de beneficiarios de IDinsight, con un tamaño de muestra igualmente pequeño, estimó el punto neutro en 0.56.
+39
+Apéndice 6, p. 94
+Usamos un rango de 0.05
+–
+a 2.5 para el punto neutro.
+Resumen: estimación deprivacionista
+El efecto directo estimado por el enfoque deprivacionista es entonces:
+WELLBYs perdidos = (nivel de bienestar esperado – punto neutro) * (esperanza de vida – edad al morir) = bienestar neto esperado * años de vida esperados
+En palabras, el WELLBY neto por año de vida es la diferencia entre la satisfacción vital esperada y el punto neutro. El número de WELLBYs perdidos por una muerte es el WELLBY neto por año de vida multiplicado por el número esperado de años de vida restantes si la persona hubiera seguido viviendo. Por ejemplo, si un niño muriera a los cuatro años, el nivel de bienestar esperado a lo largo de su vida es 4/10, y su esperanza de vida es de 66 años:
+WELLBYs = (4 – 2) * (66 – 4) = 2 * 62 = 124
+En Guesstimate, esto resulta ser de unos ~210 (50
+–
+360) WELLBYs perdidos por la muerte de un menor de 5 años.
+4.1.2 Enfoque del interés relativo al tiempo (TRIA)
+Según la estimación anterior, es más valioso salvar la vida de un niño de 2 años que la de una persona de 20. Algunas personas lo encuentran poco intuitivo y piensan que es al revés. A diferencia de la persona de 20 años, el niño de 2 años aún no está completamente desarrollado, no tiene una conexión psicológica fuerte con sus yoes futuros, ni tiene tantos intereses que se verían frustrados si no sigue viviendo.
+En la literatura filosófica, la postura que recoge la intuición de que es (normalmente) peor que alguien muera a los 20 que a los 2 se llama enfoque del interés relativo al tiempo (TRIA) de la maldad de la muerte (
+Holtug 2011
+;
+McMahan 2019
+). Según el TRIA, la maldad de la muerte es el producto del bienestar futuro del que la persona se ve privada multiplicado por lo conectada psicológicamente que está la persona en el presente con su yo futuro. No defendemos una postura frente a la otra (deprivacionismo o TRIA), sino que esbozamos las distintas implicaciones de cada una.
+No está claro exactamente cómo debería representarse el TRIA: dos personas podrían sostener la postura de que «salvar a personas de 20 años es mejor que salvar a niños de 2 años», pero discrepar sobre cómo expresar esto con precisión matemática.
+40
+Véase Greaves (
+2019
+) para una discusión de cómo la postura está infradeterminada y de la dificultad de encontrar una precisificación plausible.
+Pero en términos de los pesos morales relativos de salvar a un menor de 5 años frente a duplicar el consumo durante un año, la implicación básica de pasar del deprivacionismo al TRIA es que el valor relativo de salvar a menores de 5 años disminuirá.
+WELLBYs perdidos =  (nivel de bienestar esperado – punto neutro) * [(esperanza de vida – edad al morir) * descuento]
+El descuento del TRIA reduce el valor de evitar la muerte de alguien más joven que la edad de plena conexión psicológica. Lo representamos como una función lineal simple, que descuenta desde cero tres meses antes del nacimiento hasta uno a la edad de «plena conexión psicológica» (véase la Figura 2). En nuestro modelo usamos valores entre 10 y 21 años para la edad de «plena conexión psicológica». Los WELLBYs perdidos directamente por la muerte de un menor de 5 años según el TRIA se estiman entonces en 45 (9
+–
+110) en Guesstimate. Es plausible que la edad a la que se aplana la pendiente del descuento del TRIA capture mejor la intuición de alguien sobre el TRIA.
+Figura 2:
+Desvalor de la muerte a una edad dada, para los enfoques deprivacionista y TRIA
+Nota:
+Según el deprivacionismo (línea roja), el número de años perdidos por la muerte equivale a la esperanza de vida al nacer y disminuye linealmente a medida que aumenta la edad al morir. Nuestra función de descuento simple del TRIA (mostrada en B) va de 0 a 3 meses antes del nacimiento hasta 1 a la edad de «plena conexión psicológica». Este descuento se multiplica por el número de años de vida restantes para estimar los años «TRIA» perdidos por la muerte a una edad dada (línea azul discontinua). Hemos supuesto que la esperanza de vida es constante.
+4.2 Efectos de desbordamiento en el hogar: impacto en el SWB del duelo
+El efecto más claro sobre los demás miembros del hogar debido a una muerte es el duelo. La base de evidencia sobre los efectos del duelo en el SWB es escasa y proviene sobre todo de países de ingresos altos.
+41
+Encontramos un estudio en un contexto más relevante: el documento de trabajo de Deaton et al. (
+2009
+) que usa datos transversales del África subsahariana. Se estima que la muerte de un «familiar directo» en el último año reduce el SWB en 0.1 puntos (en la escalera de Cantril de 0 a 10). El efecto sobre la felicidad parece mucho mayor, aunque es difícil compararlo porque la pregunta sobre felicidad era binaria (probabilidad de haber experimentado disfrute el día anterior). No hemos actualizado nuestras estimaciones con base en este estudio, sobre todo por las siguientes razones: (1) la encuesta no preguntó si alguien había muerto en su familia en el último año por cualquier causa, sino solo por un subconjunto de causas (sida, malaria, tuberculosis y parto); la afirmación de que el estudio compara a personas que tuvieron familiares directos fallecidos en el último año con quienes no los tuvieron no parece ser cierta; (2) los resultados son extremadamente heterogéneos y no se indican los errores; (3) es difícil saber cuán ampliamente habrán interpretado las personas la muerte de un «familiar directo»; podría ser muy distinta de la muerte de un hijo.
+En nuestra opinión, el estudio más relevante es el de Oswald y Powdthavee (
+2008
+) Usan un conjunto de datos de panel británico (evidencia generalmente más sólida que un estudio transversal
+42
+En un panel, a menudo se pueden controlar las características invariantes en el tiempo del individuo, lo que reduce la probabilidad de sesgo por variables omitidas. Esto no permite llegar a una relación causal, porque todavía hay que lidiar con rasgos del individuo que varían en el tiempo, pero es mucho mejor que los estudios transversales, en los que probablemente solo se dispone de mediciones deficientes de algunas de las características invariantes en el tiempo.
+) y estiman el efecto sobre la satisfacción vital de alguien tras la muerte de su hijo. Los autores estiman que el efecto de la muerte de un hijo sobre sus padres es de -0.49 puntos de satisfacción vital (SV)
+43
+Combinando las estimaciones de MCO ajustadas y de VI: la muerte de la pareja tiene un efecto de (-0.590 – 0.661) / 2 sobre los puntos de SV (escala de 7 puntos). Para la muerte de un hijo es (-0.556 -0.430) / 2.
+en una escala de 7 puntos (-0.7 puntos en una escala de 11). En comparación, el efecto de la muerte de la pareja es más fuerte (aunque no de forma estadísticamente significativa), con -0.63 puntos (-0.9 en una escala de 11). El tamaño de la muestra es grande (n = 28,418), pero solo 49 personas informaron la muerte de un hijo y 89 la muerte de la pareja en los últimos 12 meses, y los errores estándar son correspondientemente grandes (0.25 y 0.24, respectivamente, en la escala de 7 puntos).
+Clark et al. (2018)
+44
+The Origins of Happiness, p. 81 (no disponible en línea).
+dan alguna indicación del efecto a lo largo del tiempo. Usando conjuntos de datos de panel de Gran Bretaña, Alemania y Australia, estiman que la pérdida de la pareja se asocia con una caída, en el año siguiente, de casi 1 punto de satisfacción vital en una escala de 11. La satisfacción vital de las mujeres y los hombres en los tres países suele volver a los niveles previos a la pérdida en un periodo de cinco años. La pérdida media total es de aproximadamente 2 WELLBYs.
+Dado esto, introducimos en nuestro modelo un valor medio de -0.7 puntos de SV por el duelo de un progenitor, siguiendo a Oswald y Powdthavee (2008), con intervalos de confianza amplios (de -0.2 a -1.7). Modelamos el efecto como una recuperación lineal hasta el nivel basal a lo largo de 5 (2
+–
+10) años. En los estudios, las muertes podrían haber ocurrido en cualquier momento del último año, así que una aproximación razonable es que el cambio medido en SV corresponde a 6 meses después de la muerte. Finalmente, suponemos que el efecto es el mismo para los demás miembros del hogar, para dar una estimación total aproximada de 6 (1
+–
+20) WELLBYs por el efecto del duelo.
+Los efectos del duelo disminuirían si incluyéramos el contrafactual
+–
+de que el duelo también ocurra cuando la persona muera en un momento posterior. Parece razonable suponer, sin embargo, que la muerte (más improbable) de un niño por malaria tendrá un efecto mucho mayor sobre el duelo de alguien que la muerte (más probable) por vejez.
+4.3 Otras consideraciones
+Nuestro análisis usa datos de SWB para (re)estimar los valores de dos resultados
+–
+aumentar el consumo y evitar la muerte de menores de 5 años
+–
+aunque asumiendo implícitamente diversos supuestos de fondo. Sin embargo, hay otros supuestos que podrían cambiar el análisis, quizás de forma sustancial, y que mencionaremos brevemente.
+Más arriba, estamos asumiendo implícitamente una visión de la ética de la población centrada en las personas afectadas, según la cual solo importan las vidas que existirán pase lo que pase con nuestras acciones
+–
+en forma de lema, las visiones centradas en las personas afectadas sostienen que “la moral trata de hacer felices a las personas, no de hacer personas felices” (
+Narveson 1973
+). GiveWell
+no tiene una postura oficial
+sobre la ética de la población, y su personal simpatiza con una variedad de posturas.
+45
+Véase
+esto
+o
+esto
+documento de integrantes actuales o anteriores del personal de GiveWell.
+Alternativamente, se podría sostener una visión como el totalismo (según el cual el mejor estado de cosas es aquel con la mayor suma de bienestar de todas las personas que alguna vez viven), en la que, de manera destacada, crear vidas felices es bueno. Según estas visiones, el valor de salvar vidas sería muy sensible al efecto que la reducción de la mortalidad infantil tiene sobre la fecundidad materna. Para explicarlo, los padres suelen buscar un tamaño de familia determinado y, por tanto, tienen menos hijos en total si disminuye la probabilidad de que cada uno muera. Un
+informe elaborado
+para GiveWell estimó que, en algunas zonas donde recomienda organizaciones benéficas, el número de nacimientos evitados por cada vida salvada llega a ser de hasta 1:1, una proporción en la que el tamaño y el crecimiento de la población quedan efectivamente sin cambios al salvar vidas.
+46
+Si resultara que no es 1:1, surgirían preocupaciones relacionadas sobre si la Tierra está subpoblada o sobrepoblada. Véanse Greaves (
+2015
+) y Plant (
+2019
+) cap. 2 para una discusión sobre los problemas de la población óptima.
+Para los totalistas, el valor de salvar vidas en un contexto 1:1 sería muy pequeño (en comparación con uno en el que no hubiera reducción de la fecundidad), ya que el valor de salvar una vida queda “anulado” por el desvalor de causar que se cree una vida menos.
+47
+Véase
+esta entrada de blog de 2017
+en el sitio web de GiveWell para algo de discusión.
+Aun así, habría que contar otros impactos en un contexto 1:1, como la prevención del duelo. Las visiones centradas en las personas afectadas generalmente no consideran que estos efectos sobre la fecundidad sean relevantes para evaluar el impacto. Vale la pena señalar que los filósofos coinciden ampliamente en que la ética de la población es un área notoriamente intratable de la ética, en la que todas las visiones tienen algunos resultados (muy) contraintuitivos. Véase Greaves (
+2017
+) para una revisión de las distintas teorías y sus problemas.
+Otra consideración es que se podría adoptar una visión ‘
+epicúrea
+’ de la muerte. En este caso, la muerte no es mala para la persona que muere; por tanto, no hay valor en salvar vidas relacionado con la persona cuya vida se salva; por supuesto, el duelo y otros efectos seguirían contándose.
+48
+Aunque es habitual analizar el epicureísmo como una posible visión, no es una visión comúnmente sostenida. Véanse, por ejemplo, Cushing (
+2007
+) y Rubio (
+de próxima publicación
+) para dos de las pocas discusiones contemporáneas (favorables).
+Desde esta visión, salvar vidas tiene, como era de esperar, un valor menor.
+Dada esta incertidumbre moral, uno podría querer combinar de alguna manera distintas visiones, ponderadas según la fuerza de la creencia en cada una, aunque no está claro exactamente cómo debería hacerse, y aquí no lo hacemos
+–
+véase Bykvist (
+2017
+) para una discusión.
+La utilidad de las métricas de bienestar subjetivo (SWB) es que constituyen un medio plausible para medir el bienestar, uno que permite expresar en una única moneda los distintos resultados que crean, extienden y mejoran vidas. Determinar el valor de los resultados depende, por supuesto, de una serie de cuestiones éticas
+–
+como cuánto se valora la creación de vidas
+–
+además de cómo medir el bienestar. Aun así, hay que contar con una medida del bienestar, sin importar cómo se resuelvan esas otras cuestiones éticas.
+5. Discusión de los resultados del modelo
+Describiremos brevemente nuestras estimaciones iniciales del valor relativo de evitar la muerte de un menor de 5 años y de duplicar el consumo de una persona durante un año. Compararemos los resultados con estimaciones anteriores y analizaremos más a fondo sus incertidumbres y su sensibilidad.
+5.1 Nuestros resultados
+Asumiendo el relato desprivacionista sobre lo malo de la muerte, la proporción entre evitar la muerte de un menor de 5 años y duplicar el consumo de un
+hogar
+durante un año en nuestro modelo es de aproximadamente 36:1. En otras palabras, duplicar el consumo de 36 hogares durante un año tendría un valor aproximadamente igual al de evitar la muerte de un niño menor de 5 años, aunque con un amplio margen de incertidumbre. Según TRIA, tal como hemos modelado la visión, la proporción de pesos morales se reduce a unos 8:1. Para obtener los pesos morales respectivos de duplicar el consumo de
+una persona
+durante un año, dividimos por el número promedio de miembros del hogar.
+Tabla 2:
+Nuestros resultados
+Proporción del peso moral: evitar la muerte de un menor de 5 años frente a duplicar
+el consumo del hogar
+durante un año
+Proporción del peso moral: evitar la muerte de un menor de 5 años frente a duplicar
+el consumo de la persona
+durante un año
+Desprivacionista
+36
+154
+TRIA
+8
+33
+5.2 Comparación con otros métodos
+Habiendo producido nuestro modelo y sus resultados, el paso natural es compararlos con las estimaciones que usa GiveWell. Aunque podemos comparar los resultados finales, y estos resultan similares, no está claro qué se puede inferir de ello, dados los distintos métodos empleados.
+La proporción de peso moral de GiveWell en 2018, usando la mediana de los integrantes de su personal, fue de 50 (el rango iba de 8 a 100).
+49
+Véase el
+CEA de 2018
+: el “valor de duplicar el consumo de una persona durante un año en comparación con salvar la vida de un niño menor de 5 años (AMF)” se expresa en porcentajes, siendo la mediana del 2%, lo que corresponde a un peso moral de 50. En el
+CEA de 2019
+, GiveWell usa una proporción de peso moral de 100:1, influida por los resultados de la encuesta de IDinsight.
+Esto es superior a nuestro resultado de TRIA (33), pero inferior a nuestro resultado desprivacionista (154). Es difícil comentar esta comparación porque solo sabemos cómo algunos integrantes del personal de GiveWell generaron sus pesos.
+50
+Los enlaces al razonamiento de algunos integrantes del personal se dan en los CEA, por ejemplo el
+CEA de 2018
+.
+El informe de IDinsight sobre las preferencias de los beneficiarios ofrece una estimación de 230 para la proporción de peso moral.
+51
+Véanse las págs. 10 y 102. Este resultado es un promedio de Kenia y Ghana. Hubo diferencias regionales significativas en los resultados; véase la sección 1 del informe de IDinsight para más discusión.
+Este es un promedio de sus dos métodos basados en preferencias, que describimos a continuación.
+En el primer método, IDinsight preguntó a los encuestados sobre su propia disposición a pagar por un medicamento o vacuna (hipotéticos) para reducir el riesgo de morir, para ellos o para sus hijos, de una enfermedad (hipotética). Concretamente, se les preguntó cuánto pagarían para reducir el riesgo de morir por la enfermedad de 20 de cada 1,000 a 5 de cada 1,000 o 10 de cada 1,000 (aleatorizado) en los siguientes 10 años. Esto exige que las personas piensen en términos de probabilidades pequeñas, lo cual resulta bastante poco intuitivo.
+52
+IDinsight evaluó la comprensión de los encuestados sobre la probabilidad mediante varias preguntas, como “Imaginen dos loterías. La probabilidad de ganar en una lotería es de 5 entre 1000; la probabilidad de ganar en la otra es de 10 entre 1000. ¿Cuál de las dos loterías tiene mayor probabilidad de ganar?”. El 58% de los encuestados respondió correctamente a las cuatro preguntas básicas a la primera. Solo el 34% respondió correctamente una pregunta más avanzada: “¿Cuál riesgo de muerte es mayor: 1 de cada 100 o 2 de cada 1,000?”. Luego el encuestador capacitó a los encuestados, dando explicaciones adicionales hasta que pudieron responder correctamente. Véase el Apéndice 2 del informe de IDinsight para más discusión.
+La disposición media a pagar fue de 0,763 (nominales) para evitar la muerte de un menor de 5 años. Esto se compara con el consumo anual per cápita promedio supuesto para la población beneficiaria típica en todo el modelo de GiveWell (86 nominales), lo que da una proporción de peso moral de 140.
+En el segundo método, se pidió a los encuestados que adoptaran la perspectiva de un responsable de decisiones en su comunidad y que eligieran entre salvar una vida (mediante una intervención hipotética) y entregar un número de transferencias monetarias de $1,000, donde el número máximo de transferencias posible era 10,000, es decir, un valor de $10m. La encuesta encontró que el 38% de los encuestados prefería salvar una vida antes que entregar 10,000 transferencias monetarias (los “que nunca cambian”). En Ghana, el punto de cambio mediano fue >9,995 transferencias monetarias (es decir, al menos $9 millones),
+53
+Tabla 28, p. 78.
+lo cual parece implausiblemente alto. IDinsight tomó la estimación central de su modelo de estimación
+54
+Un modelo de regresión logística.
+–
+91 transferencias monetarias
+–
+como dato de entrada para el peso moral; es decir, la preferencia de los beneficiarios se interpretó como indiferencia entre salvar una vida y $91,000 en transferencias monetarias. Esto da una razón estimada de pesos morales de 319.
+IDinsight también ofrece “priores de la literatura” de la razón de pesos morales,
+55
+Véase el resultado en la página 28, y más información en la p. 8, nota 14.
+con una mediana de 145 (mínimo en la literatura de 10 y máximo de 240). Estas cifras se basan en estimaciones del valor de una vida estadística (a partir de preferencias reveladas y declaradas) en Estados Unidos, extrapoladas a la población beneficiaria. Puede leer otras estimaciones en
+esta página de GiveWell
+. Como se señaló en la introducción, sin embargo, existen preocupaciones generales sobre basarse en cualquier tipo de método basado en preferencias como guía de cómo se sienten las personas durante su vida (véase Bronsteen, Buccafusco y Masur,
+2013
+).
+5.3 Incertidumbres y sensibilidad
+Resumen de los principales resultados en WELLBY (con intervalos de confianza del 90%):
+Duplicar el consumo:
+7 (2 a 19)
+Privacionista
+–
+evitar la muerte de un menor de 5 años:
+220 (58 a 360)
+TRIA
+–
+evitar la muerte de un menor de 5 años:
+45 (9 a 110)
+Para duplicar el consumo, las mayores incertidumbres provienen (al menos de los parámetros de este modelo, es decir, sin incluir la incertidumbre del modelo):
+El efecto a largo plazo de duplicar el consumo (determinado principalmente por la tasa de caída del efecto). Esto puede responderse empíricamente, aunque los ECA durante periodos largos son muy raros, dado el costo y el esfuerzo que implican.
+Derrames sobre el hogar. Seguir investigando los efectos sobre otros miembros del hogar (no solo sobre quien recibe la transferencia monetaria) parece bastante manejable y estrecharía los intervalos de confianza. Como se mencionó, no hemos incluido los efectos de derrame sobre la comunidad más amplia, pero presentamos una síntesis en el Apéndice B. Planeamos comentar esto con más detalle en nuestro próximo metaanálisis (McGuire, Bach-Mortensen y Kaiser,
+s. f.
+).
+Para evitar una muerte, el resultado del enfoque privacionista está dominado por el WELLBY neto por año de vida, que a su vez es aproximadamente igual de sensible a la satisfacción vital media y al punto neutro. Mejorar la estimación de la satisfacción vital para esta población debería ser bastante sencillo: solo necesitamos encuestar a más personas. Sin embargo, existe una gran incertidumbre en torno al BSS futuro. El reto para mejorar la estimación del punto neutro es que carecemos de una comprensión teórica de cuál es la mejor forma de determinarlo. Si el método ideal implica realizar algunas encuestas, entonces el trabajo empírico adicional sería sencillo. Planeamos seguir investigando este tema en el futuro.
+El efecto total estimado del duelo es de unos 6 WELLBY, que es relativamente más significativo para TRIA (unos 39 WELLBY perdidos por la propia muerte) que para el enfoque privacionista (unos 210 perdidos por la propia muerte). Como se mencionó antes, hay poca evidencia de alta calidad en contextos relevantes.
+Otro problema para estimar los WELLBY con el enfoque TRIA es que la propia postura está infradeterminada: hay muchas formas de precisar la idea de que “salvar a personas de 20 años es mejor que salvar a personas de 2 años”. Los defensores de esta postura querrían determinar sus detalles de manera informada filosófica y empíricamente. No obstante, creemos que nuestro supuesto ofrece una indicación razonable de cómo los defensores de TRIA podrían representar esta postura.
+6. Observaciones finales
+Hemos ilustrado un método coherente para estimar los valores relativos, en un contexto de bajos ingresos, de evitar la muerte de un menor de 5 años frente a duplicar el consumo de alguien durante un año. En concreto, usamos la satisfacción vital, una medida del bienestar subjetivo, para evaluar el valor de cada resultado en años de vida ajustados por bienestar (WELLBY). El análisis fue viable con los datos disponibles, pero la evidencia pertinente era escasa en algunos ámbitos, como los efectos a largo plazo de las transferencias monetarias y el efecto del duelo sobre el BSS en las poblaciones relevantes. Este enfoque podría extenderse sin dificultad a otros tipos de intervenciones que mejoran la vida, como el tratamiento de la depresión, la reducción del dolor crónico o la mejora de la educación. También puede reproducirse en términos de felicidad, en lugar de satisfacción vital, si y cuando existan los datos pertinentes. Explicamos las consideraciones filosóficas y empíricas a las que son sensibles nuestras estimaciones y las comparamos con algunas alternativas. También señalamos las áreas en las que un trabajo adicional sería especialmente útil.
+Apéndice A: Efectos sobre el BSS de las transferencias monetarias a largo plazo
+A continuación describimos brevemente los estudios más relevantes que encontramos sobre los efectos en el BSS en periodos más largos (más de dos años). Cada uno de estos estudios es distinto de los estudios de GiveDirectly (por ejemplo, en la naturaleza o el tamaño de la transferencia monetaria, o en el resultado medido), y hay gran variedad en los efectos a largo plazo. Por ello, no creemos tener buena evidencia para actualizar nuestra estimación del efecto a lo largo del tiempo en ninguna dirección.
+Blattman et al. (
+2018
+), documento de trabajo: se entregaron subvenciones de $400 para ayudar a personas a iniciar oficios calificados en Uganda. En un seguimiento nueve años después, no hubo diferencias significativas en un índice de salud mental entre el grupo de tratamiento y el de control. La salud mental y el BSS no pueden usarse indistintamente, pero creemos que las medidas de salud mental revelan al menos algo sobre cómo se siente alguien en la actualidad.
+Galiani et al. (
+2018
+): estudiaron la provisión de vivienda básica (no una transferencia monetaria, aunque las transferencias suelen gastarse en vivienda) en El Salvador, México y Uruguay. Tras 16 meses, el BSS mejoró sustancialmente para los beneficiarios de viviendas mejores, pero luego, tras ocho meses adicionales (en promedio), el 60% de esa ganancia desaparece. El modelo de los autores sugiere que el efecto desaparece por completo a los 28 meses (2.33 años).
+Natali et al. (
+2018
+): ECA de un programa que proporcionaba transferencias bimestrales de $24 (es decir, no una transferencia única) a madres en Zambia. Aumento de 0.19 DE en la felicidad a los tres años y de 0.25 DE a los cuatro años (es decir, aumentando con el tiempo).
+Lindvqist et al. (
+2020
+): un estudio sobre loterías en Suecia (es decir, un país de altos ingresos) encuentra que los efectos sobre la satisfacción vital persisten durante más de una década y no muestran evidencia de disiparse con el tiempo.
+Di Tella et al. (
+2010
+): usando datos de panel alemanes (también de altos ingresos), sugieren que el efecto del ingreso sobre la satisfacción vital disminuye un 65 % en cuatro años, lo que, de forma ingenua, implica que el efecto de un shock de ingresos sobre el BSS se extinguirá por completo en unos 5 años y medio.
+Apéndice B: Derrames comunitarios
+Tres de los cuatro estudios de GiveDirectly que se muestran en la Tabla 1 informan de efectos sobre índices de “bienestar psicológico” (PWB) en la comunidad. El índice de PWB contiene preguntas sobre felicidad y satisfacción vital, así como medidas de salud mental (para los derrames comunitarios, no tenemos los resultados de satisfacción vital de todos los estudios). Realizamos dos agregaciones de efectos aleatorios multinivel de los tamaños de efecto estandarizados, ponderados inversamente por el error estándar, con errores agrupados a nivel de la muestra de los tamaños de efecto estandarizados. Ambas muestran que no hay efectos de derrame significativos (IC del 95%) en las medidas de BSS y de salud mental (SM). Este análisis es preliminar, ya que hay una gran variabilidad en la forma en que se implementan y reportan las transferencias, y no está claro si una síntesis es reveladora sin un análisis correspondiente de posibles efectos moderadores, como el tamaño y el tiempo.
+La figura 3 es una agregación sencilla de los estudios de GiveDirectly de la tabla 1. La figura 4 incluye todas las medidas cuantitativas de efectos de derrame sobre el BS o la SM que hemos encontrado, lo que incluye un estudio que no es de GiveDirectly (
+Baird et al., 2013
+) que analiza el impacto de las TE mensuales en las niñas adolescentes’
+GHQ-12
+56
+El GHQ-12 es una herramienta de cribado muy utilizada para detectar trastornos mentales comunes.
+puntuaciones. En la figura 4 convertimos todos los tamaños del efecto a la d de Cohen
+57
+La relación entre los tamaños del efecto originales (Spillover_es) y la d de Cohen se recoge en el siguiente pseudocódigo: t = (Spillover_es / Spillover_SE), dt = t * sqrt((1/(Spillover_n / 2)) + (1/((Spillover_n /2 ))) ) d_se = sqrt(((Spillover_n /2)/ ((Spillover_n / 2)^2)) + ((dt^2) / (2*(Spillover_n / 2)))))
+ya que el estudio de Baird et al. usó las unidades naturales de la escala Likert del GHQ-12.
+Hay cierta heterogeneidad en la forma en que se contabilizan los efectos de derrame. La mayoría de los efectos de derrame se producen
+dentro
+de la aldea (tratada), salvo en Egger et al. 2019, que analiza los efectos de derrame
+entre
+aldeas tratadas y no tratadas.
+58
+Lo hacen comparando las aldeas de control cercanas a las aldeas de tratamiento con las aldeas de control más alejadas de estas.
+Todos los estudios identifican el tratamiento de derrame de forma categórica a partir de la proximidad geográfica de un no beneficiario a un beneficiario (generalmente en la misma aldea), salvo en el caso de “Is Your Gain My Pain” (
+Haushofer, Reisinger y Shapiro, 2019
+) donde el derrame se formula como
+cuántos
+beneficiarios viven cerca de un no beneficiario (aproximado por los aumentos en la riqueza media de la aldea). Así, es el único estudio que analiza el
+grado
+de intensidad del derrame
+.
+59
+En la jerga económica, esto se conoce como margen intensivo, en contraposición al margen extensivo.
+Figura 3
+: Gráfico de bosque de los efectos de derrame de los estudios de GiveDirectly
+Nota:
+Los errores estándar están agrupados a nivel de estudio para tener en cuenta la dependencia. Todos los efectos de derrame se producen dentro de la aldea (tratada), salvo en Egger et al., que analiza los efectos entre aldeas tratadas y no tratadas.
+Figura 4
+: Gráfico de bosque de todos los estudios de TE que miden efectos de derrame psicológicos
+Nota:
+El valor de la suma global (total en PPA $) varía entre el estudio de Baird et al. (
+2013
+) y sus seguimientos, porque la variable se genera a partir de la suma de todas las transferencias mensuales en efectivo, y es el único estudio en el que la TE se entregó en cuotas mensuales.
+Notas finales
+1
+Aunque en el apéndice B representamos los efectos conocidos de derrame comunitario e ilustramos una agregación preliminar.
+2
+Véase el análisis de GiveWell
+de costo-efectividad de 2019
+.
+3
+Véase la tabla 4 (fila 1) del
+informe de IDinsight
+.
+4
+Los AVAC son una medida de la salud ganada, mientras que los AVAD son una medida de la salud perdida. Una revisión de otras diferencias puede consultarse en Gold, Stevenson y Fryback (
+2002
+).
+5
+Solo conocemos los intentos de uno de nosotros (
+Plant, 2019, cap. 7
+), quien ofrece estimaciones puntuales de cálculo rápido sobre el valor de salvar vidas, reducir la pobreza y tratar la salud mental. Mejoramos la estimación previa de Plant sobre el valor de duplicar el consumo y de evitar muertes de varias formas: recurrimos a un conjunto más amplio de estudios para estimar el valor de duplicar el consumo (del hogar) y evaluamos su efecto total a lo largo del tiempo, modelándolo como una caída anual; usamos una simulación de Monte Carlo con intervalos de confianza subjetivos del 90% para tener en cuenta la incertidumbre; y estimamos la gravedad de la muerte según dos posturas filosóficas.
+6
+Puede editar los datos de entrada en Guesstimate para ver cómo varían los resultados. Los resultados cambiarán ligeramente al recargar la página, porque las simulaciones se vuelven a ejecutar. El valor grande que aparece en una celda es la media; si hace clic en “Expandir” en cualquier celda, puede ver la mediana (el percentil 50). Estos valores pueden ser bastante distintos, sobre todo si la presencia de unos pocos valores extremos altera más la media que la mediana. Puede leer más sobre Guesstimate en la
+documentación
+.
+7
+En un cálculo rápido, Plant (
+2019
+) p. 228-9 afirma que, como la depresión y la ansiedad tienen un impacto relativamente mayor sobre la felicidad que sobre la satisfacción vital, y el aumento del ingreso tiene un efecto relativamente menor sobre la felicidad que sobre la satisfacción vital, el valor relativo de tratar la ansiedad o la depresión, en comparación con duplicar el ingreso, es unas tres veces mayor usando la felicidad que la satisfacción vital (lo cual deja abierta la cuestión de cuál tiene mayor costo-efectividad en términos absolutos con cualquiera de las dos medidas).
+8
+GiveWell prefiere considerar el consumo en lugar del ingreso (véase
+Guía de los CEA de GiveWell
+). El consumo incluye el valor de todos los bienes utilizados dentro de un hogar. Por ejemplo, si los cultivos se cultivan y se comen en casa, su valor se incluiría en el consumo, pero no en el ingreso. Sin embargo, el consumo se operacionaliza con más frecuencia como gasto total, y no como el valor de todos los bienes consumidos.
+9
+Si un estudio encuentra un aumento de 1 punto en la SV, y la desviación estándar es de 2 puntos de SV, entonces el tamaño del efecto es de 0.5 DE. Estandarizar de esta forma permite comparar fácilmente el tamaño de efectos medidos en escalas diferentes.
+10
+Los trabajos puramente transversales tienen dos inconvenientes cuando intentamos estimar el impacto total de un choque de ingreso sobre el BS. En primer lugar, las estimaciones transversales no tienen componente temporal, por lo que no sabemos cuánto dura el efecto. En segundo lugar, no son causales. No sabemos qué parte de este coeficiente puede explicarse porque una mayor satisfacción con la vida conduce a mayores ingresos, o viceversa.
+11
+El resultado proviene de 0.36*ln(2) = 0.24, donde 0.36 era el coeficiente de log(ingreso). La ventaja de usar un modelo lineal-logarítmico es que permite interpretar los coeficientes
+como cambio porcentual
+para poder estimar el efecto de duplicar sin conocer las unidades originales (aunque cuanto mayor sea el cambio, peor será la aproximación que ofrece).
+12
+Desde la Encuesta Mundial de Gallup de 2005 a 2012 (Stevenson y Wolfers 2013, p. 601). Stevenson y Wolfers también consideran los resultados de la escala de Cantril, una pregunta de evaluación de la vida que pide a las personas que imaginen una escalera con peldaños del 0 al 10, donde 10 es la mejor vida posible y 0 la peor, y que se sitúen en ella. En este caso, duplicar el ingreso produce un aumento de 0.25*ln(2) DE en la SV.
+13
+“El efecto causal del logaritmo del ingreso sobre la SV general que implica nuestra estimación es de 0.38”, lo que corresponde a 0.38*ln(2) para duplicar el ingreso. Véase también la figura 4 en Lindvqist et al.
+14
+Un artículo reciente de Ridley et al. (2020) agrega los efectos de las transferencias en efectivo sobre la salud mental y el bienestar psicológico. La figura 10 muestra los efectos por cada 1000 $ (PPA) gastados.
+15
+Mediante un modelo de regresión lineal (lo que restringe las estimaciones de los parámetros —el logaritmo de la tasa de decaimiento y el tamaño inicial del efecto— a una distribución normal).
+16
+Página 25: es el único valor no estandarizado de una DE que se proporciona en los estudios de GiveDirectly.
+17
+Stevenson y Wolfers (2013) parecen tener una DE de 2; la encuesta British Household Panel = 1.9; Lindqvist et al. = 1.93, informe de beneficiarios de IDinsight = 2.32. Kilburn et al. informan de 1.3 DE de SV en una escala de 1 a 5
+18
+Véase O’Hare et al. (
+2013
+), Bastagli et al. (
+2019
+) y la
+Our World in Data
+página.
+19
+Véase Martín-María et al. (
+2017
+).
+20
+En Egger et al. 2019, en los hogares con una pareja casada o que convive, uno de los miembros de la pareja fue seleccionado al azar como el encuestado objetivo.
+21
+Hay cierta evidencia de resultados distintos según si la persona que recibe la TE es una mujer o un hombre. Por ejemplo, Haushofer y Shapiro (2016) encuentran diferencias significativas (al nivel del 10%) en el bienestar psicológico y el empoderamiento femenino entre los hogares con receptora mujer y los hogares con receptor hombre (pero ninguna diferencia significativa en el resto de efectos del tratamiento). Los autores ilustran estas diferencias con más detalle en Haushofer et al. (
+2019
+), donde muestran que los efectos sobre el bienestar psicológico parecen estar impulsados por las mujeres. Este resultado coincide con otra evaluación de una TE que encontró que el impacto sobre el BS está impulsado por los hogares encabezados por mujeres (que también son quienes responden) (Handa y Park,
+2014
+). Es posible que también haya diferencias en los demás miembros del hogar, según el receptor sea mujer u hombre. Dado que los estudios de GiveDirectly seleccionan al azar si el receptor es hombre o mujer, y los resultados reflejan ambos casos, no hemos intentado tener en cuenta las diferencias entre los hogares receptores de hombres y los de mujeres.
+22
+Otro documento de trabajo sobre los experimentos informados en Haushofer y Shapiro 2016, 2018.
+23
+El trabajo realizado sugiere que el efecto del ingreso relativo sigue siendo grande en entornos de menores ingresos (Reyes-García et al.,
+2016
+). En el caso del ensayo controlado aleatorizado de Natali et al. sobre una transferencia monetaria (TM) en Zambia, encuentran “evidencia de que la vía de la pobreza relativa domina a la vía de la pobreza absoluta para explicar los efectos del tratamiento” (
+2018
+).
+24
+y = a + b . log(x) + error
+25
+Véase la parte superior de la página 4 en
+estas notas
+: “para un modelo logarítmico-lineal, el cambio esperado en Y asociado con un aumento del p % en X puede calcularse como βˆ · log([100 + p]/100)”. Por tanto, el multiplicador del efecto de un cambio del 75 % en el consumo, para un cambio del 100 % en el consumo, = (log(200/100) / log(175/100)) = 1.24, o 24 %. En Haushofer y Shapiro (2016), la TM promedio de $709 equivale al 37% del consumo anual del hogar ($1,896; mensual, $158). Usando la misma ecuación para calcular cómo ajustar el tamaño del efecto en este caso se obtiene un multiplicador de (log(200/100) / log(137/100)) = 2.2. Intuitivamente, esto parece demasiado alto y no lo usamos en nuestro modelo. $709 es un promedio de una transferencia pequeña y otra grande; en el futuro, podríamos obtener los tamaños de efecto por separado.
+26
+Por eso es importante señalar que el efecto “sobre una persona” es en realidad el efecto promedio sobre un miembro del hogar (adultos y niños). En general, preferimos trabajar a nivel del hogar, y no a nivel individual, porque no tenemos mucha información sobre cómo se reparten entre los miembros del hogar tanto el consumo inicial como la TM.
+27
+Por tanto, suponemos que el bienestar futuro esperado es igual al de hoy. Es un supuesto simplificador, ya que no estamos seguros de cómo pensar en la trayectoria futura del bienestar mundial.
+28
+Esto es parecido a cómo
+los AVAD se usan para estimar la carga de la enfermedad
+. Véase Gamlund y Solberg (
+2019
+) para una recopilación de ensayos filosóficos sobre el daño de la muerte.
+29
+A menudo se informa la esperanza de vida “de periodo” (véase
+Nuestro Mundo en Datos
+para una explicación). Probablemente esperamos que la esperanza de vida aumente en el futuro para la mayoría de las personas, lo que no se reflejaría en las esperanzas de vida de periodo. Esta es una ventaja de las esperanzas de vida proyectadas que proporciona la ONU.
+30
+Véase
+World Happiness Report 2013
+. Usamos 2013 por coherencia, porque es aproximadamente la época del estudio de Haushofer y Shapiro (2016). No importa mucho qué año se elija, para
+2019
+la SV estimada es de 4.5.
+31
+Figura 8, página 42.
+32
+Para demostrarlo, IDinsight supuso que la satisfacción vital varía con el logaritmo del consumo anual per cápita. Usaron tres estimaciones del coeficiente de regresión: una de sus propios resultados, y otras de Deaton (2008) y Stevenson (2013). La satisfacción vital predicha de la muestra de su encuesta es de 3.62, 3.35 y 4.22. Véase la nota al pie de la página 95.
+33
+P. ej., Toby Ord, The Precipice (la transcripción del podcast de 80,000 Hours puede verse
+aquí
+).
+34
+Descontar el dinero o los activos obtenidos en el futuro es razonable, pero este razonamiento no necesariamente se aplica a la salud o al bienestar. Véase
+este informe de Giving What We Can
+de Ord y Wiblin. Nótese que aquí consideramos los efectos de programas que se realizan hoy (por lo que el debate sobre el descuento para tener en cuenta los programas futuros no es pertinente).
+35
+Esto se calcula tomando la estimación de Toby Ord de una probabilidad de 1 entre 6 de que la humanidad no supere el próximo siglo, y suponiendo que el riesgo es constante en ese periodo.
+36
+Esto es muy especulativo, pero se calcula a partir de que los riesgos adicionales para la población pertinente (p. ej., las catástrofes regionales) son igual de probables que los riesgos existenciales.
+37
+No hemos ajustado los efectos a corto plazo en el modelo, p. ej., los efectos de las transferencias monetarias; esto marcaría una diferencia pequeña.
+38
+Peasgood et al. (borrador no publicado)
+39
+Apéndice 6, p. 94
+40
+Véase Greaves (
+2019
+) para un análisis de cómo la visión está infradeterminada y de la dificultad de encontrar una precisión plausible.
+41
+Encontramos un estudio en un contexto más pertinente: el documento de trabajo de Deaton et al. (
+2009
+) que usa datos transversales del África subsahariana. Se estima que la muerte de un “familiar directo” en el último año reduce el BS en 0.1 puntos (en la escalera de Cantril de 0 a 10). El efecto sobre la felicidad parece mucho mayor, aunque es difícil de comparar porque la pregunta sobre felicidad era binaria (probabilidad de experimentar disfrute ayer). No hemos actualizado nuestras estimaciones con base en este estudio, por las siguientes razones principales: (1) la encuesta no preguntó si alguien murió en su familia en el último año por cualquier causa, sino solo por un subconjunto de causas (sida, malaria, tuberculosis y parto). La afirmación de que el estudio compara a personas con familiares directos fallecidos en el último año frente a las que no los tuvieron no parece ser cierta; (2) los resultados son muy heterogéneos y no se dan los errores; (3) es difícil saber con qué amplitud habrán interpretado las personas la muerte de un “familiar directo”; puede ser muy distinta de la muerte de un hijo.
+42
+En un panel, a menudo se pueden controlar las características del individuo que no cambian en el tiempo, con lo que se reduce la probabilidad de sesgo por variables omitidas. Esto no permite llegar a una relación causal, ya que todavía hay que lidiar con características del individuo que varían en el tiempo, pero es mucho mejor que los estudios transversales, en los que normalmente solo se dispone de mediciones deficientes de algunas de esas características.
+43
+Combinando las estimaciones de MCO ajustadas y de VI: la muerte de una pareja tiene un efecto de (-0.590 – 0.661) / 2 puntos de SV (escala de 7 puntos). Para la muerte de un hijo es (-0.556 -0.430) / 2.
+44
+The Origins of Happiness, p. 81 (no disponible en línea).
+45
+Véase
+este
+o
+este
+documento de antiguos o actuales miembros del personal de GiveWell.
+46
+Si resultara que no es 1:1, habría preocupaciones relacionadas sobre si la Tierra está sobrepoblada o infrapoblada. Véase Greaves (
+2015
+) y Plant (
+2019
+) cap. 2 para un análisis de las cuestiones sobre la población óptima.
+47
+Véase
+esta entrada de blog de 2017
+en el sitio web de GiveWell para algo de debate.
+48
+Si bien es habitual analizar el epicureísmo como una postura posible, no es una postura que muchos sostengan. Véase, p. ej., Cushing (
+2007
+) y Rubio (
+de próxima publicación
+) para dos de los pocos análisis contemporáneos (simpatizantes) al respecto.
+49
+Véase el
+CEA de 2018
+: “Valor de duplicar el consumo de una persona durante un año frente a salvar la vida de un niño menor de 5 años (AMF)” se expresa en porcentajes, con una mediana de 2 %, lo que corresponde a un peso moral de 50. En el
+CEA de 2019
+, GiveWell usa una proporción de pesos morales de 100:1, influida por los resultados de la encuesta de IDinsight.
+50
+Los enlaces al razonamiento de algunos miembros del personal se dan en los CEA, p. ej., el
+CEA de 2018
+.
+51
+Véanse las págs. 10 y 102. Este resultado es un promedio de Kenia y Ghana. Hubo diferencias regionales significativas en los resultados; véase la sección 1 del informe de IDinsight para más análisis.
+52
+IDinsight evaluó la comprensión de probabilidad de los encuestados haciéndoles varias preguntas, como “Imagine dos loterías. La probabilidad de ganar en una lotería es de 5 entre 1000, y en la otra de 10 entre 1000. ¿Cuál tiene mayor probabilidad de ganar?”. El 58 % de los encuestados respondió correctamente a las cuatro preguntas básicas a la primera. Solo el 34 % respondió correctamente una pregunta más avanzada: “¿Qué riesgo de muerte es mayor: 1 de cada 100 o 2 de cada 1,000?”. A continuación, el encuestador capacitó a los encuestados, dando explicaciones adicionales hasta que pudieron responder correctamente. Véase el apéndice 2 del informe de IDinsight para más análisis.
+53
+Cuadro 28, p. 78.
+54
+Un modelo de regresión logística.
+55
+Véase el resultado en la página 28, y más información en la p. 8, nota 14.
+56
+El GHQ-12 es una herramienta de cribado de uso amplio para los trastornos mentales comunes.
+57
+La relación entre los tamaños del efecto originales (Spillover_es) y la d de Cohen se expresa en el siguiente pseudocódigo: t = (Spillover_es / Spillover_SE), dt = t * sqrt((1/(Spillover_n / 2)) + (1/((Spillover_n /2 ))) ) d_se = sqrt(((Spillover_n /2)/ ((Spillover_n / 2)^2)) + ((dt^2) / (2*(Spillover_n / 2)))))
+58
+Para ello compararon aldeas de control cercanas a aldeas de tratamiento con aldeas de control más alejadas de las de tratamiento.
+59
+En la jerga de la economía, esto se conoce como margen intensivo, en oposición al margen extensivo.
+El Happier Lives Institute es una organización benéfica registrada en Inglaterra y Gales (número de beneficencia 1198178) y un fondo subordinado aprobado, administrado dentro del
+Player Philanthropy Fund
+, un fideicomiso benéfico de Maryland que ha recibido el reconocimiento de exención fiscal federal como organización benéfica pública conforme a la Sección 501(c)(3) del Código de Rentas Internas (ID fiscal: 27-6601178).
+Consejos para donantes
+Apoye nuestro trabajo
+Trabaje con nosotros
+Contáctenos
+Ideas clave
+Últimas noticias e investigaciones
+Próximos eventos
+Política de privacidad
