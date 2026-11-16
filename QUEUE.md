@@ -1204,46 +1204,46 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · kelsey piper / california-florida-voters-animal-welfare-election-day.txt · 1e4iYC2ri723ADyBRvo1loedw2nGTEQ4p · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/california-florida-voters-animal-welfare-election-day.txt`)
 - [x] es · kelsey piper / self-driving-cars-philosophy-safety-trolley-problem-mit.txt · 1dD4IaKbR1v51AlBECBKcy-4wHfJSlsbF · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/self-driving-cars-philosophy-safety-trolley-problem-mit.txt`)
 - [x] es · kelsey piper / wild-polio-eradicated-africa-who.txt · 1x3UlXDNSLSFTpt-Wm0Wop5jyzbUyHTBR · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/wild-polio-eradicated-africa-who.txt`)
-- [ ] es · kelsey piper / study-head-start-child-poverty.txt · 11OHMqMdPAzyBokakISiaTSk6auVA8vmi · 175 KB · txt
-- [ ] es · kelsey piper / stimulus-eligibility-checks-economic-impact-payments-homeless-access.txt · 1JoMlkudtDrLwvKXOziWXo3DXmSffNiFP · 175 KB · txt
-- [ ] es · kelsey piper / infant-mortality-brazil-election-fraud.txt · 1bAT8SY_NSPhVDIIPzsvFuaPkrZ_iwyTW · 175 KB · txt
-- [ ] es · kelsey piper / when-is-giving-tuesday.txt · 1KR2g6HfigYKBrQ6mZfllZrOCxjGCLFTR · 176 KB · txt
-- [ ] es · kelsey piper / chickens-factory-farming-animal-cruelty-welfare.txt · 1GDOXQVo7fvK4Wu20UCeLiJDDiNe0GJKu · 176 KB · txt
-- [ ] es · kelsey piper / giving-tuesday-best-animal-charity.txt · 1NmdYRMAIaYaZEVO1HrQ0RQFbwUXrBnuP · 177 KB · txt
-- [ ] es · kelsey piper / coronavirus-social-distancing-flatten-curve-new-york.txt · 1eFlMldFfEVtYwSSxwkIDBuIdE_bQgckc · 177 KB · txt
-- [ ] es · kelsey piper / covid-vaccines-pfizer-moderna-johnson-astrazeneca-efficacy-deaths.txt · 1H4sm8_y1KY-s4FHOvwE6eJiM-OVJDxpQ · 177 KB · txt
-- [ ] es · kelsey piper / jeff-bezos-amazon-philanthropy-gift-2-billion.txt · 1AO0szEvrHSwDh5_A7gL3pHZvFh0l4iNp · 177 KB · txt
-- [ ] es · kelsey piper / end-animal-farming-vegetarian-vegan-meat-alternatives-jacy-reese.txt · 1RwtJn43eyipuzhLOXYA3DPih7IDLZgDD · 177 KB · txt
-- [ ] es · kelsey piper / arnold-foundation-corporation-nonprofit-charity.txt · 15FBafn71xCGB2sAcU4CeoC-LdvH2Xoje · 177 KB · txt
-- [ ] es · kelsey piper / artificial-intelligence-open-ai-natural-language-processing.txt · 14dTlPQJpvO42Hq1PNTtyd_YYlrLr5wqE · 177 KB · txt
-- [ ] es · kelsey piper / eu-veggie-burger-label-ban.txt · 1LGrBJ0PEMKXElgqr7EF1lDqkBfCnO_c2 · 177 KB · txt
-- [ ] es · kelsey piper / extinction-risks-humanity-asteroids-supervolcanos-gamma-rays.txt · 1aybEBxCeuU4l38kq_41f_U5a-rms4sq6 · 177 KB · txt
-- [ ] es · kelsey piper / overhead-charities-effectiveness-donations-giving-tuesday.txt · 1BN9YCfrgP6xHk6sEzlPlm4h5k8SpOJ2I · 178 KB · txt
-- [ ] es · kelsey piper / midterm-elections-vote-fargo-approval-voting-ranked-choice.txt · 1RYEo925PiwWBsjxQ9FF7YWM0YTvoXW4d · 178 KB · txt
-- [ ] es · kelsey piper / california-coronavirus-vaccine-availability-moderna-pfizer.txt · 1cQTeygY9Z0rH7vMx45bCvrlbcpXuqZv7 · 178 KB · txt
-- [ ] es · kelsey piper / ai-machine-learning-enhance-button.txt · 1oAQpN8auMX7QYU1wWwyDKiQJ6vHsKI6x · 178 KB · txt
-- [ ] es · kelsey piper / silicon-valley-sam-altman-yc-climate-change-carbon-moonshot.txt · 1UJkjD4MU5Q4Gukdm4_bvBmnJyhuLaOv6 · 178 KB · txt
-- [ ] es · kelsey piper / global-poor-skills-training-world-bank.txt · 13vOXltxPiQOH0kSnoAtTe6kKVEhUj_f1 · 178 KB · txt
-- [ ] es · kelsey piper / beyond-impossible-plant-based-meat-factory-farming.txt · 1fVWCI4pkbwHf2zc9DGlFckUWEqpzNI_j · 179 KB · txt
-- [ ] es · kelsey piper / lottery-megamillions-powerball-win-charity-donate-private-foundation.txt · 1Ga0IcCCNbp2StkbUNTMwDfMajd2vPr6f · 179 KB · txt
-- [ ] es · kelsey piper / vegan-vegetarian-animal-welfare-corporate-advocacy.txt · 1HnsUgdvYJjSQE8E-Monj9mW6NA_jJ_Cg · 179 KB · txt
-- [ ] es · kelsey piper / cern-large-hadron-collider-future-circular-collider-physics.txt · 1EvFd-6TwSqISKhYYp6nXJYyhYtadDmRS · 180 KB · txt
-- [ ] es · kelsey piper / elon-musk-charity-donations-richest-person.txt · 1mn1Xo48XWEInydkKAXMurJkBnYYRtjfS · 181 KB · txt
-- [ ] es · kelsey piper / trump-coronavirus-speech-oval-office-travel-ban.txt · 1j2zqZM7pEnQsJxR7TqjRoGfAoUxm4jFP · 181 KB · txt
-- [ ] es · kelsey piper / 2020-vaccines-biotech-research-preparedness-silver-linings.txt · 1xYPCBqHnyi_E89BV2xJbe_QWe_x3cyl1 · 181 KB · txt
-- [ ] es · kelsey piper / coronavirus-lockdowns-developing-world.txt · 1Bo_J4rDojNGQEY0AT8x1U5NAtbUyDL6N · 181 KB · txt
-- [ ] es · kelsey piper / california-ballot-initiative-proposition-direct-democracy.txt · 1gpzQlPjxSvMWnMbMHUG6Y7fue6aOlUIa · 182 KB · txt
-- [ ] es · kelsey piper / mit-media-lab-joi-ito-epstein.txt · 1aTUsf_CXxE4PTwNdvaO4nV8lYbGaGaV4 · 182 KB · txt
-- [ ] es · kelsey piper / presymptomatic-coronavirus-spread-symptoms.txt · 1U4QFLdP883Kf3Vd4iVky0wdHNje2B-nZ · 182 KB · txt
-- [ ] es · kelsey piper / peter-singer-life-you-can-save-effective-altruism.txt · 1DgdFu8yRhDhd6Xl8eymBbO0vLe_OolZP · 182 KB · txt
-- [ ] es · kelsey piper / science-funding-grant-lotteries-research.txt · 1ZAbdzlU7Z6ni5WlTZzb54dZWzi2UBQr1 · 182 KB · txt
-- [ ] es · kelsey piper / improve-schools-invest-in-teachers.txt · 1kfJDcBztVEjj1aaYkql4JtvxuHgNcYP4 · 183 KB · txt
-- [ ] es · kelsey piper / peter-thiel-ai-arms-race-china.txt · 1KlIdr2PK_Dv-cuczM6gTaKaFFMFLdHA9 · 183 KB · txt
-- [ ] es · kelsey piper / biologists-are-trying-to-make-bird-flu-easier-to-spread-can-we-not.txt · 17jAmrUh3QVEXMuSIAsIq5Zc64i0cfewG · 183 KB · txt
-- [ ] es · kelsey piper / gates-buffett-giving-pledge-billionaire-philanthropy.txt · 1cUHE31QCA7-0MyKOnB_6pJeRvf-ostVX · 185 KB · txt
-- [ ] es · kelsey piper / nick-bostrom-vulnerable-world-global-catastrophic-risks.txt · 1SEUTewgk2wjMemZwWpNkozczoMDXFnnc · 186 KB · txt
-- [ ] es · kelsey piper / louisiana-veggie-burger-ban-tofurky-lawsuit.txt · 1tfgUk_0X31gVr5pK-Op52CEkxYYXC35D · 186 KB · txt
-- [ ] es · kelsey piper / ai-artificial-intelligence-google-deepmind-starcraft-game.txt · 1DNxdDzFYf1kTc3P5WhILnVrIlg4iyoVJ · 186 KB · txt
+- [x] es · kelsey piper / study-head-start-child-poverty.txt · 11OHMqMdPAzyBokakISiaTSk6auVA8vmi · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/study-head-start-child-poverty.txt`)
+- [x] es · kelsey piper / stimulus-eligibility-checks-economic-impact-payments-homeless-access.txt · 1JoMlkudtDrLwvKXOziWXo3DXmSffNiFP · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/stimulus-eligibility-checks-economic-impact-payments-homeless-access.txt`)
+- [x] es · kelsey piper / infant-mortality-brazil-election-fraud.txt · 1bAT8SY_NSPhVDIIPzsvFuaPkrZ_iwyTW · 175 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/infant-mortality-brazil-election-fraud.txt`)
+- [x] es · kelsey piper / when-is-giving-tuesday.txt · 1KR2g6HfigYKBrQ6mZfllZrOCxjGCLFTR · 176 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/when-is-giving-tuesday.txt`)
+- [x] es · kelsey piper / chickens-factory-farming-animal-cruelty-welfare.txt · 1GDOXQVo7fvK4Wu20UCeLiJDDiNe0GJKu · 176 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/chickens-factory-farming-animal-cruelty-welfare.txt`)
+- [x] es · kelsey piper / giving-tuesday-best-animal-charity.txt · 1NmdYRMAIaYaZEVO1HrQ0RQFbwUXrBnuP · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/giving-tuesday-best-animal-charity.txt`)
+- [x] es · kelsey piper / coronavirus-social-distancing-flatten-curve-new-york.txt · 1eFlMldFfEVtYwSSxwkIDBuIdE_bQgckc · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/coronavirus-social-distancing-flatten-curve-new-york.txt`)
+- [x] es · kelsey piper / covid-vaccines-pfizer-moderna-johnson-astrazeneca-efficacy-deaths.txt · 1H4sm8_y1KY-s4FHOvwE6eJiM-OVJDxpQ · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/covid-vaccines-pfizer-moderna-johnson-astrazeneca-efficacy-deaths.txt`)
+- [x] es · kelsey piper / jeff-bezos-amazon-philanthropy-gift-2-billion.txt · 1AO0szEvrHSwDh5_A7gL3pHZvFh0l4iNp · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/jeff-bezos-amazon-philanthropy-gift-2-billion.txt`)
+- [x] es · kelsey piper / end-animal-farming-vegetarian-vegan-meat-alternatives-jacy-reese.txt · 1RwtJn43eyipuzhLOXYA3DPih7IDLZgDD · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/end-animal-farming-vegetarian-vegan-meat-alternatives-jacy-reese.txt`)
+- [x] es · kelsey piper / arnold-foundation-corporation-nonprofit-charity.txt · 15FBafn71xCGB2sAcU4CeoC-LdvH2Xoje · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/arnold-foundation-corporation-nonprofit-charity.txt`)
+- [x] es · kelsey piper / artificial-intelligence-open-ai-natural-language-processing.txt · 14dTlPQJpvO42Hq1PNTtyd_YYlrLr5wqE · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/artificial-intelligence-open-ai-natural-language-processing.txt`)
+- [x] es · kelsey piper / eu-veggie-burger-label-ban.txt · 1LGrBJ0PEMKXElgqr7EF1lDqkBfCnO_c2 · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/eu-veggie-burger-label-ban.txt`)
+- [x] es · kelsey piper / extinction-risks-humanity-asteroids-supervolcanos-gamma-rays.txt · 1aybEBxCeuU4l38kq_41f_U5a-rms4sq6 · 177 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/extinction-risks-humanity-asteroids-supervolcanos-gamma-rays.txt`)
+- [x] es · kelsey piper / overhead-charities-effectiveness-donations-giving-tuesday.txt · 1BN9YCfrgP6xHk6sEzlPlm4h5k8SpOJ2I · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/overhead-charities-effectiveness-donations-giving-tuesday.txt`)
+- [x] es · kelsey piper / midterm-elections-vote-fargo-approval-voting-ranked-choice.txt · 1RYEo925PiwWBsjxQ9FF7YWM0YTvoXW4d · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/midterm-elections-vote-fargo-approval-voting-ranked-choice.txt`)
+- [x] es · kelsey piper / california-coronavirus-vaccine-availability-moderna-pfizer.txt · 1cQTeygY9Z0rH7vMx45bCvrlbcpXuqZv7 · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/california-coronavirus-vaccine-availability-moderna-pfizer.txt`)
+- [x] es · kelsey piper / ai-machine-learning-enhance-button.txt · 1oAQpN8auMX7QYU1wWwyDKiQJ6vHsKI6x · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/ai-machine-learning-enhance-button.txt`)
+- [x] es · kelsey piper / silicon-valley-sam-altman-yc-climate-change-carbon-moonshot.txt · 1UJkjD4MU5Q4Gukdm4_bvBmnJyhuLaOv6 · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/silicon-valley-sam-altman-yc-climate-change-carbon-moonshot.txt`)
+- [x] es · kelsey piper / global-poor-skills-training-world-bank.txt · 13vOXltxPiQOH0kSnoAtTe6kKVEhUj_f1 · 178 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/global-poor-skills-training-world-bank.txt`)
+- [x] es · kelsey piper / beyond-impossible-plant-based-meat-factory-farming.txt · 1fVWCI4pkbwHf2zc9DGlFckUWEqpzNI_j · 179 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/beyond-impossible-plant-based-meat-factory-farming.txt`)
+- [x] es · kelsey piper / lottery-megamillions-powerball-win-charity-donate-private-foundation.txt · 1Ga0IcCCNbp2StkbUNTMwDfMajd2vPr6f · 179 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/lottery-megamillions-powerball-win-charity-donate-private-foundation.txt`)
+- [x] es · kelsey piper / vegan-vegetarian-animal-welfare-corporate-advocacy.txt · 1HnsUgdvYJjSQE8E-Monj9mW6NA_jJ_Cg · 179 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/vegan-vegetarian-animal-welfare-corporate-advocacy.txt`)
+- [x] es · kelsey piper / cern-large-hadron-collider-future-circular-collider-physics.txt · 1EvFd-6TwSqISKhYYp6nXJYyhYtadDmRS · 180 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/cern-large-hadron-collider-future-circular-collider-physics.txt`)
+- [x] es · kelsey piper / elon-musk-charity-donations-richest-person.txt · 1mn1Xo48XWEInydkKAXMurJkBnYYRtjfS · 181 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/elon-musk-charity-donations-richest-person.txt`)
+- [x] es · kelsey piper / trump-coronavirus-speech-oval-office-travel-ban.txt · 1j2zqZM7pEnQsJxR7TqjRoGfAoUxm4jFP · 181 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/trump-coronavirus-speech-oval-office-travel-ban.txt`)
+- [x] es · kelsey piper / 2020-vaccines-biotech-research-preparedness-silver-linings.txt · 1xYPCBqHnyi_E89BV2xJbe_QWe_x3cyl1 · 181 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/2020-vaccines-biotech-research-preparedness-silver-linings.txt`)
+- [x] es · kelsey piper / coronavirus-lockdowns-developing-world.txt · 1Bo_J4rDojNGQEY0AT8x1U5NAtbUyDL6N · 181 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/coronavirus-lockdowns-developing-world.txt`)
+- [x] es · kelsey piper / california-ballot-initiative-proposition-direct-democracy.txt · 1gpzQlPjxSvMWnMbMHUG6Y7fue6aOlUIa · 182 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/california-ballot-initiative-proposition-direct-democracy.txt`)
+- [x] es · kelsey piper / mit-media-lab-joi-ito-epstein.txt · 1aTUsf_CXxE4PTwNdvaO4nV8lYbGaGaV4 · 182 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/mit-media-lab-joi-ito-epstein.txt`)
+- [x] es · kelsey piper / presymptomatic-coronavirus-spread-symptoms.txt · 1U4QFLdP883Kf3Vd4iVky0wdHNje2B-nZ · 182 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/presymptomatic-coronavirus-spread-symptoms.txt`)
+- [x] es · kelsey piper / peter-singer-life-you-can-save-effective-altruism.txt · 1DgdFu8yRhDhd6Xl8eymBbO0vLe_OolZP · 182 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/peter-singer-life-you-can-save-effective-altruism.txt`)
+- [x] es · kelsey piper / science-funding-grant-lotteries-research.txt · 1ZAbdzlU7Z6ni5WlTZzb54dZWzi2UBQr1 · 182 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/science-funding-grant-lotteries-research.txt`)
+- [x] es · kelsey piper / improve-schools-invest-in-teachers.txt · 1kfJDcBztVEjj1aaYkql4JtvxuHgNcYP4 · 183 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/improve-schools-invest-in-teachers.txt`)
+- [x] es · kelsey piper / peter-thiel-ai-arms-race-china.txt · 1KlIdr2PK_Dv-cuczM6gTaKaFFMFLdHA9 · 183 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/peter-thiel-ai-arms-race-china.txt`)
+- [x] es · kelsey piper / biologists-are-trying-to-make-bird-flu-easier-to-spread-can-we-not.txt · 17jAmrUh3QVEXMuSIAsIq5Zc64i0cfewG · 183 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/biologists-are-trying-to-make-bird-flu-easier-to-spread-can-we-not.txt`)
+- [x] es · kelsey piper / gates-buffett-giving-pledge-billionaire-philanthropy.txt · 1cUHE31QCA7-0MyKOnB_6pJeRvf-ostVX · 185 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/gates-buffett-giving-pledge-billionaire-philanthropy.txt`)
+- [x] es · kelsey piper / nick-bostrom-vulnerable-world-global-catastrophic-risks.txt · 1SEUTewgk2wjMemZwWpNkozczoMDXFnnc · 186 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/nick-bostrom-vulnerable-world-global-catastrophic-risks.txt`)
+- [x] es · kelsey piper / louisiana-veggie-burger-ban-tofurky-lawsuit.txt · 1tfgUk_0X31gVr5pK-Op52CEkxYYXC35D · 186 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/louisiana-veggie-burger-ban-tofurky-lawsuit.txt`)
+- [x] es · kelsey piper / ai-artificial-intelligence-google-deepmind-starcraft-game.txt · 1DNxdDzFYf1kTc3P5WhILnVrIlg4iyoVJ · 186 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/ai-artificial-intelligence-google-deepmind-starcraft-game.txt`)
 - [ ] es · kelsey piper / matt-yglesias-one-billion-americans.txt · 1LmSOrQtBGlH1QA3NCsGBTdpkUQoc1eOk · 186 KB · txt
 - [ ] es · kelsey piper / coronavirus-fast-grants-tyler-cowen-patrick-collison.txt · 1b5NZI-uj_Cqe0wZwthAbEUm4YwKUQUge · 186 KB · txt
 - [ ] es · kelsey piper / aliens-oumuamua-fast-radio-bursts-space.txt · 1YNEMJP9NTtmDIfA8rzcimXielpVzR0ha · 187 KB · txt
