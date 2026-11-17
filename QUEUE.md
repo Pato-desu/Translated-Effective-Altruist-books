@@ -1247,24 +1247,24 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [ ] es · kelsey piper / matt-yglesias-one-billion-americans.txt · 1LmSOrQtBGlH1QA3NCsGBTdpkUQoc1eOk · 186 KB · txt
 - [ ] es · kelsey piper / coronavirus-fast-grants-tyler-cowen-patrick-collison.txt · 1b5NZI-uj_Cqe0wZwthAbEUm4YwKUQUge · 186 KB · txt
 - [ ] es · kelsey piper / aliens-oumuamua-fast-radio-bursts-space.txt · 1YNEMJP9NTtmDIfA8rzcimXielpVzR0ha · 187 KB · txt
-- [ ] es · kelsey piper / kenya-mobile-banking-unbanked-cellphone-money.txt · 1DqFCpgN-dbfu7ck2NXt-3qg0jj7GIOhA · 188 KB · txt
+- [x] es · kelsey piper / kenya-mobile-banking-unbanked-cellphone-money.txt · 1DqFCpgN-dbfu7ck2NXt-3qg0jj7GIOhA · 188 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/kenya-mobile-banking-unbanked-cellphone-money.txt`)
 - [ ] es · kelsey piper / openai-greg-brockman-ilya-sutskever.txt · 1JbawqB6V4tif4-2UEmkqJp3JwPI8MCo1 · 188 KB · txt
 - [ ] es · kelsey piper / covid-vaccine-pfizer-moderna-dosing-science-delays.txt · 1qE3xGPAQJEhdJekwkSEGbV6mWAj7ClrG · 189 KB · txt
 - [ ] es · kelsey piper / coronavirus-lockdowns-stay-home-new-cases.txt · 1PXYi84h1SS5l419YTn2ydD3O8lPQQXXX · 190 KB · txt
 - [ ] es · kelsey piper / ag-gag-laws-factory-farms-explained.txt · 1iYVgdyNUiFT6hatYS0F8hyUoYIfNkIMh · 191 KB · txt
-- [ ] es · kelsey piper / possible-minds-architects-intelligence-ai-experts.txt · 1qtGl1Z9_w46hk7o19TU-QD5G1mKUY_gr · 191 KB · txt
+- [x] es · kelsey piper / possible-minds-architects-intelligence-ai-experts.txt · 1qtGl1Z9_w46hk7o19TU-QD5G1mKUY_gr · 191 KB · txt · es done 2026-11-17 (4/4 batches, `Español/posts/possible-minds-architects-intelligence-ai-experts.txt`)
 - [ ] es · kelsey piper / early-childhood-education-doesnt-teach-kids-fund-it.txt · 1rQtc2lbd38VNcBII8qy8_n4FT374RRNC · 191 KB · txt
 - [ ] es · kelsey piper / deadly-pathogens-escape-lab-smallpox-bird-flu.txt · 1ypssUxE3q5S3HaCbQVrEwoB5pleN1p2c · 192 KB · txt
-- [ ] es · kelsey piper / live-results-ballot-initiatives-democracy-reform.txt · 1ZcdHBp8eQvlhxBNQlYWpCRw19M_ytZ8j · 193 KB · txt
+- [x] es · kelsey piper / live-results-ballot-initiatives-democracy-reform.txt · 1ZcdHBp8eQvlhxBNQlYWpCRw19M_ytZ8j · 193 KB · txt · es done 2026-11-16 (2/2 batches, `Español/posts/live-results-ballot-initiatives-democracy-reform.txt`)
 - [ ] es · kelsey piper / science-replication-crisis-peer-review-statistics.txt · 1UtBVdCWImiECJn-HtLL0a1r9S4RwWXGq · 193 KB · txt
 - [ ] es · kelsey piper / killer-robots-lethal-autonomous-weapons-ai-war.txt · 1EJUt6owMauuLXYUQ6UsKWrYEDkI1_TVx · 194 KB · txt
 - [ ] es · kelsey piper / nobel-prize-economics-banerjee-duflo-kremer-rcts.txt · 1jS2AMKMP07QvGLykgUmIJP9jhG2iaEgK · 194 KB · txt
 - [ ] es · kelsey piper / 2019-predictions-forecast-democratic-nominee-brexit.txt · 1xqVC1fo-jOHsEzMqhkwdDhEN4nTlrJje · 194 KB · txt
-- [ ] es · kelsey piper / trump-coronavirus-superspreader.txt · 1zubnewx0OYxXN2EGmGPML9KWrPHOlw8s · 195 KB · txt
+- [x] es · kelsey piper / trump-coronavirus-superspreader.txt · 1zubnewx0OYxXN2EGmGPML9KWrPHOlw8s · 195 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/trump-coronavirus-superspreader.txt`)
 - [ ] es · kelsey piper / california-coronavirus-cases-lockdown.txt · 1ElJ4OIOz3LIvc_wx82yBYHk2IBDbyPkW · 197 KB · txt
 - [ ] es · kelsey piper / why-some-labs-work-on-making-viruses-deadlier-and-why-they-should-stop.txt · 1vex1Di5JSZXCq1fQ7cqH9nsPQQesbsnl · 197 KB · txt
 - [ ] es · kelsey piper / covid-19-black-death-plagues-in-history.txt · 1dcqSo15X2uNNrQ8F9bt2QQFwJOk-xozn · 199 KB · txt
-- [ ] es · kelsey piper / billionaire-philanthropy-reproductive-health-care-politics.txt · 1S0IGIZL24irnA0WQwwIoDwiTGovxQp8F · 199 KB · txt
+- [x] es · kelsey piper / billionaire-philanthropy-reproductive-health-care-politics.txt · 1S0IGIZL24irnA0WQwwIoDwiTGovxQp8F · 199 KB · txt · es done 2026-11-17 (4/4 batches, `Español/posts/billionaire-philanthropy-reproductive-health-care-politics.txt`)
 - [ ] es · kelsey piper / climate-change-human-civilization-existential-risk.txt · 1BsqHIFSZC5I3VQTnf2wX6DgciF_JN1Ik · 200 KB · txt
 - [ ] es · kelsey piper / coronavirus-wuhan-panic-pandemic-outbreak.txt · 1pvRPTMHW-3SyFIpBLJV_ntl7L_G31mTV · 200 KB · txt
 - [ ] es · kelsey piper / who-should-get-covid-19-vaccine-first-debate-explained.txt · 11i5FJspuskwLrnJvssTpxZ8ngtm_cB1n · 201 KB · txt
