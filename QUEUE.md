@@ -1244,29 +1244,29 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · kelsey piper / nick-bostrom-vulnerable-world-global-catastrophic-risks.txt · 1SEUTewgk2wjMemZwWpNkozczoMDXFnnc · 186 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/nick-bostrom-vulnerable-world-global-catastrophic-risks.txt`)
 - [x] es · kelsey piper / louisiana-veggie-burger-ban-tofurky-lawsuit.txt · 1tfgUk_0X31gVr5pK-Op52CEkxYYXC35D · 186 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/louisiana-veggie-burger-ban-tofurky-lawsuit.txt`)
 - [x] es · kelsey piper / ai-artificial-intelligence-google-deepmind-starcraft-game.txt · 1DNxdDzFYf1kTc3P5WhILnVrIlg4iyoVJ · 186 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/ai-artificial-intelligence-google-deepmind-starcraft-game.txt`)
-- [ ] es · kelsey piper / matt-yglesias-one-billion-americans.txt · 1LmSOrQtBGlH1QA3NCsGBTdpkUQoc1eOk · 186 KB · txt
-- [ ] es · kelsey piper / coronavirus-fast-grants-tyler-cowen-patrick-collison.txt · 1b5NZI-uj_Cqe0wZwthAbEUm4YwKUQUge · 186 KB · txt
-- [ ] es · kelsey piper / aliens-oumuamua-fast-radio-bursts-space.txt · 1YNEMJP9NTtmDIfA8rzcimXielpVzR0ha · 187 KB · txt
+- [x] es · kelsey piper / matt-yglesias-one-billion-americans.txt · 1LmSOrQtBGlH1QA3NCsGBTdpkUQoc1eOk · 186 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/matt-yglesias-one-billion-americans.txt`)
+- [x] es · kelsey piper / coronavirus-fast-grants-tyler-cowen-patrick-collison.txt · 1b5NZI-uj_Cqe0wZwthAbEUm4YwKUQUge · 186 KB · txt · es done 2026-11-20 (3/3 batches, `Español/posts/coronavirus-fast-grants-tyler-cowen-patrick-collison.txt`)
+- [x] es · kelsey piper / aliens-oumuamua-fast-radio-bursts-space.txt · 1YNEMJP9NTtmDIfA8rzcimXielpVzR0ha · 187 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/aliens-oumuamua-fast-radio-bursts-space.txt`)
 - [x] es · kelsey piper / kenya-mobile-banking-unbanked-cellphone-money.txt · 1DqFCpgN-dbfu7ck2NXt-3qg0jj7GIOhA · 188 KB · txt · es done 2026-11-16 (4/4 batches, `Español/posts/kenya-mobile-banking-unbanked-cellphone-money.txt`)
-- [ ] es · kelsey piper / openai-greg-brockman-ilya-sutskever.txt · 1JbawqB6V4tif4-2UEmkqJp3JwPI8MCo1 · 188 KB · txt
-- [ ] es · kelsey piper / covid-vaccine-pfizer-moderna-dosing-science-delays.txt · 1qE3xGPAQJEhdJekwkSEGbV6mWAj7ClrG · 189 KB · txt
-- [ ] es · kelsey piper / coronavirus-lockdowns-stay-home-new-cases.txt · 1PXYi84h1SS5l419YTn2ydD3O8lPQQXXX · 190 KB · txt
-- [ ] es · kelsey piper / ag-gag-laws-factory-farms-explained.txt · 1iYVgdyNUiFT6hatYS0F8hyUoYIfNkIMh · 191 KB · txt
+- [x] es · kelsey piper / openai-greg-brockman-ilya-sutskever.txt · 1JbawqB6V4tif4-2UEmkqJp3JwPI8MCo1 · 188 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/openai-greg-brockman-ilya-sutskever.txt`)
+- [x] es · kelsey piper / covid-vaccine-pfizer-moderna-dosing-science-delays.txt · 1qE3xGPAQJEhdJekwkSEGbV6mWAj7ClrG · 189 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/covid-vaccine-pfizer-moderna-dosing-science-delays.txt`)
+- [x] es · kelsey piper / coronavirus-lockdowns-stay-home-new-cases.txt · 1PXYi84h1SS5l419YTn2ydD3O8lPQQXXX · 190 KB · txt · es done 2026-11-20 (3/3 batches, `Español/posts/coronavirus-lockdowns-stay-home-new-cases.txt`)
+- [x] es · kelsey piper / ag-gag-laws-factory-farms-explained.txt · 1iYVgdyNUiFT6hatYS0F8hyUoYIfNkIMh · 191 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/ag-gag-laws-factory-farms-explained.txt`)
 - [x] es · kelsey piper / possible-minds-architects-intelligence-ai-experts.txt · 1qtGl1Z9_w46hk7o19TU-QD5G1mKUY_gr · 191 KB · txt · es done 2026-11-17 (4/4 batches, `Español/posts/possible-minds-architects-intelligence-ai-experts.txt`)
-- [ ] es · kelsey piper / early-childhood-education-doesnt-teach-kids-fund-it.txt · 1rQtc2lbd38VNcBII8qy8_n4FT374RRNC · 191 KB · txt
-- [ ] es · kelsey piper / deadly-pathogens-escape-lab-smallpox-bird-flu.txt · 1ypssUxE3q5S3HaCbQVrEwoB5pleN1p2c · 192 KB · txt
+- [x] es · kelsey piper / early-childhood-education-doesnt-teach-kids-fund-it.txt · 1rQtc2lbd38VNcBII8qy8_n4FT374RRNC · 191 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/early-childhood-education-doesnt-teach-kids-fund-it.txt`)
+- [x] es · kelsey piper / deadly-pathogens-escape-lab-smallpox-bird-flu.txt · 1ypssUxE3q5S3HaCbQVrEwoB5pleN1p2c · 192 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/deadly-pathogens-escape-lab-smallpox-bird-flu.txt`)
 - [x] es · kelsey piper / live-results-ballot-initiatives-democracy-reform.txt · 1ZcdHBp8eQvlhxBNQlYWpCRw19M_ytZ8j · 193 KB · txt · es done 2026-11-16 (2/2 batches, `Español/posts/live-results-ballot-initiatives-democracy-reform.txt`)
-- [ ] es · kelsey piper / science-replication-crisis-peer-review-statistics.txt · 1UtBVdCWImiECJn-HtLL0a1r9S4RwWXGq · 193 KB · txt
-- [ ] es · kelsey piper / killer-robots-lethal-autonomous-weapons-ai-war.txt · 1EJUt6owMauuLXYUQ6UsKWrYEDkI1_TVx · 194 KB · txt
-- [ ] es · kelsey piper / nobel-prize-economics-banerjee-duflo-kremer-rcts.txt · 1jS2AMKMP07QvGLykgUmIJP9jhG2iaEgK · 194 KB · txt
-- [ ] es · kelsey piper / 2019-predictions-forecast-democratic-nominee-brexit.txt · 1xqVC1fo-jOHsEzMqhkwdDhEN4nTlrJje · 194 KB · txt
+- [x] es · kelsey piper / science-replication-crisis-peer-review-statistics.txt · 1UtBVdCWImiECJn-HtLL0a1r9S4RwWXGq · 193 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/science-replication-crisis-peer-review-statistics.txt`)
+- [x] es · kelsey piper / killer-robots-lethal-autonomous-weapons-ai-war.txt · 1EJUt6owMauuLXYUQ6UsKWrYEDkI1_TVx · 194 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/killer-robots-lethal-autonomous-weapons-ai-war.txt`)
+- [x] es · kelsey piper / nobel-prize-economics-banerjee-duflo-kremer-rcts.txt · 1jS2AMKMP07QvGLykgUmIJP9jhG2iaEgK · 194 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/nobel-prize-economics-banerjee-duflo-kremer-rcts.txt`)
+- [x] es · kelsey piper / 2019-predictions-forecast-democratic-nominee-brexit.txt · 1xqVC1fo-jOHsEzMqhkwdDhEN4nTlrJje · 194 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/2019-predictions-forecast-democratic-nominee-brexit.txt`)
 - [x] es · kelsey piper / trump-coronavirus-superspreader.txt · 1zubnewx0OYxXN2EGmGPML9KWrPHOlw8s · 195 KB · txt · es done 2026-11-16 (3/3 batches, `Español/posts/trump-coronavirus-superspreader.txt`)
-- [ ] es · kelsey piper / california-coronavirus-cases-lockdown.txt · 1ElJ4OIOz3LIvc_wx82yBYHk2IBDbyPkW · 197 KB · txt
-- [ ] es · kelsey piper / why-some-labs-work-on-making-viruses-deadlier-and-why-they-should-stop.txt · 1vex1Di5JSZXCq1fQ7cqH9nsPQQesbsnl · 197 KB · txt
-- [ ] es · kelsey piper / covid-19-black-death-plagues-in-history.txt · 1dcqSo15X2uNNrQ8F9bt2QQFwJOk-xozn · 199 KB · txt
+- [x] es · kelsey piper / california-coronavirus-cases-lockdown.txt · 1ElJ4OIOz3LIvc_wx82yBYHk2IBDbyPkW · 197 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/california-coronavirus-cases-lockdown.txt`)
+- [x] es · kelsey piper / why-some-labs-work-on-making-viruses-deadlier-and-why-they-should-stop.txt · 1vex1Di5JSZXCq1fQ7cqH9nsPQQesbsnl · 197 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/why-some-labs-work-on-making-viruses-deadlier-and-why-they-should-stop.txt`)
+- [x] es · kelsey piper / covid-19-black-death-plagues-in-history.txt · 1dcqSo15X2uNNrQ8F9bt2QQFwJOk-xozn · 199 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/covid-19-black-death-plagues-in-history.txt`)
 - [x] es · kelsey piper / billionaire-philanthropy-reproductive-health-care-politics.txt · 1S0IGIZL24irnA0WQwwIoDwiTGovxQp8F · 199 KB · txt · es done 2026-11-17 (4/4 batches, `Español/posts/billionaire-philanthropy-reproductive-health-care-politics.txt`)
-- [ ] es · kelsey piper / climate-change-human-civilization-existential-risk.txt · 1BsqHIFSZC5I3VQTnf2wX6DgciF_JN1Ik · 200 KB · txt
-- [ ] es · kelsey piper / coronavirus-wuhan-panic-pandemic-outbreak.txt · 1pvRPTMHW-3SyFIpBLJV_ntl7L_G31mTV · 200 KB · txt
+- [x] es · kelsey piper / climate-change-human-civilization-existential-risk.txt · 1BsqHIFSZC5I3VQTnf2wX6DgciF_JN1Ik · 200 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/climate-change-human-civilization-existential-risk.txt`)
+- [x] es · kelsey piper / coronavirus-wuhan-panic-pandemic-outbreak.txt · 1pvRPTMHW-3SyFIpBLJV_ntl7L_G31mTV · 200 KB · txt · es done 2026-11-20 (4/4 batches, `Español/posts/coronavirus-wuhan-panic-pandemic-outbreak.txt`)
 - [ ] es · kelsey piper / who-should-get-covid-19-vaccine-first-debate-explained.txt · 11i5FJspuskwLrnJvssTpxZ8ngtm_cB1n · 201 KB · txt
 - [ ] es · kelsey piper / covid-vaccines-transmission-protect-spread-virus-moderna-pfizer.txt · 1gxeGzsicDbb408BUdZEEg_vnyIcWUf-q · 201 KB · txt
 - [ ] es · kelsey piper / bill-gates-coronavirus-vaccines-treatments-billionaires.txt · 1RdhpWWIlQ0YdB8GvPzzNi2You9WsetKI · 203 KB · txt
@@ -1477,7 +1477,7 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Reducing-Suffering / How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt · 14QjDK5TLG8VOU6QjG-8BLu7P-lX99Jhw · 100 KB · txt · es done 2026-11-14 (15/15 batches, `Español/posts/How the Simulation Argument Dampens Future Fanaticism – Center on Long-Term Risk.txt`)
 - [x] es · Reducing-Suffering / Anthropics without Reference Classes.txt · 1A9zRJ6eSmWNEFl7wYfRiTPFNI8WXmPup · 100 KB · txt · es done 2026-11-14 (14/14 batches, `Español/posts/Anthropics without Reference Classes.txt`)
 - [x] es · Reducing-Suffering / Assorted tips on personal finance.txt · 1nhrsXDq48cJlZV3Lrt0ndrCCwPwT6zc9 · 107 KB · txt · es done 2026-11-15 (16/16 batches, `Español/posts/Assorted tips on personal finance.txt`)
-- [ ] es · Reducing-Suffering / How Rainforest Beef Production Affects Wild-Animal Suffering.txt · 19gmTRqVNYpDehXcSTvkDwB1VR6dYo5pX · 142 KB · txt
+- [x] es · Reducing-Suffering / How Rainforest Beef Production Affects Wild-Animal Suffering.txt · 19gmTRqVNYpDehXcSTvkDwB1VR6dYo5pX · 142 KB · txt · es done 2026-11-20 (21/21 batches, `Español/posts/How Rainforest Beef Production Affects Wild-Animal Suffering.txt`)
 - [-] es · Centre on Long-Term Risk / The evidentialist’s wager - William MacAskill, Aron Vallinder (Global Priorities Institute, Oxford University) Caspar Österheld (Duke University), Carl Shulman (Future of Humanity Institute, Oxford University), Johannes Treutlein (T_78aabe7492884404.txt · 1bBOAeQqcRNBr_Yryfu2-g2XY83CWpLPh · 1 KB · txt · under 2 KB: empty page or stub
 - [-] es · Centre on Long-Term Risk / Multiple Resolution.txt · 1jGni1V7y6B9vIHbxE5OTIuwta49k2Dn4 · 1 KB · txt · under 2 KB: empty page or stub
 - [x] es · Centre on Long-Term Risk / Suffering-Focused AI Safety﹕ In Favor of “Fail-Safe” Measures – Center on Long-Term Risk.txt · 16mhYCD2_mh56MCtAu-uOmcGYloucAJBu · 3 KB · txt · es done 2026-10-30 (1/1 batches, `Español/posts/Suffering-Focused AI Safety﹕ In Favor of “Fail-Safe” Measures – Center on Long-Term Risk.txt`)
@@ -1723,9 +1723,9 @@ Four subfolders: chai `12GrAPrQ_gQ_EHfSQYFI0cB8--RBhrGDW`, wild animal initiativ
 - [x] es · Rethink Priorities / 123.txt · 1ngrAkIQF8acJFDuNdL6KEcBuRqBee1Ka · 98 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 123.txt`)
 - [x] es · Rethink Priorities / 3.txt · 156bxy2bCwUBnMtA3V_xpucWEEL5CqdWX · 99 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 3.txt`)
 - [x] es · Rethink Priorities / 128.txt · 1cSwoxtnvqIKY1PoYOTOtJGg5QSQ1Mtgv · 100 KB · txt · es done 2026-11-15 (14/14 batches, `Español/posts/Rethink Priorities 128.txt`)
-- [ ] es · Rethink Priorities / 8.txt · 1lGz4EjKerSeyLL6SFySZcb11O3sSE1-K · 100 KB · txt
-- [ ] es · Rethink Priorities / 20.txt · 196M05SDg7ULjX3uHp-pPMMehqwH6wBj9 · 101 KB · txt
-- [ ] es · Rethink Priorities / 126.txt · 19oB_P63rUxvsUBCAd9EBM0jALR2OHBqO · 109 KB · txt
+- [x] es · Rethink Priorities / 8.txt · 1lGz4EjKerSeyLL6SFySZcb11O3sSE1-K · 100 KB · txt · es done 2026-11-20 (14/14 batches, `Español/posts/Rethink Priorities 8.txt`)
+- [x] es · Rethink Priorities / 20.txt · 196M05SDg7ULjX3uHp-pPMMehqwH6wBj9 · 101 KB · txt · es done 2026-11-20 (14/14 batches, `Español/posts/Rethink Priorities 20.txt`)
+- [x] es · Rethink Priorities / 126.txt · 19oB_P63rUxvsUBCAd9EBM0jALR2OHBqO · 109 KB · txt · es done 2026-11-20 (16/16 batches, `Español/posts/Rethink Priorities 126.txt`)
 - [ ] es · Rethink Priorities / Corporate campaigns affect 9 to 120 years of chicken life per dollar spent — Rethink Priorities.txt · 1kjQqXneagSFg-Urh9HJtKbwD3xV9Ugib · 109 KB · txt
 - [ ] es · Rethink Priorities / 1.txt · 1t9OuY7R-bpMTx0rSQJ9M7LnwGv790k4- · 111 KB · txt
 - [ ] es · Rethink Priorities / 104.txt · 1nvMlRm2FxSDEyZ5X2JSwS1aqwEEXIaJv · 112 KB · txt
